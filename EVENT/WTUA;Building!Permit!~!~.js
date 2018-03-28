@@ -41,4 +41,4 @@ Notes		: Provided Record type "MJ License Application" , is not available ,repla
 closeWfTaskCertificateOfOccupancy();
 
 
-
+script208_UpdatePermitFields();
