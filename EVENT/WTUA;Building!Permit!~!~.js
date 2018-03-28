@@ -64,7 +64,7 @@ script40_backFlowPreventerEmail();
 
 //Supporting Functions
 function script40_backFlowPreventerEmail(){
-	if (wfTask == "Backflow Preventor" && wfStatus == "Final") {
+	//if (wfTask == "Backflow Preventor" && wfStatus == "Final") {
 		var applicant = getContactByType("Applicant", capId);
 		if (!applicant || !applicant.getEmail()) {
 			logDebug("**WARN no applicant found on or no email capId=" + capId);
@@ -74,9 +74,9 @@ function script40_backFlowPreventerEmail(){
 		var emailtemplatename = "BACKFLOW PREVENTER NOTIFICATION";
 		var vEParams = aa.util.newHashtable();
 		var emailparams = addStdVarsToEmail(vEParams, capId);
-		emailparams.put("$$wfDate$$", wfDate);
+		emailparams.put("$$wfDate$$", "01/01/2018");
 		emailAsync(email, emailtemplatename, emailparams, "", "", "", "");
 
-	}
+	//}
 }
 
