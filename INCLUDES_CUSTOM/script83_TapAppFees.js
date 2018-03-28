@@ -17,15 +17,15 @@ function script83_TapAppFees() {
 		if (AInfo["Type"] = "Single Family Detached" && AInfo["Water Closets"] >= "5" ) {
 			updateFee("WAT_TA_03","WAT_TA","FINAL",null,"Y");
 		}
-		if (AInfo["Type"] = "Single Family Detached" {
+		if (AInfo["Type"] = "Single Family Detached") {
 			updateFee("WAT_TA_04","WAT_TA","FINAL",null,"Y");
 		}
-		if (AInfo["Type"] = "Single Family Attached" {
+		if (AInfo["Type"] = "Single Family Attached") {
 			updateFee("WAT_TA_09","WAT_TA","FINAL",null,"Y");
 			updateFee("WAT_TA_10","WAT_TA","FINAL",null,"Y");
 			updateFee("WAT_TA_13","WAT_TA","FINAL",null,"Y");
 		}
-		if (AInfo["Type"] = "Multi Family" {
+		if (AInfo["Type"] = "Multi Family") {
 			updateFee("WAT_TA_16","WAT_TA","FINAL",null,"Y");
 		}
 		if (AInfo["Type"] = "Commercial" && AInfo["Size of Water Meter"] = "3/4" ) {
