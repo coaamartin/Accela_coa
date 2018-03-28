@@ -9,7 +9,6 @@
 |
 /------------------------------------------------------------------------------------------------------*/
 /*  - use the following for Script Tester  
-
 aa.env.setValue("showDebug","Y");
 aa.env.setValue("BatchJobName", "WorkFlowTasksOverdue");
 aa.env.setValue("emailAddress","chad@esilverliningsolutions.com.com");
@@ -19,7 +18,8 @@ aa.env.setValue("reportName","WorkFlowTasksOverdue");
 aa.env.setValue("reportModule","Building");
 aa.env.setValue("reportDesc","The attached report contains all over due work flow tasks by department.");
 aa.env.setValue("CurrentUserID","ADMIN");
- */
+*/
+ 
 /*------------------------------------------------------------------------------------------------------/
 |
 | START: USER CONFIGURABLE PARAMETERS
@@ -127,8 +127,8 @@ function mainProcess() {
 	var myParams = aa.util.newHashMap();
 //	myParams.put ("runDate", aa.date.getCurrentDate().month +"/"+ aa.date.getCurrentDate().dayOfMonth +"/"+ aa.date.getCurrentDate().year);
 	myParams.put("RECORD_MODULE",rptModule);
-aa.print("params are:");
-aa.print(myParams);
+	aa.print("params are:");
+	aa.print(myParams);
 
     report = aa.reportManager.getReportInfoModelByName(rptName);
 	report = report.getOutput();
@@ -143,16 +143,16 @@ aa.print(myParams);
 			reportResult = reportResult.getOutput();
 			if (reportResult) {
 				var myReportFileName = reportResult.name;
-				var myNewRptFileName = "OverDueWorkFlowTasks_" + aa.date.getCurrentDate().year + aa.date.getCurrentDate().month + aa.date.getCurrentDate().dayOfMonth + aa.date.getCurrentDate().hour + aa.date.getCurrentDate().minute + aa.date.getCurrentDate().second + ".pdf";
+				var myNewRptFileName = "OverDueWorkFlowTasks_" + aa.date.getCurrentDate().year + aa.date.getCurrentDate().month + aa.date.getCurrentDate().dayOfMonth + aa.date.getCurrentDate().hourOfDay + aa.date.getCurrentDate().minute + aa.date.getCurrentDate().second + ".pdf";
 				itWorkedForMe = reportResult.getReportResultModel().setName(myNewRptFileName);
 				var reportFile = aa.reportManager.storeReportToDisk(reportResult);
 				reportFile = reportFile.getOutput();
-//var file = new java.io.File("OverDueWorkFlowTasks_12282017.pdf"); 
 				var files = new Array();
 				files[0] = reportFile;
 
 				var emailReportOK = aa.sendEmailWithAttachedFiles(emailFrom,emailTo,emailCC,batchJobName + " " + aa.date.getCurrentDate().year + aa.date.getCurrentDate().month + aa.date.getCurrentDate().dayOfMonth + " Complete", rptDesc, files);
-				if (!emailReportOK) {
+
+				if (emailReportOK.getSuccess()) {
 					aa.print("Report was emailed to "+emailTo+" and CCd to "+emailCC);
 					aa.print("with the following files attached:");
 					aa.print(files);
@@ -160,7 +160,7 @@ aa.print(myParams);
 				else {
 					aa.print("Report was NOT emailed to "+emailTo+"!!");
 					aa.print("sendMail Result:");
-					aa.print(emailReportOK.getOutput());
+					aa.print(emailReportOK.getErrorMessage());
 				}
 			} else aa.print("Could not get report result output!");
 		} else aa.print("Could not get report result!");

@@ -17,5 +17,5 @@ Functional Area : Records
 Sample Call : updateAssignedUserForTraffEngReq()
 /------------------------------------------------------------------------------------------------------*/
 updateAssignedUserForTraffEngReq();
-script265_ManageReviewToSupervisor();
+script265_ManagerReviewToSupervisor();
 
