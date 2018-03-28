@@ -1,3 +1,16 @@
+var SCRIPT_VERSION = 3.0
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getScriptText("INCLUDES_CUSTOM",null,true));
+
+function getScriptText(vScriptName){
+    vScriptName = vScriptName.toUpperCase();
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+    return emseScript.getScriptText() + "";          
+}
+
+
 //WTUA:Building/Permit/*/*
 
 updateExpirationDateAsi();
