@@ -34,7 +34,7 @@ if (currenttask == "Final Acceptance" && currentstatus == "Complete")
 	reportparams.put("DEPARTMENT", "Administrator");
 	
 	//call Emmett's emailContacts function - this runs asynchronously - puts "deep link" to report in email
-	emailContacts("Applicant,Consultant", emailtemplate, emailparams, reportname, reportparams, "N", "");
+	emailContacts(allowedcontacttypes, emailtemplate, emailparams, reportname, reportparams, "N", "");
 	
 	logDebug("Did it work?");
 	
