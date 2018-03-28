@@ -11,8 +11,8 @@ function script196_AddReinspFee() {
 	logDebug("script196_AddReinspFee started.");
 	try { 
 		if (wfStatus == "Reinspection Required") {
-			emailContact("template for script test", "Please schedule another inspection"<br/><br/>This is a system generated email. Do not reply.", "Applicant");
-			emailContact("template for script test", "Please schedule another inspection"<br/><br/>This is a system generated email. Do not reply.", "Owner");
+			emailContact("template for script test", "Please schedule another inspection"+<br>+<br>+"This is a system generated email. Do not reply.", "Applicant");
+			emailContact("template for script test", "Please schedule another inspection"+<br>+<br>+"This is a system generated email. Do not reply.", "Owner");
 			if (AInfo["Type of Property"] == "Single Family Residential") {
 				updateFee("WAT_IP_03","A_REINSP","FINAL",30,"Y");
 			}
