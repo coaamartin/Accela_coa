@@ -64,6 +64,8 @@ script40_backFlowPreventerEmail();
 
 //Supporting Functions
 function script40_backFlowPreventerEmail(){
+	var capId = capId.getOutput()
+	logDebug(capId);
 	//if (wfTask == "Backflow Preventor" && wfStatus == "Final") {
 		var applicant = getContactByType("Applicant", capId);
 		if (!applicant || !applicant.getEmail()) {
