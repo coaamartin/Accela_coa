@@ -45,6 +45,25 @@ Title	: Building Certificate of Occupancy does Complete on License WF(WorkflowTa
 Purpose	: Send email to Applicant email address using tempalte BACKFLOW PREVENTER NOTIFICATION if wfTask == "Backflow Preventor" && wfStatus == "Final"
 Author	: Suhail Wakil
 Functional Area : Record WF
-Sample Call : backFlowPreventerEmail()
+Sample Call : script40_backFlowPreventerEmail()
 /------------------------------------------------------------------------------------------------------*/
 script40_backFlowPreventerEmail();
+
+//Supporting Functions
+function backFlowPreventerEmail(){
+	if (wfTask == "Backflow Preventor" && wfStatus == "Final") {
+		var applicant = getContactByType("Applicant", capId);
+		if (!applicant || !applicant.getEmail()) {
+			logDebug("**WARN no applicant found on or no email capId=" + capId);
+			return false;
+		}
+		var email = applicant.getEmail();
+		var emailtemplatename = "BACKFLOW PREVENTER NOTIFICATION";
+		var vEParams = aa.util.newHashtable();
+		var emailparams = addStdVarsToEmail(vEParams, capId);
+		emailparams.put("$$wfDate$$", wfDate);
+		emailAsync(email, emailtemplatename, emailparams, "", "", "", "");
+
+	}
+}
+
