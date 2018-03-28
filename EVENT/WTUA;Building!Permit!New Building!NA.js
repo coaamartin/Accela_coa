@@ -20,3 +20,4 @@ Sample Call : createChildWaterUtilityPermitRecords()
 
 createChildWaterUtilityPermitRecords();
 script207_SetTotalSqFtOnFireRecord();
+script206_DeactivateFEMA();
