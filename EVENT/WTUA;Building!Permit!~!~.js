@@ -47,4 +47,4 @@ Author	: Suhail Wakil
 Functional Area : Record WF
 Sample Call : backFlowPreventerEmail()
 /------------------------------------------------------------------------------------------------------*/
-include("40_backFlowPreventerEmail");
+script40_backFlowPreventerEmail();
