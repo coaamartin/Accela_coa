@@ -25,7 +25,7 @@ if (currenttask == "Final Acceptance" && currentstatus == "Complete")
 	var reportname = "JD_TEST_REPORT";
 	
 	//populate the email parameters not already included for "free" - must examine the template to know
-	var joke = "Can a kangaroo jump higher than a house?  Of course, a house doesn’t jump at all.";
+	var joke = "Can a kangaroo jump higher than a house?  Of course, a house doesn't jump at all.";
 	var emailparams = aa.util.newHashtable();
 	emailparams.put("$$Joke$$", joke);
 	
