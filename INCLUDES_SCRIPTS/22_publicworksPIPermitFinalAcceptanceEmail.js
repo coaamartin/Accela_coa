@@ -10,8 +10,13 @@ var currenttask = wfTask;
 //get the current wfStatus
 var currentstatus = wfStatus;
 
+logDebug("currenttask: " + currenttask);
+logDebug("currentstatus: " + currentstatus);
+
 if (currenttask == "Final Acceptance" && currentstatus == "Complete")
-{	
+{
+	logDebug("Starting Async Email...");
+	
 	//what contact types should get an email - comma delimited string of contact types
 	var allowedcontacttypes = "Applicant,Developer";
 		
@@ -30,5 +35,7 @@ if (currenttask == "Final Acceptance" && currentstatus == "Complete")
 	
 	//call Emmett's emailContacts function - this runs asynchronously - puts "deep link" to report in email
 	emailContacts("Applicant,Consultant", emailtemplate, emailparams, reportname, reportparams, "N", "");
+	
+	logDebug("Did it work?");
 	
 }
