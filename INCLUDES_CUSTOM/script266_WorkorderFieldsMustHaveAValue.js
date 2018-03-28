@@ -17,9 +17,9 @@ function script266_WorkorderFieldsMustHaveAValue(){
 		if ( wfTask == "Draft Workorder" && wfStatus == "Workorder Drafted")
 		{
 			// determine if the record has values in custome fields for Location, Description, and Priority. if not throw error
-			if ({Description}== null || {Location}== null || {Work Order Priority}== null)
+/*			if ({Description}== null || {Location}== null || {Work Order Priority}== null)
 				throw "Content incomplete please populate workflow information to use this status.";			
-		}
+*/		}
 	}
 	catch(err)
 	{
