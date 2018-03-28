@@ -1,3 +1,7 @@
+//COA Script #22 added by JMAIN
+include("22_publicworksPIPermitFinalAcceptanceEmail");
+
+
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Update Assigned user for Traffic Engineering Request(WorkflowTaskUpdateAfter).
 
@@ -15,5 +19,3 @@ Sample Call : updateAssignedUserForTraffEngReq()
 updateAssignedUserForTraffEngReq();
 script265_ManageReviewToSupervisor();
 
-//COA Script #22 added by JMAIN
-include("22_publicworksPIPermitFinalAcceptanceEmail");
