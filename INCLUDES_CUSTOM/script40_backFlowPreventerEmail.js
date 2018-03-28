@@ -1,5 +1,6 @@
-//Supporting Functions
+//script40_backFlowPreventerEmail Functions
 function script40_backFlowPreventerEmail(){
+	logDebug("Started script40_backFlowPreventerEmail..");
 	if (wfTask == "Backflow Preventor" && wfStatus == "Final") {
 		var applicant = getContactByType("Applicant", capId);
 		if (!applicant || !applicant.getEmail()) {
@@ -12,6 +13,6 @@ function script40_backFlowPreventerEmail(){
 		var emailparams = addStdVarsToEmail(vEParams, capId);
 		emailparams.put("$$wfDate$$", wfDate);
 		emailAsync(email, emailtemplatename, emailparams, "", "", "", "");
-
 	}
+	logDebug("Ended script40_backFlowPreventerEmail..");
 }

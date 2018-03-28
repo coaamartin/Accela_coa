@@ -42,6 +42,5 @@ closeWfTaskCertificateOfOccupancy();
 
 
 script208_UpdatePermitFields();
-
-include("40_backFlowPreventerEmail");
+script40_backFlowPreventerEmail();
 
