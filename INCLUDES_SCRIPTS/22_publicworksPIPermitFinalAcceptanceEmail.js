@@ -10,6 +10,9 @@ var currenttask = wfTask;
 //get the current wfStatus
 var currentstatus = wfStatus;
 
+//get the wfComment
+var currentstatuscomment = wfComment;
+
 logDebug("currenttask: " + currenttask);
 logDebug("currentstatus: " + currentstatus);
 
@@ -28,6 +31,7 @@ if (currenttask == "Final Acceptance" && currentstatus == "Complete")
 	var joke = "Can a kangaroo jump higher than a house?  Of course, a house doesn't jump at all.";
 	var emailparams = aa.util.newHashtable();
 	emailparams.put("$$Joke$$", joke);
+	emailparams.put("$$wfComment$$", currentstatuscomment);
 	
 	//populate the report parameters - must examine the report to know
 	var reportparams = aa.util.newHashtable();
