@@ -13,7 +13,8 @@ function script40_backFlowPreventerEmail(){
 		var email = applicant.getEmail();
 		var emailtemplatename = "BACKFLOW PREVENTER NOTIFICATION";
 		var vEParams = aa.util.newHashtable();
-		//var emailparams = addStdVarsToEmail(vEParams, capId);
+		var emailparams = aa.util.newHashtable();
+		emailparams = addStdVarsToEmail(vEParams, capId);
 		emailparams.put("$$wfDate$$", wfDate);
 		emailAsync(email, emailtemplatename, emailparams, "", "", "", "");
 	}
