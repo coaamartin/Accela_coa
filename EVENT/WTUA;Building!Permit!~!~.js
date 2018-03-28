@@ -39,3 +39,12 @@ Notes		: Provided Record type "MJ License Application" , is not available ,repla
 	          ,to be replaced with the correct record type
 /------------------------------------------------------------------------------------------------------*/
 closeWfTaskCertificateOfOccupancy();
+
+/*------------------------------------------------------------------------------------------------------/
+Title	: Building Certificate of Occupancy does Complete on License WF(WorkflowTaskUpdateAfter).
+Purpose	: Send email to Applicant email address using tempalte BACKFLOW PREVENTER NOTIFICATION if wfTask == "Backflow Preventor" && wfStatus == "Final"
+Author	: Suhail Wakil
+Functional Area : Record WF
+Sample Call : backFlowPreventerEmail()
+/------------------------------------------------------------------------------------------------------*/
+include("40_backFlowPreventerEmail");
