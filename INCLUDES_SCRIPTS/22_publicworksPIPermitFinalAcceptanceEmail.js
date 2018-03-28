@@ -1,4 +1,8 @@
-//written by JMAIN
+/* 
+Written by JMAIN
+This script figures out if a few conditions are true and then
+notifies the customer using an email template and report
+*/
 
 //get the current wfTask
 var currenttask = wfTask;
@@ -8,35 +12,23 @@ var currentstatus = wfStatus;
 
 if (currenttask == "Final Acceptance" && currentstatus == "Complete")
 {	
-	//grab the name and email of the appropriate contacts
-	var allcontacts = getContactArray();
-	var allowedcontacttypes = ["Applicant", "Developer", "Contractor(s)"];
-	var contactstoemail = [];
-	for (contact in allcontacts)
-	{
-		var contacttype = allcontacts[contact]["contactType"] + ""; //force string
-		logDebug("Contact type is: " + contacttype);
-		//check if this contact type is in the allowed list above - if not, go on to the next one...
-		if (allowedcontacttypes.indexOf(contacttype) == -1)
-		{
-			logDebug("Contact type IS NOT allowed - don't email...");
-			continue;
-		}
+	//what contact types should get an email - comma delimited string of contact types
+	var allowedcontacttypes = "Applicant,Developer";
 		
-		logDebug("Contact is IS allowed - will send email...");
-		var contactlastname = allcontacts[contact]["lastName"];
-		var contactfirstname = allcontacts[contact]["firstName"];
-		var contactemail = allcontacts[contact]["email"];
-		logDebug(contactemail + " " + contactfirstname + " " + contactlastname);
-		var person = {};
-		person.first = contactfirstname;
-		person.last = contactlastname;
-		person.email = contactemail;
-		contactstoemail.push(person)
-	}
-	logDebug(printObject(contactstoemail));
+	//send email to all contacts with the apropriate template and report
+	var emailtemplate = "JD_TEST_TEMPLATE";
+	var reportname = "JD_TEST_REPORT";
 	
-	//send email to all contacts with apropriate template from Deb and Terry
-	//todo
+	//populate the email parameters not already included for "free" - must examine the template to know
+	var joke = "Can a kangaroo jump higher than a house?  Of course, a house doesn’t jump at all.";
+	var emailparams = aa.util.newHashtable();
+	emailparams.put("$$Joke$$", joke);
+	
+	//populate the report parameters - must examine the report to know
+	var reportparams = aa.util.newHashtable();
+	reportparams.put("DEPARTMENT", "Administrator");
+	
+	//call Emmett's emailContacts function - this runs asynchronously - puts "deep link" to report in email
+	emailContacts("Applicant,Consultant", emailtemplate, emailparams, reportname, reportparams, "N", "");
 	
 }
