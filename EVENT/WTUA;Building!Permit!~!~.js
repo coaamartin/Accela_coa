@@ -39,8 +39,8 @@ Notes		: Provided Record type "MJ License Application" , is not available ,repla
 	          ,to be replaced with the correct record type
 /------------------------------------------------------------------------------------------------------*/
 closeWfTaskCertificateOfOccupancy();
-
-
 script208_UpdatePermitFields();
-script40_backFlowPreventerEmail();
+
+//COA Script - Suhail
+include("40_backFlowPreventerEmail");
 
