@@ -42,5 +42,5 @@ closeWfTaskCertificateOfOccupancy();
 script208_UpdatePermitFields();
 
 //COA Script - Suhail
-40_backFlowPreventerEmail();
+script40_backFlowPreventerEmail();
 

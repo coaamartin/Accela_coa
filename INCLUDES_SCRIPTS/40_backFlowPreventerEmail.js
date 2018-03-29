@@ -1,10 +1,10 @@
-//40_backFlowPreventerEmail Functions
+//script40_backFlowPreventerEmail Functions
 
-//result = 40_backFlowPreventerEmail();
-//logDebug("Started 40_backFlowPreventerEmail.."+ result);
-function 40_backFlowPreventerEmail()
+//result = script40_backFlowPreventerEmail();
+//logDebug("Started script40_backFlowPreventerEmail.."+ result);
+function script40_backFlowPreventerEmail()
 {
-	logDebug("Started 40_backFlowPreventerEmail..");
+	logDebug("Started script40_backFlowPreventerEmail..");
 	if (wfTask == "Backflow Preventor" && wfStatus == "Final")
 	{
 		var applicant = getContactByType("Applicant", capId);
@@ -21,5 +21,5 @@ function 40_backFlowPreventerEmail()
 		emailparams.put("$$wfDate$$", wfDate);
 		emailAsync(email, emailtemplatename, emailparams, "", "", "", "");
 	}
-	logDebug("Ended 40_backFlowPreventerEmail..");
-}
+	logDebug("Ended #40_backFlowPreventerEmail..");
+};
