@@ -1,8 +1,8 @@
-//script40_backFlowPreventerEmail Functions
+//40_backFlowPreventerEmail Functions
 
-result = script40_backFlowPreventerEmail();
+result = 40_backFlowPreventerEmail();
 logDebug("Started 40_backFlowPreventerEmail.."+ result);
-function script40_backFlowPreventerEmail(){
+function 40_backFlowPreventerEmail(){
 	logDebug("Started 40_backFlowPreventerEmail..");
 	if (wfTask == "Backflow Preventor" && wfStatus == "Final") {
 		var applicant = getContactByType("Applicant", capId);
