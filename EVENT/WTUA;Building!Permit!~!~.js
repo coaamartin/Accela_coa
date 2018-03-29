@@ -25,9 +25,9 @@ setCodeReference(wfStatusCompareVal);
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Building Certificate of Occupancy does Complete on License WF(WorkflowTaskUpdateAfter).
 
-Purpose		:If the workflow task “Inspection Phase” has a status of “Temporary CO Issued” or “Ready for CO” then use the address on
+Purpose		:If the workflow task "Inspection Phase" has a status of "Temporary CO Issued" or "Ready for CO" then use the address on
 		the record to go out and see if an MJ License Application exists on that address. and If a MJ License Application exists on
-		that address then close the workflow task “Certificate of Occupancy” with a status of “Final CO Issued”.
+		that address then close the workflow task "Certificate of Occupancy" with a status of "Final CO Issued".
 			
 Author :   Israa Ismail
 
