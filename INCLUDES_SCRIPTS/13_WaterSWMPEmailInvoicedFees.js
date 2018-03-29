@@ -7,7 +7,7 @@ var correcttask = "Application Submittal";
 var iscorrecttask = false;
 if (currenttask == correcttask)
 {
-	iscorrecttask = true;	
+	iscorrecttask = true;
 }
 logDebug("iscorrecttask: " + iscorrecttask);
 
@@ -20,55 +20,43 @@ logDebug("iscorrectstatus: " + iscorrectstatus);
 
 //Determine if there are fee balances.  Might as well load all fees and iterate through them
 var allfees = loadFees();
+logDebug(printObject(allfees)); //debug
 var numfees = allfees.length;
 logDebug("num fees: " + numfees.toString());
 var totalfeebalance = 0.00;
 for (var fee in allfees)
 {
-	var feecode = allfees[fee]["code"];
-	var feebalance = feeBalance(feecode);
+	var feeamt = parseInt(allfees[fee]["amount"]);
+	var feepaid = parseInt(allfees[fee]["amountPaid"]);
+	var feebalance = feeamt - feepaid;
 	totalfeebalance += feebalance;
 }
 logDebug("totalfeebalance: " + totalfeebalance.toString());
 
-//Get the contacts
-var allcontacts = getContactArray();
-logDebug("Contacts..." + allcontacts.length);
-logDebug(printObject(allcontacts));
-
-//grab the name and email of the appropriate contacts
-var allowedcontacttypes = ["Applicant", "Developer"];
-var contactstoemail = [];
-for (contact in allcontacts)
-{
-	var contacttype = allcontacts[contact]["contactType"] + ""; //turn this into a string - lame
-	logDebug("Contact type is: " + contacttype);
-	//check if this contact type is in the allowed list above - if not, go on to the next one...
-	//if (!exists(contacttype, allowedcontacttypes))
-	if (allowedcontacttypes.indexOf(contacttype) == -1)
-	{
-		logDebug("Contact type IS NOT allowed - don't email...");
-		continue;
-	}
-	
-	logDebug("Contact is IS allowed - will send email...");
-	var contactlastname = allcontacts[contact]["lastName"];
-	var contactfirstname = allcontacts[contact]["firstName"];
-	var contactemail = allcontacts[contact]["email"];
-	logDebug(contactemail + " " + contactfirstname + " " + contactlastname);
-	var person = {};
-	person.first = contactfirstname;
-	person.last = contactlastname;
-	person.email = contactemail;
-	contactstoemail.push(person)
-}
-logDebug(printObject(contactstoemail));
-
 //send some emails if necessary
 if (iscorrecttask && iscorrectstatus && (totalfeebalance > 0.00))
 	{
-		//send emails to the people in contacttoemail
+		//send emails to the people in allowedcontacttypes
+		//what contact types should get an email - comma delimited string of contact types
+		var allowedcontacttypes = "Applicant";
+			
+		//send email to all contacts with the apropriate template and report
+		var emailtemplate = "JD_TEST_TEMPLATE";
+		var reportname = "JD_TEST_REPORT";
 		
-		//set wfStatus to "Ready to Pay"		
+		//populate the email parameters not already included for "free" - must examine the template to know
+		var joke = "this will eventually be an invoice";
+		var emailparams = aa.util.newHashtable();
+		emailparams.put("$$Joke$$", joke);
+		
+		//populate the report parameters - must examine the report to know
+		var reportparams = aa.util.newHashtable();
+		reportparams.put("DEPARTMENT", "Administrator");
+		
+		//call Emmett's emailContacts function - this runs asynchronously - puts "deep link" to report in email
+		emailContacts(allowedcontacttypes, emailtemplate, emailparams, reportname, reportparams, "N", "");
+		
+		//set wfStatus to "Ready to Pay"
+		updateTask("Fee Processing", "Ready to Pay", "script updated Task Status", "script updated Task Status");
 		
 	}
