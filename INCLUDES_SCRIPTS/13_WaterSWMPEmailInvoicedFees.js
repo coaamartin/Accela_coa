@@ -14,8 +14,12 @@ logDebug("iscorrecttask: " + iscorrecttask);
 //determine if the current task status is "Accepted"
 var currentstatus = wfStatus;
 logDebug("currentstatus is: " + currentstatus);
-var taskstatustocheck = "Accepted";
-var iscorrectstatus = isTaskStatus(correcttask, taskstatustocheck);
+var statustocheck = "Accepted";
+var iscorrectstatus = false;
+if (currentstatus == statustocheck)
+{
+	iscorrectstatus = true;
+}
 logDebug("iscorrectstatus: " + iscorrectstatus);
 
 //Determine if there are fee balances.  Might as well load all fees and iterate through them
@@ -28,8 +32,13 @@ for (var fee in allfees)
 {
 	var feeamt = parseInt(allfees[fee]["amount"]);
 	var feepaid = parseInt(allfees[fee]["amountPaid"]);
+	var feestatus = allfees[fee]["status"] + "" //force string
 	var feebalance = feeamt - feepaid;
-	totalfeebalance += feebalance;
+	//only consider fee balances that are invoiced
+	if (feestatus == "INVOICED")
+	{
+		totalfeebalance += feebalance;
+	}
 }
 logDebug("totalfeebalance: " + totalfeebalance.toString());
 
