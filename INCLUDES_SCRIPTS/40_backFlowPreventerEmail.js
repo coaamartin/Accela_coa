@@ -2,11 +2,14 @@
 
 //result = 40_backFlowPreventerEmail();
 //logDebug("Started 40_backFlowPreventerEmail.."+ result);
-function 40_backFlowPreventerEmail(){
+function 40_backFlowPreventerEmail()
+{
 	logDebug("Started 40_backFlowPreventerEmail..");
-	if (wfTask == "Backflow Preventor" && wfStatus == "Final") {
+	if (wfTask == "Backflow Preventor" && wfStatus == "Final")
+	{
 		var applicant = getContactByType("Applicant", capId);
-		if (!applicant || !applicant.getEmail()) {
+		if (!applicant || !applicant.getEmail())
+		{
 			logDebug("**WARN no applicant found on or no email capId=" + capId);
 			return false;
 		}
