@@ -37,7 +37,7 @@ Sample Call : closeWfTaskCertificateOfOccupancy()
 
 Notes		: Provided Record type "MJ License Application" , is not available ,replaced with a Sample Record Type "Licenses/Marijuana/Retail Store/License"
 	          ,to be replaced with the correct record type
-/------------------------------------------------------------------------------------------------------*/
+------------------------------------------------------------------------------------------------------*/
 closeWfTaskCertificateOfOccupancy();
 script208_UpdatePermitFields();
 
