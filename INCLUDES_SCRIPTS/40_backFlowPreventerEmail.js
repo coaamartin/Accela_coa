@@ -1,7 +1,7 @@
 //40_backFlowPreventerEmail Functions
 
-result = 40_backFlowPreventerEmail();
-logDebug("Started 40_backFlowPreventerEmail.."+ result);
+//result = 40_backFlowPreventerEmail();
+//logDebug("Started 40_backFlowPreventerEmail.."+ result);
 function 40_backFlowPreventerEmail(){
 	logDebug("Started 40_backFlowPreventerEmail..");
 	if (wfTask == "Backflow Preventor" && wfStatus == "Final") {
