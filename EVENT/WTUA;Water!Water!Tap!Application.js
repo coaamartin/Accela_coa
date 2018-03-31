@@ -1,3 +1,2 @@
-//WTUA:Water/Water/SWMP/APPLICATION
-
+//COA Script - Suhail
 include("32_recStatusUpdateWaterTap");
