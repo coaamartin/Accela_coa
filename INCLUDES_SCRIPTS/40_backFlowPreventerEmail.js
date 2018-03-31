@@ -1,7 +1,6 @@
 //script40_backFlowPreventerEmail Functions
 
-//result = script40_backFlowPreventerEmail();
-//logDebug("Started script40_backFlowPreventerEmail.."+ result);
+script40_backFlowPreventerEmail();
 function script40_backFlowPreventerEmail()
 {
 	logDebug("Started script40_backFlowPreventerEmail..");
