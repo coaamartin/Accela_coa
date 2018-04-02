@@ -21,7 +21,7 @@ function script281_AssignScheduledFireInspection(){
 			throw "Record not Assigned to User. Please enter on the Record tab";			
 
 		// we have the user, assign this user to the inspection being scheduled
-		assignInspection(inspID,userID);
+		assignInspection(inspId,userID);
 		
 	}
 	catch(err)
