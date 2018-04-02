@@ -16,11 +16,12 @@ function script281_AssignScheduledFireInspection(){
 	{
 		// first get the user that has been assigned to the Record
 		// if there is no user this may need to be an error
-		
-		// get this inspection number
-		// inspId = curResult.inspId;
+		var userID = getAssignedStaff();
+		if (userID == null)
+			throw "Record not Assigned to User. Please enter on the Record tab";			
+
 		// we have the user, assign this user to the inspection being scheduled
-		// assignInspection(inspNum,userID);
+		assignInspection(inspID,userID);
 		
 	}
 	catch(err)
