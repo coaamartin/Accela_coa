@@ -1,6 +1,6 @@
 eval(getScriptText("STDBASE_INSPECTION_AUTOMATION"));
 var inspType = "ECKO and Initial Inspection";
-
+var inspResultComment = "";
 if ("ECKO and Initial Inspection".equals(inspType) && "Passed".equals(inspResult))
 {
     //Schedule a Routine Inspection in child SWMP Permit record (SWMP Permit Inspection group) for 30 business days 
