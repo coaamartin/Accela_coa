@@ -26,7 +26,7 @@ if ("ECKO and Initial Inspection".equals(inspType) && "Passed".equals(inspResult
     
 
 }
-else if ("ECKO and Initial Inspection".equals(inspType) && "Fail".equals(inspResult))
+else if ("ECKO and Initial Inspection".equals(inspType) && "Failed".equals(inspResult))
 {
     //Auto send email with inspection comments included to applicant (need email template) 
     //(Need to know if schedule another inspection or will Applicant schedule in ACA from COA Water staff)  
