@@ -28,4 +28,13 @@ logDebug(currenttaskstatus);
 logDebug(asi_isprojectphased);
 logDebug(neededdocument);
 logDebug(docuploaded);
+
+//raise a message if necessary
+if (currenttask == "Engineering Review" && currenttaskstatus == "Approved" && asi_isprojectphased == "Yes" && !docuploaded)
+{
+	cancel = true;
+	showMessage = true;
+	comment("Phased projects require Phase Work Plan to be attached in Documents!");
+	logDebug("Phased projects require Phase Work Plan to be attached in Documents!");
+}
 	
