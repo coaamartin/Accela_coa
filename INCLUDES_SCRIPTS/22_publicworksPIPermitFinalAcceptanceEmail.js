@@ -11,7 +11,7 @@ var currenttask = wfTask;
 var currentstatus = wfStatus;
 
 //get the wfComment
-var currentstatuscomment = wfComment;
+var currentstatuscomment = wfComment + "";
 
 logDebug("currenttask: " + currenttask);
 logDebug("currentstatus: " + currentstatus);
