@@ -2,7 +2,7 @@
 When wf step "Application Submittal" status = "Specific Contract Fees - Accepted" then 
 status wf step "Fee Processing" =  "Ready to Pay with Specific Contract Fees"
 
-written by JMAIN
+written by COA JMAIN
 */
 
 
