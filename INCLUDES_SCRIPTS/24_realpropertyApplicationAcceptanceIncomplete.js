@@ -9,34 +9,23 @@ var currentstatus = wfStatus;
 //email if task and status are what we want
 if (currenttask == "Real Property Pre Acceptance" && currentstatus == "Incomplete")
 {
-	//grab the name and email of the appropriate contacts
-	var allcontacts = getContactArray();
-	var allowedcontacttypes = ["Applicant"];
-	var contactstoemail = [];
-	for (contact in allcontacts)
-	{
-		var contacttype = allcontacts[contact]["contactType"] + ""; //force string
-		logDebug("Contact type is: " + contacttype);
-		//check if this contact type is in the allowed list above - if not, go on to the next one...
-		if (allowedcontacttypes.indexOf(contacttype) == -1)
-		{
-			logDebug("Contact type IS NOT allowed - don't email...");
-			continue;
-		}
-		
-		logDebug("Contact is IS allowed - will send email...");
-		var contactlastname = allcontacts[contact]["lastName"];
-		var contactfirstname = allcontacts[contact]["firstName"];
-		var contactemail = allcontacts[contact]["email"];
-		logDebug(contactemail + " " + contactfirstname + " " + contactlastname);
-		var person = {};
-		person.first = contactfirstname;
-		person.last = contactlastname;
-		person.email = contactemail;
-		contactstoemail.push(person)
-	}
-	logDebug(printObject(contactstoemail));
+	logDebug("running script 24...");
 	
-	//send some emails
-	//todo
+	//Prepare the email and report...
+	var emailtemplate = "JD_TEST_TEMPLATE";
+	var reportname = "JD_TEST_REPORT";
+	var allowedcontacttypes = "Applicant";
+	
+	var emailparams = aa.util.newHashtable();
+	var joke = "This will be a legit email template once created.";
+	var currentstatuscomment = "Status and Application updated by script 24";
+	emailparams.put("$$Joke$$", joke);
+	emailparams.put("$$wfComment$$", currentstatuscomment);
+
+	var reportparams = aa.util.newHashtable();
+	reportparams.put("DEPARTMENT", "Administrator");
+	
+	//send the email...
+	emailContacts(allowedcontacttypes, emailtemplate, emailparams, reportname, reportparams, "N", "");
+	logDebug("email sent...");
 }
