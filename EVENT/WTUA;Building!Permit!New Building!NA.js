@@ -21,3 +21,20 @@ Sample Call : createChildWaterUtilityPermitRecords()
 createChildWaterUtilityPermitRecords();
 script207_SetTotalSqFtOnFireRecord();
 script206_DeactivateFEMA();
+
+/*
+Title : Calculate and assess Construction Building Fees (WorkflowTaskUpdateAfter) 
+
+Purpose : For record type Building/Permit/New Building/NA fees are not assessed at intake so will need to be assessed on workflow
+task update.
+
+Author: Yazan Barghouth 
+ 
+Functional Area : Records
+
+Sample Call:
+	calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
+
+*/
+
+calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
