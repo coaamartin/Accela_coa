@@ -19,3 +19,23 @@ Sample Call : updateAssignedUserForTraffEngReq()
 updateAssignedUserForTraffEngReq();
 script265_ManagerReviewToSupervisor();
 
+/*
+Title : Resubmittal requested email notification (WorkflowTaskUpdateAfter) 
+
+Purpose : When any workflow task is updated with the status "Resubmittal Requested" then send an email to all contacts on record
+with workflow comments included in the email template.
+
+Author: Yazan Barghouth 
+ 
+Functional Area : Records
+
+Sample Call:
+	resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "MESSAGE_NOTICE_PUBLIC WORKS");
+	
+Notes:
+	Supported Email Parameters:
+	$$altID$$, $$recordAlias$$, $$recordStatus$$, $$balance$$, $$wfTask$$, $$wfStatus$$, $$wfDate$$, $$wfComment$$, $$wfStaffUserID$$, $$wfHours$$
+	
+*/
+
+resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "MESSAGE_NOTICE_PUBLIC WORKS");
