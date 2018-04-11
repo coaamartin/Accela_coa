@@ -16,3 +16,18 @@ Notes:
 */
 
 removeMasterPlanDataFromShrdDDList([ "Unapproved", "Withdrawn" ], "BLD_CODE_REF");
+
+/*
+Title : Add Master Plan Data to Share Dropdown for Building Records (ApplicationStatusUpdateAfter) 
+
+Purpose : Based on ASI value, check and inactivate a row in a shared DDL, and insert a row in Shared DDL
+
+Author: Yazan Barghouth 
+ 
+Functional Area : Records
+
+Sample Call:
+	addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
+*/
+
+addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
