@@ -19,3 +19,22 @@ Sample Call : createChildWaterUtilityPermitRecords()
 */
 
 createChildWaterUtilityPermitRecords();
+
+/*
+Title : Activate workflow tasks (WorkflowTaskUpdateAfter) 
+
+Purpose : Activate workflow tasks based on the Status of other Tasks
+
+Author: Yazan Barghouth 
+ 
+Functional Area : Records
+
+Sample Call:
+	activateWorkflowTasks();
+
+Notes:
+	- Workflow task names are not accurate (not as in config)
+	- Use arrays reviewTasksAry and activeReviewTasksAry to edit and correct task names
+*/
+
+activateWorkflowTasks();

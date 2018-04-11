@@ -38,3 +38,22 @@ Sample Call:
 */
 
 calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
+
+/*
+Title : Activate workflow tasks (WorkflowTaskUpdateAfter) 
+
+Purpose : Activate workflow tasks based on the Status of other Tasks
+
+Author: Yazan Barghouth 
+ 
+Functional Area : Records
+
+Sample Call:
+	activateWorkflowTasks();
+
+Notes:
+	- Workflow task names are not accurate (not as in config)
+	- Use arrays reviewTasksAry and activeReviewTasksAry to edit and correct task names
+*/
+
+activateWorkflowTasks();
