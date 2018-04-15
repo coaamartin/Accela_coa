@@ -42,3 +42,6 @@ checkNoFeeAndUpdateTask(capId, "Fee Processing", [ "No Fees Required" ], "MESSAG
 
 //JMAIN - show message if no phase plan
 include("11_WaterUtilityNeedPhaseWorkPlanForPermit");
+
+//SWAKIL - Email
+include("41_EmailWaterUtilityPermit");
