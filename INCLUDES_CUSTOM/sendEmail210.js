@@ -10,13 +10,13 @@ function sendEmail210(){
 	var files = new Array();
 	// use the correct parameters related to the email template provided + wfComment
 	var eParams = aa.util.newHashtable();
-//	addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-//	addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
-//	addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-//	addParameter(eParams, "$$wfTask$$", wfTask);
-//	addParameter(eParams, "$$wfStatus$$", wfStatus);
-//	addParameter(eParams, "$$wfDate$$", wfDate);
-//	addParameter(eParams, "$$wfComment$$", wfComment);
+	addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
+	addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
+	addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+	addParameter(eParams, "$$wfTask$$", wfTask);
+	addParameter(eParams, "$$wfStatus$$", wfStatus);
+	addParameter(eParams, "$$wfDate$$", wfDate);
+	addParameter(eParams, "$$wfComment$$", wfComment);
 
 	var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplate, eParams, files);
 	if (!sent.getSuccess()) {
