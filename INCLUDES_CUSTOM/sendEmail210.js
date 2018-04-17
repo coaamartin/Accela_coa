@@ -36,8 +36,8 @@ function sendEmail210(){
 	addParameter(eParams, "$$wfDate$$", wfDate);
 	addParameter(eParams, "$$wfComment$$", wfComment);
 	addParameter(eParams, "$$acaRecordUrl$$", acaUrl);
-	addParameter(params, "$$FullAddress$$", primaryAddress);
-	addParameter(params, "$$ApplicationName$$", appName);
+	addParameter(eParams, "$$FullAddress$$", primaryAddress);
+	addParameter(eParams, "$$ApplicationName$$", appName);
 
 	var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplate, eParams, files);
 	if (!sent.getSuccess()) {
