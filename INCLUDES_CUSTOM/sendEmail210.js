@@ -35,7 +35,7 @@ function sendEmail210(){
 	addParameter(eParams, "$$wfStatus$$", wfStatus);
 	addParameter(eParams, "$$wfDate$$", wfDate);
 	addParameter(eParams, "$$wfComment$$", wfComment);
-	addParameter(eParams, "$$acaRecordUrl$$", acaUrl);
+	addParameter(eParams, "$$acaRecordUrl$$", getACARecordURL);
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
 
