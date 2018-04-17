@@ -2,7 +2,7 @@ function sendEmail210(){
 	//Use the provided template name 
 	var emailTemplate="LIC MJ ADDITIONAL INFO # 210"
 	var applicant = getContactByType("Applicant", capId);
-	var acaUrl = acaUrl;
+	var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
 	if (!applicant || !applicant.getEmail()) {
 		logDebug("**WARN no applicant found or no email capId=" + capId);
 		return false;
@@ -35,7 +35,7 @@ function sendEmail210(){
 	addParameter(eParams, "$$wfStatus$$", wfStatus);
 	addParameter(eParams, "$$wfDate$$", wfDate);
 	addParameter(eParams, "$$wfComment$$", wfComment);
-	addParameter(eParams, "$$acaRecordUrl$$", getACARecordURL);
+	addParameter(eParams, "$$acaRecordUrl$$", acaUrl);
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
 
