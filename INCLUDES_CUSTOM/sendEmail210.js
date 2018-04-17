@@ -25,7 +25,7 @@ function sendEmail210(){
 			}
 	
 	var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
-	var appName = getSpecialText();
+	var appName = cap.getSpecialText();
 	
 	var eParams = aa.util.newHashtable();
 	addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
