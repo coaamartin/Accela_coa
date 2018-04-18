@@ -8,20 +8,11 @@ Author: Haitham Eleisah
 
 Functional Area : Records
 
-Notes :
-ASI Field Name "Stump Grind Priority" Not Exists so i used another field .
-when the  Tree Request Intake has status of "No Plant" the work flow is not moving to another task.
-so i used "Assigned" status to complete the logic
 Sample Call:
 updateWFtaskAndASIField("Tree Request Intake", "Crew Work", "Removal", "Stump Grind", "Area Number",2)
  */
 
-var parentWorkflowTasktoBechecked = "Tree Request Intake";
-var parentworkFlowStatustoBeChecked = "Assigned"; //"No Plant"
-var workFlowTaskTobechecked = "Crew Work";
-var workFlowStatusTobeChecked = "Removal";
-var workflowTasktobeActivated = "Stump Grind";
-var ASIFieldNametoBeUpdated = "Area Number";//"Stump Grind Priority"
-
-updateWFtaskAndASIField(parentWorkflowTasktoBechecked, parentworkFlowStatustoBeChecked, workFlowTaskTobechecked, workFlowStatusTobeChecked, workflowTasktobeActivated,
-		ASIFieldNametoBeUpdated, 2);
+if(wfTask == "Crew Work" && wfStatus =="Removal"){
+	
+	activateTask("Stump Grind");
+}
