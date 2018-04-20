@@ -50,7 +50,7 @@ reportparams.put("DEPARTMENT", "Administrator");
 //run Emmett's async email function
 logDebug("Getting ready to run emailAsync_coa.js");
 
-// Generates report and sends email - note, report does not generate... maybe due to bad report parameters or output format
+// Generates report and sends email
 emailAsync("ewylam@etechconsultingllc.com;jmain@auroragov.org", emailtemplatename, emailparams, reportname, reportparams, "mickey mouse, phil collins", "");
 
 // Just Sends email
