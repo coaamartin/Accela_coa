@@ -1,5 +1,13 @@
 doConfigurableScriptActions();
 
+//Start - proximity alerts
+include("Caution_Homes");
+include("Marijuana_Retail_Businesses");
+include("Liquor_Licenses");
+include("Pawn_Shops");
+//End - proximity alerts
+
+
 //Needed to get GIS feature associated when created by AMO or Apps 
 //Copy Parcel GIS Objects to Record using function copyParcelGisObjects()
 try{
