@@ -8,13 +8,17 @@ function script87_LinkSWMP() {
 	
 	logDebug("script87_Link SWMP started.");
 	try{
-		if (AInfo["SWMP Permit Number"] && AInfo["SWMP Permit Number"] > "") {
-			var parentAppNum = AInfo["SWMP Permit Number"];
-			parentCap = addParent("parentAppNum");
-			if (!parentCap.getSuccess()) {
-				comment("Unable to create parent record on script87_Link SWMP. Please contact administrator.");
-			}
+		
+		var gp = AInfo['SWMP Permit Number'];
+		var gpc = null;
+		gpc = aa.cap.getCapID(AInfo['SWMP Permit Number']).getOutput();
+	
+		if (!publicUser && !partialCap) {
+		addParent(gpc.getCustomID());
 		}
+
+		
+		
 	} catch(err){
 		showMessage = true;
 		comment("Error on custom function script87_Link SWMP. Please contact administrator. Err: " + err);
