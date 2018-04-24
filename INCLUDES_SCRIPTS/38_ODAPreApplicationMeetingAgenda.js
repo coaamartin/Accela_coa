@@ -9,7 +9,7 @@ if (wfTask == "Finalize Agenda" && wfStatus == "Complete")
 	var joke = "This will eventually be a real Email template - for now, just pretend.";
 	var emailparams = aa.util.newHashtable();
 	emailparams.put("$$Joke$$", joke);
-	emailparams.put("$$wfComment$$", wfComment);
+	emailparams.put("$$wfComment$$", wfComment + "");
 	
 	//need to get the ODA Agenda Report
 	var reportname = "JD_TEST_REPORT";
