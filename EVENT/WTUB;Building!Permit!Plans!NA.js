@@ -14,7 +14,7 @@ Notes:
 	- Record type is 'BUILDING/PERMIT/PLAN(S)/NA' not Plan
 */
 
-//checkWfAndParentBlockSubmit("Permit Issuance", [ "Issued" ], "Building/Permit/Master/NA", "Unapproved");
+checkWfAndParentBlockSubmit("Permit Issuance", [ "Issued" ], "Building/Permit/Master/NA", "Unapproved");
 
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Final CO Issued checks Special Inspections (WorkflowTaskUpdateBefore).
@@ -30,4 +30,4 @@ Functional Area : Records
 Sample Call : checkSpecialInspections()
 /------------------------------------------------------------------------------------------------------*/
 
-checkSpecialInspections();
+//checkSpecialInspections();
