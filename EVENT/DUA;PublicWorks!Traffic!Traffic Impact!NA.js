@@ -56,3 +56,63 @@ function checkIfDocUploadedAndUpdateWfTask(DocumentType,newStatus){
 	      }
 	}
 }
+
+function updateTaskStatusAndActivate(wfStatusNamesArray, newTaskStatus) {
+
+	var tasks = aa.workflow.getTasks(capId);
+	if (!tasks.getSuccess()) {
+		logDebug("**WARN failed to get cap tasks, capId=" + capId + " Error:" + tasks.getErrorMessage());
+		return false;
+	}
+	tasks = tasks.getOutput();
+
+	if (tasks == null || tasks.length == 0) {
+		logDebug("**WARN tasks list empty or null, capId=" + capId);
+		return false;
+	}
+
+	for (w in wfStatusNamesArray) {
+		for (t in tasks) {
+			if (wfStatusNamesArray[w] == tasks[t].getDisposition()) {
+				if (tasks[t].getActiveFlag() == "N") {
+					activateTask(tasks[t].getTaskDescription());
+				}
+				updateTask(tasks[t].getTaskDescription(), newTaskStatus, "by script - document uploaded", "by script - document uploaded");
+				//NO break; ... we need to check all tasks against each status
+			}//status matched
+		}//for all wf Tasks
+	}//for all wfStatuses
+	return true;
+}
+
+function setWFStatusAndActivate(sName){
+	var workflowResult = aa.workflow.getTaskItems(capId, "", "", null, null, null);
+	if (workflowResult.getSuccess())
+		wfObj = workflowResult.getOutput();
+	   
+	else {
+		logDebug("**ERROR: Failed to get workflow object: " , s_capResult.getErrorMessage());
+		return false;
+	}
+
+	for (i in wfObj) {
+		var fTask = wfObj[i];
+		var wStaus="Resubmittal Requested";
+		if ((fTask.getDisposition() != null && fTask.getDisposition().toUpperCase().equals(wStaus.toUpperCase())> 0)) {
+			var dispositionDate = aa.date.getCurrentDate();
+			var stepnumber = fTask.getStepNumber();
+			//activate task
+			var tResult =aa.workflow.adjustTask(capId, stepnumber, "Y", "N", null, null);
+			if (tResult.getSuccess()){
+				logDebug("Activated Workflow Task: " , fTask.getTaskDescription());
+			}
+			// update task status
+			var uResult=aa.workflow.handleDisposition(capId, stepnumber,sName, dispositionDate, "", "Updated by Script", systemUserObj, "U");
+			if (uResult.getSuccess()){
+				logDebug("Set Workflow Task: " + fTask.getTaskDescription(), " Status to : Resubmittal Received");
+			}
+			
+		}
+	}
+	return true;
+}
