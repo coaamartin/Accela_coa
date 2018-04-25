@@ -16,4 +16,4 @@ function ActivateWorkflowTasksBasedOnDocumentUpload(documentTypeUploaded, wfStat
 		}
 	}
 	return false;
-}
+} 
