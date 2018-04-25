@@ -14,7 +14,7 @@ Sample Call:
 
 */
 
-ActivateWorkflowTasksBasedOnDocumentUpload("Traffic Impact Study", [ "Resubmittal Requested", "Incomplete Submittal" ], "In Progress");
+ActivateWorkflowTasksBasedOnDocumentUpload("Traffic Impact Study", [ "Resubmittal Requested", "Incomplete Submittal" ], "Resubmittal Received");
 
 /* Title :  Activate Workflow tasks based on documents(DocumentUploadAfter)
 
