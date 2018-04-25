@@ -14,7 +14,7 @@ Sample Call:
 
 */
 
-//ActivateWorkflowTasksBasedOnDocumentUpload("Traffic Impact Study", [ "Resubmittal Requested", "Incomplete Submittal" ], "In Progress");
+ActivateWorkflowTasksBasedOnDocumentUpload("Traffic Impact Study", [ "Resubmittal Requested", "Incomplete Submittal" ], "In Progress");
 
 /* Title :  Activate Workflow tasks based on documents(DocumentUploadAfter)
 
@@ -33,3 +33,26 @@ Sample Call : checkIfDocUploadedAndUpdateWfTask("Drainage Plans","SS Requested")
 
 checkIfDocUploadedAndUpdateWfTask("Traffic Impact Study","Resubmittal Received");
 
+function ActivateWorkflowTasksBasedOnDocumentUpload(documentTypeUploaded, wfStatusNamesArray, newTaskStatus) {
+	if (typeof documentModelArray !== 'undefined' && documentModelArray == null || documentModelArray.length == 0) {
+		return false;
+	}
+	for (var d = 0; d < documentModelArray.size(); d++) {
+		if (documentModelArray.get(d).getDocCategory().equalsIgnoreCase(documentTypeUploaded)) {
+			//if docType matched, no need to complete the loop
+			return updateTaskStatusAndActivate(wfStatusNamesArray, newTaskStatus);
+		}
+	}
+	return false;
+} 
+
+function checkIfDocUploadedAndUpdateWfTask(DocumentType,newStatus){
+	for (var i = 0; i < documentModelArray.size(); i++) {
+		var documentModel = documentModelArray.get(i);
+		var documentCategory = documentModel.getDocCategory();
+		if (documentCategory!=null && documentCategory.equals(DocumentType)){
+			 setWFStatusAndActivate(newStatus);
+			 break;
+	      }
+	}
+}
