@@ -36,7 +36,7 @@ eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 var capId = null;
 
 try {
-	var emailTemplate = aa.env.getValue("LIC MJ INACTIVE LICENSE # 313");
+	var emailTemplate = "LIC MJ INACTIVE LICENSE # 313";
 	checkExpiredUpdateAppStatus("Delinquent", 7, "Expired", emailTemplate);
 } catch (ex) {
 	logDebug("**ERROR batch failed, error: " + ex);
