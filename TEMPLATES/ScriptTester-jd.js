@@ -7,12 +7,12 @@ var eventName = "PaymentReceiveAfter";
 */
 
 //You typically have to initialize some of these globals when using the script tester.
-var myCapId = "18-000012-LIP";
+var myCapId = "18-000008-PRE";
 var myUserId = "JMAIN";
 var eventName = "";
 var wfTask = "";
 var wfStatus = "";
-var wfComment = "";
+var wfComment = "blah blah blah";
 
 var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
 var runEvent = true; // set to true to simulate the event and run all std choices/scripts for the record type.  
@@ -28,8 +28,7 @@ try
 //your code here
 showDebug = true;
 
-
-}	
+logDebug("hello world!");
 
 }
 

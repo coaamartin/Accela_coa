@@ -2,6 +2,7 @@
 When the invoice on the record is paid and balance = 0 then open a Meter Set 
 Inspection and make it schedulable on ACA and email the applicant. Assign the inspection 
 for the Water Operations Service Center scheduling bucket.
+created by swakil
 */
 
 if (balanceDue == 0)

@@ -1,3 +1,5 @@
+//created by swakil
+
 eval(getScriptText("STDBASE_INSPECTION_AUTOMATION"));
 var inspResultComment = "";
 if ("ECKO and Initial Inspection".equals(inspType) && "Passed".equals(inspResult))

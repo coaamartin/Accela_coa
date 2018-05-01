@@ -1,6 +1,7 @@
 /*Event   WorkflowTaskUpdateAfter   
 Criteria   wf step "Final Acceptance" = "Completed" 
 Action email the applicant, contractor and owner. 
+created by swakil
 */
 if ("Final Acceptance".equals(wfTask) && "Completed".equals(wfStatus))
 {

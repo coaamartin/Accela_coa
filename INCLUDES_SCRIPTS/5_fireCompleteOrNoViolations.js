@@ -1,5 +1,5 @@
 //Script #245
-//Created by JDM 2018-03-06
+//Created by JMAIN 2018-03-06
 //This is JDM's first - does this script even work?
 
 if (inspResult == "Complete")

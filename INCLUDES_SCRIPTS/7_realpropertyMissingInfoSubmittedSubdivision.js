@@ -4,7 +4,7 @@ This is script 287 which checks if record status is "Waiting on Documents" AND
 the Workflow step is currently "Application Status" AND
 the workflow status is "Missing Information"
 
-JMAIN
+Written by JMAIN
 
 */
 

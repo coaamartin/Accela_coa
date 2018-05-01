@@ -1,7 +1,7 @@
 /*Event   WorkflowTaskUpdateAfter   
 Criteria   wf step "Fee Processing" = "Ready to Pay" 
-Action email the applicant with any invoiced fees on the record. 
-SW
+Action email the applicant with any invoiced fees on the record.
+created by swakil
 */
 
 if ("Fee Processing".equals(wfTask) && "Ready to Pay".equals(wfStatus))
