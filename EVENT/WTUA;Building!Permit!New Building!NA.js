@@ -82,3 +82,35 @@ updatePermitExpirationCF([ "Accept Plans", "Accepted In House", "Structural Plan
 updatePermitExpirationCF([ "Accept Plans", "Accepted In House", "Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review",
 		"Bldg Life Safety Review", "Fire Life Safety Review", "Structural Engineering Review", "Real Property Review", "Planning Review", "Water Review", "Zoning Review",
 		"Engineering Review", "Traffic Review", "Waste Water Review", "Forestry Review" ], "Resubmittal Requested", "Application Expiration Date");
+		
+/*
+Title : Auto Create Tap Application record (WorkflowTaskUpdateAfter)
+Purpose : If criteria: If wfTask = Water Review and wfStatus = "Approved" and the TSI field "Is a TAP record required" is equal to
+"Yes" and the TSI field "Number of TAP records needed" > 0 Action: Then auto create a Tap
+record(Water/Water/Tap/Application) for each number listed in the TSI field "Number of TAP records needed" as a child of
+the Building/Permit/New Building/NA. When creating these child records copy the custom field "# of Residential Units" and
+"Building Sq Ft" from the parent to the new child record along with all address, parcel, owner and contact information. In
+addition spawn a Utility Service record(Water/Utility/Service/NA) as a child of the parent for each Tap record that is created.
+
+Author: Haitham Eleisah
+
+Functional Area : Records
+
+Note: Building Sq Ft ASI field does not exists on the parent record.
+Sample Call:
+autoCreateTapApplicationRecord("Water Review","Approved","Is a TAP record required?","Number of TAP records needed", "Water/Water/Tap/Application","# of Residential Units","Building Sq Ft","# of Stories","Water/Utility/Service/NA");
+ */
+//Based on report fill report parameters here
+var workflowTasktoCheck = "Water Review";
+var workflowStatustoCheck = "Approved";
+var tsiIsTAPrecordrequired = "Is a TAP record required?";
+var tsiNumberOfTaprecords = "Number of TAP records needed";
+var childRecordToCreated = "Water/Water/Tap/Application";
+var ofResidentialUnitsASI = "Number of Residential Units";
+var parentofResidentialUnitsASI = "# of Residential Units"
+var BuildingSqFt = "Building Sq Ft";
+var parentBuildingSqFt = "# of Stories"
+var utilityServiceRecord = "Water/Utility/Service/NA";
+
+autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIsTAPrecordrequired, tsiNumberOfTaprecords, childRecordToCreated, ofResidentialUnitsASI,
+		BuildingSqFt, parentofResidentialUnitsASI, parentBuildingSqFt, utilityServiceRecord);
