@@ -1,7 +1,3 @@
-//WTUA:PublicWorks/Real Property/License Agreement/NaN
-
-//checkInvoiced(); moved to WTUB
-
 /*
 Title : Civil Plans and Drainage update Submittal Number (WorkflowTaskUpdateAfter)
 
@@ -21,3 +17,6 @@ Notes:
 
 
 updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submittal Number");
+
+
+
