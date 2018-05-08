@@ -18,9 +18,14 @@ Notes:
 1- The script will update the "Code Reference" custom field, when the workflow status = "Issued"
 */
 
-var wfStatusCompareVal = "Issued";
-setCodeReference(wfStatusCompareVal);
-
+if(wfStatus == "Issued"){
+	
+        var codeRefVal = getAppSpecific("Code Reference");
+        if (isEmpty(codeRefVal)) {
+            editAppSpecific("Code Reference", "2015 I-Codes/Aurora Muni Codes/2017-NEC");
+        }
+    
+}	
 
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Building Certificate of Occupancy does Complete on License WF(WorkflowTaskUpdateAfter).
