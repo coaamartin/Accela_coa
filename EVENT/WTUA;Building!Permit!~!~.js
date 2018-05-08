@@ -15,12 +15,12 @@ Sample Call:
 	setCodeReference("Complete");
 
 Notes:
-1- The script will update the "Code Reference" custom field, when the workflow status = "Complete"
+1- The script will update the "Code Reference" custom field, when the workflow status = "Issued"
 */
 
-// In specification record the status is "Issued", but we set it to "Complete", since we didn't find an "Issued" status
-var wfStatusCompareVal = "Complete";
+var wfStatusCompareVal = "Issued";
 setCodeReference(wfStatusCompareVal);
+
 
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Building Certificate of Occupancy does Complete on License WF(WorkflowTaskUpdateAfter).
