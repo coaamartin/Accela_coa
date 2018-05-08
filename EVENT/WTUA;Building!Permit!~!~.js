@@ -23,7 +23,7 @@ if(wfStatus == "Issued"){
         var codeRefVal = getAppSpecific("Code Reference");
         if (isEmpty(codeRefVal)) {
 			logDebug("Inside Set Code Reference Custom Field Empty Field Flag");
-            editAppSpecific("Code Reference", "Other Codes"); //2015 I-Codes/Aurora Muni Codes/2017-NEC
+            editAppSpecific("Code Reference","2015 I-Codes/Aurora Muni Codes/2017-NEC"); 
         }
     
 }	
