@@ -94,9 +94,9 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 
 		if (feeQty > 0) 
 		 {
-			addFee(feeCodesAry["DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
+			 addFee(feeCodesAry["DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
 			} 	else {
-			logDebug("**WARN " + permitFeeTypeAsiName + " is empty , no fees added");
+			logDebug("**WARN Driveway Fee is empty, no fees added");
 		}
 				
 
