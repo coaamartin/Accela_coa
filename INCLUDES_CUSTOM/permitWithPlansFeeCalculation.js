@@ -83,6 +83,18 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 			logDebug("**WARN " + permitFeeTypeAsiName + " is empty and Valuation is empty, no fees added");
 		}
 	}
+	
+	
+	//Driveway Fee
+	var feeQty = 0;
+	var drivewayFee = asiValues["# of Driveways"];
+	 if (drivewayFee && drivewayFee != null && drivewayFee != "" 
+				) {
+			feeQty = parseFloat(drivewayFee);
+     if (feeQty > 0) {
+			addFee(feeCodesAry["DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
+			}
+			}	
 
 	//check County in address:
 	var county = null;
