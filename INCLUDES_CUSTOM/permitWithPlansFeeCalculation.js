@@ -93,7 +93,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 			} 	else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is empty , no fees added");
 		}
-			}	
+				
 
 	//check County in address:
 	var county = null;
