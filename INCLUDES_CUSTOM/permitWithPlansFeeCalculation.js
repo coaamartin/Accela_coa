@@ -88,8 +88,13 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	//Driveway Fee
 	var feeQty = 0;
 	var drivewayFee = asiValues["# of Driveways"];
-	 if (drivewayFee && drivewayFee != null && drivewayFee != "" )  {
-			addFee(feeCodesAry["DRIVEWAY_FEE"], feeSched, "FINAL", parseFloat(drivewayFee), "N");
+	 if (drivewayFee && drivewayFee != null && drivewayFee != "" ) {
+ feeQty = parseFloat(drivewayFee);
+		}
+
+		if (feeQty > 0) 
+		 {
+			addFee(feeCodesAry["DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
 			} 	else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is empty , no fees added");
 		}
