@@ -43,7 +43,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	}
 
 	
-	//determine Fee Code / Fee Sched to sue based on record type
+	//determine Fee Code / Fee Sched to sue based on record type 
 	var feeSched = null;
 	var feeCodesAry = [];
 	if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")) {
@@ -61,7 +61,6 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PWP_03";
 		feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PWP_04";
 		feeCodesAry["BUILDING_USE_TAX_FEE"] = "BLD_PWP_02";
-		feeCodesAry["DRIVEWAY_FEE"] = "BLD_PWP_11";
 	}
 
 	if (feeSched == null) {
