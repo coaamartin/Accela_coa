@@ -1,6 +1,6 @@
 function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permitFeeTypeAsiName, permitFeeTypeTotalAsiName, gisSvcName, gisLayerName, gisAttrName) {
 
-	var canAddFees = false;
+	var canAddFees = false; 
 
 	if (workFlowTask && workFlowTask != null && workflowStatusArray && workflowStatusArray != null) {
 		if (wfTask == workFlowTask) {
