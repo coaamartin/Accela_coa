@@ -42,6 +42,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		asiValues = AInfo;
 	}
 
+	
 	//determine Fee Code / Fee Sched to sue based on record type
 	var feeSched = null;
 	var feeCodesAry = [];
