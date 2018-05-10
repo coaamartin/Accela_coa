@@ -1,6 +1,6 @@
 // WTUA:Building/*/*/*
 
-// following block of code was in Accela but not Github... it was added by "ADMIN" 12-22-2016
+/* following block of code was in Accela but not Github... it was added by "ADMIN" 12-22-2016
 if (wfTask == "Permit Issuance" && wfStatus == "Issued")
 editAppSpecific("Permit Issued Date", sysDateMMDDYYYY);
 if (wfTask == "Permit Issuance" && wfStatus == "Issued")
@@ -14,8 +14,8 @@ licEditExpInfo(null, AInfo["Permit Expiration Date"]);
 if (wfTask == "Permit Status" && wfStatus == "Permit Issued")
 licEditExpInfo(null, AInfo["Permit Expiration Date"]);
 // end ADMIN code
-
-script205_DeactivateSpecInsp();
+*/
+//script205_DeactivateSpecInsp();
 
 //Script 202 - Auto create inspections for Building
 /*------------------------------------------------------------------------------------------------------/
@@ -29,8 +29,8 @@ script205_DeactivateSpecInsp();
 | Created at	: 01/02/2018 16:19:04
 |
 /------------------------------------------------------------------------------------------------------*/
-/*if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
+
+if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
 	var tasksToCheck = [ "Mechanical Plan Review", "Electrical Plan Review", "Plumbing Plan Review", "Structural Plan Review" ];
 	createAutoInspection(tasksToCheck);
 }
-*/
