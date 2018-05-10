@@ -45,6 +45,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PWP_03";
 		feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PWP_04";
 		feeCodesAry["BUILDING_USE_TAX_FEE"] = "BLD_PWP_02";
+		feeCodesAry["DRIVEWAY_FEE"] = "BLD_PWP_11";
 	} else if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("No Plans")) {
 		feeSched = "BLD_PNP";
 		feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PWP_06";
