@@ -78,6 +78,22 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		}
 	}
 
+	
+	//Driveway Fee
+	var feeQty = 0;
+	var driveway = asiValues["# of Driveways"];
+	 if (driveway && driveway != null && drivewayFee != "" ) {
+     feeQty = parseFloat(driveway);
+		}
+
+		if (feeQty > 0) 
+		 {
+			 addFee(feeCodesAry["DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
+			} 	else {
+			logDebug("**WARN Driveway Fee is empty, no fees added");
+		}
+				
+	
 	//check County in address:
 	var county = null;
 	var addResult = aa.address.getAddressByCapId(capId);
@@ -116,7 +132,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	}
 
 	//Arapahoe county Fee
-	if (county == "Arapahoe") {
+	if (county == "ARAPAHOE") {
 		var feeQty = 0;
 		var materialsCost = asiValues["Materials Cost"];
 		var valuation = asiValues["Valuation"];
