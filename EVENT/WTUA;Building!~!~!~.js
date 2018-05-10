@@ -29,7 +29,8 @@ script205_DeactivateSpecInsp();
 | Created at	: 01/02/2018 16:19:04
 |
 /------------------------------------------------------------------------------------------------------*/
-if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
+/*if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
 	var tasksToCheck = [ "Mechanical Plan Review", "Electrical Plan Review", "Plumbing Plan Review", "Structural Plan Review" ];
 	createAutoInspection(tasksToCheck);
 }
+*/
