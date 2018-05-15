@@ -103,7 +103,7 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 			addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
 
-			var sent = aa.document.sendEmailByTemplateName("", owners.getEmail(), cc, emailTemplateName, eParams, null);
+			var sent = aa.document.sendEmailByTemplateName("", owners.getEmail(), cc, EMAIL_TEMPLATE, eParams, null); 
 			if (!sent.getSuccess()) {
 				logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 			}
