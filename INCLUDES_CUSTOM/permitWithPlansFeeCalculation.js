@@ -68,24 +68,6 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		return false;
 	}
 
-	//Building Fee (Flat Fee)
-	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "") {
-		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
-		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "") {
-			addFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
-		} else {
-			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
-		}
-	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "") {
-		////Building Fee (Valuation)
-		var valuation = asiValues["Valuation"];
-		if (valuation && valuation != null && valuation != "") {
-			addFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
-		} else {
-			logDebug("**WARN " + permitFeeTypeAsiName + " is empty and Valuation is empty, no fees added");
-		}
-	}
-
 	//check County in address:
 	var county = null;
 	var addResult = aa.address.getAddressByCapId(capId);
@@ -169,5 +151,24 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	if (feeQty > 0) {
 		addFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "N");
 	}
+	
+	//Building Fee (Flat Fee)
+	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "") {
+		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
+		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "") {
+			addFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
+		} else {
+			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
+		}
+	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "") {
+		////Building Fee (Valuation)
+		var valuation = asiValues["Valuation"];
+		if (valuation && valuation != null && valuation != "") {
+			addFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
+		} else {
+			logDebug("**WARN " + permitFeeTypeAsiName + " is empty and Valuation is empty, no fees added");
+		}
+	}
+	
 	return true;
 }
