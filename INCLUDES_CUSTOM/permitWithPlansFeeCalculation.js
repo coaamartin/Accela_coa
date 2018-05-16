@@ -151,7 +151,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	if (feeQty > 0) {
 		addFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "N");
 	}
-	
+try{	
 	//Building Fee (Flat Fee)
 	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "") {
 		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
@@ -169,6 +169,11 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 			logDebug("**WARN " + permitFeeTypeAsiName + " is empty and Valuation is empty, no fees added");
 		}
 	}
+	
+}
+catch (err) {
+    handleError(err, "Error on Building Fee script");
+}
 	
 	return true;
 }
