@@ -52,6 +52,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PWP_03";
 		feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PWP_04";
 		feeCodesAry["BUILDING_USE_TAX_FEE"] = "BLD_PWP_02";
+		feeCodesAry["BUILDING_DRIVEWAY_FEE"] = "BLD_PWP_11";
 	} else if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("No Plans")) {
 		feeSched = "BLD_PNP";
 		feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PWP_06";
@@ -59,6 +60,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PWP_03";
 		feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PWP_04";
 		feeCodesAry["BUILDING_USE_TAX_FEE"] = "BLD_PWP_02";
+		feeCodesAry["BUILDING_DRIVEWAY_FEE"] = "BLD_PWP_11";
 	}
 
 	if (feeSched == null) {
@@ -139,6 +141,17 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 			addFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "N");
 		}
 	}//county = Arapahoe
+	
+		//Driveway Fee
+		var feeQty = 0;
+		var driveways = asiValues["# of Driveways"];
+		if (driveways && driveways != null && driveways != "") {
+			feeQty = parseFloat(driveways);
+		}
+
+		if (feeQty > 0) {
+			addFee(feeCodesAry["BUILDING_DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
+		}
 
 	//Building Use Tax Fee
 	var feeQty = 0;
