@@ -63,3 +63,23 @@ updatePermitExpirationCF([ "Accept Plans", "Accepted In House", "Structural Plan
 updatePermitExpirationCF([ "Accept Plans", "Accepted In House", "Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review",
 		"Bldg Life Safety Review", "Fire Life Safety Review", "Structural Engineering Review", "Real Property Review", "Planning Review", "Water Review", "Zoning Review",
 		"Engineering Review", "Traffic Review", "Waste Water Review", "Forestry Review" ], "Resubmittal Requested", "Application Expiration Date");
+
+/*
+Title : Permit With Plans Fee Calculation (ApplicationSubmitAfter, WorkflowTaskUpdateAfter) 
+
+Purpose : No fees are paid up front but Fees are added on application creation as NEW but not Invoiced.
+
+Author: Yazan Barghouth 
+ 
+Functional Area : Records
+
+Sample Call:
+	For ASA: permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
+	For Workflow Event (example task and status): permitWithPlansFeeCalculation("Review", [ "Accepted", "Completed" ], "Permit Fee Type", "Permit Fee Type Total");
+	
+Notes:
+	- When try to read COUNTY from parcel it's being read from Parcel Attributes (COUNTY)
+
+*/
+
+permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
