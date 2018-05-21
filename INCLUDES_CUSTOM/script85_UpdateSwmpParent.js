@@ -17,16 +17,18 @@ function script85_UpdateSwmpParent() {
 	//	if ( wfTask == "Permit Issued" && wfStatus == "Completed" ) 
 	//	{
             //get parent
-            var parentCap,
+            var childCap,
+                parentCap,
                 parentCapTypeString,
                 parentCapid = getParent();
 
-            if(parentCapid) {
+            if(ifTracer(parentCapid, 'parent found')) {
                 //make sure parent is a permit (Water/Water/SWMP/Permit)
+                childCap = aa.cap.getCap(capId).getOutput();
                 parentCap = aa.cap.getCap(parentCapid).getOutput();
                 parentCapTypeString = parentCap.getCapType().toString();
                 logDebug("parentCapTypeString = " + parentCapTypeString);
-                if(parentCapTypeString == 'Water/Water/SWMP/Permit') {
+                if(ifTracer(parentCapTypeString == 'Water/Water/SWMP/Permit', 'parent = Water/Water/SWMP/Permit')) {
                     // copy data from renewal to parent application
                     copyContacts(capId,parentCapid);
                     copyASIFields(capId,parentCapid)
