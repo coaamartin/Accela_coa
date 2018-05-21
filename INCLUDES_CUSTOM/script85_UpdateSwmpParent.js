@@ -17,24 +17,25 @@ function script85_UpdateSwmpParent() {
 	//	if ( wfTask == "Permit Issued" && wfStatus == "Completed" ) 
 	//	{
             //get parent
-            var childCap,
-                parentCap,
+            var childCapModel,
+                parentCapModel,
                 parentCapTypeString,
-                parentCapid = getParent();
+                parentCapId = getParent();
 
-            if(ifTracer(parentCapid, 'parent found')) {
+            if(ifTracer(parentCapId, 'parent found')) {
                 //make sure parent is a permit (Water/Water/SWMP/Permit)
-                childCap = aa.cap.getCap(capId).getOutput();
-                parentCap = aa.cap.getCap(parentCapid).getOutput();
-                parentCapTypeString = parentCap.getCapType().toString();
+                childCapModel = capId.getCapModel();
+                parentCapModel = parentCapId.getCapModel();
+                parentCapTypeString = parentCapModel.getCapType().toString();
                 logDebug("parentCapTypeString = " + parentCapTypeString);
                 if(ifTracer(parentCapTypeString == 'Water/Water/SWMP/Permit', 'parent = Water/Water/SWMP/Permit')) {
                     // copy data from renewal to parent application
-                    copyContacts(capId,parentCapid);
-                    copyASIFields(capId,parentCapid)
-                    copyAddresses(capId, parentCapid);
-                    copyParcels(capId, parentCapid);
-                    parentCap.setSpecialText(childCap.getSpecialText());
+                    copyContacts(capId,parentCapId);
+                    copyAppSpecific(capId,parentCapId)
+                    copyASITables(capId,parentCapId)
+                    copyAddresses(capId, parentCapId);
+                    copyParcels(capId, parentCapId);
+                    parentCapModel.setSpecialText(childCapModel.getSpecialText());
                 }
             }
  	//	}
