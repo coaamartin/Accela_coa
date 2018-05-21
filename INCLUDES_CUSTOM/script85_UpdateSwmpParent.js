@@ -17,11 +17,14 @@ function script85_UpdateSwmpParent() {
 	//	if ( wfTask == "Permit Issued" && wfStatus == "Completed" ) 
 	//	{
             //get parent
-            var parentCapid = getParent();
+            var parentCap,
+                parentCapTypeString,
+                parentCapid = getParent();
+
             if(parentCapid) {
                 //make sure parent is a permit (Water/Water/SWMP/Permit)
                 parentCap = aa.cap.getCap(parentCapid).getOutput();
-                parentCapTypeString = capId.getCapType().toString();
+                parentCapTypeString = parentCap.getCapType().toString();
                 logDebug("parentCapTypeString = " + parentCapTypeString);
                 if(parentCapTypeString == 'Water/Water/SWMP/Permit') {
                     // copy data from renewal to parent application
