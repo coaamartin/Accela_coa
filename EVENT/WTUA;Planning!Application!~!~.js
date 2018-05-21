@@ -21,3 +21,23 @@ if(!appMatch(("Planning/Application/Address/*"))){
 
 sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
 }
+
+/*
+Title : Update Workflow Task for Traffic/ODA (WorkflowTaskUpdateAfter) 
+
+Purpose : When Record Type Planning/Application/Master Plan/NA, Planning/Application/Preliminary Plat/NA, Planning/Application/Site
+Plan/Major, Planning/Application/Site Plan/Minor Event: WorkflowTaskUpdateAfter If criteria: wfTask = Traffic Review and
+Status = "Comments not Received" or "Resubmittal Requested" when the TSI field "Is a Traffic Impact Study Required?" =
+yes (this is currently in the Accela change log) and there is not already a child Traffic Impact record Action: Then
+automatically create a child PublicWorks/Traffic/Traffic Impact/NA record and copy all relevant information (Record
+Application Name, Description, APO, Applicant and all Contacts on the record).
+
+Author: Mohammed Deeb 
+ 
+Functional Area : Workflow , Records
+*/
+
+createRecordAndCopyInfo([ "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA", "Planning/Application/Site Plan/Major",
+		"Planning/Application/Site Plan/Minor" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested" ], "Is a Traffic Impact Study Required?",
+		"PublicWorks/Traffic/Traffic Impact/NA");
+
