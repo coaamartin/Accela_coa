@@ -37,8 +37,8 @@ function closeTaskByCapId(wfstr,wfstat,wfcomment,wfnote, itemCap) // optional pr
             else
                 aa.workflow.handleDisposition(itemCap,stepnumber,wfstat,dispositionDate, wfnote,wfcomment,systemUserObj ,"Y");
             
-            logMessage("Closing Workflow Task : " + wfstr + " with status " + wfstat + " for capId " + itemCap.getCustomID());
-            logDebug("Closing Workflow Task: " + wfstr + " with status " + wfstat + " for capId " + itemCap.getCustomID());
+            logMessage("Closing Workflow Task : " + wfstr + " with status " + wfstat + " for record number " + itemCap.getCustomID());
+            logDebug("Closing Workflow Task: " + wfstr + " with status " + wfstat + " for record number " + itemCap.getCustomID());
             }           
         }
     }
