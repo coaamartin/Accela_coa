@@ -32,7 +32,7 @@ function script85_UpdateSwmpParent() {
                     copyASIFields(capId,parentCapid)
                     copyAddresses(capId, parentCapid);
                     copyParcels(capId, parentCapid);
-                    parentCapid.setSpecialText(capId.getSpecialText());
+                    parentCap.setSpecialText(capId.getSpecialText());
                 }
             }
  	//	}
