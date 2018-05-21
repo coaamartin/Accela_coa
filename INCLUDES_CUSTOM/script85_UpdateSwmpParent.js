@@ -21,7 +21,7 @@ function script85_UpdateSwmpParent() {
             if(parentCapid) {
                 //make sure parent is a permit (Water/Water/SWMP/Permit)
                 parentCap = aa.cap.getCap(parentCapid).getOutput();
-                parentCapTypeString = childCap.getCapType().toString();
+                parentCapTypeString = capId.getCapType().toString();
                 logDebug("parentCapTypeString = " + parentCapTypeString);
                 if(parentCapTypeString == 'Water/Water/SWMP/Permit') {
                     // copy data from renewal to parent application
@@ -36,8 +36,8 @@ function script85_UpdateSwmpParent() {
 	}
 	catch(err){
 		showMessage = true;
-		comment("Error on custom function “Permit Issuance(). Please contact administrator. Err: " + err);
-		logDebug("Error on custom function “Permit Issuance(). Please contact administrator. Err: " + err);
+		comment("Error on custom function “script85_UpdateSwmpParent(). Please contact administrator. Err: " + err);
+		logDebug("Error on custom function “script85_UpdateSwmpParent(). Please contact administrator. Err: " + err);
 	}
 	logDebug("script85_UpdateSwmpParent() ended.");
 };//END script85_UpdateSwmpParent();
