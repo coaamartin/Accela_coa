@@ -10,6 +10,6 @@
 
 function ifTracer (cond, msg) {
     cond = cond ? true : false;
-    logDebug((cond).toString().toUpperCase() + ': ' + msg)
+    logDebug((cond).toString().toUpperCase() + ': ' + msg);
     return cond;
-};
+}
