@@ -34,6 +34,12 @@ function script85_UpdateSwmpParent() {
                     copyAddresses(capId, parentCapId);
                     copyParcels(capId, parentCapId);
                     editAppName(childCapScriptModel.specialText, parentCapId);
+               
+                    var sourceASIFields = aa.appSpecificInfo.getByCapID(capId).getOutput()
+                    for (asi in sourceASIFields) {
+                        logDebug(asi + ' - ' + sourceASIFields[asi]);
+                        editAppSpecific(asi,sourceASIFields[asi],parentCapId);
+                    }
                 }
             }
  		}
