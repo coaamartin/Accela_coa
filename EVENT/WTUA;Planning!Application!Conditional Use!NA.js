@@ -24,7 +24,7 @@ sendNoticePCEmail();
 Title : Update custom fields based on Planning Commission Meeting Calendar (WorkflowTaskUpdateAfter)
 Purpose : Update review Comments Due dates, applicant submission dates, and Planning Commission Hearing Date
 
-Author: Ahmad WARRAD
+Author: Ahmad WARRAD 
 
 Update By : haitham Eleisah : update the script to consider the new customer changes and change the script to be as standard
 Functional Area : Records
@@ -50,5 +50,6 @@ var recordURL = getACARecordURL(acaURLDefault);
 
 updateReviewCommentsDueDate(workFlowTask, workFlowStatus, firstReviewDateASI, secondReviewDateASI, thirdReviewDateASI, meetingType, planningCommissionDateASI,
 		applicant2ndSubmissionDateASI, applicant3rdSubmissionDateASI, emailTemplate, recordURL);
+		
 
 		
