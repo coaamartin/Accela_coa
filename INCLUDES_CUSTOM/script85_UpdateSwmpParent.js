@@ -34,11 +34,10 @@ function script85_UpdateSwmpParent() {
                     copyASITables(capId,parentCapId)
                     copyAddresses(capId, parentCapId);
                     copyParcels(capId, parentCapId);
-                    logDebug("childCapScriptModel.getSpecialText() = " + childCapScriptModel.getSpecialText());
-                    logDebug("parentCapScriptModel.getSpecialText() = " + parentCapScriptModel.getSpecialText());
-                    logDebug(printObject(parentCapScriptModel));
+                    printObjProps(parentCapScriptModel);
                     parentCapScriptModel.getCapModel().setSpecialText(childCapScriptModel.getSpecialText());
-                }
+                    printObjProps(parentCapScriptModel.getCapModel());
+            }
             }
  	//	}
 	}
