@@ -31,6 +31,7 @@ function script85_UpdateSwmpParent() {
                     // copy data from renewal to parent application
                     copyContacts(capId,parentCapId);
                     copyAppSpecific(capId,parentCapId)
+                    copyASIFields(capId,parentCapId)
                     copyASITables(capId,parentCapId)
                     copyAddresses(capId, parentCapId);
                     copyParcels(capId, parentCapId);
