@@ -14,8 +14,8 @@
 function script399_BondEmailAndAwaitingBondTaskStatus() {
 	logDebug("script399_BondEmailAndAwaitingBondTaskStatus() started.");
 	try{
-	//	if (ifTracer(wfTask == "Application Submittal" && wfStatus == "Accepted", 'wfTask == Application Submittal && wfStatus == Accepted')) 
-	//	{
+		if (ifTracer(wfTask == "Application Submittal" && wfStatus == "Accepted", 'wfTask == Application Submittal && wfStatus == Accepted')) 
+		{
             //get parent
             var emailTemplate = 'WAT_SWMP_APP_BOND_EMAIL',
                 contactTypes = 'Applicant',
@@ -25,7 +25,7 @@ function script399_BondEmailAndAwaitingBondTaskStatus() {
                 emailContacts(contactTypes, emailTemplate, emailparams, "", "", "N", "");
                 updateTask('Fee Processing',"Awaiting Bond", "Updated via EMSE (#399)","");
             }
- 	//	}
+ 		}
 	}
 	catch(err){
 		showMessage = true;
