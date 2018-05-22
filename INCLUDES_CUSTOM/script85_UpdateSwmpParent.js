@@ -27,7 +27,6 @@ function script85_UpdateSwmpParent() {
                 childCapScriptModel = aa.cap.getCap(capId).getOutput();
                 parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
                 parentCapTypeString = parentCapScriptModel.getCapType().toString();
-                logDebug("parentCapTypeString = " + parentCapTypeString);
                 if(ifTracer(parentCapTypeString == 'Water/Water/SWMP/Permit', 'parent = Water/Water/SWMP/Permit')) {
                     // copy data from renewal to parent application
                     copyContacts(capId,parentCapId);
@@ -37,8 +36,8 @@ function script85_UpdateSwmpParent() {
                     copyParcels(capId, parentCapId);
                     logDebug("childCapScriptModel.getSpecialText() = " + childCapScriptModel.getSpecialText());
                     logDebug("parentCapScriptModel.getSpecialText() = " + parentCapScriptModel.getSpecialText());
-                    printObject(parentCapScriptModel);
-                    parentCapScriptModel.setSpecialText(childCapScriptModel.getSpecialText());
+                    logDebug(printObject(parentCapScriptModel));
+                    parentCapScriptModel.getCapModel().setSpecialText(childCapScriptModel.getSpecialText());
                 }
             }
  	//	}
