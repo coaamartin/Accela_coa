@@ -14,5 +14,5 @@ function setCodeReference(wfStatusCompare) {
             editAppSpecific("Code Reference", "2015 I-Codes/Aurora Muni Codes/2017-NEC");
         }
     }
-	logDebug("setCodeReference() ended."):
+	logDebug("setCodeReference() ended.");
 }
