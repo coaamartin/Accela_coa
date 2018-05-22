@@ -34,10 +34,8 @@ function script85_UpdateSwmpParent() {
                     copyASITables(capId,parentCapId)
                     copyAddresses(capId, parentCapId);
                     copyParcels(capId, parentCapId);
-                    printObjProps(parentCapScriptModel);
-                    parentCapScriptModel.specialText = childCapScriptModel.specialText;
-                    printObjProps(parentCapScriptModel.getCapModel());
-            }
+                    editAppName(childCapScriptModel.specialText, parentCapId)
+                }
             }
  	//	}
 	}
