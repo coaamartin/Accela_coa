@@ -19,3 +19,5 @@ Notes:
 */
 
 createPPBMPRecord("Re Certification", [ "Accepted" ], "POND TYPES");
+
+script399_BondEmailAndAwaitingBondTaskStatus();
