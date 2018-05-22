@@ -23,7 +23,7 @@ function script399_BondEmailAndAwaitingBondTaskStatus() {
 
             if(ifTracer(getAppSpecific("Paying with Bond") =='Yes','Paying with Bond == Yes')) {
                 emailContacts(contactTypes, emailTemplate, emailparams, "", "", "N", "");
-                updateAppStatus("Awaiting Bond", "Updated via EMSE (#399)");
+                updateTask('Fee Processing',"Awaiting Bond", "Updated via EMSE (#399)","");
             }
  	//	}
 	}
