@@ -6,7 +6,7 @@
  */
 
 function setCodeReference(wfStatusCompare) {
-	var $iTr = ifTracer;
+	var $iTrc = ifTracer;
 	logDebug("setCodeReference() started");
     if ($iTrc(wfStatus == wfStatusCompare, 'wfStatus == ' + wfStatusCompare)) {
         var codeRefVal = getAppSpecific("Code Reference");
