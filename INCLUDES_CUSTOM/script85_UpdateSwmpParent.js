@@ -29,12 +29,11 @@ function script85_UpdateSwmpParent() {
                 if(ifTracer(parentCapTypeString == 'Water/Water/SWMP/Permit', 'parent = Water/Water/SWMP/Permit')) {
                     // copy data from renewal to parent application
                     copyContacts(capId,parentCapId);
-                    copyAppSpecific(capId,parentCapId)
-                    copyASIFields(capId,parentCapId)
-                    copyASITables(capId,parentCapId)
+                    copyASIFields(capId,parentCapId);
+                    copyASITables(capId,parentCapId);
                     copyAddresses(capId, parentCapId);
                     copyParcels(capId, parentCapId);
-                    editAppName(childCapScriptModel.specialText, parentCapId)
+                    editAppName(childCapScriptModel.specialText, parentCapId);
                 }
             }
  		}
