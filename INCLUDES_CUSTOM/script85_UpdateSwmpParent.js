@@ -13,9 +13,8 @@
 function script85_UpdateSwmpParent() {
 	logDebug("script85_UpdateSwmpParent() started.");
 	try{
-		// if wfTask = Permit Issued & wfStatus = Completed”
-	//	if ( wfTask == "Permit Issued" && wfStatus == "Completed" ) 
-	//	{
+		if (ifTracer(wfTask == "Permit Issued" && wfStatus == "Completed", 'wfTask == Permit Issued && wfStatus == Completed')) 
+		{
             //get parent
             var childCapScriptModel,
                 parentCapScriptModel,
@@ -38,7 +37,7 @@ function script85_UpdateSwmpParent() {
                     editAppName(childCapScriptModel.specialText, parentCapId)
                 }
             }
- 	//	}
+ 		}
 	}
 	catch(err){
 		showMessage = true;
