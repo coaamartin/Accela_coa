@@ -35,7 +35,7 @@ function script85_UpdateSwmpParent() {
                     copyAddresses(capId, parentCapId);
                     copyParcels(capId, parentCapId);
                     printObjProps(parentCapScriptModel);
-                    parentCapScriptModel.getCapModel().setSpecialText(childCapScriptModel.getSpecialText());
+                    parentCapScriptModel.specialText = childCapScriptModel.specialText;
                     printObjProps(parentCapScriptModel.getCapModel());
             }
             }
