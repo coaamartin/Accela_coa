@@ -18,15 +18,17 @@ Notes:
 1- The script will update the "Code Reference" custom field, when the workflow status = "Issued"
 */
 
-if(wfStatus == "Issued"){
-	logDebug("Inside Set Code Reference Custom Field");
-        var codeRefVal = getAppSpecific("Code Reference");
-        if (isEmpty(codeRefVal)) {
-			logDebug("Inside Set Code Reference Custom Field Empty Field Flag");
-            editAppSpecific("Code Reference","2015 I-Codes/Aurora Muni Codes/2017-NEC"); 
-        }
-    
-}	
+setCodeReference("Issued");
+
+//if(wfStatus == "Issued"){
+//	logDebug("Inside Set Code Reference Custom Field");
+//        var codeRefVal = getAppSpecific("Code Reference");
+//        if (isEmpty(codeRefVal)) {
+//			logDebug("Inside Set Code Reference Custom Field Empty Field Flag");
+//            editAppSpecific("Code Reference","2015 I-Codes/Aurora Muni Codes/2017-NEC"); 
+//        }
+//    
+//}	
 
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Building Certificate of Occupancy does Complete on License WF(WorkflowTaskUpdateAfter).

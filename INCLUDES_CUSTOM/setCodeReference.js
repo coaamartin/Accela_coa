@@ -6,10 +6,13 @@
  */
 
 function setCodeReference(wfStatusCompare) {
-    if (wfStatus == wfStatusCompare) {
+	var $iTrc = ifTracer;
+	logDebug("setCodeReference() started");
+    if ($iTrc(wfStatus == wfStatusCompare, 'wfStatus == ' + wfStatusCompare)) {
         var codeRefVal = getAppSpecific("Code Reference");
-        if (isEmpty(codeRefVal)) {
+        if ($iTrc(isEmpty(codeRefVal), 'isEmpty(codeRefVal)')) {
             editAppSpecific("Code Reference", "2015 I-Codes/Aurora Muni Codes/2017-NEC");
         }
     }
+	logDebug("setCodeReference() ended.");
 }
