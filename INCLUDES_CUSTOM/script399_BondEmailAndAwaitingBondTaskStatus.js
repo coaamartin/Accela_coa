@@ -21,11 +21,10 @@ function script399_BondEmailAndAwaitingBondTaskStatus() {
                 contactTypes = 'Applicant',
                 emailparams = aa.util.newHashtable();
 
-            if(ifTracer(parentCapId, 'parent found')) {
-                if(ifTracer(getAppSpecific("Paying with Bond") =='Yes','Paying with Bond == Yes')) {
-                    emailContacts(contactTypes, emailTemplate, emailparams, "", "", "N", "");
-                }
-           }
+            if(ifTracer(getAppSpecific("Paying with Bond") =='Yes','Paying with Bond == Yes')) {
+                emailContacts(contactTypes, emailTemplate, emailparams, "", "", "N", "");
+                updateAppStatus('Fee Processing','Awaiting Bond')
+            }
  	//	}
 	}
 	catch(err){
