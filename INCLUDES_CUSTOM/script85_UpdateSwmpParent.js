@@ -13,7 +13,7 @@
 function script85_UpdateSwmpParent() {
 	logDebug("script85_UpdateSwmpParent() started.");
 	try{
-		if (ifTracer(wfTask == "Permit Issued" && wfStatus == "Completed", 'wfTask == Permit Issued && wfStatus == Completed')) 
+		if (ifTracer(wfTask == "Permit Issued" && wfStatus == "Complete", 'wfTask == Permit Issued && wfStatus == Complete')) 
 		{
             //get parent
             var childCapScriptModel,
