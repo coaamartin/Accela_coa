@@ -6,7 +6,8 @@ if (inspResult == "Complete")
 {
 	{	
 		logDebug("inspResult is complete so setting num failed insp to 0 and closing Inspection task");
-		editAppSpecific("Number of Failed Inspections", 17);
+		editAppSpecific("Number of Failed Inspections", 0);
+		editAppSpecific("Description of Mixed Hazards", "this is debug to test whether this script can update an ASI field");
 		closeTask("Inspection","Compliance/Complete","Updated via script","Updated via script");
 		updateAppStatus("Complete","updated by script");
 	}
@@ -14,7 +15,8 @@ if (inspResult == "Complete")
 if (inspResult =="No Violations Found")
 	{
 		logDebug("inspResult is no violations so setting num failed insp to 0 and closing Inspection task");
-		editAppSpecific("Number of Failed Inspections", 17);
+		editAppSpecific("Number of Failed Inspections", 0);
+		editAppSpecific("Description of Mixed Hazards", "this is debug to test whether this script can update an ASI field");
 		closeTask("Inspection","No Violations Found","Updated via script","Updated via script");
 		updateAppStatus("Complete","updated by script");
 	}	
