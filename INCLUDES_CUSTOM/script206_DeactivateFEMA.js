@@ -5,20 +5,19 @@
 //Created By: Silver Lining Solutions
 
 function script206_DeactivateFEMA() {
-	
-	aa.print("script206_DeactivateFEMA started.");
+	logDebug("script206_DeactivateFEMA started.");
 	try{
-		if (wfTask==("Engineering Review") && wfStatus !=("Approved with FEMA Cert Required")) {
+		var $iTrc = ifTracer;
+		if ($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued" && !isTaskStatus("Engineering Review", "Approved with FEMA Cert Required"), 'Issued and NOT Engineering Review/Approved with FEMA Cert Required'))
 			deactivateTask("FEMA Elevation Certification");
-		}
-	} catch(err){
+	}
+	catch(err){
 		showMessage = true;
 		comment("Error on custom function script206_DeactivateFEMA. Please contact administrator. Err: " + err);
-		aa.print("Error on custom function script206_DeactivateFEMA. Please contact administrator. Err: " + err);
 		logDebug("A JavaScript Error occurred: ASA:Building/*/*/* 204: " + err.message);
 		logDebug(err.stack)
 	}
-	aa.print("script206_DeactivateFEMA ended.");
+	logDebug("script206_DeactivateFEMA ended.");
 //	if function is used        };//END WTUA:Building/Permit/New Building/NA;
 
 }
