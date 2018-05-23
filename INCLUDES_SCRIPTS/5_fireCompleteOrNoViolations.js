@@ -2,8 +2,8 @@
 //Created by JMAIN 2018-03-06
 //testing on 18-000073-AFR
 
-logDebug("Inspection Results: " + inspResult);
-logDebug(inspResult.length);
+logDebug("Inspection Results: " + inspResult + "xxxxx");
+logDebug(inspResult.length());
 
 if ("Complete".equals(inspResult))
 {
