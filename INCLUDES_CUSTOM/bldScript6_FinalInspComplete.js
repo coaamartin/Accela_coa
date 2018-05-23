@@ -2,7 +2,7 @@ function bldScript6_FinalInspComplete(){
     logDebug("bldScript6_FinalInspComplete() started")
     try{
         var $iTrc = ifTracer,
-            pendOrSched = inspectionsByStatus(capId, "scheduled") && inspectionsByStatus(capId, "pending"),
+            pendOrSched = inspectionsByStatus(capId, "scheduled") || inspectionsByStatus(capId, "pending"),
             lettersReceived = checkReqLettersReceived(capId),
             certOfOccup = AInfo["Certificate of Occupancy"] == "CHECKED";
             
