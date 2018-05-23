@@ -16,7 +16,6 @@ function script399_BondEmailAndAwaitingBondTaskStatus() {
 	try{
 		if (ifTracer(wfTask == "Application Submittal" && wfStatus == "Accepted", 'wfTask == Application Submittal && wfStatus == Accepted')) 
 		{
-            //get parent
             var emailTemplate = 'WAT_SWMP_APP_BOND_EMAIL',
                 contactTypes = 'Applicant',
                 emailparams = aa.util.newHashtable();
