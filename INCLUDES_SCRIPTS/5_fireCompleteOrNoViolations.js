@@ -24,7 +24,7 @@ if ("No Violations Found".equals(inspResult))
 	}	
 }
 
-if (inspResult != "Complete" || inspResult != "No Violations Found")
+if (inspResult != "Complete" && inspResult != "No Violations Found")
 {
 	logDebug("not complete or no violations so will be incrementing the failed inspections");
 	var numinspections = getAppSpecific("Number of Failed Inspections");
