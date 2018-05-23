@@ -3,6 +3,7 @@
 //testing on 18-000073-AFR
 
 logDebug("Inspection Results: " + inspResult);
+logDebug(inspResult.length);
 
 if ("Complete".equals(inspResult))
 {
