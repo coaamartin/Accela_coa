@@ -2,7 +2,7 @@
 //Created by JMAIN 2018-03-06
 //testing on 18-000073-AFR
 
-if (inspResult == "Complete")
+if (inspResult + "" == "Complete")
 {
 	{	
 		logDebug("inspResult is complete so setting num failed insp to 0 and closing Inspection task");
@@ -12,7 +12,7 @@ if (inspResult == "Complete")
 		updateAppStatus("Complete","updated by script");
 	}
 
-if (inspResult == "No Violations Found")
+if (inspResult + "" == "No Violations Found")
 	{
 		logDebug("inspResult is no violations so setting num failed insp to 0 and closing Inspection task");
 		editAppSpecific("Number of Failed Inspections", 0);
@@ -22,7 +22,7 @@ if (inspResult == "No Violations Found")
 	}	
 }
 
-if (inspResult != "Complete" || inspResult != "No Violations Found")
+if (inspResult + "" != "Complete" || inspResult + "" != "No Violations Found")
 {
 	logDebug("not complete or no violations so will be incrementing the failed inspections");
 	var numinspections = getAppSpecific("Number of Failed Inspections");
