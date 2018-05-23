@@ -9,7 +9,7 @@
 function script31_CalcCustomExpDate() {
 	logDebug("script31_CalcCustomExpDate() started.");
 	try{
-		editAppSpecific("Expiration Date", nextWorkDay(dateAdd(sysDateMMDDYYYY, 30)));		
+		editAppSpecific("Expiration Date", nextWorkDay(dateAdd(null, 30)));		
 	}
 	catch(err){
 		showMessage = true;
