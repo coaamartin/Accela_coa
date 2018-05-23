@@ -6,16 +6,16 @@
 function createChildWaterUtilityPermitRecords() {
     logDebug("createChildWaterUtilityPermitRecords() started");
     try {
-        var $iTrc = ifTracer2;
+        var $iTrc = ifTracer;
         if ($iTrc(wfTask == "Fire Life Safety Review" && wfStatus == "Approved", 'wfTask == "Fire Life Safety Review" && wfStatus == "Approved"')) {
             var tsiArray = new Array();
             loadTaskSpecific(tsiArray);
-            var pFireLine = tsiArray["Private Fire Line"];
-            var NoOfFireLines = tsiArray["Number of Private Fire Lines"];
-            aa.print("pFireLine: "+ pFireLine);
-            aa.print("NoOfFireLines: " + NoOfFireLines);
+            var pFireLine = tsiArray["Is there a private fire line?"];
+            var NoOfFireLines = tsiArray["Number of Fire Lines"];
+            logDebug("pFireLine: "+ pFireLine);
+            logDebug("NoOfFireLines: " + NoOfFireLines);
             
-            if (pFireLine == "Yes" && (NoOfFireLines != null && parseInt(NoOfFireLines) > 0)) {
+            if ($iTrc(pFireLine == "Yes" && (NoOfFireLines != null && parseInt(NoOfFireLines) > 0), 'pFireLine == "Yes" && (NoOfFireLines != null && parseInt(NoOfFireLines) > 0)')) {
 
                 for (var i = 0; i < parseInt(NoOfFireLines); i++) {
                     var cCapId = createChild("Water", "Utility", "Permit","NA", "Water Utility Permit"); // this function
@@ -23,13 +23,13 @@ function createChildWaterUtilityPermitRecords() {
                                                             // parcel,and
                                                             // contact
                                                             // information
-                    if (cCapId != null) {
+                    if ($iTrc(cCapId, 'cCapId')) {
+                        logDebug("Created Child " + cCapId.getCustomID());
                         // copy Owner
                         copyOwner(capId, cCapId);
+                        editAppSpecific("Utility Permit Type", "Private Fire Lines",cCapId);
                     }
-
                 }
-                editAppSpecific("Utility Permit Type", "Private Fire Lines",cCapId);
             }
         }
     } catch (e) {
