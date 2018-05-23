@@ -6,7 +6,6 @@ logDebug("Inspection Results: " + inspResult);
 logDebug(inspResult.length());
 
 if ("Complete".equals(inspResult))
-{
 	{	
 		logDebug("inspResult is complete so setting num failed insp to 0 and closing Inspection task");
 		editAppSpecific("Number of Failed Inspections", 0);
@@ -22,8 +21,7 @@ if ("No Violations Found".equals(inspResult))
 		editAppSpecific("Description of Mixed Hazards", "set this asi to no violations");
 		closeTask("Inspection","No Violation","Updated via script","Updated via script COA #5");
 		updateAppStatus("Complete","updated by script COA #5");
-	}	
-}
+	}
 
 if (inspResult != "Complete" && inspResult != "No Violations Found")
 {
