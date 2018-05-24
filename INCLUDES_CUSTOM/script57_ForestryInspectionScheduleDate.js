@@ -1,3 +1,4 @@
+//@ts-check
 //Script 57
 //Record Types:	Forestry/*/*/*
 //Event: 		ISA (Inspection Scheduled After)
@@ -46,4 +47,5 @@ function script57_ForestryInspectionScheduleDate() {
 		logDebug("Error on custom function script57_ForestryInspectionScheduleDate(). Please contact administrator. Err: " + err);
 	}
 	logDebug("script57_ForestryInspectionScheduleDate() ended.");
-};//END script57_ForestryInspectionScheduleDate();
+}
+//END script57_ForestryInspectionScheduleDate();
