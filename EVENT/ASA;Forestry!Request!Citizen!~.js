@@ -110,3 +110,17 @@ function doesASITRowExist(tName, cName, cValue) {
 	}
 	catch (err) { logDebug(err); return false; }
 }
+
+
+/*
+Title : Forestry Record Application Submission Actions (ApplicationSubmitAfter,ConvertToRealCapAfter)
+Purpose : Actions that need to occur upon submission of a Forestry record of any kind.  Script ID 60 - User Story 5
+Author: Ali Othman 
+Functional Area : Parcel, Inspections, Custom Fields, Address, Records
+Sample Call:
+   closeTreeRequestIntakeTask("Source of Request", "Tree Request Intake", ["Assigned"], "Proactive", "Inspection Phase");   
+Notes:	
+*/
+
+closeTreeRequestIntakeTask("Source of Request", "Tree Request Intake", ["Assigned"], "Proactive", "Inspection Phase");
+
