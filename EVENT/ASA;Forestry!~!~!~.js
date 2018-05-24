@@ -1,6 +1,7 @@
 /*
 Script ID-71:
-Emmett T. Wylam
+Emmett T. Wylam 
+User Story 1
 Update the custom field “Area Number” with the following format from the parcel marked as primary:
 Township + Range + 0 + Section
 GIS Definitions are as follows:
@@ -22,7 +23,7 @@ try {
 			vArea = vTownship[0] + vRange[0] + "0" + vSection[0];
 			logDebug("Area: " + vArea);
 			//Save to ASI field
-			editAppSpecific("Area Number", vArea);
+			editAppSpecific("Area Number", vArea); 
 		}
 	}
 
@@ -30,4 +31,42 @@ try {
 	logDebug("A JavaScript Error occurred: ASA:Forestry/*/*/*: Script 71: " + err.message);
 	logDebug(err.stack)
 };
+
+/*
+Title : Forestry Record Application Submission Actions (ApplicationSubmitAfter,ConvertToRealCapAfter)
+
+Purpose : Actions that need to occur upon submission of a Forestry record of any kind. Story 4, 6 
+
+Author: Ali Othman
+ 
+Functional Area : Parcel, Inspections, Custom Fields, Address, Records
+
+Sample Call:
+   doForestryRecordsApplicationSubmitActions("Forestry_Inspector_Assignments", "Tree Inspect", "Forestry Inspection");
+   
+Notes:
+	
+*/
+
+doForestryRecordsApplicationSubmitActions("Forestry_Inspector_Assignments", "Tree Inspect", "Forestry Inspection");
+
+/*
+Title : Forestry Record Application Submission Actions (ApplicationSubmitAfter,ConvertToRealCapAfter)
+
+Purpose : Actions that need to occur upon submission of a Forestry record of any kind.  -- Story 2, 3
+
+Author: Ali Othman
+ 
+Functional Area : Parcel, Inspections, Custom Fields, Address, Records
+
+Sample Call:
+   doForestryPlantingRecordsApplicationSubmitActions("Forestry Site Review", "Tree Planting Intake", ["Add to List"], "Assigned status Plus Proactive", "Site Review","TREE INFORMATION");
+   
+Notes:
+	
+*/
+
+doForestryPlantingRecordsApplicationSubmitActions("Forestry Site Review", "Tree Planting Intake", ["Add to List"], "Assigned status Plus Proactive", "Site Review","TREE INFORMATION");
+
+
 
