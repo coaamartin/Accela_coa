@@ -117,3 +117,4 @@ autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIs
 		
 
 bldScript48_addForestryFee();
+bldScript390_addSinFamFee();
