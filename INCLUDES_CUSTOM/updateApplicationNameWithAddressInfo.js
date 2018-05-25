@@ -23,6 +23,7 @@ function updateApplicationNameWithAddressInfo() {
                     } else {
                         var displayAddress = objAddress.getDisplayAddress();
                         if (typeof (displayAddress) != "undefined" && displayAddress != null && displayAddress != "")
+                        logDebug("App Name " + displayAddress);
                             editAppName(displayAddress);
                         break;
                     }
