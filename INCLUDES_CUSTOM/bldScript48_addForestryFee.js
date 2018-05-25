@@ -28,10 +28,10 @@ function bldScript48_addForestryFee(){
             feeQty = parseFloat(forFeeNonArtFront);
             
             if($iTrc(sinFamDet == "Yes", 'sinFamDet == "Yes"')){
-                feeItem = "BLD_NEW_16"; feeQty = (feeQty * 6.80).toFixed(2);
+                feeItem = "BLD_NEW_16"; feeQty = 6.80;
             }
             if($iTrc(sinFamDet == "No", 'sinFamDet == "No"')){
-                feeItem = "BLD_NEW_17"; feeQty = (feeQty * 3.40).toFixed(2);
+                feeItem = "BLD_NEW_17"; feeQty = 3.40;
             }
                     
             if($iTrc(feeItem != "" && feeQty > 0, feeItem + ' != "" && ' + feeQty + ' > 0')) updateFee(feeItem, feeSched, feePeriod, feeQty, invFee);
