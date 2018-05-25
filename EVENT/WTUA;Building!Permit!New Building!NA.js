@@ -114,3 +114,6 @@ var utilityServiceRecord = "Water/Utility/Service/NA";
 
 autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIsTAPrecordrequired, tsiNumberOfTaprecords, childRecordToCreated, ofResidentialUnitsASI,
 		BuildingSqFt, parentofResidentialUnitsASI, parentBuildingSqFt, utilityServiceRecord);
+		
+
+bldScript48_addForestryFee();
