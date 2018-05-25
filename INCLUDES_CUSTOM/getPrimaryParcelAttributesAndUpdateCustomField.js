@@ -43,10 +43,20 @@ function getPrimaryParcelAttributesAndUpdateCustomField(stdForestryInspectorAssi
         logDebug("A JavaScript Error occurred: ASA:Forestry/*/*/*: Script 71: " + err.message);
         logDebug(err.stack)
     };
+
+    var capParcelResult = aa.parcel.getParcelByCapId(capId, null);
+    if (capParcelResult.getSuccess()) {
+        var arrParcels = capParcelResult.getOutput().toArray();
+        for (var p in arrParcels) {
+            var isPrimaryParcel = arrParcels[p].isPrimaryParcel();
+            if (isPrimaryParcel) {
                 var areaNo = arrParcels[p].getInspectionDistrict();
                 var trs = township + range + section;
                 if ((typeof (areaNo) != "undefined" && areaNo != null && areaNo != "") || (typeof (trs) != "undefined" && trs != null && trs != ""))
                     mapAreaTRSAssignmentInspectors(areaNo, trs, stdForestryInspectorAssignments);
             }
+            }
+        }
+        
       
    
