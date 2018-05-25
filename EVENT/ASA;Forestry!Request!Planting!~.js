@@ -1,3 +1,8 @@
+//Script 60 - User story 3
+
+createAndAssignPendingInspection("FT_TREE_PMT", "Forestry Site Review");
+
+
 /*
 Script ID-Trees from GIS:   
 Paul H. Rose
@@ -110,3 +115,7 @@ function doesASITRowExist(tName, cName, cValue) {
 	}
 	catch (err) { logDebug(err); return false; }
 }
+
+
+
+

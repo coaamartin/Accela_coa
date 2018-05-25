@@ -16,6 +16,7 @@ function updateApplicationNameWithAddressInfo() {
                             if (primaryFlag.toLowerCase() == "y") {
                                 var displayAddress = objAddress.getDisplayAddress();
                                 if (typeof (displayAddress) != "undefined" && displayAddress != null && displayAddress != "")
+                                logDebug("App Name " + displayAddress);
                                     editAppName(displayAddress);
                                 break;
                             }
@@ -23,6 +24,7 @@ function updateApplicationNameWithAddressInfo() {
                     } else {
                         var displayAddress = objAddress.getDisplayAddress();
                         if (typeof (displayAddress) != "undefined" && displayAddress != null && displayAddress != "")
+                        logDebug("App Name " + displayAddress);
                             editAppName(displayAddress);
                         break;
                     }
