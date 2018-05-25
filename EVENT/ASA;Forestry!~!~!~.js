@@ -8,7 +8,7 @@ GIS Definitions are as follows:
 Township = “Parcel Layer; City Limits; Attribute: JURISDICTION”
 Range =  “Parcel Layer; City Limits; Attribute: Shape.STArea() & Shape.StLength();
 Section = “Parcel Layer; City Limits; Attribute: Shape_Area;
- */
+
 
 try {
 	if (!publicUser) {
@@ -31,7 +31,7 @@ try {
 	logDebug("A JavaScript Error occurred: ASA:Forestry/*/*/*: Script 71: " + err.message);
 	logDebug(err.stack)
 };
-
+ */
 /*
 Title : Forestry Record Application Submission Actions (ApplicationSubmitAfter,ConvertToRealCapAfter)
 Purpose : Actions that need to occur upon submission of a Forestry record of any kind.  Script ID 60 - User Story 5
