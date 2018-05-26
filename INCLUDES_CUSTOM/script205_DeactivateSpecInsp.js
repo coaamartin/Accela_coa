@@ -10,7 +10,7 @@ function script205_DeactivateSpecInsp() {
 	logDebug("script205_DeactivateSpecInsp started.");
 	try{
 		if ( wfTask== "Permit Issuance" && wfStatus == "Issued" && AInfo["Special Inspection"] == "No" ) {
-			deactivateTask("Special Inspection Checklist");
+			deactivateTask("Special Inspections Check");
 		}
 	} catch(err){
 		showMessage = true;

@@ -10,6 +10,7 @@ Functional Area : Records
 Sample Call:
 	checkDocumentsActivateTask("Pre Submittal Meetings", [ "Email Applicant", "Note" ], "Pre Submittal Meetings", "Incomplete Submittal");
 
-*/
 
 checkDocumentsActivateTask("Pre Submittal Meetings", [ "Email Applicant", "Note" ], "Pre Submittal Meetings", "Incomplete Submittal");
+
+*/

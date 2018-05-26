@@ -20,6 +20,7 @@ Notes :
 */
 sendNoticePCEmail();
 
+
 /*
 Title : Planning Application Workflow Updates (WorkflowTaskUpdateAfter)
 Purpose : If workflow task = "Generate Hearing Results" and workflow status = "Complete - No Council" or "Complete" then reactivate

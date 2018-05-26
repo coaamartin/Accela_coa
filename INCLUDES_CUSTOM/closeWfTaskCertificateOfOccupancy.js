@@ -1,11 +1,26 @@
 function closeWfTaskCertificateOfOccupancy(){
-if (wfTask =="Inspection Phase"  && (wfStatus == "Temporary CO Issued" || wfStatus=="Ready for CO")){
-	//get the record address, check if MJ License Application exist on that address
-	//Sample Application Type :Licenses/Marijuana/Retail Store/License, this should be replaced with the correct app type
-	var caps= getCapByAddress("Licenses/Marijuana/Retail Store/License");
-	if (caps!=false){
-		closeTask("Certificate of Occupancy","Final CO Issued");
-		}
-	
-	}
+    logDebug("closeWfTaskCertificateOfOccupancy() started");
+    try{
+        var $iTrc = ifTracer;
+        if ($iTrc(wfTask =="Inspection Phase"  && (wfStatus == "Temporary CO Issued" || wfStatus=="Ready for CO"), 'wfTask =="Inspection Phase"  && (wfStatus == "Temporary CO Issued" || wfStatus=="Ready for CO")')){
+            var caps= capIdsGetByAddr();
+
+            if($iTrc(caps, 'caps')){
+                for(each in caps){
+                    var vCapID = caps[each]
+                    var vCap = aa.cap.getCap(vCapID).getOutput();
+                    var vAppTypeString = vCap.getCapType().toString();
+                    
+                    if($iTrc(vAppTypeString.startsWith("Licenses/Marijuana/") && vAppTypeString.endsWith("/Application"), 'Licenses/Marijuana/*/Application')){
+                        closeTaskByCapId("Certificate of Occupancy","Complete", "Closed by script closeWfTaskCertificateOfOccupancy()", "Closed by script closeWfTaskCertificateOfOccupancy()", vCapID);
+                    }
+                }
+            }
+        }
+    }
+    catch(err){
+        showMessage = true;
+        comment("Error on custom function closeWfTaskCertificateOfOccupancy(). Err: " + err);
+    }
+    logDebug("closeWfTaskCertificateOfOccupancy() ended");
 }

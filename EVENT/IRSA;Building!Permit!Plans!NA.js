@@ -23,3 +23,5 @@ var checkListItemValue = "Yes";
 var emailAddress = "rfoggo@accela.com";
 var emailTemplate = "BLD EXCEL ENERGY # 260";
 sendEmailBasedOnInspectionResult(InspectionType, checkListItem1, checkListItem2, checkListItemValue, emailTemplate, emailAddress);
+
+bldScript6_FinalInspComplete();
