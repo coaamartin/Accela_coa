@@ -4,6 +4,7 @@ var inspnComplete = inspectionComplete("Initial Acceptance");
 if(inspnsComplete && inspnComplete){
     closeTask("Utility Inspection", "Completed", "EMSE ID 9", "EMSE ID 9");
     activateTask("Request Materials Testing", "EMSE ID 9", "EMSE ID 9");  
+    sendEmailToApplicant();
 }
 
 function inspectionsComplete() {
@@ -40,4 +41,13 @@ function inspectionComplete(type) {
     } 
   } 
   return false;
+}
+
+function sendEmailToApplicant(){
+  var contact = "Applicant";
+  var template = "JD_TEST_TEMPLATE";
+  var joke = "Where there's a will, there's a relative.";
+  var emailparams = aa.util.newHashtable();
+  emailparams.put("$$Joke$$", joke);
+  emailContacts(contact, template, emailparams, "", "", "N", "");
 }
