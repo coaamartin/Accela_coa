@@ -1,27 +1,25 @@
-var checkTasks = ["Water Revenue Review","Parks Review","Water Dept Review","Easement Review","Real Property Review","Addressing Review","Engineering Review",
-"Life Safety Review","Planning Review","Traffic Review"];
+if(isTaskActive("Plans Coordination")){
+  var checkTasks = ["Water Revenue Review","Parks Review","Water Dept Review","Easement Review","Real Property Review","Addressing Review","Engineering Review",
+  "Life Safety Review","Planning Review","Traffic Review"];
+  var statusCheck = "Resubmittal Requested";
 
-var statusCheck = "Resubmittal Requested";
-
-var listIsComplete = isListComplete(checkTasks);
-
-if(listIsComplete){
-  var listHasResubmittal = isResubmittal(checkTasks);
-  if(listHasResubmittal){
-    sendEmailToApplicant();
+  var isActive = isListActive(checkTasks);
+  if(!isActive){
+    var listHasResubmittal = isResubmittal(checkTasks);
+    if(listHasResubmittal){
+      sendEmailToApplicant();
+    }
   }
 }
 
-function isListComplete(checkTasks){
+function isListActive(checkTasks){
   for(i in checkTasks){
-    complete = isTaskComplete(checkTasks[i]);
-    if(complete){
-      continue;
-    }else{
-      return false;
+    active = isTaskActive(checkTasks[i]);
+    if(active){
+      return true;
     }
   }
-  return true;
+  return false;
 }
 
 function isResubmittal(){
