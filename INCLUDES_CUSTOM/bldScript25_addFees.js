@@ -15,9 +15,12 @@ function bldScript25_addFees(){
             projCatry = AInfo["Project Category"],
             numResUntStr = AInfo["# of Residential Units"],
             numResUnt = 0,
+			valuation = AInfo["Valuation"],
+			valAmt = 0,
             feeSched = "BLD_NEW_CON",
             feeItem12 = "BLD_NEW_12",
             feeItem14 = "BLD_NEW_14",
+			feeItemPermit = "BLD_NEW_01",
             feePeriod = "FINAL",
             invFee = "N",
             feeQty12 = 0,
@@ -25,8 +28,11 @@ function bldScript25_addFees(){
         
         if($iTrc(!isNaN(parseFloat(numResUntStr)), '!isNaN(numResUntStr)'))
             numResUnt = parseFloat(numResUntStr);
+		
+		if($iTrc(!isNaN(parseFloat(valuation)), '!isNaN(valuation)'))
+            valAmt = parseFloat(valuation);
         
-        if($iTrc(wfTask == "Quality Check" && wfStatus == "Approved" && sinFamDet, 'wf:Quality Check/Approved && sinFamDet')){
+        if($iTrc(wfTask == "Quality Check" && wfStatus == "Approved", 'wf:Quality Check/Approved')){
             
             if($iTrc(sinFamDet == "Yes", 'sinFamDet == "Yes"')){
                 feeQty12 = 230;
@@ -43,15 +49,17 @@ function bldScript25_addFees(){
                     feeQty12 = 161.00 * numResUnt;
                     feeQty14 = 211.00 * numResUnt;
                 }
-            }
+            }			
             
             if($iTrc(feeQty12 > 0, feeQty12 + '> 0')) updateFee(feeItem12, feeSched, feePeriod, feeQty12, invFee);
             if($iTrc(feeQty14 > 0, feeQty14 + '> 0')) updateFee(feeItem14, feeSched, feePeriod, feeQty14, invFee);
+			if($iTrc(valAmt > 0, valAmt + '> 0')) updateFee(feeItemPermit, feeSched, feePeriod, valAmt, invFee);
         }
         
         if($iTrc(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Processing/Ready to Pay')){
             if($iTrc(feeExists(feeItem12), 'feeExists(' + feeItem12 + ')')) invoiceFee(feeItem12, feePeriod);
             if($iTrc(feeExists(feeItem14), 'feeExists(' + feeItem14 + ')')) invoiceFee(feeItem14, feePeriod);
+            if($iTrc(feeExists(feeItemPermit), 'feeExists(' + feeItemPermit + ')')) invoiceFee(feeItemPermit, feePeriod);
         }
     }
     catch(err){
