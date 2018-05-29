@@ -36,8 +36,9 @@ Sample Call:
 	calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
 
 */
-
-calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
+//removed this call, it is not peforming the calculations. Using bldScript25_addFees() instead
+//calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
+bldScript25_addFees();
 
 /*
 Title : Activate workflow tasks (WorkflowTaskUpdateAfter) 
