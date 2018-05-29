@@ -1,5 +1,6 @@
 logDebug("Adding Fee");
-addFee("BLD_PNP_06","BLD_PNP","FINAL",1,"Y");
+if(!appMatch("Building/Permit/New Building/NA"))
+    addFee("BLD_PNP_06","BLD_PNP","FINAL",1,"Y");
 
 
 if (matches(currentUserID,"ADMIN")) {
