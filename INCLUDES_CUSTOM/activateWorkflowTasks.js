@@ -4,7 +4,8 @@
  * @returns {Boolean}
  */
 function activateWorkflowTasks() {
-
+    logDebug("activateWorkflowTasks() started");
+	var $iTrc = ifTracer;
 	var reviewTasksAry = [ "Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review", "Bldg Life Safety Review", "Fire Life Safety Review",
 			"Structural Engineering Review" ];
 
@@ -12,6 +13,7 @@ function activateWorkflowTasks() {
 
 	var wfTasks = aa.workflow.getTaskItems(capId, null, null, null, null, null);
 	if (!wfTasks.getSuccess()) {
+		logDebug("WARNING: Unable to get tasks.");
 		return false;
 	}
 	wfTasks = wfTasks.getOutput();
@@ -33,7 +35,8 @@ function activateWorkflowTasks() {
 		}
 	}//for reviewTasksAry
 
-	if (allMatched) {
+	//Check if taskStatus of Quality Check is not Approved, if it is then no need to activate it again.
+	if ($iTrc(allMatched && !taskStatus("Quality Check", "Approved"), 'allTasks && Quality Check not resulted as Approved')) {
 		activateTask("Quality Check");
 	}
 
@@ -76,11 +79,12 @@ function activateWorkflowTasks() {
 			}
 		}//for all cap tasks
 
-		if (engineeringReviewMatched && wasteWaterReviewMatched && qualityCheckMatched) {
+		if ($iTrc(engineeringReviewMatched && wasteWaterReviewMatched && qualityCheckMatched && !isTaskComplete("Fee Processing"), 'engineeringReviewMatched && wasteWaterReviewMatched && qualityCheckMatched && !isTaskComplete("Fee Processing")')) {
 			activateTask("Fee Processing");
 		}
 
 	}//allMatched
 
+    logDebug("activateWorkflowTasks() ended");
 	return true;
 }
