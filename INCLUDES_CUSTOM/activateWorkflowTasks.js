@@ -38,7 +38,7 @@ function activateWorkflowTasks() {
     //Check if taskStatus of Quality Check is not Approved, if it is then no need to activate it again.
     //If the current task being activated is Quality Check, then no need check if needs to be activated.
     if($iTrc(wfTask != "Quality Check", 'wfTask != "Quality Check"'))
-        if ($iTrc(allMatched && !taskStatus("Quality Check", "Approved"), 'allTasks && Quality Check not resulted as Approved')) {
+        if ($iTrc(allMatched && !isTaskStatus("Quality Check", "Approved"), 'allTasks && Quality Check not resulted as Approved')) {
             activateTask("Quality Check");
         }
 
