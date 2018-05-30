@@ -155,7 +155,7 @@ try{
 	//Building Fee (Flat Fee)
 	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "") {
 		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
-		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "") {
+		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal) > 0) {
 			updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
