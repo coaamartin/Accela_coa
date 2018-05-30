@@ -119,8 +119,8 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		}
 
 		if (feeQty > 0) {
-			addFee(feeCodesAry["ARAPAHOE_FEE_1"], feeSched, "FINAL", feeQty, "N");
-			addFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "N");
+			updateFee(feeCodesAry["ARAPAHOE_FEE_1"], feeSched, "FINAL", feeQty, "N");
+			updateFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "N");
 		}
 	}//county = Arapahoe
 	
@@ -132,7 +132,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		}
 
 		if (feeQty > 0) {
-			addFee(feeCodesAry["BUILDING_DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
+			updateFee(feeCodesAry["BUILDING_DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
 		}
 
 	//Building Use Tax Fee
@@ -149,14 +149,14 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	}
 
 	if (feeQty > 0) {
-		addFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "N");
+		updateFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "N");
 	}
 try{	
 	//Building Fee (Flat Fee)
 	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "") {
 		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
 		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "") {
-			addFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
+			updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
 		}
@@ -164,7 +164,7 @@ try{
 		////Building Fee (Valuation)
 		var valuation = asiValues["Valuation"];
 		if (valuation && valuation != null && valuation != "") {
-			addFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
+			updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is empty and Valuation is empty, no fees added");
 		}
