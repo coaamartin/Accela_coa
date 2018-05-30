@@ -5,7 +5,7 @@
  */
 function activateWorkflowTasks() {
 
-	var reviewTasksAry = [ "Structural Review", "Electrical Review", "Mechanical Review", "Plumbing Review", "Building Life Safety Review", "Fire Life Safety Review",
+	var reviewTasksAry = [ "Structural Plan Review", "Electrical Review", "Mechanical Review", "Plumbing Review", "Bldg Life Safety Review", "Fire Life Safety Review",
 			"Structural Engineering Review" ];
 
 	var activeReviewTasksAry = [ "Real Property Review", "Water Review", "Zoning Review", "Traffic Review", "Forestry Review" ];
