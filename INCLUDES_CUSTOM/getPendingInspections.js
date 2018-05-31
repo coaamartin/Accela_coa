@@ -30,9 +30,9 @@ function getPendingInspections(ret) {
 				if (ret["Plumbing Rough"] == 0 && String(inspList[xx].getInspectionType()).equalsIgnoreCase("Plumbing Rough"))
 					ret["Plumbing Rough"] = 1
 
-				if (ret["Structural Final"] == 0 && String(inspList[xx].getInspectionType()).equalsIgnoreCase("Framing Final"))
+				if (ret["Framing Final"] == 0 && String(inspList[xx].getInspectionType()).equalsIgnoreCase("Framing Final"))
 					ret["Framing Final"] = 1
-				if (ret["Structural Rough"] == 0 && String(inspList[xx].getInspectionType()).equalsIgnoreCase("Framing Rough"))
+				if (ret["Framing Rough"] == 0 && String(inspList[xx].getInspectionType()).equalsIgnoreCase("Framing Rough"))
 					ret["Framing Rough"] = 1
 			}
 		}
