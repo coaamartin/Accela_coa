@@ -12,7 +12,7 @@ function script78_WatWaterTapInvoiceEmail() {
 	try{
 		if (ifTracer(wfTask == "Application Submittal" && wfStatus == "Accepted", 'wfTask == Application Submittal && wfStatus == Accepted')) 
 		{
-            //get parent
+            
             var emailTemplate = 'WAT WET TAP INVOICE EMAIL # 78',
                   contactTypes = 'Applicant',
                   emailparams = aa.util.newHashtable(),
