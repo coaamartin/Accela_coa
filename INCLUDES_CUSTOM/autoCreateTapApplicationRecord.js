@@ -9,10 +9,9 @@
  * @param BuildingSqFt ASI to be updated
  * @param parentofResidentialUnitsASI 
  * @param parentBuildingSqFt
- * @param utilityServiceRecord
  */
 function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIsTAPrecordrequired, tsiNumberOfTaprecords, childRecordToCreated, ofResidentialUnitsASI,
-		BuildingSqFt, parentofResidentialUnitsASI, parentBuildingSqFt, utilityServiceRecord) {
+		BuildingSqFt, parentofResidentialUnitsASI, parentBuildingSqFt) {
 	if (wfTask == workflowTasktoCheck && wfStatus == workflowStatustoCheck) {
 		var TAPRecordsRequiredflag = false;
 		var tsiNumberOfTaprecordsNumber = 0
@@ -31,7 +30,7 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 		if (TAPRecordsRequiredflag && tsiNumberOfTaprecordsNumber > 0) {
 			for (var i = 0; i < tsiNumberOfTaprecordsNumber; i++) {
 				var childRecordToCreatedStructure = childRecordToCreated.split("/");
-				var utilityServiceRecordStructure = utilityServiceRecord.split("/");
+				//var utilityServiceRecordStructure = utilityServiceRecord.split("/");
 				var appCreateResult = aa.cap.createApp(childRecordToCreatedStructure[0], childRecordToCreatedStructure[1], childRecordToCreatedStructure[2],
 						childRecordToCreatedStructure[3], "");
 
@@ -49,15 +48,7 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 					logDebug("Unable to create planting record ex. : " + appCreateResult.getErrorMessage());
 				}
 
-				var appServiceResult = aa.cap.createApp(utilityServiceRecordStructure[0], utilityServiceRecordStructure[1], utilityServiceRecordStructure[2],
-						utilityServiceRecordStructure[3], "");
-				if (appServiceResult.getSuccess()) {
-					var newServiceId = appServiceResult.getOutput();
-					aa.cap.createAppHierarchy(capId, newServiceId);
-					logDebug("service child cap has been created  : " + newId);
-				} else {
-					logDebug("Unable to create planting record ex. : " + appServiceResult.getErrorMessage());
-				}
+				//Removed the creation of the Utility Service record per latest specs.
 			}
 		}
 	}
