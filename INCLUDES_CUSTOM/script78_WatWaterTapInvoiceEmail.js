@@ -20,7 +20,9 @@ function script78_WatWaterTapInvoiceEmail() {
             reportparams = aa.util.newHashtable(),
             applicant = getContactByType("Applicant", capId);
 
-           if(applicant) {
+           if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
+                logDebug("applicant.contactName - " + applicant.contactName);
+                logDebug("getContactName(applicant) - " + getContactName(applicant));
                 emailparams.put("$$ContactFullName$$", getContactName(applicant));
            }
             //reportparams.put("DEPARTMENT", "Administrator");
