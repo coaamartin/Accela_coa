@@ -17,9 +17,12 @@ function script78_WatWaterTapInvoiceEmail() {
             contactTypes = 'Applicant',
             emailparams = aa.util.newHashtable(),
             reportname = "JD_TEST_REPORT"
-            reportparams = aa.util.newHashtable();
+            reportparams = aa.util.newHashtable(),
+            applicant = getContactByType("Applicant", capId);
 
-
+           if(applicant) {
+                emailparams.put("$$ContactFullName$$", getContactName(applicant));
+           }
             //reportparams.put("DEPARTMENT", "Administrator");
             emailContacts(contactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "");
      }
