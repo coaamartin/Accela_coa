@@ -22,8 +22,7 @@ function script78_WatWaterTapInvoiceEmail() {
 
            if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
                 logDebug("applicant.contactName - " + applicant.contactName);
-                logDebug("getContactName(applicant) - " + getContactName(applicant));
-                emailparams.put("$$ContactFullName$$", getContactName(applicant));
+                emailparams.put("$$ContactFullName$$", applicant.contactName);
            }
             //reportparams.put("DEPARTMENT", "Administrator");
             emailContacts(contactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "");
