@@ -41,3 +41,25 @@ createRecordAndCopyInfo([ "Planning/Application/Master Plan/NA", "Planning/Appli
 		"Planning/Application/Site Plan/Minor" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested" ], "Is a Traffic Impact Study Required?",
 		"PublicWorks/Traffic/Traffic Impact/NA");
 
+
+/*
+Title : Auto create Master Utility Study record (WorkflowTaskUpdateAfter) 
+
+Purpose : Event WorkflowTaskUpdateAfter 
+Criteria wfTask = Water Dept Review and wfTaskStatus = Resubmittal Requested or Complete or Comments Not Received 
+and TSI Is a Master Utility Plan Required = Yes on Water Dept Review Task and there not a child Master Utility Study record already
+-- this was modified according to the new specs
+Author: Yazan Barghouth 
+ 
+Functional Area : Records
+Sample Call:
+	autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Received", "Resubmittal Requested",  "Complete"], "Is a Master Utility Plan Required", "Water Dept Review",
+		"Water/Utility/Master Utility/NA");
+Notes:
+	- child record type is "Water/Utility/Master Utility/Study" (Study not NA)
+*/
+
+autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Received", "Resubmittal Requested",  "Complete"], "Is a Master Utility Plan Required", "Water Dept Review",
+		"Water/Utility/Master Utility/Study");
+
+		
