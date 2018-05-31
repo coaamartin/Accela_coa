@@ -11,7 +11,7 @@
 useAppSpecificGroupName=false;
 var cOO=getAppSpecific("Certificate of Occupancy",capId);
 if (cOO!="CHECKED"){
-	deleteTask(capId,"Certificate of Occupancy");
+	deactivateTask("Certificate of Occupancy");
 }
 
 //TestComment
