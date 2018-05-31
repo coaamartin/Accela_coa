@@ -20,11 +20,14 @@ function script78_WatWaterTapInvoiceEmail() {
             reportparams = aa.util.newHashtable(),
             applicant = getContactByType("Applicant", capId);
 
+            //email params
            if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
                 logDebug("applicant.contactName - " + applicant.contactName);
                 emailparams.put("$$ContactFullName$$", applicant.contactName);
            }
-            //reportparams.put("DEPARTMENT", "Administrator");
+           
+           //report params
+            reportparams.put("DEPARTMENT", "Administrator");
             emailContacts(contactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "");
      }
 }
@@ -33,5 +36,5 @@ catch(err){
 		comment("Error on custom function “script78_WatWaterTapInvoiceEmail(). Please contact administrator. Err: " + err);
 		logDebug("Error on custom function “script78_WatWaterTapInvoiceEmail(). Please contact administrator. Err: " + err);
 	}
-	logDebug("script78_WatWaterTapInvoiceEmail() ended.");
+	logDebug("script78_WatWaterTapInvoiceEmail() ended."); 
 }   //END script78_WatWaterTapInvoiceEmail();
