@@ -52,9 +52,10 @@ script208_UpdatePermitFields();
 //COA Script - Suhail
 include("40_backFlowPreventerEmail");
 
-var cOO = "";
-if(!useAppSpecificGroupName) cOO=getAppSpecific("Certificate of Occupancy",capId);
-else cOO=getAppSpecific("Certificate of Occupancy",capId);
+var tmpUASGN = useAppSpecificGroupName;
+useAppSpecificGroupName=false;
+var cOO=getAppSpecific("Certificate of Occupancy",capId);
+useAppSpecificGroupName = tmpUASGN;
 if (cOO!="CHECKED"){
 	deactivateTask("Certificate of Occupancy");
 }
