@@ -45,4 +45,4 @@ function script85_UpdateSwmpParent() {
 		logDebug("Error on custom function “script85_UpdateSwmpParent(). Please contact administrator. Err: " + err);
 	}
 	logDebug("script85_UpdateSwmpParent() ended.");
-};//END script85_UpdateSwmpParent();
+}//END script85_UpdateSwmpParent();
