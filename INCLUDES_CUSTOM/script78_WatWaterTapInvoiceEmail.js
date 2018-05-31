@@ -14,11 +14,11 @@ function script78_WatWaterTapInvoiceEmail() {
 		{
             //get parent
             var emailTemplate = 'WAT WET TAP INVOICE EMAIL # 78',
-            contactTypes = 'Applicant',
-            emailparams = aa.util.newHashtable(),
-            reportname = "JD_TEST_REPORT"
-            reportparams = aa.util.newHashtable(),
-            applicant = getContactByType("Applicant", capId);
+                  contactTypes = 'Applicant',
+                  emailparams = aa.util.newHashtable(),
+                  reportname = "JD_TEST_REPORT"
+                  reportparams = aa.util.newHashtable(),
+                  applicant = getContactByType("Applicant", capId);
 
             //email params
            if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
