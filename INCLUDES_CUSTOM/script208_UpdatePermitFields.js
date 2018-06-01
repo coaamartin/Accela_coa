@@ -10,10 +10,13 @@ function script208_UpdatePermitFields() {
 	logDebug("script208_UpdatePermitFields  started.");
 	try{
 		if (!appMatch("Building/Permit/Master/NA")) {
+			logDebug("script208_not a Master Rec Type.");
 			if (wfTask==("Permit Issuance") && wfStatus !=("Issued")) {
+				logDebug("script208_correct Task/Status.");
 				var sysDateYYYYMMDD = dateFormatted(sysDate.getMonth(),sysDate.getDayOfMonth(),sysDate.getYear(),"YYYY-MM-DD");
 				editAppSpecific("permit issue date",sysDateYYYYMMDD);
 				editAppSpecific("permit expiration date",dateAdd(null,180));
+				logDebug("script208_Updating asi fields.");
 			}
 		}
 	} catch(err){
