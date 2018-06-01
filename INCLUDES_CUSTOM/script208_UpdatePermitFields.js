@@ -14,7 +14,7 @@ function script208_UpdatePermitFields() {
 			if (wfTask==("Permit Issuance") && wfStatus ==("Issued")) {
 				logDebug("script208_correct Task/Status.");
 				var sysDateYYYYMMDD = dateFormatted(sysDate.getMonth(),sysDate.getDayOfMonth(),sysDate.getYear(),"YYYY-MM-DD");
-				editAppSpecific("Permit Issue Date",sysDateYYYYMMDD);
+				editAppSpecific("Permit Issued Date",sysDateYYYYMMDD);
 				editAppSpecific("Permit Expiration Date",dateAdd(null,180));
 				logDebug("script208_Updating asi fields.");
 			}
