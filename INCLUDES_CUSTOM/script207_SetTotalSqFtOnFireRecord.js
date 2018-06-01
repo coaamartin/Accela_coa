@@ -17,7 +17,7 @@
 function script207_SetTotalSqFtOnFireRecord() {
 	logDebug("script207_SetTotalSqFtOnFireRecord() started.");
 	try {
-		var SFDHome = getAppSpecific("Single Family Detached home");
+		var SFDHome = getAppSpecific("Single Family Detached Home");
 		logDebug("SFDHome =" + SFDHome);
 		if( SFDHome == "No" && wfTask == "Certificate of Occupancy" && (wfStatus == "Final CO Issued" || wfStatus == "Not Required"))
 			{
