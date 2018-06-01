@@ -50,20 +50,15 @@ if (iscorrecttask && iscorrectstatus && (totalfeebalance > 0.00))
 		var allowedcontacttypes = "Applicant";
 			
 		//send email to all contacts with the apropriate template and report
-		var emailtemplate = "JD_TEST_TEMPLATE";
-		var reportname = "JD_TEST_REPORT";
+		var emailtemplate = "SWMP EMAIL INVOICED FEES";
+
 		
 		//populate the email parameters not already included for "free" - must examine the template to know
-		var joke = "this will eventually be an invoice";
 		var emailparams = aa.util.newHashtable();
-		emailparams.put("$$Joke$$", joke);
 		
-		//populate the report parameters - must examine the report to know
-		var reportparams = aa.util.newHashtable();
-		reportparams.put("DEPARTMENT", "Administrator");
 		
 		//call Emmett's emailContacts function - this runs asynchronously - puts "deep link" to report in email
-		emailContacts(allowedcontacttypes, emailtemplate, emailparams, reportname, reportparams, "N", "");
+		emailContacts(allowedcontacttypes, emailtemplate, emailparams, "", "", "N", "");
 		
 		//set wfStatus to "Ready to Pay"
 		updateTask("Fee Processing", "Ready to Pay", "script updated Task Status", "script updated Task Status");
