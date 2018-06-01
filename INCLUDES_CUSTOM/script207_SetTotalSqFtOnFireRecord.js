@@ -17,7 +17,7 @@
 function script207_SetTotalSqFtOnFireRecord() {
 	logDebug("script207_SetTotalSqFtOnFireRecord() started.");
 	try {
-		if(wfTask == "Certificate of Occupancy" && (wfStatus == "Final CO Issued" || wfStatus == "Not Required"))
+		if(AInfo["Single Family Detached home"] == "No" && wfTask == "Certificate of Occupancy" && (wfStatus == "Final CO Issued" || wfStatus == "Not Required"))
 			{
 			logDebug("script207_SetTotalSqFtOnFireRecord() passed test.");
 			var cCapId = createChild("Fire", "Primary Inspection", "NA", "NA", ""); 
