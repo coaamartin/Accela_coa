@@ -40,8 +40,7 @@ logDebug("script57: row tree qty:"+row["Management Unit"]);
 					addThisText += "\n" + "Management Unit: " + treeMgtUnit;
 				}
 
-		//		var inspIdArr = aa.env.getValue("InspectionIDArray");	
-				var inspIdArr = InspectionIdArray;
+				var inspIdArr = aa.env.getValue("InspectionIDArray");	
 				
 logDebug("script57: the insp array is:"+inspIdArr);		
 				
