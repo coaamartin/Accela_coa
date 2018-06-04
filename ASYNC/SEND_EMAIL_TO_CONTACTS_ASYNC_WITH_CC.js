@@ -183,13 +183,14 @@ else {
 	logDebug('CC Email list' + conCCEmailArrayString);
 
 
-	//Get SEND Contacts based on type for each type provided
+    //Get SEND Contacts based on type for each type provided
+    vConObjArry = null;
 	conObjEmailCompareArray = [];
 	for (z in conTypeArray) {
 		conType = conTypeArray[z];
 		conEmail = null;
 		peopTemp = null;
-		//logDebug("          Searching for " + conTypeArray[z]);
+		logDebug("          Searching for " + conTypeArray[z]);
 		if (conType == "Primary") {
 			vConObjArry = getContactObjsByCap(capId);
 		} else {
