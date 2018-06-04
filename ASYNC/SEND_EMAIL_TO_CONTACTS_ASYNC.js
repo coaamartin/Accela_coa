@@ -93,7 +93,7 @@ logDebug("1) Here in SEND_EMAIL_TO_CONTACTS_ASYNC: " + aa.env.getValue("eventTyp
 logDebug("2) sendEmailToContactTypes: " + sendEmailToContactTypes);
 logDebug("3) emailTemplate: " + emailTemplate);
 logDebug("4) reportTemplate: " + reportTemplate);
-aa.print("5) ccEmailToContactTypes: " + ccEmailToContactTypes);
+logDebug("5) ccEmailToContactTypes: " + ccEmailToContactTypes);
 
 /* Begin SDOT work-around to prevent payment notices on auto-approved (paid) ACA submissions */
 
