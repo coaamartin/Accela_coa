@@ -180,6 +180,7 @@ else {
 			}
 		}
     }
+    conObjCCEmailArray.length;
     conCCEmailArrayString = conObjCCEmailArray.join(';');
 	log.debug('CC Email list' + conCCEmailArrayString);
 
