@@ -41,7 +41,7 @@ function emailContacts(sendEmailToContactTypes, emailTemplate, vEParams, reportT
 
 	//ccEmailToContactTypes
 	if (arguments.length > 7) {
-		ccEmailToContactTypes = arguments[8]; // array of cc addresses
+		ccEmailToContactTypes = arguments[7]; // array of cc addresses
 	}
 
 
