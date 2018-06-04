@@ -130,12 +130,14 @@ else {
 		}
 	}
 
+    logDebug('cvm1');
 
 	//get/clean contact types
 	if (sendEmailToContactTypes == "All" || sendEmailToContactTypes == null || sendEmailToContactTypes == '') {
         conTypeArray = validConTypes;
         logDebug('cvm - all valid types: ' + conTypeArray.length);
 	} else {
+        logDebug('cvm2');
 		conTypeArray = rtnContactTypes(sendEmailToContactTypes);
         logDebug('cvm - just sendEmailToContactTypes types: ' + conTypeArray.length);
 	}
@@ -338,7 +340,7 @@ else {
 				contactTypeArray.splice(x, (x + 1));
 			}
 		}
-        logDebug('getContactTypes()..returning: ' + contactTypeArray.length)
+        logDebug('getContactTypes()..returning: ' + contactTypeArray.length);
         return contactTypeArray;
 	}
 
