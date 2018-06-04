@@ -130,7 +130,6 @@ else {
 		}
 	}
 
-    logDebug('cvm - get contact clean types ');
 
 	//get/clean contact types
 	if (sendEmailToContactTypes == "All" || sendEmailToContactTypes == null || sendEmailToContactTypes == '') {
@@ -322,11 +321,13 @@ else {
 	}
 
 	function rtnContactTypes(contactTypes) {
+        logDebug('getContactTypes()');
         var contactTypeArray = [];
 
 		//Check to see if provided contact type(s) is/are valid
 		if (contactTypes != "All" && contactTypes != null && contactTypes != '') {
             contactTypeArray = contactTypes.split(",");
+            logDebug('getContactTypes()..not all spliting: ' + contactTypeArray.length)
 		}
 		for (x in contactTypeArray) {
 			//check all that are not "Primary"
@@ -337,6 +338,7 @@ else {
 				contactTypeArray.splice(x, (x + 1));
 			}
 		}
+        logDebug('getContactTypes()..returning: ' + contactTypeArray.length)
         return contactTypeArray;
 	}
 
