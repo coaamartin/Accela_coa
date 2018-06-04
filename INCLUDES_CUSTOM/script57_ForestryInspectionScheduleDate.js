@@ -16,7 +16,7 @@ function script57_ForestryInspectionScheduleDate() {
 		var thisCap = aa.cap.getCap(capId).getOutput();
 		if (thisCap != null ) {
 			var thisCapModel = thisCap.getCapModel();
-			if (thisCapModel.getSuccess()) {
+			if (thisCapModel != null) {
 				var thisWorkDesc = thisCapModel.getCapWorkDesModel().description;
 				//Get Tree Info List data, loop through them and add to a text var 
 				var thisAppSpecTable = loadASITable("TREE INFORMATION", capId);
