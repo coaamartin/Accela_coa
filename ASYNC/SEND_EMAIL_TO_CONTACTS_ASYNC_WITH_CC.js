@@ -133,11 +133,15 @@ else {
 
 	//get/clean contact types
 	if (sendEmailToContactTypes == "All" || sendEmailToContactTypes == null || sendEmailToContactTypes == '') {
-		conTypeArray = validConTypes;
+        conTypeArray = validConTypes;
+        logDebug('cvm - all valid types: ' + conTypeArray.length);
 	} else {
 		conTypeArray = getContactTypes(sendEmailToContactTypes);
+        logDebug('cvm - just sendEmailToContactTypes types: ' + conTypeArray.length);
 	}
 	conCCTypeArray = getContactTypes(ccEmailToContactTypes);
+    logDebug('cvm - cc types: ' + conCCTypeArray.length);
+    logDebug('cvm - to types: ' + conTypeArray.length);
 
 	//get From email from template configuration
 	if (emailTemplate && emailTemplate != '') {
@@ -145,7 +149,6 @@ else {
 		mailFrom = tmpl.getEmailTemplateModel().getFrom();
 	}
 
-    logDebug(conTypeArray.length);
 	//Get CC Contacts based on type for each type provided
 	conObjEmailCompareArray = [];
 	for (z in conCCTypeArray) {
@@ -182,16 +185,15 @@ else {
     }
      conCCEmailArrayString = conObjCCEmailArray.join(';');
 	logDebug('CC Email list' + conCCEmailArrayString);
-	logDebug(conTypeArray.length);
+
 
     //Get SEND Contacts based on type for each type provided
-    vConObjArry = null;
 	conObjEmailCompareArray = [];
 	for (z in conTypeArray) {
 		conType = conTypeArray[z];
 		conEmail = null;
 		peopTemp = null;
-		logDebug("          Searching for " + conTypeArray[z]);
+		//logDebug("          Searching for " + conTypeArray[z]);
 		if (conType == "Primary") {
 			vConObjArry = getContactObjsByCap(capId);
 		} else {
@@ -231,8 +233,7 @@ else {
 			}
 		}
 	}
-    logDebug(conTypeArray.length);
-    
+
 	//Get the capId type needed for the email function
 	capId4Email = null;
 	capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
@@ -278,7 +279,6 @@ else {
 		}
 	}
 
-    logDebug(conTypeArray.length);
 	//Loop through the contact objects with email and send to each
 	for (w in conObjEmailArray) {
 		vConObj = conObjEmailArray[w];
