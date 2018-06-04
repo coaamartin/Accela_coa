@@ -180,9 +180,8 @@ else {
 			}
 		}
     }
-    conObjCCEmailArray.length;
-    conCCEmailArrayString = conObjCCEmailArray.join(';');
-	log.debug('CC Email list' + conCCEmailArrayString);
+     conCCEmailArrayString = conObjCCEmailArray.join(';');
+	logDebug('CC Email list' + conCCEmailArrayString);
 
 
 	//Get SEND Contacts based on type for each type provided
@@ -336,4 +335,8 @@ else {
 		return contactTypeArray;
 	}
 
+}
+
+function newFunction() {
+    log.debug(conObjCCEmailArray.length);
 }
