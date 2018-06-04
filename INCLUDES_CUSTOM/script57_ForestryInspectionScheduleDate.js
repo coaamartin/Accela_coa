@@ -14,32 +14,51 @@ function script57_ForestryInspectionScheduleDate() {
 		
 		//Get the Record Work Description
 		var thisCap = aa.cap.getCap(capId).getOutput();
-		var thisCapModel = thisCap.getCapModel();
-		var thisWorkDesc = thisCapModel.getCapWorkDesModel().description;
-		
-		//Get Tree Info List data, loop through them and add to a text var 
-		var thisAppSpecTable = loadASITable("TREE INFORMATION", capId);
-		var row, treeId, mgtUnit;
-		var addThisText = "" + thisWorkDesc + "\n";
-		
-		for (var ea in thisAppSpecTable) {
-	 		row = thisAppSpecTable[ea];
-	        treeID = "" + row["Tree ID"].fieldValue;
-			mgtUnit = "" + row["Management Unit"].fieldValue;
-			addThisText += "\n" + "TREE ID: " + treeID;
-			addThisText += "\n" + "Mgt Unit: " + mgtUnit;
-		}
+		if (thisCap != null ) {
+			var thisCapModel = thisCap.getCapModel();
+			if (thisCapModel != null) {
+				var thisWorkDesc = thisCapModel.getCapWorkDesModel().description;
+				//Get Tree Info List data, loop through them and add to a text var 
+				var thisAppSpecTable = loadASITable("TREE INFORMATION", capId);
+				var row, treeId, treeMgtUnit;
+				var addThisText = "" + thisWorkDesc + "\n";
 
-		var inspIdArr = aa.env.getValue("InspectionIDArray");	
-		for (var inInsp in inspIdArr) {
-			var thisInspectionID = inspIdArr[inInsp];
-			var thisInsp = aa.inspection.getInspection(capId, thisInspectionID ).getOutput();
-			var thisScheduledDate = sysDate;
-			var thisRequestComment = thisInsp.requestComment == null ? "" + "\n" + addThisText : thisInsp.requestComment+ "\n" + addThisText;
-			thisInsp.setScheduledDate(thisScheduledDate);
-			thisInsp.setInspectionComments(thisRequestComment);
-			aa.inspection.editInspection(thisInsp);
-		}
+logDebug("script57: got the tree info and the cap description!");
+logDebug("script57: desc:"+thisWorkDesc);
+//logDebug("script57: tree info table ***************************");
+				
+				for (var ea in thisAppSpecTable) {
+					row = thisAppSpecTable[ea];
+					
+//logDebug("script57: tree info row:"+row);
+//logDebug("script57: row tree id:"+row["Tree ID"]);
+//logDebug("script57: row tree qty:"+row["Management Unit"]);
+
+					treeID = "" + row["Tree ID"].fieldValue;
+					treeMgtUnit = "" + row["Management Unit"].fieldValue;
+					addThisText += "\n" + "TREE ID: " + treeID;
+					addThisText += "\n" + "Management Unit: " + treeMgtUnit;
+				}
+
+				var inspIdArr = aa.env.getValue("InspectionIDArray");	
+				
+//logDebug("script57: the insp array is:"+inspIdArr);		
+				
+				for (var inInsp in inspIdArr) {
+					var thisInspectionID = inspIdArr[inInsp];
+					var thisInsp = aa.inspection.getInspection(capId, thisInspectionID ).getOutput();
+					var thisScheduledDate = sysDate;
+
+//logDebug("script57: the request comment is>"+thisInsp.requestComment + "<");
+//logDebug("script57: the inspection comments are >"+thisInsp.InspectionComment + "<");
+
+					var thisRequestComment = thisInsp.requestComment == null ? "" + "\n" + addThisText : thisInsp.requestComment+ "\n" + addThisText;
+					thisInsp.setScheduledDate(thisScheduledDate);
+					thisInsp.setInspectionComments(thisRequestComment);
+					aa.inspection.editInspection(thisInsp);
+				}
+			} else logDebug("script57: could not get cap Model!");
+		} else logDebug("script57: could not get cap!");
 	}
 	catch(err){
 		showMessage = true;
@@ -47,5 +66,4 @@ function script57_ForestryInspectionScheduleDate() {
 		logDebug("Error on custom function script57_ForestryInspectionScheduleDate(). Please contact administrator. Err: " + err);
 	}
 	logDebug("script57_ForestryInspectionScheduleDate() ended.");
-}
-//END script57_ForestryInspectionScheduleDate();
+} //END script57_ForestryInspectionScheduleDate()

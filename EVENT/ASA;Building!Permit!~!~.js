@@ -8,10 +8,12 @@
 | Created at	: 29/01/2018 15:41:
 |
 /------------------------------------------------------------------------------------------------------*/
+var tmpUASGN = useAppSpecificGroupName;
 useAppSpecificGroupName=false;
 var cOO=getAppSpecific("Certificate of Occupancy",capId);
+useAppSpecificGroupName = tmpUASGN;
 if (cOO!="CHECKED"){
-	deleteTask(capId,"Certificate of Occupancy");
+	deactivateTask("Certificate of Occupancy");
 }
 
 //TestComment

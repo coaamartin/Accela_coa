@@ -110,11 +110,11 @@ var childRecordToCreated = "Water/Water/Tap/Application";
 var ofResidentialUnitsASI = "Number of Residential Units";
 var parentofResidentialUnitsASI = "# of Residential Units"
 var BuildingSqFt = "Building Sq Ft";
-var parentBuildingSqFt = "# of Stories"
+var parentBuildingSqFt = "Total Finished Area Sq Ft"
 var utilityServiceRecord = "Water/Utility/Service/NA";
 
 autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIsTAPrecordrequired, tsiNumberOfTaprecords, childRecordToCreated, ofResidentialUnitsASI,
-		BuildingSqFt, parentofResidentialUnitsASI, parentBuildingSqFt, utilityServiceRecord);
+		BuildingSqFt, parentofResidentialUnitsASI, parentBuildingSqFt);
 		
 
 bldScript48_addForestryFee();

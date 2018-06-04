@@ -11,6 +11,7 @@ function script208_UpdatePermitFields() {
 	try{
 		if (!appMatch("Building/Permit/Master/NA")) {
 			if (wfTask==("Permit Issuance") && wfStatus ==("Issued")) {
+				var sysDateYYYYMMDD = dateFormatted(sysDate.getMonth(),sysDate.getDayOfMonth(),sysDate.getYear(),"YYYY-MM-DD");
 				editAppSpecific("Permit Issued Date",dateAdd(null,0));		
 				editAppSpecific("Permit Expiration Date",dateAdd(null,180));
 			}

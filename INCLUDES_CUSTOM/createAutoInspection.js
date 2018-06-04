@@ -1,4 +1,5 @@
 function createAutoInspection(tasksToCheck) {
+	logDebug("createAutoInspection() started");
 	var taskResult = aa.workflow.getTaskItems(capId, null, null, "Y", null, null);
 	if (taskResult.getSuccess()) {
 		var taskArr = taskResult.getOutput();
@@ -7,12 +8,13 @@ function createAutoInspection(tasksToCheck) {
 		return false;
 	}
 
+	var inspGroup = "BLD_NEW_CON";
 	var inspArray = [];
 	getPendingInspections(inspArray);
 
 	var taskNameInspectionTypeMap = new Array();
 	taskNameInspectionTypeMap["Mechanical Plan Review"] = "Mechanical Final,Mechanical Rough";
-	taskNameInspectionTypeMap["Electrical Plan Review"] = "Electrical Final,Electrical Final";
+	taskNameInspectionTypeMap["Electrical Plan Review"] = "Electrical Final,Electrical Rough";
 	taskNameInspectionTypeMap["Plumbing Plan Review"] = "Plumbing Final,Plumbing Rough";
 	taskNameInspectionTypeMap["Structural Plan Review"] = "Framing Final,Framing Rough";
 
@@ -27,14 +29,15 @@ function createAutoInspection(tasksToCheck) {
 
 					//check both types if has pending and add one if not
 					if (inspArray[inspectionsToCheck[0]] == 0) {
-						scheduleInspection(inspectionsToCheck[0], 0);
+						createPendingInspection(inspGroup, inspectionsToCheck[0]);
 					}
 					if (inspArray[inspectionsToCheck[1]] == 0) {
-						scheduleInspection(inspectionsToCheck[1], 0);
+						createPendingInspection(inspGroup, inspectionsToCheck[1]);
 					}
 					break;
 				}//task is one of required
 			}//for all tasks to check
 		}//Approved task
 	}//for all tasks on cap
+	logDebug("createAutoInspection() ended");
 }
