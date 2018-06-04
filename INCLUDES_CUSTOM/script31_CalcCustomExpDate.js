@@ -11,7 +11,9 @@ function script31_CalcCustomExpDate() {
 	try{
 		logDebug("today is: "+sysDateMMDDYYYY);
 		logDebug("and adding 30 working days makes it: "+ dateAddHC(sysDateMMDDYYYY, 30, 'Y'));
-		editAppSpecific("Expiration Date", dateAddHC(sysDateMMDDYYYY, 30, 'Y'));		
+		var chkThisDate = dateAddHC(sysDateMMDDYYYY, 30, 'Y');
+		logDebug("and after I store the data away its a type: "+typeof (chkThisDate)+" and value of: "+chkThisDate);
+		editAppSpecific("Expiration Date", chkThisDate);		
 	}
 	catch(err){
 		showMessage = true;
