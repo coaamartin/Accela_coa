@@ -18,4 +18,6 @@ var numberOfdayes = 30;
 UpdateworkFlowTaskDueDate(workFlowTasktobeChecked, numberOfdayes);
 
 
+script193_WatIrrigationAddInspFee();
+
 script195_ActivateFeeIrrPermit();

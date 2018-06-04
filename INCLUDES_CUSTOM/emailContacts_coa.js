@@ -9,13 +9,14 @@ emailContacts
      vRParams  = report parameters
 	 vAddAdHocTask = Y/N for adding manual notification task when no email exists
      changeReportName = if using reportTemplate, will change the title of the document produced by the report from its default
-
+	 ccEmailToContactTypes = comma-separated list of contact types to cc to, no spaces
 Sample: emailContacts('OWNER APPLICANT', 'DPD_WAITING_FOR_PAYMENT'); //minimal
         emailContacts('OWNER APPLICANT,BUSINESS OWNER', 'DPD_PERMIT_ISSUED', eParamHashtable, 'Construction Permit', rParamHashtable, 'Y', 'New Report Name'); //full
  */
-function emailContacts(sendEmailToContactTypes, emailTemplate, vEParams, reportTemplate, vRParams) {
+function emailContacts(sendEmailToContactTypes, emailTemplate, vEParams, reportTemplate, vRParams, ccEmailToContactTypes) {
 	var vChangeReportName = "";
 	var conTypeArray = [];
+	var conCCTypeArray = [];
 	var validConTypes = getContactTypes();
 	var x = 0;
 	var vConType;
@@ -37,6 +38,7 @@ logDebug("No adhoc task");
 		vChangeReportName = arguments[6]; // use provided report name
 	}
 
+	/* SEND contact types */
 logDebug("Provided contact types to send to: " + sendEmailToContactTypes);
 	
 	//Check to see if provided contact type(s) is/are valid
@@ -58,6 +60,30 @@ logDebug("Provided contact types to send to: " + sendEmailToContactTypes);
 	}
 	else if((sendEmailToContactTypes != "All" && sendEmailToContactTypes != null && sendEmailToContactTypes != '') && conTypeArray.length > 0) {
 		sendEmailToContactTypes = conTypeArray.toString();
+	}
+
+	/* CC contact types */
+	logDebug("Provided contact types to CC to: " + ccEmailToContactTypes);
+	
+	//Check to see if provided contact type(s) is/are valid
+	if (ccEmailToContactTypes != "All" && ccEmailToContactTypes != null && ccEmailToContactTypes != '') {
+		conCCTypeArray = ccEmailToContactTypes.split(",");
+	}
+	for (x in conCCTypeArray) {
+		//check all that are not "Primary"
+		vConType = conCCTypeArray[x];
+		if (vConType != "Primary" && !exists(vConType, validConTypes)) {
+			logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
+			conCCTypeArray.splice(x, (x+1));
+		}
+	}
+	//Check if any types remain. If not, don't continue processing
+	if ((ccEmailToContactTypes != "All" && ccEmailToContactTypes != null && ccEmailToContactTypes != '') && conCCTypeArray.length <= 0) {
+		logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
+		return false;	
+	}
+	else if((ccEmailToContactTypes != "All" && ccEmailToContactTypes != null && ccEmailToContactTypes != '') && conCCTypeArray.length > 0) {
+		ccEmailToContactTypes = conCCTypeArray.toString();
 	}
 	
 logDebug("Validated contact types to send to: " + sendEmailToContactTypes);	
