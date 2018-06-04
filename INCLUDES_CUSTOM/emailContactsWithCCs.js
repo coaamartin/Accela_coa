@@ -1,5 +1,5 @@
 /*
-emailContacts
+emailContactsWithCCs
   Required Params:
      sendEmailToContactTypes = comma-separated list of contact types to send to, no spaces
      emailTemplate = notification template name
@@ -10,10 +10,11 @@ emailContacts
 	 vAddAdHocTask = Y/N for adding manual notification task when no email exists
      changeReportName = if using reportTemplate, will change the title of the document produced by the report from its default
 	 ccEmailToContactTypes = comma-separated list of contact types to cc to, no spaces
-Sample: emailContacts('OWNER APPLICANT', 'DPD_WAITING_FOR_PAYMENT'); //minimal
-        emailContacts('OWNER APPLICANT,BUSINESS OWNER', 'DPD_PERMIT_ISSUED', eParamHashtable, 'Construction Permit', rParamHashtable, 'Y', 'New Report Name'); //full
+Sample: emailContactsWithCCs('OWNER APPLICANT', 'DPD_WAITING_FOR_PAYMENT'); //minimal
+        emailContactsWithCCs('OWNER APPLICANT,BUSINESS OWNER', 'DPD_PERMIT_ISSUED', eParamHashtable, 'Construction Permit', rParamHashtable, 'Y', 'New Report Name'); //full
  */
 function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, reportTemplate, vRParams) {//, vAddAdHocTask, changeReportName, ccEmailToContactTypes) {
+	logDebug("emailContactsWithCCs() started");
 	var vChangeReportName = "";
 //	var conTypeArray = [];
 //	var conCCTypeArray = [];
