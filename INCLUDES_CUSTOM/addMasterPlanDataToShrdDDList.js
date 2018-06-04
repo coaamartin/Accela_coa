@@ -18,7 +18,7 @@ function addMasterPlanDataToShrdDDList(asiFieldName, recordReqStatus, inactivate
 	var sharedDDL_asiValue_MAP = new Array();
 	sharedDDL_asiValue_MAP["Single Family"] = "BLD SINGLE FAMILY MASTER";
 	sharedDDL_asiValue_MAP["Multi Family"] = "BLD MULTI FAMILY MASTER";
-	sharedDDL_asiValue_MAP["Other"] = "BLD OTHER FAMILY MASTER";
+	sharedDDL_asiValue_MAP["Other"] = "BLD OTHER MASTER";
 
 	//check if AInfo is loaded with useAppSpecificGroupName=true,
 	//we need it useAppSpecificGroupName=false, most of time we don't have subgroup name
