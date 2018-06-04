@@ -16,8 +16,6 @@ Sample: emailContactsWithCCs('OWNER APPLICANT', 'DPD_WAITING_FOR_PAYMENT'); //mi
 function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, reportTemplate, vRParams) {//, vAddAdHocTask, changeReportName, ccEmailToContactTypes) {
 	logDebug("emailContactsWithCCs() started");
 	var vChangeReportName = "";
-//	var conTypeArray = [];
-//	var conCCTypeArray = [];
 	var validConTypes = getContactTypes();
 	var x = 0;
 	var vConType;
@@ -75,8 +73,8 @@ function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, 
 	envParameters.put("vAddAdHocTask", vAddAdHocTask);
 	
 	//Start modification to support batch script
-	// var vEvntTyp = aa.env.getValue("eventType");
-	// if (vEvntTyp == "Batch Process") {
+	var vEvntTyp = aa.env.getValue("eventType");
+	if (vEvntTyp == "Batch Process") {
 		aa.env.setValue("sendEmailToContactTypes", sendEmailToContactTypes);
 		aa.env.setValue("ccEmailToContactTypes", ccEmailToContactTypes);
 		aa.env.setValue("emailTemplate", emailTemplate);
@@ -89,14 +87,12 @@ function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, 
 		//call sendEmailASync script
 		logDebug("Attempting to run Non-Async: " + vAsyncScript);
 		aa.includeScript(vAsyncScript);
-	// }
-	// else {
-	// 	//call sendEmailASync script
-	// 	logDebug("Attempting to run Async: " + vAsyncScript);
-	// 	aa.runAsyncScript(vAsyncScript, envParameters);
-
-	// //	aa.includeScript(vAsyncScript);
-	// }
+	}
+	else {
+		//call sendEmailASync script
+		logDebug("Attempting to run Async: " + vAsyncScript);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+	}
 	//End modification to support batch script
 	
 	return true;
