@@ -16,3 +16,4 @@ Notes:
 */
 
 autoCloseWorkflow();
+script381_UpdatCustomFieldPermitExpirationDates();
