@@ -22,6 +22,10 @@ function deactivateSD(stdChoiceName, stdChoiceValue) {
 			logDebug("SD edit failed, Error: " + edit.getErrorMessage());
 			return false;
 		}
+		
+		if(!activeRecsOnBizDomain(stdChoiceName)){
+			activateSCRow(stdChoiceName, "Code Change");
+		}
 	}
 	return true;
 }
