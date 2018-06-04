@@ -28,7 +28,7 @@ function setUpdateColumnValue(updateRowsMap/** Map<rowID, Map<columnName, column
 /**
 * update ASIT rows data. updateRowsMap format: Map<rowID, Map<columnName, columnValue>>
 **/
-function updateAppSpecificTableInfors(tableName, capIDModel, updateRowsMap/** Map<rowID, Map<columnName, columnValue>> **/)
+function updateAppSpecificTableInfors(tableName, capId, updateRowsMap/** Map<rowID, Map<columnName, columnValue>> **/)
 {
 comment("in updateASTI");
 	if (updateRowsMap == null || updateRowsMap.isEmpty())
@@ -51,7 +51,7 @@ comment("in updateASTI");
 		rowModel.setId(rowIdArray[i]);
 		rowList.add(rowModel);
 	}
-	return aa.appSpecificTableScript.updateAppSpecificTableInfors(capIDModel, asitTableModel);
+	return aa.appSpecificTableScript.updateAppSpecificTableInfors(capId, asitTableModel);
 }
 
 
@@ -111,7 +111,7 @@ function script349_SetColumnValueToNA() {
 				}
 				if (!updateRowsMap.isEmpty())
 				{
-					updateAppSpecificTableInfors(tableName, capIDModel, updateRowsMap);
+					updateAppSpecificTableInfors(tableName, capId, updateRowsMap);
 				}
 			}	
 		}
