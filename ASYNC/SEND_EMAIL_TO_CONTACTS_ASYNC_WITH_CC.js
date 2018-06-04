@@ -325,7 +325,8 @@ else {
 
 		//Check to see if provided contact type(s) is/are valid
 		if (contactTypes != "All" && contactTypes != null && contactTypes != '') {
-			contactTypeArray = contactTypes.split(",");
+            contactTypeArray = contactTypes.split(",");
+            logDebug('getContactTypes()..not all spliting: ' + contactTypeArray.length)
 		}
 		for (x in contactTypeArray) {
 			//check all that are not "Primary"
@@ -336,11 +337,9 @@ else {
 				contactTypeArray.splice(x, (x + 1));
 			}
 		}
-		return contactTypeArray;
+        logDebug('getContactTypes()..returning: ' + contactTypeArray.length)
+        return contactTypeArray;
 	}
 
 }
 
-function newFunction() {
-    log.debug(conObjCCEmailArray.length);
-}
