@@ -15,6 +15,8 @@ function script349_SetColumnValueToNA() {
 	
 	logDebug("script349_SetColumnValueToNA  started.");
 	try{
+		//var capIDModel = aa.cap.getCapIDModel(capId.ID1,capId.ID2,capId.ID3).getOutput();
+
 		// table name
 		var tableName = "UNIT INSPECTION VIOLATIONS";
 		var columnName ="Room";
@@ -34,7 +36,8 @@ function script349_SetColumnValueToNA() {
 
 		searchConditionMap.put(columnName, valuesList);
 
-		var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIDModel, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
+		//var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIDModel, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
+		var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capId, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
 		if (appSpecificTableInfo.getSuccess())
 		{
 			comment("******Found Table");
