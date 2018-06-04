@@ -320,29 +320,29 @@ else {
 	if (vAddAdHocTask == true && conObjNonEmailArray.length > 0) {
 		logDebug("Create AddHocTask: " + vAddAdHocTask);
 		addAdHocTaskAssignDept_COA(vAdHocProcess, vAdHocTask, vAdHocNote, vAdHocAssignDept);
-	}
+    }
 
-	function rtnContactTypes(contactTypes) {
-        logDebug('getContactTypes()');
-        var contactTypeArray = [];
+}
 
-		//Check to see if provided contact type(s) is/are valid
-		if (contactTypes != "All" && contactTypes != null && contactTypes != '') {
-            contactTypeArray = contactTypes.split(",");
-            logDebug('getContactTypes()..not all spliting: ' + contactTypeArray.length)
-		}
-		for (x in contactTypeArray) {
-			//check all that are not "Primary"
-			vConType = contactTypeArray[x];
-			if (vConType != "Primary" && !exists(vConType, validConTypes)) {
-				logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
-				//Drop bad contact type from array;
-				contactTypeArray.splice(x, (x + 1));
-			}
-		}
-        logDebug('getContactTypes()..returning: ' + contactTypeArray.length);
-        return contactTypeArray;
-	}
+function rtnContactTypes(contactTypes) {
+    logDebug('getContactTypes()');
+    var contactTypeArray = [];
 
+    //Check to see if provided contact type(s) is/are valid
+    if (contactTypes != "All" && contactTypes != null && contactTypes != '') {
+        contactTypeArray = contactTypes.split(",");
+        logDebug('getContactTypes()..not all spliting: ' + contactTypeArray.length)
+    }
+    for (x in contactTypeArray) {
+        //check all that are not "Primary"
+        vConType = contactTypeArray[x];
+        if (vConType != "Primary" && !exists(vConType, validConTypes)) {
+            logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
+            //Drop bad contact type from array;
+            contactTypeArray.splice(x, (x + 1));
+        }
+    }
+    logDebug('getContactTypes()..returning: ' + contactTypeArray.length);
+    return contactTypeArray;
 }
 

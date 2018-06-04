@@ -45,8 +45,6 @@ function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, 
 		ccEmailToContactTypes = arguments[7]; // array of cc addresses
 	}
 
-
-
 	//clean contact types
 	logDebug("Provided contact types to send to: " + sendEmailToContactTypes);
 	// for SEND = "All", null & '' means everyone
@@ -63,50 +61,6 @@ function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, 
 	// for CC = only "All" means everyone
 	ccEmailToContactTypes = cleanContactTypes(ccEmailToContactTypes);
 	
-
-	// /* SEND contact types */
-	// logDebug("Provided contact types to send to: " + sendEmailToContactTypes);
-	
-	// //Check to see if provided contact type(s) is/are valid
-	// if (sendEmailToContactTypes != "All" && sendEmailToContactTypes != null && sendEmailToContactTypes != '') {
-	// 	conTypeArray = sendEmailToContactTypes.split(",");
-	// }
-	// for (x in conTypeArray) {
-	// 	//check all that are not "Primary"
-	// 	vConType = conTypeArray[x];
-	// 	if (vConType != "Primary" && !exists(vConType, validConTypes)) {
-	// 		logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
-	// 		conTypeArray.splice(x, (x+1));
-	// 	}
-	// }
-	// //Check if any types remain. If not, don't continue processing
-	// if ((sendEmailToContactTypes != "All" && sendEmailToContactTypes != null && sendEmailToContactTypes != '') && conTypeArray.length <= 0) {
-	// 	logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
-	// 	return false;	
-	// }
-	// else if((sendEmailToContactTypes != "All" && sendEmailToContactTypes != null && sendEmailToContactTypes != '') && conTypeArray.length > 0) {
-	// 	sendEmailToContactTypes = conTypeArray.toString();
-	// }
-
-	// /* CC contact types */
-	// logDebug("Provided contact types to CC to: " + ccEmailToContactTypes);
-	
-	// //Check to see if provided contact type(s) is/are valid
-	// if (ccEmailToContactTypes != "All" && ccEmailToContactTypes != null && ccEmailToContactTypes != '') {
-	// 	conCCTypeArray = ccEmailToContactTypes.split(",");
-	// }
-	// for (x in conCCTypeArray) {
-	// 	//check all that are not "Primary"
-	// 	vConType = conCCTypeArray[x];
-	// 	if (vConType != "Primary" && !exists(vConType, validConTypes)) {
-	// 		logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
-	// 		conCCTypeArray.splice(x, (x+1));
-	// 	}
-	// }
-
-	// if((ccEmailToContactTypes != "All" && ccEmailToContactTypes != null && ccEmailToContactTypes != '') && conCCTypeArray.length > 0) {
-	// 	ccEmailToContactTypes = conCCTypeArray.toString();
-	// }
 	
 	logDebug("Validated contact types to send to: " + sendEmailToContactTypes);	
 	//Save variables to the hash table and call sendEmailASync script. This allows for the email to contain an ACA deep link for the document
