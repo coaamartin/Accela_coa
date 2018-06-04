@@ -38,13 +38,13 @@ function script193_WatIrrigationAddInspFee() {
            
            //report params
             reportparams.put("DEPARTMENT", "Administrator");
-            emailContacts(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
+            emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
   //   }
 }
 catch(err){
 		showMessage = true;
-		comment("Error on custom function “script193_WatIrrigationAddInspFee(). Please contact administrator. Err: " + err);
-		logDebug("Error on custom function “script193_WatIrrigationAddInspFee(). Please contact administrator. Err: " + err);
+		comment("Error on custom function script193_WatIrrigationAddInspFee(). Please contact administrator. Err: " + err);
+		logDebug("Error on custom function script193_WatIrrigationAddInspFee(). Please contact administrator. Err: " + err);
 	}
 	logDebug("script193_WatIrrigationAddInspFee() ended."); 
 }   //END script193_WatIrrigationAddInspFee();

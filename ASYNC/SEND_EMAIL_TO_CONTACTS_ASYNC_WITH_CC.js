@@ -1,7 +1,8 @@
-aa.print("1) Here in sendEmailToContactsASync: " + aa.env.getValue("eventType"));
+aa.print("1) Here in sendEmailToContactsASyncWithCC: " + aa.env.getValue("eventType"));
 
 //Get environmental variables pass into the script
 var sendEmailToContactTypes = aa.env.getValue("sendEmailToContactTypes");
+var ccEmailToContactTypes = aa.env.getValue("ccEmailToContactTypes");
 var emailTemplate = aa.env.getValue("emailTemplate");
 var vEParams = aa.env.getValue("vEParams");
 var reportTemplate = aa.env.getValue("reportTemplate");
@@ -13,13 +14,16 @@ var vAddAdHocTask = aa.env.getValue("vAddAdHocTask");
 aa.print("2) sendEmailToContactTypes: " + sendEmailToContactTypes);
 aa.print("3) emailTemplate: " + emailTemplate);
 aa.print("4) reportTemplate: " + reportTemplate);
+aa.print("5) ccEmailToContactTypes: " + ccEmailToContactTypes);
 
 //Set variables used in the script
 var tmpl;
 var conTypeArray = [];
+var conCCTypeArray = [];
 var conType;
 var validConTypes;
 var conObjEmailArray = [];
+var conObjCCEmailArray = [];
 var conObjNonEmailArray = [];
 var conObjEmailCompareArray = [];
 var conObjNonEmailCompareArray = [];
@@ -89,11 +93,12 @@ logDebug("1) Here in SEND_EMAIL_TO_CONTACTS_ASYNC: " + aa.env.getValue("eventTyp
 logDebug("2) sendEmailToContactTypes: " + sendEmailToContactTypes);
 logDebug("3) emailTemplate: " + emailTemplate);
 logDebug("4) reportTemplate: " + reportTemplate);
+logDebug("5) ccEmailToContactTypes: " + ccEmailToContactTypes);
 
 /* Begin SDOT work-around to prevent payment notices on auto-approved (paid) ACA submissions */
 
 if (reportTemplate == "Payment Reminder" && balanceDue == '0') {
-	logDebug("Cancelling sendEmailToContactsASync. Report is a Payment Reminder and balanceDue is 0.")
+	logDebug("Cancelling sendEmailToContactsASyncWithCC. Report is a Payment Reminder and balanceDue is 0.")
 }
 else {
 	logDebug("5) balanceDue: " + balanceDue);
@@ -124,24 +129,33 @@ else {
 		}
 	}
 
-	//Check to see if provided contact type(s) is/are valid
-	if (sendEmailToContactTypes != "All" && sendEmailToContactTypes != null && sendEmailToContactTypes != '') {
-		conTypeArray = sendEmailToContactTypes.split(",");
-	}
-	for (x in conTypeArray) {
-		//check all that are not "Primary"
-		vConType = conTypeArray[x];
-		if (vConType != "Primary" && !exists(vConType, validConTypes)) {
-			logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
-			//Drop bad contact type from array;
-			conTypeArray.splice(x, (x + 1));
-		}
-	}
 
-	//If supplied value is "All" or null check and send to all contact types
+	//get/clean contact types
 	if (sendEmailToContactTypes == "All" || sendEmailToContactTypes == null || sendEmailToContactTypes == '') {
 		conTypeArray = validConTypes;
+	} else {
+		conTypeArray = getContactTypes(sendEmailToContactTypes);
 	}
+	conCCTypeArray = getContactTypes(ccEmailToContactTypes);
+
+	// //Check to see if provided contact type(s) is/are valid
+	// if (sendEmailToContactTypes != "All" && sendEmailToContactTypes != null && sendEmailToContactTypes != '') {
+	// 	conTypeArray = sendEmailToContactTypes.split(",");
+	// }
+	// for (x in conTypeArray) {
+	// 	//check all that are not "Primary"
+	// 	vConType = conTypeArray[x];
+	// 	if (vConType != "Primary" && !exists(vConType, validConTypes)) {
+	// 		logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
+	// 		//Drop bad contact type from array;
+	// 		conTypeArray.splice(x, (x + 1));
+	// 	}
+	// }
+
+	// //If supplied value is "All" or null check and send to all contact types
+	// if (sendEmailToContactTypes == "All" || sendEmailToContactTypes == null || sendEmailToContactTypes == '') {
+	// 	conTypeArray = validConTypes;
+	// }
 
 	//get From email from template configuration
 	if (emailTemplate && emailTemplate != '') {
@@ -149,7 +163,47 @@ else {
 		mailFrom = tmpl.getEmailTemplateModel().getFrom();
 	}
 
-	//Get Contacts based on type for each type provided
+	//Get CC Contacts based on type for each type provided
+	conObjEmailCompareArray = [];
+	for (z in conCCTypeArray) {
+		conType = conTypeArray[z];
+		conEmail = null;
+		peopTemp = null;
+		//logDebug("          Searching for " + conTypeArray[z]);
+		if (conType == "Primary") {
+			vConObjArry = getContactObjsByCap(capId);
+		} else {
+			vConObjArry = getContactObjsByCap(capId, conTypeArray[z]);
+		}
+		for (x in vConObjArry) {
+			vConObj = vConObjArry[x];
+	//		vConRefSeqNbr = vConObj.refSeqNumber;
+			//Get contact email
+			if (vConObj) {
+				conEmail = vConObj.people.getEmail();
+				if (conEmail && conEmail != null && conEmail != "") {
+					conEmail = conEmail.toUpperCase();
+				}
+			}
+			//Save contact email to array (primary)
+			if (conEmail && conEmail != "" && conType == "Primary" && vConObj.capContact.getPrimaryFlag() == 'Y' && !exists(conEmail, conObjEmailCompareArray)) {
+				logDebug("          Adding (Primary) " + conEmail + " to cc email array");
+				conObjCCEmailArray.push(vConObj);
+				conObjEmailCompareArray.push(conEmail); //Needed to make sure contact is only send one email if they have more than one role
+			}
+			//Save contact email to array (All or specified)
+			else if (conEmail && conEmail != "" && conType != "Primary" && !exists(conEmail, conObjEmailCompareArray)) {
+				logDebug("          Adding " + conEmail + " to cc email array");
+				conObjCCEmailArray.push(vConObj);
+				conObjEmailCompareArray.push(conEmail); //Needed to make sure contact is only sent one email if they have more than one role
+			}
+		}
+	}
+	log.debug('CC Email list' + conObjCCEmailArray.join(';'))
+
+
+	//Get SEND Contacts based on type for each type provided
+	conObjEmailCompareArray = [];
 	for (z in conTypeArray) {
 		conType = conTypeArray[z];
 		conEmail = null;
@@ -258,7 +312,7 @@ else {
 			addParameter(vEParamsToSend, "$$TradeName$$", vConObj.people.getTradeName())
 		}
 		//Send email
-		logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument(mailFrom, conEmail, "", emailTemplate, vEParamsToSend, capId4Email, null).getSuccess());
+		logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument(mailFrom, conEmail, conObjCCEmailArray.join(';'), emailTemplate, vEParamsToSend, capId4Email, null).getSuccess());
 		logDebug("SEND_EMAIL_TO_CONTACTS_ASYNC: " + capId.getCustomID() + ": Sending " + emailTemplate + " from " + mailFrom + " to " + conEmail);
 	}
 
@@ -279,4 +333,24 @@ else {
 		logDebug("Create AddHocTask: " + vAddAdHocTask);
 		addAdHocTaskAssignDept_COA(vAdHocProcess, vAdHocTask, vAdHocNote, vAdHocAssignDept);
 	}
+
+	function getContactTypes(contactTypes) {
+		var contactTypeArray = [];
+
+		//Check to see if provided contact type(s) is/are valid
+		if (contactTypes != "All" && contactTypes != null && contactTypes != '') {
+			contactTypeArray = contactTypes.split(",");
+		}
+		for (x in contactTypeArray) {
+			//check all that are not "Primary"
+			vConType = contactTypeArray[x];
+			if (vConType != "Primary" && !exists(vConType, validConTypes)) {
+				logDebug(vConType + " is not a valid contact type. No actions will be taken for this type.");
+				//Drop bad contact type from array;
+				contactTypeArray.splice(x, (x + 1));
+			}
+		}
+		return contactTypeArray;
+	}
+
 }
