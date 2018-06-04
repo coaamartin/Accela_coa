@@ -145,6 +145,7 @@ else {
 		mailFrom = tmpl.getEmailTemplateModel().getFrom();
 	}
 
+    logDebug(conTypeArray.length);
 	//Get CC Contacts based on type for each type provided
 	conObjEmailCompareArray = [];
 	for (z in conCCTypeArray) {
@@ -181,7 +182,7 @@ else {
     }
      conCCEmailArrayString = conObjCCEmailArray.join(';');
 	logDebug('CC Email list' + conCCEmailArrayString);
-
+	logDebug(conTypeArray.length);
 
     //Get SEND Contacts based on type for each type provided
     vConObjArry = null;
@@ -230,7 +231,8 @@ else {
 			}
 		}
 	}
-
+    logDebug(conTypeArray.length);
+    
 	//Get the capId type needed for the email function
 	capId4Email = null;
 	capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
@@ -276,6 +278,7 @@ else {
 		}
 	}
 
+    logDebug(conTypeArray.length);
 	//Loop through the contact objects with email and send to each
 	for (w in conObjEmailArray) {
 		vConObj = conObjEmailArray[w];
