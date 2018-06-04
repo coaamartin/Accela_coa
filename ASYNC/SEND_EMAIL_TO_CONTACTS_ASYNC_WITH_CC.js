@@ -148,14 +148,13 @@ else {
 	//Get CC Contacts based on type for each type provided
 	conObjEmailCompareArray = [];
 	for (z in conCCTypeArray) {
-		conType = conTypeArray[z];
+		conType = conCCTypeArray[z];
 		conEmail = null;
 		peopTemp = null;
-		//logDebug("          Searching for " + conTypeArray[z]);
 		if (conType == "Primary") {
 			vConObjArry = getContactObjsByCap(capId);
 		} else {
-			vConObjArry = getContactObjsByCap(capId, conTypeArray[z]);
+			vConObjArry = getContactObjsByCap(capId, conCCTypeArray[z]);
 		}
 		for (x in vConObjArry) {
 			vConObj = vConObjArry[x];
@@ -295,7 +294,7 @@ else {
 			addParameter(vEParamsToSend, "$$TradeName$$", vConObj.people.getTradeName())
 		}
 		//Send email
-		logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument(mailFrom, conEmail, conCCEmailArrayString.replace(conEmail + ';', '').replace(conEmail, ''), emailTemplate, vEParamsToSend, capId4Email, null).getSuccess());
+		logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument(mailFrom, conEmail, conCCEmailArrayString.replace(conEmail.toUpperCase() + ';', '').replace(conEmail.toUpperCase(), ''), emailTemplate, vEParamsToSend, capId4Email, null).getSuccess());
 		logDebug("SEND_EMAIL_TO_CONTACTS_ASYNC: " + capId.getCustomID() + ": Sending " + emailTemplate + " from " + mailFrom + " to " + conEmail);
 	}
 
