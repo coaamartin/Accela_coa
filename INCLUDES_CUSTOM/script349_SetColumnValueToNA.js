@@ -11,6 +11,52 @@
 //
 //Created By: Silver Lining Solutions
 
+/**
+* Set update column value. format: Map<rowID, Map<columnName, columnValue>>
+**/
+function setUpdateColumnValue(updateRowsMap/** Map<rowID, Map<columnName, columnValue>> **/, rowID, columnName, columnValue)
+{
+	var updateFieldsMap = updateRowsMap.get(rowID);
+	if (updateFieldsMap == null)
+	{
+		updateFieldsMap = aa.util.newHashMap();
+		updateRowsMap.put(rowID, updateFieldsMap);
+	}
+	updateFieldsMap.put(columnName, columnValue);
+}
+
+/**
+* update ASIT rows data. updateRowsMap format: Map<rowID, Map<columnName, columnValue>>
+**/
+function updateAppSpecificTableInfors(tableName, capIDModel, updateRowsMap/** Map<rowID, Map<columnName, columnValue>> **/)
+{
+comment("in updateASTI");
+	if (updateRowsMap == null || updateRowsMap.isEmpty())
+	{
+		return;
+	}
+	
+	var asitTableScriptModel = aa.appSpecificTableScript.createTableScriptModel();
+	var asitTableModel = asitTableScriptModel.getTabelModel();
+	var rowList = asitTableModel.getRows();
+	asitTableModel.setSubGroup(tableName);
+	var rowIdArray = updateRowsMap.keySet().toArray();
+	comment("rowIdArray.length = " + rowIdArray.length);
+	for (var i = 0; i < rowIdArray.length; i++)
+	{
+		var rowScriptModel = aa.appSpecificTableScript.createRowScriptModel();
+		var rowModel = rowScriptModel.getRow();
+		comment("rowIdArray[i] = " + rowIdArray[i]);
+		rowModel.setFields(updateRowsMap.get(rowIdArray[i]));
+		rowModel.setId(rowIdArray[i]);
+		rowList.add(rowModel);
+	}
+	return aa.appSpecificTableScript.updateAppSpecificTableInfors(capIDModel, asitTableModel);
+}
+
+
+
+
 function script349_SetColumnValueToNA() {
 	
 	logDebug("script349_SetColumnValueToNA  started.");
@@ -61,11 +107,11 @@ function script349_SetColumnValueToNA() {
 					var rowID = fieldObject.getRowIndex();
 					comment(columnName + ": " + columnValue + "   rowID: " + rowID);
 					
-				//	setUpdateColumnValue(updateRowsMap, rowID, "Location", "NA");
+					setUpdateColumnValue(updateRowsMap, rowID, "Location", "NA");
 				}
 				if (!updateRowsMap.isEmpty())
 				{
-					//updateAppSpecificTableInfors(tableName, capIDModel, updateRowsMap);
+					updateAppSpecificTableInfors(tableName, capIDModel, updateRowsMap);
 				}
 			}	
 		}
