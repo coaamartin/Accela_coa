@@ -321,7 +321,8 @@ else {
 	}
 
 	function getContactTypes(contactTypes) {
-		var contactTypeArray = [];
+        logDebug('getContactTypes()');
+        var contactTypeArray = [];
 
 		//Check to see if provided contact type(s) is/are valid
 		if (contactTypes != "All" && contactTypes != null && contactTypes != '') {
