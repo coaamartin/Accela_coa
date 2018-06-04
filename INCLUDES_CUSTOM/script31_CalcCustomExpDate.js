@@ -9,8 +9,8 @@
 function script31_CalcCustomExpDate() {
 	logDebug("script31_CalcCustomExpDate() started.");
 	try{
-//		logDebug("today is: "+sysDateMMDDYYYY);
-//		logDebug("and adding 30 working days makes it: "+ dateAddHC(sysDateMMDDYYYY, 30, 'Y'));
+		logDebug("today is: "+sysDateMMDDYYYY);
+		logDebug("and adding 30 working days makes it: "+ dateAddHC(sysDateMMDDYYYY, 30, 'Y'));
 		editAppSpecific("Expiration Date", dateAddHC(sysDateMMDDYYYY, 30, 'Y'));		
 	}
 	catch(err){
