@@ -1,14 +1,25 @@
 function addMasterPlanDataToShrdDDList(asiFieldName, recordReqStatus, inactivateRowValue) {
-
-	if (appStatus != recordReqStatus) {
-		logDebug("**WARN no match capStatus: " + cap.getCapStatus());
-		return false;
+    
+	var updateShrdDDList = false;
+    if(vEventName == "ApplicationStatusUpdateAfter"){
+	    if (appStatus != recordReqStatus) {
+	    	logDebug("**WARN no match capStatus: " + cap.getCapStatus());
+	    	return false;
+	    }
+		else
+			updateShrdDDList = true;
 	}
+		
+	if(vEventName == "WorkflowTaskUpdateAfter")
+		if((wfTask == "Final Review" && wfStatus == "Complete No Fee") || (wfTask == "Fee Processing" && wfStatus == "Complete"))
+			updateShrdDDList = true;
+	
+	if(!updateShrdDDList) return false;
 
 	var sharedDDL_asiValue_MAP = new Array();
 	sharedDDL_asiValue_MAP["Single Family"] = "BLD SINGLE FAMILY MASTER";
 	sharedDDL_asiValue_MAP["Multi Family"] = "BLD MULTI FAMILY MASTER";
-	sharedDDL_asiValue_MAP["Other"] = "BLD OTHER FAMILY MASTER";
+	sharedDDL_asiValue_MAP["Other"] = "BLD OTHER MASTER";
 
 	//check if AInfo is loaded with useAppSpecificGroupName=true,
 	//we need it useAppSpecificGroupName=false, most of time we don't have subgroup name

@@ -5,7 +5,7 @@
 
 //Created By: Silver Lining Solutions
 
-function script381_UpdatCustomFieldPermitExpirationDates{
+function script381_UpdatCustomFieldPermitExpirationDates(){
 	
 	logDebug("script381_UpdatCustomFieldPermitExpirationDates  started.");
 	try{
