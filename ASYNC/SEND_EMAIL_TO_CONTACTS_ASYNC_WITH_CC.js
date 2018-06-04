@@ -283,6 +283,7 @@ else {
 		if (vConObj) {
 			conEmail = vConObj.people.getEmail();
 		}
+		logDebug("conEmail: " + conEmail);
 		//get clean email paramaters
 		vEParamsToSend = vEParams;
 		//Set contact specific email paramaters
@@ -294,7 +295,7 @@ else {
 			addParameter(vEParamsToSend, "$$TradeName$$", vConObj.people.getTradeName())
 		}
 		//Send email
-		logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument(mailFrom, conEmail, conCCEmailArrayString, emailTemplate, vEParamsToSend, capId4Email, null).getSuccess());
+		logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument(mailFrom, conEmail, conCCEmailArrayString.replace(conEmail + ';', '').replace(conEmail, ''), emailTemplate, vEParamsToSend, capId4Email, null).getSuccess());
 		logDebug("SEND_EMAIL_TO_CONTACTS_ASYNC: " + capId.getCustomID() + ": Sending " + emailTemplate + " from " + mailFrom + " to " + conEmail);
 	}
 
