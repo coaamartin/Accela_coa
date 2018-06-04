@@ -25,14 +25,14 @@ function script57_ForestryInspectionScheduleDate() {
 
 logDebug("script57: got the tree info and the cap description!");
 logDebug("script57: desc:"+thisWorkDesc);
-logDebug("script57: tree info table ***************************");
+//logDebug("script57: tree info table ***************************");
 				
 				for (var ea in thisAppSpecTable) {
 					row = thisAppSpecTable[ea];
 					
-logDebug("script57: tree info row:"+row);
-logDebug("script57: row tree id:"+row["Tree ID"]);
-logDebug("script57: row tree qty:"+row["Management Unit"]);
+//logDebug("script57: tree info row:"+row);
+//logDebug("script57: row tree id:"+row["Tree ID"]);
+//logDebug("script57: row tree qty:"+row["Management Unit"]);
 
 					treeID = "" + row["Tree ID"].fieldValue;
 					treeMgtUnit = "" + row["Management Unit"].fieldValue;
@@ -42,15 +42,15 @@ logDebug("script57: row tree qty:"+row["Management Unit"]);
 
 				var inspIdArr = aa.env.getValue("InspectionIDArray");	
 				
-logDebug("script57: the insp array is:"+inspIdArr);		
+//logDebug("script57: the insp array is:"+inspIdArr);		
 				
 				for (var inInsp in inspIdArr) {
 					var thisInspectionID = inspIdArr[inInsp];
 					var thisInsp = aa.inspection.getInspection(capId, thisInspectionID ).getOutput();
 					var thisScheduledDate = sysDate;
 
-logDebug("script57: the request comment is>"+thisInsp.requestComment + "<");
-logDebug("script57: the inspection comments are >"+thisInsp.InspectionComment + "<");
+//logDebug("script57: the request comment is>"+thisInsp.requestComment + "<");
+//logDebug("script57: the inspection comments are >"+thisInsp.InspectionComment + "<");
 
 					var thisRequestComment = thisInsp.requestComment == null ? "" + "\n" + addThisText : thisInsp.requestComment+ "\n" + addThisText;
 					thisInsp.setScheduledDate(thisScheduledDate);
