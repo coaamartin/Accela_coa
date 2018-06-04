@@ -121,8 +121,8 @@ function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, 
 	envParameters.put("vAddAdHocTask", vAddAdHocTask);
 	
 	//Start modification to support batch script
-	var vEvntTyp = aa.env.getValue("eventType");
-	if (vEvntTyp == "Batch Process") {
+	// var vEvntTyp = aa.env.getValue("eventType");
+	// if (vEvntTyp == "Batch Process") {
 		aa.env.setValue("sendEmailToContactTypes", sendEmailToContactTypes);
 		aa.env.setValue("ccEmailToContactTypes", ccEmailToContactTypes);
 		aa.env.setValue("emailTemplate", emailTemplate);
@@ -135,14 +135,14 @@ function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, 
 		//call sendEmailASync script
 		logDebug("Attempting to run Non-Async: " + vAsyncScript);
 		aa.includeScript(vAsyncScript);
-	}
-	else {
-		//call sendEmailASync script
-		logDebug("Attempting to run Async: " + vAsyncScript);
-		aa.runAsyncScript(vAsyncScript, envParameters);
+	// }
+	// else {
+	// 	//call sendEmailASync script
+	// 	logDebug("Attempting to run Async: " + vAsyncScript);
+	// 	aa.runAsyncScript(vAsyncScript, envParameters);
 
-	//	aa.includeScript(vAsyncScript);
-	}
+	// //	aa.includeScript(vAsyncScript);
+	// }
 	//End modification to support batch script
 	
 	return true;

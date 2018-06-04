@@ -38,7 +38,6 @@ function script193_WatIrrigationAddInspFee() {
            
            //report params
             reportparams.put("DEPARTMENT", "Administrator");
-            aa.env.setValue("vEvntTyp", "Batch Process");
             emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
   //   }
 }
