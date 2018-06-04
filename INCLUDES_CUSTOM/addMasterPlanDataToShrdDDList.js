@@ -1,13 +1,14 @@
 function addMasterPlanDataToShrdDDList(asiFieldName, recordReqStatus, inactivateRowValue) {
     
 	var updateShrdDDList = false;
-    if(vEventName == "ApplicationStatusUpdateAfter")
+    if(vEventName == "ApplicationStatusUpdateAfter"){
 	    if (appStatus != recordReqStatus) {
 	    	logDebug("**WARN no match capStatus: " + cap.getCapStatus());
 	    	return false;
 	    }
 		else
 			updateShrdDDList = true;
+	}
 		
 	if(vEventName == "WorkflowTaskUpdateAfter")
 		if((wfTask == "Final Review" && wfStatus == "Complete No Fee") || (wfTask == "Fee Processing" && wfStatus == "Complete"))
