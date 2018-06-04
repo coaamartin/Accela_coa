@@ -1,4 +1,4 @@
-/*Script 78
+/*Script 193
  * Record Types: Water/Water/Lawn Irrigation/Permit
  * Event: 		WorkflowTaskUpdateAfter (WTUA)
  * 
@@ -14,8 +14,8 @@ Commercial Inspection Fee.
     If the custom field "Type of Project" has a value of "Residential" then add the Residential
 Inspection Fee. Fees: Commercial - $138.00 Single Family – $30.75
  * 
-*/
-function script193_WatIrrigationAddInspFee {
+*/       
+function script193_WatIrrigationAddInspFee() {
     
 	logDebug("script193_WatIrrigationAddInspFee() started.");
 	try{
