@@ -323,7 +323,7 @@ else {
 
 function rtnContactTypes(contactTypes) {
     logDebug('getContactTypes()');
-    var contactTypeArray = []];
+    var contactTypeArray = [];
 
     //Check to see if provided contact type(s) is/are valid
     if (contactTypes != "All" && contactTypes != null && contactTypes != '') {
