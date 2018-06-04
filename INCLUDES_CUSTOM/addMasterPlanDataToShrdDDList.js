@@ -1,9 +1,19 @@
 function addMasterPlanDataToShrdDDList(asiFieldName, recordReqStatus, inactivateRowValue) {
-
-	if (appStatus != recordReqStatus) {
-		logDebug("**WARN no match capStatus: " + cap.getCapStatus());
-		return false;
-	}
+    
+	var updateShrdDDList = false;
+    if(vEventName == "ApplicationStatusUpdateAfter")
+	    if (appStatus != recordReqStatus) {
+	    	logDebug("**WARN no match capStatus: " + cap.getCapStatus());
+	    	return false;
+	    }
+		else
+			updateShrdDDList = true;
+		
+	if(vEventName == "WorkflowTaskUpdateAfter")
+		if((wfTask == "Final Review" && wfStatus == "Complete No Fee") || (wfTask == "Fee Processing" && wfStatus == "Complete"))
+			updateShrdDDList = true;
+	
+	if(!updateShrdDDList) return false;
 
 	var sharedDDL_asiValue_MAP = new Array();
 	sharedDDL_asiValue_MAP["Single Family"] = "BLD SINGLE FAMILY MASTER";
