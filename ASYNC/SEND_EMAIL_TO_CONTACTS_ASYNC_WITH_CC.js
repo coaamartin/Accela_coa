@@ -130,6 +130,7 @@ else {
 		}
 	}
 
+    logDebug('cvm - get contact clean types ');
 
 	//get/clean contact types
 	if (sendEmailToContactTypes == "All" || sendEmailToContactTypes == null || sendEmailToContactTypes == '') {
