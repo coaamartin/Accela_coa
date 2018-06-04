@@ -135,15 +135,12 @@ else {
 	//get/clean contact types
 	if (sendEmailToContactTypes == "All" || sendEmailToContactTypes == null || sendEmailToContactTypes == '') {
         conTypeArray = validConTypes;
-        logDebug('cvm - all valid types: ' + conTypeArray.length);
 	} else {
-        logDebug('cvm2');
 		conTypeArray = rtnContactTypes(sendEmailToContactTypes);
-        logDebug('cvm - just sendEmailToContactTypes types: ' + conTypeArray.length);
 	}
 	conCCTypeArray = rtnContactTypes(ccEmailToContactTypes);
-    logDebug('cvm - cc types: ' + conCCTypeArray.length);
-    logDebug('cvm - to types: ' + conTypeArray.length);
+    logDebug('cvm - nmbr of cc types: ' + conCCTypeArray.length);
+    logDebug('cvm - nmbr of to types: ' + conTypeArray.length);
 
 	//get From email from template configuration
 	if (emailTemplate && emailTemplate != '') {
@@ -326,12 +323,13 @@ else {
 
 function rtnContactTypes(contactTypes) {
     logDebug('getContactTypes()');
-    var contactTypeArray = contactTypes;
+    var contactTypeArray = []];
 
     //Check to see if provided contact type(s) is/are valid
     if (contactTypes != "All" && contactTypes != null && contactTypes != '') {
         contactTypeArray = contactTypes.split(",");
-        logDebug('getContactTypes()..not all spliting: ' + contactTypeArray.length)
+    } else {
+        contactTypeArray = getContactTypes();
     }
     for (x in contactTypeArray) {
         //check all that are not "Primary"
@@ -342,7 +340,6 @@ function rtnContactTypes(contactTypes) {
             contactTypeArray.splice(x, (x + 1));
         }
     }
-    logDebug('getContactTypes()..returning: ' + contactTypeArray.length);
     return contactTypeArray;
 }
 
