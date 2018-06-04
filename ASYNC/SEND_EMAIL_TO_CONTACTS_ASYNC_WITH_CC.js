@@ -136,10 +136,10 @@ else {
         conTypeArray = validConTypes;
         logDebug('cvm - all valid types: ' + conTypeArray.length);
 	} else {
-		conTypeArray = getContactTypes(sendEmailToContactTypes);
+		conTypeArray = rtnContactTypes(sendEmailToContactTypes);
         logDebug('cvm - just sendEmailToContactTypes types: ' + conTypeArray.length);
 	}
-	conCCTypeArray = getContactTypes(ccEmailToContactTypes);
+	conCCTypeArray = rtnContactTypes(ccEmailToContactTypes);
     logDebug('cvm - cc types: ' + conCCTypeArray.length);
     logDebug('cvm - to types: ' + conTypeArray.length);
 
@@ -320,14 +320,12 @@ else {
 		addAdHocTaskAssignDept_COA(vAdHocProcess, vAdHocTask, vAdHocNote, vAdHocAssignDept);
 	}
 
-	function getContactTypes(contactTypes) {
-        logDebug('getContactTypes()');
+	function rtnContactTypes(contactTypes) {
         var contactTypeArray = [];
 
 		//Check to see if provided contact type(s) is/are valid
 		if (contactTypes != "All" && contactTypes != null && contactTypes != '') {
             contactTypeArray = contactTypes.split(",");
-            logDebug('getContactTypes()..not all spliting: ' + contactTypeArray.length)
 		}
 		for (x in contactTypeArray) {
 			//check all that are not "Primary"
@@ -338,7 +336,6 @@ else {
 				contactTypeArray.splice(x, (x + 1));
 			}
 		}
-        logDebug('getContactTypes()..returning: ' + contactTypeArray.length)
         return contactTypeArray;
 	}
 
