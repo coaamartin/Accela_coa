@@ -14,7 +14,7 @@ function script57_ForestryInspectionScheduleDate() {
 		
 		//Get the Record Work Description
 		var thisCap = aa.cap.getCap(capId).getOutput();
-		if (thisCap.getSuccess()) {
+		if (thisCap != null ) {
 			var thisCapModel = thisCap.getCapModel();
 			if (thisCapModel.getSuccess()) {
 				var thisWorkDesc = thisCapModel.getCapWorkDesModel().description;
