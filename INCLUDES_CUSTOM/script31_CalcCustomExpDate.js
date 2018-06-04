@@ -9,7 +9,9 @@
 function script31_CalcCustomExpDate() {
 	logDebug("script31_CalcCustomExpDate() started.");
 	try{
-		editAppSpecific("Expiration Date", nextWorkDay(dateAdd(null, 30)));		
+//		logDebug("today is: "+sysDateMMDDYYYY);
+//		logDebug("and adding 30 working days makes it: "+ dateAddHC(sysDateMMDDYYYY, 30, 'Y'));
+		editAppSpecific("Expiration Date", dateAddHC(sysDateMMDDYYYY, 30, 'Y'));		
 	}
 	catch(err){
 		showMessage = true;
@@ -17,4 +19,4 @@ function script31_CalcCustomExpDate() {
 		logDebug("Error on custom function script31_CalcCustomExpDate(). Please contact administrator. Err: " + err);
 	}
 	logDebug("script31_CalcCustomExpDate() ended.");
-};//END script31_CalcCustomExpDate();
+}//END script31_CalcCustomExpDate()
