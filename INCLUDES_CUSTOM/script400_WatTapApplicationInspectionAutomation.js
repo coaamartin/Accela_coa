@@ -61,14 +61,6 @@ function script400_WatTapApplicationInspectionAutomation() {
             }
         }
 
-        if(!cancel) {
-            cancel = true;
-            showMessage = true;
-            comment('You are stuck here forever!');
-            logDebug('You are stuck here forever!');
-        }
-
-
     }
     catch(err){
 		showMessage = true;
