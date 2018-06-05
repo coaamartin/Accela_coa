@@ -35,6 +35,49 @@ if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
 	createAutoInspection(tasksToCheck);
 }
 
+// Script #205
+
+if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
+
+	if(AInfo["Special Inspections"] != "Yes")
+
+		{
+
+		deactivateTask("Special Inspections Check","BLD_NEWCON_INSPSUB")
+
+		deactivateTask("Special Inspections Check","BLD_MASTER_INSPSUB")
+
+		}
+
+	if(!isTaskStatus("Engineering Review","Approved with FEMA Cert Required"))
+
+		{
+
+		deactivateTask("FEMA Elevation Certification","BLD_NEWCON_INSPSUB")
+
+		}
+
+}
+
+if(isTaskActive("Subtasks Complete","BLD_NEWCON_INSPSUB")&& allTasksComplete("BLD_NEWCON_INSPSUB","Subtasks Complete"))
+
+	{
+
+	closeTask("Subtasks Complete","Complete","","", "BLD_NEWCON_INSPSUB")
+
+	}
+
+// Script#206
+
+if(isTaskActive("Subtasks Complete","BLD_MASTER_INSPSUB") && allTasksComplete("BLD_MASTER_INSPSUB","Subtasks Complete"))
+
+	{
+
+	closeTask("Subtasks Complete","Complete","","", "BLD_MASTER_INSPSUB")
+
+	}
+
+
 
 var emailResult = aa.sendMail("noreply@auroragov.org", "jal@byrnesoftware.com", "", "Licensed Professional Required for permit " + capId.getCustomID(),
                     "A licensed professional is required for the permit to be issued<BR><BR>\
