@@ -61,5 +61,29 @@ Notes:
 
 autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Received", "Resubmittal Requested",  "Complete"], "Is a Master Utility Plan Required", "Water Dept Review",
 		"Water/Utility/Master Utility/Study");
+		
+/*
+Title : Application Acceptance for Planning (WorkflowTaskUpdateAfter) 
+
+Purpose : If the workflow task = Application Acceptance and workflow status = Acceptance 
+then get the meeting type "" from the meeting tab and get the meeting date and then update
+the Custom Field "".
+In addition email the applicant that their hearing has been scheduled. Email template and content will be provided by Aurora.
+
+Author:  
+ 
+Functional Area : Records
+
+Sample Call:
+script257_ApplicationAcceptanceForPlanning("Application Acceptance", [ "Accepted" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 257");
+	
+	Note:
+		this script will abort if subType = "Address", requested in PDF:
+		... Record Type: Planning/Application/{*}/{*} (except Planning/Application/Address/{*})
+*/
+if(!appMatch(("Planning/Application/Address/*"))){
+
+script257_ApplicationAcceptanceForPlanning("Application Acceptance", [ "Accepted" ], "Planning Commission", "Planning Commission Hearing Date", "PLN APPLICATION ACCEPTANCE FOR PLANNING # 257");
+}
 
 		
