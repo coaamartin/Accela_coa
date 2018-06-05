@@ -1,25 +1,17 @@
-//cancel = true;
-//showMessage = true;  
-//message =  "HELLOOO";
+cancel = true;
+showMessage = true;  
+message =  "HELLOOO";
 
 
-if (debug.indexOf("**ERROR") > 0)
-{
-  aa.env.setValue("ErrorCode", "1");
-  aa.env.setValue("ErrorMessage", debug);
-}
-else
-{
-  if (cancel)
-  {
-    aa.env.setValue("ErrorCode", "-2");
-    if (showMessage) aa.env.setValue("ErrorMessage", message);
-    if (showDebug)  aa.env.setValue("ErrorMessage", debug);
-  }
-  else
-  {
-    aa.env.setValue("ErrorCode", "0");
-    if (showMessage) aa.env.setValue("ErrorMessage", message);
-    if (showDebug)  aa.env.setValue("ErrorMessage", debug);
-  }
+var defaultValidationMsg = "The following documents are required to continue:";
+validationMsg = defaultValidationMsg;
+
+cancel = true;
+showMessage = true;
+if (isPublicUser) {
+	aa.env.setValue("ErrorCode", "1");
+	aa.env.setValue("ErrorMessage", validationMsg);
+	comment(validationMsg);
+} else {
+	comment(validationMsg);
 }
