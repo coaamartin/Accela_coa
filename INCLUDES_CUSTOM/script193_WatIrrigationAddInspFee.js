@@ -19,11 +19,11 @@ function script193_WatIrrigationAddInspFee() {
     
 	logDebug("script193_WatIrrigationAddInspFee() started.");
 	try{
-	//	if (ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wfTask == Fee Processing && wfStatus == Ready to Pay')) 
-	//	{
+		if (ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wfTask == Fee Processing && wfStatus == Ready to Pay')) 
+		{
             
             var emailTemplate = 'WAT_IRRIGATION PLAN REVIEW INVOICED #193',
-                  toContactTypes = 'Applicant,Owner',
+                  toContactTypes = 'Applicant',
                   ccContactTypes = 'All',
                   emailparams = aa.util.newHashtable(),
                   reportname = ""
@@ -48,7 +48,7 @@ function script193_WatIrrigationAddInspFee() {
 
             //send email
             emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
-  //   }
+     }
 }
 catch(err){
 		showMessage = true;
