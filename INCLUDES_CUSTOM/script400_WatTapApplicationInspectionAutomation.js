@@ -36,8 +36,8 @@ function script400_WatTapApplicationInspectionAutomation() {
                     if (ifTracer(!AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy')) {
                         cancel = true;
                         showMessage = true;
-                        logDebug('Water Meter Number must not be null to status inspection as passed.');                            
                         comment('Water Meter Number must not be null to status inspection as passed.');                            
+                        logDebug('Water Meter Number must not be null to status inspection as passed.');                            
                     }
                 }
             }
@@ -48,9 +48,9 @@ function script400_WatTapApplicationInspectionAutomation() {
                         if (ifTracer(AInfo['inspResult'] == 'Pass', 'inspResult == Pass')) {
                             cancel = true;
                             showMessage = true;
-                            logDebug('Water Meter Number must not be null to status inspection as passed.');                            
                             comment('Water Meter Number must not be null to status inspection as passed.');                            
-                        }
+                            logDebug('Water Meter Number must not be null to status inspection as passed.');                            
+                       }
                     }
                 } else {    //failed
                     emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
@@ -61,8 +61,8 @@ function script400_WatTapApplicationInspectionAutomation() {
         if(!cancel) {
             cancel = true;
             showMessage = true;
-            logDebug('You are stuck here forever!');
             comment('You are stuck here forever!');
+            logDebug('You are stuck here forever!');
         }
 
 
