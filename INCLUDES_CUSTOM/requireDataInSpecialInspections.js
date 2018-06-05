@@ -10,8 +10,8 @@ function requireDataInSpecialInspections() {
 
                     //check if ___Required field and filled
                     var asiFieldName = specialInspections[xx].getCheckboxDesc();
-                    if ($iTrc(new java.lang.String(asiFieldName).endsWith("Required") && typeof (specialInspections[xx].getChecklistComment()) == "CHECKED"
-                            && !isBlankOrNull(specialInspections[xx].getChecklistComment()), 'asiFieldName == CHECKED') ) {
+                    if (new java.lang.String(asiFieldName).endsWith("Required") && typeof (specialInspections[xx].getChecklistComment()) != "undefined"
+                            && !isBlankOrNull(specialInspections[xx].getChecklistComment())) {
 
                         asiFieldName = asiFieldName.trim();
 
