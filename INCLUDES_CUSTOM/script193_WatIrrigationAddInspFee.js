@@ -23,12 +23,13 @@ function script193_WatIrrigationAddInspFee() {
 	//	{
             
             var emailTemplate = 'WAT_IRRIGATION PLAN REVIEW INVOICED #193',
-                  toContactTypes = 'Applicant',
+                  toContactTypes = 'Applicant,Owner',
                   ccContactTypes = 'All',
                   emailparams = aa.util.newHashtable(),
-                  reportname = "JD_TEST_REPORT"
+                  reportname = ""
                   reportparams = aa.util.newHashtable(),
-                  applicant = getContactByType("Applicant", capId);
+                  applicant = getContactByType("Applicant", capId),
+                  feeSeq;
 
             //email params
            if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
@@ -38,6 +39,15 @@ function script193_WatIrrigationAddInspFee() {
            
            //report params
             reportparams.put("DEPARTMENT", "Administrator");
+
+            //create fee
+            if(AInfo['Type of Property'] == 'Single Family Residential') {
+                feeSeq = addFee('WAT_IP_01', '	WAT_IP', 'FINAL', 1, "N");                
+            } else {
+                feeSeq = addFee('WAT_IP_02', '	WAT_IP', 'FINAL', 1, "N");                
+            }
+
+            //send email
             emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
   //   }
 }

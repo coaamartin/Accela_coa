@@ -13,16 +13,16 @@ emailContactsWithCCs
 Sample: emailContactsWithCCs('OWNER APPLICANT', 'DPD_WAITING_FOR_PAYMENT'); //minimal
         emailContactsWithCCs('OWNER APPLICANT,BUSINESS OWNER', 'DPD_PERMIT_ISSUED', eParamHashtable, 'Construction Permit', rParamHashtable, 'Y', 'New Report Name'); //full
  */
-function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, reportTemplate, vRParams) {//, vAddAdHocTask, changeReportName, ccEmailToContactTypes) {
+function emailContactsWithCCs(sendEmailToContactTypes, emailTemplate, vEParams, reportTemplate, vRParams, vAddAdHocTask = true, changeReportName='', ccEmailToContactTypes=[]) {
 	logDebug("emailContactsWithCCs() started");
-	var vChangeReportName = "";
+//	var vChangeReportName = "";
 	var validConTypes = getContactTypes();
 	var x = 0;
 	var vConType;
 	var vAsyncScript = "SEND_EMAIL_TO_CONTACTS_ASYNC_WITH_CC";
 	var envParameters = aa.util.newHashMap();
-	var vAddAdHocTask = true;
-	var ccEmailToContactTypes = [];
+//	var vAddAdHocTask = true;
+//	var ccEmailToContactTypes = [];
 
 	//Ad-hoc Task Requested
 	if (arguments.length > 5) {
