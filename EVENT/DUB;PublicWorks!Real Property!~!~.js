@@ -3,10 +3,8 @@ validationMsg = defaultValidationMsg;
 
 cancel = true;
 showMessage = true;
-if (isPublicUser) {
+//if (isPublicUser) {
 	aa.env.setValue("ErrorCode", "1");
 	aa.env.setValue("ErrorMessage", validationMsg);
 	comment(validationMsg);
-} else {
-	comment(validationMsg);
-}
+//} 
