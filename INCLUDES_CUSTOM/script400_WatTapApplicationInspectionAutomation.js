@@ -18,15 +18,22 @@ function script400_WatTapApplicationInspectionAutomation() {
         var eventName = aa.env.getValue("EventName"),
             cancel = false,
             showMessage  = false,
-            comment;
-        logDebug("eventName: " + eventName);
+            comment,
+            emailTemplate = 'WAT_IRRIGATION PLAN REVIEW INVOICED #193',
+            toContactTypes = 'Applicant',
+            ccContactTypes = null,
+            emailparams = aa.util.newHashtable(),
+            reportname = ""
+            reportparams = aa.util.newHashtable(),
+            applicant = getContactByType("Applicant", capId);
 
+        logDebug("eventName: " + eventName);
 
         
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
-                    if (!ifTracer(AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy') {
+                    if (!ifTracer(AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy')) {
                         if (ifTracer(AInfo['inspResult'] == 'Pass', 'inspResult == Pass')) {
                             cancel = true;
                             showMessage = true;
@@ -37,9 +44,19 @@ function script400_WatTapApplicationInspectionAutomation() {
                 }
             }
         } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
-            if (ifTracer(AInfo['inspType'] == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
+            if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
+                if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
+                    if (!ifTracer(AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy')) {
+                        if (ifTracer(AInfo['inspResult'] == 'Pass', 'inspResult == Pass')) {
+                            cancel = true;
+                            showMessage = true;
+                            logDebug('Water Meter Number must not be null to status inspection as passed.');                            
+                            comment('Water Meter Number must not be null to status inspection as passed.');                            
+                        }
+                    }
+                } else {    //failed
 
-            }
+                }
         }
         if(!cancel) {
             cancel = true;
