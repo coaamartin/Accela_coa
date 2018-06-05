@@ -1,6 +1,8 @@
 function requireDataInSpecialInspections() {
+	logDebug("requireDataInSpecialInspections() started");
     try {
-        if (wfTask == "Special Inspections Check" && wfStatus == "Report Received") {
+		var $iTrc = ifTracer;
+        if ($iTrc(wfTask == "Special Inspections Check" && wfStatus == "Report Received", 'wf:Special Inspections Check/Report Received')) {
             var specialInspections = getASIgroup("SPECIAL INSPECTIONS", capId);
             if (specialInspections != null) {
                 var missingData = "";
@@ -8,8 +10,8 @@ function requireDataInSpecialInspections() {
 
                     //check if ___Required field and filled
                     var asiFieldName = specialInspections[xx].getCheckboxDesc();
-                    if (new java.lang.String(asiFieldName).endsWith("Required") && typeof (specialInspections[xx].getChecklistComment()) != "undefined"
-                            && !isBlankOrNull(specialInspections[xx].getChecklistComment())) {
+                    if ($iTrc(new java.lang.String(asiFieldName).endsWith("Required") && typeof (specialInspections[xx].getChecklistComment()) == "CHECKED"
+                            && !isBlankOrNull(specialInspections[xx].getChecklistComment()), 'asiFieldName == CHECKED') ) {
 
                         asiFieldName = asiFieldName.trim();
 
@@ -36,4 +38,5 @@ function requireDataInSpecialInspections() {
         showMessage = true;
         comment(e);
     }
-}
+	logDebug("requireDataInSpecialInspections() ended");
+}//END requireDataInSpecialInspections()
