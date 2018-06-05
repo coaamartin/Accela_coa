@@ -28,8 +28,7 @@ function script193_WatIrrigationAddInspFee() {
                   emailparams = aa.util.newHashtable(),
                   reportname = ""
                   reportparams = aa.util.newHashtable(),
-                  applicant = getContactByType("Applicant", capId),
-                  feeSeq;
+                  applicant = getContactByType("Applicant", capId);
 
             //email params
            if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
@@ -42,9 +41,9 @@ function script193_WatIrrigationAddInspFee() {
 
             //create fee
             if(AInfo['Type of Property'] == 'Single Family Residential') {
-                feeSeq = addFee('WAT_IP_01', 'WAT_IP', 'FINAL', 1, "Y");                
+                addFee('WAT_IP_01', 'WAT_IP', 'FINAL', 1, "Y");                
             } else {
-                feeSeq = addFee('WAT_IP_02', 'WAT_IP', 'FINAL', 1, "Y");                
+                addFee('WAT_IP_02', 'WAT_IP', 'FINAL', 1, "Y");                
             }
 
             //send email
