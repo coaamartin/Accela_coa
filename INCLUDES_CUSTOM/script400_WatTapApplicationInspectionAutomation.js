@@ -16,15 +16,17 @@ function script400_WatTapApplicationInspectionAutomation() {
  	logDebug("script400_WatTapApplicationInspectionAutomation() started.");
 	try{
         var eventName = aa.env.getValue("EventName"),
-            cancel = false,
-            showMessage  = false,
             emailTemplate = 'WAT METER SET INSPECTION FAILED # 400',
             toContactTypes = 'Applicant',
             ccContactTypes = '',
             emailparams = aa.util.newHashtable(),
             reportname = ""
             reportparams = aa.util.newHashtable(),
-            applicant = getContactByType("Applicant", capId);
+            applicant = getContactByType("Applicant", capId),
+            childCapScriptModel,
+            parentCapScriptModel,
+            parentCapTypeString,
+            parentCapId;
 
         logDebug("eventName: " + eventName);
 
@@ -43,14 +45,19 @@ function script400_WatTapApplicationInspectionAutomation() {
         } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
-                    if (!ifTracer(AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy')) {
-                        if (ifTracer(AInfo['inspResult'] == 'Pass', 'inspResult == Pass')) {
-                            cancel = true;
-                            showMessage = true;
-                            comment('Water Meter Number must not be null to status inspection as passed.');                            
-                            logDebug('Water Meter Number must not be null to status inspection as passed.');                            
-                       }
+                    //AInfo['Water Meter Number']
+                    //get parent
+                    parentCapId = getParent();
+                    if(ifTracer(parentCapId, 'parent found')) {
+                        //make sure parent is a permit (Building/Permit/*/*)
+                        childCapScriptModel = aa.cap.getCap(capId).getOutput();
+                        parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
+                        parentCapTypeString = parentCapScriptModel.getCapType().toString();
+                        if(ifTracer(parentCapTypeString.indexOf('Building/Permit/') > -1, 'parent = Building/Permit/*/*')) {
+                
+                        }
                     }
+                    
                 } else {    //failed
                     emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
                 }
