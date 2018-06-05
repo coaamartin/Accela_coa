@@ -1,4 +1,4 @@
-function checkIfPassedInspections(){
+function checkIfPassedInspections(InspectionType){
 	try{
 		if (String(InspectionType).indexOf("Final")>0){
 			var result=checkInspectionType(InspectionType);
