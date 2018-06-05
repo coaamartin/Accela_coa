@@ -10,6 +10,8 @@
  */
 function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
 
+	logDebug("Enter sendHearingScheduledEmailAndUpdateASI function");
+	
 	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 		return false;
 	}
