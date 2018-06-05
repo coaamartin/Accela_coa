@@ -10,7 +10,12 @@ function sendEmailNotification(emailTemplate,reportName){
 	}
 	// Get the Developer's email
 	var recordDeveloper = getContactByType("Developer", capId);
-	var developerEmail = recordDeveloper.getEmail();
+	var developerEmail = null;
+	if (!recordDeveloper || recordDeveloper.getEmail() == null || recordDeveloper.getEmail() == "") {
+		logDebug("**WARN no developer or developer has no email, capId=" + capId);
+	} else {
+		developerEmail = recordDeveloper.getEmail();
+	}
 	
 	// Get the Case Manager's email
 	var caseManagerEmail=getAssignedStaffEmail();
