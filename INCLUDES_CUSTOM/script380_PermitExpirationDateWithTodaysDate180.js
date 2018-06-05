@@ -1,7 +1,7 @@
 //script380_UpdatCustomFieldPermitExpirationDates
 //Record Types:	Building/Permit/New Construction/NA; Building/Permit/Plans/NA; Building/Permit/No Plans/NABuilding/Permit/*/* (EXCEPT Building/Permit/Master/NA)
-//Event: IRSA - PaymentReceivedAfter
-//Desc: Payment Recieved After, update the Custom Field ‘Permit Expiration Date’ with Today's date + 180 days  
+//Event: IRSA - Inspection Result Submit After
+//Desc: Inspection Result Submit After, update the Custom Field ‘Permit Expiration Date’ with Today's date + 180 days if inspection result is not "Cancelled"  
 
 //Created By: Silver Lining Solutions
 
@@ -10,7 +10,7 @@ function script380_PermitExpirationDateWithTodaysDate180(){
 	logDebug("script380_PermitExpirationDateWithTodaysDate180  started.");
 	try{
 		
-		if (inspResult !="Canceled") {
+		if (inspResult !="Cancelled") {
 				editAppSpecific("Permit Expiration Date",dateAdd(null,180));
 		}
 	} catch(err){
