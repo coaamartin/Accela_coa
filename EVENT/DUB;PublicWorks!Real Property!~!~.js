@@ -1,8 +1,8 @@
-
 showMessage=true;
 showDebug=true;
 var message = "AAAAA";
-var cancel=true;
+cancel = true;
+
 //if (isPublicUser) {
 if (cancel) {
 	aa.env.setValue("ScriptReturnCode", "0");
