@@ -26,24 +26,12 @@ function bldScrit2_noContractorCheck(){
             var applicantEmailAddrs = applicant.getEmail();
             if(getPrimaryOwnerFirstAndLastName().toUpperCase() == applicantName.toUpperCase()) ownerApplicantMatch = true;
             
-            if($iTrc((!ownerIsContractor && !lpOnFile) || !ownerApplicantMatch, '(!ownerIsContractor && !lpOnFile) || !ownerApplicantMatch'))
-                cancelMsg = "Contractor is not attached to Permit";
+            if($iTrc((!ownerIsContractor && !lpOnFile) || (ownerIsContractor && !ownerApplicantMatch), '(!ownerIsContractor && !lpOnFile) || (ownerIsContractor && !ownerApplicantMatch)'))
+                cancelMsg = "Contractor is not attached to Permit. Please send an email through Communications tab to the Applicant that the Permit cannot be issued without a Licensed Contractor";
             
             cancel = showMessage = cancelMsg.length > 0;
             
-            if(cancel) {
-                if(email){
-                    var emailResult = aa.sendMail("noreply@auroragov.org", applicantEmailAddrs, "", "Licensed Professional Required for permit " + capId.getCustomID(),
-                    "A licensed professional is required for the permit to be issued<BR><BR>\
-                    Thank you<br><br>\
-                    Building Division | City of Aurora | 303-739-7420 | permitcounter@auroragov.org");
-                    
-                    if(!emailResult.getSuccess()) logDebug("Error sending e-mail. Error: " + emailResult.getErrorMessage());
-					else logDebug("Email sent successfully.");
-                }
-                
-                comment(cancelMsg);
-            }
+            if(cancel) comment(cancelMsg);
             
         }
     }
