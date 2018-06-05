@@ -19,9 +19,9 @@ function script400_WatTapApplicationInspectionAutomation() {
             cancel = false,
             showMessage  = false,
             comment,
-            emailTemplate = 'WAT_IRRIGATION PLAN REVIEW INVOICED #193',
+            emailTemplate = 'WAT METER SET INSPECTION FAILED # 400',
             toContactTypes = 'Applicant',
-            ccContactTypes = null,
+            ccContactTypes = '',
             emailparams = aa.util.newHashtable(),
             reportname = ""
             reportparams = aa.util.newHashtable(),
@@ -33,13 +33,11 @@ function script400_WatTapApplicationInspectionAutomation() {
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
-                    if (!ifTracer(AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy')) {
-                        if (ifTracer(AInfo['inspResult'] == 'Pass', 'inspResult == Pass')) {
-                            cancel = true;
-                            showMessage = true;
-                            logDebug('Water Meter Number must not be null to status inspection as passed.');                            
-                            comment('Water Meter Number must not be null to status inspection as passed.');                            
-                        }
+                    if (ifTracer(!AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy')) {
+                        cancel = true;
+                        showMessage = true;
+                        logDebug('Water Meter Number must not be null to status inspection as passed.');                            
+                        comment('Water Meter Number must not be null to status inspection as passed.');                            
                     }
                 }
             }
@@ -55,7 +53,7 @@ function script400_WatTapApplicationInspectionAutomation() {
                         }
                     }
                 } else {    //failed
-
+                    emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
                 }
             }
         }
