@@ -42,9 +42,9 @@ function script193_WatIrrigationAddInspFee() {
 
             //create fee
             if(AInfo['Type of Property'] == 'Single Family Residential') {
-                feeSeq = addFee('WAT_IP_01', '	WAT_IP', 'FINAL', 1, "N");                
+                feeSeq = addFee('WAT_IP_01', 'WAT_IP', 'FINAL', 1, "N");                
             } else {
-                feeSeq = addFee('WAT_IP_02', '	WAT_IP', 'FINAL', 1, "N");                
+                feeSeq = addFee('WAT_IP_02', 'WAT_IP', 'FINAL', 1, "N");                
             }
 
             //send email
