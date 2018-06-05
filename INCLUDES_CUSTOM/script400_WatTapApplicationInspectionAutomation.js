@@ -20,17 +20,14 @@ function script400_WatTapApplicationInspectionAutomation() {
             toContactTypes = 'Applicant',
             ccContactTypes = '',
             emailparams = aa.util.newHashtable(),
-            reportname = ""
+            reportname = "",
             reportparams = aa.util.newHashtable(),
-            applicant = getContactByType("Applicant", capId),
             childCapScriptModel,
             parentCapScriptModel,
             parentCapTypeString,
-            parentCapId;
+            parentCapId,
+            applicant = getContactByType("Applicant", capId);
 
-        logDebug("eventName: " + eventName);
-
-        
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
