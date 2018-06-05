@@ -1,5 +1,5 @@
 if(isTaskActive("Plans Coordination")){
-  var checkTasks = ["Engineering Review", "Real Property Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review", "Risk Management Review"];
+  var checkTasks = ["Engineering Review", "Real Property Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review", "Risk Management Review", "Planning Review"];
   var statusCheck = "Resubmittal Requested";
 
   var isActive = isListActive(checkTasks);
