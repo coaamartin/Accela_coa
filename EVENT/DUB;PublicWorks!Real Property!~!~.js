@@ -1,8 +1,3 @@
-cancel = true;
-showMessage = true;  
-message =  "HELLOOO";
-
-
 var defaultValidationMsg = "The following documents are required to continue:";
 validationMsg = defaultValidationMsg;
 
