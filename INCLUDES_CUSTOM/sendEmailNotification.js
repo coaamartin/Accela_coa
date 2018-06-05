@@ -1,13 +1,20 @@
 function sendEmailNotification(emailTemplate,reportName){
-var recordApplicant = getContactByType("Applicant", capId);
-var applicantEmail = null;
-if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
-	logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
-} else {
+
+	// Get the Applicant's email
+	var recordApplicant = getContactByType("Applicant", capId);
+	var applicantEmail = null;
+	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+	} else {
+		applicantEmail = recordApplicant.getEmail();
+	}
+	// Get the Developer's email
 	var recordDeveloper = getContactByType("Developer", capId);
-	var developerEmail=recordApplicant.getEmail();
+	var developerEmail = recordDeveloper.getEmail();
+	
+	// Get the Case Manager's email
 	var caseManagerEmail=getAssignedStaffEmail();
-	applicantEmail = recordApplicant.getEmail();
+	
 	var cc="";
 	if (isBlankOrNull(developerEmail)==false){
 		cc=developerEmail;
