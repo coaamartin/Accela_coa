@@ -15,9 +15,11 @@ function script257_ApplicationAcceptanceForPlanning(workFlowTaskToCheck, workflo
 	}
 
 	if (wfTask == workFlowTaskToCheck) {
-/*
-		var statusMatch = false;
 
+		var statusMatch = false;
+		
+		logDebug("*****Enter script257_ApplicationAcceptanceForPlanning function*****");
+/*
 		for (s in workflowStatusArray) {
 			if (wfStatus == workflowStatusArray[s]) {
 				statusMatch = true;
