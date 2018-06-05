@@ -10,8 +10,6 @@
  */
 function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
 
-	logDebug("*****Enter sendHearingScheduledEmailAndUpdateASI function*****");
-	
 	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 		return false;
 	}
@@ -48,8 +46,6 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 				editAppSpecific(asiFieldName, meetingDate);
 				useAppSpecificGroupName = olduseAppSpecificGroupName;
 				
-				logDebug("**useAppSpecificGroupName=" + useAppSpecificGroupName);
-		
 				//Send email
 				var recordApplicant = getContactByType("Applicant", capId);
 				var applicantEmail = null;
@@ -57,9 +53,6 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
 				} else {
 					applicantEmail = recordApplicant.getEmail();
-										
-				logDebug("**recordApplicant=" + recordApplicant);
-				logDebug("**applicantEmail=" + applicantEmail);
 
 					var files = new Array();
 					var eParams = aa.util.newHashtable();
