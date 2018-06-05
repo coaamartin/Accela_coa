@@ -21,3 +21,5 @@ Notes:
 
 
 updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submittal Number");
+
+include("45_LicenseAgreementEmailResubmittal");
