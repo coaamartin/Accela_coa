@@ -1,4 +1,4 @@
-var defaultValidationMsg = "The following documents are required to continue:";
+var defaultValidationMsg = "Suhail Testing.. ";
 validationMsg = defaultValidationMsg;
 
 cancel = true;
