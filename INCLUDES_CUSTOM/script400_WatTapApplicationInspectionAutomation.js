@@ -57,7 +57,9 @@ function script400_WatTapApplicationInspectionAutomation() {
                 } else {    //failed
 
                 }
+            }
         }
+
         if(!cancel) {
             cancel = true;
             showMessage = true;
