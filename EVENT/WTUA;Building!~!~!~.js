@@ -79,10 +79,3 @@ if(isTaskActive("Subtasks Complete","BLD_MASTER_INSPSUB") && allTasksComplete("B
 
 
 
-var emailResult = aa.sendMail("noreply@auroragov.org", "jal@byrnesoftware.com", "", "Licensed Professional Required for permit " + capId.getCustomID(),
-                    "A licensed professional is required for the permit to be issued<BR><BR>\
-                    Thank you<br><br>\
-                    Building Division | City of Aurora | 303-739-7420 | permitcounter@auroragov.org");
-                    
-                    if(!emailResult.getSuccess()) logDebug("Error sending e-mail. Error: " + emailResult.getErrorMessage());
-					else logDebug("Email sent successfully.");
