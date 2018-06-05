@@ -52,5 +52,5 @@ function sendEmailNotification(emailTemplate,reportName){
 	if (sent==false) {
 		logDebug("**WARN sending email failed");
 	}
-  }
+  
 }
