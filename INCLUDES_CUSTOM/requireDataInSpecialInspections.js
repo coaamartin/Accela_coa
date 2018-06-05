@@ -2,7 +2,7 @@ function requireDataInSpecialInspections() {
 	logDebug("requireDataInSpecialInspections() started");
     try {
 		var $iTrc = ifTracer;
-        if ($iTrc(wfTask == "Special Inspections Check" && wfStatus == "Report Received", 'wf:Special Inspections Check/Report Received')) {
+        if ($iTrc((wfTask == "Special Inspections Check" && wfStatus == "Report Received") || (wfTask == "Special Inspection Check" && wfStatus == "Reports Received"), 'wf:Special Inspections Check/Report Received OR Special Inspection Check/Reports Received")')) {
             var specialInspections = getASIgroup("SPECIAL INSPECTIONS", capId);
             if (specialInspections != null) {
                 var missingData = "";
