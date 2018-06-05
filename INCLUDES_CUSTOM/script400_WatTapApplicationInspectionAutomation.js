@@ -17,6 +17,8 @@ function script400_WatTapApplicationInspectionAutomation() {
 	try{
         var eventName = aa.env.getValue("EventName");
 
+        emailContacts('Applicant,bosses', 'WAT_IRRIGATION PLAN REVIEW INVOICED #193', aa.util.newHashtable(), '', aa.util.newHashtable(), "N", "");
+
         logDebug('eventName: ' + eventName);
 		if (ifTracer(eventName == "Inspection Result Submit Before", 'eventName == Inspection Result Submit Before')) 
 		{
