@@ -15,22 +15,39 @@ to schedule a re-inspection.
 function script400_WatTapApplicationInspectionAutomation() {
  	logDebug("script400_WatTapApplicationInspectionAutomation() started.");
 	try{
-        var eventName = aa.env.getValue("EventName");
-
-        emailContacts('Applicant,bosses', 'WAT_IRRIGATION PLAN REVIEW INVOICED #193', aa.util.newHashtable(), '', aa.util.newHashtable(), "N", "");
-
-        logDebug('eventName: ' + eventName);
-		if (ifTracer(eventName == "Inspection Result Submit Before", 'eventName == Inspection Result Submit Before')) 
-		{
+        var eventName = aa.env.getValue("EventName"),
+            cancel = false,
+            showMessage  = false,
+            comment;
+        logDebug("eventName: " + eventName);
 
 
+        
+		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
+            if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
+                if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
+                    if (!ifTracer(AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy') {
+                        if (ifTracer(AInfo['inspResult'] == 'Pass', 'inspResult == Pass')) {
+                            cancel = true;
+                            showMessage = true;
+                            logDebug('Water Meter Number must not be null to status inspection as passed.');                            
+                            comment('Water Meter Number must not be null to status inspection as passed.');                            
+                        }
+                    }
+                }
+            }
+        } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
+            if (ifTracer(AInfo['inspType'] == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
 
-        } else if (ifTracer(eventName == "Inspection Result Submit After", 'eventName == Inspection Result Submit After')) {
-
+            }
         }
-        cancel = true;
-        showMessage = true;
-        comment('You are stuck here forever!');
+        if(!cancel) {
+            cancel = true;
+            showMessage = true;
+            logDebug('You are stuck here forever!');
+            comment('You are stuck here forever!');
+        }
+
 
     }
     catch(err){
