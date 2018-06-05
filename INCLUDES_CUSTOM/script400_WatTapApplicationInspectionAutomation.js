@@ -18,7 +18,6 @@ function script400_WatTapApplicationInspectionAutomation() {
         var eventName = aa.env.getValue("EventName"),
             cancel = false,
             showMessage  = false,
-            comment,
             emailTemplate = 'WAT METER SET INSPECTION FAILED # 400',
             toContactTypes = 'Applicant',
             ccContactTypes = '',
