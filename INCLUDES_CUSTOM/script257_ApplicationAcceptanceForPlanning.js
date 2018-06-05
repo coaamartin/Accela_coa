@@ -19,7 +19,7 @@ function script257_ApplicationAcceptanceForPlanning(workFlowTaskToCheck, workflo
 		var statusMatch = false;
 		
 		logDebug("*****Enter script257_ApplicationAcceptanceForPlanning function*****");
-/*
+
 		for (s in workflowStatusArray) {
 			if (wfStatus == workflowStatusArray[s]) {
 				statusMatch = true;
@@ -37,6 +37,8 @@ function script257_ApplicationAcceptanceForPlanning(workFlowTaskToCheck, workflo
 			logDebug("**ERROR could not get meeting capId=" + capId + " error:" + meetings.getErrorMessage());
 			return;
 		}
+		
+/*
 		meetings = meetings.getOutput().toArray();
 		for (m in meetings) {
 			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
