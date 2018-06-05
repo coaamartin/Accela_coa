@@ -18,7 +18,7 @@ Sample Call : checkIfPassedInspections()
 
 */
 
-checkIfPassedInspections();
+checkIfPassedInspections(inspType);
 
 /*
 Title : Check for Existing Inspection on Same Day (InspectionScheduleBefore) 
