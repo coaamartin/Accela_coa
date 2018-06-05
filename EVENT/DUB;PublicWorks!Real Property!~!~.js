@@ -1,6 +1,6 @@
-cancel = true;
-showMessage = true;  
-message =  "HELLOOO";
+//cancel = true;
+//showMessage = true;  
+//message =  "HELLOOO";
 
 
 if (debug.indexOf("**ERROR") > 0)
