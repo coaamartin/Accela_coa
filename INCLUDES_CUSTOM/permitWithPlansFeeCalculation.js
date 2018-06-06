@@ -153,14 +153,15 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	}
 try{	
 	//Building Fee (Flat Fee)
-	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "" || asiValues[permitFeeTypeAsiName] != "Other") {
+	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "" && asiValues[permitFeeTypeAsiName] != "Other") {
 		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
 		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal) > 0) {
 			updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
 		}
-	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "" || asiValues[permitFeeTypeAsiName] == "Other") {
+	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "" || asiValues[permitFeeTypeAsiName] == "Other") 
+	{
 		////Building Fee (Valuation) -- add logic for Other (dropdown)
 		var valuation = asiValues["Valuation"];
 		if (valuation && valuation != null && valuation != "") {
