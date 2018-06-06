@@ -52,7 +52,7 @@ function script400_WatTapApplicationInspectionAutomation() {
                         parentCapTypeString = parentCapScriptModel.getCapType().toString();
                         if(ifTracer(parentCapTypeString.indexOf('Building/Permit/') > -1, 'parent = Building/Permit/*/*')) {
                             //there is no water meter number field - make a comment per email from christy dtd 20180605
-                            createCapComment('Water Meter Number: ' + getMeterNumber());
+                            createCapComment('Water Meter Number: ' + getMeterNumber(), parentCapId);
                         }
                     }
                     
