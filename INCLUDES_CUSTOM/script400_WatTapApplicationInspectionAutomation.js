@@ -63,27 +63,28 @@ function script400_WatTapApplicationInspectionAutomation() {
             }
         }
 
-        function getMeterNumber() {
-            var meterNumber = null;
-            if (guideSheetObjects &&  guideSheetObjects.length > 0) {
-                for (idx in guideSheetObjects) {
-                    if(guideSheetObjects[idx].gsType == 'Tap Application') {
-                        gs[0].loadInfo();
-                        return gs[0].info["Meter Number"]
-                    }
-                    
-                }
-            }
-            return meterNumber;
-        }
-
     }
     catch(err){
 		showMessage = true;
 		comment("Error on custom function script400_WatTapApplicationInspectionAutomation(). Please contact administrator. Err: " + err);
 		logDebug("Error on custom function script400_WatTapApplicationInspectionAutomation(). Please contact administrator. Err: " + err);
 	}
-	logDebug("script400_WatTapApplicationInspectionAutomation() ended."); 
+    logDebug("script400_WatTapApplicationInspectionAutomation() ended."); 
+    
+
+    function getMeterNumber() {
+        var meterNumber = null;
+        if (guideSheetObjects &&  guideSheetObjects.length > 0) {
+            for (idx in guideSheetObjects) {
+                if(guideSheetObjects[idx].gsType == 'Tap Application') {
+                    gs[0].loadInfo();
+                    return gs[0].info["Meter Number"]
+                }
+                
+            }
+        }
+        return meterNumber;
+    }
 }   //END script400_WatTapApplicationInspectionAutomation();
 
 
