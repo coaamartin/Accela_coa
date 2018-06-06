@@ -35,6 +35,10 @@ function script400_WatTapApplicationInspectionAutomation() {
              for (idx in guideSheetObjects) {
                 printObjProps(guideSheetObjects[idx]);
                 printObjProps(guideSheetObjects[idx].item);
+                for (idx2 in guideSheetObjects[idx].item.itemASISubgroupList) { 
+                    printObjProps(guideSheetObjects[idx].item.itemASISubgroupList[idx2]);
+                }
+ 
                 // if (guideSheetsAry[idx].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
                 //     resultMatched = (String(guideSheetsAry[g].status).toLowerCase() == "yes");
                 // }
