@@ -1,7 +1,7 @@
 //Check if owner is doing the work, if not and there is no contractor in the record prevent issuance. 
 //Script 2 part2
 //By: Tony Ledezma
-function bldScrit2_noContractorCheck(){
+function bldScript2_noContractorCheck(){
     logDebug("bldScrit2_noContractorCheck() started");
     try{
         var $iTrc = ifTracer,
@@ -22,9 +22,9 @@ function bldScrit2_noContractorCheck(){
                 if(licProfList && licProfList.length > 0) lpOnFile = true;
             }
             
-            var applicantName = applicant.getFirstName() + applicant.getLastName();
+            var applicantName = applicant.getFullName();
             var applicantEmailAddrs = applicant.getEmail();
-            if(getPrimaryOwnerFirstAndLastName().toUpperCase() == applicantName.toUpperCase()) ownerApplicantMatch = true;
+            if(getPrimaryOwnerFullName().toUpperCase() == applicantName.toUpperCase()) ownerApplicantMatch = true;
             
             if($iTrc((!ownerIsContractor && !lpOnFile) || (ownerIsContractor && !ownerApplicantMatch), '(!ownerIsContractor && !lpOnFile) || (ownerIsContractor && !ownerApplicantMatch)'))
                 cancelMsg = "Contractor is not attached to Permit. Please send an email through Communications tab to the Applicant that the Permit cannot be issued without a Licensed Contractor";
