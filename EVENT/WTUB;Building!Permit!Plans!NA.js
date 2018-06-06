@@ -51,3 +51,7 @@ Notes :
 */
 //Script 13
 requireDataInSpecialInspections();
+
+//Script 9
+
+checkSpecialInspections();
