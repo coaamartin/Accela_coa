@@ -52,11 +52,11 @@ function script400_WatTapApplicationInspectionAutomation() {
         //  }  
 
         var gsArray = loadGuideSheetItems(inspId);
-        logDebug(gsArray["water meter number"]);
+      //  logDebug(gsArray["water meter number"]);
         for (var i in gsArray) {
-            logDebug(gsArray[i]);
+            printObjProps(gsArray[i]);
         }
-        logDebug(gsArray["meter number"]);
+     //   logDebug(gsArray["meter number"]);
     
 		// if (!gsArray["water meter number"] || gsArray["water meter number"] == "") {
 		// 	// var parentId = getParents("TODO:BuildingPermitRecordType");
