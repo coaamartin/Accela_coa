@@ -105,7 +105,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		}
 	}
 
-	//Arapahoe county Fee
+	//Arapahoe county Fee  
 	if (county == "ARAPAHOE") {
 		var feeQty = 0;
 		var materialsCost = asiValues["Materials Cost"];
