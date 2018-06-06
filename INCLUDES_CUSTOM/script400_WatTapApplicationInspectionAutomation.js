@@ -25,11 +25,20 @@ function script400_WatTapApplicationInspectionAutomation() {
             parentCapScriptModel,
             parentCapTypeString,
             parentCapId,
-            chkListResults = getGuideSheetObjects(inspId),
-            applicant = getContactByType("Applicant", capId);
+            guideSheetObjects = getGuideSheetObjects(inspId),
+            applicant = getContactByType("Applicant", capId),
+            idx;
 
             
-            printObjProps(chkListResults);       
+        printObjProps(guideSheetObjects);
+        if (guideSheetObjects &&  guideSheetObjects.length > 0) {
+             for (idx in guideSheetObjects) {
+                printObjProps(guideSheetObjects[idx]);
+                // if (guideSheetsAry[idx].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
+                //     resultMatched = (String(guideSheetsAry[g].status).toLowerCase() == "yes");
+                // }
+            }
+        }       
 
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
