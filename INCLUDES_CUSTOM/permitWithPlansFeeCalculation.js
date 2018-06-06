@@ -153,7 +153,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	}
 try{	
 	//Building Fee (Flat Fee)
-	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "") {
+	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "" || asiValues[permitFeeTypeAsiName] != "Other") {
 		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
 		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal) > 0) {
 			updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
