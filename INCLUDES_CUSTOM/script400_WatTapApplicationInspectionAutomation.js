@@ -22,7 +22,7 @@ function script400_WatTapApplicationInspectionAutomation() {
             emailparams = aa.util.newHashtable(),
             reportname = "",
             reportparams = aa.util.newHashtable(),
-            childCapScriptModel,
+        //    childCapScriptModel,
             parentCapScriptModel,
             parentCapTypeString,
             parentCapId,
@@ -42,16 +42,16 @@ function script400_WatTapApplicationInspectionAutomation() {
         } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
-                    //AInfo['Water Meter Number']
                     //get parent
                     parentCapId = getParent();
                     if(ifTracer(parentCapId, 'parent found')) {
                         //make sure parent is a permit (Building/Permit/*/*)
-                        childCapScriptModel = aa.cap.getCap(capId).getOutput();
+                   //     childCapScriptModel = aa.cap.getCap(capId).getOutput();
                         parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
                         parentCapTypeString = parentCapScriptModel.getCapType().toString();
                         if(ifTracer(parentCapTypeString.indexOf('Building/Permit/') > -1, 'parent = Building/Permit/*/*')) {
-                
+                            //there is no water meter number field - make a comment per email from christy dtd 20180605
+                            createCapComment('Water Meter Number: ' + AInfo['Water Meter Number']);
                         }
                     }
                     
