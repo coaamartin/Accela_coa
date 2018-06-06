@@ -34,14 +34,19 @@ function script400_WatTapApplicationInspectionAutomation() {
         if (guideSheetObjects &&  guideSheetObjects.length > 0) {
              for (idx in guideSheetObjects) {
                 printObjProps(guideSheetObjects[idx]);
-                printObjProps(guideSheetObjects[idx].item);
-                for (idx2 in guideSheetObjects[idx].item.getItemASISubgroupList()) { 
-                    printObjProps(guideSheetObjects[idx].item.getItemASISubgroupList()[idx2]);
-                    // for (idx3 in guideSheetObjects[idx].item.itemASISubgroupList.fields[idx3]) {
-                    //     printObjProps(guideSheetObjects[idx].item.itemASISubgroupList[idx2].fields[idx3]);
-                    // }
+                guideSheetObjects[idx].loadInfo();
+                printObjProps(guideSheetObjects[idx]);
+                printObjProps(guideSheetObjects[idx].info);
 
-                }
+              //  printObjProps(guideSheetObjects[idx].item);
+                // for (idx2 in guideSheetObjects[idx].item.getItemASISubgroupList()) { 
+                //     printObjProps(guideSheetObjects[idx].item.getItemASISubgroupList()[idx2]);
+                //     logDebug(guideSheetObjects[idx].item.getItemASISubgroupList()[idx2].fields.length);
+                //     // for (idx3 in guideSheetObjects[idx].item.itemASISubgroupList.fields[idx3]) {
+                //     //     printObjProps(guideSheetObjects[idx].item.itemASISubgroupList[idx2].fields[idx3]);
+                //     // }
+
+                // }
  
                 // if (guideSheetsAry[idx].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
                 //     resultMatched = (String(guideSheetsAry[g].status).toLowerCase() == "yes");
