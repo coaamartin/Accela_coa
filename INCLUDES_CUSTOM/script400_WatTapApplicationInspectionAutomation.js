@@ -35,11 +35,11 @@ function script400_WatTapApplicationInspectionAutomation() {
              for (idx in guideSheetObjects) {
                 printObjProps(guideSheetObjects[idx]);
                 printObjProps(guideSheetObjects[idx].item);
-                for (idx2 in guideSheetObjects[idx].item.itemASISubgroupList) { 
-                    printObjProps(guideSheetObjects[idx].item.itemASISubgroupList[idx2]);
-                    for (idx3 in guideSheetObjects[idx].item.itemASISubgroupList.fields[idx3]) {
-                        printObjProps(guideSheetObjects[idx].item.itemASISubgroupList[idx2].fields[idx3]);
-                    }
+                for (idx2 in guideSheetObjects[idx].item.getItemASISubgroupList()) { 
+                    printObjProps(guideSheetObjects[idx].item.getItemASISubgroupList()[idx2]);
+                    // for (idx3 in guideSheetObjects[idx].item.itemASISubgroupList.fields[idx3]) {
+                    //     printObjProps(guideSheetObjects[idx].item.itemASISubgroupList[idx2].fields[idx3]);
+                    // }
 
                 }
  
