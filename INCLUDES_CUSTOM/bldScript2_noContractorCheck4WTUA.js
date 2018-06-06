@@ -36,28 +36,31 @@ function bldScript2_noContractorCheck4WTUA(){
 				updateTask("Permit Issuance", "In Progress", "Updated via script.", "Updated via script 2. A contractor is needed before issuing permit.");
 				updateAppStatus("In Progress","");
 				
-				adResult = aa.address.getAddressByCapId(capId).getOutput(); 
-			    for(x in adResult)
-			    {
-			    	var adType = adResult[x].getAddressType(); 
-			    	var stNum = adResult[x].getHouseNumberStart();
-			    	var preDir =adResult[x].getStreetDirection();
-			    	var stName = adResult[x].getStreetName(); 
-			    	var stType = adResult[x].getStreetSuffix();
-			    	var city = adResult[x].getCity();
-			    	var state = adResult[x].getState();
-			    	var zip = adResult[x].getZip();
-			    }
-	
-	            var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
-				
-				var emailTemplate = 'BLD PERMIT REQUIRES LP # 2',
-                contactTypes = 'Applicant',
-                emailparams = aa.util.newHashtable();
-				emailparams.put("$$altID$$", capId.getCustomID());
-	            emailparams.put("$$FullAddress$$", primaryAddress);
-				
-                emailContacts(contactTypes, emailTemplate, emailparams, "", "", "N", "");
+				if(applicantEmailAddrs){
+				    adResult = aa.address.getAddressByCapId(capId).getOutput(); 
+			        for(x in adResult)
+			        {
+			        	var adType = adResult[x].getAddressType(); 
+			        	var stNum = adResult[x].getHouseNumberStart();
+			        	var preDir =adResult[x].getStreetDirection();
+			        	var stName = adResult[x].getStreetName(); 
+			        	var stType = adResult[x].getStreetSuffix();
+			        	var city = adResult[x].getCity();
+			        	var state = adResult[x].getState();
+			        	var zip = adResult[x].getZip();
+			        }
+	                
+	                var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
+				    
+				    var emailTemplate = 'BLD PERMIT REQUIRES LP # 2',
+                    contactTypes = 'Applicant',
+                    emailparams = aa.util.newHashtable();
+				    emailparams.put("$$altID$$", capId.getCustomID());
+	                emailparams.put("$$FullAddress$$", primaryAddress);
+				    emailparams.put("$$ContactEmail$$", applicantEmailAddrs);
+				    
+                    emailContacts(contactTypes, emailTemplate, emailparams, "", "", "N", "");
+				}
 			}
             
         }
