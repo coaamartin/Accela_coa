@@ -61,7 +61,7 @@ function script400_WatTapApplicationInspectionAutomation() {
        for (var i in guidesheetModelItems) {
             logDebug(guidesheetModelItems[i]);
             printObjProps(guidesheetModelItems[i]);
-        }
+        } 
 
 
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
