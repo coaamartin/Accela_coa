@@ -25,7 +25,7 @@ function script400_WatTapApplicationInspectionAutomation() {
             parentCapScriptModel,
             parentCapTypeString,
             parentCapId,
-            chkListResults = loadGuideSheetItems(inspId),
+            chkListResults = getGuideSheetObjects(inspId),
             applicant = getContactByType("Applicant", capId);
 
             
