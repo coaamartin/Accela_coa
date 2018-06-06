@@ -45,7 +45,7 @@ try{
 		var permitExpDate=getAppSpecific('Permit Expiration Date',capId);
 		logDebug("Expiration Date is : " + permitExpDate);
 		if (typeof(permitExpDate)!= "undefined" && permitExpDate!=null){
-			if (dateDiff(permitExpDate,afterThirtyDays)== 30){
+			if (dateDiff(permitExpDate,afterThirtyDays) < 30){
 					sendEmailNotification(capId,emailTemplate);
 			}
 		}
