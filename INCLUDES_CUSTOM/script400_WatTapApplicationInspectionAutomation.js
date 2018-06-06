@@ -30,55 +30,10 @@ function script400_WatTapApplicationInspectionAutomation() {
             idx;
 
             
-        printObjProps(guideSheetObjects);
-         if (guideSheetObjects &&  guideSheetObjects.length > 0) {
-              for (idx in guideSheetObjects) {
-                 printObjProps(guideSheetObjects[idx]);
-
-                 printObjProps(guideSheetObjects[idx].item);
-                 var itemASISubGroupArray = guideSheetObjects[idx].item.getItemASISubgroupList().toArray();
-                 if (itemASISubGroupArray) {
-                    for (var idx2 in itemASISubGroupArray) {
-                        logDebug(itemASISubGroupArray[idx2])
-                    }
-
-       //             printObjProps(itemASISubGroupList);
-                 }
-                
-        //          for (idx2 in guideSheetObjects[idx].item.getItemASISubgroupList()) { 
-        //         //     printObjProps(guideSheetObjects[idx].item.getItemASISubgroupList()[idx2]);
-        //         //     logDebug(guideSheetObjects[idx].item.getItemASISubgroupList()[idx2].fields.length);
-        //         //     // for (idx3 in guideSheetObjects[idx].item.itemASISubgroupList.fields[idx3]) {
-        //         //     //     printObjProps(guideSheetObjects[idx].item.itemASISubgroupList[idx2].fields[idx3]);
-        //         //     // }
-
-        //         // }
- 
-        //         // if (guideSheetsAry[idx].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
-        //         //     resultMatched = (String(guideSheetsAry[g].status).toLowerCase() == "yes");
-        //        //  }
-             }
-         }  
-
-    //     var gsArray = loadGuideSheetItems(inspId);
-    //   //  logDebug(gsArray["water meter number"]);
-    //     for (var i in gsArray) {
-    //         printObjProps(gsArray[i]);
-    //     }
-    //  //   logDebug(gsArray["meter number"]);
-    
-		// if (!gsArray["water meter number"] || gsArray["water meter number"] == "") {
-		// 	// var parentId = getParents("TODO:BuildingPermitRecordType");
-		// 	// for (var i in parentId) {
-		// 	// 	editAppSpecific("Water Meter Number",gsArray["water meter number"],parentIdArray[i]);
-		// 	// }
-		// }
-       
-
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
-                    if (ifTracer(!AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy')) {
+                    if (ifTracer(!getMeterNumber(), 'getMeterNumber() == falsy')) {
                         cancel = true;
                         showMessage = true;
                         comment('Water Meter Number must not be null to status inspection as passed.');                            
@@ -97,7 +52,7 @@ function script400_WatTapApplicationInspectionAutomation() {
                         parentCapTypeString = parentCapScriptModel.getCapType().toString();
                         if(ifTracer(parentCapTypeString.indexOf('Building/Permit/') > -1, 'parent = Building/Permit/*/*')) {
                             //there is no water meter number field - make a comment per email from christy dtd 20180605
-                            createCapComment('Water Meter Number: ' + AInfo['Water Meter Number']);
+                            createCapComment('Water Meter Number: ' + getMeterNumber());
                         }
                     }
                     
@@ -106,6 +61,20 @@ function script400_WatTapApplicationInspectionAutomation() {
                     emailContactsWithCCs(toContactTypes, emailTemplate, emailParams, reportName, reportParams, "N", "", ccContactTypes);
                 }
             }
+        }
+
+        function getMeterNumber() {
+            var meterNumber = null;
+            if (guideSheetObjects &&  guideSheetObjects.length > 0) {
+                for (idx in guideSheetObjects) {
+                    if(guideSheetObjects[idx].gsType == 'Tap Application') {
+                        gs[0].loadInfo();
+                        return gs[0].info["Meter Number"]
+                    }
+                    
+                }
+            }
+            return meterNumber;
         }
 
     }
