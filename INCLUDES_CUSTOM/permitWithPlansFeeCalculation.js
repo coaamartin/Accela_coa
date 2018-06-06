@@ -160,8 +160,8 @@ try{
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
 		}
-	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "") {
-		////Building Fee (Valuation)
+	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "" || asiValues[permitFeeTypeAsiName] == "Other") {
+		////Building Fee (Valuation) -- add logic for Other (dropdown)
 		var valuation = asiValues["Valuation"];
 		if (valuation && valuation != null && valuation != "") {
 			updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
