@@ -19,10 +19,9 @@ function script400_WatTapApplicationInspectionAutomation() {
             emailTemplate = 'WAT METER SET INSPECTION FAILED # 400',
             toContactTypes = 'Applicant',
             ccContactTypes = '',
-            emailparams = aa.util.newHashtable(),
-            reportname = "",
-            reportparams = aa.util.newHashtable(),
-        //    childCapScriptModel,
+            emailParams = aa.util.newHashtable(),
+            reportName = "",
+            reportParams = aa.util.newHashtable(),
             parentCapScriptModel,
             parentCapTypeString,
             parentCapId,
@@ -46,7 +45,6 @@ function script400_WatTapApplicationInspectionAutomation() {
                     parentCapId = getParent();
                     if(ifTracer(parentCapId, 'parent found')) {
                         //make sure parent is a permit (Building/Permit/*/*)
-                   //     childCapScriptModel = aa.cap.getCap(capId).getOutput();
                         parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
                         parentCapTypeString = parentCapScriptModel.getCapType().toString();
                         if(ifTracer(parentCapTypeString.indexOf('Building/Permit/') > -1, 'parent = Building/Permit/*/*')) {
@@ -56,7 +54,8 @@ function script400_WatTapApplicationInspectionAutomation() {
                     }
                     
                 } else {    //failed
-                    emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
+                    addParameter(emailParams, "$$inspComment$$", inspComment);
+                    emailContactsWithCCs(toContactTypes, emailTemplate, emailParams, reportName, reportParams, "N", "", ccContactTypes);
                 }
             }
         }
