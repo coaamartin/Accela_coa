@@ -36,10 +36,14 @@ function script400_WatTapApplicationInspectionAutomation() {
                  printObjProps(guideSheetObjects[idx]);
 
                  printObjProps(guideSheetObjects[idx].item);
-                 var itemASISubGroupList = guideSheetObjects[idx].item.getItemASISubgroupList();
-            //     if (itemASISubGroupList &&  itemASISubGroupList.length > 0) {
-                    printObjProps(itemASISubGroupList);
-             //   }
+                 var itemASISubGroupArray = guideSheetObjects[idx].item.getItemASISubgroupList().toArray();
+                 if (itemASISubGroupArray) {
+                    for (var idx2 in itemASISubGroupArray) {
+                        logDebug(itemASISubGroupArray[idx2])
+                    }
+
+       //             printObjProps(itemASISubGroupList);
+                 }
                 
         //          for (idx2 in guideSheetObjects[idx].item.getItemASISubgroupList()) { 
         //         //     printObjProps(guideSheetObjects[idx].item.getItemASISubgroupList()[idx2]);
