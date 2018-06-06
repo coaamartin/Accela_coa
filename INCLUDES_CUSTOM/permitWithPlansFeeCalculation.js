@@ -122,7 +122,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 			updateFee(feeCodesAry["ARAPAHOE_FEE_1"], feeSched, "FINAL", feeQty, "N");
 			updateFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "N");
 		}
-	}//county = Arapahoe
+	}//county = Arapahoe   
 	
 		//Driveway Fee
 		var feeQty = 0;
