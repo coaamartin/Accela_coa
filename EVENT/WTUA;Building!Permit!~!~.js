@@ -61,3 +61,8 @@ if((wfTask == "Inspection Phase" && matches(wfStatus, "Ready for CO", "Final")) 
     	deactivateTask("Certificate of Occupancy");
     }
 }
+
+
+//Sharepoint script ID 2 part 2
+if(appMatch("Building/Permit/New Building/NA") || appMatch("Building/Permit/Plans/NA") || appMatch("Building/Permit/No Plans/NA"))
+    bldScript2_noContractorCheck4WTUA();
