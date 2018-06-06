@@ -25,7 +25,11 @@ function script400_WatTapApplicationInspectionAutomation() {
             parentCapScriptModel,
             parentCapTypeString,
             parentCapId,
+            chkListResults = loadGuideSheetItems(inspId),
             applicant = getContactByType("Applicant", capId);
+
+            
+            printObjProps(chkListResults);       
 
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
