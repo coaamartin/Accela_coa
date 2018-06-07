@@ -55,7 +55,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		feeCodesAry["BUILDING_DRIVEWAY_FEE"] = "BLD_PWP_11";
 	} else if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("No Plans")) {
 		feeSched = "BLD_PNP";
-		feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PNP_06";
+	//	feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PNP_06";
 		feeCodesAry["BUILDING_FEE_VALUATION"] = "BLD_PNP_01";
 		feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PNP_03";
 		feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PNP_04";
@@ -155,8 +155,10 @@ try{
 	//Building Fee (Flat Fee)
 	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "" && asiValues[permitFeeTypeAsiName] != "Other") {
 		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
-		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal) > 0) {
+		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal ) > 0) {
+			if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")){
 			updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
+			}
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
 		}
