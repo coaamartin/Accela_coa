@@ -27,7 +27,7 @@ function checkSpecialInspections() {
                     //throw ("The following data is required : " + missingData);
                      showMessage = true;
                    cancel = true;
-                   comment("The following Inspection(s) have not been recieved and are required : " + missingData);
+                   comment("The following Inspection(s) have not been received and are required : " + missingData);
                 }
             }//specialInspections
         
