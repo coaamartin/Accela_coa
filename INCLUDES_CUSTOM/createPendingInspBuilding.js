@@ -22,7 +22,6 @@ function createPendingInspBuilding() {
      )
    {
    createPendingInspection("BLD_NEW_CON", "Mechanical Final")
-   logDebug("Inspection Mechanical Final added as Pending")
    } else {
 	   logDebug("**WARN - Inspection not added");
    }
@@ -34,8 +33,8 @@ function createPendingInspBuilding() {
      )
    {
    createPendingInspection("BLD_NEW_CON", "ELectrical Final")
-   logDebug("Inspection Mechanical Final added as Pending")
-   } else {
+    } 
+    else {
 	   logDebug("**WARN - Inspection not added");
    }
 
@@ -46,8 +45,8 @@ function createPendingInspBuilding() {
      )
    {
    createPendingInspection("BLD_NEW_CON", "Plumbing Final")
-   logDebug("Inspection Mechanical Final added as Pending")
-   } else {
+   } 
+   else {
 	   logDebug("**WARN - Inspection not added");
    }
 
@@ -55,16 +54,16 @@ function createPendingInspBuilding() {
    if (permitType == "Siding Replacement")
    {
    createPendingInspection("BLD_NEW_CON", "Framing Final")
-   logDebug("Inspection Mechanical Final added as Pending")
-   } else {
+   } 
+   else {
 	   logDebug("**WARN - Inspection not added");
    }
 
    if (permitType == "Commercial Roof Replacement" || permitType == "Single Family Residential Roof Replacement")
    {
    createPendingInspection("BLD_NEW_CON", "Reroof Final")
-   logDebug("Inspection Mechanical Final added as Pending")
-   } else {
+   } 
+   else {
 	   logDebug("**WARN - Inspection not added");
    }
 
