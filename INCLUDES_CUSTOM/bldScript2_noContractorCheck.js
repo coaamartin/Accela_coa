@@ -19,7 +19,7 @@ function bldScript2_noContractorCheck(){
                 cancelMsg = "Contractor is not attached to Permit. Please send an email through Communications tab to the Applicant that the Permit cannot be issued without a Licensed Contractor";
             
             cancel = showMessage = cancelMsg.length > 0;
-            
+            showDebug = false;
             if(cancel) comment(cancelMsg);
     }
     catch(err){
