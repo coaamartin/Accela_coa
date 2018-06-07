@@ -30,7 +30,7 @@ if (acres < 1.0)
 {
 	thefee = 450.00;
 }
-if (acres >= 1.0 and acres < 5.0)
+if (acres >= 1.0 && acres < 5.0)
 {
 	thefee = 1200.00;
 }
