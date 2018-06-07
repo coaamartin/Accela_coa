@@ -105,8 +105,8 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		}
 	}
 
-	//Arapahoe county Fee
-	if (county == "Arapahoe") {
+	//Arapahoe county Fee  
+	if (county == "ARAPAHOE") {
 		var feeQty = 0;
 		var materialsCost = asiValues["Materials Cost"];
 		var valuation = asiValues["Valuation"];
@@ -122,7 +122,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 			updateFee(feeCodesAry["ARAPAHOE_FEE_1"], feeSched, "FINAL", feeQty, "N");
 			updateFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "N");
 		}
-	}//county = Arapahoe
+	}//county = Arapahoe   
 	
 		//Driveway Fee
 		var feeQty = 0;
@@ -153,15 +153,16 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	}
 try{	
 	//Building Fee (Flat Fee)
-	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "") {
+	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "" && asiValues[permitFeeTypeAsiName] != "Other") {
 		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
 		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal) > 0) {
 			updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
 		}
-	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "") {
-		////Building Fee (Valuation)
+	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "" || asiValues[permitFeeTypeAsiName] == "Other") 
+	{
+		////Building Fee (Valuation) -- add logic for Other (dropdown)
 		var valuation = asiValues["Valuation"];
 		if (valuation && valuation != null && valuation != "") {
 			updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");

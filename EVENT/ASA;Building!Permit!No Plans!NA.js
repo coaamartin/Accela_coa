@@ -18,3 +18,8 @@ Notes:
 
 permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
 
+//Script 417
+
+createPendingInspBuilding()
+
+
