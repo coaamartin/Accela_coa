@@ -14,7 +14,7 @@ Written by JMAIN
 //get value of the ASI field
 logDebug("CAO Script #19 - calc the SWMP fees based on acres...");
 var acres = getAppSpecific("Area of Project to Undergo Land Disturbance (acres)");
-if (acres != null && acres != "" && !isNaN(parseFloat(acres))
+if (acres != null && acres != "" && !isNaN(parseFloat(acres)))
 {
 	acres = parseFloat(acres);
 }
