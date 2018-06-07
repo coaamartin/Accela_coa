@@ -12,15 +12,15 @@ Functional Area : Records
 Sample Call : updateAssignedToUser()
 
 */
-
-updateAssignedToUser();
+//Diabled by Don Bates until error can be resolved
+//updateAssignedToUser();
 
 /*
 Title : Set E-Agenda Due Date (WorkflowTaskUpdateAfter) 
 
-Purpose : When the workflow task “Generate Hearing Results” has a status of “Complete” then activate the workflow 
-task “Create E-Agenda” and set the workflow due date to 15 calendar days prior to the meeting type
-(from the meetings tab) “City Council”.
+Purpose : When the workflow task 'Generate Hearing Results' has a status of 'Complete' then activate the workflow 
+task 'Create E-Agenda' and set the workflow due date to 15 calendar days prior to the meeting type
+(from the meetings tab) 'City Council'.
 
 Author: Yazan Barghouth 
  
