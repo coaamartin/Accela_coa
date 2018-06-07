@@ -20,7 +20,7 @@ permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type To
 
 //Script 417
 
-var asiValues = new Array();
+/*var asiValues = new Array();
 	if (useAppSpecificGroupName) {
 		var olduseAppSpecificGroupName = useAppSpecificGroupName;
 		useAppSpecificGroupName = false;
@@ -29,8 +29,9 @@ var asiValues = new Array();
 	} else {
 		asiValues = AInfo;
 	}
+	*/
 
-var permitType = asiValues["Permit Type"];
+var permitType = AInfo["Permit Type"];
 logDebug ("Permit Type" + permitType);
 if (permitType == "Gas Pipe Installation or Modification" || permitType == "Furnace Replacement" || permitType == "Furnace and Water Heater Replacement")
 {
