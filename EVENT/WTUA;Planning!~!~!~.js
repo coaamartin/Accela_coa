@@ -12,7 +12,6 @@ Functional Area : Records
 Sample Call : updateAssignedToUser()
 
 */
-//Diabled by Don Bates until error can be resolved
 updateAssignedToUser();
 
 /*
