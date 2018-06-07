@@ -1,3 +1,4 @@
+var $iTrc = ifTracer;
 /*
 Title : Issue Permit Conditions (WorkflowTaskUpdateBefore) 
 
@@ -23,3 +24,9 @@ if(appMatch("Building/Permit/New Building/NA") || appMatch("Building/Permit/Plan
 //              comment("All fees must be paid prior to issuance");
 //  
 //}
+
+
+if($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wf:Permit Issuance/Issued')){
+    if(appMatch("Building/Permit/New Building/NA") || appMatch("Building/Permit/Plans/NA") || appMatch("Building/Permit/No Plans/NA"))
+        bldScrit2_noContractorCheck();
+}

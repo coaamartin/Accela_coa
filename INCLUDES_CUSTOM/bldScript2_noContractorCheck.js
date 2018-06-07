@@ -6,21 +6,10 @@ function bldScript2_noContractorCheck(){
     try{
         var $iTrc = ifTracer,
             ownerIsContractor = AInfo["Homeowner acting as Contractor"] == "Yes" ? true : false,
-            lpOnFile = false,
+            lpOnFile = lpExistsOnCap(capId),
             ownerApplicantMatch = false,
             cancelMsg = "",
             applicant = getContactByType("Applicant",capId);
-        
-        if($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wf:Permit Issuance/Issued')){
-            var licProfResult = aa.licenseScript.getLicenseProf(capId);
-            if (!licProfResult.getSuccess()){
-                logDebug("Error getting CAP's license professional: " +licProfResult.getErrorMessage());
-                //return false;
-            }
-            else{
-                var licProfList = licProfResult.getOutput();
-                if(licProfList && licProfList.length > 0) lpOnFile = true;
-            }
             
             var applicantName = applicant.getFullName();
             var applicantEmailAddrs = applicant.getEmail();
@@ -32,8 +21,6 @@ function bldScript2_noContractorCheck(){
             cancel = showMessage = cancelMsg.length > 0;
             
             if(cancel) comment(cancelMsg);
-            
-        }
     }
     catch(err){
         showMessage = true;
