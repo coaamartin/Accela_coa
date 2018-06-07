@@ -20,7 +20,8 @@ permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type To
 
 //Script 417
 var permitType = getAppSpecific["Permit Type"];
-if (permitType == "Gas Pipe Installation and Modification" || permitType == "Furnace Replacement")
+logDebug ("Permit Type" + permitType);
+if (permitType == "Gas Pipe Installation or Modification" || permitType == "Furnace Replacement" || permitType == "Furnace and Water Heater Replacement")
 {
 createPendingInspection("Building Inspections", "Mechanical Final")
 } else {
