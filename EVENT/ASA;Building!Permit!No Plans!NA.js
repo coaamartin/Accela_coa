@@ -19,7 +19,18 @@ Notes:
 permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
 
 //Script 417
-var permitType = getAppSpecific["Permit Type"];
+
+var asiValues = new Array();
+	if (useAppSpecificGroupName) {
+		var olduseAppSpecificGroupName = useAppSpecificGroupName;
+		useAppSpecificGroupName = false;
+		loadAppSpecific(asiValues);
+		useAppSpecificGroupName = olduseAppSpecificGroupName;
+	} else {
+		asiValues = AInfo;
+	}
+
+var permitType = asiValues["Permit Type"];
 logDebug ("Permit Type" + permitType);
 if (permitType == "Gas Pipe Installation or Modification" || permitType == "Furnace Replacement" || permitType == "Furnace and Water Heater Replacement")
 {
