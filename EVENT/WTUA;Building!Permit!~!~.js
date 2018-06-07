@@ -1,6 +1,55 @@
 //WTUA:Building/Permit/*/*
 
-updateExpirationDateAsi();
+//Call all customs for wf:Permit Issuance/Issued
+if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
+	script208_UpdatePermitFields();
+	script206_DeactivateFEMA();
+}
+
+//Call all customs for wf:Accepted/Accept Plans
+if(wfTask == "Accepted" && wfStatus == "Accept Plans"){
+	updateExpirationDateAsi();
+}
+
+//Call all customs for wfStatus of Resubmittal Requested
+if(wfStatus == "Resubmittal Requested"){
+	updateExpirationDateAsi();
+}
+
+
+if(wfTask =="Inspection Phase"  && wfStatus == "Temporary CO Issued"){
+	/*------------------------------------------------------------------------------------------------------/
+      Title 		: Building Certificate of Occupancy does Complete on License WF(WorkflowTaskUpdateAfter).
+      
+      Purpose		:If the workflow task "Inspection Phase" has a status of "Temporary CO Issued" or "Ready for CO" then use the address on
+      		the record to go out and see if an MJ License Application exists on that address. and If a MJ License Application exists on
+      		that address then close the workflow task "Certificate of Occupancy" with a status of "Final CO Issued".
+      			
+      Author :   Israa Ismail
+      
+      Functional Area : Records 
+      
+      Sample Call : closeWfTaskCertificateOfOccupancy()
+      
+      Notes		: Provided Record type "MJ License Application" , is not available ,replaced with a Sample Record Type "Licenses/Marijuana/Retail Store/License"
+      	          ,to be replaced with the correct record type
+      ------------------------------------------------------------------------------------------------------*/
+	closeWfTaskCertificateOfOccupancy();
+}
+
+if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO"){
+	closeWfTaskCertificateOfOccupancy();
+	deactCoOIfNotChecked();
+}
+
+if(wfTask =="Inspection Phase"  && wfStatus=="Final"){
+	deactCoOIfNotChecked();
+}
+
+if(wfTask == "Backflow Preventor" && wfStatus == "Final"){
+	deactCoOIfNotChecked();
+	script40_backFlowPreventerEmail()
+}
 
 /*
 Title : Set the Code Reference custom field value (WorkflowTaskUpdateAfter)
@@ -19,50 +68,3 @@ Notes:
 */
 
 setCodeReference("Issued");
-
-//if(wfStatus == "Issued"){
-//	logDebug("Inside Set Code Reference Custom Field");
-//        var codeRefVal = getAppSpecific("Code Reference");
-//        if (isEmpty(codeRefVal)) {
-//			logDebug("Inside Set Code Reference Custom Field Empty Field Flag");
-//            editAppSpecific("Code Reference","2015 I-Codes/Aurora Muni Codes/2017-NEC"); 
-//        }
-//    
-//}	
-
-/*------------------------------------------------------------------------------------------------------/
-Title 		: Building Certificate of Occupancy does Complete on License WF(WorkflowTaskUpdateAfter).
-
-Purpose		:If the workflow task "Inspection Phase" has a status of "Temporary CO Issued" or "Ready for CO" then use the address on
-		the record to go out and see if an MJ License Application exists on that address. and If a MJ License Application exists on
-		that address then close the workflow task "Certificate of Occupancy" with a status of "Final CO Issued".
-			
-Author :   Israa Ismail
-
-Functional Area : Records 
-
-Sample Call : closeWfTaskCertificateOfOccupancy()
-
-Notes		: Provided Record type "MJ License Application" , is not available ,replaced with a Sample Record Type "Licenses/Marijuana/Retail Store/License"
-	          ,to be replaced with the correct record type
-------------------------------------------------------------------------------------------------------*/
-closeWfTaskCertificateOfOccupancy();
-script208_UpdatePermitFields();
-
-//COA Script - Suhail
-include("40_backFlowPreventerEmail");
-
-if((wfTask == "Inspection Phase" && matches(wfStatus, "Ready for CO", "Final")) || (wfTask == "Backflow Preventor" && wfStatus == "Final")){
-    var tmpUASGN = useAppSpecificGroupName;
-    useAppSpecificGroupName=false;
-    var cOO=getAppSpecific("Certificate of Occupancy",capId);
-    useAppSpecificGroupName = tmpUASGN;
-    if (cOO!="CHECKED"){
-    	deactivateTask("Certificate of Occupancy");
-    }
-}
-
-
-//Sharepoint script ID 2 part 2
-if(appMatch("Building/Permit/New Building/NA") || appMatch("Building/Permit/Plans/NA") || appMatch("Building/Permit/No Plans/NA"))
-    bldScript2_noContractorCheck4WTUA();

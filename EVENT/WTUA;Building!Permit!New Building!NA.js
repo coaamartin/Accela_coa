@@ -20,7 +20,6 @@ Sample Call : createChildWaterUtilityPermitRecords()
 
 createChildWaterUtilityPermitRecords();
 script207_SetTotalSqFtOnFireRecord();
-script206_DeactivateFEMA();
 
 /*
 Title : Calculate and assess Construction Building Fees (WorkflowTaskUpdateAfter) 

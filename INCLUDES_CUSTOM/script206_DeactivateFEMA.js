@@ -8,7 +8,7 @@ function script206_DeactivateFEMA() {
 	logDebug("script206_DeactivateFEMA started.");
 	try{
 		var $iTrc = ifTracer;
-		if ($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued" && !isTaskStatus("Engineering Review", "Approved with FEMA Cert Required"), 'Issued and NOT Engineering Review/Approved with FEMA Cert Required'))
+		if ($iTrc(!isTaskStatus("Engineering Review", "Approved with FEMA Cert Required"), 'Issued and NOT Engineering Review/Approved with FEMA Cert Required'))
 			deactivateTask("FEMA Elevation Certification");
 	}
 	catch(err){

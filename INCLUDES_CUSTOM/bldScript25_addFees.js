@@ -25,7 +25,7 @@ function bldScript25_addFees(){
             invFee = "N",
             feeQty12 = 0,
             feeQty14 = 0;
-        
+		
         if($iTrc(!isNaN(parseFloat(numResUntStr)), '!isNaN(numResUntStr)'))
             numResUnt = parseFloat(numResUntStr);
 		
@@ -34,22 +34,22 @@ function bldScript25_addFees(){
         
         if($iTrc(wfTask == "Quality Check" && wfStatus == "Approved", 'wf:Quality Check/Approved')){
             
-            if($iTrc(sinFamDet == "Yes", 'sinFamDet == "Yes"')){
-                feeQty12 = 230;
-                feeQty14 = 300;
+            if($iTrc(projCatry && sinFamDet == "Yes" && matches(projCatry, "Custom Home", "Single Family From Master"), 'sinFamDet == "Yes" && matches(projCatry, "Custom Home", "Single Family From Master")')){
+                feeQty12 = 1327;
+                feeQty14 = 497.50;
             }
             
             if($iTrc(sinFamDet == "No" && numResUnt > 0 && projCatry && projCatry != "", 'sinFamDet == "No" && numResUnt > 0 && projCatry')){
-                if($iTrc(matches(projCatry, "Multi-Family Building", "Multi-Family From Master"), 'matches(projCatry, "Multi-Family Building", "Multi-Family From Master")')){
-                    feeQty12 = 198.00 * numResUnt;
-                    feeQty14 = 253.00 * numResUnt;
+                if($iTrc(matches(projCatry, "Custom Home", "Single Family From Master"), 'matches(projCatry, "Multi-Family Building", "Multi-Family From Master")')){
+                    feeQty12 = 1127.50 * numResUnt;
+                    feeQty14 = 497.50 * numResUnt;
                 }
                 
-                if($iTrc(!matches(projCatry, "Multi-Family Building", "Multi-Family From Master"), 'matches(projCatry, "Multi-Family Building", "Multi-Family From Master")')){
-                    feeQty12 = 161.00 * numResUnt;
-                    feeQty14 = 211.00 * numResUnt;
+                if($iTrc(matches(projCatry, "Multi-Family Building", "Multi-Family From Master"), 'matches(projCatry, "Multi-Family Building", "Multi-Family From Master")')){
+                    feeQty12 = 932.00 * numResUnt;
+                    feeQty14 = 469.67 * numResUnt;
                 }
-            }			
+            }
             
             if($iTrc(feeQty12 > 0, feeQty12 + '> 0')) updateFee(feeItem12, feeSched, feePeriod, feeQty12, invFee);
             if($iTrc(feeQty14 > 0, feeQty14 + '> 0')) updateFee(feeItem14, feeSched, feePeriod, feeQty14, invFee);

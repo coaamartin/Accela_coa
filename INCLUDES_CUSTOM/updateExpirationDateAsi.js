@@ -4,24 +4,11 @@ Accepted, update the Custom Field Application Expiration Date (now + 180 days)
  */
 function updateExpirationDateAsi() {
 	var asiFieldName = "Application Expiration Date";
-	var resubmittalRequestedStatus = "Resubmittal Requested";
-	var acceptedStatus = "Accepted";
-	var acceptPlansTask = "Accept Plans";
 	var numOfDays = 180;
-
-	var doUpdate = false;
-
-	if (wfStatus.equalsIgnoreCase(resubmittalRequestedStatus)) {
-		doUpdate = true;
-	} else if (wfTask.equalsIgnoreCase(acceptPlansTask) && wfStatus.equalsIgnoreCase(acceptedStatus)) {
-		doUpdate = true;
-	}
-
-	if (doUpdate) {
-		var now = formatDateX(aa.date.getCurrentDate());
-		appExpDate = aa.date.addDate(now, numOfDays);
-		editAppSpecific(asiFieldName, appExpDate);
-	}
+	
+	var now = formatDateX(aa.date.getCurrentDate());
+    appExpDate = aa.date.addDate(now, numOfDays);
+    editAppSpecific(asiFieldName, appExpDate);
 }
 
 /**
