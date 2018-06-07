@@ -16,18 +16,18 @@ function checkSpecialInspections() {
                         //validate it's __Received field
                         var asiFieldReceived = asiFieldName.substring(0, asiFieldName.lastIndexOf(" ")) + " Received";
                         if (!validateField(asiFieldReceived, specialInspections)) {
-                            missingData += asiFieldName + ",";
+                            missingData += asiFieldName + ", ";
                         }
 
                     }//need validation
                 }//for all ASIs
 
                 if (!isBlankOrNull(missingData)) {//remove last ,
-                    missingData = missingData.substring(0, missingData.length - 1);
+                    missingData = missingData.substring(0, missingData.length - 2);
                     //throw ("The following data is required : " + missingData);
                      showMessage = true;
                    cancel = true;
-                   comment("The following data is required : " + missingData);
+                   comment("The following Inspection(s) have not been recieved and are required : " + missingData);
                 }
             }//specialInspections
         
