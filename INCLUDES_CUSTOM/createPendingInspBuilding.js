@@ -41,7 +41,7 @@ function createPendingInspBuilding() {
    
    if (permitType == "Water Heater Replacement" || permitType == "Boiler Replacement" || permitType == "Furnace and Water Heater Replacement" 
        || permitType == "Furnace and Air Conditioner" 
-      || permitType == "Air Conditioner, Furnace and Water Heater Replacement" || permitType == "Air Conditioner and Water Heater Replacement"
+      || permitType == "Air Conditioner Furnace and Water Heater Replacement" || permitType == "Air Conditioner and Water Heater Replacement"
      )
    {
    createPendingInspection("BLD_NEW_CON", "Plumbing Final")
@@ -59,7 +59,7 @@ function createPendingInspBuilding() {
 	   logDebug("**WARN - Inspection not added");
    }
 
-   if (permitType == "Commercial Roof Replacement" || permitType == "Single Family Residential Roof Replacement")
+   if (permitType == "Commercial Roof Replacement" || permitType == "Single-Family Residential Roof Replacement")
    {
    createPendingInspection("BLD_NEW_CON", "Reroof Final")
    } 
