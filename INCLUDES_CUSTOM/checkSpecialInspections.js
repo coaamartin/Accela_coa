@@ -1,9 +1,7 @@
 function checkSpecialInspections() {
 	logDebug("checkSpecialInspections() started");
     try {
-		if (wfTask == "Certificate of Occupancy" && wfStatus == "Final CO Issued")
-         {
-            var specialInspections = getASIgroup("SPECIAL INSPECTIONS", capId);
+		  var specialInspections = getASIgroup("SPECIAL INSPECTIONS", capId);
             if (specialInspections != null) {
                 var missingData = "";
                 for (xx in specialInspections) {
@@ -32,8 +30,7 @@ function checkSpecialInspections() {
                    comment("The following data is required : " + missingData);
                 }
             }//specialInspections
-        }//task and status match
-
+        
     } catch (e) {
         cancel = true;
         showMessage = true;
