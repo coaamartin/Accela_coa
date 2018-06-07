@@ -11,7 +11,6 @@ function bldScript25_invoiceCaptialNParkFees(){
             if($iTrc(feeExists(feeItem12), 'feeExists(' + feeItem12 + ')')) invoiceFee(feeItem12, feePeriod);
             if($iTrc(feeExists(feeItem14), 'feeExists(' + feeItem14 + ')')) invoiceFee(feeItem14, feePeriod);
             if($iTrc(feeExists(feeItemPermit), 'feeExists(' + feeItemPermit + ')')) invoiceFee(feeItemPermit, feePeriod);
-        }
     }
     catch(err){
         showDebug = true;
