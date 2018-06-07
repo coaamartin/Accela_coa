@@ -13,7 +13,7 @@ Sample Call : updateAssignedToUser()
 
 */
 //Diabled by Don Bates until error can be resolved
-//updateAssignedToUser();
+updateAssignedToUser();
 
 /*
 Title : Set E-Agenda Due Date (WorkflowTaskUpdateAfter) 
