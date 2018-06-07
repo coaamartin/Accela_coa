@@ -20,23 +20,6 @@ permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type To
 
 //Script 417
 
-/*var asiValues = new Array();
-	if (useAppSpecificGroupName) {
-		var olduseAppSpecificGroupName = useAppSpecificGroupName;
-		useAppSpecificGroupName = false;
-		loadAppSpecific(asiValues);
-		useAppSpecificGroupName = olduseAppSpecificGroupName;
-	} else {
-		asiValues = AInfo;
-	}
-	*/
-	//var permitExpDate=getAppSpecific('Permit Expiration Date',capId);
-var permitType =getAppSpecific('Permit Type',capId);
-logDebug ("Permit Type" + permitType );
-if (permitType == "Gas Pipe Installation or Modification" || permitType == "Furnace Replacement" || permitType == "Furnace and Water Heater Replacement")
-{
-createPendingInspection("Building Inspections", "Mechanical Final")
-} else {
-	logDebug("**WARN - Inspection not added");
-}
+createPendingInspBuilding()
+
 
