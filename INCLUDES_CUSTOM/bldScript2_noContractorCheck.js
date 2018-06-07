@@ -2,7 +2,7 @@
 //Script 2 part2
 //By: Tony Ledezma
 function bldScript2_noContractorCheck(){
-    logDebug("bldScrit2_noContractorCheck() started");
+    logDebug("bldScript2_noContractorCheck() started");
     try{
         var $iTrc = ifTracer,
             ownerIsContractor = AInfo["Homeowner acting as Contractor"] == "Yes" ? true : false,
@@ -24,8 +24,8 @@ function bldScript2_noContractorCheck(){
     }
     catch(err){
         showMessage = true;
-        logDebug("Error on custom function bldScrit2_noContractorCheck(). Err: " + err);
+        logDebug("Error on custom function bldScript2_noContractorCheck(). Err: " + err);
         comment();
     }
-    logDebug("bldScrit2_noContractorCheck() ended");
-}//END bldScrit2_noContractorCheck()
+    logDebug("bldScript2_noContractorCheck() ended");
+}//END bldScript2_noContractorCheck()
