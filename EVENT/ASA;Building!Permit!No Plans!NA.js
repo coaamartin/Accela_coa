@@ -32,8 +32,7 @@ permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type To
 	*/
 	//var permitExpDate=getAppSpecific('Permit Expiration Date',capId);
 var permitType =getAppSpecific('Permit Type',capId);
-var construction = AInfo("Construction Type"); 
-logDebug ("Permit Type" + permitType + "Construction Type" + construction);
+logDebug ("Permit Type" + permitType );
 if (permitType == "Gas Pipe Installation or Modification" || permitType == "Furnace Replacement" || permitType == "Furnace and Water Heater Replacement")
 {
 createPendingInspection("Building Inspections", "Mechanical Final")
