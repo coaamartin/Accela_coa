@@ -36,4 +36,8 @@ Notes:
 	Event should be ISB(InspectionScheduleBefore) not IRSB(InspectionResultSubmitBefore)
 */
 
+if (inspSchedDate === undefined) { 
+	inspSchedDate = aa.env.getValue("InspectionDate"); // from ISB
+}
+
 checkScheduledInspSameDate(inspType, inspSchedDate);
