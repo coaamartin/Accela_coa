@@ -11,6 +11,7 @@ function checkIfPassedInspections(InspectionType){
 		
 	}catch(e){
 		cancel = true;
+		showDebug = false;
 		showMessage = true;
 		comment(e);
 	}
