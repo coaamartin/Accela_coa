@@ -11,7 +11,9 @@ if (matchARecordType([
             guideSheetObject,
             sendEmail = false,
             tempMeterReleaseComment='',
-            finalMeterReleaseComment='';
+            finalMeterReleaseComment=''
+            emailTemplate = 'BLD EXCEL ENERGY # 260',
+            emailParams = aa.util.newHashtable();
 
         if (ifTracer(guideSheetObjects &&  guideSheetObjects.length > 0, "GuideSheet(s) Exists")) {
             for (idx in guideSheetObjects) {
@@ -32,6 +34,11 @@ if (matchARecordType([
                     printObjProps(guideSheetObject);
                 }
             }
+        }
+        if (ifTracer(sendEmail, "sendEmail is truthy")) {
+            emailParams.put("$$checkListItem1$$",tempMeterReleaseComment);
+            emailParams.put("$$checkListItem2$$",finalMeterReleaseComment);
+            emailAsync("", emailTemplate, emailParams);
         }
     }
 }

@@ -77,8 +77,8 @@ function script400_WatTapApplicationInspectionAutomation() {
         if (guideSheetObjects &&  guideSheetObjects.length > 0) {
             for (idx in guideSheetObjects) {
                 if(guideSheetObjects[idx].gsType == 'Tap Application') {
-                    guideSheetObjects[0].loadInfo();
-                    return guideSheetObjects[0].info["Meter Number"]
+                    guideSheetObjects[idx].loadInfo();
+                    return guideSheetObjects[idx].info["Meter Number"]
                 }
                 
             }
