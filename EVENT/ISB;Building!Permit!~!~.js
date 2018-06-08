@@ -36,7 +36,7 @@ Notes:
 	Event should be ISB(InspectionScheduleBefore) not IRSB(InspectionResultSubmitBefore)
 */
 
-if (inspSchedDate === undefined) { 
+if (typeof inspSchedDate == 'undefined') { 
 	inspSchedDate = aa.env.getValue("InspectionDate"); // from ISB
 }
 
