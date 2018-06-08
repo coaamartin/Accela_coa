@@ -1,7 +1,7 @@
 /*
 * Script 260
 */
-if ($utils.accela.matchARecordType([
+if (matchARecordType([
     "Building/Permit/New Building/NA",
     "Building/Permit/Plans/NA",
     "Building/Permit/No Plans/NA"
