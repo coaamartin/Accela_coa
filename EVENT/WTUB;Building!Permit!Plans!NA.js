@@ -53,5 +53,7 @@ Notes :
 requireDataInSpecialInspections();
 
 //Script 9
-
-checkSpecialInspections();
+if (wfTask == "Special Inspection Check" && wfStatus == "Reports Received")
+		{
+		checkSpecialInspections();
+		}
