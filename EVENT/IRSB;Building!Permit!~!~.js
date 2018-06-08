@@ -14,7 +14,7 @@ Notes:
 	Event should be ISB(InspectionScheduleBefore) not IRSB(InspectionResultSubmitBefore)
 */
 
-checkScheduledInspSameDate(inspType, inspSchedDate);
+//checkScheduledInspSameDate(inspType, inspSchedDate);
 
 /* Title :  Require initial inspection to be statused (InspectionScheduleBefore)
 
