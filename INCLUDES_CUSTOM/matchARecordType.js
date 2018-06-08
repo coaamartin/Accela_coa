@@ -1,4 +1,4 @@
-function matchARecordType() {
+function matchARecordType(appTypeStringArray, valTypeString) {
     var appTypeArray,
         valTypeArray = valTypeString.split("/"),
         idx,
