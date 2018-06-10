@@ -130,18 +130,14 @@ else {
 		}
 	}
 
-    logDebug('cvm1');
-
-	//get/clean contact types
+ 	//get/clean contact types
 	if (sendEmailToContactTypes == "All" || sendEmailToContactTypes == null || sendEmailToContactTypes == '') {
         conTypeArray = validConTypes;
 	} else {
 		conTypeArray = rtnContactTypes(sendEmailToContactTypes);
 	}
 	conCCTypeArray = rtnContactTypes(ccEmailToContactTypes);
-    logDebug('cvm - nmbr of cc types: ' + conCCTypeArray.length);
-    logDebug('cvm - nmbr of to types: ' + conTypeArray.length);
-
+ 
 	//get From email from template configuration
 	if (emailTemplate && emailTemplate != '') {
 		tmpl = aa.communication.getNotificationTemplate(emailTemplate).getOutput();
@@ -183,7 +179,7 @@ else {
 		}
     }
      conCCEmailArrayString = conObjCCEmailArray.join(';');
-	logDebug('CC Email list' + conCCEmailArrayString);
+//	logDebug('CC Email list' + conCCEmailArrayString);
 
 
     //Get SEND Contacts based on type for each type provided

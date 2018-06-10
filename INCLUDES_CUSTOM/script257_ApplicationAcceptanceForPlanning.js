@@ -8,7 +8,7 @@
  * @param emailTemplate
  * @returns {Boolean}
  */
-function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
+function script257_ApplicationAcceptanceForPlanning(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
 
 	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 		return false;
@@ -17,6 +17,8 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 	if (wfTask == workFlowTaskToCheck) {
 
 		var statusMatch = false;
+		
+		logDebug("*****Enter script257_ApplicationAcceptanceForPlanning function*****");
 
 		for (s in workflowStatusArray) {
 			if (wfStatus == workflowStatusArray[s]) {
@@ -35,6 +37,8 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 			logDebug("**ERROR could not get meeting capId=" + capId + " error:" + meetings.getErrorMessage());
 			return;
 		}
+		
+/*
 		meetings = meetings.getOutput().toArray();
 		for (m in meetings) {
 			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
@@ -80,6 +84,7 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 		}//for all meetings
 		logDebug("**WARN no meeting of type=" + meetingType + " capId=" + capId);
 		return false;
+*/
 	} else {
 		return false;
 	}

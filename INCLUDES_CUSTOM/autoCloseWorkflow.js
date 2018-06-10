@@ -14,7 +14,8 @@ function autoCloseWorkflow() {
 		recTypesAry = new Array();
 		recTypesAry = [ "Building/Permit/New Building/NA", "Building/Permit/Plans/NA" ];
 		matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Fee Processing", "Issued", "Issued");
-
+		matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Ready to Issue", "Permit Issuance", "Issued", "Issued");
+		
 		//extra steps for #2
 		//2.1
 		if (matched) {

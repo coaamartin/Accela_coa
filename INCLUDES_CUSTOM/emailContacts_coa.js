@@ -15,7 +15,7 @@ Sample: emailContacts('OWNER APPLICANT', 'DPD_WAITING_FOR_PAYMENT'); //minimal
 function emailContacts(sendEmailToContactTypes, emailTemplate, vEParams, reportTemplate, vRParams) {
 	var vChangeReportName = "";
 	var conTypeArray = [];
-	var validConTypes = getContactTypes_BCC();
+	var validConTypes = getContactTypes();
 	var x = 0;
 	var vConType;
 	var vAsyncScript = "SEND_EMAIL_TO_CONTACTS_ASYNC";

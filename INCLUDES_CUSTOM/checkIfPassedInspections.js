@@ -1,4 +1,4 @@
-function checkIfPassedInspections(){
+function checkIfPassedInspections(InspectionType){
 	try{
 		if (String(InspectionType).indexOf("Final")>0){
 			var result=checkInspectionType(InspectionType);
@@ -11,6 +11,7 @@ function checkIfPassedInspections(){
 		
 	}catch(e){
 		cancel = true;
+		showDebug = false;
 		showMessage = true;
 		comment(e);
 	}
