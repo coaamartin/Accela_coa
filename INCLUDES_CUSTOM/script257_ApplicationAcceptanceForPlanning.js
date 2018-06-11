@@ -8,35 +8,27 @@
  * @param emailTemplate
  * @returns {Boolean}
  */
-function script257_ApplicationAcceptanceForPlanning(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
+function script257_ApplicationAcceptanceForPlanning(workFlowTask, workFlowStatus, firstReviewDateASI, meetingType, planningCommissionDateASI, emailTemplate, recordURL) {
 
-	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
+if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 		return false;
 	}
 
-	if (wfTask == workFlowTaskToCheck) {
-
-		var statusMatch = false;
-		
+if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
+		var firstReviewDate = getAppSpecific(firstReviewDateASI);
 		logDebug("*****Enter script257_ApplicationAcceptanceForPlanning function*****");
 
-		for (s in workflowStatusArray) {
-			if (wfStatus == workflowStatusArray[s]) {
-				statusMatch = true;
-				break;
-			}
-		}//for all status options
-
-		if (!statusMatch) {
-			return false;
-		}
-
-		//Update ASI
-		var meetings = aa.meeting.getMeetingsByCAP(capId, true);
-		if (!meetings.getSuccess()) {
-			logDebug("**ERROR could not get meeting capId=" + capId + " error:" + meetings.getErrorMessage());
-			return;
-		}
+		
+		if (isEmpty(firstReviewDate)) {
+        // If Custom Field "1st Review Comments Due date" is null
+        // Then update it with Today + 15 days
+        firstReviewDate = dateAdd(new Date(), 15, true);
+        editAppSpecific(firstReviewDateASI, firstReviewDate);
+        // And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
+        // Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
+        closesMeetingDate = getClosesMeetingDate(6.5, meetingType);
+        editAppSpecific(planningCommissionDateASI, aa.util.formatDate(closesMeetingDate, "MM/dd/yyyy"));
+    }
 		
 /*
 		meetings = meetings.getOutput().toArray();
