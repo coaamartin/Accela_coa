@@ -9,7 +9,7 @@
  * @returns {Boolean}
  */
 function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
-
+    logDebug("sendHearingScheduledEmailAndUpdateASI() started.");
 	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 		return false;
 	}
@@ -58,7 +58,7 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					var applicantName = recordApplicant.getFullName();
 					var caseManagerEmail = getAssignedStaffEmail();
 					var caseManagerPhone = getAssignedStaffPhone();
-					if(isBlankOrNull(caseManagerEmail)==false) caseManagerEmail = "";
+					if(isBlankOrNull(caseManagerEmail)==true) caseManagerEmail = "";
 
 					var files = new Array();
 					var eParams = aa.util.newHashtable();

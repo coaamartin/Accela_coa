@@ -18,7 +18,7 @@ Sample Call:
 		... Record Type: Planning/Application/{*}/{*} (except Planning/Application/Address/{*})
 */
 if(!appMatch(("Planning/Application/Address/*"))){
-
+//Script 278
 sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
 }
 
