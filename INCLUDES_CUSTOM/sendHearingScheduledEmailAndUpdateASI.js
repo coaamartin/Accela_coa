@@ -40,12 +40,14 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
 				//Edit ASI
 				var meetingDate = new Date(meetings[m].getMeeting().getStartDate().getTime());
-				meetingDate = aa.util.formatDate(meetingDate, "MM/DD/YYYY");
+				meetingDate = dateAdd(meetingDate, 0);
 				var olduseAppSpecificGroupName = useAppSpecificGroupName;
 				useAppSpecificGroupName = false;
 				editAppSpecific(asiFieldName, meetingDate);
+				var noOfSigns = getAppSpecific("Number of Signs");
 				useAppSpecificGroupName = olduseAppSpecificGroupName;
 				
+				if(noOfSigns == undefined || noOfSigns == null || noOfSigns == "") noOfSigns = "";
 				//Send email
 				var recordApplicant = getContactByType("Applicant", capId);
 				var applicantEmail = null;
@@ -53,21 +55,33 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
 				} else {
 					applicantEmail = recordApplicant.getEmail();
+					var applicantName = recordApplicant.getFullName();
+					var caseManagerEmail = getAssignedStaffEmail();
+					var caseManagerPhone = getAssignedStaffPhone();
+					if(isBlankOrNull(caseManagerEmail)==false) caseManagerEmail = "";
 
 					var files = new Array();
 					var eParams = aa.util.newHashtable();
 					addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-					addParameter(eParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
-					addParameter(eParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
-					addParameter(eParams, "$$balance$$", feeBalance(""));
-					addParameter(eParams, "$$wfTask$$", wfTask);
-					addParameter(eParams, "$$wfStatus$$", wfStatus);
-					addParameter(eParams, "$$wfDate$$", wfDate);
-					if (wfComment != null && typeof wfComment !== 'undefined') {
-						addParameter(eParams, "$$wfComment$$", wfComment);
-					}
-					addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
-					addParameter(eParams, "$$wfHours$$", wfHours);
+					addParameter(eParams, "$$ContactEmail$$", applicantEmail);
+					addParameter(eParams, "$$ContactFullName$$", applicantName);
+					addParameter(eParams, "$$pcDate$$", meetingDate);
+					addParameter(eParams, "$$12dayspriortopcDate$$", dateAdd(meetingDate, -12));
+					addParameter(eParams, "$$numberofSigns$$", noOfSigns);
+					addParameter(eParams, "$$StaffPhone$$", caseManagerPhone);
+					addParameter(eParams, "$$StaffEmail$$", caseManagerEmail);
+					
+					//addParameter(eParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
+					//addParameter(eParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
+					//addParameter(eParams, "$$balance$$", feeBalance(""));
+					//addParameter(eParams, "$$wfTask$$", wfTask);
+					//addParameter(eParams, "$$wfStatus$$", wfStatus);
+					//addParameter(eParams, "$$wfDate$$", wfDate);
+					//if (wfComment != null && typeof wfComment !== 'undefined') {
+					//	addParameter(eParams, "$$wfComment$$", wfComment);
+					//}
+					//addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
+					//addParameter(eParams, "$$wfHours$$", wfHours);
 
 					var sent = aa.document.sendEmailByTemplateName("", applicantEmail, "", emailTemplate, eParams, files);
 					if (!sent.getSuccess()) {
