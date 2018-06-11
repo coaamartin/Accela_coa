@@ -27,8 +27,8 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
         editAppSpecific(firstReviewDateASI, firstReviewDate);
         // And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
         // Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
-        closesMeetingDate = getClosesMeetingDate(6.5, meetingType);
-        editAppSpecific(planningCommissionDateASI, aa.util.formatDate(closesMeetingDate, "MM/dd/yyyy"));
+        //closesMeetingDate = getClosesMeetingDate(6.5, meetingType);
+        //editAppSpecific(planningCommissionDateASI, aa.util.formatDate(closesMeetingDate, "MM/dd/yyyy"));
     }
 		
 /*
