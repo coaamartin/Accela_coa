@@ -66,7 +66,7 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					addParameter(eParams, "$$ContactEmail$$", applicantEmail);
 					addParameter(eParams, "$$ContactFullName$$", applicantName);
 					addParameter(eParams, "$$pcDate$$", meetingDate);
-					addParameter(eParams, "$$12dayspriortopcDate$$", dateAdd(meetingDate, -12));
+					addParameter(eParams, "$$10dayspriortopcDate$$", dateAdd(meetingDate, -10));
 					addParameter(eParams, "$$numberofSigns$$", noOfSigns);
 					addParameter(eParams, "$$StaffPhone$$", caseManagerPhone);
 					addParameter(eParams, "$$StaffEmail$$", caseManagerEmail);
