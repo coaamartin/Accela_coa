@@ -1,4 +1,12 @@
 
+var currUserId = aa.env.getValue("CurrentUserID");
+var isPublicUser = false;
+if (typeof publicUser === 'undefined') {
+	isPublicUser = currUserId.indexOf("PUBLICUSER") == 0;
+} else {
+	isPublicUser = publicUser;
+}
+
 capStatus = aa.cap.getCap(capId).getOutput().getCapStatus();
 
 
