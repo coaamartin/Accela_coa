@@ -1,3 +1,4 @@
+var $iTrc = ifTracer;
 /* Title :  Send Notice - PC email (WorkflowTaskUpdateAfter)
 
 Purpose :  If workflow task = "Prepare Signs" AND workflow task "Notice - PC" both have a workflow status of "Complete" then email
@@ -19,3 +20,7 @@ Notes :
 		    "PLANNING/APPLICATION/MASTER PLAN/*","PLANNING/APPLICATION/REZONING/NA","PLANNING/APPLICATION/SITE PLAN/*"
 */
 sendNoticePCEmail();
+
+if($iTrc(wfTask == "Generate Hearing Results" && wfStatus == "Technical Submittal", 'wf:Generate Hearing Results/Technical Submittal')){
+	plnScript284_activateTasks();
+}
