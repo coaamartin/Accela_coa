@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------------------------------/
 | TESTING PARAMETERS (Uncomment to use in the script tester)
 /------------------------------------------------------------------------------------------------------*/
-//aa.env.setValue("paramStdChoice","BCC_LIC_EXPIRE");
+//aa.env.setValue("paramStdChoice","COA_LIC_EXPIRE");
 //aa.env.setValue("eventType","Batch Process");
 /*------------------------------------------------------------------------------------------------------/
 | Program: Batch Expiration Template.js  Trigger: Batch
-| Client: BCC
+| Client: COA
 |
 |
 /------------------------------------------------------------------------------------------------------*/
@@ -383,11 +383,11 @@ function mainProcess() {
 
 				logDebug('Attempting to send email with report: ' + emailTemplate + " : " + reportName + " : " + capId.getCustomID());
 				//logDebug('Attempting to send email with report: ' + emailTemplate + " : " + reportName + " : " + capId.getCustomID());
-				emailContacts_BCC(sendEmailToContactTypes, emailTemplate, eParams, reportName, rParams, "Y");
+				emailContacts(sendEmailToContactTypes, emailTemplate, eParams, reportName, rParams, "Y");
 			} else {
 				logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 				//logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-				emailContacts_BCC(sendEmailToContactTypes, emailTemplate, eParams, null, null, "Y");
+				emailContacts(sendEmailToContactTypes, emailTemplate, eParams, null, null, "Y");
 			}
 		}
 
