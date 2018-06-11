@@ -80,6 +80,7 @@ function getScriptText(vScriptName) {
 | CORE EXPIRATION BATCH FUNCTIONALITY
 /------------------------------------------------------------------------------------------------------*/
 try {
+	showMessage = false;
 	showDebug = true;
 	if (String(aa.env.getValue("showDebug")).length > 0) {
 		showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
@@ -105,8 +106,8 @@ try {
 	var vEmailFrom = ""; //Testing Only
 	var vEmailTo = ""; //Testing Only
 	var vEmailCC = ""; //Testing Only
-	vEmailFrom = "dpd_rrio@seattle.gov"; //Testing Only
-	vEmailTo = "ewylam@accela.com"; //Testing Only
+	vEmailFrom = "noreply@accela.com"; //Testing Only
+	vEmailTo = "noreply@accela.com"; //Testing Only
 	vEmailCC = ""; //Testing Only
 
 	if (aa.env.getValue("FromEmail") != null && aa.env.getValue("FromEmail") != "") {
