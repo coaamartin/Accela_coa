@@ -10,12 +10,12 @@ if (matchARecordType([
             feeItem = "WAT_SWMP_24",
             feeSched = "WAT_SWMP_APP",
             feePeriod = "FINAL" ;
-            
+
         if (ifTracer(nmbrOfDisturbedAcreas  > 5, "nmbrOfDisturbedAcreas > 5")) {
             addFee(feeItem, feeSched, feePeriod, 2250, "Y");
-        } else if(ifTracer(nmbrOfDisturbedAcreas  > 1, "nmbrOfDisturbedAcreas > 1") {
+        } else if(ifTracer(nmbrOfDisturbedAcreas  > 1, "nmbrOfDisturbedAcreas > 1")) {
             addFee(feeItem, feeSched, feePeriod, 1200, "Y");
-        } else if(ifTracer(nmbrOfDisturbedAcreas  > 0, "nmbrOfDisturbedAcreas > 0") {
+        } else if(ifTracer(nmbrOfDisturbedAcreas  > 0, "nmbrOfDisturbedAcreas > 0")) {
             addFee(feeItem, feeSched, feePeriod, 450, "Y");
         }
     })();
