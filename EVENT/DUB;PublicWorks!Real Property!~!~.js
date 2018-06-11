@@ -1,6 +1,8 @@
 
+capStatus = aa.cap.getCap(capId).getOutput().getCapStatus();
+
 //if (isPublicUser) {
-if (appStatus.equals("In Review")) {
+if (capStatus.equals("In Review")) {
 	var message = "AAAAA";
 	cancel = true;
 	showMessage=true;
