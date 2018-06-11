@@ -40,6 +40,7 @@ Sample Call:
 //calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
 if($iTrc(wfTask == "Quality Check" && wfStatus == "Approved", 'wf:Quality Check/Approved')){
     bldScript25_addCaptialNParkFees();
+    bldScript390_addSinFamFee();
 }
 
 if($iTrc(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Processing/Ready to Pay')){
@@ -124,4 +125,3 @@ autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIs
 		
 
 bldScript48_addForestryFee();
-bldScript390_addSinFamFee();
