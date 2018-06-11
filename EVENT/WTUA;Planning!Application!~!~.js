@@ -65,25 +65,32 @@ autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Receiv
 /*
 Title : Application Acceptance for Planning (WorkflowTaskUpdateAfter) 
 
-Purpose : If the workflow task = Application Acceptance and workflow status = Acceptance 
-then get the meeting type "" from the meeting tab and get the meeting date and then update
-the Custom Field "".
-In addition email the applicant that their hearing has been scheduled. Email template and content will be provided by Aurora.
+Purpose : 
 
-Author:  
+Author: Silver Lining Solutions
  
 Functional Area : Records
 
 Sample Call:
-script257_ApplicationAcceptanceForPlanning("Application Acceptance", [ "Accepted" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 257");
+script257_ApplicationAcceptanceForPlanning(workFlowTask, workFlowStatus, firstReviewDateASI, meetingType, planningCommissionDateASI, emailTemplate, recordURL);
 	
 	Note:
 		this script will abort if subType = "Address", requested in PDF:
 		... Record Type: Planning/Application/{*}/{*} (except Planning/Application/Address/{*})
 */
 if(!appMatch(("Planning/Application/Address/*"))){
+	var workFlowTask = "Application Acceptance";
+	var workFlowStatus = "Accepted";
+	var firstReviewDateASI = "1st Review Comments Due Date";
+	var meetingType = "Planning Commission";
+	var planningCommissionDateASI = "Planning Commission Hearing Date";
+	var emailTemplate = "MESSAGE_NOTICE_PUBLIC WORKS"; //"PLN APPLICATION ACCEPTANCE FOR PLANNING # 257"
+	var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+	acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+	var recordURL = getACARecordURL(acaURLDefault);
 
-script257_ApplicationAcceptanceForPlanning("Application Acceptance", [ "Accepted" ], "Planning Commission", "Planning Commission Hearing Date", "PLN APPLICATION ACCEPTANCE FOR PLANNING # 257");
+script257_ApplicationAcceptanceForPlanning(workFlowTask, workFlowStatus, firstReviewDateASI, meetingType, planningCommissionDateASI, emailTemplate, recordURL);
+//("Application Acceptance", [ "Accepted" ], "Planning Commission", "Planning Commission Hearing Date", "PLN APPLICATION ACCEPTANCE FOR PLANNING # 257");
 }
 
 		
