@@ -31,51 +31,29 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
     }
 		
 /*
-		meetings = meetings.getOutput().toArray();
-		for (m in meetings) {
-			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
-				//Edit ASI
-				var meetingDate = new Date(meetings[m].getMeeting().getStartDate().getTime());
-				meetingDate = aa.util.formatDate(meetingDate, "MM/DD/YYYY");
-				var olduseAppSpecificGroupName = useAppSpecificGroupName;
-				useAppSpecificGroupName = false;
-				editAppSpecific(asiFieldName, meetingDate);
-				useAppSpecificGroupName = olduseAppSpecificGroupName;
-				
-				//Send email
-				var recordApplicant = getContactByType("Applicant", capId);
-				var applicantEmail = null;
-				if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
-					logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
-				} else {
-					applicantEmail = recordApplicant.getEmail();
-
-					var files = new Array();
-					var eParams = aa.util.newHashtable();
-					addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-					addParameter(eParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
-					addParameter(eParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
-					addParameter(eParams, "$$balance$$", feeBalance(""));
-					addParameter(eParams, "$$wfTask$$", wfTask);
-					addParameter(eParams, "$$wfStatus$$", wfStatus);
-					addParameter(eParams, "$$wfDate$$", wfDate);
-					if (wfComment != null && typeof wfComment !== 'undefined') {
-						addParameter(eParams, "$$wfComment$$", wfComment);
-					}
-					addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
-					addParameter(eParams, "$$wfHours$$", wfHours);
-
-					var sent = aa.document.sendEmailByTemplateName("", applicantEmail, "", emailTemplate, eParams, files);
-					if (!sent.getSuccess()) {
-						logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-						return false;
-					}
-				}//applicant OK
-				return true;
-			}//meetingType match
-		}//for all meetings
-		logDebug("**WARN no meeting of type=" + meetingType + " capId=" + capId);
-		return false;
+	var applicantEmail = null;
+    var recordApplicant = getContactByType("Applicant", capId);
+    if (recordApplicant) {
+        applicantEmail = recordApplicant.getEmail();
+    }
+    if (applicantEmail == null) {
+        logDebug("**WARN Applicant on record " + capId + " has no email");
+        return false
+    }
+    var files = new Array();
+    var emailParams = aa.util.newHashtable();
+    addParameter(emailParams, "$$altID$$", cap.getCapModel().getAltID());
+    addParameter(emailParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
+    addParameter(emailParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
+    addParameter(emailParams, "$$wfComment$$", wfComment);
+    addParameter(emailParams, "$$wfTask$$", wfTask);
+    addParameter(emailParams, "$$wfStatus$$", wfStatus);
+    addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
+    var sent = aa.document.sendEmailByTemplateName("", applicantEmail, "", emailTemplate, emailParams, files);
+    if (!sent.getSuccess()) {
+        logDebug("**ERROR sending email failed, error:" + sent.getErrorMessage());
+        return false;
+    }
 */
 	} else {
 		return false;
