@@ -46,7 +46,7 @@ function notifyOverdueIssuedPermits(grp, typ, stype, cat){
                 if (expSince > maxExpDaysAllowed) {
                     capId=capScript.getCapID();
                     aa.print("sending email, cap id = " + capId.getCustomID());
-                    emailContacts("Applicant", "WAT RENEWAL OF SWMP PERMIT # 376");
+                    emailContacts("Applicant", "WAT RENEWAL OF SWMP PERMIT # 376", aa.util.newHashtable(), "",  aa.util.newHashtable());
                     updateAppStatus("About to Expire","Updated via Batch Job : " + batchJobName, capScript.getCapID());
                 }
             }
