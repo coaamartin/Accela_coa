@@ -18,5 +18,5 @@ if (matchARecordType([
         } else if(ifTracer(nmbrOfDisturbedAcreas  > 0, "nmbrOfDisturbedAcreas > 0")) {
             addFee(feeItem, feeSched, feePeriod, 450, "Y");
         }
-    })();
+    })(); 
 }
