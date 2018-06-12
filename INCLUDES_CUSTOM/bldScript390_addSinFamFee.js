@@ -18,16 +18,13 @@ function bldScript390_addSinFamFee(){
             invFee = "N",
             feeQty = 1;
         
-        if($iTrc(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Processing/Ready to Pay')){
-            
-            if($iTrc(sinFamDet == "Yes", 'sinFamDet == "Yes"')){
-                updateFee(feeItem, feeSched, feePeriod, feeQty, invFee);
-                createPendingInspection("BLD_NEW_CON", "Irrigation Inspection");
-            }
-            
-            if($iTrc(sinFamDet == "No", 'sinFamDet == "No"'))
-                createPendingInspection("BLD_NEW_CON", "Irrigation Inspection");
+        if($iTrc(sinFamDet == "Yes", 'sinFamDet == "Yes"')){
+            updateFee(feeItem, feeSched, feePeriod, feeQty, invFee);
+            createPendingInspection("BLD_NEW_CON", "Irrigation Inspection");
         }
+        
+        if($iTrc(sinFamDet == "No", 'sinFamDet == "No"'))
+            createPendingInspection("BLD_NEW_CON", "Irrigation Inspection");
     }
     catch(err){
         showDebug = true;

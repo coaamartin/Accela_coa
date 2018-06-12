@@ -8,11 +8,13 @@ var v0=expression.getValue("ASI::GENERAL INFORMATION::Qualifying Professional Ty
 var v1=expression.getValue("ASI::GENERAL INFORMATION::Aboveground Fuel Storage Tanks (AST)");
 var v2=expression.getValue("ASI::GENERAL INFORMATION::Decommissioning of Tanks");
 var v3=expression.getValue("ASI::GENERAL INFORMATION::Underground Storage Tanks (UST)");
-
+var f = expression.getValue("ASI::FORM");
 
 v1.readOnly = false;
 v2.readOnly = false;
 v3.readOnly = false;
+f.blockSubmit = false;
+f.message = "";
 
 if(v0.value!=null && !v0.value.equals(String("Fuel Tank"))){
 	v1.setValue("UNCHECKED");
@@ -38,7 +40,12 @@ else {
 			v1.readOnly = true;
 			v2.readOnly = true;
 	}
+	if ("UNCHECKED".equals(v1.value) && "UNCHECKED".equals(v1.value) && "UNCHECKED".equals(v1.value)) {
+		f.blockSubmit = true;
+		f.message = "Please select at least one tank activity";
+	}
 }	
 expression.setReturn(v1);
 expression.setReturn(v2);
 expression.setReturn(v3);
+expression.setReturn(f);
