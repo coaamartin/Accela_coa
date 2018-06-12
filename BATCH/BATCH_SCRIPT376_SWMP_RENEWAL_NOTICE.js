@@ -48,10 +48,10 @@ function notifyOverdueIssuedPermits(grp, typ, stype, cat){
                 //    capId=capScript.getCapID();
                 //    aa.print("sending email, cap id = " + capId.getCustomID());
                     eParams = aa.util.newHashtable();
-                    eParams.put("$$altID$$", capScript.getCustomID());
+                    eParams.put("$$altID$$", capScript.getCapID().getCustomID());
                     emailContacts("Applicant", "WAT RENEWAL OF SWMP PERMIT # 376", eParams, "",  aa.util.newHashtable());
                     updateAppStatus("About to Expire","Updated via Batch Job : " + batchJobName, capScript.getCapID());
-                }
+                } 
             }
         }
     }
