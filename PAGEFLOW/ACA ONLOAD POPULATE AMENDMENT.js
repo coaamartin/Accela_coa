@@ -89,7 +89,7 @@ var capName = cap.getSpecialText();
 var capStatus = cap.getCapStatus();
 
 var AInfo = new Array();						// Create array for tokenized variables
-loadAppSpecific4ACA(AInfo); 						// Add AppSpecific Info
+//loadAppSpecific4ACA(AInfo); 						// Add AppSpecific Info
 //loadTaskSpecific(AInfo);						// Add task specific info
 //loadParcelAttributes(AInfo);						// Add parcel attributes
 //loadASITables4ACA();
