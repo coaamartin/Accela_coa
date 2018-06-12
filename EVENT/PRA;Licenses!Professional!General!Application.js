@@ -10,4 +10,10 @@ Sample Call:
 	createParentLicenseOnPRA("MESSAGE_NOTICE_PUBLIC WORKS");
 */
 
-createParentLicenseOnPRA("MESSAGE_NOTICE_PUBLIC WORKS");
+// Script 64
+if (balanceDue == 0) {
+	include("64_CreateProfessionalLicenseAndLP");
+}
+
+
+//createParentLicenseOnPRA("MESSAGE_NOTICE_PUBLIC WORKS");
