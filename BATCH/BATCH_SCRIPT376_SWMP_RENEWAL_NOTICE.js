@@ -32,6 +32,7 @@ function notifyOverdueIssuedPermits(grp, typ, stype, cat){
         expSince,
         capScript,
         maxExpDaysAllowed = 29,
+        eParams,
         capScriptList = aa.cap.getByAppType(grp, typ, stype, cat).getOutput();
     
     for(idx in capScriptList) {
@@ -44,11 +45,13 @@ function notifyOverdueIssuedPermits(grp, typ, stype, cat){
                 expSince = dateDiff(expDate, new Date());
                 aa.print(expSince);
                 if (expSince > maxExpDaysAllowed) {
-                    capId=capScript.getCapID();
-                    aa.print("sending email, cap id = " + capId.getCustomID());
-                    emailContacts("Applicant", "WAT RENEWAL OF SWMP PERMIT # 376", aa.util.newHashtable(), "",  aa.util.newHashtable());
-                    updateAppStatus("About to Expire","Updated via Batch Job : " + batchJobName, capScript.getCapID());
-                }
+                //    capId=capScript.getCapID();
+                //    aa.print("sending email, cap id = " + capId.getCustomID());
+                eParams = aa.util.newHashtable();
+                eParams.put("$$altID$$", capId.getCustomID());
+                emailContacts("Applicant", "WAT RENEWAL OF SWMP PERMIT # 376", eParams, "",  aa.util.newHashtable());
+                updateAppStatus("About to Expire","Updated via Batch Job : " + batchJobName, capScript.getCapID());
+            }
             }
         }
     }
