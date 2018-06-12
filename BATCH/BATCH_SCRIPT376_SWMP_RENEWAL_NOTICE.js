@@ -8,6 +8,9 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("INCLUDES_CUSTOM", null, true));
 
+
+eval(getScriptText("INCLUDES_BATCH"));
+
 function getScriptText(e) {
 	var t = aa.getServiceProviderCode();
 	if (arguments.length > 1)
@@ -37,20 +40,22 @@ function notifyOverdueIssuedPermits(grp, typ, stype, cat){
     
     for(idx in capScriptList) {
         capScript = capScriptList[idx];
-        if(ifTracer(capScript.getCapStatus() == "Issued" || capScript.getCapStatus() == "About to Expire", "Record status = Issued" )) {
-            capScript.capModel.expDate = new Date(2018,4,3);
-            aa.print("Exp Date: " + capScript.capModel.getExpDate());
+        if(ifTracer(capScript.getCapStatus() == "Issued", "Record status = Issued")) {
+        //    capScript.capModel.expDate = new Date(2018,4,3);
+     //       aa.print("Exp Date: " + capScript.capModel.getExpDate());
             expDate = capScript.capModel.getExpDate();
             if(ifTracer(expDate, "Record expDate is truthy")) {
                 expSince = dateDiff(expDate, new Date());
                 aa.print(expSince);
                 if (expSince > maxExpDaysAllowed) {
-                //    capId=capScript.getCapID();
-                //    aa.print("sending email, cap id = " + capId.getCustomID());
-                    eParams = aa.util.newHashtable();
-                    eParams.put("$$altID$$", capScript.getCapID().getCustomID());
+                    capId=capScript.getCapID();
+                    aa.print("sending email, cap id = " + capId.getCustomID());
+               //     aa.print("sending email, cap id = " + capScript.getCapID().getCustomID());
+                   eParams = aa.util.newHashtable();
+               //     eParams.put("$$altID$$", capId.getCustomID());
                     emailContacts("Applicant", "WAT RENEWAL OF SWMP PERMIT # 376", eParams, "",  aa.util.newHashtable());
                     updateAppStatus("About to Expire","Updated via Batch Job : " + batchJobName, capScript.getCapID());
+                    aa.print("eParams : " + eParams);
                 } 
             }
         }
