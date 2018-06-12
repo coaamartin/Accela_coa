@@ -36,7 +36,7 @@ function notifyOverdueIssuedPermits(grp, typ, stype, cat){
     
     for(idx in capScriptList) {
         capScript = capScriptList[idx];
-        if(ifTracer(capScript.getCapStatus() == "Issued", "Record status = Issued" )) {
+        if(ifTracer(capScript.getCapStatus() == "Issued" || capScript.getCapStatus() == "About to Expire", "Record status = Issued" )) {
             capScript.capModel.expDate = new Date(2018,4,3);
             aa.print("Exp Date: " + capScript.capModel.getExpDate());
             expDate = capScript.capModel.getExpDate();
