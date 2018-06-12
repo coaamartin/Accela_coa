@@ -18,7 +18,7 @@ function createPendingInspBuilding() {
    if (permitType == "Gas Pipe Installation or Modification" || permitType == "Furnace Replacement" || permitType == "Furnace and Water Heater Replacement"
       || permitType == "Air Conditioner Replacement" || permitType == "Evaporative Cooler Replacement" || permitType == "Boiler Replacement" 
       || permitType == "Furnace and Air Conditioner" || permitType == "Rooftop Unit Replacement"
-      || permitType == "Air Conditioner, Furnace and Water Heater Replacement" || permitType == "Air Conditioner and Water Heater Replacement"
+      || permitType == "Air Conditioner Furnace and Water Heater Replacement" || permitType == "Air Conditioner and Water Heater Replacement"
      )
    {
    createPendingInspection("BLD_NEW_CON", "Mechanical Final")
@@ -26,7 +26,7 @@ function createPendingInspBuilding() {
    
    if (permitType == "Air Conditioner Replacement" || permitType == "Evaporative Cooler Replacement" || permitType == "Boiler Replacement" 
       || permitType == "Furnace and Air Conditioner" || permitType == "Rooftop Unit Replacement"
-      || permitType == "Air Conditioner, Furnace and Water Heater Replacement" || permitType == "Air Conditioner and Water Heater Replacement"
+      || permitType == "Air Conditioner Furnace and Water Heater Replacement" || permitType == "Air Conditioner and Water Heater Replacement"
      )
    {
    createPendingInspection("BLD_NEW_CON", "ELectrical Final")
