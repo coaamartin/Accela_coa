@@ -31,8 +31,7 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
         //editAppSpecific(planningCommissionDateASI, aa.util.formatDate(closesMeetingDate, "MM/dd/yyyy"));
     }
 		
-/*
-	var applicantEmail = null;
+		var applicantEmail = null;
     var recordApplicant = getContactByType("Applicant", capId);
     if (recordApplicant) {
         applicantEmail = recordApplicant.getEmail();
@@ -55,7 +54,7 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
         logDebug("**ERROR sending email failed, error:" + sent.getErrorMessage());
         return false;
     }
-*/
+
 	} else {
 		return false;
 	}
