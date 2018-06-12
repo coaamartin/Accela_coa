@@ -115,10 +115,10 @@ if (capDetailObjResult.getSuccess()) {
 }
 
 var AInfo = new Array(); // Create array for tokenized variables
-loadAppSpecific4ACA(AInfo); // Add AppSpecific Info
+//loadAppSpecific4ACA(AInfo); // Add AppSpecific Info
 //loadTaskSpecific(AInfo);						// Add task specific info
 //loadParcelAttributes(AInfo);						// Add parcel attributes
-loadASITables();
+//loadASITables();
 
 logDebug("<B>EMSE Script Results for " + capIDString + "</B>");
 logDebug("capId = " + capId.getClass());
@@ -552,3 +552,49 @@ function copyAppSpecificTableForLic(srcCapId, targetCapId) {
 	}
 
 }
+
+function getTableName(capId)
+{
+	var tableName = null;
+	var result = aa.appSpecificTableScript.getAppSpecificGroupTableNames(capId);
+	if(result.getSuccess())
+	{
+		tableName = result.getOutput();
+		if(tableName!=null)
+		{
+			return tableName;
+		}
+	}
+	return tableName;
+}
+
+function IsStrInArry(eVal,argArr) {
+   	for (x in argArr){
+   		if (eVal == argArr[x]){
+   			return true;
+   		}
+ 	  }	
+	return false;
+}
+
+function getAppSpecificTableForLic(capId,tableName)
+{
+	appSpecificTable = null;
+	var s_result = aa.appSpecificTableScript.getAppSpecificTableModel(capId,tableName);
+	if(s_result.getSuccess())
+	{
+		appSpecificTable = s_result.getOutput();
+		if (appSpecificTable == null || appSpecificTable.length == 0)
+		{
+			logDebug("WARNING: no appSpecificTable on this CAP:" + capId);
+			appSpecificTable = null;
+		}
+	}
+	else
+	{
+		logDebug("ERROR: Failed to appSpecificTable: " + s_result.getErrorMessage());
+		appSpecificTable = null;	
+	}
+	return appSpecificTable;
+}
+
