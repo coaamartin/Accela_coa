@@ -100,7 +100,8 @@ else {
 /* End SDOT work-around to prevent payment notices on auto-approved (paid) ACA submissions */
 	//Get valid array of contact types
 	validConTypes = getContactTypes();
-	aa.print("5): ");
+	aa.print("6) capId: " + capId);
+	aa.print("6.1) vEParams: " + vEParams);
 	//Add standard email variables from record information
 	vEParams = addStdVarsToEmail(vEParams, capId);
 	aa.print("7): ");
