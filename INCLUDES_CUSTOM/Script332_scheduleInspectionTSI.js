@@ -19,9 +19,7 @@ var tsiArray = new Array();
             var pPreHearingDate = tsiArray["Pre hearing inspection date"];
             var inspectorID = getInspectorID();
 			var noOfDays = dateDiff(today, pPreHearingDate);
-            logDebug("pPreHearingDate: "+ pPreHearingDate);
-            logDebug("noOfDays: "+ noOfDays);
-            
+                        
             if (pPreHearingDate != null ) {
                 scheduleInspection("Pre Court Inspection", noOfDays, inspectorID);
             }
