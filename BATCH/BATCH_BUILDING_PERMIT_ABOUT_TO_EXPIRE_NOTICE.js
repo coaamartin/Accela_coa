@@ -138,7 +138,7 @@ function elapsed() {
 }
 
 function printDebug(dstr){
-    aa.print(dstr + br);
+    logDebug(dstr + br);
 }
 
 function getPrimContractorEmail(itemCap){
