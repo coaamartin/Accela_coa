@@ -30,7 +30,8 @@ function script260_EmailExcelEnergyOnInspectionResult() {
     }
     if (ifTracer(sendEmail, "sendEmail is truthy")) {
         setChecklistItemText();
-        emailAsync("Inspection-co@xcelenergy.com", emailTemplate, emailParams);
+//        emailAsync("Inspection-co@xcelenergy.com", emailTemplate, emailParams);
+        emailAsync("ddodd@auroragov.org", emailTemplate, emailParams);
     }
 
     function setChecklistItemFlag() {
