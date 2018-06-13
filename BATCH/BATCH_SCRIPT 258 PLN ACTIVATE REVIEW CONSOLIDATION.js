@@ -32,6 +32,7 @@ eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 try {
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	var tmpAry = RECORD_TYPE.split("/");
+	
 	capTypeModel.setGroup("Planning");
 	capTypeModel.setType("*");
 	capTypeModel.setSubType("*");
@@ -39,13 +40,14 @@ try {
 
 	var capModel = aa.cap.getCapModel().getOutput();
 	capModel.setCapType(capTypeModel);
+	
 	var capIDList = aa.cap.getCapIDListByCapModel(capModel);
 	if (!capIDList.getSuccess()) {
 		logDebug("**INFO failed to get capIds list " + capIDList.getErrorMessage());
 		capIDList = new Array();//empty array script will exit
 	} else {
 		capIDList = capIDList.getOutput();
-		logDebug("**size of capIDList = " + capIDList.length));
+		logDebug("**size of capIDList = " + capIDList.length);
 	}
 /*
 	for (c in capIDList) {
