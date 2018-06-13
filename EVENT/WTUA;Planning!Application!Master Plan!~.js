@@ -86,5 +86,5 @@ logDebug("script419 WTUACreatePublicWorksDrainageRecord end.");
 
 //Script 58
 
-setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Create E-Agenda", "City Council");
+setEAgendaDueDate("Generate Hearing Results", [ "Review Complete" ], "Create E-Agenda", "City Council");
 
