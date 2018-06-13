@@ -37,7 +37,7 @@ Notes:
 	- Use arrays reviewTasksAry and activeReviewTasksAry to edit and correct task names
 */
 
-activateWorkflowTasks();
+//activateWorkflowTasks();
 
 /*
 Title : Update Permit Expiration with every Resubmittal (WorkflowTaskUpdateAfter) 
