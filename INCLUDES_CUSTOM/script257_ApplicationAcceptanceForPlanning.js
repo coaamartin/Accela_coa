@@ -27,12 +27,12 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
         editAppSpecific(firstReviewDateASI, firstReviewDate);
         // And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
         // Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
-        //closesMeetingDate = getClosesMeetingDate(6.5, meetingType);
+        closesMeetingDate = getClosesMeetingDate(6.5, meetingType);
+		logDebug("closesMeetingDate =" + closesMeetingDate);
         //editAppSpecific(planningCommissionDateASI, aa.util.formatDate(closesMeetingDate, "MM/dd/yyyy"));
     }
 		
-/*
-	var applicantEmail = null;
+		var applicantEmail = null;
     var recordApplicant = getContactByType("Applicant", capId);
     if (recordApplicant) {
         applicantEmail = recordApplicant.getEmail();
@@ -55,7 +55,7 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
         logDebug("**ERROR sending email failed, error:" + sent.getErrorMessage());
         return false;
     }
-*/
+
 	} else {
 		return false;
 	}

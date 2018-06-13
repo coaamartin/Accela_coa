@@ -4,6 +4,18 @@ Title : Update Assigned to and due dates on workflow (Batch)
 Purpose : check if certain tasks are active, with no staff assigned, then assign staff to the Task.
 check other Tasks for certain wfStatus, and update Due Date
 
+Batch Job - Runs hourly For Planning/Application/~/~ records, except Planning/Application/Address/*.
+If the workflow task(s) "Planning Review" or "Staff Report" or "Prepare Signs and Notice – PC" are active with a Start date of Today 
+   and do not have a staff assigned to the task then
+   update the workflow task "Assigned to" with the staff in Record Detail Assigned user.
+   
+If the workflow task = "PC Legal Notification" has a status of "Notification Sent"
+   then wf task "Prepare Sign and Notification" should become active 13 working
+   days before the planning commission meeting date and set the due date 9 working days before the Planning Commission
+   Meeting date on the record.
+In addition update the workflow task "Staff Report" to become active 13 working days and set
+due date to 8 working days before the Planning Commission Meeting date.
+
 Author: Yazan Barghouth 
  
 Functional Area : Records
