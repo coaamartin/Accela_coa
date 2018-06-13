@@ -27,5 +27,5 @@ if($iTrc(wfTask == "Generate Hearing Results" && wfStatus == "Technical Submitta
 
 //Script 58
 
-setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Complete E-Agenda", "City Council");
+setEAgendaDueDate("Generate Hearing Results", [ "Review Complete" ], "Complete E-Agenda", "City Council");
 
