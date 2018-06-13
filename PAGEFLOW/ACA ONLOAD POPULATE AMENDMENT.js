@@ -28,49 +28,10 @@ var message = ""; // Message String
 var debug = ""; // Debug String
 var br = "<BR>"; // Break Tag
 
-var useSA = false;
-var SA = null;
-var SAScript = null;
-var bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_FOR_EMSE");
-if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
-	useSA = true;
-	SA = bzr.getOutput().getDescription();
-	bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_INCLUDE_SCRIPT");
-	if (bzr.getSuccess()) {
-		SAScript = bzr.getOutput().getDescription();
-	}
-}
-
-if (SA) {
-	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA, useCustomScriptFile));
-	eval(getScriptText(SAScript, SA));
-} else {
-	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, useCustomScriptFile));
-}
-
-eval(getScriptText("INCLUDES_CUSTOM", null, useCustomScriptFile));
-
-function getScriptText(vScriptName, servProvCode, useProductScripts) {
-	if (!servProvCode)
-		servProvCode = aa.getServiceProviderCode();
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		if (useProductScripts) {
-			var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-		} else {
-			var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
-		}
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-	}
-}
-
 var cap = aa.env.getValue("CapModel");
 var capId = cap.getCapID();
-var servProvCode = capId.getServiceProviderCode() // Service Provider Code
-	var publicUser = false;
+var servProvCode = capId.getServiceProviderCode();// Service Provider Code
+var publicUser = false;
 var currentUserID = aa.env.getValue("CurrentUserID");
 var publicUserID = aa.env.getValue("CurrentUserID");
 if (currentUserID.indexOf("PUBLICUSER") == 0) {
