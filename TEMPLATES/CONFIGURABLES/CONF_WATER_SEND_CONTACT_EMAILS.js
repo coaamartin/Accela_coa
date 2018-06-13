@@ -320,7 +320,7 @@
                 },
                 "criteria": {
                   "inspectionTypePerformed": [
-                    "Routine Inspection"
+                    "Routine Inspections"
                   ],
                   "inspectionResult": [
                     "Routine Pass"
@@ -328,6 +328,70 @@
                 },
                 "action": {
                     "notificationTemplate": "SWMP ROUTINE PASS # 395",
+                    "notificationReport": "",
+                    "notifyContactTypes": [
+                        "Applicant"
+                    ],
+                    "url4ACA": "",
+                    "fromEmail": "noreply@auroraco.gov",
+                    "additionalEmailsTo": [
+
+                    ],
+                    "createFromParent": "",
+                    "reportingInfoStandards": ""
+                }
+            },
+            {
+                "preScript": "",
+                "postScript": "",
+                "metadata": {
+                  "description": "Script 395",
+                  "operators": {
+                    
+                  }
+                },
+                "criteria": {
+                  "inspectionTypePerformed": [
+                    "Routine Inspections"
+                  ],
+                  "inspectionResult": [
+                    "Fail"
+                  ]
+                },
+                "action": {
+                    "notificationTemplate": "SWMP ROUTINE FAIL # 395",
+                    "notificationReport": "",
+                    "notifyContactTypes": [
+                        "Applicant"
+                    ],
+                    "url4ACA": "",
+                    "fromEmail": "noreply@auroraco.gov",
+                    "additionalEmailsTo": [
+
+                    ],
+                    "createFromParent": "",
+                    "reportingInfoStandards": ""
+                }
+            },
+            {
+                "preScript": "",
+                "postScript": "",
+                "metadata": {
+                  "description": "Script 395",
+                  "operators": {
+                    
+                  }
+                },
+                "criteria": {
+                  "inspectionTypePerformed": [
+                    "Routine Inspections"
+                  ],
+                  "inspectionResult": [
+                    "Immediate Clean Up Order"
+                  ]
+                },
+                "action": {
+                    "notificationTemplate": "SWMP ROUTINE IMMEDIATE CLEAN-UP # 395",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "Applicant"
