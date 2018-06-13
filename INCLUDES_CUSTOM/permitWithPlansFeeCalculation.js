@@ -111,11 +111,11 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		var materialsCost = asiValues["Materials Cost"];
 		var valuation = asiValues["Valuation"];
 		if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
-				&& parseFloat(materialsCost) == (parseFloat(valuation) / 2)) {
-			feeQty = parseFloat(materialsCost);
+				&& parseFloat(materialsCost) <= (parseFloat(valuation) / 2)) {
+			feeQty = parseFloat(valuation)/2;
 		} else if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
 				&& parseFloat(materialsCost) > (parseFloat(valuation) / 2)) {
-			feeQty = parseFloat(valuation);
+			feeQty = parseFloat(materialsCost);
 		}
 
 		if (feeQty > 0) {
@@ -141,11 +141,11 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	var valuation = asiValues["Valuation"];
 
 	if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
-			&& parseFloat(materialsCost) <= (parseFloat(valuation) / 2)) {
-		feeQty = parseFloat(valuation) / 2;
+			&& parseFloat(materialsCost) == (parseFloat(valuation) / 2)) {
+		feeQty = parseFloat(materialsCost);
 	} else if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
 			&& parseFloat(materialsCost) > (parseFloat(valuation) / 2)) {
-		feeQty = parseFloat(materialsCost);
+		feeQty = parseFloat(valuation);
 	}
 
 	if (feeQty > 0) {
