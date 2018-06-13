@@ -178,6 +178,6 @@ try{
 catch (err) {
     handleError(err, "Error on Building Fee script");
 }
-	logDebug("permitWithPlansFeeCalculation started.");
+	logDebug("permitWithPlansFeeCalculation ended.");
 	return true;
 }
