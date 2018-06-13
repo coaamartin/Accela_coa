@@ -6,7 +6,7 @@
  * @returns {Boolean}
  */
 function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permitFeeTypeAsiName, permitFeeTypeTotalAsiName, gisSvcName, gisLayerName, gisAttrName) {
-
+    logDebug("permitWithPlansFeeCalculation started.");
 	var canAddFees = false;
 
 	if (workFlowTask && workFlowTask != null && workflowStatusArray && workflowStatusArray != null) {
@@ -178,6 +178,6 @@ try{
 catch (err) {
     handleError(err, "Error on Building Fee script");
 }
-	
+	logDebug("permitWithPlansFeeCalculation started.");
 	return true;
 }
