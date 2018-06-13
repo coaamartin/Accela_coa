@@ -38,3 +38,8 @@ Notes :
 		    "PLANNING/APPLICATION/MASTER PLAN/*","PLANNING/APPLICATION/REZONING/NA","PLANNING/APPLICATION/SITE PLAN/*"
 */
 sendNoticePCEmail();
+
+//Script 58
+
+setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Complete E-Agenda", "City Council");
+
