@@ -307,7 +307,41 @@
                     "reportingInfoStandards": ""
                 }
             }
-        ]
+        ],
+        "InspectionResultSubmitAfter": [
+            {
+                "preScript": "",
+                "postScript": "",
+                "metadata": {
+                  "description": "Script 395",
+                  "operators": {
+                    
+                  }
+                },
+                "criteria": {
+                  "inspectionTypePerformed": [
+                    "Routine Inspection"
+                  ],
+                  "inspectionResult": [
+                    "Routine Pass"
+                  ]
+                },
+                "action": {
+                    "notificationTemplate": "SWMP ROUTINE PASS # 395",
+                    "notificationReport": "",
+                    "notifyContactTypes": [
+                        "Applicant"
+                    ],
+                    "url4ACA": "",
+                    "fromEmail": "noreply@auroraco.gov",
+                    "additionalEmailsTo": [
+
+                    ],
+                    "createFromParent": "",
+                    "reportingInfoStandards": ""
+                }
+            }
+        ]        
     },
     "Water/Water/SWMP/Renewal": {
         "WorkflowTaskUpdateAfter": [
