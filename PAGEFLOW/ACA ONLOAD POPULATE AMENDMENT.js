@@ -90,8 +90,10 @@ try {
 		copyCapWorkDesInfo(parentCapId, capId);
 
 		//Copy ASI
-		copyAppSpecific4ACA(parentCapId);
-
+		var pASI = [];
+		loadAppSpecific(pASI);
+		copyAppSpecificForAmendment(pASI);
+		
 		copyAppSpecificTableForLic(parentCapId, capId);
 
 		aa.env.setValue("CapModel", cap);
@@ -488,3 +490,52 @@ function getAppSpecificTableForLic(capId,tableName)
 	return appSpecificTable;
 }
 
+function copyAppSpecificForAmendment(AInfo) // copy all App Specific info
+// into new Cap, 1 optional
+// parameter for ignoreArr
+{
+	var ignoreArr = new Array();
+	var limitCopy = false;
+	if (arguments.length > 2) {
+		ignoreArr = arguments[2];
+		limitCopy = true;
+	}
+
+	for (asi in AInfo) {
+		if (limitCopy) {
+			var ignore = false;
+			for (var i = 0; i < ignoreArr.length; i++) {
+				if (asi.indexOf(ignoreArr[i]) == 0) {
+					// if(ignoreArr[i] == asi){
+					logDebug("ignoring " + asi);
+					ignore = true;
+					break;
+				}
+			}
+			if (!ignore)
+				editAppSpecific4ACA(asi, AInfo[asi]);
+		} else
+			editAppSpecific4ACA(asi, AInfo[asi]);
+	}
+}
+
+function loadAppSpecific(thisArr) {
+	// 
+	// Returns an associative array of App Specific Info
+	// Optional second parameter, cap ID to load from
+	//
+	
+	var itemCap = capId;
+	if (arguments.length == 2) itemCap = arguments[1]; // use cap ID specified in args
+
+    var appSpecInfoResult = aa.appSpecificInfo.getByCapID(itemCap);
+	if (appSpecInfoResult.getSuccess())
+	 	{
+		var fAppSpecInfoObj = appSpecInfoResult.getOutput();
+
+		for (loopk in fAppSpecInfoObj)
+			{
+			thisArr[fAppSpecInfoObj[loopk].checkboxDesc] = fAppSpecInfoObj[loopk].checklistComment;
+			}
+		}
+	}
