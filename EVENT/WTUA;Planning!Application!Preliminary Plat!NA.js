@@ -24,3 +24,8 @@ sendNoticePCEmail();
 if($iTrc(wfTask == "Generate Hearing Results" && wfStatus == "Technical Submittal", 'wf:Generate Hearing Results/Technical Submittal')){
 	plnScript284_activateTasks();
 }
+
+//Script 58
+
+setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Complete E-Agenda", "City Council");
+

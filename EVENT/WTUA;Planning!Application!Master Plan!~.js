@@ -82,3 +82,9 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
 }
 logDebug("script419 WTUACreatePublicWorksDrainageRecord end.");
 /* END script 419 */
+
+
+//Script 58
+
+setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Create E-Agenda", "City Council");
+
