@@ -93,7 +93,54 @@
             "assignToUserID": ""
           }
         }
-      ]
+      ],
+      "Pageflow": [
+        {
+          "preScript": "",
+          "postScript": "",
+          "metadata": {
+            "description": "To run automated script based on JSON rules",
+            "operators": {}
+          },
+          "criteria": {
+            "documentCategory": [],
+            "documentGroup": [],
+            "workFlow": {},
+            "isCreatedByACA": false,
+            "isACAEvent": false,
+            "balanceAllowed": true,
+            "recordStatus": [
+              "Submit Application"
+            ]
+          },
+          "action": {
+            "activateTask": [
+              "Real Property Pre Acceptance",
+              "Planning pre Acceptance"
+            ],
+            "daysOut": "2",
+            "useCalendarDays": true,
+            "deactivateTask": [],
+            "deleteTask": [],
+            "updateTask": [
+              {
+                "task": "",
+                "status": ""
+              }
+            ],
+            "invoiceFees": "",
+            "createChild": "",
+            "createParentOfType": "",
+            "addCondition": "",
+            "addConditionSeverity": "",
+            "conditionType": "",
+            "removeCondition": "",
+            "addComment": "",
+            "newStatus": "Submitted",
+            "assignToUserID": ""
+          }
+        }
+      ]  
     },
     "Planning/Application/*/*": {
       "WorkflowTaskUpdateAfter": [
