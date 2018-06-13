@@ -44,7 +44,9 @@ var feeschedule = "WAT_SWMP_APP";
 
 //asses the fee
 logDebug("Adding custom fee - WAT_SWMP_24 WAT_SWMP_APP $" + thefee);
-var feeseqnum = addCustomFee(feecode,feeschedule,"fee for SWMP application","FINAL",thefee,"0052042905");
+feeseqnum = addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+
+//var feeseqnum = addCustomFee(feecode,feeschedule,"fee for SWMP application","FINAL",thefee,"0052042905");
 logDebug("FeeSeqNum is: " + feeseqnum);
 
 //invoice the fee - this is not necessare as WAT_SWMP_24 is auto-invoiced in the configuration (I think)
