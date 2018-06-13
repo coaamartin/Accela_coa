@@ -22,8 +22,15 @@ TASK_TO_ACTIVATE: the task to be activated if criteria matched
 
 var SCRIPT_VERSION = 3.0;
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getScriptText("INCLUDES_BATCH"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 
+showDebug = true;
+showMessage = true;
+
+if (String(aa.env.getValue("showDebug")).length > 0) {
+	showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
+}
 
 // Load Batch Parameters
 // n/a
