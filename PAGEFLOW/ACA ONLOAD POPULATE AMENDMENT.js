@@ -139,7 +139,6 @@ logDebug("feeFactor = " + feeFactor);
 logDebug("houseCount = " + houseCount);
 logDebug("feesInvoicedTotal = " + feesInvoicedTotal);
 logDebug("balanceDue = " + balanceDue);
-logDebug("<script>$(document).ready(function () {$('#pageTitle').hide(); });</script>");
 
 // page flow custom code begin
 try {
