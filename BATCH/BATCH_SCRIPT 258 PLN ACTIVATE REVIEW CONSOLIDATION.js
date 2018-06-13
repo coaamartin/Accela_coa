@@ -145,11 +145,11 @@ try {
 	| <===========Main=Loop================>
 	/-----------------------------------------------------------------------------------------------------*/
 
-	logDebug("Start of Job");
+	logDebug("BATCH_SCRIPT 258 PLN ACTIVATE REVIEW CONSOLIDATION:  Start of Job");
 
 	mainProcess();
 
-	logDebug("End of Job: Elapsed Time : " + elapsed() + " Seconds");
+	logDebug("BATCH_SCRIPT 258 PLN ACTIVATE REVIEW CONSOLIDATION:  End of Job: Elapsed Time : " + elapsed() + " Seconds");
 	
 	/*------------------------------------------------------------------------------------------------------/
 	| <===========END=Main=Loop================>
