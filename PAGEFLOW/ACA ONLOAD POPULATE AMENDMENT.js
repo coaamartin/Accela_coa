@@ -91,7 +91,7 @@ try {
 
 		//Copy ASI
 		var pASI = [];
-		loadAppSpecific(pASI);
+		loadAppSpecific(pASI,parentCapId);
 		copyAppSpecificForAmendment(pASI);
 		
 		copyAppSpecificTableForLic(parentCapId, capId);
