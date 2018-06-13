@@ -18,6 +18,7 @@ var showDebug = true;							// Set to true to see debug messages in popup window
 var message =	"";								// Message String
 var debug = "";									// Debug String
 var br = "<BR>";								// Break Tag
+var cancel = false;
 
 var cap = aa.env.getValue("CapModel");
 var capId = cap.getCapID();
