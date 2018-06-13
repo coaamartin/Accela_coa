@@ -30,6 +30,7 @@ eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 
 // Main Executable
 try {
+	logDebug("START****  Execution of Batch Script 258 PLN Activate Review Consolidation");
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	var tmpAry = RECORD_TYPE.split("/");
 	
@@ -49,7 +50,10 @@ try {
 		capIDList = capIDList.getOutput();
 		logDebug("**size of capIDList = " + capIDList.length);
 	}
-/*
+
+	logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+
+	/*
 	for (c in capIDList) {
 		capId = capIDList[c].getCapID();
 
