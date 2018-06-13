@@ -19,24 +19,75 @@ NEW_APP_STATUS: the application status used to update CAP (empty string value wi
 TASK_TO_ACTIVATE: the task to be activated if criteria matched
 */
 
+/*------------------------------------------------------------------------------------------------------/
+| USER CONFIGURABLE PARAMETERS
+/------------------------------------------------------------------------------------------------------*/
+currentUserID = "ADMIN";
+useAppSpecificGroupName = false;
+/*------------------------------------------------------------------------------------------------------/
+| GLOBAL VARIABLES
+/------------------------------------------------------------------------------------------------------*/
+message = "";
+br = "<br>";
+debug = "";
+systemUserObj = aa.person.getUser(currentUserID).getOutput();
+publicUser = false;
 
 var SCRIPT_VERSION = 3.0;
+
+var useSA = false;
+var SA = null;
+var SAScript = null;
+var bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_FOR_EMSE");
+if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
+	useSA = true;
+	SA = bzr.getOutput().getDescription();
+	bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_INCLUDE_SCRIPT");
+	if (bzr.getSuccess()) {
+		SAScript = bzr.getOutput().getDescription();
+	}
+}
+
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_BATCH"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getMasterScriptText("INCLUDES_CUSTOM"));
 
-showDebug = true;
-showMessage = true;
-
-if (String(aa.env.getValue("showDebug")).length > 0) {
-	showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
+function getMasterScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
 }
 
-// Load Batch Parameters
-// n/a
+function getScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
+}
 
-// Main Executable
 try {
+	showDebug = true;
+	showMessage = true;
+
+	if (String(aa.env.getValue("showDebug")).length > 0) {
+		showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
+	}
 	logDebug("START****  Execution of Batch Script 258 PLN Activate Review Consolidation");
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	var tmpAry = RECORD_TYPE.split("/");
@@ -59,69 +110,28 @@ try {
 	}
 
 	logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
+logDebug("END  ****  Execution of Batch Script 258 PLN Activate Review Consolidation");
 
-	/*
-	for (c in capIDList) {
-		capId = capIDList[c].getCapID();
-
-		if (isTaskActive(TASK_TO_CHECK_ACTIVE)) {
-			sysDate = aa.date.getCurrentDate();
-			var taskDueDate = getTaskDueDate(TASK_TO_CHECK_ACTIVE);
-			if (taskDueDate == null || taskDueDate == "") {
-				continue;
-			}
-
-			taskDueDate = aa.date.getScriptDateTime(taskDueDate);
-			taskDueDate = formatDateX(taskDueDate);
-			now = formatDateX(aa.date.getCurrentDate());
-
-			if (aa.date.diffDate(now, taskDueDate) > 0) {
-
-				//prevent errors when run in non-event
-				systemUserObj = aa.person.getCurrentUser().getOutput();
-				message = "";
-
-				if (NEW_APP_STATUS != null && NEW_APP_STATUS.trim() != "") {
-					updateAppStatus(NEW_APP_STATUS, "By Batch, Appeal expired");
-				}
-
-				updateTask(TASK_TO_CHECK_ACTIVE, APPEAL_TASK_STATUS, "By Batch, Appeal expired", "By Batch, Appeal expired");
-				deactivateTask(TASK_TO_CHECK_ACTIVE);
-				activateTask(TASK_TO_ACTIVATE);
-			}//due date passed
-		}//still active
-	}//for all capIds
-*/
 	} catch (ex) {
 	logDebug("**ERROR failed to run batch " + ex);
 }
 
-/**
- * Format a ScriptDate mm/dd/yyyy
- * @param scriptDate
- * @returns {String} formatted date
- */
-function formatDateX(scriptDate) {
-	var ret = "";
-	ret += scriptDate.getMonth().toString().length == 1 ? "0" + scriptDate.getMonth() : scriptDate.getMonth();
-	ret += "/";
-	ret += scriptDate.getDayOfMonth().toString().length == 1 ? "0" + scriptDate.getDayOfMonth() : scriptDate.getDayOfMonth();
-	ret += "/";
-	ret += scriptDate.getYear();
-	return ret;
-}
 
-function getScriptText(e) {
-	var t = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		t = arguments[1];
-	e = e.toUpperCase();
-	var n = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var r = n.getScriptByPK(t, e, "ADMIN");
-		return r.getScriptText() + ""
-	} catch (i) {
-		return ""
-	}
-}
 
