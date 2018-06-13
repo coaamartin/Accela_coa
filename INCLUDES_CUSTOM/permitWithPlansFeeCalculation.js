@@ -141,11 +141,11 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	var valuation = asiValues["Valuation"];
 
 	if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
-			&& parseFloat(materialsCost) == (parseFloat(valuation) / 2)) {
-		feeQty = parseFloat(materialsCost);
+			&& parseFloat(materialsCost) <= (parseFloat(valuation) / 2)) {
+		feeQty = parseFloat(valuation) / 2;
 	} else if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
 			&& parseFloat(materialsCost) > (parseFloat(valuation) / 2)) {
-		feeQty = parseFloat(valuation);
+		feeQty = parseFloat(materialsCost);
 	}
 
 	if (feeQty > 0) {
@@ -153,7 +153,8 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	}
 try{	
 	//Building Fee (Flat Fee)
-	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "" && asiValues[permitFeeTypeAsiName] != "Other") {
+	var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
+	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "" && asiValues[permitFeeTypeAsiName] != "Other" && parseFloat(permitTypeTotal)> 0) {
 		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
 		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal ) > 0) {
 			if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")){
@@ -162,7 +163,7 @@ try{
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
 		}
-	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "" || asiValues[permitFeeTypeAsiName] == "Other") 
+	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "" || asiValues[permitFeeTypeAsiName] == "Other" || parseFloat(permitTypeTotal ) == 0) 
 	{
 		////Building Fee (Valuation) -- add logic for Other (dropdown)
 		var valuation = asiValues["Valuation"];
