@@ -139,6 +139,7 @@ logDebug("feeFactor = " + feeFactor);
 logDebug("houseCount = " + houseCount);
 logDebug("feesInvoicedTotal = " + feesInvoicedTotal);
 logDebug("balanceDue = " + balanceDue);
+logDebug("<script>$(document).ready(function () {$('#pageTitle').hide(); });</script>");
 
 // page flow custom code begin
 try {
@@ -246,8 +247,10 @@ function copyAppSpecific4ACA(capFrom) { // copy all App Specific info into new C
 
 				if (useAppSpecificGroupName)
 					editAppSpecific4ACA(field.getCheckboxType() + "." + field.getCheckboxDesc(), field.getChecklistComment());
-				else
+				else {
+					logDebug("copying " + field.getCheckboxDesc() + " : " + field.getChecklistComment());
 					editAppSpecific4ACA(field.getCheckboxDesc(), field.getChecklistComment());
+				}
 			}
 		}
 	}
