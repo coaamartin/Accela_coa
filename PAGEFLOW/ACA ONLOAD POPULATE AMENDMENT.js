@@ -14,7 +14,7 @@
 |     changes are made, please add notes above.
 /------------------------------------------------------------------------------------------------------*/
 var showMessage = false;						// Set to true to see results in popup window
-var showDebug = true;							// Set to true to see debug messages in popup window
+var showDebug = false;							// Set to true to see debug messages in popup window
 var message =	"";								// Message String
 var debug = "";									// Debug String
 var br = "<BR>";								// Break Tag
@@ -90,7 +90,7 @@ try {
 		copyCapWorkDesInfo(parentCapId, capId);
 
 		//Copy ASI
-		copyAppSpecific4ACA(parentCap);
+		copyAppSpecific4ACA(parentCapId);
 
 		copyAppSpecificTableForLic(parentCapId, capId);
 
