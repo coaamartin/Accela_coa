@@ -664,10 +664,8 @@
           },
           "criteria": {
             "task": [
-              "Waste Water Review"
             ],
             "status": [
-              "Approved Inspection Required"
             ],
             "isCreatedByACA": "",
             "balanceAllowed": "",
@@ -677,7 +675,6 @@
           },
           "action": {
             "activateTask": [
-              "Waste Water"
             ],
             "daysOut": "",
             "deactivateTask": [
