@@ -62,8 +62,8 @@
     "Planning/Application/Address/NA": {
       "WorkflowTaskUpdateAfter": [
         {
-          "preScript": "261_prescript",
-          "postScript": "",
+          "preScript": "",
+          "postScript": "261_postscript",
           "metadata": {
             "description": "Script 261",
             "operators": {}
