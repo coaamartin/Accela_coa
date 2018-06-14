@@ -114,18 +114,17 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 	
 		// And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
 		// Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
-	
-	
 		var dToday = new Date();
-		dToday = ("0" + (dToday.getMonth() + 1)).slice(-2) + "/" 
+		var dTodayStr = "" + ("0" + (dToday.getMonth() + 1)).slice(-2) + "/" 
 				+ ("0" + dToday.getDate()).slice(-2) + "/" 
 				+ dToday.getYear();
-		logDebug("LABEL (anything) dToday = " + dToday);
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAdd(dToday,(7*6.5)));
+		logDebug("dtodayStr = " + dTodayStr);
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*6.5)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
 		logDebug("lookforMMDDYYYY:"+lookForMMDDYYYY);
+
 		//Set up the 'look back' from the target date for searching
 		var lookForStartDate		= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
 		logDebug("you lookForStartDate is:"+lookForStartDate.getMonth()+"/"+lookForStartDate.getDayOfMonth()+"/"+lookForStartDate.getYear());
