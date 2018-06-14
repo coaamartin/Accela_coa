@@ -16,7 +16,7 @@ if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 
 if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 		var firstReviewDate = getAppSpecific(firstReviewDateASI);
-		logDebug("*****Enter script257_ApplicationAcceptanceForPlanning function*****");
+		logDebug("*****Enter NEW script257_ApplicationAcceptanceForPlanning function*****");
 
 		
 		if (isEmpty(firstReviewDate)) {
