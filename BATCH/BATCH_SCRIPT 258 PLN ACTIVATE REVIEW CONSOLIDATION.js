@@ -192,8 +192,6 @@ function mainProcess() {
                                    "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA",
                                    "Planning/Application/Rezoning/NA", "Planning/Application/Site Plan/Amendment",
                                    "Planning/Application/Site Plan/Major", "Planning/Application/Site Plan/Minor")) continue;
-                                   
-        logDebug("Checking record " + altId);
         
         var assignedUser = getAssignedStaff4Batch(capId);
         var parTskDueIn7 = parallelTaskDueIn7Days(capId);
@@ -207,7 +205,11 @@ function mainProcess() {
                 var revTskDueDate = getTaskDueDate4Batch(capId, revTsk);
                 activateTask4Batch(capId, revConsTsk);
                 assignTask4Batch(capId, revConsTsk, assignedUser);
-                editTaskDueDate4Batch(capId, revConsTsk, revTskDueDate);
+                if(revTskDueDate && revTskDueDate != undefined){
+                    revTskDueDate = aa.date.getScriptDateTime(revTskDueDate);
+                    var revTskDueDteStr = formatDateX(revTskDueDate);
+                    editTaskDueDate4Batch(capId, revConsTsk, revTskDueDteStr);
+                }
                 break;
             }
         }
@@ -226,7 +228,10 @@ function parallelTaskDueIn7Days(itemCap){
             var taskName = tasksArr[i].getTaskDescription().trim();
             var dueDate = task.getDueDate();
             if(dueDate && dueDate != undefined) {
-                if(days_between_batch(dueDate, sevenDaysAhead) == 0) return true;
+                if(days_between_batch(dueDate, sevenDaysAhead) == 0) {
+                    logDebug("Record " + itemCap.getCustomID() + " has parallel task " + taskName + " due in 7 days.");
+                    return true;
+                }
             }
         }
     }
