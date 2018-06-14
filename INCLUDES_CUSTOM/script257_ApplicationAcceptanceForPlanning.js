@@ -27,7 +27,26 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
         editAppSpecific(firstReviewDateASI, firstReviewDate);
         // And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
         // Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
-        closesMeetingDate = getClosesMeetingDate(6.5, meetingType);
+        
+		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
+
+		// now set the ASI values you need to update for this If
+		editAppSpecific("1st Review Comments Due date",dateAdd(null,15));
+		if (newPlnMtg != null) {
+			logDebug("----------------the new planning meet date is:"+newPlnMtg.meetingId+"----------------");
+			//printObjProperties(newPlnMtg);
+				var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
+								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
+								+(""+ newPlnMtg.startDate).slice(0,4);
+			logDebug("now updating the date with:"+newHearingDate);
+			editAppSpecific("Projected Planning Commission Date",newHearingDate);
+		} else {
+			logDebug("Script 273: WARNING - there is no planning commission date within 45 days of your target date!");
+			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
+		}
+		
+		
+		
 		logDebug("closesMeetingDate =" + closesMeetingDate);
         //editAppSpecific(planningCommissionDateASI, aa.util.formatDate(closesMeetingDate, "MM/dd/yyyy"));
     }
