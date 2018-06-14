@@ -9,11 +9,13 @@ function dateAddHC(td, amt)
 	if (arguments.length == 3)
 		useWorking = true;
 
-	if (!td)
+	if (!td) {
 		dDate = new Date();
-	else
+	}
+	else {
 		logDebug("trying to convert date...");
 		dDate = convertDate(td);
+	}
 	logDebug("date: " + dDate);
 	var i = 0;
 	var failsafe = 0;
