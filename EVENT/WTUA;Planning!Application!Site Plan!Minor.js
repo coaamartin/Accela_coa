@@ -12,6 +12,8 @@ Sample Call:
 		"Applicant 2nd Submission Date", "Applicant 3rd Submission Date", "MESSAGE_NOTICE_PUBLIC WORKS", recordURL);
 
 */
+/****************** Per Don Bates we are commenting out this code - if you need it, please correct it ******/
+/*  ************* start of code commented out!
 var workFlowTask = "Review Distribution";
 var workFlowStatus = "In Review";
 var firstReviewDateASI = "1st Review Comments Due Date";
@@ -28,6 +30,7 @@ var recordURL = getACARecordURL(acaURLDefault);
 
 updateReviewCommentsDueDate(workFlowTask, workFlowStatus, firstReviewDateASI, secondReviewDateASI, thirdReviewDateASI, meetingType, planningCommissionDateASI,
 		applicant2ndSubmissionDateASI, applicant3rdSubmissionDateASI, emailTemplate, recordURL);
+******************** end commented out code!  */
 
 /* Script 419 created by SLS */
 logDebug("script419 WTUACreatePublicWorksDrainageRecord START."); 
