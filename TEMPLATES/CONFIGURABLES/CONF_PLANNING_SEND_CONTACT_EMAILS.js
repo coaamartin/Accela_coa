@@ -255,9 +255,6 @@
             ],
             "status": [
               "Resubmittal Requested"
-            ], 
-           "excludeRecordType": [
-		      "Planning/Application/Address/NA"
             ]
           },
           "action": {
