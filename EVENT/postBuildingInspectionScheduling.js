@@ -19,8 +19,8 @@ Script Name "POST_BUILDING_INSPECTIONSCHEDULING" , Sample Call : populateRequest
 populateRequestComment();
 function  populateRequestComment(){
 	var detailedDesc=workDescGet(capId);
-	logDebug("Getting inspection type " + rules.inspectionType);
-	var iObjResult = getLastInspectionbyType(capId, rules.inspectionType);
+	logDebug("Getting inspection type " + rules.action.inspectionType);
+	var iObjResult = getLastInspectionbyType(capId, rules.action.inspectionType);
 	if (iObjResult!=null){
 		logDebug("Updating inspection comments to " + detailedDesc);
 		iObjResult.setInspectionComments(String(detailedDesc));
