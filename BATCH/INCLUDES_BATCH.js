@@ -87,3 +87,29 @@ function getJobParam(pParamName) //gets parameter value and logs message showing
 		}
 	return ret;
 }
+
+function getAssignedStaff4Batch(itemCap) {
+	try {
+		var assignedStaff = "";
+		var cdScriptObjResult = aa.cap.getCapDetail(itemCap);
+		if (!cdScriptObjResult.getSuccess()) {
+			aa.debug("**ERROR: No cap detail script object : ",
+					cdScriptObjResult.getErrorMessage());
+			return "";
+		}
+
+		var cdScriptObj = cdScriptObjResult.getOutput();
+		if (!cdScriptObj) {
+			aa.debug("**ERROR: No cap detail script object", "");
+			return "";
+		}
+		cd = cdScriptObj.getCapDetailModel();
+		assignedStaff = cd.getAsgnStaff();
+
+		return assignedStaff
+
+	} catch (e) {
+		aa.debug("getAssignedStaff ", e);
+		return null;
+	}
+}
