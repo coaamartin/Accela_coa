@@ -1,3 +1,4 @@
+var $iTrc = ifTracer;
 /* Title :  Create child water utility permit records (WorkflowTaskUpdateAfter)
 
 Purpose :   If workflow task = "Fire Life Safety Review" and workflow status = "Approved" and the TSI field "Is there a private fire line" =
@@ -38,6 +39,8 @@ Notes:
 */
 
 activateWorkflowTasks();
+if($iTrc(!taskStatus("Quality Check", "Approved"), '!taskStatus("Quality Check", "Approved")'))
+	deactivateTask("Fee Processing");
 
 /*
 Title : Update Permit Expiration with every Resubmittal (WorkflowTaskUpdateAfter) 

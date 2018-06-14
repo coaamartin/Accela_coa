@@ -65,6 +65,8 @@ Notes:
 */
 
 activateWorkflowTasks();
+if($iTrc(!taskStatus("Quality Check", "Approved"), '!taskStatus("Quality Check", "Approved")'))
+	deactivateTask("Fee Processing");
 
 /*
 Title : Update Permit Expiration with every Resubmittal (WorkflowTaskUpdateAfter) 

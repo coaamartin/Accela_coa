@@ -240,4 +240,36 @@
         }
       ]
     },  
+    "Planning/Application/*/*": {
+      "WorkflowTaskUpdateAfter": [
+        {
+          "preScript": "",
+          "postScript": "",
+          "metadata": {
+            "description": "To run automated script based on JSON rules. Script 280",
+            "operators": {}
+          },
+          "criteria": {
+            "task": [
+              "Review Consolidation"
+            ],
+            "status": [
+              "Resubmittal Requested"
+            ]
+          },
+          "action": {
+            "notificationTemplate": "PLN RESUBMITAL REQUESTED #280",
+            "notificationReport": "",
+            "notifyContactTypes": [
+              "Applicant"
+            ],
+            "url4ACA": "",
+            "fromEmail": "noreply@auroraco.gov",
+            "additionalEmailsTo": [],
+            "createFromParent": "",
+            "reportingInfoStandards": ""
+          }
+        }
+      ]
+    }
   }
