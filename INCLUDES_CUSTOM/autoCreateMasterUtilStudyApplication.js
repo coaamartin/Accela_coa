@@ -50,6 +50,7 @@ function autoCreateMasterUtilStudyApplication(wfTaskName, workflowStatusArray, t
 			//createAppHierarchy and copy data
 			var appHierarchy = aa.cap.createAppHierarchy(capId, createChildResult);
 			copyRecordDetailsLocal(capId, createChildResult);
+			copyContacts(capId, createChildResult);
 			copyAddresses(capId, createChildResult);
 			copyParcels(capId, createChildResult);
 			copyOwner(capId, createChildResult);
