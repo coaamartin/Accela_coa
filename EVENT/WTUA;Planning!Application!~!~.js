@@ -100,26 +100,28 @@ if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 	}
 
 if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
-		var firstReviewDate = getAppSpecific(firstReviewDateASI);
-		logDebug("*****Enter NEW script257_AppAcceptanceForPln function*****");
+	var firstReviewDate = getAppSpecific(firstReviewDateASI);
+	logDebug("*****Enter NEW script257_AppAcceptanceForPln function*****");
 
-		
-		if (isEmpty(firstReviewDate)) {
+	
+	if (isEmpty(firstReviewDate)) 
+	{
 		logDebug("**script257: step 1**");
-        // If Custom Field "1st Review Comments Due date" is null
-        // Then update it with Today + 15 days
-        firstReviewDate = dateAdd(new Date(), 15, true);
-        editAppSpecific(firstReviewDateASI, firstReviewDate);
-        // And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
-        // Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
-        
-		
+		// If Custom Field "1st Review Comments Due date" is null
+		// Then update it with Today + 15 days
+		firstReviewDate = dateAdd(new Date(), 15, true);
+		editAppSpecific(firstReviewDateASI, firstReviewDate);
+	
+		// And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
+		// Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
+	
+	
 		var dToday = new Date();
 		dToday = ("0" + (dToday.getMonth() + 1)).slice(-2) + "/" 
 				+ ("0" + dToday.getDate()).slice(-2) + "/" 
 				+ dToday.getYear();
 		logDebug("LABEL (anything) dToday = " + dToday);
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAdd("03/01/2018",(7*6.5)));
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAdd(dToday,(7*6.5)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
@@ -150,8 +152,8 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
 		}
 		
-    }
-		
+	}
+	
 		var applicantEmail = null;
     var recordApplicant = getContactByType("Applicant", capId);
     if (recordApplicant) {
