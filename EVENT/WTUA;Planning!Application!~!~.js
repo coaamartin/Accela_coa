@@ -118,6 +118,7 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 		dToday = ("0" + (dToday.getMonth() + 1)).slice(-2) + "/" 
 				+ ("0" + dToday.getDate()).slice(-2) + "/" 
 				+ dToday.getYear();
+		logDebug("LABEL (anything) dToday = " + dToday);
 		var lookForPlanningMtgDate	= aa.date.parseDate(dateAdd("03/01/2018",(7*6.5)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
