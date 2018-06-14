@@ -106,7 +106,6 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 	
 	if (isEmpty(firstReviewDate)) 
 	{
-		logDebug("**script257: step 1**");
 		// If Custom Field "1st Review Comments Due date" is null
 		// Then update it with Today + 15 days
 		firstReviewDate = dateAdd(new Date(), 15, true);
@@ -131,8 +130,7 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 		logDebug("you lookForStartDate is:"+lookForEndDate.getMonth()+"/"+lookForEndDate.getDayOfMonth()+"/"+lookForEndDate.getYear());
 		
 		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
-		logDebug("**script257: step 2**");
-
+		
 		// now set the ASI values you need to update for this If
 		editAppSpecific("1st Review Comments Due date",dateAdd(null,15));
 		if (newPlnMtg != null) {
@@ -150,7 +148,8 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 		
 	}
 	
-		var applicantEmail = null;
+    logDebug("**script257 preparing email**");
+	var applicantEmail = null;
     var recordApplicant = getContactByType("Applicant", capId);
     if (recordApplicant) {
         applicantEmail = recordApplicant.getEmail();
@@ -159,7 +158,9 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
         logDebug("**WARN Applicant on record " + capId + " has no email");
         return false
     }
+
     var files = new Array();
+	var emailTemplate = "PLN APPLICATION ACCEPTANCE FOR PLANNING # 257";
     var emailParams = aa.util.newHashtable();
     addParameter(emailParams, "$$altID$$", cap.getCapModel().getAltID());
     addParameter(emailParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
