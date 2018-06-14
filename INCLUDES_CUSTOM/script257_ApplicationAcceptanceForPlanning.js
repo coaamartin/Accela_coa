@@ -21,6 +21,7 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 
 		
 		if (isEmpty(firstReviewDate)) {
+		logDebug("**script257: step 1**");
         // If Custom Field "1st Review Comments Due date" is null
         // Then update it with Today + 15 days
         firstReviewDate = dateAdd(new Date(), 15, true);
@@ -28,7 +29,26 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
         // And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
         // Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
         
+		
+		var dToday = new Date();
+		dToday = ("0" + (dToday.getMonth() + 1)).slice(-2) + "/" 
+				+ ("0" + dToday.getDate()).slice(-2) + "/" 
+				+ dToday.getYear();
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAdd("03/01/2018",(7*6.5)));
+		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
+								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
+								+ lookForPlanningMtgDate.getYear();
+		logDebug("lookforMMDDYYYY:"+lookForMMDDYYYY);
+		//Set up the 'look back' from the target date for searching
+		var lookForStartDate		= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
+		logDebug("you lookForStartDate is:"+lookForStartDate.getMonth()+"/"+lookForStartDate.getDayOfMonth()+"/"+lookForStartDate.getYear());
+		
+		//Set up the 'look forward' from the target date for searching
+		var lookForEndDate			= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+45));
+		logDebug("you lookForStartDate is:"+lookForEndDate.getMonth()+"/"+lookForEndDate.getDayOfMonth()+"/"+lookForEndDate.getYear());
+		
 		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
+		logDebug("**script257: step 2**");
 
 		// now set the ASI values you need to update for this If
 		editAppSpecific("1st Review Comments Due date",dateAdd(null,15));
