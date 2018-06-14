@@ -149,33 +149,6 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 	}
 	
     logDebug("**script257 preparing email**");
-	var applicantEmail = null;
-    var recordApplicant = getContactByType("Applicant", capId);
-    if (recordApplicant) {
-        applicantEmail = recordApplicant.getEmail();
-    }
-    if (applicantEmail == null) {
-        logDebug("**WARN Applicant on record " + capId + " has no email");
-        return false
-    }
-
-    var files = new Array();
-	var emailTemplate = "PLN APPLICATION ACCEPTANCE FOR PLANNING # 257";
-    var emailParams = aa.util.newHashtable();
-    addParameter(emailParams, "$$altID$$", cap.getCapModel().getAltID());
-    addParameter(emailParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
-    addParameter(emailParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
-    addParameter(emailParams, "$$wfComment$$", wfComment);
-    addParameter(emailParams, "$$wfTask$$", wfTask);
-    addParameter(emailParams, "$$wfStatus$$", wfStatus);
-    addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
-    var sent = aa.document.sendEmailByTemplateName("", applicantEmail, "", emailTemplate, emailParams, files);
-    if (!sent.getSuccess()) {
-        logDebug("**ERROR sending email failed, error:" + sent.getErrorMessage());
-        return false;
-    }
-
-	} else {
-		return false;
-	}
+	sendEmailNotification("PLN APPLICATION ACCEPTANCE FOR PLANNING # 257","");
+	
 }		
