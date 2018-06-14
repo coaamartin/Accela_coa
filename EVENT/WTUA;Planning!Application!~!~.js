@@ -147,9 +147,15 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			}
 			
 		}
-		var reportName="WorkFlowTasksOverdue";
 		logDebug("**script257 preparing email**");
-		sendEmailNotification("PLN APPLICATION ACCEPTANCE FOR PLANNING # 257",reportName);
 		
-	}
+		// send an email to the applicant - we're waiting on the actual template here.
+		var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+		var emailParameters = aa.util.newHashtable();
+		var reportFile = [];
+		var sendResult = sendNotification("noreply@aurora.gov","eric@esilverliningsolutions.com","","TEST_FOR_SCRIPTS",emailParameters,reportFile,capID4Email);
+		if (!sendResult) 
+			{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+		else
+			{ logDebug("Sent Notification"); }	
 }		
