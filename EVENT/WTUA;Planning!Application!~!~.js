@@ -95,60 +95,61 @@ script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReviewDateASI, 
 
 function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReviewDateASI, meetingType, planningCommissionDateASI, emailTemplate, recordURL) {
 
-if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
-		return false;
-	}
+	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
+			return false;
+		}
 
-if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
-	var firstReviewDate = getAppSpecific(firstReviewDateASI);
-	logDebug("*****Enter NEW script257_AppAcceptanceForPln function*****");
+	if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
+		var firstReviewDate = getAppSpecific(firstReviewDateASI);
+		logDebug("*****Enter NEW script257_AppAcceptanceForPln function*****");
 
-	
-	if (isEmpty(firstReviewDate)) 
-	{
-		// If Custom Field "1st Review Comments Due date" is null
-		// Then update it with Today + 15 days
-		firstReviewDate = dateAdd(new Date(), 15, true);
-		editAppSpecific(firstReviewDateASI, firstReviewDate);
-	
-		// And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
-		// Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
-		var dToday = new Date();
-
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*6.5)));
-		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
-								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
-								+ lookForPlanningMtgDate.getYear();
-		logDebug("lookforMMDDYYYY:"+lookForMMDDYYYY);
-
-		//Set up the 'look back' from the target date for searching
-		var lookForStartDate		= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
-		logDebug("you lookForStartDate is:"+lookForStartDate.getMonth()+"/"+lookForStartDate.getDayOfMonth()+"/"+lookForStartDate.getYear());
 		
-		//Set up the 'look forward' from the target date for searching
-		var lookForEndDate			= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+45));
-		logDebug("you lookForStartDate is:"+lookForEndDate.getMonth()+"/"+lookForEndDate.getDayOfMonth()+"/"+lookForEndDate.getYear());
+		if (isEmpty(firstReviewDate)) 
+		{
+			// If Custom Field "1st Review Comments Due date" is null
+			// Then update it with Today + 15 days
+			firstReviewDate = dateAdd(new Date(), 15, true);
+			editAppSpecific(firstReviewDateASI, firstReviewDate);
 		
-		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
-		
-		// now set the ASI values you need to update for this If
-		editAppSpecific("1st Review Comments Due date",dateAdd(null,15));
-		if (newPlnMtg != null) {
-			logDebug("----------------the new planning meet date is:"+newPlnMtg.meetingId+"----------------");
-			//printObjProperties(newPlnMtg);
-				var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
-								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
-								+(""+ newPlnMtg.startDate).slice(0,4);
-			logDebug("now updating the date with:"+newHearingDate);
-			editAppSpecific("Projected Planning Commission Date",newHearingDate);
-		} else {
-			logDebug("Script 257: WARNING - there is no planning commission date within 45 days of your target date!");
-			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
+			// And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
+			// Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
+			var dToday = new Date();
+
+			var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*6.5)));
+			var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
+									+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
+									+ lookForPlanningMtgDate.getYear();
+			logDebug("lookforMMDDYYYY:"+lookForMMDDYYYY);
+
+			//Set up the 'look back' from the target date for searching
+			var lookForStartDate		= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
+			logDebug("you lookForStartDate is:"+lookForStartDate.getMonth()+"/"+lookForStartDate.getDayOfMonth()+"/"+lookForStartDate.getYear());
+			
+			//Set up the 'look forward' from the target date for searching
+			var lookForEndDate			= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+45));
+			logDebug("you lookForStartDate is:"+lookForEndDate.getMonth()+"/"+lookForEndDate.getDayOfMonth()+"/"+lookForEndDate.getYear());
+			
+			var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
+			
+			// now set the ASI values you need to update for this If
+			editAppSpecific("1st Review Comments Due date",dateAdd(null,15));
+			if (newPlnMtg != null) {
+				logDebug("----------------the new planning meet date is:"+newPlnMtg.meetingId+"----------------");
+				//printObjProperties(newPlnMtg);
+					var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
+									+(""+ newPlnMtg.startDate).slice(8,10)+"/"
+									+(""+ newPlnMtg.startDate).slice(0,4);
+				logDebug("now updating the date with:"+newHearingDate);
+				editAppSpecific("Projected Planning Commission Date",newHearingDate);
+			} else {
+				logDebug("Script 257: WARNING - there is no planning commission date within 45 days of your target date!");
+				comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
+			}
+			
 		}
 		
+		logDebug("**script257 preparing email**");
+		sendEmailNotification("PLN APPLICATION ACCEPTANCE FOR PLANNING # 257","");
+		
 	}
-	
-    logDebug("**script257 preparing email**");
-	sendEmailNotification("PLN APPLICATION ACCEPTANCE FOR PLANNING # 257","");
-	
 }		
