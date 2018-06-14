@@ -27,8 +27,12 @@ function setEAgendaDueDate(workFlowTask, workflowStatusArray, wfTaskToUpdate, me
 			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
 				var meetingDate = new Date(meetings[m].getMeeting().getStartDate().getTime());
 				var prev15 = getPrevWorkingDays(meetingDate, 15);
+				var prev20 = getPrevWorkingDays(meetingDate, 20);
 				prev15 = aa.util.formatDate(prev15, "MM/dd/YYYY");
+				prev20 = aa.util.formatDate(prev20, "MM/dd/YYYY");
 				editTaskDueDate(wfTaskToUpdate, prev15);
+				updateTaskAssignedDate(wfTaskToUpdate,prev20);
+	            //logDebug("Prev 20: " + prev20);
 				break;//stop meetings loop
 			}//meeting found
 		}//for all meetings
@@ -36,4 +40,6 @@ function setEAgendaDueDate(workFlowTask, workflowStatusArray, wfTaskToUpdate, me
 		return false;
 	}
 	return true;
+
+	
 }
