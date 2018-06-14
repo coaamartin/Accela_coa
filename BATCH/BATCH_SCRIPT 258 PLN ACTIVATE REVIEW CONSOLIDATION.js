@@ -75,17 +75,17 @@ eval(getScriptText("INCLUDES_CUSTOM", null, useCustomScriptFile));
 eval(getScriptText("INCLUDES_BATCH", null, false));
 
 function getMasterScriptText(vScriptName) {
-	var servProvCode = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		servProvCode = arguments[1]; // use different serv prov code
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-	}
+    var servProvCode = aa.getServiceProviderCode();
+    if (arguments.length > 1)
+        servProvCode = arguments[1]; // use different serv prov code
+    vScriptName = vScriptName.toUpperCase();
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    try {
+        var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+        return emseScript.getScriptText() + "";
+    } catch (err) {
+        return "";
+    }
 }
 
 function getScriptText(vScriptName, servProvCode, useProductScripts) {
@@ -107,131 +107,131 @@ function getScriptText(vScriptName, servProvCode, useProductScripts) {
 | CORE EXPIRATION BATCH FUNCTIONALITY
 /------------------------------------------------------------------------------------------------------*/
 try {
-	showMessage = false;
-	showDebug = true;
-	if (String(aa.env.getValue("showDebug")).length > 0) {
-		showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
-	}
+    showMessage = false;
+    showDebug = true;
+    if (String(aa.env.getValue("showDebug")).length > 0) {
+        showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
+    }
 
-	sysDate = aa.date.getCurrentDate();
-	var startDate = new Date();
-	var startTime = startDate.getTime(); // Start timer
-	var systemUserObj = aa.person.getUser("ADMIN").getOutput();
+    sysDate = aa.date.getCurrentDate();
+    var startDate = new Date();
+    var startTime = startDate.getTime(); // Start timer
+    var systemUserObj = aa.person.getUser("ADMIN").getOutput();
 
-	sysDateMMDDYYYY = dateFormatted(sysDate.getMonth(), sysDate.getDayOfMonth(), sysDate.getYear(), "");
-	batchJobResult = aa.batchJob.getJobID();
-	batchJobName = "" + aa.env.getValue("BatchJobName");
-	batchJobID = 0;
+    sysDateMMDDYYYY = dateFormatted(sysDate.getMonth(), sysDate.getDayOfMonth(), sysDate.getYear(), "");
+    batchJobResult = aa.batchJob.getJobID();
+    batchJobName = "" + aa.env.getValue("BatchJobName");
+    batchJobID = 0;
 
-	if (batchJobResult.getSuccess()) {
-		batchJobID = batchJobResult.getOutput();
-		logDebug("Batch Job " + batchJobName + " Job ID is " + batchJobID);
-	} else {
-		logDebug("Batch job ID not found " + batchJobResult.getErrorMessage());
-	}
-	
-	/*------------------------------------------------------------------------------------------------------/
-	| <===========Main=Loop================>
-	/-----------------------------------------------------------------------------------------------------*/
+    if (batchJobResult.getSuccess()) {
+        batchJobID = batchJobResult.getOutput();
+        logDebug("Batch Job " + batchJobName + " Job ID is " + batchJobID);
+    } else {
+        logDebug("Batch job ID not found " + batchJobResult.getErrorMessage());
+    }
+    
+    /*------------------------------------------------------------------------------------------------------/
+    | <===========Main=Loop================>
+    /-----------------------------------------------------------------------------------------------------*/
 
-	logDebug("BATCH_SCRIPT 258 PLN ACTIVATE REVIEW CONSOLIDATION:  Start of Job");
+    logDebug("BATCH_SCRIPT 258 PLN ACTIVATE REVIEW CONSOLIDATION:  Start of Job");
 
-	mainProcess();
+    mainProcess();
 
-	logDebug("BATCH_SCRIPT 258 PLN ACTIVATE REVIEW CONSOLIDATION:  End of Job: Elapsed Time : " + elapsed() + " Seconds");
-	
-	/*------------------------------------------------------------------------------------------------------/
-	| <===========END=Main=Loop================>
-	/-----------------------------------------------------------------------------------------------------*/	
+    logDebug("BATCH_SCRIPT 258 PLN ACTIVATE REVIEW CONSOLIDATION:  End of Job: Elapsed Time : " + elapsed() + " Seconds");
+    
+    /*------------------------------------------------------------------------------------------------------/
+    | <===========END=Main=Loop================>
+    /-----------------------------------------------------------------------------------------------------*/    
 } catch (err) {
-	handleError(err,"Batch Job:" + batchJobName + " Job ID:" + batchJobID);
+    handleError(err,"Batch Job:" + batchJobName + " Job ID:" + batchJobID);
 }
 
 /*------------------------------------------------------------------------------------------------------/
 | <=========== Errors and Reporting
 /------------------------------------------------------------------------------------------------------*/
 if (debug.indexOf("**ERROR") > 0) {
-	aa.env.setValue("ScriptReturnCode", "1");
-	aa.env.setValue("ScriptReturnMessage", debug);
+    aa.env.setValue("ScriptReturnCode", "1");
+    aa.env.setValue("ScriptReturnMessage", debug);
 } else {
-	aa.env.setValue("ScriptReturnCode", "0");
-	if (showMessage) {
-		aa.env.setValue("ScriptReturnMessage", message);
-	}
-	if (showDebug) {
-		aa.env.setValue("ScriptReturnMessage", debug);
-	}
+    aa.env.setValue("ScriptReturnCode", "0");
+    if (showMessage) {
+        aa.env.setValue("ScriptReturnMessage", message);
+    }
+    if (showDebug) {
+        aa.env.setValue("ScriptReturnMessage", debug);
+    }
 }
 /*------------------------------------------------------------------------------------------------------/
 | FUNCTIONS (mainProcess is the core function for processing expiration records)
 /------------------------------------------------------------------------------------------------------*/
 function mainProcess() {
-	var capIdsResult = aa.cap.getByAppType("Planning", "Application");
-	if(!capIdsResult.getSuccess()){
-		logDebug("UNABLE to get applications: " + capIdsResult.getErrorMessage());
-		return false;
-	}
-	
-	var revConsTsk = "Review Consolidation";
-	var reviewTskArry = ["Historic Review","Landscape Review","Airport Review","Addressing Review","Planning Review",
-	                     "Forestry Review","Forestry","Parks Review","Licensing Review","Code Enforcement Review",
-						 "Fire Review","Urban Renewal Review","Neighborhood Services Review","Neighborhood Liaison Review",
-						 "Traffic Review","Life Safety Review","Life Safety","Public Art","Water Dept Review","Water Department Review",
-						 "ODA Review","Real Property Review","Civil Review","Aurora Marijuana Enforcement"]
-	
-	var capIds = capIdsResult.getOutput();
-	for(each in capIds){
-		var oneRec = capIds[each];
-		var capId = oneRec.getCapID();
-		var altId = capId.getCustomID();
-		var cap = aa.cap.getCap(capId).getOutput();
+    var capIdsResult = aa.cap.getByAppType("Planning", "Application");
+    if(!capIdsResult.getSuccess()){
+        logDebug("UNABLE to get applications: " + capIdsResult.getErrorMessage());
+        return false;
+    }
+    
+    var revConsTsk = "Review Consolidation";
+    var reviewTskArry = ["Historic Review","Landscape Review","Airport Review","Addressing Review","Planning Review",
+                         "Forestry Review","Forestry","Parks Review","Licensing Review","Code Enforcement Review",
+                         "Fire Review","Urban Renewal Review","Neighborhood Services Review","Neighborhood Liaison Review",
+                         "Traffic Review","Life Safety Review","Life Safety","Public Art","Water Dept Review","Water Department Review",
+                         "ODA Review","Real Property Review","Civil Review","Aurora Marijuana Enforcement"]
+    
+    var capIds = capIdsResult.getOutput();
+    for(each in capIds){
+        var oneRec = capIds[each];
+        var capId = oneRec.getCapID();
+        var altId = capId.getCustomID();
+        var cap = aa.cap.getCap(capId).getOutput();
         var appTypeString = cap.getCapType().toString();
         appTypeArray = appTypeString.split("/");
-		
-		if(!matches(appTypeString, "Planning/Application/Conditional Use/NA", "Planning/Application/Master Plan/Amendment",
-		                           "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA",
-								   "Planning/Application/Rezoning/NA", "Planning/Application/Site Plan/Amendment",
-								   "Planning/Application/Site Plan/Major", "Planning/Application/Site Plan/Minor")) continue;
-								   
-		logDebug("Checking record " + altId);
-		
-		var assignedUser = getAssignedStaff4Batch(capId);
-		var parTskDueIn7 = parallelTaskDueIn7Days(capId);
-		
-		if(!parTskDueIn7) continue;
-		
-		for(eachTask in reviewTskArry){
-			revTsk = reviewTskArry[eachTask];
-			
-			if(isTaskActive4Batch(capId, revTsk) && !isTaskActive4Batch(capId, revConsTsk)){
-				var revTskDueDate = getTaskDueDate4Batch(capId, revTsk);
-				activateTask4Batch(capId, revConsTsk);
-				assignTask4Batch(capId, revConsTsk, assignedUser);
-				editTaskDueDate4Batch(capId, revConsTsk, revTskDueDate);
-				break;
-			}
-		}
-	}
+        
+        if(!matches(appTypeString, "Planning/Application/Conditional Use/NA", "Planning/Application/Master Plan/Amendment",
+                                   "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA",
+                                   "Planning/Application/Rezoning/NA", "Planning/Application/Site Plan/Amendment",
+                                   "Planning/Application/Site Plan/Major", "Planning/Application/Site Plan/Minor")) continue;
+                                   
+        logDebug("Checking record " + altId);
+        
+        var assignedUser = getAssignedStaff4Batch(capId);
+        var parTskDueIn7 = parallelTaskDueIn7Days(capId);
+        
+        if(!parTskDueIn7) continue;
+        
+        for(eachTask in reviewTskArry){
+            revTsk = reviewTskArry[eachTask];
+            
+            if(isTaskActive4Batch(capId, revTsk) && !isTaskActive4Batch(capId, revConsTsk)){
+                var revTskDueDate = getTaskDueDate4Batch(capId, revTsk);
+                activateTask4Batch(capId, revConsTsk);
+                assignTask4Batch(capId, revConsTsk, assignedUser);
+                editTaskDueDate4Batch(capId, revConsTsk, revTskDueDate);
+                break;
+            }
+        }
+    }
 }
 
 
 function parallelTaskDueIn7Days(itemCap){
-	var sevenDaysAhead = aa.date.parseDate(dateAdd(null, 7));
-	var tasksArr = aa.workflow.getTasks(itemCap).getOutput(); 
+    var sevenDaysAhead = aa.date.parseDate(dateAdd(null, 7));
+    var tasksArr = aa.workflow.getTasks(itemCap).getOutput(); 
     for(i in tasksArr){
-	    var task = tasksArr[i];
+        var task = tasksArr[i];
         var taskItem = tasksArr[i].getTaskItem(); //logDebug("taskItem: " + tasksArr[i].getTaskDescription().trim());
         //aa.print("taskItem.getParallelInd(): " + taskItem.getParallelInd())
         if(taskItem.getParallelInd() != "000"){
             var taskName = tasksArr[i].getTaskDescription().trim();
             var dueDate = task.getDueDate();
-			if(dueDate && dueDate != undefined) {
-				if(days_between_batch(dueDate, sevenDaysAhead) == 0) return true;
-			}
+            if(dueDate && dueDate != undefined) {
+                if(days_between_batch(dueDate, sevenDaysAhead) == 0) return true;
+            }
         }
     }
-	
-	return false;
+    
+    return false;
 }
 
 function printObjProperties(obj){
