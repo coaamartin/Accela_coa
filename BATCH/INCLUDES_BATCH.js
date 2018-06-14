@@ -296,3 +296,37 @@ function formatDateX(scriptDate) {
 	ret += scriptDate.getYear();
 	return ret;
 }
+
+
+
+function days_between_batch(date1, date2) {
+
+
+
+    // The number of milliseconds in one day
+
+    var ONE_DAY = 1000 * 60 * 60 * 24
+
+
+
+    // Convert both dates to milliseconds
+
+    var date1_ms = date1.getEpochMilliseconds()
+
+    var date2_ms = date2.getEpochMilliseconds()
+
+
+
+    // Calculate the difference in milliseconds
+
+    var difference_ms = Math.abs(date1_ms - date2_ms)
+
+
+
+    // Convert back to days and return
+
+    return Math.round(difference_ms/ONE_DAY)
+
+
+
+}
