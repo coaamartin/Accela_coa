@@ -204,9 +204,11 @@ function mainProcess() {
 			revTsk = reviewTskArry[eachTask];
 			
 			if(isTaskActive4Batch(capId, revTsk) && !isTaskActive4Batch(capId, revConsTsk)){
+				var revTskDueDate = getTaskDueDate4Batch(capId, revTsk);
 				activateTask4Batch(capId, revConsTsk);
 				assignTask4Batch(capId, revConsTsk, assignedUser);
-				//editTaskDueDate4Batch(capId, revConsTsk, "");
+				editTaskDueDate4Batch(capId, revConsTsk, revTskDueDate);
+				break;
 			}
 		}
 	}
