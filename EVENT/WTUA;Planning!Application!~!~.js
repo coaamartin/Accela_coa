@@ -147,9 +147,9 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			}
 			
 		}
-		
+		var reportName="WorkFlowTasksOverdue";
 		logDebug("**script257 preparing email**");
-		sendEmailNotification("PLN APPLICATION ACCEPTANCE FOR PLANNING # 257","");
+		sendEmailNotification("PLN APPLICATION ACCEPTANCE FOR PLANNING # 257",reportName);
 		
 	}
 }		
