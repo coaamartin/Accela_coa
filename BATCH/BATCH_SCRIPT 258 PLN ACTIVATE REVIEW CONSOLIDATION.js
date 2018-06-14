@@ -166,8 +166,8 @@ if (debug.indexOf("**ERROR") > 0) {
 | FUNCTIONS (mainProcess is the core function for processing expiration records)
 /------------------------------------------------------------------------------------------------------*/
 function mainProcess() {
+	//var sevenDaysAhead = ;
 	var capIdsResult = aa.cap.getByAppType("Planning", "Application");
-	
 	if(!capIdsResult.getSuccess()){
 		logDebug("UNABLE to get applications: " + capIdsResult.getErrorMessage());
 		return false;
@@ -178,9 +178,40 @@ function mainProcess() {
 		var oneRec = capIds[each];
 		var capId = oneRec.getCapID();
 		var altId = capId.getCustomID();
-		var assignedUser = getAssignedStaff4Batch(capId);
+		var cap = aa.cap.getCap(capId).getOutput();
+        var appTypeString = cap.getCapType().toString();
+        appTypeArray = appTypeString.split("/");
 		
+		if(!matches(appTypeString, "Planning/Application/Conditional Use/NA", "Planning/Application/Master Plan/Amendment",
+		                           "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA",
+								   "Planning/Application/Rezoning/NA", "Planning/Application/Site Plan/Amendment",
+								   "Planning/Application/Site Plan/Major", "Planning/Application/Site Plan/Minor")) continue;
+								   
+		logDebug("Checking record " + altId);
+		
+		var assignedUser = getAssignedStaff4Batch(capId);
+		var parTskDueIn7 = parallelTaskDueIn7Days(capId);
+		aa.print(parTskDueIn7);
 	}
+}
+
+
+function parallelTaskDueIn7Days(itemCap){
+	var tasksArr = aa.workflow.getTasks(itemCap).getOutput(); 
+    for(i in tasksArr){
+	    var task = tasksArr[i];
+        var taskItem = tasksArr[i].getTaskItem(); //logDebug("taskItem: " + tasksArr[i].getTaskDescription().trim());
+        //aa.print("taskItem.getParallelInd(): " + taskItem.getParallelInd())
+        if(taskItem.getParallelInd() != "000"){
+            var taskName = tasksArr[i].getTaskDescription().trim();
+            var dueDate = task.getDueDate();
+			if(dueDate && dueDate != undefined) {
+				if(days_between(dueDate, sevenDaysAhead) == 0) return true;
+			}
+        }
+    }
+	
+	return false;
 }
 
 function printObjProperties(obj){
