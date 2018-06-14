@@ -6,7 +6,7 @@
 function planningCaseAssignmentChange(){
 	try {
 		   var assignedStaff=getAssignedStaff(capId);
-		logDegug("assignedStaff:" + assignedStaff);
+		logDebug("assignedStaff:" + assignedStaff);
    		if (typeof(assignedStaff)!="undefined" && assignedStaff!=null && assignedStaff!=""){
    			assignWfTask(assignedStaff,capId);
 		}
