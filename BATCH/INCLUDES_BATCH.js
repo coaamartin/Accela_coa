@@ -179,3 +179,75 @@ function assignTask4Batch(itemCap, wfstr,username) // optional process name
 			}			
 		}
 	}
+
+function activateTask4Batch(itemCap, wfstr) // optional process name
+{
+	var useProcess = false;
+	var processName = "";
+	if (arguments.length == 3) {
+		processName = arguments[2]; // subprocess
+		useProcess = true;
+	}
+
+	var workflowResult = aa.workflow.getTaskItems(itemCap, wfstr, processName, null, null, null);
+	if (workflowResult.getSuccess())
+		var wfObj = workflowResult.getOutput();
+	else {
+		logMessage("**ERROR: Failed to get workflow object: " + s_capResult.getErrorMessage());
+		return false;
+	}
+
+	for (i in wfObj) {
+		var fTask = wfObj[i];
+		if (fTask.getTaskDescription().toUpperCase().equals(wfstr.toUpperCase()) && (!useProcess || fTask.getProcessCode().equals(processName))) {
+			var stepnumber = fTask.getStepNumber();
+			var processID = fTask.getProcessID();
+
+			if (useProcess) {
+				aa.workflow.adjustTask(itemCap, stepnumber, processID, "Y", "N", null, null)
+			} else {
+				aa.workflow.adjustTask(itemCap, stepnumber, "Y", "N", null, null)
+			}
+			logMessage("Activating Workflow Task: " + wfstr);
+			logDebug("Activating Workflow Task: " + wfstr);
+		}
+	}
+}
+
+function editTaskDueDate4Batch(itemCap, wfstr, wfdate) // optional process name.  if wfstr == "*", set for all tasks
+{
+	var useProcess = false;
+	var processName = "";
+	if (arguments.length == 4) {
+		processName = arguments[3]; // subprocess
+		useProcess = true;
+	}
+
+	var taskDesc = wfstr;
+	if (wfstr == "*") {
+		taskDesc = "";
+	}
+	var workflowResult = aa.workflow.getTaskItems(itemCap, taskDesc, processName, null, null, null);
+	if (workflowResult.getSuccess())
+		wfObj = workflowResult.getOutput();
+	else {
+		logMessage("**ERROR: Failed to get workflow object: " + s_capResult.getErrorMessage());
+		return false;
+	}
+
+	for (i in wfObj) {
+		var fTask = wfObj[i];
+		if ((fTask.getTaskDescription().toUpperCase().equals(wfstr.toUpperCase()) || wfstr == "*") && (!useProcess || fTask.getProcessCode().equals(processName))) {
+			wfObj[i].setDueDate(aa.date.parseDate(wfdate));
+			var fTaskModel = wfObj[i].getTaskItem();
+			var tResult = aa.workflow.adjustTaskWithNoAudit(fTaskModel);
+			if (tResult.getSuccess())
+				logDebug("Set Workflow Task: " + fTask.getTaskDescription() + " due Date " + wfdate);
+			else {
+				logMessage("**ERROR: Failed to update due date on workflow: " + tResult.getErrorMessage());
+				return false;
+			}
+		}
+	}
+}
+	

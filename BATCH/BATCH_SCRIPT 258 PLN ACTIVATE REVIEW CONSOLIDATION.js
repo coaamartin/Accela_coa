@@ -166,12 +166,18 @@ if (debug.indexOf("**ERROR") > 0) {
 | FUNCTIONS (mainProcess is the core function for processing expiration records)
 /------------------------------------------------------------------------------------------------------*/
 function mainProcess() {
-	//var sevenDaysAhead = ;
 	var capIdsResult = aa.cap.getByAppType("Planning", "Application");
 	if(!capIdsResult.getSuccess()){
 		logDebug("UNABLE to get applications: " + capIdsResult.getErrorMessage());
 		return false;
 	}
+	
+	var revConsTsk = "Review Consolidation";
+	var reviewTskArry = ["Historic Review","Landscape Review","Airport Review","Addressing Review","Planning Review",
+	                     "Forestry Review","Forestry","Parks Review","Licensing Review","Code Enforcement Review",
+						 "Fire Review","Urban Renewal Review","Neighborhood Services Review","Neighborhood Liaison Review",
+						 "Traffic Review","Life Safety Review","Life Safety","Public Art","Water Dept Review","Water Department Review",
+						 "ODA Review","Real Property Review","Civil Review","Aurora Marijuana Enforcement"]
 	
 	var capIds = capIdsResult.getOutput();
 	for(each in capIds){
@@ -191,12 +197,24 @@ function mainProcess() {
 		
 		var assignedUser = getAssignedStaff4Batch(capId);
 		var parTskDueIn7 = parallelTaskDueIn7Days(capId);
-		aa.print(parTskDueIn7);
+		
+		if(!parTskDueIn7) continue;
+		
+		for(eachTask in reviewTskArry){
+			revTsk = reviewTskArry[eachTask];
+			
+			if(isTaskActive4Batch(capId, revTsk) && !isTaskActive4Batch(capId, revConsTsk)){
+				activateTask4Batch(capId, revConsTsk);
+				assignTask4Batch(capId, revConsTsk, assignedUser);
+				//editTaskDueDate4Batch(capId, revConsTsk, "");
+			}
+		}
 	}
 }
 
 
 function parallelTaskDueIn7Days(itemCap){
+	var sevenDaysAhead = aa.date.parseDate(dateAdd(null, 7));
 	var tasksArr = aa.workflow.getTasks(itemCap).getOutput(); 
     for(i in tasksArr){
 	    var task = tasksArr[i];
@@ -206,7 +224,7 @@ function parallelTaskDueIn7Days(itemCap){
             var taskName = tasksArr[i].getTaskDescription().trim();
             var dueDate = task.getDueDate();
 			if(dueDate && dueDate != undefined) {
-				if(days_between(dueDate, sevenDaysAhead) == 0) return true;
+				if(days_between_batch(dueDate, sevenDaysAhead) == 0) return true;
 			}
         }
     }
@@ -230,4 +248,36 @@ function printObjProperties(obj){
             aa.print(idx + ":  " + obj[idx]);
         }
     }
+}
+
+function days_between_batch(date1, date2) {
+
+
+
+    // The number of milliseconds in one day
+
+    var ONE_DAY = 1000 * 60 * 60 * 24
+
+
+
+    // Convert both dates to milliseconds
+
+    var date1_ms = date1.getEpochMilliseconds()
+
+    var date2_ms = date2.getEpochMilliseconds()
+
+
+
+    // Calculate the difference in milliseconds
+
+    var difference_ms = Math.abs(date1_ms - date2_ms)
+
+
+
+    // Convert back to days and return
+
+    return Math.round(difference_ms/ONE_DAY)
+
+
+
 }
