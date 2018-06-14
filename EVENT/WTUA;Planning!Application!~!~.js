@@ -93,7 +93,8 @@ script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReviewDateASI, 
 //("Application Acceptance", [ "Accepted" ], "Planning Commission", "Planning Commission Hearing Date", "PLN APPLICATION ACCEPTANCE FOR PLANNING # 257");
 }
 
-function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReviewDateASI, meetingType, planningCommissionDateASI, emailTemplate, recordURL) {
+function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReviewDateASI, meetingType, planningCommissionDateASI, emailTemplate, recordURL) 
+{
 
 	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 			return false;
@@ -158,4 +159,5 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 		else
 			{ logDebug("Sent Notification"); }	
+	}
 }		
