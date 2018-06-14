@@ -115,10 +115,7 @@ if (matches(wfTask, workFlowTask) && matches(wfStatus, workFlowStatus)) {
 		// And update the custom Field "Projected Planning Commission Hearing date" by searching the Planning
 		// Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
 		var dToday = new Date();
-		var dTodayStr = "" + ("0" + (dToday.getMonth() + 1)).slice(-2) + "/" 
-				+ ("0" + dToday.getDate()).slice(-2) + "/" 
-				+ (1900 + dToday.getYear());
-		logDebug("dtodayStr = " + dTodayStr);
+
 		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*6.5)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
