@@ -1,4 +1,4 @@
-//THIS IS SAME AS SEN_EMAIL_ASYNC BUT IT HAS THE FOLOWING ADDITON:
+//THIS IS SAME AS SEND_EMAIL_ASYNC BUT IT HAS THE FOLOWING ADDITON:
 //  IF !sendEmailToAddresses && emailTemplate THEN USE TO ADDRESS FROM EMAIL NOTIFICATION TEMPLATE
 
 //Get environmental variables pass into the script
@@ -88,6 +88,7 @@ try {
 		if (emailTemplate && emailTemplate != '') {
 			var tmpl = aa.communication.getNotificationTemplate(emailTemplate).getOutput();
             sendEmailToAddresses = tmpl.getEmailTemplateModel().getTo();
+            logDebug("getting sendEmailToAddresses from eamil template")
             if(sendEmailToAddresses) {
                 //this part replaces semicolons with commas (its commmon to deliminate with semicolons, but this function expects comma deliminated)
                 sendEmailToAddresses = sendEmailToAddresses.replace(";", "'")
