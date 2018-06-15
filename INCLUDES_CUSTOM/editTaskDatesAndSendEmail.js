@@ -16,7 +16,11 @@ logDebug("start Script32");
 	var meetingGroupName  = result.output.getMeetingGroupName();
 	var meetingGroupType = result.output.getMeetingGroupType();
 	
-
+	logDebug("calId: "+ calId);
+	logDebug("meetingId: "+ meetingId);
+	logDebug("result: "+ result);
+	logDebug("meetingGroupName: "+ meetingGroupName);
+	logDebug("meetingGroupType: "+ meetingGroupType);
 
 	if (calId == null || calId == "" || meetingId == null || meetingId == "") {
 		logDebug("**WARN no calendarId or MeetingId in session!, capId=" + capId);
