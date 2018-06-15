@@ -57,7 +57,7 @@
           },
           "criteria": {
             "documentCategory": [],
-            "documentGroup": [],
+            "documentGroup": ["PLN_ZONE"],
             "workFlow": {},
             "isCreatedByACA": false,
             "isACAEvent": false,
@@ -103,8 +103,8 @@
             "operators": {}
           },
           "criteria": {
-            "documentCategory": [],
-            "documentGroup": [],
+            "documentCategory": ["Referral Letter"],
+            "documentGroup": ["PLN_ZONE"],
             "workFlow": {},
             "isCreatedByACA": false,
             "isACAEvent": true,
