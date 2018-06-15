@@ -219,6 +219,6 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 	logDebug("script277_Match on task/status");
 	// get Record assigned staff 
 	var assignedStaff = getAssignedStaff();
-	assignTask("Hearing Scheduling",assignedStaff);
+	assignTask("Hearing Scheduled",assignedStaff);
 }
 logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
