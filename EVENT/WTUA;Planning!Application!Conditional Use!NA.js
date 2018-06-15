@@ -201,3 +201,22 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 	sendEmail("TEST_FOR_SCRIPTS");
 }
 logDebug("script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule end.");
+
+/*
+Script 277
+Record Types:	​Planning/Application/Conditional Use/NA 
+				Planning/Application/Rezoning/NA 
+				Planning/Application/Site Plan/Major
+				Planning/Application/​​Site Plan/Amendment
+
+Desc:			see Script Tracker for script 277
+
+Created By: Silver Lining Solutions
+*/
+logDebug("START of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
+if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStatus == "Ready for Planning Commission")
+{
+	// get Record assigned staff 
+	var assignedStaff = getAssignedStaff();
+}
+logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
