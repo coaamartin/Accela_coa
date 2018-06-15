@@ -1,3 +1,4 @@
+var $iTrc = ifTracer;
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Set workflow due date based on plan review timelines(WorkflowTaskUpdateAfter).
 
@@ -37,3 +38,10 @@ Notes:
 
 updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submittal Number");
 
+if($iTrc(wfTask == "Plans Coordination" && wfStatus == "Resubmittal Requested", 'wfTask == "Plans Coordination" && wfStatus == "Resubmittal Requested"')){
+	deactivateTask("Completeness Check");
+}
+
+if($iTrc(wfTask == "Plans Coordination" && wfStatus == "SS Requested", 'wfTask == "Plans Coordination" && wfStatus == "SS Requested"')){
+	deactivateTask("Completeness Check");
+}
