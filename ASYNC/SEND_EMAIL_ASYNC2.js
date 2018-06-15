@@ -90,7 +90,7 @@ try {
             sendEmailToAddresses = tmpl.getEmailTemplateModel().getTo();
             if(sendEmailToAddresses) {
                 //this part replaces semicolons with commas (its commmon to deliminate with semicolons, but this function expects comma deliminated)
-                sendEmailToAddresses = sendEmailToAddresses.replace(";", "'")
+                sendEmailToAddresses = sendEmailToAddresses.replace(";", ",")
             }
             logDebug("getting sendEmailToAddresses from eamil template:" + sendEmailToAddresses);
 		}
