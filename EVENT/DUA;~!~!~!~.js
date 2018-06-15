@@ -34,3 +34,18 @@ function doConfigurableScriptActions(){
 		}
 	}
 }
+
+
+//script 22 
+logDebug("Script #22 Starting");
+if (matchARecordType([
+	  "PublicWorks/Drainange/NA/NA",
+	  "PublicWorks/Civil Plans/*/*",
+	  "PublicWorks/Pavement Design/NA/NA",
+	  "Water/Utility/Master/Study"
+  ], appTypeString)) {
+	if(ifTracer(capScript.getCapStatus() == "Waiting on Documents", "Record status = Waiting on Documents")) {
+		include("22_activateCompletenessCheck");
+	}
+
+  }
