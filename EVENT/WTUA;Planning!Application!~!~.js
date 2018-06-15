@@ -159,5 +159,11 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 		else
 			{ logDebug("Sent Notification"); }	
+		
+		// assign Review Distribution to the assigned staff for the record
+		logDebug("**script257 assigning task**");
+		var assignedStaff = getAssignedStaff();
+		assignWfTask(assignedStaff);
+		
 	}
 }		
