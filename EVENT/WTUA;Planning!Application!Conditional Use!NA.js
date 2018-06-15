@@ -223,12 +223,43 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 	assignTask("Hearing Scheduled",assignedStaff);
 	
 	logDebug("**script277 preparing email**");
-		
+	
+    // Get the Applicant's email
+	var recordApplicant = getContactByType("Applicant", capId);
+	var applicantEmail = null;
+	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+	} else {
+		applicantEmail = recordApplicant.getEmail();
+	}
+	
+	// Get the Case Manager's email
+	var caseManagerEmail=getAssignedStaffEmail();
+	var caseManagerPhone=getAssignedStaffPhone();
+	
+	var cc="";
+	if (isBlankOrNull(developerEmail)==false){
+		cc=developerEmail;
+	}
+	if (isBlankOrNull(caseManagerEmail)==false){
+		if (cc!=""){
+			cc+= ";" +caseManagerEmail;
+		}else{
+			cc=caseManagerEmail;
+		}
+	}	
 	// send an email to the applicant - we're waiting on the actual template here.
 	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+	
 	var emailParameters = aa.util.newHashtable();
 	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
+	addParameter(emailParameters, "$$StaffPhone$$", caseManagerPhone);
+	addParameter(emailParameters, "$$StaffEmail$$", caseManagerEmail);
+	addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
+	addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
 	var reportFile = [];
+	
 	var sendResult = sendNotification("noreply@aurora.gov","eric@esilverliningsolutions.com","","PLN HEARING SCHEDULED # 277",emailParameters,reportFile,capID4Email);
 	if (!sendResult) 
 		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
