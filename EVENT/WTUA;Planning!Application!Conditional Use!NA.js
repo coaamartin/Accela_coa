@@ -238,9 +238,7 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 	var caseManagerPhone=getAssignedStaffPhone();
 	
 	var cc="";
-	if (isBlankOrNull(developerEmail)==false){
-		cc=developerEmail;
-	}
+	
 	if (isBlankOrNull(caseManagerEmail)==false){
 		if (cc!=""){
 			cc+= ";" +caseManagerEmail;
