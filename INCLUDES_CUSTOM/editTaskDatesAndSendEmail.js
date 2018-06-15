@@ -9,9 +9,14 @@ Notes:
 
 
 function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName) {
-
+logDebug("start Script32");
 	var calId = aa.env.getValue("CalendarID");
 	var meetingId = aa.env.getValue("MeetingID");
+	var result = aa.meeting.getMeetingCalendar(CalendarID);
+	var meetingGroupName  = result.output.getMeetingGroupName();
+	var meetingGroupType = result.output.getMeetingGroupType();
+	
+
 
 	if (calId == null || calId == "" || meetingId == null || meetingId == "") {
 		logDebug("**WARN no calendarId or MeetingId in session!, capId=" + capId);
@@ -24,6 +29,7 @@ function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName)
 		return false;
 	}
 	meeting = meeting.getOutput();
+	logDebug("Meeting: "+ meeting);
 	var startDate = meeting.getStartDate();
 	if (!String(meeting.getMeetingType()).equalsIgnoreCase(meetingType)) {
 		return false;
@@ -52,4 +58,5 @@ function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName)
 		logDebug("**WARN send email failed, Error: " + sent.getErrorMessage());
 	}
 	return true;
+	logDebug("end Script32");
 }
