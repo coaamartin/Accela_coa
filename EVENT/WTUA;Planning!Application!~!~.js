@@ -163,7 +163,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		// assign Review Distribution to the assigned staff for the record
 		logDebug("**script257 assigning task**");
 		var assignedStaff = getAssignedStaff();
-		assignWfTask(assignedStaff);
+		assignTask("Review Distribution",assignedStaff);
 		
 	}
 }		

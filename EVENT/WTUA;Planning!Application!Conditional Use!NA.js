@@ -227,6 +227,7 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 	// send an email to the applicant - we're waiting on the actual template here.
 	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 	var emailParameters = aa.util.newHashtable();
+	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
 	var reportFile = [];
 	var sendResult = sendNotification("noreply@aurora.gov","eric@esilverliningsolutions.com","","PLN HEARING SCHEDULED # 277",emailParameters,reportFile,capID4Email);
 	if (!sendResult) 
