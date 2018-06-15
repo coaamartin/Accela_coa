@@ -206,7 +206,7 @@
           "caseCopyComments": false,
           "inspectionType": "Investigation",
           "inspectionCopyComment": true,
-          "rangeType": "Days",
+          "rangeType": "workingdays",
           "range": "7",
           "sameInspector": true,
           "createCondition": "",
