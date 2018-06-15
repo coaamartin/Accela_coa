@@ -107,7 +107,7 @@
             "documentGroup": [],
             "workFlow": {},
             "isCreatedByACA": false,
-            "isACAEvent": false,
+            "isACAEvent": true,
             "balanceAllowed": true,
             "recordStatus": [
               "Submit Application"
