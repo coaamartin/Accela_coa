@@ -21,6 +21,7 @@ logDebug("start Script32");
 	logDebug("result: "+ result);
 	logDebug("meetingGroupName: "+ meetingGroupName);
 	logDebug("meetingGroupType: "+ meetingGroupType);
+	logDebug("meetingType: "+ meetingType);
 
 	if (calId == null || calId == "" || meetingId == null || meetingId == "") {
 		logDebug("**WARN no calendarId or MeetingId in session!, capId=" + capId);
