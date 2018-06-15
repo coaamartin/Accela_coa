@@ -149,9 +149,9 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			}
 			
 		}
-		logDebug("**script257 preparing email**");
+				logDebug("**script257 preparing email**");
 		
-		// send an email to the applicant - we're waiting on the actual template here.
+		// send an email to the applicant
 		// Get the Applicant's email
 		var recordApplicant = getContactByType("Applicant", capId);
 		var applicantEmail = null;
@@ -161,15 +161,39 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			applicantEmail = recordApplicant.getEmail();
 		}
 		
+		// Get the Case Manager's email
+		var caseManagerEmail=getAssignedStaffEmail();
+		var caseManagerPhone=getAssignedStaffPhone();
+		var caseManagerFullName=getAssignedStaffFullName();
+		var caseManagerTitle=getAssignedStaffTitle();
+		
+		var cc="";
+		
+		if (isBlankOrNull(caseManagerEmail)==false){
+			if (cc!=""){
+				cc+= ";" +caseManagerEmail;
+			}else{
+				cc=caseManagerEmail;
+			}
+		}		
+		
 		var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 		var emailParameters = aa.util.newHashtable();
+		addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+		addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
+		addParameter(emailParameters, "$$StaffPhone$$", caseManagerPhone);
+		addParameter(emailParameters, "$$StaffEmail$$", caseManagerEmail);
+		addParameter(emailParameters, "$$StaffFullName$$", caseManagerFullName);
+		addParameter(emailParameters, "$$StaffTitle$$", caseManagerTitle);
+		addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
+		addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
+		addParameter(emailParameters, "$$wfComment$$", wfComment);
 		var reportFile = [];
-		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","TEST_FOR_SCRIPTS",emailParameters,reportFile,capID4Email);
+		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN APPLICATION ACCEPTANCE FOR PLANNING # 257",emailParameters,reportFile,capID4Email);
 		if (!sendResult) 
 			{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 		else
 			{ logDebug("Sent Notification"); }	
-		
 		// assign Review Distribution to the assigned staff for the record
 		logDebug("**script257 assigning task**");
 		var assignedStaff = getAssignedStaff();
