@@ -145,7 +145,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
-
+		logDebug("lookForPlanningMtgDate = " + lookForPlanningMtgDate);
 		//Set up the 'look back' from the target date for searching
 		var lookForStartDate		= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
 		
@@ -167,6 +167,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 			var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
 								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
 								+(""+ newPlnMtg.startDate).slice(0,4);
+		    logDebug("newHearingDate = " + newHearingDate);								
 			editAppSpecific("Projected Planning Commission Date",newHearingDate);
 		} else {
 			logDebug("Script 274: WARNING - there is no planning commission date within 45 days of your target date!");
