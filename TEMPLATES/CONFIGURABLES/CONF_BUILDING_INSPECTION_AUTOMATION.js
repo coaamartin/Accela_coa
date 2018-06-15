@@ -159,7 +159,7 @@
           "caseCopyComments": true,
           "inspectionType": "Notice of Violation Inspection",
           "inspectionCopyComment": true,
-          "rangeType": "Days",
+          "rangeType": "workingdays",
           "range": 7,
           "sameInspector": true,
           "createCondition": "",
