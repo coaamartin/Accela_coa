@@ -151,10 +151,19 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		logDebug("**script257 preparing email**");
 		
 		// send an email to the applicant - we're waiting on the actual template here.
+		// Get the Applicant's email
+		var recordApplicant = getContactByType("Applicant", capId);
+		var applicantEmail = null;
+		if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+			logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+		} else {
+			applicantEmail = recordApplicant.getEmail();
+		}
+		
 		var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 		var emailParameters = aa.util.newHashtable();
 		var reportFile = [];
-		var sendResult = sendNotification("noreply@aurora.gov","eric@esilverliningsolutions.com","","TEST_FOR_SCRIPTS",emailParameters,reportFile,capID4Email);
+		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","TEST_FOR_SCRIPTS",emailParameters,reportFile,capID4Email);
 		if (!sendResult) 
 			{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 		else
