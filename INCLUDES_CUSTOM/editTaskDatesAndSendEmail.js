@@ -33,7 +33,8 @@ logDebug("start Script32");
 		logDebug("**WARN getMeetingByMeetingID failed capId=" + capId + "calendarId/MeetingId: " + calId + "/" + meetingId);
 		return false;
 	}
-	meeting = meeting.getOutput();
+	//meeting = meeting.getOutput();
+	meeting = meetingType;
 	logDebug("Meeting: "+ meeting);
 	var startDate = meeting.getStartDate();
 	if (!String(meeting.getMeetingType()).equalsIgnoreCase(meetingType)) {
