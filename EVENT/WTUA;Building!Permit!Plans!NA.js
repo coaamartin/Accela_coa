@@ -39,7 +39,7 @@ Notes:
 */
 
 activateWorkflowTasks();
-if($iTrc(!taskStatus("Quality Check", "Approved"), '!taskStatus("Quality Check", "Approved")'))
+if($iTrc(!isTaskStatus("Quality Check", "Approved"), '!isTaskStatus("Quality Check", "Approved")'))
 	deactivateTask("Fee Processing");
 
 /*
