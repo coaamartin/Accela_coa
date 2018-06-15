@@ -120,7 +120,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		
 		//Set up the 'look forward' from the target date for searching
 		var lookForEndDate			= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+45));
-		
+		logDebug("lookForPlanningMtgDate = " + lookForPlanningMtgDate);
 		//Find the closest meeting to lookForPlanningMtgDate between lookForStartDate and lookForEndDate 
 		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
 
@@ -136,7 +136,8 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 			var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
 								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
 								+(""+ newPlnMtg.startDate).slice(0,4);
-			editAppSpecific("Projected Planning Commission Date",newHearingDate);
+		  logDebug("newHearingDate = " + newHearingDate);			
+		  editAppSpecific("Projected Planning Commission Date",newHearingDate);
 		} else {
 			logDebug("Script 275: WARNING - there is no planning commission date within 45 days of your target date!");
 			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
