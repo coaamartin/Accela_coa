@@ -108,13 +108,13 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		editAppSpecific("2nd Review Comments Due date",revdDateStr);
 		logDebug("*******2nd Review Date = " +revdDateStr);
 
-/*		// update submission date
+		// update submission date
 		var subdDate = aa.date.parseDate(dateAddHC("",20, true));
 		var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
 							+ ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
 							+ subdDate.getYear();
 		editAppSpecific("Applicant 2nd Submission Date",subdDateStr); 
-*/
+
 		// update planning commission date if found
 		if (newPlnMtg != null) {
 			var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
