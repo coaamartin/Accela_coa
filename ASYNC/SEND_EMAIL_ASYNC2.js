@@ -1,3 +1,6 @@
+//THIS IS SAME AS SEN_EMAIL_ASYNC BUT IT HAS THE FOLOWING ADDITON:
+//  IF !sendEmailToAddresses && emailTemplate THEN USE TO ADDRESS FROM EMAIL NOTIFICATION TEMPLATE
+
 //Get environmental variables pass into the script
 var sendEmailToAddresses = aa.env.getValue("sendEmailToAddresses");
 var emailTemplate = aa.env.getValue("emailTemplate");
