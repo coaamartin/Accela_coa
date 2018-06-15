@@ -109,7 +109,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		{
 			// If Custom Field "1st Review Comments Due date" is null
 			// Then update it with Today + 15 days
-			firstReviewDate = dateAddHC(new Date(), 15, true);
+			firstReviewDate = dateAddHC(new Date(), 15, 'Y');
 			logDebug("firstReviewDate = " + firstReviewDate);
 			editAppSpecific(firstReviewDateASI, firstReviewDate);
 		
@@ -117,7 +117,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			// Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
 			var dToday = new Date();
 
-			var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*6.5),true));
+			var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*6.5),'Y'));
 			var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 									+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 									+ lookForPlanningMtgDate.getYear();
