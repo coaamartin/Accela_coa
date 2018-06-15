@@ -11,4 +11,5 @@ Notes:
 	make sure meeting type "Tuesday Zoning Inquiry" Meeting exist (configured), you can pass any type as parameter 'meetingType'
 
 */
-editTaskDatesAndSendEmail("Zoning Inquiry Meeting", "Tuesday Zoning Inquiry", "MESSAGE_NOTICE_PUBLIC WORKS");
+
+editTaskDatesAndSendEmail("Zoning Inquiry Meeting", "ZONING INQUIRY", "MESSAGE_NOTICE_PUBLIC WORKS");
