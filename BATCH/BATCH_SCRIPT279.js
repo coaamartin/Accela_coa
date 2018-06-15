@@ -123,6 +123,7 @@ if (debug.indexOf("**ERROR") > 0) {
 function updateAssignedStaffAndDueDateWorkflow(wfTasksCheckAssignedStaff, workFlowTaskNameForDueDate, workflowStatusArray, wfTaskDueDate12Days, wfTaskDueDate16Days, meetingType) {
 
     var nowDateFormatted = aa.util.formatDate(new Date(), "MM/dd/YYYY");
+    var today = aa.util.parseDate(dateAdd(null, 0));
 
     var capTypeModel = aa.cap.getCapTypeModel().getOutput();
     capTypeModel.setGroup("Planning");
@@ -137,7 +138,7 @@ function updateAssignedStaffAndDueDateWorkflow(wfTasksCheckAssignedStaff, workFl
 
     for (r in capIdScriptModelList) {
         capId = capIdScriptModelList[r].getCapID();
-		capId = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput();
+        capId = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput();
 
         //skip SubType=Address (by Specs)
         var thisCap = aa.cap.getCap(capId).getOutput();
@@ -146,6 +147,14 @@ function updateAssignedStaffAndDueDateWorkflow(wfTasksCheckAssignedStaff, workFl
         }
 
         logDebug("-------- capID=" + capId + ", altId=" + capId.getCustomID());
+        
+        /* If the workflow task = "PC Legal Notification" has a status of "Notification Sent"
+               then wf task "Prepare Sign and Notification" should become active 13 working
+               days before the planning commission meeting date and set the due date 9 working days before the Planning Commission
+               Meeting date on the record.
+            In addition update the workflow task "Staff Report" to become active 13 working days and set
+            due date to 8 working days before the Planning Commission Meeting date.
+        */
         var tasks = aa.workflow.getTasks(capId).getOutput();
         for (t in tasks) {
             var task = tasks[t];
@@ -162,9 +171,20 @@ function updateAssignedStaffAndDueDateWorkflow(wfTasksCheckAssignedStaff, workFl
                         for (m in meetings) {
                             if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
                                 var meetingDate = new Date(meetings[m].getMeeting().getStartDate().getTime());
-								aa.print(meetingDate);
-                                var prev12 = getPrevWorkingDays(meetingDate, 12);
-                                var prev16 = getPrevWorkingDays(prev12, 4);
+                                var meetingDateSDT = aa.date.getScriptDateTime(meetingDate);
+                                //Days between today and meeting date
+                                var days13BeforeMeet = getPrevWorkingDays(meetingDate, 13);
+                                days13BeforeMeet.setHours(0);
+                                days13BeforeMeet.setMinutes(0);
+                                days13BeforeMeet.setSeconds(0);
+                                
+                                //If it's 13 days then we activate tasks if not active
+                                if(days13BeforeMeet.getTime() == today.getTime()){
+                                    activateTask4Batch(capId, wfTaskDueDate12Days);
+                                    activateTask4Batch(capId, wfTaskDueDate16Days)
+                                }
+                                var prev12 = getPrevWorkingDays(meetingDate, 9);
+                                var prev16 = getPrevWorkingDays(meetingDate, 8);
 
                                 prev12 = aa.util.formatDate(prev12, "MM/dd/YYYY");
                                 prev16 = aa.util.formatDate(prev16, "MM/dd/YYYY");
@@ -178,8 +198,8 @@ function updateAssignedStaffAndDueDateWorkflow(wfTasksCheckAssignedStaff, workFl
                 }//for all statuses
             }//check if WFtask of dueDate update
 
-			
-			/* If the workflow task(s) "Planning Review" or "Staff Report" or "Prepare Signs and Notice - PC" are active with a Start date of Today
+            
+            /* If the workflow task(s) "Planning Review" or "Staff Report" or "Prepare Signs and Notice - PC" are active with a Start date of Today
                and do not have a staff assigned to the task then
                update the workflow task "Assigned to" with the staff in Record Detail Assigned user. */
             for (a in wfTasksCheckAssignedStaff) {
@@ -188,10 +208,10 @@ function updateAssignedStaffAndDueDateWorkflow(wfTasksCheckAssignedStaff, workFl
 
                 //Prepare Signs and Notice - PC
                 if (task.getTaskDescription() == wfTasksCheckAssignedStaff[a] && task.getActiveFlag() == "Y" && noStaffAssigned) {
-					var assignmentDateFormatted = "";
-					if(task.getAssignmentDate())
+                    var assignmentDateFormatted = "";
+                    if(task.getAssignmentDate())
                         var assignmentDateFormatted = aa.util.formatDate(convertDate(task.getAssignmentDate()), "MM/dd/YYYY");
-					
+                    
                     if (assignmentDateFormatted == nowDateFormatted) {
                         var capDetails = aa.cap.getCapDetail(capId).getOutput();
                         var recordStaff = capDetails.getAsgnStaff();
@@ -210,8 +230,8 @@ function updateAssignedStaffAndDueDateWorkflow(wfTasksCheckAssignedStaff, workFl
                         if (!edited.getSuccess()) {
                             logDebug("**WARN task edit failed, error:" + edited.getErrorMessage());
                         }//edit success?
-						else
-							logDebug("Successfully assigned task " + task.getTaskDescription().trim());
+                        else
+                            logDebug("Successfully assigned task " + task.getTaskDescription().trim());
                     }//assigned today
                 }//active, no staff
             }//all task names (inactive - no staff)
