@@ -193,7 +193,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
 
 		// update review comments
-		var revdDate = aa.date.parseDate(dateAddHC("",20, true));
+		var revdDate = aa.date.parseDate(dateAddHC("",15, true));
 		var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
 							+ ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
 							+ revdDate.getYear();
