@@ -221,5 +221,17 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 	var assignedStaff = getAssignedStaff();
 	logDebug("script277 assignedstaff =" + assignedStaff);
 	assignTask("Hearing Scheduled",assignedStaff);
+	
+	logDebug("**script277 preparing email**");
+		
+	// send an email to the applicant - we're waiting on the actual template here.
+	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+	var emailParameters = aa.util.newHashtable();
+	var reportFile = [];
+	var sendResult = sendNotification("noreply@aurora.gov","eric@esilverliningsolutions.com","","PLN HEARING SCHEDULED # 277",emailParameters,reportFile,capID4Email);
+	if (!sendResult) 
+		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	else
+		{ logDebug("Sent Notification"); }	
 }
 logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
