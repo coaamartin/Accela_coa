@@ -82,19 +82,17 @@ try {
 			}
 		}
     }
-    
+ 
     //2.1 Get Email TO from template, if not specified
-	if (!sendEmailToAddresses) {
-        logDebug("sendEmailToAddresses is false")
+	if (sendEmailToAddresses == null || sendEmailToAddresses == '') {
 		if (emailTemplate && emailTemplate != '') {
-            logDebug("emailTemplate is true")
 			var tmpl = aa.communication.getNotificationTemplate(emailTemplate).getOutput();
             sendEmailToAddresses = tmpl.getEmailTemplateModel().getTo();
-            logDebug("getting sendEmailToAddresses from eamil template")
             if(sendEmailToAddresses) {
                 //this part replaces semicolons with commas (its commmon to deliminate with semicolons, but this function expects comma deliminated)
                 sendEmailToAddresses = sendEmailToAddresses.replace(";", "'")
             }
+            logDebug("getting sendEmailToAddresses from eamil template:" + sendEmailToAddresses);
 		}
     }
 

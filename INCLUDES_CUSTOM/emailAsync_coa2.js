@@ -54,7 +54,7 @@ function emailAsync2(sendEmailToAddresses, emailTemplate, vEParams, reportTempla
 		
 		//call sendEmailASync script
 		logDebug("Attempting to run Async: " + vAsyncScript);
-        aa.runAsyncScript(vAsyncScript, envParameters);
+        aa.runAsyncScript(vAsyncScript, envParameters); 
     }
 	//End modification to support batch script
 	
