@@ -214,7 +214,7 @@ Desc:			see Script Tracker for script 277
 Created By: Silver Lining Solutions
 */
 logDebug("START of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
-if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStatus == "Ready for Planning Commission")
+if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStatus == "Ready for Planning Commission"))
 {
 	// get Record assigned staff 
 	var assignedStaff = getAssignedStaff();
