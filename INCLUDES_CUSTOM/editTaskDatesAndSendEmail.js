@@ -37,6 +37,7 @@ function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName)
 	addParameter(eParams, "$$altID$$", cap.getAltID());
 	addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+	addParameter(eParams, "$$MeetingDate$$", meetingDate);
 	var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
 	if (!sent.getSuccess()) {
 		logDebug("**WARN send email failed, Error: " + sent.getErrorMessage());
