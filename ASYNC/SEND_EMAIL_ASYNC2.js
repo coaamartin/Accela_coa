@@ -85,7 +85,9 @@ try {
     
     //2.1 Get Email TO from template, if not specified
 	if (!sendEmailToAddresses) {
+        logDebug("sendEmailToAddresses is false")
 		if (emailTemplate && emailTemplate != '') {
+            logDebug("emailTemplate is true")
 			var tmpl = aa.communication.getNotificationTemplate(emailTemplate).getOutput();
             sendEmailToAddresses = tmpl.getEmailTemplateModel().getTo();
             logDebug("getting sendEmailToAddresses from eamil template")
