@@ -191,8 +191,51 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		}
 	}
 	
-// send an email to the applicant - we're waiting on the actual template here.
-	sendEmail("TEST_FOR_SCRIPTS");
+		logDebug("**script273 preparing email**");
+		
+		// send an email to the applicant
+		// Get the Applicant's email
+		var recordApplicant = getContactByType("Applicant", capId);
+		var applicantEmail = null;
+		if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+			logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+		} else {
+			applicantEmail = recordApplicant.getEmail();
+		}
+		
+		// Get the Case Manager's email
+		var caseManagerEmail=getAssignedStaffEmail();
+		var caseManagerPhone=getAssignedStaffPhone();
+		var caseManagerFullName=getAssignedStaffFullName();
+		var caseManagerTitle=getAssignedStaffTitle();
+		
+		var cc="";
+		
+		if (isBlankOrNull(caseManagerEmail)==false){
+			if (cc!=""){
+				cc+= ";" +caseManagerEmail;
+			}else{
+				cc=caseManagerEmail;
+			}
+		}		
+		
+		var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+		var emailParameters = aa.util.newHashtable();
+		addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+		addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
+		addParameter(emailParameters, "$$StaffPhone$$", caseManagerPhone);
+		addParameter(emailParameters, "$$StaffEmail$$", caseManagerEmail);
+		addParameter(emailParameters, "$$StaffFullName$$", caseManagerFullName);
+		addParameter(emailParameters, "$$StaffTitle$$", caseManagerTitle);
+		addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
+		addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
+		addParameter(emailParameters, "$$wfComment$$", wfComment);
+		var reportFile = [];
+		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN REVIEW COMMENTS # 273 274 275",emailParameters,reportFile,capID4Email);
+		if (!sendResult) 
+			{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+		else
+			{ logDebug("Sent Notification"); }	
 }
 logDebug("script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule end.");
 
