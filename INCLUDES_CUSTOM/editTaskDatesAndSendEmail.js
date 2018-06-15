@@ -1,27 +1,7 @@
-/*
-Title : Update Workflow Due Date with Zoning Inquiry Meeting Date and send email (MeetingScheduleAfter) 
-Purpose : If certain meeting type was scheduled, update a Task status and due date, and send an email
-Author: Yazan Barghouth 
-Functional Area : Records
-Notes:
-	make sure meeting type "Tuesday Zoning Inquiry" Meeting exist (configured), you can pass any type as parameter 'meetingType'
-*/
-
-
 function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName) {
-logDebug("start Script32");
+
 	var calId = aa.env.getValue("CalendarID");
 	var meetingId = aa.env.getValue("MeetingID");
-	var result = aa.meeting.getMeetingCalendar(CalendarID);
-	var meetingGroupName  = result.output.getMeetingGroupName();
-	var meetingGroupType = result.output.getMeetingGroupType();
-	
-	logDebug("calId: "+ calId);
-	logDebug("meetingId: "+ meetingId);
-	logDebug("result: "+ result);
-	logDebug("meetingGroupName: "+ meetingGroupName);
-	logDebug("meetingGroupType: "+ meetingGroupType);
-	logDebug("meetingType: "+ meetingType);
 
 	if (calId == null || calId == "" || meetingId == null || meetingId == "") {
 		logDebug("**WARN no calendarId or MeetingId in session!, capId=" + capId);
@@ -33,9 +13,7 @@ logDebug("start Script32");
 		logDebug("**WARN getMeetingByMeetingID failed capId=" + capId + "calendarId/MeetingId: " + calId + "/" + meetingId);
 		return false;
 	}
-	//meeting = meeting.getOutput();
-	meeting = meetingType;
-	logDebug("Meeting: "+ meeting);
+	meeting = meeting.getOutput();
 	var startDate = meeting.getStartDate();
 	if (!String(meeting.getMeetingType()).equalsIgnoreCase(meetingType)) {
 		return false;
@@ -64,5 +42,4 @@ logDebug("start Script32");
 		logDebug("**WARN send email failed, Error: " + sent.getErrorMessage());
 	}
 	return true;
-	logDebug("end Script32");
 }
