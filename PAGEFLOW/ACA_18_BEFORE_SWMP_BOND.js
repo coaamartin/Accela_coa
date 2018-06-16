@@ -16,7 +16,7 @@ if(ASIValue.equals("Yes"))
 {
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
-		if((TotalASITRows("BOND INFORMATION",capId) == "false") 
+		if(TotalASITRows("BOND INFORMATION",capId) == "false") 
 		{
 			logMessage("**ERROR Add Some Rows please!");
 		}
