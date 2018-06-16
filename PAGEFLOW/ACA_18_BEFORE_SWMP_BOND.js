@@ -81,7 +81,7 @@ function TotalASITRows(tname)
       };
       if (tsm.rowIndex.isEmpty()) {
       message = message + " EMPTY "
-      continue
+      //continue
       }; // empty table
 
    	  var tempObject = new Array();
