@@ -16,7 +16,7 @@ if(ASIValue.equals("Yes"))
 {
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
-  		loadASITable("BONDINFORMATION");
+  		loadASITable("BOND INFORMATION");
 		//if(TotalASITRows("BOND INFORMATION",capId) == "0") 
 		//{
 			logMessage("**ERROR ");
