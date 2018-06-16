@@ -17,10 +17,11 @@ if(ASIValue.equals("Yes"))
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
   		var tabLength = TotalASITRows("BOND INFORMATION");
-		if(tabLength && tabLength == 0) 
-		{
+  		message = message+" "+tabLength
+		//if(tabLength && tabLength == 0) 
+		//{
 			logMessage("**ERROR Please add Bond Information. ");
-		}
+		//}
 	}
 }
 
