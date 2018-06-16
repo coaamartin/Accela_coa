@@ -16,7 +16,7 @@ if(ASIValue.equals("Yes"))
 {
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
-  		message = message+ ' '+TotalASITRows("BOND INFORMATION",capId)
+  		message = message+ ' '+TotalASITRows1("BOND INFORMATION",capId)
 
 		//if(TotalASITRows("BOND INFORMATION",capId) == 0) 
 		//{
@@ -33,7 +33,7 @@ if (message.indexOf("**ERROR") > 0)
 
 
 
-function TotalASITRows(tname) 
+function TotalASITRows1(tname) 
 {
 
  	// tname: ASI table name
