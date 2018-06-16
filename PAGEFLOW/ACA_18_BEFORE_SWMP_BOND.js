@@ -1,6 +1,6 @@
 var cap = aa.env.getValue("CapModel");
 var useAppSpecificGroupName = false;	
-var message = " --- ";							
+var message = " 1-- ";							
 var debug = "";								
 var br = "<BR>";							
 var cap = aa.env.getValue("CapModel");
@@ -16,7 +16,7 @@ if(ASIValue.equals("Yes"))
 {
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
-  		message = message+ ' '+TotalASITRows1("BOND INFORMATION",capId)
+  		message = message+ ' '+TotalASITRows("BOND INFORMATION",capId)
 
 		//if(TotalASITRows("BOND INFORMATION",capId) == 0) 
 		//{
@@ -33,7 +33,7 @@ if (message.indexOf("**ERROR") > 0)
 
 
 
-function TotalASITRows1(tname) 
+function TotalASITRows(tname) 
 {
 
  	// tname: ASI table name
@@ -47,7 +47,8 @@ function TotalASITRows1(tname)
 	var ta = gm.getTablesArray()
 	var tai = ta.iterator();
 	var numrows = 0;
-
+	
+		message = message + "111 "+numrows
 	while (tai.hasNext())
 	  {
 	  var tsm = tai.next();
