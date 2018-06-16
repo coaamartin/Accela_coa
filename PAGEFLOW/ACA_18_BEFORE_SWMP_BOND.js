@@ -23,19 +23,6 @@ if(ASIValue.equals("Yes") && loadASIT())
 	}
 }
 
-if(ASIValue.equals("Yes"))
-{
-	if(appTypeResult == "Water/Water/SWMP/Application")
-  	{
-  		message = message+ ' '+TotalASITRows("BOND INFORMATION",capId)
-
-		//if(TotalASITRows("BOND INFORMATION",capId) == 0) 
-		//{
-			logMessage("**ERROR Please add Bond Information. ");
-		//}
-	}
-}
-
 if (message.indexOf("**ERROR") > 0)
 {
 	aa.env.setValue("ErrorCode", "1");
