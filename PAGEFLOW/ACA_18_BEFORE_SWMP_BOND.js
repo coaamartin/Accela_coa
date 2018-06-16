@@ -10,7 +10,7 @@ var appTypeResult = cap.getCapType();
 
 var AInfo = new Array();						
 loadAppSpecific4ACA(AInfo); 						
-var ASIValue = AInfo["Will you be paying fiscal security by bond?"];
+var ASIValue = AInfo["Paying with Bond"];
 
 //if(ASIValue.equals("Yes"))
 //{
@@ -18,7 +18,8 @@ var ASIValue = AInfo["Will you be paying fiscal security by bond?"];
 //  	{
 //		if(TotalASITRows("BOND INFORMATION",capId) == "false") 
 //		{
-			logMessage("**ERROR Add Some Rows please! " +ASIValue);
+			message = message + ASIValue;
+			logMessage("**ERROR Add Some Rows please! " +message);
 //		}
 //	}
 //}
