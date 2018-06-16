@@ -12,17 +12,17 @@ var AInfo = new Array();
 loadAppSpecific4ACA(AInfo); 						
 var ASIValue = AInfo["PAYING WITH BOND"];
 
-//if(ASIValue.equals("Yes"))
-//{
-//	if(appTypeResult == "Water/Water/SWMP/Application")
-//  	{
-//		if(TotalASITRows("BOND INFORMATION",capId) == "false") 
-//		{
-			message = message + ASIValue;
-			logMessage("**ERROR Add Some Rows please! " +message);
-//		}
-//	}
-//}
+if(ASIValue.equals("Yes"))
+{
+	if(appTypeResult == "Water/Water/SWMP/Application")
+  	{
+  		message = message+ ' '+TotalASITRows("BOND INFORMATION",capId)
+		//if(TotalASITRows("BOND INFORMATION",capId) == "false") 
+		//{
+			logMessage("**ERROR Please add Bond Information. ");
+		//}
+	}
+}
 
 if (message.indexOf("**ERROR") > 0)
 {
