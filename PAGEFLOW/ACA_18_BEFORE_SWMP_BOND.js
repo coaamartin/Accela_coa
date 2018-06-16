@@ -12,6 +12,17 @@ var AInfo = new Array();
 loadAppSpecific4ACA(AInfo); 						
 var ASIValue = AInfo["PAYING WITH BOND"];
 
+if(ASIValue.equals("Yes") && loadASIT())
+{
+	if(appTypeResult == "Water/Water/SWMP/Application")
+  	{
+		if((TotalASITRows("BOND INFORMATION",capId) == "0") 
+		{
+			logMessage("**ERROR The Number of Units identified in the Units table does not equal the number available units for rent that you indicated.");
+		}
+	}
+}
+
 if(ASIValue.equals("Yes"))
 {
 	if(appTypeResult == "Water/Water/SWMP/Application")
@@ -31,7 +42,28 @@ if (message.indexOf("**ERROR") > 0)
 	aa.env.setValue("ErrorMessage", message);
 }
 
-
+function loadASIT() 
+{
+	//Verify Page flow has ASI Table
+	var itemCap = capId;
+	if (arguments.length == 1)
+	{
+		itemCap = arguments[0]; // use cap ID specified in args
+		var gm = aa.appSpecificTableScript.getAppSpecificTableGroupModel(itemCap).getOutput();
+	}
+	else
+	{
+		var gm = cap.getAppSpecificTableGroupModel()
+	}
+	if(!gm)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}	
+}
 
 function TotalASITRows(tname) 
 {
@@ -47,7 +79,7 @@ function TotalASITRows(tname)
 	var ta = gm.getTablesArray()
 	var tai = ta.iterator();
 	var numrows = 0;
-	
+
 		message = message + "111 "+numrows
 	while (tai.hasNext())
 	  {
