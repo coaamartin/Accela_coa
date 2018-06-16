@@ -18,7 +18,7 @@ var ASIValue = AInfo["Paying with Bond"];
 //  	{
 //		if(TotalASITRows("BOND INFORMATION",capId) == "false") 
 //		{
-			logMessage("**ERROR Add Some Rows please! " +ASIValue);
+			logMessage("**ERROR Add Some Rows please! " +AInfo);
 //		}
 //	}
 //}
