@@ -17,10 +17,11 @@ if(ASIValue.equals("Yes"))
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
   		asit = loadASITable("BOND INFORMATION");
-  		if(asit && asit.length ==0)
-  			logMessage("**ERROR Please add Bond Information. ");
+		if(asit && asit.length ==0){
+		  logMessage("**ERROR Please add Bond Information. ");
 		}
 	}
+	
 }
 
 if (message.indexOf("**ERROR") > 0)
