@@ -12,10 +12,11 @@ var AInfo = new Array();
 loadAppSpecific4ACA(AInfo); 						
 var ASIValue = AInfo["PAYING WITH BOND"];
 
-if(ASIValue.equals("Yes") && loadASIT())
+if(ASIValue.equals("Yes"))
 {
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
+  		loadASITable("BOND INFORMATION");
 		//if(TotalASITRows("BOND INFORMATION",capId) == "0") 
 		//{
 			logMessage("**ERROR The Number of Units identified in the Units table does not equal the number available units for rent that you indicated.");
@@ -29,60 +30,34 @@ if (message.indexOf("**ERROR") > 0)
 	aa.env.setValue("ErrorMessage", message);
 }
 
-function loadASIT() 
-{
-	//Verify Page flow has ASI Table
-	var itemCap = capId;
-	if (arguments.length == 1)
-	{
-		itemCap = arguments[0]; // use cap ID specified in args
-		var gm = aa.appSpecificTableScript.getAppSpecificTableGroupModel(itemCap).getOutput();
-	}
-	else
-	{
-		var gm = cap.getAppSpecificTableGroupModel()
-	}
-	if(!gm)
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}	
-}
+function loadASITable(tname) {
 
-function TotalASITRows(tname) 
-{
-
- 	// tname: ASI table name
- 	// Returns a ASI Table row number
+ 	//
+ 	// Returns a single ASI Table array of arrays
+	// Optional parameter, cap ID to load from
 	//
 
 	var itemCap = capId;
+	message = message + " ---- " +itemCap+ " ---- " ;
 	if (arguments.length == 2) itemCap = arguments[1]; // use cap ID specified in args
 
 	var gm = aa.appSpecificTableScript.getAppSpecificTableGroupModel(itemCap).getOutput();
 	var ta = gm.getTablesArray()
 	var tai = ta.iterator();
-	var numrows = 0;
 
-		message = message + "111 "+numrows
 	while (tai.hasNext())
 	  {
 	  var tsm = tai.next();
 	  var tn = tsm.getTableName();
+	  message = message + " ---- " +tn+ " ---- " ;
+      if (!tn.equals(tname)) continue;
 
-		message = message + "222 "+tn
-      
-      if (!tn.equals(tname)) {
-      	message = message + " MISMATCH "
-      	continue
-      };
-      if (tsm.rowIndex.isEmpty()) {
-      message = message + " EMPTY "
-      //continue
-      }; // empty table
+	  if (tsm.rowIndex.isEmpty())
+	  	{
+	  		message = message + " ---- " +"EMPTY"+ " ---- " ;
+			logDebug("Couldn't load ASI Table " + tname + " it is empty");
+			return false;
+		}
 
    	  var tempObject = new Array();
 	  var tempArray = new Array();
@@ -90,25 +65,21 @@ function TotalASITRows(tname)
   	  var tsmfldi = tsm.getTableField().iterator();
 	  var tsmcoli = tsm.getColumns().iterator();
       var readOnlyi = tsm.getAppSpecificTableModel().getReadonlyField().iterator(); // get Readonly filed
-	  numrows = 1;
+	  var numrows = 1;
 
-	  message = message + " hasnext "+ tsmfldi.hasNext()
 	  while (tsmfldi.hasNext())  // cycle through fields
 		{
-
 		if (!tsmcoli.hasNext())  // cycle through columns
 			{
 			var tsmcoli = tsm.getColumns().iterator();
 			tempArray.push(tempObject);  // end of record
 			var tempObject = new Array();  // clear the temp obj
 			numrows++;
-			message = message + "  "+ numrows
 			}
 		var tcol = tsmcoli.next();
 		var tval = tsmfldi.next();
 		var readOnly = 'N';
-		if (readOnlyi.hasNext()) 
-		{
+		if (readOnlyi.hasNext()) {
 			readOnly = readOnlyi.next();
 		}
 		var fieldInfo = new asiTableValObj(tcol.getColumnName(), tval, readOnly);
@@ -117,9 +88,9 @@ function TotalASITRows(tname)
 		}
 		tempArray.push(tempObject);  // end of record
 	  }
-	  
-	  return numrows;
-}
+	  return tempArray;
+	}
+
 
 function loadAppSpecific4ACA(thisArr) 
 {
