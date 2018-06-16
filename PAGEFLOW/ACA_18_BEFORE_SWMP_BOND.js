@@ -53,6 +53,8 @@ function TotalASITRows(tname)
 	  var tsm = tai.next();
 	  var tn = tsm.getTableName();
 
+		message = message + "222 "+tn
+      
       if (!tn.equals(tname)) continue;
       if (tsm.rowIndex.isEmpty()) continue; // empty table
 
@@ -86,6 +88,7 @@ function TotalASITRows(tname)
 		}
 		tempArray.push(tempObject);  // end of record
 	  }
+	  message = message + "333 "+numrows
 	  return numrows;
 }
 
