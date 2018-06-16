@@ -21,7 +21,7 @@ if(ASIValue.equals("Yes"))
 			logMessage("**ERROR Add Some Rows please!");
 	//	}
 	//}
-//}
+}
 
 if (message.indexOf("**ERROR") > 0)
 {
