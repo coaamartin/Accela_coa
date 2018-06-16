@@ -1,6 +1,6 @@
 var cap = aa.env.getValue("CapModel");
 var useAppSpecificGroupName = false;	
-var message = " ";							
+var message = " --- ";							
 var debug = "";								
 var br = "<BR>";							
 var cap = aa.env.getValue("CapModel");
