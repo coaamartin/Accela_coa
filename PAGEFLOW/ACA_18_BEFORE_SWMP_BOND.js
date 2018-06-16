@@ -1,7 +1,7 @@
 var cap = aa.env.getValue("CapModel");
 var useAppSpecificGroupName = false;	
-var message = " --- ";							
-var debug = "";								
+var message = " ";							
+var debug = " ";								
 var br = "<BR>";							
 var cap = aa.env.getValue("CapModel");
 var capId = cap.getCapID();
@@ -19,6 +19,8 @@ if(ASIValue.equals("Yes"))
 		if(TotalASITRows("BOND INFORMATION",capId) == 0) 
 		{
 			logMessage("**ERROR Please add Bond Information. ");
+		}else{
+			message = " ";
 		}
 	}
 }
