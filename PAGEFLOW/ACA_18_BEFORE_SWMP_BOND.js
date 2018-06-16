@@ -75,8 +75,14 @@ function TotalASITRows(tname)
 
 		message = message + "222 "+tn
       
-      if (!tn.equals(tname)) continue;
-      if (tsm.rowIndex.isEmpty()) continue; // empty table
+      if (!tn.equals(tname)) {
+      	message = message + " MISMATCH "
+      	continue
+      };
+      if (tsm.rowIndex.isEmpty()) {
+      message = message + " EMPTY "
+      continue
+      }; // empty table
 
    	  var tempObject = new Array();
 	  var tempArray = new Array();
@@ -85,6 +91,8 @@ function TotalASITRows(tname)
 	  var tsmcoli = tsm.getColumns().iterator();
       var readOnlyi = tsm.getAppSpecificTableModel().getReadonlyField().iterator(); // get Readonly filed
 	  numrows = 1;
+
+	  message = message + " hasnext "+ tsmfldi.hasNext()
 	  while (tsmfldi.hasNext())  // cycle through fields
 		{
 
@@ -94,6 +102,7 @@ function TotalASITRows(tname)
 			tempArray.push(tempObject);  // end of record
 			var tempObject = new Array();  // clear the temp obj
 			numrows++;
+			message = message + "  "+ numrows
 			}
 		var tcol = tsmcoli.next();
 		var tval = tsmfldi.next();
@@ -108,7 +117,7 @@ function TotalASITRows(tname)
 		}
 		tempArray.push(tempObject);  // end of record
 	  }
-	  message = message + "333 "+numrows
+	  
 	  return numrows;
 }
 
