@@ -1,7 +1,7 @@
 var cap = aa.env.getValue("CapModel");
 var useAppSpecificGroupName = false;	
-var message = " ";							
-var debug = " ";								
+var message = " --- ";							
+var debug = "";								
 var br = "<BR>";							
 var cap = aa.env.getValue("CapModel");
 var capId = cap.getCapID();
@@ -16,12 +16,11 @@ if(ASIValue.equals("Yes"))
 {
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
-  		var tabLength = TotalASITRows("BOND INFORMATION");
-  		message = message+" "+tabLength
-		//if(tabLength && tabLength == 0) 
-		//{
+  		message = message+ ' '+TotalASITRows("BOND INFORMATION",capId)
+		if(TotalASITRows("BOND INFORMATION",capId) == 0) 
+		{
 			logMessage("**ERROR Please add Bond Information. ");
-		//}
+		}
 	}
 }
 
