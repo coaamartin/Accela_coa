@@ -32,77 +32,60 @@ if (message.indexOf("**ERROR") > 0)
 
 
 
-function TotalASITRows(tname,capId) 
+function TotalASITRows(tname) 
 {
+
  	// tname: ASI table name
-	// Returns a ASI Table row number
+ 	// Returns a ASI Table row number
 	//
-	var numrows = "";
-	var tablename = tname;
-	//logDebug("  "+tablename);
+
 	var itemCap = capId;
-	if (arguments.length == 1)
-		{
-		itemCap = arguments[0]; // use cap ID specified in args
-		var gm = aa.appSpecificTableScript.getAppSpecificTableGroupModel(itemCap).getOutput();
-		}
-	else
-		{
-		var gm = cap.getAppSpecificTableGroupModel()
-		}
+	if (arguments.length == 2) itemCap = arguments[1]; // use cap ID specified in args
 
-	var ta = gm.getTablesMap();
-
-	var tai = ta.values().iterator();
+	var gm = aa.appSpecificTableScript.getAppSpecificTableGroupModel(itemCap).getOutput();
+	var ta = gm.getTablesArray()
+	var tai = ta.iterator();
+	var numrows = 0;
 
 	while (tai.hasNext())
 	  {
 	  var tsm = tai.next();
-
-	  if (tsm.rowIndex.isEmpty()) 
-	{
-		numrows = 0;
-		continue;
-	}
-	    // empty table
-
-	  var tempObject = new Array();
-	  var tempArray = new Array();
 	  var tn = tsm.getTableName();
-	  if (!tn.equals(tablename)) 
-	  	{   numrows = false;
-	  		continue;
-	  	}
 
-	  tn = String(tn).replace(/[^a-zA-Z0-9]+/g,'');
+      if (!tn.equals(tname)) continue;
+      if (tsm.rowIndex.isEmpty()) continue; // empty table
 
-	  if (!isNaN(tn.substring(0,1))) tn = "TBL" + tn  // prepend with TBL if it starts with a number
+   	  var tempObject = new Array();
+	  var tempArray = new Array();
 
   	  var tsmfldi = tsm.getTableField().iterator();
 	  var tsmcoli = tsm.getColumns().iterator();
+      var readOnlyi = tsm.getAppSpecificTableModel().getReadonlyField().iterator(); // get Readonly filed
 	  numrows = 1;
-
 	  while (tsmfldi.hasNext())  // cycle through fields
 		{
-		
+
 		if (!tsmcoli.hasNext())  // cycle through columns
 			{
-
 			var tsmcoli = tsm.getColumns().iterator();
 			tempArray.push(tempObject);  // end of record
 			var tempObject = new Array();  // clear the temp obj
 			numrows++;
 			}
 		var tcol = tsmcoli.next();
-		var tval = tsmfldi.next().getInputValue();
-		tempObject[tcol.getColumnName()] = tval;
+		var tval = tsmfldi.next();
+		var readOnly = 'N';
+		if (readOnlyi.hasNext()) 
+		{
+			readOnly = readOnlyi.next();
 		}
-	  tempArray.push(tempObject);  // end of record
-	  var copyStr = "" + tn + " = tempArray";
-	  logDebug("ASI Table Array : " + tn + " (" + numrows + " Rows)");
-	  eval(copyStr);  // move to table name
+		var fieldInfo = new asiTableValObj(tcol.getColumnName(), tval, readOnly);
+		tempObject[tcol.getColumnName()] = fieldInfo;
+
+		}
+		tempArray.push(tempObject);  // end of record
 	  }
-	return numrows;
+	  return numrows;
 }
 
 function loadAppSpecific4ACA(thisArr) 
