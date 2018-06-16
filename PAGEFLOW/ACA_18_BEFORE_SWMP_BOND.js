@@ -10,7 +10,7 @@ var appTypeResult = cap.getCapType();
 
 var AInfo = new Array();						
 loadAppSpecific4ACA(AInfo); 						
-var ASIValue = AInfo["Paying with Bond"];
+var ASIValue = AInfo["PAYING WITH BOND"];
 
 //if(ASIValue.equals("Yes"))
 //{
