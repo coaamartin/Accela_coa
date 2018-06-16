@@ -14,14 +14,14 @@ var ASIValue = AInfo["Paying with Bond"];
 
 if(ASIValue.equals("Yes"))
 {
-	if(appTypeResult == "Water/Water/SWMP/Application")
-  	{
-		if(TotalASITRows("BOND INFORMATION",capId) == "false") 
-		{
+	//if(appTypeResult == "Water/Water/SWMP/Application")
+  	//{
+		//if(TotalASITRows("BOND INFORMATION",capId) == "false") 
+	//	{
 			logMessage("**ERROR Add Some Rows please!");
-		}
-	}
-}
+	//	}
+	//}
+//}
 
 if (message.indexOf("**ERROR") > 0)
 {
