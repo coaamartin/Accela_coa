@@ -10,10 +10,9 @@ if ("Plans Coordination".equals(wfTask) && "Request Final Documents".equals(wfSt
         var emailtemplate = "JD_TEST_TEMPLATE";
         
         var emailparams = aa.util.newHashtable();
-        emailparams.put("$$wfComment$$", wfComment);
+        emailparams.put("$$wfComment$$", wfComment+"");
         emailparams.put("$$Joke$$", "requesting final documents");
         
         logDebug("about to send the email...")
         emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");     
-        logDebug("Did it work?");
 }
