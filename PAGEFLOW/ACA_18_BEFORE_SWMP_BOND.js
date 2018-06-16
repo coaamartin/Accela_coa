@@ -16,10 +16,10 @@ if(ASIValue.equals("Yes"))
 {
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
-  		loadASITable("BOND INFORMATION");
+  		loadASITable("BONDINFORMATION");
 		//if(TotalASITRows("BOND INFORMATION",capId) == "0") 
 		//{
-			logMessage("**ERROR The Number of Units identified in the Units table does not equal the number available units for rent that you indicated.");
+			logMessage("**ERROR ");
 		//}
 	}
 }
