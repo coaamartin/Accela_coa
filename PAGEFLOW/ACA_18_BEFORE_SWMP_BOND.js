@@ -16,11 +16,10 @@ if(ASIValue.equals("Yes"))
 {
 	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
-  		message = message+ ' '+TotalASITRows("BOND INFORMATION",capId)
-		//if(TotalASITRows("BOND INFORMATION",capId) == "false") 
-		//{
+		if(TotalASITRows("BOND INFORMATION",capId) == 0) 
+		{
 			logMessage("**ERROR Please add Bond Information. ");
-		//}
+		}
 	}
 }
 
