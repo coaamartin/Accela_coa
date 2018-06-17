@@ -15,11 +15,8 @@ var ASIValue = AInfo["PAYING WITH BOND"];
 if(ASIValue.equals("Yes"))
 {
 	loadACAASITables();
-	if (typeof(BONDINFORMATION) == "object") {
-		length = BONDINFORMATION.length;
-		if(length<=0){
-			message = 'No Rows..'
-		}
+	if (typeof(BONDINFORMATION) != "object") {
+		message = 'No Rows..';
 		message = message +'---'+length
 	}
 
