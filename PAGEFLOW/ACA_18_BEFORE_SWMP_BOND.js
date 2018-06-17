@@ -15,7 +15,7 @@ var ASIValue = AInfo["PAYING WITH BOND"];
 if(ASIValue.equals("Yes"))
 {
 	loadACAASITables();
-	if (typeof(BONDINFORMATION) == "object" && BONDINFORMATION.length == 0) {
+	if (typeof(BONDINFORMATION) == "object" && BONDINFORMATION.length == "0") {
 		logMessage("**ERROR: Please enter BOND Information ");
 	}
 }
