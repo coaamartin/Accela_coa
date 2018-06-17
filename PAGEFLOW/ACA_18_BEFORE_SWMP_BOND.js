@@ -15,9 +15,24 @@ var ASIValue = AInfo["PAYING WITH BOND"];
 if(ASIValue.equals("Yes"))
 {
 	loadACAASITables();
-	if (typeof(BONDINFORMATION) == "object" && BONDINFORMATION.length == "0") {
-		logMessage("**ERROR: Please enter BOND Information ");
+	if (typeof(BONDINFORMATION) == "object") {
+		length = BONDINFORMATION.length;
+		if(length<=0){
+			message = 'No Rows..'
+		}
+		message = message +'---'+length
 	}
+
+	logMessage("**ERROR ");
+
+	/*if(appTypeResult == "Water/Water/SWMP/Application")
+  	{
+  		loadASITable("BOND INFORMATION");
+		//if(TotalASITRows("BOND INFORMATION",capId) == "0") 
+		//{
+			logMessage("**ERROR ");
+		//}
+	}*/
 }
 
 if (message.indexOf("**ERROR") > 0)
@@ -27,6 +42,7 @@ if (message.indexOf("**ERROR") > 0)
 }
 
 function loadACAASITables() {
+	//logDebugWithThreadID("Loading ASIT for Venue NOC:"+count);
 	var gm = cap.getAppSpecificTableGroupModel();
 	if(gm == null)
 	{
