@@ -17,7 +17,6 @@ if(ASIValue.equals("Yes"))
 	loadACAASITables();
 	if (typeof(BONDINFORMATION) != "object") {
 		message = 'No Rows..';
-		message = message +'---'+length
 	}
 
 	logMessage("**ERROR ");
