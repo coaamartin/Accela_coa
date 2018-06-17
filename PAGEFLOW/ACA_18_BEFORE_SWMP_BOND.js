@@ -1,6 +1,6 @@
 var cap = aa.env.getValue("CapModel");
 var useAppSpecificGroupName = false;	
-var message = " -- ";							
+var message = " ";							
 var debug = "";								
 var br = "<BR>";							
 var cap = aa.env.getValue("CapModel");
@@ -14,21 +14,13 @@ var ASIValue = AInfo["PAYING WITH BOND"];
 
 if(ASIValue.equals("Yes"))
 {
-	loadACAASITables();
-	if (typeof(BONDINFORMATION) != "object") {
-		message = 'No Rows..';
-	}
-
-	logMessage("**ERROR ");
-
-	/*if(appTypeResult == "Water/Water/SWMP/Application")
+	if(appTypeResult == "Water/Water/SWMP/Application")
   	{
-  		loadASITable("BOND INFORMATION");
-		//if(TotalASITRows("BOND INFORMATION",capId) == "0") 
-		//{
-			logMessage("**ERROR ");
-		//}
-	}*/
+		loadACAASITables();
+		if (typeof(BONDINFORMATION) != "object") {
+			logMessage("**ERROR: Please enter BOND Information. ");
+		}
+	}
 }
 
 if (message.indexOf("**ERROR") > 0)
