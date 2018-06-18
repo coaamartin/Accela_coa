@@ -32,7 +32,7 @@ function script260_EmailExcelEnergyOnInspectionResult() {
         setChecklistItemText();
         if (inspComment)
             addParameter(emailParams, "$$inspComment$$", inspComment);
-        addParameter(eParams, "$$FullAddress$$", getCapFullAddress());
+        addParameter(emailParams, "$$FullAddress$$", getCapFullAddress());
         emailAsync2("", emailTemplate, emailParams);
 }
 
