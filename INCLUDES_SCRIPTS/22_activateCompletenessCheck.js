@@ -1,11 +1,16 @@
 (function() {
     var idx,
+        docListArray,
         doc,
         docCat;
 
-    for (var idx in documentModelArray) {
-        doc = documentModelArray[idx];
-        docCat = doc.getDocCategory();
- logDebug(docCat);
+
+logDebug("one");
+    docListArray = getDocumentList();
+    for (var idx in docListArray) {
+        doc = docListArray[idx];
+        docCat = doc.docCategory;
+        logDebug(docCat);
+        printObjProperties(doc);
     }
 })(); 
