@@ -1,13 +1,3 @@
-/*
-Title : Update Workflow Due Date with Zoning Inquiry Meeting Date and send email (MeetingScheduleAfter) 
-Purpose : If certain meeting type was scheduled, update a Task status and due date, and send an email
-Author: Yazan Barghouth 
-Functional Area : Records
-Notes:
-	make sure meeting type "Tuesday Zoning Inquiry" Meeting exist (configured), you can pass any type as parameter 'meetingType'
-*/
-
-
 function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName) {
 
 	var calId = aa.env.getValue("CalendarID");
@@ -47,6 +37,7 @@ function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName)
 	addParameter(eParams, "$$altID$$", cap.getAltID());
 	addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+	addParameter(eParams, "$$MeetingDate$$", meetingDate);
 	var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
 	if (!sent.getSuccess()) {
 		logDebug("**WARN send email failed, Error: " + sent.getErrorMessage());

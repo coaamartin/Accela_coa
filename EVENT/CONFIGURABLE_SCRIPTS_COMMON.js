@@ -1,7 +1,10 @@
-/**
- * CONFIGURABLE_SCRIPTS_COMMON
- *
- */
+/*------------------------------------------------------------------------------------------------------/
+| Program		: CONFIGURABLE_SCRIPTS_COMMON.js
+| Event			: N/A
+| Usage			: Script performs common functions as an aide to the Standard Configurable Scripts
+| Created by	: AME Team
+| Created on	: 11/01/2017
+/------------------------------------------------------------------------------------------------------*/
 
 var SCRIPT_VERSION = 3.0;
 // Support ACA and AV, without messing with Global publicUser
@@ -13,11 +16,29 @@ if (typeof publicUser === 'undefined') {
 	isPublicUser = publicUser;
 }
 
-var asiGroups;
+/** 
+ * this is a global variable for Configurable scripts
+ * used by preScript to cancel process of the STDBASE script
+ * based on complex logic
+ * */
+var cancelCfgExecution = false;
 
+var asiGroups;
 if (isPublicUser && (typeof controlString === 'undefined' || controlString == "Pageflow") && (typeof capId === 'undefined' || capId == null)) {
-	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-	eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+	var includesAccelaFunctions = getScriptText("INCLUDES_ACCELA_FUNCTIONS");
+	if (typeof (includesAccelaFunctions) != "undefined" && includesAccelaFunctions != null && includesAccelaFunctions != "") {
+		eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+	} else {
+		eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, true));
+	}
+
+	var includesAccelaGlobals = getScriptText("INCLUDES_ACCELA_GLOBALS");
+	if (typeof (includesAccelaGlobals) != "undefined" && includesAccelaGlobals != null && includesAccelaGlobals != "") {
+		eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+	} else {
+		eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
+	}
+
 	var capModel = aa.env.getValue("CapModel");
 	var cap = capModel;
 	capId = capModel.getCapID();
@@ -27,24 +48,22 @@ if (isPublicUser && (typeof controlString === 'undefined' || controlString == "P
 // this in case of there is capId and cap object is undefined.
 else if (typeof cap === 'undefined' && capId != null) {
 	cap = aa.cap.getCap(capId).getOutput();
-
 }
 
 /**
- * Check if appType is defined in StandardChoice, and fills Settings array
- *
- * @Param settingsArray
- *            array to be populated
- * @Param ignoreEvent optional parameter if true then will ignore the checking the event from the JSON else will include the event this is used in STDBASE_ACA_AUTO_ISSUANCE script.           
- *
- * @returns true if JSON configuration is set for the record type and if a
- *          ruleset for the recordType/Event is defined in JSON , false if not.
+ * Check JSON CONF file for Application type (Wild Card supported), controlString, event variables and primary criteria
+ * <br/> if matched, JSON settings (rules) are returned to STDBASE script.
+ * <br/><b>Primary Criteria</b> includes:  customFields, customLists, contactFields, addressFields, parcelFields, lpFields, recordStatus
+ * <br/><b>Event Variables</b> are: Workflow: task and status, Inspection: type and result, Document: group and category
+ * @param settingsArray array of matched settings from JSON conf file (accessed and filled by reference)
+ * @param jsonFileSuffix
+ * @param allowedEvents {Array} {OPTIONAL} events allowed to execute the STDBASE regardless of JSON config or CONFIGURABLE_RULESET, empty or null to ignore
+ * @returns {Boolean} true if STDBASE script should start (criteria matched)
  */
-
 function isConfigurableScript(settingsArray, jsonFileSuffix) {
-	var ignoreEvent = false;
+	var allowedEvents = [];
 	if (arguments.length == 3) {
-		ignoreEvent = arguments[2];
+		allowedEvents = arguments[2];
 	}
 
 	// delete this if "Pageflow" passed from GLOBAL SCRIPTS
@@ -85,116 +104,202 @@ function isConfigurableScript(settingsArray, jsonFileSuffix) {
 	if (!solution) {
 		return false;
 	}
-
 	var jsonName = "CONF_" + solution + "_" + jsonFileSuffix;
-	logDebug("jsonName: " + jsonName);
+
 	var cfgJsonStr = getScriptText(jsonName);
 	if (cfgJsonStr == "") {
 		return false
 	}
-	//logDebug("cfgJsonStr: " + cfgJsonStr)
+
 	var cfgJsonObj = JSON.parse(cfgJsonStr);
-	var ruleSet = "";
 
-	if (controlString.indexOf("Workflow") > -1) {
-		ruleSet = controlString + "/" + wfTask + "/" + wfStatus;
-	} else if (controlString.indexOf("Inspection") > -1) {
-		ruleSet = controlString + "/" + inspType + "/" + inspResult;
-	} else if (controlString.indexOf("Document") > -1) {
-		// this to handle the document type and document category since the user my upload more than one category and group.
-		for (var d = 0; d < documentModelArray.size(); d++) {
-			var documentgroup = documentModelArray.get(d).getDocGroup();
-			var documentCategory = documentModelArray.get(d).getDocCategory();
-			ruleSet = controlString + "/" + documentgroup + "/" + documentCategory;
-			settingsArray = fillSettingsArray(itemAppTypeArray, settingsArray, ruleSet, cfgJsonObj, ignoreEvent);
-		}//for all docs
-		return (settingsArray != null && settingsArray.length > 0);
-	} else {
-		ruleSet = controlString;
-	}
+	var wildCardProbabiltyArr = [ itemAppTypeArray[0] + "/" + itemAppTypeArray[1] + "/" + itemAppTypeArray[2] + "/" + itemAppTypeArray[3],
+			itemAppTypeArray[0] + "/" + itemAppTypeArray[1] + "/" + itemAppTypeArray[2] + "/*", itemAppTypeArray[0] + "/" + itemAppTypeArray[1] + "/*/*",
+			itemAppTypeArray[0] + "/*/*/*", itemAppTypeArray[0] + "/*/" + itemAppTypeArray[2] + "/*",
+			itemAppTypeArray[0] + "/*/" + itemAppTypeArray[2] + "/" + itemAppTypeArray[3], itemAppTypeArray[0] + "/*/*/" + itemAppTypeArray[3],
+			itemAppTypeArray[0] + "/" + itemAppTypeArray[1] + "/*/" + itemAppTypeArray[3] ];
 
-	settingsArray = fillSettingsArray(itemAppTypeArray, settingsArray, ruleSet, cfgJsonObj, ignoreEvent);
+	for (w in wildCardProbabiltyArr) {
+		var recordTypeRules = cfgJsonObj[wildCardProbabiltyArr[w]];
+		if (recordTypeRules === undefined)
+			continue;
+
+		//on event involved, just add whatever in record type match level
+		if (allowedEvents && allowedEvents != null && allowedEvents.length > 0 && !arrayContainsValue(allowedEvents, controlString)) {
+			logDebug("**WARN isConfigurableScript() controlString not in allowedEvents array STDBASE:" + jsonFileSuffix + " allowedEvents:" + allowedEvents);
+			continue;
+		}
+
+		//logDebug("find cfgJsonObj for record type: [" + wildCardProbabiltyArr[w] + "] : " + (recordTypeRules != undefined));
+
+		var recordTypeEventRules = recordTypeRules[controlString];
+		if (recordTypeEventRules === undefined)
+			continue;
+
+		//logDebug("find controlString [" + controlString + "] in recordTypeRules: " + recordTypeEventRules.length);
+		//logDebug("Check Is Event Criteria Matched...?");
+		for (x in recordTypeEventRules) {
+			var criteria = recordTypeEventRules[x].criteria;
+			var operators = recordTypeEventRules[x].metadata.operators;
+			if (controlString.indexOf("Workflow") > -1) {
+				var evalResult = evaluateBooleanVinA(criteria["task"], wfTask, getLogicalOp(recordTypeEventRules[x], "task"));
+				if (evalResult || criteria["task"] == null || criteria["task"] === undefined || criteria["task"].length == 0) {
+					var evalResult = evaluateBooleanVinA(criteria["status"], wfStatus, getLogicalOp(recordTypeEventRules[x], "status"));
+					if (evalResult || criteria["status"] == null || criteria["status"] === undefined || criteria["status"].length == 0) {
+						var primaryCriResult = checkPrimaryCriteria(criteria, operators);
+						if (!primaryCriResult) {
+							continue;
+						}
+						//logDebug(controlString + " :: event criteria matched, add rule to settings array...");
+						settingsArray.push(recordTypeEventRules[x]);
+					}//event 2nd level matched
+				}//event 1st level matched
+			} else if (controlString.indexOf("InspectionResult") > -1) {
+				var evalResult = evaluateBooleanVinA(criteria["inspectionTypePerformed"], inspType, getLogicalOp(recordTypeEventRules[x], "inspectionTypePerformed"));
+				if (evalResult || criteria["inspectionTypePerformed"] == null || criteria["inspectionTypePerformed"] === undefined) {
+					var evalResult = evaluateBooleanVinA(criteria["inspectionResult"], inspResult, getLogicalOp(recordTypeEventRules[x], "inspectionResult"));
+					if (evalResult || criteria["inspectionResult"] == null || criteria["inspectionResult"] === undefined) {
+						var primaryCriResult = checkPrimaryCriteria(criteria, operators);
+						if (!primaryCriResult) {
+							continue;
+						}
+						//logDebug(controlString + " :: event criteria matched, add rule to settings array...");
+						settingsArray.push(recordTypeEventRules[x]);
+					}//event 2nd level matched
+				}//event 1st level matched
+			} else if (controlString.indexOf("InspectionMultipleSchedule") > -1 || controlString.indexOf("InspectionSchedule") > -1) {
+				var evalResult = evaluateBooleanVinA(criteria["inspectionTypePerformed"], inspType, getLogicalOp(recordTypeEventRules[x], "inspectionTypePerformed"));
+				if (evalResult || criteria["inspectionTypePerformed"] == null || criteria["inspectionTypePerformed"] === undefined) {
+					if (evalResult) {
+						var primaryCriResult = checkPrimaryCriteria(criteria, operators);
+						if (!primaryCriResult) {
+							continue;
+						}
+						settingsArray.push(recordTypeEventRules[x]);
+					}
+				}//event 1st level matched
+			} else if (controlString.indexOf("Document") > -1) {
+				var crDocCategory = criteria["documentCategory"];
+				var crDocGroup = criteria["documentGroup"];
+
+				var isReqCrDocCategory = crDocCategory != null && crDocCategory !== undefined && crDocCategory.length > 0;
+				var isReqCrDocGroup = crDocGroup != null && crDocGroup !== undefined && crDocGroup.length > 0;
+
+				var total = 0;
+				for (var d = 0; d < documentModelArray.size(); d++) {
+					var docGrp = documentModelArray.get(d).getDocGroup();
+					var docCat = documentModelArray.get(d).getDocCategory();
+					for (k in crDocCategory) {
+						//if doc cat not required or matched AND docGrp not required or matched, count it
+						if ((!isReqCrDocCategory || crDocCategory[k] == docCat) && (!isReqCrDocGroup || arrayContainsValue(crDocGroup, docGrp))) {
+							++total;
+						}
+					}//for all crDocCategory in JSON
+				}//for all cap docs
+
+				var docExistEval = false;
+				if (isReqCrDocCategory)
+					docExistEval = (total >= crDocCategory.length);
+				else
+					docExistEval = true;
+
+				docExistEval = evaluateBoolean(docExistEval, getLogicalOp(recordTypeEventRules[x], "document"));
+				if (docExistEval) {
+					var primaryCriResult = checkPrimaryCriteria(criteria, operators);
+					if (!primaryCriResult) {
+						continue;
+					}
+					//logDebug(controlString + " :: event criteria matched, add rule to settings array...");
+					settingsArray.push(recordTypeEventRules[x]);
+				}
+
+			} else {
+				//other events: Pageflow, ApplicationSubmitAfter...
+				var primaryCriResult = checkPrimaryCriteria(criteria, operators);
+				if (!primaryCriResult) {
+					continue;
+				}
+				settingsArray.push(recordTypeEventRules[x]);
+			}
+		}//for all rules in ....
+	}//for all record type options (wildcard)
 	return (settingsArray != null && settingsArray.length > 0);
 }
 
-function fillSettingsArray(itemType, settingsArray, ruleSet, configJsonObj, ignoreEvent) {
-	var length = itemType.length;
-	//support /*/* in ruleSet.
-	var ruleSetOptions = new Array();
-	if (ruleSet.indexOf("/") != -1) {
-		var ruleSetPartsTemp = ruleSet.split("/");
-		ruleSetOptions.push(ruleSetPartsTemp[0] + "/*/" + ruleSetPartsTemp[2]);
-		ruleSetOptions.push(ruleSetPartsTemp[0] + "/" + ruleSetPartsTemp[1] + "/*");
-		ruleSetOptions.push(ruleSetPartsTemp[0] + "/" + ruleSetPartsTemp[1] + "/" + ruleSetPartsTemp[2]);
-		ruleSetOptions.push(ruleSetPartsTemp[0] + "/*/*");
-	} else {
-		ruleSetOptions.push(ruleSet); // ex Pageflow
-	}
-	// for better maintenance, static template to cover all probabilities
-	var wildCardProbabiltyArr = [ itemType[0] + "/" + itemType[1] + "/" + itemType[2] + "/" + itemType[3], itemType[0] + "/" + itemType[1] + "/" + itemType[2] + "/*",
-			itemType[0] + "/" + itemType[1] + "/*/*", itemType[0] + "/*/*/*", itemType[0] + "/*/" + itemType[2] + "/*", itemType[0] + "/*/" + itemType[2] + "/" + itemType[3],
-			itemType[0] + "/*/*/" + itemType[3], itemType[0] + "/" + itemType[1] + "/*/" + itemType[3] ]
+/**
+ * Check if customFields, customLists, contactFields, addressFields, parcelFields, lpFields, recordStatus are exist in JSON criteria and matches current record
+ * @param criteria json object from conf JSON
+ * @param operators json object from conf JSON
+ * @returns {Boolean}
+ */
+function checkPrimaryCriteria(criteria, operators) {
+	var PRI_CRITERIA_ELEMENTS = [ "customFields", "customLists", "contactFields", "addressFields", "parcelFields", "lpFields", "recordStatus" ];
+	var crElementMethodNameMap = new Array();
+	crElementMethodNameMap["customFields"] = "isCustomFieldsMatchRules";
+	crElementMethodNameMap["customLists"] = "isCustomListsMatchRules";
+	crElementMethodNameMap["contactFields"] = "isContactMatchRules";
+	crElementMethodNameMap["addressFields"] = "isAddressMatchRules";
+	crElementMethodNameMap["parcelFields"] = "isParcelMatchRules";
+	crElementMethodNameMap["lpFields"] = "isLPMatchRules";
+	crElementMethodNameMap["recordStatus"] = "isCapStatusMatchRules";
 
-	for (i in wildCardProbabiltyArr) {
-		var itemTypeStr = "";
-		itemTypeStr = wildCardProbabiltyArr[i];
-		var thisTypeEvents = configJsonObj[itemTypeStr];
-		if (thisTypeEvents) {
-
-			//check if JSON has pipe delimited values in 3rd level of event, and add them if they match
-			for (t in thisTypeEvents) {
-				if (t.indexOf("|") != -1) {
-					var jsonEventParts = t.split("/");
-					var pipeValuesArray = jsonEventParts[2].split("|");
-					for (ro in ruleSetOptions) {
-						var thisOption = ruleSetOptions[ro];
-						var thisOptionParts = thisOption.split("/");
-						//check levels 1 and 2
-						if (thisOptionParts[0] == jsonEventParts[0] && thisOptionParts[1] == jsonEventParts[1]) {
-							//check if 3rd level matches any of pipe values
-							for (p in pipeValuesArray) {
-								if (thisOptionParts[2] == pipeValuesArray[p]) {
-									if (thisTypeEvents[t] != null) {
-										for (j in thisTypeEvents[t]) {
-											settingsArray.push(thisTypeEvents[t][j]);
-										}//for all items in thisEvent
-									}//thisEvent !=null
-									break;
-								}
-							}//for all pipe values
-						}//event name and second level matched
-					}//for all options
-				}//contains |
-			}//for all events in thisTypeEvents
-
-			for (ro in ruleSetOptions) {
-				if (thisTypeEvents[ruleSetOptions[ro]]) {
-					var ruleSetArray = thisTypeEvents[ruleSetOptions[ro]];
-					if (ruleSetArray.length > 0) {
-						for (r in ruleSetArray) {
-
-							settingsArray.push(ruleSetArray[r]);
-
-						}
-					} else {
-						settingsArray.push(ruleSetArray);
-					}
-				} // by itemType and ruleSet
-				else if (ignoreEvent) {
-					var ruleSetArray = thisTypeEvents;
-
-					if (ruleSetArray.length > 0) {
-						for (r in ruleSetArray) {
-							settingsArray.push(ruleSetArray[r]);
-						}
-					} else {
-						settingsArray.push(ruleSetArray);
-					}
-				} //for all ruleSetOptions based on the event that provided from JSON
+	for (cr in PRI_CRITERIA_ELEMENTS) {
+		var crElement = PRI_CRITERIA_ELEMENTS[cr];
+		if (criteria.hasOwnProperty(crElement)) {
+			var expr = "isXxxMatchRules(crElementJson)";
+			var crElementJson = criteria[crElement];
+			expr = crElementMethodNameMap[crElement] + "(crElementJson)";
+			var evalResult = eval(expr);
+			if (!isEmptyOrNull(operators)) {
+				evalResult = evaluateBoolean(evalResult, operators[crElement]);
 			}
-		}// in case there is no event provided in the JSON
-	} // for item type parts
-	return settingsArray;
+			if (!evalResult) {
+				return false;
+			}
+		}//crElement  exist
+	}//for all PRI_CRITERIA_ELEMENTS
+	return true;
+}
+
+/**
+ * Check if JSON object has operators defined, and return value of required property
+ * @param jsonRules an element from settingsArray[] array
+ * @param opPropName
+ * @returns operator value, or null if not exist.
+ */
+function getLogicalOp(jsonRules, opPropName) {
+	if (isEmptyOrNull(jsonRules.metadata.operators) || isEmptyOrNull(jsonRules.metadata.operators[opPropName])) {
+		return null;
+	}
+	return jsonRules.metadata.operators[opPropName];
+}
+/**
+ * Apply an operator -currently '!=' only supported, to a boolean, any other operator will be considered as '=='
+ * @param evalResult a boolean value
+ * @param {String} op 
+ * @returns evalResult after applying op
+ */
+function evaluateBoolean(evalResult, op) {
+	if (op != null && op !== undefined && op == "!=") {
+		evalResult = !evalResult;
+	}
+	return evalResult;
+}
+
+/**
+ * Finds if value exist in inputArray then Apply an operator -currently '!=' only supported, to the result,
+   <br/>any other operator will be considered as '=='
+ * @param evalResult a boolean value
+ * @param {String} op 
+ * @returns search result after applying op
+ */
+function evaluateBooleanVinA(inputArray, value, op) {
+	if (inputArray == null || inputArray === undefined || inputArray.length == 0) {
+		return true;
+	}
+
+	var evalResult = arrayContainsValue(inputArray, value);
+	return evaluateBoolean(evalResult, op);
 }
 
 function getContacts() {
@@ -272,7 +377,7 @@ function loadAddressAttributesSessionAV(thisArr) {
 	var addressModel = aa.env.getValue("AddressModel");
 	var addressModelList = aa.env.getValue("SelectedAddressList");
 
-	if (addressModelList != "") {
+	if (addressModelList != "" && addressModelList != null) {
 		for (var i = 0; i < addressModelList.size(); i++) {
 			var address = new Array();
 			// Explicitly load some standard values
@@ -405,7 +510,7 @@ function getLPFields(returnArray) {
 function getLPfromSessionForASB(returnArray) {
 	var LPModelList = aa.env.getValue("LicProfList");
 
-	if (LPModelList != "") {
+	if (LPModelList != "" && LPModelList != null) {
 		for (var i = 0; i < LPModelList.size(); i++) {
 
 			var lp = new Array();
@@ -536,7 +641,13 @@ function getLPFieldsAV(returnArray) {
 }
 
 function loadAddressAndAttributesFromSession4ACA(addressArray) {
-	var addressModel = cap.getAddressModel();
+	var addressModel = null;
+
+	if (String(cap.getClass()).indexOf("CapScriptModel") != -1) {
+		addressModel = cap.getCapModel().getAddressModel();
+	} else {
+		addressModel = cap.getAddressModel();
+	}
 
 	if (addressModel == null) {
 		return false;
@@ -633,11 +744,6 @@ function loadParcelAttributes(thisArr) {
 	for (i in fcapParcelObj) {
 
 		var parcel = new Array();
-
-		parcelAttrObj = fcapParcelObj[i].getParcelAttribute().toArray();
-		for (z in parcelAttrObj)
-			parcel["ParcelAttribute." + parcelAttrObj[z].getB1AttributeName()] = parcelAttrObj[z].getB1AttributeValue();
-
 		// Explicitly load some standard values
 		parcel["ParcelNumber"] = fcapParcelObj[i].getParcelNumber();
 		parcel["Section"] = fcapParcelObj[i].getSection();
@@ -662,8 +768,13 @@ function loadParcelAttributes(thisArr) {
 		parcel["Township"] = fcapParcelObj[i].getTownship();
 		parcel["LandValue"] = fcapParcelObj[i].getLandValue();
 
+		parcelAttrObj = fcapParcelObj[i].getParcelAttribute().toArray();
+		for (z in parcelAttrObj) {
+			parcel["ParcelAttribute." + parcelAttrObj[z].getB1AttributeName()] = parcelAttrObj[z].getB1AttributeValue();
+		}
 		thisArr.push(parcel);
 	}
+	return thisArr;
 }
 
 function LoadPacelFromAVSession(parcelArray) {
@@ -671,7 +782,7 @@ function LoadPacelFromAVSession(parcelArray) {
 	var SelectedParcelList = aa.env.getValue("SelectedParcelList");
 	var ParcelModel = aa.env.getValue("parcelModel");
 
-	if (SelectedParcelList != "") {
+	if (SelectedParcelList != "" && SelectedParcelList != null) {
 		for (var i = 0; i < SelectedParcelList.size(); i++) {
 			var parcel = new Array();
 			parcel["ParcelNumber"] = SelectedParcelList.get(i).getParcelModel().getParcelNo();
@@ -780,10 +891,11 @@ function createAsitRulesMap(customListsRule) {
 	var asitRule = new Array();
 
 	for ( var tc in customListsRule) {
-		var tableColumn = tc.split('/');
-		var tableName = tableColumn[0];
-		var asitColName = tableColumn[1];
-		var asitValue = customListsRule[tc];
+		var asitCell = customListsRule[tc];
+
+		var tableName = asitCell.tableName;
+		var asitColName = asitCell.columnName;
+		var asitValue = asitCell.value;
 
 		if (asitRule[tableName] == null) {
 			var ruleArr = new Array();
@@ -811,7 +923,7 @@ function asitRuleFieldsObject(columnName, fieldValue) {
 //this function to get the Contacts attribute from the session in ACA and AV for ASB EVENT
 function getContactsFromSessionForASB() {
 	var contactModelList = aa.env.getValue("ContactList");
-	if (contactModelList != "") {
+	if (contactModelList != "" && contactModelList != null) {
 		var contactsArray = new Array;
 		var contact = new Array;
 		for (var i = 0; i < contactModelList.size(); i++) {
@@ -856,7 +968,7 @@ function getContactsFromSessionAV() {
 	var contactModelList = aa.env.getValue("SelectedContactList");
 	var contactsArray = new Array;
 	var contact = new Array;
-	if (contactModelList != "") {
+	if (contactModelList != "" && contactModelList != null) {
 
 		for (var i = 0; i < contactModelList.size(); i++) {
 			contact["lastName"] = contactModelList.get(i).getPeople().getLastName();
@@ -927,8 +1039,18 @@ function getContactsFromSessionAV() {
 
 function getContactsFromSession4ACA() {
 	var e = capId;
-	r = cap.getContactsGroup();
+	var r = null;
+
+	if (String(cap.getClass()).indexOf("CapScriptModel") != -1) {
+		r = cap.getCapModel().getContactsGroup();
+	} else {
+		r = cap.getContactsGroup();
+	}
+	if (r == null)
+		return false;
+
 	var contactsArray = new Array;
+
 	if (r.size() > 0) {
 		for (var cc = 0; cc < r.size(); cc++) {
 			var contact = new Array;
@@ -1030,7 +1152,15 @@ function getFieldValue(fieldName, asiGroups) {
 }
 
 function getASITablesRowsFromSession4ACA(tableName) {
-	var gm = cap.getAppSpecificTableGroupModel()
+	var gm = null;
+	if (String(cap.getClass()).indexOf("CapScriptModel") != -1) {
+		cap.getCapModel().getAppSpecificTableGroupModel();
+	} else {
+		cap.getAppSpecificTableGroupModel();
+	}
+	if (gm == null) {
+		return false;
+	}
 	var ta = gm.getTablesMap();
 	var tai = ta.values().iterator();
 	while (tai.hasNext()) {
@@ -1236,16 +1366,34 @@ function isLPMatchRules(lpJson) {
 
 }
 
-////this function to compare Record Status between the JSON and the system(Sesssion or DB)
+/**
+ * This function to compare Record Status between the JSON and the system(Sesssion or DB)
+ * @param {Array} or {String} statusJson
+ * @returns {Boolean}
+ */
 function isCapStatusMatchRules(statusJson) {
 
 	if (statusJson == null || statusJson == "")
 		return true;
-	var isValid = true;
-	if (statusJson != getRecordStatus()) {
-		isValid = false;
+
+	var tmpArray = new Array();
+	if (!Array.isArray(statusJson)) {
+		tmpArray.push(statusJson);
+	} else {
+		tmpArray = statusJson;
 	}
-	return isValid;
+
+	if (tmpArray.length == 0) {
+		return true;
+	}
+
+	var tmpCapStatus = getRecordStatus();
+	for (s in tmpArray) {
+		if (tmpArray[s] == tmpCapStatus) {
+			return true;
+		}
+	}
+	return false;
 }
 
 //this function is to get the current cap status if ACA or AV.
@@ -1262,7 +1410,7 @@ function getRecordStatus() {
 
 function isContactMatchRules(contactFieldsJson) {
 	//no contact rules in JSON
-	if (!contactFieldsJson) {
+	if (!contactFieldsJson || contactFieldsJson == null || contactFieldsJson == "" || (typeof contactFieldsJson == 'object' && Object.keys(contactFieldsJson).length == 0)) {
 		return true;
 	}
 
@@ -1411,6 +1559,15 @@ function handleUndefined(item, required) {
 	return item;
 }
 
+/**
+ * Check if passed value is null, undefined or empty, if passed value is an Array,
+   <br/>then if length=0 or has an item with value '' will consider EmptyOrNull
+ * @param value
+ * @returns {Boolean}
+ */
+function isEmptyOrNull(value) {
+	return value == null || value === undefined || String(value) == "";
+}
 /// --------------------- GIS UTILS Section
 function GisUtils(gisServiceId) {
 	this.gisBusiness = aa.proxyInvoker.newInstance("com.accela.aa.gis.gis.GISBusiness").getOutput();
@@ -1554,6 +1711,7 @@ function proximityForGISObject(svc, layer, numDistance, objectType) {
 }
 
 /**
+ * @deprecated <b>use getGisAttributesMap() instead</b>
  * creates an Associative Array, with values retrieved from GIS service.
  * @param copyGISData Describes GIS service|layer|attribute and destination field name (JSON Object)
  * @param mappingIdField ID or OBJECTID
@@ -1570,6 +1728,25 @@ function getNewAttributesMap(copyGISData, mappingIdField, parcelNumber) {
 		var keyArray = key.split("|");
 		var newValue = getAttrFromGIS(keyArray[0], keyArray[1], keyArray[2], mappingIdField, parcelNumber);
 
+		if (newValue) {
+			atrValuesMap[destFieldName] = newValue;
+		}
+	}//for all copyGisData key Fields
+	return atrValuesMap;
+}
+
+/**
+ * creates an Associative Array, with values retrieved from GIS service.
+ * @param copyGISData from rules JSON Object
+ * @param parcelNumber
+ * @returns {Associative Array} , KEY is destination field/attribute name, VALUE is the new value (From GIS Service) 
+ */
+function getGisAttributesMap(copyGISData, parcelNumber) {
+	var atrValuesMap = new Array();
+	for (i in copyGISData) {
+		var item = copyGISData[i];
+		var destFieldName = String(item.field);
+		var newValue = getAttrFromGIS(item.service, item.layer, item.attribute, item.mappingIdField, parcelNumber);
 		if (newValue) {
 			atrValuesMap[destFieldName] = newValue;
 		}
