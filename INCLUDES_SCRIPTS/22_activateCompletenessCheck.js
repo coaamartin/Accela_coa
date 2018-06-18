@@ -3,7 +3,7 @@
         docListArray,
         doc,
         docCat,
-        asiGroups,
+        group,
         idxAsiGrps;
 
 
@@ -21,19 +21,40 @@
 
 //var capModel =  aa.cap.getCap(capId).getOutput().getCapModel();
 
-    asiGroups = cap.capModel.getAppSpecificInfoGroups()
-    for (idxAsiGrps in asiGroups) {
-       // doc = docListArray[idxAsiGrps];
-      //  docCat = doc.docCategory;
-    //    logDebug(docListArray[idxAsiGrps]);
-        printObjProps(docListArray[idxAsiGrps]);
-    }
+    // asiGroups = cap.capModel.getAppSpecificInfoGroups()
+    // for (idxAsiGrps in asiGroups) {
+    //    // doc = docListArray[idxAsiGrps];
+    //   //  docCat = doc.docCategory;
+    // //    logDebug(docListArray[idxAsiGrps]);
+    //     printObjProps(docListArray[idxAsiGrps]);
+    // }
 
     var idxAsiGrps= cap.capModel.getAppSpecificInfoGroups().iterator();
-    while (i.hasNext())
+    while (idxAsiGrps.hasNext())
     {
-        var group = i.next();
-        printObjProps(group);
-
+        var group = idxAsiGrps.next();
+        if(group.groupName.toUpperCase().indexOf('SUPPORTING DOCUMENT') > -1 ) {
+            printObjProps(group);
+            var fields = group.getFields();
+            if (fields != null)
+	        {
+                var iteFields = fields.iterator();
+                while (iteFields.hasNext())
+                {
+                    var field = iteFields.next();
+                    logDebug(field);
+                }
+            }
+        }
     }
+
+    // var arr = [];
+    // loadAppSpecific(arr)
+    // for (var idx in arr) {
+    //     printObjProps(arr[idx]);
+    // }
+
+
+ 
+
 })(); 
