@@ -3,8 +3,12 @@ function dateAddHC2(td, amt)
 // td can be "mm/dd/yyyy" (or any string that will convert to JS date)
 // amt can be positive or negative (5, -3) days
 // if optional parameter #3 is present, use working days only
+// 
+// function corrected by SLS Eric Koontz
+//     correctly adjust the target date to ensure that the date returned is a workind day
+//     correctly handle a zero date adjustment 
 {
-
+    aa.print("in dateAddHC2");
 	var useWorking = false;
 	if (arguments.length == 3)
 		useWorking = true;
@@ -13,29 +17,30 @@ function dateAddHC2(td, amt)
 		dDate = new Date();
 	}
 	else {
-		logDebug("trying to convert date...");
+		aa.print("trying to convert date...");
 		dDate = convertDate(td);
 	}
-	logDebug("date: " + dDate);
+	aa.print("days to increment = " + amt + "  date: " + dDate);
 	var i = 0;
 	var nonWorking = false;
 	var failsafe = 0;
+
 	// incorporate logic that will increment the date without counting non-working days
 	if (useWorking){
-		while (i < Math.abs(amt) && failsafe < 200) {
+		while (i < Math.abs(amt) && failsafe < 600) {
 			// handle positive date changes
-			if (amt > 0) {
+			if (amt >= 0) {
 				nonWorking = checkHolidayCalendar(dDate);
 				if (!nonWorking){
-					dDate = convertDate(dateAdd(dDate,1));
 					i++;
 					failsafe++;
-					logDebug("nonWorking = " + nonWorking + " || amt = " + amt + " || i = " + i + " || failsafe = " + failsafe + " || dDate = " + dDate );
+					aa.print("WORKDAY = " + nonWorking + " || amt = " + amt + " || i = " + i + " || dDate = " + dDate );
+					dDate = convertDate(dateAdd(dDate,1));
 				}
 				else {
-					dDate = convertDate(dateAdd(dDate,1));
 					failsafe++;
-					logDebug("nonWorking = " + nonWorking + " || amt = " + amt + " || i = " + i + " || failsafe = " + failsafe + " || dDate = " + dDate );
+					aa.print("nonWork = " + nonWorking + " || amt = " + amt + " || i = " + i + " || dDate = " + dDate );
+					dDate = convertDate(dateAdd(dDate,1));
 				}				
 			} 
 			// handle negative date changes
@@ -50,6 +55,22 @@ function dateAddHC2(td, amt)
 					failsafe++;
 				}
 			}
+		}
+		
+		// we have identified the target date using the working calendar, now we need
+		// to confirm that the target date is a working day
+		nonWorking = checkHolidayCalendar(dDate);
+		while (nonWorking) 
+		{
+			i++;
+			failsafe++
+			if (amt >= 0 ) {
+				dDate = convertDate(dateAdd(dDate,1));
+			}
+			else{
+				dDate = convertDate(dateAdd(dDate,-1));
+			}
+				nonWorking = checkHolidayCalendar(dDate);
 		}
 	}
 	// ignore non-working days and simply use calendar days increment
