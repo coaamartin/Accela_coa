@@ -25,5 +25,5 @@ updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submit
 include("45_LicenseAgreementEmailResubmittal");
 
 if($iTrc(wfTask == "Signatures" && wfStatus == "Pending Owner Signature", 'wfTask == "Signatures" && wfStatus == "Pending Owner Signature"')){
-    pWrksScript303_reqOwnerSigEmail();
+	if(balanceDue == 0) pWrksScript303_reqOwnerSigEmail();
 }
