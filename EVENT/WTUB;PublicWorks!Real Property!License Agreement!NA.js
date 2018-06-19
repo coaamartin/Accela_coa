@@ -30,7 +30,8 @@ noInvoicedFeesErrorMessage("Completeness Check", [ "Ready to Pay" ]);
 
 logDebug("START: Script 294");
 if (wfStatus == "Complete" && balanceDue == 0) {
-	showMessage == true;
+	showMessage = true;
 	comment("Fees must be paid before proceeding the workflow");
+	cancel = true;
 }
 logDebug("END: Script 294");
