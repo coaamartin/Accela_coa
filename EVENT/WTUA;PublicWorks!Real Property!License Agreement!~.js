@@ -23,3 +23,7 @@ Notes:
 updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submittal Number");
 
 include("45_LicenseAgreementEmailResubmittal");
+
+if($iTrc(wfTask == "Signatures" && wfStatus == "Pending Owner Signature", 'wfTask == "Signatures" && wfStatus == "Pending Owner Signature"')){
+    pWrksScript303_reqOwnerSigEmail();
+}

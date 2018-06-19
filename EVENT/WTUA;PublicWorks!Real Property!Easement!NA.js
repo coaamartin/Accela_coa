@@ -48,3 +48,7 @@ UpdateASIFieldBasedOnworkFlowTask(workflowTaskName, workflowStatus, ASIFieldName
 if($iTrc(wfTask == "Completeness Check" && wfStatus == "Ready to Pay", 'wfTask == "Completeness Check" && wfStatus == "Ready to Pay"')){
 	pWrksScript293_addFeeEmailReadyToPay();
 }
+
+if($iTrc(wfTask == "Signatures" && wfStatus == "Pending Owner Signature", 'wfTask == "Signatures" && wfStatus == "Pending Owner Signature"')){
+    pWrksScript303_reqOwnerSigEmail();
+}
