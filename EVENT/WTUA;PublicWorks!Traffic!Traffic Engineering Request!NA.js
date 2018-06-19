@@ -27,7 +27,7 @@ script270_GenerateWorkOrderNumber();
 Title : Generate Work Order Email (WorkflowTaskUpdateAfter)
 
 Purpose : If the workflow task = 'Manager Review' and the workflow status = 'Approved then auto generate an incrementing
-number(Format TBD by Aurora) and update the custom field “Work Order Number” and send a notification email(Template
+number(Format TBD by Aurora) and update the custom field "Work Order Number" and send a notification email(Template
 TBD by Aurora) with an attached Work Order Report(Report name TBD) and email Chris Carnihan(ccarnihan@aurora.gov)
 
 Author: Yazan Barghouth 
@@ -47,5 +47,5 @@ Notes:
 var rptParams = aa.util.newHashtable();
 rptParams.put("altID", cap.getCapModel().getAltID());
 
-generateWorkOrderEmail("Manager Review", [ "Approved" ], "Work Order Number", "MESSAGE_NOTICE_PUBLIC WORKS", "WorkFlowTasksOverdue", rptParams, "ccarnihan@aurora.gov", "Receipt",
-		"Agency-Receipt", "Agency-Receipt");
+//generateWorkOrderEmail("Manager Review", [ "Approved" ], "Work Order Number", "MESSAGE_NOTICE_PUBLIC WORKS", "WorkFlowTasksOverdue", rptParams, "ccarnihan@aurora.gov", "Receipt",
+//		"Agency-Receipt", "Agency-Receipt");
