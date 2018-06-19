@@ -13,3 +13,9 @@ Notes : The name of the record is changed to “Traffic Engineering Request” (
 */
 
 validateWOFields();
+
+//script 173
+logDebug('Script 173 Starting')
+if (ifTracer(wfTask=="Request Complete" && wfStatus=="Complete ",'wfTask & wfStatus match')) {
+	include("173_RequireFinalResponseSent");
+}
