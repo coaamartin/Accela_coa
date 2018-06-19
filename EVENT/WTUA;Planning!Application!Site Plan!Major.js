@@ -112,7 +112,7 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 	addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
 	var reportFile = [];
 	
-	var sendResult = sendNotification("noreply@aurora.gov","eric@esilverliningsolutions.com","","PLN HEARING SCHEDULED # 277",emailParameters,reportFile,capID4Email);
+	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN HEARING SCHEDULED # 277",emailParameters,reportFile,capID4Email);
 	if (!sendResult) 
 		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 	else
