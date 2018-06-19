@@ -4,20 +4,11 @@ if (ifTracer((wfTask=="Initial Review" || wfTask=="Initial Supervisor Review") &
 	include("250_updateAssignedUserForTrafficEngRequest");
 }
 
-// //script 265
-// logDebug('Script 265 Starting')
-// if (ifTracer(wfTask=="Manager Review" && wfStatus=="Approved",'wfTask & wfStatus match')) {
-// 	var tasks = aa.workflow.getHistory(capId).getOutput();
-// 	for (var t in tasks) {
-// 		var task = tasks[t];
-// 		logDebug(task.getTaskDescription());
-// 		if (task.getTaskDescription() == 'Traffic Investigation') {
-// 			printObjProps(task);
-// 		}
-// 	}
-// //printObjProps(tiTask);
-// //	assignTask("Generate Work Order",userObj.getUserID());
-// }
+//script 269
+logDebug('Script 269 Starting')
+if (ifTracer(wfTask=="Manager Review" && wfStatus=="Approved",'wfTask & wfStatus match')) {
+	include("269_GenerateWorkOrderTrafficInvestigation");
+}
 
 script265_ManagerReviewToSupervisor();
 script268_MakeFieldsNullIfNoWorkOrderrder();
