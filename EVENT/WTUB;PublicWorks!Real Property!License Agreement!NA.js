@@ -29,7 +29,7 @@ noInvoicedFeesErrorMessage("Completeness Check", [ "Ready to Pay" ]);
 //Created By: Silver Lining Solutions
 
 logDebug("START: Script 294");
-if (wfStatus == "Complete" && balanceDue == 0) {
+if (wfStatus == "Complete" && balanceDue != 0) {
 	showMessage = true;
 	comment("Fees must be paid before proceeding the workflow");
 	cancel = true;
