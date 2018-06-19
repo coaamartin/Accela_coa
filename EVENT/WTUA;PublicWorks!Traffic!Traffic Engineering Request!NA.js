@@ -47,5 +47,4 @@ Notes:
 var rptParams = aa.util.newHashtable();
 rptParams.put("altID", cap.getCapModel().getAltID());
 
-//generateWorkOrderEmail("Manager Review", [ "Approved" ], "Work Order Number", "MESSAGE_NOTICE_PUBLIC WORKS", "WorkFlowTasksOverdue", rptParams, "ccarnihan@aurora.gov", "Receipt",
-//		"Agency-Receipt", "Agency-Receipt");
+generateWorkOrderEmail("Manager Review", [ "Approved" ], "Work Order Number", "MESSAGE_NOTICE_PUBLIC WORKS", "WorkFlowTasksOverdue", rptParams, "ccarnihan@aurora.gov", "Receipt", "Agency-Receipt", "Agency-Receipt");
