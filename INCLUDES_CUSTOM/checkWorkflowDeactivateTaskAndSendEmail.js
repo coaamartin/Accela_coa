@@ -45,7 +45,7 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 
 		var eParams = aa.util.newHashtable();
 		addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
-		addParameter(emailParameters, "$$ContactFullName$$",fullName); 
+		addParameter(eParams, "$$ContactFullName$$",fullName); 
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
