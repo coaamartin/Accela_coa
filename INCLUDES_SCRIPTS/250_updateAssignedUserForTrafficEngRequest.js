@@ -8,17 +8,17 @@ var assignToUserName = AInfo['Updated.Assigned To']
 		
 	loadTaskSpecific(tsiArray);
 	for (i in tsiArray){
-	logDebug(i)
-    if (i=="Assigned To"){
-    	var assignedTo=tsiArray[i];
-    	if (assignedTo!=null && assignedTo!=""){
-    			var userName=assignedTo.split(" ");
-    			var userObj = aa.person.getUser(userName[0],null,userName[1]).getOutput();
-    			assignTask("Traffic Investigation",userObj.getUserID());
-    			updateTaskDepartment("Traffic Investigation",userObj.getDeptOfUser());		
-    	}	
-     }
-    	
-    }
-	
+		if (ifTracer(i=="Assigned To", "i == Assigned To")) {
+			var assignedTo=tsiArray[i];
+			if (ifTracer(assignedTo!=null && assignedTo!="", "assignedTo is valid")) {
+				logDebug(assignedTo);
+				var userName=assignedTo.split(" ");
+				var userObj = aa.person.getUser(userName[0],null,userName[1]).getOutput();
+		//		printObjProps(userObj);
+				assignTask("Traffic Investigation",userObj.getUserID());
+				updateTaskDepartment("Traffic Investigation",userObj.getDeptOfUser());		
+			}	
+		}
+	}
+	 	
 }

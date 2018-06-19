@@ -4,6 +4,13 @@ if (ifTracer((wfTask=="Initial Review" || wfTask=="Initial Supervisor Review") &
 	include("250_updateAssignedUserForTrafficEngRequest");
 }
 
+//script 265
+logDebug('Script 265 Starting')
+if (ifTracer(wfTask=="Manager Review" && wfStatus=="Approved",'wfTask & wfStatus match')) {
+	var taskResult = aa.workflow.getTask(capId, 'Traffic Investigation');
+//	assignTask("Generate Work Order",userObj.getUserID());
+}
+
 script265_ManagerReviewToSupervisor();
 script268_MakeFieldsNullIfNoWorkOrderrder();
 script270_GenerateWorkOrderNumber();
