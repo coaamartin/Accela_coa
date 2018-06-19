@@ -3,7 +3,7 @@
     "InspectionResultSubmitAfter": [
       {
         "preScript": "",
-        "postScript": "",
+        "postScript": "deactivateAllActiveTsksWhenRecClosed",
         "metadata": {
           "description": "To run automated script based on JSON rules - Script 328",
           "operators": {}
@@ -18,8 +18,7 @@
           "rangeType": "",
           "range": 0,
           "taskName": "Pre Hearing Inspection",
-          "taskStatus": "Compliance",
-		  "deactivateTask": ["Complaint Intake", "Investigation", "Court Hearing", "Notice of Violation"]
+          "taskStatus": "Compliance"
         }
       },
       {
