@@ -109,7 +109,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		{
 			// If Custom Field "1st Review Comments Due date" is null
 			// Then update it with Today + 15 days
-			firstReviewDate = dateAddHC(new Date(), 15, 'Y');
+			firstReviewDate = dateAddHC2(new Date(), 15, 'Y');
 			logDebug("firstReviewDate = " + firstReviewDate);
 			editAppSpecific(firstReviewDateASI, firstReviewDate);
 		
@@ -117,7 +117,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			// Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
 			var dToday = new Date();
 
-			var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*6.5),'Y'));
+			var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*6.5),'Y'));
 			var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 									+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 									+ lookForPlanningMtgDate.getYear();
@@ -134,7 +134,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
 			
 			// now set the ASI values you need to update for this If
-		//	editAppSpecific("1st Review Comments Due date",dateAddHC(null,15,true));
+		//	editAppSpecific("1st Review Comments Due date",dateAddHC2(null,15,true));
 			if (newPlnMtg != null) {
 				logDebug("----------------the new planning meet date is:"+newPlnMtg.meetingId+"----------------");
 				//printObjProperties(newPlnMtg);
