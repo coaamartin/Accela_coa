@@ -51,4 +51,5 @@ if($iTrc(wfTask == "Completeness Check" && wfStatus == "Ready to Pay", 'wfTask =
 
 if($iTrc(wfTask == "Signatures" && wfStatus == "Pending Owner Signature", 'wfTask == "Signatures" && wfStatus == "Pending Owner Signature"')){
 	if(balanceDue == 0) pWrksScript303_reqOwnerSigEmail();
+	pWrksScript305_updateTaskDueDate();
 }
