@@ -109,7 +109,7 @@
             ]
           },
           "action": {
-            "notificationTemplate": "PLN PRE SUBMITTAL MEETING #253",
+            "notificationTemplate": "PLN PRE ACCEPTANCE # 282",
             "notificationReport": "",
             "notifyContactTypes": [
               "Applicant"
@@ -150,7 +150,7 @@
             ]
           },
           "action": {
-            "notificationTemplate": "PLN PRE SUBMITTAL MEETING #253",
+            "notificationTemplate": "PLN PRE ACCEPTANCE # 282",
             "notificationReport": "",
             "notifyContactTypes": [
               "Applicant"
@@ -191,7 +191,7 @@
             ]
           },
           "action": {
-            "notificationTemplate": "PLN PRE SUBMITTAL MEETING #253",
+            "notificationTemplate": "PLN PRE ACCEPTANCE # 282",
             "notificationReport": "",
             "notifyContactTypes": [
               "Applicant"
@@ -226,7 +226,7 @@
             ]
           },
           "action": {
-            "notificationTemplate": "PLN PRE SUBMITTAL MEETING #253",
+            "notificationTemplate": "PLN PRE ACCEPTANCE # 282",
             "notificationReport": "",
             "notifyContactTypes": [
               "Applicant"
