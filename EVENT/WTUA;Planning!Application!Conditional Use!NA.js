@@ -308,3 +308,12 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 		{ logDebug("Sent Notification"); }	
 }
 logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
+
+/*
+Title : Deactivate Pre Submittal Meeting Task and Email (WorkflowTaskUpdateAfter) 
+Notes:
+	- Deep URL variable for email template $$recordDeepUrl$$
+	- $$altID$$ is used for record#
+*/
+
+checkWorkflowDeactivateTaskAndSendEmail("Pre Submittal Meetings", [ "Email Applicant" ], "Pre Submittal Meetings", "PLN PRE SUBMITTAL MEETING #253");
