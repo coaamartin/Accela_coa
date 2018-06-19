@@ -23,7 +23,11 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 			return false;
 		}
 		var toEmail = applicant.getEmail();
-
+		var firstName = applicant.getFirstName();   
+		var middleName =applicant.getMiddleName();   
+		var lastName = applicant.getLastName(); 
+		var fullName = buildFullName(firstName, middleName,lastName);
+		logDebug("FULL Name : " + fullName);
 		//prepare Deep URL:
 		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
@@ -41,7 +45,7 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 
 		var eParams = aa.util.newHashtable();
 		addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
-
+		addParameter(emailParameters, "$$ContactFullName$$",fullName); 
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
