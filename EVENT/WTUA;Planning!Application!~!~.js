@@ -177,7 +177,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		var iName = iNameResult.getOutput();
 		var userEmail=iName.getEmail();
 		var userName = iName.getFullName();
-	  //  var userPhone = iName.getPhone(); // " Phone: " + userPhone +
+	    var userPhone = iName.getPhoneNumber();
 	   var userTitle = iName.getTitle(); 
 
 		var cc="";
@@ -209,7 +209,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		var emailParameters = aa.util.newHashtable();
 		addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
-		//addParameter(emailParameters, "$$StaffPhone$$", userPhone); // uncomment when the user phone field is defined
+		addParameter(emailParameters, "$$StaffPhone$$", userPhone); 
 		addParameter(emailParameters, "$$StaffEmail$$", userEmail);
 		addParameter(emailParameters, "$$StaffFullName$$", userName);
 		addParameter(emailParameters, "$$StaffTitle$$", userTitle);
