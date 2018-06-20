@@ -19,7 +19,7 @@ Sample Call:
 */
 if(!appMatch(("Planning/Application/Address/*"))){
 //Script 278
-sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
+sendHearingScheduledEmailAndUpdateASI("Hearing Scheduled", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
 }
 
 /*
@@ -117,7 +117,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			// Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
 			var dToday = new Date();
 
-			var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*6.5),'Y'));
+			var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*6.5)));
 			var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 									+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 									+ lookForPlanningMtgDate.getYear();
@@ -177,7 +177,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		var iName = iNameResult.getOutput();
 		var userEmail=iName.getEmail();
 		var userName = iName.getFullName();
-	  //  var userPhone = iName.getPhone(); // " Phone: " + userPhone +
+	    var userPhone = iName.getPhoneNumber();
 	   var userTitle = iName.getTitle(); 
 
 		var cc="";
@@ -209,7 +209,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		var emailParameters = aa.util.newHashtable();
 		addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
-		//addParameter(emailParameters, "$$StaffPhone$$", userPhone); // uncomment when the user phone field is defined
+		addParameter(emailParameters, "$$StaffPhone$$", userPhone); 
 		addParameter(emailParameters, "$$StaffEmail$$", userEmail);
 		addParameter(emailParameters, "$$StaffFullName$$", userName);
 		addParameter(emailParameters, "$$StaffTitle$$", userTitle);

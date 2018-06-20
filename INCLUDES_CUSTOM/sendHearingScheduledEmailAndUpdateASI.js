@@ -1,15 +1,9 @@
-
-/**
- * Check wfTask and wfStatus if matched, update ASI field from meeting date in meetingType and send email to Applicant
- * @param workFlowTaskToCheck
- * @param workflowStatusArray
- * @param meetingType
- * @param asiFieldName
- * @param emailTemplate
- * @returns {Boolean}
- */
 function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
-    logDebug("sendHearingScheduledEmailAndUpdateASI() started.");
+	logDebug("sendHearingScheduledEmailAndUpdateASI() started.");
+	logDebug("Meeting Type" + meetingType);
+	logDebug("workflow " + workFlowTaskToCheck);
+    logDebug("ASI " + asiFieldName);
+
 	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 		return false;
 	}
@@ -40,14 +34,13 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
 				//Edit ASI
 				var meetingDate = new Date(meetings[m].getMeeting().getStartDate().getTime());
-				meetingDate = dateAdd(meetingDate, 0);
+				meetingDate = aa.util.formatDate(meetingDate, "MM/DD/YYYY");
 				var olduseAppSpecificGroupName = useAppSpecificGroupName;
 				useAppSpecificGroupName = false;
+				logDebug("Meeting Date " + meetingDate);
 				editAppSpecific(asiFieldName, meetingDate);
-				var noOfSigns = getAppSpecific("Number of Signs");
 				useAppSpecificGroupName = olduseAppSpecificGroupName;
-				
-				if(noOfSigns == undefined || noOfSigns == null || noOfSigns == "") noOfSigns = "";
+
 				//Send email
 				var recordApplicant = getContactByType("Applicant", capId);
 				var applicantEmail = null;
@@ -55,33 +48,21 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
 				} else {
 					applicantEmail = recordApplicant.getEmail();
-					var applicantName = recordApplicant.getFullName();
-					var caseManagerEmail = getAssignedStaffEmail();
-					var caseManagerPhone = getAssignedStaffPhone();
-					if(isBlankOrNull(caseManagerEmail)==true) caseManagerEmail = "";
-
+					logDebug("Applicant Email" + applicantEmail);
 					var files = new Array();
 					var eParams = aa.util.newHashtable();
 					addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-					addParameter(eParams, "$$ContactEmail$$", applicantEmail);
-					addParameter(eParams, "$$ContactFullName$$", applicantName);
-					addParameter(eParams, "$$pcDate$$", meetingDate);
-					addParameter(eParams, "$$10dayspriortopcDate$$", dateAdd(meetingDate, -10));
-					addParameter(eParams, "$$numberofSigns$$", noOfSigns);
-					addParameter(eParams, "$$StaffPhone$$", caseManagerPhone);
-					addParameter(eParams, "$$StaffEmail$$", caseManagerEmail);
-					
-					//addParameter(eParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
-					//addParameter(eParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
-					//addParameter(eParams, "$$balance$$", feeBalance(""));
-					//addParameter(eParams, "$$wfTask$$", wfTask);
-					//addParameter(eParams, "$$wfStatus$$", wfStatus);
-					//addParameter(eParams, "$$wfDate$$", wfDate);
-					//if (wfComment != null && typeof wfComment !== 'undefined') {
-					//	addParameter(eParams, "$$wfComment$$", wfComment);
-					//}
-					//addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
-					//addParameter(eParams, "$$wfHours$$", wfHours);
+					addParameter(eParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
+					addParameter(eParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
+					addParameter(eParams, "$$balance$$", feeBalance(""));
+					addParameter(eParams, "$$wfTask$$", wfTask);
+					addParameter(eParams, "$$wfStatus$$", wfStatus);
+					addParameter(eParams, "$$wfDate$$", wfDate);
+					if (wfComment != null && typeof wfComment !== 'undefined') {
+						addParameter(eParams, "$$wfComment$$", wfComment);
+					}
+					addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
+					addParameter(eParams, "$$wfHours$$", wfHours);
 
 					var sent = aa.document.sendEmailByTemplateName("", applicantEmail, "", emailTemplate, eParams, files);
 					if (!sent.getSuccess()) {
