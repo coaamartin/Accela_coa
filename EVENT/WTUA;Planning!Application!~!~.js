@@ -19,7 +19,7 @@ Sample Call:
 */
 if(!appMatch(("Planning/Application/Address/*"))){
 //Script 278
-sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
+sendHearingScheduledEmailAndUpdateASI("Hearing Scheduled", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
 }
 
 /*
