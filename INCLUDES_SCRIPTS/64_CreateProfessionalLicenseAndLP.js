@@ -80,11 +80,11 @@ if (contact) {
 	var vEParams = aa.util.newHashtable();
 	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
-	addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
-	addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());
+	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
+	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
 
 	tmpCap = capId;
-	capId = vLicenseID;
+	capId = createdApp;
 	emailContacts("All",vEmailTemplate, vEParams, null,null);
 	capId = tmpCap;
 } else { //contact required exist on child (current) record
