@@ -34,7 +34,7 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		var iName = iNameResult.getOutput();
 		var userEmail=iName.getEmail();
 		var userName = iName.getFullName();
-	    var phone = iName.getPhoneNumber();
+	    var userphone = iName.getPhoneNumber();
 	    var userTitle = iName.getTitle(); 
 	   
 	   //prepare Deep URL:
