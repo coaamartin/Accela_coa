@@ -61,8 +61,7 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					
 					if(isBlankOrNull(caseManagerEmail)==true) caseManagerEmail = "";
 					var files = new Array();
-					logDebug("Applicant Email" + applicantEmail);
-					//prepare Deep URL:
+				//prepare Deep URL:
 				var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 				var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
 				var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
@@ -98,14 +97,12 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					var sendResult = sendNotification("noreply@aurora.gov",applicantEmail, "",emailTemplate, eParams,reportFile,capID4Email);
 					if (!sendResult) 
 					{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-				else
-					{ logDebug("Sent Notification"); }
-					
+									
 				//}//applicant OK
 				//return true;
 			}//meetingType match
 		}//for all meetings
-		logDebug("**WARN no meeting of type=" + meetingType + " capId=" + capId);
+		//logDebug("**WARN no meeting of type=" + meetingType + " capId=" + capId);
 		return false;
 	} else {
 		return false;

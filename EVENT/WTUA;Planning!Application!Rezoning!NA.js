@@ -39,6 +39,10 @@ Notes :
 */
 sendNoticePCEmail();
 
+//Script 278
+
+sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
+
 //Script 58
 
 setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Complete E-Agenda", "City Council");
