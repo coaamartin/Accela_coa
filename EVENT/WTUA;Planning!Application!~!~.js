@@ -84,7 +84,7 @@ if(!appMatch(("Planning/Application/Address/*"))){
 	var firstReviewDateASI = "1st Review Comments Due Date";
 	var meetingType = "Planning Commission";
 	var planningCommissionDateASI = "Planning Commission Hearing Date";
-	var emailTemplate = "MESSAGE_NOTICE_PUBLIC WORKS"; //"PLN APPLICATION ACCEPTANCE FOR PLANNING # 257"
+	var emailTemplate ="PLN APPLICATION ACCEPTANCE FOR PLANNING # 257" //"MESSAGE_NOTICE_PUBLIC WORKS"; //
 	var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
 	acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
 	var recordURL = getACARecordURL(acaURLDefault);
@@ -160,13 +160,26 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		} else {
 			applicantEmail = recordApplicant.getEmail();
 		}
-		
+		//06/19 - Concatenate first and last name
+		var firstName = recordApplicant.getFirstName();   
+		var middleName =recordApplicant.getMiddleName();   
+		var lastName = recordApplicant.getLastName(); 
+		var fullName = buildFullName(firstName, middleName,lastName);
+
 		// Get the Case Manager's email
 		var caseManagerEmail=getAssignedStaffEmail();
 		var caseManagerPhone=getAssignedStaffPhone();
 		var caseManagerFullName=getAssignedStaffFullName();
 		var caseManagerTitle=getAssignedStaffTitle();
+		//New spec on 06/19/2018 - User current userid for Staff Info
 		
+		var iNameResult = aa.person.getUser(currentUserID);
+		var iName = iNameResult.getOutput();
+		var userEmail=iName.getEmail();
+		var userName = iName.getFullName();
+	  //  var userPhone = iName.getPhone(); // " Phone: " + userPhone +
+	   var userTitle = iName.getTitle(); 
+
 		var cc="";
 		
 		if (isBlankOrNull(caseManagerEmail)==false){
@@ -177,17 +190,34 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			}
 		}		
 		
+        //prepare Deep URL:
+		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
+		var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
+
+		var deepUrl = "/urlrouting.ashx?type=1000";
+		deepUrl = deepUrl + "&Module=" + cap.getCapModel().getModuleName();
+		deepUrl = deepUrl + "&capID1=" + capId.getID1();
+		deepUrl = deepUrl + "&capID2=" + capId.getID2();
+		deepUrl = deepUrl + "&capID3=" + capId.getID3();
+		deepUrl = deepUrl + "&agencyCode=" + aa.getServiceProviderCode();
+		deepUrl = deepUrl + "&HideHeader=true";
+
+		var recordDeepUrl = acaCitizenRootUrl + deepUrl;
+
 		var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 		var emailParameters = aa.util.newHashtable();
 		addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
-		addParameter(emailParameters, "$$StaffPhone$$", caseManagerPhone);
-		addParameter(emailParameters, "$$StaffEmail$$", caseManagerEmail);
-		addParameter(emailParameters, "$$StaffFullName$$", caseManagerFullName);
-		addParameter(emailParameters, "$$StaffTitle$$", caseManagerTitle);
+		//addParameter(emailParameters, "$$StaffPhone$$", userPhone); // uncomment when the user phone field is defined
+		addParameter(emailParameters, "$$StaffEmail$$", userEmail);
+		addParameter(emailParameters, "$$StaffFullName$$", userName);
+		addParameter(emailParameters, "$$StaffTitle$$", userTitle);
 		addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
 		addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
+		addParameter(emailParameters, "$$ContactFullName$$", fullName);
 		addParameter(emailParameters, "$$wfComment$$", wfComment);
+		addParameter(emailParameters, "$$recordDeepUrl$$", recordDeepUrl);
 		var reportFile = [];
 		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN APPLICATION ACCEPTANCE FOR PLANNING # 257",emailParameters,reportFile,capID4Email);
 		if (!sendResult) 
