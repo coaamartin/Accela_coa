@@ -50,7 +50,7 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		deepUrl = deepUrl + "&HideHeader=true";
 
 		var recordDeepUrl = acaCitizenRootUrl + deepUrl;
-
+   
 		var eParams = aa.util.newHashtable();
 		addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
 		addParameter(eParams, "$$ContactFullName$$",fullName); 
@@ -60,7 +60,7 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		addParameter(eParams, "$$StaffFullName$$", userName);
 		addParameter(eParams, "$$StaffEmail$$", userEmail);
 		addParameter(eParams, "$$StaffTitle$$", userTitle);
-
+		addParameter(eParams, "$$wfComment$$", wfComment);
 		var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
 		if (!sent.getSuccess()) {
 			logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
