@@ -72,8 +72,21 @@ if (contact) {
 
 		rB1ExpResult = aa.expiration.getLicensesByCapID(createdApp).getOutput();
 		rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+		rB1ExpResult.setExpStatus("Active");
 		aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
 	}
+	
+	var vEmailTemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
+	var vEParams = aa.util.newHashtable();
+	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
+	addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
+	addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
+	addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());
+
+	tmpCap = capId;
+	capId = vLicenseID;
+	emailContacts("All",vEmailTemplate, vEParams, null,null);
+	capId = tmpCap;
 } else { //contact required exist on child (current) record
 	logDebug("**WARN contact of type : " + contactType + " not found on record");
 }
