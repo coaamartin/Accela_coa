@@ -190,6 +190,21 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			}
 		}		
 		
+        //prepare Deep URL:
+		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
+		var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
+
+		var deepUrl = "/urlrouting.ashx?type=1000";
+		deepUrl = deepUrl + "&Module=" + cap.getCapModel().getModuleName();
+		deepUrl = deepUrl + "&capID1=" + capId.getID1();
+		deepUrl = deepUrl + "&capID2=" + capId.getID2();
+		deepUrl = deepUrl + "&capID3=" + capId.getID3();
+		deepUrl = deepUrl + "&agencyCode=" + aa.getServiceProviderCode();
+		deepUrl = deepUrl + "&HideHeader=true";
+
+		var recordDeepUrl = acaCitizenRootUrl + deepUrl;
+
 		var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 		var emailParameters = aa.util.newHashtable();
 		addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
@@ -202,6 +217,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
 		addParameter(emailParameters, "$$ContactFullName$$", fullName);
 		addParameter(emailParameters, "$$wfComment$$", wfComment);
+		addParameter(emailParameters, "$$recordDeepUrl$$", recordDeepUrl);
 		var reportFile = [];
 		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN APPLICATION ACCEPTANCE FOR PLANNING # 257",emailParameters,reportFile,capID4Email);
 		if (!sendResult) 
