@@ -27,7 +27,15 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		var middleName =applicant.getMiddleName();   
 		var lastName = applicant.getLastName(); 
 		var fullName = buildFullName(firstName, middleName,lastName);
-		logDebug("FULL Name : " + fullName);
+		
+		
+		var iNameResult = aa.person.getUser(currentUserID);
+		var iName = iNameResult.getOutput();
+		var userEmail=iName.getEmail();
+		var userName = iName.getFullName();
+	  //  var userPhone = iName.getPhone(); // " Phone: " + userPhone +
+	   var userTitle = iName.getTitle(); 
+
 		//prepare Deep URL:
 		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
@@ -42,14 +50,17 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		deepUrl = deepUrl + "&HideHeader=true";
 
 		var recordDeepUrl = acaCitizenRootUrl + deepUrl;
-
+   
 		var eParams = aa.util.newHashtable();
 		addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
 		addParameter(eParams, "$$ContactFullName$$",fullName); 
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-
+		addParameter(eParams, "$$StaffFullName$$", userName);
+		addParameter(eParams, "$$StaffEmail$$", userEmail);
+		addParameter(eParams, "$$StaffTitle$$", userTitle);
+		addParameter(eParams, "$$wfComment$$", wfComment);
 		var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
 		if (!sent.getSuccess()) {
 			logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
