@@ -3,46 +3,22 @@
     "InspectionResultSubmitAfter": [
       {
         "preScript": "",
-        "postScript": "",
+        "postScript": "deactivateAllActiveTsksWhenRecClosed",
         "metadata": {
           "description": "To run automated script based on JSON rules - Script 328",
           "operators": {}
         },
         "criteria": {
-          "inspectionTypePerformed": [
-            "Pre court investigation"
-          ],
-          "inspectionResult": [
-            "Compliance"
-          ]
+          "inspectionTypePerformed": ["Pre Court Investigation"],
+          "inspectionResult": ["Compliance"]
         },
         "action": {
-          "costRangeType": "",
-          "costRange": 0,
-          "costFeeType": "",
-          "costFeeSchedule": "",
-          "costFeeName": "",
-          "costFeeAmount": 0,
           "newAppStatus": "Closed",
-          "caseCreationType": "",
-          "caseFailureStatus": [],
-          "caseType": "",
           "caseCopyComments": false,
-          "inspectionType": "",
-          "inspectionCopyComment": true,
           "rangeType": "",
           "range": 0,
-          "sameInspector": true,
-          "createCondition": "",
-          "createConditionType": "",
-          "createConditionSeverity": "",
-          "feeSchedule": "",
-          "feeName": "",
-          "feeAmount": 0,
           "taskName": "Pre Hearing Inspection",
-          "taskStatus": "Compliance",
-          "removeCondition": "",
-          "removeConditionType": ""
+          "taskStatus": "Compliance"
         }
       },
       {
@@ -54,7 +30,7 @@
         },
         "criteria": {
           "inspectionTypePerformed": [
-            "Pre court investigation"
+            "Pre Court Investigation"
           ],
           "inspectionResult": ["Non compliance"
           ]

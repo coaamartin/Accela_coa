@@ -30,6 +30,9 @@ function script260_EmailExcelEnergyOnInspectionResult() {
     }
     if (ifTracer(sendEmail, "sendEmail is truthy")) {
         setChecklistItemText();
+        if (inspComment)
+            addParameter(emailParams, "$$inspComment$$", inspComment);
+        addParameter(emailParams, "$$FullAddress$$", getCapFullAddress());
         emailAsync2("", emailTemplate, emailParams);
 }
 
