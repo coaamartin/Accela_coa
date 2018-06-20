@@ -57,9 +57,9 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-		addParameter(eParams, "$$userName$$", userName);
-		addParameter(eParams, "$$userEmail$$", userEmail);
-		addParameter(eParams, "$$userTitle$$", userTitle);
+		addParameter(eParams, "$$StaffFullName$$", userName);
+		addParameter(eParams, "$$StaffEmail$$", userEmail);
+		addParameter(eParams, "$$StaffTitle$$", userTitle);
 
 		var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
 		if (!sent.getSuccess()) {
