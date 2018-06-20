@@ -7,13 +7,13 @@ function script171_UpdateWorkFlowAdCreateChildRecs() {
 
     for (var t in tasks) {
         var task = tasks[t];
-        if (ifTracer(task.getTaskDescription() == 'Traffic Investigation', 'Task is “Traffic Investigation')) {
+        if (ifTracer(task.getTaskDescription() == 'Traffic Investigation', 'Task is Traffic Investigation')) {
             if(ifTracer(task.disposition == 'Refer to Forestry', 'task.disposition == Refer to Forestry')) {
                 closeParent("Refer to Forestry");
                 childCapId = createChild('Forestry', 'Request', 'Citizen', 'NA', 'Tree Citizen Request', capId);
 
             } else if(ifTracer(task.disposition == 'Refer to Code Enforcement', 'task.disposition == Refer to Code Enforcement')) {
-                closeParent("“Refer to Code Enforcement");
+                closeParent("Refer to Code Enforcement");
                 childCapId = createChild('Enforcement', 'Incident', 'Informational', 'NA', 'Informational', capId);
 
             }
