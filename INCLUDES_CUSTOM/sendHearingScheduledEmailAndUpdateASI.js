@@ -105,4 +105,5 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 	} else {
 		return false;
 	}
+	return true;
 }
