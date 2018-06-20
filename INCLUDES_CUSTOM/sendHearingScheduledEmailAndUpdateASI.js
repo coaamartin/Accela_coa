@@ -45,7 +45,6 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 				useAppSpecificGroupName = false;
 				editAppSpecific(asiFieldName, meetingDate);
 				logDebug("ASI " + asiFieldName);
-				editAppSpecific("Planning Commission Hearing Date", meetingDate);
 				var noOfSigns = getAppSpecific("Number of Signs");
 				useAppSpecificGroupName = olduseAppSpecificGroupName;
 				
