@@ -88,10 +88,11 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
 					addParameter(eParams, "$$wfHours$$", wfHours);
 
-					var sent = sendNotification("noreply@aurora.gov",applicantEmail, "",emailTemplate, eParams,reportFile,capID4Email);
-					 if (!sent.getSuccess()) {
-						logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-						return false;
+					var sendResult = sendNotification("noreply@aurora.gov",applicantEmail, "",emailTemplate, eParams,reportFile,capID4Email);
+					if (!sendResult) 
+					{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+				else
+					{ logDebug("Sent Notification"); }
 					}
 				}//applicant OK
 				return true;
