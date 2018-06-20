@@ -27,7 +27,15 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		var middleName =applicant.getMiddleName();   
 		var lastName = applicant.getLastName(); 
 		var fullName = buildFullName(firstName, middleName,lastName);
-		logDebug("FULL Name : " + fullName);
+		
+		
+		var iNameResult = aa.person.getUser(currentUserID);
+		var iName = iNameResult.getOutput();
+		var userEmail=iName.getEmail();
+		var userName = iName.getFullName();
+	  //  var userPhone = iName.getPhone(); // " Phone: " + userPhone +
+	   var userTitle = iName.getTitle(); 
+
 		//prepare Deep URL:
 		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
@@ -49,6 +57,9 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+		addParameter(eParams, "$$userName$$", userName);
+		addParameter(eParams, "$$userEmail$$", userEmail);
+		addParameter(eParams, "$$userTitle$$", userTitle);
 
 		var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
 		if (!sent.getSuccess()) {
