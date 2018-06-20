@@ -117,7 +117,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 			// Commission Meeting Calendar returning the "Planning Commission Meeting" closest to 6.5 weeks from the current date
 			var dToday = new Date();
 
-			var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*6.5),'Y'));
+			var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*6.5)));
 			var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 									+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 									+ lookForPlanningMtgDate.getYear();
