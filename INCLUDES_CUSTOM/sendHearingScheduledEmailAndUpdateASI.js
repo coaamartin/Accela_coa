@@ -28,7 +28,7 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 		if (!statusMatch) {
 			return false;
 		}
-
+       logDebug("Meeting Type" + meetingType);
 		//Update ASI
 		var meetings = aa.meeting.getMeetingsByCAP(capId, true);
 		if (!meetings.getSuccess()) {
@@ -61,7 +61,7 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					var caseManagerPhone = getAssignedStaffPhone();
 					if(isBlankOrNull(caseManagerEmail)==true) caseManagerEmail = "";
 					var files = new Array();
-					
+					logDebug("Applicant Email" + applicantEmail);
 	   //prepare Deep URL:
 		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
@@ -92,6 +92,10 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 						logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 						return false;
 					}
+					else
+				{ logDebug("Sent Notification");
+			return false;
+				}
 				}//applicant OK
 				return true;
 			}//meetingType match
