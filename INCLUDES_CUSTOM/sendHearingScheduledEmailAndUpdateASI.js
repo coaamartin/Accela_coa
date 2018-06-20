@@ -52,8 +52,11 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 				} else {
 					applicantEmail = recordApplicant.getEmail();
 					var applicantName = recordApplicant.getFullName();
-					logDebug("Applicant Email" + applicantEmail);
+					var caseManagerEmail = getAssignedStaffEmail();
+					var caseManagerPhone = getAssignedStaffPhone();
+					if(isBlankOrNull(caseManagerEmail)==true) caseManagerEmail = "";
 					var files = new Array();
+					logDebug("Applicant Email" + applicantEmail);
 					//prepare Deep URL:
 				var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 				var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
