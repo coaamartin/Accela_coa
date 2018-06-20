@@ -16,6 +16,6 @@ validateWOFields();
 
 //script 173
 logDebug('Script 173 Starting')
-if (ifTracer(wfTask=="Request Complete" && wfStatus=="Complete ",'wfTask & wfStatus match')) {
+if (ifTracer(wfTask=="Request Complete" && wfStatus=="Complete",'wfTask & wfStatus match')) {
 	include("173_RequireFinalResponseSent");
 }
