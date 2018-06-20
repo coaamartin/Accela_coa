@@ -77,7 +77,7 @@ if (contact) {
 	var vEmailTemplate = "Template TBD";
 	var vEParams = aa.util.newHashtable();
 	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
-	addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
+	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
 	addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
 	addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());
 
