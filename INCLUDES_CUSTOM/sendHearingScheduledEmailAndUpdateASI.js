@@ -1,15 +1,10 @@
 function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
-	logDebug("sendHearingScheduledEmailAndUpdateASI() started.");
-	logDebug("Meeting Type" + meetingType);
-	logDebug("workflow " + workFlowTaskToCheck);
-    logDebug("ASI " + asiFieldName);
-
+	
 	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 		return false;
 	}
 
 	if (wfTask == workFlowTaskToCheck) {
-
 		var statusMatch = false;
 
 		for (s in workflowStatusArray) {
@@ -51,9 +46,19 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
 				} else {
 					applicantEmail = recordApplicant.getEmail();
-					var applicantName = recordApplicant.getFullName();
-					var caseManagerEmail = getAssignedStaffEmail();
-					var caseManagerPhone = getAssignedStaffPhone();
+				}
+				//06/19 - Concatenate first and last name
+		var firstName = recordApplicant.getFirstName();   
+		var middleName =recordApplicant.getMiddleName();   
+		var lastName = recordApplicant.getLastName(); 
+		var fullName = buildFullName(firstName, middleName,lastName);
+
+		// Get the Case Manager's email
+		var caseManagerEmail=getAssignedStaffEmail();
+		var caseManagerPhone=getAssignedStaffPhone();
+		var caseManagerFullName=getAssignedStaffFullName();
+		var caseManagerTitle=getAssignedStaffTitle();
+					
 					if(isBlankOrNull(caseManagerEmail)==true) caseManagerEmail = "";
 					var files = new Array();
 					logDebug("Applicant Email" + applicantEmail);
@@ -75,12 +80,14 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					var eParams = aa.util.newHashtable();
 					addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 					addParameter(eParams, "$$ContactEmail$$", applicantEmail);
-					addParameter(eParams, "$$ContactFullName$$", applicantName);
+					addParameter(eParams, "$$ContactFullName$$", fullName);
 					addParameter(eParams, "$$pcDate$$", meetingDate);
 					addParameter(eParams, "$$10dayspriortopcDate$$", dateAdd(meetingDate, -10));
 					addParameter(eParams, "$$numberofSigns$$", noOfSigns);
 					addParameter(eParams, "$$StaffPhone$$", caseManagerPhone);
 					addParameter(eParams, "$$StaffEmail$$", caseManagerEmail);
+					addParameter(emailParameters, "$$StaffFullName$$", caseManagerFullName);
+		            addParameter(emailParameters, "$$StaffTitle$$",caseManagerTitle);
 					addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
 					if (wfComment != null && typeof wfComment !== 'undefined') {
 						addParameter(eParams, "$$wfComment$$", wfComment);
@@ -93,9 +100,9 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 				else
 					{ logDebug("Sent Notification"); }
-					}
-				}//applicant OK
-				return true;
+					
+				//}//applicant OK
+				//return true;
 			}//meetingType match
 		}//for all meetings
 		logDebug("**WARN no meeting of type=" + meetingType + " capId=" + capId);
@@ -103,4 +110,5 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 	} else {
 		return false;
 	}
+	return true;
 }
