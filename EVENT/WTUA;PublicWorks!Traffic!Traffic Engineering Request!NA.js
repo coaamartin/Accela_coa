@@ -10,6 +10,12 @@ if (ifTracer(wfTask=="Manager Review" && wfStatus=="Approved",'wfTask & wfStatus
 	include("269_GenerateWorkOrderTrafficInvestigation");
 }
 
+//script 171
+logDebug('Script 171 Starting')
+if (ifTracer(wfTask=="Manager Review" && wfStatus=="“Request Complete",'wfTask & wfStatus match')) {
+	include("171_UpdateWorkFlowAdCreateChildRecs");
+}
+
 script265_ManagerReviewToSupervisor();
 script268_MakeFieldsNullIfNoWorkOrderrder();
 script270_GenerateWorkOrderNumber();
