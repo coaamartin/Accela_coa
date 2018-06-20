@@ -1,4 +1,3 @@
-var inspId = aa.env.getValue("InspectionId");
 var gso = getGuideSheetObjects(inspId);
 
 for (gsos in gso) {
