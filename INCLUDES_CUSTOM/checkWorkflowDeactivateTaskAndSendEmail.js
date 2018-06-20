@@ -29,18 +29,18 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		var fullName = buildFullName(firstName, middleName,lastName);
 		
 		
-		var iNameResult = aa.person.getUser(currentUserID);
+		//var iNameResult = aa.person.getUser(currentUserID);
+		var iNameResult = aa.person.getUser(wfStaffUserID);
 		var iName = iNameResult.getOutput();
 		var userEmail=iName.getEmail();
 		var userName = iName.getFullName();
-	  //  var userPhone = iName.getPhone(); // " Phone: " + userPhone +
-	   var userTitle = iName.getTitle(); 
-
-		//prepare Deep URL:
+	    var userPhone = iName.getPhoneNumber();
+	    var userTitle = iName.getTitle(); 
+	   
+	   //prepare Deep URL:
 		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
 		var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
-
 		var deepUrl = "/urlrouting.ashx?type=1000";
 		deepUrl = deepUrl + "&Module=" + cap.getCapModel().getModuleName();
 		deepUrl = deepUrl + "&capID1=" + capId.getID1();
@@ -50,7 +50,7 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		deepUrl = deepUrl + "&HideHeader=true";
 
 		var recordDeepUrl = acaCitizenRootUrl + deepUrl;
-   
+        var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 		var eParams = aa.util.newHashtable();
 		addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
 		addParameter(eParams, "$$ContactFullName$$",fullName); 
@@ -60,8 +60,19 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 		addParameter(eParams, "$$StaffFullName$$", userName);
 		addParameter(eParams, "$$StaffEmail$$", userEmail);
 		addParameter(eParams, "$$StaffTitle$$", userTitle);
+		addParameter(eParams, "$$StaffPhone$$", userPhone);
 		addParameter(eParams, "$$wfComment$$", wfComment);
-		var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
+        var reportFile = [];
+		var sendResult = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,reportFile,capID4Email);
+		if (!sendResult) 
+			{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	}
+	else
+		{ logDebug("Sent Notification");
+			return false;
+		}
+
+	/*	var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
 		if (!sent.getSuccess()) {
 			logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 			return false;
@@ -69,5 +80,6 @@ function checkWorkflowDeactivateTaskAndSendEmail(workFlowTask, workflowStatusArr
 	} else {
 		return false;
 	}
+	*/
 	return true;
 }
