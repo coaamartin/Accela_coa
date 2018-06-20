@@ -14,7 +14,12 @@
 //
 //Created By: Silver Lining Solutions
 
-logDebug ("script22 () started")
-logDebug ("script22 () end")
+logDebug ("script22 START");
+
+if(isPublicUser && capStatus=="Waiting on Documents")
+{
+	logDebug("Script 22: criteria successfully met");
+}
+logDebug ("script22 END");
 
 
