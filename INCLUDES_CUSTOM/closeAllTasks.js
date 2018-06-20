@@ -13,8 +13,8 @@ function closeAllTasks(capId, wfComment) {
 
         aa.workflow.handleDisposition(capId, stepnumber, wfstat, dispositionDate, '', wfComment, systemUserObj, "Y");
 
-        logMessage("Closing Workflow Task: " + wfstr + " with status " + wfstat);
-        logDebug("Closing Workflow Task: " + wfstr + " with status " + wfstat);
+        logMessage("Closing Workflow Task: " + task.getTaskDescription() + " with status " + wfstat);
+        logDebug("Closing Workflow Task: " + task.getTaskDescription() + " with status " + wfstat);
     }
 
 }
