@@ -19,8 +19,10 @@ logDebug ("script22 START");
 // if(isPublicUser && capStatus=="Waiting on Documents")
 if(capStatus=="Waiting on Documents")
 {
-	logDebug("Script 22: criteria successfully met");
+    logDebug("Script 22: criteria successfully met");
+    activateTask("Completeness Check");
+    editTaskDueDate("Completeness Check");
+    
 }
 logDebug ("script22 END");
-
 
