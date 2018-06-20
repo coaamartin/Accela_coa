@@ -34,6 +34,7 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
 				//Edit ASI
 				var meetingDate = new Date(meetings[m].getMeeting().getStartDate().getTime());
+				logDebug("Meeting Date " + meetingDate);
 				meetingDate = aa.util.formatDate(meetingDate, "MM/DD/YYYY");
 				var olduseAppSpecificGroupName = useAppSpecificGroupName;
 				useAppSpecificGroupName = false;
@@ -50,21 +51,38 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					applicantEmail = recordApplicant.getEmail();
 					logDebug("Applicant Email" + applicantEmail);
 					var files = new Array();
+					//prepare Deep URL:
+				var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+				var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
+				var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
+				var deepUrl = "/urlrouting.ashx?type=1000";
+				deepUrl = deepUrl + "&Module=" + cap.getCapModel().getModuleName();
+				deepUrl = deepUrl + "&capID1=" + capId.getID1();
+				deepUrl = deepUrl + "&capID2=" + capId.getID2();
+				deepUrl = deepUrl + "&capID3=" + capId.getID3();
+				deepUrl = deepUrl + "&agencyCode=" + aa.getServiceProviderCode();
+				deepUrl = deepUrl + "&HideHeader=true";
+				var recordDeepUrl = acaCitizenRootUrl + deepUrl;
+				var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+				var reportFile = [];
+
 					var eParams = aa.util.newHashtable();
 					addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-					addParameter(eParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
-					addParameter(eParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
-					addParameter(eParams, "$$balance$$", feeBalance(""));
-					addParameter(eParams, "$$wfTask$$", wfTask);
-					addParameter(eParams, "$$wfStatus$$", wfStatus);
-					addParameter(eParams, "$$wfDate$$", wfDate);
+					addParameter(eParams, "$$ContactEmail$$", applicantEmail);
+					addParameter(eParams, "$$ContactFullName$$", applicantName);
+					addParameter(eParams, "$$pcDate$$", meetingDate);
+					addParameter(eParams, "$$10dayspriortopcDate$$", dateAdd(meetingDate, -10));
+					addParameter(eParams, "$$numberofSigns$$", noOfSigns);
+					addParameter(eParams, "$$StaffPhone$$", caseManagerPhone);
+					addParameter(eParams, "$$StaffEmail$$", caseManagerEmail);
+					addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
 					if (wfComment != null && typeof wfComment !== 'undefined') {
 						addParameter(eParams, "$$wfComment$$", wfComment);
 					}
 					addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
 					addParameter(eParams, "$$wfHours$$", wfHours);
 
-					var sent = aa.document.sendEmailByTemplateName("", applicantEmail, "", emailTemplate, eParams, files);
+					var sent = sendNotification("noreply@aurora.gov",applicantEmail, "",emailTemplate, eParams,reportFile,capID4Email);
 					if (!sent.getSuccess()) {
 						logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 						return false;
