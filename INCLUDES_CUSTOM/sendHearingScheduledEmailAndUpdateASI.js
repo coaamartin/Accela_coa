@@ -86,8 +86,8 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					addParameter(eParams, "$$numberofSigns$$", noOfSigns);
 					addParameter(eParams, "$$StaffPhone$$", caseManagerPhone);
 					addParameter(eParams, "$$StaffEmail$$", caseManagerEmail);
-					addParameter(emailParameters, "$$StaffFullName$$", caseManagerFullName);
-		            addParameter(emailParameters, "$$StaffTitle$$",caseManagerTitle);
+					addParameter(eParams, "$$StaffFullName$$", caseManagerFullName);
+		            addParameter(eParams, "$$StaffTitle$$",caseManagerTitle);
 					addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
 					if (wfComment != null && typeof wfComment !== 'undefined') {
 						addParameter(eParams, "$$wfComment$$", wfComment);
