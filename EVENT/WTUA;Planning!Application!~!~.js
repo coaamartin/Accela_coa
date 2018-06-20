@@ -160,7 +160,12 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		} else {
 			applicantEmail = recordApplicant.getEmail();
 		}
-		
+		//06/19 - Concatenate first and last name
+		var firstName = recordApplicant.getFirstName();   
+		var middleName =recordApplicant.getMiddleName();   
+		var lastName = recordApplicant.getLastName(); 
+		var fullName = buildFullName(firstName, middleName,lastName);
+
 		// Get the Case Manager's email
 		var caseManagerEmail=getAssignedStaffEmail();
 		var caseManagerPhone=getAssignedStaffPhone();
@@ -195,6 +200,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		addParameter(emailParameters, "$$StaffTitle$$", userTitle);
 		addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
 		addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
+		addParameter(emailParameters, "$$ContactFullName$$", fullName);
 		addParameter(emailParameters, "$$wfComment$$", wfComment);
 		var reportFile = [];
 		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN APPLICATION ACCEPTANCE FOR PLANNING # 257",emailParameters,reportFile,capID4Email);
