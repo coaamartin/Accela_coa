@@ -374,6 +374,8 @@ function mainProcess() {
 		if (emailTemplate != null && emailTemplate != "" && sendEmailToContactTypes && sendEmailToContactTypes != "") {
 			eParams = aa.util.newHashtable();
 			eParams.put("$$expirationDate$$", b1ExpDate);
+			eParams.put("$$altID$$",capId.getCustomID());
+			eParams.put("$$acaRecordUrl$$",getACARecordURL(""));
 			if (reportName != null && reportName != "") {
 				var rParams = aa.util.newHashtable();
 				addParameter(rParams, "prmRecordID", altId);

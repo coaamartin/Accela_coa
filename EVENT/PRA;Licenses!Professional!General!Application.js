@@ -11,7 +11,7 @@ Sample Call:
 */
 
 // Script 64
-if (balanceDue == 0) {
+if (balanceDue == 0 && "Ready to Pay".equals(taskStatus("License Issuance"))) {
 	include("64_CreateProfessionalLicenseAndLP");
 }
 
