@@ -37,6 +37,7 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 				meetingDate = aa.util.formatDate(meetingDate, "MM/DD/YYYY");
 				var olduseAppSpecificGroupName = useAppSpecificGroupName;
 				useAppSpecificGroupName = false;
+				logDebug("Meeting Date " + meetingDate);
 				editAppSpecific(asiFieldName, meetingDate);
 				useAppSpecificGroupName = olduseAppSpecificGroupName;
 
