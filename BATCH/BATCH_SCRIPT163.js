@@ -37,13 +37,13 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 
 var capId = null;
-try {var emailTemplateName = 'PW LIC AGR RENEWAL #163', daysAhead = 60;
-	//var emailTemplateName = aa.env.getValue("EMAIL_TEMPLATE");
+try {
+	var emailTemplateName = aa.env.getValue("EMAIL_TEMPLATE");
 	if (!emailTemplateName || emailTemplateName == null || emailTemplateName == "") {
 		logDebug("**ERROR Parameter 'EMAIL_TEMPLATE' not defined");
 	} else {
 
-		//var daysAhead = aa.env.getValue("DAYS_AHEAD");
+		var daysAhead = aa.env.getValue("DAYS_AHEAD");
 		if (!daysAhead) {
 			daysAhead = 60;
 		}
