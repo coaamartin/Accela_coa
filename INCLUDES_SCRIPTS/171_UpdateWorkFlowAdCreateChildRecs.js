@@ -2,12 +2,12 @@ script171_UpdateWorkFlowAdCreateChildRecs();
 
 function script171_UpdateWorkFlowAdCreateChildRecs() {
     var childCapId,
-        capScriptModel = aa.cap.getCap(capId).getOutput();
+        capScriptModel = aa.cap.getCap(capId).getOutput(),
         tasks = aa.workflow.getTasks(capId).getOutput();
 
     for (var t in tasks) {
         var task = tasks[t];
-        if (ifTracer(task.getTaskDescription() == '“Traffic Investigation', 'Task is “Traffic Investigation')) {
+        if (ifTracer(task.getTaskDescription() == 'Traffic Investigation', 'Task is “Traffic Investigation')) {
             if(ifTracer(task.disposition == 'Refer to Forestry', 'task.disposition == Refer to Forestry')) {
                 closeParent("Refer to Forestry");
                 childCapId = createChild('Forestry', 'Request', 'Citizen', 'NA', 'Tree Citizen Request', capId);
@@ -32,7 +32,14 @@ function script171_UpdateWorkFlowAdCreateChildRecs() {
         copyOwner(capId, childCapId);
         editAppName(capScriptModel.specialText, childCapId);
        // copyContacts(capId, childCapId));
-     //   editAppName(childCapScriptModel.specialText, parentCapId);
+        //   editAppName(childCapScriptModel.specialText, parentCapId);
+        if(wfComment != null) {
+            createCapComment(wfComment, childCapId)
+        }
+        var desc = workDescGet(capId);
+        if(desc) {
+            createCapComment(desc, childCapId)
+        }
     }
 
 }
