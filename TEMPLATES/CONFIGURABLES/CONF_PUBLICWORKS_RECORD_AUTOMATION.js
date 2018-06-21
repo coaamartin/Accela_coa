@@ -6,33 +6,21 @@
         "postScript": "",
         "metadata": {
           "description": "To run automated script based on JSON rules",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "isCreatedByACA": true,
           "balanceAllowed": "",
-          "recordStatus": [
-            
-          ]
+          "recordStatus": []
         },
         "action": {
           "prescript": "",
-          "activateTask": [
-            
-          ],
+          "activateTask": [],
           "daysOut": "",
-          "deactivateTask": [
-            
-          ],
-          "deleteTask": [
-            
-          ],
+          "deactivateTask": [],
+          "deleteTask": [],
           "updateTask": [
-            {
-
-            }
+            {}
           ],
           "invoiceFees": "",
           "createChild": "",
@@ -53,15 +41,13 @@
         }
       }
     ],
-	"WorkflowTaskUpdateAfter": [
+    "WorkflowTaskUpdateAfter": [
       {
         "preScript": "",
         "postScript": "",
         "metadata": {
           "description": "Script 123",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -70,26 +56,19 @@
           "status": [
             "Ready to Pay"
           ],
-          "workFlow": {
-          },
+          "workFlow": {},
           "isCreatedByACA": "",
           "balanceAllowed": "",
-          "recordStatus": [
-            
-          ]
+          "recordStatus": []
         },
         "action": {
           "prescript": "",
-          "activateTask": [
-            
-          ],
+          "activateTask": [],
           "daysOut": "",
           "deactivateTask": [
             ""
           ],
-          "deleteTask": [
-            
-          ],
+          "deleteTask": [],
           "updateTask": [
             {
               "task": "",
@@ -123,9 +102,7 @@
         "postScript": "",
         "metadata": {
           "description": "To run automated script based on JSON rules",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -139,22 +116,16 @@
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",
-          "recordStatus": [
-            
-          ]
+          "recordStatus": []
         },
         "action": {
           "prescript": "",
-          "activateTask": [
-            
-          ],
+          "activateTask": [],
           "daysOut": "",
           "deactivateTask": [
             "Generate Work Order"
           ],
-          "deleteTask": [
-            
-          ],
+          "deleteTask": [],
           "updateTask": [
             {
               "task": "Application Submittal",
@@ -188,9 +159,7 @@
         "postScript": "",
         "metadata": {
           "description": "To run automated script based on JSON rules",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -204,22 +173,14 @@
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",
-          "recordStatus": [
-            
-          ]
+          "recordStatus": []
         },
         "action": {
           "prescript": "",
-          "activateTask": [
-            
-          ],
+          "activateTask": [],
           "daysOut": "",
-          "deactivateTask": [
-            
-          ],
-          "deleteTask": [
-            
-          ],
+          "deactivateTask": [],
+          "deleteTask": [],
           "updateTask": [
             {
               "task": "",
@@ -249,9 +210,7 @@
         "postScript": "",
         "metadata": {
           "description": "333",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -260,30 +219,17 @@
           "status": [
             "Ready to Pay"
           ],
-          "customFields": {
-            ("Review Fee?": "Yes",
-			"License Type": "Master License Agreement"),
-			("Review Fee?": "Yes",
-			"License Type": "License Agreement")
-          },
+          "customFields": {},
           "isCreatedByACA": "",
           "balanceAllowed": "",
-          "recordStatus": [
-            
-          ]
+          "recordStatus": []
         },
         "action": {
           "prescript": "",
-          "activateTask": [
-            
-          ],
+          "activateTask": [],
           "daysOut": "",
-          "deactivateTask": [
-            
-          ],
-          "deleteTask": [
-            
-          ],
+          "deactivateTask": [],
+          "deleteTask": [],
           "updateTask": [
             {
               "task": "",
