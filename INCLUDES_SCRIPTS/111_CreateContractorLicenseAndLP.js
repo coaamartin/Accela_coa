@@ -34,6 +34,8 @@ if (contact) {
 	} else {
 		vNewExpDate.setMonth(vNewExpDate.getMonth() + 1);
 	}
+	//vNewExpDate = new Date(vNewExpDate - 1);
+	
 	var licenseNbr;
 	var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
 

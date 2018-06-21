@@ -141,7 +141,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 	if ( !(AInfo["1st Review Comments Due Date"]) ) {
 		// Set up the 'target' date we want to search for meetings
 		var dToday = new Date();
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*12)));
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*12)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
@@ -156,7 +156,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
 
 		// update review comments
-		var revdDate = aa.date.parseDate(dateAddHC("",15, true));
+		var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
 		var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
 							+ ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
 							+ revdDate.getYear();
@@ -178,7 +178,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		// Set up the 'target' date we want to search for meetings
 		logDebug("1st Review Comments is Populated--Looking at 2nd Review Comments");
 		var dToday = new Date();
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*8),true));
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*8)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
@@ -193,7 +193,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
 
 		// update review comments
-		var revdDate = aa.date.parseDate(dateAddHC("",15, true));
+		var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
 		var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
 							+ ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
 							+ revdDate.getYear();
@@ -201,7 +201,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		logDebug("*******2nd Review Date = " +revdDateStr);
 
 		// update submission date
-		var subdDate = aa.date.parseDate(dateAddHC("",20, true));
+		var subdDate = aa.date.parseDate(dateAddHC2("",20, true));
 		var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
 							+ ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
 							+ subdDate.getYear();
@@ -221,7 +221,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 	} else {
 		// Set up the 'target' date we want to search for meetings
 		var dToday = new Date();
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*4),true));
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*4)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
@@ -237,14 +237,14 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 
 		if (!(AInfo["3rd Review Comments Due Date"])) {
 			// update review comments
-			var revdDate = aa.date.parseDate(dateAddHC("",10, true));
+			var revdDate = aa.date.parseDate(dateAddHC2("",10, true));
 			var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
 								+ revdDate.getYear();
 			editAppSpecific("3rd Review Comments Due date",revdDateStr);
 		
 			// update submission date
-			var subdDate = aa.date.parseDate(dateAddHC("",15, true));
+			var subdDate = aa.date.parseDate(dateAddHC2("",15, true));
 			var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
 								+ subdDate.getYear();
