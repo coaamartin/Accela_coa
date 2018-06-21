@@ -136,7 +136,14 @@ else {
 	} else {
 		conTypeArray = rtnContactTypes(sendEmailToContactTypes);
 	}
-	conCCTypeArray = rtnContactTypes(ccEmailToContactTypes);
+
+	//get/clean cc types
+	if (ccEmailToContactTypes == "All") {
+		conCCTypeArray = validConTypes;
+	} else {
+		conCCTypeArray = rtnContactTypes(ccEmailToContactTypes);
+	}
+	//conCCTypeArray = rtnContactTypes(ccEmailToContactTypes);
  
 	//get From email from template configuration
 	if (emailTemplate && emailTemplate != '') {
