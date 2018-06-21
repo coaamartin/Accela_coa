@@ -219,3 +219,82 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 			
 }
 logDebug("script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2 end.");
+
+/*
+Script 277
+Record Types:	​Planning/Application/Conditional Use/NA 
+				Planning/Application/Rezoning/NA 
+				Planning/Application/Site Plan/Major
+				Planning/Application/​​Site Plan/Amendment
+
+Desc:			see Script Tracker for script 277
+
+Created By: Silver Lining Solutions
+*/
+logDebug("START of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
+if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStatus == "Ready for Planning Commission"))
+{
+	logDebug("script277_Match on task/status");
+	// get Record assigned staff 
+	var assignedStaff = getAssignedStaff();
+	logDebug("script277 assignedstaff =" + assignedStaff);
+	assignTask("Hearing Scheduled",assignedStaff);
+	
+	logDebug("**script277 preparing email**");
+	
+    // Get the Applicant's email
+	var recordApplicant = getContactByType("Applicant", capId);
+	var applicantEmail = null;
+	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+	} else {
+		applicantEmail = recordApplicant.getEmail();
+	}
+	
+	// Get the Case Manager's email
+	var caseManagerEmail=getAssignedStaffEmail();
+	var caseManagerPhone=getAssignedStaffPhone();
+	
+	var cc="";
+	
+	if (isBlankOrNull(caseManagerEmail)==false){
+		if (cc!=""){
+			cc+= ";" +caseManagerEmail;
+		}else{
+			cc=caseManagerEmail;
+		}
+	}	
+	
+	   //prepare Deep URL:
+		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
+		var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
+		var deepUrl = "/urlrouting.ashx?type=1000";
+		deepUrl = deepUrl + "&Module=" + cap.getCapModel().getModuleName();
+		deepUrl = deepUrl + "&capID1=" + capId.getID1();
+		deepUrl = deepUrl + "&capID2=" + capId.getID2();
+		deepUrl = deepUrl + "&capID3=" + capId.getID3();
+		deepUrl = deepUrl + "&agencyCode=" + aa.getServiceProviderCode();
+		deepUrl = deepUrl + "&HideHeader=true";
+
+		var recordDeepUrl = acaCitizenRootUrl + deepUrl;
+	// send an email to the applicant - we're waiting on the actual template here.
+	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+	
+	var emailParameters = aa.util.newHashtable();
+	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+	addParameter(emailParameters, "$$recordDeepUrl$$", recordDeepUrl);
+	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
+	addParameter(emailParameters, "$$StaffPhone$$", caseManagerPhone);
+	addParameter(emailParameters, "$$StaffEmail$$", caseManagerEmail);
+	addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
+	addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
+	var reportFile = [];
+	
+	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN HEARING SCHEDULED # 277",emailParameters,reportFile,capID4Email);
+	if (!sendResult) 
+		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	else
+		{ logDebug("Sent Notification"); }	
+}
+logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
