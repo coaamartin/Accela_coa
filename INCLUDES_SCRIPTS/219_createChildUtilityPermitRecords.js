@@ -7,7 +7,7 @@ function script219_createChildUtilityPermitRecords() {
     if (ifTracer(wfTask=="Plans Coordination Status" && wfStatus=="Water Review",'wfTask == Plans Coordination Status && wfStatus == Water Review')) {
         var  waterMainUtilityPermit = getTaskSpecific(wfTask,"Water Main Utility Permit");
         if(waterMainUtilityPermit == 'Yes') {
-            emailParams = aa.util.newHashtable(),
+            emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
             createTempChildGeneric('','','','', {
@@ -36,7 +36,7 @@ function script219_createChildUtilityPermitRecords() {
     } else if (ifTracer(wfTask=="Water Review",'wfTask == Water Review')) {
         var sanitarySewerUtilityPermit = getTaskSpecific(wfTask,"Sanitary Sewer Utility Permit");
         if(sanitarySewerUtilityPermit == 'Yes') {
-            emailParams = aa.util.newHashtable(),
+            emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
             createTempChildGeneric('','','','', {
@@ -65,7 +65,7 @@ function script219_createChildUtilityPermitRecords() {
     } else if (ifTracer(wfTask=="Water Review",'wfTask == Water Review')) {
         var publicStormSewerUtilityPermit = getTaskSpecific(wfTask,"Public Storm Sewer Utility Permit");
         if(publicStormSewerUtilityPermit == 'Yes') {
-            emailParams = aa.util.newHashtable(),
+            emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
             createTempChildGeneric('','','','', {
@@ -94,7 +94,7 @@ function script219_createChildUtilityPermitRecords() {
     } else if (ifTracer(wfTask=="Water Review",'wfTask == Water Review')) {
         var privateStormSewerUtilityPermit = getTaskSpecific(wfTask,"Private Storm Sewer Utility Permit");
         if(privateStormSewerUtilityPermit == 'Yes') {
-            emailParams = aa.util.newHashtable(),
+            emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
             createTempChildGeneric('','','','', {
@@ -123,7 +123,7 @@ function script219_createChildUtilityPermitRecords() {
     } else if (ifTracer(wfTask=="Water Review",'wfTask == Water Review')) {
         var privateFireLineUtilityPermit = getTaskSpecific(wfTask,"Private Fire Line Utility Permit");
         if(privateFireLineUtilityPermit == 'Yes') {
-            emailParams = aa.util.newHashtable(),
+            emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
             createTempChildGeneric('','','','', {
