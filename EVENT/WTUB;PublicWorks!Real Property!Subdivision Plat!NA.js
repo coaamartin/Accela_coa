@@ -25,11 +25,11 @@ validateReceptionNumber();
 //Created By: Silver Lining Solutions
 
 //logDebug("START: Script 286");
-if(wfTask =="Application Acceptance" && wfStatus =="Ready to Pay") {
+/*if(wfTask =="Application Acceptance" && wfStatus =="Ready to Pay") {
 		if (!hasInvoicedFees(capId, "")) {
               cancel=true;
               showMessage=true;
               comment("Please add fees to this to continue");
   	}
-}
+} */
 //logDebug("END: Script 286");
