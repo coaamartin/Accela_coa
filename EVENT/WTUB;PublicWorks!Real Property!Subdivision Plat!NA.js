@@ -24,7 +24,7 @@ validateReceptionNumber();
 //					the message “Please add fees to this case to continue”
 //Created By: Silver Lining Solutions
 
-logDebug("START: Script 286");
+//logDebug("START: Script 286");
 if(wfTask =="Application Acceptance" && wfStatus =="Ready to Pay") {
 		if (!hasInvoicedFees(capId, "")) {
               cancel=true;
@@ -32,4 +32,4 @@ if(wfTask =="Application Acceptance" && wfStatus =="Ready to Pay") {
               comment("Please add fees to this to continue");
   	}
 }
-logDebug("END: Script 286");
+//logDebug("END: Script 286");
