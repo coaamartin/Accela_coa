@@ -12,9 +12,9 @@
 
 	logDebug ("script94 START");
 	
-	if  (“true”)
+	if  (true)
 	{
-		logDebug ("this is a special assesement");
+		logDebug (true);
 	}
 	
 
