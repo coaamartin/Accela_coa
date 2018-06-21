@@ -29,7 +29,8 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
 				//Edit ASI
 				var meetingDate = new Date(meetings[m].getMeeting().getStartDate().getTime());
-				meetingDate = dateAdd(meetingDate, 0);
+				//meetingDate = dateAdd(meetingDate, 0);
+				meetingDate = aa.util.formatDate(meetingDate, "MM/dd/YYYY");
 				var olduseAppSpecificGroupName = useAppSpecificGroupName;
 				useAppSpecificGroupName = false;
 				editAppSpecific(asiFieldName, meetingDate);
