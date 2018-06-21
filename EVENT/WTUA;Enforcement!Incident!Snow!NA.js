@@ -10,9 +10,11 @@
 
 logDebug("START: Script 77");
 
-if ( wfTask == "Initial Investigation" && wfStatus == "Skip to City Abatement")
+if (wfTask == "Initial Investigation" && wfStatus == "Skip to City Abatement")
 {
 	logDebug("task/status criteria met");
+	closeTask("Initial Investigation","Skip to City Abatement","auto closed by script","auto closed by script");
+	updateAppStatus("Closed","auto closed");
 }
 
 
