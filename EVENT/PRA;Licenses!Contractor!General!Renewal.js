@@ -42,19 +42,17 @@ if (balanceDue == 0) {
 		if (vNewExpDate.getMonth() == 11) {
 			vNewExpDate.setMonth(0);
 			vNewExpDate.setFullYear(vNewExpDate.getFullYear() + 1);
+		} else {
+			vNewExpDate.setMonth(vNewExpDate.getMonth() + 1);
 		}
-		else {
-			vNewExpDate.setMonth(vNewExpDate.getMonth()+1);
-		}		
-		
+
 		// Update license expiration date
 		logDebug("Updating Expiration Date to: " + vNewExpDate);
 		vLicenseObj.setExpiration(dateAdd(vNewExpDate, 0));
 		// Set license record expiration to active
-		//vLicenseObj.setStatus("Active");
+		vLicenseObj.setStatus("Active");
 		// set parent record status to Issued
-		updateAppStatus("Issued","Updated by PRA;Licenses!Contractor!General!Renewal",vLicenseID);
-		
+		updateAppStatus("Issued", "Updated by PRA;Licenses!Contractor!General!Renewal", vLicenseID);
 
 		//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 		renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
@@ -62,6 +60,15 @@ if (balanceDue == 0) {
 			renewalCapProject.setStatus("Complete");
 			aa.cap.updateProject(renewalCapProject);
 		}
+
+		var vEmailTemplate = "TBD LICENSE RENEWAL EMAIL";
+		var vEParams = aa.util.newHashtable();
+		addParameter(vEParams, "$$LicenseType$$", "Contractor License");
+		addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
+		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
+		addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());
+
+		emailContacts("All", vEmailTemplate, vEParams, null, null);
 
 	}
 }
