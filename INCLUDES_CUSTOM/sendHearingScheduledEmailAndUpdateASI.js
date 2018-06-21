@@ -1,15 +1,10 @@
 function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
-	logDebug("sendHearingScheduledEmailAndUpdateASI() started.");
-	logDebug("Meeting Type" + meetingType);
-	logDebug("workflow " + workFlowTaskToCheck);
-    logDebug("ASI " + asiFieldName);
-
+	
 	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 		return false;
 	}
 
 	if (wfTask == workFlowTaskToCheck) {
-
 		var statusMatch = false;
 
 		for (s in workflowStatusArray) {
@@ -34,13 +29,15 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
 				//Edit ASI
 				var meetingDate = new Date(meetings[m].getMeeting().getStartDate().getTime());
-				logDebug("Meeting Date " + meetingDate);
-				meetingDate = aa.util.formatDate(meetingDate, "MM/DD/YYYY");
+				meetingDate = dateAdd(meetingDate, 0);
 				var olduseAppSpecificGroupName = useAppSpecificGroupName;
 				useAppSpecificGroupName = false;
-				logDebug("Meeting Date " + meetingDate);
 				editAppSpecific(asiFieldName, meetingDate);
+				logDebug("ASI " + asiFieldName);
+				var noOfSigns = getAppSpecific("Number of Signs");
 				useAppSpecificGroupName = olduseAppSpecificGroupName;
+				
+				if(noOfSigns == undefined || noOfSigns == null || noOfSigns == "") noOfSigns = "";
 
 				//Send email
 				var recordApplicant = getContactByType("Applicant", capId);
@@ -49,9 +46,22 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
 				} else {
 					applicantEmail = recordApplicant.getEmail();
-					logDebug("Applicant Email" + applicantEmail);
+				}
+				//06/19 - Concatenate first and last name
+		var firstName = recordApplicant.getFirstName();   
+		var middleName =recordApplicant.getMiddleName();   
+		var lastName = recordApplicant.getLastName(); 
+		var fullName = buildFullName(firstName, middleName,lastName);
+
+		// Get the Case Manager's email
+		var caseManagerEmail=getAssignedStaffEmail();
+		var caseManagerPhone=getAssignedStaffPhone();
+		var caseManagerFullName=getAssignedStaffFullName();
+		var caseManagerTitle=getAssignedStaffTitle();
+					
+					if(isBlankOrNull(caseManagerEmail)==true) caseManagerEmail = "";
 					var files = new Array();
-					//prepare Deep URL:
+				//prepare Deep URL:
 				var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 				var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
 				var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
@@ -69,12 +79,14 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					var eParams = aa.util.newHashtable();
 					addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 					addParameter(eParams, "$$ContactEmail$$", applicantEmail);
-					addParameter(eParams, "$$ContactFullName$$", applicantName);
+					addParameter(eParams, "$$ContactFullName$$", fullName);
 					addParameter(eParams, "$$pcDate$$", meetingDate);
 					addParameter(eParams, "$$10dayspriortopcDate$$", dateAdd(meetingDate, -10));
 					addParameter(eParams, "$$numberofSigns$$", noOfSigns);
 					addParameter(eParams, "$$StaffPhone$$", caseManagerPhone);
 					addParameter(eParams, "$$StaffEmail$$", caseManagerEmail);
+					addParameter(eParams, "$$StaffFullName$$", caseManagerFullName);
+		            addParameter(eParams, "$$StaffTitle$$",caseManagerTitle);
 					addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
 					if (wfComment != null && typeof wfComment !== 'undefined') {
 						addParameter(eParams, "$$wfComment$$", wfComment);
@@ -82,18 +94,18 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
 					addParameter(eParams, "$$wfHours$$", wfHours);
 
-					var sent = sendNotification("noreply@aurora.gov",applicantEmail, "",emailTemplate, eParams,reportFile,capID4Email);
-					if (!sent.getSuccess()) {
-						logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-						return false;
-					}
-				}//applicant OK
-				return true;
+					var sendResult = sendNotification("noreply@aurora.gov",applicantEmail, "",emailTemplate, eParams,reportFile,capID4Email);
+					if (!sendResult) 
+					{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+									
+				//}//applicant OK
+				//return true;
 			}//meetingType match
 		}//for all meetings
-		logDebug("**WARN no meeting of type=" + meetingType + " capId=" + capId);
+		//logDebug("**WARN no meeting of type=" + meetingType + " capId=" + capId);
 		return false;
 	} else {
 		return false;
 	}
+	return true;
 }

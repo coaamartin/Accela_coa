@@ -39,6 +39,10 @@ Notes :
 */
 sendNoticePCEmail();
 
+//Script 278
+
+sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
+
 //Script 58
 
 setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Complete E-Agenda", "City Council");
@@ -87,11 +91,26 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 			cc=caseManagerEmail;
 		}
 	}	
+	
+	   //prepare Deep URL:
+		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
+		var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
+		var deepUrl = "/urlrouting.ashx?type=1000";
+		deepUrl = deepUrl + "&Module=" + cap.getCapModel().getModuleName();
+		deepUrl = deepUrl + "&capID1=" + capId.getID1();
+		deepUrl = deepUrl + "&capID2=" + capId.getID2();
+		deepUrl = deepUrl + "&capID3=" + capId.getID3();
+		deepUrl = deepUrl + "&agencyCode=" + aa.getServiceProviderCode();
+		deepUrl = deepUrl + "&HideHeader=true";
+
+		var recordDeepUrl = acaCitizenRootUrl + deepUrl;
 	// send an email to the applicant - we're waiting on the actual template here.
 	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 	
 	var emailParameters = aa.util.newHashtable();
 	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+	addParameter(emailParameters, "$$recordDeepUrl$$", recordDeepUrl);
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(emailParameters, "$$StaffPhone$$", caseManagerPhone);
 	addParameter(emailParameters, "$$StaffEmail$$", caseManagerEmail);
@@ -106,6 +125,7 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 		{ logDebug("Sent Notification"); }	
 }
 logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
+
 
 /*
 Script 275
