@@ -39,10 +39,6 @@ Notes :
 */
 sendNoticePCEmail();
 
-//Script 278
-
-sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
-
 //Script 58
 
 setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Complete E-Agenda", "City Council");
@@ -91,26 +87,11 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 			cc=caseManagerEmail;
 		}
 	}	
-	
-	   //prepare Deep URL:
-		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
-		var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
-		var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
-		var deepUrl = "/urlrouting.ashx?type=1000";
-		deepUrl = deepUrl + "&Module=" + cap.getCapModel().getModuleName();
-		deepUrl = deepUrl + "&capID1=" + capId.getID1();
-		deepUrl = deepUrl + "&capID2=" + capId.getID2();
-		deepUrl = deepUrl + "&capID3=" + capId.getID3();
-		deepUrl = deepUrl + "&agencyCode=" + aa.getServiceProviderCode();
-		deepUrl = deepUrl + "&HideHeader=true";
-
-		var recordDeepUrl = acaCitizenRootUrl + deepUrl;
 	// send an email to the applicant - we're waiting on the actual template here.
 	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 	
 	var emailParameters = aa.util.newHashtable();
 	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
-	addParameter(emailParameters, "$$recordDeepUrl$$", recordDeepUrl);
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(emailParameters, "$$StaffPhone$$", caseManagerPhone);
 	addParameter(emailParameters, "$$StaffEmail$$", caseManagerEmail);
@@ -125,7 +106,6 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 		{ logDebug("Sent Notification"); }	
 }
 logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
-
 
 /*
 Script 275
@@ -148,7 +128,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 	if ( !(AInfo["1st Review Comments Due Date"]) ) {
 		// Set up the 'target' date we want to search for meetings
 		var dToday = new Date();
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*17.5),true));
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*17.5)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
@@ -163,7 +143,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
 
 		// update review comments
-		var revdDate = aa.date.parseDate(dateAddHC("",15, true));
+		var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
 		var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
 							+ ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
 							+ revdDate.getYear();
@@ -185,7 +165,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		// Set up the 'target' date we want to search for meetings
 		logDebug("1st Review Comments is Populated--Looking at 2nd Review Comments");
 		var dToday = new Date();
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*6),true));
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*6)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
@@ -200,7 +180,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
 
 		// update review comments
-		var revdDate = aa.date.parseDate(dateAddHC("",15, true));
+		var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
 		var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
 							+ ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
 							+ revdDate.getYear();
@@ -208,7 +188,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		logDebug("*******2nd Review Date = " +revdDateStr);
 
 		// update submission date
-		var subdDate = aa.date.parseDate(dateAddHC("",20, true));
+		var subdDate = aa.date.parseDate(dateAddHC2("",20, true));
 		var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
 							+ ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
 							+ subdDate.getYear();
@@ -228,7 +208,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 	} else {
 		// Set up the 'target' date we want to search for meetings
 		var dToday = new Date();
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC(dToday,(7*5),true));
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*5)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
@@ -244,14 +224,14 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 
 		if (!(AInfo["3rd Review Comments Due Date"])) {
 			// update review comments
-			var revdDate = aa.date.parseDate(dateAddHC("",10, true));
+			var revdDate = aa.date.parseDate(dateAddHC2("",10, true));
 			var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
 								+ revdDate.getYear();
 			editAppSpecific("3rd Review Comments Due date",revdDateStr);
 		
 			// update submission date
-			var subdDate = aa.date.parseDate(dateAddHC("",15, true));
+			var subdDate = aa.date.parseDate(dateAddHC2("",15, true));
 			var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
 								+ subdDate.getYear();
