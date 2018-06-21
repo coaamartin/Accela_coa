@@ -35,7 +35,7 @@ if (balanceDue == 0) {
 		// Get current expiration date.
 		vLicenseObj = new licenseObject(null, vLicenseID);
 		vExpDate = vLicenseObj.b1ExpDate;
-		vExpDate = new Date(vExpDate);
+		vExpDate = new Date();
 		// Extend license expiration by 3 year, last day of next month.
 		vNewExpDate = new Date(vExpDate.getFullYear() + 3, vExpDate.getMonth(), vExpDate.getDate());
 		vNewExpDate.setDate(1);
@@ -52,7 +52,7 @@ if (balanceDue == 0) {
 		logDebug("Updating Expiration Date to: " + vNewExpDate);
 		vLicenseObj.setExpiration(dateAdd(vNewExpDate, 0));
 		// Set license record expiration to active
-		//vLicenseObj.setStatus("Active");
+		vLicenseObj.setStatus("Active");
 		// set parent record status to Issued
 		updateAppStatus("Issued","Updated by PRA;Licenses!Professional!General!Renewal",vLicenseID);
 		

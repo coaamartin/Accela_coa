@@ -35,7 +35,7 @@ if (balanceDue == 0) {
 		// Get current expiration date.
 		vLicenseObj = new licenseObject(null, vLicenseID);
 		vExpDate = vLicenseObj.b1ExpDate;
-		vExpDate = new Date(vExpDate);
+		vExpDate = new Date();
 		// Extend license expiration by 1 year, first day of next month.
 		vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
 		vNewExpDate.setDate(1);
