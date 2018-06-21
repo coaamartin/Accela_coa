@@ -2,9 +2,9 @@ function createTempChildGeneric(grp, type, stype, cat, options) {
     //cvm not tested 6/21/2018 
     var settings = {
         parentCapID: capId,
-        appName = null,
-        capClass = "INCOMPLETE CAP",
-        accessByACA = false,
+        appName : null,
+        capClass : "INCOMPLETE CAP",
+        accessByACA : false,
         copyParcels: false,
         copyAddresses: false,
         copyOwner: false,
