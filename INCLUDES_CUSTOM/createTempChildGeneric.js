@@ -1,4 +1,5 @@
-function createTempChildGeneric(grp, type, stype, cat, options) {
+function createTempChildGeneric(grp, type, stype, cat, options) {  
+    //cvm not tested 6/21/2018 
     var settings = {
         parentCapID: capId,
         appName = null,
@@ -8,7 +9,7 @@ function createTempChildGeneric(grp, type, stype, cat, options) {
         copyAddresses: false,
         copyOwner: false,
         copyContacts: false,
-        customFields: []    // array of key/val objects { key: "Utility Permit Type", val: "waterMainUtilityPermit" }
+        customFields: []    // array of key/val objects { key: "Awesome Guy", val: "waterMainUtilityPermit" }
     };
     //optional params - overriding default settings
     for (var attr in options) { settings[attr] = options[attr]; }
