@@ -20,16 +20,16 @@ validateReceptionNumber();
 
 //Event: 		WTUB
 //Desc:			If workflow task = Application Acceptance and status = Ready to Pay 
-//					and no Fee exists then do not let the workflow proceed and display 
-//					the message “Please add fees to this case to continue”
+//				and no Fee exists then do not let the workflow proceed and display 
+//				the message “Please add fees to this case to continue”
 //Created By: Silver Lining Solutions
 
-//logDebug("START: Script 286");
-/*if(wfTask =="Application Acceptance" && wfStatus =="Ready to Pay") {
-		if (!hasInvoicedFees(capId, "")) {
-              cancel=true;
-              showMessage=true;
-              comment("Please add fees to this to continue");
+logDebug("START: Script 286");
+if(wfTask =="Application Acceptance" && wfStatus =="Ready to Pay") {
+	if (!hasInvoicedFees(capId, "")) {
+		showMessage=true;
+        comment("Please add fees to this to continue");
+		cancel=true;
   	}
-} */
-//logDebug("END: Script 286");
+} 
+logDebug("END: Script 286");
