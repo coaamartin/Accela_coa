@@ -12,6 +12,8 @@
 
 	logDebug ("script94 START");
 	
+	if (capStatus!=“Special Assessment”)
+	{logDebug ("this is a special assesement"}
 	
-	
-	LogDebug ("script94 END");
+
+	logDebug ("script94 END");
