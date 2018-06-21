@@ -524,7 +524,7 @@
           ],
           "status": [
             "Resubmittal Requested",
-            "SS Requested",
+            "SS Requested"
           ]
         },
         "action": {
@@ -627,7 +627,7 @@
           ],
           "status": [
             "Resubmittal Requested",
-            "SS Requested",
+            "SS Requested"
           ]
         },
         "action": {
@@ -730,7 +730,7 @@
           ],
           "status": [
             "Resubmittal Requested",
-            "SS Requested",
+            "SS Requested"
           ]
         },
         "action": {
