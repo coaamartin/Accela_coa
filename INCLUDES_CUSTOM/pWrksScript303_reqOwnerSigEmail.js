@@ -2,12 +2,12 @@ function pWrksScript303_reqOwnerSigEmail(){
     logDebug("pWrksScript303_reqOwnerSigEmail() started");
     try{
         var $iTrc = ifTracer,
-            emailTemplate = "",
-			ownerEmail = getPrimaryOwnerEmail();
+            emailTemplate = "PW REAL PROP OWNER SIGNATURE # 303",
+			applicantEmail = getContactEmailAddress("Applicant", capId);
 		
             
-        if($iTrc(ownerEmail, 'ownerEmail')){
-            var contactTypes = 'Owner';
+        if($iTrc(applicantEmail, 'applicantEmail')){
+            var contactTypes = 'Applicant';
             var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
             emailparams = aa.util.newHashtable();
             emailparams.put("$$ContactEmail$$", applicantEmail);
@@ -16,7 +16,7 @@ function pWrksScript303_reqOwnerSigEmail(){
             emailparams.put("$$acaRecordUrl$$", acaUrl);
             //emailparams.put("$$wfComment$$", wfComment == null ? "" : wfComment);
             
-            //emailContacts(contactTypes, emailTemplate, emailparams, "", "", "N", "");
+            emailContacts(contactTypes, emailTemplate, emailparams, "", "", "N", "");
         }
     }
     catch(err){
