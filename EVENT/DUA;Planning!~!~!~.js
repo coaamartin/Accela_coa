@@ -8,3 +8,4 @@ if((capStatus=="Waiting on Documents")  && isTaskStatus("Review Consolidation", 
     activateTask("Submission Quality Check");
     editTaskDueDate("Submission Quality Check",dateAdd(null, 2));
 }
+
