@@ -12,10 +12,5 @@
 
 	logDebug ("script94 START");
 	
-	if  (true)
-	{
-		logDebug (true);
-	}
-	
 
 	logDebug ("script94 END");
