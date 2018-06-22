@@ -24,7 +24,7 @@ function createTempChild(appNameAppendix, utilityPermitType, emailTemplate) {
         acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
         var recordURL = getACARecordURL(acaURLDefault);
         var emailParams = aa.util.newHashtable();
-        addParameter(emailParams, "$$altID$$", childCapId.getCustomID());
+        addParameter(emailParams, "$$altID$$", capId.getCustomID());
         addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
         emailContactsWithCCs("Applicant", emailTemplate, emailParams, "", aa.util.newHashtable(), "N","","All");
     } else {
