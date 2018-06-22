@@ -12,7 +12,7 @@ Sample Call:
 	createTempWaterChild("MESSAGE_NOTICE_PUBLIC WORKS");
 */
 
-createTempWaterChild("MESSAGE_NOTICE_PUBLIC WORKS");
+createTempWaterChild("SWMP PERMIT REQUIRED # 219");
 
 if($iTrc(wfTask == "Plans Coordination" && wfStatus == "Resubmittal Requested", 'wfTask == "Plans Coordination" && wfStatus == "Resubmittal Requested"')){
 	//Script 125
