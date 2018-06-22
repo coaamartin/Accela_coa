@@ -78,7 +78,7 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
 	
-	if roadwayType == "Local" 
+	if (roadwayType == "Local") 
 	{
 /*
 If Custom Field "Work Zone Length" <= 224 (this is a minimum fee) 
