@@ -57,18 +57,19 @@ resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "MESSAG
 //*********************************************************************************************************
 
 logDebug("Script 183 START");
-
+var doReviewFee = getAppSpecific("Review Fee");
+var strOccFee = getAppSpecific("Script 183 calculating Review Fee");
 if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
 	
-	if ({Review Fee} == "Yes")
+	if (doReviewFee == "Yes")
 	{
 		//Add Traffic Control Plan Review fee PW_PIP_35
 		logDebug("Script 183 calculating Review Fee");
 		
 	}
-	if ({Street Occupancy Fee Amount} == )
+	if (strOccFee != null )
 	{
 		//Add to the Street Occupancy fee based on ASI
 		logDebug("Script 183 Calculating Street Occ Fee");
