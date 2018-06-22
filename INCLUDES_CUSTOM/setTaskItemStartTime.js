@@ -35,12 +35,20 @@ function setTaskItemStartTime(wfstr, dateStr){
             //fTask.setStatusDate(aa.date.parseDate(dateStr));
             //fTask.setStatusDateString(dateStr);
             fTask.setStartTime(aa.util.parseDate(dateStr));
-            if (useProcess) {
+            /*if (useProcess) {
                 aa.workflow.adjustTask(itemCap, stepnumber, processID, "Y", "N", null, null)
             } else {
                 aa.workflow.adjustTask(itemCap, stepnumber, "Y", "N", null, null)
-            }
-            logDebug("Setting start date for task " + wfstr + " to " + dateStr);
+            }*/
+			var fTaskModel = fTask.getTaskItem();
+			var tResult = aa.workflow.adjustTaskWithNoAudit(fTaskModel);
+			if (tResult.getSuccess())
+				logDebug("Set Workflow Task: " + fTask.getTaskDescription() + " start date " + wfdate);
+			else {
+				logMessage("**ERROR: Failed to update due date on workflow: " + tResult.getErrorMessage());
+				return false;
+			}
+            //logDebug("Setting start date for task " + wfstr + " to " + dateStr);
         }
     }
 }
