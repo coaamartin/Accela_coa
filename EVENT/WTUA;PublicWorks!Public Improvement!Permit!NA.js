@@ -39,3 +39,45 @@ Notes:
 */
 
 resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "MESSAGE_NOTICE_PUBLIC WORKS");
+
+//*********************************************************************************************************
+//script 183 		Assess Public Improvement Fees
+//
+//Record Types:		PublicWorks/Public Improvement/Permit/NA
+//Event: 			WTUA - WorkflowTaskUpdateAfter
+//Desc:				When the wfTask = "TCP Review" and the status = "Estimate Fee" then add but do NOT invoice 
+//					the Street Occupation Fee and Review fee on the record from Custom Fields under subgroup 
+//					TRAFFIC CONTROL INFORMATION (FEE GROUP: PW_PIP) if Custom Field "Review Fee" = yes add Traffic 
+//					Control Plan Review fee (fee code = PW_PIP_35)if Custom Field "Street Occupancy Fee Amount " is
+//					not = null (fee code = PW_PIP_30) then add this number to the fees amount not invoice 
+//					(fee code = PW_PIP_30)Instructions to calculate Street Occupancy fee is 
+//					based on values within Custom Fields
+//
+//Created By: 		Silver Lining Solutions
+//*********************************************************************************************************
+
+logDebug("Script 183 START");
+
+if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
+{
+	logDebug("Script 183 Conditions met - will calculate fees per spec");
+	
+	if ({Review Fee} == "Yes")
+	{
+		//Add Traffic Control Plan Review fee PW_PIP_35
+		logDebug("Script 183 calculating Review Fee");
+		
+	}
+	if ({Street Occupancy Fee Amount} == )
+	{
+		//Add to the Street Occupancy fee based on ASI
+		logDebug("Script 183 Calculating Street Occ Fee");
+	}
+	
+}
+
+logDebug("Script 183 END");
+
+
+
+
