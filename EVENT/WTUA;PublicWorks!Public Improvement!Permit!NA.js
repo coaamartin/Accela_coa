@@ -59,9 +59,285 @@ resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "MESSAG
 logDebug("Script 183 START");
 var doReviewFee = getAppSpecific("Review Fee");
 var strOccFee = getAppSpecific("Script 183 calculating Review Fee");
+var roadwayType = getAppSpecific("Roadway Type");
+var workZoneLength = getAppSpecific("Work Zone Length");
+var numberOfLanesClosed = getAppSpecific("Number of Lanes Closed");
+var closureLength = getAppSpecific("Closure Length");
+var durationOfClosureInDays = getAppSpecific("Duration of Closure in Days");
+var sidewalkLength = getAppSpecific("Sidewalk Length");
+var parkingLanesLength = getAppSpecific("Parking Lanes Length");
+var permitParkingLength = getAppSpecific("Permit Parking Length");
+var meteredParkingLength = getAppSpecific("Metered Parking Length");
+var bikeLaneLength = getAppSpecific("Bike Lane Length");
+var peak = getAppSpecific("Peak");
+var detour = getAppSpecific("Detour");
+
+var strOccFeeAmount = 0;
+
 if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
+	
+	if roadwayType == "Local" 
+	{
+/*
+If Custom Field "Work Zone Length" <= 224 (this is a minimum fee) 
+	then fee amount is (0.15 X "Number of Lanes Closed" X "Closure Length" X "Duration of Closure in Days") 
+	If Custom Field "Work Zone Length" > 224 and "Peak" = Yes 
+		then fee amount is 2(0.15 X "Number of Lanes Closed" X "Closure Length" X "Duration of Closure in Days") 
+		If Custom Field "Peak" = No 
+			then fee amount = 0.42 X "Number of Lanes Closed" X "Duration of Closure in Days X 420"
+
+Detour If Yes and Peak = Yes 
+	then add this amount to the fee calc 2(154 X "Number of Lanes Closed" X "Duration of Closure in Days) 
+	if Detour = Yes and Peak = No 
+		then add fee amount (154 X "Number of Lanes Closed" X "Duration of Closure in Days).
+
+If Sidewalk Length > 0 
+	then add to fee amount (0.00 X Sidewalk Length X Duration of Closure in Days) = will calc to zero always, 
+	however if they have a value in the future then script will only need that value changed unless zero produces an error
+
+If "Parking Lanes Length" > 0 
+	then add to fee amount (0.15 X Parking Lane Length? X Duration of Closure in Days)
+
+If "Permit Parking Length" > 0 
+	then add to fee amount (0.15 X Permit Parking Length X Duration of Closure in Days)
+
+If "Metered Parking Length" > 0 
+	then add to fee amount (0.41 X Metered Parking Length X Duration of Closure in Days)
+*/
+		if (workZoneLength <= 224)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
+		}
+		else
+		{
+			if (peak == "Yes")
+			{
+				strOccFeeAmount = strOccFeeAmount + (2 * (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
+			}
+			else if (peak == "No")
+			{
+				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420));
+			}
+		}
+		
+		if (detour == "Yes")
+		{
+			if (peak == "Yes")
+			{
+				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+			}
+			else if (peak == "No")
+			{
+				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+			}
+		}
+		if (sidewalkLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (0 * sidewalkLength * durationOfClosureInDays);
+		}
+		if (parkingLanesLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * parkingLanesLength * durationOfClosureInDays);
+		}
+		if (permitParkingLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * permitParkingLength * durationOfClosureInDays);
+		}
+		if (meteredParkingLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.41 * meteredParkingLength * durationOfClosureInDays);
+		}
+	} 
+	
+	else if roadwayType = "Arterial"
+	{
+/*
+If Custom Field "Work Zone Length" <=412 (this is a minimum fee) 
+	then fee amount is (0.42 X "Number of Lanes Closed" X "Closure Length" X "Duration of Closure in Days") 
+	If Custom Field "Work Zone Length" > 412 and "Peak" = Yes 
+		then fee amount is 2(0.42 X "Number of Lanes Closed" X "Closure Length" X "Duration of Closure in Days") 
+		If Custom Field "Peak" = No 
+			then fee amount = 0.42 X "Number of Lanes Closed" X "Duration of Closure in Days X 420"
+
+Detour If Yes and Peak = Yes 
+	then add this amount to the fee calc above - 2(154 X "Number of Lanes Closed" X "Duration of Closure in Days) 
+	if Detour = Yes and Peak = No 
+		then add fee amount above (154 X "Number of Lanes Closed" X "Duration of Closure in Days).
+
+If Sidewalk Length > 0 
+	then add to fee amount above (0.15 X Sidewalk Length X Duration of Closure in Days)
+
+If Bike Lane Length > 0 
+	then add to fee amount above (0.15 X Bike Lane Length X Duration of Closure in Days)
+
+If "Parking Lanes Length" > 0 
+	then add to fee amount above (0.41 X Parking Lane Length X Duration of Closure in Days)
+
+If "Permit Parking Length" > 0 
+	then add to fee amount above (0.15 X Permit Parking Length X Duration of Closure in Days)
+
+If "Metered Parking Length" > 0 
+	then add to fee amount above (0.41 X Metered Parking Length X Duration of Closure in Days)
+*/				 	
+		if (workZoneLength <= 412)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
+		}
+		else
+		{
+			if (peak == "Yes")
+			{
+				strOccFeeAmount = strOccFeeAmount + (2 * (.42 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
+			}
+			else if (peak == "No")
+			{
+				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420));
+			}
+		}
+		
+		if (detour == "Yes")
+		{
+			if (peak == "Yes")
+			{
+				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+			}
+			else if (peak == "No")
+			{
+				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+			}
+		}
+		if (sidewalkLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * sidewalkLength * durationOfClosureInDays);
+		}
+		if (bikeLaneLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * bikeLaneLength * durationOfClosureInDays);
+		}
+		if (parkingLanesLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.41 * parkingLanesLength * durationOfClosureInDays);
+		}
+		if (permitParkingLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * permitParkingLength * durationOfClosureInDays);
+		}
+		if (meteredParkingLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.41 * meteredParkingLength * durationOfClosureInDays);
+		}
+	} 
+	
+	else if roadwayType = "Collector"
+	{
+/*
+If Custom Field "Work Zone Length" <= 279 
+	(this is a minimum fee) (0.42 X "Number of Lanes Closed" X "Closure Length" X "Duration of Closure in Days") 
+	If Custom Field "Work Zone Length" > 279 and "Peak" = Yes 
+		then fee amount is 2 (0.42 X "Number of Lanes Closed" X "Closure Length" X "Duration of Closure in Days") 
+		If Custom Field "Peak" = No 
+			then fee amount = 0.42 X "Number of Lanes Closed" X "Duration of Closure in Days X 420"
+
+Detour If Yes and Peak = Yes 
+	then add this amount to the fee calc 2(154 X "Number of Lanes Closed" X "Duration of Closure in Days) 
+	if Detour = Yes and Peak = No 
+		then add fee amount (154 X "Number of Lanes Closed" X "Duration of Closure in Days).
+
+If Sidewalk Length > 0 
+	then add to fee amount (0.15 X Sidewalk Length X Duration of Closure in Days)
+
+If Bike Lane Length > 0 
+	then add to fee amount (0.15 X Bike Lane Length X Duration of Closure in Days)
+
+If "Parking Lanes Length" > 0 
+	then add to fee amount (0.15 X Parking Lane Length? X Duration of Closure in Days)
+
+If "Permit Parking Length" > 0 
+	then add to fee amount (0.15 X Permit Parking Length X Duration of Closure in Days)
+
+If "Metered Parking Length" > 0 
+	then add to fee amount (0.41 X Metered Parking Length X Duration of Closure in Days)
+*/		
+		if (workZoneLength <= 279)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
+		}
+		else
+		{
+			if (peak == "Yes")
+			{
+				strOccFeeAmount = strOccFeeAmount + (2 * (.42 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
+			}
+			else if (peak == "No")
+			{
+				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420));
+			}
+		}
+		
+		if (detour == "Yes")
+		{
+			if (peak == "Yes")
+			{
+				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+			}
+			else if (peak == "No")
+			{
+				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+			}
+		}
+		if (sidewalkLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * sidewalkLength * durationOfClosureInDays);
+		}
+		if (bikeLaneLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * bikeLaneLength * durationOfClosureInDays);
+		}
+		if (parkingLanesLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.41 * parkingLanesLength * durationOfClosureInDays);
+		}
+		if (permitParkingLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * permitParkingLength * durationOfClosureInDays);
+		}
+		if (meteredParkingLength > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.41 * meteredParkingLength * durationOfClosureInDays);
+		}
+	}
+	
+	else if roadwayType = "Alley"
+	{
+		
+/* 
+If Custom Field "Duration of Closure in Days" > 0 
+	then 0.15 X Number of Lanes Closed X Closure Length X Duration of Closure in Days
+
+Detour If Yes and Peak = Yes 
+	then add this amount to the fee calc 2(154 X "Number of Lanes Closed" X "Duration of Closure in Days) 
+	if Detour = Yes and Peak = No 
+		then add fee amount (154 X "Number of Lanes Closed" X "Duration of Closure in Days).
+*/				
+		if (durationOfClosureInDays > 0)
+		{
+			strOccFeeAmount = strOccFeeAmount + (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
+			if (detour == "Yes")
+			{
+				if (peak == "Yes")
+				{
+					strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+				}
+				else if (peak == "No")
+				{
+					strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+				}
+			}
+		}
+	}
+
 	
 	if (doReviewFee == "Yes")
 	{
@@ -74,7 +350,7 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 		//Add to the Street Occupancy fee based on ASI
 		logDebug("Script 183 Calculating Street Occ Fee");
 	}
-	
+
 }
 
 logDebug("Script 183 END");
