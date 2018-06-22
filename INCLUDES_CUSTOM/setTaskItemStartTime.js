@@ -43,7 +43,7 @@ function setTaskItemStartTime(wfstr, dateStr){
 			var fTaskModel = fTask.getTaskItem();
 			var tResult = aa.workflow.adjustTaskWithNoAudit(fTaskModel);
 			if (tResult.getSuccess())
-				logDebug("Set Workflow Task: " + fTask.getTaskDescription() + " start date " + wfdate);
+				logDebug("Set Workflow Task: " + fTask.getTaskDescription() + " start date " + dateStr);
 			else {
 				logMessage("**ERROR: Failed to update due date on workflow: " + tResult.getErrorMessage());
 				return false;
