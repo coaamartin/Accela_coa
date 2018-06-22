@@ -32,7 +32,7 @@ function setTaskItemStartTime(wfstr, dateStr){
             var processID = fTask.getProcessID();
             var completeFlag = fTask.getCompleteFlag();
 
-            //fTask.setStatusDate(aa.date.parseDate(dateStr));
+            fTask.setStatusDate(aa.date.parseDate(dateStr));
             //fTask.setStatusDateString(dateStr);
             fTask.setStartTime(aa.util.parseDate(dateStr));
             /*if (useProcess) {
