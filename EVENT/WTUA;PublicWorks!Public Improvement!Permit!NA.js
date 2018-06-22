@@ -118,7 +118,7 @@ If "Metered Parking Length" > 0
 			}
 			else if (peak == "No")
 			{
-				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420));
+				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420);
 			}
 		}
 		
@@ -193,7 +193,7 @@ If "Metered Parking Length" > 0
 			}
 			else if (peak == "No")
 			{
-				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420));
+				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420);
 			}
 		}
 		
@@ -272,7 +272,7 @@ If "Metered Parking Length" > 0
 			}
 			else if (peak == "No")
 			{
-				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420));
+				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420);
 			}
 		}
 		
