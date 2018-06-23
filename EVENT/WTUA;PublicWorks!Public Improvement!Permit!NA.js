@@ -106,6 +106,7 @@ If "Permit Parking Length" > 0
 If "Metered Parking Length" > 0 
 	then add to fee amount (0.41 X Metered Parking Length X Duration of Closure in Days)
 */
+	logDebug("roadway type local");
 		if (workZoneLength <= 224)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
@@ -181,6 +182,7 @@ If "Permit Parking Length" > 0
 If "Metered Parking Length" > 0 
 	then add to fee amount above (0.41 X Metered Parking Length X Duration of Closure in Days)
 */				 	
+	logDebug("roadway type arterial");
 		if (workZoneLength <= 412)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
@@ -260,6 +262,7 @@ If "Permit Parking Length" > 0
 If "Metered Parking Length" > 0 
 	then add to fee amount (0.41 X Metered Parking Length X Duration of Closure in Days)
 */		
+	logDebug("roadway type collector");
 		if (workZoneLength <= 279)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
@@ -321,10 +324,9 @@ Detour If Yes and Peak = Yes
 	if Detour = Yes and Peak = No 
 		then add fee amount (154 X "Number of Lanes Closed" X "Duration of Closure in Days).
 */				
+	logDebug("roadway type alley");
 		if (durationOfClosureInDays > 0)
 		{
-			
-			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			strOccFeeAmount = strOccFeeAmount + (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 			if (detour == "Yes")
 			{
