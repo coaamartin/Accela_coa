@@ -146,12 +146,12 @@ If "Metered Parking Length" > 0
 		if (parkingLanesLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * parkingLanesLength * durationOfClosureInDays);
-			logDebug("Street Occupation Fee = " + strOccFeeAmount);
+			logDebug("Street Occupation Fee (parking) = " + strOccFeeAmount);
 		}
 		if (permitParkingLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * permitParkingLength * durationOfClosureInDays);
-			logDebug("Street Occupation Fee = " + strOccFeeAmount);
+			logDebug("Street Occupation Fee (permit) = " + strOccFeeAmount);
 		}
 		if (meteredParkingLength > 0)
 		{
