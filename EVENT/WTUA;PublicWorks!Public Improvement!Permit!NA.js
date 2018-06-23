@@ -73,13 +73,11 @@ var peak = getAppSpecific("Peak");
 var detour = getAppSpecific("Detour");
 
 var strOccFeeAmount = 0;
-/*if (strOccFee != null)
+
+if (strOccFee != null)
 {
-	strOccFeeAmount = strOccFee;
-} else
-{
-	strOccFeeAmount = 0;
-}*/
+	strOccFeeAmount = Number(strOccFee);
+} 
 
 if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
