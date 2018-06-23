@@ -350,7 +350,7 @@ Detour If Yes and Peak = Yes
 		//Add to the Street Occupancy fee based on ASI
 		logDebug("Script 183 Calculating Street Occ Fee");
 	}
-
+	logDebug("Street Occupation Fee = " + strOccFeeAmount);
 }
 
 logDebug("Script 183 END");
