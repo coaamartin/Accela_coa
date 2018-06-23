@@ -78,6 +78,7 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
 	logDebug("roadway type = " + roadwayType);
+	logDebug("Parking Lanes Length = " + parkingLanesLength);
 	if (roadwayType == "Local") 
 	{
 /*
