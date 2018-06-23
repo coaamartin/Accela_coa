@@ -109,16 +109,19 @@ If "Metered Parking Length" > 0
 		if (workZoneLength <= 224)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
+			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 		}
 		else
 		{
 			if (peak == "Yes")
 			{
 				strOccFeeAmount = strOccFeeAmount + (2 * (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
+				logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			}
 			else if (peak == "No")
 			{
 				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420);
+				logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			}
 		}
 		
@@ -127,27 +130,33 @@ If "Metered Parking Length" > 0
 			if (peak == "Yes")
 			{
 				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+				logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			}
 			else if (peak == "No")
 			{
 				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+				logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			}
 		}
 		if (sidewalkLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (0 * sidewalkLength * durationOfClosureInDays);
+			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 		}
 		if (parkingLanesLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * parkingLanesLength * durationOfClosureInDays);
+			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 		}
 		if (permitParkingLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * permitParkingLength * durationOfClosureInDays);
+			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 		}
 		if (meteredParkingLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.41 * meteredParkingLength * durationOfClosureInDays);
+			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 		}
 	} 
 	
