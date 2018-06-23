@@ -77,7 +77,7 @@ var strOccFeeAmount = 0;
 if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
-	
+	logDebug("roadway type = " + roadayType);
 	if (roadwayType == "Local") 
 	{
 /*
@@ -182,7 +182,6 @@ If "Permit Parking Length" > 0
 If "Metered Parking Length" > 0 
 	then add to fee amount above (0.41 X Metered Parking Length X Duration of Closure in Days)
 */				 	
-	logDebug("roadway type arterial");
 		if (workZoneLength <= 412)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
