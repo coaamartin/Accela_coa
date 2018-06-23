@@ -78,7 +78,7 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
 	logDebug("roadway type = " + roadwayType);
-	logDebug("Parking Lanes Length = " + parkingLaneLength);
+	
 	if (roadwayType == "Local") 
 	{
 /*
@@ -110,19 +110,16 @@ If "Metered Parking Length" > 0
 		if (workZoneLength <= 224)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
-			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 		}
 		else
 		{
 			if (peak == "Yes")
 			{
 				strOccFeeAmount = strOccFeeAmount + (2 * (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
-				logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			}
 			else if (peak == "No")
 			{
 				strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * durationOfClosureInDays * 420);
-				logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			}
 		}
 		
@@ -131,33 +128,27 @@ If "Metered Parking Length" > 0
 			if (peak == "Yes")
 			{
 				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
-				logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			}
 			else if (peak == "No")
 			{
 				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
-				logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			}
 		}
 		if (sidewalkLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (0 * sidewalkLength * durationOfClosureInDays);
-			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 		}
 		if (parkingLaneLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * parkingLaneLength * durationOfClosureInDays);
-			logDebug("Street Occupation Fee (parking) = " + strOccFeeAmount);
 		}
 		if (permitParkingLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * permitParkingLength * durationOfClosureInDays);
-			logDebug("Street Occupation Fee (permit) = " + strOccFeeAmount);
 		}
 		if (meteredParkingLength > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.41 * meteredParkingLength * durationOfClosureInDays);
-			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 		}
 	} 
 	
