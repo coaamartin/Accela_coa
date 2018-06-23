@@ -323,6 +323,8 @@ Detour If Yes and Peak = Yes
 */				
 		if (durationOfClosureInDays > 0)
 		{
+			
+			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 			strOccFeeAmount = strOccFeeAmount + (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 			if (detour == "Yes")
 			{
