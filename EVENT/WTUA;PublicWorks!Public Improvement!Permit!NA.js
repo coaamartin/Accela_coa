@@ -151,7 +151,7 @@ If "Metered Parking Length" > 0
 		}
 	} 
 	
-	else if roadwayType = "Arterial"
+	else if (roadwayType = "Arterial")
 	{
 /*
 If Custom Field "Work Zone Length" <=412 (this is a minimum fee) 
@@ -230,7 +230,7 @@ If "Metered Parking Length" > 0
 		}
 	} 
 	
-	else if roadwayType = "Collector"
+	else if (roadwayType = "Collector")
 	{
 /*
 If Custom Field "Work Zone Length" <= 279 
@@ -309,7 +309,7 @@ If "Metered Parking Length" > 0
 		}
 	}
 	
-	else if roadwayType = "Alley"
+	else if (roadwayType = "Alley")
 	{
 		
 /* 
