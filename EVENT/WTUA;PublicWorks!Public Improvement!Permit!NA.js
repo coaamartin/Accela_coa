@@ -106,7 +106,6 @@ If "Permit Parking Length" > 0
 If "Metered Parking Length" > 0 
 	then add to fee amount (0.41 X Metered Parking Length X Duration of Closure in Days)
 */
-	logDebug("roadway type local");
 		if (workZoneLength <= 224)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
@@ -152,7 +151,7 @@ If "Metered Parking Length" > 0
 		}
 	} 
 	
-	else if (roadwayType = "Arterial")
+	else if (roadwayType == "Arterial")
 	{
 /*
 If Custom Field "Work Zone Length" <=412 (this is a minimum fee) 
@@ -231,7 +230,7 @@ If "Metered Parking Length" > 0
 		}
 	} 
 	
-	else if (roadwayType = "Collector")
+	else if (roadwayType == "Collector")
 	{
 /*
 If Custom Field "Work Zone Length" <= 279 
@@ -261,7 +260,6 @@ If "Permit Parking Length" > 0
 If "Metered Parking Length" > 0 
 	then add to fee amount (0.41 X Metered Parking Length X Duration of Closure in Days)
 */		
-	logDebug("roadway type collector");
 		if (workZoneLength <= 279)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.42 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
@@ -311,7 +309,7 @@ If "Metered Parking Length" > 0
 		}
 	}
 	
-	else if (roadwayType = "Alley")
+	else if (roadwayType == "Alley")
 	{
 		
 /* 
@@ -323,7 +321,6 @@ Detour If Yes and Peak = Yes
 	if Detour = Yes and Peak = No 
 		then add fee amount (154 X "Number of Lanes Closed" X "Duration of Closure in Days).
 */				
-	logDebug("roadway type alley");
 		if (durationOfClosureInDays > 0)
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
