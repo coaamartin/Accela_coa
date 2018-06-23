@@ -65,7 +65,7 @@ var numberOfLanesClosed = getAppSpecific("Number of Lanes Closed");
 var closureLength = getAppSpecific("Closure Length");
 var durationOfClosureInDays = getAppSpecific("Duration of Closure in Days");
 var sidewalkLength = getAppSpecific("Sidewalk Length");
-var parkingLanesLength = getAppSpecific("Parking Lanes Length");
+var parkingLaneLength = getAppSpecific("Parking Lane Length");
 var permitParkingLength = getAppSpecific("Permit Parking Length");
 var meteredParkingLength = getAppSpecific("Metered Parking Length");
 var bikeLaneLength = getAppSpecific("Bike Lane Length");
@@ -78,7 +78,7 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
 	logDebug("roadway type = " + roadwayType);
-	logDebug("Parking Lanes Length = " + parkingLanesLength);
+	logDebug("Parking Lanes Length = " + parkingLaneLength);
 	if (roadwayType == "Local") 
 	{
 /*
@@ -144,9 +144,9 @@ If "Metered Parking Length" > 0
 			strOccFeeAmount = strOccFeeAmount + (0 * sidewalkLength * durationOfClosureInDays);
 			logDebug("Street Occupation Fee = " + strOccFeeAmount);
 		}
-		if (parkingLanesLength > 0)
+		if (parkingLaneLength > 0)
 		{
-			strOccFeeAmount = strOccFeeAmount + (.15 * parkingLanesLength * durationOfClosureInDays);
+			strOccFeeAmount = strOccFeeAmount + (.15 * parkingLaneLength * durationOfClosureInDays);
 			logDebug("Street Occupation Fee (parking) = " + strOccFeeAmount);
 		}
 		if (permitParkingLength > 0)
@@ -226,9 +226,9 @@ If "Metered Parking Length" > 0
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * bikeLaneLength * durationOfClosureInDays);
 		}
-		if (parkingLanesLength > 0)
+		if (parkingLaneLength > 0)
 		{
-			strOccFeeAmount = strOccFeeAmount + (.41 * parkingLanesLength * durationOfClosureInDays);
+			strOccFeeAmount = strOccFeeAmount + (.41 * parkingLaneLength * durationOfClosureInDays);
 		}
 		if (permitParkingLength > 0)
 		{
@@ -305,9 +305,9 @@ If "Metered Parking Length" > 0
 		{
 			strOccFeeAmount = strOccFeeAmount + (.15 * bikeLaneLength * durationOfClosureInDays);
 		}
-		if (parkingLanesLength > 0)
+		if (parkingLaneLength > 0)
 		{
-			strOccFeeAmount = strOccFeeAmount + (.41 * parkingLanesLength * durationOfClosureInDays);
+			strOccFeeAmount = strOccFeeAmount + (.41 * parkingLaneLength * durationOfClosureInDays);
 		}
 		if (permitParkingLength > 0)
 		{
