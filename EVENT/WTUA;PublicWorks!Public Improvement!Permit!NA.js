@@ -77,7 +77,7 @@ var strOccFeeAmount = 0;
 if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
-	logDebug("roadway type = " + roadayType);
+	logDebug("roadway type = " + roadwayType);
 	if (roadwayType == "Local") 
 	{
 /*
