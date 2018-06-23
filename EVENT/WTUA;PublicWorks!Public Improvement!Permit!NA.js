@@ -58,7 +58,7 @@ resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "MESSAG
 
 logDebug("Script 183 START");
 var doReviewFee = getAppSpecific("Review Fee");
-var strOccFee = getAppSpecific("Script 183 calculating Review Fee");
+var strOccFee = getAppSpecific("Street Occupancy Fee Amount");
 var roadwayType = getAppSpecific("Roadway Type");
 var workZoneLength = getAppSpecific("Work Zone Length");
 var numberOfLanesClosed = getAppSpecific("Number of Lanes Closed");
@@ -73,6 +73,13 @@ var peak = getAppSpecific("Peak");
 var detour = getAppSpecific("Detour");
 
 var strOccFeeAmount = 0;
+if (strOccFee != null)
+{
+	strOccFeeAmount = strOccFee;
+} else
+{
+	strOccFeeAmount = 0;
+}
 
 if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
@@ -81,6 +88,7 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 	
 	if (roadwayType == "Local") 
 	{
+		
 /*
 If Custom Field "Work Zone Length" <= 224 (this is a minimum fee) 
 	then fee amount is (0.15 X "Number of Lanes Closed" X "Closure Length" X "Duration of Closure in Days") 
@@ -344,13 +352,13 @@ Detour If Yes and Peak = Yes
 	{
 		//Add Traffic Control Plan Review fee PW_PIP_35
 		logDebug("Script 183 calculating Review Fee");
-		
+		addFee("PW_PIP_35","PW_PIP","FINAL",1,"N");
 	}
-	if (strOccFee != null )
-	{
-		//Add to the Street Occupancy fee based on ASI
-		logDebug("Script 183 Calculating Street Occ Fee");
-	}
+
+	//Add to the Street Occupancy fee based on ASI
+	logDebug("Script 183 Calculating Street Occ Fee");
+	addFee("PW_PIP_30","PW_PIP","FINAL",strOccFeeAmount,"N");
+
 	logDebug("Street Occupation Fee = " + strOccFeeAmount);
 }
 
