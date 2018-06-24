@@ -13,7 +13,7 @@
 //
 
 logDebug ("script22 () started")
-if(capStatus=="Waiting on Documents" && documentCategory == "Outside Agency") 
+if(capStatus=="Waiting on Documents") // && documentCategory == "Outside Agency") 
  {  
 	activateTask("Completeness Check");
 	updateAppStatus("Submitted",null);
