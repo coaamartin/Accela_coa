@@ -13,7 +13,9 @@
 //
 
 logDebug ("script22 () started")
-if(capStatus=="Waiting on Documents") // && documentCategory == "Outside Agency") 
+var docCategory = checkIfDocUploaded("Outside Agency");
+logDebug("Doc Category " + docCategory);
+if(capStatus=="Waiting on Documents" && docCategory == "Outside Agency") 
  {  
 	activateTask("Completeness Check");
 	updateAppStatus("Submitted",null);
@@ -21,3 +23,15 @@ if(capStatus=="Waiting on Documents") // && documentCategory == "Outside Agency"
 logDebug ("script22 () end")
 
 
+function checkIfDocUploaded(DocumentType){
+	for (var i = 0; i < documentModelArray.size(); i++) {
+		var documentModel = documentModelArray.get(i);
+		var documentCategory = documentModel.getDocCategory();
+		if (documentCategory!=null && documentCategory.equals(DocumentType)){
+			logDebug("DocumentType " + documentCategory);
+			 return documentCategory;
+	      }
+		  else 
+		  return false;
+	}
+}
