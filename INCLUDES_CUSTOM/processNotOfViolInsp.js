@@ -17,8 +17,14 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, updateWf, wfTsk2Upd
         if($iTrc(inspType == iType && inspResult == iResult, inspType + ' == ' + iType + ' && ' + inspResult + ' == ' + iResult)){
             if($iTrc(createNewInsp, "create new inspection"))
                 scheduleInspection(iType, inspDaysAhead, inspector, null, newInspReqComments);
-            if($iTrc(updateWf, "update worflow"))
-                updateTask(wfTsk2Update, wfSt2Update);
+            if($iTrc(updateWf, "update worflow")){
+                if(isTaskActive(wfTsk2Update))
+                    updateTask(wfTsk2Update, wfSt2Update);
+                else{
+                    activateTask(wfTsk2Update);
+                    updateTask(wfTsk2Update, wfSt2Update);
+                }
+            }
         }
     }
     catch(err){
