@@ -13,9 +13,10 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, updateWf, wfTsk2Upd
         var $iTrc = ifTracer;
         var newInspReqComments = getInspReqCommsByInspID(inspId) + " " + inspComment;
         var inspector = getInspectorByInspID(inspId);
+        var inspDaysAhead = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(dateAdd(inspResultDate, 7, true)));
         if($iTrc(inspType == iType && inspResult == iResult, inspType + ' == ' + iType + ' && ' + inspResult + ' == ' + iResult)){
             if($iTrc(createNewInsp, "create new inspection"))
-                scheduleInspection(iType, dateAdd(inspResultDate, 7, true), inspector, null, newInspReqComments);
+                scheduleInspection(iType, inspDaysAhead, inspector, null, newInspReqComments);
             if($iTrc(updateWf, "update worflow"))
                 updateTask(wfTsk2Update, wfSt2Update);
         }
