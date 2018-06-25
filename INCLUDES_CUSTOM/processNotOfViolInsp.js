@@ -11,7 +11,7 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, updateWf, wfTsk2Upd
     logDebug("noticeOfViolationInspection() started");
     try{
         var $iTrc = ifTracer;
-        var newInspReqComments = getInspReqCommsByInspID(inspId) + " " inspComment;
+        var newInspReqComments = getInspReqCommsByInspID(inspId) + " " + inspComment;
         var inspector = getInspectorByInspID(inspId);
         if($iTrc(inspType == iType && inspResult == iResult, inspType + ' == ' + iType + ' && ' + inspResult + ' == ' + iResult)){
             if($iTrc(createNewInsp, "create new inspection"))
