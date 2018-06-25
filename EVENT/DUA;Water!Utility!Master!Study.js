@@ -6,15 +6,21 @@
 
 //Event: 		DUA:
 
-//Desc:			FOR ACA only - When a document is uploaded and not from a Contact Type = "Agency Reviewer" 
+//Desc:			FOR ACA only - When a document is uploaded and not from a Contact Type = "Agency Reviewer"  -- changed to Doc Type = "Outside Agaency"
 //				and if the record status is = “Waiting on Documents” then the workflow task “Completeness Check” 
 //				needs to be activated and the workflow Start Date and Due Date needs to be set to the current date and then update the record status to “Submitted”. 
 //
 //             
 //
-//Created By: Silver Lining Solutions
 
 logDebug ("script22 () started")
+var docCategory = checkIfDocUploaded("Outside Agency");
+//logDebug("Doc Category " + docCategory);
+if(capStatus=="Waiting on Documents" && docCategory == "Outside Agency") 
+ {  
+	activateTask("Completeness Check");
+	editTaskDueDate("Completeness Check",dateAdd(null, 0));
+	updateAppStatus("Submitted",null);
+}
 logDebug ("script22 () end")
-
 

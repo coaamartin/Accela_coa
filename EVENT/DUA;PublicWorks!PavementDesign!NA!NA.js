@@ -12,9 +12,16 @@
 //
 //             
 //
-//Created By: Silver Lining Solutions
+
 
 logDebug ("script22 () started")
+var docCategory = checkIfDocUploaded("Outside Agency");
+//logDebug("Doc Category " + docCategory);
+if(capStatus=="Waiting on Documents" && docCategory == "Outside Agency") 
+ {  
+	activateTask("Completeness Check");
+	editTaskDueDate("Completeness Check",dateAdd(null, 0));
+	updateAppStatus("Submitted",null);
+}
 logDebug ("script22 () end")
-
 
