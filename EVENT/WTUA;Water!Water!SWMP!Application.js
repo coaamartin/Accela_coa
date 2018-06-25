@@ -21,7 +21,7 @@ Notes:
 //script 238
 logDebug('Script 238 Starting')
 if (ifTracer(wfTask=="Fee Processing" && 
-		(wfStatus=="Accepted No Fees Due" || wfStatus=="Fees Paid" || wfStatus=="Paid by Bond" || wfStatus=="Ready to Pay"),
+		(wfStatus=="Accepted No Fees Due" || wfStatus=="Fees Paid" || wfStatus=="Paid by Bond"),
 		'wfTask & wfStatus match')) {
 
 	emailContactsWithCCs(
