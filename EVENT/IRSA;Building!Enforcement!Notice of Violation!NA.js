@@ -12,10 +12,10 @@ if(inspType == "Notice of Violation Inspection"){
     if(inspResult == "Compliance"){
         var wfTsk2Update = "Notice of Violation", wfSt2Update = "Compliance";
         if(isTaskActive(wfTsk2Update))
-            updateTask(wfTsk2Update, wfSt2Update);
+            closeTask(wfTsk2Update, wfSt2Update, "vis Script", "vis Script");
         else{
             activateTask(wfTsk2Update);
-            updateTask(wfTsk2Update, wfSt2Update);
+            closeTask(wfTsk2Update, wfSt2Update, "vis Script", "vis Script");
         }
         updateAppStatus("Closed", "Updated via IRSA");
         var wfProcess = getWfProcessCodeByCapId(capId);
