@@ -13,8 +13,8 @@
 //
 
 logDebug ("script22 () started")
-//var docCategory = checkIfDocUploaded("Outside Agency");
-logDebug("Doc Category " + docCategory);
+var docCategory = checkIfDocUploaded("Outside Agency");
+//logDebug("Doc Category " + docCategory);
 if(capStatus=="Waiting on Documents" && docCategory == "Outside Agency") 
  {  
 	activateTask("Completeness Check");
