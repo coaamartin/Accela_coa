@@ -11,20 +11,7 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, updateWf, wfTsk2Upd
     logDebug("noticeOfViolationInspection() started");
     try{
         var $iTrc = ifTracer;
-    var vEventName = aa.env.getValue("EventName");
-	var params = aa.env.paramValues;
-	var keys = params.keys(); // class java.util.Hashtable$Enumerator ;
-	var key = null;
     
-	logDebug('***** Begin List Environment for the ' + vEventName + ' event *****');
-	while (keys.hasMoreElements())
-	{
-		key = keys.nextElement();
-		//logDebug("var " + key + " = aa.env.getValue( \"" + key + "\" ) ;");
-		//logDebug("Loaded Env Variable: " + key + " = " + aa.env.getValue(key));
-		logDebug('var ' + key + ' = ' + aa.env.getValue(key) + ' ;');
-	}
-	logDebug('***** End List Environment for the ' + vEventName + ' event *****');
         if($iTrc(inspType == iType && inspResult == iResult, inspType + ' == ' + iType + ' && ' + inspResult + ' == ' + iResult)){
             if($iTrc(createNewInsp, "create new inspection"))
                 scheduleInspection(iType, dateAdd(null, 7, true))

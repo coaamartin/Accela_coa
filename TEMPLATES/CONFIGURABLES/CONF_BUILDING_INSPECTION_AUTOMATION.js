@@ -201,53 +201,6 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "To run automated script based on JSON rules - Script 332a",
-          "operators": {}
-        },
-        "criteria": {
-          "inspectionTypePerformed": [
-            "Notice of Violation Inspection"
-          ],
-          "inspectionResult": [
-                "First Notice"
-          ],
-          "isCreatedByACA": false,
-          "isACAEvent": false
-
-        },
-        "action": {
-          "costRangeType": "",
-          "costRange": 0,
-          "costFeeType": "",
-          "costFeeSchedule": "",
-          "costFeeName": "",
-          "costFeeAmount": 0,
-          "newAppStatus": "",
-          "caseCreationType": "",
-          "caseFailureStatus": [],
-          "caseType": "",
-          "caseCopyComments": true,
-          "inspectionType":"Notice of Violation Inspection",
-          "inspectionCopyComment": true,
-          "rangeType": "workingdays",
-          "range": "7",
-          "sameInspector": true,
-          "createCondition": "",
-          "createConditionType": "",
-          "createConditionSeverity": "",
-          "feeSchedule": "",
-          "feeName": "",
-          "feeAmount": 0,
-          "taskName": "Notice of Violation",
-          "taskStatus": "First Notice",
-          "removeCondition": "",
-          "removeConditionType": ""
-        }
-      },
-      {
-        "preScript": "",
-        "postScript": "",
-        "metadata": {
           "description": "To run automated script based on JSON rules - Script 332b",
           "operators": {}
         },
