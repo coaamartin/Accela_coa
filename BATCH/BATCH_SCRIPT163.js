@@ -37,6 +37,8 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 
 var capId = null;
+var showDebug = true; // Set to true to see debug messages
+
 try {
 	var emailTemplateName = aa.env.getValue("EMAIL_TEMPLATE");
 	if (!emailTemplateName || emailTemplateName == null || emailTemplateName == "") {
