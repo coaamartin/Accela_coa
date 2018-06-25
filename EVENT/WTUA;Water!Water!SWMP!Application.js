@@ -21,7 +21,7 @@ Notes:
 //script 238
 logDebug('Script 238 Starting')
 if (ifTracer(wfTask=="Fee Processing" && 
-		(wfStatus=="No fees due" || wfStatus=="Fees Paid" || wfStatus=="Paid by Bond"),
+		(wfStatus=="Accepted No Fees Due" || wfStatus=="Fees Paid" || wfStatus=="Paid by Bond" || wfStatus=="Ready to Pay"),
 		'wfTask & wfStatus match')) {
 
 	emailContactsWithCCs(
@@ -34,7 +34,7 @@ if (ifTracer(wfTask=="Fee Processing" &&
 		"", 
 		"Contact,Project Owner"
 	);
-}
+} 
 
 createPPBMPRecord("Re Certification", [ "Accepted" ], "POND TYPES");
 
