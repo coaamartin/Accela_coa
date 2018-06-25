@@ -11,10 +11,11 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, updateWf, wfTsk2Upd
     logDebug("noticeOfViolationInspection() started");
     try{
         var $iTrc = ifTracer;
-    
+        var newInspReqComments = getInspReqCommsByInspID(inspId) + " " inspComment;
+        var inspector = getInspectorByInspID(inspId);
         if($iTrc(inspType == iType && inspResult == iResult, inspType + ' == ' + iType + ' && ' + inspResult + ' == ' + iResult)){
             if($iTrc(createNewInsp, "create new inspection"))
-                scheduleInspection(iType, dateAdd(null, 7, true))
+                scheduleInspection(iType, dateAdd(inspResultDate, 7, true), inspector, null, newInspReqComments);
             if($iTrc(updateWf, "update worflow"))
                 updateTask(wfTsk2Update, wfSt2Update);
         }
