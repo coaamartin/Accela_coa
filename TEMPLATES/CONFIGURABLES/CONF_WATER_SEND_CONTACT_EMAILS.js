@@ -404,6 +404,38 @@
                     "createFromParent": "",
                     "reportingInfoStandards": ""
                 }
+            },
+            {
+                "preScript": "script395_prescript_pondRowsMustExist",
+                "postScript": "",
+                "metadata": {
+                  "description": "Script 395",
+                  "operators": {
+                    
+                  }
+                },
+                "criteria": {
+                    "inspectionTypePerformed": [
+                        "Routine Inspections"
+                    ],
+                      "inspectionResult": [
+                        "Ready for Final"
+                    ]
+                },
+                "action": {
+                    "notificationTemplate": " SWMP ROUTINE READY FOR FINAL # 395",
+                    "notificationReport": "",
+                    "notifyContactTypes": [
+                        "Applicant"
+                    ],
+                    "url4ACA": "",
+                    "fromEmail": "noreply@auroraco.gov",
+                    "additionalEmailsTo": [
+
+                    ],
+                    "createFromParent": "",
+                    "reportingInfoStandards": ""
+                }
             }
         ]        
     },

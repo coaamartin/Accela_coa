@@ -176,7 +176,7 @@
     "Water/Water/SWMP/Permit": {
         "InspectionResultSubmitAfter": [
         {
-          "preScript": "",
+          "preScript": "script395_prescript_pondRowsMustExist",
           "postScript": "",
           "metadata": {
             "description": "Script 395",
@@ -194,20 +194,21 @@
               },
             "action": {
               "activateTask": [
-                
+                {
+                    "task": "Active Permit",
+                    "status": "Ready for Final Certification"
+                  },
+                  {
+                      "task": "Final Certification",
+                      "status": "Upload Pending"
+                  }                
               ],
               "daysOut": "",
               "deactivateTask": [
-                "Fee Processing"
               ],
               "deleteTask": [
-                
               ],
               "updateTask": [
-                {
-                  "task": "",
-                  "status": ""
-                }
               ],
               "invoiceFees": "",
               "createChild": "",

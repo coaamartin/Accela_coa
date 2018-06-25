@@ -5,6 +5,7 @@ function script395_prescript_pondRowsMustExist() {
     if(!rows) {
         cancelCfgExecution = true;
         var message = "No Pond Type rows exist";
+        comment("No Pond Type rows exist");
         cancel = true;
         showMessage=true;
     }

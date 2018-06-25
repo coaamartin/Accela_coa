@@ -18,6 +18,24 @@ Notes:
 	- Task name 'Re Certification' not Recertification
 */
 
+//script 238
+logDebug('Script 238 Starting')
+if (ifTracer(wfTask=="Fee Processing" && 
+		(wfStatus=="No fees due" || wfStatus=="Fees Paid" || wfStatus=="Paid by Bond"),
+		'wfTask & wfStatus match')) {
+
+	emailContactsWithCCs(
+		"Applicant", 
+		"SWMP PERMIT ISSUED # 238", 
+		aa.util.newHashtable(), 
+		"", 
+		aa.util.newHashtable(), 
+		"N", 
+		"", 
+		"Contact,Project Owner"
+	);
+}
+
 createPPBMPRecord("Re Certification", [ "Accepted" ], "POND TYPES");
 
 script399_BondEmailAndAwaitingBondTaskStatus();

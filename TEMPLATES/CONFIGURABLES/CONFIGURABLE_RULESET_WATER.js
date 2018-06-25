@@ -1,7 +1,7 @@
 {
     "WorkflowTaskUpdateAfter": {
       "StandardScripts": [
-        "STDBASE_SEND_CONTACT_EMAILS"
+        "STDBASE_SEND_CONTACT_EMAILS",
       ]
     },
     "ApplicationSubmitAfter": {
@@ -12,7 +12,8 @@
     "InspectionResultSubmitAfter":{
         "StandardScripts":[
           "STDBASE_INSPECTION_AUTOMATION",
-          "STDBASE_SEND_CONTACT_EMAILS"
+          "STDBASE_SEND_CONTACT_EMAILS",
+          "STDBASE_RECORD_AUTOMATION"
         ]
     },
     "WorkflowTaskUpdateBefore": {
