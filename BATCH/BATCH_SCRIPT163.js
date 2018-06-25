@@ -40,13 +40,15 @@ var capId = null;
 try {
 	var emailTemplateName = aa.env.getValue("EMAIL_TEMPLATE");
 	if (!emailTemplateName || emailTemplateName == null || emailTemplateName == "") {
-		logDebug("**ERROR Parameter 'EMAIL_TEMPLATE' not defined");
+		emailTemplateName = 'PW LIC AGR RENEWAL #163';
+	//	logDebug("**ERROR Parameter 'EMAIL_TEMPLATE' not defined");
 	} else {
 
 		var daysAhead = aa.env.getValue("DAYS_AHEAD");
 		if (!daysAhead) {
 			daysAhead = 60;
 		}
+
 		sendCertificateofInsuranceExpirationNotification(emailTemplateName, daysAhead, "Certificate of Insurance Expiration Date");
 	}
 } catch (ex) {
@@ -60,6 +62,9 @@ try {
  * @param asiFieldName to get Date value and compare with
  */
 function sendCertificateofInsuranceExpirationNotification(emailTemplateName, daysAhead, asiFieldName) {
+	var currDate = aa.util.parseDate(dateAdd(null, 0));
+	var cutoffDate = aa.util.parseDate(dateAdd(null, daysAhead));
+	logDebug("Looking for records that will expire in 60 days on the date " +  formatDateToMMDDYYYY(cutoffDate));
 
 	var capListResult = aa.cap.getByAppType("PublicWorks", "Real Property", "License Agreement", "NA");
 	if(!capListResult.getSuccess()) {LogBatchDebug("DEBUG", "Unable to get records " + capListResult.getErrorMessage(), true); return ; }
@@ -78,11 +83,8 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 			continue;
 		}
 		
-        var currDate = aa.util.parseDate(dateAdd(null, 0));
         certInsExpDate = aa.util.parseDate(certInsExpDate);
-		var expDiff = days_between(certInsExpDate, currDate);
-		expDiff = parseInt(expDiff);
-		if (expDiff == daysAhead) {
+		if (expDiff == cutoffDate) {
 			var cc = getContactByType("Insurance Agency", capId);
 			if (!cc) {
 				cc = "";
@@ -140,3 +142,16 @@ function LogBatchDebug(etype, edesc, createEventLog) {
 	}
 	debug += msg;
 }
+
+function formatDateToMMDDYYYY (date) {
+	var yyyy = date.getFullYear().toString(),
+		mm = (date.getMonth() + 1).toString(),
+		dd = date.getDate().toString();
+
+	// CONVERT mm AND dd INTO chars
+	var mmChars = mm.split(''),
+		ddChars = dd.split('');
+
+	// CONCAT THE STRINGS IN YYYY-MM-DD FORMAT
+	return datestring = (mmChars[1] ? mm : "0" + mmChars[0]) + '/' + (ddChars[1] ? dd : "0" + ddChars[0]) + '/' + yyyy;
+};
