@@ -7,7 +7,7 @@
  * @wfTsk2Update (String) - workflow task to update
  * @wfSt2Update (String) - workflow task status to update the task to
  */
-function processNotOfViolInsp(iType, iResult, createNewInsp, updateWf, wfTsk2Update, wfSt2Update){
+function processNotOfViolInsp(iType, iResult, createNewInsp, insp2Create, updateWf, wfTsk2Update, wfSt2Update){
     logDebug("noticeOfViolationInspection() started");
     try{
         var $iTrc = ifTracer;
@@ -16,7 +16,7 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, updateWf, wfTsk2Upd
         var inspDaysAhead = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(dateAdd(inspResultDate, 7, true)));
         if($iTrc(inspType == iType && inspResult == iResult, inspType + ' == ' + iType + ' && ' + inspResult + ' == ' + iResult)){
             if($iTrc(createNewInsp, "create new inspection"))
-                scheduleInspection(iType, inspDaysAhead, inspector, null, newInspReqComments);
+                scheduleInspection(insp2Create, inspDaysAhead, inspector, null, newInspReqComments);
             if($iTrc(updateWf, "update worflow")){
                 if(isTaskActive(wfTsk2Update))
                     updateTask(wfTsk2Update, wfSt2Update);
