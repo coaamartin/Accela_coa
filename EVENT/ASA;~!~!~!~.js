@@ -65,6 +65,7 @@ try{
 	//addParameter(params, "$$acaRecordUrl$$", acaUrl);
 	getRecordParams4Notification(params);
 	getContactParams4Notification(params,"Applicant");
+	getContactParams4Notification(params,"License Holder");
 	sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null); 
 	
  function getRecordParams4Notification(params) {
