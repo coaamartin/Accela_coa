@@ -26,7 +26,7 @@ updateSubmittalNumber("Completeness Check", ["Complete"], "Submittal Number");
 
 include("45_LicenseAgreementEmailResubmittal");
 
-if($iTrc(wfTask == "Signatures" && wfStatus == "Pending Owner Signature", 'wfTask == "Signatures" && wfStatus == "Pending Owner Signature"')){
+if(wfTask == "Signatures" && wfStatus == "Pending Owner Signature"){
 	if(balanceDue == 0) pWrksScript303_reqOwnerSigEmail();
 	pWrksScript305_updateTaskDueDate();
 }

@@ -38,7 +38,7 @@ Notes:
 	
 */
 
-resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "MESSAGE_NOTICE_PUBLIC WORKS");
+resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "PI RESUBMITTAL REQUESTED # 382");
 
 //*********************************************************************************************************
 //script 183 		Assess Public Improvement Fees

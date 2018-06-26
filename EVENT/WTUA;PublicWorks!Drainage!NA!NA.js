@@ -49,3 +49,8 @@ if($iTrc(wfTask == "Plans Coordination" && wfStatus == "SS Requested", 'wfTask =
 	//Script 125
 	deactivateTask("Completeness Check");
 }
+
+if($iTrc(wfTask == "Completeness Check" && wfStatus == "Incomplete", 'wfTask == "Completeness Check" && wfStatus == "Incomplete"')){
+	//Script 125
+	deactivateTask("Completeness Check");
+}
