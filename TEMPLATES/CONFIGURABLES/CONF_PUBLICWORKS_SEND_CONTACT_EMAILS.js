@@ -116,9 +116,12 @@
         "criteria": {
           "task": [
             "Plans Coordination"
+								   
+
           ],
           "status": [
             "Ready for Signatures"
+				  
           ]
         },
         "action": {
@@ -286,7 +289,7 @@
           ]
         },
         "action": {
-          "notificationTemplate": "TEST_FOR_SCRIPTS",
+          "notificationTemplate": "PI INITIAL ACCEPTANCE # 167",
           "notificationReport": "",
           "notifyContactTypes": [
             "ALL"
