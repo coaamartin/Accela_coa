@@ -115,13 +115,13 @@
         },
         "criteria": {
           "task": [
-            "Plans Coordination"
-								   
+            "Plans Coordination",
+            "Application Submittal"
 
           ],
           "status": [
-            "Ready for Signatures"
-				  
+            "Ready for Signatures",
+            "None"
           ]
         },
         "action": {
@@ -275,7 +275,7 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "To validate record based on JSON rules",
+          "description": "Script 167",
           "operators": {
             
           }
@@ -526,12 +526,43 @@
             "Plans Coordination"
           ],
           "status": [
-            "Resubmittal Requested",
+            "Resubmittal Requested"
+          ]
+        },
+        "action": {
+          "notificationTemplate": "PW PLANS COORDINATION EMAILS RESUBMITTAL REQUESTED #402",
+          "notificationReport": "",
+          "notifyContactTypes": [
+            "Applicant"
+          ],
+          "url4ACA": "",
+          "fromEmail": "noreply@auroraco.gov",
+          "additionalEmailsTo": [
+            ""
+          ],
+          "createFromParent": "",
+          "reportingInfoStandards": ""
+        }
+      },
+      {
+        "preScript": "",
+        "postScript": "",
+        "metadata": {
+          "description": "Script 402",
+          "operators": {
+            
+          }
+        },
+        "criteria": {
+          "task": [
+            "Plans Coordination"
+          ],
+          "status": [
             "SS Requested"
           ]
         },
         "action": {
-          "notificationTemplate": "PW PLANS COORDINATION EMAILS #402",
+          "notificationTemplate": "PW PLANS COORDINATION EMAILS SS REQUESTED #402",
           "notificationReport": "",
           "notifyContactTypes": [
             "Applicant"
@@ -563,7 +594,7 @@
           ]
         },
         "action": {
-          "notificationTemplate": "PW PLANS COORDINATION EMAILS #402",
+          "notificationTemplate": "PW PLANS COORDINATION EMAILS APPROVED #402",
           "notificationReport": "",
           "notifyContactTypes": [
             "Applicant",
