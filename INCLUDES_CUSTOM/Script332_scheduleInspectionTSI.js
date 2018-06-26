@@ -21,6 +21,6 @@ var tsiArray = new Array();
 			var noOfDays = dateDiff(today, pPreHearingDate);
                         
             if (pPreHearingDate != null ) {
-                scheduleInspection("Pre Court Inspection", noOfDays, inspectorID);
+                scheduleInspection("Pre Court Investigation", noOfDays, inspectorID);
             }
  }        
