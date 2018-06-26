@@ -1,92 +1,128 @@
 /*==========================================================================================
 Title : STDBASE_SEND_CONTACT_EMAILS
-
 Purpose : Sends Email Template to necessary Contact Types with available parameters
-
 Author: David Bischof / Jason Plaisted
-
 Functional Area : General
-
 Description : JSON must contain :
-				"Module/Type/Subtype/Category" = 4 level record structure parent
-					"Rule set" - SubParent.  Event name plus rules.  Currently supports only wftTask/wfStatus or inspType/inspResult. example: "WorflowTaskUpdateAfter/wfTask/wfStatus" 
-						"notificationTemplate" = name of email template to be used
-						"notificationReport" = name of reports to be sent with notification, pipe | delimited
-						"notifyContactTypes" = contact types to be sent the notification, pipe | delimited. May include "ALL" and "Primary" but as the only parameter
-						"url4ACA" = include the URL for ACA	
-						"fromEmail" = who to send from (must have proper permissions)
-						"additionalEmailsTo" = /optional/ additional Email Recipients, pipe | delimited email addresses
-							Sample: "additionalEmailsTo":"email1@host.com|email2@host.com"
-						"customFields"= /optional/ key-value pairs, (asiFieldName,asiRequiredValue) allows multiple (matched with AND)
-							Sample: "customFields":{"asiField1":"asiVal1","asiField2":"asiVal2"}
-						"createFromParent" = /optional/ (true/false) creates the notification from the parent License Record for example
-						"reportingInfoStandards" = /optional/ Defualts to "Reporting Information Standards" Standard Choice for varibles such as Agency Name
-
-                For testing, a sample JSON object is embedded in the function.  Wild cards are accepted in all 4 levels.
-				
-				Included Report Params are:
-				altID
-				inspID (inspection events only)
-				
-				Included email Parameters are:
-				Contacts:
-				$$ContactLastName$$
-				$$ContactFirstName$$
-				$$ContactMiddleName$$
-				$$ContactFullName$$
-				$$ContactBusinesName$$
-				$$ContactContactSeqNumber$$
-				$$ContactType$$
-				$$ContactRelation$$
-				$$ContactPhone1$$
-				$$ContactPhone2$$
-				$$ContactEmail$$
-				$$ContactAddressLine1$$
-				$$ContactAddressLine2$$
-				$$ContactCity$$
-				$$ContactState$$
-				$$ContactZip$$
-				$$ContactFax$$
-				$$ContactNotes$$
-				$$ContactCountry$$
-
-				
-				Record:
-				$$altID$$
-				$$recordAlias$$
-				$$recordStatus$$
-				$$balance$$
-				$$fileDate$$
-				$$workDesc$$
-				$$acaRecordUrl$$
-				$$acaPaymentUrl$$
-				$$recordName$$
-				$$FullAddress$$
-				
-				Inspection:
-				$$inspId$$  (inspection events only)
-				$$inspResult$$   (inspection events only)
-				$$inspComment$$   (inspection events only)
-				$$inspResultDate$$   (inspection events only)
-				$$inspGroup$$   (inspection events only)
-				$$inspType$$    (inspection events only)
-				$$inspSchedDate$$    (inspection events only)
-				
-				Workflow:
-				$$wfTask$$    (workflow events only)
-				$$wfStatus$$    (workflow events only)
-				$$wfDate$$    (workflow events only)
-				$$wfComment$$    (workflow events only)
-				$$wfStaffUserID$$    (workflow events only)
-				$$wfHours$$    (workflow events only)
+	"Module/Type/Subtype/Category" = 4 level record structure parent
+		"Rule set" - SubParent.  Event name plus rules.  Currently supports only wftTask/wfStatus or inspType/inspResult. example: "WorflowTaskUpdateAfter/wfTask/wfStatus" 
+			"notificationTemplate" = name of email template to be used
+			"notificationReport" = name of reports to be sent with notification, Array ["val1","val2"]
+			"notifyContactTypes" = contact types to be sent the notification, Array ["val1","val2"]. May include "ALL" and "Primary" but as the only element
+			"url4ACA" = include the URL for ACA	
+			"fromEmail" = who to send from (must have proper permissions)
+			"additionalEmailsTo" = /optional/ additional Email Recipients, Array ["val1","val2"] email addresses
+				Sample: "additionalEmailsTo":["email1@host.com","email2@host.com"]
+			"customFields"= /optional/ key-value pairs, (asiFieldName,asiRequiredValue) allows multiple (matched with AND)
+				Sample: "customFields":{"asiField1":"asiVal1","asiField2":"asiVal2"}
+			"createFromParent" = /optional/ (true/false) creates the notification from the parent License Record for example
+			"reportingInfoStandards" = /optional/ Defualts to "Reporting Information Standards" Standard Choice for varibles such as Agency Name
+            "balanceAllowed": /optional/ if set to false and Balance equal zero feesContactTypes will recieve an email.
+            
+- Department information parameters can be added to email parameters, current user's department is used.
+1. a standard choice with name 'DEPARTMENT_INFORMATION' should be added
+2. a row per department should be added in DEPARTMENT_INFORMATION
+3. row Value should be department name
+4. row Desc contains all parameters: $$paramName1$$:paramValue1|$$paramName2$$:paramValue2|...
+Sample JSON :
+{
+  "Marijuana/Enforcement/Complaint/NA": {
+    "ApplicationSpecificInfoUpdateAfter": [
+      {
+        "metadata": {
+          "description": "Sends Email Template to necessary Contact Types with available parameters",
+          "operators": {
+            
+          }
+        },
+        "preScript": "",
+        "criteria": {
+          "customFields": {
+            "Notify Complaintant": "Yes"
+          }
+        },
+        "action": {
+          "notificationTemplate": "MESSAGE_NOTICE_PUBLIC WORKS",
+          "notificationReport": "",
+          "notifyContactTypes": [
+            "Applicant"
+          ],
+          "additionalEmailsTo": [
+            "email1@hostAbc.com"
+          ],
+          "url4ACA": "",
+          "fromEmail": "",
+          "createFromParent": false,
+          "reportingInfoStandards": "",
+          "balanceAllowed": false,
+          
+        },
+        "postScript": ""
+      }
+    ]
+  }
+}
+    For testing, a sample JSON object is embedded in the function.  Wild cards are accepted in all 4 levels.
+	
+	Included Report Params are:
+	altID
+	inspID (inspection events only)
+	
+	Included email Parameters are:
+	Contacts:
+	$$ContactLastName$$
+	$$ContactFirstName$$
+	$$ContactMiddleName$$
+	$$ContactFullName$$
+	$$ContactBusinesName$$
+	$$ContactContactSeqNumber$$
+	$$ContactType$$
+	$$ContactRelation$$
+	$$ContactPhone1$$
+	$$ContactPhone2$$
+	$$ContactEmail$$
+	$$ContactAddressLine1$$
+	$$ContactAddressLine2$$
+	$$ContactCity$$
+	$$ContactState$$
+	$$ContactZip$$
+	$$ContactFax$$
+	$$ContactNotes$$
+	$$ContactCountry$$
+	
+	Record:
+	$$altID$$
+	$$recordAlias$$
+	$$recordStatus$$
+	$$balance$$
+	$$fileDate$$
+	$$workDesc$$
+	$$acaRecordUrl$$
+	$$acaPaymentUrl$$
+	$$recordName$$
+	$$FullAddress$$
+	
+	Inspection:
+	$$inspId$$  (inspection events only)
+	$$inspResult$$   (inspection events only)
+	$$inspComment$$   (inspection events only)
+	$$inspResultDate$$   (inspection events only)
+	$$inspGroup$$   (inspection events only)
+	$$inspType$$    (inspection events only)
+	$$inspSchedDate$$    (inspection events only)
+	
+	Workflow:
+	$$wfTask$$    (workflow events only)
+	$$wfStatus$$    (workflow events only)
+	$$wfDate$$    (workflow events only)
+	$$wfComment$$    (workflow events only)
+	$$wfStaffUserID$$    (workflow events only)
+	$$wfActionByUserID$$    (workflow events only)
+	$$wfHours$$    (workflow events only)
 Reviewed By: 
-
 Script Type : (EMSE, EB, Pageflow, Batch): EMSE
-
 General Purpose/Client Specific : General
-
 Client developed for : 
-
 Parameters:
 				parameters - pass in aa.util.newHashtable(); for additional parameters. 
 							(example: myNewParams = aa.util.hashTable(); 
@@ -102,7 +138,6 @@ var scriptSuffix = "SEND_CONTACT_EMAILS";
 var agencyReplyEmailDefault = lookup("ACA_EMAIL_TO_AND_FROM_SETTING", "RENEW_LICENSE_AUTO_ISSUANCE_MAILFROM");
 var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
 acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
-acaURLDefault = "https://acastd.accela.com/marijuanalicensing";
 
 try {
 	// This should be included in all Configurable Scripts
@@ -115,33 +150,20 @@ try {
 			var rules = settingsArray[s];
 
 			//Execute PreScript
-			if (rules.hasOwnProperty("preScript") && !matches(rules.preScript, null, "")) {
+			if (!isEmptyOrNull(rules.preScript)) {
 				eval(getScriptText(rules.preScript));
 			}
 
-			var asiMatched = true;
-			if (typeof rules.customFields !== 'undefined' && rules.customFields != "" && rules.customFields != null) {
-
-				//in AInfo we don't know if useAppSpecificGroupName was true or false,
-				//we don't have asi group/subgroup name, so we reload with useAppSpecificGroupName=false
-				var olduseAppSpecificGroupName = useAppSpecificGroupName;
-				useAppSpecificGroupName = false;
-				var asiValues = new Array();
-				loadAppSpecific(asiValues);
-				useAppSpecificGroupName = olduseAppSpecificGroupName;
-
-				for (r in rules.customFields) {
-					asiMatched = asiMatched && asiValues[r] == rules.customFields[r];
-				}
+			if (cancelCfgExecution) {
+				logDebug("**WARN STDBASE Script [" + scriptSuffix + "] canceled by cancelCfgExecution");
+				cancelCfgExecution = false;
+				continue;
 			}
 
-			if (asiMatched) {
-				//Execute
-				sendContactEmails(capId, rules);
-			}
+			sendContactEmails(capId, rules);
 
 			//Execute Post Script
-			if (rules.hasOwnProperty("postScript") && !matches(rules.postScript, null, "")) {
+			if (!isEmptyOrNull(rules.postScript)) {
 				eval(getScriptText(rules.postScript));
 			}
 		}
@@ -151,6 +173,85 @@ try {
 	logDebug("**ERROR: Exception while verification the rules for " + scriptSuffix + ". Error: " + ex);
 }
 
+
+function getRecordAssignedStaffEmail(){
+	var cdScriptObjResult = aa.cap.getCapDetail(capId);
+	if (!cdScriptObjResult.getSuccess()) {
+		logDebug("**ERROR: No cap detail script object : " + cdScriptObjResult.getErrorMessage());
+        return ""
+	}
+	var cdScriptObj = cdScriptObjResult.getOutput();
+	if (!cdScriptObj) {
+		logDebug("**ERROR: No cap detail script object");
+		return ""
+	}
+	var cd = cdScriptObj.getCapDetailModel();
+    var	userId=cd.getAsgnStaff();
+    if (userId==null) return "";
+	var iNameResult = aa.person.getUser(userId);
+	var iName = iNameResult.getOutput();
+	var email=iName.getEmail();
+	return email;
+}
+
+function getRecordAssignedStaffPhone(){
+	var cdScriptObjResult = aa.cap.getCapDetail(capId);
+	if (!cdScriptObjResult.getSuccess()) {
+		logDebug("**ERROR: No cap detail script object : " + cdScriptObjResult.getErrorMessage());
+        return ""
+	}
+	var cdScriptObj = cdScriptObjResult.getOutput();
+	if (!cdScriptObj) {
+		logDebug("**ERROR: No cap detail script object");
+		return ""
+	}
+	var cd = cdScriptObj.getCapDetailModel();
+    var	userId=cd.getAsgnStaff();
+    if (userId==null) return "";
+	var iNameResult = aa.person.getUser(userId);
+	var iName = iNameResult.getOutput();
+	var phone=iName.getPhoneNumber();
+	return phone;
+}
+
+function getRecordAssignedStaffTitle(){
+	var cdScriptObjResult = aa.cap.getCapDetail(capId);
+	if (!cdScriptObjResult.getSuccess()) {
+		logDebug("**ERROR: No cap detail script object : " + cdScriptObjResult.getErrorMessage());
+        return ""
+	}
+	var cdScriptObj = cdScriptObjResult.getOutput();
+	if (!cdScriptObj) {
+		logDebug("**ERROR: No cap detail script object");
+		return ""
+	}
+	var cd = cdScriptObj.getCapDetailModel();
+    var	userId=cd.getAsgnStaff();
+    if (userId==null) return "";
+	var iNameResult = aa.person.getUser(userId);
+	var iName = iNameResult.getOutput();
+	var title=iName.getTitle();
+	return title;
+}
+function getRecordAssignedStaffFullname(){
+	var cdScriptObjResult = aa.cap.getCapDetail(capId);
+	if (!cdScriptObjResult.getSuccess()) {
+		logDebug("**ERROR: No cap detail script object : " + cdScriptObjResult.getErrorMessage());
+        return ""
+	}
+	var cdScriptObj = cdScriptObjResult.getOutput();
+	if (!cdScriptObj) {
+		logDebug("**ERROR: No cap detail script object");
+		return ""
+	}
+	var cd = cdScriptObj.getCapDetailModel();
+    var	userId=cd.getAsgnStaff();
+    if (userId==null) return "";
+	var iNameResult = aa.person.getUser(userId);
+	var iName = iNameResult.getOutput();
+	var fn=iName.getFullName();
+	return fn;
+}
 function runReportAndSendAsync(reportName, module, itemCapId, reportParameters, emailFrom, emailTo, emailTemplate, emailParameters, emailCC, waitTimeSec, reportAttach) {
 
 	var scriptName = "STDBASE_RUNREPORTANDSENDASYNC";
@@ -230,6 +331,65 @@ function getReporingInfoStandards4Notification(eParamsHash, rptInfoStdChoice) {
 	return eParamsHash;
 }
 
+function getDepartmentParams4Notification(eParamsHash, deptName) {
+	if (deptName == null) {
+		return eParamsHash;
+	}
+	var rptInfoStdArray = getStandardChoiceArray("DEPARTMENT_INFORMATION");
+
+	var valDesc = null;
+	for (s in rptInfoStdArray) {
+		if (rptInfoStdArray[s]["active"] == "A" && String(rptInfoStdArray[s]["value"]).toUpperCase() == String(deptName).toUpperCase()) {
+			valDesc = rptInfoStdArray[s]["valueDesc"];
+			if (isEmptyOrNull(valDesc)) {
+				return eParamsHash;
+			}
+			valDesc = String(valDesc).split("|");
+			break;
+		}//active and name match
+	}//all std-choice rows
+
+	if (!isEmptyOrNull(valDesc)) {
+		for (e in valDesc) {
+			var parameterName = "";
+			var tmpParam = valDesc[e].split(":");
+			if (tmpParam[0].indexOf("$$") < 0)
+				parameterName = "$$" + tmpParam[0].replace(/\s+/g, '') + "$$";
+			else
+				parameterName = tmpParam[0];
+
+			addParameter(eParamsHash, parameterName, tmpParam[1]);
+		}//for all parameters in each row
+	}//has email parameters
+
+	return eParamsHash;
+}
+
+function sendNotificationLocal(emailFrom, emailTo, emailCC, templateName, params, reportFile) {
+	var itemCap = capId;
+
+	if (arguments.length == 7)
+		itemCap = arguments[6]; // use cap ID specified in args
+
+	var id1 = itemCap.ID1;
+	var id2 = itemCap.ID2;
+	var id3 = itemCap.ID3;
+
+	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
+
+	var result = null;
+
+	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
+
+	if (result.getSuccess()) {
+		logDebug("Sent email successfully!");
+		return true;
+	} else {
+		logDebug("Failed to send mail. - " + result.getErrorType() + " : " + result.getErrorMessage());
+		return false;
+	}
+}
+
 /**
  * Standard base automation to send notifications to contacts based on JSON configurable rules.
  * 
@@ -245,14 +405,15 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 
 	// validate JSON parameters using handleUndefined function
 	// handleUndefine(JSON Parameter, isRequired);
-	var rNotificationTemplate = handleUndefined(recordSettings.notificationTemplate, false);
-	var rNotifyContactType = handleUndefined(recordSettings.notifyContactTypes, false);
-	var rUrl4ACA = handleUndefined(recordSettings.url4ACA, false);
-	var rNotificationReport = handleUndefined(recordSettings.notificationReport, false);
-	var rFromEmail = handleUndefined(recordSettings.fromEmail, false);
-	var rAdditionalEmailsTo = handleUndefined(recordSettings.additionalEmailsTo, false);
-	var rCreateFromParent = handleUndefined(recordSettings.createFromParent, false);
-	var rReportingInfoStandards = handleUndefined(recordSettings.reportingInfoStandards, false);
+	var rNotificationTemplate = handleUndefined(recordSettings.action.notificationTemplate, false);
+	var rNotifyContactType = handleUndefined(recordSettings.action.notifyContactTypes, false);
+	var rUrl4ACA = handleUndefined(recordSettings.action.url4ACA, false);
+	var rNotificationReport = handleUndefined(recordSettings.action.notificationReport, false);
+	var rFromEmail = handleUndefined(recordSettings.action.fromEmail, false);
+	var rAdditionalEmailsTo = handleUndefined(recordSettings.action.additionalEmailsTo, false);
+	var rCreateFromParent = handleUndefined(recordSettings.action.createFromParent, false);
+	var rReportingInfoStandards = handleUndefined(recordSettings.action.reportingInfoStandards, false);
+	var rBalanceAllowed = handleUndefined(recordSettings.action.balanceAllowed, false);
 
 	// VALIDATE FUNCTION PARAMETERS
 	// validate required parameters, log error and return false if required parameters are missing
@@ -261,12 +422,12 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 		return false;
 	}
 
-	if (!rNotifyContactType) {
+	if (isEmptyOrNull(rNotifyContactType)) {
 		logDebug("ERROR: recordSettings.notifyContactType is missing in JSON configuration.");
 		return false;
 	}
 
-	if (!rUrl4ACA || rUrl4ACA == "") {
+	if (isEmptyOrNull(rUrl4ACA)) {
 		rUrl4ACA = acaURLDefault;
 	}
 
@@ -275,7 +436,7 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 			return false;
 		} */
 
-	if (!rFromEmail || rFromEmail == "") {
+	if (isEmptyOrNull(rFromEmail)) {
 		rFromEmail = agencyReplyEmailDefault;
 	}
 
@@ -283,7 +444,7 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 		logDebug("WARNING: The capIdObject Parameter is required for the function. " + functionTitle);
 		return false;
 	}
-	if (!rCreateFromParent || rCreateFromParent == "") {
+	if (isEmptyOrNull(rCreateFromParent)) {
 		rCreateFromParent = false;
 	}
 
@@ -295,11 +456,11 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 		}
 	}
 
-	if (!rReportingInfoStandards || rReportingInfoStandards == "") {
+	if (isEmptyOrNull(rReportingInfoStandards)) {
 		rReportingInfoStandards = "Reporting Information Standards";
 	}
 
-	if (rNotificationTemplate != "" && rNotifyContactType != "") {
+	if (!isEmptyOrNull(rNotificationTemplate) && !isEmptyOrNull(rNotifyContactType)) {
 		try {
 			//Get Contacts
 			emailAddrList = new Array();
@@ -311,20 +472,19 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 			}
 
 			//Check Necessary Contacts
-			if (rNotifyContactType.toUpperCase() != "ALL" && rNotifyContactType.toUpperCase() != "PRIMARY") {
-				conTypeArray = rNotifyContactType.split('|');
+			if (rNotifyContactType[0].toUpperCase() != "ALL" && rNotifyContactType[0].toUpperCase() != "PRIMARY") {
 				if (capContactArray) {
 					for (y in capContactArray) {
 						thisCon = capContactArray[y];
-						for (z in conTypeArray) {
-							if (thisCon.getPeople().getContactType().toUpperCase() == conTypeArray[z].toUpperCase()) {
+						for (z in rNotifyContactType) {
+							if (thisCon.getPeople().getContactType().toUpperCase() == rNotifyContactType[z].toUpperCase()) {
 								if (thisCon.getEmail())
 									contactObjArray.push(new contactObj(thisCon));
 							}
 						}
 					}
 				}
-			} else if (rNotifyContactType.toUpperCase() == "ALL") {
+			} else if (rNotifyContactType[0].toUpperCase() == "ALL") {
 				if (capContactArray) {
 					for (y in capContactArray) {
 						thisCon = capContactArray[y];
@@ -332,19 +492,18 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 							contactObjArray.push(new contactObj(thisCon));
 					}
 				}
-			} else if (rNotifyContactType.toUpperCase() == "PRIMARY") {
+			} else if (rNotifyContactType[0].toUpperCase() == "PRIMARY") {
 				if (capContactArray) {
 					for (y in capContactArray) {
 						thisCon = capContactArray[y];
 						if (thisCon.getPeople().getFlag() == "Y" && thisCon.getEmail())
 							contactObjArray.push(new contactObj(thisCon));
-						;
 					}
 				}
 			}
 
 			var eParams = null;
-			if (contactObjArray.length > 0 || rAdditionalEmailsTo) {
+			if (contactObjArray.length > 0 || !isEmptyOrNull(rAdditionalEmailsTo)) {
 
 				//Build parameters
 				if (!parameters) {
@@ -383,6 +542,11 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 				repParams.put("p1Value", itemCapIDString); // Used for Ad Hoc Reporting
 
 				getReporingInfoStandards4Notification(eParams, rReportingInfoStandards);
+
+				var deps = aa.people.getDepartmentList(aa.getAuditID()).getOutput();
+				if (!isEmptyOrNull(deps)) {
+					getDepartmentParams4Notification(eParams, deps[0].getDeptName());
+				}
 
 				addParameter(eParams, "$$altID$$", itemCapIDString);
 				addParameter(eParams, "$$recordName$$", itemCapName);
@@ -447,27 +611,60 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 						addParameter(eParams, "$$wfDate$$", wfDateMMDDYYYY);
 					if (wfComment)
 						addParameter(eParams, "$$wfComment$$", wfComment);
-					if (wfActionByUserID)
+					if (wfStaffUserID)
+					{
 						addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
+						addParameter(eParams,"$$StaffEmail$$",getRecordAssignedStaffEmail());
+						addParameter(eParams,"$$StaffPhone$$",getRecordAssignedStaffPhone());
+						addParameter(eParams,"$$StaffTitle$$",getRecordAssignedStaffTitle());
+						addParameter(eParams,"$$StaffFullName$$",getRecordAssignedStaffFullname());
+					}	
+					if (typeof wfActionByUserID != 'undefined' && wfActionByUserID)
+						addParameter(eParams, "$$wfActionByUserID$$", wfActionByUserID);
 					if (wfHours)
 						addParameter(eParams, "$$wfHours$$", wfHours);
 				}
 			}//contacs list or additional emails
+
+			//an email needs to be sent to a specified contact type when all fees have been paid.
+			if (String(rNotifyContactType) != "" && String(rBalanceAllowed) != "") {
+				var itemBalanceDue = 0;
+				var itemCapDetailObjResult = aa.cap.getCapDetail(itemCapId);
+				if (itemCapDetailObjResult.getSuccess()) {
+					itemCapDetail = itemCapDetailObjResult.getOutput();
+					itemBalanceDue = itemCapDetail.getBalance();
+				}
+				if (rBalanceAllowed == false && itemBalanceDue == 0) {
+					if (capContactArray) {
+						for (y in capContactArray) {
+							thisCon = capContactArray[y];
+							for (z in rNotifyContactType) {
+								if (thisCon.getPeople().getContactType().toUpperCase() == rNotifyContactType[z].toUpperCase()) {
+									if (thisCon.getEmail())
+										contactObjArray.push(new contactObj(thisCon));
+								}
+							}
+						}
+					}
+				}
+			}
 
 			//Send Email logic
 			for (iCont in contactObjArray) {
 				var eParamsContact = eParams;
 				var rptParamsContact = repParams;
 				var tContactObj = contactObjArray[iCont];
+				var capIDScriptModel = aa.cap.createCapIDScriptModel(itemCapId.getID1(), itemCapId.getID2(), itemCapId.getID3());
 				tContactObj.getEmailTemplateParams(eParamsContact, "Contact");
 				rptParamsContact.put("p2Value", tContactObj.type);
 
 				if (rNotificationReport == "") {
-					sendNotification(rFromEmail, tContactObj.people.getEmail(), "", rNotificationTemplate, eParamsContact, null, itemCapId);
+					sendNotificationLocal(rFromEmail, tContactObj.people.getEmail(), "", rNotificationTemplate, eParamsContact, null, itemCapId);
+
 				} else {
 					reportFiles = new Array();
 					repTypeArray = rNotificationReport.split('|');
-					var capIDScriptModel = aa.cap.createCapIDScriptModel(itemCapId.getID1(), itemCapId.getID2(), itemCapId.getID3());
+
 					for (xReport in repTypeArray) {
 						var report = repTypeArray[xReport];
 						runReportAndSendAsync(report, itemModule, itemCapId, rptParamsContact, rFromEmail, tContactObj.people.getEmail(), rNotificationTemplate, eParamsContact,
@@ -477,18 +674,17 @@ function sendContactEmails(itemCapId, recordSettings, parameters) {
 			} // contactObjArray loop
 
 			//code block repeated, we could not create empty CapContactScriptModel object and push() it to 'contactObjArray'
-			if (rAdditionalEmailsTo) {
-				var extraEmailsArray = rAdditionalEmailsTo.split("|");
-				for (e in extraEmailsArray) {
+			if (!isEmptyOrNull(rAdditionalEmailsTo)) {
+				for (e in rAdditionalEmailsTo) {
 					if (rNotificationReport == "") {
-						sendNotification(rFromEmail, extraEmailsArray[e].trim(), "", rNotificationTemplate, eParams, null);
+						sendNotificationLocal(rFromEmail, rAdditionalEmailsTo[e].trim(), "", rNotificationTemplate, eParams, null, itemCapId);
 					} else {
 						reportFiles = new Array();
 						repTypeArray = rNotificationReport.split('|');
 						var capIDScriptModel = aa.cap.createCapIDScriptModel(itemCapId.getID1(), itemCapId.getID2(), itemCapId.getID3());
 						for (xReport in repTypeArray) {
 							var report = repTypeArray[xReport];
-							runReportAndSendAsync(report, itemModule, itemCapId, repParams, rFromEmail, extraEmailsArray[e].trim(), rNotificationTemplate, eParams, "", 1);
+							runReportAndSendAsync(report, itemModule, itemCapId, repParams, rFromEmail, rAdditionalEmailsTo[e].trim(), rNotificationTemplate, eParams, "", 1);
 						}
 					}
 				}//for all extra emails
