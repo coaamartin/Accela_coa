@@ -243,7 +243,7 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "To validate record based on JSON rules.",
+          "description": "Script 180",
           "operators": {
             
           }
@@ -257,7 +257,7 @@
           ]
         },
         "action": {
-          "notificationTemplate": "TEST_FOR_SCRIPTS",
+          "notificationTemplate": "PW PI ISSUED # 180",
           "notificationReport": "",
           "notifyContactTypes": [
             "Applicant"
