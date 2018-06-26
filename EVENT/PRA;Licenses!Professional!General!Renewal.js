@@ -46,7 +46,7 @@ if (balanceDue == 0) {
 		else {
 			vNewExpDate.setMonth(vNewExpDate.getMonth()+1);
 		}		
-		vNewExpDate = new Date(vNewExpDate-1);
+		vNewExpDate = new Date(vNewExpDate - (24*60*60*1000));
 		
 		// Update license expiration date
 		logDebug("Updating Expiration Date to: " + vNewExpDate);
