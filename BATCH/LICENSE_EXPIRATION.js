@@ -195,6 +195,9 @@ function mainProcess() {
 	var newPermitStatus = getJobParam("newPermitStatus");
 	var reportName = getJobParam("reportName");
 	var reportType = getJobParam("reportType");
+	var filterExpression = getJobParam("filterExpression"); // JavaScript used to filter records.   Evaluating to false will skip the record, for example:   getAppSpecific("FieldName").toUpperCase() == "TEST"
+	var actionExpression = getJobParam("actionExpression"); // JavaScript used to perform custom action, for example:   addStdCondition(...)
+
 
 	//Non-parameter variables
 	if (!fromDate.length) { // no "from" date, assume today + number of days to look ahead
@@ -332,6 +335,13 @@ function mainProcess() {
 		logDebug("Renewal Status : " + b1Status + ", Expires on " + b1ExpDate);
 
 		// Actions start here:
+
+		// execute custom expression
+		
+		if (actionExpression.length > 0) {
+			logDebug("Executing action expression : " + actionExpression);
+			var result = eval(filterExpression);
+		}
 
 		// update expiration status
 		if (newExpStatus.length > 0) {
