@@ -299,10 +299,10 @@ function mainProcess() {
 			capDeactivated++;
 			continue;
 		} else {
-			var cap = capResult.getOutput();
+			cap = capResult.getOutput();
 		}
 
-		var capStatus = cap.getCapStatus();
+		capStatus = cap.getCapStatus();
 
 		appTypeResult = cap.getCapType(); //create CapTypeModel object
 		appTypeString = appTypeResult.toString();
@@ -340,7 +340,7 @@ function mainProcess() {
 		
 		if (actionExpression.length > 0) {
 			logDebug("Executing action expression : " + actionExpression);
-			var result = eval(filterExpression);
+			var result = eval(actionExpression);
 		}
 
 		// update expiration status
