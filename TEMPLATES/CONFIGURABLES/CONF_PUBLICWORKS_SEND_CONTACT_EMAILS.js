@@ -194,7 +194,7 @@
         },
         "action": {
           "notificationTemplate": "PW PI TESTING VERIFICATION - APPROVED # 168",
-          "notificationReport": "",
+          "notificationReport": "PW_Public_Improvement_Permit",
           "notifyContactTypes": [
             "ALL"
           ],
