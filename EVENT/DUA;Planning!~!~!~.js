@@ -7,7 +7,8 @@ if($iTrc(capStatus == "Waiting on Documents" && isTaskStatus("Review Consolidati
     var workflowTsk = "Submission Quality Check";
     var todayString = aa.util.formatDate(new Date(), "MM/dd/YYYY");
     var next2ndWorkDay = dateAdd(null, 2, true);
-    deactivateTask("Review Consolidation")
+    deactivateTask("Review Consolidation");
+	deactivateTask(workflowTsk);
     activateTask(workflowTsk);
     setTaskItemStartTime(workflowTsk, todayString);
     editTaskDueDate(workflowTsk, next2ndWorkDay);
