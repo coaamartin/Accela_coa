@@ -18,7 +18,7 @@ function pWrksScript289_subPlatNotification(){
         if(emlTo){
             var sendResult = sendNotification("noreply@aurora.gov",emlTo,"",emailTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("pWrksScript289_subPlatNotification: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-            else { logDebug("pWrksScript289_subPlatNotification: Sent email notification that work order is complete to "+emlTo)}
+            else { logDebug("pWrksScript289_subPlatNotification: Sent email notification that application has been recorded to "+emlTo)}
         }
         else
             logDebug("WARNING: There are no emails on file for the contacts.");

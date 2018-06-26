@@ -10,7 +10,7 @@ function getAllContactsEmails(){
 			conEmail = vConObj.people.getEmail();
 			if (conEmail && conEmail != null && conEmail != "") {
 				conEmail = conEmail.toUpperCase();
-				emailsString += conEmail + ",";
+				emailsString += conEmail + ";";
 			}
 		}
 	}
