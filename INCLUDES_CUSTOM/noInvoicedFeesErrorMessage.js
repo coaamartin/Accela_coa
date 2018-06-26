@@ -16,7 +16,8 @@ function noInvoicedFeesErrorMessage(workFlowTask, workflowStatusArray) {
 		}
 
 		var hasInvoiced = hasInvoicedFees(capId, "");
-		if (!hasInvoiced) {
+		//Script 164
+		if (!hasInvoiced && AInfo["Review Fee?"] == "Yes") {
 			cancel = true;
 			showMessage = true;
 			comment("Please add and invoice the correct fee item(s).");
