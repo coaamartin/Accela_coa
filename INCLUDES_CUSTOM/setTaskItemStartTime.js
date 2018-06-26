@@ -32,9 +32,6 @@ function setTaskItemStartTime(wfstr, dateStr){
             var processID = fTask.getProcessID();
             var completeFlag = fTask.getCompleteFlag();
 
-            fTask.setStatusDate(aa.date.parseDate(dateStr));
-            //fTask.setStatusDateString(dateStr);
-            //fTask.setStartTime(aa.util.parseDate(dateStr));
 			fTask.setStartTime(aa.util.now());
             /*if (useProcess) {
                 aa.workflow.adjustTask(itemCap, stepnumber, processID, "Y", "N", null, null)
