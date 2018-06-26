@@ -66,8 +66,8 @@ Notes:
 */
 
 
-
-updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submittal Number");
-
+// per customer direction during script testing, it was determined that this functionality should 
+// be completed on task 'Completeness Check' and status 'Complete'
+updateSubmittalNumber("Completeness Check", ["Complete"], "Submittal Number");
 
 
