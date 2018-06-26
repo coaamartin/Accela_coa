@@ -36,6 +36,14 @@ if (ifTracer(wfTask=="Fee Processing" &&
 	);
 } 
 
+//script 397
+logDebug("Script 397 Starting");
+if(ifTracer(wfTask == "Closure" && wfStatus == "Closed")) {
+	include("397_createPpbmpRecordBasedOnCustomListData");
+}
+
+
 createPPBMPRecord("Re Certification", [ "Accepted" ], "POND TYPES");
 
 script399_BondEmailAndAwaitingBondTaskStatus();
+	
