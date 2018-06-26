@@ -15,7 +15,12 @@ BATCH Parameters:
 
 Notes:
         - Email to Owner, CC Insurance Agency
-        - Email Variables: $$altID$$,$$recordAlias$$,$$recordStatus$$
+		- Email Variables: $$altID$$,$$recordAlias$$,$$recordStatus$$
+		
+		var emailTemplateName = 'PW LIC AGR RENEWAL #163', daysAhead = 60;
+
+		aa.env.setValue("EMAIL_TEMPLATE", 'PW LIC AGR RENEWAL #163');
+		aa.env.setValue("DAYS_AHEAD", 60);
 */
 
 function getScriptText(e) {
@@ -37,18 +42,17 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 
 var capId = null;
-try {var emailTemplateName = 'PW LIC AGR RENEWAL #163', daysAhead = 60;
-        //var emailTemplateName = aa.env.getValue("EMAIL_TEMPLATE");
+try {
+        var emailTemplateName = aa.env.getValue("EMAIL_TEMPLATE");
         if (!emailTemplateName || emailTemplateName == null || emailTemplateName == "") {
-               logDebug("**ERROR Parameter 'EMAIL_TEMPLATE' not defined");
-        } else {
+			emailTemplateName = 'PW LIC AGR RENEWAL #163';
+		} 
+		var daysAhead = aa.env.getValue("DAYS_AHEAD");
+		if (!daysAhead) {
+				daysAhead = 60;
+		}
+		sendCertificateofInsuranceExpirationNotification(emailTemplateName, daysAhead, "Certificate of Insurance Expiration Date");
 
-               //var daysAhead = aa.env.getValue("DAYS_AHEAD");
-               if (!daysAhead) {
-                       daysAhead = 60;
-               }
-               sendCertificateofInsuranceExpirationNotification(emailTemplateName, daysAhead, "Certificate of Insurance Expiration Date");
-        }
 } catch (ex) {
         logDebug("**ERROR batch failed, error: " + ex);
 }
