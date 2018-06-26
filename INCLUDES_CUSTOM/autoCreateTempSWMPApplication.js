@@ -9,6 +9,7 @@
  */
 function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiFieldName, appTypeStr, emailTemplate) {
 
+	aa.print('autoCreateTempSWMPApplication() started');
 	if (wfTask == wfTaskName) {
 
 		var statusMatch = false;
@@ -23,6 +24,7 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
 		if (!statusMatch) {
 			return false;
 		}
+		aa.print('autoCreateTempSWMPApplication() wf status & task match');
 
 		useAppSpecificGroupName = false;
 		var asiFieldValue = getAppSpecific(asiFieldName);
@@ -69,6 +71,7 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
 
 
 			//	var sent = aa.document.sendEmailByTemplateName("", projectOwner.getEmail(), "", emailTemplate, eParams, files);			
+			aa.print('autoCreateTempSWMPApplication() sending email to ' + projectOwner.getEmail());
 			var sent = sendNotification("noreply@auroragov.org", projectOwner.getEmail(), "", emailTemplate, eParams, files);
 			if (!sent) {
 					logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
