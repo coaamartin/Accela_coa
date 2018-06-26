@@ -36,7 +36,9 @@ Notes:
 
 
 
-updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submittal Number");
+// per customer direction during script testing, it was determined that this functionality should 
+// be completed on task 'Completeness Check' and status 'Complete'
+updateSubmittalNumber("Completeness Check", ["Complete"], "Submittal Number");
 
 if($iTrc(wfTask == "Plans Coordination" && wfStatus == "Resubmittal Requested", 'wfTask == "Plans Coordination" && wfStatus == "Resubmittal Requested"')){
 	//Script 125
@@ -44,6 +46,11 @@ if($iTrc(wfTask == "Plans Coordination" && wfStatus == "Resubmittal Requested", 
 }
 
 if($iTrc(wfTask == "Plans Coordination" && wfStatus == "SS Requested", 'wfTask == "Plans Coordination" && wfStatus == "SS Requested"')){
+	//Script 125
+	deactivateTask("Completeness Check");
+}
+
+if($iTrc(wfTask == "Completeness Check" && wfStatus == "Incomplete", 'wfTask == "Completeness Check" && wfStatus == "Incomplete"')){
 	//Script 125
 	deactivateTask("Completeness Check");
 }

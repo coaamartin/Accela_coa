@@ -67,8 +67,10 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
 				addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
 				addParameter(eParams, "$$wfHours$$", wfHours);
 
-				var sent = aa.document.sendEmailByTemplateName("", projectOwner.getEmail(), "", emailTemplate, eParams, files);
-				if (!sent.getSuccess()) {
+
+			//	var sent = aa.document.sendEmailByTemplateName("", projectOwner.getEmail(), "", emailTemplate, eParams, files);			
+			var sent = sendNotification("noreply@auroragov.org", projectOwner.getEmail(), "", emailTemplate, eParams, files);
+			if (!sent) {
 					logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 					return false;
 				}
