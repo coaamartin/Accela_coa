@@ -13,7 +13,8 @@
 //             
 //
 
-logDebug ("script22 () started")
+logDebug ("script22 () started");
+
 var docCategory = checkIfDocUploaded("Outside Agency");
 //logDebug("Doc Category " + docCategory);
 if( publicUser && (capStatus=="Waiting on Documents" || capStatus=="Upload Signature Set" ) && docCategory == "Outside Agency") 
