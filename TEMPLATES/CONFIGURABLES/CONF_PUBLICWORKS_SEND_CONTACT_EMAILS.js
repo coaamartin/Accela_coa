@@ -122,7 +122,7 @@
           ]
         },
         "action": {
-          "notificationTemplate": "TEST_FOR_SCRIPTS",
+          "notificationTemplate": "PW LICENSE AGREEMENT READY FOR SIG #334",
           "notificationReport": "",
           "notifyContactTypes": [
             "Applicant"
