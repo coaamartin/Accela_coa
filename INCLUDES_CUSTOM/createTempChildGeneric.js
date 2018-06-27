@@ -2,11 +2,11 @@ function createTempChildGeneric(grp, type, stype, cat, options) {
     //cvm not tested 6/21/2018 
     var settings = {
         parentCapID: capId,
-        appName : null,
-        capClass : "INCOMPLETE CAP",
-        accessByACA : false,
+        appName: null,
+        capClass: "INCOMPLETE CAP",
+        accessByACA: false,
         copyParcels: false,
-        copyAddresses: false,
+        copyAddresses: false,   
         copyOwner: false,
         copyContacts: false,
         customFields: []    // array of key/val objects { key: "Awesome_Guy", val: "Charlie" }
@@ -25,31 +25,32 @@ function createTempChildGeneric(grp, type, stype, cat, options) {
     var childCapId = aa.cap.createSimplePartialRecord(emptyCt, settings.appName, settings.capClass).getOutput();
     aa.cap.createAppHierarchy(capId, childCapId);
 
-    if(accessByACA) {
+    if(settings.accessByACA) {
         aa.cap.updateAccessByACA(childCapId, "Y");
     }
 
-    if(copyParcels) {
-        copyParcels(parentCapID, childCapId);
+    if(settings.copyParcels) {
+        copyParcels(settings.parentCapID, childCapId);
     }
 
-    if(copyAddresses) {
-        copyAddresses(parentCapID, childCapId);
+    if(settings.copyAddresses) {
+        copyAddresses(settings.parentCapID, childCapId);
     }
 
-    if(copyOwner) {
-        copyOwner(parentCapID, childCapId);
+    if(settings.copyOwner) {
+        copyOwner(settings.parentCapID, childCapId);
     }
 
-    if(copyContacts) {
-        copyContacts(parentCapID, childCapId);
+    if(settings.copyContacts) {
+        copyContacts(settings.parentCapID, childCapId);
     }
 
-    for(var idxCF in options.customFields) {
-        var objCF = options.customFields[idxCF];
+    for(var idxCF in settings.customFields) {
+        var objCF = settings.customFields[idxCF];
         editAppSpecific(objCF.key, objCF.val, childCapId);
     }
 
     return childCapId;  
 
  }
+ 
