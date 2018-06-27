@@ -1,3 +1,3 @@
-//PRA:PublicWorks/Civil Plan/*/*
+//PRA:PublicWorks/Civil Plan/
 
 script124_ActivateQualityCheckWhenPaidandBalIsZero();
