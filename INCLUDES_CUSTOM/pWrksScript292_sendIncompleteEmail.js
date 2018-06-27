@@ -2,7 +2,7 @@
 function pWrksScript292_sendIncompleteEmail(){
     logDebug("pWrksScript292_sendIncompleteEmail() started");
     try{
-        var emailTemplate = "TEST_FOR_SCRIPTS";
+        var emailTemplate = "PW EA INCOMPLETE COMPLETENESS CHECK # 292";
         var applicantEmail = getContactEmailAddress("Applicant", capId);
         var permitFile = "";
         
@@ -17,6 +17,7 @@ function pWrksScript292_sendIncompleteEmail(){
             
             addParameter(emailParams, "$$altID$$", capIDString);
             addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
+			addParameter(emailParams, "$$wfComment$$", wfComment == null ? "" : wfComment);
             
             var sendResult = sendNotification("noreply@aurora.gov",emlTo,"",emailTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("pWrksScript292_sendIncompleteEmail: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
