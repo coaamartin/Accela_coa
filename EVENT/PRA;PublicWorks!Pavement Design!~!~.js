@@ -1,3 +1,2 @@
-//PRA:PublicWorks/Pavement Design/NA/NA​
-
+//PRA:PublicWorks/Pavement Design/NA/NA
 script124_ActivateQualityCheckWhenPaidandBalIsZero();
