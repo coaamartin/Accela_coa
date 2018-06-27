@@ -1,9 +1,10 @@
-function createTempChildGeneric(grp, type, stype, cat, options) {  
+function createChildGeneric(grp, type, stype, cat, options) {  
     //cvm not tested 6/21/2018 
     var settings = {
         parentCapID: capId,
         appName: null,
         capClass: "INCOMPLETE CAP",
+        createAsTempRecord: false,
         accessByACA: false,
         copyParcels: false,
         copyAddresses: false,   
@@ -14,15 +15,21 @@ function createTempChildGeneric(grp, type, stype, cat, options) {
     //optional params - overriding default settings
     for (var attr in options) { settings[attr] = options[attr]; }
 
-    var emptyCm = aa.cap.getCapModel().getOutput();
-    var emptyCt = emptyCm.getCapType();
-    emptyCt.setGroup(grp); 
-    emptyCt.setType(type); 
-    emptyCt.setSubType(stype);
-    emptyCt.setCategory(cat);
-    emptyCm.setCapType(emptyCt);
-
-    var childCapId = aa.cap.createSimplePartialRecord(emptyCt, settings.appName, settings.capClass).getOutput();
+    var childCapId;
+    
+    if(settings.createAsTempRecord) {
+        var emptyCm = aa.cap.getCapModel().getOutput();
+        var emptyCt = emptyCm.getCapType();
+        emptyCt.setGroup(grp); 
+        emptyCt.setType(type); 
+        emptyCt.setSubType(stype);
+        emptyCt.setCategory(cat);
+        emptyCm.setCapType(emptyCt);
+        childCapId = aa.cap.createSimplePartialRecord(emptyCt, settings.appName, settings.capClass).getOutput();
+    } else {
+        childCapId = createChild(grp, type, stype, cat, settings.appName); 
+    }
+    
     aa.cap.createAppHierarchy(capId, childCapId);
 
     if(settings.accessByACA) {

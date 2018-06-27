@@ -10,11 +10,12 @@ function script219_createChildUtilityPermitRecords() {
             emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
-            createTempChildGeneric('','','','', {
-                appName = parentAppName + " – Water Utility Main Permit",
-                accessByACA = true,
+            createChildGeneric('','','','', {
+                appName: parentAppName + " – Water Utility Main Permit",
+                accessByACA: true,
                 copyParcels: true,
                 copyAddresses: true,
+                createAsTempRecord: false,
                 copyOwner: true,
                 copyContacts: true,
                 customFields: [
@@ -39,11 +40,12 @@ function script219_createChildUtilityPermitRecords() {
             emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
-            createTempChildGeneric('','','','', {
-                appName = parentAppName + " – Sanitary Sewer Utility Permit",
-                accessByACA = true,
+            createChildGeneric('','','','', {
+                appName: parentAppName + " – Sanitary Sewer Utility Permit",
+                accessByACA: true,
                 copyParcels: true,
                 copyAddresses: true,
+                createAsTempRecord: false,
                 copyOwner: true,
                 copyContacts: true,
                 customFields: [
@@ -68,11 +70,12 @@ function script219_createChildUtilityPermitRecords() {
             emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
-            createTempChildGeneric('','','','', {
-                appName = parentAppName + " – Public Storm Sewer Utility Permit",
-                accessByACA = true,
+            createChildGeneric('','','','', {
+                appName: parentAppName + " – Public Storm Sewer Utility Permit",
+                accessByACA: true,
                 copyParcels: true,
                 copyAddresses: true,
+                createAsTempRecord: false,
                 copyOwner: true,
                 copyContacts: true,
                 customFields: [
@@ -97,11 +100,12 @@ function script219_createChildUtilityPermitRecords() {
             emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
-            createTempChildGeneric('','','','', {
-                appName = parentAppName + " – Private Storm Sewer Utility Permit",
-                accessByACA = true,
+            createChildGeneric('','','','', {
+                appName: parentAppName + " – Private Storm Sewer Utility Permit",
+                accessByACA: true,
                 copyParcels: true,
                 copyAddresses: true,
+                createAsTempRecord: false,
                 copyOwner: true,
                 copyContacts: true,
                 customFields: [
@@ -127,10 +131,11 @@ function script219_createChildUtilityPermitRecords() {
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;
 
             createTempChildGeneric('','','','', {
-                appName = parentAppName + " – Private Fire Line Utility Permit",
-                accessByACA = true,
+                appName: parentAppName + " – Private Fire Line Utility Permit",
+                accessByACA: true,
                 copyParcels: true,
                 copyAddresses: true,
+                createAsTempRecord: false,
                 copyOwner: true,
                 copyContacts: true,
                 customFields: [
