@@ -256,7 +256,7 @@
         },
         "action": {
           "notificationTemplate": "PW PI ISSUED # 180",
-          "notificationReport": "PW_Public_Improvement_Permit",
+          "notificationReport": ["PW_Public_Improvement_Permit"],
           "notifyContactTypes": [
             "Applicant"
           ],
