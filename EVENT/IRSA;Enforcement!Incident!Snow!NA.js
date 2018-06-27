@@ -27,5 +27,5 @@ function getSameInspector(){
 //script 357
 logDebug("Script 357 Starting");
 if(ifTracer(inspResult == "Snow Warning Posted" || inspResult == "Snow Warning Served", "inspResult == Snow Warning Served or Posted")) {
-	addAddressCondition(null,'Potential Hazards',inspResult,'Added per script 357');
+	addrAddCondition(null,'Potential Hazards',inspResult,'Added per script 357','','N');
 }
