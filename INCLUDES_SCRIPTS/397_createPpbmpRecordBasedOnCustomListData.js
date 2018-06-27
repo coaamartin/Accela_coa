@@ -8,7 +8,7 @@ function script397_createPpbmpRecordBasedOnCustomListData() {
                  var row = tempASIT[ea];
 
                     createTempChildGeneric('Water', 'Water', 'PPBMP', 'NA', {
-                        appName = row['Pond Type'] + " - " + row['Pond Number'],
+                        appName: row['Pond Type'] + " - " + row['Pond Number'],
                         accessByACA: true,
                         copyParcels: true,
                         copyAddresses: true,
