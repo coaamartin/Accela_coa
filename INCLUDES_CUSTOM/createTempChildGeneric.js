@@ -9,7 +9,7 @@ function createTempChildGeneric(grp, type, stype, cat, options) {
         copyAddresses: false,
         copyOwner: false,
         copyContacts: false,
-        customFields: []    // array of key/val objects { key: "Awesome Guy", val: "waterMainUtilityPermit" }
+        customFields: []    // array of key/val objects { key: "Awesome_Guy", val: "Charlie" }
     };
     //optional params - overriding default settings
     for (var attr in options) { settings[attr] = options[attr]; }
