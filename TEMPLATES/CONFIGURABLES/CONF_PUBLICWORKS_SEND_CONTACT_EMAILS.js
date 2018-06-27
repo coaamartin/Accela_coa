@@ -115,13 +115,11 @@
         },
         "criteria": {
           "task": [
-            "Plans Coordination",
-            "Application Submittal"
+            "Plans Coordination"
 
           ],
           "status": [
-            "Ready for Signatures",
-            "None"
+            "Ready for Signatures"
           ]
         },
         "action": {
