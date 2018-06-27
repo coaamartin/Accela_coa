@@ -16,11 +16,8 @@ function pWrksScript292_sendIncompleteEmail(){
             var emlTo = applicantEmail;
             
             addParameter(emailParams, "$$altID$$", capIDString);
-            addParameter(emailParams, "$$recordName$$", capName);
-            addParameter(emailParams, "$$receptionNumber$$", recepNumber);
             addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
             
-                
             var sendResult = sendNotification("noreply@aurora.gov",emlTo,"",emailTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("pWrksScript292_sendIncompleteEmail: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
             else { logDebug("pWrksScript292_sendIncompleteEmail: Sent email notification that work order is complete to "+emlTo)}
