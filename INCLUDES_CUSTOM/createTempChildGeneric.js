@@ -1,5 +1,4 @@
-function createChildGeneric(grp, type, stype, cat, options) {  
-    //cvm not tested 6/21/2018 
+function createChildGeneric(grp, type, stype, cat, options) { 
     var settings = {
         parentCapID: capId,
         appName: null,
