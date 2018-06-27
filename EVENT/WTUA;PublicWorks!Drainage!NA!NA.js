@@ -54,3 +54,13 @@ if($iTrc(wfTask == "Completeness Check" && wfStatus == "Incomplete", 'wfTask == 
 	//Script 125
 	deactivateTask("Completeness Check");
 }
+
+if($iTrc(wfTask == "Application Submittal" && wfStatus == "Complete", 'wfTask == "Application Submittal" && wfStatus == "Complete"')){
+	//Script 125
+	deactivateTask("Completeness Check");
+}
+
+if($iTrc(wfTask == "Application Submittal" && wfStatus == "Accepted", 'wfTask == "Application Submittal" && wfStatus == "Accepted"')){
+	//Script 125
+	deactivateTask("Completeness Check");
+}
