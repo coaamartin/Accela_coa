@@ -101,7 +101,7 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "To run automated script based on JSON rules",
+          "description": "Script 172. If Manager Review is resulted after Traffic Investigation",
           "operators": {}
         },
         "criteria": {
@@ -112,7 +112,60 @@
             "Approved"
           ],
           "workFlow": {
-            "Traffic Investigation": "No Change Warranted"
+            "Traffic Investigation": ["No Change Warranted"]
+          },
+          "isCreatedByACA": "",
+          "balanceAllowed": "",
+          "recordStatus": []
+        },
+        "action": {
+          "prescript": "",
+          "activateTask": [],
+          "daysOut": "",
+          "deactivateTask": [
+            "Generate Work Order"
+          ],
+          "deleteTask": [],
+          "updateTask": [
+            {
+              "task": "Application Submittal",
+              "status": "Complete"
+            }
+          ],
+          "invoiceFees": "",
+          "createChild": "",
+          "createParent": "",
+          "addCondition": "",
+          "removeCondition": "",
+          "addComment": "",
+          "newStatus": "No Change Warranted",
+          "assessFees": [
+            {
+              "feeSchedule": "",
+              "feeCode": " ",
+              "feeQuantity": 0,
+              "feeInvoice": "",
+              "feePeriod": ""
+            }
+          ]
+        }
+      },
+      {
+        "preScript": "",
+        "postScript": "deactivateAllActiveTsks",
+        "metadata": {
+          "description": "Script 172. If Traffic Investigation is resulted after Manager Review",
+          "operators": {}
+        },
+        "criteria": {
+          "task": [
+            "Traffic Investigation"
+          ],
+          "status": [
+            "No Change Warranted"
+          ],
+          "workFlow": {
+            "Manager Review": ["Approved"]
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",
