@@ -6,7 +6,6 @@ if(inspType == "Notice of Violation Inspection"){
     processNotOfViolInsp("Notice of Violation Inspection", "First Notice", true, "Notice of Violation Inspection", true, "Notice of Violation", "First Notice");
     processNotOfViolInsp("Notice of Violation Inspection", "Second Notice", true, "Notice of Violation Inspection", true, "Notice of Violation", "Second Notice");
     processNotOfViolInsp("Notice of Violation Inspection", "Third Notice", true, "Notice of Violation Inspection", true, "Notice of Violation", "Third Notice");
-    processNotOfViolInsp("Notice of Violation Inspection", "Issue Summons", false, null, true, "Notice of Violation", "Issue Summons");
     
     if(inspResult == "Compliance"){
         var wfTsk2Update = "Notice of Violation", wfSt2Update = "Compliance";
@@ -21,5 +20,10 @@ if(inspType == "Notice of Violation Inspection"){
         logDebug("Record is Closed.  Closing all active tasks for process code: " + wfProcess);
         if(wfProcess) deactivateActiveTasks(wfProcess);
     }
+	
+	if(inspResult == "Issue Summons"){
+		closeTask("Notice of Violation", "Issue Summons", "via Script 332", "via Script 332");
+		activateTask("Pre Hearing Inspection");
+	}
     //Script 332 end
 }
