@@ -405,6 +405,63 @@
           },
           "criteria": {
             "task": [
+              "Inspection Phase"
+            ],
+            "status": [
+              "Expired"
+            ],
+            "isCreatedByACA": "",
+            "balanceAllowed": "",
+            "recordStatus": [
+              
+            ]
+          },
+          "action": {
+            "activateTask": [
+              
+            ],
+            "daysOut": "",
+            "deactivateTask": [
+              "Certificate of Occupancy"
+            ],
+            "deleteTask": [
+              
+            ],
+            "updateTask": [
+              
+            ],
+            "invoiceFees": "",
+            "createChild": "",
+            "createParent": "",
+            "addCondition": "",
+            "addConditionSeverity": "",
+            "conditionType": "",
+            "removeCondition": "",
+            "addComment": "",
+            "newStatus": "Expired",
+            "assignToUserID": "",
+            "assessFees": [
+              {
+                "feeSchedule": "",
+                "feeCode": "",
+                "feeQuantity": "",
+                "feeInvoice": "",
+                "feePeriod": ""
+              }
+            ]
+          }
+        },
+        {
+          "preScript": "",
+          "postScript": "",
+          "metadata": {
+            "description": "To run automated script based on JSON rules",
+            "operators": {
+              
+            }
+          },
+          "criteria": {
+            "task": [
               "Water Meter"
             ],
             "status": [
