@@ -11,7 +11,7 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, insp2Create, update
     logDebug("noticeOfViolationInspection() started");
     try{
         var $iTrc = ifTracer;
-        var newInspReqComments = getInspReqCommsByInspID(inspId) + " " + inspComment;
+        var newInspReqComments = getInspReqCommsByInspID(inspId);
         var inspector = getInspectorByInspID(inspId);
         var inspDaysAhead = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(dateAdd(inspResultDate, 7, true)));
         if($iTrc(inspType == iType && inspResult == iResult, inspType + ' == ' + iType + ' && ' + inspResult + ' == ' + iResult)){

@@ -8,14 +8,13 @@ if(inspType == "Notice of Violation Inspection"){
     processNotOfViolInsp("Notice of Violation Inspection", "Third Notice", true, "Notice of Violation Inspection", true, "Notice of Violation", "Third Notice");
     processNotOfViolInsp("Notice of Violation Inspection", "Issue Summons", false, null, true, "Notice of Violation", "Issue Summons");
     
-    if(inspResult == "Issue Summons") createPreCourtInvestigationInsp();
     if(inspResult == "Compliance"){
         var wfTsk2Update = "Notice of Violation", wfSt2Update = "Compliance";
         if(isTaskActive(wfTsk2Update))
-            closeTask(wfTsk2Update, wfSt2Update, "vis Script", "vis Script");
+            closeTask(wfTsk2Update, wfSt2Update, "via Script", "via Script");
         else{
             activateTask(wfTsk2Update);
-            closeTask(wfTsk2Update, wfSt2Update, "vis Script", "vis Script");
+            closeTask(wfTsk2Update, wfSt2Update, "via Script", "via Script");
         }
         updateAppStatus("Closed", "Updated via IRSA");
         var wfProcess = getWfProcessCodeByCapId(capId);

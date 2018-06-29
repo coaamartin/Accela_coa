@@ -1,26 +1,13 @@
- function Script332_scheduleInspectionTSI()  {
+function Script332_scheduleInspectionTSI()  {
+    var today = aa.util.parseDate(dateAdd(null, 0));
+    var tsiArray = new Array();
             
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0!
-  var yyyy = today.getFullYear();
-   if(dd<10) {
-    dd = '0'+dd
-    } 
-   if(mm<10) {
-    mm = '0'+mm
-   } 
-today = mm + '/' + dd + '/' + yyyy;
-  
-var tsiArray = new Array();
-            //var today = new Date();
-			
-            loadTaskSpecific(tsiArray);
-            var pPreHearingDate = tsiArray["Pre hearing inspection date"];
-            var inspectorID = getInspectorID();
-			var noOfDays = dateDiff(today, pPreHearingDate);
-                        
-            if (pPreHearingDate != null ) {
-                scheduleInspection("Pre Court Investigation", noOfDays, inspectorID);
-            }
- }        
+    loadTaskSpecific(tsiArray);
+    var pPreHearingDate = tsiArray["Pre hearing inspection date"];
+	var preHearingDateMinus1 = getPrevWorkingDays(new Date(pPreHearingDate), 1);
+    var inspectorID = getInspectorID();
+    var noOfDays = days_between(today, preHearingDateMinus1);
+                
+    if (pPreHearingDate != null )
+        scheduleInspection("Pre Court Investigation", noOfDays, inspectorID);
+}
