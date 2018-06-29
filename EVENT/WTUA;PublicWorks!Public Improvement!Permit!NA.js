@@ -1,3 +1,8 @@
+if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
+	logDebug('wfTask == "Permit Issuance" && wfStatus == "Issued"');
+	pWrksScript180_emailPermit();
+}
+
 //COA Script #22 added by JMAIN
 include("22_publicworksPIPermitFinalAcceptanceEmail");
 
