@@ -1,8 +1,3 @@
-if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
-	logDebug('wfTask == "Permit Issuance" && wfStatus == "Issued"');
-	pWrksScript180_emailPermit();
-}
-
 //COA Script #22 added by JMAIN
 include("22_publicworksPIPermitFinalAcceptanceEmail");
 
@@ -119,11 +114,11 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 		{
 			if (peak == "Yes")
 			{
-				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
 			}
 			else if (peak == "No")
 			{
-				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 			}
 		}
 		if (sidewalkLength > 0)
@@ -173,11 +168,11 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 		{
 			if (peak == "Yes")
 			{
-				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
 			}
 			else if (peak == "No")
 			{
-				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 			}
 		}
 		if (sidewalkLength > 0)
@@ -232,11 +227,11 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 		{
 			if (peak == "Yes")
 			{
-				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
 			}
 			else if (peak == "No")
 			{
-				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 			}
 		}
 		if (sidewalkLength > 0)
@@ -271,11 +266,11 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 			{
 				if (peak == "Yes")
 				{
-					strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+					strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
 				}
 				else if (peak == "No")
 				{
-					strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+					strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 				}
 			}
 		}
