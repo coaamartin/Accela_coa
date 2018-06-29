@@ -341,7 +341,7 @@
           "preScript": "",
           "postScript": "",
           "metadata": {
-            "description": "To run automated script based on JSON rules",
+            "description": "Script 51",
             "operators": {
               
             }
@@ -398,7 +398,7 @@
           "preScript": "",
           "postScript": "",
           "metadata": {
-            "description": "To run automated script based on JSON rules",
+            "description": "Script 51",
             "operators": {
               
             }
