@@ -1,5 +1,5 @@
 function loadUserProperties(usrArr, usrId){
-	var usrObjResult = aa.person.getUser(currentUserID);
+	var usrObjResult = aa.person.getUser(usrId);
 	
 	if(!usrObjResult.getSuccess()) return false;
 	
