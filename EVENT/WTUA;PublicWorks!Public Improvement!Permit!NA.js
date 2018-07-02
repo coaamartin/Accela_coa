@@ -114,11 +114,11 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 		{
 			if (peak == "Yes")
 			{
-				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
 			}
 			else if (peak == "No")
 			{
-				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 			}
 		}
 		if (sidewalkLength > 0)
@@ -168,11 +168,11 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 		{
 			if (peak == "Yes")
 			{
-				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
 			}
 			else if (peak == "No")
 			{
-				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 			}
 		}
 		if (sidewalkLength > 0)
@@ -227,11 +227,11 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 		{
 			if (peak == "Yes")
 			{
-				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+				strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
 			}
 			else if (peak == "No")
 			{
-				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+				strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 			}
 		}
 		if (sidewalkLength > 0)
@@ -266,11 +266,11 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 			{
 				if (peak == "Yes")
 				{
-					strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * durationOfClosureInDays));
+					strOccFeeAmount = strOccFeeAmount + (2 * (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays));
 				}
 				else if (peak == "No")
 				{
-					strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * durationOfClosureInDays);
+					strOccFeeAmount = strOccFeeAmount + (154 * numberOfLanesClosed * closureLength * durationOfClosureInDays);
 				}
 			}
 		}
