@@ -1,57 +1,59 @@
 function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName) {
 
-	var calId = aa.env.getValue("CalendarID");
-	var meetingId = aa.env.getValue("MeetingID");
+    var calId = aa.env.getValue("CalendarID");
+    var meetingId = aa.env.getValue("MeetingID");
 
-	if (calId == null || calId == "" || meetingId == null || meetingId == "") {
-		logDebug("**WARN no calendarId or MeetingId in session!, capId=" + capId);
-		return false;
-	}
+    if (calId == null || calId == "" || meetingId == null || meetingId == "") {
+        logDebug("**WARN no calendarId or MeetingId in session!, capId=" + capId);
+        return false;
+    }
 
-	var meeting = aa.meeting.getMeetingByMeetingID(calId, meetingId)
-	if (!meeting.getSuccess()) {
-		logDebug("**WARN getMeetingByMeetingID failed capId=" + capId + "calendarId/MeetingId: " + calId + "/" + meetingId);
-		return false;
-	}
-	meeting = meeting.getOutput();
-	var startDate = meeting.getStartDate();
-	if (!String(meeting.getMeetingType()).equalsIgnoreCase(meetingType)) {
-		return false;
-	}
-	var meetingDate = aa.util.formatDate(startDate, "MM/dd/YYYY");
+    var meeting = aa.meeting.getMeetingByMeetingID(calId, meetingId)
+    if (!meeting.getSuccess()) {
+        logDebug("**WARN getMeetingByMeetingID failed capId=" + capId + "calendarId/MeetingId: " + calId + "/" + meetingId);
+        return false;
+    }
+    meeting = meeting.getOutput();
+    var startDate = meeting.getStartDate();
+    if (!String(meeting.getMeetingType()).equalsIgnoreCase(meetingType)) {
+        return false;
+    }
+    var meetingDate = aa.util.formatDate(startDate, "MM/dd/YYYY");
 
-	var task = aa.workflow.getTask(capId, workFlowTask).getOutput();
-	task.getTaskItem().setStatusDate(convertDate(meetingDate));
-	task.getTaskItem().setDueDate(convertDate(meetingDate));
-	var edit = aa.workflow.editTask(task);
+    var task = aa.workflow.getTask(capId, workFlowTask).getOutput();
+    task.getTaskItem().setStatusDate(convertDate(meetingDate));
+    task.getTaskItem().setDueDate(convertDate(meetingDate));
+    var edit = aa.workflow.editTask(task);
 
-	var applicant = getContactByType("Applicant", capId);
-	if (!applicant || !applicant.getEmail()) {
-		logDebug("**WARN no applicant found on or no email capId=" + capId);
-		return false;
-	}
-	var cap = aa.cap.getCap(capId).getOutput();
-	cap = cap.getCapModel();
-	var toEmail = applicant.getEmail();
-	var applicantName = applicant.getContactName();
-	
-	var respUserProp = [];
-	
-	var currUserProp = [];
-	loadUserProperties(currUserProp, CurrentUserID);
-	var eParams = aa.util.newHashtable();
-	addParameter(eParams, "$$ContactFullName$$", applicantName);
-	addParameter(eParams, "$$fileDate$$", fileDate);
-	addParameter(eParams, "$$MeetingDate$$", meetingDate);
-	addParameter(eParams, "$$MeetingResponceDate$$", dateAdd(meetingDate, 7, true));
-	
-	addParameter(eParams, "$$StaffPhone$$", currUserProp["PhoneNumer"]);
-	addParameter(eParams, "$$StaffEmail$$", currUserProp["Email"]);
-	
-
-	var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
-	if (!sent.getSuccess()) {
-		logDebug("**WARN send email failed, Error: " + sent.getErrorMessage());
-	}
-	return true;
+    var applicant = getContactByType("Applicant", capId);
+    if (!applicant || !applicant.getEmail()) {
+        logDebug("**WARN no applicant found on or no email capId=" + capId);
+        return false;
+    }
+    var cap = aa.cap.getCap(capId).getOutput();
+    cap = cap.getCapModel();
+    var toEmail = applicant.getEmail();
+    var applicantName = applicant.getContactName();
+    
+    var respUserProp = [];
+    
+    var mgrProp = [];
+    var caseMgr = getInspectorID();
+    loadUserProperties(mgrProp, caseMgr);
+    var eParams = aa.util.newHashtable();
+    addParameter(eParams, "$$ContactFullName$$", applicantName);
+    addParameter(eParams, "$$fileDate$$", fileDate);
+    addParameter(eParams, "$$MeetingDate$$", meetingDate);
+    addParameter(eParams, "$$MeetingResponceDate$$", dateAdd(meetingDate, 7, true));
+    
+    addParameter(eParams, "$$StaffPhone$$", mgrProp["PhoneNumer"]);
+    addParameter(eParams, "$$StaffEmail$$", mgrProp["Email"]);
+    addParameter(eParams, "$$Meeting.RespName$$", mgrProp["FullName"]);
+    addParameter(eParams, "$$Meeting.RespDept$$", mgrProp["Department"]);
+    
+    var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
+    if (!sent.getSuccess()) {
+        logDebug("**WARN send email failed, Error: " + sent.getErrorMessage());
+    }
+    return true;
 }
