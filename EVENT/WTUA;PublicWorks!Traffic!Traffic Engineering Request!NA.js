@@ -1,19 +1,25 @@
 //script 250
 logDebug('Script 250 Starting')
 if (ifTracer((wfTask=="Initial Review" || wfTask=="Initial Supervisor Review") && wfStatus=="Assigned",'wfTask & wfStatus match - calling 250_updateAssignedUserForTrafficEngRequest()')) {
-	include("250_updateAssignedUserForTrafficEngRequest");
+    include("250_updateAssignedUserForTrafficEngRequest");
 }
+
+if(ifTracer(wfTask == "Initial Review" && wfStatus == "Assigned to Supervisor", 'wfTask == "Initial Review" && wfStatus == "Assigned to Supervisor"')){
+    assignTaskToTSIUser("Initial Supervisor Review", "Assigned To");
+}
+
+logDebug('Script 250 Ending')
 
 //script 269
 logDebug('Script 269 Starting')
 if (ifTracer(wfTask=="Manager Review" && wfStatus=="Approved",'wfTask & wfStatus match')) {
-	include("269_GenerateWorkOrderTrafficInvestigation");
+    include("269_GenerateWorkOrderTrafficInvestigation");
 }
 
 //script 171
 logDebug('Script 171 Starting')
 if (ifTracer(wfTask=="Manager Review" && wfStatus=="Request Complete",'wfTask & wfStatus match')) {
-	include("171_UpdateWorkFlowAdCreateChildRecs");
+    include("171_UpdateWorkFlowAdCreateChildRecs");
 }
 
 script265_ManagerReviewToSupervisor();
@@ -32,12 +38,12 @@ Author: Yazan Barghouth
 Functional Area : Records
 
 Sample Call:
-	generateWorkOrderEmail('Manager Review', [ 'Approved' ], 'Work Order Number', 'MESSAGE_NOTICE_PUBLIC WORKS', 'WorkFlowTasksOverdue', rptParams, 'ccarnihan@aurora.gov');
+    generateWorkOrderEmail('Manager Review', [ 'Approved' ], 'Work Order Number', 'MESSAGE_NOTICE_PUBLIC WORKS', 'WorkFlowTasksOverdue', rptParams, 'ccarnihan@aurora.gov');
 
 Notes:
-	- The auto incrementing number, Mask/Sequence is used, the script needs a seqType, seqName, maskName
-	which can be obtained from Config UI when seq/mask is created
-	- record of type in task details was not found, we used another record for test
+    - The auto incrementing number, Mask/Sequence is used, the script needs a seqType, seqName, maskName
+    which can be obtained from Config UI when seq/mask is created
+    - record of type in task details was not found, we used another record for test
 */
 
 //Based on report fill report parameters here
