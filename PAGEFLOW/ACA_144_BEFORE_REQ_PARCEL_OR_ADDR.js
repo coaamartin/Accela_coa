@@ -96,6 +96,18 @@ if (parcel) {
 	}
 if (address) {
 	streetName = address.getStreetName();
+	
+	showDebug = true;
+	for (var i in address){
+        if (typeof(address[i]) != "function"){
+            debug += "==> " + i + " = " + address[i];
+        }
+    }
+	for (var i in address){
+        if (typeof(address[i]) == "function"){
+            debug += "==> " + i + " = " + address[i];
+        }
+    }
 	logDebug('streetName = '+streetName);
 }
 
