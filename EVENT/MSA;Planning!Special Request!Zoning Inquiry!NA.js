@@ -12,4 +12,4 @@ Notes:
 
 */
 
-editTaskDatesAndSendEmail("Zoning Inquiry Meeting", "ZONING INQUIRY", "PLN ZONING INQUIRY MEETING #32");
+editTaskDatesAndSendEmail("Zoning Inquiry Meeting", "TUESDAY ZONING INQUIRY", "PLN ZONING INQUIRY MEETING #32");
