@@ -1,3 +1,4 @@
+//Script 32
 function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName) {
 
     var calId = aa.env.getValue("CalendarID");
@@ -51,9 +52,10 @@ function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName)
     addParameter(eParams, "$$Meeting.RespName$$", mgrProp["FullName"]);
     addParameter(eParams, "$$Meeting.RespDept$$", mgrProp["Department"]);
     
-    var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
-    if (!sent.getSuccess()) {
-        logDebug("**WARN send email failed, Error: " + sent.getErrorMessage());
-    }
+	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+	var reportFile = [];
+	var sendResult = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,reportFile,capID4Email);
+	if (!sendResult) { logDebug("editTaskDatesAndSendEmail: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	else { logDebug("editTaskDatesAndSendEmail: Sent email notification meeting scheduled "+toEmail)}
     return true;
 }
