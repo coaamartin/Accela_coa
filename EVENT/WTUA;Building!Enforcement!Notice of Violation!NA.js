@@ -1,6 +1,6 @@
 var $iTrc = ifTracer;
 //Script 332
-if(wfTask == "Pre Hearing Inspection" && wfStatus == "Non Compliance"){
+if($iTrc(wfTask == "Pre Hearing Inspection" && wfStatus == "Hearing Scheduled", 'wfTask == "Pre Hearing Inspection" && wfStatus == "Hearing Scheduled"')){
 	Script332_scheduleInspectionTSI();
 }
 

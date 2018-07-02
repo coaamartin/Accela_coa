@@ -11,5 +11,4 @@ function script250_updateAssignedUserForTrafficEngRequest(){
 		assignTask("Traffic Investigation",userObj.getUserID());
 		updateTaskDepartment("Traffic Investigation",userObj.getDeptOfUser());		
 	}
-	 	
 }	

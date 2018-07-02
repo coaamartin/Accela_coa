@@ -96,13 +96,14 @@ if (parcel) {
 	}
 if (address) {
 	streetName = address.getStreetName();
+	crossStreet = address.getCrossStreetNameStart();
 	logDebug('streetName = '+streetName);
 }
 
-if ((!parcelNum || parcelNum == "") && (!streetName || streetName =="")) {
+if ((!parcelNum || parcelNum == "") && (!streetName || streetName =="") && (!crossStreet || crossStreet =="")) {
 	cancel = true;
 	showMessage = true;
-	comment("Address or Parcel is required");
+	comment("You must supply an address, intersection or a parcel before proceeding");
 }
 
 

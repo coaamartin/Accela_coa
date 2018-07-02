@@ -1,3 +1,10 @@
+//script 432
+logDebug("Script 423 Starting");
+if (ifTracer(wfTask == "Invoicing" && wfStatus == "Invoiced", "wfTask == Invoicing && wfStatus == Invoiced")) {
+    include("423_AccessInvoiceSnowAndAbatementFees");
+}
+
+
 //Script 229
 //Name: 		Issued Retail Product Manufacturer License
 //Record Types:	Enforcement/Incident/Abatement/NA
@@ -16,7 +23,8 @@
 logDebug ("script94 START");
 
 
-if (wfTask == "License Issuance" && wfStatus== "Issued Action)
+if (wfTask == "License Issuance" && wfStatus== "Issued Action")
 {
 
 logDebug ("script94 END");
+}

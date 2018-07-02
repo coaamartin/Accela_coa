@@ -33,11 +33,22 @@ function editTaskDatesAndSendEmail(workFlowTask, meetingType, emailTemplateName)
 	var cap = aa.cap.getCap(capId).getOutput();
 	cap = cap.getCapModel();
 	var toEmail = applicant.getEmail();
+	var applicantName = applicant.getContactName();
+	
+	var respUserProp = [];
+	
+	var currUserProp = [];
+	loadUserProperties(currUserProp, CurrentUserID);
 	var eParams = aa.util.newHashtable();
-	addParameter(eParams, "$$altID$$", cap.getAltID());
-	addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
-	addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+	addParameter(eParams, "$$ContactFullName$$", applicantName);
+	addParameter(eParams, "$$fileDate$$", fileDate);
 	addParameter(eParams, "$$MeetingDate$$", meetingDate);
+	addParameter(eParams, "$$MeetingResponceDate$$", dateAdd(meetingDate, 7, true));
+	
+	addParameter(eParams, "$$StaffPhone$$", currUserProp["PhoneNumer"]);
+	addParameter(eParams, "$$StaffEmail$$", currUserProp["Email"]);
+	
+
 	var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
 	if (!sent.getSuccess()) {
 		logDebug("**WARN send email failed, Error: " + sent.getErrorMessage());

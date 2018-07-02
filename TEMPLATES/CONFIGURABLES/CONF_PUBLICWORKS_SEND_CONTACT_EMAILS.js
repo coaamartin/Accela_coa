@@ -241,38 +241,6 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "Script 180",
-          "operators": {
-            
-          }
-        },
-        "criteria": {
-          "task": [
-            "Permit Issuance"
-          ],
-          "status": [
-            "Issued"
-          ]
-        },
-        "action": {
-          "notificationTemplate": "PW PI ISSUED # 180",
-          "notificationReport": ["PW_Public_Improvement_Permit"],
-          "notifyContactTypes": [
-            "Applicant"
-          ],
-          "url4ACA": "",
-          "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
-          "createFromParent": "",
-          "reportingInfoStandards": ""
-        }
-      },
-      {
-        "preScript": "",
-        "postScript": "",
-        "metadata": {
           "description": "Script 167",
           "operators": {
             
