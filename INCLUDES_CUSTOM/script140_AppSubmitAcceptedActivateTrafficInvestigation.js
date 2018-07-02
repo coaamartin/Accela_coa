@@ -11,8 +11,6 @@ function script140_AppSubmitAcceptedActivateTrafficInvestigation() {
 	try{
 		logDebug("script140: closing application submittal with accepted.");
 		closeTask("Application Submittal", "Accepted", "Auto-Accepted by script", "");
-		logDebug("script140: activating Traffic Investigation task.");
-		activateTask("Traffic Investigation");
 	}
 	catch(err){
 		showMessage = true;
