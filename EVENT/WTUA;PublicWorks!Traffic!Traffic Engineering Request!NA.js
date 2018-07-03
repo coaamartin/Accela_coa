@@ -14,6 +14,12 @@ logDebug('Script 250 Ending')
 logDebug('Script 269 Starting')
 if (ifTracer(wfTask=="Manager Review" && wfStatus=="Approved",'wfTask & wfStatus match')) {
     include("269_GenerateWorkOrderTrafficInvestigation");
+
+	//Script 174 Begin
+	if (AInfo["Final Response Required"]=="CHECKED"){
+	 	var res=addAdHocTask("ADHOC_WORKFLOW","Final Request Sent");
+	}
+	//Script 174 End
 }
 
 //script 171
