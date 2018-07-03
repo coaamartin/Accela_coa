@@ -35,4 +35,4 @@ if (wfTask == "License Issuance" && wfStatus== "Issued Action")
 
 }
 
-logDebug ("script229 END");
+logDebug ("script229 END")
