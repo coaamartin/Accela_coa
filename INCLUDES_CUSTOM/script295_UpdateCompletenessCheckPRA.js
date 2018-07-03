@@ -12,6 +12,8 @@ function script295_UpdateCompletenessCheckPRA() {
 		if ( balanceDue <= 0 ) {
 			updateTask("Completeness Check","Complete","updated via script when balance is zero","updated via script when balance is zero");
 			logDebug("script295: updated completeness check to complete!");
+			activateTask("Review Distribution");
+			
 		}
 	}
 	catch(err){
