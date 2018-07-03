@@ -20,11 +20,19 @@ if (ifTracer(wfTask == "Invoicing" && wfStatus == "Invoiced", "wfTask == Invoici
 //
 //Created By: Silver Lining Solutions
 
-logDebug ("script94 START");
+logDebug ("script229 START");
 
 
 if (wfTask == "License Issuance" && wfStatus== "Issued Action")
-{
+{ 	// Get the Applicant's email
+	var recordApplicant = getContactByType("Applicant", capId);
+	var applicantEmail = null;
+	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+	} else {
+		applicantEmail = recordApplicant.getEmail();
 
-logDebug ("script94 END");
+
 }
+
+logDebug ("script229 END");
