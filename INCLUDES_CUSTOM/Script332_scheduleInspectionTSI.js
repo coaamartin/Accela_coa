@@ -9,5 +9,5 @@ function Script332_scheduleInspectionTSI()  {
     var noOfDays = days_between(today, preHearingDateMinus1);
                 
     if (pPreHearingDate != null )
-        scheduleInspection("Pre Court Investigation", noOfDays, inspectorID);
+        scheduleInspection("Pre Court Investigation", noOfDays, inspectorID, null, workDescGet(capId));
 }
