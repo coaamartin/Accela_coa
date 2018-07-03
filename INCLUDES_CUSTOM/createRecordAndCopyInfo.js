@@ -25,7 +25,7 @@ if (appMatch(appType[i])) {
                 var trafficRecordStructure = childRecord.split("/");
                 var childRecs = getChildren(childRecord, capId);
                 //if a child of type childRecord exist, then don't create the child record.
-                if(childRecs && childRecs > 0) return ;
+                if(childRecs && childRecs.length > 0) return ;
                 
                 var newId = createChild(trafficRecordStructure[0], trafficRecordStructure[1], trafficRecordStructure[2], trafficRecordStructure[3], "");
 				//Remove all contacts
