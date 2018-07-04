@@ -27,3 +27,19 @@ if ("Inspection Failed".equals(inspResult) && feeCode && typeof(INSPECTIONINFORM
 }
 
 // end script 351
+
+// start script 352
+if ("Inspection Passed".equals(inspResult)) {
+		if (matches(inspType,"Initial Housing Inspection","1st Housing Re-Inspection","2nd Housing Re-Inspection","3rd Housing Re-Inspection","4th Housing Re-Inspection")) {
+			if (AInfo["Inspection Cycle"] && AInfo["Inspection Cycle"].toUpperCase().indexOf("YEAR") > 0) {
+				var yearCycle = parseInt(AInfo["Inspection Cycle"].substring(0,1));
+				if (yearCycle) {
+					currentCycleDate = AInfo["Date of Next Inspection"] && AInfo["Date of Next Inspection"] != "" ? convertDate(AInfo["Date of Next Inspection"]) : new Date();
+					var newCycleDate = currentCycleDate.setFullYear(currentCycleDate.getFullYear() + yearCycle); 
+					logDebug(yearCycle + " " + currentCycleDate + " " + newCycleDate);
+					editAppSpecific("Date of Next Inspection",dateAdd(newCycleDate,0));
+				}
+			}
+		}
+}
+// end script 352
