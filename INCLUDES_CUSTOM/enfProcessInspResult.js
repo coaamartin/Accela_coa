@@ -29,7 +29,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                 }
                 
                 var newInspId = scheduleInspectionCustom(newInsp, numOfDays4Insp);
-                if($iTrc(newInspId, 'copy failed checklist items')) copyFailedGSItems(inspId, newInspId);
+                if($iTrc(carryOverFailedCheckList && newInspId, 'copy failed checklist items to inspId: ' + newInspId)) copyFailedGSItems(inspId, newInspId);
             }
             
             //If workflow task and task status are passed on the parameter, do the update here
