@@ -35,12 +35,55 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
 {
 	logDebug("Script 286: Ready to Pay criteria met");
 	invoiceAllFees();
+
+	// email Developer that they are ready to pay 
+	var dev = getContactByType("Developer", capId);
+		var devEmail = null;
+		if (!dev || dev.getEmail() == null || dev.getEmail() == "") {
+			logDebug("**WARN no developer or developer has no email, capId=" + capId);
+		} else {
+			devEmail = dev.getEmail();
+		}
+		
+	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+	var emailParameters = aa.util.newHashtable();
+	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+	addParameter(emailParameters, "$$ContactEmail$$", devEmail);
+	addParameter(emailParameters, "$$wfComment$$", wfComment);
+	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
+		
+	var reportFile = [];
+	var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW READY TO PAY #123",emailParameters,reportFile,capID4Email);
+	if (!sendResult) 
+		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	else
+		{ logDebug("Sent Notification"); }	
+	
 }
 if (wfTask == "Application Acceptance" && wfStatus == "Missing Information")
 {
 	logDebug("Script 286: Missing Information criteria met");
 	closeTask("Application Acceptance","Missing Information","script 286","script 286");
 	// email Developer that there is insufficient info 
+	var dev = getContactByType("Developer", capId);
+		var devEmail = null;
+		if (!dev || dev.getEmail() == null || dev.getEmail() == "") {
+			logDebug("**WARN no developer or developer has no email, capId=" + capId);
+		} else {
+			devEmail = dev.getEmail();
+		}
+		
+	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+	var emailParameters = aa.util.newHashtable();
+	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+	addParameter(emailParameters, "$$ContactEmail$$", devEmail);
+	addParameter(emailParameters, "$$wfComment$$", wfComment);
+	var reportFile = [];
+	var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW SUBDIVISION INCOMPLETE COMPLETENESS CHECK # 286",emailParameters,reportFile,capID4Email);
+	if (!sendResult) 
+		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	else
+		{ logDebug("Sent Notification"); }	
 	
 }
 logDebug("END: Script 286");
