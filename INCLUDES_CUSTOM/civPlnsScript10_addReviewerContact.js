@@ -37,7 +37,7 @@ function civPlnsScript10_addReviewerContact(){
                         addParameter(eParams, "$$fileDate$$", fileDate);
                         addParameter(eParams, "$$ApplicationName$$", cap.getSpecialText());
                         addParameter(eParams, "$$workDesc$$", workDescGet(capId));
-                        addParameter(eParams, "$$ReviewDueDate$$", dateAdd(null, 7, true));
+                        addParameter(eParams, "$$ReviewDueDate$$", dateAdd(getTaskDueDate("Engineering Review"), -2, true));
                         
                         var sendResult = sendNotification("noreply@aurora.gov",capConEml,"","PW OUTSIDE REVIEWER EMAIL #10",eParams,reportFile,capID4Email);
                         if (!sendResult) { logDebug("civPlnsScript10_addReviewerContact: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
