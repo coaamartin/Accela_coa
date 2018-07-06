@@ -58,7 +58,7 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
             if (projectOwner && projectOwner.getEmail() != null && projectOwner.getEmail() != "") {
 				//Get ACA Url
 	            acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
-	            acaURL = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
+	            acaURL = acaURL.substr(0, acaURL.toUpperCase().indexOf("/ADMIN"));
 				
                 var files = new Array();
                 var eParams = aa.util.newHashtable();
