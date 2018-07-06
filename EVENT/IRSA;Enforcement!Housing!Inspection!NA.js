@@ -43,3 +43,10 @@ if ("Inspection Passed".equals(inspResult)) {
 		}
 }
 // end script 352
+
+// start script 356
+if ("Extension - Fee".equals(inspResult)) {
+		addFee("ENF_HI_05","ENF_HI","FINAL",1,"Y");
+}
+
+ 
