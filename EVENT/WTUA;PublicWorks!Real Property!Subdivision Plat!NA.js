@@ -90,6 +90,7 @@ logDebug("END: Script 286");
 
 function invoiceAllFees() {
 	var feeFound = false;
+	var fperiod = "";
 	getFeeResult = aa.fee.getFeeItems(capId,"",null);
 	if (getFeeResult.getSuccess()) 
 	{
