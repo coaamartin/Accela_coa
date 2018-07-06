@@ -103,7 +103,7 @@ function invoiceAllFees() {
 				feeSeqList.push(feeSeq);
 				paymentPeriodList.push(fperiod);
 				feeFound = true;
-				logDebug("Script 286: Assessed fee " + fcode + " found and tagged for invoicing");
+				logDebug("Script 286: Assessed fee found and tagged for invoicing");
 			}
 	} 
 	else 
