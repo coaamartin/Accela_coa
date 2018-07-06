@@ -1,6 +1,6 @@
 
 // Script 421
-if ("Zoning Initial Inspection".equals(inspType) && "Citation/Summons".equals(inspResult) {
+if ("Zoning Initial Inspection".equals(inspType) && "Citation/Summons".equals(inspResult)) {
 	var holdId = capId;
 	var r = getRelatedCapsByAddress("Enforcement/Incident/Summons/NA");
 	if (r && r.length > 0) {
