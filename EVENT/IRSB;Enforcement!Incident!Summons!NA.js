@@ -1,5 +1,4 @@
 // script 424
-
 if ("Summons Issuance".equals(inspType)) {
 	if (matches(inspResult,"Visit/Attempted Contact","Letter to be Sent","Personal Service","Compliance","Cancelled")) {
 		if (inspId && "Scheduled".equals(String(aa.inspection.getInspection(capId,inspId).getOutput().getInspectionStatus()))) {
@@ -9,5 +8,4 @@ if ("Summons Issuance".equals(inspType)) {
 		}
 	}
 }
-
 // end script 424
