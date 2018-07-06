@@ -13,3 +13,58 @@ if ($iTrc(wfTask=="Recordation" && wfStatus=="Recorded", 'wfTask=="Recordation" 
 	//Script 289
 	pWrksScript289_subPlatNotification();
 }
+
+//Script 286
+//Record Types:	PublicWorks/Real Property/Subdivision Plat/NA​
+//Event: 		WTUA
+//Desc:			
+//	Criteria 	wfTask = Application Acceptance and status = Ready to Pay Action 
+//				Check if there is at least 1 fee item 
+//				that is not invoiced if so then 
+//  Action		invoice all fees that have not been 
+//				previously invoiced and email the Contact (Developer) with Invoice as 
+//				link to generated report saved in attachments. 
+// Or Criteria  wfTask = Application Acceptance and status = Missing Information 
+//	Action 		Deactivate Application Acceptance task email Developer insufficient 
+//				information please refer to comments below to complete your application. 
+//				(need template from Darren) include Comments 
+//
+//Created By: Silver Lining Solutions
+logDebug("START: Script 286");
+if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
+{
+	logDebug("Script 286: Ready to Pay criteria met");
+	invoiceAllFees();
+}
+if (wfTask == "Application Acceptance" && wfStatus == "Missing Information")
+{
+	logDebug("Script 286: Missing Information criteria met");
+	closeTask("Application Acceptance","Missing Information","script 286","script 286");
+	// email Developer that there is insufficient info 
+	
+}
+logDebug("END: Script 286");
+
+function invoiceAllFees() {
+	var feeFound = false;
+	getFeeResult = aa.fee.getFeeItems(capId,"",null);
+	if (getFeeResult.getSuccess()) 
+	{
+		var feeList = getFeeResult.getOutput();
+		
+		for (feeNum in feeList)
+			if (feeList[feeNum].getFeeitemStatus().equals("NEW")) 
+			{
+				var feeSeq = feeList[feeNum].getFeeSeqNbr();
+				feeSeqList.push(feeSeq);
+				paymentPeriodList.push(fperiod);
+				feeFound = true;
+				logDebug("Script 286: Assessed fee " + fcode + " found and tagged for invoicing");
+			}
+	} 
+	else 
+	{
+		logDebug("Script 286: no fees exist that are not invoiced")
+	}
+	return feeFound;
+} 
