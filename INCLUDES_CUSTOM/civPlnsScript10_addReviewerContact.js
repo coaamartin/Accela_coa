@@ -32,9 +32,13 @@ function civPlnsScript10_addReviewerContact(){
                     if(capConEml){
                         var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
                         var reportFile = [];
+                        var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+                        acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+                        var recordURL = getACARecordURL(acaURLDefault);
                         var eParams = aa.util.newHashtable();
                         addParameter(eParams, "$$altID$$", capIDString);
                         addParameter(eParams, "$$fileDate$$", fileDate);
+                        addParameter(eParams, "$$acaRecordUrl$$", recordURL);
                         addParameter(eParams, "$$ApplicationName$$", cap.getSpecialText());
                         addParameter(eParams, "$$workDesc$$", workDescGet(capId));
                         addParameter(eParams, "$$ReviewDueDate$$", dateAdd(getTaskDueDate("Engineering Review"), -2, true));
