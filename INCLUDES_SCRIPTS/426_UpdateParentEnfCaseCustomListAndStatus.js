@@ -38,14 +38,21 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 
         } else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
             //WTUA
-            if(ifTracer(wfTask == "Invoicing" && (wfStatus =="Invoiced" || wfStatus =="Invoiced City Paid"), "wfTask == Invoicing && wfStatus == Invoiced OR Invoiced City Paid")) {
-                // inspResult == Taken and Stored
-                row = createAsiTableValObjs([
-                        { columnName: 'Invoiced Date', fieldValue: wfDateMMDDYYYY , readOnly: 'N' },
-                        { columnName: 'Bill Amount', fieldValue: wfDateMMDDYYYY , readOnly: 'N' }
-                    ]
-                );
-                addToASITable(tableName, row);
+            if(ifTracer(wfTask == "Invoicing" && (wfStatus =="Invoiced" || wfStatus =="Invoiced - City Paid"), "wfTask == Invoicing && wfStatus == Invoiced OR Invoiced City Paid")) {
+                // wfTask == "Invoicing" && wfStatus =="Invoiced"
+                if(!updateAsiTableRows(tableName, 'Invoiced Date', wfDateMMDDYYYY, {})) {
+                    row = createAsiTableValObjs([
+                        { columnName: 'Invoiced Date', fieldValue: wfDateMMDDYYYY , readOnly: 'N' }
+                    ]);
+                    addToASITable(tableName, row);
+                }
+
+                if(!updateAsiTableRows(tableName, 'Bill Amount', feesInvoicedTotal, {})) {
+                    row = createAsiTableValObjs([
+                        { columnName: 'Bill Amount', fieldValue: feesInvoicedTotal, readOnly: 'N' }
+                    ]);
+                    addToASITable(tableName, row);
+                }
             }
         }
     }
