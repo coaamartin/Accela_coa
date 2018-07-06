@@ -5,10 +5,10 @@ function copyFailedGSItems(sInspId, tInspId){
     if(!currInspGSObj.getSuccess()) { logDebug("WARNING: Unable to load failed guidesheet items."); }
     var currInspGS = currInspGSObj.getOutput();
     
-    var copyResult = aa.inspection.saveCarryOverItems(currInspGS, capId, sInspId);
+    var copyResult = aa.inspection.saveCarryOverItems(currInspGS, capId, tInspId);
     
     if (copyResult.getSuccess()) {
-    	logDebug("Successfully copied failed guideSheet items to new inspection ID : " + sInspId);
+    	logDebug("Successfully copied failed guideSheet items to new inspection ID : " + tInspId);
     } else {
     	logDebug("Failed copied failed guideSheet items to cap: " + copyResult.getErrorMessage());
     }
