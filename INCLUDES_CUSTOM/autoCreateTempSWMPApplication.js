@@ -56,10 +56,14 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
 
             var projectOwner = getContactByType("Project Owner", capId);
             if (projectOwner && projectOwner.getEmail() != null && projectOwner.getEmail() != "") {
+				//Get ACA Url
+	            acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
+	            acaURL = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
+				
                 var files = new Array();
                 var eParams = aa.util.newHashtable();
                 addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-                addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
+                addParameter(eParams, "$$appTypeString$$", cap.getCapType().getAlias());
                 addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
                 addParameter(eParams, "$$balance$$", feeBalance(""));
                 addParameter(eParams, "$$wfTask$$", wfTask);
@@ -70,6 +74,8 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
                 }
                 addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
                 addParameter(eParams, "$$wfHours$$", wfHours);
+				
+				addParameter(eParams, "$$acaDocDownloadUrl$$", acaURL);
 
 
             //  var sent = aa.document.sendEmailByTemplateName("", projectOwner.getEmail(), "", emailTemplate, eParams, files);         
