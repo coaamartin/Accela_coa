@@ -18,7 +18,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     { columnName: 'Type', fieldValue: AInfo['Abatement Type'], readOnly: 'N' }
                 ]);
                 addToASITable(tableName, row);
-            } else if(ifTracer(inspResult == "Called in Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
+            } else if(ifTracer(inspResult == "Called In Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
                 // inspResult == Called in Service Request OR Completed Service Request (update row if exists, else create row)
                 if(!updateAsiTableRows(tableName, 'Request Date', inspResultDate, {})) {
                     row = createAsiTableValObjs([
