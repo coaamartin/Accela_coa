@@ -265,7 +265,8 @@ if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance
 	}
 	
 	// get the users info that is assigned to the task
-	var staff = getTaskAssignedStaff();
+	var staff = getTaskAssignedStaff(wfTask);
+	logDebug("staff = " + staff);
 	var staffFullName = staff.getFullName();
 
    //prepare Deep URL:
