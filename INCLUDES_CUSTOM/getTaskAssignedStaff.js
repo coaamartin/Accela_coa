@@ -35,7 +35,9 @@ function getTaskAssignedStaff(wfstr) // optional process name
 		if (fTask.getTaskDescription().toUpperCase().equals(wfstr.toUpperCase()) && (!useProcess || fTask.getProcessCode().equals(processName))) 
 		{
 			var aStaff = fTask.getAssignedStaff();
-			return(aStaff);
+			var staffObj = aa.person.getUser(aStaff.firstName, "", aStaff.lastName).getOutput(); 
+
+			return(staffObj);
 		}
 	}
 }
