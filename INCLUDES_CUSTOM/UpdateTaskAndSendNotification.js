@@ -36,10 +36,13 @@ function UpdateTaskAndSendNotification(emailTemplate, taskToBeUpdated, taskStatu
 	if (wfComment != null && typeof wfComment !== 'undefined') {
 		addParameter(eParams, "$$wfComment$$", wfComment);
 	}
-	var sent = aa.document.sendEmailByTemplateName("", applicantEmail, "", emailTemplate, eParams, files);
-	if (!sent.getSuccess()) {
-		logDebug("**ERROR sending email failed, error:" + sent.getErrorMessage());
-		return false;
-	}
+	
+	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+
+	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParams,files,capID4Email);
+	if (!sendResult) 
+		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	else
+		{ logDebug("Sent Notification"); }	
 
 }
