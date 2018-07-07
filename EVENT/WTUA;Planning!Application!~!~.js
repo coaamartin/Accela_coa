@@ -266,7 +266,7 @@ if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance
 	
 	// get the users info that is assigned to the task
 	var staff = getTaskAssignedStaff();
-	
+	var staffFullName = staff.getFullName();
 
    //prepare Deep URL:
 	var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
@@ -288,10 +288,10 @@ if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance
 	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
 	addParameter(emailParameters, "$$recordDeepUrl$$", recordDeepUrl);
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
-	addParameter(emailParameters, "$$StaffFullName$$", staff.getFullName());
-	addParameter(emailParameters, "$$StaffTitle$$", staff.getTitle());
+	addParameter(emailParameters, "$$StaffFullName$$", staffFullName);
+/*	addParameter(emailParameters, "$$StaffTitle$$", staff.getTitle());
 	addParameter(emailParameters, "$$StaffPhone$$", staff.getPhone());
-	addParameter(emailParameters, "$$StaffEmail$$", staff.getEmail());
+	addParameter(emailParameters, "$$StaffEmail$$", staff.getEmail());*/
 	addParameter(emailParameters, "$$ContactEmail$$", applicantEmail);
 	addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
 	addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
