@@ -83,6 +83,7 @@ function doPIPCalculation()
 		strOccFeeAmount = Number(strOccFee);
 	} 
 	
+	logDebug("roadway type = " + roadwayType);
 	if (roadwayType == "Local") {
 		if (workZoneLength <= 224){
 			if (peak == "Yes")
@@ -202,7 +203,7 @@ var strOccFee = getAppSpecific("Street Occupancy Fee Amount"); // this value is 
 if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
-	logDebug("roadway type = " + roadwayType);
+
 
 	if (doReviewFee == "Yes"){
 		//Add Traffic Control Plan Review fee PW_PIP_35
