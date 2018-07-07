@@ -291,7 +291,7 @@ if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(emailParameters, "$$StaffFullName$$", staffFullName);
 	addParameter(emailParameters, "$$StaffTitle$$", staff.getTitle());
-	addParameter(emailParameters, "$$StaffPhone$$", staff.getPhone());
+	addParameter(emailParameters, "$$StaffPhone$$", staff.getPhoneNumber());
 	addParameter(emailParameters, "$$StaffEmail$$", staff.getEmail());
 	addParameter(emailParameters, "$$ContactEmail$$", applicantEmail);
 	addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
