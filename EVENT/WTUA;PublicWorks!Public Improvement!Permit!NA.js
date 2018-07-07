@@ -59,21 +59,10 @@ resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "PI RES
 //*********************************************************************************************************
 // function doPIPCalculation() is used by script 183 to calculate each row in the Traffic Control Information Table
 //*********************************************************************************************************
-function doPIPCalculation()
+function doPIPCalculation(closureLength, sidewalkLength, parkingLaneLength, permitParkingLength, meteredParkingLength, bikeLaneLength,
+						  peak, detour, durationOfClosureInDays, roadwayType, workZoneLength, numberOfLanesClosed)
 {
-	var closureLength = getAppSpecific("Closure Length");									// now in ASIT row **** NEEDS TO BE THERE
-
-	var sidewalkLength = getAppSpecific("Sidewalk Length");									// now in ASIT row
-	var parkingLaneLength = getAppSpecific("Parking Lane Length");							// now in ASIT row
-	var permitParkingLength = getAppSpecific("Permit Parking Length");						// now in ASIT row
-	var meteredParkingLength = getAppSpecific("Metered Parking Length");					// now in ASIT row
-	var bikeLaneLength = getAppSpecific("Bike Lane Length");								// now in ASIT row
-	var peak = getAppSpecific("Peak");														// now in ASIT row
-	var detour = getAppSpecific("Detour");													// now in ASIT row
-	var durationOfClosureInDays = getAppSpecific("Duration of Closure in Days");  			// now in ASIT row
-	var roadwayType = getAppSpecific("Roadway Type");  										// now in ASIT row
-	var workZoneLength = getAppSpecific("Work Zone Length");  								// now in ASIT row
-	var numberOfLanesClosed = getAppSpecific("Number of Lanes Closed");  					// now in ASIT row
+	
 
 	logDebug("Script 183: function doPIPCalculation START");
 	var strOccFeeAmount = 0;
@@ -204,6 +193,19 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
 
+	var closureLength = getAppSpecific("Closure Length");									// now in ASIT row **** NEEDS TO BE THERE
+
+	var sidewalkLength = getAppSpecific("Sidewalk Length");									// now in ASIT row
+	var parkingLaneLength = getAppSpecific("Parking Lane Length");							// now in ASIT row
+	var permitParkingLength = getAppSpecific("Permit Parking Length");						// now in ASIT row
+	var meteredParkingLength = getAppSpecific("Metered Parking Length");					// now in ASIT row
+	var bikeLaneLength = getAppSpecific("Bike Lane Length");								// now in ASIT row
+	var peak = getAppSpecific("Peak");														// now in ASIT row
+	var detour = getAppSpecific("Detour");													// now in ASIT row
+	var durationOfClosureInDays = getAppSpecific("Duration of Closure in Days");  			// now in ASIT row
+	var roadwayType = getAppSpecific("Roadway Type");  										// now in ASIT row
+	var workZoneLength = getAppSpecific("Work Zone Length");  								// now in ASIT row
+	var numberOfLanesClosed = getAppSpecific("Number of Lanes Closed");  					// now in ASIT row
 
 	if (doReviewFee == "Yes"){
 		//Add Traffic Control Plan Review fee PW_PIP_35
@@ -213,7 +215,8 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 
 	//Add to the Street Occupancy fee based on ASI
 	logDebug("Script 183 Calculating Street Occ Fee");
-	var strOccFeeAmount = doPIPCalculation();
+	var strOccFeeAmount = doPIPCalculation(closureLength, sidewalkLength, parkingLaneLength, permitParkingLength, meteredParkingLength, bikeLaneLength,
+						  peak, detour, durationOfClosureInDays, roadwayType, workZoneLength, numberOfLanesClosed);
 	addFee("PW_PIP_30","PW_PIP","FINAL",strOccFeeAmount,"N");
 
 	logDebug("Street Occupation Fee = " + strOccFeeAmount);
