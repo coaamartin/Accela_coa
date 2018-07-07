@@ -290,13 +290,13 @@ if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance
 	addParameter(emailParameters, "$$recordDeepUrl$$", recordDeepUrl);
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(emailParameters, "$$StaffFullName$$", staffFullName);
-/*	addParameter(emailParameters, "$$StaffTitle$$", staff.getTitle());
+	addParameter(emailParameters, "$$StaffTitle$$", staff.getTitle());
 	addParameter(emailParameters, "$$StaffPhone$$", staff.getPhone());
-	addParameter(emailParameters, "$$StaffEmail$$", staff.getEmail());*/
+	addParameter(emailParameters, "$$StaffEmail$$", staff.getEmail());
 	addParameter(emailParameters, "$$ContactEmail$$", applicantEmail);
 	addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
 	addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
-	addParameter(emailparameters, "$$ContactFullName$$", applicantName);
+	addParameter(emailParameters, "$$ContactFullName$$", applicantName);
 	addParameter(emailParameters, "$$wfComment$$", wfComment);
 	
 	var reportFile = [];
