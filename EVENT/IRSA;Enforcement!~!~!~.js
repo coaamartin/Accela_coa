@@ -89,7 +89,7 @@ logDebug("Script 343 START");
 if (inspResult == "Skip to Summons")
 {
 	logDebug("Script 343: criteria met");
-	var appName = "Summons created for Record Type " + capName + " and Record Number " + capId;
+	var appName = "Summons created for Record Number " + capId.customID;
 	var newChild = createChild('Enforcement','Incident','Summons','NA',appName);
 	var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
 	copyRecordDetailsLocal(capId, newChild);
@@ -97,6 +97,9 @@ if (inspResult == "Skip to Summons")
 	copyAddresses(capId, newChild);
 	copyParcels(capId, newChild);
 	copyOwner(capId, newChild);
+	
+	createPendingInspection("ENF_SUMMON","Pre Trial Inspection",newChild);
+	
 
 }			
 logDebug("Script 343 END");
