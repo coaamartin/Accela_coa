@@ -99,7 +99,7 @@ if (inspResult == "Skip to Summons")
 	copyParcels(capId, newChild);
 	copyOwner(capId, newChild);
 	
-	createPendingInspection("ENF_SUMMON","Pre Trial Inspection",newChild);
+	//createPendingInspection("ENF_SUMMON","Pre Trial Inspection",newChild);
 	capId = newChild;
 	scheduleInspection("Pre Trial Inspection",0);
 	capId = currentCapId;
