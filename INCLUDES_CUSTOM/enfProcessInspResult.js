@@ -18,7 +18,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
             if($iTrc(newInsp, 'create new inspection')){
                 //Get the custom field value
                 var custField = null;
-                var currDate = aa.util.parseDate(daetAdd(null, 0);
+                var currDate = aa.util.parseDate(dateAdd(null, 0));
                 var numOfDays4Insp = 1; //If unable to parse the custom field, then default inspection to one day ahead.
                 if($iTrc(!isNaN(newInspDateOrDays), 'newInspDateOrDays is a number, use this as inspection days'))
                     numOfDays4Insp = parseInt(newInspDateOrDays);
