@@ -17,7 +17,7 @@ function autoCloseWorkflow() {
 	
 	var eParams = aa.util.newHashtable();
 	addParameter(eParams, "$$altID$$", capIDString);
-	addParameter(eParams, "$$ContactFullName$$", applicant.contactName);
+	addParameter(eParams, "$$ContactFullName$$", applicant.getFullName());
 	addParameter(eParams, "$$recordAlias$$", appTypeAlias);
 	addParameter(eParams, "$$acaRecordUrl$$", recordURL);
 	
@@ -29,7 +29,8 @@ function autoCloseWorkflow() {
 		
 		var emailTemplate = "BLD PLANS APPROVED # 35";
 		var lpEmail = getPrimLPEmailByCapId(capId);
-		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,lpEmail,emailTemplate,eParams,reportFile,capID4Email);
+		addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
+		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParams,reportFile,capID4Email);
         if (!sendResult) { logDebug("autoCloseWorkflow: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
         else { logDebug("autoCloseWorkflow: Sent email to applicant "+applicantEmail)}	
 	}
