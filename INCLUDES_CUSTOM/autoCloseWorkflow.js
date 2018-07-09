@@ -7,6 +7,11 @@ function autoCloseWorkflow() {
 	var matched = false;
 	var applicant = getContactByType("Applicant", capId);
 	var applicantEmail = getContactEmailAddress("Applicant", capId);
+	var issuedEmlTemplate = "BLD PERMIT ISSUED # 35";
+	
+	var reportTemplate = "Building Permit";
+	var reportParams = aa.util.newHashtable();
+	addParameter(reportParams, "RecordID", capIDString);
 	
     var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
     acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
@@ -59,6 +64,11 @@ function autoCloseWorkflow() {
 				activateTask("Inspection Phase");
 				if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspection Check");
 			}//2.2
+			
+			//send email()
+			var lpEmail = getPrimLPEmailByCapId(capId);
+		    addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
+			emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
 		}//matched
 	}
 
@@ -67,5 +77,12 @@ function autoCloseWorkflow() {
 		recTypesAry = new Array();
 		recTypesAry = [ "Building/Permit/No Plans/NA" ];
 		matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Submitted", "Fee Processing", "Issued", "Issued");
+		
+		if(matched){
+			//send email()
+			var lpEmail = getPrimLPEmailByCapId(capId);
+		    addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
+			emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
+		}
 	}
 }
