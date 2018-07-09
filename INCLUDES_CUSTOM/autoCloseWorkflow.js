@@ -15,7 +15,7 @@ function autoCloseWorkflow() {
 	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
     var reportFile = [];
 	
-	var eParams = aa.util.newHashTable();
+	var eParams = aa.util.newHashtable();
 	addParameter(eParams, "$$altID$$", capIDString);
 	addParameter(eParams, "$$ContactFullName$$", applicant.contactName);
 	addParameter(eParams, "$$recordAlias$$", appTypeAlias);
