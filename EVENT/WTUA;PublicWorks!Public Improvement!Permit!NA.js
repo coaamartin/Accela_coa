@@ -177,14 +177,22 @@ function doPIPCalculation(closureLength, sidewalkLength, parkingLaneLength, perm
 	return strOccFeeAmount;
 }
 
-logDebug("Script 183 START");
-var doReviewFee = getAppSpecific("Review Fee"); // y/n field indicating whether a review fee should be included
-var strOccFee = getAppSpecific("Street Occupancy Fee Amount"); // this value is what is already in the ASI field before the script and will be added to the total of the rows
 
 
 //****************************************************************************************
 // Start of script 183
 //****************************************************************************************
+logDebug("Script 183 START");
+
+var doReviewFee = getAppSpecific("Review Fee"); // y/n field indicating whether a review fee should be included
+var strOccFee = getAppSpecific("Street Occupancy Fee Amount"); // this value is what is already in the ASI field before the script and will be added to the total of the rows
+
+if (doReviewFee == "Yes"){
+	//Add Traffic Control Plan Review fee PW_PIP_35
+	logDebug("Script 183 calculating Review Fee");
+	addFee("PW_PIP_35","PW_PIP","FINAL",1,"N");
+}
+	
 if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 {
 	logDebug("Script 183 Conditions met - will calculate fees per spec");
@@ -249,7 +257,9 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 		logDebug("amount = " + strOccFeeAmount + " & total = " + strOccFeeTotal);
 		
 	}
-	
+	addFee("PW_PIP_30","PW_PIP","FINAL",strOccFeeAmount,"N");
+
+	logDebug("Street Occupation Fee = " + strOccFeeAmount);
 }
 
 logDebug("Script 183 END");
