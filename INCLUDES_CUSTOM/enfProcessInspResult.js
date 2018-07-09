@@ -17,8 +17,11 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
             //If newInsp is valid, then try to create inspection
             if($iTrc(newInsp, 'create new inspection')){
                 //Get the custom field value
-                var custField = AInfo[newInspDateOrDays];
+				var custField = null;
                 var numOfDays4Insp = 1; //If unable to parse the custom field, then default inspection to one day ahead.
+				if($iTrc(!isNaN(newInspDateOrDays), 'newInspDateOrDays is a number, use this as inspection days'))
+					numOfDays4Insp = parseInt(newInspDateOrDays);
+				else custField = AInfo[newInspDateOrDays];
                 //If the custom field value is valid, then try to parse it to get the number of days
                 if($iTrc(custField, custField)){
                     //If custom field is not a number, then it's date, use it to calculat the number of days between today and the date
