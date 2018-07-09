@@ -236,9 +236,8 @@ if (inspResult == "Skip to Abatement" || inspResult == "Skip to City Abatement")
 	copyParcels(capId, newChild);
 	copyOwner(capId, newChild);
 	
-	//createPendingInspection("ENF_SUMMON","Pre Trial Inspection",newChild);
 	capId = newChild;
-	scheduleInspection("Pre Trial Inspection",0);
+	scheduleInspection("Post Abatement Inspection",0);
 	capId = currentCapId;
 	
 	if (inspResult == "Skip to City Abatement")
