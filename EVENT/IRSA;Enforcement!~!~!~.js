@@ -210,3 +210,39 @@ if (inspResult == "Skip to Summons")
 
 }           
 logDebug("Script 343 END");
+
+//*********************************************************************************************************
+//script 344 		Create Child Abatement
+//
+//Record Types:		Enforcement/*/*/*
+//Event: 			IRSA
+//Desc:				Create Child Record and schedule same day inspection when the inspection is resulted 
+// 					"Skip to Summons" Enforcement/Incident/Zoning/NA Enforcement/Incident/Snow/NA 
+//					Enforcement/Incident/Housing/NA SEE ATTACHMENT FOR SCRIPT SPECIFICATIONS
+//
+//Created By: 		Silver Lining Solutions
+//*********************************************************************************************************
+logDebug("Script 344 START");
+if (inspResult == "Skip to Abatement" || inspResult == "Skip to City Abatement")
+{
+	logDebug("Script 344: criteria met");
+	var currentCapId = capId;
+	var appName = "Abatement created for Record Number " + capId.customID;
+	var newChild = createChild('Enforcement','Incident','Abatement','NA',appName);
+	var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
+	copyRecordDetailsLocal(capId, newChild);
+	copyContacts(capId, newChild);
+	copyAddresses(capId, newChild);
+	copyParcels(capId, newChild);
+	copyOwner(capId, newChild);
+	
+	//createPendingInspection("ENF_SUMMON","Pre Trial Inspection",newChild);
+	capId = newChild;
+	scheduleInspection("Pre Trial Inspection",0);
+	capId = currentCapId;
+	
+	if (inspResult == "Skip to City Abatement")
+		{ editAppSpecific("Abatement Type", "City", newChild); }
+
+}			
+logDebug("Script 344 END");
