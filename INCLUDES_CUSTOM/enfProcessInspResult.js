@@ -31,7 +31,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                 if($iTrc(custField, custField)){
                     //If custom field is not a number, then it's date, use it to calculat the number of days between today and the date
                     if($iTrc(isNaN(custField), 'custom field ' + newInspDateOrDays + ' is not a number'))
-                        numOfDays4Insp = days_between(currDate)), aa.util.parseDate(custField));
+                        numOfDays4Insp = days_between(currDate, aa.util.parseDate(custField));
                     else //the custom field is a number
                         numOfDays4Insp = parseInt(custField);
                 }
