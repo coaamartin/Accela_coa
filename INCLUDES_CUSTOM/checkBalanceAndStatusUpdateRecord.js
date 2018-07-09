@@ -14,8 +14,8 @@ function checkBalanceAndStatusUpdateRecord(recordTypesArray, recordStatusToCheck
 		if (appMatch(recordTypesArray[r]) && balanceDue == 0) {
 			if (recordStatusToCheck != null && recordStatusToCheck == cap.getCapStatus()) {
 				if (wfTaskUpdate != null && wfStatusUpdate != null) {
-					updateTask(wfTaskUpdate, wfStatusUpdate, "by script", "by script");
-					deactivateTask(wfTaskUpdate);
+					closeTask(wfTaskUpdate, wfStatusUpdate, "by script", "by script");
+					//deactivateTask(wfTaskUpdate);
 				}
 				if (newAppStatus != null) {
 					updateAppStatus(newAppStatus, "by script");

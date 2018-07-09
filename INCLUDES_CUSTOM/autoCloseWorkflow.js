@@ -5,16 +5,41 @@
 function autoCloseWorkflow() {
 	var recTypesAry = new Array();
 	var matched = false;
+	var applicant = getContactByType("Applicant", capId);
+	var applicantEmail = getContactEmailAddress("Applicant", capId);
+	
+    var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+    acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+    var recordURL = getACARecordURL(acaURLDefault);
+	
+	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+    var reportFile = [];
+	
+	var eParams = aa.util.newHashTable();
+	addParameter(eParams, "$$altID$$", capIDString);
+	addParameter(eParams, "$$ContactFullName$$", applicant.contactName);
+	addParameter(eParams, "$$recordAlias$$", appTypeAlias);
+	addParameter(eParams, "$$acaRecordUrl$$", recordURL);
+	
 	//#1
 	recTypesAry = [ "Building/Permit/Plans/Amendment", "Building/Permit/New Building/Amendment", "Building/Permit/Master/Amendment", "Building/Permit/Master/NA" ];
 	matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Fee Processing", "Complete", "Approved");
-
+    if(matched){
+		//Send email for case #1
+		
+		var emailTemplate = "BLD PLANS APPROVED # 35";
+		var lpEmail = getPrimLPEmailByCapId(capId);
+		var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,lpEmail,emailTemplate,eParams,reportFile,capID4Email);
+        if (!sendResult) { logDebug("autoCloseWorkflow: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+        else { logDebug("autoCloseWorkflow: Sent email to applicant "+applicantEmail)}	
+	}
+	
 	//#2
 	if (!matched) {
 		recTypesAry = new Array();
 		recTypesAry = [ "Building/Permit/New Building/NA", "Building/Permit/Plans/NA" ];
 		matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Fee Processing", "Issued", "Issued");
-		matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Ready to Issue", "Permit Issuance", "Issued", "Issued");
+		//Specs don't mention anything for Ready to Issuematched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Ready to Issue", "Permit Issuance", "Issued", "Issued");
 		
 		//extra steps for #2
 		//2.1
@@ -22,16 +47,16 @@ function autoCloseWorkflow() {
 			if (appMatch("Building/Permit/New Building/NA")) {
 				activateTask("Water Meter");
 				activateTask("Inspection Phase");
-				activateTask("Waste Water");
-				activateTask("Special Inspection Check");
-				activateTask("FEMA Elevation Certificate");
+				if(isTaskStatus("Waste Water Review", "Approved Inspection Required")) activateTask("Waste Water");
+				if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspection Check");
+				if(isTaskStatus("Engineering Review", "Approved with FEMA Cert Required")) activateTask("FEMA Elevation Certificate");
 			}//2.1
 
 			//2.2
 			if (appMatch("Building/Permit/Plans/NA")) {
-				activateTask("Waste Water");
+				if(isTaskStatus("Waste Water Review", "Approved Inspection Required")) activateTask("Waste Water");
 				activateTask("Inspection Phase");
-				activateTask("Special Inspection Check");
+				if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspection Check");
 			}//2.2
 		}//matched
 	}
