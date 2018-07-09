@@ -1,7 +1,15 @@
 
 if(inspType == "Zoning Initial Inspection"){
     //Script 346
+	//                    Inspection to check for,    Insp result         New inspection                  Custom field to get date for new insp, copy failed GS, wfTask2Update, status for WF task
+	//enfProcessInspResult("", "", "", "", bool, "", "");
 	enfProcessInspResult("Zoning Initial Inspection", "Notice Posted", "Zoning Follow-Up Inspection", "Initial Investigation Re-Inspection Days", true, "Initial Investigation", "Notice Posted");
+	enfProcessInspResult("Zoning Initial Inspection", "Notice Served", "Zoning Follow-Up Inspection", "Initial Investigation Re-Inspection Days", true, "Initial Investigation", "Notice Served");
+	enfProcessInspResult("Zoning Initial Inspection", "Graffiti Notice Posted", "Graffiti Follow-Up Inspection", "Initial Investigation Re-Inspection Days", true, "Initial Investigation", "Graffiti Notice Posted");
+	enfProcessInspResult("Zoning Initial Inspection", "Graffiti Notice Served", "Graffiti Follow-Up Inspection", "Initial Investigation Re-Inspection Days", true, "Initial Investigation", "Graffiti Notice Served");
+	enfProcessInspResult("Zoning Initial Inspection", "No Violation Observed", null, null, false, "Initial Investigation", "No Violation Observed");
+	enfProcessInspResult("Zoning Initial Inspection", "Visit/Attempted Contact", "Zoning Initial Inspection ", 1, true, "Initial Investigation", "Attempted Contact");
+	//enfProcessInspResult("", "", "", "", bool, "", "");
 }
 
 disableTokens = true;
