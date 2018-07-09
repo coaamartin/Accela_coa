@@ -257,7 +257,7 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 		logDebug("amount = " + strOccFeeAmount + " & total = " + strOccFeeTotal);
 		
 	}
-	addFee("PW_PIP_30","PW_PIP","FINAL",strOccFeeAmount,"N");
+	addFee("PW_PIP_30","PW_PIP","FINAL",strOccFeeTotal,"N");
 
 	logDebug("Street Occupation Fee = " + strOccFeeTotal);
 }
