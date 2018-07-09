@@ -1,7 +1,7 @@
 
 if(inspType == "Zoning Initial Inspection"){
     //Script 346
-	enfProcessInspResult("Zoning Initial Inspection", "Notice Posted", "Zoning Follow-Up Inspection", "Initial Investigation Re-Inspection Days", false, "Initial Investigation", "Notice Posted");
+	enfProcessInspResult("Zoning Initial Inspection", "Notice Posted", "Zoning Follow-Up Inspection", "Initial Investigation Re-Inspection Days", true, "Initial Investigation", "Notice Posted");
 }
 
 disableTokens = true;
@@ -73,3 +73,36 @@ if (inspType == "Follow-Up Investigation" && inspResult == "Abated") {
 updateTask("Incident Status","Violation Abated","Updated by Inspection Result","Note");
 closeTask("Incident Status","Closed","","");
 }
+
+//*********************************************************************************************************
+//script 343 		Create Child Summons to Court Record
+//
+//Record Types:		Enforcement/*/*/*
+//Event: 			IRSA
+//Desc:				Create Child Record and schedule same day inspection when the inspection is resulted 
+// 					"Skip to Summons" Enforcement/Incident/Zoning/NA Enforcement/Incident/Snow/NA 
+//					Enforcement/Incident/Housing/NA SEE ATTACHMENT FOR SCRIPT SPECIFICATIONS
+//
+//Created By: 		Silver Lining Solutions
+//*********************************************************************************************************
+logDebug("Script 343 START");
+if (inspResult == "Skip to Summons")
+{
+	logDebug("Script 343: criteria met");
+	var currentCapId = capId;
+	var appName = "Summons created for Record Number " + capId.customID;
+	var newChild = createChild('Enforcement','Incident','Summons','NA',appName);
+	var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
+	copyRecordDetailsLocal(capId, newChild);
+	copyContacts(capId, newChild);
+	copyAddresses(capId, newChild);
+	copyParcels(capId, newChild);
+	copyOwner(capId, newChild);
+	
+	//createPendingInspection("ENF_SUMMON","Pre Trial Inspection",newChild);
+	capId = newChild;
+	scheduleInspection("Pre Trial Inspection",0);
+	capId = currentCapId;
+
+}			
+logDebug("Script 343 END");

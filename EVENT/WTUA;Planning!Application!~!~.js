@@ -233,3 +233,79 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 		
 	}
 }		
+
+//Script 282
+//Record Types:	Planning/Application/~/~ except for Address
+//Event: 		WTUA
+//Desc:			Event: WorkflowTaskUpdateAfter wfTask = Landscape Pre Acceptance 
+//				or Addressing Pre Acceptance or Planning Pre Acceptance or Civil 
+//				Pre Acceptance = Resubmittal Requested send an email to the applicant,
+//				include Record # and deep link for the record (Planning to send 
+//				Template). Sincerely, Name of Assigned to Staff in the Record Detail, 
+//				with their email from user and phone number from (Shared Dropdown if 
+//				Active directory does not merge phone numbers or a general phone 
+//				number for Planning). Include comments from the status – Req for Planning
+//
+//Created By: Silver Lining Solutions
+logDebug("script 282: started");
+if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance" || 
+	wfTask == "Planning Pre Acceptance" || wfTask == "Civil Pre Acceptance" ) &&
+	wfStatus == "Resubmittal Requested" && !appMatch("Planning/Application/Address/*"))
+{
+	logDebug("script 282: criteria met");
+	
+    // Get the Applicant's email
+	var recordApplicant = getContactByType("Applicant", capId);
+	var applicantEmail = null;
+	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+	} else {
+		applicantEmail = recordApplicant.getEmail();
+		var applicantName = recordApplicant.getFullName();
+	}
+	
+	// get the users info that is assigned to the task
+	var staff = getTaskAssignedStaff(wfTask);
+	logDebug("staff = " + staff);
+	var staffFullName = staff.getFullName();
+
+   //prepare Deep URL:
+	var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+	var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
+	var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
+	var deepUrl = "/urlrouting.ashx?type=1000";
+	deepUrl = deepUrl + "&Module=" + cap.getCapModel().getModuleName();
+	deepUrl = deepUrl + "&capID1=" + capId.getID1();
+	deepUrl = deepUrl + "&capID2=" + capId.getID2();
+	deepUrl = deepUrl + "&capID3=" + capId.getID3();
+	deepUrl = deepUrl + "&agencyCode=" + aa.getServiceProviderCode();
+	deepUrl = deepUrl + "&HideHeader=true";
+
+	var recordDeepUrl = acaCitizenRootUrl + deepUrl;
+	// send an email to the applicant - we're waiting on the actual template here.
+	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+	
+	var emailParameters = aa.util.newHashtable();
+	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+	addParameter(emailParameters, "$$recordDeepUrl$$", recordDeepUrl);
+	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
+	addParameter(emailParameters, "$$StaffFullName$$", staffFullName);
+	addParameter(emailParameters, "$$StaffTitle$$", staff.getTitle());
+	addParameter(emailParameters, "$$StaffPhone$$", staff.getPhoneNumber());
+	addParameter(emailParameters, "$$StaffEmail$$", staff.getEmail());
+	addParameter(emailParameters, "$$ContactEmail$$", applicantEmail);
+	addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
+	addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
+	addParameter(emailParameters, "$$ContactFullName$$", applicantName);
+	addParameter(emailParameters, "$$wfComment$$", wfComment);
+	
+	var reportFile = [];
+	
+	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN PRE ACCEPTANCE # 282",emailParameters,reportFile,capID4Email);
+	if (!sendResult) 
+		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	else
+		{ logDebug("Sent Notification"); }	
+}
+
+logDebug("script 282: ended");

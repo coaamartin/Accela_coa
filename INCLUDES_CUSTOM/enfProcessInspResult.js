@@ -28,12 +28,16 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                         numOfDays4Insp = parseInt(custField);
                 }
                 
-                scheduleInspection(newInsp, numOfDays4Insp);
+                var newInspId = scheduleInspectionCustom(newInsp, numOfDays4Insp);
+                if($iTrc(carryOverFailedCheckList && newInspId, 'copy failed checklist items to inspId: ' + newInspId)) copyFailedGSItems(inspId, newInspId);
             }
             
             //If workflow task and task status are passed on the parameter, do the update here
-            if($iTrc(wfTsk && wfSts, wfTsk + ' && ' + wfSts))
+            if($iTrc(wfTsk && wfSts, wfTsk + ' && ' + wfSts)){
+                if(!isTaskActive(wfTsk)) activateTask(wfTsk);
+                
                 updateTask(wfTsk, wfSts, "Updated via enfProcessInspResult()", "Updated via enfProcessInspResult()");
+            }
             
             
             //Add a cap comment to the record
