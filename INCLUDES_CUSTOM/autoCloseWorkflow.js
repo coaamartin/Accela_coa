@@ -54,7 +54,7 @@ function autoCloseWorkflow() {
 				activateTask("Water Meter");
 				activateTask("Inspection Phase");
 				if(isTaskStatus("Waste Water Review", "Approved Inspection Required")) activateTask("Waste Water");
-				if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspection Check");
+				if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspections Check");
 				if(isTaskStatus("Engineering Review", "Approved with FEMA Cert Required")) activateTask("FEMA Elevation Certificate");
 			}//2.1
 
@@ -62,7 +62,7 @@ function autoCloseWorkflow() {
 			if (appMatch("Building/Permit/Plans/NA")) {
 				if(isTaskStatus("Waste Water Review", "Approved Inspection Required")) activateTask("Waste Water");
 				activateTask("Inspection Phase");
-				if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspection Check");
+				if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspections Check");
 			}//2.2
 			
 			//send email()
