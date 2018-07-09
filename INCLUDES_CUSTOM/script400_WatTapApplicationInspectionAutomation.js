@@ -19,19 +19,21 @@ function script400_WatTapApplicationInspectionAutomation() {
             emailTemplate = 'WAT METER SET INSPECTION FAILED # 400',
             toContactTypes = 'Applicant',
             ccContactTypes = '',
-            emailparams = aa.util.newHashtable(),
-            reportname = "",
-            reportparams = aa.util.newHashtable(),
-            childCapScriptModel,
+            emailParams = aa.util.newHashtable(),
+            reportName = "",
+            reportParams = aa.util.newHashtable(),
             parentCapScriptModel,
             parentCapTypeString,
             parentCapId,
-            applicant = getContactByType("Applicant", capId);
+            guideSheetObjects = getGuideSheetObjects(inspId),
+            applicant = getContactByType("Applicant", capId),
+            idx;
 
+            
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
-                    if (ifTracer(!AInfo['Water Meter Number'], 'AInfo[Water Meter Number] == falsy')) {
+                    if (ifTracer(!getMeterNumber(), 'getMeterNumber() == falsy')) {
                         cancel = true;
                         showMessage = true;
                         comment('Water Meter Number must not be null to status inspection as passed.');                            
@@ -42,21 +44,21 @@ function script400_WatTapApplicationInspectionAutomation() {
         } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
-                    //AInfo['Water Meter Number']
                     //get parent
                     parentCapId = getParent();
                     if(ifTracer(parentCapId, 'parent found')) {
                         //make sure parent is a permit (Building/Permit/*/*)
-                        childCapScriptModel = aa.cap.getCap(capId).getOutput();
                         parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
                         parentCapTypeString = parentCapScriptModel.getCapType().toString();
                         if(ifTracer(parentCapTypeString.indexOf('Building/Permit/') > -1, 'parent = Building/Permit/*/*')) {
-                
+                            //there is no water meter number field - make a comment per email from christy dtd 20180605
+                            createCapComment('Water Meter Number: ' + getMeterNumber(), parentCapId);
                         }
                     }
                     
                 } else {    //failed
-                    emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
+                    addParameter(emailParams, "$$inspComment$$", inspComment);
+                    emailContactsWithCCs(toContactTypes, emailTemplate, emailParams, reportName, reportParams, "N", "", ccContactTypes);
                 }
             }
         }
@@ -67,7 +69,22 @@ function script400_WatTapApplicationInspectionAutomation() {
 		comment("Error on custom function script400_WatTapApplicationInspectionAutomation(). Please contact administrator. Err: " + err);
 		logDebug("Error on custom function script400_WatTapApplicationInspectionAutomation(). Please contact administrator. Err: " + err);
 	}
-	logDebug("script400_WatTapApplicationInspectionAutomation() ended."); 
+    logDebug("script400_WatTapApplicationInspectionAutomation() ended."); 
+    
+
+    function getMeterNumber() {
+        var meterNumber = null;
+        if (guideSheetObjects &&  guideSheetObjects.length > 0) {
+            for (idx in guideSheetObjects) {
+                if(guideSheetObjects[idx].gsType == 'Tap Application') {
+                    guideSheetObjects[idx].loadInfo();
+                    return guideSheetObjects[idx].info["Meter Number"]
+                }
+                
+            }
+        }
+        return meterNumber;
+    }
 }   //END script400_WatTapApplicationInspectionAutomation();
 
 

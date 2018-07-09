@@ -6,7 +6,7 @@
  * @returns {Boolean}
  */
 function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permitFeeTypeAsiName, permitFeeTypeTotalAsiName, gisSvcName, gisLayerName, gisAttrName) {
-
+    logDebug("permitWithPlansFeeCalculation started.");
 	var canAddFees = false;
 
 	if (workFlowTask && workFlowTask != null && workflowStatusArray && workflowStatusArray != null) {
@@ -55,7 +55,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		feeCodesAry["BUILDING_DRIVEWAY_FEE"] = "BLD_PWP_11";
 	} else if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("No Plans")) {
 		feeSched = "BLD_PNP";
-		feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PNP_06";
+	//	feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PNP_06";
 		feeCodesAry["BUILDING_FEE_VALUATION"] = "BLD_PNP_01";
 		feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PNP_03";
 		feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PNP_04";
@@ -105,24 +105,24 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 		}
 	}
 
-	//Arapahoe county Fee
-	if (county == "Arapahoe") {
+	//Arapahoe county Fee  
+	if (county == "ARAPAHOE") {
 		var feeQty = 0;
 		var materialsCost = asiValues["Materials Cost"];
 		var valuation = asiValues["Valuation"];
 		if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
-				&& parseFloat(materialsCost) == (parseFloat(valuation) / 2)) {
-			feeQty = parseFloat(materialsCost);
+				&& parseFloat(materialsCost) <= (parseFloat(valuation) / 2)) {
+			feeQty = parseFloat(valuation)/2;
 		} else if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
 				&& parseFloat(materialsCost) > (parseFloat(valuation) / 2)) {
-			feeQty = parseFloat(valuation);
+			feeQty = parseFloat(materialsCost);
 		}
 
 		if (feeQty > 0) {
 			updateFee(feeCodesAry["ARAPAHOE_FEE_1"], feeSched, "FINAL", feeQty, "N");
 			updateFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "N");
 		}
-	}//county = Arapahoe
+	}//county = Arapahoe   
 	
 		//Driveway Fee
 		var feeQty = 0;
@@ -141,11 +141,11 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	var valuation = asiValues["Valuation"];
 
 	if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
-			&& parseFloat(materialsCost) == (parseFloat(valuation) / 2)) {
-		feeQty = parseFloat(materialsCost);
+			&& parseFloat(materialsCost) <= (parseFloat(valuation) / 2)) {
+		feeQty = parseFloat(valuation)/2;
 	} else if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
 			&& parseFloat(materialsCost) > (parseFloat(valuation) / 2)) {
-		feeQty = parseFloat(valuation);
+		feeQty = parseFloat(materialsCost);
 	}
 
 	if (feeQty > 0) {
@@ -153,15 +153,19 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
 	}
 try{	
 	//Building Fee (Flat Fee)
-	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "") {
+	var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
+	if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "" && asiValues[permitFeeTypeAsiName] != "Other" && parseFloat(permitTypeTotal)> 0) {
 		var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
-		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal) > 0) {
+		if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal ) > 0) {
+			if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")){
 			updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
+			}
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
 		}
-	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "") {
-		////Building Fee (Valuation)
+	} else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "" || asiValues[permitFeeTypeAsiName] == "Other" || parseFloat(permitTypeTotal ) == 0) 
+	{
+		////Building Fee (Valuation) -- add logic for Other (dropdown)
 		var valuation = asiValues["Valuation"];
 		if (valuation && valuation != null && valuation != "") {
 			updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
@@ -174,6 +178,6 @@ try{
 catch (err) {
     handleError(err, "Error on Building Fee script");
 }
-	
+	logDebug("permitWithPlansFeeCalculation ended.");
 	return true;
 }

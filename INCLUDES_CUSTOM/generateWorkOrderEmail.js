@@ -24,6 +24,7 @@ function generateWorkOrderEmail(workFlowTask, workflowStatusArray, asiFieldName,
 
 		//Send the email with attached report
 		var eParams = aa.util.newHashtable();
+		addParameter(eParams, "$$WorkOrderNumber$$", autoGenNumber);
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());

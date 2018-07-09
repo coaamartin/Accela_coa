@@ -13,3 +13,25 @@ Sample Call : validateReceptionNumber()
 */
 
 validateReceptionNumber();
+
+
+//Script 286
+//Record Types:	​PublicWorks/Real Property/Subdivision Plat/NA
+
+//Event: 		WTUB
+//Desc:			If workflow task = Application Acceptance and status = Ready to Pay 
+//				and no Fee exists then do not let the workflow proceed and display 
+//				the message “Please add fees to this case to continue”
+//Created By: Silver Lining Solutions
+
+logDebug("START: Script 286");
+if(wfTask =="Application Acceptance" && wfStatus =="Ready to Pay") {
+	logDebug("task/status criteria met");
+	if (!hasNewOrInvoicedFees(capId, "")) {
+		logDebug("criteria met");
+		showMessage=true;
+        comment("Please add fees to this case to continue");
+		cancel=true;
+  	}
+} 
+logDebug("END: Script 286");

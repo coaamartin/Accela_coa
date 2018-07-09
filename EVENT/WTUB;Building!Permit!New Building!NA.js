@@ -37,5 +37,7 @@ Notes :
 requireDataInSpecialInspections();
 
 //Script 9 
-
-checkSpecialInspections();
+if (wfTask == "Certificate of Occupancy" && wfStatus == "Final CO Issued")
+		{
+		checkSpecialInspections();
+		}

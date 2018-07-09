@@ -19,4 +19,4 @@ Notes:
 	- result in reqInspResults will be checked for preReqInspResult at same index
 */
 
-checkPrevInspResultAndPreventSubmit("Notice of Violation", [ "Second Notice", "Third Notice" ], [ "First Notice", "Second Notice" ]);
+checkPrevInspResultAndPreventSubmit("Notice of Violation Inspection", [ "Second Notice", "Third Notice" ], [ "First Notice", "Second Notice" ]);

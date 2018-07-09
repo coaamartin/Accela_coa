@@ -15,5 +15,5 @@ Notes:
 	- When try to read COUNTY from parcel it's being read from Parcel Attributes (COUNTY)
 
 */
-
-permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
+//Not needed in WTUA
+//permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");

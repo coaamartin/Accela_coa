@@ -1,3 +1,5 @@
+//Do not remove this variable.
+var $iTrc = ifTracer;
 /*
 Title : Set Completeness Check #2 to Resubmittal Requested (WorkflowTaskUpdateAfter)
 Purpose : if the last of the following parallel workflow tasks is statused: (Engineering Review, Water Dept Review, Life Safety
@@ -43,3 +45,16 @@ var workflowStatus = "Received City Signatures";
 var ASIFieldName = "Signed Easement Due Date";
 var daysOut = 60;
 UpdateASIFieldBasedOnworkFlowTask(workflowTaskName, workflowStatus, ASIFieldName, daysOut);
+
+if($iTrc(wfTask == "Completeness Check" && wfStatus == "Ready to Pay", 'wfTask == "Completeness Check" && wfStatus == "Ready to Pay"')){
+	pWrksScript293_addFeeEmailReadyToPay();
+}
+
+if($iTrc(wfTask == "Signatures" && wfStatus == "Pending Owner Signature", 'wfTask == "Signatures" && wfStatus == "Pending Owner Signature"')){
+	if(balanceDue == 0) pWrksScript303_reqOwnerSigEmail();
+	pWrksScript305_updateTaskDueDate();
+}
+
+if($iTrc(wfTask == "Completeness Check" && wfStatus == "Incomplete", 'wfTask == "Completeness Check" && wfStatus == "Incomplete"')){
+    pWrksScript292_sendIncompleteEmail();
+}

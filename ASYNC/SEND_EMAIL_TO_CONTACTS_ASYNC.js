@@ -96,14 +96,13 @@ if (reportTemplate == "Payment Reminder" && balanceDue == '0') {
 	logDebug("Cancelling sendEmailToContactsASync. Report is a Payment Reminder and balanceDue is 0.")
 }
 else {
-	logDebug("5) balanceDue: " + balanceDue);
+	aa.print("5) balanceDue: " + balanceDue);
 /* End SDOT work-around to prevent payment notices on auto-approved (paid) ACA submissions */
 	//Get valid array of contact types
 	validConTypes = getContactTypes();
-
 	//Add standard email variables from record information
 	vEParams = addStdVarsToEmail(vEParams, capId);
-
+	
 	//Set Ad-Hoc Task Information
 	if (vAddAdHocTask) {
 		//Set department for ad-hoc task based on record type.
@@ -123,7 +122,7 @@ else {
 			vAdHocAssignDept = "DPD/NA/OPS/PROC/P_RTG/NA" //Plans Routing
 		}
 	}
-
+	
 	//Check to see if provided contact type(s) is/are valid
 	if (sendEmailToContactTypes != "All" && sendEmailToContactTypes != null && sendEmailToContactTypes != '') {
 		conTypeArray = sendEmailToContactTypes.split(",");
@@ -142,13 +141,13 @@ else {
 	if (sendEmailToContactTypes == "All" || sendEmailToContactTypes == null || sendEmailToContactTypes == '') {
 		conTypeArray = validConTypes;
 	}
-
+	
 	//get From email from template configuration
 	if (emailTemplate && emailTemplate != '') {
 		tmpl = aa.communication.getNotificationTemplate(emailTemplate).getOutput();
 		mailFrom = tmpl.getEmailTemplateModel().getFrom();
 	}
-
+	
 	//Get Contacts based on type for each type provided
 	for (z in conTypeArray) {
 		conType = conTypeArray[z];
@@ -194,7 +193,7 @@ else {
 			}
 		}
 	}
-
+	
 	//Get the capId type needed for the email function
 	capId4Email = null;
 	capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());

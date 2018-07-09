@@ -19,6 +19,7 @@ function sendEmailNotification(emailTemplate,reportName){
 	
 	// Get the Case Manager's email
 	var caseManagerEmail=getAssignedStaffEmail();
+	var caseManagerPhone=getAssignedStaffPhone();
 	
 	var cc="";
 	if (isBlankOrNull(developerEmail)==false){
@@ -43,7 +44,9 @@ function sendEmailNotification(emailTemplate,reportName){
 	addParameter(eParams, "$$wfComment$$", wfComment);
 	addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
 	addParameter(eParams, "$$wfHours$$", wfHours);
-
+	addParameter(eParams, "$$StaffPhone$$", caseManagerPhone);
+	addParameter(eParams, "$$StaffEmail$$", caseManagerEmail);
+	
 	//Based on report, fill report parameters here
 	var rptParams = aa.util.newHashtable();
 	rptParams.put("RECORD_MODULE", "PLANNING");

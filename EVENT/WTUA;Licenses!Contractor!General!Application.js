@@ -1,10 +1,19 @@
 //Last part of Script #106, Commercial and Residential are added via configurable script
 
-if(appMatch("Licenses/Contractor/General/Application")){
-	var contType = getAppSpecific("Contractor Type");
-	if(wfTask == "License Issuance" && wfStatus == "Ready to Pay"){
-		if (!matches(contType, "Commercial Building", "Residential Building")){
-			updateFee("LIC_020", "LIC_CONTRACTOR_GENERAL", "FINAL", 125, "Y");
-		}
+if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) {
+	// script 427
+	var theFee = 125;
+	if ("Commercial Building".equals(AInfo["Contractor Type"])) {
+		theFee = 300;
 	}
+	if ("Residential Building".equals(AInfo["Contractor Type"])) {
+		theFee = 180;
+	}
+	updateFee("LIC_020", "LIC_CONTRACTOR_GENERAL", "FINAL", theFee, "N");
+	// end Script 427
+}
+
+// Script 111
+if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus)) {
+	include("111_CreateContractorLicenseAndLP");
 }

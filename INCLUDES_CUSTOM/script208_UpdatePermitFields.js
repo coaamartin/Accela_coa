@@ -10,10 +10,8 @@ function script208_UpdatePermitFields() {
 	logDebug("script208_UpdatePermitFields  started.");
 	try{
 		if (!appMatch("Building/Permit/Master/NA")) {
-			if (wfTask==("Permit Issuance") && wfStatus ==("Issued")) {
 				editAppSpecific("Permit Issued Date",dateAdd(null,0));		
 				editAppSpecific("Permit Expiration Date",dateAdd(null,180));
-			}
 		}
 	} catch(err){
 		showMessage = true;

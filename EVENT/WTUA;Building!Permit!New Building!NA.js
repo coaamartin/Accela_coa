@@ -1,3 +1,4 @@
+var $iTrc = ifTracer;
 /* Title :  Create child water utility permit records (WorkflowTaskUpdateAfter)
 
 Purpose :   If workflow task = "Fire Life Safety Review" and workflow status = "Approved" and the TSI field "Is there a private fire line" =
@@ -20,7 +21,6 @@ Sample Call : createChildWaterUtilityPermitRecords()
 
 createChildWaterUtilityPermitRecords();
 script207_SetTotalSqFtOnFireRecord();
-script206_DeactivateFEMA();
 
 /*
 Title : Calculate and assess Construction Building Fees (WorkflowTaskUpdateAfter) 
@@ -38,7 +38,14 @@ Sample Call:
 */
 //removed this call, it is not peforming the calculations. Using bldScript25_addFees() instead
 //calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
-bldScript25_addFees();
+if($iTrc(wfTask == "Quality Check" && wfStatus == "Approved", 'wf:Quality Check/Approved')){
+    bldScript25_addCaptialNParkFees();
+    bldScript390_addSinFamFee();
+}
+
+if($iTrc(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Processing/Ready to Pay')){
+	bldScript25_invoiceCaptialNParkFees();
+}
 
 /*
 Title : Activate workflow tasks (WorkflowTaskUpdateAfter) 
@@ -58,6 +65,8 @@ Notes:
 */
 
 activateWorkflowTasks();
+if($iTrc(!isTaskStatus("Quality Check", "Approved"), '!isTaskStatus("Quality Check", "Approved")'))
+	deactivateTask("Fee Processing");
 
 /*
 Title : Update Permit Expiration with every Resubmittal (WorkflowTaskUpdateAfter) 
@@ -118,4 +127,3 @@ autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIs
 		
 
 bldScript48_addForestryFee();
-bldScript390_addSinFamFee();

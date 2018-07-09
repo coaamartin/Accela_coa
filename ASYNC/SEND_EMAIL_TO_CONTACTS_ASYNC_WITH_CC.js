@@ -136,7 +136,14 @@ else {
 	} else {
 		conTypeArray = rtnContactTypes(sendEmailToContactTypes);
 	}
-	conCCTypeArray = rtnContactTypes(ccEmailToContactTypes);
+
+	//get/clean cc types
+	if (ccEmailToContactTypes == "All") {
+		conCCTypeArray = validConTypes;
+	} else {
+		conCCTypeArray = rtnContactTypes(ccEmailToContactTypes);
+	}
+	//conCCTypeArray = rtnContactTypes(ccEmailToContactTypes);
  
 	//get From email from template configuration
 	if (emailTemplate && emailTemplate != '') {
@@ -295,7 +302,9 @@ else {
 		//Send email
 		logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument(mailFrom, conEmail, conCCEmailArrayString.replace(conEmail.toUpperCase() + ';', '').replace(conEmail.toUpperCase(), ''), emailTemplate, vEParamsToSend, capId4Email, null).getSuccess());
 		logDebug("SEND_EMAIL_TO_CONTACTS_ASYNC: " + capId.getCustomID() + ": Sending " + emailTemplate + " from " + mailFrom + " to " + conEmail);
+		conCCEmailArrayString = '';
 	}
+
 
 	//Loop through the contact objects without email and update the Ad-Hoc Note
 	for (v in conObjNonEmailArray) {

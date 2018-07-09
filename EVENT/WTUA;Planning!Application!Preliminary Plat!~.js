@@ -16,40 +16,41 @@ Notes:
 */
 
 checkWorkflowDeactivateTaskAndSendEmail("Pre Submittal Meetings", [ "Email Applicant" ], "Pre Submittal Meetings", "PLN PRE SUBMITTAL MEETING #253");
+/* Script 419 created by SLS */
+logDebug("script419 WTUACreatePublicWorksDrainageRecord START."); 
+if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' || wfStatus == 'Resubmittal Requested' || wfStatus == 'Comments Not Received')) {
 
-/*
-Title : Planning Application Workflow Updates (WorkflowTaskUpdateAfter)
-Purpose : If workflow task = "Generate Hearing Results" and workflow status = "Complete - No Council" or "Complete" then reactivate
-any workflow review task that has the workflow status of "Proceed Tech" or "Resubmittal Requested" and send an email to
-the applicant with the workflow comments. In addition if the workflow task "Planning Commission Hearing" and workflow
-status = "Recommend Denial" then assign the case manager (Comes from the assigned to user in Record Detail tab) to the
-workflow task "Add to Council Agenda" or "Appeal/Call Up Period" if either of these tasks are active.
+// >>>>>>>>>>>> for now set the TSI value to true to create 
+// >>>>>>>>>>>> the record until City can decide on config change
 
-Author: Haitham Eleisah
+	var isDrainageReqTSI = true;
+	var thisTSIArr = [];
+	loadTaskSpecific(thisTSIArr);
 
-Functional Area : Records
-
-Notes :
-Appeal/Call Up Period task is not exists i think the correct name is Appeal Period
-Sample Call:
-if (wfTask == "Generate Hearing Results" && checkWFStatus("Complete", [ "Complete - No Council", "Complete Council", "Complete" ])) {
-	reactivateTasksAndSendemail("MESSAGE_NOTICE_PUBLIC WORKS", [ "Proceed-Tech", "Resubmittal Requested" ]);
-} else if (wfTask == "Planning Commission Hearing" && wfStatus == "Recommend Denial") {
-	updateTaskAssignedUserbyCapAssignedUser([ "Add to Council Agenda", "Appeal Period" ]);
-}
- */
-
-var generateWorkFlowTask = "Generate Hearing Results";
-var generateWorkFlowStatuses = [ "Complete - No Council", "Complete Council", "Complete" ];
-var planningWorkFlowTask = "Planning Commission Hearing";
-var plangingWorkFlowStatus = "Recommend Denial";
-var emailTemplate = "MESSAGE_NOTICE_PUBLIC WORKS";
-var reviewTasksStatuses = [ "Proceed-Tech", "Resubmittal Requested" ];
-var TasksToBeChecked = [ "Add to Council Agenda", "Appeal Period" ];
-if (appTypeArray[2] != "Address") {
-	if (wfTask == generateWorkFlowTask && checkWFStatus(wfStatus, generateWorkFlowStatuses)) {
-		reactivateTasksAndSendemail(emailTemplate, reviewTasksStatuses);
-	} else if (wfTask == planningWorkFlowTask && wfStatus == plangingWorkFlowStatus) {
-		updateTaskAssignedUserbyCapAssignedUser(TasksToBeChecked);
+	var appNamed = cap.getSpecialText() + "";
+	var alreadyDrainageChildWithSameName = false;
+	var childArr = getChildren("PublicWorks/Drainage/NA/NA",capId);
+	for (aChild in childArr) {
+		var aChildCap = aa.cap.getCap(childArr[aChild]).getOutput();
+		var childAppNameStr = aChildCap.getSpecialText();
+		if ( childAppNameStr == appNamed ) {
+			alreadyDrainageChildWithSameName = true;
+		}
+	}
+	if ((!alreadyDrainageChildWithSameName) && isDrainageReqTSI) {
+		var newChildrec = createChild('PublicWorks','Drainage','NA','NA',appNamed);
+		if (!newChildrec) { 
+			logDebug("script419: unable to create child record");
+		}
+		else {
+			logDebug("script419: Child Record Created="+newChildrec);
+		}
+	}
+	else {
+		logDebug("script419: Drainage TSI is false or already child created!");
+		logDebug("script419: alreadyDrainageChildWithSameName= "+alreadyDrainageChildWithSameName);
+		logDebug("script419: isDrainageReqTSI+ "+isDrainageReqTSI);				
 	}
 }
+logDebug("script419 WTUACreatePublicWorksDrainageRecord end.");
+/* END script 419 */

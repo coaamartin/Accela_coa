@@ -12,25 +12,5 @@ Functional Area : Records
 Sample Call : updateAssignedToUser()
 
 */
-
 updateAssignedToUser();
 
-/*
-Title : Set E-Agenda Due Date (WorkflowTaskUpdateAfter) 
-
-Purpose : When the workflow task “Generate Hearing Results” has a status of “Complete” then activate the workflow 
-task “Create E-Agenda” and set the workflow due date to 15 calendar days prior to the meeting type
-(from the meetings tab) “City Council”.
-
-Author: Yazan Barghouth 
- 
-Functional Area : Records
-
-Sample Call:
-	setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Create E-Agenda", "City Council");
-	
-Notes:
-	Meeting 'City Council' was not found -could not be scheduled?!-, Script tested with 'Planning Commission' Meeting
-*/
-
-setEAgendaDueDate("Generate Hearing Results", [ "Complete" ], "Create E-Agenda", "City Council");

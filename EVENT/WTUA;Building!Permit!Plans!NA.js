@@ -1,10 +1,11 @@
+var $iTrc = ifTracer;
 /* Title :  Create child water utility permit records (WorkflowTaskUpdateAfter)
 
-Purpose :   If workflow task = “Fire Life Safety Review” and workflow status = “Approved” and the TSI field “Is there a private fire line” =
-“Yes” and the custom field “Number of Fire Lines” > 0 then auto create a child Water Utility Permit record
-(Water/Utility/Permit/NA) for each number listed in the TSI field “Number of Fire Lines” as a child of the
+Purpose :   If workflow task = "Fire Life Safety Review" and workflow status = "Approved" and the TSI field "Is there a private fire line" =
+"Yes" and the custom field "Number of Fire Lines" > 0 then auto create a child Water Utility Permit record
+(Water/Utility/Permit/NA) for each number listed in the TSI field "Number of Fire Lines" as a child of the
 Building/Permit/New Building/NA or Building/Permit/Plan/NA. When creating these child records copy address, parcel,
-owner and contact information. In addition set the custom field “Utility Permit Type” = “Private Fire Lines” On the Utility
+owner and contact information. In addition set the custom field "Utility Permit Type" = "Private Fire Lines" On the Utility
 Permit record.
 
 Author :   Israa Ismail
@@ -38,6 +39,8 @@ Notes:
 */
 
 activateWorkflowTasks();
+if($iTrc(!isTaskStatus("Quality Check", "Approved"), '!isTaskStatus("Quality Check", "Approved")'))
+	deactivateTask("Fee Processing");
 
 /*
 Title : Update Permit Expiration with every Resubmittal (WorkflowTaskUpdateAfter) 
@@ -81,5 +84,5 @@ Notes:
 	- When try to read COUNTY from parcel it's being read from Parcel Attributes (COUNTY)
 
 */
-
-permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
+//not needed in WTUA
+//permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
