@@ -56,10 +56,16 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                          updateOrCreateValueInASITable(tableName, 'Admin Charge', amt, 'N');
                     }
                 } 
-            } else if(ifTracer(wfTask == "Recordation" && (wfStatus =="Record Reception"), "wfTask == Recordation && wfStatus == Record Reception")) {
+            } else if(ifTracer(wfTask == "Recordation" && wfStatus =="Record Reception", "wfTask == Recordation && wfStatus == Record Reception")) {
                 // wfTask == "Recordation" && wfStatus =="Record Reception"
                 updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal, 'N');
-            }            
+            } else if(ifTracer(wfTask == "Release Lien" && wfStatus =="Record Reception", "wfTask == Release Lien && wfStatus == Record Reception")) {
+                // wfTask == "Release Lien" && wfStatus =="Record Reception"
+                updateOrCreateValueInASITable(tableName, 'Release Date', AInfo["Release Reception Date"], 'N');
+            } else if(ifTracer(wfTask == "Recordation" && wfStatus =="Released to County", "wfTask == Recordation && wfStatus == Released to County")) {
+                // wfTask == "Recordation" && wfStatus =="Released to County"
+                updateOrCreateValueInASITable(tableName, 'Released to County Date', AInfo["Released to County Date"], 'N');
+            }         
         } else if(ifTracer(eventName == "PaymentReceiveAfter", "EventName == PaymentReceiveAfter")) {
             //PRA
             if(ifTracer(balanceDue == 0,'balanceDue = 0')) {
