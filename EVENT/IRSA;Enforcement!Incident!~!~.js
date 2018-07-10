@@ -17,4 +17,4 @@ if (matchARecordType([
     include("426_UpdateParentEnfCaseCustomListAndStatus");
 }
 
-logDebug('capId: ' + capId);
+logDebug('capId (IRSA;Enforcement!Incident!~!~): ' + capId);
