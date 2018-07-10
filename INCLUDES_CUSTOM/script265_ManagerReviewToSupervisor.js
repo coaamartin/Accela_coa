@@ -26,7 +26,7 @@ function script265_ManagerReviewToSupervisor (){
 		}
 		
 		if($iTrc(!supRevAssigned, '!supRevAssigned')){
-			var initSupRevUser = getTaskAssignedStaff("Supervisor Review"");
+			var initSupRevUser = getTaskAssignedStaff("Supervisor Review");
 			assignTask("Supervisor Review", initSupRevUser);
 		}
 	}
