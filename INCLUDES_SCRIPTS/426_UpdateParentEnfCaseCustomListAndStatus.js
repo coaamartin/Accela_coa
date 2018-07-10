@@ -1,5 +1,4 @@
-//script426_UpdateParentEnfCaseCustomListAndStatus();
-logDebug('capId: ' + capId);
+script426_UpdateParentEnfCaseCustomListAndStatus();
 
 function script426_UpdateParentEnfCaseCustomListAndStatus() {
     var row,
@@ -9,6 +8,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         mm,
         dd,
         dte,
+        maxInsp,
         eventName = aa.env.getValue("EventName");
 
     if (matchARecordType([
@@ -132,18 +132,25 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 // inspType == "NOV Inspection"
                 updateOrCreateValueInASITable(tableName, 'Last Inspection Date', inspResultDate, 'N');
                 if(inspResult == "Failed") {
-                    var maxInsp = getLastInspectionbyType(capId, "NOV Release Inspection");
+                    maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection" });
                     if(maxInsp) {
-                        updateOrCreateValueInASITable(tableName, 'Next Inspection Date', maxInsp.getScheduledDate(), 'N');
+                        dte = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
+                        updateOrCreateValueInASITable(tableName, 'Next Inspection Date', dte, 'N');
                     }
                 } else {
                     updateOrCreateValueInASITable(tableName, 'Next Inspection Date', inspSchedDate, 'N');
                 }
+                updateOrCreateValueInASITable(tableName, 'Completed Inspections', getCompletedInspections({}), 'N');
+                maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
+                if(maxInsp) {
+                    dte = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
+                    updateOrCreateValueInASITable(tableName, 'Compliance Date', dte, 'N');
+                }
              }
         }  else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
             //WTUA
-            if(ifTracer(inspResult == "Record NOV", 'inspResult == "Record NOV"')) {
-                // inspResult == "Record NOV", "inspResult == Taken and Stored"
+            if(ifTracer(wfTask == "Record NOV" && wfStatus == "Record Reception", 'wfTask == "Record NOV" && wfStatus == "Record Reception"')) {
+                // wfTask == "Record NOV" && wfStatus == "Record Reception"
                 row = createAsiTableValObjs([
                     { columnName: 'NOV Record #', fieldValue: capIDString, readOnly: 'N' },
                     { columnName: 'Recordation Date', fieldValue: AInfo['Record Reception Date'], readOnly: 'N' },
@@ -152,8 +159,10 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     { columnName: 'Release #', fieldValue: AInfo['Release Reception #'], readOnly: 'N' }
                 ]);
                 addToASITable(tableName, row);
+            } else if(ifTracer(wfTask == "Release NOV" && wfStatus == "Record Reception", 'wfTask == "Release NOV" && wfStatus == "Record Reception"')) {
+                // wfTask == "Release NOV" && wfStatus == "Record Reception"
+                updateRecordWithCountyUponCompletion();
             }
-
         }
     }
 }
@@ -295,22 +304,104 @@ function updateSummonsUponCompletion() {
             if(parentAppString == "Enforcement\Housing\Inspection\NA") {
                 updateAppStatus(capStatus,'Status set by script 426', parentCapId);
             } else {
-                updateAppStatus('Pending Houdsing Inspection','Status set by script 426', parentCapId);
+                updateAppStatus('Pending Housing Inspection','Status set by script 426', parentCapId);
             }
         }
    }
 }
 
-function getLastInspectionbyType(capId, inspectionType) {
+function updateRecordWithCountyUponCompletion() {
+    //THIS IS INSANE MAKING ME DO EVERYTHING OVER AGAIN AT THE END - GHEZ!
+    var dteSched,
+        dteStatus;
+
+    maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection" });
+    if(maxInsp) {
+        dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
+        dteSched = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
+        updateOrCreateValueInASITable(tableName, 'Last Inspection Date', dteStatus, 'N');
+        updateOrCreateValueInASITable(tableName, 'Next Inspection Date', dteSched, 'N');
+    }
+    maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
+    if(maxInsp) {
+        dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
+        updateOrCreateValueInASITable(tableName, 'Compliance Date', dteStatus, 'N');
+    }
+    updateOrCreateValueInASITable(tableName, 'Recordation Date', AInfo['Record Reception Date'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Recordation #', AInfo['Record Reception #'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Release Date', AInfo['Release Reception Date'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Release #', AInfo['Release Reception #'], 'N');
+
+    var childrenWithActiveTasks = getChildrenWithActiveTasks();
+    if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
+        //if current record is the only record open, close parent
+        var parentCapId = getParent();
+        var parentCap = aa.cap.getCap(parentCapId).getOutput();
+        var parentCapStatus = parentCap.getStatus();
+        var parentAppString = parentCap.getCapType().toString();
+
+        if (matchARecordType([
+            "Enforcement\Housing\Inspection\NA",
+            "Enforcement\Incident\Zoning\NA"
+        ], appTypeString)) {
+            closeAllTasks(parentCapId, 'closed by script 426');
+            if(parentAppString == "Enforcement\Housing\Inspection\NA") {
+                updateAppStatus("Pending Housing Inspection",'Status set by script 426', parentCapId);
+            } else {
+                updateAppStatus('Compliance','Status set by script 426', parentCapId);
+            }
+        }
+   }
+}
+
+
+
+function getCompletedInspections(options) {
+    var settings = {
+        inspType: null, // if not null, will filter by given inspection type
+        capId: capId,
+    };
+    for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
+
+    var completedInspections = [],
+        inspResultObj = aa.inspection.getInspections(settings.capId);
+      
+    if (inspResultObj.getSuccess()) {
+        var inspList = inspResultObj.getOutput();
+        for (xx in inspList) {
+            if(
+                (!inspList[xx].getInspectionStatus().toUpperCase().equals("SCHEDULED"))
+                && (settings.inspType = null || String(settings.inspType).equals(inspArray[i].getInspectionType()))
+            ){
+                completedInspections.push(inspList[xx]);
+            }
+        }
+    }    
+      
+    return completedInspections;
+}
+
+function getLastInspection(options) {
+    var settings = {
+        capId: capId,
+        inspType: null, // if not null, will filter by given inspection type
+        inspResult: null // if not null, will filter by given inspection result
+    };
+    for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
+
+
 	var ret = null;
-	var r = aa.inspection.getInspections(capId);
+	var r = aa.inspection.getInspections(settings.capId);
 	if (r.getSuccess()) {
 		var maxId = -1;
 		var maxInsp = null;
 		var inspArray = r.getOutput();
 
 		for (i in inspArray) {
-			if (String(inspectionType).equals(inspArray[i].getInspectionType())) {
+			if (
+                (settings.inspType = null || String(settings.inspType).equals(inspArray[i].getInspectionType()))
+                && (settings.inspResult = null || String(settings.inspResult).equals(inspArray[i].getInspectionStatus()))
+            ) {
 				var id = inspArray[i].getIdNumber();
 				if (id > maxId) {
 					maxId = id;
@@ -322,8 +413,8 @@ function getLastInspectionbyType(capId, inspectionType) {
 		if (maxId >= 0) {
 			ret = maxInsp;
 		}
-	} else {
-		aa.debug("LIST INSP ERROR:", r.getErrorMessage())
-	}
+	} 
 	return ret;
 }
+
+
