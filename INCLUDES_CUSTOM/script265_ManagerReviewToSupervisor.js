@@ -12,11 +12,10 @@
 function script265_ManagerReviewToSupervisor (){
 	logDebug("script265_ManagerReviewToSupervisor() started.");
 	try{
-		if ( wfTask == "Supervisor Review" && wfStatus == "Approved" && isTaskStatus("Draft Workorder","Workorder Drafted"))
-		{
-			assignTask("Manager Review",currentUserID);
-			logDebug("script265_ManagerReviewToSupervisor() - Task Supervisor Review set to: " + currentUserID);
-		}
+		var supRevTSI = initSupRev = [];
+		loadTSIByTask(supRevTSI, "Supervisor Review");
+		loadTSIByTask(initSupRev, "Intital Supervisor Review");
+		
 	}
 	catch(err){
 		logDebug("Error on custom function script265_ManagerReviewToSupervisor(). Please contact administrator. Err: " + err);
