@@ -1,4 +1,4 @@
-script426_UpdateParentEnfCaseCustomListAndStatus();
+//script426_UpdateParentEnfCaseCustomListAndStatus();
 
 function script426_UpdateParentEnfCaseCustomListAndStatus() {
     var row,
@@ -16,7 +16,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         tableName = 'ABATEMENT INFORMATION';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
             //IRSA
-            if(ifTracer(inspResult == "Taken and Stored", "inspResult == Taken and Stored")) {
+            if(ifTracer(inspResult == "Taken and Stored", 'inspResult == "Taken and Stored"')) {
                 // inspResult == Taken and Stored (create row)
                 row = createAsiTableValObjs([
                     { columnName: 'Abatement #', fieldValue: capIDString, readOnly: 'N' },
@@ -26,7 +26,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             } else if(ifTracer(inspResult == "Called In Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
                 // inspResult == Called in Service Request OR Completed Service Request (update row if exists, else create row)
                 updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
-            }  else if(ifTracer(inspType== "Abatement Approval" && inspResult == "Invoice Approval", "inspType== Abatement Approval && inspResult == Invoice Approval")) {
+            } else if(ifTracer(inspType== "Abatement Approval" && inspResult == "Invoice Approval", "inspType== Abatement Approval && inspResult == Invoice Approval")) {
                 // inspType== Abatement Approval && inspResult == Invoice Approval (update row if exists, else create row)
                 updateOrCreateValueInASITable(tableName, 'Completed Date', Info['Abatement Completed Date'], 'N');
             } else if(ifTracer(instr(inspType, "Post Abatement Inspection") > -1 && inspResult == "Cancelled", "inspType Like Abatement Approval && inspResult == Cancelled")) {
@@ -67,7 +67,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 updateOrCreateValueInASITable(tableName, 'Paid Date', dte, 'N');
             }
         }
-    } if (matchARecordType([
+    } else if (matchARecordType([
         "Enforcement/Incident/Summons/NA"
     ], appTypeString)) {
         tableName = 'SUMMONS TO COURT INFORMATION';
@@ -120,10 +120,41 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 // wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"
                 editAppSpecific("Disposition", wfStatus);
             }
-        } 
-        
+        }         
+    } else if (matchARecordType([
+        "Enforcement/Incident/Record with County/NA"
+    ], appTypeString)) {
+        tableName = 'NOV RECORDATION INFORMATION';
+        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
+            //IRSA
+            if(ifTracer(inspType == "NOV Release Inspection", 'inspType == "NOV Release Inspection"')) {
+                // inspType == "NOV Inspection"
+                updateOrCreateValueInASITable(tableName, 'Last Inspection Date', inspResultDate, 'N');
+                if(inspResult == "Failed") {
+                    var maxInsp = getLastInspectionbyType(capId, "NOV Release Inspection");
+                    if(maxInsp) {
+                        updateOrCreateValueInASITable(tableName, 'Next Inspection Date', maxInsp.getScheduledDate(), 'N');
+                    }
+                } else {
+                    updateOrCreateValueInASITable(tableName, 'Next Inspection Date', inspSchedDate, 'N');
+                }
+             }
+        }  else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
+            //WTUA
+            if(ifTracer(inspResult == "Record NOV", 'inspResult == "Record NOV"')) {
+                // inspResult == "Record NOV", "inspResult == Taken and Stored"
+                row = createAsiTableValObjs([
+                    { columnName: 'NOV Record #', fieldValue: capIDString, readOnly: 'N' },
+                    { columnName: 'Recordation Date', fieldValue: AInfo['Record Reception Date'], readOnly: 'N' },
+                    { columnName: 'Recordation #', fieldValue: AInfo['Record Reception #'], readOnly: 'N' },
+                    { columnName: 'Release Date', fieldValue: AInfo['Release Reception Date'], readOnly: 'N' },
+                    { columnName: 'Release #', fieldValue: AInfo['Release Reception #'], readOnly: 'N' }
+                ]);
+                addToASITable(tableName, row);
+            }
+
+        }
     }
-    
 }
 
 function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
@@ -267,4 +298,31 @@ function updateSummonsUponCompletion() {
             }
         }
    }
+}
+
+function getLastInspectionbyType(capId, inspectionType) {
+	var ret = null;
+	var r = aa.inspection.getInspections(capId);
+	if (r.getSuccess()) {
+		var maxId = -1;
+		var maxInsp = null;
+		var inspArray = r.getOutput();
+
+		for (i in inspArray) {
+			if (String(inspectionType).equals(inspArray[i].getInspectionType())) {
+				var id = inspArray[i].getIdNumber();
+				if (id > maxId) {
+					maxId = id;
+					maxInsp = inspArray[i];
+				}
+
+			}
+		}
+		if (maxId >= 0) {
+			ret = maxInsp;
+		}
+	} else {
+		aa.debug("LIST INSP ERROR:", r.getErrorMessage())
+	}
+	return ret;
 }
