@@ -67,7 +67,7 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 	}
 	
 	var currentCapId = capId;
-	var appName = "Forestry created for Record Number " + capId.customID;
+//	var appName = "Forestry created for Record Number " + capId.customID ;
 	var newChild = createChild('Forestry','Request','Citizen','NA',appName);
 	var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
 	copyRecordDetailsLocal(capId, newChild);
