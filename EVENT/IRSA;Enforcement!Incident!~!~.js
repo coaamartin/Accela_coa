@@ -16,3 +16,5 @@ if (matchARecordType([
 ], appTypeString)) {
     include("426_UpdateParentEnfCaseCustomListAndStatus");
 }
+
+logDebug('capId: ' + capId);
