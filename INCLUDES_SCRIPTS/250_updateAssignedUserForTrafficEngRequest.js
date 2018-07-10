@@ -3,7 +3,7 @@ script250_updateAssignedUserForTrafficEngRequest();
 function script250_updateAssignedUserForTrafficEngRequest(){
 	useTaskSpecificGroupName=false;
 
-	var assignedTo = getTaskSpecific(wfTask, "Assigned To");
+	var assignedTo = getTaskSpecific(wfTask, "Assigned to Investigator");
 	logDebug(assignedTo);
 	if(assignedTo != false) {
 		var userName=assignedTo.split(" ");
