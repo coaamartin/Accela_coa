@@ -22,6 +22,7 @@
 //Created By: 		Silver Lining Solutions
 //*********************************************************************************************************
 logDebug("Script 73 START");
+logDebug("Script 73 capId = " + capId);
 if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection" || 
 										 inspType == "Zoning Follow-Up Inspection" ||
 										 inspType == "Zoning Final Inspection" ))
@@ -44,7 +45,7 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 	}
 	
 	var currentCapId = capId;
-//	var appName = "Forestry created for Record Number " + capId.customID ;
+	var appName = "Forestry created for Record Number " + capId.customID ;
 	var appName = "Created from Zoninig Incident";
 	var newChild = createChild('Forestry','Request','Citizen','NA',appName);
 	var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
