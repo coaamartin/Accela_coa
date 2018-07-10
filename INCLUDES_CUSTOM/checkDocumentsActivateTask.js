@@ -1,9 +1,9 @@
 function checkDocumentsActivateTask(workFlowTask, workflowStatusArray, activateAndTsiTaskName, recordStatus) {
-
+	logDebug("DONB x1")
 	if (cap.getCapStatus() != recordStatus) {
 		return false;
 	}
-
+	logDebug("DONB x2")
 	var matched = false;
 	for (s in workflowStatusArray) {
 		if (isTaskStatus(workFlowTask, workflowStatusArray[s])) {
@@ -15,7 +15,7 @@ function checkDocumentsActivateTask(workFlowTask, workflowStatusArray, activateA
 	if (!matched) {
 		return false;
 	}
-
+	logDebug("DONB x3")	
 	var olduseTaskSpecificGroupName = useTaskSpecificGroupName;
 	useTaskSpecificGroupName = true;
 	var tsiValues = new Array();
