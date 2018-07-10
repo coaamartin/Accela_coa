@@ -33,8 +33,10 @@ function checkDocumentsActivateTask(workFlowTask, workflowStatusArray, activateA
 		if (t.indexOf(activateAndTsiTaskName) != -1 && tsiValues[t] == "CHECKED") {
 			var uploaded = checkDocumentUploaded(t);
 			++totalChecked;
+			logDebug("DONB1 totalChecked" + totalChecked)
 			if (uploaded) {
 				++totalUploaded;
+				logDebug("DONB2 totalUploaded" + totalUploaded)
 			}
 		}//checked TSI for required task
 	}//for all TSIs
