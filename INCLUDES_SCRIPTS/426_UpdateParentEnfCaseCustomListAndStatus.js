@@ -93,9 +93,9 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 // inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")
                 updateOrCreateValueInASITable(tableName, 'Arraign Date', Info['Arraignment Date'], 'N');
                 updateOrCreateValueInASITable(tableName, 'Notice of Hearing', Info['Notice of Hearing'], 'N');
-            } else if(ifTracer(inspType == "Legal Resolution" && inspResult == "Complete", 'nspType == "Legal Resolution" && inspResult == "Complete"')) {
+            } else if(ifTracer(inspType == "Legal Resolution" && inspResult == "Complete", 'inspType == "Legal Resolution" && inspResult == "Complete"')) {
                 // inspType == "Legal Resolution" && inspResult == "Complete"
-                updateOrCreateValueInASITable(tableName, 'Notice of Hearing', Info['Notice of Hearing'], 'N');
+
             } 
         } else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
             //WTUA
@@ -239,4 +239,32 @@ function updateAbatementUponCompletion() {
         closeAllTasks(parentCapId, 'closed by script 426');
         updateAppStatus('Compliance','Status set by script 426', parentCapId);
     }
+}
+
+function updateSummonsUponCompletion() {
+    updateOrCreateValueInASITable(tableName, 'Arraign Date', Info['Arraignment Date'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Notice of Hearing', Info['Notice of Hearing'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
+    updateOrCreateValueInASITable(tableName, 'Trial Date', AInfo["Trial Date"], 'N');
+    updateOrCreateValueInASITable(tableName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
+    updateOrCreateValueInASITable(tableName, 'Summons #', AInfo['Court Z-Number'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Issue Date', AInfo['Court Z-Number'], 'N');
+
+    var childrenWithActiveTasks = getChildrenWithActiveTasks();
+    if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
+        //if current record is the only record open, close parent
+        var parentCapId = getParent();
+        var parentCap = aa.cap.getCap(parentCapId).getOutput();
+        var parentCapStatus = parentCap.getStatus();
+        var parentAppString = parentCap.getCapType().toString();
+        if(parentCapStatus == "NFZV - 1 Year Date" || parentCapStatus =="Compliance") {
+            closeAllTasks(parentCapId, 'closed by script 426');
+            if(parentAppString == "Enforcement\Housing\Inspection\NA") {
+                updateAppStatus(capStatus,'Status set by script 426', parentCapId);
+            } else {
+                updateAppStatus('Pending Houdsing Inspection','Status set by script 426', parentCapId);
+            }
+        }
+   }
 }
