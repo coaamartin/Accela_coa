@@ -89,8 +89,39 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     }
                 }
                 addToASITable(tableName, row);
+            } else if(ifTracer(inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA"), 'inspType == "Pre Court Action" && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")')) {
+                // inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")
+                updateOrCreateValueInASITable(tableName, 'Arraign Date', Info['Arraignment Date'], 'N');
+                updateOrCreateValueInASITable(tableName, 'Notice of Hearing', Info['Notice of Hearing'], 'N');
+            } else if(ifTracer(inspType == "Legal Resolution" && inspResult == "Complete", 'nspType == "Legal Resolution" && inspResult == "Complete"')) {
+                // inspType == "Legal Resolution" && inspResult == "Complete"
+                updateOrCreateValueInASITable(tableName, 'Notice of Hearing', Info['Notice of Hearing'], 'N');
+            } 
+        } else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
+            //WTUA
+            if(ifTracer(wfTask == "Legal Hearing" && wfStatus == "Court Ordered Re-Inspect", 'wfTask == "Legal Hearing" && wfStatus == "Court Ordered Re-Inspect"')) {
+                // wfTask == "Legal Hearing" && wfStatus == "Court Ordered Re-Inspect"
+                updateOrCreateValueInASITable(tableName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
+            } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="Pre-Trial", 'wfTask == "Legal Hearing" && wfStatus =="Pre-Trial"')) {
+                // wfTask == "Legal Hearing" && wfStatus =="Pre-Trial"
+                updateOrCreateValueInASITable(tableName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
+            } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="Trial", 'wfTask == "Legal Hearing" && wfStatus =="Trial"')) {
+                // wfTask == "Legal Hearing" && wfStatus =="Trial"
+                updateOrCreateValueInASITable(tableName, 'Trial Date', AInfo["Trial Date"], 'N');
+            } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year", 'wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year')) {
+                // wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year"
+                updateOrCreateValueInASITable(tableName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
+            } else if(ifTracer(wfTask == "Legal Hearing" && 
+                        (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"
+                        || wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"
+                        || wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"
+                        || wfStatus == "FTA"
+                        ), 'wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"')) {
+                // wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"
+                editAppSpecific("Disposition", wfStatus);
             }
-        }
+        } 
+        
     }
     
 }
