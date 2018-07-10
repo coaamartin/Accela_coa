@@ -278,6 +278,4 @@ else {
 		logDebug("Create AddHocTask: " + vAddAdHocTask);
 		addAdHocTaskAssignDept_COA(vAdHocProcess, vAdHocTask, vAdHocNote, vAdHocAssignDept);
 	}
-	
-	aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 }

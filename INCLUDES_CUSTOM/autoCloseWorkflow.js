@@ -76,7 +76,7 @@ function autoCloseWorkflow() {
 	if (!matched) {
 		recTypesAry = new Array();
 		recTypesAry = [ "Building/Permit/No Plans/NA" ];
-		matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Submitted", "Fee Processing", "Issued", "Issued");
+		matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Submitted", "Permit Issuance", "Issued", "Issued");
 		
 		if(matched){
 			//send email()
