@@ -108,6 +108,152 @@ if(inspType == "Snow Fee 2nd Re-Inspection"){
     enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abate/Summons", null, null, false, "Snow Fee 2nd Reinspect", "Snow Abate/Summons");
 }
 
+if(inspType == "Initial Housing Inspectionn"){
+    //Script 346
+    enfProcessInspResult("Initial Housing Inspection", "Inspection Failed", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "Initial Inspection", "Inspection Failed");
+    enfProcessInspResult("Initial Housing Inspection", "Inspection Passed", null, null, false, "Initial Inspection", "Inspection Passed");
+    enfProcessInspResult("Initial Housing Inspection", "Extension - Fee", "Initial Housing Inspection", "Initial Inspection Scheduled Date", false, "Initial Inspection", "Extension - Fee");
+    enfProcessInspResult("Initial Housing Inspection", "Extension - No Fee", "Initial Housing Inspection", "Initial Inspection Scheduled Date", false, "Initial Inspection", "Extension - No Fee");
+    enfProcessInspResult("Initial Housing Inspection", "No Show", "Initial Housing Inspection", "Initial Inspection Scheduled Date", false, "Initial Inspection", "No Show");
+}
+
+if(inspType == "1st Housing Re-Inspection"){
+    //Script 346
+    enfProcessInspResult("1st Housing Re-Inspection", "Inspection Failed", "2nd Housing Re-Inspection", "2nd Re-Inspection Scheduled Date", false, "1st Re-inspection","Inspection Failed");
+    enfProcessInspResult("1st Housing Re-Inspection", "Inspection Passed", null, null, false, "1st Re-inspection","Inspection Passed");
+    enfProcessInspResult("1st Housing Re-Inspection", "Extension - Fee", "1st Housing Re-Inspectio,", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - Fee");
+    enfProcessInspResult("1st Housing Re-Inspection", "Extension - No Fee", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - No Fee");
+}
+
+if(inspType == "2nd Housing Re-Inspection"){
+    //Script 346
+    enfProcessInspResult("2nd Housing Re-Inspection", "Inspection Failed", "3rd Housing Re-Inspection", "3rd Re-Inspection Scheduled Date", false, "2nd Re-inspection", "Inspection Failed");
+    enfProcessInspResult("2nd Housing Re-Inspection", "Inspection Passed", null, null, false, "2nd Re-inspection", "Inspection Passed");
+    enfProcessInspResult("2nd Housing Re-Inspection", "Extension - Fee", "2nd Housing Re-Inspection", "2nd Re-Inspection Scheduled Date", false, "2nd Re-inspection", "Extension - Fee");
+    enfProcessInspResult("2nd Housing Re-Inspection", "No Show", "2nd Housing Re-Inspection", "2nd Re-Inspection Scheduled Date", false, "2nd Re-inspection", "No Show");
+}
+
+if(inspType == "3rd Housing Re-Inspection"){
+    //Script 346
+    enfProcessInspResult("3rd Housing Re-Inspection", "Inspection Failed", "4th Housing Re-Inspection", "4th Re-Inspection Scheduled Date", false, "3rd Re-inspection", "Inspection Failed");
+    enfProcessInspResult("3rd Housing Re-Inspection", "Inspection Passed", null, null, false, "3rd Re-inspection", "Inspection Passed");
+    enfProcessInspResult("3rd Housing Re-Inspection", "Extension - Fee", "3rd Housing Re-Inspection", "3rd Re-Inspection Scheduled Date", false, "3rd Re-inspection", "Extension - Fee");
+    enfProcessInspResult("3rd Housing Re-Inspection", "Extension - No Fee", "3rd Housing Re-Inspection", "3rd Re-Inspection Scheduled Date", false, "3rd Re-inspection", "Extension - No Fee");
+}
+
+if(inspType == "4th Housing Re-Inspection"){
+    //Script 346
+    enfProcessInspResult("4th Housing Re-Inspection", "Inspection Failed", null, null, false, "4th Re-inspection", "Inspection Failed");
+    enfProcessInspResult("4th Housing Re-Inspection", "Inspection Passed", null, null, false, "4th Re-inspection", "Inspection Passed");
+    enfProcessInspResult("4th Housing Re-Inspection", "Extension - Fee", "4th Housing Re-Inspection", "4th Re-Inspection Scheduled Date", false, "4th Re-inspection", "Extension - Fee");
+    enfProcessInspResult("4th Housing Re-Inspection", "Extension - No Fee", "4th Housing Re-Inspection", "4th Re-Inspection Scheduled Date", false, "4th Re-inspection", "Extension - No Fee");
+}
+
+if(inspType == "Summons Issuance"){
+    //Script 346
+    enfProcessInspResult("Summons Issuance", "Taken and Stored - Summons", null, null, false, "Pre Summons Photos", "Taken and Stored - Summons");
+    enfProcessInspResult("Summons Issuance", "Visit/Attempted Contact", null, null, false, "Summons Issuance", "Visit/Attempted Contact");
+    enfProcessInspResult("Summons Issuance", "Personal Service", "Pre Court Action", 0, false, "Summons Issuance", "Personal Service");
+    enfProcessInspResult("Summons Issuance", "Letter to be Sent", "Pre Court Action", 0, false, "Summons Issuance", "Letter to be Sent");
+    enfProcessInspResult("Summons Issuance", "Compliance", null, null, false, "Summons Issuance", "Compliance");
+    enfProcessInspResult("Summons Issuance", "Cancelled", null, null, false, "Summons Issuance", "Cancelled");
+    enfProcessInspResult("Summons Issuance", "Taken and Stored - Citation", "Pre Court Action", "Pre Court Action", false, "Pre Summons Photos", "Taken and Stored - Citation");
+}
+
+if(inspType == "Pre Court Action"){
+    //Script 346
+    enfProcessInspResult("Pre Court Action", "1 - Create Summons File", null, null, false, "Pre Court Action"," 1 - Create Summons File");
+    enfProcessInspResult("Pre Court Action", "2 - Summons to Court Liaison", null, null, false, "Pre Court Action"," 2 - Summons to Court Liaison");
+    enfProcessInspResult("Pre Court Action", "3 - File to Court Liaison", null, null, false, "Pre Court Action"," 3 - File to Court Liaison");
+    enfProcessInspResult("Pre Court Action", "4 - Summons to Docketing", null, null, false, "Pre Court Action"," 4 - Summons to Docketing");
+    enfProcessInspResult("Pre Court Action", "5 - Summons File to CA", "Pre Trial Inspection", 0, false, "Pre Court Action"," 5 - Summons File to CA");
+    enfProcessInspResult("Pre Court Action", "6 - Citation File to CA", "Pre Trial Inspection", 0, false, "Pre Court Action"," 6 - Citation File to CA");
+}
+
+if(inspType == "Pre Trial Inspection"){
+    //Script 346
+    enfProcessInspResult("Pre Trial Inspection", "Compliance", null, null, false, "Pre Court Investigation", "Compliance");
+    enfProcessInspResult("Pre Trial Inspection", "Non-Compliance", null, null, false, "Pre Court Investigation", "Non-Compliance");
+    enfProcessInspResult("Pre Trial Inspection", "Unverifiable", null, null, false, "Pre Court Investigation", "Unverifiable");
+}
+
+if(inspType == "Legal Resolution"){
+    //Script 346
+    enfProcessInspResult("Legal Resolution", "Complete", null, null, false, "Legal Resolution", "Complete");
+}
+
+if(inspType == "NOV Recordation Photos"){
+    //Script 346
+    enfProcessInspResult("NOV Recordation Photos", "Taken and Stored ", null, null, false, "Recordation Photos", "Taken and Stored");
+}
+
+if(inspType == "NOV Release Inspection"){
+    //Script 346
+    enfProcessInspResult("NOV Release Inspection", "Compliance", null, null, false, "NOV Release Inspection", "Compliance");
+    enfProcessInspResult("NOV Release Inspection", "Failed", "NOV Release Inspection", 90, false, "NOV Release Inspection", "Failed");
+    enfProcessInspResult("NOV Release Inspection", "New Owner", null, null, false, "NOV Release Inspection", "New Owner");
+}
+
+if(inspType == "Board-Up Abatement Order"){
+    //Script 346
+    enfProcessInspResult("Board-Up Abatement Order", "Called in Service Request", null, null, false, "Abatement Request", "Completed Service Request");
+    enfProcessInspResult("Board-Up Abatement Order", "Taken and Stored", "Post Abatement Inspection", "nextWorkDay", false, "Pre Abatement Photos", "Taken and Stored");
+}
+
+if(inspType == "Graffiti Abatement Order"){
+    //Script 346
+    enfProcessInspResult("Graffiti Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
+    enfProcessInspResult("Graffiti Abatement Order", "Taken and Stored", "Post Abatement Inspection - Graffiti Only", 0, false, "Pre Abatement Photos", "Taken and Stored");
+}
+
+if(inspType == "Post Abatement Inspection"){
+    //Script 346
+    enfProcessInspResult("Post Abatement Inspection", "Rescheduled Upon Re-Inspect", null, null, false, "Post Abatement Photos", "Rescheduled Upon Re-Inspect");
+    enfProcessInspResult("Post Abatement Inspection", "Rescheduled", null, null, false, "Post Abatement Photos", "Rescheduled");
+    enfProcessInspResult("Post Abatement Inspection", "Cancelled", null, null, false, "Post Abatement Photos", "Cancelled");
+    
+    if(inspResult == "Taken and Stored"){
+        updateTask("Post Abatement Photos", "No Violation Observed", "", "");
+        var currDate = aa.util.parseDate(dateAdd(null, 0));
+        var next3Days = aa.util.parseDate(dateAdd(null, 3));
+        var inspDays = days_between(currDate, next3Days);
+        scheduleInspection("Abatement Approval", inspDays);
+    }
+}
+
+if(inspType == "Post Abatement Inspection - Graffiti Only"){
+    //Script 
+    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Taken and Stored", "Abatement Approval", 0, false, "Post Abatement Photos", "No Violation Observed");
+    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Cancelled", null, null, false, "Post Abatement Photos", "Cancelled");
+}
+
+if(inspType == "Snow Abatement Order"){
+    //Script 346
+    enfProcessInspResult("Snow Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Sign Removed");
+    
+    if(inspResult == "Taken and Stored"){
+        var currDate = aa.util.parseDate(dateAdd(null, 0));
+        var next2Days = aa.util.parseDate(dateAdd(null, 2));
+        var inspDays = days_between(currDate, next2Days);
+        scheduleInspection("Post Abatement Inspection", inspDays);
+    }
+}
+
+if(inspType == "Abatement Approval"){
+    //Script 346
+    enfProcessInspResult("Abatement Approval", "Bill and Photo Denied", "Abatement Approval", "nextWorkDay", false, "Abatement Approval", "Bill and Photo Denied");
+    enfProcessInspResult("Abatement Approval", "Invoice Approved", null, null, false, "Abatement Approval", "Invoice Approved");
+    enfProcessInspResult("Abatement Approval", "Invoice Denied", "Abatement Approval", "nextWorkDay", false, "Abatement Approval", "Invoice Denied");
+    enfProcessInspResult("Abatement Approval", "Grafitti Abatement Redo", "Post Abatement Inspection - Graffiti Only", 0, false, "Abatement Approval", "Grafitti Abatement Redo");
+    
+    if(inspResult == "Bill and Photo Approved"){
+        var currDate = aa.util.parseDate(dateAdd(null, 0));
+        var next10Days = aa.util.parseDate(dateAdd(null, 10));
+        var inspDays = days_between(currDate, next10Days);
+        scheduleInspection("Abatement Approval", inspDays);
+    }
+}
+
 disableTokens = true;
 holdCapId = capId;
 parentArray = getParents("*/*/*/*");
@@ -212,36 +358,36 @@ if (inspResult == "Skip to Summons")
 logDebug("Script 343 END");
 
 //*********************************************************************************************************
-//script 344 		Create Child Abatement
+//script 344        Create Child Abatement
 //
-//Record Types:		Enforcement/*/*/*
-//Event: 			IRSA
-//Desc:				Create Child Record and schedule same day inspection when the inspection is resulted 
-// 					"Skip to Summons" Enforcement/Incident/Zoning/NA Enforcement/Incident/Snow/NA 
-//					Enforcement/Incident/Housing/NA SEE ATTACHMENT FOR SCRIPT SPECIFICATIONS
+//Record Types:     Enforcement/*/*/*
+//Event:            IRSA
+//Desc:             Create Child Record and schedule same day inspection when the inspection is resulted 
+//                  "Skip to Summons" Enforcement/Incident/Zoning/NA Enforcement/Incident/Snow/NA 
+//                  Enforcement/Incident/Housing/NA SEE ATTACHMENT FOR SCRIPT SPECIFICATIONS
 //
-//Created By: 		Silver Lining Solutions
+//Created By:       Silver Lining Solutions
 //*********************************************************************************************************
 logDebug("Script 344 START");
 if (inspResult == "Skip to Abatement" || inspResult == "Skip to City Abatement")
 {
-	logDebug("Script 344: criteria met");
-	var currentCapId = capId;
-	var appName = "Abatement created for Record Number " + capId.customID;
-	var newChild = createChild('Enforcement','Incident','Abatement','NA',appName);
-	var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
-	copyRecordDetailsLocal(capId, newChild);
-	copyContacts(capId, newChild);
-	copyAddresses(capId, newChild);
-	copyParcels(capId, newChild);
-	copyOwner(capId, newChild);
-	
-	capId = newChild;
-	scheduleInspection("Post Abatement Inspection",0);
-	capId = currentCapId;
-	
-	if (inspResult == "Skip to City Abatement")
-		{ editAppSpecific("Abatement Type", "City", newChild); }
+    logDebug("Script 344: criteria met");
+    var currentCapId = capId;
+    var appName = "Abatement created for Record Number " + capId.customID;
+    var newChild = createChild('Enforcement','Incident','Abatement','NA',appName);
+    var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
+    copyRecordDetailsLocal(capId, newChild);
+    copyContacts(capId, newChild);
+    copyAddresses(capId, newChild);
+    copyParcels(capId, newChild);
+    copyOwner(capId, newChild);
+    
+    capId = newChild;
+    scheduleInspection("Post Abatement Inspection",0);
+    capId = currentCapId;
+    
+    if (inspResult == "Skip to City Abatement")
+        { editAppSpecific("Abatement Type", "City", newChild); }
 
-}			
+}           
 logDebug("Script 344 END");
