@@ -22,7 +22,7 @@ function script265_ManagerReviewToSupervisor (){
 		
 		if($iTrc(!supRevAssigned && initSupRevAssi, '!supRevAssigned && initSupRevAssi')){
 			var initSupRevUser = getTaskAssignedStaff("Initial Supervisor Review");
-			assignTask("Supervisor Review", initSupRevUser); return;
+			assignTask("Supervisor Review", "LNORDEEN"); return;
 		}
 		
 		if($iTrc(!supRevAssigned, '!supRevAssigned')){
