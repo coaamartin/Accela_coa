@@ -1,4 +1,5 @@
 //script426_UpdateParentEnfCaseCustomListAndStatus();
+logDebug('capId: ' + capId);
 
 function script426_UpdateParentEnfCaseCustomListAndStatus() {
     var row,
