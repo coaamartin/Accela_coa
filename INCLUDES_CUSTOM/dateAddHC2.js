@@ -8,8 +8,7 @@ function dateAddHC2(td, amt)
 //     correctly adjust the target date to ensure that the date returned is a workind day
 //     correctly handle a zero date adjustment 
 {
-    aa.print("in dateAddHC2");
-	var useWorking = false;
+   	var useWorking = false;
 	if (arguments.length == 3)
 		useWorking = true;
 
@@ -17,10 +16,8 @@ function dateAddHC2(td, amt)
 		dDate = new Date();
 	}
 	else {
-		aa.print("trying to convert date...");
 		dDate = convertDate(td);
 	}
-	aa.print("days to increment = " + amt + "  date: " + dDate);
 	var i = 0;
 	var nonWorking = false;
 	var failsafe = 0;
@@ -34,12 +31,10 @@ function dateAddHC2(td, amt)
 				if (!nonWorking){
 					i++;
 					failsafe++;
-					aa.print("WORKDAY = " + nonWorking + " || amt = " + amt + " || i = " + i + " || dDate = " + dDate );
 					dDate = convertDate(dateAdd(dDate,1));
 				}
 				else {
 					failsafe++;
-					aa.print("nonWork = " + nonWorking + " || amt = " + amt + " || i = " + i + " || dDate = " + dDate );
 					dDate = convertDate(dateAdd(dDate,1));
 				}				
 			} 
