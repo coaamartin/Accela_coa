@@ -81,8 +81,8 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     { columnName: 'Summons #', fieldValue: AInfo['Court Z-Number'], readOnly: 'N' },
                     { columnName: 'Issue Date', fieldValue: AInfo['Court Z-Number'], readOnly: 'N' }
                 ]);
-                var respPeople = getContactsByType("Responsible Party", capId);
-                if(respPeople && respPeople.length > 0) {
+                var respPeople = getContacts( { contactType: "Responsible Party" });
+                if(respPeople.length > 0) {
                     for(var rp in respPeople) {
                         if(respPeople[rp].getPrimaryFlag() == 'Y') {
                             row.push({ columnName: 'Defendant', fieldValue: respPeople[rp].getFullName(), readOnly: 'N' });
@@ -167,6 +167,8 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     }
 }
 
+
+
 function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
     if(!updateAsiTableRows(tableName, fieldName, value, {})) {
         var row = createAsiTableValObjs([
@@ -220,23 +222,6 @@ function getChildrenWithActiveTasks() {
             
         }
     }
-}
-
-function getContactsByType(conType, capId) {
-    var contactsByType = [];
-	var contactArray = getPeople(capId);
-
-	for (thisContact in contactArray) {
-        if ((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase()) {
-            contactsByType.push(contactArray[thisContact].getPeople())
-        }
-    }
-    if(contactsByType.length > 0) {
-        return contactsByType;
-    }
-
-	return false;
-
 }
 
 function activeTasksCheck(options) {
@@ -353,68 +338,4 @@ function updateRecordWithCountyUponCompletion() {
         }
    }
 }
-
-
-
-function getCompletedInspections(options) {
-    var settings = {
-        inspType: null, // if not null, will filter by given inspection type
-        capId: capId,
-    };
-    for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
-
-    var completedInspections = [],
-        inspResultObj = aa.inspection.getInspections(settings.capId);
-      
-    if (inspResultObj.getSuccess()) {
-        var inspList = inspResultObj.getOutput();
-        for (xx in inspList) {
-            if(
-                (!inspList[xx].getInspectionStatus().toUpperCase().equals("SCHEDULED"))
-                && (settings.inspType = null || String(settings.inspType).equals(inspArray[i].getInspectionType()))
-            ){
-                completedInspections.push(inspList[xx]);
-            }
-        }
-    }    
-      
-    return completedInspections;
-}
-
-function getLastInspection(options) {
-    var settings = {
-        capId: capId,
-        inspType: null, // if not null, will filter by given inspection type
-        inspResult: null // if not null, will filter by given inspection result
-    };
-    for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
-
-
-	var ret = null;
-	var r = aa.inspection.getInspections(settings.capId);
-	if (r.getSuccess()) {
-		var maxId = -1;
-		var maxInsp = null;
-		var inspArray = r.getOutput();
-
-		for (i in inspArray) {
-			if (
-                (settings.inspType = null || String(settings.inspType).equals(inspArray[i].getInspectionType()))
-                && (settings.inspResult = null || String(settings.inspResult).equals(inspArray[i].getInspectionStatus()))
-            ) {
-				var id = inspArray[i].getIdNumber();
-				if (id > maxId) {
-					maxId = id;
-					maxInsp = inspArray[i];
-				}
-
-			}
-		}
-		if (maxId >= 0) {
-			ret = maxInsp;
-		}
-	} 
-	return ret;
-}
-
 
