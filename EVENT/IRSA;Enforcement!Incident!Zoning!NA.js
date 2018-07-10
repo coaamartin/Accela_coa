@@ -22,28 +22,22 @@
 //Created By: 		Silver Lining Solutions
 //*********************************************************************************************************
 logDebug("Script 73 START");
-logDebug("Script 73 capId = " + capId);
+logDebug("Script 73 capId = " + capId); 
 if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection" || 
 										 inspType == "Zoning Follow-Up Inspection" ||
 										 inspType == "Zoning Final Inspection" ))
 {
 	logDebug("Script 73 criteria met");
 	
+	// update the correct task with the status
 	if (inspType == "Zoning Initial Inspection")
-	{
-		updateTask("Initial Investigation","Refer to Forestry","auto updated by script","auto updated by script");
-	}
-	
+		{ updateTask("Initial Investigation","Refer to Forestry","auto updated by script","auto updated by script");	}
 	if (inspType == "Zoning Follow-Up Inspection" )
-	{
-		updateTask("Follow-Up Investigation","Refer to Forestry","auto updated by script","auto updated by script");
-	}
-	
+		{ updateTask("Follow-Up Investigation","Refer to Forestry","auto updated by script","auto updated by script");	}
 	if (inspType == "Zoning Final Inspection" )
-	{
-		updateTask("Final Follow-Up Investigation","Refer to Forestry","auto updated by script","auto updated by script");
-	}
+		{ updateTask("Final Follow-Up Investigation","Refer to Forestry","auto updated by script","auto updated by script"); }
 	
+	// create child record and copy info
 	var currentCapId = capId;
 	var appName = "Forestry created for Record Number " + capId.customID ;
 	var appName = "Created from Zoninig Incident";
@@ -55,7 +49,6 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 	copyParcels(capId, newChild);
 	copyOwner(capId, newChild);
 	
-	 //Set Description.
 	var forestryComments = getAppSpecific("Comments to Forestry");
 	
 	var workDescResult = aa.cap.getCapWorkDesByPK(newChild);
@@ -64,31 +57,35 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 		workDesObj.setDescription(forestryComments);
 		aa.cap.editCapWorkDes(workDesObj);
 	}
-}
-
-
-logDebug("Script 73 END");
-
-
-// Script 421
-if ("Zoning Initial Inspection".equals(inspType) && "Citation/Summons".equals(inspResult)) {
-	var holdId = capId;
-	var r = getRelatedCapsByAddress("Enforcement/Incident/Summons/NA");
-	if (r && r.length > 0) {
-		for (var i in r) {
-			var capId = aa.cap.getCapID(r[i].getID1(), r[i].getID2(), r[i].getID3()).getOutput();
-			var thisCap = aa.cap.getCapBasicInfo(capId).getOutput();
-			logDebug("related summons address: " + capId.getCustomID() + " has status " + thisCap.getCapStatus());
-			if ("NFZV - 1 Year".equals(thisCap.getCapStatus())) {
-				activateTask("Pre Summons Photos");
-				updateAppStatus("Pending Citation", "Updated by Script 421");
-				var thisInsp = scheduleInspectDate("Summons Issuance", dateAdd(null, 0));
-				logDebug("inspection is " + thisInsp);
-			}
-		}
-
+	
+	// check guide sheets to see if we need to deactivate the tasks and update the rec status
+	guideSheetArray = getGuideSheetObjects(inspId);
+	
+	var needToRefer = false;
+	for (x in guideSheetArray)
+	{
+		if (gsItem.status != "Refer to Forestry" && gsItem.status != "N/A" )
+			{ needToRefer = true;}
 	}
-	capId = holdId;
+	
+	if (needToRefer)
+	{
+		updateAppStatus("Referred to Forestry","");
+		
+		if (inspType == "Zoning Initial Inspection")
+			{ deactivateTask("Initial Investigation");	}
+		if (inspType == "Zoning Follow-Up Inspection" )
+			{ deactivateTask("Follow-Up Investigation");	}
+		if (inspType == "Zoning Final Inspection" )
+			{ deactivateTask("Final Follow-Up Investigation"); }
+		
+		if(inspType == "Zoning Initial Inspection") 
+			{ resultInspection("Zoning Initial Inspection","Referred to Forestry","",""); }	
+		if(inspType == "Zoning Follow-Up Inspection") 
+			{ resultInspection("Zoning Follow-Up Inspection","Referred to Forestry","",""); }
+		if(inspType == "Zoning Final Inspection" )
+			{ resultInspection("Zoning Final Inspection","Referred to Forestry","",""); }
+	}
 }
-// End Script 421
-
+logDebug("Script 73 END");
+logDebug("Script 73 capId = " + capId); 

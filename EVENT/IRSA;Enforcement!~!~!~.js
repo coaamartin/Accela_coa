@@ -1,4 +1,4 @@
-
+logDebug("DONB 101 " + capId)
 if(inspType == "Zoning Initial Inspection"){
     //Script 346
     //                    Inspection to check for,    Insp result         New inspection                  Custom field to get date for new insp, copy failed GS, wfTask2Update, status for WF task
@@ -263,45 +263,50 @@ closeTask("Case Closed","Closed","","");
 if (parentArray && parentArray.length > 0)
 for (thisParent in parentArray)
 if (parentArray[thisParent])
-{
-capId = parentArray[thisParent];
-closeTask("Investigation","No Violation Found","","");
-capId = holdCapId;
+	{
+	closeTaskByCapId("Investigation","No Violation Found","","",parentArray[thisParent]);
+	}
 }
-}
-if (inspType == "Initial Investigation" && inspResult == "In Violation") {
-closeTask("Initial Investigation","In Violation","Updated by Inspection Result","Note");
-}
-if (inspType == "Initial Investigation" && inspResult == "Citation") {
-loopTask("Initial Investigation","Recommend Citation","Updated by Inspection Result","Note");
-}
-if(inspType == "Follow-Up Investigation" && inspResult == "Compliant"){
-branchTask("Follow-Up Investigation","Violation Corrected","Updated by Inspection Result","Note");
-closeTask("Case Closed","Closed","","");
-if (parentArray && parentArray.length > 0)
-for (thisParent in parentArray)
-if (parentArray[thisParent])
-{
-capId = parentArray[thisParent];
-closeTask("Investigation","Corrected","","");
-capId = holdCapId;
-}
-}
-if (inspType == "Follow-Up Investigation" && inspResult == "Citation") {
-closeTask("Follow-Up Investigation","Recommend Citation","Updated by Inspection Result","Note");
-}
-if(inspType == "Follow-Up Investigation" && inspResult == "Abated"){
-branchTask("Follow-Up Investigation","Violation Abated","Updated by Inspection Result","Note");
-closeTask("Case Closed","Closed","","");
-if (parentArray && parentArray.length > 0)
-for (thisParent in parentArray)
-if (parentArray[thisParent])
-{
-capId = parentArray[thisParent];
-closeTask("Investigation","Corrected","","");
-capId = holdCapId;
-}
-}
+if (inspType == "Initial Investigation" && inspResult == "In Violation") 
+	{
+	closeTask("Initial Investigation","In Violation","Updated by Inspection Result","Note");
+	}
+if (inspType == "Initial Investigation" && inspResult == "Citation") 
+	{
+	loopTask("Initial Investigation","Recommend Citation","Updated by Inspection Result","Note");
+	}
+if(inspType == "Follow-Up Investigation" && inspResult == "Compliant")
+	{
+	branchTask("Follow-Up Investigation","Violation Corrected","Updated by Inspection Result","Note");
+	closeTask("Case Closed","Closed","","");
+	if (parentArray && parentArray.length > 0)
+		{
+		for (thisParent in parentArray)
+			if (parentArray[thisParent])
+			{
+			closeTaskByCapId("Investigation","Corrected","","",parentArray[thisParent]);
+			}
+		}
+	}
+if (inspType == "Follow-Up Investigation" && inspResult == "Citation") 
+	{
+	closeTask("Follow-Up Investigation","Recommend Citation","Updated by Inspection Result","Note");
+	}
+if(inspType == "Follow-Up Investigation" && inspResult == "Abated")
+	{
+	branchTask("Follow-Up Investigation","Violation Abated","Updated by Inspection Result","Note");
+	closeTask("Case Closed","Closed","","");
+	if (parentArray && parentArray.length > 0)
+		{
+		for (thisParent in parentArray)
+			{
+			if (parentArray[thisParent])
+				{
+				closeTaskByCapId("Investigation","Corrected","","",parentArray[thisParent]);
+				}
+			}
+		}
+	}
 if (inspType == "Initial Investigation" && inspResult == "Compliant") {
 updateTask("Incident Status","No Violation","Updated by Inspection Result","Note");
 closeTask("Incident Status","Closed","","");
@@ -391,3 +396,4 @@ if (inspResult == "Skip to Abatement" || inspResult == "Skip to City Abatement")
 
 }           
 logDebug("Script 344 END");
+logDebug("DONB 101 " + capId)

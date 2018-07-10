@@ -70,6 +70,13 @@ try{
 	getRecordParams4Notification(params);
 	getContactParams4Notification(params,"Applicant");
 	getContactParams4Notification(params,"License Holder");
+	getContactParams4Notification(params,"Constituent");
+	getContactParams4Notification(params,"Complainant");
+	getContactParams4Notification(params,"Reporting Party");
+	getContactParams4Notification(params,"Contact");
+	getContactParams4Notification(params,"Arborist Applicant");
+	getContactParams4Notification(params,"Contractor Applicant");
+	getContactParams4Notification(params,"Responsible Party");
 	sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null); 
 	
  function getRecordParams4Notification(params) {

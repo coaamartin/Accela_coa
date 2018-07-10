@@ -5,7 +5,7 @@ if (ifTracer((wfTask=="Initial Review" || wfTask=="Initial Supervisor Review") &
 }
 
 if(ifTracer(wfTask == "Initial Review" && wfStatus == "Assigned to Supervisor", 'wfTask == "Initial Review" && wfStatus == "Assigned to Supervisor"')){
-    assignTaskToTSIUser("Initial Supervisor Review", "Assigned To");
+    assignTaskToTSIUser("Initial Supervisor Review", "Assigned to Supervisor");
 }
 
 logDebug('Script 250 Ending')
