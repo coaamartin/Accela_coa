@@ -38,11 +38,11 @@ if (ifTracer(wfTask=="Manager Review" && wfStatus=="Request Complete",'wfTask & 
     script268_MakeFieldsNullIfNoWorkOrderrder();
 }
 
-if(iTracer(wfTask == "Draft Workorder" && wfStatus == "Workorder Drafted", 'wf:Draft Workorder/Workorder Drafted')){
+if(ifTracer(wfTask == "Draft Workorder" && wfStatus == "Workorder Drafted", 'wf:Draft Workorder/Workorder Drafted')){
     script265_ManagerReviewToSupervisor();
 }
 
-if(iTracer(wfTask == "Traffic Investigation" && matches(wfStatus, "No Change Warranted", "Refer to Forestry", "Refer to Code Enforcement"), 'wf:Traffic Investigation/No Change Warranted or Refer to Forestry or Refer to Code Enforcement')){
+if(ifTracer(wfTask == "Traffic Investigation" && matches(wfStatus, "No Change Warranted", "Refer to Forestry", "Refer to Code Enforcement"), 'wf:Traffic Investigation/No Change Warranted or Refer to Forestry or Refer to Code Enforcement')){
     script265_ManagerReviewToSupervisor();
 }
 
