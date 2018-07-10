@@ -22,13 +22,13 @@ function script265_ManagerReviewToSupervisor (){
 		
 		if($iTrc(!supRevAssigned && initSupRevAssi, '!supRevAssigned && initSupRevAssi')){
 			var initSupRevUser = getTaskAssignedStaff("Initial Supervisor Review");
-			assignTask("Supervisor Review", "LNORDEEN"); return;
+			assignTask("Supervisor Review", initSupRevUser.getUserID());
 		}
 		
-		if($iTrc(!supRevAssigned, '!supRevAssigned')){
+		/*if($iTrc(!supRevAssigned, '!supRevAssigned')){
 			var initSupRevUser = getTaskAssignedStaff("Supervisor Review");
-			assignTask("Supervisor Review", initSupRevUser);
-		}
+			assignTask("Supervisor Review", initSupRevUser.getUserID());
+		}*/
 	}
 	catch(err){
 		logDebug("Error on custom function script265_ManagerReviewToSupervisor(). Please contact administrator. Err: " + err);
