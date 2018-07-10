@@ -155,7 +155,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
 								+(""+ newPlnMtg.startDate).slice(0,4);
 		  logDebug("newHearingDate = " + newHearingDate);			
-		  editAppSpecific("Projected Planning Commission Date",newHearingDate);
+		  editAppSpecific("Project Planning Commission Date",newHearingDate);
 		} else {
 			logDebug("Script 275: WARNING - there is no planning commission date within 45 days of your target date!");
 			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
@@ -199,7 +199,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 			var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
 								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
 								+(""+ newPlnMtg.startDate).slice(0,4);
-			editAppSpecific("Projected Planning Commission Date",newHearingDate);
+			editAppSpecific("Project Planning Commission Date",newHearingDate);
 		} else {
 			logDebug("Script 275: WARNING - there is no planning commission date within 45 days of your target date!");
 			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
@@ -243,7 +243,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 			var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
 								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
 								+(""+ newPlnMtg.startDate).slice(0,4);
-			editAppSpecific("Projected Planning Commission Date",newHearingDate);
+			editAppSpecific("Project Planning Commission Date",newHearingDate);
 		} else {
 			logDebug("Script 274: WARNING - there is no planning commission date within 45 days of your target date!");
 			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
