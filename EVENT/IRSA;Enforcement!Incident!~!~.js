@@ -1,3 +1,4 @@
+/*
 //script 423
 logDebug("Script 423 Starting");
 if (matchARecordType([
@@ -16,5 +17,5 @@ if (matchARecordType([
 ], appTypeString)) {
     include("426_UpdateParentEnfCaseCustomListAndStatus");
 }
-
+*/
 logDebug('capId (IRSA;Enforcement!Incident!~!~): ' + capId);
