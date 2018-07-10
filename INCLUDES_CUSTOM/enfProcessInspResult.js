@@ -50,7 +50,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
             
             //Add a cap comment to the record
             //Get inspector from inspection
-            var inspector = getLastInspector(iType) == null ? "" : getLastInspector(iType);
+            var inspector = getInspectorByInspID(inspId) == false ? "" : getInspectorByInspID(inspId);
             //Prepare comment text
             var vComment = inspector + " - " + inspResult + " - " + (inspComment == null ? "" : inspComment);
             var comDate = aa.date.parseDate(inspResultDate);
