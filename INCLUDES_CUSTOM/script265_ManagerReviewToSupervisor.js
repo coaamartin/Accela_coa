@@ -17,7 +17,7 @@ function script265_ManagerReviewToSupervisor (){
 		var initSupRevAssi = isTaskAssigned("Initial Supervisor Review");
 		var assignedTo = getTaskSpecific("Initial Review", "Assigned to Supervisor");
 		
-		if($iTrc(!supRevAssigned) && !initSupRevAssi, 'Supervisor Review and Initial Supervisor Review are not assigned'))
+		if($iTrc(!supRevAssigned && !initSupRevAssi, 'Supervisor Review and Initial Supervisor Review are not assigned'))
 			assignTaskToTSIUser("Supervisor Review", assignedTo);
 		
 		if($iTrc(!supRevAssigned && initSupRevAssi, '!supRevAssigned && initSupRevAssi')){
