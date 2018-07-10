@@ -7,5 +7,7 @@ function getPrimLPEmailByCapId(itemCap){
         if(lp.getPrintFlag() == "Y") return lp.getEmail();
     }
     
-    return eachLp[0].getEmail();
+	if(capLps) return capLps[0].getEmail();
+	
+	return null;
 }

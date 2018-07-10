@@ -22,7 +22,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                 var numOfDays4Insp = 1; //If unable to parse the custom field, then default inspection to one day ahead.
                 if($iTrc(!isNaN(newInspDateOrDays), 'newInspDateOrDays is a number, use this as inspection days'))
                     numOfDays4Insp = parseInt(newInspDateOrDays);
-                else if($iTrc(newInspDateOrDays.equalsIgnoreCase(newInspDateOrDays), 'nextWorkDay')){
+                else if($iTrc(newInspDateOrDays.equalsIgnoreCase("nextWorkDay"), 'nextWorkDay == ' + newInspDateOrDays)){
                     var nextWorkDayDate = dateAdd(null, 1, true);
                     numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWorkDayDate));
                 }
@@ -50,7 +50,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
             
             //Add a cap comment to the record
             //Get inspector from inspection
-            var inspector = getLastInspector(iType) == null ? "" : getLastInspector(iType);
+            var inspector = getInspectorByInspID(inspId) == false ? "" : getInspectorByInspID(inspId);
             //Prepare comment text
             var vComment = inspector + " - " + inspResult + " - " + (inspComment == null ? "" : inspComment);
             var comDate = aa.date.parseDate(inspResultDate);
