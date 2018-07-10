@@ -18,7 +18,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
             if($iTrc(newInsp, 'create new inspection')){
                 //Get the custom field value
                 var custField = null;
-                var currDate = aa.util.parseDate(daetAdd(null, 0);
+                var currDate = aa.util.parseDate(dateAdd(null, 0));
                 var numOfDays4Insp = 1; //If unable to parse the custom field, then default inspection to one day ahead.
                 if($iTrc(!isNaN(newInspDateOrDays), 'newInspDateOrDays is a number, use this as inspection days'))
                     numOfDays4Insp = parseInt(newInspDateOrDays);
@@ -31,7 +31,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                 if($iTrc(custField, custField)){
                     //If custom field is not a number, then it's date, use it to calculat the number of days between today and the date
                     if($iTrc(isNaN(custField), 'custom field ' + newInspDateOrDays + ' is not a number'))
-                        numOfDays4Insp = days_between(currDate)), aa.util.parseDate(custField));
+                        numOfDays4Insp = days_between(currDate, aa.util.parseDate(custField));
                     else //the custom field is a number
                         numOfDays4Insp = parseInt(custField);
                 }

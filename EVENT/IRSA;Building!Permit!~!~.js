@@ -9,4 +9,6 @@ if (matchARecordType([
     if (ifTracer(inspType == "Electrical Rough" || inspType  == "Mechanical Rough", "inspType == Electrical Rough or Mechanical Rough")) {
         include("260_EmailExcelEnergyOnInspectionResult");
     }
+	
+	script380_PermitExpirationDateWithTodaysDate180();
 }
