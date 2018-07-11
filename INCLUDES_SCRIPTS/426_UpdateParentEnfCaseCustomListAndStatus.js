@@ -29,7 +29,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
             } else if(ifTracer(inspType== "Abatement Approval" && inspResult == "Invoice Approval", "inspType== Abatement Approval && inspResult == Invoice Approval")) {
                 // inspType== Abatement Approval && inspResult == Invoice Approval (update row if exists, else create row)
-                updateOrCreateValueInASITable(tableName, 'Completed Date', Info['Abatement Completed Date'], 'N');
+                updateOrCreateValueInASITable(tableName, 'Completed Date',AInfo['Abatement Completed Date'], 'N');
             } else if(ifTracer(instr(inspType, "Post Abatement Inspection") > -1 && inspResult == "Cancelled", "inspType Like Abatement Approval && inspResult == Cancelled")) {
                 // inspType LIKE Post Abatement Inspection && inspResult == Cancelled
                 updateAbatementUponCompletion();
@@ -92,8 +92,8 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 addToASITable(tableName, row);
             } else if(ifTracer(inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA"), 'inspType == "Pre Court Action" && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")')) {
                 // inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")
-                updateOrCreateValueInASITable(tableName, 'Arraign Date', Info['Arraignment Date'], 'N');
-                updateOrCreateValueInASITable(tableName, 'Notice of Hearing', Info['Notice of Hearing'], 'N');
+                updateOrCreateValueInASITable(tableName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
+                updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
             } else if(ifTracer(inspType == "Legal Resolution" && inspResult == "Complete", 'inspType == "Legal Resolution" && inspResult == "Complete"')) {
                 // inspType == "Legal Resolution" && inspResult == "Complete"
 
@@ -250,7 +250,7 @@ function activeTasksCheck(options) {
 function updateAbatementUponCompletion() {
     updateOrCreateValueInASITable(tableName, 'Type', AInfo['Abatement Type'], 'N');
     updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
-    updateOrCreateValueInASITable(tableName, 'Completed Date', Info['Abatement Completed Date'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Completed Date', AInfo['Abatement Completed Date'], 'N');
     updateOrCreateValueInASITable(tableName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
     updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal, 'N');
     updateAbatementAdminCharge();
@@ -268,8 +268,8 @@ function updateAbatementUponCompletion() {
 }
 
 function updateSummonsUponCompletion() {
-    updateOrCreateValueInASITable(tableName, 'Arraign Date', Info['Arraignment Date'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Notice of Hearing', Info['Notice of Hearing'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
+    updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
     updateOrCreateValueInASITable(tableName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
     updateOrCreateValueInASITable(tableName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
     updateOrCreateValueInASITable(tableName, 'Trial Date', AInfo["Trial Date"], 'N');
