@@ -17,7 +17,7 @@ Notes :
 Sample Call : checkIfPassedInspections()
 
 */
-if (!appMatch("Building/Permit/No Plans/NA") {
+if (!appMatch("Building/Permit/No Plans/NA")) {
 	checkIfPassedInspections(inspType);
 }
 /*
