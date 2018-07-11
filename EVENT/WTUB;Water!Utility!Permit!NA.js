@@ -30,7 +30,7 @@ if ("Final Acceptance Inspection".equals(wfTask) && "Warranty Work Required".equ
 	if (!filteredDocs || filteredDocs.length == 0) {
 		cancel = true;
 		showMessage = true;
-		comment("Warranty Work Punch List is required for Warranty Work Required status");
+		comment("Warranty Work Punch List is required for Warranty Work Required statusxx");
 	}
 }
 
