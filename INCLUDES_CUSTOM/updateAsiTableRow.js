@@ -56,6 +56,7 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
         var updateFieldsMap = updateRowsMap.get(rowID);
         if (updateFieldsMap == null)
         {
+            logDebug('setUpdateColumnValue(): updateFieldsMap == null')
             updateFieldsMap = aa.util.newHashMap();
             updateRowsMap.put(rowID, updateFieldsMap);
         }
