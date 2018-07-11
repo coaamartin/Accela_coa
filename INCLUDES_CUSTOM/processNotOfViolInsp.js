@@ -18,12 +18,13 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, insp2Create, update
             if($iTrc(createNewInsp, "create new inspection"))
                 scheduleInspection(insp2Create, inspDaysAhead, inspector, null, newInspReqComments);
             if($iTrc(updateWf, "update worflow")){
-                if(isTaskActive(wfTsk2Update))
-                    updateTask(wfTsk2Update, wfSt2Update);
-                else{
+                if(!isTaskActive(wfTsk2Update))
                     activateTask(wfTsk2Update);
+                
+                if(wfTsk2Update == "Investigation" && wfSt2Update == "Notice of Violation")
+                    closeTask(wfTsk2Update, wfSt2Update);
+                else
                     updateTask(wfTsk2Update, wfSt2Update);
-                }
             }
         }
     }
