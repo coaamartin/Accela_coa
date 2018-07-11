@@ -10,7 +10,7 @@ if ("Zoning Initial Inspection".equals(inspType) && "Citation/Summons".equals(in
 			if ("NFZV - 1 Year".equals(thisCap.getCapStatus())) {
 				activateTask("Pre Summons Photos");
 				updateAppStatus("Pending Citation", "Updated by Script 421");
-				var thisInsp = scheduleInspectDate("Summons Issuance", dateAdd(null, 0));
+				var thisInsp = scheduleInspectionCustom("Summons Issuance", dateAdd(null, 0));
 				logDebug("inspection is " + thisInsp);
 			}
 		}
