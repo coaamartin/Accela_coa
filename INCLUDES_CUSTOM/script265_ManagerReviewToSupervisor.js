@@ -12,11 +12,23 @@
 function script265_ManagerReviewToSupervisor (){
 	logDebug("script265_ManagerReviewToSupervisor() started.");
 	try{
-		if ( wfTask == "Supervisor Review" && wfStatus == "Approved" && isTaskStatus("Draft Workorder","Workorder Drafted"))
-		{
-			assignTask("Manager Review",currentUserID);
-			logDebug("script265_ManagerReviewToSupervisor() - Task Supervisor Review set to: " + currentUserID);
+		var $iTrc = ifTracer;
+		var supRevAssigned = isTaskAssigned("Supervisor Review");
+		var initSupRevAssi = isTaskAssigned("Initial Supervisor Review");
+		var assignedTo = getTaskSpecific("Initial Review", "Assigned to Supervisor");
+		
+		if($iTrc(!supRevAssigned && !initSupRevAssi, 'Supervisor Review and Initial Supervisor Review are not assigned'))
+			assignTaskToTSIUser("Supervisor Review", assignedTo);
+		
+		if($iTrc(!supRevAssigned && initSupRevAssi, '!supRevAssigned && initSupRevAssi')){
+			var initSupRevUser = getTaskAssignedStaff("Initial Supervisor Review");
+			assignTask("Supervisor Review", initSupRevUser.getUserID());
 		}
+		
+		/*if($iTrc(!supRevAssigned, '!supRevAssigned')){
+			var initSupRevUser = getTaskAssignedStaff("Supervisor Review");
+			assignTask("Supervisor Review", initSupRevUser.getUserID());
+		}*/
 	}
 	catch(err){
 		logDebug("Error on custom function script265_ManagerReviewToSupervisor(). Please contact administrator. Err: " + err);

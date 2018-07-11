@@ -17,9 +17,9 @@ Notes :
 Sample Call : checkIfPassedInspections()
 
 */
-
-checkIfPassedInspections(inspType);
-
+if (!appMatch("Building/Permit/No Plans/NA")) {
+	checkIfPassedInspections(inspType);
+}
 /*
 Title : Check for Existing Inspection on Same Day (InspectionScheduleBefore) 
 
