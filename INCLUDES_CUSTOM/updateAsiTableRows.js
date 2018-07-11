@@ -13,6 +13,7 @@ function updateAsiTableRows(tableName, columnName, newValue, options) {
         val,
         rtn = false;
 
+    logDebug('updateAsiTableRows() starting');
     //first get existing rows - if available
     var asitTable = getAsiTableRows(tableName, {
         capId: settings.capId,

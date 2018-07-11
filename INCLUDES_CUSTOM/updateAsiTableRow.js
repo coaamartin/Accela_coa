@@ -9,12 +9,14 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
     };
     for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
 
+    logDebug('updateAsiTableRow() starting');
     var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
     // Create a List object to add the value of Column.
     var valuesList = aa.util.newArrayList();
     valuesList.add(curValue);
     searchConditionMap.put(columnName, valuesList);
-
+    printObjProps(searchConditionMap);
+    
     var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(settings.capId, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
     if (appSpecificTableInfo.getSuccess())
     {
@@ -49,7 +51,7 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
     /** 
     /* Set update column value. format: Map<rowID, Map<columnName, columnValue>>
     **/
-    function setUpdateColumnValue(updateRowsMap/** Map<rowID, Map<columnName, columnValue>> **/, rowID, columnName, columnValue)
+    function setUpdateColumnValue(updateRowsMap, rowID, columnName, columnValue)
     {
         var updateFieldsMap = updateRowsMap.get(rowID);
         if (updateFieldsMap == null)

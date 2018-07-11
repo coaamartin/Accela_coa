@@ -30,7 +30,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             } else if(ifTracer(inspType== "Abatement Approval" && inspResult == "Invoice Approval", "inspType== Abatement Approval && inspResult == Invoice Approval")) {
                 // inspType== Abatement Approval && inspResult == Invoice Approval (update row if exists, else create row)
                 updateOrCreateValueInASITable(tableName, 'Completed Date',AInfo['Abatement Completed Date'], 'N');
-            } else if(ifTracer(instr(inspType, "Post Abatement Inspection") > -1 && inspResult == "Cancelled", "inspType Like Abatement Approval && inspResult == Cancelled")) {
+            } else if(ifTracer(indexOf(inspType, "Post Abatement Inspection") > -1 && inspResult == "Cancelled", "inspType Like Abatement Approval && inspResult == Cancelled")) {
                 // inspType LIKE Post Abatement Inspection && inspResult == Cancelled
                 updateAbatementUponCompletion();
             }
