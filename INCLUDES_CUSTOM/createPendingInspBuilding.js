@@ -32,8 +32,7 @@ function createPendingInspBuilding() {
    createPendingInspection("BLD_NEW_CON", "ELectrical Final")
     } 
        
-   if (permitType == "Water Heater Replacement" || permitType == "Boiler Replacement" || permitType == "Furnace and Water Heater Replacement" 
-       || permitType == "Furnace and Air Conditioner" 
+   if (permitType == "Water Heater Replacement" || permitType == "Boiler Replacement" || permitType == "Furnace and Water Heater Replacement"  
       || permitType == "Air Conditioner Furnace and Water Heater Replacement" || permitType == "Air Conditioner and Water Heater Replacement"
      )
    {
