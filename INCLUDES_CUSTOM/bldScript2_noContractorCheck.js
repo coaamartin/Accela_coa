@@ -13,7 +13,7 @@ function bldScript2_noContractorCheck(){
             
             var applicantName = applicant.getFullName();
             var applicantEmailAddrs = applicant.getEmail();
-            if(getPrimaryOwnerFullName().toUpperCase() == applicantName.toUpperCase()) ownerApplicantMatch = true;
+            //if(getPrimaryOwnerFullName().toUpperCase() == applicantName.toUpperCase()) ownerApplicantMatch = true;
             
 			//if($iTrc((!ownerIsContractor && !lpOnFile) || (ownerIsContractor && !ownerApplicantMatch), '(!ownerIsContractor && !lpOnFile) || (ownerIsContractor && !ownerApplicantMatch)'))
             if($iTrc(!ownerIsContractor && !lpOnFile, '!ownerIsContractor && !lpOnFile'))
