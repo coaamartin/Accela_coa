@@ -30,6 +30,8 @@ function autoCloseWorkflow() {
 	recTypesAry = [ "Building/Permit/Plans/Amendment", "Building/Permit/New Building/Amendment", "Building/Permit/Master/Amendment", "Building/Permit/Master/NA" ];
 	matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Fee Processing", "Complete", "Approved");
     if(matched){
+		
+		setCodeReference("Complete");
 		//Send email for case #1
 		
 		var emailTemplate = "BLD PLANS APPROVED # 35";
@@ -65,6 +67,7 @@ function autoCloseWorkflow() {
 				if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspections Check");
 			}//2.2
 			
+		    setCodeReference("Issued");
 			//send email()
 			var lpEmail = getPrimLPEmailByCapId(capId);
 		    addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
@@ -83,6 +86,8 @@ function autoCloseWorkflow() {
 			var lpEmail = getPrimLPEmailByCapId(capId);
 		    addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
 			emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
+			
+		    setCodeReference("Issued");
 		}
 	}
 }
