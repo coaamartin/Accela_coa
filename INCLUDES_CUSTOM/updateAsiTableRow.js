@@ -85,6 +85,7 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
             var rowScriptModel = aa.appSpecificTableScript.createRowScriptModel();
             var rowModel = rowScriptModel.getRow();
             logDebug("rowIdArray[i] = " + rowIdArray[i]);
+            printObjProps(rowModel.getFields(updateRowsMap.get(rowIdArray[i])));
             rowModel.setFields(updateRowsMap.get(rowIdArray[i]));
             rowModel.setId(rowIdArray[i]);
             rowList.add(rowModel);
