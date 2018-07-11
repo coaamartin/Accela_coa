@@ -41,4 +41,3 @@ if (typeof inspSchedDate == 'undefined') {
 }
 
 checkScheduledInspSameDate(inspType, inspSchedDate);
-showDebug = true;
