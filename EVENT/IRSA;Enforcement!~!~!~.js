@@ -390,6 +390,9 @@ createChildAbatement("Board-Up Final Inspection", 		"Abatement", 				"Board-Up A
 createChildAbatement("Graffiti Final Inspection", 		"Abate/Summons",			"Graffiti Abatement Order", "Graffiti");
 createChildAbatement("Graffiti Final Inspection", 		"Abatement", 				"Graffiti Abatement Order", "Graffiti");
 
+createChildAbatement("Snow Initial Inspection", 		"Skip to City Abatement", 	"City Abatement Order", 	"City");
+createChildAbatement("Snow Fee 2nd Reinspection", 		"Snow Abate/Summons", 		"Snow Abatement Order", 	"Snow");
+createChildAbatement("Snow Fee 2nd Reinspection", 		"Snow Abatement",	 		"Snow Abatement Order", 	"Snow");
           
 logDebug("Script 344 END");
 
