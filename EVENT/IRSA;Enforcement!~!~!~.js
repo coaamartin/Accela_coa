@@ -412,12 +412,13 @@ function createChildAbatement(iType, iResult, schedIType, setFieldValue)
 		copyParcels(capId, newChild);
 		copyOwner(capId, newChild);
 		
-		capId = newChild;
-
 		// get the inspector from GIS and assign the rec to this user
 		inspUserObj = null
 		x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
 		logDebug(x[0]["OFFICER_NAME"]);
+		
+		capId = newChild;
+		
 		var offFullName = x[0]["OFFICER_NAME"];
 		
 		var offFname = offFullName.substr(0,offFullName.indexOf(' '));
