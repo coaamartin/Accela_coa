@@ -103,7 +103,8 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 			{ deactivateTask("Final Follow-Up Investigation"); }
 		
 		if(inspType == "Zoning Initial Inspection") 
-			{ resultInspection("Zoning Initial Inspection","Referred to Forestry","07/12/2018",""); }	
+			{ logDebug("Script 73: ZII ");
+			resultInspection("Zoning Initial Inspection","Referred to Forestry","07/12/2018",""); }	
 		if(inspType == "Zoning Follow-Up Inspection") 
 			{ resultInspection("Zoning Follow-Up Inspection","Referred to Forestry","07/12/2018",""); }
 		if(inspType == "Zoning Final Inspection" )
