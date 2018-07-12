@@ -90,9 +90,10 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 		if (gsItem.status != "Refer to Forestry" && gsItem.status != "N/A" )
 			{ needToRefer = true;}
 	}
-	
+	logDebug("Script 73: need to refer = " + needToRefer);
 	if (needToRefer)
 	{
+		logDebug("Script 73: going to refer - inspType = " + inspType);
 		updateAppStatus("Referred to Forestry","");
 		
 		if (inspType == "Zoning Initial Inspection")
