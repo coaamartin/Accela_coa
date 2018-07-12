@@ -40,8 +40,10 @@ Supported Email Parameters:
 
 checkNoFeeAndUpdateTask(capId, "Fee Processing", [ "No Fees Required" ], "MESSAGE_NOTICE_PUBLIC WORKS", "Permit Issuance", "Issued","Issued");
 
+
 //JMAIN - show message if no phase plan
-include("11_WaterUtilityNeedPhaseWorkPlanForPermit");
+//disabled the script below as it was causing errors and will not work as designed
+//include("11_WaterUtilityNeedPhaseWorkPlanForPermit");
 
 //SWAKIL - Email
 include("41_EmailWaterUtilityPermit");
