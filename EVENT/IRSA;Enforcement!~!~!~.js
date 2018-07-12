@@ -414,8 +414,24 @@ function createChildAbatement(iType, iResult, schedIType, setFieldValue)
 		
 		capId = newChild;
 
-		scheduleInspection(schedIType,0);
+		// get the inspector from GIS and assign the rec to this user
+		inspUserObj = null
+		x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
+		logDebug(x[0]["OFFICER_NAME"]);
+		var offFullName = x[0]["OFFICER_NAME"];
+		
+		var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+		logDebug(offFname);
+		
+		var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+		logDebug(offLname);
+		
+		inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+		if(inspUserObj != null)
+			{ assignCap(inspUserObj.getUserID()); }
 
+		scheduleInspection(schedIType,0, currentUserID);
+		
 	    capId = currentCapId;
     
 		editAppSpecific("Abatement Type", setFieldValue, newChild); 
