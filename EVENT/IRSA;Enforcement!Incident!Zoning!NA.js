@@ -83,15 +83,18 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 	// check guide sheets to see if we need to deactivate the tasks and update the rec status
 	guideSheetArray = getGuideSheetObjects(inspId);
 	
-	var needToRefer = false;
-	for (x in guideSheetArray)
+	var needToRefer = true;
+	for (var x in guideSheetArray)
 	{
+		gsItem = guideSheetArray[x];
+		logDebug("x = " + x + " | status = " + gsItem.status );
 		if (gsItem.status != "Refer to Forestry" && gsItem.status != "N/A" )
-			{ needToRefer = true;}
+			{ needToRefer = false;}
 	}
-	
+	logDebug("Script 73: need to refer = " + needToRefer);
 	if (needToRefer)
 	{
+		logDebug("Script 73: going to refer - inspType = " + inspType);
 		updateAppStatus("Referred to Forestry","");
 		
 		if (inspType == "Zoning Initial Inspection")
@@ -102,12 +105,42 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 			{ deactivateTask("Final Follow-Up Investigation"); }
 		
 		if(inspType == "Zoning Initial Inspection") 
-			{ resultInspection("Zoning Initial Inspection","Referred to Forestry","",""); }	
+			{ logDebug("Script 73: ZII ");
+			forceResultInspection("Zoning Initial Inspection","Referred to Forestry","07/12/2018",""); }	
 		if(inspType == "Zoning Follow-Up Inspection") 
-			{ resultInspection("Zoning Follow-Up Inspection","Referred to Forestry","",""); }
+			{ forceResultInspection("Zoning Follow-Up Inspection","Referred to Forestry","07/12/2018",""); }
 		if(inspType == "Zoning Final Inspection" )
-			{ resultInspection("Zoning Final Inspection","Referred to Forestry","",""); }
+			{ forceResultInspection("Zoning Final Inspection","Referred to Forestry","07/12/2018",""); }
 	}
 }
 logDebug("Script 73 END");
 logDebug("Script 73 capId = " + capId); 
+
+function forceResultInspection(inspType, inspStatus, resultDate, resultComment) //optional capId
+{
+	var itemCap = capId
+		if (arguments.length > 4)
+			itemCap = arguments[4]; // use cap ID specified in args
+
+		var foundID;
+	var inspResultObj = aa.inspection.getInspections(itemCap);
+	if (inspResultObj.getSuccess()) {
+		var inspList = inspResultObj.getOutput();
+		for (xx in inspList)
+			if (String(inspType).equals(inspList[xx].getInspectionType()))
+				foundID = inspList[xx].getIdNumber();
+	}
+
+	if (foundID) {
+		resultResult = aa.inspection.resultInspection(itemCap, foundID, inspStatus, resultDate, resultComment, currentUserID)
+
+			if (resultResult.getSuccess()) {
+				logDebug("Successfully resulted inspection: " + inspType + " to Status: " + inspStatus)
+			} else {
+				logDebug("**WARNING could not result inspection : " + inspType + ", " + resultResult.getErrorMessage());
+			}
+	} else {
+		logDebug("Could not result inspection : " + inspType + ", not scheduled");
+	}
+
+}

@@ -355,8 +355,26 @@ if (inspResult == "Skip to Summons")
     copyOwner(capId, newChild);
     
     //createPendingInspection("ENF_SUMMON","Pre Trial Inspection",newChild);
-    capId = newChild;
-    scheduleInspection("Pre Trial Inspection",0);
+	
+	// get the inspector from GIS and assign the rec to this user
+	inspUserObj = null
+	x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
+	logDebug(x[0]["OFFICER_NAME"]);
+	
+	capId = newChild;
+	
+	var offFullName = x[0]["OFFICER_NAME"];
+	
+	var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+	logDebug(offFname);
+	
+	var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+	logDebug(offLname);
+	
+	inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+	if(inspUserObj != null)
+		{ assignCap(inspUserObj.getUserID()); }
+    scheduleInspection(schedIType,0, currentUserID);
     capId = currentCapId;
 
 }           
@@ -374,26 +392,68 @@ logDebug("Script 343 END");
 //Created By:       Silver Lining Solutions
 //*********************************************************************************************************
 logDebug("Script 344 START");
-if (inspResult == "Skip to Abatement" || inspResult == "Skip to City Abatement")
-{
-    logDebug("Script 344: criteria met");
-    var currentCapId = capId;
-    var appName = "Abatement created for Record Number " + capId.customID;
-    var newChild = createChild('Enforcement','Incident','Abatement','NA',appName);
-    var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
-    copyRecordDetailsLocal(capId, newChild);
-    copyContacts(capId, newChild);
-    copyAddresses(capId, newChild);
-    copyParcels(capId, newChild);
-    copyOwner(capId, newChild);
-    
-    capId = newChild;
-    scheduleInspection("Post Abatement Inspection",0);
-    capId = currentCapId;
-    
-    if (inspResult == "Skip to City Abatement")
-        { editAppSpecific("Abatement Type", "City", newChild); }
 
-}           
+createChildAbatement("Zoning Initial Inspection", 		"Skip to City Abatement", 	"City Abatement Order", 	"City");
+createChildAbatement("Zoning Follow-Up Inspection", 	"Skip to City Abatement", 	"City Abatement Order", 	"City");
+createChildAbatement("Graffiti Follow-Up Inspection", 	"Skip to City Abatement", 	"City Abatement Order", 	"City");
+
+createChildAbatement("Zoning Final Inspection", 		"Abate/Record", 			"Regular Abatement Order", 	"Regular");
+createChildAbatement("Zoning Final Inspection", 		"Abate/Summons", 			"Regular Abatement Order", 	"Regular");
+createChildAbatement("Zoning Final Inspection", 		"Abatement", 				"Regular Abatement Order", 	"Regular");
+
+createChildAbatement("Board-Up Final Inspection", 		"Abate/Record", 			"Board-Up Abatement Order", "Board-Up");
+createChildAbatement("Board-Up Final Inspection", 		"Abate/Summons", 			"Board-Up Abatement Order", "Board-Up");
+createChildAbatement("Board-Up Final Inspection", 		"Abatement", 				"Board-Up Abatement Order", "Board-Up");
+
+createChildAbatement("Graffiti Final Inspection", 		"Abate/Summons",			"Graffiti Abatement Order", "Graffiti");
+createChildAbatement("Graffiti Final Inspection", 		"Abatement", 				"Graffiti Abatement Order", "Graffiti");
+
+createChildAbatement("Snow Initial Inspection", 		"Skip to City Abatement", 	"City Abatement Order", 	"City");
+createChildAbatement("Snow Fee 2nd Reinspection", 		"Snow Abate/Summons", 		"Snow Abatement Order", 	"Snow");
+createChildAbatement("Snow Fee 2nd Reinspection", 		"Snow Abatement",	 		"Snow Abatement Order", 	"Snow");
+          
 logDebug("Script 344 END");
-logDebug("DONB 101 " + capId)
+
+function createChildAbatement(iType, iResult, schedIType, setFieldValue)
+{
+	if (inspType == iType && inspResult == iResult)
+	{
+		logDebug("function createChildAbatement criteria met:  inspection type = " + iType + " and result = " + iResult);
+		
+		var currentCapId = capId;
+		var appName = "Abatement created for Record Number " + capId.customID;
+		var newChild = createChild('Enforcement','Incident','Abatement','NA',appName);
+		var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
+		copyRecordDetailsLocal(capId, newChild);
+		copyContacts(capId, newChild);
+		copyAddresses(capId, newChild);
+		copyParcels(capId, newChild);
+		copyOwner(capId, newChild);
+		
+		// get the inspector from GIS and assign the rec to this user
+		inspUserObj = null
+		x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
+		logDebug(x[0]["OFFICER_NAME"]);
+		
+		capId = newChild;
+		
+		var offFullName = x[0]["OFFICER_NAME"];
+		
+		var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+		logDebug(offFname);
+		
+		var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+		logDebug(offLname);
+		
+		inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+		if(inspUserObj != null)
+			{ assignCap(inspUserObj.getUserID()); }
+
+		scheduleInspection(schedIType,0, currentUserID);
+		
+	    capId = currentCapId;
+    
+		editAppSpecific("Abatement Type", setFieldValue, newChild); 
+
+	}
+}

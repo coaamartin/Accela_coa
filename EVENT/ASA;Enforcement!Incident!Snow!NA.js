@@ -10,7 +10,7 @@ or created proactively in the field by a code officer. The script needs to:
 		
 */
 
-var thisInsp = scheduleInspectionCustom("Snow Initial Inspection", dateAdd(null, 0));
+var thisInsp = scheduleInspectionCustom("Snow Initial Inspection", 0);
 logDebug("inspection is " + thisInsp);
 if (thisInsp) {
 	autoAssignInspection(thisInsp);

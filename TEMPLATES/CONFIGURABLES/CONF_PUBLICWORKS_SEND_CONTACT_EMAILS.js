@@ -58,7 +58,8 @@
           "notificationTemplate": "PW LICENSE AG INCOMPLETE COMPLETENESS CHECK # 333 A",
           "notificationReport": "",
           "notifyContactTypes": [
-            "ALL"
+            "Applicant",
+	    "Project Owner"
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
@@ -93,7 +94,8 @@
           "notificationTemplate": "PW LICENSE AG INCOMPLETE COMPLETENESS CHECK # 333 B",
           "notificationReport": "",
           "notifyContactTypes": [
-            "ALL"
+            "Applicant",
+	    "Project Owner"
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
@@ -303,74 +305,6 @@
       }
     ]
   },
-  "PublicWorks/Real Property/Subdivision Plat/NA": {
-    "WorkflowTaskUpdateAfter": [
-      {
-        "preScript": "preScript286",
-        "postScript": "",
-        "metadata": {
-          "description": "To validate record based on JSON rules",
-          "operators": {
-            
-          }
-        },
-        "criteria": {
-          "task": [
-            "Application Acceptance"
-          ],
-          "status": [
-            "Ready to Pay"
-          ]
-        },
-        "action": {
-          "notificationTemplate": "TEST_FOR_SCRIPTS",
-          "notificationReport": "",
-          "notifyContactTypes": [
-            "Developer"
-          ],
-          "url4ACA": "",
-          "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
-          "createFromParent": "",
-          "reportingInfoStandards": ""
-        }
-      },
-      {
-        "preScript": "",
-        "postScript": "",
-        "metadata": {
-          "description": "To validate record based on JSON rules",
-          "operators": {
-            
-          }
-        },
-        "criteria": {
-          "task": [
-            "Application Acceptance"
-          ],
-          "status": [
-            "Missing Information"
-          ]
-        },
-        "action": {
-          "notificationTemplate": "TEST_FOR_SCRIPTS",
-          "notificationReport": "",
-          "notifyContactTypes": [
-            "Developer"
-          ],
-          "url4ACA": "",
-          "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
-          "createFromParent": "",
-          "reportingInfoStandards": ""
-        }
-      }
-    ]
-  },
   "PublicWorks/Real Property/Easement/NA": {
     "WorkflowTaskUpdateAfter": [
       {
@@ -391,7 +325,7 @@
           ]
         },
         "action": {
-          "notificationTemplate": "TEST_FOR_SCRIPTS",
+          "notificationTemplate": "PW SUB PLAT RECORDED # 289",
           "notificationReport": "",
           "notifyContactTypes": [
             "Applicant"

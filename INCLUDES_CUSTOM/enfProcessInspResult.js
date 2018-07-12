@@ -44,7 +44,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
             if($iTrc(wfTsk && wfSts, wfTsk + ' && ' + wfSts)){
                 if(!isTaskActive(wfTsk)) activateTask(wfTsk);
                 
-                updateTask(wfTsk, wfSts, "Updated via enfProcessInspResult()", "Updated via enfProcessInspResult()");
+                resultWorkflowTask(wfTsk, wfSts, "Updated via enfProcessInspResult()", "Updated via enfProcessInspResult()");
             }
             
             
