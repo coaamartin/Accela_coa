@@ -83,14 +83,13 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 	// check guide sheets to see if we need to deactivate the tasks and update the rec status
 	guideSheetArray = getGuideSheetObjects(inspId);
 	
-	var needToRefer = false;
-	for (x in guideSheetArray)
+	var needToRefer = true;
+	for (var x in guideSheetArray)
 	{
 		gsItem = guideSheetArray[x];
+		logDebug("x = " + x + " | status = " + gsItem.status );
 		if (gsItem.status != "Refer to Forestry" && gsItem.status != "N/A" )
-			{
-			logDebug("x = " + x + " | status = " + gsItem.status );
-			needToRefer = true;}
+			{ needToRefer = false;}
 	}
 	logDebug("Script 73: need to refer = " + needToRefer);
 	if (needToRefer)
