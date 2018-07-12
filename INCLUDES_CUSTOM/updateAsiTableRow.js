@@ -9,15 +9,16 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
     };
     for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
 
-    logDebug('updateAsiTableRow() starting');
-    var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
-    // Create a List object to add the value of Column.
-    var valuesList = aa.util.newArrayList();
-    valuesList.add(curValue);
-    searchConditionMap.put(columnName, valuesList);
-    printObjProps(searchConditionMap);
+    // logDebug('updateAsiTableRow() starting');
+    // var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
+    // // Create a List object to add the value of Column.
+    // var valuesList = aa.util.newArrayList();
+    // valuesList.add(curValue);
+    // searchConditionMap.put(columnName, valuesList);
+    // printObjProps(searchConditionMap);
     
-    var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(settings.capId, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
+  //  var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(settings.capId, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
+    var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(settings.capId, tableName, null);
     if (appSpecificTableInfo.getSuccess())
     {
         var appSpecificTableModel = appSpecificTableInfo.getOutput().getAppSpecificTableModel();
@@ -34,7 +35,9 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
                 var foColumnValue = fieldObject.getInputValue();
                 //get the row ID 
                 var foRowIndex = fieldObject.getRowIndex();
-                aa.print(columnName + ": " + foColumnName + "   rowIndex: " + foRowIndex);
+
+                if(i == 0) { logDebug('updateAsiTableRow(): foRowIndex = ' + foRowIndex); }
+                //logDebug(columnName + ": " + foColumnName + "   rowIndex: " + foRowIndex);
                 if(columnName == foColumnName && rowIndex == foRowIndex) {
                     setUpdateColumnValue(updateRowsMap, foRowIndex, columnName, newValue);
                 }
@@ -53,6 +56,7 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
     **/
     function setUpdateColumnValue(updateRowsMap, rowID, columnName, columnValue)
     {
+        logDebug('setUpdateColumnValue(): rowID = ' + rowID + ', columnName = ' + columnName + ', columnValue = ' + columnValue);
         var updateFieldsMap = updateRowsMap.get(rowID);
         if (updateFieldsMap == null)
         {
@@ -84,13 +88,13 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
         {
             var rowScriptModel = aa.appSpecificTableScript.createRowScriptModel();
             var rowModel = rowScriptModel.getRow();
-            logDebug("rowIdArray[i] = " + rowIdArray[i]);
-            printObjProps(rowModel.getFields(updateRowsMap.get(rowIdArray[i])));
             rowModel.setFields(updateRowsMap.get(rowIdArray[i]));
             rowModel.setId(rowIdArray[i]);
             rowList.add(rowModel);
         }
-        return aa.appSpecificTableScript.updateAppSpecificTableInfors(capId, asitTableModel);
+      //  return aa.appSpecificTableScript.updateAppSpecificTableInfors(settings.capId, asitTableModel);
+        aa.appSpecificTableScript.deletedAppSpecificTableInfors(settings.capId, asitTableModel); 
+        aa.appSpecificTableScript.addAppSpecificTableInfors(settings.capId, asitTableModel);
     }
 
 }

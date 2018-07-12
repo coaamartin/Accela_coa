@@ -10,9 +10,9 @@ function script423_AccessInvoiceSnowAndAbatementFees() {
             if(ifTracer(inspResult == "Snow Fee Posted" || inspResult == "Snow Fee Served", "inspResult == Snow Fee Served or Posted")) {
                 var snowFeeType = AInfo["Snow Fee Type"];
                 if(snowFeeType =="Residential Snow Fee") {
-                    addFee("ENF_SNW_01", "ENF_SNOW", "FINAL", 1, "Y");
+                    updateFee("ENF_SNW_01", "ENF_SNOW", "FINAL", 1, "Y", "Y");
                 } else if(snowFeeType =="Commercial Snow Fee") {
-                    addFee("ENF_SNW_02", "ENF_SNOW", "FINAL", 1, "Y");
+                    updateFee("ENF_SNW_02", "ENF_SNOW", "FINAL", 1, "Y", "Y");
                 }
             }
         } else if(ifTracer(appTypeString == "Enforcement/Incident/Abatement/NA", "appTypeString == Enforcement/Incident/Abatement/NA")) {
