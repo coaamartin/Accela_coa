@@ -17,7 +17,7 @@ function updateSubmittalNumber(workFlowTask, workflowStatusArray, customFieldNam
         if (typeof (customFieldValue) != "undefined" && customFieldValue != null && customFieldValue != "")
             customFieldValue = parseInt(customFieldValue) + 1;
         else
-            customFieldValue = 0;
+            customFieldValue = 1;
 
         editAppSpecific(customFieldName, customFieldValue);
 
