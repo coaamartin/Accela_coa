@@ -22,7 +22,10 @@ Notes:
 
 // per customer direction during script testing, it was determined that this functionality should 
 // be completed on task 'Completeness Check' and status 'Complete'
+// script 18
+// EK updated this script to include Application Submittal and Accepted
 updateSubmittalNumber("Completeness Check", ["Complete","Accepted"], "Submittal Number");
+updateSubmittalNumber("Application Submittal", ["Complete","Accepted"], "Submittal Number");
 
 include("45_LicenseAgreementEmailResubmittal");
 
