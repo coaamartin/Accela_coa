@@ -45,9 +45,8 @@ if ("Zoning Initial Inspection".equals(inspType) && "Citation/Summons".equals(in
 //*********************************************************************************************************
 logDebug("Script 73 START");
 logDebug("Script 73 capId = " + capId); 
-if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection" || 
-										 inspType == "Zoning Follow-Up Inspection" ||
-										 inspType == "Zoning Final Inspection" ))
+if(	(inspResult == "Refer to Forestry" || inspResult == "Referred to Forestry" ) 
+	&& (inspType == "Zoning Initial Inspection" || inspType == "Zoning Follow-Up Inspection" || inspType == "Zoning Final Inspection" ))
 {
 	logDebug("Script 73 criteria met");
 	
@@ -71,12 +70,19 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 	copyParcels(capId, newChild);
 	copyOwner(capId, newChild);
 	
+	// need to get the record detail description info and concatenate this with the comments to forestryComments
+	var workDescResult = aa.cap.getCapWorkDesByPK(capId);
+	var workDesObj = workDescResult.getOutput().getCapWorkDesModel();
+	var details = workDesObj.getDescription();
 	var forestryComments = getAppSpecific("Comments to Forestry");
+	var childDescString = details + " | " + forestryComments;
+	logDebug("childDescString = " + childDescString);
 	
+	// now place the new detail desc in the child rec detail description
 	var workDescResult = aa.cap.getCapWorkDesByPK(newChild);
 	if (workDescResult.getSuccess()) {
 		var workDesObj = workDescResult.getOutput().getCapWorkDesModel();
-		workDesObj.setDescription(forestryComments);
+		workDesObj.setDescription(childDescString);
 		aa.cap.editCapWorkDes(workDesObj);
 	}
 	
