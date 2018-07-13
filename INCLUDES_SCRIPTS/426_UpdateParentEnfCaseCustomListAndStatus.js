@@ -92,10 +92,12 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             } else if(ifTracer(inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA"), 'inspType == "Pre Court Action" && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")')) {
                 // inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")
                 updateOrCreateValueInASITable(tableName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
-                updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
+                if(nspResult == "Summons File to CA") {
+                    updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');                    
+                }
             } else if(ifTracer(inspType == "Legal Resolution" && inspResult == "Complete", 'inspType == "Legal Resolution" && inspResult == "Complete"')) {
                 // inspType == "Legal Resolution" && inspResult == "Complete"
-                updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
+                updateSummonsUponCompletion();
             } 
         } else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
             //WTUA
