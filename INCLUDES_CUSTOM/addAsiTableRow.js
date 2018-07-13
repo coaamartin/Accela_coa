@@ -18,11 +18,9 @@ function addAsiTableRow(tableName, columnArray, options) {
         col = aa.util.newHashMap();
         col.put(columnArray[idx].colName, columnArray[idx].colValue);
     }
-
-    if(col != null) {
-        asitFieldArray.push(col);
-        addAppSpecificTableInfors();
-    }
+    logDebug('addAsiTableRow(): inserting ASIT Row');
+    asitFieldArray.push(col);
+    addAppSpecificTableInfors();
 
 
     function addAppSpecificTableInfors() {
@@ -36,6 +34,7 @@ function addAsiTableRow(tableName, columnArray, options) {
             rowModel.setFields(asitFieldArray[i]);
             rowList.add(rowModel);
         }
+        logDebug('addAppSpecificTableInfors(): inserting ASIT Row');
         return aa.appSpecificTableScript.addAppSpecificTableInfors(settings.capId, asitTableModel);
     }
 
