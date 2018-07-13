@@ -71,12 +71,19 @@ if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection"
 	copyParcels(capId, newChild);
 	copyOwner(capId, newChild);
 	
+	// need to get the record detail description info and concatenate this with the comments to forestryComments
+	var workDescResult = aa.cap.getCapWorkDesByPK(capId);
+	var workDesObj = workDescResult.getOutput().getCapWorkDesModel();
+	var details = workDesObj.getDescription();
 	var forestryComments = getAppSpecific("Comments to Forestry");
+	var childDescString = details + " | " + forestryComments;
+	logDebug("childDescString = " + childDescString);
 	
+	// now place the new detail desc in the child rec detail description
 	var workDescResult = aa.cap.getCapWorkDesByPK(newChild);
 	if (workDescResult.getSuccess()) {
 		var workDesObj = workDescResult.getOutput().getCapWorkDesModel();
-		workDesObj.setDescription(forestryComments);
+		workDesObj.setDescription(childDescString);
 		aa.cap.editCapWorkDes(workDesObj);
 	}
 	
