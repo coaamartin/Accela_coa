@@ -331,7 +331,7 @@ function activeTasksCheck(options) {
 
     for (i in wfObj) {
            fTask = wfObj[i];
-           if (fTask.getActiveFlag().equals("Y"))
+           if (ifTracer(fTask.getActiveFlag().equals("Y"), 'child is active'))
                   return true;
     }
 
