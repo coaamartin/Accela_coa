@@ -168,7 +168,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         updateOrCreateValueInASITable(tableName, 'Type', AInfo['Abatement Type'], 'N');
         updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
         updateOrCreateValueInASITable(tableName, 'Completed Date', AInfo['Abatement Completed Date'], 'N');
-        updateOrCreateValueInASITable(tableName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
+   //    updateOrCreateValueInASITable(tableName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
         updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal, 'N');
         updateAbatementAdminCharge();
         updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal, 'N');
