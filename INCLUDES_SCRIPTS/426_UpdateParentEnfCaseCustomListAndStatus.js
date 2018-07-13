@@ -168,7 +168,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 
 
 function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
-    if(!updateAsiTableRows(tableName, fieldName, value, {})) {
+    if(!updateAsiTableRow(tableName, fieldName, value, {})) {
         addAsiTableRow(tableName, [
             { colName: fieldName, colValue: value }
         ]);
