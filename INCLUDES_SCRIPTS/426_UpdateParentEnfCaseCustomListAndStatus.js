@@ -270,7 +270,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 //parent is Zoning Violation Charge
                  amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02") + feeAmount("ENF_ABT_05") + feeAmount("ENF_ABT_06") 
                  updateOrCreateValueInASITable(tableName, 'Admin Charge', amt.toString(), 'N');
-            } else if(ifTracer(parentCapTypeString.indexOf('Enforcment\Incident\Snow') > -1, 'parent = Snow Violation Case')) {
+            } else if(ifTracer(parentCapTypeString.indexOf('Enforcement\Incident\Snow') > -1, 'parent = Snow Violation Case')) {
                 //parent is Snow Violation Case
                  amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02")
                  updateOrCreateValueInASITable(tableName, 'Admin Charge', amt.toString(), 'N');
