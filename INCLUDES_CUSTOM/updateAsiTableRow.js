@@ -21,7 +21,7 @@ function updateAsiTableRow(tableName, columnName, newValue, options) {
     var asitTable = getAsiTableRows(tableName, {
         capId: settings.capId,
     })
-
+  
     if(asitTable) { //found table
         asiTableRowIndexes = getAsiTableRowIndexes();
         if(settings.rowIndex != null && asitTable[settings.rowIndex] != null) { //update specific row
