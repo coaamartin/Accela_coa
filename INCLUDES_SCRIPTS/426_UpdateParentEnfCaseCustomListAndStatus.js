@@ -20,8 +20,8 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             if(ifTracer(inspResult == "Taken and Stored", 'inspResult == "Taken and Stored"')) {
                 // inspResult == Taken and Stored (create row)
                 addAsiTableRow(tableName, [
-                    { columnName: 'Abatement #', fieldValue: capIDString },
-                    { columnName: 'Type', fieldValue: AInfo['Abatement Type'] }
+                    { colName: 'Abatement #', colValue: capIDString },
+                    { colName: 'Type', colValue: AInfo['Abatement Type'] }
                 ]);
                 // row = createAsiTableValObjs([
                 //     { columnName: 'Abatement #', fieldValue: capIDString, readOnly: 'N' },
@@ -180,7 +180,7 @@ function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
         // ]);
       //  addToASITable(tableName, row);
         addAsiTableRow(tableName, [
-            { columnName: fieldName, fieldValue: value, readOnly: readonly }
+            { colName: fieldName, colValue: value }
         ]);
     }
 }
