@@ -23,12 +23,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     { colName: 'Abatement #', colValue: capIDString },
                     { colName: 'Type', colValue: AInfo['Abatement Type'] }
                 ]);
-                // row = createAsiTableValObjs([
-                //     { columnName: 'Abatement #', fieldValue: capIDString, readOnly: 'N' },
-                //     { columnName: 'Type', fieldValue: AInfo['Abatement Type'], readOnly: 'N' }
-                // ]);
-                // addToASITable(tableName, row);
-            } else if(ifTracer(inspResult == "Called In Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
+             } else if(ifTracer(inspResult == "Called In Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
                 // inspResult == Called in Service Request OR Completed Service Request (update row if exists, else create row)
                 updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
             } else if(ifTracer(inspType== "Abatement Approval" && inspResult == "Invoice Approval", "inspType== Abatement Approval && inspResult == Invoice Approval")) {
@@ -80,20 +75,20 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             //IRSA
             if(ifTracer(inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service"), 'inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")')) {
                 // inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")
-                row = createAsiTableValObjs([
-                    { columnName: 'Case #', fieldValue: capIDString, readOnly: 'N' },
-                    { columnName: 'Summons #', fieldValue: AInfo['Court Z-Number'], readOnly: 'N' },
-                    { columnName: 'Issue Date', fieldValue: AInfo['Court Z-Number'], readOnly: 'N' }
-                ]);
+                row = [
+                    { colName: 'Case #', colValue: capIDString },
+                    { colName: 'Summons #', colValue: AInfo['Court Z-Number'] },
+                    { colName: 'Issue Date', colValue: AInfo['Court Z-Number'] }
+                ];
                 var respPeople = getContacts( { contactType: "Responsible Party" });
                 if(respPeople.length > 0) {
                     for(var rp in respPeople) {
                         if(respPeople[rp].getPrimaryFlag() == 'Y') {
-                            row.push({ columnName: 'Defendant', fieldValue: respPeople[rp].getFullName(), readOnly: 'N' });
+                            row.push({ colName: 'Defendant', colValue: respPeople[rp].getFullName() });
                         }
                     }
                 }
-                addToASITable(tableName, row);
+                addAsiTableRow(tableName, row);
             } else if(ifTracer(inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA"), 'inspType == "Pre Court Action" && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")')) {
                 // inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")
                 updateOrCreateValueInASITable(tableName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
@@ -155,14 +150,13 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             //WTUA
             if(ifTracer(wfTask == "Record NOV" && wfStatus == "Record Reception", 'wfTask == "Record NOV" && wfStatus == "Record Reception"')) {
                 // wfTask == "Record NOV" && wfStatus == "Record Reception"
-                row = createAsiTableValObjs([
-                    { columnName: 'NOV Record #', fieldValue: capIDString, readOnly: 'N' },
-                    { columnName: 'Recordation Date', fieldValue: AInfo['Record Reception Date'], readOnly: 'N' },
-                    { columnName: 'Recordation #', fieldValue: AInfo['Record Reception #'], readOnly: 'N' },
-                    { columnName: 'Release Date', fieldValue: AInfo['Release Reception Date'], readOnly: 'N' },
-                    { columnName: 'Release #', fieldValue: AInfo['Release Reception #'], readOnly: 'N' }
+                addAsiTableRow(tableName, [
+                    { colName: 'NOV Record #', colValue: capIDString },
+                    { colName: 'Recordation Date', colValue: AInfo['Record Reception Date'] },
+                    { colName: 'Recordation #', colValue: AInfo['Record Reception #'] },
+                    { colName: 'Release Date', colValue: AInfo['Release Reception Date'] },
+                    { colName: 'Release #', colValue: AInfo['Release Reception #'] }
                 ]);
-                addToASITable(tableName, row);
             } else if(ifTracer(wfTask == "Release NOV" && wfStatus == "Record Reception", 'wfTask == "Release NOV" && wfStatus == "Record Reception"')) {
                 // wfTask == "Release NOV" && wfStatus == "Record Reception"
                 updateRecordWithCountyUponCompletion();
@@ -175,10 +169,6 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 
 function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
     if(!updateAsiTableRows(tableName, fieldName, value, {})) {
-        // var row = createAsiTableValObjs([
-        //     { columnName: fieldName, fieldValue: value, readOnly: readonly }
-        // ]);
-      //  addToASITable(tableName, row);
         addAsiTableRow(tableName, [
             { colName: fieldName, colValue: value }
         ]);
