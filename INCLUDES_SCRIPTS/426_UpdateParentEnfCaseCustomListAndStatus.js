@@ -131,7 +131,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 // inspType == "NOV Inspection"
                 updateOrCreateValueInASITable(tableName, 'Last Inspection Date', inspResultDate, 'N');
                 if(inspResult == "Failed") {
-                    maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection" });
+                    maxInsp = getLastInspection({ inspType: "NOV Release Inspection" });
                     if(maxInsp) {
                         dte = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
                         updateOrCreateValueInASITable(tableName, 'Next Inspection Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
@@ -140,7 +140,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     updateOrCreateValueInASITable(tableName, 'Next Inspection Date', inspSchedDate, 'N');
                 }
                 updateOrCreateValueInASITable(tableName, 'Completed Inspections', getCompletedInspections({}), 'N');
-                maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
+                maxInsp = getLastInspection({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
                 if(maxInsp) {
                     dte = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
                     updateOrCreateValueInASITable(tableName, 'Compliance Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
@@ -217,14 +217,14 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         var dteSched,
             dteStatus;
     
-        maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection" });
+        maxInsp = getLastInspection({ inspType: "NOV Release Inspection" });
         if(maxInsp) {
             dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
             dteSched = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
             updateOrCreateValueInASITable(tableName, 'Last Inspection Date', dteStatus, 'N');
             updateOrCreateValueInASITable(tableName, 'Next Inspection Date', dteSched, 'N');
         }
-        maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
+        maxInsp = getLastInspection({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
         if(maxInsp) {
             dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
             updateOrCreateValueInASITable(tableName, 'Compliance Date', dteStatus, 'N');
