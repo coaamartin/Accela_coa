@@ -38,13 +38,13 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             if(ifTracer(wfTask == "Invoicing" && (wfStatus =="Invoiced" || wfStatus =="Invoiced - City Paid"), "wfTask == Invoicing && wfStatus == Invoiced OR Invoiced City Paid")) {
                 // wfTask == "Invoicing" && wfStatus =="Invoiced"
                 updateOrCreateValueInASITable(tableName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
-                updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal, 'N');
+                updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
             } else if(ifTracer(wfTask == "Recordation" && (wfStatus =="Submit Recording"), "wfTask == Recordation && wfStatus == Submit Recording")) {
                 // wfTask == "Recordation" && wfStatus =="Submit Recording"
                 updateAbatementAdminCharge();
             } else if(ifTracer(wfTask == "Recordation" && wfStatus =="Record Reception", "wfTask == Recordation && wfStatus == Record Reception")) {
                 // wfTask == "Recordation" && wfStatus =="Record Reception"
-                updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal, 'N');
+                updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal.toString(), 'N');
             } else if(ifTracer(wfTask == "Release Lien" && wfStatus =="Record Reception", "wfTask == Release Lien && wfStatus == Record Reception")) {
                 // wfTask == "Release Lien" && wfStatus =="Record Reception"
                 updateOrCreateValueInASITable(tableName, 'Release Date', AInfo["Release Reception Date"], 'N');
@@ -169,9 +169,9 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
         updateOrCreateValueInASITable(tableName, 'Completed Date', AInfo['Abatement Completed Date'], 'N');
    //    updateOrCreateValueInASITable(tableName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
-        updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal, 'N');
+        updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
         updateAbatementAdminCharge();
-        updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal, 'N');
+        updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal.toString(), 'N');
         updateOrCreateValueInASITable(tableName, 'Release Date', AInfo["Release Reception Date"], 'N');
         updateOrCreateValueInASITable(tableName, 'Released to County Date', AInfo["Released to County Date"], 'N');
     
