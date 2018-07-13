@@ -73,12 +73,12 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         tableName = 'SUMMONS TO COURT INFORMATION';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
             //IRSA
-            if(ifTracer(inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service"), 'inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")')) {
+            if(ifTracer(inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service"), 'inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")')) {
                 // inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")
                 row = [
                     { colName: 'Case #', colValue: capIDString },
                     { colName: 'Summons #', colValue: AInfo['Court Z-Number'] },
-                    { colName: 'Issue Date', colValue: AInfo['Court Z-Number'] }
+                    { colName: 'Issue Date', colValue: inspResultDate }
                 ];
                 var respPeople = getContacts( { contactType: "Responsible Party" });
                 if(respPeople.length > 0) {
