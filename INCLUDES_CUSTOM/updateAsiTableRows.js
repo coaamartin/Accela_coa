@@ -55,7 +55,7 @@ function updateAsiTableRows(tableName, columnName, newValue, options) {
                     //get the row ID 
                     var foRowIndex = fieldObject.getRowIndex();
 
-                    if(asiTableRowIndexes.indexOf(foRowIndex) -1) {
+                    if(asiTableRowIndexes.indexOf(foRowIndex) < 0) {
                         asiTableRowIndexes.push(foRowIndex)
                     }
 
