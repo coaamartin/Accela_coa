@@ -175,10 +175,13 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 
 function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
     if(!updateAsiTableRows(tableName, fieldName, value, {})) {
-        var row = createAsiTableValObjs([
+        // var row = createAsiTableValObjs([
+        //     { columnName: fieldName, fieldValue: value, readOnly: readonly }
+        // ]);
+      //  addToASITable(tableName, row);
+        addAsiTableRow(tableName, [
             { columnName: fieldName, fieldValue: value, readOnly: readonly }
         ]);
-        addToASITable(tableName, row);
     }
 }
 

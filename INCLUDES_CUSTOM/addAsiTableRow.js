@@ -1,8 +1,8 @@
 /*
 * ALLOWS ADDING OF MULTIPLE COLUMNS IN ONE ROW
     columnArray = [
-        { columnName: 'Abatement #', fieldValue: capIDString },
-        { columnName: 'Type', fieldValue: 'Snow' }
+        { colName: 'Abatement #', colValue: capIDString },
+        { colName: 'Type', colValue: 'Snow' }
     ]
 */
 function addAsiTableRow(tableName, columnArray, options) {
@@ -11,15 +11,16 @@ function addAsiTableRow(tableName, columnArray, options) {
     };
     for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
   
-    var asitFieldArray = [];
+    var asitFieldArray = [],
+        col;
+
     for(var idx in columnArray) {
-        var col = aa.util.newHashMap();
-        col.put(columnArray[idx].columnName, columnArray[idx].fieldValue);
-        asitFieldArray.push(col);
+        col = aa.util.newHashMap();
+        col.put(columnArray[idx].colName, columnArray[idx].colValue);
     }
 
-    // add asit data
-    if(asitFieldArray.length > 0) {
+    if(col != null) {
+        asitFieldArray.push(col);
         addAppSpecificTableInfors();
     }
 
