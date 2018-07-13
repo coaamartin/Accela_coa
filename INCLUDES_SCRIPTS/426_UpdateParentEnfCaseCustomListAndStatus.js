@@ -298,7 +298,7 @@ function getChildrenWithActiveTasks() {
     childCapId;
 
     if(ifTracer(parentCapId, 'Parent found.')) {  
-        children = getChildren("*/*/*/*", capId);
+        children = getChildren("*/*/*/*", parentCapId);
         if (ifTracer(children && children.length > 0, 'Children found.'))
         {
             for (var c in children)
