@@ -12,13 +12,13 @@ function addAsiTableRow(tableName, columnArray, options) {
     for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
   
     var asitFieldArray = [],
-        col = aa.util.newHashMap();;
+        cols = aa.util.newHashMap();;
 
     for(var idx in columnArray) {
-         col.put(columnArray[idx].colName, columnArray[idx].colValue);
+         cols.put(columnArray[idx].colName, columnArray[idx].colValue);
     }
     logDebug('addAsiTableRow(): inserting ASIT Row');
-    asitFieldArray.push(col);
+    asitFieldArray.push(cols);
     addAppSpecificTableInfors();
 
 
