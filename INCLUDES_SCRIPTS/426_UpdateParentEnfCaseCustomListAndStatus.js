@@ -64,7 +64,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 dd = paymentDateArr[2].toString();
                 dte = new Date(mm + '/' + dd + '/' + yyyy);
 
-                updateOrCreateValueInASITable(tableName, 'Paid Date', dte, 'N');
+                updateOrCreateValueInASITable(tableName, 'Paid Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
             }
         }
     } else if (matchARecordType([
@@ -134,7 +134,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection" });
                     if(maxInsp) {
                         dte = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
-                        updateOrCreateValueInASITable(tableName, 'Next Inspection Date', dte, 'N');
+                        updateOrCreateValueInASITable(tableName, 'Next Inspection Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
                     }
                 } else {
                     updateOrCreateValueInASITable(tableName, 'Next Inspection Date', inspSchedDate, 'N');
@@ -143,7 +143,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
                 if(maxInsp) {
                     dte = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
-                    updateOrCreateValueInASITable(tableName, 'Compliance Date', dte, 'N');
+                    updateOrCreateValueInASITable(tableName, 'Compliance Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
                 }
              }
         }  else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
