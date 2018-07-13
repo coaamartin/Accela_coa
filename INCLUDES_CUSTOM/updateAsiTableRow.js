@@ -91,7 +91,7 @@ function updateAsiTableRow(tableName, columnName, newValue, options) {
                 var foRowIndex = fieldObject.getRowIndex();
 
                 if(columnName == foColumnName && rowIndex == foRowIndex) {
-                    setUpdateColumnValue();
+                    setUpdateColumnValue(rowIndex);
                 }
              }
             if (!updateRowsMap.isEmpty())
