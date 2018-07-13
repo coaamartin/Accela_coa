@@ -203,7 +203,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             var parentAppString = parentCap.getCapType().toString();
             if(parentCapStatus == "NFZV - 1 Year Date" || parentCapStatus =="Compliance") {
                 closeAllTasks(parentCapId, 'closed by script 426');
-                if(parentAppString == "Enforcement\Housing\Inspection\NA") {
+                if(parentAppString == "Enforcement/Housing/Inspection/NA") {
                     updateAppStatus(capStatus,'Status set by script 426', parentCapId);
                 } else {
                     updateAppStatus('Pending Housing Inspection','Status set by script 426', parentCapId);
@@ -243,11 +243,11 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             var parentAppString = parentCap.getCapType().toString();
     
             if (matchARecordType([
-                "Enforcement\Housing\Inspection\NA",
-                "Enforcement\Incident\Zoning\NA"
+                "Enforcement/Housing/Inspection/NA",
+                "Enforcement/Incident/Zoning/NA"
             ], appTypeString)) {
                 closeAllTasks(parentCapId, 'closed by script 426');
-                if(parentAppString == "Enforcement\Housing\Inspection\NA") {
+                if(parentAppString == "Enforcement/Housing/Inspection/NA") {
                     updateAppStatus("Pending Housing Inspection",'Status set by script 426', parentCapId);
                 } else {
                     updateAppStatus('Compliance','Status set by script 426', parentCapId);
@@ -266,11 +266,11 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         if(ifTracer(parentCapId, 'parent found')) { 
             parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
             parentCapTypeString = parentCapScriptModel.getCapType().toString();
-            if(ifTracer(parentCapTypeString.indexOf('Enforcement\Incident\Zoning') > -1, 'parent = Zoning Violation Charge')) {
+            if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Zoning') > -1, 'parent = Zoning Violation Charge')) {
                 //parent is Zoning Violation Charge
                  amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02") + feeAmount("ENF_ABT_05") + feeAmount("ENF_ABT_06") 
                  updateOrCreateValueInASITable(tableName, 'Admin Charge', amt.toString(), 'N');
-            } else if(ifTracer(parentCapTypeString.indexOf('Enforcement\Incident\Snow') > -1, 'parent = Snow Violation Case')) {
+            } else if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Snow') > -1, 'parent = Snow Violation Case')) {
                 //parent is Snow Violation Case
                  amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02")
                  updateOrCreateValueInASITable(tableName, 'Admin Charge', amt.toString(), 'N');
