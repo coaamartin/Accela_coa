@@ -32,21 +32,21 @@ if (insp1pass || insp2pass)
 	updateAppStatus("Approved", "updated by script 21");
 	
 	//Prepare the email and report...
-	var emailtemplate = "JD_TEST_TEMPLATE";
-	var reportname = "JD_TEST_REPORT";
+	var emailtemplate = "WAT_IP_INSPECTION PASS";
+	var reportname = "";
 	var allowedcontacttypes = "Applicant";
 	
 	var emailparams = aa.util.newHashtable();
-	var joke = "This will be a legit email template once created.";
-	var currentstatuscomment = "Status and Application updated by script 21";
-	emailparams.put("$$Joke$$", joke);
-	emailparams.put("$$wfComment$$", currentstatuscomment);
+	//var joke = "This will be a legit email template once created.";
+	//var currentstatuscomment = "Status and Application updated by script 21";
+	//emailparams.put("$$Joke$$", joke);
+	//emailparams.put("$$wfComment$$", currentstatuscomment);
 
-	var reportparams = aa.util.newHashtable();
-	reportparams.put("DEPARTMENT", "Administrator");
+	//var reportparams = aa.util.newHashtable();
+	//reportparams.put("DEPARTMENT", "Administrator");
 	
 	//send the email...
-	emailContacts(allowedcontacttypes, emailtemplate, emailparams, reportname, reportparams, "N", "");
+	emailContacts(allowedcontacttypes, emailtemplate, emailparams, "", "", "N", "");
 	logDebug("email sent...");
 }	
 
