@@ -1,25 +1,14 @@
 /*
 * ALLOWS UPDATING OF ONE COLUMN IN ONE ROW
-    THIS IS FOR WHEN YOU ALREADY KNW THE CURRENT-VALUE 
-    USE updateAsiTableRows() IF YOU DON'T KNOW THE CURRENT VALUE
-
+ 
     NOTE: Can only be used by rows added using the UI or addAsiTableRow()
 */
-function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, options) {
+function updateAsiTableRow(tableName, columnName, newValue, rowIndex, options) {
     var settings = {
         capId: capId,
     };
     for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
 
-    // logDebug('updateAsiTableRow() starting');
-    // var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
-    // // Create a List object to add the value of Column.
-    // var valuesList = aa.util.newArrayList();
-    // valuesList.add(curValue);
-    // searchConditionMap.put(columnName, valuesList);
-    // printObjProps(searchConditionMap);
-    
-  //  var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(settings.capId, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
     var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(settings.capId, tableName, null);
     if (appSpecificTableInfo.getSuccess())
     {
@@ -74,7 +63,7 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
     **/
     function updateAppSpecificTableInfors(tableName, capId, updateRowsMap/** Map<rowID, Map<columnName, columnValue>> **/)
     {
-    logDebug("in updateA STI");
+    logDebug("in update STI");
         if (updateRowsMap == null || updateRowsMap.isEmpty())
         {
             return;
@@ -95,8 +84,6 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
             rowList.add(rowModel);
         }
         return aa.appSpecificTableScript.updateAppSpecificTableInfors(settings.capId, asitTableModel);
-        // aa.appSpecificTableScript.deletedAppSpecificTableInfors(settings.capId, asitTableModel); 
-        // aa.appSpecificTableScript.addAppSpecificTableInfors(settings.capId, asitTableModel);
     }
 
 }
