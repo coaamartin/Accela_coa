@@ -176,7 +176,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         updateOrCreateValueInASITable(tableName, 'Released to County Date', AInfo["Released to County Date"], 'N');
     
         var childrenWithActiveTasks = getChildrenWithActiveTasks();
-        if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
+        if(ifTracer(childrenWithActiveTasks && childrenWithActiveTasks.length == 1, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 1')) {
             //if current record is the only record open, close parent
             var parentCapId = getParent();
             closeAllTasks(parentCapId, 'closed by script 426');
@@ -195,7 +195,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         updateOrCreateValueInASITable(tableName, 'Issue Date', AInfo['Court Z-Number'], 'N');
     
         var childrenWithActiveTasks = getChildrenWithActiveTasks();
-        if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
+        if(ifTracer(childrenWithActiveTasks && childrenWithActiveTasks.length == 1, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 1')) {
             //if current record is the only record open, close parent
             var parentCapId = getParent();
             var parentCap = aa.cap.getCap(parentCapId).getOutput();
@@ -235,7 +235,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         updateOrCreateValueInASITable(tableName, 'Release #', AInfo['Release Reception #'], 'N');
     
         var childrenWithActiveTasks = getChildrenWithActiveTasks();
-        if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
+        if(ifTracer(childrenWithActiveTasks && childrenWithActiveTasks.length == 1, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 1')) {
             //if current record is the only record open, close parent
             var parentCapId = getParent();
             var parentCap = aa.cap.getCap(parentCapId).getOutput();
