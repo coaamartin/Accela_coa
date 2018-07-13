@@ -344,23 +344,11 @@ logDebug("Script 343 START");
 if (inspResult == "Skip to Summons")
 {
     logDebug("Script 343: criteria met");
-    var currentCapId = capId;
-    var appName = "Summons created for Record Number " + capId.customID;
-    var newChild = createChild('Enforcement','Incident','Summons','NA',appName);
-    var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
-    copyRecordDetailsLocal(capId, newChild);
-    copyContacts(capId, newChild);
-    copyAddresses(capId, newChild);
-    copyParcels(capId, newChild);
-    copyOwner(capId, newChild);
-    
     
 	// get the inspector from GIS and assign the rec to this user
-	inspUserObj = null
+	inspUserObj = null;
 	x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
 	logDebug(x[0]["OFFICER_NAME"]);
-	
-
 	
 	var offFullName = x[0]["OFFICER_NAME"];
 	
@@ -371,6 +359,19 @@ if (inspResult == "Skip to Summons")
 	logDebug(offLname);
 	
 	inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+	
+	var currentCapId = capId;
+    var appName = "Summons created for Record Number " + capId.customID;
+    var newChild = createChild('Enforcement','Incident','Summons','NA',appName);
+    var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
+    copyRecordDetailsLocal(capId, newChild);
+    copyContacts(capId, newChild);
+    copyAddresses(capId, newChild);
+    copyParcels(capId, newChild);
+    copyOwner(capId, newChild);
+    
+    
+	
 
 	capId = newChild;
 	if(inspUserObj != null)
@@ -432,7 +433,7 @@ function createChildAbatement(iType, iResult, schedIType, setFieldValue)
 		copyOwner(capId, newChild);
 		
 		// get the inspector from GIS and assign the rec to this user
-		inspUserObj = null
+		inspUserObj = null;
 		x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
 		logDebug(x[0]["OFFICER_NAME"]);
 		
