@@ -163,6 +163,122 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             }
         }
     }
+
+    function updateAbatementUponCompletion() {
+        updateOrCreateValueInASITable(tableName, 'Type', AInfo['Abatement Type'], 'N');
+        updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
+        updateOrCreateValueInASITable(tableName, 'Completed Date', AInfo['Abatement Completed Date'], 'N');
+        updateOrCreateValueInASITable(tableName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
+        updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal, 'N');
+        updateAbatementAdminCharge();
+        updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal, 'N');
+        updateOrCreateValueInASITable(tableName, 'Release Date', AInfo["Release Reception Date"], 'N');
+        updateOrCreateValueInASITable(tableName, 'Released to County Date', AInfo["Released to County Date"], 'N');
+    
+        var childrenWithActiveTasks = getChildrenWithActiveTasks();
+        if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
+            //if current record is the only record open, close parent
+            var parentCapId = getParent();
+            closeAllTasks(parentCapId, 'closed by script 426');
+            updateAppStatus('Compliance','Status set by script 426', parentCapId);
+        }
+    }
+    
+    function updateSummonsUponCompletion() {
+        updateOrCreateValueInASITable(tableName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
+        updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
+        updateOrCreateValueInASITable(tableName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
+        updateOrCreateValueInASITable(tableName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
+        updateOrCreateValueInASITable(tableName, 'Trial Date', AInfo["Trial Date"], 'N');
+        updateOrCreateValueInASITable(tableName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
+        updateOrCreateValueInASITable(tableName, 'Summons #', AInfo['Court Z-Number'], 'N');
+        updateOrCreateValueInASITable(tableName, 'Issue Date', AInfo['Court Z-Number'], 'N');
+    
+        var childrenWithActiveTasks = getChildrenWithActiveTasks();
+        if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
+            //if current record is the only record open, close parent
+            var parentCapId = getParent();
+            var parentCap = aa.cap.getCap(parentCapId).getOutput();
+            var parentCapStatus = parentCap.getStatus();
+            var parentAppString = parentCap.getCapType().toString();
+            if(parentCapStatus == "NFZV - 1 Year Date" || parentCapStatus =="Compliance") {
+                closeAllTasks(parentCapId, 'closed by script 426');
+                if(parentAppString == "Enforcement\Housing\Inspection\NA") {
+                    updateAppStatus(capStatus,'Status set by script 426', parentCapId);
+                } else {
+                    updateAppStatus('Pending Housing Inspection','Status set by script 426', parentCapId);
+                }
+            }
+       }
+    }
+    
+    function updateRecordWithCountyUponCompletion() {
+        //THIS IS INSANE MAKING ME DO EVERYTHING OVER AGAIN AT THE END - GHEZ!
+        var dteSched,
+            dteStatus;
+    
+        maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection" });
+        if(maxInsp) {
+            dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
+            dteSched = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
+            updateOrCreateValueInASITable(tableName, 'Last Inspection Date', dteStatus, 'N');
+            updateOrCreateValueInASITable(tableName, 'Next Inspection Date', dteSched, 'N');
+        }
+        maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
+        if(maxInsp) {
+            dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
+            updateOrCreateValueInASITable(tableName, 'Compliance Date', dteStatus, 'N');
+        }
+        updateOrCreateValueInASITable(tableName, 'Recordation Date', AInfo['Record Reception Date'], 'N');
+        updateOrCreateValueInASITable(tableName, 'Recordation #', AInfo['Record Reception #'], 'N');
+        updateOrCreateValueInASITable(tableName, 'Release Date', AInfo['Release Reception Date'], 'N');
+        updateOrCreateValueInASITable(tableName, 'Release #', AInfo['Release Reception #'], 'N');
+    
+        var childrenWithActiveTasks = getChildrenWithActiveTasks();
+        if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
+            //if current record is the only record open, close parent
+            var parentCapId = getParent();
+            var parentCap = aa.cap.getCap(parentCapId).getOutput();
+            var parentCapStatus = parentCap.getStatus();
+            var parentAppString = parentCap.getCapType().toString();
+    
+            if (matchARecordType([
+                "Enforcement\Housing\Inspection\NA",
+                "Enforcement\Incident\Zoning\NA"
+            ], appTypeString)) {
+                closeAllTasks(parentCapId, 'closed by script 426');
+                if(parentAppString == "Enforcement\Housing\Inspection\NA") {
+                    updateAppStatus("Pending Housing Inspection",'Status set by script 426', parentCapId);
+                } else {
+                    updateAppStatus('Compliance','Status set by script 426', parentCapId);
+                }
+            }
+       }
+    }
+
+    function updateAbatementAdminCharge() {
+        var parentCapId,
+            parentCapScriptModel,
+            parentCapTypeString,
+            amt;
+    
+        parentCapId = getParent();
+        if(ifTracer(parentCapId, 'parent found')) { 
+            parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
+            parentCapTypeString = parentCapScriptModel.getCapType().toString();
+            if(ifTracer(parentCapTypeString.indexOf('Enforcement\Incident\Zoning') > -1, 'parent = Zoning Violation Charge')) {
+                //parent is Zoning Violation Charge
+                 amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02") + feeAmount("ENF_ABT_05") + feeAmount("ENF_ABT_06") 
+                 updateOrCreateValueInASITable(tableName, 'Admin Charge', amt, 'N');
+            } else if(ifTracer(parentCapTypeString.indexOf('Enforcment\Incident\Snow') > -1, 'parent = Snow Violation Case')) {
+                //parent is Snow Violation Case
+                 amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02")
+                 updateOrCreateValueInASITable(tableName, 'Admin Charge', amt, 'N');
+            }
+        } 
+    }
+    
+    
 }
 
 
@@ -173,28 +289,6 @@ function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
             { colName: fieldName, colValue: value }
         ]);
     }
-}
-
-function updateAbatementAdminCharge() {
-    var parentCapId,
-        parentCapScriptModel,
-        parentCapTypeString,
-        amt;
-
-    parentCapId = getParent();
-    if(ifTracer(parentCapId, 'parent found')) { 
-        parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
-        parentCapTypeString = parentCapScriptModel.getCapType().toString();
-        if(ifTracer(parentCapTypeString.indexOf('Enforcement\Incident\Zoning') > -1, 'parent = Zoning Violation Charge')) {
-            //parent is Zoning Violation Charge
-             amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02") + feeAmount("ENF_ABT_05") + feeAmount("ENF_ABT_06") 
-             updateOrCreateValueInASITable(tableName, 'Admin Charge', amt, 'N');
-        } else if(ifTracer(parentCapTypeString.indexOf('Enforcment\Incident\Snow') > -1, 'parent = Snow Violation Case')) {
-            //parent is Snow Violation Case
-             amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02")
-             updateOrCreateValueInASITable(tableName, 'Admin Charge', amt, 'N');
-        }
-    } 
 }
 
 function getChildrenWithActiveTasks() {
@@ -244,95 +338,4 @@ function activeTasksCheck(options) {
     return false;
 }
 
-function updateAbatementUponCompletion() {
-    updateOrCreateValueInASITable(tableName, 'Type', AInfo['Abatement Type'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
-    updateOrCreateValueInASITable(tableName, 'Completed Date', AInfo['Abatement Completed Date'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
-    updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal, 'N');
-    updateAbatementAdminCharge();
-    updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal, 'N');
-    updateOrCreateValueInASITable(tableName, 'Release Date', AInfo["Release Reception Date"], 'N');
-    updateOrCreateValueInASITable(tableName, 'Released to County Date', AInfo["Released to County Date"], 'N');
-
-    var childrenWithActiveTasks = getChildrenWithActiveTasks();
-    if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
-        //if current record is the only record open, close parent
-        var parentCapId = getParent();
-        closeAllTasks(parentCapId, 'closed by script 426');
-        updateAppStatus('Compliance','Status set by script 426', parentCapId);
-    }
-}
-
-function updateSummonsUponCompletion() {
-    updateOrCreateValueInASITable(tableName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
-    updateOrCreateValueInASITable(tableName, 'Trial Date', AInfo["Trial Date"], 'N');
-    updateOrCreateValueInASITable(tableName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
-    updateOrCreateValueInASITable(tableName, 'Summons #', AInfo['Court Z-Number'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Issue Date', AInfo['Court Z-Number'], 'N');
-
-    var childrenWithActiveTasks = getChildrenWithActiveTasks();
-    if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
-        //if current record is the only record open, close parent
-        var parentCapId = getParent();
-        var parentCap = aa.cap.getCap(parentCapId).getOutput();
-        var parentCapStatus = parentCap.getStatus();
-        var parentAppString = parentCap.getCapType().toString();
-        if(parentCapStatus == "NFZV - 1 Year Date" || parentCapStatus =="Compliance") {
-            closeAllTasks(parentCapId, 'closed by script 426');
-            if(parentAppString == "Enforcement\Housing\Inspection\NA") {
-                updateAppStatus(capStatus,'Status set by script 426', parentCapId);
-            } else {
-                updateAppStatus('Pending Housing Inspection','Status set by script 426', parentCapId);
-            }
-        }
-   }
-}
-
-function updateRecordWithCountyUponCompletion() {
-    //THIS IS INSANE MAKING ME DO EVERYTHING OVER AGAIN AT THE END - GHEZ!
-    var dteSched,
-        dteStatus;
-
-    maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection" });
-    if(maxInsp) {
-        dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
-        dteSched = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
-        updateOrCreateValueInASITable(tableName, 'Last Inspection Date', dteStatus, 'N');
-        updateOrCreateValueInASITable(tableName, 'Next Inspection Date', dteSched, 'N');
-    }
-    maxInsp = getLastInspectionby({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
-    if(maxInsp) {
-        dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
-        updateOrCreateValueInASITable(tableName, 'Compliance Date', dteStatus, 'N');
-    }
-    updateOrCreateValueInASITable(tableName, 'Recordation Date', AInfo['Record Reception Date'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Recordation #', AInfo['Record Reception #'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Release Date', AInfo['Release Reception Date'], 'N');
-    updateOrCreateValueInASITable(tableName, 'Release #', AInfo['Release Reception #'], 'N');
-
-    var childrenWithActiveTasks = getChildrenWithActiveTasks();
-    if(childrenWithActiveTasks && childrenWithActiveTasks.length == 1) {
-        //if current record is the only record open, close parent
-        var parentCapId = getParent();
-        var parentCap = aa.cap.getCap(parentCapId).getOutput();
-        var parentCapStatus = parentCap.getStatus();
-        var parentAppString = parentCap.getCapType().toString();
-
-        if (matchARecordType([
-            "Enforcement\Housing\Inspection\NA",
-            "Enforcement\Incident\Zoning\NA"
-        ], appTypeString)) {
-            closeAllTasks(parentCapId, 'closed by script 426');
-            if(parentAppString == "Enforcement\Housing\Inspection\NA") {
-                updateAppStatus("Pending Housing Inspection",'Status set by script 426', parentCapId);
-            } else {
-                updateAppStatus('Compliance','Status set by script 426', parentCapId);
-            }
-        }
-   }
-}
 
