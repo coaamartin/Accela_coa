@@ -45,9 +45,8 @@ if ("Zoning Initial Inspection".equals(inspType) && "Citation/Summons".equals(in
 //*********************************************************************************************************
 logDebug("Script 73 START");
 logDebug("Script 73 capId = " + capId); 
-if(inspResult == "Refer to Forestry" && (inspType == "Zoning Initial Inspection" || 
-										 inspType == "Zoning Follow-Up Inspection" ||
-										 inspType == "Zoning Final Inspection" ))
+if(	(inspResult == "Refer to Forestry" || inspResult == "Referred to Forestry" ) 
+	&& (inspType == "Zoning Initial Inspection" || inspType == "Zoning Follow-Up Inspection" || inspType == "Zoning Final Inspection" ))
 {
 	logDebug("Script 73 criteria met");
 	
