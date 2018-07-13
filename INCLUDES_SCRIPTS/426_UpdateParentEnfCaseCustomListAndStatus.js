@@ -19,11 +19,15 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             //IRSA
             if(ifTracer(inspResult == "Taken and Stored", 'inspResult == "Taken and Stored"')) {
                 // inspResult == Taken and Stored (create row)
-                row = createAsiTableValObjs([
-                    { columnName: 'Abatement #', fieldValue: capIDString, readOnly: 'N' },
-                    { columnName: 'Type', fieldValue: AInfo['Abatement Type'], readOnly: 'N' }
+                addAsiTableRow(tableName, [
+                    { columnName: 'Abatement #', fieldValue: capIDString },
+                    { columnName: 'Type', fieldValue: AInfo['Abatement Type'] }
                 ]);
-                addToASITable(tableName, row);
+                // row = createAsiTableValObjs([
+                //     { columnName: 'Abatement #', fieldValue: capIDString, readOnly: 'N' },
+                //     { columnName: 'Type', fieldValue: AInfo['Abatement Type'], readOnly: 'N' }
+                // ]);
+                // addToASITable(tableName, row);
             } else if(ifTracer(inspResult == "Called In Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
                 // inspResult == Called in Service Request OR Completed Service Request (update row if exists, else create row)
                 updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
