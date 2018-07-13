@@ -7,6 +7,7 @@ function getLastInspection(options) {
     };
     for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
 
+    
 	var ret = null;
 	var r = aa.inspection.getInspections(settings.capId);
 	if (r.getSuccess()) {

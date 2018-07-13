@@ -1,6 +1,8 @@
 /*
 * ALLOWS UPDATING OF ONE COLUMN IN ONE OR MORE ROWS 
     CALLS BY updateAsiTableRow() 
+
+    NOTE: Can only be used by rows added using the UI or addAsiTableRow()
 */
 function updateAsiTableRows(tableName, columnName, newValue, options) {
     var settings = {

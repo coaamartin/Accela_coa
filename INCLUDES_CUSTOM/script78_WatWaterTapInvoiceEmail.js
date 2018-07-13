@@ -16,7 +16,7 @@ function script78_WatWaterTapInvoiceEmail() {
             var emailTemplate = 'WAT WET TAP INVOICE EMAIL # 78',
                   contactTypes = 'Applicant',
                   emailparams = aa.util.newHashtable(),
-                  reportname = "JD_TEST_REPORT"
+                  reportname = "Invoice Report"
                   reportparams = aa.util.newHashtable(),
                   applicant = getContactByType("Applicant", capId);
 
@@ -27,7 +27,8 @@ function script78_WatWaterTapInvoiceEmail() {
            }
            
            //report params
-            reportparams.put("DEPARTMENT", "Administrator");
+            reportparams.put("AGENCYID", aa.getServiceProviderCode());
+            reportparams.put("INVOICEID", "Administrator");
             emailContacts(contactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "");
      }
 }

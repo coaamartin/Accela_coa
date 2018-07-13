@@ -2,6 +2,8 @@
 * ALLOWS UPDATING OF ONE COLUMN IN ONE ROW
     THIS IS FOR WHEN YOU ALREADY KNW THE CURRENT-VALUE 
     USE updateAsiTableRows() IF YOU DON'T KNOW THE CURRENT VALUE
+
+    NOTE: Can only be used by rows added using the UI or addAsiTableRow()
 */
 function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, options) {
     var settings = {
@@ -92,9 +94,9 @@ function updateAsiTableRow(tableName, columnName, curValue, newValue, rowIndex, 
             rowModel.setId(rowIdArray[i]);
             rowList.add(rowModel);
         }
-      //  return aa.appSpecificTableScript.updateAppSpecificTableInfors(settings.capId, asitTableModel);
-        aa.appSpecificTableScript.deletedAppSpecificTableInfors(settings.capId, asitTableModel); 
-        aa.appSpecificTableScript.addAppSpecificTableInfors(settings.capId, asitTableModel);
+        return aa.appSpecificTableScript.updateAppSpecificTableInfors(settings.capId, asitTableModel);
+        // aa.appSpecificTableScript.deletedAppSpecificTableInfors(settings.capId, asitTableModel); 
+        // aa.appSpecificTableScript.addAppSpecificTableInfors(settings.capId, asitTableModel);
     }
 
 }
