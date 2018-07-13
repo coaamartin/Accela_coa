@@ -360,7 +360,7 @@ if (inspResult == "Skip to Summons")
 	x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
 	logDebug(x[0]["OFFICER_NAME"]);
 	
-	capId = newChild;
+
 	
 	var offFullName = x[0]["OFFICER_NAME"];
 	
@@ -371,6 +371,8 @@ if (inspResult == "Skip to Summons")
 	logDebug(offLname);
 	
 	inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+
+	capId = newChild;
 	if(inspUserObj != null)
 		{ assignCap(inspUserObj.getUserID()); }
     scheduleInspection("Summons Issuance",0, currentUserID);
