@@ -95,7 +95,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
             } else if(ifTracer(inspType == "Legal Resolution" && inspResult == "Complete", 'inspType == "Legal Resolution" && inspResult == "Complete"')) {
                 // inspType == "Legal Resolution" && inspResult == "Complete"
-
+                updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
             } 
         } else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
             //WTUA
@@ -118,7 +118,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                         || wfStatus == "FTA"
                         ), 'wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"')) {
                 // wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"
-                editAppSpecific("Disposition", wfStatus);
+                updateOrCreateValueInASITable(tableName, 'Disposition', wfStatus, 'N');
             }
         }         
     } else if (matchARecordType([
