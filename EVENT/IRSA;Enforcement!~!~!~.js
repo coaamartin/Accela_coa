@@ -354,8 +354,7 @@ if (inspResult == "Skip to Summons")
     copyParcels(capId, newChild);
     copyOwner(capId, newChild);
     
-    //createPendingInspection("ENF_SUMMON","Pre Trial Inspection",newChild);
-	
+    
 	// get the inspector from GIS and assign the rec to this user
 	inspUserObj = null
 	x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
@@ -374,7 +373,7 @@ if (inspResult == "Skip to Summons")
 	inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
 	if(inspUserObj != null)
 		{ assignCap(inspUserObj.getUserID()); }
-    scheduleInspection(schedIType,0, currentUserID);
+    scheduleInspection("Summons Issuance",0, currentUserID);
     capId = currentCapId;
 
 }           
