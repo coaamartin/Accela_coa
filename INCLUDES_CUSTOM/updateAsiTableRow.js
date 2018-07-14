@@ -1,5 +1,5 @@
 /*
-* ALLOWS UPDATING OF ONE COLUMN OF ALL ROWS 
+* UPDATES A COLUMN FOR AN EXISTING ROW(S)
 *  UPDATES ALL ROWS (BY DEFAULT) - SEE OPTIONS
 
     NOTE: Can only be used by rows added using the UI or addAsiTableRow()

@@ -1,5 +1,5 @@
 /*
-* ALLOWS ADDING OF MULTIPLE COLUMNS IN ONE ROW
+* ADDS ASIT ROW TO EXISTING TABLE 
     columnArray = [
         { colName: 'Abatement #', colValue: capIDString },
         { colName: 'Type', colValue: 'Snow' }

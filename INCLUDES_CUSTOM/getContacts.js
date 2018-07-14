@@ -1,3 +1,8 @@
+/*
+* GETS CONTACTS
+
+    OPTIONS: ADDITIONAL OPTIONS YOU NEED FOR FILTERING (CURRENTLY FILTERS BY contactType)
+*/
 function getContacts(options) {
     var settings = {
         capId: capId,

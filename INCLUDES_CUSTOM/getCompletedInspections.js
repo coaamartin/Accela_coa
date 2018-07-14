@@ -1,3 +1,8 @@
+/*
+* GETS COMPLETED INSPECTIONS
+
+    OPTIONS: ADDITIONAL OPTIONS YOU NEED FOR FILTERING (CURRENTLY FILTERS BY inspType)
+*/
 function getCompletedInspections(options) {
     var settings = {
         inspType: null, // if not null, will filter by given inspection type
