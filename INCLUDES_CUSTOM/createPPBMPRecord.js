@@ -1,5 +1,10 @@
 function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
 
+    if(vEventName != "WorkflowTaskUpdateAfter"){
+		var wfTask = "Permit Issued";
+		var wfStatus = "Complete";
+	}
+
 	if (wfTask == workFlowTask) {
 
 		var statusMatch = false;
