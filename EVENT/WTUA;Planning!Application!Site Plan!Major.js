@@ -75,10 +75,7 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
     var assignedStaff = getAssignedStaff();
     logDebug("script277 assignedstaff =" + assignedStaff);
     
-    if(appMatch("Planning/Application/Conditional Use/NA"))
-        assignTask("Hearing Scheduled",assignedStaff);
-    else
-        assignTask("Hearing Scheduling",assignedStaff);
+    assignTask("Hearing Scheduling",assignedStaff);
     
     logDebug("**script277 preparing email**");
     
