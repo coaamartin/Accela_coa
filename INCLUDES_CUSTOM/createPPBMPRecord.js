@@ -7,7 +7,7 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
             var wfTask = "Permit Issued";
             var wfStatus = "Complete";
         }
-        
+        //Print the condition to the debug to see if it's true;
         if (ifTracer(wfTask == workFlowTask, wfTask + " == " + workFlowTask)) {
         
             var statusMatch = false;
