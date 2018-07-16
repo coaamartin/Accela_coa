@@ -20,7 +20,7 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
             }//for all status options
         
             if (!statusMatch) {
-				logDebug("createPPBMPRecord() ended");
+				logDebug("createPPBMPRecord() ended: no match");
                 return false;
             }
         
@@ -38,14 +38,14 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
                 var parents = getParents("PublicWorks/Civil Plan/Review/NA")
                 if(!parents || parents.length == 0){
                     logDebug("**WARN no parents found for record, capId=" + capId + ", altId=" + capIDString);
-		            logDebug("createPPBMPRecord() ended");
+		            logDebug("createPPBMPRecord() ended: no parent");
                     return ;
                 }
                 recordParentCapId = parents[0];
                 var pondTypes = loadASITable(asitName, recordParentCapId);
                 if (!pondTypes) {
                     logDebug("Parent " + recordParentCapId.getCustomID() + " has no " + asitName + " table");
-		            logDebug("createPPBMPRecord() ended");
+		            logDebug("createPPBMPRecord() ended: no ASIT On parent");
                     return ;
                 }
                 
@@ -109,7 +109,7 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
             //  linkDocuments(recordParentCapId, createdAppId, [ "Pond Certification", "Inspection & Maintenance Plan" ]);
             //}
         } else {
-		    logDebug("createPPBMPRecord() ended");
+		    logDebug("createPPBMPRecord() ended: wfTask No Match");
             return false;
         }
 		logDebug("createPPBMPRecord() ended");
