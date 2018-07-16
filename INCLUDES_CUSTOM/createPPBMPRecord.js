@@ -8,7 +8,7 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
             var wfStatus = "Complete";
         }
         
-        if (wfTask == workFlowTask) {
+        if (ifTracer(wfTask == workFlowTask, wfTask + " == " + workFlowTask)) {
         
             var statusMatch = false;
         
