@@ -4,8 +4,8 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
         //In case the permit is issued from other event, we hard code the task and status.
         if(vEventName != "WorkflowTaskUpdateAfter"){
 			logDebug("Event name is not WTUA");
-            var wfTask = "Permit Issued";
-            var wfStatus = "Complete";
+            wfTask = "Permit Issud";
+            wfStatus = "Complete";
         }
         //Print the condition to the debug to see if it's true;
         if (ifTracer(wfTask == workFlowTask, wfTask + " == " + workFlowTask)) {
