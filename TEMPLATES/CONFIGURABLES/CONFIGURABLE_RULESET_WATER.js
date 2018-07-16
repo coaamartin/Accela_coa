@@ -2,6 +2,7 @@
     "WorkflowTaskUpdateAfter": {
       "StandardScripts": [
         "STDBASE_SEND_CONTACT_EMAILS",
+        "STDBASE_INSPECTION_SCHEDULING"
       ]
     },
     "ApplicationSubmitAfter": {
