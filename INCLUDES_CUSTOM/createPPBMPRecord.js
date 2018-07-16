@@ -28,7 +28,8 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
             
             if(childCapId){
                 copyOwner(capId, childCapId);
-                copyAppSpecific(childCapId);
+                //copyAppSpecific(childCapId);
+				editAppSpecific("Anticipated Start Date", AInfo["Anticipated Start Date (Month/Date/Year)"], childCapId);
                 updateAppStatus("Issued", "", childCapId);
                 var thirtyDaysAhead = nextWorkDay(dateAdd(null, 30));
                 var days4Insp = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(thirtyDaysAhead));
