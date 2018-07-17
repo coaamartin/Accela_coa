@@ -9,6 +9,6 @@ if(wfTask=="Plan Review" && wfStatus=="Resubmittal Requested"){
 	//must inlcude an emailparams hashtable even if we don't use it.
 	//wfComment is NOT included as a built-in so we must add it if the email template requires this variable
 	var emailparams = aa.util.newHashtable();
-	emailparams.add(wfComment);
+	emailparams.put("$$wfComment$$", wfComment);
 	emailContacts(contact, template, emailparams, "", "", "N", "");
 }
