@@ -18,7 +18,8 @@ function script78_WatWaterTapInvoiceEmail() {
                   emailparams = aa.util.newHashtable(),
                   reportname = "Invoice Report"
                   reportparams = aa.util.newHashtable(),
-                  applicant = getContactByType("Applicant", capId);
+                  applicant = getContactByType("Applicant", capId),
+                  lastInvoice = getLastInvoice({});
 
             //email params
            if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
@@ -26,9 +27,8 @@ function script78_WatWaterTapInvoiceEmail() {
                 emailparams.put("$$ContactFullName$$", applicant.contactName);
            } 
            
-           //report params
             reportparams.put("AGENCYID", aa.getServiceProviderCode());
-            reportparams.put("INVOICEID", getLastInvoice({}));
+            reportparams.put("INVOICEID", lastInvoice ? lastInvoice.invNbr : null);
             emailContacts(contactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "");
      }
 }
