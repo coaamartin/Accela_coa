@@ -6,7 +6,7 @@ include("24_realpropertyApplicationAcceptanceIncomplete");
 include("25_PlatEmailResubmittal");
 
 //SWAKIL
-include("20_PlatFinalDocRequest");
+include("26_PlatFinalDocRequest");
 
 
 if ($iTrc(wfTask=="Recordation" && wfStatus=="Recorded", 'wfTask=="Recordation" && wfStatus=="Recorded"')){

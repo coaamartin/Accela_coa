@@ -11,7 +11,7 @@ function setCodeReference(wfStatusCompare) {
     //In case the permit is issued from other event, we hard code the task and status.
     if(vEventName != "WorkflowTaskUpdateAfter"){
         logDebug("Event name is not WTUA");
-        wfStatus = "Issued";
+        wfStatus = wfStatusCompare;
     }
 	
     if ($iTrc(wfStatus == wfStatusCompare, 'wfStatus == ' + wfStatusCompare)) {
