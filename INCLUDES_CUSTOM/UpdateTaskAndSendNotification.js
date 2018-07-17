@@ -12,7 +12,6 @@ function UpdateTaskAndSendNotification(emailTemplate, taskToBeUpdated, taskStatu
 	if (currentTask != null && currentTask != "") {
 		currentTask.setDisposition(taskStatus);
 		var updateResult = aa.workflow.handleDisposition(currentTask.getTaskItem(), capId);
-		deactivateTask(currentTask);
 	}
 
 	var applicantEmail = null;
