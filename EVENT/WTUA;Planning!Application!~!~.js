@@ -38,9 +38,9 @@ Author: Mohammed Deeb
  
 Functional Area : Workflow , Records
 */
-
+//Script 137
 createRecordAndCopyInfo([ "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA", "Planning/Application/Site Plan/Major",
-		"Planning/Application/Site Plan/Minor" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested" ], "Is a Traffic Impact Study Required?",
+		"Planning/Application/Site Plan/Minor" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Traffic Impact Study Required?",
 		"PublicWorks/Traffic/Traffic Impact/NA");
 
 
