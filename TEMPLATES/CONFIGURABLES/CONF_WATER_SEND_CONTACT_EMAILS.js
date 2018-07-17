@@ -44,7 +44,7 @@
                 },
                 "criteria": {
                     "task": [
-                        " Water Review"
+                        "Water Review"
                     ],
                     "status": [
                         "Resubmittal Requested"
