@@ -10,5 +10,5 @@ if (wfTask == "Application Submittal" && wfStatus == "Specific Contract Fees - A
 {
 	logDebug("Activating Task Fee Processing and Setting Task Status to Specific Contract Fees - Accepted");
 	activateTask("Fee Processing");
-	updateTask("Fee Processing", "Specific Contract Fees - Accepted", "updated by script", "updated by script");
+	updateTask("Fee Processing", "Ready to Pay with Specific Contract Fees", "updated by script COA 33", "updated by script COA 33");
 }
