@@ -13,15 +13,21 @@
 function script84_SendRenewalEmailWhenPermitIssuedComplete() {
 	logDebug("script84_SendRenewalEmailWhenPermitIssuedComplete() started.");
 	try{
-		// if wfTask = Permit Issued & wfStatus = Completed”
-		if ( wfTask == "Permit Issued" && wfStatus == "Completed" ) 
-		{
-			var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
-			var emailParameters = aa.util.newHashtable();
-			var reportFile = [];
-			var sendResult = sendNotification("noreply@aurora.gov","chad@esilverliningsolutions.com","","TEST_FOR_SCRIPTS",emailParameters,reportFile,capID4Email);
-			if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-		}
+		// if wfTask = Permit Issued & wfStatus = Completed"
+		var emailTo = "jal@byrnesoftware.com";
+		var emailTemplate = "SWMP PERMIT RENEWAL APPROVED # 84";
+		var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+        acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+        var recordURL = getACARecordURL(acaURLDefault);
+		var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+		var reportFile = [];
+		var emailParameters = aa.util.newHashtable();
+        emailParams.put("$$altID$$", capIDString);
+        emailParams.put("$$ContactFullName$$", applicantFullNam);
+        emailParams.put("$$acaRecordUrl$$", recordURL);
+		
+		var sendResult = sendNotification("noreply@aurora.gov",emailTo,"",emailTemplate,emailParameters,reportFile,capID4Email);
+		if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 	}
 	catch(err){
 		showMessage = true;
