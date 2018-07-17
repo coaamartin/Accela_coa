@@ -1,4 +1,4 @@
-//WTUA:Water/Water/SWMP/Renewal
+//WTUA:Water/Water/SWMP/Renewal 
 
 if ( wfTask == "Permit Issued" && wfStatus == "Completed" ) {
     script84_SendRenewalEmailWhenPermitIssuedComplete();
