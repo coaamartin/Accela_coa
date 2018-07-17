@@ -27,6 +27,7 @@ function script78_WatWaterTapInvoiceEmail() {
                 emailparams.put("$$ContactFullName$$", applicant.contactName);
            } 
            
+            printObjProps(lastInvoice)
             reportparams.put("AGENCYID", aa.getServiceProviderCode());
             reportparams.put("INVOICEID", lastInvoice ? lastInvoice.invNbr : null);
             emailContacts(contactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "");
