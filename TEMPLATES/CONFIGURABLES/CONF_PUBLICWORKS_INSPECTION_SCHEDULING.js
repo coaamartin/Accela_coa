@@ -20,7 +20,7 @@
           "isCreatedByACA": false
         },
         "action": {
-          "inspectionType": "PI Inspection",
+          "inspectionType": "PI Warranty Inspection",
           "rangeType": "Months",
           "range": 11,
           "assignment": "",
