@@ -24,7 +24,7 @@ function script84_SendRenewalEmailWhenPermitIssuedComplete() {
             var recordURL = getACARecordURL(acaURLDefault);
             var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
             var reportFile = [];
-            var emailParameters = aa.util.newHashtable();
+            var emailParams = aa.util.newHashtable();
             emailParams.put("$$altID$$", capIDString);
             emailParams.put("$$ContactFullName$$", applicantFullNam);
             emailParams.put("$$acaRecordUrl$$", recordURL);
