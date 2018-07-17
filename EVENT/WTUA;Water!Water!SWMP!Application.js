@@ -36,7 +36,7 @@ if (ifTracer(wfTask=="Fee Processing" &&
 	);
 } 
 
-
-createPPBMPRecord("Re Certification", [ "Accepted" ], "POND TYPES");
+//Script 100
+createPPBMPRecord("Permit Issued", [ "Complete" ], "POND TYPES");
 
 script399_BondEmailAndAwaitingBondTaskStatus();

@@ -37,6 +37,38 @@
                 "preScript": "",
                 "postScript": "",
                 "metadata": {
+                    "description": "Script #241",
+                    "operators": {
+
+                    }
+                },
+                "criteria": {
+                    "task": [
+                        "Water Review"
+                    ],
+                    "status": [
+                        "Resubmittal Requested"
+                    ]
+                },
+                "action": {
+                    "notificationTemplate": "MUS Resubmittal Requested #241",
+                    "notificationReport": "",
+                    "notifyContactTypes": [
+                        "Applicant"
+                    ],
+                    "url4ACA": "",
+                    "fromEmail": "noreply@auroraco.gov",
+                    "additionalEmailsTo": [
+
+                    ],
+                    "createFromParent": "",
+                    "reportingInfoStandards": ""
+                }
+            },
+            {
+                "preScript": "",
+                "postScript": "",
+                "metadata": {
                     "description": "Script 242",
                     "operators": {
 
