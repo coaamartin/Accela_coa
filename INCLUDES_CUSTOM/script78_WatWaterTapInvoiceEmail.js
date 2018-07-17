@@ -28,7 +28,7 @@ function script78_WatWaterTapInvoiceEmail() {
            
            //report params
             reportparams.put("AGENCYID", aa.getServiceProviderCode());
-            reportparams.put("INVOICEID", "Administrator");
+            reportparams.put("INVOICEID", getLastInvoice({}));
             emailContacts(contactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "");
      }
 }
