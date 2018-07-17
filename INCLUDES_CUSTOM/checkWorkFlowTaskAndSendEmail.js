@@ -26,7 +26,6 @@ function checkWorkFlowTaskAndSendEmail(ParentParallelTask, workFlowParentTaskSta
 			var task = aa.workflow.getTask(capId, workflowParallelTasks[t]).getOutput();
 			if (task.getDisposition() != statusToBeChecked) {
 				UpdateTaskAndSendNotification(emailTemplate, taskToBeUpdated, taskStatus);
-				deactivateTask("Completeness Check");
 				break;
 
 			}
