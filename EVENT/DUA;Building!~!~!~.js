@@ -17,3 +17,6 @@ if (capStatus=="Waiting on Documents"){
 		editTaskDueDate("Accepted In House",dateAdd(null, 1));
 	}
 }
+
+//Added by SWAKIL
+include("49_doc_upload_corrections");
