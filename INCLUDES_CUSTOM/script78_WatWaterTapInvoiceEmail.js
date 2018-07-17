@@ -24,7 +24,7 @@ function script78_WatWaterTapInvoiceEmail() {
            if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
                 logDebug("applicant.contactName - " + applicant.contactName);
                 emailparams.put("$$ContactFullName$$", applicant.contactName);
-           }
+           } 
            
            //report params
             reportparams.put("AGENCYID", aa.getServiceProviderCode());
