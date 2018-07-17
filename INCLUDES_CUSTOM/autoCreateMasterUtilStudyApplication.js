@@ -43,6 +43,10 @@ function autoCreateMasterUtilStudyApplication(wfTaskName, workflowStatusArray, t
 		}
 
 		var cTypeArray = appTypeStr.split("/");
+		var childRecs = getChildren(appTypeStr, capId);
+        //if a child of type appTypeStr exist, then don't create the child record.
+        if(childRecs && childRecs.length > 0) { logDebug("Child of type " + appTypeStr + " already exists."); return true; }
+		
 		var createChildResult = aa.cap.createApp(cTypeArray[0], cTypeArray[1], cTypeArray[2], cTypeArray[3], "");
 
 		if (createChildResult.getSuccess()) {
