@@ -29,7 +29,7 @@ function script84_SendRenewalEmailWhenPermitIssuedComplete() {
             emailParams.put("$$ContactFullName$$", applicantFullNam);
             emailParams.put("$$acaRecordUrl$$", recordURL);
             
-            var sendResult = sendNotification("noreply@aurora.gov",emailTo,"",emailTemplate,emailParameters,reportFile,capID4Email);
+            var sendResult = sendNotification("noreply@aurora.gov",emailTo,"",emailTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 		}
     }
