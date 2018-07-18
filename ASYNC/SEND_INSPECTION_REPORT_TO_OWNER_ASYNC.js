@@ -1,15 +1,15 @@
 /* SEND_INSPECTION_REPORT_TO_OWNER_ASYNC */
 aa.print("Executing SEND_INSPECTION_REPORT_TO_OWNER_ASYNC");
-logDebug("Executing SEND_INSPECTION_REPORT_TO_OWNER_ASYNC");
+//logDebug("Executing SEND_INSPECTION_REPORT_TO_OWNER_ASYNC");
 aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 //Get environmental variables pass into the script
-var emailParameters = aa.env.getValue("emailParameters");
-var capId = aa.env.getValue("CapId");
-var emailTemplate = aa.env.getValue("emailTemplate");
-var reportTemplate = aa.env.getValue("");
-var vRParams = aa.env.getValue("vRParams");
-var toEmail = aa.env.getValue("toEmail");
-var ccEmail = aa.env.getValue("ccEmail");
+//var emailParameters = aa.env.getValue("emailParameters");
+//var capId = aa.env.getValue("CapId");
+//var emailTemplate = aa.env.getValue("emailTemplate");
+//var reportTemplate = aa.env.getValue("");
+//var vRParams = aa.env.getValue("vRParams");
+//var toEmail = aa.env.getValue("toEmail");
+//var ccEmail = aa.env.getValue("ccEmail");
 //var  = aa.env.getValue("");
 
 //function getScriptText(vScriptName, servProvCode, useProductScripts) {
@@ -72,4 +72,4 @@ var ccEmail = aa.env.getValue("ccEmail");
 
 //var sendResult = sendNotification("noreply@aurora.gov",toEmail,ccEmail,emailTemplate,emailParameters,reportFile,capID4Email);
 //if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+//aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
