@@ -22,7 +22,7 @@ function updateAsiTableRow(tableName, columnName, newValue, options) {
         capId: settings.capId,
     })
   
-    if(asitTable) { //found table
+    if(asitTable != null) { //found table
         asiTableRowIndexes = getAsiTableRowIndexes();
         if(settings.rowIndex != null && asitTable[settings.rowIndex] != null) { //update specific row
             row = asitTable[settings.rowIndex];

@@ -20,15 +20,17 @@ function getAsiTableRows(tableName, options) {
         return null;    //no table or rows
     }
 
-    if(settings.colFilters != null && settings.colFilters.length > 0) {
-        for(var idxRows in rows) {
-            printObjProps(rows[idxRows]);
-            // for(var idxFilter in settings.colFilters) {
-            //     filter = settings.colFilters[idxFilter];
-            //    // if(filter.colName == rows[ ])
-            // }
-        }
-    } 
+    printObjProps(rows);
+
+    // if(settings.colFilters != null && settings.colFilters.length > 0) {
+    //     for(var idxRows in rows) {
+    //         printObjProps(rows[idxRows]);
+    //         // for(var idxFilter in settings.colFilters) {
+    //         //     filter = settings.colFilters[idxFilter];
+    //         //    // if(filter.colName == rows[ ])
+    //         // }
+    //     }
+    // } 
 
     return rows;
 }
