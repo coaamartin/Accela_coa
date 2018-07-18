@@ -254,6 +254,36 @@ if(inspType == "Abatement Approval"){
     }
 }
 
+if(inspType == "City Abatement Order"){
+    //Script 346
+    enfProcessInspResult("City Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
+    enfProcessInspResult("City Abatement Order", "Called in Service Request", null, null, false, "Abatement Request", "Called in Service Request");
+    
+    if(inspResult == "Taken and Stored"){
+        var inspDays = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(dateAdd(null, 3, true)));
+        scheduleInspection("Post Abatement Inspection", inspDays);
+        var wfTsk = "Pre Abatement Photos";
+        var wfSts = "Taken and Stored";
+        if(!isTaskActive(wfTsk)) activateTask(wfTsk);
+        resultWorkflowTask(wfTsk, wfSts, "", "");
+    }
+}
+
+if(inspType == "Regular Abatement Order"){
+    //Script 346
+    enfProcessInspResult("Regular Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
+    enfProcessInspResult("Regular Abatement Order", "Called in Service Request", null, null, false, "Abatement Request", "Called in Service Request");
+    
+    if(inspResult == "Taken and Stored"){
+        var inspDays = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(dateAdd(null, 3, true)));
+        scheduleInspection("Post Abatement Inspection", inspDays);
+        var wfTsk = "Pre Abatement Photos";
+        var wfSts = "Taken and Stored";
+        if(!isTaskActive(wfTsk)) activateTask(wfTsk);
+        resultWorkflowTask(wfTsk, wfSts, "", "");
+    }
+}
+
 disableTokens = true;
 holdCapId = capId;
 parentArray = getParents("*/*/*/*");
@@ -263,50 +293,50 @@ closeTask("Case Closed","Closed","","");
 if (parentArray && parentArray.length > 0)
 for (thisParent in parentArray)
 if (parentArray[thisParent])
-	{
-	closeTaskByCapId("Investigation","No Violation Found","","",parentArray[thisParent]);
-	}
+    {
+    closeTaskByCapId("Investigation","No Violation Found","","",parentArray[thisParent]);
+    }
 }
 if (inspType == "Initial Investigation" && inspResult == "In Violation") 
-	{
-	closeTask("Initial Investigation","In Violation","Updated by Inspection Result","Note");
-	}
+    {
+    closeTask("Initial Investigation","In Violation","Updated by Inspection Result","Note");
+    }
 if (inspType == "Initial Investigation" && inspResult == "Citation") 
-	{
-	loopTask("Initial Investigation","Recommend Citation","Updated by Inspection Result","Note");
-	}
+    {
+    loopTask("Initial Investigation","Recommend Citation","Updated by Inspection Result","Note");
+    }
 if(inspType == "Follow-Up Investigation" && inspResult == "Compliant")
-	{
-	branchTask("Follow-Up Investigation","Violation Corrected","Updated by Inspection Result","Note");
-	closeTask("Case Closed","Closed","","");
-	if (parentArray && parentArray.length > 0)
-		{
-		for (thisParent in parentArray)
-			if (parentArray[thisParent])
-			{
-			closeTaskByCapId("Investigation","Corrected","","",parentArray[thisParent]);
-			}
-		}
-	}
+    {
+    branchTask("Follow-Up Investigation","Violation Corrected","Updated by Inspection Result","Note");
+    closeTask("Case Closed","Closed","","");
+    if (parentArray && parentArray.length > 0)
+        {
+        for (thisParent in parentArray)
+            if (parentArray[thisParent])
+            {
+            closeTaskByCapId("Investigation","Corrected","","",parentArray[thisParent]);
+            }
+        }
+    }
 if (inspType == "Follow-Up Investigation" && inspResult == "Citation") 
-	{
-	closeTask("Follow-Up Investigation","Recommend Citation","Updated by Inspection Result","Note");
-	}
+    {
+    closeTask("Follow-Up Investigation","Recommend Citation","Updated by Inspection Result","Note");
+    }
 if(inspType == "Follow-Up Investigation" && inspResult == "Abated")
-	{
-	branchTask("Follow-Up Investigation","Violation Abated","Updated by Inspection Result","Note");
-	closeTask("Case Closed","Closed","","");
-	if (parentArray && parentArray.length > 0)
-		{
-		for (thisParent in parentArray)
-			{
-			if (parentArray[thisParent])
-				{
-				closeTaskByCapId("Investigation","Corrected","","",parentArray[thisParent]);
-				}
-			}
-		}
-	}
+    {
+    branchTask("Follow-Up Investigation","Violation Abated","Updated by Inspection Result","Note");
+    closeTask("Case Closed","Closed","","");
+    if (parentArray && parentArray.length > 0)
+        {
+        for (thisParent in parentArray)
+            {
+            if (parentArray[thisParent])
+                {
+                closeTaskByCapId("Investigation","Corrected","","",parentArray[thisParent]);
+                }
+            }
+        }
+    }
 if (inspType == "Initial Investigation" && inspResult == "Compliant") {
 updateTask("Incident Status","No Violation","Updated by Inspection Result","Note");
 closeTask("Incident Status","Closed","","");
@@ -345,22 +375,22 @@ if (inspResult == "Skip to Summons")
 {
     logDebug("Script 343: criteria met");
     
-	// get the inspector from GIS and assign the rec to this user
-	inspUserObj = null;
-	x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
-	logDebug(x[0]["OFFICER_NAME"]);
-	
-	var offFullName = x[0]["OFFICER_NAME"];
-	
-	var offFname = offFullName.substr(0,offFullName.indexOf(' '));
-	logDebug(offFname);
-	
-	var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
-	logDebug(offLname);
-	
-	inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
-	
-	var currentCapId = capId;
+    // get the inspector from GIS and assign the rec to this user
+    inspUserObj = null;
+    x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
+    logDebug(x[0]["OFFICER_NAME"]);
+    
+    var offFullName = x[0]["OFFICER_NAME"];
+    
+    var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+    logDebug(offFname);
+    
+    var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+    logDebug(offLname);
+    
+    inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+    
+    var currentCapId = capId;
     var appName = "Summons created for Record Number " + capId.customID;
     var newChild = createChild('Enforcement','Incident','Summons','NA',appName);
     var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
@@ -371,11 +401,11 @@ if (inspResult == "Skip to Summons")
     copyOwner(capId, newChild);
     
     
-	
+    
 
-	capId = newChild;
-	if(inspUserObj != null)
-		{ assignCap(inspUserObj.getUserID()); }
+    capId = newChild;
+    if(inspUserObj != null)
+        { assignCap(inspUserObj.getUserID()); }
     scheduleInspection("Summons Issuance",0, currentUserID);
     capId = currentCapId;
 
@@ -395,67 +425,67 @@ logDebug("Script 343 END");
 //*********************************************************************************************************
 logDebug("Script 344 START");
 
-createChildAbatement("Zoning Initial Inspection", 		"Skip to City Abatement", 	"City Abatement Order", 	"City");
-createChildAbatement("Zoning Follow-Up Inspection", 	"Skip to City Abatement", 	"City Abatement Order", 	"City");
-createChildAbatement("Graffiti Follow-Up Inspection", 	"Skip to City Abatement", 	"City Abatement Order", 	"City");
+createChildAbatement("Zoning Initial Inspection",       "Skip to City Abatement",   "City Abatement Order",     "City");
+createChildAbatement("Zoning Follow-Up Inspection",     "Skip to City Abatement",   "City Abatement Order",     "City");
+createChildAbatement("Graffiti Follow-Up Inspection",   "Skip to City Abatement",   "City Abatement Order",     "City");
 
-createChildAbatement("Zoning Final Inspection", 		"Abate/Record", 			"Regular Abatement Order", 	"Regular");
-createChildAbatement("Zoning Final Inspection", 		"Abate/Summons", 			"Regular Abatement Order", 	"Regular");
-createChildAbatement("Zoning Final Inspection", 		"Abatement", 				"Regular Abatement Order", 	"Regular");
+createChildAbatement("Zoning Final Inspection",         "Abate/Record",             "Regular Abatement Order",  "Regular");
+createChildAbatement("Zoning Final Inspection",         "Abate/Summons",            "Regular Abatement Order",  "Regular");
+createChildAbatement("Zoning Final Inspection",         "Abatement",                "Regular Abatement Order",  "Regular");
 
-createChildAbatement("Board-Up Final Inspection", 		"Abate/Record", 			"Board-Up Abatement Order", "Board-Up");
-createChildAbatement("Board-Up Final Inspection", 		"Abate/Summons", 			"Board-Up Abatement Order", "Board-Up");
-createChildAbatement("Board-Up Final Inspection", 		"Abatement", 				"Board-Up Abatement Order", "Board-Up");
+createChildAbatement("Board-Up Final Inspection",       "Abate/Record",             "Board-Up Abatement Order", "Board-Up");
+createChildAbatement("Board-Up Final Inspection",       "Abate/Summons",            "Board-Up Abatement Order", "Board-Up");
+createChildAbatement("Board-Up Final Inspection",       "Abatement",                "Board-Up Abatement Order", "Board-Up");
 
-createChildAbatement("Graffiti Final Inspection", 		"Abate/Summons",			"Graffiti Abatement Order", "Graffiti");
-createChildAbatement("Graffiti Final Inspection", 		"Abatement", 				"Graffiti Abatement Order", "Graffiti");
+createChildAbatement("Graffiti Final Inspection",       "Abate/Summons",            "Graffiti Abatement Order", "Graffiti");
+createChildAbatement("Graffiti Final Inspection",       "Abatement",                "Graffiti Abatement Order", "Graffiti");
 
-createChildAbatement("Snow Initial Inspection", 		"Skip to City Abatement", 	"City Abatement Order", 	"City");
-createChildAbatement("Snow Fee 2nd Reinspection", 		"Snow Abate/Summons", 		"Snow Abatement Order", 	"Snow");
-createChildAbatement("Snow Fee 2nd Reinspection", 		"Snow Abatement",	 		"Snow Abatement Order", 	"Snow");
+createChildAbatement("Snow Initial Inspection",         "Skip to City Abatement",   "City Abatement Order",     "City");
+createChildAbatement("Snow Fee 2nd Reinspection",       "Snow Abate/Summons",       "Snow Abatement Order",     "Snow");
+createChildAbatement("Snow Fee 2nd Reinspection",       "Snow Abatement",           "Snow Abatement Order",     "Snow");
           
 logDebug("Script 344 END");
 
 function createChildAbatement(iType, iResult, schedIType, setFieldValue)
 {
-	if (inspType == iType && inspResult == iResult)
-	{
-		logDebug("function createChildAbatement criteria met:  inspection type = " + iType + " and result = " + iResult);
-		
-		var currentCapId = capId;
-		var appName = "Abatement created for Record Number " + capId.customID;
-		var newChild = createChild('Enforcement','Incident','Abatement','NA',appName);
-		var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
-		copyRecordDetailsLocal(capId, newChild);
-		copyContacts(capId, newChild);
-		copyAddresses(capId, newChild);
-		copyParcels(capId, newChild);
-		copyOwner(capId, newChild);
-		
-		// get the inspector from GIS and assign the rec to this user
-		inspUserObj = null;
-		x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
-		logDebug(x[0]["OFFICER_NAME"]);
-		
-		capId = newChild;
-		
-		var offFullName = x[0]["OFFICER_NAME"];
-		
-		var offFname = offFullName.substr(0,offFullName.indexOf(' '));
-		logDebug(offFname);
-		
-		var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
-		logDebug(offLname);
-		
-		inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
-		if(inspUserObj != null)
-			{ assignCap(inspUserObj.getUserID()); }
+    if (inspType == iType && inspResult == iResult)
+    {
+        logDebug("function createChildAbatement criteria met:  inspection type = " + iType + " and result = " + iResult);
+        
+        var currentCapId = capId;
+        var appName = "Abatement created for Record Number " + capId.customID;
+        var newChild = createChild('Enforcement','Incident','Abatement','NA',appName);
+        var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
+        copyRecordDetailsLocal(capId, newChild);
+        copyContacts(capId, newChild);
+        copyAddresses(capId, newChild);
+        copyParcels(capId, newChild);
+        copyOwner(capId, newChild);
+        
+        // get the inspector from GIS and assign the rec to this user
+        inspUserObj = null;
+        x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
+        logDebug(x[0]["OFFICER_NAME"]);
+        
+        capId = newChild;
+        
+        var offFullName = x[0]["OFFICER_NAME"];
+        
+        var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+        logDebug(offFname);
+        
+        var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+        logDebug(offLname);
+        
+        inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+        if(inspUserObj != null)
+            { assignCap(inspUserObj.getUserID()); }
 
-		scheduleInspection(schedIType,0, currentUserID);
-		
-	    capId = currentCapId;
+        scheduleInspection(schedIType,0, currentUserID);
+        
+        capId = currentCapId;
     
-		editAppSpecific("Abatement Type", setFieldValue, newChild); 
+        editAppSpecific("Abatement Type", setFieldValue, newChild); 
 
-	}
+    }
 }
