@@ -33,7 +33,7 @@ var ccEmail = aa.env.getValue("ccEmail");
 
 try{
     //Get the capId type needed for the email function
-    capId4Email = null;
+    var capId4Email = null;
     capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
     
     var reportFile = [];
@@ -69,15 +69,14 @@ try{
     
     logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", toEmail, ccEmail, emailTemplate, emailParameters, capId4Email, null).getSuccess());
     
-    var sendResult = sendNotification("noreply@aurora.gov",toEmail,ccEmail,emailTemplate,emailParameters,reportFile,capID4Email);
-    if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-    aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+    //var sendResult = sendNotification("noreply@aurora.gov",toEmail,ccEmail,emailTemplate,emailParameters,reportFile,capID4Email);
+    //if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 }
 catch(err){
 	showMessage = true;
     comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
     logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
-	aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+	//aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 }
 
 function generateReportForEmail4thisScript(itemCap, reportName, module, parameters) {
