@@ -19,7 +19,10 @@ Sample Call:
 */
 if(!appMatch(("Planning/Application/Address/*"))){
 //Script 278
-sendHearingScheduledEmailAndUpdateASI("Hearing Scheduled", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
+    if(appMatch("Planning/Application/Conditional Use/NA"))
+        sendHearingScheduledEmailAndUpdateASI("Hearing Scheduled", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
+	else
+        sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
 }
 // Workflow Task name is different for Rezoning so putting in the Event for WTUA:"Planning/Application/Rezoning/NA
 //	sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
