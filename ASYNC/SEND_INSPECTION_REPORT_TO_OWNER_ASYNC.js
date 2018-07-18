@@ -25,7 +25,7 @@ logDebug("Executing SEND_INSPECTION_REPORT_TO_OWNER_ASYNC");
 var emailParameters = aa.env.getValue("emailParameters");
 var capId = aa.env.getValue("CapId");
 var emailTemplate = aa.env.getValue("emailTemplate");
-var reportTemplate = aa.env.getValue("");
+var reportTemplate = aa.env.getValue("reportTemplate");
 var vRParams = aa.env.getValue("vRParams");
 var toEmail = aa.env.getValue("toEmail");
 var ccEmail = aa.env.getValue("ccEmail");
