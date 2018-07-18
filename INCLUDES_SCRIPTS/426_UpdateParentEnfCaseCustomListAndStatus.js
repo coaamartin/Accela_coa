@@ -16,6 +16,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         logDebug('ERROR: :The record does not have an associated parent record.')
         return;
     }
+    logDebug('parentCapId: ' + parentCapId);
 
     if (matchARecordType([
         "Enforcement/Incident/Abatement/NA"

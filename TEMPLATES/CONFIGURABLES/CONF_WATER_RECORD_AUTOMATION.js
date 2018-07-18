@@ -15,7 +15,7 @@
               
             ],
             "isCreatedByACA": false,
-            "balanceAllowed": false,
+            "balanceAllowed": false
           },
           "action": {
             "daysOut": "",
@@ -130,7 +130,7 @@
               
             ],
             "isCreatedByACA": false,
-            "balanceAllowed": false,
+            "balanceAllowed": false
           },
           "action": {
             "daysOut": "",
