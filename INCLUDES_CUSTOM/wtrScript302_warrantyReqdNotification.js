@@ -17,7 +17,7 @@ function wtrScript302_warrantyReqdNotification(){
             var reportFile = [];
 		    //var punchListModel = getDocModel4Link("Warrant Work Punch List");
 	        //var punchListLink = recordURL;
-			
+			var emailParams = aa.util.newHashtable();
             emailParams.put("$$ContactEmail$$", applicantEml + ";" + lpEml + ";" + ownerEml);
             emailParams.put("$$altID$$", capIDString);
             emailParams.put("$$ContactFullName$$", applicantFullNam);
