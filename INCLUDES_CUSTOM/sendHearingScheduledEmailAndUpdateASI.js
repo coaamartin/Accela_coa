@@ -1,5 +1,5 @@
 function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStatusArray, meetingType, asiFieldName, emailTemplate) {
-	
+	logDebug("sendHearingScheduledEmailAndUpdateASI() started.");
 	if (cap.getCapModel().getCapType().getSubType().equalsIgnoreCase("Address")) {
 		return false;
 	}
@@ -18,6 +18,7 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 			return false;
 		}
 
+		logDebug("worklow matches: " + workFlowTaskToCheck + "/" + workflowStatusArray);
 		//Update ASI
 		var meetings = aa.meeting.getMeetingsByCAP(capId, true);
 		if (!meetings.getSuccess()) {
@@ -26,7 +27,9 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 		}
 		meetings = meetings.getOutput().toArray();
 		for (m in meetings) {
+			logDebug("meeting " + m);
 			if (meetings[m].getMeeting().getMeetingType() != null && meetings[m].getMeeting().getMeetingType().equalsIgnoreCase(meetingType)) {
+				logDebug("meetingType matches: " + meetingType);
 				//Edit ASI
 				var meetingDate = new Date(meetings[m].getMeeting().getStartDate().getTime());
 				//meetingDate = dateAdd(meetingDate, 0);
@@ -49,16 +52,16 @@ function sendHearingScheduledEmailAndUpdateASI(workFlowTaskToCheck, workflowStat
 					applicantEmail = recordApplicant.getEmail();
 				}
 				//06/19 - Concatenate first and last name
-		var firstName = recordApplicant.getFirstName();   
-		var middleName =recordApplicant.getMiddleName();   
-		var lastName = recordApplicant.getLastName(); 
-		var fullName = buildFullName(firstName, middleName,lastName);
-
-		// Get the Case Manager's email
-		var caseManagerEmail=getAssignedStaffEmail();
-		var caseManagerPhone=getAssignedStaffPhone();
-		var caseManagerFullName=getAssignedStaffFullName();
-		var caseManagerTitle=getAssignedStaffTitle();
+		        var firstName = recordApplicant.getFirstName();   
+		        var middleName =recordApplicant.getMiddleName();   
+		        var lastName = recordApplicant.getLastName(); 
+		        var fullName = buildFullName(firstName, middleName,lastName);
+                
+		        // Get the Case Manager's email
+		        var caseManagerEmail=getAssignedStaffEmail();
+		        var caseManagerPhone=getAssignedStaffPhone();
+		        var caseManagerFullName=getAssignedStaffFullName();
+		        var caseManagerTitle=getAssignedStaffTitle();
 					
 					if(isBlankOrNull(caseManagerEmail)==true) caseManagerEmail = "";
 					var files = new Array();
