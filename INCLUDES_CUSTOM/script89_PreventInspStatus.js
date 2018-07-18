@@ -7,35 +7,36 @@
 
 function script89_PreventInspStatus() {
 	logDebug("script89_PreventInspStatus started.");
-	try{
-		if (wfTask==("WorkFlow Utility Inspection") && wfStatus ==("Complete")) {
-			var isInspectionPassed = false;
-			var inspResultObj = aa.inspection.getInspections(capId);
-			if (inspResultObj.getSuccess()) {
-				var inspList = inspResultObj.getOutput();
-				for (index in inspList) {
-					if (inspList[index].getInspectionType().toLowerCase().indexOf("clearwater") >= 0
-							&& String("Pass").equals(inspList[index].getInspectionStatus())) {
-						isInspectionPassed = true;
-						break;
-					}
+
+	if ("WorkFlow Utility Inspection".equals(wfTask) && "Complete".equals(wfStatus)) {
+		var clearInspectionPassed = false;
+		var hydroInspectionPassed = false;
+		var superInspectionPassed = false;
+		var inspResultObj = aa.inspection.getInspections(capId);
+		if (inspResultObj.getSuccess()) {
+			var inspList = inspResultObj.getOutput();
+			for (index in inspList) {
+				if (inspList[index].getInspectionType().toUpperCase().indexOf("CLEARWATER") >= 0
+					 && matches(inspList[index].getInspectionStatus().toUpperCase(), "PASS", "COMPLETE", "CANCELLED")) {
+					clearInspectionPassed = true;
+				}
+				if (inspList[index].getInspectionType().toUpperCase().indexOf("SUPER FLUSH") >= 0
+					 && matches(inspList[index].getInspectionStatus().toUpperCase(), "PASS", "COMPLETE", "CANCELLED")) {
+					superInspectionPassed = true;
+				}
+				if (inspList[index].getInspectionType().toUpperCase().indexOf("HYDROSTATIC PRESSURE TEST") >= 0
+					 && matches(inspList[index].getInspectionStatus().toUpperCase(), "PASS", "COMPLETE", "CANCELLED")) {
+					hydroInspectionPassed = true;
 				}
 			}
+		}
 
-			if (!isInspectionPassed) {
-				cancel = true;
-				showMessage = true;
-				comment("Task cannot be completed until the Clearwater, super flush, pressure test Inspection has been approved");
-			}
-	}
-	} catch(err){
-		showMessage = true;
-		comment("Error on custom function script89_PreventInspStatus. Please contact administrator. Err: " + err);
-		logDebug("Error on custom function script89_PreventInspStatus. Please contact administrator. Err: " + err);
-		logDebug("A JavaScript Error occurred: WTUB:Water/Utility/Permit/NA 89: " + err.message);
-		logDebug(err.stack)
+		if (!clearInspectionPassed || !hydroInspectionPassed || !superInspectionPassed) {
+			cancel = true;
+			showMessage = true;
+			comment("Task cannot be completed until the Clearwater, super flush, pressure test Inspection has been approved");
+		}
 	}
 	logDebug("script89_PreventInspStatus ended.");
-//	if function is used        };//END WTUB:Water/Utility/Permit/NA;
 
 }
