@@ -8,7 +8,7 @@
 function script89_PreventInspStatus() {
 	logDebug("script89_PreventInspStatus started.");
 
-	if ("WorkFlow Utility Inspection".equals(wfTask) && "Complete".equals(wfStatus)) {
+	if ("Utility Inspection".equals(wfTask) && "Complete".equals(wfStatus)) {
 		var clearInspectionPassed = false;
 		var hydroInspectionPassed = false;
 		var superInspectionPassed = false;
