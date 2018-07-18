@@ -29,6 +29,11 @@ function addStdVarsToEmail(vEParams, vCapId) {
 	var parentCapId;
 	var addressLine;
 	
+	//compute the longform date...
+	var now = new Date();
+	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	var todayDateLongForm = months[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear()
+	
 	//get standard variables for the record provided
 	if(vCapId != null){
 		capId = vCapId;
@@ -83,6 +88,7 @@ function addStdVarsToEmail(vEParams, vCapId) {
 		parcelArea = 0;;
 
 		//save variables to email paramater hashtable
+		addParameter(vEParams,"$$todayDate$$",todayDateLongForm);
 		addParameter(vEParams,"$$altid$$",capIDString);	
 		addParameter(vEParams,"$$capIDString$$",capIDString);
 		addParameter(vEParams,"$$currentUserID$$",currentUserID); // seems to cause the issue
