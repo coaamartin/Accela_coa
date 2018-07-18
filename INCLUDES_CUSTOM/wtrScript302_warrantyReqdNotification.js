@@ -15,8 +15,9 @@ function wtrScript302_warrantyReqdNotification(){
             var recordURL = getACARecordURL(acaURLDefault);
             var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
             var reportFile = [];
-            
-            var emailParams = aa.util.newHashtable();
+		    //var punchListModel = getDocModel4Link("Warrant Work Punch List");
+	        //var punchListLink = recordURL;
+			
             emailParams.put("$$ContactEmail$$", applicantEml + ";" + lpEml + ";" + ownerEml);
             emailParams.put("$$altID$$", capIDString);
             emailParams.put("$$ContactFullName$$", applicantFullNam);
