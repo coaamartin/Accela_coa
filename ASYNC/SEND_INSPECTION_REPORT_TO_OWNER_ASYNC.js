@@ -1,38 +1,40 @@
 /* SEND_INSPECTION_REPORT_TO_OWNER_ASYNC */
+function getScriptText(vScriptName, servProvCode, useProductScripts) {
+    if (!servProvCode)
+        servProvCode = aa.getServiceProviderCode();
+    vScriptName = vScriptName.toUpperCase();
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    try {
+        if (useProductScripts) {
+            var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+        } else {
+            var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
+        }
+        return emseScript.getScriptText() + "";
+    } catch (err) {
+        return "";
+    }
+}
+var SCRIPT_VERSION = 3.0;
+aa.env.setValue("CurrentUserID", "ADMIN");
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, true));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
 aa.print("Executing SEND_INSPECTION_REPORT_TO_OWNER_ASYNC");
-//logDebug("Executing SEND_INSPECTION_REPORT_TO_OWNER_ASYNC");
-aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br> test" + "debug" + "<br>Message: <br>" + "message");
+logDebug("Executing SEND_INSPECTION_REPORT_TO_OWNER_ASYNC");
 //Get environmental variables pass into the script
-//var emailParameters = aa.env.getValue("emailParameters");
-//var capId = aa.env.getValue("CapId");
-//var emailTemplate = aa.env.getValue("emailTemplate");
-//var reportTemplate = aa.env.getValue("");
-//var vRParams = aa.env.getValue("vRParams");
-//var toEmail = aa.env.getValue("toEmail");
-//var ccEmail = aa.env.getValue("ccEmail");
-//var  = aa.env.getValue("");
+var emailParameters = aa.env.getValue("emailParameters");
+var capId = aa.env.getValue("CapId");
+var emailTemplate = aa.env.getValue("emailTemplate");
+var reportTemplate = aa.env.getValue("");
+var vRParams = aa.env.getValue("vRParams");
+var toEmail = aa.env.getValue("toEmail");
+var ccEmail = aa.env.getValue("ccEmail");
+var  = aa.env.getValue("");
 
-//function getScriptText(vScriptName, servProvCode, useProductScripts) {
-//    if (!servProvCode)
-//        servProvCode = aa.getServiceProviderCode();
-//    vScriptName = vScriptName.toUpperCase();
-//    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-//    try {
-//        if (useProductScripts) {
-//            var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-//        } else {
-//            var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
-//        }
-//        return emseScript.getScriptText() + "";
-//    } catch (err) {
-//        return "";
-//    }
-//}
-//var SCRIPT_VERSION = 3.0;
-//aa.env.setValue("CurrentUserID", "ADMIN");
-//eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, true));
-//eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
-//
+aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br> test" + debug + "<br>Message: <br>" + message);
+
+
+
 ////Get the capId type needed for the email function
 //capId4Email = null;
 //capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
