@@ -20,4 +20,7 @@ Notes:
 var rptParams = aa.util.newHashtable();
 rptParams.put("altID", cap.getCapModel().getAltID());
 
-checkInspectionsResultAndSendEmail("PPBMP INSPECTION # 102", "REPORT_NAME", rptParams, "Date of next Inspection");
+//Script 102
+if(inspResult == "Complete"){
+    checkInspectionsResultAndSendEmail("PPBMP INSPECTION # 102", "Date of next Inspection");
+}

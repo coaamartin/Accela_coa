@@ -20,7 +20,7 @@
           "isCreatedByACA": false
         },
         "action": {
-          "inspectionType": "PI Inspection",
+          "inspectionType": "PI Warranty Inspection",
           "rangeType": "Months",
           "range": 11,
           "assignment": "",
@@ -32,7 +32,7 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "To run automated script based on JSON rules",
+          "description": "Script 167",
           "operators": {
             
           }
@@ -47,7 +47,7 @@
           "isCreatedByACA": false
         },
         "action": {
-          "inspectionType": "PI Inspection",
+          "inspectionType": "PI Warranty Inspection",
           "rangeType": "Months",
           "range": 11,
           "assignment": "",

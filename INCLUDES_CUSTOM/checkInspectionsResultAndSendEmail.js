@@ -7,59 +7,52 @@
  * @param asiFieldName
  * @returns {Boolean}
  */
-function checkInspectionsResultAndSendEmail(emailTemplateName, reportName, rptParams, asiFieldName) {
-	var anyPassedInsp = checkAnyInspectionPassed(capId);
-	if (anyPassedInsp) {
+function checkInspectionsResultAndSendEmail(emailTemplateName, asiFieldName) {
+	logDebug("checkInspectionsResultAndSendEmail() started");
+	//Update ASI
+	var newDate = dateAddMonths(null, 36);//36 months = 3 years
+	editAppSpecific(asiFieldName, newDate);
 
-		//Update ASI
-		var newDate = dateAdd(new Date(), 1095);//1095 = 3 years
-		editAppSpecific(asiFieldName, newDate);
-
-		//Send the email
-		var ownerEmail = null, applicantEmail = null;
-		var owners = aa.owner.getOwnerByCapId(capId);
-		if (owners.getSuccess()) {
-			owners = owners.getOutput();
-			if (owners == null || owners.length == 0) {
-				logDebug("**WARN no owners on record " + capId);
-				return false;
-			}//len=0
-
-			ownerEmail = owners[0].getEmail();
-		} else {
-			logDebug("**Failed to get owners on record " + capId + " Error: " + owners.getErrorMessage());
+	//Send the email
+	var ownerEmail = null, applicantEmail = null;
+	var owners = aa.owner.getOwnerByCapId(capId);
+	if (owners.getSuccess()) {
+		owners = owners.getOutput();
+		if (owners == null || owners.length == 0) {
+			logDebug("**WARN no owners on record " + capId);
 			return false;
-		}
-		var recordApplicant = getContactByType("Applicant", capId);
-		if (recordApplicant) {
-			applicantEmail = recordApplicant.getEmail();
-		}
+		}//len=0
 
-		if (ownerEmail == null || ownerEmail == "") {
-			logDebug("**WARN Owner on record " + capId + " has no email");
-			return false
-		}
+		ownerEmail = owners[0].getEmail();
+	} else {
+		logDebug("**Failed to get owners on record " + capId + " Error: " + owners.getErrorMessage());
+		return false;
+	}
+	var recordApplicant = getContactByType("Applicant", capId);
+	if (recordApplicant) {
+		applicantEmail = recordApplicant.getEmail();
+	}
 
-		var emailParams = aa.util.newHashtable();
-		addParameter(emailParams, "$$altID$$", cap.getCapModel().getAltID());
-		addParameter(emailParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
-		addParameter(emailParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
-		addParameter(emailParams, "$$balance$$", feeBalance(""));
+	if (ownerEmail == null || ownerEmail == "") {
+		logDebug("**WARN Owner on record " + capId + " has no email");
+		return false
+	}
 
-		addParameter(emailParams, "$$inspID$$", inspId);
-		addParameter(emailParams, "$$inspResult$$", inspResult);
-		addParameter(emailParams, "$$inspComment$$", inspComment);
-		addParameter(emailParams, "$$inspResultDate$$", inspResultDate);
-		addParameter(emailParams, "$$inspGroup$$", inspGroup);
-		addParameter(emailParams, "$$inspType$$", inspType);
-		if (inspSchedDate) {
-			addParameter(emailParams, "$$inspSchedDate$$", inspSchedDate);
-		} else {
-			addParameter(emailParams, "$$inspSchedDate$$", "N/A");
-		}
+	var ownerName = getOnwertName();
+	
+    var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+    var reportFile = [];
+	
+	var acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
+	acaURL = acaURL.substr(0, acaURL.toUpperCase().indexOf("/ADMIN"));
+	
+	var emailParams = aa.util.newHashtable();
+	addParameter(emailParams, "$$ContactEmail$$", applicantEmail);
+	addParameter(emailParams, "$$ContactFullName$$", ownerName);
+	addParameter(emailParams, "$$acaDocDownloadUrl$$", acaURL);
+            
+    var sendResult = sendNotification("noreply@aurora.gov",ownerEmail,"",emailTemplateName,emailParams,reportFile,capID4Email);
+    if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 
-		sendEmailWithReport(ownerEmail, applicantEmail, emailTemplateName, reportName, rptParams, emailParams);
-
-	}//anyPassedInsp
 	return true;
 }
