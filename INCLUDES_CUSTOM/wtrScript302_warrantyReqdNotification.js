@@ -18,15 +18,26 @@ function wtrScript302_warrantyReqdNotification(){
 		    //var punchListModel = getDocModel4Link("Warrant Work Punch List");
 	        //var punchListLink = recordURL;
 			var emailParams = aa.util.newHashtable();
-            emailParams.put("$$ContactEmail$$", applicantEml + ";" + lpEml + ";" + ownerEml);
+            emailParams.put("$$ContactEmail$$", applicantEml);
             emailParams.put("$$altID$$", capIDString);
             emailParams.put("$$ContactFullName$$", applicantFullNam);
             emailParams.put("$$acaRecordUrl$$", recordURL);
             emailParams.put("$$wfComment$$", wfComment == null ? "" : wfComment);
             
+			//Send email to applicant
             var sendResult = sendNotification("noreply@aurora.gov",applicantEml,"",emlTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("wtrScript302_warrantyReqdNotification: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
             else { logDebug("wtrScript302_warrantyReqdNotification: Sent email notification that work order is complete to "+applicantEml)}
+			//Send email to owner
+            emailParams.put("$$ContactEmail$$", ownerEml);
+            var sendResult = sendNotification("noreply@aurora.gov",ownerEml,"",emlTemplate,emailParams,reportFile,capID4Email);
+            if (!sendResult) { logDebug("wtrScript302_warrantyReqdNotification: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+            else { logDebug("wtrScript302_warrantyReqdNotification: Sent email notification that work order is complete to "+ownerEml)}
+			//Send email to lp
+            emailParams.put("$$ContactEmail$$", lpEml);
+            var sendResult = sendNotification("noreply@aurora.gov",lpEml,"",emlTemplate,emailParams,reportFile,capID4Email);
+            if (!sendResult) { logDebug("wtrScript302_warrantyReqdNotification: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+            else { logDebug("wtrScript302_warrantyReqdNotification: Sent email notification that work order is complete to "+lpEml)}
         }
         
     }
