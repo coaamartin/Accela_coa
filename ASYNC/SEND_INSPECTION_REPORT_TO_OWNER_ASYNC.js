@@ -1,7 +1,7 @@
 /* SEND_INSPECTION_REPORT_TO_OWNER_ASYNC */
 aa.print("Executing SEND_INSPECTION_REPORT_TO_OWNER_ASYNC");
 logDebug("Executing SEND_INSPECTION_REPORT_TO_OWNER_ASYNC");
-
+aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 //Get environmental variables pass into the script
 var emailParameters = aa.env.getValue("emailParameters");
 var capId = aa.env.getValue("CapId");
