@@ -2,12 +2,14 @@
 * UPDATES A COLUMN FOR AN EXISTING ROW(S)
 *  UPDATES ALL ROWS (BY DEFAULT) - SEE OPTIONS
 
-    NOTE: Can only be used by rows added using the UI or addAsiTableRow()
-*/
+    NOTE 1: Can only be used by rows added using the UI or addAsiTableRow()
+    NOTE 2: Filters are additive
+    */
 function updateAsiTableRow(tableName, columnName, newValue, options) {
     var settings = {
         capId: capId,
-        rowIndex: null //0 based row index - null means update all rows
+        rowIndex: null, //0 based row index - null means update all rows
+        colFilters: null //array of column values to filter by... null = update all rows
     };
     for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
 
@@ -24,20 +26,53 @@ function updateAsiTableRow(tableName, columnName, newValue, options) {
   
     if(asitTable != null) { //found table
         asiTableRowIndexes = getAsiTableRowIndexes();
-        if(settings.rowIndex != null && asitTable[settings.rowIndex] != null) { //update specific row
-            row = asitTable[settings.rowIndex];
+        filterRows();
+
+
+        // if(settings.rowIndex != null && asitTable[settings.rowIndex] != null) { //update specific row
+        //     row = asitTable[settings.rowIndex];
+        //     val = row[columnName] ? row[columnName] : null;
+        //     rtn = updAsiTableRow(asiTableRowIndexes[settings.rowIndex])
+        // } else {    //update all rows  todo
+        for (var ea in asitTable) {
+            row = asitTable[ea];
             val = row[columnName] ? row[columnName] : null;
-            rtn = updAsiTableRow(asiTableRowIndexes[settings.rowIndex])
-        } else {    //update all rows
-            for (var ea in asitTable) {
-                row = asitTable[ea];
-                val = row[columnName] ? row[columnName] : null;
-                rtn = updAsiTableRow(asiTableRowIndexes[ea])
-            }
+            rtn = updAsiTableRow(asiTableRowIndexes[ea])
         }
+     //   }
         return true
     }
     return rtn;
+
+
+    function filterRows() {
+        var filteredRows = [],
+        matched,
+        filter;
+
+        //filter by settings.rowIndex
+        if(settings.rowIndex != null && asitTable[settings.rowIndex] != null) { //update specific row
+            filteredRows.push(asitTable[settings.rowIndex]);
+            asitTable = filteredRows;
+        }
+
+        //filter by settings.colFilters
+        if(settings.colFilters != null && settings.colFilters.length > 0) {
+            for(var idxRows in asitTable) {
+                matched = true;
+                for(var idxFilter in settings.colFilters) {
+                    filter = settings.colFilters[idxFilter];
+                    if(filter.colValue != asitTable[idxRows][filter.colName]) {
+                        matched = false;
+                    }
+                }
+                if(matched) {
+                    filteredRows.push(asitTable[idxRows]);
+                }
+            }
+            asitTable = filteredRows;
+        } 
+    }
 
     function getAsiTableRowIndexes() {
         var asiTableRowIndexes = [];
