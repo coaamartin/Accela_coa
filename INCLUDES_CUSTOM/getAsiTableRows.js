@@ -20,7 +20,7 @@ function getAsiTableRows(tableName, options) {
         return null;    //no table or rows
     }
 
-    printObjProps(rows);
+    //printObjProps(rows);
 
     // if(settings.colFilters != null && settings.colFilters.length > 0) {
     //     for(var idxRows in rows) {
