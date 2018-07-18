@@ -9,7 +9,13 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         dd,
         dte,
         maxInsp,
-        eventName = aa.env.getValue("EventName");
+        eventName = aa.env.getValue("EventName"),
+        parentCapId = getParent();
+
+    if(parentCapId == false) {
+        logDebug('ERROR: :The record does not have an associated parent record.')
+        return;
+    }
 
     if (matchARecordType([
         "Enforcement/Incident/Abatement/NA"
@@ -22,7 +28,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 addAsiTableRow(tableName, [
                     { colName: 'Abatement #', colValue: capIDString },
                     { colName: 'Type', colValue: AInfo['Abatement Type'] }
-                ]);
+                ], { capId: parentCapId });
              } else if(ifTracer(inspResult == "Called In Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
                 // inspResult == Called in Service Request OR Completed Service Request (update row if exists, else create row)
                 updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
@@ -88,7 +94,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                         }
                     }
                 }
-                addAsiTableRow(tableName, row);
+                addAsiTableRow(tableName, row, { capId: parentCapId });
             } else if(ifTracer(inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA"), 'inspType == "Pre Court Action" && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")')) {
                 // inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")
                 updateOrCreateValueInASITable(tableName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
@@ -158,7 +164,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     { colName: 'Recordation #', colValue: AInfo['Record Reception #'] },
                     { colName: 'Release Date', colValue: AInfo['Release Reception Date'] },
                     { colName: 'Release #', colValue: AInfo['Release Reception #'] }
-                ]);
+                ], { capId: parentCapId });
             } else if(ifTracer(wfTask == "Release NOV" && wfStatus == "Record Reception", 'wfTask == "Release NOV" && wfStatus == "Record Reception"')) {
                 // wfTask == "Release NOV" && wfStatus == "Record Reception"
                 updateRecordWithCountyUponCompletion();
@@ -286,16 +292,16 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 
 
 function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
-    if(!updateAsiTableRow(tableName, fieldName, value, {})) {
+    if(!updateAsiTableRow(tableName, fieldName, value, { capId: parentCapId })) {
         addAsiTableRow(tableName, [
             { colName: fieldName, colValue: value }
-        ]);
+        ], { capId: parentCapId });
     }
 }
 
 function getChildrenWithActiveTasks() {
-    var parentCapId = getParent(),
-    children,
+  //  var parentCapId = getParent(),
+    var children,
     childrenWithActiveTasks = [],
     childCapId;
 
