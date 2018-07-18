@@ -43,7 +43,7 @@ try{
     vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
     
     
-    var vReportName = generateReportForEmail(capId, reportTemplate, aa.getServiceProviderCode(), vRParams);
+    var vReportName = generateReportForEmail4thisScript(capId, reportTemplate, aa.getServiceProviderCode(), vRParams);
     
     //Get document deep link URL
     if (vReportName != null && vReportName != false) {
@@ -78,4 +78,41 @@ catch(err){
     comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
     logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
 	aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+}
+
+function generateReportForEmail4thisScript(itemCap, reportName, module, parameters) {
+    //returns the report file which can be attached to an email.
+    var vAltId;
+	var user = currentUserID;   // Setting the User Name
+    var report = aa.reportManager.getReportInfoModelByName(reportName);
+	var permit;
+	var reportResult;
+	var reportOutput;
+	var vReportName;
+    report = report.getOutput();
+    report.setModule(module);
+    report.setCapId(itemCap);
+    report.setReportParameters(parameters);
+	
+	vAltId = itemCap.getCustomID();
+	report.getEDMSEntityIdModel().setAltId(vAltId);
+	
+    permit = aa.reportManager.hasPermission(reportName, user);
+    if (permit.getOutput().booleanValue()) {
+        reportResult = aa.reportManager.getReportResult(report);
+        if (!reportResult.getSuccess()) {
+            logDebug("System failed get report: " + reportResult.getErrorType() + ":" + reportResult.getErrorMessage());
+            return false;
+        }
+        else {
+            reportOutput = reportResult.getOutput();
+			vReportName = reportOutput.getName();
+			logDebug("Report " + vReportName + " generated for record " + itemCap.getCustomID() + ". " + parameters);
+            return vReportName;
+        }
+    }
+    else {
+        logDebug("Permissions are not set for report " + reportName + ".");
+        return false;
+    }
 }
