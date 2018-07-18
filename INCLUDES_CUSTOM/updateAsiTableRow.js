@@ -4,6 +4,11 @@
 
     NOTE 1: Can only be used by rows added using the UI or addAsiTableRow()
     NOTE 2: Filters are additive
+
+    colFilters = [
+        { colName: 'Abatement #', colValue: capIDString },
+        { colnName: 'Type', colValue: AInfo['Abatement Type'] }
+    ]
     */
 function updateAsiTableRow(tableName, columnName, newValue, options) {
     var settings = {
@@ -36,8 +41,10 @@ function updateAsiTableRow(tableName, columnName, newValue, options) {
         // } else {    //update all rows  todo
         for (var ea in asitTable) {
             row = asitTable[ea];
-            val = row[columnName] ? row[columnName] : null;
-            rtn = updAsiTableRow(asiTableRowIndexes[ea])
+            if(row.filteredOut == false) {
+                val = row[columnName] ? row[columnName] : null;
+                rtn = updAsiTableRow(asiTableRowIndexes[ea]);   
+            }
         }
      //   }
         return true
@@ -46,31 +53,37 @@ function updateAsiTableRow(tableName, columnName, newValue, options) {
 
 
     function filterRows() {
-        var filteredRows = [],
-        matched,
-        filter;
+        var matched,
+            filter,
+            idxRows;
+
+        for(idxRows in asitTable) {
+            asitTable[idxRows].filteredOut = false;
+        }
 
         //filter by settings.rowIndex
         if(settings.rowIndex != null && asitTable[settings.rowIndex] != null) { //update specific row
-            filteredRows.push(asitTable[settings.rowIndex]);
-            asitTable = filteredRows;
+            for(idxRows in asitTable) {
+                if(settings.rowIndex != idxRows) {
+                    asitTable[idxRows].filteredOut = true;
+                }
+            }
         }
 
         //filter by settings.colFilters
         if(settings.colFilters != null && settings.colFilters.length > 0) {
-            for(var idxRows in asitTable) {
+            for(idxRows in asitTable) {
                 matched = true;
                 for(var idxFilter in settings.colFilters) {
                     filter = settings.colFilters[idxFilter];
-                    if(filter.colValue != asitTable[idxRows][filter.colName]) {
+                    if(filter.colValue.toString() != asitTable[idxRows][filter.colName].toString()) {
                         matched = false;
                     }
                 }
-                if(matched) {
-                    filteredRows.push(asitTable[idxRows]);
+                if(matched == false) {
+                    asitTable[idxRows].filteredOut = true;
                 }
             }
-            asitTable = filteredRows;
         } 
     }
 

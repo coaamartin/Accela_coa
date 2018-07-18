@@ -297,7 +297,7 @@ function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
     if(!updateAsiTableRow(tableName, fieldName, value, { 
         capId: parentCapId,
         colFilters: [
-            { colName: 'Abatement #', colValue: capIDString},
+            { colName: 'Abatement #', colValue: capIDString}
         ]}) 
     ) {
         addAsiTableRow(tableName, [
