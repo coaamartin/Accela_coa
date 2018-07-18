@@ -1,19 +1,35 @@
 /*
-* WRAPPER AROUND loadASITable - RETURNS FALSE OR ARRAY
-    row = createAsiTableValObjs([
-        { columnName: 'Abatement #', fieldValue: capIDString, readOnly: 'N' },
-        { columnName: 'Type', fieldValue: AInfo['Abatement Type'], readOnly: 'N' }
-    ]);)
+* WRAPPER AROUND loadASITable - RETURNS NULL OR ARRAY
+    colFilters = [
+        { colName: 'Abatement #', colValue: capIDString },
+        { colnName: 'Type', colValue: AInfo['Abatement Type'] }
+    ]
 */
 function getAsiTableRows(tableName, options) {
     var settings = {
         capId: capId,
+        colFilters: null //array of column values to filter by or null
     };
     //optional params - overriding default settings
     for (var attr in options) { settings[attr] = options[attr]; }
 
-    var asitArray = loadASITable(tableName, settings.capId);
-    if (asitArray == undefined || asitArray == null) return false;
-    return asitArray;
+    var rows = loadASITable(tableName, settings.capId),
+        filter;
+
+    if (asitArray == undefined || asitArray == null) {
+        return null;    //no table or rows
+    }
+
+    if(settings.colFilters != null && settings.colFilters.length > 0) {
+        for(var idxRows in rows) {
+            printObjProps(rows[idxRows]);
+            // for(var idxFilter in settings.colFilters) {
+            //     filter = settings.colFilters[idxFilter];
+            //    // if(filter.colName == rows[ ])
+            // }
+        }
+    } 
+
+    return rows;
 }
 
