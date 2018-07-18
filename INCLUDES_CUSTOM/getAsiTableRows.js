@@ -16,7 +16,7 @@ function getAsiTableRows(tableName, options) {
     var rows = loadASITable(tableName, settings.capId),
         filter;
 
-    if (asitArray == undefined || asitArray == null) {
+    if (rows == undefined || rows == null) {
         return null;    //no table or rows
     }
 
