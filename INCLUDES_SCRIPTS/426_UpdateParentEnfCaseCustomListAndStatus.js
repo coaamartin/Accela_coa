@@ -24,16 +24,17 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         tableName = 'ABATEMENT INFORMATION';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
             //IRSA
-            if(ifTracer(inspResult == "Taken and Stored", 'inspResult == "Taken and Stored"')) {
+            if(ifTracer(inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored", 'inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored"')) {
                 // inspResult == Taken and Stored (create row)
                 addAsiTableRow(tableName, [
                     { colName: 'Abatement #', colValue: capIDString },
-                    { colName: 'Type', colValue: AInfo['Abatement Type'] }
+                    { colName: 'Type', colValue: AInfo['Abatement Type'] },
+                    { colName: 'Request Date', colValue: inspResultDate }
                 ], { capId: parentCapId });
-             } else if(ifTracer(inspResult == "Called In Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
-                // inspResult == Called in Service Request OR Completed Service Request (update row if exists, else create row)
-                updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
-            } else if(ifTracer(inspType== "Abatement Approval" && inspResult == "Invoice Approval", "inspType== Abatement Approval && inspResult == Invoice Approval")) {
+            //  } else if(ifTracer(inspResult == "Called In Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
+            //     // inspResult == Called in Service Request OR Completed Service Request (update row if exists, else create row)
+            //     updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
+            } else if(ifTracer(inspType== "Abatement Approval" && inspResult == "Invoice Approved", "inspType== Abatement Approval && inspResult == Invoice Approved")) {
                 // inspType== Abatement Approval && inspResult == Invoice Approval (update row if exists, else create row)
                 updateOrCreateValueInASITable(tableName, 'Completed Date',AInfo['Abatement Completed Date'], 'N');
             } else if(ifTracer(inspType.indexOf("Post Abatement Inspection") > -1 && inspResult == "Cancelled", "inspType Like Abatement Approval && inspResult == Cancelled")) {
@@ -281,7 +282,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                  updateOrCreateValueInASITable(tableName, 'Admin Charge', amt.toString(), 'N');
             } else if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Snow') > -1, 'parent = Snow Violation Case')) {
                 //parent is Snow Violation Case
-                 amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02")
+                 amt = feeAmount2("ENF_ABT_01", { capId: parentCapId }) + feeAmount2("ENF_ABT_02", { capId: parentCapId })
                  updateOrCreateValueInASITable(tableName, 'Admin Charge', amt.toString(), 'N');
             }
         } 

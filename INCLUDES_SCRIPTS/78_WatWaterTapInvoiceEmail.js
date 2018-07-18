@@ -15,11 +15,9 @@ function script78_WatWaterTapInvoiceEmail() {
         emailparams.put("$$ContactFullName$$", applicant.contactName);
     } 
 
-    if(lastInvoice != null) {
+    if(lastInvoice != null && lastInvoice.invNbr != null) {
         reportparams.put("AGENCYID", aa.getServiceProviderCode());
-        reportparams.put("INVOICEID", lastInvoice ? lastInvoice.invNbr : null);
+        reportparams.put("INVOICEID", lastInvoice.invNbr);
         emailContacts(contactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "");    
-    } else{
-        emailContacts(contactTypes, emailTemplate, emailparams, null, null, "N", "");
-    }
+    } 
 }
