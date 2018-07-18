@@ -31,47 +31,51 @@ var toEmail = aa.env.getValue("toEmail");
 var ccEmail = aa.env.getValue("ccEmail");
 //var  = aa.env.getValue("");
 
-aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br> test" + debug + "<br>Message: <br>" + message);
-
-
-
-////Get the capId type needed for the email function
-//capId4Email = null;
-//capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
-//
-//var reportFile = [];
-//
-////Get ACA Url
-//vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
-//vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
-//
-//
-//var vReportName = generateReportForEmail(capId, reportTemplate, aa.getServiceProviderCode(), vRParams);
-//
-////Get document deep link URL
-//if (vReportName != null && vReportName != false) {
-//    vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
-//    if (vDocumentList != null) {
-//        vDocumentList = vDocumentList.getOutput();
-//    }
-//}
-//
-//if (vDocumentList != null) {
-//    for (y = 0; y < vDocumentList.size(); y++) {
-//        vDocumentModel = vDocumentList.get(y);
-//        vDocumentName = vDocumentModel.getFileName();
-//        if (vDocumentName == vReportName) {
-//            //Add the document url to the email paramaters using the name: $$acaDocDownloadUrl$$
-//            getACADocDownloadParam4Notification(vEParams, vACAUrl, vDocumentModel);
-//            logDebug("including document url: " + vEParams.get('$$acaDocDownloadUrl$$'));
-//            aa.print("including document url: " + vEParams.get('$$acaDocDownloadUrl$$'));
-//            break;
-//        }
-//    }
-//}
-//
-//logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", toEmail, ccEmail, emailTemplate, emailParameters, capId4Email, null).getSuccess());
-
-//var sendResult = sendNotification("noreply@aurora.gov",toEmail,ccEmail,emailTemplate,emailParameters,reportFile,capID4Email);
-//if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-//aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+try{
+    //Get the capId type needed for the email function
+    capId4Email = null;
+    capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
+    
+    var reportFile = [];
+    
+    //Get ACA Url
+    vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+    vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
+    
+    
+    var vReportName = generateReportForEmail(capId, reportTemplate, aa.getServiceProviderCode(), vRParams);
+    
+    //Get document deep link URL
+    if (vReportName != null && vReportName != false) {
+        vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
+        if (vDocumentList != null) {
+            vDocumentList = vDocumentList.getOutput();
+        }
+    }
+    
+    if (vDocumentList != null) {
+        for (y = 0; y < vDocumentList.size(); y++) {
+            vDocumentModel = vDocumentList.get(y);
+            vDocumentName = vDocumentModel.getFileName();
+            if (vDocumentName == vReportName) {
+                //Add the document url to the email paramaters using the name: $$acaDocDownloadUrl$$
+                getACADocDownloadParam4Notification(vEParams, vACAUrl, vDocumentModel);
+                logDebug("including document url: " + vEParams.get('$$acaDocDownloadUrl$$'));
+                aa.print("including document url: " + vEParams.get('$$acaDocDownloadUrl$$'));
+                break;
+            }
+        }
+    }
+    
+    logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", toEmail, ccEmail, emailTemplate, emailParameters, capId4Email, null).getSuccess());
+    
+    var sendResult = sendNotification("noreply@aurora.gov",toEmail,ccEmail,emailTemplate,emailParameters,reportFile,capID4Email);
+    if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+    aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+}
+catch(err){
+	showMessage = true;
+    comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
+    logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
+	aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+}
