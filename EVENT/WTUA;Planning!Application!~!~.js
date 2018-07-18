@@ -38,9 +38,9 @@ Author: Mohammed Deeb
  
 Functional Area : Workflow , Records
 */
-//Script 137
+
 createRecordAndCopyInfo([ "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA", "Planning/Application/Site Plan/Major",
-		"Planning/Application/Site Plan/Minor" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Traffic Impact Study Required?",
+		"Planning/Application/Site Plan/Minor" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested" ], "Is a Traffic Impact Study Required?",
 		"PublicWorks/Traffic/Traffic Impact/NA");
 
 
@@ -60,8 +60,8 @@ Sample Call:
 Notes:
 	- child record type is "Water/Utility/Master Utility/Study" (Study not NA)
 */
-//Script 244
-autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Received", "Resubmittal Requested",  "Complete", "Note"], "Is a Master Utility Plan Required", "Water Dept Review",
+
+autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Received", "Resubmittal Requested",  "Complete"], "Is a Master Utility Plan Required", "Water Dept Review",
 		"Water/Utility/Master Utility/Study");
 		
 /*
@@ -249,7 +249,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 //Created By: Silver Lining Solutions
 logDebug("script 282: started");
 if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance" || 
-	wfTask == "Planning Pre Acceptance" || wfTask == "Civil Pre Acceptance" ) &&
+	wfTask == "Real Property Pre Acceptance" ||	wfTask == "Planning Pre Acceptance" || wfTask == "Civil Pre Acceptance" ) &&
 	wfStatus == "Resubmittal Requested" && !appMatch("Planning/Application/Address/*"))
 {
 	logDebug("script 282: criteria met");
