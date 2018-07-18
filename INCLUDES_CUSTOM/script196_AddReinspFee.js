@@ -73,11 +73,11 @@ function script196_AddReinspFee() {
 // update or create fee
 			if (AInfo["Type of Property"] == "Single Family Residential") {
 				var thisFeeAmt = 30.75;
-				updateFee("WAT_IP_03","A_REINSP","FINAL",thisFeeAmt,"Y");
+				updateFee("WAT_IP_03","WAT_IP","FINAL",thisFeeAmt,"Y");
 			}
 			if (AInfo["Type of Property"] == "Other") {
 				var thisFeeAmt = 138.00;
-				updateFee("WAT_IP_03","A_REINSP","FINAL",thisFeeAmt,"Y");
+				updateFee("WAT_IP_03","WAT_IP","FINAL",thisFeeAmt,"Y");
 			}
 		}
 	} catch(err){
