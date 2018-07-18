@@ -294,7 +294,12 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 
 
 function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
-    if(!updateAsiTableRow(tableName, fieldName, value, { capId: parentCapId })) {
+    if(!updateAsiTableRow(tableName, fieldName, value, { 
+        capId: parentCapId,
+        colFilters: [
+            { colName: 'Abatement #', colValue: capIDString},
+        ]}) 
+    ) {
         addAsiTableRow(tableName, [
             { colName: fieldName, colValue: value }
         ], { capId: parentCapId });
