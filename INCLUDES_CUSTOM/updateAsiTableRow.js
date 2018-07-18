@@ -27,7 +27,7 @@ function updateAsiTableRow(tableName, columnName, newValue, options) {
     if(asitTable != null) { //found table
         asiTableRowIndexes = getAsiTableRowIndexes();
         filterRows();
-
+        logDebug('updateAsiTableRow(): asitTable.length = ' + asitTable.length);
 
         // if(settings.rowIndex != null && asitTable[settings.rowIndex] != null) { //update specific row
         //     row = asitTable[settings.rowIndex];
