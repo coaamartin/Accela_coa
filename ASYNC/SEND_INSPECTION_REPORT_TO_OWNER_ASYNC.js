@@ -29,7 +29,7 @@ var reportTemplate = aa.env.getValue("");
 var vRParams = aa.env.getValue("vRParams");
 var toEmail = aa.env.getValue("toEmail");
 var ccEmail = aa.env.getValue("ccEmail");
-var  = aa.env.getValue("");
+//var  = aa.env.getValue("");
 
 aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br> test" + debug + "<br>Message: <br>" + message);
 
