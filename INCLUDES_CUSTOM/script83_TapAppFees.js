@@ -26,7 +26,7 @@ function script83_TapAppFees() {
 			updateFee("WAT_TA_13","WAT_TA","FINAL",1,"Y");
 		}
 		if (AInfo["Type"] == "Multi Family") {
-			updateFee("WAT_TA_16","WAT_TA","FINAL",1,"Y");
+			updateFee("WAT_TA_16","WAT_TA","FINAL",AInfo["Number of Residential Units"],"Y");
 		}
 		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] == "3/4" ) {
 			updateFee("WAT_TA_22","WAT_TA","FINAL",1,"Y");
