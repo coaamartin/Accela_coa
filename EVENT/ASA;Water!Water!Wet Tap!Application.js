@@ -43,7 +43,7 @@ for (var ea in tempASIT)
 	if ( size == 'Tap Size 6" Main Line 30 to 36"')
 		{updateFee("WETTAP_06","WAT_WETTAP","FINAL",quantity,"Y");}
 
-	if ( size == 'Tap Size 8" Main Line 6 to 12"')
+	if ( size == 'Tap Size 8" Main Line 8 to 12"')
 		{updateFee("WETTAP_07","WAT_WETTAP","FINAL",quantity,"Y");}
 	if ( size == 'Tap Size 8" Main Line 16 to 24"')
 		{updateFee("WETTAP_08","WAT_WETTAP","FINAL",quantity,"Y");}
@@ -67,11 +67,11 @@ for (var ea in tempASIT)
 		{updateFee("WETTAP_16","WAT_WETTAP","FINAL",quantity,"Y");}
 
 	if ( size == 'Tap Size 24" Main Line 16" Weld-on')
-		{updateFee("WETTAP_19","WAT_WETTAP","FINAL",quantity,"Y");}
+		{logDebug("24");updateFee("WETTAP_19","WAT_WETTAP","FINAL",quantity,"Y");}
 	if ( size == 'Tap Size 30" Main Line 16" Weld-on')
-		{updateFee("WETTAP_20","WAT_WETTAP","FINAL",quantity,"Y");}
+		{logDebug("30");updateFee("WETTAP_20","WAT_WETTAP","FINAL",quantity,"Y");}
 	if ( size == 'Tap Size 36" Main Line 16" Weld-on')
-		{updateFee("WETTAP_21","WAT_WETTAP","FINAL",quantity,"Y");}
+		{logDebug("36");updateFee("WETTAP_21","WAT_WETTAP","FINAL",quantity,"Y");}
 	
 
 }
