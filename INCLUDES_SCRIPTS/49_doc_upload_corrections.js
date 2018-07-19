@@ -1,13 +1,15 @@
 /*Event   DocumentUploadAfter   
 Added by SWAKIL
 */
+documentModelArray = aa.env.getValue("DocumentModelList");
+documentModelArray = documentModelArray.toArray();
 
 for (var d in documentModelArray)
 {
 	var thisDoc = documentModelArray[d];
 	var addDays = lookup("PLAN_REVIEW_CORRECTION", "ADD_DAYS");
 	var wfdate = dateAdd(null, addDays);
-	switch(thisDoc.Category) 
+	switch(thisDoc.getDocCategory() + "") 
 	{
 	    case "Electrical Plans":
 	        editTaskDueDate("Electrical Plan Review", wfdate);
