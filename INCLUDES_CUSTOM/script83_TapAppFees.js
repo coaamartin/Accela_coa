@@ -18,11 +18,11 @@ function script83_TapAppFees() {
 			updateFee("WAT_TA_03","WAT_TA","FINAL",1,"Y");
 		}
 		if (AInfo["Type"] == "Single Family Detached") {
-			updateFee("WAT_TA_04","WAT_TA","FINAL",1,"Y");
+			updateFee("WAT_TA_04","WAT_TA","FINAL",AInfo["Total Lot Size"],"Y");
 		}
 		if (AInfo["Type"] == "Single Family Attached") {
 			updateFee("WAT_TA_09","WAT_TA","FINAL",1,"Y");
-			updateFee("WAT_TA_10","WAT_TA","FINAL",1,"Y");
+			updateFee("WAT_TA_10","WAT_TA","FINAL",AInfo["Total Lot Size"],"Y");
 			updateFee("WAT_TA_13","WAT_TA","FINAL",1,"Y");
 		}
 		if (AInfo["Type"] == "Multi Family") {
