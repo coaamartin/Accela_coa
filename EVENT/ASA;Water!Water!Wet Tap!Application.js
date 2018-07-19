@@ -13,10 +13,6 @@ Created By: Silver Lining Solutions
 */
 logDebug("Script 81 START");
 
-quantity = 2;
-size = 'Tap Size 4" Main Line 6 to 12';
-logDebug("Size = " + size + " | quantity = " + quantity);
-
 tempASIT = loadASITable("SIZE");
 if (tempASIT == undefined || tempASIT == null) 
 {}
@@ -25,8 +21,7 @@ for (var ea in tempASIT)
 	var row = tempASIT[ea];
 	size 		= "" + row["Size"].fieldValue;
 	quantity 	= "" + row["Number of Taps"].fieldValue;
-	cValue = "" + cValue;
-
+	logDebug("Size = " + size + " | quantity = " + quantity);
 		
 	if ( size == 'Tap Size 4" Main Line 6 to 12')
 		{updateFee("WETTAP_01","WAT_WETTAP","FINAL",quantity,"Y");}
