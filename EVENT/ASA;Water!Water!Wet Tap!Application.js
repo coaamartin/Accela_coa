@@ -71,6 +71,7 @@ for (var ea in tempASIT)
 	if ( size == 'Tap Size 30" Main Line 16" Weld-on')
 		{logDebug("30");updateFee("WETTAP_20","WAT_WETTAP","FINAL",quantity,"Y");}
 	if ( size == 'Tap Size 36" Main Line 16" Weld-on')
+		          
 		{logDebug("36");updateFee("WETTAP_21","WAT_WETTAP","FINAL",quantity,"Y");}
 	
 
@@ -91,7 +92,7 @@ if (appSpecificTableInfo.getSuccess())
 	comment("******Found Table");
 	var appSpecificTableModel = appSpecificTableInfo.getOutput().getAppSpecificTableModel();
 	var tableFields = appSpecificTableModel.getTableFields(); // List<BaseField>
-	comment("tableField size = " + tableFields.size());
+	
 	if (tableFields != null && tableFields.size() > 0)
 	{
 		var updateRowsMap = aa.util.newHashMap(); // Map<rowID, Map<columnName, columnValue>>
