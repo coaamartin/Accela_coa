@@ -17,12 +17,74 @@ logDebug("Script 81 START");
 var tableName = "SIZE";
 var columnName ="Complete";
 
+tempASIT = loadASITable(tableName);
+
+for (var ea in tempASIT) 
+{
+	var row = tempASIT[ea];
+
+	size 		= "" + fieldObject["Size"].fieldValue;
+	quantity 	= "" + fieldObject["Number of Taps"].fieldValue;
+	complete  	= "" + fieldObject["Complete"].fieldValue;
+	
+	logDebug("Size = " + size + " | quantity = " + quantity + " | complete = " + complete);
+
+	var rowID = fieldObject.getRowIndex();
+	setUpdateColumnValue(updateRowsMap, rowID, "Complete", "UNCHECKED");
+	
+	if ( size == 'Tap Size 4" Main Line 6 to 12"')
+		{updateFee("WETTAP_01","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 4" Main Line 16 to 24"')
+		{updateFee("WETTAP_02","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 4" Main Line 30 to 36"')
+		{updateFee("WETTAP_03","WAT_WETTAP","FINAL",quantity,"Y");}
+
+	if ( size == 'Tap Size 6" Main Line 6 to 12"')
+		{updateFee("WETTAP_04","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 6" Main Line 16 to 24"')
+		{updateFee("WETTAP_05","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 6" Main Line 30 to 36"')
+		{updateFee("WETTAP_06","WAT_WETTAP","FINAL",quantity,"Y");}
+
+	if ( size == 'Tap Size 8" Main Line 6 to 12"')
+		{updateFee("WETTAP_07","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 8" Main Line 16 to 24"')
+		{updateFee("WETTAP_08","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 8" Main Line 30 to 36"')
+		{updateFee("WETTAP_09","WAT_WETTAP","FINAL",quantity,"Y");}
+
+	if ( size == 'Tap Size 12" Main Line 12"')
+		{updateFee("WETTAP_10","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 12" Main Line 16"')
+		{updateFee("WETTAP_11","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 12" Main Line 24 to 36"')
+		{updateFee("WETTAP_12","WAT_WETTAP","FINAL",quantity,"Y");}
+
+	if ( size == 'Tap Size 16" Main Line 16"')
+		{updateFee("WETTAP_13","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 16" Main Line 24"')
+		{updateFee("WETTAP_14","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 16" Main Line 30"')
+		{updateFee("WETTAP_15","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 16" Main Line 36"')
+		{updateFee("WETTAP_16","WAT_WETTAP","FINAL",quantity,"Y");}
+
+	if ( size == 'Tap Size 24" Main Line 16" Weld-on')
+		{updateFee("WETTAP_19","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 30" Main Line 16" Weld-on')
+		{updateFee("WETTAP_20","WAT_WETTAP","FINAL",quantity,"Y");}
+	if ( size == 'Tap Size 36" Main Line 16" Weld-on')
+		{updateFee("WETTAP_21","WAT_WETTAP","FINAL",quantity,"Y");}
+	
+
+}
+	
+
 // Create a HashMap.
 var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
 
 // Create a List object to add the value of Column.
 var valuesList = aa.util.newArrayList();
-valuesList.add("UNCHECKED");
 valuesList.add("CHECKED");
 
 searchConditionMap.put(columnName, valuesList);
@@ -42,59 +104,15 @@ if (appSpecificTableInfo.getSuccess())
 			var fieldObject = tableFields.get(i); // BaseField
 			comment("fieldObject = " + fieldObject);
 
-			size 		= "" + fieldObject["Size"].fieldValue;
-			quantity 	= "" + fieldObject["Number of Taps"].fieldValue;
-			complete  	= "" + fieldObject["Complete"].fieldValue;
-			
-			logDebug("Size = " + size + " | quantity = " + quantity + " | complete = " + complete);
-
+			//get the column name.
+			var columnName = fieldObject.getFieldLabel();
+			//get the value of column
+			var columnValue = fieldObject.getInputValue();
+			//get the row ID 
 			var rowID = fieldObject.getRowIndex();
+			comment(columnName + ": " + columnValue + "   rowID: " + rowID);
+			
 			setUpdateColumnValue(updateRowsMap, rowID, "Complete", "UNCHECKED");
-			
-			if ( size == 'Tap Size 4" Main Line 6 to 12"')
-				{updateFee("WETTAP_01","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 4" Main Line 16 to 24"')
-				{updateFee("WETTAP_02","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 4" Main Line 30 to 36"')
-				{updateFee("WETTAP_03","WAT_WETTAP","FINAL",quantity,"Y");}
-
-			if ( size == 'Tap Size 6" Main Line 6 to 12"')
-				{updateFee("WETTAP_04","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 6" Main Line 16 to 24"')
-				{updateFee("WETTAP_05","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 6" Main Line 30 to 36"')
-				{updateFee("WETTAP_06","WAT_WETTAP","FINAL",quantity,"Y");}
-
-			if ( size == 'Tap Size 8" Main Line 6 to 12"')
-				{updateFee("WETTAP_07","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 8" Main Line 16 to 24"')
-				{updateFee("WETTAP_08","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 8" Main Line 30 to 36"')
-				{updateFee("WETTAP_09","WAT_WETTAP","FINAL",quantity,"Y");}
-
-			if ( size == 'Tap Size 12" Main Line 12"')
-				{updateFee("WETTAP_10","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 12" Main Line 16"')
-				{updateFee("WETTAP_11","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 12" Main Line 24 to 36"')
-				{updateFee("WETTAP_12","WAT_WETTAP","FINAL",quantity,"Y");}
-
-			if ( size == 'Tap Size 16" Main Line 16"')
-				{updateFee("WETTAP_13","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 16" Main Line 24"')
-				{updateFee("WETTAP_14","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 16" Main Line 30"')
-				{updateFee("WETTAP_15","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 16" Main Line 36"')
-				{updateFee("WETTAP_16","WAT_WETTAP","FINAL",quantity,"Y");}
-
-			if ( size == 'Tap Size 24" Main Line 16" Weld-on')
-				{updateFee("WETTAP_19","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 30" Main Line 16" Weld-on')
-				{updateFee("WETTAP_20","WAT_WETTAP","FINAL",quantity,"Y");}
-			if ( size == 'Tap Size 36" Main Line 16" Weld-on')
-				{updateFee("WETTAP_21","WAT_WETTAP","FINAL",quantity,"Y");}
-			
 		}
 		if (!updateRowsMap.isEmpty())
 			{updateAppSpecificTableInfors(tableName, capId, updateRowsMap);}
