@@ -23,9 +23,9 @@ for (var ea in tempASIT)
 {
 	var row = tempASIT[ea];
 
-	size 		= "" + fieldObject["Size"].fieldValue;
-	quantity 	= "" + fieldObject["Number of Taps"].fieldValue;
-	complete  	= "" + fieldObject["Complete"].fieldValue;
+	size 		= "" + row["Size"].fieldValue;
+	quantity 	= "" + row["Number of Taps"].fieldValue;
+	complete  	= "" + row["Complete"].fieldValue;
 	
 	logDebug("Size = " + size + " | quantity = " + quantity + " | complete = " + complete);
 
