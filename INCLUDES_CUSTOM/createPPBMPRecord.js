@@ -1,9 +1,9 @@
 function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
-	logDebug("createPPBMPRecord() started");
+    logDebug("createPPBMPRecord() started");
     try{
         //In case the permit is issued from other event, we hard code the task and status.
         if(vEventName != "WorkflowTaskUpdateAfter"){
-			logDebug("Event name is not WTUA");
+            logDebug("Event name is not WTUA");
             wfTask = "Permit Issud";
             wfStatus = "Complete";
         }
@@ -20,7 +20,7 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
             }//for all status options
         
             if (!statusMatch) {
-				logDebug("createPPBMPRecord() ended: no match");
+                logDebug("createPPBMPRecord() ended: no match");
                 return false;
             }
         
@@ -33,19 +33,19 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
                 var thirtyDaysAhead = nextWorkDay(dateAdd(null, 30));
                 var days4Insp = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(thirtyDaysAhead));
         
-                scheduleInspectionCustom4CapId(childCapId, "Route Inspection", days4Insp);
+                scheduleInspectionCustom4CapId(childCapId, "Routine Inspection", days4Insp);
                 
                 var parents = getParents("PublicWorks/Civil Plan/Review/NA")
                 if(!parents || parents.length == 0){
                     logDebug("**WARN no parents found for record, capId=" + capId + ", altId=" + capIDString);
-		            logDebug("createPPBMPRecord() ended: no parent");
+                    logDebug("createPPBMPRecord() ended: no parent");
                     return ;
                 }
                 recordParentCapId = parents[0];
                 var pondTypes = loadASITable(asitName, recordParentCapId);
                 if (!pondTypes) {
                     logDebug("Parent " + recordParentCapId.getCustomID() + " has no " + asitName + " table");
-		            logDebug("createPPBMPRecord() ended: no ASIT On parent");
+                    logDebug("createPPBMPRecord() ended: no ASIT On parent");
                     return ;
                 }
                 
@@ -109,15 +109,15 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
             //  linkDocuments(recordParentCapId, createdAppId, [ "Pond Certification", "Inspection & Maintenance Plan" ]);
             //}
         } else {
-		    logDebug("createPPBMPRecord() ended: wfTask No Match");
+            logDebug("createPPBMPRecord() ended: wfTask No Match");
             return false;
         }
-		logDebug("createPPBMPRecord() ended");
+        logDebug("createPPBMPRecord() ended");
         return true;
-	}
-	catch(err){
-		showMessage = true;
+    }
+    catch(err){
+        showMessage = true;
         comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
         logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
-	}
+    }
 }
