@@ -114,7 +114,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             //WTUA
             if(ifTracer(wfTask == "Legal Hearing" && wfStatus == "Court Ordered Re-Inspect", 'wfTask == "Legal Hearing" && wfStatus == "Court Ordered Re-Inspect"')) {
                 // wfTask == "Legal Hearing" && wfStatus == "Court Ordered Re-Inspect"
-                updateOrCreateValueInASITable(tableName, colKeyName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Court Re-Insp Date', AInfo['Court Reinspection Date'], 'N');
             } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="Pre-Trial", 'wfTask == "Legal Hearing" && wfStatus =="Pre-Trial"')) {
                 // wfTask == "Legal Hearing" && wfStatus =="Pre-Trial"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
@@ -201,7 +201,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     function updateSummonsUponCompletion() {
         updateOrCreateValueInASITable(tableName, colKeyName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
-        updateOrCreateValueInASITable(tableName, colKeyName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Court Re-Insp Date', AInfo['Court Reinspection Date'], 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Trial Date', AInfo["Trial Date"], 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
