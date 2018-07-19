@@ -13,71 +13,93 @@ Created By: Silver Lining Solutions
 */
 logDebug("Script 81 START");
 
-tempASIT = loadASITable("SIZE");
+// table name
+var tableName = "SIZE";
+var columnName ="Complete";
 
-var updateRowsMap = aa.util.newHashMap(); // Map<rowID, Map<columnName, columnValue>>
+// Create a HashMap.
+var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
 
-if (tempASIT == undefined || tempASIT == null) 
-{}
-for (var ea in tempASIT) 
+// Create a List object to add the value of Column.
+var valuesList = aa.util.newArrayList();
+valuesList.add("UNCHECKED");
+valuesList.add("CHECKED");
+
+searchConditionMap.put(columnName, valuesList);
+var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capId, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
+if (appSpecificTableInfo.getSuccess())
+{
+	comment("******Found Table");
+	var appSpecificTableModel = appSpecificTableInfo.getOutput().getAppSpecificTableModel();
+	var tableFields = appSpecificTableModel.getTableFields(); // List<BaseField>
+	comment("tableField size = " + tableFields.size());
+	if (tableFields != null && tableFields.size() > 0)
 	{
-	var row = tempASIT[ea];
-	size 		= "" + row["Size"].fieldValue;
-	quantity 	= "" + row["Number of Taps"].fieldValue;
-	complete  	= "" + row["Complete"].fieldValue;
-	
-	logDebug("Size = " + size + " | quantity = " + quantity + " | complete = " + complete);
+		var updateRowsMap = aa.util.newHashMap(); // Map<rowID, Map<columnName, columnValue>>
+		for (var i=0; i < tableFields.size(); i++)
+		{
+			comment ("on line --- i = " + i);
+			var fieldObject = tableFields.get(i); // BaseField
+			comment("fieldObject = " + fieldObject);
 
-	var rowID = row.getRowIndex();
-	setUpdateColumnValue(updateRowsMap, rowID, "Complete", "UNCHECKED");
-	
-	if ( size == 'Tap Size 4" Main Line 6 to 12"')
-		{updateFee("WETTAP_01","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 4" Main Line 16 to 24"')
-		{updateFee("WETTAP_02","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 4" Main Line 30 to 36"')
-		{updateFee("WETTAP_03","WAT_WETTAP","FINAL",quantity,"Y");}
+			size 		= "" + fieldObject["Size"].fieldValue;
+			quantity 	= "" + fieldObject["Number of Taps"].fieldValue;
+			complete  	= "" + fieldObject["Complete"].fieldValue;
+			
+			logDebug("Size = " + size + " | quantity = " + quantity + " | complete = " + complete);
 
-	if ( size == 'Tap Size 6" Main Line 6 to 12"')
-		{updateFee("WETTAP_04","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 6" Main Line 16 to 24"')
-		{updateFee("WETTAP_05","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 6" Main Line 30 to 36"')
-		{updateFee("WETTAP_06","WAT_WETTAP","FINAL",quantity,"Y");}
+			var rowID = fieldObject.getRowIndex();
+			setUpdateColumnValue(updateRowsMap, rowID, "Complete", "UNCHECKED");
+			
+			if ( size == 'Tap Size 4" Main Line 6 to 12"')
+				{updateFee("WETTAP_01","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 4" Main Line 16 to 24"')
+				{updateFee("WETTAP_02","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 4" Main Line 30 to 36"')
+				{updateFee("WETTAP_03","WAT_WETTAP","FINAL",quantity,"Y");}
 
-	if ( size == 'Tap Size 8" Main Line 6 to 12"')
-		{updateFee("WETTAP_07","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 8" Main Line 16 to 24"')
-		{updateFee("WETTAP_08","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 8" Main Line 30 to 36"')
-		{updateFee("WETTAP_09","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 6" Main Line 6 to 12"')
+				{updateFee("WETTAP_04","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 6" Main Line 16 to 24"')
+				{updateFee("WETTAP_05","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 6" Main Line 30 to 36"')
+				{updateFee("WETTAP_06","WAT_WETTAP","FINAL",quantity,"Y");}
 
-	if ( size == 'Tap Size 12" Main Line 12"')
-		{updateFee("WETTAP_10","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 12" Main Line 16"')
-		{updateFee("WETTAP_11","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 12" Main Line 24 to 36"')
-		{updateFee("WETTAP_12","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 8" Main Line 6 to 12"')
+				{updateFee("WETTAP_07","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 8" Main Line 16 to 24"')
+				{updateFee("WETTAP_08","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 8" Main Line 30 to 36"')
+				{updateFee("WETTAP_09","WAT_WETTAP","FINAL",quantity,"Y");}
 
-	if ( size == 'Tap Size 16" Main Line 16"')
-		{updateFee("WETTAP_13","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 16" Main Line 24"')
-		{updateFee("WETTAP_14","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 16" Main Line 30"')
-		{updateFee("WETTAP_15","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 16" Main Line 36"')
-		{updateFee("WETTAP_16","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 12" Main Line 12"')
+				{updateFee("WETTAP_10","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 12" Main Line 16"')
+				{updateFee("WETTAP_11","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 12" Main Line 24 to 36"')
+				{updateFee("WETTAP_12","WAT_WETTAP","FINAL",quantity,"Y");}
 
-	if ( size == 'Tap Size 24" Main Line 16" Weld-on')
-		{updateFee("WETTAP_19","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 30" Main Line 16" Weld-on')
-		{updateFee("WETTAP_20","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 36" Main Line 16" Weld-on')
-		{updateFee("WETTAP_21","WAT_WETTAP","FINAL",quantity,"Y");}
-	}
-	
-if (!updateRowsMap.isEmpty())
-	{updateAppSpecificTableInfors(tableName, capId, updateRowsMap);}
+			if ( size == 'Tap Size 16" Main Line 16"')
+				{updateFee("WETTAP_13","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 16" Main Line 24"')
+				{updateFee("WETTAP_14","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 16" Main Line 30"')
+				{updateFee("WETTAP_15","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 16" Main Line 36"')
+				{updateFee("WETTAP_16","WAT_WETTAP","FINAL",quantity,"Y");}
+
+			if ( size == 'Tap Size 24" Main Line 16" Weld-on')
+				{updateFee("WETTAP_19","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 30" Main Line 16" Weld-on')
+				{updateFee("WETTAP_20","WAT_WETTAP","FINAL",quantity,"Y");}
+			if ( size == 'Tap Size 36" Main Line 16" Weld-on')
+				{updateFee("WETTAP_21","WAT_WETTAP","FINAL",quantity,"Y");}
+			
+		}
+		if (!updateRowsMap.isEmpty())
+			{updateAppSpecificTableInfors(tableName, capId, updateRowsMap);}
+	}	
+}
 	
 logDebug("Script 81 END");
 
