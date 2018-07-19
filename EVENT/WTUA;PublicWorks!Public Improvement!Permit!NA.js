@@ -263,3 +263,8 @@ if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
 }
 
 logDebug("Script 183 END");
+
+if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
+	logDebug('wfTask == "Permit Issuance" && wfStatus == "Issued"');
+	pWrksScript180_emailPermit();
+}
