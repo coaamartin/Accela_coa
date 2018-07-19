@@ -31,10 +31,12 @@ notifyOverdueIssuedPermits("Water", "Water", "SWMP", "Permit");
 
 function notifyOverdueIssuedPermits(grp, typ, stype, cat){
     var idx,
-        expDate,
+        lic,
+        expAccDate,
+        expJsDate,
         expSince,
         capScript,
-        maxExpDaysAllowed = 29,
+        minExpDaysAllowed = 30,
         eParams,
         capScriptList = aa.cap.getByAppType(grp, typ, stype, cat).getOutput();
     
@@ -42,17 +44,23 @@ function notifyOverdueIssuedPermits(grp, typ, stype, cat){
         capScript = capScriptList[idx];
         if(ifTracer(capScript.getCapStatus() == "Issued", "Record status = Issued")) {
         //    capScript.capModel.expDate = new Date(2018,4,3);
-            expDate = capScript.capModel.getExpDate();
-            if(ifTracer(expDate, "Record expDate is truthy")) {
-                expSince = dateDiff(expDate, new Date());
-                aa.print(expSince);
-                if (expSince > maxExpDaysAllowed) {
-                    capId=capScript.getCapID();
-                    aa.print("sending email, cap id = " + capId.getCustomID());
-                    eParams = aa.util.newHashtable();
-                    emailContacts("Applicant", "WAT RENEWAL OF SWMP PERMIT # 376", eParams, "",  aa.util.newHashtable());
-                    updateAppStatus("About to Expire","Updated via Batch Job : " + batchJobName, capScript.getCapID());
-                } 
+            aa.print('record id - ' + capScript.capID.getCustomID());
+            lic = aa.expiration.getLicensesByCapID(capScript.capID).getOutput();
+            if(lic != null && lic.getExpDate != null) {
+                expAccDate = lic.getExpDate();
+                if(expAccDate != null) {
+                    expJsDate = new Date(expAccDate.year, expAccDate.month-1, expAccDate.dayOfMonth);
+                    aa.print('expJsDate - ' + expJsDate);
+                    expSince = dateDiff(new Date(), expJsDate);
+                    aa.print('expSince - ' + expSince);
+                    if (expSince < minExpDaysAllowed) {
+                        capId=capScript.getCapID();
+                        aa.print("sending email, cap id = " + capId.getCustomID());
+                        eParams = aa.util.newHashtable();
+                        emailContacts("Applicant", "WAT RENEWAL OF SWMP PERMIT # 376", eParams, "",  aa.util.newHashtable());
+                        updateAppStatus("About to Expire","Updated via Batch Job : " + batchJobName, capScript.getCapID());
+                    } 
+                }
             }
         }
     }
