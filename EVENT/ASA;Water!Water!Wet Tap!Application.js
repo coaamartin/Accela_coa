@@ -14,6 +14,9 @@ Created By: Silver Lining Solutions
 logDebug("Script 81 START");
 
 tempASIT = loadASITable("SIZE");
+
+var updateRowsMap = aa.util.newHashMap(); // Map<rowID, Map<columnName, columnValue>>
+
 if (tempASIT == undefined || tempASIT == null) 
 {}
 for (var ea in tempASIT) 
@@ -21,8 +24,13 @@ for (var ea in tempASIT)
 	var row = tempASIT[ea];
 	size 		= "" + row["Size"].fieldValue;
 	quantity 	= "" + row["Number of Taps"].fieldValue;
-	logDebug("Size = " + size + " | quantity = " + quantity);
-		
+	complete  	= "" + row["Complete"].fieldValue;
+	
+	logDebug("Size = " + size + " | quantity = " + quantity + " | complete = " + complete);
+
+	var rowID = fieldObject.getRowIndex();
+	setUpdateColumnValue(updateRowsMap, rowID, "Complete", "Unchecked");
+	
 	if ( size == 'Tap Size 4" Main Line 6 to 12"')
 		{updateFee("WETTAP_01","WAT_WETTAP","FINAL",quantity,"Y");}
 	if ( size == 'Tap Size 4" Main Line 16 to 24"')
@@ -60,11 +68,60 @@ for (var ea in tempASIT)
 	if ( size == 'Tap Size 16" Main Line 36"')
 		{updateFee("WETTAP_16","WAT_WETTAP","FINAL",quantity,"Y");}
 
-	if ( size == 'Tap Size 24" Main Line 16 Weld-on')
+	if ( size == 'Tap Size 24" Main Line 16" Weld-on')
 		{updateFee("WETTAP_19","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 30" Main Line 16 Weld-on')
+	if ( size == 'Tap Size 30" Main Line 16" Weld-on')
 		{updateFee("WETTAP_20","WAT_WETTAP","FINAL",quantity,"Y");}
-	if ( size == 'Tap Size 36" Main Line 16 Weld-on')
+	if ( size == 'Tap Size 36" Main Line 16" Weld-on')
 		{updateFee("WETTAP_21","WAT_WETTAP","FINAL",quantity,"Y");}
 	}
+	
+if (!updateRowsMap.isEmpty())
+	{updateAppSpecificTableInfors(tableName, capId, updateRowsMap);}
+	
 logDebug("Script 81 END");
+
+/**
+* Set update column value. format: Map<rowID, Map<columnName, columnValue>>
+**/
+function setUpdateColumnValue(updateRowsMap/** Map<rowID, Map<columnName, columnValue>> **/, rowID, columnName, columnValue)
+{
+	var updateFieldsMap = updateRowsMap.get(rowID);
+	if (updateFieldsMap == null)
+	{
+		updateFieldsMap = aa.util.newHashMap();
+		updateRowsMap.put(rowID, updateFieldsMap);
+	}
+	updateFieldsMap.put(columnName, columnValue);
+}
+
+/**
+* update ASIT rows data. updateRowsMap format: Map<rowID, Map<columnName, columnValue>>
+**/
+function updateAppSpecificTableInfors(tableName, capId, updateRowsMap/** Map<rowID, Map<columnName, columnValue>> **/)
+{
+comment("in updateASTI");
+	if (updateRowsMap == null || updateRowsMap.isEmpty())
+	{
+		return;
+	}
+	
+	var asitTableScriptModel = aa.appSpecificTableScript.createTableScriptModel();
+	var asitTableModel = asitTableScriptModel.getTabelModel();
+	var rowList = asitTableModel.getRows();
+	asitTableModel.setSubGroup(tableName);
+	var rowIdArray = updateRowsMap.keySet().toArray();
+	comment("rowIdArray.length = " + rowIdArray.length);
+	for (var i = 0; i < rowIdArray.length; i++)
+	{
+		var rowScriptModel = aa.appSpecificTableScript.createRowScriptModel();
+		var rowModel = rowScriptModel.getRow();
+		comment("rowIdArray[i] = " + rowIdArray[i]);
+		rowModel.setFields(updateRowsMap.get(rowIdArray[i]));
+		rowModel.setId(rowIdArray[i]);
+		rowList.add(rowModel);
+	}
+	return aa.appSpecificTableScript.updateAppSpecificTableInfors(capId, asitTableModel);
+}
+
+
