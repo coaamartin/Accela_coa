@@ -52,3 +52,8 @@ if(ifTracer(wfTask == "Final Acceptance Inspection" && wfStatus == "Warranty Wor
 	//Script 302
 	wtrScript302_warrantyReqdNotification();
 }
+
+if(ifTracer(wfTask == "Final Acceptance Inspection" && wfStatus == "Complete", 'wf:Final Acceptance Inspection/Complete')){
+	//Script 302
+	wtrScript302_warrantyReqdNotification();
+}
