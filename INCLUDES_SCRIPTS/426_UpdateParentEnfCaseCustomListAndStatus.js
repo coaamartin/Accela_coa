@@ -35,10 +35,10 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 ], { capId: parentCapId });
             //  } else if(ifTracer(inspResult == "Called In Service Request" || inspResult == "Completed Service Request", "inspResult == Called in Service Request OR Completed Service Request")) {
             //     // inspResult == Called in Service Request OR Completed Service Request (update row if exists, else create row)
-            //     updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
+            //     updateOrCreateValueInASITable(tableName, colKeyName, 'Request Date', inspResultDate, 'N');
             } else if(ifTracer(inspType== "Abatement Approval" && inspResult == "Invoice Approved", "inspType== Abatement Approval && inspResult == Invoice Approved")) {
                 // inspType== Abatement Approval && inspResult == Invoice Approval (update row if exists, else create row)
-                updateOrCreateValueInASITable(tableName, 'Completed Date',AInfo['Abatement Completed Date'], 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Date',AInfo['Abatement Completed Date'], 'N');
             } else if(ifTracer(inspType.indexOf("Post Abatement Inspection") > -1 && inspResult == "Cancelled", "inspType Like Abatement Approval && inspResult == Cancelled")) {
                 // inspType LIKE Post Abatement Inspection && inspResult == Cancelled
                 updateAbatementUponCompletion();
@@ -47,20 +47,20 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             //WTUA
             if(ifTracer(wfTask == "Invoicing" && (wfStatus =="Invoiced" || wfStatus =="Invoiced - City Paid"), "wfTask == Invoicing && wfStatus == Invoiced OR Invoiced City Paid")) {
                 // wfTask == "Invoicing" && wfStatus =="Invoiced"
-                updateOrCreateValueInASITable(tableName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
-                updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
             } else if(ifTracer(wfTask == "Recordation" && (wfStatus =="Submit Recording"), "wfTask == Recordation && wfStatus == Submit Recording")) {
                 // wfTask == "Recordation" && wfStatus =="Submit Recording"
                 updateAbatementAdminCharge();
             } else if(ifTracer(wfTask == "Recordation" && wfStatus =="Record Reception", "wfTask == Recordation && wfStatus == Record Reception")) {
                 // wfTask == "Recordation" && wfStatus =="Record Reception"
-                updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal.toString(), 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Lien Amount', feesInvoicedTotal.toString(), 'N');
             } else if(ifTracer(wfTask == "Release Lien" && wfStatus =="Record Reception", "wfTask == Release Lien && wfStatus == Record Reception")) {
                 // wfTask == "Release Lien" && wfStatus =="Record Reception"
-                updateOrCreateValueInASITable(tableName, 'Release Date', AInfo["Release Reception Date"], 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Release Date', AInfo["Release Reception Date"], 'N');
             } else if(ifTracer(wfTask == "Recordation" && wfStatus =="Released to County", "wfTask == Recordation && wfStatus == Released to County")) {
                 // wfTask == "Recordation" && wfStatus =="Released to County"
-                updateOrCreateValueInASITable(tableName, 'Released to County Date', AInfo["Released to County Date"], 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Released to County Date', AInfo["Released to County Date"], 'N');
             } else if(ifTracer((wfTask == "Recordation" && wfStatus =="Released to County") || (wfTask == "Invoicing" && wfStatus =="Invoiced - City Paid"), '(wfTask == "Recordation" && wfStatus =="Released to County") || (wfTask == "Invoicing" && wfStatus =="Invoiced - City Paid")')) {
                 // wfTask == "Recordation" && wfStatus =="Released to County"
                 updateAbatementUponCompletion();
@@ -74,7 +74,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 dd = paymentDateArr[2].toString();
                 dte = new Date(mm + '/' + dd + '/' + yyyy);
 
-                updateOrCreateValueInASITable(tableName, 'Paid Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Paid Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
             }
         }
     } else if (matchARecordType([
@@ -102,9 +102,9 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 addAsiTableRow(tableName, row, { capId: parentCapId });
             } else if(ifTracer(inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA"), 'inspType == "Pre Court Action" && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")')) {
                 // inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")
-                updateOrCreateValueInASITable(tableName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
                 if(nspResult == "Summons File to CA") {
-                    updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');                    
+                    updateOrCreateValueInASITable(tableName, colKeyName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');                    
                 }
             } else if(ifTracer(inspType == "Legal Resolution" && inspResult == "Complete", 'inspType == "Legal Resolution" && inspResult == "Complete"')) {
                 // inspType == "Legal Resolution" && inspResult == "Complete"
@@ -114,16 +114,16 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             //WTUA
             if(ifTracer(wfTask == "Legal Hearing" && wfStatus == "Court Ordered Re-Inspect", 'wfTask == "Legal Hearing" && wfStatus == "Court Ordered Re-Inspect"')) {
                 // wfTask == "Legal Hearing" && wfStatus == "Court Ordered Re-Inspect"
-                updateOrCreateValueInASITable(tableName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
             } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="Pre-Trial", 'wfTask == "Legal Hearing" && wfStatus =="Pre-Trial"')) {
                 // wfTask == "Legal Hearing" && wfStatus =="Pre-Trial"
-                updateOrCreateValueInASITable(tableName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
             } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="Trial", 'wfTask == "Legal Hearing" && wfStatus =="Trial"')) {
                 // wfTask == "Legal Hearing" && wfStatus =="Trial"
-                updateOrCreateValueInASITable(tableName, 'Trial Date', AInfo["Trial Date"], 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Trial Date', AInfo["Trial Date"], 'N');
             } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year", 'wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year')) {
                 // wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year"
-                updateOrCreateValueInASITable(tableName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
             } else if(ifTracer(wfTask == "Legal Hearing" && 
                         (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"
                         || wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"
@@ -131,7 +131,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                         || wfStatus == "FTA"
                         ), 'wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"')) {
                 // wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"
-                updateOrCreateValueInASITable(tableName, 'Disposition', wfStatus, 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Disposition', wfStatus, 'N');
             }
         }         
     } else if (matchARecordType([
@@ -143,21 +143,21 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             //IRSA
             if(ifTracer(inspType == "NOV Release Inspection", 'inspType == "NOV Release Inspection"')) {
                 // inspType == "NOV Inspection"
-                updateOrCreateValueInASITable(tableName, 'Last Inspection Date', inspResultDate, 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Last Inspection Date', inspResultDate, 'N');
                 if(inspResult == "Failed") {
                     maxInsp = getLastInspection({ inspType: "NOV Release Inspection" });
                     if(maxInsp) {
                         dte = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
-                        updateOrCreateValueInASITable(tableName, 'Next Inspection Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
+                        updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
                     }
                 } else {
-                    updateOrCreateValueInASITable(tableName, 'Next Inspection Date', inspSchedDate, 'N');
+                    updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', inspSchedDate, 'N');
                 }
-                updateOrCreateValueInASITable(tableName, 'Completed Inspections', getCompletedInspections({}), 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Inspections', getCompletedInspections({}), 'N');
                 maxInsp = getLastInspection({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
                 if(maxInsp) {
                     dte = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
-                    updateOrCreateValueInASITable(tableName, 'Compliance Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
+                    updateOrCreateValueInASITable(tableName, colKeyName, 'Compliance Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
                 }
              }
         }  else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
@@ -179,15 +179,15 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     }
 
     function updateAbatementUponCompletion() {
-        updateOrCreateValueInASITable(tableName, 'Type', AInfo['Abatement Type'], 'N');
-        updateOrCreateValueInASITable(tableName, 'Request Date', inspResultDate, 'N');
-        updateOrCreateValueInASITable(tableName, 'Completed Date', AInfo['Abatement Completed Date'], 'N');
-   //    updateOrCreateValueInASITable(tableName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
-        updateOrCreateValueInASITable(tableName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Type', AInfo['Abatement Type'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Request Date', inspResultDate, 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Date', AInfo['Abatement Completed Date'], 'N');
+   //    updateOrCreateValueInASITable(tableName, colKeyName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
         updateAbatementAdminCharge();
-        updateOrCreateValueInASITable(tableName, 'Lien Amount', feesInvoicedTotal.toString(), 'N');
-        updateOrCreateValueInASITable(tableName, 'Release Date', AInfo["Release Reception Date"], 'N');
-        updateOrCreateValueInASITable(tableName, 'Released to County Date', AInfo["Released to County Date"], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Lien Amount', feesInvoicedTotal.toString(), 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Release Date', AInfo["Release Reception Date"], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Released to County Date', AInfo["Released to County Date"], 'N');
     
         var childrenWithActiveTasks = getChildrenWithActiveTasks();
         if(ifTracer(childrenWithActiveTasks.length == 1, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 1')) {
@@ -199,14 +199,14 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     }
     
     function updateSummonsUponCompletion() {
-        updateOrCreateValueInASITable(tableName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
-        updateOrCreateValueInASITable(tableName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
-        updateOrCreateValueInASITable(tableName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
-        updateOrCreateValueInASITable(tableName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
-        updateOrCreateValueInASITable(tableName, 'Trial Date', AInfo["Trial Date"], 'N');
-        updateOrCreateValueInASITable(tableName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
-        updateOrCreateValueInASITable(tableName, 'Summons #', AInfo['Court Z-Number'], 'N');
-        updateOrCreateValueInASITable(tableName, 'Issue Date', AInfo['Court Z-Number'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Court Re-Insp Date', AInfo['Court Re-Inspection Date'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Pre-Trial Date', AInfo["Pre-Trial Date"], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Trial Date', AInfo["Trial Date"], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Summons #', AInfo['Court Z-Number'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Issue Date', AInfo['Court Z-Number'], 'N');
     
         var childrenWithActiveTasks = getChildrenWithActiveTasks();
         if(ifTracer(childrenWithActiveTasks.length == 1, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 1')) {
@@ -235,18 +235,18 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         if(maxInsp) {
             dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
             dteSched = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
-            updateOrCreateValueInASITable(tableName, 'Last Inspection Date', dteStatus, 'N');
-            updateOrCreateValueInASITable(tableName, 'Next Inspection Date', dteSched, 'N');
+            updateOrCreateValueInASITable(tableName, colKeyName, 'Last Inspection Date', dteStatus, 'N');
+            updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', dteSched, 'N');
         }
         maxInsp = getLastInspection({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
         if(maxInsp) {
             dteStatus = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
-            updateOrCreateValueInASITable(tableName, 'Compliance Date', dteStatus, 'N');
+            updateOrCreateValueInASITable(tableName, colKeyName, 'Compliance Date', dteStatus, 'N');
         }
-        updateOrCreateValueInASITable(tableName, 'Recordation Date', AInfo['Record Reception Date'], 'N');
-        updateOrCreateValueInASITable(tableName, 'Recordation #', AInfo['Record Reception #'], 'N');
-        updateOrCreateValueInASITable(tableName, 'Release Date', AInfo['Release Reception Date'], 'N');
-        updateOrCreateValueInASITable(tableName, 'Release #', AInfo['Release Reception #'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Recordation Date', AInfo['Record Reception Date'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Recordation #', AInfo['Record Reception #'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Release Date', AInfo['Release Reception Date'], 'N');
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Release #', AInfo['Release Reception #'], 'N');
     
         var childrenWithActiveTasks = getChildrenWithActiveTasks();
         if(ifTracer(childrenWithActiveTasks.length == 1, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 1')) {
@@ -283,11 +283,11 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Zoning') > -1, 'parent = Zoning Violation Charge')) {
                 //parent is Zoning Violation Charge
                  amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02") + feeAmount("ENF_ABT_05") + feeAmount("ENF_ABT_06") 
-                 updateOrCreateValueInASITable(tableName, 'Admin Charge', amt.toString(), 'N');
+                 updateOrCreateValueInASITable(tableName, colKeyName, 'Admin Charge', amt.toString(), 'N');
             } else if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Snow') > -1, 'parent = Snow Violation Case')) {
                 //parent is Snow Violation Case
                  amt = feeAmount2("ENF_ABT_01", { capId: parentCapId }) + feeAmount2("ENF_ABT_02", { capId: parentCapId })
-                 updateOrCreateValueInASITable(tableName, 'Admin Charge', amt.toString(), 'N');
+                 updateOrCreateValueInASITable(tableName, colKeyName, 'Admin Charge', amt.toString(), 'N');
             }
         } 
     }
@@ -297,7 +297,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 
 
 
-function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
+function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, readonly) {
     if(!updateAsiTableRow(tableName, fieldName, value, { 
         capId: parentCapId,
         colFilters: [
