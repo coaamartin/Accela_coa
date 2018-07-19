@@ -28,8 +28,8 @@ for (var ea in tempASIT)
 	
 	logDebug("Size = " + size + " | quantity = " + quantity + " | complete = " + complete);
 
-	var rowID = fieldObject.getRowIndex();
-	setUpdateColumnValue(updateRowsMap, rowID, "Complete", "Unchecked");
+	var rowID = row.getRowIndex();
+	setUpdateColumnValue(updateRowsMap, rowID, "Complete", "UNCHECKED");
 	
 	if ( size == 'Tap Size 4" Main Line 6 to 12"')
 		{updateFee("WETTAP_01","WAT_WETTAP","FINAL",quantity,"Y");}
