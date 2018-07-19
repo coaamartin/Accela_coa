@@ -12,6 +12,6 @@ Sample Call : checkIfAddressOrParcelExists();
 
  */
 
-if (!appMatch("*/*/*/Renewal") {
+if (!appMatch("*/*/*/Renewal")) {
 	checkIfAddressOrParcelExists();
 }
