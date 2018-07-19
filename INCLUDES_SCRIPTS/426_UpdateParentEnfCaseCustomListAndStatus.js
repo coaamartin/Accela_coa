@@ -3,6 +3,7 @@ script426_UpdateParentEnfCaseCustomListAndStatus();
 function script426_UpdateParentEnfCaseCustomListAndStatus() {
     var row,
         tableName,
+        colKeyName,
         paymentDateArr,
         yyyy,
         mm,
@@ -22,6 +23,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         "Enforcement/Incident/Abatement/NA"
     ], appTypeString)) {
         tableName = 'ABATEMENT INFORMATION';
+        colKeyName = 'Abatement #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
             //IRSA
             if(ifTracer(inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored", 'inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored"')) {
@@ -79,6 +81,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         "Enforcement/Incident/Summons/NA"
     ], appTypeString)) {
         tableName = 'SUMMONS TO COURT INFORMATION';
+        colKeyName = 'Case #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
             //IRSA
             if(ifTracer(inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service"), 'inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service")')) {
@@ -135,6 +138,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         "Enforcement/Incident/Record with County/NA"
     ], appTypeString)) {
         tableName = 'NOV RECORDATION INFORMATION';
+        colKeyName = 'NOV Record #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
             //IRSA
             if(ifTracer(inspType == "NOV Release Inspection", 'inspType == "NOV Release Inspection"')) {
@@ -297,7 +301,7 @@ function updateOrCreateValueInASITable(tableName, fieldName, value, readonly) {
     if(!updateAsiTableRow(tableName, fieldName, value, { 
         capId: parentCapId,
         colFilters: [
-            { colName: 'Abatement #', colValue: capIDString}
+            { colName: colKeyName, colValue: capIDString}
         ]}) 
     ) {
         addAsiTableRow(tableName, [
