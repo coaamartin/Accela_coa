@@ -40,7 +40,7 @@ function script83_TapAppFees() {
 		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] == '2"' ) {
 			updateFee("WAT_TA_25","WAT_TA","FINAL",1,"Y");
 		}
-		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] > '2"' ) {
+		if (AInfo["Type"] == "Commercial" && matches(AInfo["Size of Water Meter"],'2 1/2"','3"','4"','5"','6"','7"','8"','9"','10"','11"','12"') ) {
 			updateFee("WAT_TA_39","WAT_TA","FINAL",1,"Y");
 		}
 	} catch(err){
