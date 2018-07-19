@@ -290,7 +290,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                  updateOrCreateValueInASITable(tableName, colKeyName, 'Admin Charge', amt.toString(), 'N');
             }
         } 
-    }
+    }   
     
     
 }
