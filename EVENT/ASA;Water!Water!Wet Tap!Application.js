@@ -28,9 +28,6 @@ for (var ea in tempASIT)
 	complete  	= "" + row["Complete"].fieldValue;
 	
 	logDebug("Size = " + size + " | quantity = " + quantity + " | complete = " + complete);
-
-	var rowID = fieldObject.getRowIndex();
-	setUpdateColumnValue(updateRowsMap, rowID, "Complete", "UNCHECKED");
 	
 	if ( size == 'Tap Size 4" Main Line 6 to 12"')
 		{updateFee("WETTAP_01","WAT_WETTAP","FINAL",quantity,"Y");}
@@ -111,7 +108,7 @@ if (appSpecificTableInfo.getSuccess())
 			//get the row ID 
 			var rowID = fieldObject.getRowIndex();
 			comment(columnName + ": " + columnValue + "   rowID: " + rowID);
-			
+
 			setUpdateColumnValue(updateRowsMap, rowID, "Complete", "UNCHECKED");
 		}
 		if (!updateRowsMap.isEmpty())
