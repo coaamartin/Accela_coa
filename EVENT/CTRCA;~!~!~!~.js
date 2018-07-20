@@ -9,5 +9,5 @@ try{
 	}
 } catch (err) {
 	logDebug("A JavaScript Error occurred: CTRCA:*/*/*/*: copyParcelGisObjects():" + err.lineNumber + ". Err Message: " + err.message);
-	logDebug("Stack: "err.stack);
+	logDebug("Stack: " + err.stack);
 };
