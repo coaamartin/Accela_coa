@@ -15,6 +15,7 @@ function updateWFtaskAndASIField(parentWorkflowTasktoBechecked, parentworkFlowSt
 		var parentTask = aa.workflow.getTask(capId, parentWorkflowTasktoBechecked).getOutput();
 		if (parentTask != null && parentTask != "") {
 			if (parentTask.getDisposition() == parentworkFlowStatustoBeChecked) {
+				logDebug("Script 200 Starting");
 				activateTask(workflowTasktobeActivated);
 				editAppSpecific(ASIFieldNametoBeUpdated, ASIFieldValue, capId);
 
