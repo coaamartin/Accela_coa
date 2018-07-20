@@ -7,7 +7,7 @@ if (matchARecordType([
 ], appTypeString)) {
     (function() {
         var nmbrOfDisturbedAcreas = parseFloat(AInfo['Area of Project to Undergo Land Disturbance (acres)']),
-            feeItem = "WAT_SWMP_24",
+            feeItem = "WAT_SWMP_25",
             feeSched = "WAT_SWMP_APP",
             feePeriod = "FINAL" ;
 
