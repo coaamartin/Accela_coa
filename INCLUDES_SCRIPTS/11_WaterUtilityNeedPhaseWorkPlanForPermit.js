@@ -10,9 +10,7 @@ var neededdocument = "Phase Work Plan";
 var docuploaded = false;
 var capIdobject = aa.cap.getCapID(capId).getOutput();
 var documentsobject = aa.document.getCapDocumentList(capIdobject, "ADMIN");
-logDebug("here is the result of getSuccess on the documentsobject...");
-logDebug(documentsobject.getSuccess());
-if (documentsobject.getSuccess())
+if (documentsobject != null)
 {
 	var listofdocuments = documentsobject.getOutput();
 	for (var i in listofdocuments)
