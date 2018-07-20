@@ -31,16 +31,16 @@ function script83_TapAppFees() {
 		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] == '3/4"' ) {
 			updateFee("WAT_TA_22","WAT_TA","FINAL",1,"Y");
 		}
-		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] == "1" ) {
+		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] == '1"' ) {
 			updateFee("WAT_TA_23","WAT_TA","FINAL",1,"Y");
 		}
-		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] == "1 1/2" ) {
+		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] == '1 1/2"' ) {
 			updateFee("WAT_TA_24","WAT_TA","FINAL",1,"Y");
 		}
-		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] == "2" ) {
+		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] == '2"' ) {
 			updateFee("WAT_TA_25","WAT_TA","FINAL",1,"Y");
 		}
-		if (AInfo["Type"] == "Commercial" && AInfo["Size of Water Meter"] > "2" ) {
+		if (AInfo["Type"] == "Commercial" && (AInfo["Size of Water Meter"] == '2 1/2"' || AInfo["Size of Water Meter"] == '3"' || AInfo["Size of Water Meter"] == '4"' || AInfo["Size of Water Meter"] =='5"' || AInfo["Size of Water Meter"] =='6"' || AInfo["Size of Water Meter"] =='7"' || AInfo["Size of Water Meter"] =='8"' || AInfo["Size of Water Meter"] =='9"' || AInfo["Size of Water Meter"] =='10"' || AInfo["Size of Water Meter"] =='11"' || AInfo["Size of Water Meter"] =='12"') ) {
 			updateFee("WAT_TA_39","WAT_TA","FINAL",1,"Y");
 		}
 	} catch(err){

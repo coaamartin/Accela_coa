@@ -40,8 +40,8 @@ function getScriptText(vScriptName)
 
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-eval(getScriptText("INCLUDES_BATCH"));
-eval(getScriptText("INCLUDES_CUSTOM"));
+//eval(getScriptText("INCLUDES_BATCH"));
+//eval(getScriptText("INCLUDES_CUSTOM"));
 /*------------------------------------------------------------------------------------------------------/
 |
 | END: USER CONFIGURABLE PARAMETERS
@@ -56,7 +56,7 @@ showMessage = false;
 if (String(aa.env.getValue("showDebug")).length > 0) {
 	showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
 }
-override = "function logDebug(dstr){ if(showDebug) { aa.print(dstr); emailText+= dstr + \"<br>\"; } }";
+override = "function logDebugCustom(dstr){ if(showDebug) { aa.print(dstr); emailText+= dstr + \"<br>\"; } }";
 eval(override);
 
 var currentUserID = "ADMIN"
@@ -66,9 +66,9 @@ batchJobName = "" + aa.env.getValue("BatchJobName");
 batchJobID = 0;
 if (batchJobResult.getSuccess()) {
 	batchJobID = batchJobResult.getOutput();
-	logDebug("Batch Job " + batchJobName + " Job ID is " + batchJobID);
+	logDebugCustom("Batch Job " + batchJobName + " Job ID is " + batchJobID + br);
 } else {
-	logDebug("Batch job ID not found " + batchJobResult.getErrorMessage());
+	logDebugCustom("Batch job ID not found " + batchJobResult.getErrorMessage()+ br);
 }
 
 /*----------------------------------------------------------------------------------------------------/
@@ -80,10 +80,10 @@ if (batchJobResult.getSuccess()) {
 // Get parameters
 var appGroup = getParam("appGroup");
 var appTypeType = getParam("appTypeType");
-var appSubtype = getParam("appSubType");
+var appSubtype = getParam("appSubtype");
 var appCategory = getParam("appCategory");
 var appStatusList = getParam("appStatusList");
-var emailAddress = getParam("emailAddress"); 
+var emailAddress = getParam("emailAddress");
 
 //test parms
 /* var appGroup = "Water";
@@ -115,31 +115,31 @@ if (appSubtype == "")
 if (appCategory == "")
 	appCategory = "*";
 var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategory;
-// logDebug("appType: " + appType);
+// logDebugCustom("appType: " + appType);
 
 /*------------------------------------------------------------------------------------------------------/
 | <===========Main=Loop================>
 |
 /-----------------------------------------------------------------------------------------------------*/
 
-logDebug("Start of Job");
+logDebugCustom("Start of Job");
 
 } catch (err) {
-	logDebug("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber);
-	logDebug("Stack: " + err.stack);
+	logDebugCustom("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber + br);
+	logDebugCustom("Stack: " + err.stack);
 }
 
 try {
 	mainProcess();
 
-logDebug("End of Job: Elapsed Time : " + elapsed() + " Seconds");
+logDebugCustom("End of Job: Elapsed Time : " + elapsed() + " Seconds" + br);
 
 if (emailAddress.length)
 	aa.sendMail("noreply@accela.com", emailAddress, "", batchJobName + " Results", emailText);
 
 } catch (err) {
-	logDebug("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber);
-	logDebug("Stack: " + err.stack);
+	logDebugCustom("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber + br);
+	logDebugCustom("Stack: " + err.stack + br);
 }
 
 /*------------------------------------------------------------------------------------------------------/
@@ -179,15 +179,15 @@ function mainProcess() {
 			thisRecordList = capIdResult.getOutput()
 			capIdArrayList.push(thisRecordList)
 			totalCapsFound += thisRecordList.length
-			//logDebug("Found "+thisRecordList.length+" records with status "+thisStatus)
-			// logDebug("rec type: " + appTypeArr[2]);
+			//logDebugCustom("Found "+thisRecordList.length+" records with status "+thisStatus)
+			// logDebugCustom("rec type: " + appTypeArr[2]);
 		} 
 	}
 	
 // loop through array	
 	for (l in capIdArrayList) {
 		if (elapsed() > maxSeconds) {
-				logDebug("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed.");
+				logDebugCustom("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + br);
 				timeExpired = true
 				break;
 		}
@@ -195,11 +195,11 @@ function mainProcess() {
 		
 //Process record list
 		for (thisCap in capList)  { 
-		//logDebug(" ");
+		//logDebugCustom(" ");
 			totalCapsProcessed = totalCapsProcessed + 1;		
 
 			if (elapsed() > maxSeconds) {
-					logDebug("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + capCount) ;
+					logDebugCustom("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + capCount + br) ;
 					timeExpired = true ;
 					break;
 			}
@@ -207,11 +207,11 @@ function mainProcess() {
 				
 			capId = aa.cap.getCapID(foundRecord.getCapID().getID1(), foundRecord.getCapID().getID2(), foundRecord.getCapID().getID3()).getOutput();
 			if (!capId) {
-				logDebug("Could not get a Cap ID for " + foundRecord.getCapID().getID1() + "-" + foundRecord.getCapID().getID2() + "-" + foundRecord.getCapID().getID3());
+				logDebugCustom("Could not get a Cap ID for " + foundRecord.getCapID().getID1() + "-" + foundRecord.getCapID().getID2() + "-" + foundRecord.getCapID().getID3() + br);
 				continue;
 			}
 			altId = capId.getCustomID();
-			//logDebug("record found: " + altId);
+			//logDebugCustom("record found: " + altId);
 						
 			var capOutput = aa.cap.getCap(capId).getOutput();
 			var capStatus = capOutput.getCapStatus();
@@ -221,12 +221,12 @@ function mainProcess() {
 			// get owners on Cap
 			var capOwnerArray = getOwner(capId);
 			var capOwnerArrLength = capOwnerArray.length;
-			//logDebug("capOwnerArrLength: " + capOwnerArrLength);
+			//logDebugCustom("capOwnerArrLength: " + capOwnerArrLength);
 			
 			// get primary owner on parcel
 			var parcelOwnerPrimary = getPrimaryOwnerByParcel();
 			//var parcelownerArrLength = parcelOwnerArray.length;
-			//logDebug("parcelOwnerPrimary: " + parcelOwnerPrimary);
+			//logDebugCustom("parcelOwnerPrimary: " + parcelOwnerPrimary);
 			
 			// compare cap owners and primary parcel owner 
 			// if no matches found, copy owner from parcel to record
@@ -234,7 +234,7 @@ function mainProcess() {
 			var matchFound = false;
 			for (var a =0; a< capOwnerArrLength; a++){
 				var match = isMatchOwner(capOwnerArr[a], parcelOwnerPrimary);
-				//logDebug("match: " + match);
+				//logDebugCustom("match: " + match);
 				if (match){
 					matchFound = true;
 					break;
@@ -250,7 +250,7 @@ function mainProcess() {
 			
 			var dueDate = new Date(); // will need to find out if there's a due date for report to be submitted
 			var ownerEmail = parcelOwnerPrimary.getEmail();
-			//logDebug("ownerEmail: " + ownerEmail);
+			//logDebugCustom("ownerEmail: " + ownerEmail);
 			
 			//Add parameters
 			var replyEmail = "noreply@accela.com";
@@ -263,13 +263,13 @@ function mainProcess() {
 		} //process record
 		
 		//Print some numbers
-		logDebug("Total CAPS processed: " + totalCapsProcessed);
-		logDebug("Total emails sent: " + emailSent);
+		logDebugCustom("Total CAPS processed: " + totalCapsProcessed);
+		logDebugCustom("Total emails sent: " + emailSent);
 	} // loop through found records
 	if (capsUpdated.length > 0){
-		logDebug("The following records had updates to the Primary Owner from the Parcel record:");
+		logDebugCustom("The following records had updates to the Primary Owner from the Parcel record:");
 		for (o in capsUpdated){
-			logDebug(capsUpdated[o]);
+			logDebugCustom(capsUpdated[o]);
 		}
 	}
 }
@@ -292,7 +292,7 @@ function getPrimaryOwnerByParcel(){
 				var parcelNbr = parcels[i].getParcelNumber();
 
 				if (parcelOwnersResult.getSuccess()){
-						//logDebug("parcelNbr " + parcelNbr);
+						//logDebugCustom("parcelNbr " + parcelNbr);
 						var ownerArr = parcelOwnersResult.getOutput();
 						for (x in ownerArr){
 							if (ownerArr[x].getPrimaryOwner() == "Y"){
@@ -317,13 +317,13 @@ function getOwner(capId)
 		capOwnerArr = s_result.getOutput();
 		if (capOwnerArr == null || capOwnerArr.length == 0)
 		{
-			logDebug("WARNING: no Owner on this CAP:" + capId);
+			logDebugCustom("WARNING: no Owner on this CAP:" + capId);
 			capOwnerArr = null;
 		}
 	}
 	else
 	{
-		logDebug("ERROR: Failed to Owner: " + s_result.getErrorMessage());
+		logDebugCustom("ERROR: Failed to Owner: " + s_result.getErrorMessage());
 		capOwnerArr = null;	
 	}
 	return capOwnerArr;
@@ -338,8 +338,8 @@ function isMatchOwner(ownerScriptModel1, ownerScriptModel2)
 	var fullName1 = ownerScriptModel1.getOwnerFullName();
 	var fullName2 = ownerScriptModel2.getOwnerFullName();
 
-	//logDebug("fullName1: " + fullName1);
-	//logDebug("fullName2: " + fullName2);
+	//logDebugCustom("fullName1: " + fullName1);
+	//logDebugCustom("fullName2: " + fullName2);
 	if ((fullName1 == null && fullName2 != null) 
 		|| (fullName1 != null && fullName2 == null))
 	{
@@ -375,7 +375,7 @@ function updateCapOwnersByParcel()
 			 parcels = parcels.getOutput();
 			 if(parcels == null || parcels.length == 0) 
 			 {
-				logDebug("No parcels available for this record");
+				logDebugCustom("No parcels available for this record");
 			 }
 			 else
 			 {
@@ -430,7 +430,7 @@ function updateCapOwnersByParcel()
 					}
 					else
 					{
-							logDebug("ERROR: Failed to get owner(s) by Parcel(s): " + parcelOwnersResult.getErrorMessage());
+							logDebugCustom("ERROR: Failed to get owner(s) by Parcel(s): " + parcelOwnersResult.getErrorMessage());
 					}
 				}
 			 }
@@ -448,7 +448,7 @@ function updateCapOwnersByParcel()
 function getParam(pParamName) //gets parameter value and logs message showing param value
 {
 	var ret = "" + aa.env.getValue(pParamName);
-	// logDebug("Parameter : " + pParamName + " = " + ret);
+    logDebugCustom("Parameter : " + pParamName + " = " + ret);
 	return ret;
 }
 function elapsed() {
@@ -457,7 +457,7 @@ function elapsed() {
 	return ((thisTime - startTime) / 1000)
 }
 
-function logDebug(dstr) {
+function logDebugCustom(dstr) {
 	aa.print(dstr + "\n")
 	aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"), dstr)
 }
@@ -496,7 +496,7 @@ function convertDate(thisDate) {
 		return new Date(thisDate); // assume milliseconds
 	}
 
-	logDebug("**WARNING** convertDate cannot parse date : " + thisDate);
+	logDebugCustom("**WARNING** convertDate cannot parse date : " + thisDate);
 	return null;
 
 }
@@ -538,7 +538,7 @@ function dateDiff(date1, date2) {
 
 	{
 
-		//logDebug("Sent email successfully!");
+		//logDebugCustom("Sent email successfully!");
 
 		return true;
 
@@ -548,7 +548,7 @@ function dateDiff(date1, date2) {
 
 	{
 
-		logDebug("Failed to send mail. - " + result.getErrorType());
+		logDebugCustom("Failed to send mail. - " + result.getErrorType());
 
 		return false;
 

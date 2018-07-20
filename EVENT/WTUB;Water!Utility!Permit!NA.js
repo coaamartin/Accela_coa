@@ -5,6 +5,10 @@ This event created by JMAIN 03-15-2018
 include("15_waterCheckFeesInvoicedBeforeSendingEmail");
 script89_PreventInspStatus();
 
+//put the jmain script back into this event
+include("11_WaterUtilityNeedPhaseWorkPlanForPermit");
+
+/*
 
 // refactored version of include("11_WaterUtilityNeedPhaseWorkPlanForPermit");  7/11/18 JHS
 
@@ -26,3 +30,5 @@ if ("Engineering Review".equals(wfTask) && "Approved".equals(wfStatus)) {
 		comment("Phased projects require Phase Work Plan to be attached in Documents");
 	}
 }
+
+*/

@@ -14,5 +14,5 @@ Sample Call:
 Notes:
 	- no event was mentioned in the specs, but i think it should be PaymentReceiveBefore (PRB)
 */
-
+//Script 95
 preventPaymentDueToSpecialAssessment("Special Assessment");

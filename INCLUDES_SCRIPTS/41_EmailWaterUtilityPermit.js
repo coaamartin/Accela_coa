@@ -2,13 +2,15 @@
 Criteria   wf step "Final Acceptance" = "Completed" 
 Action email the applicant, contractor and owner. 
 created by swakil
+
+07/20/2018 updated by JMAIN to include the real email template
+
 */
 if ("Final Acceptance".equals(wfTask) && "Completed".equals(wfStatus))
 {
-		var contact = "Applicant,Property Owner Name,Contractor(s)";
-		var template = "JD_TEST_TEMPLATE";
+		var contacts = "Applicant,Property Owner Name,Contractor(s)";
+		var emailtemplate = "WAT_WUP_FINAL ACCEPT COMPLETE";
 		var emailparams = aa.util.newHashtable();
-		emailparams.put("$$anyParm$$", "AAA");
-		emailContacts(contact, template, emailparams, "", "", "N", "");		
+		emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");		
 }
 
