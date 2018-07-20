@@ -251,7 +251,7 @@ function mainProcess() {
             
             var dueDate = new Date(); // will need to find out if there's a due date for report to be submitted
             var ownerEmail = parcelOwnerPrimary.getEmail();
-            var applicantEmail = getContactEmailAddress("Applicant", capId) == false ? "" : getContactEmailAddress("Applicant");
+            var applicantEmail = getContactEmailAddress("Applicant", capId) == false ? "" : getContactEmailAddress("Applicant", capId);
             //logDebugCustom("ownerEmail: " + ownerEmail);
             
             //Add parameters
