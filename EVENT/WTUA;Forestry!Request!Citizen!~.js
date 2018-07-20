@@ -11,7 +11,7 @@ Functional Area : Records
 Sample Call:
 updateWFtaskAndASIField("Tree Request Intake", "Crew Work", "Removal", "Stump Grind", "Area Number",2)
  */
- updateWFtaskAndASIField("Tree Request Intake", "No Plant", "Crew Work", "Removal", "Stump Grind Priority",2);
+ updateWFtaskAndASIField("Tree Request Intake", "No Plant", "Crew Work", "Removal", "Area Number","2");
 /*
 if(wfTask == "Crew Work" && wfStatus =="Removal"){
 	
