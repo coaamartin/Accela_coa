@@ -24,8 +24,8 @@ function autoCreateTempIrrigationPermit(wfTaskName, workflowStatusArray, appType
 		ctm.setSubType(cTypeArray[2]);
 		ctm.setCategory(cTypeArray[3]);
 		createChildResult = aa.cap.createSimplePartialRecord(ctm, cap.getSpecialText(), "INCOMPLETE EST");
-aa.print("G");
-		if (createChildResult.getSuccess()) {aa.print("H")
+
+		if (createChildResult.getSuccess()) {
 			createChildResult = createChildResult.getOutput();
 			var appHierarchy = aa.cap.createAppHierarchy(capId, createChildResult);
 			copyAddresses(capId, createChildResult);
