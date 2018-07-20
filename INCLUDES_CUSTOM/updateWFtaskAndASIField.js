@@ -11,7 +11,7 @@
  */
 function updateWFtaskAndASIField(parentWorkflowTasktoBechecked, parentworkFlowStatustoBeChecked, workFlowTaskTobechecked, workFlowStatusTobeChecked, workflowTasktobeActivated,
 		ASIFieldNametoBeUpdated, ASIFieldValue) {
-							logDebug("Script 200 Starting " + wfTask + " " + workFlowTaskTobechecked + " " + wfStatus + " " + workFlowStatusTobeChecked);
+							logDebug("Script 200 Starting ," + wfTask + "," + workFlowTaskTobechecked + "," + wfStatus + "," + workFlowStatusTobeChecked);
 	if (wfTask == workFlowTaskTobechecked && wfStatus == workFlowStatusTobeChecked) {
 		var parentTask = aa.workflow.getTask(capId, parentWorkflowTasktoBechecked).getOutput();
 		if (parentTask != null && parentTask != "") {
