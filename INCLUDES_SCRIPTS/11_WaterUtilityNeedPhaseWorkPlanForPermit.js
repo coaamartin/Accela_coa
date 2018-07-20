@@ -9,9 +9,9 @@ var neededdocument = "Phase Work Plan";
 //has the needed document been uploaded?
 var docuploaded = false;
 var capIdobject = aa.cap.getCapID(capId).getOutput();
-printObjProps(capIdobject);
+printObject(capIdobject);
 var documentsobject = aa.document.getCapDocumentList(capIdobject, "ADMIN");
-printObjProps(documentsobject);
+printObject(documentsobject);
 
 if (documentsobject != null)
 {
