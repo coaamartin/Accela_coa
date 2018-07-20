@@ -8,7 +8,8 @@ var neededdocument = "Phase Work Plan";
 
 //has the needed document been uploaded?
 var docuploaded = false;
-var capIdobject = aa.cap.getCapID(altID).getOutput();
+var thealtid = capId.getCustomID();
+var capIdobject = aa.cap.getCapID(thealtid).getOutput();
 var documentsobject = aa.document.getCapDocumentList(capIdobject, "ADMIN");
 if (documentsobject.getSuccess())
 {
