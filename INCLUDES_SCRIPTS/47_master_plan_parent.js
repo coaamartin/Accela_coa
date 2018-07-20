@@ -1,4 +1,4 @@
-if (appMathc("Building/Permit/New Building/NA"))
+if (appMatch("Building/Permit/New Building/NA"))
 {
 	var masterPlan = AInfo["Single Family Master Plans"] || AInfo["Multi Family Master Plans"];
 	//get the Building/Permit/Master/NA record with application name containing masterPlan

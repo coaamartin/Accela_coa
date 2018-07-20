@@ -19,5 +19,5 @@ if (capStatus=="Waiting on Documents"){
 }
 
 //Added by SWAKIL
-showDebug = true;
+//showDebug = true;
 include("49_doc_upload_corrections");
