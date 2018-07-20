@@ -1,6 +1,6 @@
 //created by swakil
 
-autoCreateTempIrrigationPermit("Plan Review", [ "Approved" ], "Water/Water/Lawn Irrigation/Permit", "JD_TEST_TEMPLATE");
+autoCreateTempIrrigationPermit("Plan Review", [ "Approved" ], "Water/Water/Lawn Irrigation/Permit", "WAT_IRR_PLAN_RESUB");
 
 function autoCreateTempIrrigationPermit(wfTaskName, workflowStatusArray, appTypeStr, emailTemplate) {
 	if (wfTask == wfTaskName) {
@@ -18,13 +18,14 @@ function autoCreateTempIrrigationPermit(wfTaskName, workflowStatusArray, appType
 
 		var cTypeArray = appTypeStr.split("/");
 		var ctm = aa.proxyInvoker.newInstance("com.accela.aa.aamain.cap.CapTypeModel").getOutput();
+		var fullName = "";
 		ctm.setGroup(cTypeArray[0]);
 		ctm.setType(cTypeArray[1]);
 		ctm.setSubType(cTypeArray[2]);
 		ctm.setCategory(cTypeArray[3]);
 		createChildResult = aa.cap.createSimplePartialRecord(ctm, cap.getSpecialText(), "INCOMPLETE EST");
-
-		if (createChildResult.getSuccess()) {
+aa.print("G");
+		if (createChildResult.getSuccess()) {aa.print("H")
 			createChildResult = createChildResult.getOutput();
 			var appHierarchy = aa.cap.createAppHierarchy(capId, createChildResult);
 			copyAddresses(capId, createChildResult);
@@ -32,13 +33,16 @@ function autoCreateTempIrrigationPermit(wfTaskName, workflowStatusArray, appType
 			copyOwner(capId, createChildResult);
 			copyContacts(capId, createChildResult);
 
+   		   //get contact
+		   var aContact = getContactByType("Applicant", capId);
+		   if (aContact) fullName = aContact.getFullName() || aContact.getFirstName() + " " + aContact.getLastName();
+
 			var eParams = aa.util.newHashtable();
-			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
-			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-			addParameter(eParams, "$$balance$$", feeBalance(""));
-			addParameter(eParams, "$$wfTask$$", wfTask);
-			addParameter(eParams, "$$wfStatus$$", wfStatus);
+			addParameter(eParams, "$$altid$$", cap.getCapModel().getAltID());
+			addParameter(eParams, "$$capAlias$$", cap.getCapType().getAlias());
+			addParameter(eParams, "$$FullName$$", cap.getCapStatus());
+			addParameter(eParams, "$$wfComment$$", wfComment);
+			addParameter(eParams, "$$todayDate$$", sysDateMMDDYYYY);
 		
 			var sent = emailContacts("Applicant", emailTemplate, eParams, "", "", "N", "");		
 
