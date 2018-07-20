@@ -270,7 +270,7 @@ if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
 }
 
 if(wfTask == "Verify Testing Received" && wfStatus == "Not Received"){
-	logDebug('wfTask == "Permit Issuance" && wfStatus == "Issued"');
+	logDebug('wfTask == "Verify Testing Receive" && wfStatus == "Not Received"');
 	//Script 182
 	//get the nearest business day after 30 calendar days.
 	//Using 29 to get the extract 30 days.  
