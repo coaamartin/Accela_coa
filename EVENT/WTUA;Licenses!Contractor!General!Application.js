@@ -17,3 +17,5 @@ if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) {
 if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus)) {
 	include("111_CreateContractorLicenseAndLP");
 }
+//SWAKIL
+include("50_ReadyToPayWF");
