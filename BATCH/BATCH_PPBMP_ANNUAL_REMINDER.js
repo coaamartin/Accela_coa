@@ -78,12 +78,12 @@ if (batchJobResult.getSuccess()) {
 /------------------------------------------------------------------------------------------------------*/
 
 // Get parameters
-var appGroup = getParam("appGroup");
-var appTypeType = getParam("appTypeType");
-var appSubtype = getParam("appSubType");
-var appCategory = getParam("appCategory");
-var appStatusList = getParam("appStatusList");
-var emailAddress = getParam("emailAddress"); 
+var appGroup = getParam("appGroup");logDebug(br);
+var appTypeType = getParam("appTypeType");logDebug(br);
+var appSubtype = getParam("appSubType");logDebug(br);
+var appCategory = getParam("appCategory");logDebug(br);
+var appStatusList = getParam("appStatusList");logDebug(br);
+var emailAddress = getParam("emailAddress"); logDebug(br);
 
 //test parms
 /* var appGroup = "Water";
@@ -125,21 +125,21 @@ var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategor
 logDebug("Start of Job");
 
 } catch (err) {
-	logDebug("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber);
+	logDebug("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber + br);
 	logDebug("Stack: " + err.stack);
 }
 
 try {
 	mainProcess();
 
-logDebug("End of Job: Elapsed Time : " + elapsed() + " Seconds");
+logDebug("End of Job: Elapsed Time : " + elapsed() + " Seconds" + br);
 
 if (emailAddress.length)
 	aa.sendMail("noreply@accela.com", emailAddress, "", batchJobName + " Results", emailText);
 
 } catch (err) {
-	logDebug("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber);
-	logDebug("Stack: " + err.stack);
+	logDebug("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber + br);
+	logDebug("Stack: " + err.stack + br);
 }
 
 /*------------------------------------------------------------------------------------------------------/
@@ -187,7 +187,7 @@ function mainProcess() {
 // loop through array	
 	for (l in capIdArrayList) {
 		if (elapsed() > maxSeconds) {
-				logDebug("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed.");
+				logDebug("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + br);
 				timeExpired = true
 				break;
 		}
@@ -199,7 +199,7 @@ function mainProcess() {
 			totalCapsProcessed = totalCapsProcessed + 1;		
 
 			if (elapsed() > maxSeconds) {
-					logDebug("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + capCount) ;
+					logDebug("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + capCount + br) ;
 					timeExpired = true ;
 					break;
 			}
@@ -207,7 +207,7 @@ function mainProcess() {
 				
 			capId = aa.cap.getCapID(foundRecord.getCapID().getID1(), foundRecord.getCapID().getID2(), foundRecord.getCapID().getID3()).getOutput();
 			if (!capId) {
-				logDebug("Could not get a Cap ID for " + foundRecord.getCapID().getID1() + "-" + foundRecord.getCapID().getID2() + "-" + foundRecord.getCapID().getID3());
+				logDebug("Could not get a Cap ID for " + foundRecord.getCapID().getID1() + "-" + foundRecord.getCapID().getID2() + "-" + foundRecord.getCapID().getID3() + br);
 				continue;
 			}
 			altId = capId.getCustomID();
@@ -263,8 +263,8 @@ function mainProcess() {
 		} //process record
 		
 		//Print some numbers
-		logDebug("Total CAPS processed: " + totalCapsProcessed);
-		logDebug("Total emails sent: " + emailSent);
+		logDebug("Total CAPS processed: " + totalCapsProcessed + br);
+		logDebug("Total emails sent: " + emailSent + br);
 	} // loop through found records
 	if (capsUpdated.length > 0){
 		logDebug("The following records had updates to the Primary Owner from the Parcel record:");
@@ -445,12 +445,12 @@ function updateCapOwnersByParcel()
 /*
 |  some standard help functions
 */  
-function getParam(pParamName) //gets parameter value and logs message showing param value
+/*function getParam(pParamName) //gets parameter value and logs message showing param value
 {
 	var ret = "" + aa.env.getValue(pParamName);
 	// logDebug("Parameter : " + pParamName + " = " + ret);
 	return ret;
-}
+}*/
 function elapsed() {
 	var thisDate = new Date();
 	var thisTime = thisDate.getTime();
