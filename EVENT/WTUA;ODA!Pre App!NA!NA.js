@@ -18,3 +18,8 @@ Sample Call:
 */
 
 sendMeetingConfirmationEmail("Finalize Agenda", [ "Complete" ], "MESSAGE_NOTICE_PUBLIC WORKS");
+
+//Script 225
+if(ifTracer(wfTask == "Prepare Final Letter" && wfStatus == "Complete", 'wf:Prepare Final Letter/Complete')){
+    odaScript225_emailMeetingNotes();
+}
