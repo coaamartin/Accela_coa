@@ -12,7 +12,7 @@ Sample Call:
 updateWFtaskAndASIField("Tree Request Intake", "Crew Work", "Removal", "Stump Grind", "Area Number",2)
  */
  
- updateWFtaskAndASIField("Tree Request Intake", "Crew Work", "Removal", "Stump Grind", "Area Number",2)
+ updateWFtaskAndASIField("Tree Request Intake", "Crew Work", "Removal", "Stump Grind", "Area Number",2);
 /*
 if(wfTask == "Crew Work" && wfStatus =="Removal"){
 	
