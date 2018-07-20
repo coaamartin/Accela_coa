@@ -249,7 +249,7 @@ function mainProcess() {
             
             // send email to primary owner
             
-            var dueDate = new Date(); // will need to find out if there's a due date for report to be submitted
+            var dueDate = dateAdd(null, 0); // will need to find out if there's a due date for report to be submitted
             var ownerEmail = parcelOwnerPrimary.getEmail();
             var applicantEmail = getContactEmailAddress("Applicant", capId) == false ? "" : getContactEmailAddress("Applicant", capId);
             //logDebugCustom("ownerEmail: " + ownerEmail);
@@ -257,7 +257,7 @@ function mainProcess() {
             //Add parameters
             var replyEmail = "noreply@accela.com";
             var params = aa.util.newHashtable();
-            addParameter(params, "$$recordID$$", capId.getCustomID());
+            addParameter(params, "$$altID$$", capId.getCustomID());
             addParameter(params, "$$dueDate$$", dueDate);
             sendNotificationLocal(replyEmail, ownerEmail, applicantEmail, "PPBMP_ANNUAL_REMINDER", params, null);
             emailSent++;
