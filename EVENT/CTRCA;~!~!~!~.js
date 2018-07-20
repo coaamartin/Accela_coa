@@ -8,6 +8,6 @@ try{
 		addParcelDistrict(null,codeDistrict[0]["CODE_NUMBER"]);
 	}
 } catch (err) {
-	logDebug("A JavaScript Error occurred: CTRCA:*/*/*/*: copyParcelGisObjects()" + err.message);
-	logDebug(err.stack);
+	logDebug("A JavaScript Error occurred: CTRCA:*/*/*/*: copyParcelGisObjects():" + err.lineNumber + ". Err Message: " + err.message);
+	logDebug("Stack: "err.stack);
 };
