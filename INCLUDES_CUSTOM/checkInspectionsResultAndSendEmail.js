@@ -1,4 +1,3 @@
-
 /**
  * check if any inspection was finished with result 'Complete', it sends email to owner and applicant and updates an ASI field
  * @param emailTemplateName

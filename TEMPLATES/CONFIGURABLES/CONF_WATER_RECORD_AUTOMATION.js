@@ -1,4 +1,59 @@
 {
+    "Water/Water/Lawn Irrigation/Permit": {
+      "PaymentReceiveAfter": [
+        {
+          "preScript": " ",
+          "postScript": "",
+          "metadata": {
+            "description": "Script 411",
+            "operators": {
+              
+            }
+          },
+          "criteria": {
+            "recordStatus": [
+              
+            ],
+            "isCreatedByACA": false,
+            "balanceAllowed": false
+          },
+          "action": {
+            "daysOut": "",
+            "deactivateTask": [
+              
+            ],
+            "deleteTask": [
+              
+            ],
+            "updateTask": [
+              {
+                "task": "Fee Processing",
+                "status": "Fees Paid"
+              }
+            ],
+            "invoiceFees": "",
+            "createChild": "",
+            "createParent": "",
+            "addCondition": "",
+            "addConditionSeverity": "",
+            "conditionType": "",
+            "removeCondition": "",
+            "addComment": "",
+            "newStatus": "",
+            "assignToUserID": "",
+            "assessFees": [
+              {
+                "feeSchedule": "",
+                "feeCode": "",
+                "feeQuantity": 0,
+                "feeInvoice": "",
+                "feePeriod": ""
+              }
+            ]
+          }
+        }
+      ]
+    },
     "Water/Water/Irrigation Plan Review/NA": {
       "DocumentUploadAfter": [
         {
@@ -65,7 +120,7 @@
           "preScript": " ",
           "postScript": "",
           "metadata": {
-            "description": "To run automated script based on JSON rules",
+            "description": "Script 411",
             "operators": {
               
             }
@@ -74,7 +129,8 @@
             "recordStatus": [
               
             ],
-            "balanceAllowed": "False"
+            "isCreatedByACA": false,
+            "balanceAllowed": false
           },
           "action": {
             "daysOut": "",

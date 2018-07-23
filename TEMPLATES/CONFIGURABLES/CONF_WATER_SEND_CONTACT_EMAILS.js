@@ -37,6 +37,38 @@
                 "preScript": "",
                 "postScript": "",
                 "metadata": {
+                    "description": "Script #241",
+                    "operators": {
+
+                    }
+                },
+                "criteria": {
+                    "task": [
+                        "Water Review"
+                    ],
+                    "status": [
+                        "Resubmittal Requested"
+                    ]
+                },
+                "action": {
+                    "notificationTemplate": "MUS Resubmittal Requested #241",
+                    "notificationReport": "",
+                    "notifyContactTypes": [
+                        "Applicant"
+                    ],
+                    "url4ACA": "",
+                    "fromEmail": "noreply@auroraco.gov",
+                    "additionalEmailsTo": [
+
+                    ],
+                    "createFromParent": "",
+                    "reportingInfoStandards": ""
+                }
+            },
+            {
+                "preScript": "",
+                "postScript": "",
+                "metadata": {
                     "description": "Script 242",
                     "operators": {
 
@@ -135,6 +167,42 @@
             }
         ]
     },
+    "Water/Water/Lawn Irrigation/Permit": {
+    "WorkflowTaskUpdateAfter": [
+        {
+            "preScript": "",
+            "postScript": "",
+            "metadata": {
+                "description": "Spec 411",
+                "operators": {
+
+                }
+            },
+            "criteria": {
+                "task": [
+                    "Fee Processing"
+                ],
+                "status": [
+                    "Invoiced"
+                ]
+            },
+            "action": {
+                "notificationTemplate": "WAT_IP_FEE # 411",
+                "notificationReport": "",
+                "notifyContactTypes": [
+                    "Applicant"
+                ],
+                "url4ACA": "",
+                "fromEmail": "noreply@auroraco.gov",
+                "additionalEmailsTo": [
+
+                ],
+                "createFromParent": "",
+                "reportingInfoStandards": ""
+            }
+        }
+    ]
+    },
     "Water/Water/Irrigation Plan Review/NA": {
         "WorkflowTaskUpdateAfter": [
             {
@@ -155,7 +223,7 @@
                     ]
                 },
                 "action": {
-                    "notificationTemplate": "TEST_FOR_SCRIPTS",
+                    "notificationTemplate": "LIR REQUIRE IRRIGATION PLAN 191",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "Applicant"
@@ -188,6 +256,38 @@
                 },
                 "action": {
                     "notificationTemplate": "WAT_IRRIGATION PLAN REVIEW INVOICED #193",
+                    "notificationReport": "",
+                    "notifyContactTypes": [
+                        "Applicant"
+                    ],
+                    "url4ACA": "",
+                    "fromEmail": "noreply@auroraco.gov",
+                    "additionalEmailsTo": [
+
+                    ],
+                    "createFromParent": "",
+                    "reportingInfoStandards": ""
+                }
+            },
+            {
+                "preScript": "",
+                "postScript": "",
+                "metadata": {
+                    "description": "Spec 411",
+                    "operators": {
+
+                    }
+                },
+                "criteria": {
+                    "task": [
+                        "Fee Processing"
+                    ],
+                    "status": [
+                        "Invoiced"
+                    ]
+                },
+                "action": {
+                    "notificationTemplate": "WAT_IP_FEE # 411",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "Applicant"

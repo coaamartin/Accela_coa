@@ -9,7 +9,7 @@ Author: Yazan Barghouth
 Functional Area : Records
 
 Sample Call:
-	checkInspectionsResultAndSendEmail("MESSAGE_NOTICE_PUBLIC WORKS", "REPORT_NAME", "Date of next Inspection");
+	checkInspectionsResultAndSendEmail4PPBMP("MESSAGE_NOTICE_PUBLIC WORKS", "Date of next Inspection");
 
 Notes:
 	- ASI filed name is 'Date of next Inspection' NOT 'Next Inspection Date'
@@ -20,4 +20,7 @@ Notes:
 var rptParams = aa.util.newHashtable();
 rptParams.put("altID", cap.getCapModel().getAltID());
 
-checkInspectionsResultAndSendEmail("PPBMP INSPECTION # 102", "REPORT_NAME", rptParams, "Date of next Inspection");
+//Script 102
+if(inspResult == "Complete"){
+    checkInspectionsResultAndSendEmail4PPBMP("PPBMP INSPECTION # 102", "Date of next Inspection");
+}

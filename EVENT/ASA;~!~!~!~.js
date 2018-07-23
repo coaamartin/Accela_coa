@@ -15,12 +15,13 @@ try{
 		copyParcelGisObjects();
 		var codeDistrict = new Array;
 		codeDistrict = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","CODE_NUMBER")
-		if(codeDistrict.length != null)
-			{addParcelDistrict(null,codeDistrict[0]["CODE_NUMBER"]);}
+	    if(codeDistrict && codeDistrict.length > 0){
+			addParcelDistrict(null,codeDistrict[0]["CODE_NUMBER"]);
+		}
 	}
 } catch (err) {
-	logDebug("A JavaScript Error occurred: CTRCA:*/*/*/*: copyParcelGisObjects()" + err.message);
-	logDebug(err.stack);
+	logDebug("A JavaScript Error occurred: ASA:*/*/*/*: copyParcelGisObjects(): " + err.lineNumber + ". Error: " + err.message);
+	logDebug("Stack:" + err.stack);
 };
 
 

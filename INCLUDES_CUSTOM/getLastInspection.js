@@ -1,4 +1,8 @@
+/*
+* GETS LAST INSPECTION
 
+    OPTIONS: ADDITIONAL OPTIONS YOU NEED FOR FILTERING (CURRENTLY FILTERS BY inspType & inspResult)
+*/
 function getLastInspection(options) {
     var settings = {
         capId: capId,

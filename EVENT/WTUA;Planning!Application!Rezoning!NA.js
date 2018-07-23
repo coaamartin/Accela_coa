@@ -61,7 +61,7 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
 	// get Record assigned staff 
 	var assignedStaff = getAssignedStaff();
 	logDebug("script277 assignedstaff =" + assignedStaff);
-	assignTask("Hearing Scheduled",assignedStaff);
+	assignTask("Hearing Scheduling",assignedStaff);
 	
 	logDebug("**script277 preparing email**");
 	

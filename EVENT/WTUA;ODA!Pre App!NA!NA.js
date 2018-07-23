@@ -4,6 +4,9 @@ script133_AutoCreateTraffic();
 //COA - JMAIN
 include("38_ODAPreApplicationMeetingAgenda");
 
+//COA - JMAIN
+include("4_odaPlanningSupervisorReviewAssigned");
+
 //
 /*
 Title : Send Meeting Confirmation Email (WorkflowTaskUpdateAfter) 
@@ -15,3 +18,8 @@ Sample Call:
 */
 
 sendMeetingConfirmationEmail("Finalize Agenda", [ "Complete" ], "MESSAGE_NOTICE_PUBLIC WORKS");
+
+//Script 225
+if(ifTracer(wfTask == "Prepare Final Letter" && wfStatus == "Complete", 'wf:Prepare Final Letter/Complete')){
+    odaScript225_emailMeetingNotes();
+}

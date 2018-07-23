@@ -1,5 +1,5 @@
 function AutoCreateIrrigationPlanRecord(){
-if (wfTask == "Water Review" && wfStatus == "Signature Set Requested") {
+if (wfTask == "Water Review" && wfStatus == "SS Requested") {
 	var tsiArray = new Array(); 
     loadTaskSpecific(tsiArray);
 	var Irrigation_Plan_Required = tsiArray["Irrigation Plan Required"];

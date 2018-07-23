@@ -1,11 +1,7 @@
-//script 432
-logDebug("Script 423 Starting");
-if (ifTracer(wfTask == "Invoicing" && wfStatus == "Invoiced", "wfTask == Invoicing && wfStatus == Invoiced")) {
-    include("423_AccessInvoiceSnowAndAbatementFees");
-}
 
 
-//Script 229
+
+//Script 229	
 //Name: 		Issued Retail Product Manufacturer License
 //Record Types:	Enforcement/Incident/Abatement/NA
 //Event: 		EMSE

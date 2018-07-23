@@ -15,7 +15,7 @@ function script398_ScheduleFinalInspection() {
 	try{
 		if (ifTracer(wfTask == "Final Certification" && wfStatus == "Complete", 'wfTask == Final Certification && wfStatus == Complete')) 
 		{
-            var emailTemplate = 'WAT_SWMP_PERMIT_SCHED_FINAL_INSP',
+            var emailTemplate = 'SWMP FINAL CERTIFICATION COMPLETE #398',
                 contactTypes = 'Applicant',
                 emailparams = aa.util.newHashtable();
 

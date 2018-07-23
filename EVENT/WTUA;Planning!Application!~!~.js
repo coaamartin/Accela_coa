@@ -19,7 +19,10 @@ Sample Call:
 */
 if(!appMatch(("Planning/Application/Address/*"))){
 //Script 278
-sendHearingScheduledEmailAndUpdateASI("Hearing Scheduled", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
+    if(appMatch("Planning/Application/Conditional Use/NA"))
+        sendHearingScheduledEmailAndUpdateASI("Hearing Scheduled", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
+	else
+        sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
 }
 // Workflow Task name is different for Rezoning so putting in the Event for WTUA:"Planning/Application/Rezoning/NA
 //	sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
@@ -249,7 +252,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
 //Created By: Silver Lining Solutions
 logDebug("script 282: started");
 if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance" || 
-	wfTask == "Planning Pre Acceptance" || wfTask == "Civil Pre Acceptance" ) &&
+	wfTask == "Real Property Pre Acceptance" ||	wfTask == "Planning Pre Acceptance" || wfTask == "Civil Pre Acceptance" ) &&
 	wfStatus == "Resubmittal Requested" && !appMatch("Planning/Application/Address/*"))
 {
 	logDebug("script 282: criteria met");

@@ -9,7 +9,7 @@ function checkAnyInspectionPassed(recordCapId) {
 	if (n.getSuccess()) {
 		var r = n.getOutput();
 		for (xx in r)
-			if (String("Complete").equals(r[xx].getInspectionStatus()) || String("Pass").equals(r[xx].getInspectionStatus()))
+			if (String("Complete").equals(r[xx].getInspectionStatus()))
 				return true;
 	}
 	return false;

@@ -19,7 +19,7 @@ function script85_UpdateSwmpParent() {
             var childCapScriptModel,
                 parentCapScriptModel,
                 parentCapTypeString,
-                parentCapId = getParent();
+                parentCapId = getParentLicenseCapID(capId);
 
             if(ifTracer(parentCapId, 'parent found')) {
                 //make sure parent is a permit (Water/Water/SWMP/Permit)

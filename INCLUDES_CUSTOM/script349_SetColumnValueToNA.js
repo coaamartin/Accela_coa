@@ -108,6 +108,8 @@ function script349_SetColumnValueToNA() {
 					comment(columnName + ": " + columnValue + "   rowID: " + rowID);
 					
 					setUpdateColumnValue(updateRowsMap, rowID, "Location", "NA");
+					setUpdateColumnValue(updateRowsMap, rowID, "Violation", "NA");
+					setUpdateColumnValue(updateRowsMap, rowID, "Object", "NA");
 				}
 				if (!updateRowsMap.isEmpty())
 				{

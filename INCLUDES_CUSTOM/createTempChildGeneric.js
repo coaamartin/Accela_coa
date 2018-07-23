@@ -1,3 +1,8 @@
+/*
+* CREATES CHILD RECORDS
+
+    OPTIONS: TONS OF OPTIONS AVAILABLE FOR MAKING THE CHILD RECORD 
+*/
 function createChildGeneric(grp, type, stype, cat, options) { 
     var settings = {
         parentCapID: capId,
