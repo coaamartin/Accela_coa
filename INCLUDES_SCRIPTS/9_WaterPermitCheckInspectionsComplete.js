@@ -13,7 +13,7 @@ edited by jmain 07/23/2018
 var inspnsComplete = inspectionsComplete();
 var inspnComplete = inspectionComplete("Initial Acceptance");
 
-if(inspnsComplete || inspnComplete)
+if(inspnsComplete && inspnComplete)
 {
 	closeTask("Utility Inspection", "Completed", "EMSE ID 9", "EMSE ID 9");
 	activateTask("Request Materials Testing", "EMSE ID 9", "EMSE ID 9");  
