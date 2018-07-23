@@ -16,17 +16,38 @@ function createTempChild(appNameAppendix, utilityPermitType, emailTemplate) {
         copyOwner(capId, childCapId);
         // Copy contacts
         copyContacts(capId, childCapId);
+        removeContactsFromCapByType(childCapId, "Agency Reviewer");
         // Update the child Utility Permit Type ASI
         editAppSpecific("Utility Permit Type", utilityPermitType, childCapId);
         // Send an email
         //sendEmail(emailTemplate);
+        var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+        var reportFile = [];
+        var emailCC = "";//Rest of contacts
+        var emailTo = "";//Applicant
         var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
         acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
         var recordURL = getACARecordURL(acaURLDefault);
         var emailParams = aa.util.newHashtable();
         addParameter(emailParams, "$$altID$$", capId.getCustomID());
         addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
-        emailContactsWithCCs("Applicant", emailTemplate, emailParams, "", aa.util.newHashtable(), "N","","All");
+        
+        //Email All contacts except agency reviewer
+        var contactArray = getPeople(capId);
+        for(thisContact in contactArray) {
+            if((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase())
+
+            var cont = contactArray[thisContact].getPeople();
+            
+            if(cont.contactType == "Applicant") emailTo = cont.getEmail();
+            if(cont.conType != "Applicant" && cont.conType != "Agency Reviewer") emailCC += cont.getEmail() + ";";
+        }
+
+        if(emailTo && emailTo != null && emailTo != "" && emailTo != undefined){
+            var sendResult = sendNotification("noreply@aurora.gov",emailTo,emailCC,emailTemplate,emailParams,reportFile,capID4Email);
+            if (!sendResult) { logDebug("createTempChild: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+            else { logDebug("createTempChild: Sent email notification to "+lpEml)}
+        }
     } else {
         logDebug("**WARN creating a temporary child failed, error:" + sent.getErrorMessage());
     }
