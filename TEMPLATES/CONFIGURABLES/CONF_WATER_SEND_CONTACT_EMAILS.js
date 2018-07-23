@@ -223,7 +223,7 @@
                     ]
                 },
                 "action": {
-                    "notificationTemplate": "TEST_FOR_SCRIPTS",
+                    "notificationTemplate": "LIR REQUIRE IRRIGATION PLAN 191",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "Applicant"

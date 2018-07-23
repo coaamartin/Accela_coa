@@ -1,14 +1,14 @@
 /*------------------------------------------------------------------------------------------------------/
-| SharePoint Script Id 	: 103
-| Script Name			: BATCH_PPBMP_ANNUAL_REMINDER
-| Event					: Batch
-| Description   		: Property owner on Water/Water/PPBMP/NA records each year will receive a notice that an annual report is due. 
-|						  Job will check the property record that the owner on the PPBMP record is a match. 
-|						  If not, the owner on the property record will be copied to the transaction record. 
-|						  The old owner will not be removed.
-|						  A report will be generated with a list of records that had new owners added.
-| Author				: Nickie Albert
-| Date					: 11/2017
+| SharePoint Script Id  : 103
+| Script Name           : BATCH_PPBMP_ANNUAL_REMINDER
+| Event                 : Batch
+| Description           : Property owner on Water/Water/PPBMP/NA records each year will receive a notice that an annual report is due. 
+|                         Job will check the property record that the owner on the PPBMP record is a match. 
+|                         If not, the owner on the property record will be copied to the transaction record. 
+|                         The old owner will not be removed.
+|                         A report will be generated with a list of records that had new owners added.
+| Author                : Nickie Albert
+| Date                  : 11/2017
 /------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------/
 |
@@ -32,10 +32,10 @@ function getScriptText(vScriptName)
         var emseScript = emseBiz.getScriptByPK(servProvCode,vScriptName,"ADMIN");
         return emseScript.getScriptText() + ""; 
         } 
-	catch(err)
-		{
+    catch(err)
+        {
         return "";
-		}
+        }
 }
 
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
@@ -54,7 +54,7 @@ showDebug = true;
 var disableTokens = false;
 showMessage = false;
 if (String(aa.env.getValue("showDebug")).length > 0) {
-	showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
+    showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
 }
 override = "function logDebugCustom(dstr){ if(showDebug) { aa.print(dstr); emailText+= dstr + \"<br>\"; } }";
 eval(override);
@@ -65,10 +65,10 @@ batchJobResult = aa.batchJob.getJobID();
 batchJobName = "" + aa.env.getValue("BatchJobName");
 batchJobID = 0;
 if (batchJobResult.getSuccess()) {
-	batchJobID = batchJobResult.getOutput();
-	logDebugCustom("Batch Job " + batchJobName + " Job ID is " + batchJobID + br);
+    batchJobID = batchJobResult.getOutput();
+    logDebugCustom("Batch Job " + batchJobName + " Job ID is " + batchJobID + br);
 } else {
-	logDebugCustom("Batch job ID not found " + batchJobResult.getErrorMessage()+ br);
+    logDebugCustom("Batch job ID not found " + batchJobResult.getErrorMessage()+ br);
 }
 
 /*----------------------------------------------------------------------------------------------------/
@@ -109,11 +109,11 @@ var systemUserObj = aa.person.getUser("ADMIN").getOutput();
 if (appGroup == "")
         appGroup = "*";
 if (appTypeType == "")
-	appTypeType = "*";
+    appTypeType = "*";
 if (appSubtype == "")
-	appSubtype = "*";
+    appSubtype = "*";
 if (appCategory == "")
-	appCategory = "*";
+    appCategory = "*";
 var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategory;
 // logDebugCustom("appType: " + appType);
 
@@ -125,21 +125,21 @@ var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategor
 logDebugCustom("Start of Job");
 
 } catch (err) {
-	logDebugCustom("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber + br);
-	logDebugCustom("Stack: " + err.stack);
+    logDebugCustom("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber + br);
+    logDebugCustom("Stack: " + err.stack);
 }
 
 try {
-	mainProcess();
+    mainProcess();
 
 logDebugCustom("End of Job: Elapsed Time : " + elapsed() + " Seconds" + br);
 
 if (emailAddress.length)
-	aa.sendMail("noreply@accela.com", emailAddress, "", batchJobName + " Results", emailText);
+    aa.sendMail("noreply@accela.com", emailAddress, "", batchJobName + " Results", emailText);
 
 } catch (err) {
-	logDebugCustom("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber + br);
-	logDebugCustom("Stack: " + err.stack + br);
+    logDebugCustom("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber + br);
+    logDebugCustom("Stack: " + err.stack + br);
 }
 
 /*------------------------------------------------------------------------------------------------------/
@@ -147,298 +147,303 @@ if (emailAddress.length)
 /-----------------------------------------------------------------------------------------------------*/
 
 function mainProcess() {
-	//Counters
-	
-	var totalCapsProcessed = 0
-	var capCount = 0;
-	var totalCapsFound = 0;
-	var emailSent = 0;
-	
-	var timeExpired = false
+    //Counters
+    
+    var totalCapsProcessed = 0
+    var capCount = 0;
+    var totalCapsFound = 0;
+    var emailSent = 0;
+    var altIdlist = "";
+    
+    var timeExpired = false
 
-	//Timeout variable
-	var maxSeconds = 120 * 60;
+    //Timeout variable
+    var maxSeconds = 120 * 60;
 
-	var capIdArrayList = []
-	statusList = appStatusList.split(",")
-	for (s in statusList) {
-		thisStatus = statusList[s].trim()
-		 
-		var capModelResult = aa.cap.getCapModel()
-		var capModel = capModelResult.getOutput();
-		var capTypeModel = capModel.getCapType();
-		appTypeArr = appType.split("/");
-		if (appTypeArr[0] != "*") capTypeModel.setGroup("" + appGroup);
-		if (appTypeArr[1] != "*") capTypeModel.setType("" + appTypeType);
-		if (appTypeArr[2] != "*") capTypeModel.setSubType("" + appSubtype);
-		if (appTypeArr[3] != "*") capTypeModel.setCategory("" + appCategory);
-		capModel.setCapType(capTypeModel); 
-		capModel.setCapStatus(thisStatus);
-		capIdResult = aa.cap.getCapIDListByCapModel(capModel);
-		if (capIdResult.getSuccess()) {
-			thisRecordList = capIdResult.getOutput()
-			capIdArrayList.push(thisRecordList)
-			totalCapsFound += thisRecordList.length
-			//logDebugCustom("Found "+thisRecordList.length+" records with status "+thisStatus)
-			// logDebugCustom("rec type: " + appTypeArr[2]);
-		} 
-	}
-	
-// loop through array	
-	for (l in capIdArrayList) {
-		if (elapsed() > maxSeconds) {
-				logDebugCustom("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + br);
-				timeExpired = true
-				break;
-		}
-		capList = capIdArrayList[l]
-		
+    var capIdArrayList = []
+    statusList = appStatusList.split(",")
+    for (s in statusList) {
+        thisStatus = statusList[s].trim()
+         
+        var capModelResult = aa.cap.getCapModel()
+        var capModel = capModelResult.getOutput();
+        var capTypeModel = capModel.getCapType();
+        appTypeArr = appType.split("/");
+        if (appTypeArr[0] != "*") capTypeModel.setGroup("" + appGroup);
+        if (appTypeArr[1] != "*") capTypeModel.setType("" + appTypeType);
+        if (appTypeArr[2] != "*") capTypeModel.setSubType("" + appSubtype);
+        if (appTypeArr[3] != "*") capTypeModel.setCategory("" + appCategory);
+        capModel.setCapType(capTypeModel); 
+        capModel.setCapStatus(thisStatus);
+        capIdResult = aa.cap.getCapIDListByCapModel(capModel);
+        if (capIdResult.getSuccess()) {
+            thisRecordList = capIdResult.getOutput()
+            capIdArrayList.push(thisRecordList)
+            totalCapsFound += thisRecordList.length
+            //logDebugCustom("Found "+thisRecordList.length+" records with status "+thisStatus)
+            // logDebugCustom("rec type: " + appTypeArr[2]);
+        } 
+    }
+    
+// loop through array   
+    for (l in capIdArrayList) {
+        if (elapsed() > maxSeconds) {
+                logDebugCustom("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + br);
+                timeExpired = true
+                break;
+        }
+        capList = capIdArrayList[l]
+        
 //Process record list
-		for (thisCap in capList)  { 
-		//logDebugCustom(" ");
-			totalCapsProcessed = totalCapsProcessed + 1;		
+        for (thisCap in capList)  { 
+        //logDebugCustom(" ");
+            totalCapsProcessed = totalCapsProcessed + 1;        
 
-			if (elapsed() > maxSeconds) {
-					logDebugCustom("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + capCount + br) ;
-					timeExpired = true ;
-					break;
-			}
-			var foundRecord = capList[thisCap];
-				
-			capId = aa.cap.getCapID(foundRecord.getCapID().getID1(), foundRecord.getCapID().getID2(), foundRecord.getCapID().getID3()).getOutput();
-			if (!capId) {
-				logDebugCustom("Could not get a Cap ID for " + foundRecord.getCapID().getID1() + "-" + foundRecord.getCapID().getID2() + "-" + foundRecord.getCapID().getID3() + br);
-				continue;
-			}
-			altId = capId.getCustomID();
-			//logDebugCustom("record found: " + altId);
-						
-			var capOutput = aa.cap.getCap(capId).getOutput();
-			var capStatus = capOutput.getCapStatus();
-			
-			// update owner on record
-			
-			// get owners on Cap
-			var capOwnerArray = getOwner(capId);
-			var capOwnerArrLength = capOwnerArray.length;
-			//logDebugCustom("capOwnerArrLength: " + capOwnerArrLength);
-			
-			// get primary owner on parcel
-			var parcelOwnerPrimary = getPrimaryOwnerByParcel();
-			//var parcelownerArrLength = parcelOwnerArray.length;
-			//logDebugCustom("parcelOwnerPrimary: " + parcelOwnerPrimary);
-			
-			// compare cap owners and primary parcel owner 
-			// if no matches found, copy owner from parcel to record
-			
-			var matchFound = false;
-			for (var a =0; a< capOwnerArrLength; a++){
-				var match = isMatchOwner(capOwnerArr[a], parcelOwnerPrimary);
-				//logDebugCustom("match: " + match);
-				if (match){
-					matchFound = true;
-					break;
-				}
-			}
-			var capsUpdated = [];
-			if (!matchFound){
-				updateCapOwnersByParcel();
-				capsUpdated.push(altId);
-			}
-			
-			// send email to primary owner
-			
-			var dueDate = new Date(); // will need to find out if there's a due date for report to be submitted
-			var ownerEmail = parcelOwnerPrimary.getEmail();
-			//logDebugCustom("ownerEmail: " + ownerEmail);
-			
-			//Add parameters
-			var replyEmail = "noreply@accela.com";
-			var params = aa.util.newHashtable();
-			addParameter(params, "$$recordID$$", capId.getCustomID());
-			addParameter(params, "$$dueDate$$", dueDate);
-			sendNotificationLocal(replyEmail, ownerEmail, "", "PPBMP_ANNUAL_REMINDER", params, null);
-			emailSent++;
+            if (elapsed() > maxSeconds) {
+                    logDebugCustom("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed." + capCount + br) ;
+                    timeExpired = true ;
+                    break;
+            }
+            var foundRecord = capList[thisCap];
+                
+            capId = aa.cap.getCapID(foundRecord.getCapID().getID1(), foundRecord.getCapID().getID2(), foundRecord.getCapID().getID3()).getOutput();
+            if (!capId) {
+                logDebugCustom("Could not get a Cap ID for " + foundRecord.getCapID().getID1() + "-" + foundRecord.getCapID().getID2() + "-" + foundRecord.getCapID().getID3() + br);
+                continue;
+            }
+            altId = capId.getCustomID();
+            //logDebugCustom("record found: " + altId);
+                        
+            var capOutput = aa.cap.getCap(capId).getOutput();
+            var capStatus = capOutput.getCapStatus();
+            
+            // update owner on record
+            
+            // get owners on Cap
+            var capOwnerArray = getOwner(capId);
+            var capOwnerArrLength = capOwnerArray.length;
+            //logDebugCustom("capOwnerArrLength: " + capOwnerArrLength);
+            
+            // get primary owner on parcel
+            var parcelOwnerPrimary = getPrimaryOwnerByParcel();
+            //var parcelownerArrLength = parcelOwnerArray.length;
+            //logDebugCustom("parcelOwnerPrimary: " + parcelOwnerPrimary);
+            
+            // compare cap owners and primary parcel owner 
+            // if no matches found, copy owner from parcel to record
+            
+            var matchFound = false;
+            for (var a =0; a< capOwnerArrLength; a++){
+                var match = isMatchOwner(capOwnerArr[a], parcelOwnerPrimary);
+                //logDebugCustom("match: " + match);
+                if (match){
+                    matchFound = true;
+                    break;
+                }
+            }
+            var capsUpdated = [];
+            if (!matchFound){
+                updateCapOwnersByParcel();
+                capsUpdated.push(altId);
+            }
+            
+            // send email to primary owner
+            
+            var dueDate = dateAdd(null, 0); // will need to find out if there's a due date for report to be submitted
+            var ownerEmail = parcelOwnerPrimary.getEmail();
+            var applicantEmail = getContactEmailAddress("Applicant", capId) == false ? "" : getContactEmailAddress("Applicant", capId);
+            //logDebugCustom("ownerEmail: " + ownerEmail);
+            
+            //Add parameters
+            var replyEmail = "noreply@accela.com";
+            var params = aa.util.newHashtable();
+            addParameter(params, "$$altID$$", capId.getCustomID());
+            addParameter(params, "$$dueDate$$", dueDate);
+            sendNotificationLocal(replyEmail, ownerEmail, applicantEmail, "PPBMP_ANNUAL_REMINDER", params, null);
+            emailSent++;
+            
+            altIdlist += capId.getCustomID() + ",";
 
-		} //process record
-		
-		//Print some numbers
-		logDebugCustom("Total CAPS processed: " + totalCapsProcessed);
-		logDebugCustom("Total emails sent: " + emailSent);
-	} // loop through found records
-	if (capsUpdated.length > 0){
-		logDebugCustom("The following records had updates to the Primary Owner from the Parcel record:");
-		for (o in capsUpdated){
-			logDebugCustom(capsUpdated[o]);
-		}
-	}
+        } //process record
+        
+        //Print some numbers
+        logDebugCustom("Sent notifications for records: " + altIdlist.slice(0, -1));
+        logDebugCustom("Total CAPS processed: " + totalCapsProcessed);
+        logDebugCustom("Total emails sent: " + emailSent);
+    } // loop through found records
+    if (capsUpdated.length > 0){
+        logDebugCustom("The following records had updates to the Primary Owner from the Parcel record:");
+        for (o in capsUpdated){
+            logDebugCustom(capsUpdated[o]);
+        }
+    }
 }
 /*-----------------------------------------------------------
 Helper Functions
 ------------------------------------------------------------*/
 
 function getPrimaryOwnerByParcel(){
-	//get parcel(s) by capid
-	var parcels = aa.parcel.getParcelDailyByCapID(capId,null);
+    //get parcel(s) by capid
+    var parcels = aa.parcel.getParcelDailyByCapID(capId,null);
 
-	if(parcels.getSuccess()){
-		 parcels = parcels.getOutput();
-		 if(parcels == null || parcels.length == 0) {
-			aa.print("There are no parcels for this cap.");
-		 } else{
-			//get owner(s) by parcel(s)
-			for (var i =0; i< parcels.length; i++){
-				var parcelOwnersResult = aa.owner.getOwnersByParcel(parcels[i]);
-				var parcelNbr = parcels[i].getParcelNumber();
+    if(parcels.getSuccess()){
+         parcels = parcels.getOutput();
+         if(parcels == null || parcels.length == 0) {
+            aa.print("There are no parcels for this cap.");
+         } else{
+            //get owner(s) by parcel(s)
+            for (var i =0; i< parcels.length; i++){
+                var parcelOwnersResult = aa.owner.getOwnersByParcel(parcels[i]);
+                var parcelNbr = parcels[i].getParcelNumber();
 
-				if (parcelOwnersResult.getSuccess()){
-						//logDebugCustom("parcelNbr " + parcelNbr);
-						var ownerArr = parcelOwnersResult.getOutput();
-						for (x in ownerArr){
-							if (ownerArr[x].getPrimaryOwner() == "Y"){
-								var parcelOwner = ownerArr[x];
-								return parcelOwner;
-							}
-						}
-				}else{
-					aa.print("ERROR: Failed to get owner(s) by Parcel(s): " + parcelOwnersResult.getErrorMessage());
-				}
-			}
-		 }
-	} 
+                if (parcelOwnersResult.getSuccess()){
+                        //logDebugCustom("parcelNbr " + parcelNbr);
+                        var ownerArr = parcelOwnersResult.getOutput();
+                        for (x in ownerArr){
+                            if (ownerArr[x].getPrimaryOwner() == "Y"){
+                                var parcelOwner = ownerArr[x];
+                                return parcelOwner;
+                            }
+                        }
+                }else{
+                    aa.print("ERROR: Failed to get owner(s) by Parcel(s): " + parcelOwnersResult.getErrorMessage());
+                }
+            }
+         }
+    } 
 }
 
 function getOwner(capId)
 {
-	capOwnerArr = null;
-	var s_result = aa.owner.getOwnerByCapId(capId);
-	if(s_result.getSuccess())
-	{
-		capOwnerArr = s_result.getOutput();
-		if (capOwnerArr == null || capOwnerArr.length == 0)
-		{
-			logDebugCustom("WARNING: no Owner on this CAP:" + capId);
-			capOwnerArr = null;
-		}
-	}
-	else
-	{
-		logDebugCustom("ERROR: Failed to Owner: " + s_result.getErrorMessage());
-		capOwnerArr = null;	
-	}
-	return capOwnerArr;
+    capOwnerArr = null;
+    var s_result = aa.owner.getOwnerByCapId(capId);
+    if(s_result.getSuccess())
+    {
+        capOwnerArr = s_result.getOutput();
+        if (capOwnerArr == null || capOwnerArr.length == 0)
+        {
+            logDebugCustom("WARNING: no Owner on this CAP:" + capId);
+            capOwnerArr = null;
+        }
+    }
+    else
+    {
+        logDebugCustom("ERROR: Failed to Owner: " + s_result.getErrorMessage());
+        capOwnerArr = null; 
+    }
+    return capOwnerArr;
 }
 
 function isMatchOwner(ownerScriptModel1, ownerScriptModel2)
 {
-	if (ownerScriptModel1 == null || ownerScriptModel2 == null)
-	{
-		return false;
-	}
-	var fullName1 = ownerScriptModel1.getOwnerFullName();
-	var fullName2 = ownerScriptModel2.getOwnerFullName();
+    if (ownerScriptModel1 == null || ownerScriptModel2 == null)
+    {
+        return false;
+    }
+    var fullName1 = ownerScriptModel1.getOwnerFullName();
+    var fullName2 = ownerScriptModel2.getOwnerFullName();
 
-	//logDebugCustom("fullName1: " + fullName1);
-	//logDebugCustom("fullName2: " + fullName2);
-	if ((fullName1 == null && fullName2 != null) 
-		|| (fullName1 != null && fullName2 == null))
-	{
-		return false;
-	}
-	if (fullName1 != null && !fullName1.equals(fullName2))
-	{
-		return false;
-	}
-	return	true;
+    //logDebugCustom("fullName1: " + fullName1);
+    //logDebugCustom("fullName2: " + fullName2);
+    if ((fullName1 == null && fullName2 != null) 
+        || (fullName1 != null && fullName2 == null))
+    {
+        return false;
+    }
+    if (fullName1 != null && !fullName1.equals(fullName2))
+    {
+        return false;
+    }
+    return  true;
 }
 function updateCapOwnersByParcel()
 {
-	//loads the parcels on the record, looks up the parcels' owners, and adds them
-	try{
-		var ownerNumberList = new Array();
-		var ownerRefNumber = "";
-		var firstLoop = true;
-		var duplicateOwner = false;
-		
-		// remove current owners on record
-		var recOwners = aa.owner.getOwnerByCapId(capId).getOutput() 
-		for (pntOwner in recOwners)
-		{
-			aa.owner.removeCapOwnerModel(recOwners[pntOwner]);
-		}
-		
-		//get record's parcel(s)
-		var parcels = aa.parcel.getParcelDailyByCapID(capId,null);
-		
-		if(parcels.getSuccess())
-		{
-			 parcels = parcels.getOutput();
-			 if(parcels == null || parcels.length == 0) 
-			 {
-				logDebugCustom("No parcels available for this record");
-			 }
-			 else
-			 {
-				//get owner(s) by parcel(s) and add to record
-				for (var i =0; i< parcels.length; i++)
-				{
-					var parcelOwnersResult = aa.owner.getOwnersByParcel(parcels[i]);
-					var parcelNbr = parcels[i].getParcelNumber();
-					var parcelUID = parcels[i].getParcelModel().getUID();
-					if (parcelOwnersResult.getSuccess())
-					{
-							var actuallyParcelNumber = parcelNbr != null?parcelNbr:parcelUID;
-							//aa.print("");
-							//aa.print("Successfully get owner(s) by Parcel "+actuallyParcelNumber+". Detail as follow:");
-							var ownerArr = parcelOwnersResult.getOutput();
-							//aa.print("Size :" + ownerArr.length);
-							for (j = 0; j < ownerArr.length; j++)
-							{
-								ownerRefNumber = ownerArr[j].getL1OwnerNumber();
-								//aa.print("Looking at ref owner: " + ownerRefNumber);
-								duplicateOwner = false;
-								
-								if (firstLoop)
-								{
-									ownerArr[j].setCapID(capId);
-									ownerArr[j].setPrimaryOwner("N");
-									aa.owner.createCapOwnerWithAPOAttribute(ownerArr[j]);
-									//aa.print("Added first owner: " + ownerArr[j].getOwnerFullName() + ", #" + ownerArr[j].getL1OwnerNumber());
-									ownerNumberList.push(ownerArr[j].getL1OwnerNumber());
-									firstLoop = false;
-								} else {
-									// Look for duplicates
-									for (k = 0; k < ownerNumberList.length; k++)
-									{
-										if (ownerNumberList[k] == ownerRefNumber)
-										{
-											duplicateOwner = true;
-											//aa.print("Found duplicate");
-											break;
-										}
-									}
-									if (!duplicateOwner)
-									{
-											ownerArr[j].setCapID(capId);
-											ownerArr[j].setPrimaryOwner("N");
-											aa.owner.createCapOwnerWithAPOAttribute(ownerArr[j]);
-											//aa.print("Added owner: " + ownerArr[j].getOwnerFullName() + ", #" + ownerArr[j].getL1OwnerNumber());
-											ownerNumberList.push(ownerArr[j].getL1OwnerNumber());
-									}
-								}
-							}		
-					}
-					else
-					{
-							logDebugCustom("ERROR: Failed to get owner(s) by Parcel(s): " + parcelOwnersResult.getErrorMessage());
-					}
-				}
-			 }
-		} 
-	}
-	catch (err){
-	comment("A JavaScript Error occurred:  Custom Function: updateCapOwnersByParcel(): " + err.message);
-	}
+    //loads the parcels on the record, looks up the parcels' owners, and adds them
+    try{
+        var ownerNumberList = new Array();
+        var ownerRefNumber = "";
+        var firstLoop = true;
+        var duplicateOwner = false;
+        
+        // remove current owners on record
+        var recOwners = aa.owner.getOwnerByCapId(capId).getOutput() 
+        for (pntOwner in recOwners)
+        {
+            aa.owner.removeCapOwnerModel(recOwners[pntOwner]);
+        }
+        
+        //get record's parcel(s)
+        var parcels = aa.parcel.getParcelDailyByCapID(capId,null);
+        
+        if(parcels.getSuccess())
+        {
+             parcels = parcels.getOutput();
+             if(parcels == null || parcels.length == 0) 
+             {
+                logDebugCustom("No parcels available for this record");
+             }
+             else
+             {
+                //get owner(s) by parcel(s) and add to record
+                for (var i =0; i< parcels.length; i++)
+                {
+                    var parcelOwnersResult = aa.owner.getOwnersByParcel(parcels[i]);
+                    var parcelNbr = parcels[i].getParcelNumber();
+                    var parcelUID = parcels[i].getParcelModel().getUID();
+                    if (parcelOwnersResult.getSuccess())
+                    {
+                            var actuallyParcelNumber = parcelNbr != null?parcelNbr:parcelUID;
+                            //aa.print("");
+                            //aa.print("Successfully get owner(s) by Parcel "+actuallyParcelNumber+". Detail as follow:");
+                            var ownerArr = parcelOwnersResult.getOutput();
+                            //aa.print("Size :" + ownerArr.length);
+                            for (j = 0; j < ownerArr.length; j++)
+                            {
+                                ownerRefNumber = ownerArr[j].getL1OwnerNumber();
+                                //aa.print("Looking at ref owner: " + ownerRefNumber);
+                                duplicateOwner = false;
+                                
+                                if (firstLoop)
+                                {
+                                    ownerArr[j].setCapID(capId);
+                                    ownerArr[j].setPrimaryOwner("N");
+                                    aa.owner.createCapOwnerWithAPOAttribute(ownerArr[j]);
+                                    //aa.print("Added first owner: " + ownerArr[j].getOwnerFullName() + ", #" + ownerArr[j].getL1OwnerNumber());
+                                    ownerNumberList.push(ownerArr[j].getL1OwnerNumber());
+                                    firstLoop = false;
+                                } else {
+                                    // Look for duplicates
+                                    for (k = 0; k < ownerNumberList.length; k++)
+                                    {
+                                        if (ownerNumberList[k] == ownerRefNumber)
+                                        {
+                                            duplicateOwner = true;
+                                            //aa.print("Found duplicate");
+                                            break;
+                                        }
+                                    }
+                                    if (!duplicateOwner)
+                                    {
+                                            ownerArr[j].setCapID(capId);
+                                            ownerArr[j].setPrimaryOwner("N");
+                                            aa.owner.createCapOwnerWithAPOAttribute(ownerArr[j]);
+                                            //aa.print("Added owner: " + ownerArr[j].getOwnerFullName() + ", #" + ownerArr[j].getL1OwnerNumber());
+                                            ownerNumberList.push(ownerArr[j].getL1OwnerNumber());
+                                    }
+                                }
+                            }       
+                    }
+                    else
+                    {
+                            logDebugCustom("ERROR: Failed to get owner(s) by Parcel(s): " + parcelOwnersResult.getErrorMessage());
+                    }
+                }
+             }
+        } 
+    }
+    catch (err){
+    comment("A JavaScript Error occurred:  Custom Function: updateCapOwnersByParcel(): " + err.message);
+    }
 }
 
 
@@ -447,62 +452,62 @@ function updateCapOwnersByParcel()
 */  
 function getParam(pParamName) //gets parameter value and logs message showing param value
 {
-	var ret = "" + aa.env.getValue(pParamName);
+    var ret = "" + aa.env.getValue(pParamName);
     logDebugCustom("Parameter : " + pParamName + " = " + ret);
-	return ret;
+    return ret;
 }
 function elapsed() {
-	var thisDate = new Date();
-	var thisTime = thisDate.getTime();
-	return ((thisTime - startTime) / 1000)
+    var thisDate = new Date();
+    var thisTime = thisDate.getTime();
+    return ((thisTime - startTime) / 1000)
 }
 
 function logDebugCustom(dstr) {
-	aa.print(dstr + "\n")
-	aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"), dstr)
+    aa.print(dstr + "\n")
+    aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"), dstr)
 }
 function convertDate(thisDate) {
 
-	if (typeof(thisDate) == "string") {
-		var retVal = new Date(String(thisDate));
-		if (!retVal.toString().equals("Invalid Date"))
-			return retVal;
-	}
+    if (typeof(thisDate) == "string") {
+        var retVal = new Date(String(thisDate));
+        if (!retVal.toString().equals("Invalid Date"))
+            return retVal;
+    }
 
-	if (typeof(thisDate) == "object") {
-		if (!thisDate.getClass) // object without getClass, assume that this is a javascript date already
-		{
-			return thisDate;
-		}
+    if (typeof(thisDate) == "object") {
+        if (!thisDate.getClass) // object without getClass, assume that this is a javascript date already
+        {
+            return thisDate;
+        }
 
-		if (thisDate.getClass().toString().equals("class com.accela.aa.emse.dom.ScriptDateTime")) {
-			return new Date(thisDate.getMonth() + "/" + thisDate.getDayOfMonth() + "/" + thisDate.getYear());
-		}
+        if (thisDate.getClass().toString().equals("class com.accela.aa.emse.dom.ScriptDateTime")) {
+            return new Date(thisDate.getMonth() + "/" + thisDate.getDayOfMonth() + "/" + thisDate.getYear());
+        }
 
-		if (thisDate.getClass().toString().equals("class com.accela.aa.emse.util.ScriptDateTime")) {
-			return new Date(thisDate.getMonth() + "/" + thisDate.getDayOfMonth() + "/" + thisDate.getYear());
-		}
+        if (thisDate.getClass().toString().equals("class com.accela.aa.emse.util.ScriptDateTime")) {
+            return new Date(thisDate.getMonth() + "/" + thisDate.getDayOfMonth() + "/" + thisDate.getYear());
+        }
 
-		if (thisDate.getClass().toString().equals("class java.util.Date")) {
-			return new Date(thisDate.getTime());
-		}
+        if (thisDate.getClass().toString().equals("class java.util.Date")) {
+            return new Date(thisDate.getTime());
+        }
 
-		if (thisDate.getClass().toString().equals("class java.lang.String")) {
-			return new Date(String(thisDate));
-		}
-	}
+        if (thisDate.getClass().toString().equals("class java.lang.String")) {
+            return new Date(String(thisDate));
+        }
+    }
 
-	if (typeof(thisDate) == "number") {
-		return new Date(thisDate); // assume milliseconds
-	}
+    if (typeof(thisDate) == "number") {
+        return new Date(thisDate); // assume milliseconds
+    }
 
-	logDebugCustom("**WARNING** convertDate cannot parse date : " + thisDate);
-	return null;
+    logDebugCustom("**WARNING** convertDate cannot parse date : " + thisDate);
+    return null;
 
 }
 
 function dateDiff(date1, date2) {
-	return (convertDate(date2).getTime() - convertDate(date1).getTime()) / (1000 * 60 * 60 * 24);
+    return (convertDate(date2).getTime() - convertDate(date1).getTime()) / (1000 * 60 * 60 * 24);
 }
 
 // added to avoid success message everytime email is sent
@@ -510,48 +515,56 @@ function dateDiff(date1, date2) {
 
 {
 
-	var itemCap = capId;
+    var itemCap = capId;
 
-	if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
-
-
-
-	var id1 = itemCap.ID1;
-
- 	var id2 = itemCap.ID2;
-
- 	var id3 = itemCap.ID3;
+    if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
 
 
 
-	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
+    var id1 = itemCap.ID1;
+
+    var id2 = itemCap.ID2;
+
+    var id3 = itemCap.ID3;
+
+
+
+    var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
 
 
 
 
 
-	var result = null;
+    var result = null;
 
-	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
+    result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
 
-	if(result.getSuccess())
+    if(result.getSuccess())
 
-	{
+    {
 
-		//logDebugCustom("Sent email successfully!");
+        //logDebugCustom("Sent email successfully!");
 
-		return true;
+        return true;
 
-	}
+    }
 
-	else
+    else
 
-	{
+    {
 
-		logDebugCustom("Failed to send mail. - " + result.getErrorType());
+        logDebugCustom("Failed to send mail. - " + result.getErrorType());
 
-		return false;
+        return false;
 
-	}
+    }
 
+}
+
+function getContactEmailAddress(contType, itemCap){
+    var thisContact = getContactByType(contType, itemCap);
+    var thisContEmailAddr = thisContact.getEmail();
+    
+    if(thisContEmailAddr) return thisContEmailAddr;
+    return false;
 }

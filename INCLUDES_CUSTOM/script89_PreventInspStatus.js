@@ -17,15 +17,15 @@ function script89_PreventInspStatus() {
 			var inspList = inspResultObj.getOutput();
 			for (index in inspList) {
 				if (inspList[index].getInspectionType().toUpperCase().indexOf("CLEARWATER") >= 0
-					 && matches(inspList[index].getInspectionStatus().toUpperCase(), "PASS", "COMPLETE", "CANCELLED")) {
+					 && matches(inspList[index].getInspectionStatus().toUpperCase(), "PASSED", "PASS", "COMPLETE", "CANCELLED")) {
 					clearInspectionPassed = true;
 				}
 				if (inspList[index].getInspectionType().toUpperCase().indexOf("SUPER FLUSH") >= 0
-					 && matches(inspList[index].getInspectionStatus().toUpperCase(), "PASS", "COMPLETE", "CANCELLED")) {
+					 && matches(inspList[index].getInspectionStatus().toUpperCase(), "PASSED", "PASS", "COMPLETE", "CANCELLED")) {
 					superInspectionPassed = true;
 				}
 				if (inspList[index].getInspectionType().toUpperCase().indexOf("HYDROSTATIC PRESSURE TEST") >= 0
-					 && matches(inspList[index].getInspectionStatus().toUpperCase(), "PASS", "COMPLETE", "CANCELLED")) {
+					 && matches(inspList[index].getInspectionStatus().toUpperCase(), "PASSED", "PASS", "COMPLETE", "CANCELLED")) {
 					hydroInspectionPassed = true;
 				}
 			}
