@@ -35,8 +35,6 @@ function createTempChild(appNameAppendix, utilityPermitType, emailTemplate) {
         //Email All contacts except agency reviewer
         var contactArray = getPeople(capId);
         for(thisContact in contactArray) {
-            if((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase())
-
             var cont = contactArray[thisContact].getPeople();
             
             if(cont.contactType == "Applicant") emailTo = cont.getEmail();
