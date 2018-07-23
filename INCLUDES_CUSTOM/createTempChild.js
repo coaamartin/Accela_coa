@@ -44,7 +44,7 @@ function createTempChild(appNameAppendix, utilityPermitType, emailTemplate) {
         if(emailTo && emailTo != null && emailTo != "" && emailTo != undefined){
             var sendResult = sendNotification("noreply@aurora.gov",emailTo,emailCC,emailTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("createTempChild: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-            else { logDebug("createTempChild: Sent email notification to "+lpEml)}
+            else { logDebug("createTempChild: Sent email notification to "+emailTo)}
         }
     } else {
         logDebug("**WARN creating a temporary child failed, error:" + sent.getErrorMessage());
