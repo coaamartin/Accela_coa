@@ -38,7 +38,7 @@ function createTempChild(appNameAppendix, utilityPermitType, emailTemplate) {
             var cont = contactArray[thisContact].getPeople();
             
             if(cont.contactType == "Applicant") emailTo = cont.getEmail();
-            if(cont.conType != "Applicant" && cont.conType != "Agency Reviewer") emailCC += cont.getEmail() + ";";
+            if(cont.contactType != "Applicant" && cont.contactType != "Agency Reviewer") emailCC += cont.getEmail() + ";";
         }
 
         if(emailTo && emailTo != null && emailTo != "" && emailTo != undefined){
