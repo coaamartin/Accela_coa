@@ -1,24 +1,22 @@
+//written by swakil
+//edited by jmain 07/24/2018 - updated email template and param variables
+
 if ("Payment Pending".equals(capStatus) && balanceDue == 0)
 {
-	var contact = "Applicant";
+	var contacts = "Applicant";
 	var template = "WAT_IP_PERMIT FEES PAID";
 	
 	//get contact
-	var aContact = getContactByType(contact, capId);
-	if (aContact) fullName = aContact.getFullName() || aContact.getFirstName() + " " + aContact.getLastName();	
+	//var aContact = getContactByType(contact, capId);
+	//if (aContact) fullName = aContact.getFullName() || aContact.getFirstName() + " " + aContact.getLastName();	
 
  	//build ACA URL
-	var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-	acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));  
-	var recURL = acaSite + getACAUrl();
+	//var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+	//acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));  
+	//var recURL = acaSite + getACAUrl();
 
 	var eParams = aa.util.newHashtable();
-	addParameter(eParams, "$$altid$$", cap.getCapModel().getAltID());
-	addParameter(eParams, "$$capAlias$$", cap.getCapType().getAlias());
-	addParameter(eParams, "$$ContactFullName$$", cap.getCapStatus());
-	addParameter(eParams, "$$acaRecordURL$$", recURL);
-	addParameter(eParams, "$$todayDate$$", sysDateMMDDYYYY);
-	emailContacts(contact, template, eParams, "", "", "N", "");	
+	emailContacts(contacts, template, eParams, "", "", "N", "");	
 
 	if (isTaskActive("Fee Processing"))
 	{
