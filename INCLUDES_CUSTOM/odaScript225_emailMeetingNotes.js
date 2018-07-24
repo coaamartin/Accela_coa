@@ -9,7 +9,6 @@ function odaScript225_emailMeetingNotes(){
         var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
         var reportFile = [];
         var emailParams = aa.util.newHashtable();
-        var reportParms = aa.util.newHashtable();
         
         var odaProjMan = AInfo["ODA Project Manager"];
         var odaProjCor = AInfo["ODA Project Coordinator"];
@@ -56,37 +55,33 @@ function odaScript225_emailMeetingNotes(){
                     addParameter(emailParams, "$$projectCoordinatorEmail$$", staffObj.email)
                 }
             }
-            
-            addParameter(reportParms, "Record_ID", capIDString)
-            
-            var vReportName = generateReportForEmail(capId, reportTemplate, aa.getServiceProviderCode(), reportParms);
-    
             //Get document deep link URL
             
             //Get ACA Url
             vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
             vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
-
-            if (vReportName != null && vReportName != false) {
-                vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
-                if (vDocumentList != null) {
-                    vDocumentList = vDocumentList.getOutput();
-                }
+            var docNotFound = true;
+            vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
+            if (vDocumentList != null) {
+                vDocumentList = vDocumentList.getOutput();
             }
             
             if (vDocumentList != null) {
                 for (y = 0; y < vDocumentList.size(); y++) {
                     vDocumentModel = vDocumentList.get(y);
-                    vDocumentName = vDocumentModel.getFileName();
-                    if (vDocumentName == vReportName) {
+                    vDocumentCat = vDocumentModel.getDocCategory();
+                    if (vDocumentCat == "Pre-Application Meeting Notes") {
                         //Add the document url to the email paramaters using the name: $$acaDocDownloadUrl$$
                         getACADocDownloadParam4Notification(emailParams, vACAUrl, vDocumentModel);
                         logDebug("including document url: " + emailParams.get('$$acaDocDownloadUrl$$'));
                         aa.print("including document url: " + emailParams.get('$$acaDocDownloadUrl$$'));
+                        docNotFound = false;
                         break;
                     }
                 }
             }
+            //If no documents found then we just add the record link
+            if(!vDocumentList || docNotFound) addParameter(emailParams, "$$acaDocDownloadUrl$$", recordURL);
             
             var sendResult = sendNotification("noreply@aurora.gov",resParEmail,ccEmails,emailTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("script225: UNABLE TO SEND NOTICE!  ERROR: "+ sendResult.getErrorMessage()); }

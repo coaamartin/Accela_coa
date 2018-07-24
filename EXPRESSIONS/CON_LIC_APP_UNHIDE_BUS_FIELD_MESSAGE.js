@@ -25,7 +25,7 @@ if (("" + altID.value).indexOf("-CL") == -1) {  // real record
 	}
 	if ((variable0.value != null && (variable0.value.equalsIgnoreCase('NO') || variable0.value.equalsIgnoreCase('N') || variable0.value.equalsIgnoreCase('UNCHECKED') || variable0.value.equalsIgnoreCase('UNSELECTED') || variable0.value.equalsIgnoreCase('FALSE') || variable0.value.equalsIgnoreCase('OFF')))) {
 
-		variable0.message = "Ok I have added the Business License Application that will be available once you finish this application.";
+		variable0.message = "Please contact the City of Aurora Tax and Licensing Department at 303.739.7057 to obtain a City of Aurora Business License.";
 		expression.setReturn(variable0);
 	}
 }

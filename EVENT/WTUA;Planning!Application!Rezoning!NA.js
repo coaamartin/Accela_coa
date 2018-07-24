@@ -113,10 +113,21 @@ Record Types:	Planning/Application/Master Plan/NA
 				Planning/Application/Rezoning/NA
 Desc:			Spec:  (from spec: 275) and tracker comments
 Created By: Silver Lining Solutions
+
+removed per instructions on 7/18 - this functionality remains for the Master Plan
 */
 
-logDebug("script275_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule3 START.");
+/*
+Script 273
+Record Types:		Planning/Application/Site Plan/Amendment
+			Planning/Application/Conditional Use/NA 
+			Planning/Application/Site Plan/Minor
+Desc:			Spec:  (from spec: 273/Script-273-version3.pdf) and tracker comments
 
+Created By: Silver Lining Solutions
+*/
+
+logDebug("script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule START.");
 var appSpecRevComments = "";
 var appSpecValRevComments = "";
 var appSpecProjCommHearingDate = "";
@@ -124,11 +135,10 @@ var appSpecSubmissionDate = "";
 var appSpecValSubmissionDate = "";
 
 if (wfTask == "Review Distribution" && wfStatus == "In Review") {
-	logDebug("*******TASK AND STATUS MATCH*****");
 	if ( !(AInfo["1st Review Comments Due Date"]) ) {
 		// Set up the 'target' date we want to search for meetings
 		var dToday = new Date();
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*17.5)));
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*6.5)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
@@ -138,7 +148,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		
 		//Set up the 'look forward' from the target date for searching
 		var lookForEndDate			= aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+45));
-		logDebug("lookForPlanningMtgDate = " + lookForPlanningMtgDate);
+		
 		//Find the closest meeting to lookForPlanningMtgDate between lookForStartDate and lookForEndDate 
 		var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
 
@@ -154,16 +164,14 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 			var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
 								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
 								+(""+ newPlnMtg.startDate).slice(0,4);
-		  logDebug("newHearingDate = " + newHearingDate);			
-		  editAppSpecific("Project Planning Commission Date",newHearingDate);
+			editAppSpecific("Projected Planning Commission Date",newHearingDate);
 		} else {
-			logDebug("Script 275: WARNING - there is no planning commission date within 45 days of your target date!");
+			logDebug("Script 273: WARNING - there is no planning commission date within 45 days of your target date!");
 			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
 		}
 	}
 	else if ( !(AInfo["2nd Review Comments Due Date"]) ) {
 		// Set up the 'target' date we want to search for meetings
-		logDebug("1st Review Comments is Populated--Looking at 2nd Review Comments");
 		var dToday = new Date();
 		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*6)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
@@ -185,7 +193,6 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 							+ ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
 							+ revdDate.getYear();
 		editAppSpecific("2nd Review Comments Due date",revdDateStr);
-		logDebug("*******2nd Review Date = " +revdDateStr);
 
 		// update submission date
 		var subdDate = aa.date.parseDate(dateAddHC2("",20, true));
@@ -199,9 +206,9 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 			var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
 								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
 								+(""+ newPlnMtg.startDate).slice(0,4);
-			editAppSpecific("Project Planning Commission Date",newHearingDate);
+			editAppSpecific("Projected Planning Commission Date",newHearingDate);
 		} else {
-			logDebug("Script 275: WARNING - there is no planning commission date within 45 days of your target date!");
+			logDebug("Script 273: WARNING - there is no planning commission date within 45 days of your target date!");
 			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
 		}
 		
@@ -243,14 +250,14 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 			var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
 								+(""+ newPlnMtg.startDate).slice(8,10)+"/"
 								+(""+ newPlnMtg.startDate).slice(0,4);
-			editAppSpecific("Project Planning Commission Date",newHearingDate);
+			editAppSpecific("Projected Planning Commission Date",newHearingDate);
 		} else {
-			logDebug("Script 274: WARNING - there is no planning commission date within 45 days of your target date!");
+			logDebug("Script 273: WARNING - there is no planning commission date within 45 days of your target date!");
 			comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
 		}
 	}
 	
-		logDebug("**script275 preparing email**");
+		logDebug("**script273 preparing email**");
 		
 		// send an email to the applicant
 		// Get the Applicant's email
@@ -296,5 +303,4 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 		else
 			{ logDebug("Sent Notification"); }	
 }
-logDebug("script275_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule3 end.");
-
+logDebug("script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule end.");
