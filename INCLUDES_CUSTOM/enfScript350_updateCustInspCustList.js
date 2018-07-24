@@ -1,4 +1,4 @@
-function enfScript350_updateCustInspCustList(iType){
+function enfScript350_updateCustInspCustList(){
     logDebug("enfScript350_updateCustInspCustList() started");
     try{
         var $iTrc = ifTracer;
@@ -13,19 +13,17 @@ function enfScript350_updateCustInspCustList(iType){
             for(eachRow in tableArr){
                 var aRow = tableArr[eachRow];
                 for(col in aRow)
-                    if(col == "Inspection Type" && aRow[col] == iType) rowExists = true;
+                    if(col == "Inspection Type" && aRow[col] == inspType) rowExists = true;
             }
         }
         
-        if($iTrc(inspType == iType, 'inspType matches')){
-            var row = [{colName: 'Inspection Type', colValue: inspType},
-                       {colName: 'Inspection Date', colValue: formatDteStringToMMDDYYYY(inspSchedDate)}];
-            
-            if($iTrc(!rowExists, 'row does not exits, inserting it'))   
-                addAsiTableRow(inspsTable, row);
-            if($iTrc(rowExists, 'row exists, updating the "Inspection Date"'))
-                updateAsiTableRow(inspsTable, 'Inspection Date', formatDteStringToMMDDYYYY(inspSchedDate))
-        }
+        var row = [{colName: 'Inspection Type', colValue: inspType},
+                   {colName: 'Inspection Date', colValue: formatDteStringToMMDDYYYY(inspSchedDate)}];
+        
+        if($iTrc(!rowExists, 'row does not exits, inserting it'))   
+            addAsiTableRow(inspsTable, row);
+        if($iTrc(rowExists, 'row exists, updating the "Inspection Date"'))
+            updateAsiTableRow(inspsTable, 'Inspection Date', formatDteStringToMMDDYYYY(inspSchedDate))
     }
     catch(err){
         showMessage = true;
