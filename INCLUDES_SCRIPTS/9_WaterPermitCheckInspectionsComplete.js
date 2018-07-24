@@ -66,9 +66,9 @@ function inspectionComplete(type)
 
 function sendEmailToApplicant(){
   var contact = "Applicant";
-  var template = "JD_TEST_TEMPLATE";
-  var joke = "Where there's a will, there's a relative.";
+  var template = "WAT_MATERIALS_TESTING";
+  var asiextensionnumber = getAppSpecific("Extension Number");
   var emailparams = aa.util.newHashtable();
-  emailparams.put("$$Joke$$", joke);
+  emailparams.put("$$asi_ExtensionNumber$$", asiextensionnumber);
   emailContacts(contact, template, emailparams, "", "", "N", "");
 }
