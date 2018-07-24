@@ -506,7 +506,7 @@
                 }
             },
             {
-                "preScript": "script395_prescript_pondRowsMustExist",
+                "preScript": "395_prescript_pondRowsMustExist",
                 "postScript": "",
                 "metadata": {
                   "description": "Script 395",
@@ -515,6 +515,7 @@
                   }
                 },
                 "criteria": {
+                    "isCreatedByACA": false,
                     "inspectionTypePerformed": [
                         "Routine Inspections"
                     ],
