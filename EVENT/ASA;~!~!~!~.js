@@ -18,13 +18,7 @@ try{
 	    if(codeDistrict && codeDistrict.length > 0){
 			addParcelDistrict(null,codeDistrict[0]["CODE_NUMBER"]);
 		}
-	}
-} catch (err) {
-	logDebug("A JavaScript Error occurred: ASA:*/*/*/*: copyParcelGisObjects(): " + err.lineNumber + ". Error: " + err.message);
-	logDebug("Stack:" + err.stack);
-};
-
-
+	
 	params = aa.util.newHashtable();
 	var record = aa.cap.getCap(capId).getOutput();
 	var capType=record.getCapType();
@@ -80,6 +74,15 @@ try{
 	getContactParams4Notification(params,"Responsible Party");
 	logDebug("ASA/*/*/* - capIDString = " + capIDString);
 	sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null); 
+		
+		
+	}
+} catch (err) {
+	logDebug("A JavaScript Error occurred: ASA:*/*/*/*: copyParcelGisObjects(): " + err.lineNumber + ". Error: " + err.message);
+	logDebug("Stack:" + err.stack);
+};
+
+
 	
  function getRecordParams4Notification(params) {
 

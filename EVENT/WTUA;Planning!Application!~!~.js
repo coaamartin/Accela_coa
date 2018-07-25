@@ -63,8 +63,8 @@ Sample Call:
 Notes:
 	- child record type is "Water/Utility/Master Utility/Study" (Study not NA)
 */
-
-autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Received", "Resubmittal Requested",  "Complete"], "Is a Master Utility Plan Required", "Water Dept Review",
+// Script 244
+autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Received", "Resubmittal Requested",  "Complete", "Note"], "Is a Master Utility Plan Required", "Water Dept Review",
 		"Water/Utility/Master Utility/Study");
 		
 /*
