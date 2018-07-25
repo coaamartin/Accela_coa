@@ -371,7 +371,7 @@ closeTask("Incident Status","Closed","","");
 //Created By:       Silver Lining Solutions
 //*********************************************************************************************************
 logDebug("Script 343 START");
-if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || inspResult == "Abate/Summons" 
+if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || inspResult == "Abate/Summons" ||
 	inspResult == "Issue Summons" )
 {
     logDebug("Script 343: criteria met");
