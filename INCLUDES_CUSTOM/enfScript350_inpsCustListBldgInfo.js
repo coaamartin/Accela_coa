@@ -7,6 +7,7 @@ function enfScript350_inpsCustListBldgInfo(){
         var unitInspViolsTname = "UNIT INSPECTION VIOLATIONS";
         var bldgInspViolTable = [];
         var unitInspViolTable = [];
+        var inspectionInfoTblArr = [];
         var bldgNumbers = [];
         var unitNumbers = [];
         var numberOfBuildings = 0;
@@ -17,8 +18,9 @@ function enfScript350_inpsCustListBldgInfo(){
         var unitsNoAccRei = 0;
         bldgInspViolTable = loadASITable(bldgInspViolsTname);
         unitInspViolTable = loadASITable(unitInspViolsTname);
+        inspectionInfoTblArr = loadASITable(inspectionsTable);
         
-		//Read BUILDING INSPECTION VIOLATIONS TABLE
+        //Read BUILDING INSPECTION VIOLATIONS TABLE
         if(bldgInspViolTable){
             for(eachRow in bldgInspViolTable){
                 var aRow = bldgInspViolTable[eachRow];
@@ -30,7 +32,11 @@ function enfScript350_inpsCustListBldgInfo(){
                 }
             }
             
-            updateAsiTableRow(inspectionsTable, "# of Bldgs Inspected", numberOfBuildings);
+            for(eachInsp in inspectionInfoTblArr){
+                var inspRow = inspectionInfoTblArr[eachInsp];
+                inspRow["# of Bldgs Inspected"] = numberOfBuildings + "";
+            }
+            //updateAsiTableRow(inspectionsTable, "# of Bldgs Inspected", numberOfBuildings);
         }
         
         if(unitInspViolTable){
@@ -53,12 +59,24 @@ function enfScript350_inpsCustListBldgInfo(){
                 if(matches(roomCol, "Dog on Premises","Lockout","Tenent Ill - Reinspect")) unitsNoAccRei++;
             }
             
-            updateAsiTableRow(inspectionsTable, "# of Units Inspected", numberOfUnits);
-            updateAsiTableRow(inspectionsTable, "Units - Passed", unitsNoViol);
-            updateAsiTableRow(inspectionsTable, "Units - Failed", unitsFailed);
-            updateAsiTableRow(inspectionsTable, "Units - No Access", unitsNoAccess);
-            updateAsiTableRow(inspectionsTable, "Units - No Access/Re-Inspect", unitsNoAccRei);
+            for(eachInsp in inspectionInfoTblArr){
+                var inspRow = inspectionInfoTblArr[eachInsp];
+                inspRow["# of Units Inspected"] = numberOfUnits+ "";
+                inspRow["Units - Passed"]       = unitsNoViol+ "";
+                inspRow["Units - Failed"]       = unitsFailed+ "";
+                inspRow["Units - No Access"]    = unitsNoAccess+ "";
+                inspRow["Units - No Access/Re-Inspect"] = unitsNoAccRei+ "";
+            }
+            
+            //updateAsiTableRow(inspectionsTable, "# of Units Inspected", numberOfUnits);
+            //updateAsiTableRow(inspectionsTable, "Units - Passed", unitsNoViol);
+            //updateAsiTableRow(inspectionsTable, "Units - Failed", unitsFailed);
+            //updateAsiTableRow(inspectionsTable, "Units - No Access", unitsNoAccess);
+            //updateAsiTableRow(inspectionsTable, "Units - No Access/Re-Inspect", unitsNoAccRei);
         }
+        
+        removeASITable(inspectionsTable);
+        addASITable(inspectionsTable, inspectionInfoTblArr);
     }
     catch(err){
         showMessage = true;
