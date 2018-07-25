@@ -16,8 +16,8 @@ logDebug("Script 186 START");
 
     // get the inspector from GIS and assign the rec to this user
     inspUserObj = null;
-    x = getGISBufferInfo("AURORACO","Fire Response Zones Run Order","0.01","BATTALION_FIRSTDUE")
-    logDebug(x[0]["BATTALION_FIRSTDUE"])
+    x = getGISBufferInfo("AURORACO","Fire Response Zones Run Order","0.01","BATTALION_FIRSTDUE");
+    logDebug(x[0]["BATTALION_FIRSTDUE"]);
    
     var offFullName = x[0]["OFFICER_NAME"];
     
@@ -30,10 +30,10 @@ logDebug("Script 186 START");
     inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
 	
 	if(inspUserObj != null)
-		{scheduleInspection("Summons Issuance",0, inspUserID);}
+		{scheduleInspection("Fire Complaint",0, inspUserID);}
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
-		scheduleInspection("Summons Issuance",0, inspUserID);
+		scheduleInspection("Fire Complaint",0);
 		}
 
 logDebug("Script 186 END");
