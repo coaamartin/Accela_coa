@@ -43,7 +43,7 @@ function AboristLicenseRenewal(grp, typ, stype, cat){
     if(aa.env.getValue("RunDate") != null) {
         runDate = new Date(aa.env.getValue("RunDate"));
     }
-    if(runDate.getMonth() != 2 || runDate.getMonth() != 11) {
+    if(runDate.getMonth() != 1 || runDate.getMonth() != 11) {
         aa.print('You can only run this in December or Februrary OR pass in parameter RunDate (mm/dd/yyyy)');
     }
     for(idx in capScriptList) {
