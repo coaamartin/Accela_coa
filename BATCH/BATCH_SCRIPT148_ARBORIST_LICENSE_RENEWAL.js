@@ -43,6 +43,9 @@ function AboristLicenseRenewal(grp, typ, stype, cat){
     if(aa.env.getValue("RunDate") != null) {
         runDate = new Date(aa.env.getValue("RunDate"));
     }
+    if(runDate.getMonth() != 2 || runDate.getMonth() != 11) {
+        aa.print('You can only run this in December or Februrary OR pass in parameter RunDate (mm/dd/yyyy)');
+    }
     for(idx in capScriptList) {
         capScript = capScriptList[idx];
         if(ifTracer(capScript.getCapStatus() == "Issued", "Record status = Issued")) {
@@ -69,21 +72,16 @@ function AboristLicenseRenewal(grp, typ, stype, cat){
                             "Arborist Company"
                         );
                         getOrCreateRenewalKids();
-                         if (runDate.getMonth() == 11) {
+                        if (runDate.getMonth() == 11) {
                             aa.print('adding dec fee');
                             addFee("LIC_CONT_A01", "LIC_CONTRACTOR_ARBORIST ", "FINAL", 1, "Y", renewalKids[0]);
-                        } else {
-                            aa.print('You can only run this in December or Februrary OR pass in parameter RunDate (mm/dd/yyyy)');
                         }
                     } else if(expJsDate.getTime() == new Date(runDate.getFullYear()-1, 11, 31).getTime()) {
                         getOrCreateRenewalKids();
                         if(runDate.getMonth() == 1) {
                             aa.print('adding feb fee');
                             addFee("LIC_CONT_A02", "LIC_CONTRACTOR_ARBORIST ", "FINAL", 1, "Y", renewalKids[0]);
-                        } else {
-                            aa.print('You can only run this in December or Februrary OR pass in parameter RunDate (mm/dd/yyyy)');
                         }
-
                     }
                 }
             }
@@ -101,7 +99,5 @@ function AboristLicenseRenewal(grp, typ, stype, cat){
         }
         aa.print('renewal record is ' + renewalKids[0]);
     }
-
-
 
 }
