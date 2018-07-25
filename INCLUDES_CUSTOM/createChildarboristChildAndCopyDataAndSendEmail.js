@@ -63,7 +63,8 @@ function createChildarboristChildAndCopyDataAndSendEmail(workflowTask, worflowSt
 				//addParameter(emailParams, "$$wfTask$$", wfTask);
 				//addParameter(emailParams, "$$wfStatus$$", wfStatus);
 
-				sendEmailWithReport(applicantEmail, "", emailTemplate, reportName, rptParams, emailParams)
+				//sendEmailWithReport(applicantEmail, "", emailTemplate, reportName, rptParams, emailParams)
+				emailContacts("Arborist Applicant",emailTemplate, emailParams, reportName,rptParams);
 
 			}
 
