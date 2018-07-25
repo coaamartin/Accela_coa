@@ -17,7 +17,7 @@ createChildarboristChildAndCopyDataAndSendEmail("License Issuance", "Issued", "L
 
 var workflowTask = "License Issuance";
 var worflowStatus = "Issued";
-var emailTemplate = "MESSAGE_NOTICE_PUBLIC WORKS";
+var emailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
 var reportName = "WorkFlowTasksOverdue";
 var LicenseType = "Licenses/Contractor/Arborist/License";
 var rptParams = aa.util.newHashtable();

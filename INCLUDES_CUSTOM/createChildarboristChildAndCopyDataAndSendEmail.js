@@ -42,11 +42,11 @@ function createChildarboristChildAndCopyDataAndSendEmail(workflowTask, worflowSt
 		}
 		if (childCapId != null) {
 			var rNewLicIdString = childCapId.getCustomID();
-			createRefLP4Lookup(rNewLicIdString, "Business", "Applicant", null);
+			createRefLP4Lookup(rNewLicIdString, "Business", "Arborist Applicant", null);
 			var rNewLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, rNewLicIdString).getOutput();
-			aa.licenseScript.associateLpWithCap(capId, rNewLP[0]);
+			if(rNewLP) aa.licenseScript.associateLpWithCap(capId, rNewLP[0]);
 			copyASIFields(capId, childCapId);
-			var recordApplicant = getContactByType("Applicant", capId);
+			var recordApplicant = getContactByType("Arborist Applicant", capId);
 			if (recordApplicant) {
 				applicantEmail = recordApplicant.getEmail();
 			}
@@ -57,11 +57,11 @@ function createChildarboristChildAndCopyDataAndSendEmail(workflowTask, worflowSt
 
 				var emailParams = aa.util.newHashtable();
 				addParameter(emailParams, "$$altID$$", cap.getCapModel().getAltID());
-				addParameter(emailParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
-				addParameter(emailParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
-				addParameter(emailParams, "$$wfComment$$", wfComment);
-				addParameter(emailParams, "$$wfTask$$", wfTask);
-				addParameter(emailParams, "$$wfStatus$$", wfStatus);
+				//addParameter(emailParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
+				//addParameter(emailParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
+				//addParameter(emailParams, "$$wfComment$$", wfComment);
+				//addParameter(emailParams, "$$wfTask$$", wfTask);
+				//addParameter(emailParams, "$$wfStatus$$", wfStatus);
 
 				sendEmailWithReport(applicantEmail, "", emailTemplate, reportName, rptParams, emailParams)
 
