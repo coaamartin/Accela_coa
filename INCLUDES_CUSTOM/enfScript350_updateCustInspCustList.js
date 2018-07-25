@@ -15,7 +15,7 @@ function enfScript350_updateCustInspCustList(){
                 for(col in aRow){
 					aa.print("col: " + col + ":" + aRow[col]);
 					aa.print(col == "Inspection Type");
-					aa.print(inspType.equals(aRow[col]));
+					aa.print((inspType + "") == aRow[col]);
                     if(col == "Inspection Type" && inspType.equals(aRow[col])) rowExists = true;
 				}
             }
