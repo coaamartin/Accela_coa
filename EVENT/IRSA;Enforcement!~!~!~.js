@@ -447,3 +447,54 @@ createChildAbatement("Snow Fee 2nd Re-Inspection",      "Snow Abatement",       
           
 logDebug("Script 344 END");
 
+//*********************************************************************************************************
+//script 345        Create Recordation Child
+//
+//Record Types:     Enforcement/*/*/*
+//Event:            IRSA
+//Desc:             Create Child Recordation
+//
+//Created By:       Silver Lining Solutions
+//*********************************************************************************************************
+logDebug("Script 345 START");
+if (inspResult == "Abate/Record" || inspResult == "Record with County" )
+{
+    logDebug("Script 345: criteria met");
+    
+    // get the inspector from GIS and assign the rec to this user
+    inspUserObj = null;
+    x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
+    logDebug(x[0]["OFFICER_NAME"]);
+    
+    var offFullName = x[0]["OFFICER_NAME"];
+    
+    var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+    logDebug(offFname);
+    
+    var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+    logDebug(offLname);
+    
+    inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+    
+    var currentCapId = capId;
+    var appName = "Summons created for Record Number " + capId.customID;
+    var newChild = createChild('Enforcement','Incident','Record with County','NA',appName);
+    var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
+    copyRecordDetailsLocal(capId, newChild);
+    copyContacts(capId, newChild);
+    copyAddresses(capId, newChild);
+    copyParcels(capId, newChild);
+    copyOwner(capId, newChild);
+    
+    
+    
+
+    capId = newChild;
+    if(inspUserObj != null)
+        { assignCap(inspUserObj.getUserID()); }
+    scheduleInspection("Recordation Photos",0, currentUserID);
+    capId = currentCapId;
+
+}           
+logDebug("Script 345 END");
+
