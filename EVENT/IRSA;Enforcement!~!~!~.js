@@ -396,7 +396,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     var newChild = createChild('Enforcement','Incident','Summons','NA',appName);
     var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
     copyRecordDetailsLocal(capId, newChild);
-    copyContacts(capId, newChild);
+    
     copyAddresses(capId, newChild);
     copyParcels(capId, newChild);
     copyOwner(capId, newChild);
