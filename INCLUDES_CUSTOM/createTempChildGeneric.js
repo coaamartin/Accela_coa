@@ -34,7 +34,7 @@ function createChildGeneric(grp, type, stype, cat, options) {
         childCapId = createChild(grp, type, stype, cat, settings.appName); 
     }
     
-    aa.cap.createAppHierarchy(capId, childCapId);
+    aa.cap.createAppHierarchy(settings.parentCapID, childCapId);
 
     if(settings.accessByACA) {
         aa.cap.updateAccessByACA(childCapId, "Y");
