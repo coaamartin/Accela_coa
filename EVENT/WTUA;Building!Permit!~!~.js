@@ -3,7 +3,7 @@
 //Call all customs for wf:Permit Issuance/Issued
 if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
 	script208_UpdatePermitFields();
-	script206_DeactivateFEMA();
+	//script206_DeactivateFEMA(); //Commented out since it is being done in WTUA:Building/*/*/*
 }
 
 //Call all customs for wf:Accepted/Accept Plans
