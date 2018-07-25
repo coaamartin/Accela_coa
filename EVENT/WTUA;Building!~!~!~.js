@@ -67,5 +67,30 @@ if(isTaskActive("Subtasks Complete","BLD_MASTER_INSPSUB") && allTasksComplete("B
 	closeTask("Subtasks Complete","Complete","","", "BLD_MASTER_INSPSUB")
 }
 
+/**
+ * Workflow automation for all Building
+ * @namespace WTUA:Building///
+ * @requires INCLUDES_CRM
+ */
 
+eval(getScriptText("INCLUDES_CRM", null, false));
 
+logDebug("*** BEGIN process_WF_JSON_Rules for CRM (Building) ***");
+// execute workflow propagation rules
+process_WF_JSON_Rules(capId, wfTask, wfStatus);
+logDebug("*** FINISH process_WF_JSON_Rules for CRM (Building) ***");
+
+if (appMatch("Building/Enforcement/Notice of Violation/NA")) {
+    var parent = getParent();
+    if(parent){
+        if(matches(wfStatus,"Fire Call","Assigned","In Progress","Extension","Issue Summons","Notice of Violation","Third Notice","First Notice","Second Notice","Non Compliance")){
+            createCapComment(wfComment,parent);
+            updateAppStatus("In Progress","Updated via Script",parent);
+        }
+        
+        if(matches(wfStatus,"Duplicate","Referred","Complete","Reasign to another Division","No Violation Observed","Compliance")){
+            createCapComment(wfComment,parent);
+            updateAppStatus("Completed","Updated via Script",parent);
+        }
+    }
+}
