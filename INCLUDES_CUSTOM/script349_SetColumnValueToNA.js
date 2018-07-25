@@ -30,7 +30,6 @@ function setUpdateColumnValue(updateRowsMap/** Map<rowID, Map<columnName, column
 **/
 function updateAppSpecificTableInfors(tableName, capId, updateRowsMap/** Map<rowID, Map<columnName, columnValue>> **/)
 {
-comment("in updateASTI");
 	if (updateRowsMap == null || updateRowsMap.isEmpty())
 	{
 		return;
@@ -41,7 +40,6 @@ comment("in updateASTI");
 	var rowList = asitTableModel.getRows();
 	asitTableModel.setSubGroup(tableName);
 	var rowIdArray = updateRowsMap.keySet().toArray();
-	comment("rowIdArray.length = " + rowIdArray.length);
 	for (var i = 0; i < rowIdArray.length; i++)
 	{
 		var rowScriptModel = aa.appSpecificTableScript.createRowScriptModel();
@@ -86,18 +84,14 @@ function script349_SetColumnValueToNA() {
 		var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capId, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
 		if (appSpecificTableInfo.getSuccess())
 		{
-			comment("******Found Table");
 			var appSpecificTableModel = appSpecificTableInfo.getOutput().getAppSpecificTableModel();
 			var tableFields = appSpecificTableModel.getTableFields(); // List<BaseField>
-			comment("tableField size = " + tableFields.size());
 			if (tableFields != null && tableFields.size() > 0)
 			{
 				var updateRowsMap = aa.util.newHashMap(); // Map<rowID, Map<columnName, columnValue>>
 				for (var i=0; i < tableFields.size(); i++)
 				{
-					comment ("on line --- i = " + i);
 					var fieldObject = tableFields.get(i); // BaseField
-					comment("fieldObject = " + fieldObject);
 					
 					//get the column name.
 					var columnName = fieldObject.getFieldLabel();
@@ -105,7 +99,6 @@ function script349_SetColumnValueToNA() {
 					var columnValue = fieldObject.getInputValue();
 					//get the row ID 
 					var rowID = fieldObject.getRowIndex();
-					comment(columnName + ": " + columnValue + "   rowID: " + rowID);
 					
 					setUpdateColumnValue(updateRowsMap, rowID, "Location", "NA");
 					setUpdateColumnValue(updateRowsMap, rowID, "Violation", "NA");
