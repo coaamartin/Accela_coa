@@ -477,7 +477,7 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
     
     var currentCapId = capId;
-    var appName = "Summons created for Record Number " + capId.customID;
+    var appName = "Recordation created for Record Number " + capId.customID;
     var newChild = createChild('Enforcement','Incident','Record with County','NA',appName);
     var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
     copyRecordDetailsLocal(capId, newChild);
