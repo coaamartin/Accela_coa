@@ -15,12 +15,13 @@ createChildarboristChildAndCopyDataAndSendEmail("License Issuance", "Issued", "L
 
  */
 
-var workflowTask = "License Issuance";
-var worflowStatus = "Issued";
-var emailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
-var reportName = "JD_TEST_SSRS";
-var LicenseType = "Licenses/Contractor/Arborist/License";
-var rptParams = aa.util.newHashtable();
-rptParams.put("Record_ID", cap.getCapModel().getAltID());
 
-createChildarboristChildAndCopyDataAndSendEmail(workflowTask, worflowStatus, LicenseType, emailTemplate, reportName, rptParams);
+
+if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Issuance/Issued')){
+	var emailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
+    var reportName = "JD_TEST_SSRS";
+    var LicenseType = "Licenses/Contractor/Arborist/License";
+    var rptParams = aa.util.newHashtable();
+    rptParams.put("Record_ID", cap.getCapModel().getAltID());
+    createChildarboristChildAndCopyDataAndSendEmail(LicenseType, emailTemplate, reportName, rptParams);
+}
