@@ -12,3 +12,9 @@
 //
 //Created By: 		Silver Lining Solutions
 //*********************************************************************************************************
+
+logDebug("Script 186 START");
+
+scheduleInspection("Fire Complaint",0);
+
+logDebug("Script 186 END");
