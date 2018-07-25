@@ -78,6 +78,7 @@ try{
 	getContactParams4Notification(params,"Arborist Applicant");
 	getContactParams4Notification(params,"Contractor Applicant");
 	getContactParams4Notification(params,"Responsible Party");
+	logDebug("ASA/*/*/* - capIDString = " + capIDString);
 	sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null); 
 	
  function getRecordParams4Notification(params) {
