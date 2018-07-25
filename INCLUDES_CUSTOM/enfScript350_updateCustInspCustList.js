@@ -9,21 +9,30 @@ function enfScript350_updateCustInspCustList(){
         
         tableArr = loadASITable(inspsTable);
         
-        if($iTrc(tableArr, 'tableArrx')){
-            for(eachRow in tableArr){
-                var aRow = tableArr[eachRow];
-                for(col in aRow)
-                    if(col == "Inspection Type" && (inspType + "") == aRow[col]) rowExists = true;
-            }
-        }
+        //if($iTrc(tableArr, 'tableArrx')){
+        //    for(eachRow in tableArr){
+        //        var aRow = tableArr[eachRow];
+        //        for(col in aRow)
+        //            if(col == "Inspection Type" && (inspType + "") == aRow[col]) rowExists = true;
+        //    }
+        //}
         
         var row = [{colName: 'Inspection Type', colValue: inspType},
                    {colName: 'Inspection Date', colValue: formatDteStringToMMDDYYYY(inspSchedDate)}];
         
-        if($iTrc(!rowExists, 'row does not exits, inserting it'))   
+		if(!updateAsiTableRow(inspsTable, "Inspection Date", formatDteStringToMMDDYYYY(inspSchedDate), { 
+            capId: capId,
+            colFilters: [
+                { colName: "Inspection Type", colValue: inspType}
+            ]})
+        ) {
             addAsiTableRow(inspsTable, row);
-        if($iTrc(rowExists, 'row exists, updating the "Inspection Date"'))
-            updateAsiTableRow(inspsTable, 'Inspection Date', formatDteStringToMMDDYYYY(inspSchedDate))
+        }
+		
+        //if($iTrc(!rowExists, 'row does not exits, inserting it'))   
+        //    addAsiTableRow(inspsTable, row);
+        //if($iTrc(rowExists, 'row exists, updating the "Inspection Date"'))
+        //    updateAsiTableRow(inspsTable, 'Inspection Date', formatDteStringToMMDDYYYY(inspSchedDate))
     }
     catch(err){
         showMessage = true;
