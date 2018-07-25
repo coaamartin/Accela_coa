@@ -19,7 +19,7 @@ logDebug("Script 186 START");
     x = getGISBufferInfo("AURORACO","Fire Response Zones Run Order","0.01","BATTALION_FIRSTDUE");
     logDebug(x[0]["BATTALION_FIRSTDUE"]);
    
-    var offFullName = x[0]["OFFICER_NAME"];
+    var offFullName = x[0]["BATTALION FIRSTDUE"];
     
     var offFname = offFullName.substr(0,offFullName.indexOf(' '));
     logDebug("first name = " + offFname);
