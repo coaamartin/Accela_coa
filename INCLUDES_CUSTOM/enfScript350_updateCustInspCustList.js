@@ -12,12 +12,8 @@ function enfScript350_updateCustInspCustList(){
         if($iTrc(tableArr, 'tableArrx')){
             for(eachRow in tableArr){
                 var aRow = tableArr[eachRow];
-                for(col in aRow){
-					aa.print("col: " + col + ":" + aRow[col]);
-					aa.print(col == "Inspection Type");
-					aa.print((inspType + "") == aRow[col]);
-                    if(col == "Inspection Type" && inspType.equals(aRow[col])) rowExists = true;
-				}
+                for(col in aRow)
+                    if(col == "Inspection Type" && (inspType + "") == aRow[col]) rowExists = true;
             }
         }
         
