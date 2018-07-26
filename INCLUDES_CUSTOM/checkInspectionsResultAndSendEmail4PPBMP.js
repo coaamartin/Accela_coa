@@ -72,7 +72,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
 	}
 	
 	if (projectOwnerEmail != null && projectOwnerEmail != "") {
-		if (eeEmail != "") {
+		if (ccEmail != "") {
 			ccEmail += ";" +projectOwnerEmail;
 		} else {
 			ccEmail = projectOwnerEmail;
@@ -82,7 +82,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
     var ownerName = getOnwertName();
     
     //var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
-    //var reportFile = [];
+    var reportFile = [];
     var reportTemplate = "JD_TEST_SSRS";
     var vRParams = aa.util.newHashtable();
     addParameter(vRParams, "Record_ID", capIDString);
@@ -107,8 +107,8 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
     logDebug("Attempting to run Async: " + vAsyncScript);
     aa.runAsyncScript(vAsyncScript, envParameters);
             
-    //var sendResult = sendNotification("noreply@aurora.gov",ownerEmail,ccEmail,emailTemplateName,emailParams,reportFile,capID4Email);
-    //if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+    var sendResult = sendNotification("noreply@aurora.gov",ownerEmail,ccEmail,emailTemplateName,emailParams,reportFile,capID);
+    if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 
     return true;
 }
