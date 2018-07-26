@@ -11,5 +11,5 @@ function script395_prescript_pondRowsMustExist() {
         showMessage=true;
         return false;
     }
-    return true;
+    return true; 
 }
