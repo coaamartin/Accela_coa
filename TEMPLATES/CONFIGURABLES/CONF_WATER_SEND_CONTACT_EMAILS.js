@@ -524,7 +524,40 @@
                     ]
                 },
                 "action": {
-                    "notificationTemplate": " SWMP ROUTINE READY FOR FINAL # 395",
+                    "notificationTemplate": "SWMP ROUTINE READY FOR FINAL # 395",
+                    "notificationReport": "",
+                    "notifyContactTypes": [
+                        "Applicant"
+                    ],
+                    "url4ACA": "",
+                    "fromEmail": "noreply@auroraco.gov",
+                    "additionalEmailsTo": [
+
+                    ],
+                    "createFromParent": "",
+                    "reportingInfoStandards": ""
+                }
+            },
+            {
+                "preScript": "",
+                "postScript": "",
+                "metadata": {
+                  "description": "Script 395",
+                  "operators": {
+                    
+                  }
+                },
+                "criteria": {
+                    "isCreatedByACA": false,
+                    "inspectionTypePerformed": [
+                        "Routine Inspections"
+                      ],
+                      "inspectionResult": [
+                        "Permittee Photo Approved"
+                      ]
+                },
+                "action": {
+                    "notificationTemplate": "SWMP PHOTO APPROVED # 395",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "Applicant"
