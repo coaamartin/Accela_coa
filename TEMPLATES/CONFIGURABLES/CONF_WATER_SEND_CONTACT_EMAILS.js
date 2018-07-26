@@ -557,7 +557,7 @@
                       ]
                 },
                 "action": {
-                    "notificationTemplate": "SWMP PHOTO APPROVED # 395",
+                    "notificationTemplate": "SWMP ROUTINE PHOTO APPROVED # 395",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "Applicant"

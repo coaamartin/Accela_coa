@@ -126,7 +126,7 @@
           }
         },
         {
-          "preScript": "395_prescript_pondRowsMustNotExist",
+          "preScript": "",
           "postScript": "",
           "metadata": {
             "description": "Script 395",
