@@ -34,24 +34,27 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
     var recordApplicant = getContactByType("Applicant", capId);
     if (recordApplicant) {
         applicantEmail = recordApplicant.getEmail();
+		logDebug("Applicant Email " + applicantEmail);
     }
 	
 	//find developer email
 	var recordDeveloper = getContactByType("Developer", capId);
     if (recordDeveloper) {
         developerEmail = recordDeveloper.getEmail();
+		logDebug("Developer Email " + developerEmail);
     }
 	
 	//find project owner email
 	var recordProjectOwner = getContactByType("Project Owner", capId);
     if (recordProjectOwner) {
         projectOwnerEmail = recordProjectOwner.getEmail();
+		logDebug("Project Owner Email " + projectOwnerEmail);
     }
 
-    if (ownerEmail == null || ownerEmail == "") {
+    /*if (ownerEmail == null || ownerEmail == "") {
         logDebug("**WARN Owner on record " + capId + " has no email");
         return false
-    }
+    }*/
 
 	//build CC email list
 	var ccEmail = "";
