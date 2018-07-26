@@ -7,13 +7,17 @@
  * @param reportName
  * @param rptParams
  * @returns {Boolean}
+ *
+ * 07/25/2018 (evontrapp) - Updated newInspSchedDate to add 7 days from date of result (inspResultDate), rather than date of scheduled inspection (inspSchedDate)
+ * 07/25/2018 (evontrpap) - Removed reference to sendEmailWithReport() function, and replaced with sendNotification function
  */
 function autoScheduleFailedInspectionsOrgScheduleDatePlusDays(inspectionTypesAry, inspReqResult, daysToAdd, emailTemplateName, reportName, rptParams) {
 
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == inspReqResult) {
-
-			var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
+			
+			//schedule new inspection
+			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
 			scheduleInspectDate(inspType, newInspSchedDate);
 
 			//get applicant
@@ -44,8 +48,9 @@ function autoScheduleFailedInspectionsOrgScheduleDatePlusDays(inspectionTypesAry
 				addParameter(eParams, "$$inspType$$", inspType);
 			if (inspSchedDate)
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
-
-			sendEmailWithReport(applicant.getEmail(), "", emailTemplateName, reportName, rptParams, eParams);
+			
+			//send email with report attachment
+			sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplateName,eParams,"",capID);
 			return true;
 		}//inspType/Result matched
 	}//for all inspection types
