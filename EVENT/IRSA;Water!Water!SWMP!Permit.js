@@ -11,7 +11,7 @@ include("27_SWMPFinalInspection");
 logDebug("Script 395 Starting");
 if(ifTracer(inspType == "Routine Inspections" && inspResult == "Ready for Final", 'inspType == "Routine Inspections" && inspResult == "Ready for Final"')) {
     include("395_prescript_pondRowsMustExist");
-    if(ifTracer(cancelCfgExec != true, 'Pond Type list has rows')) {
+    if(ifTracer(script395_prescript_pondRowsMustExist() == true, 'Pond Type list has rows')) {
         updateTask("Active Permit", "Ready for Final Certification", "", "");
         updateTask("Final Certification", "Upload Pending", "", "");
     } 
