@@ -65,6 +65,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
 			ccEmail += ";" +developerEmail;
 		} else {
 			ccEmail = developerEmail;
+		}
 	}
 	
 	if (isBlankOrNull(projectOwnerEmail)==false) {
@@ -72,6 +73,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
 			ccEmail += ";" +projectOwnerEmail;
 		} else {
 			ccEmail = projectOwnerEmail;
+		}
 	}
 	
     var ownerName = getOnwertName();
