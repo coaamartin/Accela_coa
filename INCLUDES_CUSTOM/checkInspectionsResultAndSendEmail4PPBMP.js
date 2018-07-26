@@ -6,6 +6,7 @@
  * @param rptParams
  * @param asiFieldName
  * @returns {Boolean}
+ * 07/26/2018 (evontrapp) - added developer and project owner emails to CC list
  */
 function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldName) {
     logDebug("checkInspectionsResultAndSendEmail() started");
@@ -14,7 +15,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
     editAppSpecific(asiFieldName, newDate);
 
     //Send the email
-    var ownerEmail = null, applicantEmail = null;
+    var ownerEmail = null, applicantEmail = null, developerEmail = null, projectOwnerEmail = null;
     var owners = aa.owner.getOwnerByCapId(capId);
     if (owners.getSuccess()) {
         owners = owners.getOutput();
@@ -28,9 +29,23 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
         logDebug("**Failed to get owners on record " + capId + " Error: " + owners.getErrorMessage());
         return false;
     }
+	
+	//find applicant email
     var recordApplicant = getContactByType("Applicant", capId);
     if (recordApplicant) {
         applicantEmail = recordApplicant.getEmail();
+    }
+	
+	//find developer email
+	var recordDeveloper = getContactByType("Developer", capId);
+    if (recordDeveloper) {
+        developerEmail = recordDeveloper.getEmail();
+    }
+	
+	//find project owner email
+	var recordProjectOwner = getContactByType("Project Owner", capId);
+    if (recordProjectOwner) {
+        projectOwnerEmail = recordProjectOwner.getEmail();
     }
 
     if (ownerEmail == null || ownerEmail == "") {
@@ -38,6 +53,27 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
         return false
     }
 
+	//build CC email list
+	var ccEmail = "";
+	
+	if (isBlankOrNull(applicantEmail)==false) {
+		ccEmail = applicantEmail;
+	}
+	
+	if (isBlankOrNull(developerEmail)==false) {
+		if (ccEmail != "") {
+			ccEmail += ";" +developerEmail;
+		} else {
+			ccEmail = developerEmail;
+	}
+	
+	if (isBlankOrNull(projectOwnerEmail)==false) {
+		if (eeEmail != "") {
+			ccEmail += ";" +projectOwnerEmail;
+		} else {
+			ccEmail = projectOwnerEmail;
+	}
+	
     var ownerName = getOnwertName();
     
     //var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
@@ -62,11 +98,11 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
     envParameters.put("reportTemplate", reportTemplate);
     envParameters.put("vRParams", vRParams);
     envParameters.put("toEmail", ownerEmail);
-    envParameters.put("ccEmail", applicantEmail);
+    envParameters.put("ccEmail", ccEmail);
     logDebug("Attempting to run Async: " + vAsyncScript);
     aa.runAsyncScript(vAsyncScript, envParameters);
             
-    //var sendResult = sendNotification("noreply@aurora.gov",ownerEmail,"",emailTemplateName,emailParams,reportFile,capID4Email);
+    //var sendResult = sendNotification("noreply@aurora.gov",ownerEmail,ccEmail,emailTemplateName,emailParams,reportFile,capID4Email);
     //if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 
     return true;
