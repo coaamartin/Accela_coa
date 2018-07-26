@@ -51,7 +51,8 @@ function checkBalanceSendEmailAndUpdateWf(emailTemplateName, wfTaskFees, wfStatu
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 
-		var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, null);
+		var reportFile = [];
+		sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,reportFile);
 		if (!sent.getSuccess()) {
 			logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 			return false;
