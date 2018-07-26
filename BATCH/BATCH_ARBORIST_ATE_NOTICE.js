@@ -91,7 +91,7 @@ function notifyRecordsForRenewal() {
  * @param recordCap
  */
 function notifyApplicantOrAddToSet(recordCapId, recordCap) {
-	var applicant = getContactByType("Applicant", recordCapId);
+	var applicant = getContactByType("Arborist Applicant", recordCapId);
 	if (!applicant || applicant.getEmail() == null || applicant.getEmail() == "") {
 		var added = aa.set.addCapSetMember(SET_NAME, recordCapId);
 		logDebug("no applicant or no email for applicant, record added to SET .. " + added.getSuccess());
