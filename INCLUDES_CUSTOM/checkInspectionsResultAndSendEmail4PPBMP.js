@@ -107,7 +107,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
     logDebug("Attempting to run Async: " + vAsyncScript);
     aa.runAsyncScript(vAsyncScript, envParameters);
             
-    var sendResult = sendNotification("noreply@aurora.gov",ownerEmail,ccEmail,emailTemplateName,emailParams,reportFile,capID);
+    var sendResult = sendNotification("noreply@aurora.gov",ownerEmail,ccEmail,emailTemplateName,emailParams,reportFile,capId);
     if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 
     return true;
