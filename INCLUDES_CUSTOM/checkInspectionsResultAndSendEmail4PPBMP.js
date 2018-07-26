@@ -56,11 +56,11 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
 	//build CC email list
 	var ccEmail = "";
 	
-	if (isBlankOrNull(applicantEmail)==false) {
+	if (applicantEmail != null && applicantEmail != "") {
 		ccEmail = applicantEmail;
 	}
 	
-	if (isBlankOrNull(developerEmail)==false) {
+	if (developerEmail != null && developerEmail != "") {
 		if (ccEmail != "") {
 			ccEmail += ";" +developerEmail;
 		} else {
@@ -68,7 +68,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
 		}
 	}
 	
-	if (isBlankOrNull(projectOwnerEmail)==false) {
+	if (projectOwnerEmail != null && projectOwnerEmail != "") {
 		if (eeEmail != "") {
 			ccEmail += ";" +projectOwnerEmail;
 		} else {
