@@ -15,6 +15,12 @@
 
 logDebug("Script 186 START");
 
+var x = new Array;
+inspUserObj = null;
+x = getGISBufferInfo("AURORACO","Fire Response Zones Run Order","0.01","BATTALION_FIRSTDUE");
+logDebug("x =" + x);
 scheduleInspection("Fire Complaint",0);
 
+
 logDebug("Script 186 END");
+aa.sendMail("eric@esilverliningsolutions.com", "eric@esilverliningsolutions.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
