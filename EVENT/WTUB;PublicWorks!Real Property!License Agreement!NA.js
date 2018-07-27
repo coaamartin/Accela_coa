@@ -16,7 +16,7 @@ only display error message.
 - See below feeBalanceLocal() and reason to use it
 */
 //Script 164
-noInvoicedFeesErrorMessage("Completeness Check", [ "Ready to Pay" ]);
+//noInvoicedFeesErrorMessage("Completeness Check", [ "Ready to Pay" ]);
 
 //Script 294
 //Record Types:	​PublicWorks/Real Property/Easement/NA

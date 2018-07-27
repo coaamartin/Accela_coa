@@ -1,7 +1,5 @@
 //WTUB:PublicWorks/Real Property/License Agreement/NaN
 
-checkInvoiced();
-
 /* Title :  Payment before Route Signatures Completion (WorkflowTaskUpdateBefore)
 
 Purpose :  If workflow task = “Signatures” and workflow status = “Routed for Signatures” and Balance due > 0 or a fee item exists in a
