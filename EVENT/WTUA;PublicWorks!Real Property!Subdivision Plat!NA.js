@@ -30,6 +30,38 @@ if ($iTrc(wfTask=="Recordation" && wfStatus=="Recorded", 'wfTask=="Recordation" 
 //				(need template from Darren) include Comments 
 //
 //Created By: Silver Lining Solutions
+function generateInvoiceReport() {
+
+  //returns the report file which can be attached to an email.
+  var user = currentUserID;   // Setting the User Name
+  var report = aa.reportManager.getReportInfoModelByName("Invoice Report");
+  itemCap = capId;
+  parameters = ["PublicWorks"];
+  report = report.getOutput();
+  report.setModule("PublicWorks");
+  report.setCapId(itemCap.getID1() + "-" + itemCap.getID2() + "-" + itemCap.getID3());
+  report.setReportParameters(parameters);
+  report.getEDMSEntityIdModel().setAltId(itemCap.getCustomID());
+
+  var permit = aa.reportManager.hasPermission(reportName,user);
+
+  if (permit.getOutput().booleanValue()) {
+    var reportResult = aa.reportManager.getReportResult(report);
+    if(reportResult) {
+      reportOutput = reportResult.getOutput();
+      var reportFile=aa.reportManager.storeReportToDisk(reportOutput);
+      reportFile=reportFile.getOutput();
+      return reportFile;
+    }  else {
+      logDebug("System failed get report: " + reportResult.getErrorType() + ":" +reportResult.getErrorMessage());
+      return false;
+    }
+  } else {
+    logDebug("You have no permission.");
+    return false;
+  }
+}
+
 logDebug("START: Script 286");
 if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
 {
@@ -52,7 +84,7 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
 	addParameter(emailParameters, "$$wfComment$$", wfComment);
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
 	
-	generateReport(capId,"Invoice Report","PublicWorks","PublicWorks")
+	var myReport = generateInvoiceReport();
 	vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 	vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
 	var docNotFound = true;
