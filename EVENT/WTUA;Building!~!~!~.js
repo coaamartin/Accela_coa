@@ -40,18 +40,20 @@ if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
 if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
 	if(AInfo["Special Inspections"] != "Yes")
 	{
-		deactivateTask("Special Inspections Check","BLD_NEWCON_INSPSUB")
-		deactivateTask("Special Inspections Check","BLD_MASTER_INSPSUB")
+		deactivateTask("Special Inspections Check","BLD_NEWCON_INSPSUB");
+		deactivateTask("Special Inspections Check","BLD_MASTER_INSPSUB");
 	}
 
 	if(!isTaskStatus("Engineering Review","Approved with FEMA Cert Required"))
 	{
-		deactivateTask("FEMA Elevation Certification","BLD_NEWCON_INSPSUB")
+		deactivateTask("FEMA Elevation Certification","BLD_NEWCON_INSPSUB");
+		deactivateTask("FEMA Elevation Certification","BLD_MASTER_INSPSUB");
 	}
 	
 	if(!isTaskStatus("Waste Water Review","Approved Inspection Required"))
 	{
-		deactivateTask("Waste Water","BLD_NEWCON_INSPSUB")
+		deactivateTask("Waste Water","BLD_NEWCON_INSPSUB");
+		deactivateTask("Waste Water","BLD_MASTER_INSPSUB");
 	}
 
 }
