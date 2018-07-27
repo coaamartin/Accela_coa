@@ -18,7 +18,7 @@ function script58_SetEAgendaDueDate() {
         meetingDateMinus15 = dateAdd(aa.util.formatDate(meetingDate, "MM/dd/YYYY"), -15);
         meetingDateMinus20 = dateAdd(aa.util.formatDate(meetingDate, "MM/dd/YYYY"), -20);
 
-        editTaskDueDate(wfTaskToUpdate, aa.util.formatDate(meetingDateMinus15));
-        updateTaskAssignedDate(wfTaskToUpdate, aa.util.formatDate(meetingDateMinus20));
+        editTaskDueDate(wfTaskToUpdate, meetingDateMinus15);
+        updateTaskAssignedDate(wfTaskToUpdate, meetingDateMinus20);
     }
 }
