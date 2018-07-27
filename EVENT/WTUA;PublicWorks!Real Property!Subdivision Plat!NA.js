@@ -45,7 +45,7 @@ function generateInvoiceReport() {
   report.setReportParameters(reportParams);
   report.getEDMSEntityIdModel().setAltId(itemCap.getCustomID());
 
-  var permit = aa.reportManager.hasPermission(reportName,user);
+  var permit = aa.reportManager.hasPermission("Invoice Report",user);
 
   if (permit.getOutput().booleanValue()) {
     var reportResult = aa.reportManager.getReportResult(report);
