@@ -16,5 +16,6 @@ if (cOO!="CHECKED"){
 	deactivateTask("Certificate of Occupancy");
 }
 
-//TestComment
+//SWAKIL
+include("47_master_plan_parent");
 
