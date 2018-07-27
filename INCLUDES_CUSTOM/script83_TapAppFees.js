@@ -46,6 +46,11 @@ function script83_TapAppFees() {
 			if (AInfo["Type"] == "Commercial" && (AInfo["Size of Water Meter"] == '2 1/2"' || AInfo["Size of Water Meter"] == '3"' || AInfo["Size of Water Meter"] == '4"' || AInfo["Size of Water Meter"] =='5"' || AInfo["Size of Water Meter"] =='6"' || AInfo["Size of Water Meter"] =='7"' || AInfo["Size of Water Meter"] =='8"' || AInfo["Size of Water Meter"] =='9"' || AInfo["Size of Water Meter"] =='10"' || AInfo["Size of Water Meter"] =='11"' || AInfo["Size of Water Meter"] =='12"') ) {
 				updateFee("WAT_TA_39","WAT_TA","FINAL",1,"Y");
 			}
+			if (AInfo["Type"] == "Irrigation") {
+				updateFee("WAT_TA_36","WAT_TA","FINAL",AInfo["Non-water conserving sq ft"],"Y");
+				updateFee("WAT_TA_37","WAT_TA","FINAL",AInfo["Water conserving sq ft"],"Y");
+				updateFee("WAT_TA_38","WAT_TA","FINAL",AInfo["Z zone sq ft"],"Y");
+			}
 		} catch(err){
 			showMessage = true;
 			comment("Error on custom function script83_TapAppFees. Please contact administrator. Err: " + err);
@@ -53,7 +58,7 @@ function script83_TapAppFees() {
 			logDebug("A JavaScript Error occurred: ASA:Water/Water/Tap/Application 83: " + err.message);
 			logDebug(err.stack)
 		}
-	} else if (AInfo["Platted after 2017"] == "No"){ //use WAT_TA2 fee schedule if platted before 2017
+	} else if (AInfo["Platted after 2017"] == "No") { //use WAT_TA2 fee schedule if platted before 2017
 		try{
 			if (AInfo["Type"] == "Single Family Detached" && (AInfo["Water Closets"] >= "1" && AInfo["Water Closets"] <= "2")) {
 				updateFee("WAT_TA2_01","WAT_TA2","FINAL",1,"Y");
@@ -89,6 +94,11 @@ function script83_TapAppFees() {
 			}
 			if (AInfo["Type"] == "Commercial" && (AInfo["Size of Water Meter"] == '2 1/2"' || AInfo["Size of Water Meter"] == '3"' || AInfo["Size of Water Meter"] == '4"' || AInfo["Size of Water Meter"] =='5"' || AInfo["Size of Water Meter"] =='6"' || AInfo["Size of Water Meter"] =='7"' || AInfo["Size of Water Meter"] =='8"' || AInfo["Size of Water Meter"] =='9"' || AInfo["Size of Water Meter"] =='10"' || AInfo["Size of Water Meter"] =='11"' || AInfo["Size of Water Meter"] =='12"') ) {
 				updateFee("WAT_TA2_39","WAT_TA2","FINAL",1,"Y");
+			}
+			if (AInfo["Type"] == "Irrigation") {
+				updateFee("WAT_TA2_36","WAT_TA2","FINAL",AInfo["Non-water conserving sq ft"],"Y");
+				updateFee("WAT_TA2_37","WAT_TA2","FINAL",AInfo["Water conserving sq ft"],"Y");
+				updateFee("WAT_TA2_38","WAT_TA2","FINAL",AInfo["Z zone sq ft"],"Y");
 			}
 		} catch(err){
 			showMessage = true;
