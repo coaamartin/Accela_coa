@@ -36,11 +36,13 @@ function generateInvoiceReport() {
   var user = currentUserID;   // Setting the User Name
   var report = aa.reportManager.getReportInfoModelByName("Invoice Report");
   itemCap = capId;
-  parameters = ["PublicWorks"];
+  var reportParams = aa.util.newHashtable();
+  addParameter(reportParams, "RECORD_MODULE", "PublicWorks");
+	
   report = report.getOutput();
   report.setModule("PublicWorks");
   report.setCapId(itemCap.getID1() + "-" + itemCap.getID2() + "-" + itemCap.getID3());
-  report.setReportParameters(parameters);
+  report.setReportParameters(reportParams);
   report.getEDMSEntityIdModel().setAltId(itemCap.getCustomID());
 
   var permit = aa.reportManager.hasPermission(reportName,user);
