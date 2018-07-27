@@ -51,7 +51,32 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
 	addParameter(emailParameters, "$$ContactEmail$$", devEmail);
 	addParameter(emailParameters, "$$wfComment$$", wfComment);
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
-		
+	
+	generateReport(capId,"Invoice Report","PublicWorks","PublicWorks")
+	vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+	vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
+	var docNotFound = true;
+	vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
+	if (vDocumentList != null) {
+		vDocumentList = vDocumentList.getOutput();
+	}
+	if (vDocumentList != null) {
+		for (y = 0; y < vDocumentList.size(); y++) {
+			vDocumentModel = vDocumentList.get(y);
+			vDocumentCat = vDocumentModel.getDocCategory();
+			if (vDocumentCat == "Invoice Report") {
+				//Add the document url to the email paramaters using the name: $$acaDocDownloadUrl$$
+				getACADocDownloadParam4Notification(emailParams, vACAUrl, vDocumentModel);
+				logDebug("including document url: " + emailParams.get('$$acaDocDownloadUrl$$'));
+				aa.print("including document url: " + emailParams.get('$$acaDocDownloadUrl$$'));
+				docNotFound = false;
+				break;
+			}
+		}
+	}
+	//If no documents found then we just add the record link
+	if(!vDocumentList || docNotFound) addParameter(emailParams, "$$acaDocDownloadUrl$$", recordURL);
+
 	var reportFile = [];
 	var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW READY TO PAY #123",emailParameters,reportFile,capID4Email);
 	if (!sendResult) 
