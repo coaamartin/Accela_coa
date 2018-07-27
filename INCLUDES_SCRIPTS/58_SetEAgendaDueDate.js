@@ -13,7 +13,7 @@ function script58_SetEAgendaDueDate() {
         meetingType: wfTaskToUpdate 
     });
 
-    if(meetings && meetings.length > 0) {
+    if(ifTracer(meetings && meetings.length > 0, 'there are meetings')) {
         meetingDate = new Date(meetings[0].getMeeting().getStartDate().getTime());
         meetingDateMinus15 = dateAdd(aa.util.formatDate(meetingDate, "MM/dd/YYYY"), -15);
         meetingDateMinus20 = dateAdd(aa.util.formatDate(meetingDate, "MM/dd/YYYY"), -20);
