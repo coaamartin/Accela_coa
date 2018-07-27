@@ -45,7 +45,7 @@ function notifyOverdueIssuedPermits(grp, typ, stype, cat){
         if(ifTracer(capScript.getCapStatus() == "Issued", "Record status = Issued")) {
         //    capScript.capModel.expDate = new Date(2018,4,3);
             lic = aa.expiration.getLicensesByCapID(capScript.capID).getOutput();
-            if(lic != null && lic.getExpDate != null)// && lic.expStatus == 'Active') {
+            if(lic != null && lic.getExpDate != null) {// && lic.expStatus == 'Active') {
                 aa.print('record id - ' + capScript.capID.getCustomID());
                 expAccDate = lic.getExpDate();
                 if(expAccDate != null) {
