@@ -52,3 +52,8 @@ if(ifTracer(wfTask == "Final Acceptance Inspection" && wfStatus == "Warranty Wor
 	//Script 302
 	wtrScript302_warrantyReqdNotification();
 }
+
+/* Script 401 - moved from ASIUA to WTUA */
+if ("Water Main Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Fire Lines".equals(AInfo["Utility Permit Type"])) {
+	createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
+}
