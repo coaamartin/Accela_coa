@@ -33,7 +33,7 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
                 var thirtyDaysAhead = nextWorkDay(dateAdd(null, 30));
                 var days4Insp = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(thirtyDaysAhead));
         
-                scheduleInspectionCustom4CapId(childCapId, "Route Inspection", days4Insp);
+                scheduleInspectionCustom4CapId(childCapId, "Routine Inspection", days4Insp);
                 
                 var parents = getParents("PublicWorks/Civil Plan/Review/NA")
                 if(!parents || parents.length == 0){
