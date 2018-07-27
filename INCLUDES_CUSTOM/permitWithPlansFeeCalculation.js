@@ -138,7 +138,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
         
         //Chicken Fee
         var feeQtyCh = 0;
-        var chickens = asiValue["# of Chicken Coops"];
+        var chickens = asiValues["# of Chicken Coops"];
         if(chickens && chickens != null && chickens != ""){
             feeQtyCh = parseFloat(chickens);
         }
