@@ -167,7 +167,13 @@ try{
 	{
 		////Building Fee (Valuation) -- add logic for Other (dropdown)
 		var valuation = asiValues["Valuation"];
-		if (valuation && valuation != null && valuation != "") {
+        var perFeeTot = AInfo["Permit Fee Type Total"];
+        var feeAmt = 0;
+        
+        if(perFeeTot && parseFloat(perFeeTot) > 0) feeAmt = parseFloat(perFeeTot);
+        if(!perFeeTot && valuation && valuation != null && valuation != "") feeAmt = parseFloat(valuation);
+		
+		if (feeAmt > 0) {
 			updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
 		} else {
 			logDebug("**WARN " + permitFeeTypeAsiName + " is empty and Valuation is empty, no fees added");
