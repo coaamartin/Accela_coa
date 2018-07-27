@@ -555,13 +555,14 @@
           "postScript": "",
           "metadata": {
             "description": "To run automated script based on JSON rules - Script 418 b",
-            "operators": {        }
+            "operators": { "customFields":"!="       }
           },
           "criteria": {
             "task": ["Accepted In House"],
             "status": ["Routed for Review"],
             "customFields": {
-              "Project Category": "Single Family From Master"
+              "Project Category": "Single Family From Master",
+              "Project Category": "Custom Home"
             },
             "isCreatedByACA": "",
             "balanceAllowed": "",
@@ -570,7 +571,7 @@
           },
           "action": {
             "activateTask": ["Structural Plan Review"],
-            "daysOut": "7",
+            "daysOut": "26",
             "deactivateTask": ["Fire Life Safety Review", "Real Property Review", "Water Review", "Zoning Review", "Engineering Review", 
                           "Traffic Review", "Waste Water Review", "Forestry Review", "Bldg Life Safety Review", 
                           "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review", "Structural Engineering Review"],
