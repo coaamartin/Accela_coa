@@ -14,5 +14,9 @@ if(ifTracer(inspType == "Routine Inspections" && inspResult == "Ready for Final"
     if(ifTracer(rows, 'Pond Type list has rows')) {
         updateTask("Active Permit", "Ready for Final Certification", "", "");
         updateTask("Final Certification", "Upload Pending", "", "");
+    } else {
+        updateTask("Active Permit", "Ready for Closure No Pond", "", "");
+        updateTask("Closure", "Pending Final Inspection", "", "");
+        createPendingInspection('WAT_SW','Final Inspection');
     }
  }
