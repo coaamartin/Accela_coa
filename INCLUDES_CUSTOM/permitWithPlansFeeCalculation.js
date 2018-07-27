@@ -181,7 +181,7 @@ try{
         var feeAmt = 0;
         
         if(perFeeTot && parseFloat(perFeeTot) > 0) feeAmt = parseFloat(perFeeTot);
-        if(!perFeeTot && valuation && valuation != null && valuation != "") feeAmt = parseFloat(valuation);
+        else if(valuation && valuation != null && valuation != "") feeAmt = parseFloat(valuation);
         
         if (feeAmt > 0) {
             updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
