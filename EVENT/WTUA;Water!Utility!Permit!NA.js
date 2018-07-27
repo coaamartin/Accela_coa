@@ -59,7 +59,7 @@ if(ifTracer(wfTask == "Final Acceptance Inspection" && wfStatus == "Complete", '
 }
 
 /* Script 401 - moved from ASIUA to WTUA */
-if ( wfTask == "Permmit Issuance" && wfStatus == "Issued" ) {
+if ( wfTask == "Permit Issuance" && wfStatus == "Issued" ) {
 	if ("Water Main Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Fire Lines".equals(AInfo["Utility Permit Type"])) {
 		createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
 	}
