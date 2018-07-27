@@ -216,64 +216,6 @@
         }
       ]
     },
-    "Building/Permit/No Plans/NA": {
-      "PaymentReceiveAfter": [
-        {
-          "preScript": "",
-          "postScript": "",
-          "metadata": {
-            "description": "To run automated script based on JSON rules",
-            "operators": {
-              
-            }
-          },
-          "criteria": {
-            "isCreatedByACA": "",
-            "balanceAllowed": false,
-            "recordStatus": [
-              "Submitted"
-            ]
-          },
-          "action": {
-            "activateTask": [
-              
-            ],
-            "daysOut": "",
-            "deactivateTask": [
-              
-            ],
-            "deleteTask": [
-              
-            ],
-            "updateTask": [
-              {
-                "task": "Permit Issuance",
-                "status": "Issued"
-              }
-            ],
-            "invoiceFees": "",
-            "createChild": "",
-            "createParent": "",
-            "addCondition": "",
-            "addConditionSeverity": "",
-            "conditionType": "",
-            "removeCondition": "",
-            "addComment": "",
-            "newStatus": "Issued",
-            "assignToUserID": "",
-            "assessFees": [
-              {
-                "feeSchedule": "",
-                "feeCode": "",
-                "feeQuantity": "",
-                "feeInvoice": "",
-                "feePeriod": ""
-              }
-            ]
-          }
-        }
-      ]
-    },
     "Building/Permit/Plans/Amendment": {
       "WorkflowTaskUpdateAfter": [
         {
