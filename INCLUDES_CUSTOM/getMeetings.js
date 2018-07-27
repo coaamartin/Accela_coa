@@ -11,7 +11,7 @@
             allMeetings = aa.meeting.getMeetingsByCAP(settings.capId, settings.includeHistory).getOutput().toArray();
         
         for (idx in allMeetings) {
-			if (settings.meetingType == null || allMeetings[idx].getMeeting().getMeetingType() == settings.meetingType) {
+			if (settings.meetingType == null || allMeetings[idx].meeting.meetingType == settings.meetingType) {
                 filteredMeetings.push(allMeetings[idx])
 			}
         }

@@ -10,7 +10,7 @@ function script58_SetEAgendaDueDate() {
     activateTask('Create E-Agenda');
 
     meetings = getMeetings ({
-        meetingType: wfTaskToUpdate 
+        meetingType: 'CITY COUNCIL'
     });
 
     if(ifTracer(meetings && meetings.length > 0, 'there are meetings')) {
