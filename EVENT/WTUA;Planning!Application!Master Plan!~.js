@@ -86,7 +86,7 @@ logDebug("script419 WTUACreatePublicWorksDrainageRecord end.");
 
 //Script 58
 //-- this is how it is spelled now. if this is corrected then comment the first line and uncomment the second one
-setEAgendaDueDate("Generate Hearing Results", [ "Reveiw Complete" ], "Create E-Agenda", "City Council"); 
+//setEAgendaDueDate("Generate Hearing Results", [ "Reveiw Complete" ], "Create E-Agenda", "City Council"); 
 //setEAgendaDueDate("Generate Hearing Results", [ "Review Complete" ], "Create E-Agenda", "City Council");
 
 /*
