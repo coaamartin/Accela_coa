@@ -14,7 +14,7 @@ if(ifTracer(wfTask == "Initial Review" && wfStatus == "Assigned to Supervisor", 
             assignTask("Initial Supervisor Review",userObj.getUserID());
             updateTaskDepartment("Initial Supervisor Review",userObj.getDeptOfUser());
             editTaskSpecific("Initial Supervisor Review", "Assigned to Investgator", userObj.getUserID());	
-        } 
+        }    
     }
 }
 
