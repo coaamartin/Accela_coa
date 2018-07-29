@@ -86,7 +86,7 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
 	addParameter(emailParameters, "$$wfComment$$", wfComment);
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
 	
-	//var myReport = generateInvoiceReport();
+	var myReport = generateInvoiceReport();
 	vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 	vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
 	var docNotFound = true;
@@ -109,7 +109,7 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
 		}
 	}
 	//If no documents found then we just add the record link
-	if(!vDocumentList || docNotFound) addParameter(emailParams, "$$acaDocDownloadUrl$$", recordURL);
+	if(!vDocumentList || docNotFound) addParameter(emailParameters, "$$acaDocDownloadUrl$$", recordURL);
 
 	var reportFile = [];
 	var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW READY TO PAY #123",emailParameters,reportFile,capID4Email);
