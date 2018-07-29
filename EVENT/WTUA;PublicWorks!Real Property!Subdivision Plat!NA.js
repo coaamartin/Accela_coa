@@ -113,7 +113,7 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
 		}
 	}
 	//If no documents found then we just add the record link
-	var recordURL = getACARecordURL(acaURLDefault);
+	var recordURL = getACARecordURL(vACAUrl);
 	if(!vDocumentList || docNotFound) addParameter(emailParameters, "$$acaDocDownloadUrl$$", recordURL);
 
 	var reportFile = [];
