@@ -56,6 +56,8 @@ function generateInvoiceReport() {
 		reportOutput = reportResult.getOutput();
 		var reportFile=aa.reportManager.storeReportToDisk(reportOutput);
 		reportFile=reportFile.getOutput();
+		logDebug("report File = " + reportFile);
+		printObject(reportFile);
 		return reportFile;
 	}  
 	else {
