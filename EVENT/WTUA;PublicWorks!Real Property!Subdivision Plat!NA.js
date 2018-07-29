@@ -32,36 +32,40 @@ if ($iTrc(wfTask=="Recordation" && wfStatus=="Recorded", 'wfTask=="Recordation" 
 //Created By: Silver Lining Solutions
 function generateInvoiceReport() {
 
-  //returns the report file which can be attached to an email.
-  var user = currentUserID;   // Setting the User Name
-  var report = aa.reportManager.getReportInfoModelByName("Invoice Report");
-  itemCap = capId;
-  var reportParams = aa.util.newHashtable();
-  addParameter(reportParams, "RECORD_MODULE", "PublicWorks");
+	//returns the report file which can be attached to an email.
+	var user = currentUserID;   // Setting the User Name
+	var report = aa.reportManager.getReportInfoModelByName("Invoice Report");
+	itemCap = capId;
+	logDebug("report: " + report);
+	var reportParams = aa.util.newHashtable();
+	addParameter(reportParams, "AGENCYID", "AURORACO");
+	addParameter(reportParams, "INVOICEID", "855");
 	
-  report = report.getOutput();
-  report.setModule("PublicWorks");
-  report.setCapId(itemCap.getID1() + "-" + itemCap.getID2() + "-" + itemCap.getID3());
-  report.setReportParameters(reportParams);
-  report.getEDMSEntityIdModel().setAltId(itemCap.getCustomID());
+	report = report.getOutput();
+	report.setModule("PublicWorks");
+	report.setCapId(itemCap.getID1() + "-" + itemCap.getID2() + "-" + itemCap.getID3());
+	report.setReportParameters(reportParams);
+	report.getEDMSEntityIdModel().setAltId(itemCap.getCustomID());
 
-  var permit = aa.reportManager.hasPermission("Invoice Report",user);
+	var permit = aa.reportManager.hasPermission("Invoice Report",user);
 
-  if (permit.getOutput().booleanValue()) {
-    var reportResult = aa.reportManager.getReportResult(report);
-    if(reportResult) {
-      reportOutput = reportResult.getOutput();
-      var reportFile=aa.reportManager.storeReportToDisk(reportOutput);
-      reportFile=reportFile.getOutput();
-      return reportFile;
-    }  else {
-      logDebug("System failed get report: " + reportResult.getErrorType() + ":" +reportResult.getErrorMessage());
-      return false;
-    }
-  } else {
-    logDebug("You have no permission.");
-    return false;
-  }
+	if (permit.getOutput().booleanValue()) {
+	var reportResult = aa.reportManager.getReportResult(report);
+	if(reportResult) {
+		logDebug("report result = " + reportResult);
+		reportOutput = reportResult.getOutput();
+		var reportFile=aa.reportManager.storeReportToDisk(reportOutput);
+		reportFile=reportFile.getOutput();
+		return reportFile;
+	}  
+	else {
+		logDebug("System failed get report: " + reportResult.getErrorType() + ":" +reportResult.getErrorMessage());
+		return false;
+	}
+	} else {
+		logDebug("You have no permission.");
+		return false;
+	}
 }
 
 logDebug("START: Script 286");
