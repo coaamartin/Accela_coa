@@ -86,7 +86,7 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
 	addParameter(emailParameters, "$$wfComment$$", wfComment);
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
 	
-	var myReport = generateInvoiceReport();
+	//var myReport = generateInvoiceReport();
 	vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 	vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
 	var docNotFound = true;
