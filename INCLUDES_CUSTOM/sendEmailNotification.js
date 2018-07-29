@@ -56,4 +56,38 @@ function sendEmailNotification(emailTemplate,reportName){
 		logDebug("**WARN sending email failed");
 	}
   
+// 7/29/2018 New requirements added for script 290
+// need to send notice for a Public Hearing Notice document
+	vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+    vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
+    var docNotFound = true;
+    vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
+    if (vDocumentList != null) {
+        vDocumentList = vDocumentList.getOutput();
+    }
+	aa.print("doc list = " + vDocumentList);
+	aa.print("list size = " + vDocumentList.size());
+	if (vDocumentList != null) {
+		for (y = 0; y < vDocumentList.size(); y++) {
+			vDocumentModel = vDocumentList.get(y);
+			vDocumentCat = vDocumentModel.getDocCategory();
+			aa.print("doc category = " + vDocumentCat);
+			if (vDocumentCat == "Public Hearing Notice") {
+				//Add the document url to the email paramaters using the name: $$acaDocDownloadUrl$$
+				getACADocDownloadParam4Notification(eParams, vACAUrl, vDocumentModel);
+				logDebug("including document url: " + eParams.get('$$acaDocDownloadUrl$$'));
+				aa.print("including document url: " + eParams.get('$$acaDocDownloadUrl$$'));
+				docNotFound = false;
+				break;
+			}
+		}
+	}
+	var reportFile = [];
+	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParam,reportFile,capID4Email);
+	if (!sendResult) 
+		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	else
+		{ logDebug("Sent Notification"); }	
+
 }
