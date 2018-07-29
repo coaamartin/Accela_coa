@@ -1,5 +1,5 @@
 function sendEmailNotification(emailTemplate,reportName){
-
+	logDebug("SendEmailNotification START");
 	// Get the Applicant's email
 	var recordApplicant = getContactByType("Applicant", capId);
 	var applicantEmail = null;
@@ -84,10 +84,10 @@ function sendEmailNotification(emailTemplate,reportName){
 	}
 	var reportFile = [];
 	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
-	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParam,reportFile,capID4Email);
+	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParams,reportFile,capID4Email);
 	if (!sendResult) 
 		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 	else
 		{ logDebug("Sent Notification"); }	
-
+	logDebug("SendEmailNotification START");	
 }
