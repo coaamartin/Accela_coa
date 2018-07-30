@@ -34,27 +34,25 @@ function generateInvoiceReport() {
 
     //returns the report file which can be attached to an email.
     var user = currentUserID;   // Setting the User Name
-    var report = aa.reportManager.getReportInfoModelByName("Invoice Report");
-    itemCap = capId;
-    logDebug("report: " + report);
+    var reportResult = aa.reportManager.getReportInfoModelByName("Invoice Report");
+    logDebug("report: " + reportResult);
     lastInvoice = getLastInvoice({});
     if(lastInvoice) var invoiceNbr = lastInvoice.invNbr;
     else { logDebug("WARNING: There are no invoices to send."); return false; }
     var reportParams = aa.util.newHashtable();
     addParameter(reportParams, "AGENCYID", "AURORACO");
-    addParameter(reportParams, "INVOICEID", invoiceNbr);
+    addParameter(reportParams, "INVOICEID", invoiceNbr.toString());
     
-    report = report.getOutput();
+    report = reportResult.getOutput();
     report.setModule("PublicWorks");
-    report.setCapId(itemCap.getID1() + "-" + itemCap.getID2() + "-" + itemCap.getID3());
+    report.setCapId(capId.getID1() + "-" + capId.getID2() + "-" + capId.getID3());
     report.setReportParameters(reportParams);
-    report.getEDMSEntityIdModel().setAltId(itemCap.getCustomID());
+    report.getEDMSEntityIdModel().setAltId(capId.getCustomID());
 
     var permit = aa.reportManager.hasPermission("Invoice Report",user);
-
     if (permit.getOutput().booleanValue()) {
     var reportResult = aa.reportManager.getReportResult(report);
-    if(reportResult) {
+    if(reportResult.getSuccess()) {
         logDebug("report result = " + reportResult);
         reportOutput = reportResult.getOutput();
         var reportFile=aa.reportManager.storeReportToDisk(reportOutput);
@@ -123,7 +121,7 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
     if(!vDocumentList || docNotFound) addParameter(emailParameters, "$$acaDocDownloadUrl$$", recordURL);
 
     var reportFile = [];
-    var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW READY TO PAY #123",emailParameters,reportFile,capID4Email);
+    var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW SUBDIVISION READY TO PAY # 286",emailParameters,reportFile,capID4Email);
     if (!sendResult) 
         { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
     else
