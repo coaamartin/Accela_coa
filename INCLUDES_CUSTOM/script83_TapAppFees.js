@@ -4,6 +4,7 @@
 //Desc: Add fees with ASI is updated.
 //Created By: Silver Lining Solutions
 //Updated 07/27/2018 (evontrapp@etechconsultingllc.com) - Added logic to check for pre/post 2017 fee schedule
+//Updated 07/30/2018 (evontrapp@etechconsultingllc.com) - Added fee logic for Cherry Creek Basin, Commercial Water fee, and updated Z-Zone fee assessment
 
 function script83_TapAppFees() {
 	logDebug("script83_TapAppFees started.");
@@ -49,8 +50,18 @@ function script83_TapAppFees() {
 			if (AInfo["Type"] == "Irrigation") {
 				updateFee("WAT_TA_36","WAT_TA","FINAL",AInfo["Non-water conserving sq ft"],"Y");
 				updateFee("WAT_TA_37","WAT_TA","FINAL",AInfo["Water conserving sq ft"],"Y");
-				updateFee("WAT_TA_38","WAT_TA","FINAL",AInfo["Z zone sq ft"],"Y");
+				if (AInfo["Z zone sq ft"] != null && AInfo["Z zone sq ft"] != "") {
+					updateFee("WAT_TA_38","WAT_TA","FINAL",1,"Y");
+				}
 			}
+			if (AInfo["Cherry Creek Basin"] == "Yes") {
+				if (AInfo["Type"] == "Single Family Attached" || AInfo["Type"] == "Single Family Detached") {
+					updateFee("WAT_TA_40","WAT_TA","FINAL",1,"Y");
+				} else {
+					updateFee("WAT_TA_41","WAT_TA","FINAL",1,"Y");
+				}				
+			}
+			updateFee("WAT_TA_42","WAT_TA","FINAL",AInfo["Number of Water Meters"],"Y");
 		} catch(err){
 			showMessage = true;
 			comment("Error on custom function script83_TapAppFees. Please contact administrator. Err: " + err);
@@ -98,8 +109,18 @@ function script83_TapAppFees() {
 			if (AInfo["Type"] == "Irrigation") {
 				updateFee("WAT_TA2_36","WAT_TA2","FINAL",AInfo["Non-water conserving sq ft"],"Y");
 				updateFee("WAT_TA2_37","WAT_TA2","FINAL",AInfo["Water conserving sq ft"],"Y");
-				updateFee("WAT_TA2_38","WAT_TA2","FINAL",AInfo["Z zone sq ft"],"Y");
+				if (AInfo["Z zone sq ft"] != null && AInfo["Z zone sq ft"] != "") {
+					updateFee("WAT_TA2_38","WAT_TA2","FINAL",1,"Y");
+				}
 			}
+			if (AInfo["Cherry Creek Basin"] == "Yes") {
+				if (AInfo["Type"] == "Single Family Attached" || AInfo["Type"] == "Single Family Detached") {
+					updateFee("WAT_TA2_40","WAT_TA2","FINAL",1,"Y");
+				} else {
+					updateFee("WAT_TA2_41","WAT_TA2","FINAL",1,"Y");
+				}				
+			}
+			updateFee("WAT_TA2_42","WAT_TA2","FINAL",AInfo["Number of Water Meters"],"Y");
 		} catch(err){
 			showMessage = true;
 			comment("Error on custom function script83_TapAppFees. Please contact administrator. Err: " + err);
