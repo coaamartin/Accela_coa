@@ -10,6 +10,6 @@ function script250_updateAssignedUserForTrafficEngRequest(){
 		var userObj = aa.person.getUser(userName[0],null,userName[1]).getOutput();
 		assignTask("Traffic Investigation",userObj.getUserID());
 		updateTaskDepartment("Traffic Investigation",userObj.getDeptOfUser());
-		editTaskSpecific("Traffic Investigation", "Assigned to Investigator", assignedTo);	
+	//	editTaskSpecific("Traffic Investigation", "Assigned to Investigator", assignedTo);	
 	}
 }	
