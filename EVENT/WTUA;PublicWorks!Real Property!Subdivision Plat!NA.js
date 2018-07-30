@@ -100,8 +100,8 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
     envParameters.put("emailParameters", emailParameters);
     envParameters.put("CapId", capId);
     envParameters.put("emailTemplate", emailTemplateName);
-    envParameters.put("toEmail", ownerEmail);
-    envParameters.put("ccEmail", ccEmail);
+    envParameters.put("toEmail", devEmail);
+    envParameters.put("ccEmail", "");
     logDebug("Attempting to run Async: " + vAsyncScript);
     aa.runAsyncScript(vAsyncScript, envParameters);
 	
