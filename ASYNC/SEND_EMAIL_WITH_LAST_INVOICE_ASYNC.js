@@ -75,16 +75,20 @@ try{
         }
     }
     
+    var recordURL = getACARecordURL(vACAUrl);
+    if(!vDocumentList) addParameter(emailParameters, "$$acaRecordUrl$$", recordURL);
+    else addParameter(emailParameters, "$$acaRecordUrl$$", emailParameters.get("$$acaDocDownloadUrl$$"));
+    
     logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", toEmail, ccEmail, emailTemplate, emailParameters, capId4Email, null).getSuccess());
     
     //var sendResult = sendNotification("noreply@aurora.gov",toEmail,ccEmail,emailTemplate,emailParameters,reportFile,capID4Email);
     //if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 }
 catch(err){
-	showMessage = true;
+    showMessage = true;
     comment("Error on custom async script SEND_EMAIL_WITH_LAST_INVOICE_ASYNC. Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
     logDebug("Error on custom function SEND_EMAIL_WITH_LAST_INVOICE_ASYNC. Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
-	aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+    aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 }
 aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 function generateLastInvoiceReportForEmail4thisScript() {
@@ -114,9 +118,9 @@ function generateLastInvoiceReportForEmail4thisScript() {
         reportOutput = reportResult.getOutput();
         var reportFile=aa.reportManager.storeReportToDisk(reportOutput);
         reportFile=reportFile.getOutput();
-		var reportName = reportOutput.getName();
+        var reportName = reportOutput.getName();
         logDebug("report File = " + reportFile);
-		logDebug("report Name = " + reportName);
+        logDebug("report Name = " + reportName);
         printObject(reportName);
         return reportName;
     }  
