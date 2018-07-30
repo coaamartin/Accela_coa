@@ -113,7 +113,7 @@ function generateLastInvoiceReportForEmail4thisScript() {
         logDebug("report result = " + reportResult);
         reportOutput = reportResult.getOutput();
         var reportFile=aa.reportManager.storeReportToDisk(reportOutput);
-        reportFile=reportFile.getOutput();
+        reportFile=reportOutput.getOutput();
 		var reportName = reportFile.getName();
         logDebug("report File = " + reportFile);
 		logDebug("report Name = " + reportName);
