@@ -108,7 +108,7 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
             vDocumentCat = vDocumentModel.getDocCategory();
             if (vDocumentCat == "Invoice Report") {
                 //Add the document url to the email paramaters using the name: $$acaDocDownloadUrl$$
-                getACADocDownloadParam4Notification(emailParameters, vACAUrl, myReport);
+                getACADocDownloadParam4Notification(emailParameters, vACAUrl, vDocumentModel);
                 logDebug("including document url: " + emailParameters.get('$$acaDocDownloadUrl$$'));
                 aa.print("including document url: " + emailParameters.get('$$acaDocDownloadUrl$$'));
                 docNotFound = false;
