@@ -104,41 +104,6 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
     envParameters.put("ccEmail", "");
     logDebug("Attempting to run Async: " + vAsyncScript);
     aa.runAsyncScript(vAsyncScript, envParameters);
-	
-    //var myReport = generateInvoiceReport();
-    //vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
-    //vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
-    //var docNotFound = true;
-    //vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
-    //if (vDocumentList != null) {
-    //    vDocumentList = vDocumentList.getOutput();
-    //}
-    //if (vDocumentList != null) {
-    //    for (y = 0; y < vDocumentList.size(); y++) {
-    //        vDocumentModel = vDocumentList.get(y);
-    //        vDocumentCat = vDocumentModel.getDocCategory();
-    //        if (vDocumentCat == "Invoice Report" && myReport.endsWith(vDocumentModel.getFileName())) {
-    //            //Add the document url to the email paramaters using the name: $$acaDocDownloadUrl$$
-    //            getACADocDownloadParam4Notification(emailParameters, vACAUrl, vDocumentModel);
-    //            logDebug("including document url: " + emailParameters.get('$$acaDocDownloadUrl$$'));
-    //            aa.print("including document url: " + emailParameters.get('$$acaDocDownloadUrl$$'));
-    //            docNotFound = false;
-    //            break;
-    //        }
-    //    }
-    //}
-    ////If no documents found then we just add the record link
-    //var recordURL = getACARecordURL(vACAUrl);
-    //if(!vDocumentList || docNotFound) addParameter(emailParameters, "$$acaDocDownloadUrl$$", recordURL);
-    //
-    //addParameter(emailParameters, "$$acaRecordUrl$$", emailParameters.get("$$acaDocDownloadUrl$$"));
-    //
-    //var reportFile = [];
-    //var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW READY TO PAY #123",emailParameters,reportFile,capID4Email);
-    //if (!sendResult) 
-    //    { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-    //else
-    //    { logDebug("Sent Notification"); }  
     
 }
 if (wfTask == "Application Acceptance" && wfStatus == "Missing Information")
