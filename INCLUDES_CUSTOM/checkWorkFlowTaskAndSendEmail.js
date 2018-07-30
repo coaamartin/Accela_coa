@@ -12,7 +12,7 @@
 function checkWorkFlowTaskAndSendEmail(ParentParallelTask, workFlowParentTaskStatus, workflowParallelTasks, taskToBeUpdated, taskStatus, statusToBeChecked, emailTemplate) {
 	var isLastParallelTask = true;
 	var parentTask = aa.workflow.getTask(capId, ParentParallelTask).getOutput();
-	if (parentTask != null) {
+	if (ifTracer(parentTask != null, 'parentTask != null')) {
 		for ( var t in workflowParallelTasks) {
 			if (isTaskActive(workflowParallelTasks[t]) || parentTask.getDisposition() != workFlowParentTaskStatus) {
 				isLastParallelTask = false;
@@ -21,10 +21,10 @@ function checkWorkFlowTaskAndSendEmail(ParentParallelTask, workFlowParentTaskSta
 
 		}
 	}
-	if (isLastParallelTask) {
+	if (ifTracer(isLastParallelTask, 'isLastParallelTask')) {
 		for (t in workflowParallelTasks) {
 			var task = aa.workflow.getTask(capId, workflowParallelTasks[t]).getOutput();
-			if (task.getDisposition() != statusToBeChecked) {
+			if (ifTracer(task.getDisposition() != statusToBeChecked, 'task.getDisposition() != statusToBeChecked')) {
 				UpdateTaskAndSendNotification(emailTemplate, taskToBeUpdated, taskStatus);
 				deactivateTask("Completeness Check #2");
 				break;
