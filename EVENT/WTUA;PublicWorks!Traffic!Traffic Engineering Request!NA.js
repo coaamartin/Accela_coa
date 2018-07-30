@@ -13,7 +13,7 @@ if(ifTracer(wfTask == "Initial Review" && wfStatus == "Assigned to Supervisor", 
         if(userObj){
             assignTask("Initial Supervisor Review",userObj.getUserID());
             updateTaskDepartment("Initial Supervisor Review",userObj.getDeptOfUser());
-            editTaskSpecific("Initial Supervisor Review", "Assigned to Investigator", assignedTo);	
+            editTaskSpecific("Initial Supervisor Review", "Assigned to Supervisor", assignedTo);	
         }    
     }
 }
