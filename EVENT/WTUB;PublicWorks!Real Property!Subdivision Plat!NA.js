@@ -27,7 +27,7 @@ validateReceptionNumber();
 logDebug("START: Script 286");
 if(wfTask =="Application Acceptance" && wfStatus =="Ready to Pay") {
 	logDebug("task/status criteria met");
-	if (!hasNewOrInvoicedFees(capId, "")) {
+	if (!hasNewOrInvoicedFees(capId, "") && AInfo["Review Fee?"] == "Yes") {
 		logDebug("criteria met");
 		showMessage=true;
         comment("Please add fees to this case to continue");
