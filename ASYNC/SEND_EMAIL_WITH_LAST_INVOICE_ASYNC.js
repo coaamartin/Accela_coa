@@ -88,9 +88,8 @@ catch(err){
     showMessage = true;
     comment("Error on custom async script SEND_EMAIL_WITH_LAST_INVOICE_ASYNC. Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
     logDebug("Error on custom function SEND_EMAIL_WITH_LAST_INVOICE_ASYNC. Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
-    aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 }
-aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+
 function generateLastInvoiceReportForEmail4thisScript() {
     //returns the report file which can be attached to an email.
     //returns the report file which can be attached to an email.
