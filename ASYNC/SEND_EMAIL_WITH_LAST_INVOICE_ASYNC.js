@@ -27,6 +27,7 @@ var SCRIPT_VERSION = 3.0;
 aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, true));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
+eval(getScriptText("INCLUDES_CUSTOM", null, true));
 aa.print("Executing SEND_EMAIL_WITH_LAST_INVOICE_ASYNC");
 logDebug("Executing SEND_EMAIL_WITH_LAST_INVOICE_ASYNC");
 //Get environmental variables pass into the script
