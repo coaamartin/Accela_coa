@@ -55,7 +55,7 @@ function script83_TapAppFees() {
 				}
 			}
 			if (AInfo["Cherry Creek Basin"] == "Yes") {
-				if (AInfo["Type"] == "Single Family Attached" || "Single Family Detached") {
+				if (AInfo["Type"] == "Single Family Attached" || AInfo["Type"] == "Single Family Detached") {
 					updateFee("WAT_TA_40","WAT_TA","FINAL",1,"Y");
 				} else {
 					updateFee("WAT_TA_41","WAT_TA","FINAL",1,"Y");
@@ -114,7 +114,7 @@ function script83_TapAppFees() {
 				}
 			}
 			if (AInfo["Cherry Creek Basin"] == "Yes") {
-				if (AInfo["Type"] == "Single Family Attached" || "Single Family Detached") {
+				if (AInfo["Type"] == "Single Family Attached" || AInfo["Type"] == "Single Family Detached") {
 					updateFee("WAT_TA2_40","WAT_TA2","FINAL",1,"Y");
 				} else {
 					updateFee("WAT_TA2_41","WAT_TA2","FINAL",1,"Y");
