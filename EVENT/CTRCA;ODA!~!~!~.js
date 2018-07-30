@@ -22,3 +22,6 @@ try {
 	logDebug("**WARN add additional parcels from ASIT 'MULTIPLEPARCELS' failed, " + ex);
 }
 
+
+//Send ODA Pre App Email script 220
+script220_ApplicationReceivedEmailForPreApp();
