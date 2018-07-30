@@ -114,9 +114,11 @@ function generateLastInvoiceReportForEmail4thisScript() {
         reportOutput = reportResult.getOutput();
         var reportFile=aa.reportManager.storeReportToDisk(reportOutput);
         reportFile=reportFile.getOutput();
+		var reportName = reportFile.getName();
         logDebug("report File = " + reportFile);
-        printObject(reportFile);
-        return reportFile;
+		logDebug("report Name = " + reportName);
+        printObject(reportName);
+        return reportName;
     }  
     else {
         logDebug("System failed get report: " + reportResult.getErrorType() + ":" +reportResult.getErrorMessage());
