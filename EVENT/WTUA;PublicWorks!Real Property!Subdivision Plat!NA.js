@@ -89,10 +89,10 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
         
     var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
     var emailParameters = aa.util.newHashtable();
-    addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+    addParameter(emailParameters, "$$altID$$", capIDString);
     addParameter(emailParameters, "$$ContactEmail$$", devEmail);
     addParameter(emailParameters, "$$wfComment$$", wfComment);
-    addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
+    addParameter(emailParameters, "$$recordAlias$$", appTypeAlias);
     
     var myReport = generateInvoiceReport();
     vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
@@ -119,9 +119,11 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
     //If no documents found then we just add the record link
     var recordURL = getACARecordURL(vACAUrl);
     if(!vDocumentList || docNotFound) addParameter(emailParameters, "$$acaDocDownloadUrl$$", recordURL);
+    
+    addParameter(emailParameters, "$$acaRecordUrl$$", emailParameters.get("$$acaDocDownloadUrl$$"));
 
     var reportFile = [];
-    var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW SUBDIVISION READY TO PAY # 286",emailParameters,reportFile,capID4Email);
+    var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW READY TO PAY #123",emailParameters,reportFile,capID4Email);
     if (!sendResult) 
         { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
     else
