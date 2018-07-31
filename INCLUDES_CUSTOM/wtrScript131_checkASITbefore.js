@@ -21,7 +21,7 @@ function wtrScript131_checkASITbefore(){
             }
             
         }
-        catch(err)
+        catch(err){
             if(watMatRows < minRows) doCancel = true;
         }
         
