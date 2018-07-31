@@ -33,7 +33,7 @@ function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToA
 			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 
-			var reportTemplate = "";
+			var reportTemplate = reportName;
 			var reportParams = aa.util.newHashtable();
 			addParameter(reportParams, "RecordID", capIDString);
 			
