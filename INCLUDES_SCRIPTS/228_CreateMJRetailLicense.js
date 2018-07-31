@@ -80,6 +80,8 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		if (appMatch("Licenses/Marijuana/Retail Store/License", vLicenseID) && (wfStatus == "Issued")) {
 			vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
 			vReportTemplate = "MJ_License";
+			tmpCap = capId;
+			capId = vLicenseID;
 			scheduleInspection("MJ AMED Inspection", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 228");
@@ -87,6 +89,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 			scheduleInspection("MJ Building Inspections - Life Safety", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Structural", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			capId = tmpCap;
 		}
 
 		//are these the parameters used in the email or report?
