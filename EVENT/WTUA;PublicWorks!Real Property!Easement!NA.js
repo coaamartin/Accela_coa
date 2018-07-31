@@ -24,7 +24,7 @@ var taskToUpdated = "Completeness Check #2";
 var Status = "Resubmittal Requested";
 var statusToCheck = "Complete";
 
-if(ifTracer(workflowTasks.indexOf(wfTask) > -1, 'workflowTasks.indexOf(wfTask) > -1' )) {
+if(ifTracer(workflowTasks.indexOf(wfTask.toString()) > -1, 'workflowTasks.indexOf(wfTask) > -1' )) {
 	checkWorkFlowTaskAndSendEmail(workFlowParentTask, workFlowParentStatus, workflowTasks, taskToUpdated, Status, statusToCheck, "PW EASEMENT RESUBMITAL #296");
 }
 
