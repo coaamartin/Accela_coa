@@ -16,7 +16,7 @@ function odaScript225_emailMeetingNotes(){
         addParameter(emailParams, "$$altID$$", capIDString);
         addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
         
-        var resParEmail = getContactEmailAddress("Responsible Party", capId) + ";";
+        var resParEmail = "";
         var ccEmails = "";
         
         if(resParEmail){
