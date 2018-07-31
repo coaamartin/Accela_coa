@@ -15,6 +15,8 @@ Functional Area : Records
 Sample Call:
 checkWorkFlowTaskAndSendEmail("Review Distribution","Route for Review",["Engineering Review", "Water Dept Review"], "Completeness Check #2", "Resubmittal Requested", "Complete", "MESSAGE_NOTICE_PUBLIC WORKS");
  */
+
+ logDebug('Script 296 Starting.');
 var workFlowParentTask = "Review Distribution";
 var workFlowParentStatus = "Route for Review";
 var workflowTasks = [ "Engineering Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review" ];
