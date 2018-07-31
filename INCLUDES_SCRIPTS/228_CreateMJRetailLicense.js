@@ -37,7 +37,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	} else if (appTypeArray[3] == "Application") {
 		vLicenseID = createParent(appTypeArray[0], appTypeArray[1], appTypeArray[2], vParentLicType, getAppName(capId));
 	}
-	
+
 	//If the current record is an application record and the parent license
 	//record does not exist or the current record is a renewal record and
 	//the parent license does exist then update the license records info
@@ -62,6 +62,10 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 
 		//Copy application name from child to license
 		editAppName(getAppName(capId), vLicenseID);
+
+		//Activate the license records expiration cycle
+		vLicenseObj = new licenseObject(null, vLicenseID);
+		vLicenseObj.setStatus("Active");
 
 		//Update License Workflow
 		tmpCap = capId;
