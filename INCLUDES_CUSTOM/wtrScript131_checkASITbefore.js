@@ -1,8 +1,8 @@
 function wtrScript131_checkASITbefore(){
     logDebug("wtrScript131_checkASITbefore() started");
+    var permitType = AInfo["Utility Permit Type"];
     if(permitType == "Water Main Utility Permit"){
         try{
-            var permitType = AInfo["Utility Permit Type"];
             var watMatRows = 0;
             var minRows = 1;
             var doCancel = false;
