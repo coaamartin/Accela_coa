@@ -31,14 +31,18 @@ function inspectionsComplete()
 			for (xx in n)
 			{
 				inspStatus = n[xx].getInspectionStatus().toUpperCase();
+				logDebug(inspStatus);
 				if (!( inspStatus.equals("PASSED") || inspStatus.equals("CANCELED") || inspStatus.equals("COMPLETE")) ) 
 				{
+				  logDebug("inspection check returns false...");
 				  return false;
 				}
 			}
+			logDebug("inspection check returns true...");
 			return true; 
 		} 
 	} 
+	logDebug("inspection getSuccess returns false...");
 	return false;
 }
 
@@ -56,11 +60,15 @@ function inspectionComplete(type)
 				inspStatus = n[xx].getInspectionStatus().toUpperCase();
 				if ( inspType.equals(type) && inspStatus.equals("COMPLETE"))  
 				{
+				  logDebug("Initial Acceptance returns true...");
 				  return true;
 				}
 			}
+			logDebug("Initial Acceptance returns false...");
+			return false;
 		} 
-	} 
+	}
+	logDebug("Initial Acceptance getSuccess returns false...");
 	return false;
 }
 
