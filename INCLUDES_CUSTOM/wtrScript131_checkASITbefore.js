@@ -9,7 +9,7 @@ function wtrScript131_checkASITbefore(){
             loadASITablesBefore();
             
             watMatRows = WATERMATERIAL.length;
-            for(x in EMPLOYEEINFORMATION){
+            for(x in WATERMATERIAL){
                 var col1 = WATERMATERIAL[x]["Size of Pipe"];
                 var col2 = WATERMATERIAL[x]["Pipe Material"];       
                 var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];
@@ -22,15 +22,13 @@ function wtrScript131_checkASITbefore(){
                 }
                 else
                     doCancel = true;
-				
-				if(currentUserID == "TLEDEZMA") doCancel = true;
             }
             
         }
         catch(err){
             if(watMatRows < minRows) doCancel = true;
         }
-        
+		
         if(doCancel){
             cancel = true;
             showMessage = true;
