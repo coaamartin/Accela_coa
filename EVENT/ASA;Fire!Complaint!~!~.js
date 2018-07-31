@@ -30,18 +30,6 @@ if (x && x.length > 0) {
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
 		scheduleInspection("Fire Complaint",0);
 	}
-	/*var offFullName = x[0]["BATTALION_FIRSTDUE"];
-	var offFname = offFullName.substr(0,offFullName.indexOf(' '));
-	var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
-	inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
-
-	if(inspUserObj != null){
-		scheduleInspection("Fire Complaint",0, inspUserID);}
-	else{
-		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
-		scheduleInspection("Fire Complaint",0);
-	}*/
-
 }
 else{
 	comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
