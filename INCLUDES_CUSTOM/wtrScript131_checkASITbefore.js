@@ -12,12 +12,18 @@ function wtrScript131_checkASITbefore(){
             for(x in EMPLOYEEINFORMATION){
                 var col1 = WATERMATERIAL[x]["Size of Pipe"];
                 var col2 = WATERMATERIAL[x]["Pipe Material"];       
-                var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];   
+                var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];
+				
+				logDebug("col1:" + col1 + ";col1.length():" + col1.length());
+				logDebug("col2:" + col2 + ";col2.length():" + col2.length());
+				logDebug("col3:" + col3 + ";col3.length():" + col3.length());
                 if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
                    doCancel = false;
                 }
                 else
                     doCancel = true;
+				
+				if(currentUserID == "TLEDEZMA") doCancel = true;
             }
             
         }
