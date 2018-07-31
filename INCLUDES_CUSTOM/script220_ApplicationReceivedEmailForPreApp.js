@@ -42,7 +42,7 @@ function script220_ApplicationReceivedEmailForPreApp() {
                     ccEmails += aCont.email + ",";
             }
             
-            var sendResult = sendNotification("noreply@aurora.gov",resParEmail,ccEmails,emailTemplate,emailParams,reportFile,capID4Email);
+            var sendResult = sendNotification("noreply@auroragov.org",resParEmail,ccEmails,emailTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("script220: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
             else { logDebug("script220: Sent email notification that ODA PRE APP is Submitted to "+resParEmail)}
         }

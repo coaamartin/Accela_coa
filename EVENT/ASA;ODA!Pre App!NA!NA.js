@@ -1,1 +1,1 @@
-script220_ApplicationReceivedEmailForPreApp();
+if(!publicUser) script220_ApplicationReceivedEmailForPreApp();
