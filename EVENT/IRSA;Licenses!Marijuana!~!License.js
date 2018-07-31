@@ -30,7 +30,9 @@ autoScheduleFailedInspectionsOrgScheduleDatePlusDays([ "MJ AMED Inspection", "MJ
 failedMJInspectionAutomation([ "MJ AMED Inspection", "MJ Building Inspection - Electrical", "MJ Building Inspection - Life Safety",
 		"MJ Building Inspection - Mechanical", "MJ Building Inspection - Plumbing", "MJ Building Inspection - Structural", "MJ Security Inspection - 3rd Party",
 		"MJ Zoning Inspection" ], "Failed", 7, "LIC MJ INSPECTION CORRECTION REPORT # 231", "WorkFlowTasksOverdue");
-		
+
+/* comment out for testing 		
 passedMJInspectionAutomation([ "MJ AMED Inspection", "MJ Building Inspection - Electrical", "MJ Building Inspection - Life Safety",
 		"MJ Building Inspection - Mechanical", "MJ Building Inspection - Plumbing", "MJ Building Inspection - Structural", "MJ Security Inspection - 3rd Party",
 		"MJ Zoning Inspection" ], "Passed", 7, "LIC MJ COMPLIANCE #232", "WorkFlowTasksOverdue", rptParams);
+*/
