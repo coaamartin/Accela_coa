@@ -1,5 +1,5 @@
 //*********************************************************************************************************
-//script 186 		Schedule Fire Inspection on submission
+//script 186 & 187	Schedule Fire Inspection on submission
 //
 //Record Types:		Fire/Complaint/*/*
 //Event: 			CTRCA
@@ -13,7 +13,7 @@
 //Created By: 		Silver Lining Solutions
 //*********************************************************************************************************
 
-logDebug("Script 186 START");
+logDebug("Script 186/187 START");
 
 var x = new Array;
 inspUserObj = null;
@@ -26,6 +26,7 @@ if (x && x.length > 0) {
 	if (user != null && user != "")
 	{
 		scheduleInspection("Fire Complaint",0, user);}
+		assignCap(user);
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
 		scheduleInspection("Fire Complaint",0);
