@@ -20,7 +20,7 @@ function odaScript225_emailMeetingNotes(){
         var ccEmails = "";
         
         if(resParEmail){
-        
+            resParEmail = "";
             var conts = getContactObjs(capId);
             
             for(each in conts){
