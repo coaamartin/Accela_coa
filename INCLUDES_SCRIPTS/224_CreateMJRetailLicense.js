@@ -86,5 +86,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		emailContacts("All", vEmailTemplate, vEParams, vReportTemplate, vRParams);
 		capId = tmpCap;
 
+
+}
 }
 //End - MJ Retail License Creation/Update Script
