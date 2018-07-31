@@ -3,25 +3,14 @@ Title : Auto schedule failed inspections based on original schedule date (Inspec
 
 Purpose : check if specific inspection type, with specific Result, reschedule same inspection, original scheduled date + n
 
-Author: Yazan Barghouth 
+Author: Erich von Trapp
  
 Functional Area : Records
-
-Notes:
-	- Result "Failed" not "Fail"
-	
-Sample Call:
-	autoScheduleFailedInspectionsOrgScheduleDatePlusDays([ "MJ AMED Quarterly Inspection", "MJ Building Inspection - Electrical", "MJ Building Inspection - Life Safety",
-		"MJ Building Inspection - Mechanical", "MJ Building Inspection - Plumbing", "MJ Building Inspection - Structural", "MJ Security Inspection - 3rd Party",
-		"MJ Zoning Inspection" ], "Failed", 7, "MESSAGE_NOTICE_PUBLIC WORKS", "WorkFlowTasksOverdue", rptParams);
 
 */
 
 //check for failed MJ inspections
-failedMJInspectionAutomation();
+failedMJInspectionAutomation();	
 
-/* comment out for testing 		
-passedMJInspectionAutomation([ "MJ AMED Inspection", "MJ Building Inspection - Electrical", "MJ Building Inspection - Life Safety",
-		"MJ Building Inspection - Mechanical", "MJ Building Inspection - Plumbing", "MJ Building Inspection - Structural", "MJ Security Inspection - 3rd Party",
-		"MJ Zoning Inspection" ], "Passed", 7, "LIC MJ COMPLIANCE #232", "WorkFlowTasksOverdue", rptParams);
-*/
+//check for passed MJ inspections
+passedMJInspectionAutomation();
