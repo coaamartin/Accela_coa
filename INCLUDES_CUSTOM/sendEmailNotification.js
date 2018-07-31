@@ -84,7 +84,7 @@ function sendEmailNotification(emailTemplate,reportName){
 	}
 	var reportFile = [];
 	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
-	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParams,reportFile,capID4Email);
+	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,cc,emailTemplate,eParams,reportFile,capID4Email);
 	if (!sendResult) 
 		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 	else
