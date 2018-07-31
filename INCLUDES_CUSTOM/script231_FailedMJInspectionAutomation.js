@@ -9,7 +9,7 @@
  * @returns {Boolean}
  *
  */
-function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToAdd, emailTemplateName, reportName, rptParams) {
+function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToAdd, emailTemplateName, reportName) {
 
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == inspReqResult) {
@@ -18,6 +18,9 @@ function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToA
 			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
 			scheduleInspectDate(inspType, newInspSchedDate);
 
+			
+			
+			
 			//get applicant
 			var applicant = getContactByType("Applicant", capId);
 			if (!applicant || !applicant.getEmail()) {
@@ -36,8 +39,8 @@ function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToA
 			}
 			if (inspResult)
 				addParameter(eParams, "$$inspResult$$", inspResult);
-			//if (inspComment)
-			//	addParameter(eParams, "$$inspComment$$", inspComment);
+			if (inspComment)
+				addParameter(eParams, "$$inspComment$$", inspComment);
 			if (inspResultDate)
 				addParameter(eParams, "$$inspResultDate$$", inspResultDate);
 			if (inspGroup)
@@ -48,7 +51,15 @@ function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToA
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplateName,eParams,"");
+			var reportTemplate = "";
+			var reportParams = aa.util.newHashtable();
+			addParameter(reportParams, "RecordID", capIDString);
+			emailContacts(applicant.getEmail(), emailTemplateName, eParams, reportTemplate, reportParams);
+
+			
+			
+			
+			//sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplateName,eParams,"");
 			return true;
 		}//inspType/Result matched
 	}//for all inspection types
