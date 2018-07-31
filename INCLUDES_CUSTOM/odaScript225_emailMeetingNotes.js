@@ -83,7 +83,7 @@ function odaScript225_emailMeetingNotes(){
             //If no documents found then we just add the record link
             if(!vDocumentList || docNotFound) addParameter(emailParams, "$$acaDocDownloadUrl$$", recordURL);
             
-            var sendResult = sendNotification("noreply@aurora.gov",resParEmail,ccEmails,emailTemplate,emailParams,reportFile,capID4Email);
+            var sendResult = sendNotification("noreply@auroragov.org",resParEmail,ccEmails,emailTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("script225: UNABLE TO SEND NOTICE!  ERROR: "+ sendResult.getErrorMessage()); }
             else { logDebug("script225: Sent email notification of meeting notes to "+ resParEmail + ", and CC to " + ccEmails)}
         }
