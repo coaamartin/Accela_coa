@@ -22,8 +22,6 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vEndOfMonth;
 	var vGoLive;
 
-
-
 	//If the current record is an application record and the parent license
 	//record does not exist or the current record is a renewal record and
 	//the parent license does exist then update the license records info
@@ -49,15 +47,11 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		//Copy application name from child to license
 		editAppName(getAppName(capId), vLicenseID);
 
-
 		//Update License Workflow
 		tmpCap = capId;
 		capId = vLicenseID;
 		updateTask("License Status", "Active", "Updated by Script 224_CreateMJRetailLicense", "Update by Script 224_CreateMJRetailLicense");
 		capId = tmpCap;
-
-	
-
 
 		//Generate license report and email
 		var vEmailTemplate;
@@ -66,13 +60,13 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		if (appMatch("Licenses/Marijuana/Retail Store/License", vLicenseID)&& (wfStatus == "Issued")) {
 				vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
 				vReportTemplate = "MJ_License";
-			    scheduleInspection ("MJ AMED Inspection",77, SLCLARK," ", "Scheduled by Script 224")
-				scheduleInspection ("MJ Building Inspections - Plumbing",77, SLCLARK, " ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Building Inspections - Electrical",77, SLCLARK," ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Building Inspections - Mechanical",77, SLCLARK," ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Building Inspections - Life Safety",77, SLCLARK," ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Security Inspections - 3rd Party",77, SLCLARK," ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Buidling Inspections - Structural",77, SLCLARK," ", "Scheduled by Script 224") 				
+			    scheduleInspection ("MJ AMED Inspection",77, "SLCLARK"," ", "Scheduled by Script 224")
+				scheduleInspection ("MJ Building Inspections - Plumbing",77, "SLCLARK", " ", "Scheduled by Script 224") 
+				scheduleInspection ("MJ Building Inspections - Electrical",77, "SLCLARK"," ", "Scheduled by Script 224") 
+				scheduleInspection ("MJ Building Inspections - Mechanical",77, "SLCLARK"," ", "Scheduled by Script 224") 
+				scheduleInspection ("MJ Building Inspections - Life Safety",77, "SLCLARK"," ", "Scheduled by Script 224") 
+				scheduleInspection ("MJ Security Inspections - 3rd Party",77, "SLCLARK"," ", "Scheduled by Script 224") 
+				scheduleInspection ("MJ Buidling Inspections - Structural",77, "SLCLARK"," ", "Scheduled by Script 224") 				
 		
 		}
 		
@@ -82,8 +76,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
-		
-	
+			
 		var vRParams = aa.util.newHashtable();
 		addParameter(vRParams, "p1Value", vLicenseID.getCustomID());
 

@@ -16,7 +16,7 @@ function odaScript225_emailMeetingNotes(){
         addParameter(emailParams, "$$altID$$", capIDString);
         addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
         
-        var resParEmail = getContactEmailAddress("Responsible Party", capId);
+        var resParEmail = getContactEmailAddress("Responsible Party", capId) + ";";
         var ccEmails = "";
         
         if(resParEmail){
@@ -38,7 +38,7 @@ function odaScript225_emailMeetingNotes(){
                     var staffObj = aa.person.getUser(adaProjManSplit[0], "", adaProjManSplit[1]).getOutput();
                 
                 if(staffObj.email != null && staffObj.email != undefined && staffObj.email != "") {
-                    ccEmails += staffObj.email;
+                    ccEmails += staffObj.email + ";";
                     addParameter(emailParams, "$$projectManagerEmail$$", staffObj.email)
                 }
             }           
@@ -51,7 +51,7 @@ function odaScript225_emailMeetingNotes(){
                     var staffObj = aa.person.getUser(adaProjCorSplit[0], "", adaProjCorSplit[1]).getOutput();
                 
                 if(staffObj.email != null && staffObj.email != undefined && staffObj.email != "") {
-                    ccEmails += staffObj.email;
+                    ccEmails += staffObj.email + ";";
                     addParameter(emailParams, "$$projectCoordinatorEmail$$", staffObj.email)
                 }
             }
@@ -83,7 +83,7 @@ function odaScript225_emailMeetingNotes(){
             //If no documents found then we just add the record link
             if(!vDocumentList || docNotFound) addParameter(emailParams, "$$acaDocDownloadUrl$$", recordURL);
             
-            var sendResult = sendNotification("noreply@aurora.gov",resParEmail,ccEmails,emailTemplate,emailParams,reportFile,capID4Email);
+            var sendResult = sendNotification("noreply@auroragov.org",resParEmail,ccEmails,emailTemplate,emailParams,reportFile,capID4Email);
             if (!sendResult) { logDebug("script225: UNABLE TO SEND NOTICE!  ERROR: "+ sendResult.getErrorMessage()); }
             else { logDebug("script225: Sent email notification of meeting notes to "+ resParEmail + ", and CC to " + ccEmails)}
         }

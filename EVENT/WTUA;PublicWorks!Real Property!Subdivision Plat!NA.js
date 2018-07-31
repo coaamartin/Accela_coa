@@ -94,40 +94,16 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
     addParameter(emailParameters, "$$wfComment$$", wfComment);
     addParameter(emailParameters, "$$recordAlias$$", appTypeAlias);
     
-    var myReport = generateInvoiceReport();
-    vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
-    vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
-    var docNotFound = true;
-    vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
-    if (vDocumentList != null) {
-        vDocumentList = vDocumentList.getOutput();
-    }
-    if (vDocumentList != null) {
-        for (y = 0; y < vDocumentList.size(); y++) {
-            vDocumentModel = vDocumentList.get(y);
-            vDocumentCat = vDocumentModel.getDocCategory();
-            if (vDocumentCat == "Invoice Report" && myReport.endsWith(vDocumentModel.getFileName())) {
-                //Add the document url to the email paramaters using the name: $$acaDocDownloadUrl$$
-                getACADocDownloadParam4Notification(emailParameters, vACAUrl, vDocumentModel);
-                logDebug("including document url: " + emailParameters.get('$$acaDocDownloadUrl$$'));
-                aa.print("including document url: " + emailParameters.get('$$acaDocDownloadUrl$$'));
-                docNotFound = false;
-                break;
-            }
-        }
-    }
-    //If no documents found then we just add the record link
-    var recordURL = getACARecordURL(vACAUrl);
-    if(!vDocumentList || docNotFound) addParameter(emailParameters, "$$acaDocDownloadUrl$$", recordURL);
-    
-    addParameter(emailParameters, "$$acaRecordUrl$$", emailParameters.get("$$acaDocDownloadUrl$$"));
-
-    var reportFile = [];
-    var sendResult = sendNotification("noreply@aurora.gov",devEmail,"","PW READY TO PAY #123",emailParameters,reportFile,capID4Email);
-    if (!sendResult) 
-        { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-    else
-        { logDebug("Sent Notification"); }  
+	var vAsyncScript = "SEND_EMAIL_WITH_LAST_INVOICE_ASYNC";
+	var emailTemplateName = "PW READY TO PAY #123";
+	var envParameters = aa.util.newHashMap();
+    envParameters.put("emailParameters", emailParameters);
+    envParameters.put("CapId", capId);
+    envParameters.put("emailTemplate", emailTemplateName);
+    envParameters.put("toEmail", devEmail);
+    envParameters.put("ccEmail", "");
+    logDebug("Attempting to run Async: " + vAsyncScript);
+    aa.runAsyncScript(vAsyncScript, envParameters);
     
 }
 if (wfTask == "Application Acceptance" && wfStatus == "Missing Information")
@@ -159,26 +135,34 @@ if (wfTask == "Application Acceptance" && wfStatus == "Missing Information")
 logDebug("END: Script 286");
 
 function invoiceAllNewFees() {
-    var feeFound = false;
-    var fperiod = "";
-    getFeeResult = aa.fee.getFeeItems(capId,"",null);
-    if (getFeeResult.getSuccess()) 
-    {
-        var feeList = getFeeResult.getOutput();
-        
-        for (feeNum in feeList)
-            if (feeList[feeNum].getFeeitemStatus().equals("NEW")) 
-            {
-                var feeSeq = feeList[feeNum].getFeeSeqNbr();
-                feeSeqList.push(feeSeq);
-                paymentPeriodList.push(fperiod);
-                feeFound = true;
-                logDebug("Script 286: Assessed fee found and tagged for invoicing");
-            }
-    } 
-    else 
-    {
-        logDebug("Script 286: no fees exist that are not invoiced")
-    }
+	var feeFound = false;
+	var fperiod = "";
+	var thisFeeSeqList = [];
+	var thisPaymentPeriodList = [];
+	getFeeResult = aa.fee.getFeeItems(capId,"",null);
+	if (getFeeResult.getSuccess()) 
+	{
+		var feeList = getFeeResult.getOutput();
+		
+		for (feeNum in feeList)
+			if (feeList[feeNum].getFeeitemStatus().equals("NEW")) 
+			{
+				var feeSeq = feeList[feeNum].getFeeSeqNbr();
+				thisFeeSeqList.push(feeSeq);
+				thisPaymentPeriodList.push(fperiod);
+				feeFound = true;
+				logDebug("Script 286: Assessed fee found and tagged for invoicing");
+			}
+	} 
+	else 
+	{
+		logDebug("Script 286: no fees exist that are not invoiced");
+		return feeFound
+	}
+	
+	var invResult = aa.finance.createInvoice(capId, thisFeeSeqList, thisPaymentPeriodList);
+	if (invResult.getSuccess())
+		logDebug("Invoicing assessed fee items is successful.");
+	
     return feeFound;
 } 
