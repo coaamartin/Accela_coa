@@ -21,7 +21,17 @@ x = getGISBufferInfo("AURORACO","Fire Response Zones Run Order","0.01","BATTALIO
 logDebug("x =" + x);
 if (x && x.length > 0) {
 	logDebug(x[0]["BATTALION_FIRSTDUE"]);
-	var offFullName = x[0]["BATTALION_FIRSTDUE"];
+	var refUser = x[0]["BATTALION_FIRSTDUE"];
+	var user = lookup("FIRE STATION", refUser);
+	if (user != null && user != "")
+	{
+		scheduleInspection("Fire Complaint",0, inspUserID);}
+	}
+	else{
+		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
+		scheduleInspection("Fire Complaint",0);
+	}
+	/*var offFullName = x[0]["BATTALION_FIRSTDUE"];
 	var offFname = offFullName.substr(0,offFullName.indexOf(' '));
 	var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
 	inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
@@ -31,7 +41,7 @@ if (x && x.length > 0) {
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
 		scheduleInspection("Fire Complaint",0);
-	}
+	}*/
 
 }
 else{
