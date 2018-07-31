@@ -25,7 +25,7 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, insp2Create, update
                 //    closeTask(wfTsk2Update, wfSt2Update);
                 //else
                 //    updateTask(wfTsk2Update, wfSt2Update);
-			    resultWorkflowTask(wfTsk2Update, wfSt2Updat);
+			    resultWorkflowTask(wfTsk2Update, wfSt2Update);
             }
         }
     }
