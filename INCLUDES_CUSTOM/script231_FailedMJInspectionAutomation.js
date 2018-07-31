@@ -48,7 +48,7 @@ function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToA
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplateName,eParams,"",capID);
+			sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplateName,eParams,"",capId);
 			return true;
 		}//inspType/Result matched
 	}//for all inspection types
