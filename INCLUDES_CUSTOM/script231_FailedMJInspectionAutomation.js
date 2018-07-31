@@ -36,8 +36,8 @@ function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToA
 			}
 			if (inspResult)
 				addParameter(eParams, "$$inspResult$$", inspResult);
-			if (inspComment)
-				addParameter(eParams, "$$inspComment$$", inspComment);
+			//if (inspComment)
+			//	addParameter(eParams, "$$inspComment$$", inspComment);
 			if (inspResultDate)
 				addParameter(eParams, "$$inspResultDate$$", inspResultDate);
 			if (inspGroup)
