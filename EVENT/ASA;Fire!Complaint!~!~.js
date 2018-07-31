@@ -26,7 +26,6 @@ if (x && x.length > 0) {
 	if (user != null && user != "")
 	{
 		scheduleInspection("Fire Complaint",0, inspUserID);}
-	}
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
 		scheduleInspection("Fire Complaint",0);
