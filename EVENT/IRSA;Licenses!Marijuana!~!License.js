@@ -17,19 +17,8 @@ Sample Call:
 
 */
 
-//pre-existing code, probably needs to be removed once testing is concluded
-/*
-autoScheduleFailedInspectionsOrgScheduleDatePlusDays([ "MJ AMED Inspection", "MJ Building Inspection - Electrical", "MJ Building Inspection - Life Safety",
-		"MJ Building Inspection - Mechanical", "MJ Building Inspection - Plumbing", "MJ Building Inspection - Structural", "MJ Security Inspection - 3rd Party",
-		"MJ Zoning Inspection" ], "Failed", 7, "LIC MJ INSPECTION CORRECTION REPORT # 231", "WorkFlowTasksOverdue", rptParams);
-*/		
-
-//var rptParams = aa.util.newHashtable();
-//rptParams.put("altID", cap.getCapModel().getAltID());
-		
-failedMJInspectionAutomation([ "MJ AMED Inspection", "MJ Building Inspection - Electrical", "MJ Building Inspection - Life Safety",
-		"MJ Building Inspection - Mechanical", "MJ Building Inspection - Plumbing", "MJ Building Inspection - Structural", "MJ Security Inspection - 3rd Party",
-		"MJ Zoning Inspection" ], "Failed", 7, "LIC MJ INSPECTION CORRECTION REPORT # 231", "WorkFlowTasksOverdue");
+//check for failed MJ inspections
+failedMJInspectionAutomation();
 
 /* comment out for testing 		
 passedMJInspectionAutomation([ "MJ AMED Inspection", "MJ Building Inspection - Electrical", "MJ Building Inspection - Life Safety",
