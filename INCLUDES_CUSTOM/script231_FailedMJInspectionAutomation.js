@@ -33,6 +33,10 @@ function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToA
 			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 
+			var reportTemplate = "";
+			var reportParams = aa.util.newHashtable();
+			addParameter(reportParams, "RecordID", capIDString);
+			
 			if (inspId) {
 				addParameter(eParams, "$$inspId$$", inspId);
 				reportParams.put("inspId", inspId);
@@ -51,12 +55,8 @@ function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToA
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			var reportTemplate = "";
-			var reportParams = aa.util.newHashtable();
-			addParameter(reportParams, "RecordID", capIDString);
 			emailContacts(applicant.getEmail(), emailTemplateName, eParams, reportTemplate, reportParams);
 
-			
 			
 			
 			//sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplateName,eParams,"");
