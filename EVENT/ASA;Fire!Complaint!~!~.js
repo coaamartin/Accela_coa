@@ -25,7 +25,7 @@ if (x && x.length > 0) {
 	var user = lookup("FIRE STATION", refUser);
 	if (user != null && user != "")
 	{
-		scheduleInspection("Fire Complaint",0, inspUserID);}
+		scheduleInspection("Fire Complaint",0, user);}
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
 		scheduleInspection("Fire Complaint",0);
