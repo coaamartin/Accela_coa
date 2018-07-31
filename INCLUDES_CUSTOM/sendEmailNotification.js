@@ -51,10 +51,10 @@ function sendEmailNotification(emailTemplate,reportName){
 	var rptParams = aa.util.newHashtable();
 	rptParams.put("RECORD_MODULE", "PLANNING");
 	
-	var sent =sendEmailWithReport(applicantEmail,cc, emailTemplate, reportName, rptParams, eParams);
+/*	var sent =sendEmailWithReport(applicantEmail,cc, emailTemplate, reportName, rptParams, eParams);
 	if (sent==false) {
 		logDebug("**WARN sending email failed");
-	}
+	}*/
   
 // 7/29/2018 New requirements added for script 290
 // need to send notice for a Public Hearing Notice document
