@@ -1,5 +1,6 @@
-//Start - 224 MJ Retail License Creation/Update Script 
-
+//Start - 228 MJ Retail License Creation/Update Script 
+logDebug("etw capId: " + capId);
+/*
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;
@@ -88,4 +89,5 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 
 }
 }
+*/
 //End - MJ Retail License Creation/Update Script
