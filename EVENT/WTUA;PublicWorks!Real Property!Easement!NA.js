@@ -24,7 +24,9 @@ var taskToUpdated = "Completeness Check #2";
 var Status = "Resubmittal Requested";
 var statusToCheck = "Complete";
 
-checkWorkFlowTaskAndSendEmail(workFlowParentTask, workFlowParentStatus, workflowTasks, taskToUpdated, Status, statusToCheck, "PW EASEMENT RESUBMITAL #296");
+if(ifTracer(workflowTasks.indexOf(wfTask) > -1, 'workflowTasks.indexOf(wfTask) > -1' )) {
+	checkWorkFlowTaskAndSendEmail(workFlowParentTask, workFlowParentStatus, workflowTasks, taskToUpdated, Status, statusToCheck, "PW EASEMENT RESUBMITAL #296");
+}
 
 /*
 Title : Update Signed License Due Date Custom Field (WorkflowTaskUpdateAfter)
