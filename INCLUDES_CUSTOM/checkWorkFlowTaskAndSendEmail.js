@@ -14,7 +14,7 @@ function checkWorkFlowTaskAndSendEmail(ParentParallelTask, workFlowParentTaskSta
 	var parentTask = aa.workflow.getTask(capId, ParentParallelTask).getOutput();
 	if (ifTracer(parentTask != null, 'parentTask != null')) {
 		for ( var t in workflowParallelTasks) {
-			if (isTaskActive(workflowParallelTasks[t]) || parentTask.getDisposition() != workFlowParentTaskStatus) {
+			if (ifTracer(isTaskActive(workflowParallelTasks[t]) || parentTask.getDisposition() != workFlowParentTaskStatus, 'workflowParallelTasks[t]) || parentTask.getDisposition() != workFlowParentTaskStatus')) {
 				isLastParallelTask = false;
 				break;
 			}
