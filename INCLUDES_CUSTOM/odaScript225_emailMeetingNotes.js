@@ -16,11 +16,11 @@ function odaScript225_emailMeetingNotes(){
         addParameter(emailParams, "$$altID$$", capIDString);
         addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
         
-        var resParEmail = "";
+        var resParEmail = getContactEmailAddress("Responsible Party", capId) + ";";
         var ccEmails = "";
         
         if(resParEmail){
-        
+            resParEmail = "";
             var conts = getContactObjs(capId);
             
             for(each in conts){
