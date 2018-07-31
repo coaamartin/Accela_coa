@@ -27,10 +27,7 @@ function wtrScript131_checkASITbefore(){
         }
         catch(err){
             if(watMatRows < minRows) doCancel = true;
-			logDebug("WARNING: " + err)
         }
-        
-		if(currentUserID == "TLEDEZMA") doCancel = true;
 		
         if(doCancel){
             cancel = true;
