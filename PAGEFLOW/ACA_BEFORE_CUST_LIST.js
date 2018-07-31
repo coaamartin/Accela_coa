@@ -79,7 +79,7 @@ var appTypeString = appTypeResult.toString();               // Convert applicati
 var appTypeArray = appTypeString.split("/");                // Array of application type string
 var AInfo = new Array();                        // Create array for tokenized variables
 var capId = null; // needed for next call
-loadAppSpecific4ACA(AInfo);                       // Add AppSpecific Info
+//loadAppSpecific4ACA(AInfo);                       // Add AppSpecific Info
 
 // page flow custom code begin
 
