@@ -55,7 +55,7 @@ function failedMJInspectionAutomation(inspectionTypesAry, inspReqResult, daysToA
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			emailContacts(applicant.getEmail(), emailTemplateName, eParams, reportTemplate, reportParams);
+			emailContacts("Applicant", emailTemplateName, eParams, reportTemplate, reportParams);
 
 			
 			
