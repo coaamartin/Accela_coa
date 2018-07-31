@@ -75,7 +75,7 @@ function inspectionComplete(type)
 function sendEmailToApplicant(){
   var contact = "Applicant";
   var template = "WAT_MATERIALS_TESTING";
-  var asiextensionnumber = getAppSpecific("Extension Number");
+  var asiextensionnumber = getAppSpecific("Extension Number") + "" //it may be null so best to turn into blank string;
   var emailparams = aa.util.newHashtable();
   emailparams.put("$$asi_ExtensionNumber$$", asiextensionnumber);
   emailContacts(contact, template, emailparams, "", "", "N", "");
