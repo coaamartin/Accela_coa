@@ -69,12 +69,13 @@ if(isTaskActive("Subtasks Complete","BLD_MASTER_INSPSUB") && allTasksComplete("B
 	closeTask("Subtasks Complete","Complete","","", "BLD_MASTER_INSPSUB")
 }
 
-/**
- * Workflow automation for all Building
+/**ACCELA CIVIC PLATFORM TO CRM SCRIPTING LOGIC 
+ * Workflow automation for all Building Records 
  * @namespace WTUA:Building///
  * @requires INCLUDES_CRM
  */
 
+//Retreive Enterprise CRM Function File 
 eval(getScriptText("INCLUDES_CRM", null, false));
 
 logDebug("*** BEGIN process_WF_JSON_Rules for CRM (Building) ***");
@@ -82,6 +83,8 @@ logDebug("*** BEGIN process_WF_JSON_Rules for CRM (Building) ***");
 process_WF_JSON_Rules(capId, wfTask, wfStatus);
 logDebug("*** FINISH process_WF_JSON_Rules for CRM (Building) ***");
 
+
+//Start Logic For Building Workflow Statuses that trigger when comments status updates are published to the shadow record which will push to CRM System
 if (appMatch("Building/Enforcement/Notice of Violation/NA")) {
     var parent = getParent();
     if(parent){
