@@ -1,8 +1,6 @@
 //written by JMAIN
 
-//get some facts about this record
-var currenttask = wfTask;
-var currenttaskstatus = wfStatus;
+//get some facts about this application
 var asi_isprojectphased = getAppSpecific("Is this project going to be phased?");
 var neededdocument = "Phase Work Plan";
 
@@ -24,14 +22,12 @@ if (documentsobject.getSuccess())
 	}
 }
 
-logDebug(currenttask);
-logDebug(currenttaskstatus);
 logDebug(asi_isprojectphased);
 logDebug(neededdocument);
 logDebug(docuploaded);
 
 //raise a message if necessary
-if (currenttask == "Engineering Review" && currenttaskstatus == "Approved" && asi_isprojectphased == "Yes" && !docuploaded)
+if (asi_isprojectphased == "Yes" && !docuploaded)
 {
 	cancel = true;
 	showMessage = true;
