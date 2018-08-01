@@ -38,13 +38,13 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	numFailInsp = getAppSpecific("Number of Failed Inspections");
 	
 	var daysAhead = 0;
-	if((inspResult == "Fail" || inspResult == Violations Found") && numFailInsp == 1 )
+	if((inspResult == "Fail" || inspResult == "Violations Found") && numFailInsp == 1 )
 	{	//schedule 30 days out
 		daysAhead = 30;	}
-	else if((inspResult == "Order Notice")
+	else if(inspResult == "Order Notice")
 	{	//schedule 3 days out
 		daysAhead = 3;	}
-	else if((inspResult == "Fail" || inspResult == Violations Found") && (numFailInsp == 2 || numFailInsp == 3) )
+	else if((inspResult == "Fail" || inspResult == "Violations Found") && (numFailInsp == 2 || numFailInsp == 3) )
 	{	//schedule 14 days out
 		daysAhead = 14;	}
 	else if(numFailInsp >= 4 )
