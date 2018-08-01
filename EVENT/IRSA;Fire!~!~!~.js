@@ -58,9 +58,9 @@ logDebug("Script 15 - inspResult = " + inspResult + " daysAhead = " + daysAhead 
 	var oneDay = 24*60*60*1000; // number of millisec in a day
 	var targetDate = new Date(targetDateString);
 	var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
-	
+logDebug("Script 15 - checkpoint 0 targetDateString = " + targetDateString + " oneDay = " + oneDay + " targetDate = " + targetDate + " daysOut = " + daysOut);
 logDebug("Script 15 - check point 1");
-	//var inspDate = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
+	var inspDate = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
 logDebug("Script 15 - check point inspDate = " + inspDate + " lookForMMDDYYYY = " + lookForMMDDYYYY);
 	scheduleInspection(newInspType,daysOut,inspector);
 logDebug("Script 15 - check point 2");
