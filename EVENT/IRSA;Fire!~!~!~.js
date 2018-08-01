@@ -24,10 +24,6 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	if (inspType == "FD Initial Unscheduled Inspection")
 		{newInspType = "FD Follow-Up";}
 		
-	//delete full Custom List on the record
-	
-	//insert a row for each item on the checklist that was in violation
-	
 	//assign inspector based on inspector assigned to the record
 	var inspector = null;
 	var assignedStaff = getAssignedStaff();
@@ -50,7 +46,7 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	else if(numFailInsp >= 4 )
 	{	//schedule 1 days out
 		daysAhead = 1;	}
-logDebug("Script 15 - inspResult = " + inspResult + " daysAhead = " + daysAhead + " inspector = " + inspector);
+
 	//schedule follow up inspection based on working days
 	var dToday = new Date();
 	var td = aa.date.parseDate(dateAddHC2(dToday,daysAhead,true));
@@ -58,15 +54,17 @@ logDebug("Script 15 - inspResult = " + inspResult + " daysAhead = " + daysAhead 
 	var oneDay = 24*60*60*1000; // number of millisec in a day
 	var targetDate = new Date(targetDateString);
 	var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
-logDebug("Script 15 - checkpoint 0 targetDateString = " + targetDateString + " oneDay = " + oneDay + " targetDate = " + targetDate + " daysOut = " + daysOut);
-logDebug("Script 15 - check point 1");
-//	var inspDate = aa.date.parseDate(aa.date.addDate(targetDate,0));
-logDebug("Script 15 - check point 1.5");
 	scheduleInspection(newInspType,daysOut,inspector);
-logDebug("Script 15 - check point 2");
+
 	//copy checklist to new inspection
 	var inspId = getScheduledInspId(newInspType);
 logDebug("Script 15 - check point 3");
+
+	//delete full Custom List on the record
+	deleteASIT("Fire Violations");
+	
+	//insert a row for each item on the checklist that was in violation
+	
 }
 
 // notify all contacts and attach to record communications
@@ -80,4 +78,72 @@ if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResul
 	closeCap(currentUserId);
 }
 logDebug("Script 15 - End");
+
+
+function deleteASIT(tableName)
+{
+	// Create a HashMap.
+	var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
+	// Create a List object to add the value of Column.
+	var columnName ="Violation Status";
+	var valuesList = aa.util.newArrayList();
+	valuesList.add("Compliance");
+	valuesList.add("Corrected On Site");
+	valuesList.add("Non Compliance");
+	searchConditionMap.put(columnName, valuesList);
+
+	var capIDModel = aa.cap.getCapIDModel(capId).getOutput();
+
+	var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIDModel, tableName, searchConditionMap);
+	if (appSpecificTableInfo.getSuccess())
+	{
+		var appSpecificTableModel = appSpecificTableInfo.getOutput().getAppSpecificTableModel();
+		var tableFields = appSpecificTableModel.getTableFields(); // List
+		if (tableFields != null && tableFields.size() > 0)
+		{
+			var deleteIDsArray = []; // delete ASIT data rows ID
+			for(var i=0; i < tableFields.size(); i++)
+			{
+				var fieldObject = tableFields.get(i); // BaseField
+				// get the column name.
+				var columnName = fieldObject.getFieldLabel();
+				// get the value of column
+				var columnValue = fieldObject.getInputValue();
+				// get the row ID 
+				var rowID = fieldObject.getRowIndex();
+				aa.print(columnName + ": " + columnValue + "   rowID: " + rowID);
+				if (!contains(deleteIDsArray, rowID))
+				{
+					deleteIDsArray.push(rowID);
+				}
+			}
+			deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray);
+		}	
+	}
+}
+
+
+/**
+* Delete ASIT rows data by rowID, format: Array[rowID]
+**/
+function deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray/** Array[rowID] **/)
+{
+	if (deleteIDsArray == null || deleteIDsArray.length == 0)
+	{
+		return;
+	}
+	
+	var asitTableScriptModel = aa.appSpecificTableScript.createTableScriptModel();
+	var asitTableModel = asitTableScriptModel.getTabelModel();
+	var rowList = asitTableModel.getRows();
+	asitTableModel.setSubGroup(tableName);
+	for (var i = 0; i < deleteIDsArray.length; i++)
+	{
+		var rowScriptModel = aa.appSpecificTableScript.createRowScriptModel();
+		var rowModel = rowScriptModel.getRow();
+		rowModel.setId(deleteIDsArray[i]);
+		rowList.add(rowModel);
+	}
+	return aa.appSpecificTableScript.deletedAppSpecificTableInfors(capIDModel, asitTableModel);
+}	
 
