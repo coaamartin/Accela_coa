@@ -50,18 +50,20 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	else if(numFailInsp >= 4 )
 	{	//schedule 1 days out
 		daysAhead = 1;	}
-
+logDebug("Script 15 - inspResult = " + inspResult + " daysAhead = " + daysAhead + " inspector = " + inspector);
 	//schedule follow up inspection based on working days
 	var dToday = new Date();
-	var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,daysAhead));
+	var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,daysAhead,true));
 	var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 							+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 							+ lookForPlanningMtgDate.getYear();
+logDebug("Script 15 - check point 1");
 	var inspDate = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
 	scheduleInspection(newInspType,inspDate,inspector);
-
+logDebug("Script 15 - check point 2");
 	//copy checklist to new inspection
 	var inspId = getScheduledInspId(newInspType);
+logDebug("Script 15 - check point 3");
 }
 
 // notify all contacts and attach to record communications
@@ -75,3 +77,4 @@ if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResul
 	closeCap(currentUserId);
 }
 logDebug("Script 15 - End");
+
