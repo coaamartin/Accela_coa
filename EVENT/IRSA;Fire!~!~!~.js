@@ -53,14 +53,16 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 logDebug("Script 15 - inspResult = " + inspResult + " daysAhead = " + daysAhead + " inspector = " + inspector);
 	//schedule follow up inspection based on working days
 	var dToday = new Date();
-	var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,daysAhead,true));
-	var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
-							+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
-							+ lookForPlanningMtgDate.getYear();
+	var td = aa.date.parseDate(dateAddHC2(dToday,daysAhead,true));
+	var targetDateString = ("0" + td.getMonth()).slice(-2) + "/" + ("0" + td.getDayOfMonth()).slice(-2) + "/" + td.getYear();
+	var oneDay = 24*60*60*1000; // number of millisec in a day
+	var targetDate = new Date(targetDateString);
+	var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
+	
 logDebug("Script 15 - check point 1");
-	var inspDate = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
+	//var inspDate = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
 logDebug("Script 15 - check point inspDate = " + inspDate + " lookForMMDDYYYY = " + lookForMMDDYYYY);
-	scheduleInspection(newInspType,inspDate,inspector);
+	scheduleInspection(newInspType,daysOut,inspector);
 logDebug("Script 15 - check point 2");
 	//copy checklist to new inspection
 	var inspId = getScheduledInspId(newInspType);
