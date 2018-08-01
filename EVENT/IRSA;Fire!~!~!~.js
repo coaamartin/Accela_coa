@@ -59,6 +59,7 @@ logDebug("Script 15 - inspResult = " + inspResult + " daysAhead = " + daysAhead 
 							+ lookForPlanningMtgDate.getYear();
 logDebug("Script 15 - check point 1");
 	var inspDate = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
+logDebug("Script 15 - check point 1ish");
 	scheduleInspection(newInspType,inspDate,inspector);
 logDebug("Script 15 - check point 2");
 	//copy checklist to new inspection
