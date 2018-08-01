@@ -45,15 +45,14 @@ if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
     }
 }
 
-if (SA) {
-    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA));
-    eval(getScriptText(SAScript, SA));
-} else {
-    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-}
+//if (SA) {
+//    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA));
+//    eval(getScriptText(SAScript, SA));
+//} else {
+//    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+//}
 
-eval(getScriptText("INCLUDES_CUSTOM",null,useCustomScriptFile));
-
+//eval(getScriptText("INCLUDES_CUSTOM",null,useCustomScriptFile));
 
 function getScriptText(vScriptName, servProvCode, useProductScripts) {
     if (!servProvCode)  servProvCode = aa.getServiceProviderCode();
@@ -72,6 +71,15 @@ function getScriptText(vScriptName, servProvCode, useProductScripts) {
 }
 
 
+if (SA) {
+    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA, useCustomScriptFile));
+    eval(getScriptText("INCLUDES_ACCELA_GLOBALS", SA, useCustomScriptFile));
+    eval(getScriptText(SAScript, SA));
+} else {
+    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, useCustomScriptFile));
+    eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, useCustomScriptFile));
+}
+
 var cap = aa.env.getValue("CapModel");
 var parentId = cap.getParentCapID();
 var appTypeResult = cap.getCapType();
@@ -79,7 +87,7 @@ var appTypeString = appTypeResult.toString();               // Convert applicati
 var appTypeArray = appTypeString.split("/");                // Array of application type string
 var AInfo = new Array();                        // Create array for tokenized variables
 var capId = null; // needed for next call
-//loadAppSpecific4ACA(AInfo);                       // Add AppSpecific Info
+loadAppSpecific4ACA(AInfo);                       // Add AppSpecific Info
 
 // page flow custom code begin
 
@@ -91,42 +99,38 @@ parcel = cap.getParcelModel();
 address = cap.getAddressModel();
 
 //Do any pageflow validation scripting for custom lists here for water
-//if(appTypeArray[0] == 'Water'){
-//    //Scripting for Water/Utility/Permit/NA
-//    if(appTypeString == "Water/Utility/Permit/NA"){
-//        var permitType = AInfo["Utility Permit Type"];
-//        if(permitType == "Water Main Utility Permit"){
-//            loadASITables4ACA();
-//            //if (typeof (WATERMATERIAL) == "object") {
-//            //    for(x in WATERMATERIAL){
-//            //        var col1 = WATERMATERIAL[x]["Size of Pipe"];
-//            //        var col2 = WATERMATERIAL[x]["Pipe Material"];       
-//            //        var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];
-//            //        
-//            //        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
-//            //        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
-//            //        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
-//            //        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
-//            //            cancel = false;
-//            //        }
-//            //        else
-//            //            message += "You must add at least 1 row in  WATER MATERIAL.";
-//            //    }
-//            //}
-//            //else
-//            //    message += "You must add at least 1 row in  WATER MATERIAL.";
-//        }
-//    }
-//    //end Scripting for Water/Utility/Permit/NA
-//    message += "Test";
-//	showDebug = true;
-//    showMessage = cancel = message.length ? true : false;
-//    
-//}//END scriting for water module
-  message += "Test";
-  showDebug = true;// page flow custom code end
-  showMessage = cancel = message.length ? true : false;
-  aa.sendMail("jal@byrnesoftware.com", "jal@byrnesoftware.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+if(appTypeArray[0] == 'Water'){
+    //Scripting for Water/Utility/Permit/NA
+    if(appTypeString == "Water/Utility/Permit/NA"){
+        var permitType = AInfo["Utility Permit Type"];
+        if(permitType == "Water Main Utility Permit"){
+            loadASITables4ACA();
+            //if (typeof (WATERMATERIAL) == "object") {
+            //    for(x in WATERMATERIAL){
+            //        var col1 = WATERMATERIAL[x]["Size of Pipe"];
+            //        var col2 = WATERMATERIAL[x]["Pipe Material"];       
+            //        var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];
+            //        
+            //        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
+            //        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
+            //        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
+            //        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
+            //            cancel = false;
+            //        }
+            //        else
+            //            message += "You must add at least 1 row in  WATER MATERIAL.";
+            //    }
+            //}
+            //else
+            //    message += "You must add at least 1 row in  WATER MATERIAL.";
+        }
+    }
+    //end Scripting for Water/Utility/Permit/NA
+    message += "Test";
+	showDebug = true;
+    showMessage = cancel = message.length ? true : false;
+    
+}//END scriting for water module
 
 if (debug.indexOf("**ERROR") > 0) {
     aa.env.setValue("ErrorCode", "1");

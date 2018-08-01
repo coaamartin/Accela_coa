@@ -37,7 +37,7 @@ function odaScript225_emailMeetingNotes(){
                 else
                     var staffObj = aa.person.getUser(adaProjManSplit[0], "", adaProjManSplit[1]).getOutput();
                 
-                if(staffObj.email != null && staffObj.email != undefined && staffObj.email != "") {
+                if(staffObj && staffObj.email != null && staffObj.email != undefined && staffObj.email != "") {
                     ccEmails += staffObj.email + ";";
                     addParameter(emailParams, "$$projectManagerEmail$$", staffObj.email)
                 }
@@ -50,7 +50,7 @@ function odaScript225_emailMeetingNotes(){
                 else
                     var staffObj = aa.person.getUser(adaProjCorSplit[0], "", adaProjCorSplit[1]).getOutput();
                 
-                if(staffObj.email != null && staffObj.email != undefined && staffObj.email != "") {
+                if(staffObj && staffObj.email != null && staffObj.email != undefined && staffObj.email != "") {
                     ccEmails += staffObj.email + ";";
                     addParameter(emailParams, "$$projectCoordinatorEmail$$", staffObj.email)
                 }
