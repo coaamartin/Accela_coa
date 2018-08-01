@@ -92,7 +92,7 @@ function deleteASIT(tableName)
 	valuesList.add("Non Compliance");
 	searchConditionMap.put(columnName, valuesList);
 
-	var capIDModel = aa.cap.getCapIDModel(capId).getOutput();
+	var capIDModel = aa.cap.getCapIDModel(capId.getID1(),capId.getID2(),capId.getID3()).getOutput();
 logDebug("deleteASIT - checkpoint 1");
 	var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIDModel, tableName, searchConditionMap);
 	if (appSpecificTableInfo.getSuccess())
@@ -115,10 +115,7 @@ logDebug("deleteASIT - checkpoint 4");
 				// get the row ID 
 				var rowID = fieldObject.getRowIndex();
 				aa.print(columnName + ": " + columnValue + "   rowID: " + rowID);
-				if (!contains(deleteIDsArray, rowID))
-				{
-					deleteIDsArray.push(rowID);
-				}
+				deleteIDsArray.push(rowID);
 			}
 			deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray);
 logDebug("deleteASIT - checkpoint 5");
