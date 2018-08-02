@@ -289,7 +289,7 @@
           ]
         },
         "action": {
-          "notificationTemplate": "TEST_FOR_SCRIPTS",
+          "notificationTemplate": "PW READY TO PAY #123",
           "notificationReport": "",
           "notifyContactTypes": [
             "Contractor(s)"
