@@ -117,8 +117,8 @@ logDebug("deleteASIT - checkpoint 4");
 				aa.print(columnName + ": " + columnValue + "   rowID: " + rowID);
 				deleteIDsArray.push(rowID);
 			}
-			deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray);
-logDebug("deleteASIT - checkpoint 5");
+			var result = deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray);
+logDebug("deleteASIT - checkpoint 5 - result = " + result);
 		}	
 	}
 }
