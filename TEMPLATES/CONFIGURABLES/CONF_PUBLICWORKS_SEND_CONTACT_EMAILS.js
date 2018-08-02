@@ -275,7 +275,7 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "To validate record based on JSON rules",
+          "description": "Script 383",
           "operators": {
             
           }
