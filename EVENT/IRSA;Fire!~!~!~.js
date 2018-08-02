@@ -3,13 +3,14 @@ include("5_fireCompleteOrNoViolations");
 //Written by SWAKIL
 include("42_FireViolationsSummary");
 
+//*****************************************************************************
 //Script 15
 //Record Types:	Fire\*\*\* 
 //Event: 		IRSA
 //Desc:			
 //
 //Created By: Silver Lining Solutions
-
+//******************************************************************************
 logDebug("Script 15 - Start");
 var newInspType = null;
 if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection")
@@ -58,13 +59,14 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 
 	//copy checklist to new inspection
 	var inspId = getScheduledInspId(newInspType);
-logDebug("Script 15 - check point 3");
+
 
 	//delete full Custom List on the record
+	// todo  TOODOO :) John, this function (deleteASIT) needs to be fixed.  the script specification calls for deleting all ASIT rows.
 	deleteASIT("Fire Violations");
 	
 	//insert a row for each item on the checklist that was in violation
-	
+	// todo - John, once the ASIT has been purged, then it should be rebuilt based on the ASIT found in the guidesheet
 }
 
 // notify all contacts and attach to record communications
@@ -93,20 +95,17 @@ function deleteASIT(tableName)
 	searchConditionMap.put(columnName, valuesList);
 
 	var capIDModel = aa.cap.getCapIDModel(capId.getID1(),capId.getID2(),capId.getID3()).getOutput();
-logDebug("deleteASIT - checkpoint 1");
+
 	var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIDModel, tableName, searchConditionMap);
 	if (appSpecificTableInfo.getSuccess())
 	{
-logDebug("deleteASIT - checkpoint 2");
 		var appSpecificTableModel = appSpecificTableInfo.getOutput().getAppSpecificTableModel();
 		var tableFields = appSpecificTableModel.getTableFields(); // List
 		if (tableFields != null && tableFields.size() > 0)
 		{
-logDebug("deleteASIT - checkpoint 3");
 			var deleteIDsArray = []; // delete ASIT data rows ID
 			for(var i=0; i < tableFields.size(); i++)
 			{
-logDebug("deleteASIT - checkpoint 4");
 				var fieldObject = tableFields.get(i); // BaseField
 				// get the column name.
 				var columnName = fieldObject.getFieldLabel();
@@ -118,8 +117,6 @@ logDebug("deleteASIT - checkpoint 4");
 				deleteIDsArray.push(rowID);
 			}
 			var result = deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray);
-logDebug("deleteASIT - checkpoint 5 - result = " + result);
-printObject(result);
 		}	
 	}
 }
@@ -130,19 +127,16 @@ printObject(result);
 **/
 function deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray/** Array[rowID] **/)
 {
-logDebug("deleteASIT - checkpoint 10");
 	if (deleteIDsArray == null || deleteIDsArray.length == 0)
 	{
 		return;
 	}
-logDebug("deleteASIT - checkpoint 11");	
 	var asitTableScriptModel = aa.appSpecificTableScript.createTableScriptModel();
 	var asitTableModel = asitTableScriptModel.getTabelModel();
 	var rowList = asitTableModel.getRows();
 	asitTableModel.setSubGroup(tableName);
 	for (var i = 0; i < deleteIDsArray.length; i++)
 	{
-logDebug("deleteASIT - checkpoint 12");
 		var rowScriptModel = aa.appSpecificTableScript.createRowScriptModel();
 		var rowModel = rowScriptModel.getRow();
 		rowModel.setId(deleteIDsArray[i]);
