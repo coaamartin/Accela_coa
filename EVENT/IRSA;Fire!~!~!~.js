@@ -119,6 +119,7 @@ logDebug("deleteASIT - checkpoint 4");
 			}
 			var result = deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray);
 logDebug("deleteASIT - checkpoint 5 - result = " + result);
+printObject(result);
 		}	
 	}
 }
