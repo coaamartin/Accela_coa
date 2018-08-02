@@ -32,106 +32,86 @@ var message = ""; // Message String
 var debug = ""; // Debug String
 var br = "<BR>"; // Break Tag
 
-var useSA = false;
-var SA = null;
-var SAScript = null;
-var bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_FOR_EMSE");
-if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
-    useSA = true;
-    SA = bzr.getOutput().getDescription();
-    bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_INCLUDE_SCRIPT");
-    if (bzr.getSuccess()) {
-        SAScript = bzr.getOutput().getDescription();
-    }
+try{
+    var cap = aa.env.getValue("CapModel");
+    var capId = cap.getCapID();
+    var capIDString = altId = capId.getCustomID();
+    var servProvCode = capId.getServiceProviderCode()       		// Service Provider Code
+    var currentUserID = aa.env.getValue("CurrentUserID");
+    if (currentUserID.indexOf("PUBLICUSER") == 0) { currentUserID = "ADMIN" ; publicUser = true }  // ignore public users
+    var parentId = cap.getParentCapID();
+    var appTypeResult = cap.getCapType();
+    var appTypeString = appTypeResult.toString();               // Convert application type to string ("Building/A/B/C")
+    var appTypeArray = appTypeString.split("/");                // Array of application type string
+    var currentUserGroup;
+    var currentUserGroupObj = aa.userright.getUserRight(appTypeArray[0], currentUserID).getOutput()
+    if (currentUserGroupObj)
+        currentUserGroup = currentUserGroupObj.getGroupName();
+    var capName = cap.getSpecialText();
+    var capStatus = cap.getCapStatus();
+    var sysDate = aa.date.getCurrentDate();
+    var AInfo = new Array();                        // Create array for tokenized variables
+    
+    var useAppSpecificGroupName = false;
+    loadAppSpecific4ACA(AInfo);                       // Add AppSpecific Info
 }
-
-//if (SA) {
-//    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA));
-//    eval(getScriptText(SAScript, SA));
-//} else {
-//    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-//}
-
-//eval(getScriptText("INCLUDES_CUSTOM",null,useCustomScriptFile));
-
-function getScriptText(vScriptName, servProvCode, useProductScripts) {
-    if (!servProvCode)  servProvCode = aa.getServiceProviderCode();
-    vScriptName = vScriptName.toUpperCase();
-    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-    try {
-        if (useProductScripts) {
-            var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-        } else {
-            var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
-        }
-        return emseScript.getScriptText() + "";
-    } catch (err) {
-        return "";
-    }
+catch(err){
+	showDebug = true;
+	logDebug("Error " + err.message + " at " + err.lineNumber + "Stack: " + err.stack);
 }
-
-
-if (SA) {
-    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA, useCustomScriptFile));
-    eval(getScriptText("INCLUDES_ACCELA_GLOBALS", SA, useCustomScriptFile));
-    eval(getScriptText(SAScript, SA));
-} else {
-    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, useCustomScriptFile));
-    eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, useCustomScriptFile));
-}
-
-var cap = aa.env.getValue("CapModel");
-var parentId = cap.getParentCapID();
-var appTypeResult = cap.getCapType();
-var appTypeString = appTypeResult.toString();               // Convert application type to string ("Building/A/B/C")
-var appTypeArray = appTypeString.split("/");                // Array of application type string
-var AInfo = new Array();                        // Create array for tokenized variables
-var capId = null; // needed for next call
-loadAppSpecific4ACA(AInfo);                       // Add AppSpecific Info
+	
 
 // page flow custom code begin
+/*------------------------------------------------------------------------------------------------------/
+| <===========Main=Loop================>
+|
+/-----------------------------------------------------------------------------------------------------*/
+try{
 
-var parcel = null;
-var address = null;
-var parcelNum;
-var streetName;
-parcel = cap.getParcelModel();
-address = cap.getAddressModel();
-
-//Do any pageflow validation scripting for custom lists here for water
-if(appTypeArray[0] == 'Water'){
-    //Scripting for Water/Utility/Permit/NA
-    if(appTypeString == "Water/Utility/Permit/NA"){
-        var permitType = AInfo["Utility Permit Type"];
-        if(permitType == "Water Main Utility Permit"){
-            loadASITables4ACA();
-            //if (typeof (WATERMATERIAL) == "object") {
-            //    for(x in WATERMATERIAL){
-            //        var col1 = WATERMATERIAL[x]["Size of Pipe"];
-            //        var col2 = WATERMATERIAL[x]["Pipe Material"];       
-            //        var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];
-            //        
-            //        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
-            //        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
-            //        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
-            //        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
-            //            cancel = false;
-            //        }
-            //        else
-            //            message += "You must add at least 1 row in  WATER MATERIAL.";
-            //    }
-            //}
-            //else
-            //    message += "You must add at least 1 row in  WATER MATERIAL.";
+    //Do any pageflow validation scripting for custom lists here for water
+    if(appTypeArray[0] == 'Water'){
+        //Scripting for Water/Utility/Permit/NA
+        if(appTypeString == "Water/Utility/Permit/NA"){
+            var permitType = AInfo["Utility Permit Type"];
+            if(permitType == "Water Main Utility Permit"){
+                myloadASITables4ACA();
+                if (typeof (WATERMATERIAL) == "object") {
+                    for(x in WATERMATERIAL){
+                        var col1 = WATERMATERIAL[x]["Size of Pipe"];
+                        var col2 = WATERMATERIAL[x]["Pipe Material"];       
+                        var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];
+                        
+                        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
+                        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
+                        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
+                        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
+                            cancel = false;
+                        }
+                        else
+                            message += "You must add at least 1 row in  WATER MATERIAL.";
+                    }
+                }
+                else
+                    message += "You must add at least 1 row in  WATER MATERIAL.";
+            }
         }
-    }
-    //end Scripting for Water/Utility/Permit/NA
-    message += "Test";
+        //end Scripting for Water/Utility/Permit/NA
+        showMessage = cancel = message.length ? true : false;
+        
+    }//END scriting for water module
+}
+catch(err2){
 	showDebug = true;
-    showMessage = cancel = message.length ? true : false;
-    
-}//END scriting for water module
-
+	logDebug("Error " + err2.message + " at " + err2.lineNumber + "Stack: " + err2.stack);
+}
+displayNormalDebugVars(showDebug);
+/*------------------------------------------------------------------------------------------------------/
+| <===========END=Main=Loop================>
+/-----------------------------------------------------------------------------------------------------*/
+//debug += "ERROR: TEST 7";
+//cancel = true;
+//showDebug = true;
+//showMessage = true;
 if (debug.indexOf("**ERROR") > 0) {
     aa.env.setValue("ErrorCode", "1");
     aa.env.setValue("ErrorMessage", debug);
@@ -150,3 +130,159 @@ if (debug.indexOf("**ERROR") > 0) {
             aa.env.setValue("ErrorMessage", debug);
     }
 }
+
+/*------------------------------------------------------------------------------------------------------/
+| <===========External Functions (used by Action entries)
+/------------------------------------------------------------------------------------------------------*/
+function displayNormalDebugVars(dispDebug) {
+    if (dispDebug) {
+        logDebug("<B>EMSE Script Results for " + capIDString + "</B>");
+        logDebug("capId = " + capId.getClass());
+        logDebug("cap = " + cap.getClass());
+        logDebug("currentUserID = " + currentUserID);
+        logDebug("appTypeString = " + appTypeString);
+        logDebug("sysDate = " + sysDate.getClass());
+        
+        logGlobals(AInfo);
+    }
+}
+
+
+function myloadASITables4ACA() {
+
+	//
+	// Loads App Specific tables into their own array of arrays.  Creates global array objects
+	//
+	// Optional parameter, cap ID to load from.  If no CAP Id specified, use the capModel
+	//
+
+	var itemCap = capId;
+	if (arguments.length == 1) {
+		itemCap = arguments[0]; // use cap ID specified in args
+		var gm = aa.appSpecificTableScript.getAppSpecificTableGroupModel(itemCap).getOutput();
+	} else {
+		var gm = cap.getAppSpecificTableGroupModel()
+	}
+
+	var ta = gm.getTablesMap();
+	var tai = ta.values().iterator();
+
+	while (tai.hasNext()) {
+		var tsm = tai.next();
+
+		if (tsm.rowIndex.isEmpty())
+			continue; // empty table
+
+		var tempObject = new Array();
+		var tempArray = new Array();
+		var tn = tsm.getTableName();
+
+		tn = String(tn).replace(/[^a-zA-Z0-9]+/g, '');
+
+		if (!isNaN(tn.substring(0, 1)))
+			tn = "TBL" + tn // prepend with TBL if it starts with a number
+
+		var tsmfldi = tsm.getTableField().iterator();
+		var tsmcoli = tsm.getColumns().iterator();
+		var numrows = 1;
+
+		while (tsmfldi.hasNext()) // cycle through fields
+		{
+			if (!tsmcoli.hasNext()) // cycle through columns
+			{
+
+				var tsmcoli = tsm.getColumns().iterator();
+				tempArray.push(tempObject); // end of record
+				var tempObject = new Array(); // clear the temp obj
+				numrows++;
+			}
+			var tcol = tsmcoli.next();
+			var tval = tsmfldi.next(); //fixed this line
+			tempObject[tcol.getColumnName()] = tval;
+		}
+		tempArray.push(tempObject); // end of record
+		var copyStr = "" + tn + " = tempArray";
+		logDebug("ASI Table Array : " + tn + " (" + numrows + " Rows)");
+		eval(copyStr); // move to table name
+	}
+
+}
+
+function logDebug(dstr) {
+
+	if (!aa.calendar.getNextWorkDay) {
+
+		var vLevel = 1
+			if (arguments.length > 1)
+				vLevel = arguments[1]
+
+					if ((showDebug & vLevel) == vLevel || vLevel == 1)
+						debug += dstr + br;
+
+					if ((showDebug & vLevel) == vLevel)
+						aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"), dstr)
+	} else {
+		debug += dstr + br;
+	}
+
+}
+
+
+function loadAppSpecific4ACA(thisArr) {
+	//
+	// Returns an associative array of App Specific Info
+	// Optional second parameter, cap ID to load from
+	//
+	// uses capModel in this event
+
+	var itemCap = capId;
+	if (arguments.length >= 2)
+		{
+		itemCap = arguments[1]; // use cap ID specified in args
+
+    		var fAppSpecInfoObj = aa.appSpecificInfo.getByCapID(itemCap).getOutput();
+
+		for (loopk in fAppSpecInfoObj)
+			{
+			if (useAppSpecificGroupName)
+				thisArr[fAppSpecInfoObj[loopk].getCheckboxType() + "." + fAppSpecInfoObj[loopk].checkboxDesc] = fAppSpecInfoObj[loopk].checklistComment;
+			else
+				thisArr[fAppSpecInfoObj[loopk].checkboxDesc] = fAppSpecInfoObj[loopk].checklistComment;
+			}
+		}
+	else
+		{
+		var capASI = cap.getAppSpecificInfoGroups();
+		if (!capASI) {
+			logDebug("No ASI for the CapModel");
+			}
+		else {
+			var i= cap.getAppSpecificInfoGroups().iterator();
+
+			while (i.hasNext())
+				{
+				 var group = i.next();
+				 var fields = group.getFields();
+				 if (fields != null)
+					{
+					var iteFields = fields.iterator();
+					while (iteFields.hasNext())
+						{
+						 var field = iteFields.next();
+
+						if (useAppSpecificGroupName)
+							thisArr[field.getCheckboxType() + "." + field.getCheckboxDesc()] = field.getChecklistComment();
+						else
+							thisArr[field.getCheckboxDesc()] = field.getChecklistComment();
+					 }
+					}
+				 }
+			}
+		}
+} 
+	
+function logGlobals(globArray) {
+
+	for (loopGlob in globArray)
+		logDebug("{" + loopGlob + "} = " + globArray[loopGlob])
+	}
