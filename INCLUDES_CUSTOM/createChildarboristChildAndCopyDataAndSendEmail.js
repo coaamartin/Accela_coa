@@ -31,9 +31,26 @@ function createArboristLicenseAndCopyDataAndSendEmail(LicenseType, emailTemplate
             copyContacts(capId, createdApp);
             copyAppSpecific(createdApp);
             var rNewLicIdString = createdApp.getCustomID();
+            
+            vExpDate = new Date();
+            vNewExpDate = new Date(vExpDate.getFullYear() + 3, vExpDate.getMonth(), vExpDate.getDate());
+            vNewExpDate.setDate(1);
+            if (vNewExpDate.getMonth() == 11) {
+                vNewExpDate.setMonth(0);
+                vNewExpDate.setFullYear(vNewExpDate.getFullYear() + 1);
+            } else {
+                vNewExpDate.setMonth(vNewExpDate.getMonth() + 1);
+            }
+            vNewExpDate = new Date(vNewExpDate - (24*60*60*1000));
+            
             createRefLP4Lookup(rNewLicIdString, "Business", "Arborist Applicant", null);
             var rNewLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, rNewLicIdString).getOutput();
-            if(rNewLP) aa.licenseScript.associateLpWithCap(capId, rNewLP[0]);
+            if(rNewLP) {
+                var theRefLP = rNewLP[0];
+                aa.licenseScript.associateLpWithCap(capId, theRefLP);
+                theRefLP.setLicenseExpirationDate(aa.date.getScriptDateTime(vNewExpDate));
+                var editRefResult = aa.licenseScript.editRefLicenseProf(theRefLP);
+            }
             
             var rB1ExpResult = aa.expiration.getLicensesByCapID(createdApp).getOutput();
             rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
