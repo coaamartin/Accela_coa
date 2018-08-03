@@ -1,3 +1,4 @@
+sendNoticePCEmail();
 /*
 Title : Deactivate Pre Submittal Meeting Task and Email (WorkflowTaskUpdateAfter) 
 
