@@ -1,7 +1,7 @@
 include("5_fireCompleteOrNoViolations");
-
 //Written by SWAKIL
-include("42_FireViolationsSummary");
+//duplicate script below.   Replaced by script 15 below.
+//include("42_FireViolationsSummary");
 
 //*****************************************************************************
 //Script 15
@@ -17,6 +17,7 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail") )
 {
 	logDebug("Script 15 - criteria met");
+	
 	//determine follow up inspection based on this inspection
 	if (inspType == "FD Complaint Inspection")
 		{newInspType = "FD Complaint Follow-Up Inspection";}
@@ -55,48 +56,47 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	var oneDay = 24*60*60*1000; // number of millisec in a day
 	var targetDate = new Date(targetDateString);
 	var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
-	scheduleInspection(newInspType,daysOut,inspector);
 
 	//delete full Custom List on the record
 	removeASITable("Fire Violations");
 
 	//insert a row for each item on the checklist that was in violation
 
-	if (inspId) {
-		var gsi = getGuideSheetObjects(inspId);
-		if (gsi) {
-			for (var gs in gsi) {
-				var t = gsi[gs];
-				t.loadInfoTables();
-				if (t.validTables) {
-					var g = (t.infoTables["FIRE VIOLATIONS"] ? t.infoTables["FIRE VIOLATIONS"] : []);
-					for (var fvi in g) {
-						var fvit = g[fvi];
-						if ("Non Compliance".equals(fvit["Violation Status"])) {
-							var thisViolation = [{
-									colName: "Sort Order",
-									colValue: String(fvit["Sort Order"])
-								}, {
-									colName: "Violation",
-									colValue: String(fvit["Violation"])
-								}, {
-									colName: "Comment",
-									colValue: String(fvit["Comment"])
-								}, {
-									colName: "Violation Status",
-									colValue: String(fvit["Violation Status"])
-								}
-							];
-							addAsiTableRow("FIRE VIOLATIONS", thisViolation);
-						}
+	var gsi = getGuideSheetObjects(inspId);
+	if (gsi) {
+		for (var gs in gsi) {
+			var t = gsi[gs];
+			t.loadInfoTables();
+			if (t.validTables) {
+				var g = (t.infoTables["FIRE VIOLATIONS"] ? t.infoTables["FIRE VIOLATIONS"] : []);
+				for (var fvi in g) {
+					var fvit = g[fvi];
+					if ("Non Compliance".equals(fvit["Violation Status"])) {
+						var thisViolation = [{
+								colName: "Sort Order",
+								colValue: String(fvit["Sort Order"])
+							}, {
+								colName: "Violation",
+								colValue: String(fvit["Violation"])
+							}, {
+								colName: "Comment",
+								colValue: String(fvit["Comment"])
+							}, {
+								colName: "Violation Status",
+								colValue: String(fvit["Violation Status"])
+							}
+						];
+						addAsiTableRow("FIRE VIOLATIONS", thisViolation);
 					}
 				}
 			}
 		}
 	}
 
+	scheduleInspection(newInspType,daysOut,inspector);
+
 	//copy checklist to new inspection
-	var inspId = getScheduledInspId(newInspType);
+	var newInspId = getScheduledInspId(newInspType);
 
 }
 
@@ -111,68 +111,4 @@ if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResul
 	closeCap(currentUserId);
 }
 logDebug("Script 15 - End");
-
-
-function deleteASIT(tableName)
-{
-	// Create a HashMap.
-	var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
-	// Create a List object to add the value of Column.
-	var columnName ="Violation Status";
-	var valuesList = aa.util.newArrayList();
-	valuesList.add("Compliance");
-	valuesList.add("Corrected On Site");
-	valuesList.add("Non Compliance");
-	searchConditionMap.put(columnName, valuesList);
-
-	var capIDModel = aa.cap.getCapIDModel(capId.getID1(),capId.getID2(),capId.getID3()).getOutput();
-
-	var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIDModel, tableName, searchConditionMap);
-	if (appSpecificTableInfo.getSuccess())
-	{
-		var appSpecificTableModel = appSpecificTableInfo.getOutput().getAppSpecificTableModel();
-		var tableFields = appSpecificTableModel.getTableFields(); // List
-		if (tableFields != null && tableFields.size() > 0)
-		{
-			var deleteIDsArray = []; // delete ASIT data rows ID
-			for(var i=0; i < tableFields.size(); i++)
-			{
-				var fieldObject = tableFields.get(i); // BaseField
-				// get the column name.
-				var columnName = fieldObject.getFieldLabel();
-				// get the value of column
-				var columnValue = fieldObject.getInputValue();
-				// get the row ID 
-				var rowID = fieldObject.getRowIndex();
-				aa.print(columnName + ": " + columnValue + "   rowID: " + rowID);
-				deleteIDsArray.push(rowID);
-			}
-			var result = deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray);
-		}	
-	}
-}
-
-
-/**
-* Delete ASIT rows data by rowID, format: Array[rowID]
-**/
-function deletedAppSpecificTableInfors(tableName, capIDModel, deleteIDsArray/** Array[rowID] **/)
-{
-	if (deleteIDsArray == null || deleteIDsArray.length == 0)
-	{
-		return;
-	}
-	var asitTableScriptModel = aa.appSpecificTableScript.createTableScriptModel();
-	var asitTableModel = asitTableScriptModel.getTabelModel();
-	var rowList = asitTableModel.getRows();
-	asitTableModel.setSubGroup(tableName);
-	for (var i = 0; i < deleteIDsArray.length; i++)
-	{
-		var rowScriptModel = aa.appSpecificTableScript.createRowScriptModel();
-		var rowModel = rowScriptModel.getRow();
-		rowModel.setId(deleteIDsArray[i]);
-		rowList.add(rowModel);
-	}
-	return aa.appSpecificTableScript.deletedAppSpecificTableInfors(capIDModel, asitTableModel);
-}	
 
