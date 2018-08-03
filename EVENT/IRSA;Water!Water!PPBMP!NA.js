@@ -31,14 +31,14 @@ if(ifTracer(inspResult == "Complete",'inspResult == "Complete"')){
 	//scheduleInspection(insp2Create, newInspDate);//, inspector, null, newInspReqComments);
 
 	emailContactsWithCCs(
-		"Owner", 
+		"Project Owner", 
 		"PPBMP INSPECTION # 102", 
 		emailParams, 
 		"", 
 		reportTemplate, 
 		"N", 
 		"", 
-		"Applicant,Developer,Project Owner"
+		"Applicant,Developer"
 	);
 
 
