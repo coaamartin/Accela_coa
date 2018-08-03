@@ -464,7 +464,46 @@
             "task": ["Accepted In House"],
             "status": ["Routed for Review"],
             "customFields": {
-              "Project Category": "Custom Home",
+              "Project Category": "Custom Home"
+            },
+            "isCreatedByACA": "",
+            "balanceAllowed": "",
+            "recordStatus": [
+            ]
+          },
+          "action": {
+            "activateTask": ["Structural Plan Review" ,"Electrical Plan Review" ,"Mechanical Plan Review" ,"Plumbing Plan Review" ,"Structural Engineering Review" ,
+			                 "Fire Life Safety Review" ,"Real Property Review" ,"Water Review" ,"Zoning Review" ,"Engineering Review" ,"Traffic Review" ,
+							 "Waste Water Review" ,"Forestry Review" ,"Bldg Life Safety Review" ,"Planning Review"
+            ],
+            "daysOut": "21",
+            "deactivateTask": [],
+            "updateTask": [              ],
+            "addComment": "",
+            "newStatus": "",
+            "assignToUserID": "",
+            "assessFees": [
+              {
+                "feeSchedule": "",
+                "feeCode": "",
+                "feeQuantity": "",
+                "feeInvoice": "",
+                "feePeriod": ""
+              }
+            ]
+          }
+        },
+        {
+          "preScript": "",
+          "postScript": "",
+          "metadata": {
+            "description": "To run automated script based on JSON rules - Script 418 a",
+            "operators": {        }
+          },
+          "criteria": {
+            "task": ["Accepted In House"],
+            "status": ["Routed for Review"],
+            "customFields": {
               "Project Category": "Single Family From Master"
             },
             "isCreatedByACA": "",
@@ -473,12 +512,52 @@
             ]
           },
           "action": {
-            "activateTask": ["Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review", "Structural Engineering Review","Fire Life Safety Review", "Real Property Review", "Water Review", "Zoning Review", "Engineering Review", 
-                          "Traffic Review", "Waste Water Review", "Forestry Review", "Bldg Life Safety Review"
+            "activateTask": ["Structural Plan Review" ,"Electrical Plan Review" ,"Mechanical Plan Review" ,"Plumbing Plan Review" ,"Structural Engineering Review" ,
+			                 "Fire Life Safety Review" ,"Real Property Review" ,"Water Review" ,"Zoning Review" ,"Engineering Review" ,"Traffic Review" ,
+							 "Waste Water Review" ,"Forestry Review" ,"Bldg Life Safety Review" ,"Planning Review"
             ],
             "daysOut": "21",
-            "deactivateTask": ["Fire Life Safety Review", "Real Property Review", "Water Review", "Zoning Review", "Engineering Review", 
-                          "Traffic Review", "Waste Water Review", "Forestry Review", "Bldg Life Safety Review"],
+            "deactivateTask": [],
+            "updateTask": [              ],
+            "addComment": "",
+            "newStatus": "",
+            "assignToUserID": "",
+            "assessFees": [
+              {
+                "feeSchedule": "",
+                "feeCode": "",
+                "feeQuantity": "",
+                "feeInvoice": "",
+                "feePeriod": ""
+              }
+            ]
+          }
+        },
+        {
+          "preScript": "",
+          "postScript": "",
+          "metadata": {
+            "description": "To run automated script based on JSON rules - Script 418 a",
+            "operators": {        }
+          },
+          "criteria": {
+            "task": ["Accepted In House"],
+            "status": ["Routed for Review"],
+            "customFields": {
+              "Project Category": "Multi-Family Building"
+            },
+            "isCreatedByACA": "",
+            "balanceAllowed": "",
+            "recordStatus": [
+            ]
+          },
+          "action": {
+            "activateTask": ["Structural Plan Review" ,"Electrical Plan Review" ,"Mechanical Plan Review" ,"Plumbing Plan Review" ,"Structural Engineering Review" ,
+			                 "Fire Life Safety Review" ,"Real Property Review" ,"Water Review" ,"Zoning Review" ,"Engineering Review" ,"Traffic Review" ,
+							 "Waste Water Review" ,"Forestry Review" ,"Bldg Life Safety Review" ,"Planning Review"
+            ],
+            "daysOut": "21",
+            "deactivateTask": [],
             "updateTask": [              ],
             "addComment": "",
             "newStatus": "",
@@ -499,14 +578,13 @@
           "postScript": "",
           "metadata": {
             "description": "To run automated script based on JSON rules - Script 418 b",
-            "operators": { "customFields":"!="       }
+            "operators": { "customFields":"!=" }
           },
           "criteria": {
             "task": ["Accepted In House"],
             "status": ["Routed for Review"],
             "customFields": {
-              "Project Category": "Single Family From Master",
-              "Project Category": "Custom Home"
+              "Project Category": ["Single Family From Master","Custom Home", "Multi-Family Building"]
             },
             "isCreatedByACA": "",
             "balanceAllowed": "",
@@ -514,13 +592,11 @@
             ]
           },
           "action": {
-            "activateTask": ["Structural Plan Review","Fire Life Safety Review", "Real Property Review", "Water Review", "Zoning Review", "Engineering Review", 
-                          "Traffic Review", "Waste Water Review", "Forestry Review", "Bldg Life Safety Review", 
-                          "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review", "Structural Engineering Review"],
-            "daysOut": "21",
-            "deactivateTask": ["Fire Life Safety Review", "Real Property Review", "Water Review", "Zoning Review", "Engineering Review", 
-                          "Traffic Review", "Waste Water Review", "Forestry Review", "Bldg Life Safety Review", 
-                          "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review", "Structural Engineering Review"],
+            "activateTask": ["Structural Plan Review" ,"Electrical Plan Review" ,"Mechanical Plan Review" ,"Plumbing Plan Review" ,"Structural Engineering Review" ,
+			                 "Fire Life Safety Review" ,"Real Property Review" ,"Water Review" ,"Zoning Review" ,"Engineering Review" ,"Traffic Review" ,
+							 "Waste Water Review" ,"Forestry Review" ,"Bldg Life Safety Review" ,"Planning Review"],
+            "daysOut": "26",
+            "deactivateTask": [],
             "updateTask": [              ],
             "addComment": "",
             "newStatus": "",
