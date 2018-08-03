@@ -100,8 +100,8 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
     addParameter(emailParams, "$$ContactEmail$$", applicantEmail);
     addParameter(emailParams, "$$ContactFullName$$", ownerName);
     addParameter(emailParams, "$$reportName$$", reportTemplate);
-    addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
-	addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
+    addParameter(emailParams, "$$applicantFirstName$$", recordApplicant.getFirstName());
+	addParameter(emailParams, "$$applicantLastName$$", recordApplicant.getLastName());
     //addParameter(emailParams, "$$acaDocDownloadUrl$$", acaURL);
     
     var envParameters = aa.util.newHashMap();
