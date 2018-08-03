@@ -8,8 +8,8 @@
  * @param reportName report name    
  * @param rptParams report param if exists
  */
-function createChildarboristChildAndCopyDataAndSendEmail(LicenseType, emailTemplate, reportName, rptParams) {
-    logDebug("createChildarboristChildAndCopyDataAndSendEmail() Started");
+function createArboristLicenseAndCopyDataAndSendEmail(LicenseType, emailTemplate, reportName, rptParams) {
+    logDebug("createArboristLicenseAndCopyDataAndSendEmail() Started");
     try{
         var applicantEmail = "";
         var licTypeArray = LicenseType.split("/");
@@ -34,6 +34,11 @@ function createChildarboristChildAndCopyDataAndSendEmail(LicenseType, emailTempl
             createRefLP4Lookup(rNewLicIdString, "Business", "Arborist Applicant", null);
             var rNewLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, rNewLicIdString).getOutput();
             if(rNewLP) aa.licenseScript.associateLpWithCap(capId, rNewLP[0]);
+            
+            var rB1ExpResult = aa.expiration.getLicensesByCapID(createdApp).getOutput();
+            rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+            rB1ExpResult.setExpStatus("Active");
+            aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
             
             var recordApplicant = getContactByType("Arborist Applicant", capId);
             if (recordApplicant) {
@@ -60,8 +65,8 @@ function createChildarboristChildAndCopyDataAndSendEmail(LicenseType, emailTempl
     }
     catch(err){
         showMessage = true;
-        comment("Error on custom function createChildarboristChildAndCopyDataAndSendEmail(). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
-        logDebug("Error on custom function createChildarboristChildAndCopyDataAndSendEmail(). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
+        comment("Error on custom function createArboristLicenseAndCopyDataAndSendEmail(). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
+        logDebug("Error on custom function createArboristLicenseAndCopyDataAndSendEmail(). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
     }
-    logDebug("createChildarboristChildAndCopyDataAndSendEmail() ended");
+    logDebug("createArboristLicenseAndCopyDataAndSendEmail() ended");
 }//END
