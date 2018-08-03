@@ -284,7 +284,7 @@ if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance
 	
 	var emailParameters = aa.util.newHashtable();
 	addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
-	addParameter(emailParameters, "$$recordDeepUrl$$", recordDeepUrl);
+	addParameter(emailParameters, "$$acaRecordUrl$$", recordDeepUrl);
 	addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(emailParameters, "$$StaffFullName$$", staffFullName);
 	addParameter(emailParameters, "$$StaffTitle$$", staff.getTitle());
