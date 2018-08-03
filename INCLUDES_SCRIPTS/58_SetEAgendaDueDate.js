@@ -6,7 +6,7 @@ function script58_SetEAgendaDueDate() {
         meetingDate,
         meetingDateMinus15,
         meetingDateMinus20,
-        wfTaskToUpdate = 'Create E-Agenda';
+        wfTaskToUpdate = 'Complete E-Agenda';
 
    // activateTask('Create E-Agenda');
     activateTask('Complete E-Agenda'); 
