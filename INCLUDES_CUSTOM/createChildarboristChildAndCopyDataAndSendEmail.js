@@ -32,16 +32,10 @@ function createArboristLicenseAndCopyDataAndSendEmail(LicenseType, emailTemplate
             copyAppSpecific(createdApp);
             var rNewLicIdString = createdApp.getCustomID();
             
-            vExpDate = new Date();
-            vNewExpDate = new Date(vExpDate.getFullYear() + 3, vExpDate.getMonth(), vExpDate.getDate());
-            vNewExpDate.setDate(1);
-            if (vNewExpDate.getMonth() == 11) {
-                vNewExpDate.setMonth(0);
-                vNewExpDate.setFullYear(vNewExpDate.getFullYear() + 1);
-            } else {
-                vNewExpDate.setMonth(vNewExpDate.getMonth() + 1);
-            }
-            vNewExpDate = new Date(vNewExpDate - (24*60*60*1000));
+            updateAppStatus("Issued", "Issued via script", createdApp);
+            
+            //vExpDate = new Date();
+            vNewExpDate = new Date(vExpDate.getFullYear(), 11, 31);
             
             createRefLP4Lookup(rNewLicIdString, "Business", "Arborist Applicant", null);
             var rNewLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, rNewLicIdString).getOutput();
@@ -51,11 +45,11 @@ function createArboristLicenseAndCopyDataAndSendEmail(LicenseType, emailTemplate
                 theRefLP.setLicenseExpirationDate(aa.date.getScriptDateTime(vNewExpDate));
                 var editRefResult = aa.licenseScript.editRefLicenseProf(theRefLP);
             }
-            
-            var rB1ExpResult = aa.expiration.getLicensesByCapID(createdApp).getOutput();
-            rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
-            rB1ExpResult.setExpStatus("Active");
-            aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
+                
+                var rB1ExpResult = aa.expiration.getLicensesByCapID(createdApp).getOutput();
+                rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+                rB1ExpResult.setExpStatus("Active");
+                aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
             
             var recordApplicant = getContactByType("Arborist Applicant", capId);
             if (recordApplicant) {
