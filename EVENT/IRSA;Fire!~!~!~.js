@@ -64,7 +64,7 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	//insert a row for each item on the checklist that was in violation
 
 	if (inspId) {
-		var gsi = getGuideSheetObjects2(inspId);
+		var gsi = getGuideSheetObjects(inspId);
 		if (gsi) {
 			var sortOrder = 0;
 			for (var thisGsi in gsi) {
