@@ -908,7 +908,24 @@
           ]
         },
         "action": {
-            "invoiceFees": "true"
+          "prescript": "",
+          "activateTask": [],
+          "daysOut": "",
+          "deactivateTask": [],
+          "deleteTask": [],
+          "updateTask": [
+            {
+              "task": "",
+              "status": ""
+            }
+          ],
+          "invoiceFees": "Y",
+          "createChild": "",
+          "createParent": "",
+          "addCondition": "",
+          "removeCondition": "",
+          "addComment": "",
+          "newStatus": ""
         }
       }
     ]
