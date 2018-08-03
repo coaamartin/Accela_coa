@@ -39,6 +39,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
         applicantEmail = recordApplicant.getEmail();
 		logDebug("Applicant Email " + applicantEmail);
     }
+
 	
 	//find developer email
 	var recordDeveloper = getContactByType("Developer", capId);
@@ -61,11 +62,11 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
 
 	//build CC email list
 	var ccEmail = "";
-	
+	// sending email to applicant as the owner doesn't have email
 	if (applicantEmail != null && applicantEmail != "") {
 		ccEmail = applicantEmail;
 	}
-	
+	//
 	if (developerEmail != null && developerEmail != "") {
 		if (ccEmail != "") {
 			ccEmail += ";" +developerEmail;
@@ -82,21 +83,25 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
 		}
 	}
 	
-    var ownerName = getOnwertName();
+    var ownerName = getOnwertName();  //this is not a spelling mistake
     
     //var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
     var reportFile = [];
     var reportTemplate = "JD_TEST_SSRS";
     var vRParams = aa.util.newHashtable();
     addParameter(vRParams, "Record_ID", capIDString);
-    var vAsyncScript = "SEND_INSPECTION_REPORT_TO_OWNER_ASYNC";
-    
+    //var vAsyncScript = "SEND_INSPECTION_REPORT_TO_OWNER_ASYNC";
+    var vAsyncScript = "SEND_EMAIL_TO_CONTACTS_ASYNC_WITH_CC";
+
     var acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
     acaURL = acaURL.substr(0, acaURL.toUpperCase().indexOf("/ADMIN"));
     
     var emailParams = aa.util.newHashtable();
     addParameter(emailParams, "$$ContactEmail$$", applicantEmail);
     addParameter(emailParams, "$$ContactFullName$$", ownerName);
+    addParameter(emailParams, "$$reportName$$", reportTemplate);
+    addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
+	addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
     //addParameter(emailParams, "$$acaDocDownloadUrl$$", acaURL);
     
     var envParameters = aa.util.newHashMap();
