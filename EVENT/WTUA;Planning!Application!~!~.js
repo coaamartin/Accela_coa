@@ -267,6 +267,7 @@ if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance
 		var applicantName = recordApplicant.getFullName();
 	}
 	
+	
 	// get the users info that is assigned to the task
 	var staff = getTaskAssignedStaff(wfTask);
 	logDebug("staff = " + staff);
