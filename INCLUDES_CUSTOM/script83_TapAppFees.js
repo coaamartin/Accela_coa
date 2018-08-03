@@ -61,7 +61,7 @@ function script83_TapAppFees() {
 					updateFee("WAT_TA_41","WAT_TA","FINAL",1,"Y");
 				}				
 			}
-			if(Ainfo["Construction Water"] == "Yes"){
+			if(AInfo["Construction Water"] == "Yes"){
 				updateFee("WAT_TA_42","WAT_TA","FINAL",AInfo["Number of Water Meters"],"Y");
 			}
 		} catch(err){
@@ -122,7 +122,7 @@ function script83_TapAppFees() {
 					updateFee("WAT_TA2_41","WAT_TA2","FINAL",1,"Y");
 				}				
 			}
-			if(Ainfo["Construction Water"] == "Yes"){
+			if(AInfo["Construction Water"] == "Yes"){
 				updateFee("WAT_TA2_42","WAT_TA2","FINAL",AInfo["Number of Water Meters"],"Y");
 			}
 		} catch(err){
