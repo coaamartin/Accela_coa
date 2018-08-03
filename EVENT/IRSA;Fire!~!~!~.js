@@ -66,31 +66,28 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 		var gsi = getGuideSheetObjects(inspId);
 		if (gsi) {
 			for (var gs in gsi) {
-				var t = gsi[gs]
-					t.loadInfoTables();
+				var t = gsi[gs];
+				t.loadInfoTables();
 				if (t.validTables) {
-					for (var thisGsi in t.infoTables) {
-						var g = (t.infoTables["FIRE VIOLATIONS"] ? t.infoTables["FIRE VIOLATIONS"] : []);
-						for (var fvi in g) {
-							var fvit = g[fvi];
-							logDebug(fvit["Violation Status"]);
-							if ("Non Compliance".equals(fvit["Violation Status"])) {
-								var thisViolation = [{
-										colName: "Sort Order",
-										colValue: String(fvit["Sort Order"])
-									}, {
-										colName: "Violation",
-										colValue: String(fvit["Violation"])
-									}, {
-										colName: "Comment",
-										colValue: String(fvit["Comment"])
-									}, {
-										colName: "Violation Status",
-										colValue: String(fvit["Violation Status"])
-									}
-								];
-								addAsiTableRow("FIRE VIOLATIONS", thisViolation);
-							}
+					var g = (t.infoTables["FIRE VIOLATIONS"] ? t.infoTables["FIRE VIOLATIONS"] : []);
+					for (var fvi in g) {
+						var fvit = g[fvi];
+						if ("Non Compliance".equals(fvit["Violation Status"])) {
+							var thisViolation = [{
+									colName: "Sort Order",
+									colValue: String(fvit["Sort Order"])
+								}, {
+									colName: "Violation",
+									colValue: String(fvit["Violation"])
+								}, {
+									colName: "Comment",
+									colValue: String(fvit["Comment"])
+								}, {
+									colName: "Violation Status",
+									colValue: String(fvit["Violation Status"])
+								}
+							];
+							addAsiTableRow("FIRE VIOLATIONS", thisViolation);
 						}
 					}
 				}
@@ -100,8 +97,6 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 
 	//copy checklist to new inspection
 	var inspId = getScheduledInspId(newInspType);
-
-
 
 }
 
