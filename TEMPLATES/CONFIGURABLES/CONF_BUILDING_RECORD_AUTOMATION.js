@@ -464,7 +464,8 @@
             "task": ["Accepted In House"],
             "status": ["Routed for Review"],
             "customFields": {
-              "Project Category": "Custom Home"
+              "Project Category": "Custom Home",
+              "Project Category": "Single Family From Master"
             },
             "isCreatedByACA": "",
             "balanceAllowed": "",
@@ -472,7 +473,8 @@
             ]
           },
           "action": {
-            "activateTask": ["Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review", "Structural Engineering Review"
+            "activateTask": ["Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review", "Structural Engineering Review","Fire Life Safety Review", "Real Property Review", "Water Review", "Zoning Review", "Engineering Review", 
+                          "Traffic Review", "Waste Water Review", "Forestry Review", "Bldg Life Safety Review"
             ],
             "daysOut": "21",
             "deactivateTask": ["Fire Life Safety Review", "Real Property Review", "Water Review", "Zoning Review", "Engineering Review", 
@@ -512,8 +514,10 @@
             ]
           },
           "action": {
-            "activateTask": ["Structural Plan Review"],
-            "daysOut": "26",
+            "activateTask": ["Structural Plan Review","Fire Life Safety Review", "Real Property Review", "Water Review", "Zoning Review", "Engineering Review", 
+                          "Traffic Review", "Waste Water Review", "Forestry Review", "Bldg Life Safety Review", 
+                          "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review", "Structural Engineering Review"],
+            "daysOut": "21",
             "deactivateTask": ["Fire Life Safety Review", "Real Property Review", "Water Review", "Zoning Review", "Engineering Review", 
                           "Traffic Review", "Waste Water Review", "Forestry Review", "Bldg Life Safety Review", 
                           "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review", "Structural Engineering Review"],
