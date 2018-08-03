@@ -37,7 +37,7 @@ function createArboristLicenseAndCopyDataAndSendEmail(LicenseType, emailTemplate
             //vExpDate = new Date();
             vNewExpDate = new Date(vExpDate.getFullYear(), 11, 31);
             
-            createRefLP4Lookup(rNewLicIdString, "Business", "Arborist Applicant", null);
+            createRefLP4Lookup(rNewLicIdString, "Arborist", "Arborist Applicant", null);
             var rNewLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, rNewLicIdString).getOutput();
             if(rNewLP) {
                 var theRefLP = rNewLP[0];
