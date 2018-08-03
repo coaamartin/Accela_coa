@@ -57,16 +57,47 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
 	scheduleInspection(newInspType,daysOut,inspector);
 
+	//delete full Custom List on the record
+	removeASITable("Fire Violations");
+	inspId = 195;
+
+	//insert a row for each item on the checklist that was in violation
+
+	if (inspId) {
+		var gsi = getGuideSheetObjects2(inspId);
+		if (gsi) {
+			var sortOrder = 0;
+			for (var thisGsi in gsi) {
+				var g = gsi[thisGsi];
+				if ("DENIED".equals(g.resultType.toUpperCase())) {
+					var thisViolation = [];
+					sortOrder++;
+					var thisViolation = [{
+							colName: "Sort Order",
+							colValue: String(sortOrder)
+						}, {
+							colName: "Violation",
+							colValue: (g.text && g.text != "null" ? String(g.text) : "")
+						}, {
+							colName: "Comment",
+							colValue: (g.comment && g.comment != "null" ? String(g.comment) : "")
+						}, {
+							colName: "Violation Status",
+							colValue: "Non Compliance"  // hardcode to value used in ASIT drop down
+						}
+					];
+					logDebug(JSON.stringify(thisViolation));
+					addAsiTableRow("FIRE VIOLATIONS", thisViolation);
+				}
+			}
+		}
+	}
+
 	//copy checklist to new inspection
 	var inspId = getScheduledInspId(newInspType);
 
 
-	//delete full Custom List on the record
-	// todo  TOODOO :) John, this function (deleteASIT) needs to be fixed.  the script specification calls for deleting all ASIT rows.
-	deleteASIT("Fire Violations");
-	
-	//insert a row for each item on the checklist that was in violation
-	// todo - John, once the ASIT has been purged, then it should be rebuilt based on the ASIT found in the guidesheet
+
 }
 
 // notify all contacts and attach to record communications
