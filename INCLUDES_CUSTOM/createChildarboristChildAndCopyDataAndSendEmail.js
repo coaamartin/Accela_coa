@@ -41,7 +41,7 @@ function createArboristLicenseAndCopyDataAndSendEmail(LicenseType, emailTemplate
             var rNewLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, rNewLicIdString).getOutput();
             if(rNewLP) {
                 var theRefLP = rNewLP[0];
-                aa.licenseScript.associateLpWithCap(capId, theRefLP);
+                aa.licenseScript.associateLpWithCap(createdApp, theRefLP);
                 theRefLP.setLicenseExpirationDate(aa.date.getScriptDateTime(vNewExpDate));
                 var editRefResult = aa.licenseScript.editRefLicenseProf(theRefLP);
             }
