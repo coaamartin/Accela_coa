@@ -223,7 +223,7 @@
           ],
           "customFields": {
             "Review Fee?": "Yes",
-			"License Type": "License Agreement"
+            "License Type": "License Agreement"
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",
@@ -275,8 +275,8 @@
           ],
           "customFields": {
             "Review Fee?": "Yes",
-			"License Type": "Master License Agreement"
-		  },
+            "License Type": "Master License Agreement"
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -327,8 +327,8 @@
           ],
           "customFields": {
             "Review Fee?": "Yes",
-			"License Type": "Addendum"
-		  },
+            "License Type": "Addendum"
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -379,8 +379,8 @@
           ],
           "customFields": {
             "Review Fee?": "Yes",
-			"License Type": "Assignment of a License"
-		  },
+            "License Type": "Assignment of a License"
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -431,8 +431,8 @@
           ],
           "customFields": {
             "Review Fee?": "Yes",
-			"License Type": "Pre-License Agreement"
-		  },
+            "License Type": "Pre-License Agreement"
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -483,8 +483,8 @@
           ],
           "customFields": {
             "Review Fee?": "Yes",
-			"License Type": "Revocable License (Commercial)"
-		  },
+            "License Type": "Revocable License (Commercial)"
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -535,8 +535,8 @@
           ],
           "customFields": {
             "Review Fee?": "Yes",
-			"License Type": "Revocable License (Residential)"
-		  },
+            "License Type": "Revocable License (Residential)"
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -587,8 +587,8 @@
           ],
           "customFields": {
             "Review Fee?": "Yes",
-			"License Type": "Supplemental Site License"
-		  },
+            "License Type": "Supplemental Site License"
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -642,8 +642,8 @@
             "Ready to Pay"
           ],
           "customFields": {
-            "Review Type": "Master Drainage Report"		  
-		  },
+            "Review Type": "Master Drainage Report"       
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -693,8 +693,8 @@
             "Ready to Pay"
           ],
           "customFields": {
-            "Review Type": "Preliminary Drainage Letter"		  
-		  },
+            "Review Type": "Preliminary Drainage Letter"          
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -729,7 +729,7 @@
           ]
         }
       },
-	  {
+      {
         "preScript": "",
         "postScript": "",
         "metadata": {
@@ -744,8 +744,8 @@
             "Ready to Pay"
           ],
           "customFields": {
-            "Review Type": "Preliminary Drainage Report"		  
-		  },
+            "Review Type": "Preliminary Drainage Report"          
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -884,6 +884,48 @@
               "feePeriod": "FINAL"
             }
           ]
+        }
+      }
+    ]
+  },
+  "PublicWorks/Public Improvement/Permit/NA": {
+    "WorkflowTaskUpdateAfter": [
+      {
+        "preScript": "",
+        "postScript": "",
+        "metadata": {
+          "description": "Script 383",
+          "operators": {
+            
+          }
+        },
+        "criteria": {
+          "task": [
+            "Fee Processing"
+          ],
+          "status": [
+            "Ready to Pay"
+          ]
+        },
+        "action": {
+          "prescript": "",
+          "activateTask": [],
+          "daysOut": "",
+          "deactivateTask": [],
+          "deleteTask": [],
+          "updateTask": [
+            {
+              "task": "",
+              "status": ""
+            }
+          ],
+          "invoiceFees": "Y",
+          "createChild": "",
+          "createParent": "",
+          "addCondition": "",
+          "removeCondition": "",
+          "addComment": "",
+          "newStatus": ""
         }
       }
     ]

@@ -28,7 +28,7 @@ Sample Call:
 	autoCreateTempSWMPApplication("Plans Coordination", [ "Approved" ], "Erosion (SWMP) Report", "Water/Water/SWMP/Application");
 */
 
-autoCreateTempSWMPApplication("Plans Coordination", [ "Approved" ], "Erosion (SWMP) Report", "Water/Water/SWMP/Application", "SWMP REQUIRES STORMWATER PERMIT # 101");
+autoCreateTempSWMPApplication("Plans Coordination", [ "Approved" ], "Storm Water Permit Required", "Water/Water/SWMP/Application", "SWMP REQUIRES STORMWATER PERMIT # 101");
 
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Set workflow due date based on plan review timelines(WorkflowTaskUpdateAfter).

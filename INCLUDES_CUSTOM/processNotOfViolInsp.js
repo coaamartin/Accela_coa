@@ -21,10 +21,11 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, insp2Create, update
                 if(!isTaskActive(wfTsk2Update))
                     activateTask(wfTsk2Update);
                 
-                if(wfTsk2Update == "Investigation" && wfSt2Update == "Notice of Violation")
-                    closeTask(wfTsk2Update, wfSt2Update);
-                else
-                    updateTask(wfTsk2Update, wfSt2Update);
+                //if(wfTsk2Update == "Investigation" && wfSt2Update == "Notice of Violation")
+                //    closeTask(wfTsk2Update, wfSt2Update);
+                //else
+                //    updateTask(wfTsk2Update, wfSt2Update);
+			    resultWorkflowTask(wfTsk2Update, wfSt2Update);
             }
         }
     }

@@ -275,7 +275,7 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "To validate record based on JSON rules",
+          "description": "Script 383",
           "operators": {
             
           }
@@ -289,7 +289,7 @@
           ]
         },
         "action": {
-          "notificationTemplate": "TEST_FOR_SCRIPTS",
+          "notificationTemplate": "PW READY TO PAY #123",
           "notificationReport": "",
           "notifyContactTypes": [
             "Contractor(s)"

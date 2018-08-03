@@ -16,6 +16,9 @@ Notes:
 	- Inspection result is 'Complete' not 'Pass'
 */
 
+// written by SWAKIL
+include("9_WaterPermitCheckInspectionsComplete");
+
 //Based on report fill report parameters here
 var rptParams = aa.util.newHashtable();
 rptParams.put("altID", cap.getCapModel().getAltID());

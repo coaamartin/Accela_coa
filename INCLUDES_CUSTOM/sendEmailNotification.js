@@ -51,10 +51,10 @@ function sendEmailNotification(emailTemplate,reportName){
 	var rptParams = aa.util.newHashtable();
 	rptParams.put("RECORD_MODULE", "PLANNING");
 	
-	var sent =sendEmailWithReport(applicantEmail,cc, emailTemplate, reportName, rptParams, eParams);
+/*	var sent =sendEmailWithReport(applicantEmail,cc, emailTemplate, reportName, rptParams, eParams);
 	if (sent==false) {
 		logDebug("**WARN sending email failed");
-	}
+	}*/
   
 // 7/29/2018 New requirements added for script 290
 // need to send notice for a Public Hearing Notice document
@@ -84,7 +84,7 @@ function sendEmailNotification(emailTemplate,reportName){
 	}
 	var reportFile = [];
 	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
-	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParams,reportFile,capID4Email);
+	var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,cc,emailTemplate,eParams,reportFile,capID4Email);
 	if (!sendResult) 
 		{ logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 	else

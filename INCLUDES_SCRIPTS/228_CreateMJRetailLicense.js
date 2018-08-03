@@ -1,5 +1,5 @@
-//Start - 224 MJ Retail License Creation/Update Script 
-
+//Start - 228 MJ Retail License Creation/Update Script
+logDebug("etw capId: " + capId);
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;
@@ -21,6 +21,22 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vDateDiff;
 	var vEndOfMonth;
 	var vGoLive;
+
+	vParentLicTypeString = appTypeArray[0] + "/" + appTypeArray[1] + "/" + appTypeArray[2] + "/" + "License";
+	vParentLicType = "License";
+
+	//Check if the record already has a parent of the correct type.
+	//The correct type has the same top three levels of the record type
+	//hierarchy as the current record but the fourth level is
+	//'License' instead of 'Application'.
+	//If no license exists create one.
+	//
+	vParentArry = getParents(vParentLicTypeString);
+	if (vParentArry != null && vParentArry != "") {
+		vLicenseID = vParentArry[0];
+	} else if (appTypeArray[3] == "Application") {
+		vLicenseID = createParent(appTypeArray[0], appTypeArray[1], appTypeArray[2], vParentLicType, getAppName(capId));
+	}
 
 	//If the current record is an application record and the parent license
 	//record does not exist or the current record is a renewal record and
@@ -47,36 +63,42 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		//Copy application name from child to license
 		editAppName(getAppName(capId), vLicenseID);
 
+		//Activate the license records expiration cycle
+		vLicenseObj = new licenseObject(null, vLicenseID);
+		vLicenseObj.setStatus("Active");
+
 		//Update License Workflow
 		tmpCap = capId;
 		capId = vLicenseID;
-		updateTask("License Status", "Active", "Updated by Script 224_CreateMJRetailLicense", "Update by Script 224_CreateMJRetailLicense");
+		updateTask("License Status", "Active", "Updated by Script 228_CreateMJRetailLicense", "Update by Script 228_CreateMJRetailLicense");
 		capId = tmpCap;
 
 		//Generate license report and email
 		var vEmailTemplate;
 		var vReportTemplate;
 
-		if (appMatch("Licenses/Marijuana/Retail Store/License", vLicenseID)&& (wfStatus == "Issued")) {
-				vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
-				vReportTemplate = "MJ_License";
-			    scheduleInspection ("MJ AMED Inspection",77, "SLCLARK"," ", "Scheduled by Script 224")
-				scheduleInspection ("MJ Building Inspections - Plumbing",77, "SLCLARK", " ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Building Inspections - Electrical",77, "SLCLARK"," ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Building Inspections - Mechanical",77, "SLCLARK"," ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Building Inspections - Life Safety",77, "SLCLARK"," ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Security Inspections - 3rd Party",77, "SLCLARK"," ", "Scheduled by Script 224") 
-				scheduleInspection ("MJ Buidling Inspections - Structural",77, "SLCLARK"," ", "Scheduled by Script 224") 				
-		
+		if (appMatch("Licenses/Marijuana/Retail Store/License", vLicenseID) && (wfStatus == "Issued")) {
+			vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
+			vReportTemplate = "MJ_License";
+			tmpCap = capId;
+			capId = vLicenseID;
+			scheduleInspection("MJ AMED Inspection", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ Building Inspections - Mechanical", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ Building Inspections - Life Safety", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ Building Inspections - Structural", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			capId = tmpCap;
 		}
-		
-		//are these the parameters used in the email or report?  
+
+		//are these the parameters used in the email or report?
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
-			
+
 		var vRParams = aa.util.newHashtable();
 		addParameter(vRParams, "p1Value", vLicenseID.getCustomID());
 
@@ -86,5 +108,6 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		emailContacts("All", vEmailTemplate, vEParams, vReportTemplate, vRParams);
 		capId = tmpCap;
 
+	}
 }
 //End - MJ Retail License Creation/Update Script

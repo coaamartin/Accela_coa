@@ -68,7 +68,21 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
         logDebug("**WARN could not obtain Fee Schedule from App Type " + appTypeArray);
         return false;
     }
-
+    
+    if(appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")){
+        //Chicken Fee
+        var feeQtyCh = 0;
+        var chickens = asiValues["# of Chicken Coops"];
+        if(chickens && chickens != null && chickens != ""){
+            feeQtyCh = parseFloat(chickens);
+        }
+        
+        if(feeQtyCh > 0 && feeCodesAry["BUILDING_CHICKEN_FEE"]){
+            updateFee(feeCodesAry["BUILDING_CHICKEN_FEE"], feeSched, "FINAL", 1, "N");
+            return true;
+        }
+    }
+    
     //check County in address:
     var county = null;
     var addResult = aa.address.getAddressByCapId(capId);
@@ -135,16 +149,6 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
         if (feeQty > 0) {
             updateFee(feeCodesAry["BUILDING_DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
         }
-        
-        //Chicken Fee
-        var feeQtyCh = 0;
-        var chickens = asiValues["# of Chicken Coops"];
-        if(chickens && chickens != null && chickens != ""){
-            feeQtyCh = parseFloat(chickens);
-        }
-        
-        if(feeQtyCh > 0 && feeCodesAry["BUILDING_CHICKEN_FEE"]) updateFee(feeCodesAry["BUILDING_CHICKEN_FEE"], feeSched, "FINAL", feeQtyCh, "N");
-
     //Building Use Tax Fee
     var feeQty = 0;
     var materialsCost = asiValues["Materials Cost"];

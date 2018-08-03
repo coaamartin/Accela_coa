@@ -27,9 +27,12 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
         logDebug('autoCreateTempSWMPApplication() wf status & task match');
 
         useAppSpecificGroupName = false;
-        var asiFieldValue = getAppSpecific(asiFieldName);
+        //var asiFieldValue = getAppSpecific(asiFieldName);
+		var thisTSIArr = [];
+	    loadTaskSpecific(thisTSIArr);
+		var tsiValue = thisTSIArr[asiFieldName]
 
-        if (asiFieldValue == null || !asiFieldValue.equalsIgnoreCase("yes")) {
+        if (tsiValue == null || !tsiValue.equalsIgnoreCase("yes")) {
             return false;
         }
 

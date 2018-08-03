@@ -11,7 +11,7 @@ Author: Haitham Eleisah
 Functional Area : Records
 
 Sample Call:
-createChildarboristChildAndCopyDataAndSendEmail("License Issuance", "Issued", "Licenses/Contractor/Arborist/License", "MESSAGE_NOTICE_PUBLIC WORKS", "WorkFlowTasksOverdue", rptParams);
+createArboristLicenseAndCopyDataAndSendEmail("License Issuance", "Issued", "Licenses/Contractor/Arborist/License", "MESSAGE_NOTICE_PUBLIC WORKS", "WorkFlowTasksOverdue", rptParams);
 
  */
 
@@ -23,5 +23,5 @@ if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Is
     var LicenseType = "Licenses/Contractor/Arborist/License";
     var rptParams = aa.util.newHashtable();
     rptParams.put("Record_ID", cap.getCapModel().getAltID());
-    createChildarboristChildAndCopyDataAndSendEmail(LicenseType, emailTemplate, reportName, rptParams);
+    createArboristLicenseAndCopyDataAndSendEmail(LicenseType, emailTemplate, reportName, rptParams);
 }
