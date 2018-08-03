@@ -275,16 +275,9 @@ if((wfTask == "Landscape Pre Acceptance" || wfTask == "Addressing Pre Acceptance
    //prepare Deep URL:
 	var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 	var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
-	var acaCitizenRootUrl = acaSiteUrl.substring(0, subStrIndex);
-	var deepUrl = "/urlrouting.ashx?type=1000";
-	deepUrl = deepUrl + "&Module=" + cap.getCapModel().getModuleName();
-	deepUrl = deepUrl + "&capID1=" + capId.getID1();
-	deepUrl = deepUrl + "&capID2=" + capId.getID2();
-	deepUrl = deepUrl + "&capID3=" + capId.getID3();
-	deepUrl = deepUrl + "&agencyCode=" + aa.getServiceProviderCode();
-	deepUrl = deepUrl + "&HideHeader=true";
-
-	var recordDeepUrl = acaCitizenRootUrl + deepUrl;
+	var recordDeepUrl = getACARecordURL(subStrIndex)
+	
+	
 	// send an email to the applicant - we're waiting on the actual template here.
 	var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 	
