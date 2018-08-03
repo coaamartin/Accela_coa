@@ -10,6 +10,9 @@
  */
 function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldName) {
     logDebug("checkInspectionsResultAndSendEmail() started");
+
+
+
     //Update ASI
     var newDate = dateAddMonths(null, 36);//36 months = 3 years
     editAppSpecific(asiFieldName, newDate);

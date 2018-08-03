@@ -1,3 +1,4 @@
+// coded to spec - not needed
 script58_SetEAgendaDueDate();
 
 function script58_SetEAgendaDueDate() {        
@@ -7,7 +8,8 @@ function script58_SetEAgendaDueDate() {
         meetingDateMinus20,
         wfTaskToUpdate = 'Create E-Agenda';
 
-    activateTask('Create E-Agenda');
+   // activateTask('Create E-Agenda');
+    activateTask('Complete E-Agenda'); 
 
     meetings = getMeetings ({
         meetingType: 'CITY COUNCIL'

@@ -1,3 +1,10 @@
+ logDebug("Script 58 Starting");
+if (ifTracer(wfTask == "Generate Hearing Results" && wfStatus == "Complete", 'wfTask == "Generate Hearing Results" && wfStatus == "Complete"')) {
+    include("58_SetEAgendaDueDate");
+}
+
+
+
 /*
 Title : Set Rezoning Expiration Date (WorkflowTaskUpdateAfter) 
 

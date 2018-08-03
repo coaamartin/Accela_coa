@@ -20,7 +20,30 @@ Notes:
 var rptParams = aa.util.newHashtable();
 rptParams.put("altID", cap.getCapModel().getAltID());
 
-//Script 102
-if(inspResult == "Complete"){
-    checkInspectionsResultAndSendEmail4PPBMP("PPBMP INSPECTION # 102", "Date of next Inspection");
+logDebug('script 102 started')
+if(ifTracer(inspResult == "Complete",'inspResult == "Complete"')){
+	var emailParams = aa.util.newHashtable(),
+		reportParams = aa.util.newHashtable(),
+		reportTemplate = '',
+		newInspDate = dateAddMonths(null, 36);
+	
+	editAppSpecific("Date of next Inspection", newInspDate);
+	//scheduleInspection(insp2Create, newInspDate);//, inspector, null, newInspReqComments);
+
+	emailContactsWithCCs(
+		"Owner", 
+		"PPBMP INSPECTION # 102", 
+		emailParams, 
+		"", 
+		reportTemplate, 
+		"N", 
+		"", 
+		"Applicant,Developer,Project Owner"
+	);
+
+
+
+
+
+   // checkInspectionsResultAndSendEmail4PPBMP("PPBMP INSPECTION # 102", "Date of next Inspection");
 }
