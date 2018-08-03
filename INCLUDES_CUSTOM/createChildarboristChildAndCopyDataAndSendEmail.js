@@ -61,7 +61,7 @@ function createArboristLicenseAndCopyDataAndSendEmail(LicenseType, emailTemplate
             } else {
         
                 var emailParams = aa.util.newHashtable();
-                addParameter(emailParams, "$$altID$$", cap.getCapModel().getAltID());
+                addParameter(emailParams, "$$altID$$", rNewLicIdString);
                 //addParameter(emailParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
                 //addParameter(emailParams, "$$recordStatus$$", cap.getCapModel().getCapStatus());
                 //addParameter(emailParams, "$$wfComment$$", wfComment);
