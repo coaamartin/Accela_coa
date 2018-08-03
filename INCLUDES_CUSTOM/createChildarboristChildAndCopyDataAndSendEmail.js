@@ -34,7 +34,7 @@ function createArboristLicenseAndCopyDataAndSendEmail(LicenseType, emailTemplate
             
             updateAppStatus("Issued", "Issued via script", createdApp);
             
-            //vExpDate = new Date();
+            vExpDate = new Date();
             vNewExpDate = new Date(vExpDate.getFullYear(), 11, 31);
             
             createRefLP4Lookup(rNewLicIdString, "Arborist", "Arborist Applicant", null);
