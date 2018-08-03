@@ -19,7 +19,7 @@ function script219_createChildUtilityPermitRecords() {
                 copyOwner: true,
                 copyContacts: true,
                 customFields: [
-                    { key: "Utility Permit Type", val: "waterMainUtilityPermit" }
+                    { key: "Utility Permit Type", val: waterMainUtilityPermit }
                 ]
             });
             emailContactsWithCCs(

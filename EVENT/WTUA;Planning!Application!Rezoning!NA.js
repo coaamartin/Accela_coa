@@ -1,3 +1,10 @@
+ logDebug("Script 58 Starting");
+if (ifTracer(wfTask == "Generate Hearing Results" && wfStatus == "Complete", 'wfTask == "Generate Hearing Results" && wfStatus == "Complete"')) {
+    include("58_SetEAgendaDueDate");
+}
+  
+
+
 /*
 Title : Set Rezoning Expiration Date (WorkflowTaskUpdateAfter) 
 
@@ -138,7 +145,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
 	if ( !(AInfo["1st Review Comments Due Date"]) ) {
 		// Set up the 'target' date we want to search for meetings
 		var dToday = new Date();
-		var lookForPlanningMtgDate	= aa.date.parseDate(dateAddHC2(dToday,(7*6.5)));
+		var lookForPlanningMtgDate	= aa.date.parseDate(dateAdd(dToday,(7*6.5)));
 		var lookForMMDDYYYY = ("0" + lookForPlanningMtgDate.getMonth()).slice(-2) + "/" 
 								+ ("0" + lookForPlanningMtgDate.getDayOfMonth()).slice(-2) + "/" 
 								+ lookForPlanningMtgDate.getYear();
