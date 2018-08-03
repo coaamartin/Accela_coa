@@ -30,7 +30,9 @@ if(ifTracer(inspResult == "Complete",'inspResult == "Complete"')){
 	editAppSpecific("Date of next Inspection", newInspDate);
 	//scheduleInspection(insp2Create, newInspDate);//, inspector, null, newInspReqComments);
 
-	emailContactsWithCCs(
+	
+
+	/*emailContactsWithCCs(
 		"Project Owner", 
 		"PPBMP INSPECTION # 102", 
 		emailParams, 
@@ -41,9 +43,9 @@ if(ifTracer(inspResult == "Complete",'inspResult == "Complete"')){
 		"Applicant,Developer"
 	);
 
+*/
 
 
 
-
-   // checkInspectionsResultAndSendEmail4PPBMP("PPBMP INSPECTION # 102", "Date of next Inspection");
+   checkInspectionsResultAndSendEmail4PPBMP("PPBMP INSPECTION # 102", "Date of next Inspection");
 }
