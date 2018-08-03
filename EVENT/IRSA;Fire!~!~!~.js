@@ -59,35 +59,40 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 
 	//delete full Custom List on the record
 	removeASITable("Fire Violations");
-	inspId = 195;
 
 	//insert a row for each item on the checklist that was in violation
 
 	if (inspId) {
 		var gsi = getGuideSheetObjects(inspId);
 		if (gsi) {
-			var sortOrder = 0;
-			for (var thisGsi in gsi) {
-				var g = gsi[thisGsi];
-				if ("DENIED".equals(g.resultType.toUpperCase())) {
-					var thisViolation = [];
-					sortOrder++;
-					var thisViolation = [{
-							colName: "Sort Order",
-							colValue: String(sortOrder)
-						}, {
-							colName: "Violation",
-							colValue: (g.text && g.text != "null" ? String(g.text) : "")
-						}, {
-							colName: "Comment",
-							colValue: (g.comment && g.comment != "null" ? String(g.comment) : "")
-						}, {
-							colName: "Violation Status",
-							colValue: "Non Compliance"  // hardcode to value used in ASIT drop down
+			for (var gs in gsi) {
+				var t = gsi[gs]
+					t.loadInfoTables();
+				if (t.validTables) {
+					for (var thisGsi in t.infoTables) {
+						var g = (t.infoTables["FIRE VIOLATIONS"] ? t.infoTables["FIRE VIOLATIONS"] : []);
+						for (var fvi in g) {
+							var fvit = g[fvi];
+							logDebug(fvit["Violation Status"]);
+							if ("Non Compliance".equals(fvit["Violation Status"])) {
+								var thisViolation = [{
+										colName: "Sort Order",
+										colValue: String(fvit["Sort Order"])
+									}, {
+										colName: "Violation",
+										colValue: String(fvit["Violation"])
+									}, {
+										colName: "Comment",
+										colValue: String(fvit["Comment"])
+									}, {
+										colName: "Violation Status",
+										colValue: String(fvit["Violation Status"])
+									}
+								];
+								addAsiTableRow("FIRE VIOLATIONS", thisViolation);
+							}
 						}
-					];
-					logDebug(JSON.stringify(thisViolation));
-					addAsiTableRow("FIRE VIOLATIONS", thisViolation);
+					}
 				}
 			}
 		}
