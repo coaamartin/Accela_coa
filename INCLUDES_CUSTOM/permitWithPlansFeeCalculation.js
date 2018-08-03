@@ -78,7 +78,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
         }
         
         if(feeQtyCh > 0 && feeCodesAry["BUILDING_CHICKEN_FEE"]){
-            updateFee(feeCodesAry["BUILDING_CHICKEN_FEE"], feeSched, "FINAL", feeQtyCh, "N");
+            updateFee(feeCodesAry["BUILDING_CHICKEN_FEE"], feeSched, "FINAL", 1, "N");
             return true;
         }
     }
