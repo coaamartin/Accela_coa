@@ -6,26 +6,21 @@
 var SCRIPT_VERSION = 3.0
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-
-//var debug;
+eval(getScriptText("COMMON_ACA_PAGEFLOW_FUNCTIONS"));
 
 var cap = aa.env.getValue("CapModel");
 var capId = cap.getCapID();
 
-var isTempLic = getAppSpecific("Amend Temporary Restaurant License");
+var phased = getAppSpecific("Is this project going to be phased?");
 
-//if (isTempLic == "CHECKED") {
-	//Remove all docs
+if (phased == "Yes") {
 	removeAllRequiredDocumentCapCondition();
-   	addRequiredDocument("Suhail Tetsing... ");
+   	addRequiredDocument("Phase Work Plan");
 	
-//}
-//else{	
-//	aa.env.setValue("ReturnData", "{'PageFlow': {'HidePage' : 'Y'}}");
-//}
-
-//aa.env.setValue("ErrorMessage", debug);
-
+}
+else{	
+	aa.env.setValue("ReturnData", "{'PageFlow': {'HidePage' : 'Y'}}");
+}
 
 function getScriptText(vScriptName) {
    var servProvCode = aa.getServiceProviderCode();
@@ -40,50 +35,4 @@ function getScriptText(vScriptName) {
    } catch (err) {
       return "";
    }
-}
-
-function removeAllRequiredDocumentCapCondition()
-{
-    //delete documents
-   var entityModel = aa.proxyInvoker.newInstance("com.accela.v360.document.EntityModel").getOutput();
-   entityModel.setServiceProviderCode('AURORACO');
-   entityModel.setEntityType("TMP_CAP");
-   entityModel.setEntityID(capId);
-
-   var documentlist = aa.document.getDocumentListByEntity(capId, 'TMP_CAP').getOutput();
-   var documentBiz = aa.proxyInvoker.newInstance("com.accela.aa.ads.ads.DocumentBusiness").getOutput();
-
-   for (var d = 0; d < documentlist.size(); d ++ )
-   {
-      var documentItem = documentlist.get(d);
-      documentBiz.removeDocument4Partial(entityModel, 'AURORACO', documentItem.getDocumentNo());
-   }
-   
-   //delete conditions
-   var result = aa.capCondition.getCapConditions(capId);
-   var condMap = {};
-   var conditions = {};
-   var capConds = result.getOutput();
-   for(var i = 0; i < capConds.length; i ++ )
-   {
-      aa.capCondition.deleteCapCondition(capId, capConds[i].getConditionNumber());
-   }
-}
-
-function addRequiredDocument(DocumentName)
-{
-    var capConditionScriptModel = aa.capCondition.getNewConditionScriptModel().getOutput();
-    capConditionScriptModel.setCapID(capId)
-    capConditionScriptModel.setConditionGroup("Required Document")
-    capConditionScriptModel.setConditionType("Required Document")
-    capConditionScriptModel.setConditionDescription(DocumentName)
-    capConditionScriptModel.setImpactCode("Notice")
-    capConditionScriptModel.setConditionStatus("Applied")
-    capConditionScriptModel.setInheritable("N")
-    capConditionScriptModel.setConditionComment(DocumentName)
-    var result = aa.capCondition.createCapCondition(capConditionScriptModel);
-    if (result.getSuccess())
-        logDebug("Successfully add Cap Condition to: " + capId + " (Required Document) " + DocumentName );
-    else
-        logDebug( "**ERROR: Add Cap Condition to:" + capId + " (Required Document): " + result.getErrorMessage());
 }
