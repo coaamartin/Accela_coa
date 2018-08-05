@@ -1,6 +1,9 @@
 //COA Script #6 added by SWAKIL
 include("51_deactivatePIInspectionTask");
 
+//COA Script #6 added by SWAKIL
+include("6_assignedUserDraftWorkOrder");
+
 //script 250
 logDebug('Script 250 Starting')
 if (ifTracer((wfTask=="Initial Review" || wfTask=="Initial Supervisor Review") && wfStatus=="Assigned",'wfTask & wfStatus match - calling 250_updateAssignedUserForTrafficEngRequest()')) {
