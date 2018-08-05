@@ -20,5 +20,5 @@ Notes :
 	-The WTUA could not be used to prevent the workflow from proceeding , alternatively we use WTUB
 */
 
-requireDataInSpecialInspections();
+//requireDataInSpecialInspections();
 
