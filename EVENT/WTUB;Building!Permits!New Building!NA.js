@@ -17,3 +17,6 @@ Notes :
 */
 
 requireDataInSpecialInspections();
+
+//COA Script #48 added by SWAKIL
+include("48_RequiredFieldsQualityCheck");
