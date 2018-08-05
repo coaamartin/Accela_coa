@@ -1,7 +1,3 @@
-
-//COA Script #48 added by SWAKIL
-include("48_RequiredFieldsQualityCheck");
-
 /* Title :  Require Data in Special Inspections (WorkflowTaskUpdateBefore)
 
 Purpose :  If workflow task "Special Inspection" and the workflow status is "Final" and check that all the custom fields in the custom
@@ -20,5 +16,5 @@ Notes :
 	-The WTUA could not be used to prevent the workflow from proceeding , alternatively we use WTUB
 */
 
-//requireDataInSpecialInspections();
+requireDataInSpecialInspections();
 
