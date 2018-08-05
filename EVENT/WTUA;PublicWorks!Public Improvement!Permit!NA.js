@@ -1,7 +1,8 @@
 //COA Script #22 added by JMAIN
 include("22_publicworksPIPermitFinalAcceptanceEmail");
 
-
+//COA Script #51 added by SWAKIL
+include("51_deactivatePIInspectionTask");
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Update Assigned user for Traffic Engineering Request(WorkflowTaskUpdateAfter).
 
