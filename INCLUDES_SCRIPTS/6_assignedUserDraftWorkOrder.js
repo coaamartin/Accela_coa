@@ -1,7 +1,8 @@
 //SWAKIL
 if ("Traffic Investigation".equals(wfTask) && "Draft Work Order".equals(wfStatus))
 {	
-	assignTask("Draft Workorder", wfActionByUserID +"");
+	var userID = aa.env.getValue("CurrentUserID");
+	assignTask("Draft Workorder", userID);
 }
 
 
