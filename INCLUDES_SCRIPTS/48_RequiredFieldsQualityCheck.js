@@ -18,5 +18,4 @@ if ("Quality Check".equals(wfTask) && "Approved".equals(wfStatus))
 	        comment("Not all Required Custom fields are populated for QC Approval.");
 			cancel=true;
 		}
-
 }
