@@ -14,8 +14,9 @@ if ("Quality Check".equals(wfTask) && "Approved".equals(wfStatus))
 	var p = getAppSpecific("Homeowner acting as Contractor");
 
 		//if(!p || !q || !r || !s || !t || !u || !v || !w || !x || !y || !z  ){
+			cancel=true;
 			showMessage=true;
 	        comment("Not all Required Custom fields are populated for QC Approval.");
-			cancel=true;
+			
 		//}
 }
