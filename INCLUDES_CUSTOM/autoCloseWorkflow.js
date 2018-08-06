@@ -40,9 +40,10 @@ function autoCloseWorkflow() {
         var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParams,reportFile,capID4Email);
         if (!sendResult) { logDebug("autoCloseWorkflow: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
         else { logDebug("autoCloseWorkflow: Sent email to applicant "+applicantEmail)}  
-		
-		//Script 324
-		addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
+        
+        //Script 324
+        if(appMatch("Building/Permit/Master/NA"))
+            addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
     }
     
     //#2
