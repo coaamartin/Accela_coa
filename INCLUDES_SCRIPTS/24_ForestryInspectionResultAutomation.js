@@ -1,6 +1,6 @@
-script27_ForestryInspectionResultAutomation();
+script24_ForestryInspectionResultAutomation();
 
-function script27_ForestryInspectionResultAutomation() {   
+function script24_ForestryInspectionResultAutomation() {   
     var inspectListitem = null;
 
     if (ifTracer(inspType == "Forestry Inspection" && inspResult == "Complete", 'inspType == "Forestry Inspection" && inspResult == "Complete"' )) {
@@ -26,6 +26,10 @@ function script27_ForestryInspectionResultAutomation() {
 
         guideSheetObjects = getGuideSheetObjects(inspId);
         var items = loadGuideSheetItems(inspId) 
+        for(var key in items) {
+            logDebug(key);
+            printObjProps(items[key]);
+        }
         return items[itemKey];
     }
 }
