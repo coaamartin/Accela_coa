@@ -22,7 +22,7 @@ if(!appMatch(("Planning/Application/Address/*"))){
     if(appMatch("Planning/Application/Conditional Use/NA"))
         sendHearingScheduledEmailAndUpdateASI("Hearing Scheduled", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
     else if(appMatch("Planning/Application/Rezoning/NA"))
-        sendHearingScheduledEmailAndUpdateASI("Hearing Scheduled", [ "Scheduled" ], "Planning Commission", "Projected Planning Commission Date", "PLN PUBLIC HEARING EMAIL # 278");
+        sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Projected Planning Commission Date", "PLN PUBLIC HEARING EMAIL # 278");
     else
         sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
 }
