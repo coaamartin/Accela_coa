@@ -35,6 +35,13 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
         
                 scheduleInspectionCustom4CapId(childCapId, "Routine Inspections", days4Insp);
                 
+                //update Renewal status and date
+                var vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
+                var rB1ExpResult = aa.expiration.getLicensesByCapID(childCapId).getOutput();
+                rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+                rB1ExpResult.setExpStatus("Active");
+                aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
+                
                 var parents = getParents("PublicWorks/Civil Plan/Review/NA")
                 if(!parents || parents.length == 0){
                     logDebug("**WARN no parents found for record, capId=" + capId + ", altId=" + capIDString);
@@ -50,13 +57,6 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
                 }
                 
                 addASITable(asitName, pondTypes, childCapId);
-                
-                //update Renewal status and date
-                var vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
-                var rB1ExpResult = aa.expiration.getLicensesByCapID(childCapId).getOutput();
-                rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
-                rB1ExpResult.setExpStatus("Active");
-                aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
             }
         } else {
             logDebug("createPPBMPRecord() ended: wfTask No Match");
