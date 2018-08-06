@@ -8,7 +8,7 @@
 
     if (ifTracer(inspResult == "Complete", 'inspResult == "Complete"')) {
         removalItem = getRemovalChecklistItem();
-        if(ifTracer(removalItem == "Yes", 'removalItem == "Yes"') {
+        if(ifTracer(removalItem == "Yes", 'removalItem == "Yes"')) {
         //  closeTask("Crew Work", "Complete", "", ""); 
         //  activateTask("Stump Grind");
         }
