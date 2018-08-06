@@ -3,6 +3,7 @@
  * prepare parameters and calls the method that will do the actual work
  */
 function autoCloseWorkflow() {
+    logDebug("autoCloseWorkflow() started")
     var recTypesAry = new Array();
     var matched = false;
     var applicant = getContactByType("Applicant", capId);
@@ -30,7 +31,7 @@ function autoCloseWorkflow() {
     recTypesAry = [ "Building/Permit/Plans/Amendment", "Building/Permit/New Building/Amendment", "Building/Permit/Master/Amendment", "Building/Permit/Master/NA" ];
     matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Fee Processing", "Complete", "Approved");
     if(matched){
-        
+        logDebug("matched #1");
         setCodeReference("Complete");
         //Send email for case #1
         
@@ -42,8 +43,10 @@ function autoCloseWorkflow() {
         else { logDebug("autoCloseWorkflow: Sent email to applicant "+applicantEmail)}  
         
         //Script 324
-        if(appMatch("Building/Permit/Master/NA"))
+        if(appMatch("Building/Permit/Master/NA")){
+            logDebug("Calling Script 324 from PRA");
             addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
+        }
     }
     
     //#2
@@ -83,7 +86,7 @@ function autoCloseWorkflow() {
     if (!matched) {
         recTypesAry = new Array();
         recTypesAry = [ "Building/Permit/No Plans/NA" ];
-        if(bldScript2_noContractorCheck())
+        if(appMatch("Building/Permit/No Plans/NA") && bldScript2_noContractorCheck())
             matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Submitted", "Permit Issuance", "Issued", "Issued");
         else logDebug("No LP on file.  Not issuing permit");
         
@@ -96,4 +99,5 @@ function autoCloseWorkflow() {
             setCodeReference("Issued");
         }
     }
+    logDebug("autoCloseWorkflow() ended");
 }

@@ -1,7 +1,7 @@
 function addMasterPlanDataToShrdDDList(asiFieldName, recordReqStatus, inactivateRowValue) {
-    
+    logDebug("addMasterPlanDataToShrdDDList() started");
     var updateShrdDDList = false;
-    if(vEventName == "ApplicationStatusUpdateAfter"){
+    if(ifTracer(vEventName == "ApplicationStatusUpdateAfter", 'ASUA')){
         if (appStatus != recordReqStatus) {
             logDebug("**WARN no match capStatus: " + cap.getCapStatus());
             return false;
@@ -10,11 +10,11 @@ function addMasterPlanDataToShrdDDList(asiFieldName, recordReqStatus, inactivate
             updateShrdDDList = true;
     }
         
-    if(vEventName == "WorkflowTaskUpdateAfter")
+    if(ifTracer(vEventName == "WorkflowTaskUpdateAfter", 'WTUA'))
         if((wfTask == "Final Review" && wfStatus == "Complete No Fee") || (wfTask == "Fee Processing" && wfStatus == "Complete"))
             updateShrdDDList = true;
         
-    if(vEventName == "PaymentReceiveAfter") updateShrdDDList = true;
+    if(ifTracer(vEventName == "PaymentReceiveAfter", 'PRA')) updateShrdDDList = true;
     
     if(!updateShrdDDList) return false;
 
@@ -66,4 +66,5 @@ function addMasterPlanDataToShrdDDList(asiFieldName, recordReqStatus, inactivate
     if (!added.getSuccess()) {
         logDebug("**WARN DDL '" + sharedDDLName + "' - Add Row failed, Error: " + added.getErrorMessage());
     }
+    logDebug("addMasterPlanDataToShrdDDList() ended");
 }
