@@ -65,7 +65,7 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
 				
                 var files = new Array();
                 var eParams = aa.util.newHashtable();
-                addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
+                addParameter(eParams, "$$altID$$", createChildResult.getCustomID());
                 addParameter(eParams, "$$appTypeString$$", cap.getCapType().getAlias());
                 addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
                 addParameter(eParams, "$$balance$$", feeBalance(""));
