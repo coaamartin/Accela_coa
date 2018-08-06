@@ -44,9 +44,9 @@ function autoCloseWorkflow() {
         
         //Script 324
         if(appMatch("Building/Permit/Master/NA")){
-			logDebug("Calling Script 324 from PRA");
+            logDebug("Calling Script 324 from PRA");
             addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
-		}
+        }
     }
     
     //#2
@@ -86,7 +86,7 @@ function autoCloseWorkflow() {
     if (!matched) {
         recTypesAry = new Array();
         recTypesAry = [ "Building/Permit/No Plans/NA" ];
-        if(bldScript2_noContractorCheck())
+        if(appMatch("Building/Permit/No Plans/NA") && bldScript2_noContractorCheck())
             matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Submitted", "Permit Issuance", "Issued", "Issued");
         else logDebug("No LP on file.  Not issuing permit");
         
