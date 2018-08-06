@@ -17,7 +17,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
     var newDate = dateAddMonths(null, 36);//36 months = 3 years
     editAppSpecific(asiFieldName, newDate);
 
-    //Send the email
+    //Send the email  -- owners don't have emails all the time so making applicant the Toemail and adding owner email to cc email
     var ownerEmail = null, applicantEmail = null, developerEmail = null, projectOwnerEmail = null;
     var owners = aa.owner.getOwnerByCapId(capId);
     if (owners.getSuccess()) {
@@ -39,6 +39,7 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
         applicantEmail = recordApplicant.getEmail();
 		logDebug("Applicant Email " + applicantEmail);
     }
+
 	
 	//find developer email
 	var recordDeveloper = getContactByType("Developer", capId);
@@ -61,11 +62,11 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
 
 	//build CC email list
 	var ccEmail = "";
-	
-	if (applicantEmail != null && applicantEmail != "") {
-		ccEmail = applicantEmail;
+	// sending email to applicant as the owner doesn't have email
+	if (ownerEmail != null && ownerEmail != "") {
+		ccEmail = ownerEmail;
 	}
-	
+	//
 	if (developerEmail != null && developerEmail != "") {
 		if (ccEmail != "") {
 			ccEmail += ";" +developerEmail;
@@ -82,21 +83,24 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
 		}
 	}
 	
-    var ownerName = getOnwertName();
+    // do not need this, applicant name is being used --var ownerName = getOnwertName();  //this is not a spelling mistake
     
     //var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
     var reportFile = [];
     var reportTemplate = "JD_TEST_SSRS";
     var vRParams = aa.util.newHashtable();
     addParameter(vRParams, "Record_ID", capIDString);
-    var vAsyncScript = "SEND_INSPECTION_REPORT_TO_OWNER_ASYNC";
-    
+    //var vAsyncScript = "SEND_INSPECTION_REPORT_TO_OWNER_ASYNC";
+    var vAsyncScript = "SEND_EMAIL_TO_CONTACTS_ASYNC_WITH_CC";
+
     var acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
     acaURL = acaURL.substr(0, acaURL.toUpperCase().indexOf("/ADMIN"));
     
     var emailParams = aa.util.newHashtable();
     addParameter(emailParams, "$$ContactEmail$$", applicantEmail);
-    addParameter(emailParams, "$$ContactFullName$$", ownerName);
+    addParameter(emailParams, "$$reportName$$", reportTemplate);
+    addParameter(emailParams, "$$applicantFirstName$$", recordApplicant.getFirstName());
+	addParameter(emailParams, "$$applicantLastName$$", recordApplicant.getLastName());
     //addParameter(emailParams, "$$acaDocDownloadUrl$$", acaURL);
     
     var envParameters = aa.util.newHashMap();
@@ -105,12 +109,12 @@ function checkInspectionsResultAndSendEmail4PPBMP(emailTemplateName, asiFieldNam
     envParameters.put("emailTemplate", emailTemplateName);
     envParameters.put("reportTemplate", reportTemplate);
     envParameters.put("vRParams", vRParams);
-    envParameters.put("toEmail", ownerEmail);
+    envParameters.put("toEmail", applicantEmail);
     envParameters.put("ccEmail", ccEmail);
     logDebug("Attempting to run Async: " + vAsyncScript);
     aa.runAsyncScript(vAsyncScript, envParameters);
             
-    var sendResult = sendNotification("noreply@aurora.gov",ownerEmail,ccEmail,emailTemplateName,emailParams,reportFile,capId);
+    var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,ccEmail,emailTemplateName,emailParams,reportFile,capId);
     if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 
     return true;

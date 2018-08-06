@@ -13,3 +13,6 @@ Sample Call:
 */
 
 establishCivilPlanParentRelationship("Civil Plan number", "PublicWorks/Civil Plan/Review/NA");
+
+//SWAKIL
+include("55_WUPInspectionScheduling");
