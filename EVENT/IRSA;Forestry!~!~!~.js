@@ -5,4 +5,3 @@ if (ifTracer(matchARecordType([
   ], appTypeString), 'Record type matches.')) {
         include("55_AfterForestryFieldCrewInspection");
 }
-"
