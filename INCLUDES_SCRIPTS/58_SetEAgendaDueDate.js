@@ -22,5 +22,6 @@ function script58_SetEAgendaDueDate() {
 
         editTaskDueDate(wfTaskToUpdate, meetingDateMinus15);
         updateTaskAssignedDate(wfTaskToUpdate, meetingDateMinus20);
+        setTaskItemStartTime(wfTaskToUpdate, meetingDateMinus20)
     }
 }
