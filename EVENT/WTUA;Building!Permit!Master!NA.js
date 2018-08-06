@@ -10,6 +10,7 @@ Author: Yazan Barghouth
 Functional Area : Records
 
 Sample Call:
-	addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
+    addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
 */
+//Script 324
 addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
