@@ -36,6 +36,7 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
                 scheduleInspectionCustom4CapId(childCapId, "Routine Inspections", days4Insp);
                 
                 //update Renewal status and date
+                var vExpDate = new Date();
                 var vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
                 var rB1ExpResult = aa.expiration.getLicensesByCapID(childCapId).getOutput();
                 rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
