@@ -7,7 +7,7 @@
 
 function script59_PlanningCloseCaseComplete(){
     logDebug("script59_PlanningCloseCaseComplete() started.");
-    if(ifTracer(wfTask == 'Case Complete' && wfStatus == 'Closed', 'wf: Case Complete/Closed'))
+    if(ifTracer(wfTask == 'Case Complete' && matches(wfStatus, 'Closed', 'Complete'), 'wf: Case Complete/Closed OR Case Complete/Complete'))
         if(wfProcess) deactivateActiveTasks(wfProcess);
     logDebug("script59_PlanningCloseCaseComplete() ended.");
 };//END script59_PlanningCloseCaseComplete();
