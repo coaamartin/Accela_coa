@@ -13,5 +13,4 @@ Sample Call : updateAssignedToUser()
 
 */
 updateAssignedToUser();
-
-
+script59_PlanningCloseCaseComplete();

@@ -6,6 +6,7 @@
 | Created on	: 11/01/2017
 /------------------------------------------------------------------------------------------------------*/
 
+
 var SCRIPT_VERSION = 3.0;
 // Support ACA and AV, without messing with Global publicUser
 var currUserId = aa.env.getValue("CurrentUserID");
