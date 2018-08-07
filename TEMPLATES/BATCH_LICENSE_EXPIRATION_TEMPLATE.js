@@ -329,7 +329,7 @@ function mainProcess() {
 
 		logDebug("==========: " + altId + " :==========");
 		logDebug("Renewal Status : " + b1Status + ", Expires on " + b1ExpDate);
-
+		
 		// Actions start here:
 
 		// update expiration status
