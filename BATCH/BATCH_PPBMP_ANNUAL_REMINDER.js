@@ -257,8 +257,6 @@ function mainProcess() {
 				var capStatus = capOutput.getCapStatus();
 
 				// update owner on record
-				copyOwnersByParcel_Local();
-				/*
 				// get owners on Cap
 				var capOwnerArray = getOwner(capId);
 				var capOwnerArrLength = capOwnerArray.length;
@@ -283,10 +281,10 @@ function mainProcess() {
 				}
 				var capsUpdated = [];
 				if (!matchFound) {
-				updateCapOwnersByParcel();
+				//updateCapOwnersByParcel();
+				copyOwnersByParcel_Local();
 				capsUpdated.push(altId);
 				}
-				 */
 				// send email to primary owner
 
 				var dueDate = dateAdd(null, 0); // will need to find out if there's a due date for report to be submitted
@@ -312,14 +310,15 @@ function mainProcess() {
 		logMessage("Total CAPS processed: " + totalCapsProcessed);
 		logMessage("Total emails sent: " + emailSent);
 	} // loop through found records
-	/*
+	
 	if (capsUpdated.length > 0) {
-		logDebug("The following records had updates to the Primary Owner from the Parcel record:");
+		logMessage("The following records had updates to the Primary Owner from the Parcel record:");
+		var o = 0;
 		for (o in capsUpdated) {
-			logDebug(capsUpdated[o]);
+			logMessage(capsUpdated[o]);
 		}
 	}
-	*/
+	
 }
 /*-----------------------------------------------------------
 Helper Functions
