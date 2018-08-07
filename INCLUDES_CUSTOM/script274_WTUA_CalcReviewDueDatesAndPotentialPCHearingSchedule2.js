@@ -35,18 +35,19 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
                                 + ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
                                 + revdDate.getYear();
             editAppSpecific("1st Review Comments Due date",revdDateStr);
-        }
-        // update planning commission date if found
-        if (newPlnMtg != null) {
-            var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
-                                +(""+ newPlnMtg.startDate).slice(8,10)+"/"
-                                +(""+ newPlnMtg.startDate).slice(0,4);
-            logDebug("newHearingDate = " + newHearingDate);                             
-            editAppSpecific("Projected Planning Commission Date",newHearingDate);
-        } else {
-            logDebug("Script 274: WARNING - there is no planning commission date within 45 days of your target date!");
-            comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
-        }
+        
+            // update planning commission date if found
+            if (newPlnMtg != null) {
+                var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
+                                    +(""+ newPlnMtg.startDate).slice(8,10)+"/"
+                                    +(""+ newPlnMtg.startDate).slice(0,4);
+                logDebug("newHearingDate = " + newHearingDate);                             
+                editAppSpecific("Projected Planning Commission Date",newHearingDate);
+            } else {
+                logDebug("Script 274: WARNING - there is no planning commission date within 45 days of your target date!");
+                comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
+            }
+		}
     }
     else 
         if ( !(AInfo["2nd Review Comments Due Date"]) ) {
@@ -68,30 +69,38 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
             var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
         
             // update review comments
-            var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
-            var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
-                                + ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
-                                + revdDate.getYear();
-            editAppSpecific("2nd Review Comments Due date",revdDateStr);
-            logDebug("*******2nd Review Date = " +revdDateStr);
+		    //Specs say to check for Resubmital requested,but only prelminary plat has this status
+		    var updateCustField = true;
+		    if(appMatch("Planning/Application/Preliminary Plat/NA") && !isHistTaskStatus("Review Distribution", "Resubmittal Requested")) updateCustField = false;
+		    
+            if(updateCustField){
+                var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
+                var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
+                                    + ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
+                                    + revdDate.getYear();
+                editAppSpecific("2nd Review Comments Due date",revdDateStr);
+                logDebug("*******2nd Review Date = " +revdDateStr);
+			    
+            
         
-            // update submission date
-            var subdDate = aa.date.parseDate(dateAddHC2("",20, true));
-            var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
-                                + ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
-                                + subdDate.getYear();
-            editAppSpecific("Applicant 2nd Submission Date",subdDateStr); 
-        
-            // update planning commission date if found
-            if (newPlnMtg != null) {
-                var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
-                                    +(""+ newPlnMtg.startDate).slice(8,10)+"/"
-                                    +(""+ newPlnMtg.startDate).slice(0,4);
-                editAppSpecific("Projected Planning Commission Date",newHearingDate);
-            } else {
-                logDebug("Script 274: WARNING - there is no planning commission date within 45 days of your target date!");
-                comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
-            }
+                // update submission date
+                var subdDate = aa.date.parseDate(dateAddHC2("",20, true));
+                var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
+                                    + ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
+                                    + subdDate.getYear();
+                editAppSpecific("Applicant 2nd Submission Date",subdDateStr); 
+                
+                // update planning commission date if found
+                if (newPlnMtg != null) {
+                    var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
+                                        +(""+ newPlnMtg.startDate).slice(8,10)+"/"
+                                        +(""+ newPlnMtg.startDate).slice(0,4);
+                    editAppSpecific("Projected Planning Commission Date",newHearingDate);
+                } else {
+                    logDebug("Script 274: WARNING - there is no planning commission date within 45 days of your target date!");
+                    comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
+                }
+			}
             
         } else {
             // Set up the 'target' date we want to search for meetings
@@ -112,18 +121,24 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
         
             if (!(AInfo["3rd Review Comments Due Date"])) {
                 // update review comments
-                var revdDate = aa.date.parseDate(dateAddHC2("",10, true));
-                var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
-                                    + ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
-                                    + revdDate.getYear();
-                editAppSpecific("3rd Review Comments Due date",revdDateStr);
-            
-                // update submission date
-                var subdDate = aa.date.parseDate(dateAddHC2("",15, true));
-                var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
-                                    + ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
-                                    + subdDate.getYear();
-                editAppSpecific("Applicant 3rd Submission Date",subdDateStr); 
+		        //Specs say to check for Resubmital requested,but only prelminary plat has this status
+		        var updateCustField = true;
+		        if(appMatch("Planning/Application/Preliminary Plat/NA") && !isHistTaskStatus("Review Distribution", "Resubmittal Requested")) updateCustField = false;
+		        
+                if(updateCustField){
+                    var revdDate = aa.date.parseDate(dateAddHC2("",10, true));
+                    var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
+                                        + ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
+                                        + revdDate.getYear();
+                    editAppSpecific("3rd Review Comments Due date",revdDateStr);
+                    
+                    // update submission date
+                    var subdDate = aa.date.parseDate(dateAddHC2("",15, true));
+                    var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
+                                        + ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
+                                        + subdDate.getYear();
+                    editAppSpecific("Applicant 3rd Submission Date",subdDateStr); 
+				}
             }
         
             // update planning commission date if found
