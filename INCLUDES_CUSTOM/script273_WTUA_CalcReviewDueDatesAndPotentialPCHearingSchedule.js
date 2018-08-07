@@ -161,7 +161,7 @@ function script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule(){
             var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
             var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
             var recordACAUrl = getACARecordURL(subStrIndex)
-            
+            aa.print(recordACAUrl);
             var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
             var emailParameters = aa.util.newHashtable();
             addParameter(emailParameters, "$$todayDate$$", dateAdd(null, 0));
