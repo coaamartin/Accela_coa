@@ -8,28 +8,18 @@
 
     if (ifTracer(inspResult == "Complete", 'inspResult == "Complete"')) {
         removalItem = getRemovalChecklistItem();
+        logDebug("removalItem: " + removalItem)
         if(ifTracer(removalItem == "Yes", 'removalItem == "Yes"')) {
-        //  closeTask("Crew Work", "Complete", "", ""); 
-        //  activateTask("Stump Grind");
+            closeTask("Crew Work", "Complete", "", ""); 
+            activateTask("Stump Grind");
         }
     }
-
-
     
     function getRemovalChecklistItem() {
-         var guideSheetObjects,
-         item = null,
+        var guideSheetObjects;
 
-         guideSheetObjects = getGuideSheetObjects(inspId);
-         if (ifTracer(guideSheetObjects && guideSheetObjects.length > 0, 'guideSheetObjects.length > 0')) {
-            for (idx in guideSheetObjects) {
-                if(ifTracer(guideSheetObjects[idx].gsType == "FORESTRY FIELD CREW", 'guideSheetObjects[idx].gsType == "FORESTRY FIELD CREW"')) {
-                    guideSheetObjects[idx].loadInfo();
-                    return guideSheetObjects[idx].info["Removal"]
-                }
-                
-            }
-        }
-        return item;
+        guideSheetObjects = getGuideSheetObjects(inspId);
+        var items = loadGuideSheetItems(inspId) 
+        return items['Removal'];
     }
  }
