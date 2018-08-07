@@ -137,14 +137,14 @@ try {
 	|
 	/-----------------------------------------------------------------------------------------------------*/
 
-	logDebug("Start of Job");
+	logMessage("Start of Job");
 
 	mainProcess();
 
-	logDebug("End of Job: Elapsed Time : " + elapsed() + " Seconds" + br);
+	logMessage("End of Job: Elapsed Time : " + elapsed() + " Seconds" + br);
 
 	if (emailAddress.length)
-		aa.sendMail("noreply@accela.com", emailAddress, "", batchJobName + " Results", emailText);
+		aa.sendMail("noreply@accela.com", emailAddress, "", batchJobName + " Results", message);
 
 }
 /*------------------------------------------------------------------------------------------------------/
