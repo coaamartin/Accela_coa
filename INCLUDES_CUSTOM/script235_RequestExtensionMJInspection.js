@@ -13,7 +13,8 @@ function requestExtensionMJInspection() {
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Request for Extension") {	
 		
-		var inspComments = capId.getInspectionComments();		
+		var inspResultObj = aa.inspection.getInspections(capId);
+		var inspComments = inspResultObj.getInspectionComments();		
 		var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
 		
 		scheduleInspectDate(inspType, newInspSchedDate, null, null, inspComments);	
