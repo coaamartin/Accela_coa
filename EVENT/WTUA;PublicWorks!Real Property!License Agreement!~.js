@@ -35,5 +35,5 @@ if(wfTask == "Signatures" && wfStatus == "Pending Owner Signature"){
 
 //Script 162
 if(wfTask == "Plans Coordination" && wfStatus == "Ready for Signatures"){
-    editAppSpecific("Signed Easement Due Date", dateAdd(null, 60), capId);
+    editAppSpecific("Signed License Due Date", dateAdd(null, 60), capId);
 }
