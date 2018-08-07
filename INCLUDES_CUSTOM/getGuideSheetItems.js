@@ -4,12 +4,12 @@
      * EXAMPLE - Gets all items for specified inspId, guidelist type, where value = 'Yes'
      *  guideSheets = getGuideSheetItems({
             inspId: inspId,
-            guideTypeName: "FORESTRY INSPECTION",
+            guideTypeName: "FORESTRY INSPECTOR",
             guideItemValue: 'Yes'
         });
      * 
     */
-function getGuideSheetItems(options) {
+   function getGuideSheetItems(options) {
     var settings = {
         capId: capId,
         inspId: null,    // filter by InspId - null for no filtering
@@ -37,7 +37,7 @@ function getGuideSheetItems(options) {
             if (inspGuidesheets) {
                 inspGuidesheetsArray = inspGuidesheets.toArray();
                 for (var gsKey in inspGuidesheetsArray) {
-                    if(inspGuidesheetsArray[gsKey] == settings.guideTypeName || settings.guideTypeName == null) {
+                    if(inspGuidesheetsArray[gsKey].guideType == settings.guideTypeName || settings.guideTypeName == null) {
                         var inspGuidesheetItemsArray = inspGuidesheetsArray[gsKey].getItems().toArray();
                         for (var idx in inspGuidesheetItemsArray) {
                             if(settings.guideItemName == inspGuidesheetItemsArray[idx].guideItemText

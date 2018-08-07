@@ -3,7 +3,7 @@
 function plnScript284_activateTasks() {
     logDebug("plnScript284_activateTasks() started");
     try{
-        var reviewTasksStatuses = ["Proceed-Tech", "Resubmittal Requested"];
+        var reviewTasksStatuses = ["Proceed-Tech", "Proceed Tech", "Resubmittal Requested"];
         var workflowTasks = aa.workflow.getTasks(capId).getOutput();
         for (i in workflowTasks) {
             var wfTask = workflowTasks[i];
