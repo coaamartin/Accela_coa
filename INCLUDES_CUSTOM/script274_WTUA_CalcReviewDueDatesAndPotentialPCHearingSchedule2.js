@@ -25,12 +25,13 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
         var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
 
         // update review comments
-        var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
-        var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
-                            + ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
-                            + revdDate.getYear();
-        editAppSpecific("1st Review Comments Due date",revdDateStr);
-        
+        if(isHistTaskStatus("Review Distribution", "Resubmittal Requested")){
+            var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
+            var revdDateStr = ("0" + revdDate.getMonth()).slice(-2) + "/" 
+                                + ("0" + revdDate.getDayOfMonth()).slice(-2) + "/" 
+                                + revdDate.getYear();
+            editAppSpecific("1st Review Comments Due date",revdDateStr);
+        }
         // update planning commission date if found
         if (newPlnMtg != null) {
             var newHearingDate = (""+ newPlnMtg.startDate).slice(5,7)+"/" 
