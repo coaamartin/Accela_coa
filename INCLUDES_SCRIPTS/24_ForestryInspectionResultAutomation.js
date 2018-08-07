@@ -8,6 +8,7 @@ function script24_ForestryInspectionResultAutomation() {
 
      guideSheets = getGuideSheetItems({
         inspId: inspId,
+        guideTypeName: "FORESTRY INSPECTION",
         guideItemValue: 'Yes'
      });
 
