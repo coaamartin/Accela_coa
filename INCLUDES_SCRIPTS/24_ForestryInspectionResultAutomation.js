@@ -1,10 +1,17 @@
 script24_ForestryInspectionResultAutomation();
 
 function script24_ForestryInspectionResultAutomation() {   
-    var inspectListitem = null;
+    var guideSheets = [];
 
     if (ifTracer(inspType == "Forestry Inspection" && inspResult == "Complete", 'inspType == "Forestry Inspection" && inspResult == "Complete"' )) {
-        inspectListitem = getChecklistItem("Inspect")
+     //   inspectListitem = getChecklistItem("Inspect")
+
+     guideSheets = getGuideSheetItems({
+        inspId: inspId,
+        guideItemValue: 'Yes'
+     });
+
+     logDebug('guideSheets.length: ' + guideSheets.length);
         
         // removalItem = getRemovalChecklistItem();
         // logDebug("removalItem: " + removalItem)
@@ -19,17 +26,5 @@ function script24_ForestryInspectionResultAutomation() {
         
         
     }
-    
-    
-    function getChecklistItem(itemKey) {
-        var guideSheetObjects;
-
-        guideSheetObjects = getGuideSheetObjects(inspId);
-        var items = loadGuideSheetItems(inspId) 
-        for(var key in items) {
-            logDebug(key);
-            printObjProps(items[key]);
-        }
-        return items[itemKey];
-    }
+   
 }
