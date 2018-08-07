@@ -1,5 +1,13 @@
  /* RETURNS AN ARRAY OF [ {com.accela.aa.inspection.guidesheet.GGuideSheetItemModel } ]
      * OPTIONAL FILTERS SUCH AS inspId, guidesheetName, guideTypeName, guideItemName, guideItemValue
+     *
+     * EXAMPLE - Gets all items for specified inspId, guidelist type, where value = 'Yes'
+     *  guideSheets = getGuideSheetItems({
+            inspId: inspId,
+            guideTypeName: "FORESTRY INSPECTION",
+            guideItemValue: 'Yes'
+        });
+     * 
     */
 function getGuideSheetItems(options) {
     var settings = {
