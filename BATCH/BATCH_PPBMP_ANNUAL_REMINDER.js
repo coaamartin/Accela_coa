@@ -308,9 +308,9 @@ function mainProcess() {
 			} //process record
 
 		//Print some numbers
-		logDebug("Sent notifications for records: " + altIdlist.slice(0, -1));
-		logDebug("Total CAPS processed: " + totalCapsProcessed);
-		logDebug("Total emails sent: " + emailSent);
+		logMessage("Sent notifications for records: " + altIdlist.slice(0, -1));
+		logMessage("Total CAPS processed: " + totalCapsProcessed);
+		logMessage("Total emails sent: " + emailSent);
 	} // loop through found records
 	/*
 	if (capsUpdated.length > 0) {
