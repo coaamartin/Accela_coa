@@ -13,7 +13,7 @@ function passedMJInspectionAutomation() {
 		
 	//check for passed inspections, schedule new inspection, and email inspection contact with report
 	for (s in inspectionTypesAry) {
-		if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - minor violation")) {
+		if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
 			
 			var vIsMJLicense = false;	
 			var vIsRetailStoreLicense = false;
