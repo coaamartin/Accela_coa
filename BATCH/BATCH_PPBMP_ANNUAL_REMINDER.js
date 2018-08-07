@@ -545,7 +545,7 @@ function sendNotificationLocal(emailFrom, emailTo, emailCC, templateName, params
 
 	if (result.getSuccess()) {
 
-		logMessage("Sent email successfully!");
+		//logMessage("Sent email successfully!");
 
 		return true;
 
