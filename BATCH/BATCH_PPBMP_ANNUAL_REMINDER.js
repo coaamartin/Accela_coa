@@ -51,9 +51,9 @@ eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
 
 try {
 
-	showDebug = true;
+	showDebug = false;
 	var disableTokens = false;
-	showMessage = false;
+	showMessage = true;
 	if (String(aa.env.getValue("showDebug")).length > 0) {
 		showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
 	}
@@ -546,7 +546,7 @@ function sendNotificationLocal(emailFrom, emailTo, emailCC, templateName, params
 
 	if (result.getSuccess()) {
 
-		//logDebug("Sent email successfully!");
+		logMessage("Sent email successfully!");
 
 		return true;
 
