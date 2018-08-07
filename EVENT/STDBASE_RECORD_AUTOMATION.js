@@ -95,7 +95,6 @@ or a constant with format $....$ that will be resolved during script execution, 
 	
 isCreatedByACA optional, considered MATCHED if not provided in JSON
  */
- 
 try {
 	// This should be included in all Configurable Scripts
 	eval(getScriptText("CONFIGURABLE_SCRIPTS_COMMON"));
