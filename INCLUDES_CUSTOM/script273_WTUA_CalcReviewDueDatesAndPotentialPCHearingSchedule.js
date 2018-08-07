@@ -175,7 +175,7 @@ function script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule(){
             addParameter(emailParameters, "$$FirstName$$", recordApplicant.getFirstName());
             addParameter(emailParameters, "$$LastName$$", recordApplicant.getLastName());
             addParameter(emailParameters, "$$wfComment$$", wfComment);
-            addParameter(emailParameters, "$$acaRecordUrl$$", recordACAUrl);
+            addParameter(emailParameters, "$$acaDocDownloadUrl$$", recordACAUrl);
             var reportFile = [];
             var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN REVIEW COMMENTS # 273 274 275",emailParameters,reportFile,capID4Email);
             if (!sendResult) 
