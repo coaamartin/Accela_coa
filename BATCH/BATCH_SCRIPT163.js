@@ -112,13 +112,22 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
                        //addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
             addParameter(eParams, "$$acaRecordUrl$$", recordURL);
                        
-
-                       var sent = aa.document.sendEmailByTemplateName("", projOwner, cc, emailTemplateName, eParams, null);
-                       if (!sent.getSuccess()) {
+						var sent = sendNotification("",projOwner,cc,emailTemplateName,eParams,null); 
+						if (!sent) {
                                logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-                       }
-                       else
-                               LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID());
+							}
+						else {
+								LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID());}					
+						
+						
+						
+						
+                       //var sent = aa.document.sendEmailByTemplateName("", projOwner, cc, emailTemplateName, eParams, null);
+                       //if (!sent.getSuccess()) {
+                               //logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
+                       //}
+                      // else
+                               //LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID());
                }//60 days
         }//for all caps
         useAppSpecificGroupName = olduseAppSpecificGroupName;

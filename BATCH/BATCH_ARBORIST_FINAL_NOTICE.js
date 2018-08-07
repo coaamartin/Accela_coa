@@ -144,7 +144,8 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 		addParameter(emailParams, "$$altID$$", recordCap.getCapModel().getAltID());
 		addParameter(emailParams, "$$recordAlias$$", recordCap.getCapModel().getCapType().getAlias());
 		addParameter(emailParams, "$$recordStatus$$", recordCap.getCapModel().getCapStatus());
-		aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", EMAIL_TEMPLATE, emailParams, new Array())
+		//aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", EMAIL_TEMPLATE, emailParams, new Array())
+		sendNotification("",applicant.getEmail(),"",EMAIL_TEMPLATE,emailParams,new Array()); 
 	}
 }
 

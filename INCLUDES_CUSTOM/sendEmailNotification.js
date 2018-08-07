@@ -60,7 +60,7 @@ function sendEmailNotification(emailTemplate,reportName){
 // need to send notice for a Public Hearing Notice document
 	vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
     vACAUrl = vACAUrl.substr(0, vACAUrl.toUpperCase().indexOf("/ADMIN"));
-    addParameter(eParams, "$$acaRecordURL$$,getACARecordURL(vACAUrl));
+    addParameter(eParams, "$$acaRecordURL$$",getACARecordURL(vACAUrl));
 	var docNotFound = true;
     vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
     if (vDocumentList != null) {
