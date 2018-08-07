@@ -67,12 +67,6 @@ Desc:           Spec:  (from spec: 273/Script-273-version3.pdf) and tracker comm
 Created By: Silver Lining Solutions
 */
 
-logDebug("script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule START.");
-var appSpecRevComments = "";
-var appSpecValRevComments = "";
-var appSpecProjCommHearingDate = "";
-var appSpecSubmissionDate = "";
-var appSpecValSubmissionDate = "";
 
 if (wfTask == "Review Distribution" && wfStatus == "In Review") {
     script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule();

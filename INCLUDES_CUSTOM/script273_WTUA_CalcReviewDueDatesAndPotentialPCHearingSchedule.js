@@ -42,7 +42,7 @@ function script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule(){
         }
     }
     else 
-		if ( !(AInfo["2nd Review Comments Due Date"]) ) {
+        if ( !(AInfo["2nd Review Comments Due Date"]) ) {
             // Set up the 'target' date we want to search for meetings
             var dToday = new Date();
             var lookForPlanningMtgDate  = aa.date.parseDate(dateAddHC2(dToday,(7*6)));
@@ -157,7 +157,7 @@ function script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule(){
             }
         }       
         
-		if(recordApplicant){
+        if(recordApplicant){
             var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
             var emailParameters = aa.util.newHashtable();
             addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
@@ -175,7 +175,6 @@ function script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule(){
                 { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
             else
                 { logDebug("Sent Notification"); }  
-		}
-    }
-    logDebug("script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule end.");
+        }
+    logDebug("script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule end.");	
 }//END script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule()
