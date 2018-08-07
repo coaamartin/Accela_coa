@@ -158,17 +158,24 @@ function script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule(){
         }       
         
         if(recordApplicant){
+            var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+            var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
+            var recordACAUrl = getACARecordURL(subStrIndex)
+            
             var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
             var emailParameters = aa.util.newHashtable();
+            addParameter(emailParameters, "$$todayDate$$", dateAdd(null, 0));
             addParameter(emailParameters, "$$altID$$", cap.getCapModel().getAltID());
+            addParameter(emailParameters, "$$capAlias$$", capName);
             addParameter(emailParameters, "$$recordAlias$$", cap.getCapType().getAlias());
             addParameter(emailParameters, "$$StaffPhone$$", caseManagerPhone);
             addParameter(emailParameters, "$$StaffEmail$$", caseManagerEmail);
             addParameter(emailParameters, "$$StaffFullName$$", caseManagerFullName);
             addParameter(emailParameters, "$$StaffTitle$$", caseManagerTitle);
-            addParameter(emailParameters, "$$applicantFirstName$$", recordApplicant.getFirstName());
-            addParameter(emailParameters, "$$applicantLastName$$", recordApplicant.getLastName());
+            addParameter(emailParameters, "$$FirstName$$", recordApplicant.getFirstName());
+            addParameter(emailParameters, "$$LastName$$", recordApplicant.getLastName());
             addParameter(emailParameters, "$$wfComment$$", wfComment);
+            addParameter(emailParameters, "$$acaRecordUrl$$", recordACAUrl);
             var reportFile = [];
             var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"","PLN REVIEW COMMENTS # 273 274 275",emailParameters,reportFile,capID4Email);
             if (!sendResult) 
@@ -176,5 +183,5 @@ function script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule(){
             else
                 { logDebug("Sent Notification"); }  
         }
-    logDebug("script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule end.");	
+    logDebug("script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule end.");    
 }//END script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule()
