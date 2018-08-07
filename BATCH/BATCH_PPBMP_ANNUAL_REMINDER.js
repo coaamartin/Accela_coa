@@ -591,7 +591,7 @@ function copyOwnersByParcel_Local() {
 					for (j = 0; j < ownerArr.length; j++) {
 						ownerArr[j].setCapID(capId);
 						var vResult = aa.owner.createCapOwnerWithAPOAttribute(ownerArr[j]);
-						logMessage("Created new owner on " capId.getCustomID() + " : " + vResult.getSuccess());
+						logMessage("Created new owner on " + capId.getCustomID() + " : " + vResult.getSuccess());
 					}
 				} else {
 					logDebug("ERROR: Failed to get owner(s) by Parcel(s): " + parcelOwnersResult.getErrorMessage());
