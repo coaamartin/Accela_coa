@@ -108,8 +108,9 @@ function sendEmailNotificationBatch(itemCapId,emailTemplate, params, recipientTy
             
             addParameter(params, "$$ContactEmail$$", applicantEmail);
             addParameter(params, "$$ContactFullName$$", applicantName);
-            var sent = aa.document.sendEmailByTemplateName("", applicantEmail, "", emailTemplate, params, files);
-            if (!sent.getSuccess()) {
+            //var sent = aa.document.sendEmailByTemplateName("", applicantEmail, "", emailTemplate, params, files);
+			var sent = sendNotification("",applicantEmail,"",emailTemplate,params,files); 
+            if (!sent) {
                 printDebug("**WARN sending email applicant failed, error:" + sent.getErrorMessage());
                 return false;
             }
