@@ -109,7 +109,8 @@ if (wfTask == "Application Acceptance" && wfStatus == "Ready to Pay")
 if (wfTask == "Application Acceptance" && wfStatus == "Missing Information")
 {
     logDebug("Script 286: Missing Information criteria met");
-    closeTask("Application Acceptance","Missing Information","script 286","script 286");
+    //closeTask("Application Acceptance","Missing Information","script 286","script 286");
+	deactivateTask("Application Acceptance");
     // email Developer that there is insufficient info 
     var dev = getContactByType("Developer", capId);
         var devEmail = null;
