@@ -1,5 +1,3 @@
-// One_Time_Batch_Update_Business_Structure.js
-
 /*------------------------------------------------------------------------------------------------------/
 |
 | START: USER CONFIGURABLE PARAMETERS
@@ -146,6 +144,7 @@ showMessage = false;
 for (x in vCapList) {
 	vCap = vCapList[x];
 	capId = vCap.getCapID();
+	
 	
 	// Do stuff
 	include("SAVE_BUSINESS_INFO_TO_RECORD");

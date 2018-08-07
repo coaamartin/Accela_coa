@@ -4,6 +4,7 @@ function editDocumentName(vOrgDocumentName, vNewDocumentName) {
 	var y;
 	var vDocumentModel;
 	var vDocumentName;
+	var vSaveResult;
 	
 	vDocumentList = aa.document.getDocumentListByEntity(capId, "CAP");
 	if (vDocumentList != null) {
@@ -20,8 +21,15 @@ function editDocumentName(vOrgDocumentName, vNewDocumentName) {
 			if (vDocumentName == vOrgDocumentName) {
 				//edit document name in accela
 				vDocumentModel.setFileName(vNewDocumentName);
-				logDebug("Here: " + aa.document.updateDocument(vDocumentModel).getSuccess());
-				return true;
+				vSaveResult = aa.document.updateDocument(vDocumentModel);
+				if (vSaveResult.getSuccess()) {
+					logDebug("Renamed document " + vDocumentName + " to " + vNewDocumentName + vFileExtension);					
+					return true;
+				} else {
+					logDebug("Failed to update report name");
+					logDebug("Error: " + vSaveResult.getErrorMessage());
+					return false;
+				}
 			}
 		}
 	}
