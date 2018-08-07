@@ -53,5 +53,5 @@ if (vMonthNum < 10) {
 //vDateFormatted = vDay + " " vMonthName + " " vYear;
 vDateFormatted = vMonthNum + " " + vMonthName;
 editAppSpecific("Inspection Month",vDateFormatted)
-
+}
 // End script to set the Inspection Month to same month as submitted date
