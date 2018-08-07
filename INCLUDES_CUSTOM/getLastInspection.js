@@ -21,8 +21,8 @@ function getLastInspection(options) {
 
 		for (i in inspArray) {
 			if (
-                (settings.inspType = null || String(settings.inspType).equals(inspArray[i].getInspectionType()))
-                && (settings.inspResult = null || String(settings.inspResult).equals(inspArray[i].getInspectionStatus()))
+                (settings.inspType == null || String(settings.inspType).equals(inspArray[i].getInspectionType()))
+                && (settings.inspResult == null || String(settings.inspResult).equals(inspArray[i].getInspectionStatus()))
             ) {
 				var id = inspArray[i].getIdNumber();
 				if (id > maxId) {
