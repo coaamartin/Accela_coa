@@ -58,7 +58,7 @@ function autoCloseWorkflow() {
     if (!matched) {
         recTypesAry = new Array();
         recTypesAry = [ "Building/Permit/New Building/NA", "Building/Permit/Plans/NA" ];
-        matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Fee Processing", "Issued", "Issued");
+        matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Permit Issuance", "Issued", "Issued");
         //Specs don't mention anything for Ready to Issuematched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Ready to Issue", "Permit Issuance", "Issued", "Issued");
         
         //extra steps for #2
@@ -100,6 +100,7 @@ function autoCloseWorkflow() {
             addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
             emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
             
+            autoCreateInsp = true;//Script 202
             deacSpecInspCheck = true;//Script 205
         }//matched
     }
@@ -119,7 +120,7 @@ function autoCloseWorkflow() {
             emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
             
             setCodeReference("Issued");
-            autoCreateInsp = true;
+            autoCreateInsp = true;//Script 202
             deacSpecInspCheck = true;//Script 205
             
             
