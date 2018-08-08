@@ -29,7 +29,7 @@ function requestExtensionMJInspection() {
 					
 					vInsp = inspResultObj[x];
 					
-					if (vInsp.getInspectionType() == "") {
+					if (vInsp.getInspectionType() == inspType) {
 						
 						//copy comments from existing inspection to new
 						inspComments = inspResultObj.getInspectionComments();        
@@ -45,4 +45,3 @@ function requestExtensionMJInspection() {
 		}
 	}
 }
-
