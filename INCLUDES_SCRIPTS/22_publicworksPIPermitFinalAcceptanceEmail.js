@@ -21,24 +21,17 @@ if (currenttask == "Final Acceptance" && currentstatus == "Complete")
 	logDebug("Starting Async Email...");
 	
 	//what contact types should get an email - comma delimited string of contact types
-	var allowedcontacttypes = "Applicant,Developer";
+	var allowedcontacttypes = "Applicant,Developer,Contractor(s)";
 		
 	//send email to all contacts with the apropriate template and report
-	var emailtemplate = "JD_TEST_TEMPLATE";
-	var reportname = "JD_TEST_REPORT";
+	var emailtemplate = "PI PERMIT FINAL ACCEPTANCE";
 	
 	//populate the email parameters not already included for "free" - must examine the template to know
-	var joke = "Can a kangaroo jump higher than a house?  Of course, a house doesn't jump at all.";
 	var emailparams = aa.util.newHashtable();
-	emailparams.put("$$Joke$$", joke);
 	emailparams.put("$$wfComment$$", currentstatuscomment);
 	
-	//populate the report parameters - must examine the report to know
-	var reportparams = aa.util.newHashtable();
-	reportparams.put("DEPARTMENT", "Administrator");
-	
 	//call Emmett's emailContacts function - this runs asynchronously - puts "deep link" to report in email
-	emailContacts(allowedcontacttypes, emailtemplate, emailparams, reportname, reportparams, "N", "");
+	emailContacts(allowedcontacttypes, emailtemplate, emailparams, "", "", "N", "");
 	
 	logDebug("Did it work?");
 	

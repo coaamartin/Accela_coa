@@ -11,4 +11,5 @@ Sample Call:
 	checkWfTaskToActivateAnother("Completeness Check #2", "Resubmittal Requested", "Completeness Check");
 */
 
-checkWfTaskToActivateAnother("Completeness Check #2", "Resubmittal Requested", "Completeness Check");
+//Removed per testing session with Aurora and Darren on 8/7/2018
+//checkWfTaskToActivateAnother("Completeness Check #2", "Resubmittal Requested", "Completeness Check");

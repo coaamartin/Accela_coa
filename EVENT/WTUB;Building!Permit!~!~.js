@@ -30,3 +30,9 @@ if($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wf:Permit Issuanc
     if(appMatch("Building/Permit/New Building/NA") || appMatch("Building/Permit/Plans/NA") || appMatch("Building/Permit/No Plans/NA"))
         bldScript2_noContractorCheck();
 }
+
+//script ID: 52_Allow_Prevent_Final_CO
+if ("Inspection Phase".equals(wfTask) && exists(wfStatus, ["Ready for CO", "Final"]))
+{
+	include("52_Allow_Prevent_Final_CO");
+}

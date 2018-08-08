@@ -27,6 +27,9 @@ function autoCloseWorkflow() {
     addParameter(eParams, "$$recordAlias$$", appTypeAlias);
     addParameter(eParams, "$$acaRecordUrl$$", recordURL);
     
+    var deacSpecInspCheck = false;//To use for script 205
+    var autoCreateInsp = false;//To use for script 202
+    
     //#1
     recTypesAry = [ "Building/Permit/Plans/Amendment", "Building/Permit/New Building/Amendment", "Building/Permit/Master/Amendment", "Building/Permit/Master/NA" ];
     matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Fee Processing", "Complete", "Approved");
@@ -47,13 +50,15 @@ function autoCloseWorkflow() {
             logDebug("Calling Script 324 from PRA");
             addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
         }
+        
+        deacSpecInspCheck = true;//Script 205
     }
     
     //#2
     if (!matched) {
         recTypesAry = new Array();
         recTypesAry = [ "Building/Permit/New Building/NA", "Building/Permit/Plans/NA" ];
-        matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Fee Processing", "Issued", "Issued");
+        matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Permit Issuance", "Issued", "Issued");
         //Specs don't mention anything for Ready to Issuematched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Ready to Issue", "Permit Issuance", "Issued", "Issued");
         
         //extra steps for #2
@@ -62,16 +67,31 @@ function autoCloseWorkflow() {
             if (appMatch("Building/Permit/New Building/NA")) {
                 activateTask("Water Meter");
                 activateTask("Inspection Phase");
-                if(isTaskStatus("Waste Water Review", "Approved Inspection Required")) activateTask("Waste Water");
-                if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspections Check");
-                if(isTaskStatus("Engineering Review", "Approved with FEMA Cert Required")) activateTask("FEMA Elevation Certificate");
+                if(isTaskStatus("Waste Water Review", "Approved Inspection Required")){
+                    activateTask("Waste Water", "BLD_NEWCON_INSPSUB");
+                    activateTask("Waste Water", "BLD_MASTER_INSPSUB");
+                }
+                if(AInfo["Special Inspections"] == "Yes") {
+                    activateTask("Special Inspections Check","BLD_NEWCON_INSPSUB");
+                    activateTask("Special Inspections Check","BLD_MASTER_INSPSUB");
+                }
+                if(isTaskStatus("Engineering Review", "Approved with FEMA Cert Required")) {
+                    activateTask("FEMA Elevation Certification","BLD_NEWCON_INSPSUB");
+                    activateTask("FEMA Elevation Certification","BLD_MASTER_INSPSUB");
+                }
             }//2.1
 
             //2.2
             if (appMatch("Building/Permit/Plans/NA")) {
-                if(isTaskStatus("Waste Water Review", "Approved Inspection Required")) activateTask("Waste Water");
+                if(isTaskStatus("Waste Water Review", "Approved Inspection Required")) {
+                    activateTask("Waste Water", "BLD_NEWCON_INSPSUB");
+                    activateTask("Waste Water", "BLD_MASTER_INSPSUB");
+                }
                 activateTask("Inspection Phase");
-                if(AInfo["Special Inspections"] == "Yes") activateTask("Special Inspections Check");
+                if(AInfo["Special Inspections"] == "Yes") {
+                    activateTask("Special Inspections Check","BLD_NEWCON_INSPSUB");
+                    activateTask("Special Inspections Check","BLD_MASTER_INSPSUB");
+                }
             }//2.2
             
             setCodeReference("Issued");
@@ -79,6 +99,9 @@ function autoCloseWorkflow() {
             var lpEmail = getPrimLPEmailByCapId(capId);
             addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
             emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
+            
+            autoCreateInsp = true;//Script 202
+            deacSpecInspCheck = true;//Script 205
         }//matched
     }
 
@@ -97,7 +120,42 @@ function autoCloseWorkflow() {
             emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
             
             setCodeReference("Issued");
+            autoCreateInsp = true;//Script 202
+            deacSpecInspCheck = true;//Script 205
+            
+            
         }
     }
+    
+    //Script 202
+    if(deacSpecInspCheck){
+        logDebug("Script 202: autoCreateInspections");
+        var tasksToCheck = [ "Mechanical Plan Review", "Electrical Plan Review", "Plumbing Plan Review", "Structural Plan Review" ];
+        createAutoInspection(tasksToCheck);
+    }
+    
+    //Script 205, 206 being
+    if(deacSpecInspCheck){
+        logDebug("Script 205: Deactivating Special Inspections Check, FEMA Elevation Certification, Waste Water")
+        if(AInfo["Special Inspections"] != "Yes")
+        {
+            deactivateTask("Special Inspections Check","BLD_NEWCON_INSPSUB");
+            deactivateTask("Special Inspections Check","BLD_MASTER_INSPSUB");
+        }//END Script 205
+        
+        //Script 206
+        if(!isTaskStatus("Engineering Review","Approved with FEMA Cert Required"))
+        {
+            deactivateTask("FEMA Elevation Certification","BLD_NEWCON_INSPSUB");
+            deactivateTask("FEMA Elevation Certification","BLD_MASTER_INSPSUB");
+        }
+        
+        if(!isTaskStatus("Waste Water Review","Approved Inspection Required"))
+        {
+            deactivateTask("Waste Water","BLD_NEWCON_INSPSUB");
+            deactivateTask("Waste Water","BLD_MASTER_INSPSUB");
+        }//END Script 206
+    }//END Script 205, 206
+    
     logDebug("autoCloseWorkflow() ended");
 }

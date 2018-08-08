@@ -5,7 +5,7 @@ function UpdateWFAddInspAndCreateNewRecord(){
 		//create a new insp of type Tree Removal
 		scheduleInspect(capId,"Tree Removal",0);
 		//create a child record 
-	    var ChildCapId=createChild("Forestry","Request","Planting","NA");
+	    var ChildCapId=createChild("Forestry","Request","Planting","NA","Tree Planting Wait List");
 		//update WfTask Tree Planting Intake
 		updateTask("Tree Planting Intake","Add to List","","","",ChildCapId);
 		//enter "Staff" in Custom Field "Source of Request" 
