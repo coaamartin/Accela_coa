@@ -43,5 +43,4 @@ function sendEmailReceipt_MJApplication(emailTemplateName) {
 			return false;
 		}
 	
-	return false;
 }
