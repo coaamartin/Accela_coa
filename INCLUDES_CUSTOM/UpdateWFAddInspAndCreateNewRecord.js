@@ -11,6 +11,6 @@ function UpdateWFAddInspAndCreateNewRecord(){
 		//enter "Staff" in Custom Field "Source of Request" 
 		editAppSpecific("Source of Request","Staff",ChildCapId);
 		//Activate wfTask Site Review
-		//activateWFTask("Site Review",ChildCapId);
+		activateWFTask("Site Review",ChildCapId);
 	}
 }
