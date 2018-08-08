@@ -9,7 +9,7 @@
  * @param newAppStatus
  * @returns {Boolean}
  */
-function sendEmailReceipt_MJApplication(emailTemplateName, wfTaskFees, wfStatusFees, wfTaskClose, wfStatusClose, newAppStatus) {
+function sendEmailReceipt_MJApplication(emailTemplateName) {
 	
 		//Update app Status:
 		updateAppStatus(newAppStatus, "by script, PRA balance=0");
