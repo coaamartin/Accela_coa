@@ -93,11 +93,18 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		}
 
 		//are these the parameters used in the email or report?
+		
+		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+        var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
+        var recordDeepUrl = getACARecordURL(subStrIndex)
+                
+
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
+		addParameter(VEParams, "$$recordDeepUrl$$", recordACAUrl);
 
 		var vRParams = aa.util.newHashtable();
 		addParameter(vRParams, "p1Value", vLicenseID.getCustomID());
