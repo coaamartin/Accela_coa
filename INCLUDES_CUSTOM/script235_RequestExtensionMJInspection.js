@@ -13,8 +13,6 @@ function requestExtensionMJInspection() {
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Request for Extension") {	
 		
-			logDebug("CapId: " + capId);
-			logDebug("InspId: " + inspId);
 			var inspResultObj = aa.inspection.getInspections(capId);
 			var vInsp;
 			var x = 0;
@@ -32,7 +30,8 @@ function requestExtensionMJInspection() {
 					if (vInsp.getInspectionType() == inspType) {
 						
 						//copy comments from existing inspection to new
-						inspComments = vInsp.getInspectionComments();        
+						inspComments = vInsp.getInspectionComments();
+						logDebug("Inspection Comments: " + inspComments);
 						newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
         
 						scheduleInspectDate(inspType, newInspSchedDate, null, null, inspComments);
