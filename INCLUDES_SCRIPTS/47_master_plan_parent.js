@@ -46,7 +46,7 @@ function getCapsByAppNameLike(gaGroup, gaType, gaSubTyp, gaCat, gaName)
         {
         var thisCapId = aa.cap.getCapID(apsArray[aps].getID1(), apsArray[aps].getID2(), apsArray[aps].getID3()).getOutput();
         var myCap = aa.cap.getCap(thisCapId).getOutput();
-        if (myCap.getSpecialText() && myCap.getSpecialText().indexOf(gaName) > -1)
+        if (myCap && myCap.getSpecialText() && myCap.getSpecialText().indexOf(gaName) > -1)
             {
             logDebug("getAppIdByName(" + gaGroup + "," + gaType + "," + gaName + ") Returns " + thisCapId.getCustomID()); 
             return thisCapId;
