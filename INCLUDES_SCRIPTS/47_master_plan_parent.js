@@ -1,8 +1,10 @@
 if (appMatch("Building/Permit/New Building/NA"))
 {
+    var r = false;
     var masterPlan = AInfo["Single Family Master Plans"] || AInfo["Multi Family Master Plans"];
     //get the Building/Permit/Master/NA record with application name containing masterPlan
-    var r = getCapsByAppNameLike("Building", "Permit", "Master", "NA", masterPlan);
+    if(masterPlan)
+        r = getCapsByAppNameLike("Building", "Permit", "Master", "NA", masterPlan);
     //relate as parent
     if (r)
     {
