@@ -104,7 +104,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
-		addParameter(VEParams, "$$recordDeepUrl$$", recordACAUrl);
+		addParameter(vEParams, "$$recordDeepUrl$$", recordACAUrl);
 
 		var vRParams = aa.util.newHashtable();
 		addParameter(vRParams, "p1Value", vLicenseID.getCustomID());
