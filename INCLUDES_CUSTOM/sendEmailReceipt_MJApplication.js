@@ -11,9 +11,6 @@
  */
 function sendEmailReceipt_MJApplication(emailTemplateName) {
 	
-		//Update app Status:
-		updateAppStatus(newAppStatus, "by script, PRA balance=0");
-
 		//send email
 		var applicant = getContactByType("Applicant", capId);
 		if (!applicant || !applicant.getEmail()) {
@@ -31,11 +28,6 @@ function sendEmailReceipt_MJApplication(emailTemplateName) {
 		loadAppSpecific(asiValues)
 		useAppSpecificGroupName = olduseAppSpecificGroupName;
 
-		var sizes = new Array();
-		for (c in asitSize) {
-			var size = asitSize[c]["Size"].fieldValue;
-			sizes.push(size)
-		}
 
         addParameter(eParams, "$$date$$", sysDateMMDDYYYY);
         addParameter(eParams, "$$amountPaid$$", PaymentTotalPaidAmount);
