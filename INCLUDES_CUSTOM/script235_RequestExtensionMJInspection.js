@@ -9,16 +9,35 @@ function requestExtensionMJInspection() {
 	//define number of days to schedule next inspection
 	var daysToAdd = 7;
 	
-	//check for extension request and schedule new inspection 7 days out
+	//check for extension request and schedule new inspection 7 days out 
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Request for Extension") {	
 		
-		var inspResultObj = aa.inspection.getInspections(capId);
-		var inspComments = inspResultObj.getInspectionComments();		
-		var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
-		
-		scheduleInspectDate(inspType, newInspSchedDate, null, null, inspComments);	
-		
-		}	
+			var inspResultObj = aa.inspection.getInspections(capId);
+			var vInsp;
+			var x = 0;
+			var inspComments;
+			var newInspSchedDate;
+			
+			if(inspResultObj.getSuccess()) {
+				inspResultObj = inspResultObj.getOutput();
+				
+				for (x in inspResultObj) {
+					vInsp = inspResultObj[x];
+					
+					if (vInsp.getInspectionType() == "") {
+						//copy comments from existing inspection to new
+						inspComments = inspResultObj.getInspectionComments();        
+						newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
+        
+						scheduleInspectDate(inspType, newInspSchedDate, null, null, inspComments);
+						break;
+					}
+				}
+			} else {
+			    logDebug("Failed to get inspections: " + inspResultObj.getErrorMessage());
+			}	
+		}
 	}
 }
+
