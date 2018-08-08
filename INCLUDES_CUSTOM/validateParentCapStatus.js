@@ -7,28 +7,44 @@
  */
 function validateParentCapStatus(workflowStatusArray, parentType, parentStatus) {
 
-	var statusMatch = false;
+    var statusMatch = false;
 
-	for (s in workflowStatusArray) {
-		if (wfStatus == workflowStatusArray[s]) {
-			statusMatch = true;
-			break;
-		}
-	}//for all status options
+    if(ifTracer(vEventName == "WorkflowTaskUpdateBefore", 'WTUB')){
+    
+        for (s in workflowStatusArray) {
+            if (wfStatus == workflowStatusArray[s]) {
+                statusMatch = true;
+                break;
+            }
+        }//for all status options
 
-	if (!statusMatch) {
-		return false;
+        if (!statusMatch) {
+            return false;
+        }
+	
+        var parents = getParents(parentType);
+        for (p in parents) {
+            var parentCap = aa.cap.getCap(parents[p]).getOutput();
+            if (parentCap.getCapStatus() == parentStatus) {
+                cancel = true;
+                showMessage = true;
+                comment("Master is previous code year cannot issue permit.");
+                return false;
+            }
+        }
+        return true;
 	}
-
-	var parents = getParents(parentType);
-	for (p in parents) {
-		var parentCap = aa.cap.getCap(parents[p]).getOutput();
-		if (parentCap.getCapStatus() == parentStatus) {
-			cancel = true;
-			showMessage = true;
-			comment("Master is previous code year cannot issue permit.");
-			return false;
-		}
+	
+	if(ifTracer(vEventName == "PaymentReceiveAfter", 'PRA')){
+		var parents = getParents(parentType);
+        for (p in parents) {
+            var parentCap = aa.cap.getCap(parents[p]).getOutput();
+            if (parentCap.getCapStatus() == parentStatus) {
+                showMessage = true;
+                comment("<B><Font Color=RED>Master is previous code year cannot issue permit.</Font></B>");
+                return false;
+            }
+        }
+        return true;
 	}
-	return true;
 }

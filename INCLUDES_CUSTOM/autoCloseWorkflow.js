@@ -58,7 +58,8 @@ function autoCloseWorkflow() {
     if (!matched) {
         recTypesAry = new Array();
         recTypesAry = [ "Building/Permit/New Building/NA", "Building/Permit/Plans/NA" ];
-        if(bldScript2_noContractorCheck())
+		//validateParentCapStatus() is part of script 2.  Permit cannot be issued if Parent Master is Unapproved
+        if(bldScript2_noContractorCheck() && validateParentCapStatus([ "Issued" ], "Building/Permit/Master/NA", "Unapproved"))
             matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Permit Issuance", "Issued", "Issued");
         else
             logDebug("No LP on file.  Not issuing permit")
@@ -112,7 +113,7 @@ function autoCloseWorkflow() {
     if (!matched) {
         recTypesAry = new Array();
         recTypesAry = [ "Building/Permit/No Plans/NA" ];
-        if(appMatch("Building/Permit/No Plans/NA") && bldScript2_noContractorCheck())
+        if(appMatch("Building/Permit/No Plans/NA") && bldScript2_noContractorCheck() && validateParentCapStatus([ "Issued" ], "Building/Permit/Master/NA", "Unapproved"))
             matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Submitted", "Permit Issuance", "Issued", "Issued");
         else logDebug("No LP on file.  Not issuing permit");
         
