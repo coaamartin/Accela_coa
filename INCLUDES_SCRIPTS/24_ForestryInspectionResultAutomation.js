@@ -2,6 +2,7 @@ script24_ForestryInspectionResultAutomation();
 
 function script24_ForestryInspectionResultAutomation() {   
     var newInspection,
+        newGuidesheetModel,
         newGuideSheetItems,
         newGuideSheetItem,
         curInspection = getInspections({ 
@@ -12,14 +13,16 @@ function script24_ForestryInspectionResultAutomation() {
             guideTypeName: "FORESTRY INSPECTOR",
             guideItemValue: 'Yes'
         });
+               printObjProps(curGuideSheetItems[0]);
+
 
     if (ifTracer(inspType == "Forestry Inspection" && inspResult == "Complete", 'inspType == "Forestry Inspection" && inspResult == "Complete"' )) {
         
-        logDebug('curGuideSheetItems.length: ' + curGuideSheetItems.length);
-        logDebug('curInspection.length: ' + curInspection.length);
-        //  printObjProps(curInspection);
-        // printObjProps(curInspection[0].getInspection());
-        // printObjProps(curInspection[0].getInspection().getActivity());
+     //   logDebug('curGuideSheetItems.length: ' + curGuideSheetItems.length);
+      //  logDebug('curInspection.length: ' + curInspection.length);
+     //   printObjProps(curInspection);
+      //  printObjProps(curInspection[0].getInspection());
+     //   printObjProps(curInspection[0].getInspection().getActivity());
 
         if (ifTracer(curGuideSheetItems.length == 1 && curGuideSheetItems[0].guideItemText == "Inspect", 'Only Inspect == Yes')) {
             closeTask("Inspection Phase", "Complete", "", "");      
@@ -40,42 +43,89 @@ function script24_ForestryInspectionResultAutomation() {
                         ||  es6ArrayFind(curGuideSheetItems, function(itm) { return itm.guideItemText == 'Trim - Structure' })  != null
                       , "Going to create an inspection for 1 day in the future" )) {
                     
-                        //create new inspection
-                        scheduleInspection("Forestry Field Crew", dateAdd(null, 1, true), null, null, curInspection[0].getInspection().requestComment);
-                        newInspection = getLastInspection({ inspType: "Forestry Field Crew" });
-                        //populate inspection with specified values from current insption
-                        newInspection.getInspection().getActivity().unitNBR = curInspection[0].getInspection().getActivity().unitNBR;
-                        //      newInspection.getInspection().requestComment = curInspection.getInspection().requestComment;
-                        newInspection.getInspection().getActivity().vehicleID = curInspection[0].getInspection().getActivity().vehicleID;
-                        //update guidesheet items marked yes
-                        newGuideSheetItems = newInspection.getInspection().getGuideSheets();
-                        for(var i in curGuideSheetItems) {
-                            newGuideSheetItem = es6ArrayFind(newGuideSheetItems, function(itm) { return itm.guideItemText == curGuideSheetItems[i].guideItemText })  
-                            if(ifTracer(newGuideSheetItem != null, "guidesheet item found - so set it's value to Yes")) {
-                                newGuideSheetItem.guideItemStatus = curGuideSheetItems[i].guideItemStatus;
-                                aa.guidesheet.updateGGuidesheet(newGuideSheetItem.getAuditID());
-                             }
+                    createInspection("Forestry Field Crew",  aa.date.parseDate(dateAdd(null, 1, true)));
+                    //populate inspection with specified values from current insption
+                    newInspection.getInspection().getActivity().unitNBR = curInspection[0].getInspection().getActivity().unitNBR;
+                    newInspection.getInspection().getActivity().vehicleID = curInspection[0].getInspection().getActivity().vehicleID;
+                    //update guidesheet items marked yes
+                    getGuidesheetObjs()
+                    for(var i in curGuideSheetItems) {
+                        newGuideSheetItem = es6ArrayFind(newGuideSheetItems, function(itm) { return itm.guideItemText == curGuideSheetItems[i].guideItemText 
+                                                                                                && curGuideSheetItems[i].guideItemText != 'Inspect' })  
+                        if(ifTracer(newGuideSheetItem != null, "guidesheet item found - so set it's value to Yes")) {
+                            newGuideSheetItem.guideItemStatus = 'Yes';
+                            newGuideSheetItem.guideItemComment = curGuideSheetItems[i].guideItemComment;
                         }
-
-                        //save updates to new inspection 
-                        logDebug('going to update the inspection');
-                        aa.inspection.editInspection(newInspection);                       
-
+                    }
+                    updateInspectionAndGuidesheet();
                 }
             }
         }
     } else if (ifTracer(inspType == "Forestry Inspection" && inspResult == "Fall Trim", 'inspType == "Forestry Inspection" && inspResult == "Fall Trim"' )) {
 
-        scheduleInspection("Field Crew Inspection",dateAdd(null, 1, true));
+        var today = new Date();
+        var apr1 = new Date(today.getFullYear(), 3, 1),
+            nov15 = new Date(today.getFullYear(), 10, 14);
+         var inspDte = today.getTime() > apr1.getTime() && today.getTime() < nov15.getTime() ? new Date(today.getFullYear(), 10, 15) : new Date(); 
+
+        createInspection("Forestry Field Crew",  aa.date.parseDate(aa.util.formatDate(inspDte, "MM/dd/YYYY")));
+        //populate inspection with specified values from current insption
+        newInspection.getInspection().resultComment = curInspection[0].getInspection().resultComment;
+        newInspection.getInspection().getActivity().unitNBR = curInspection[0].getInspection().getActivity().unitNBR;
+        newInspection.getInspection().getActivity().vehicleID = curInspection[0].getInspection().getActivity().vehicleID;
+        //update guidesheet items marked yes
+        getGuidesheetObjs()
+        for(var i in curGuideSheetItems) {
+            newGuideSheetItem = es6ArrayFind(newGuideSheetItems, function(itm) { return itm.guideItemText == curGuideSheetItems[i].guideItemText 
+                                                                                        && curGuideSheetItems[i].guideItemText != 'Inspect' })  
+            if(ifTracer(newGuideSheetItem != null, "guidesheet item found - so set it's value to Yes")) {
+                newGuideSheetItem.guideItemStatus = 'Yes';
+                newGuideSheetItem.guideItemComment = curGuideSheetItems[i].guideItemComment;
+            }
+        }
+        updateInspectionAndGuidesheet();
 
         
-    } else if (ifTracer(inspType == "Forestry Inspection" && matches(inspResult, ["PR1", "PR2", "PR20", "Other"], 'inspType == "Forestry Inspection" && matches(inspResult, ["PR1", "PR2", "PR20", "Other"]') )) {
+    } else if (ifTracer(inspType == "Forestry Inspection" && matches(inspResult, "PR1", "PR2", "PR20", "Other"), 'inspType == "Forestry Inspection" && matches(inspResult, ["PR1", "PR2", "PR20", "Other"]')) {
         
+        createInspection("Forestry Field Crew",  aa.date.parseDate(aa.util.formatDate(new Date(), "MM/dd/YYYY")));
+        //populate inspection with specified values from current insption
+        newInspection.getInspection().resultComment = curInspection[0].getInspection().resultComment;
+        newInspection.getInspection().getActivity().unitNBR = curInspection[0].getInspection().getActivity().unitNBR;
+        newInspection.getInspection().getActivity().vehicleID = curInspection[0].getInspection().getActivity().vehicleID;
+        //update guidesheet items marked yes
+        getGuidesheetObjs()
+        for(var i in curGuideSheetItems) {
+            newGuideSheetItem = es6ArrayFind(newGuideSheetItems, function(itm) { return itm.guideItemText == curGuideSheetItems[i].guideItemText 
+                                                                                        && curGuideSheetItems[i].guideItemText != 'Inspect' })  
+            if(ifTracer(newGuideSheetItem != null, "guidesheet item found - so set it's value to Yes")) {
+                newGuideSheetItem.guideItemStatus = 'Yes';
+                newGuideSheetItem.guideItemComment = curGuideSheetItems[i].guideItemComment;
+            }
+        }
+        updateInspectionAndGuidesheet();
         
+    } else if (ifTracer(inspType == "Forestry Inspection" && inspResult == "Forestry Refer to Code", 'inspType == "Forestry Inspection" && inspResult == "Forestry Refer to Code"' )) {
+
+        closeAllTasks(capId, 'closed by script 24');
+        updateAppStatus('Compliance','Status set by script 24', capId);
+        createChildGeneric('Enforcement', 'Incident', 'Zoning', 'NA', {});
     }
 
-    // function searchInspect1DayReqs() {
-    //     return 
-    // }
+
+    function createInspection(type, date) {
+        aa.inspection.scheduleInspection(capId, null, date, null, type, curInspection[0].getInspection().requestComment);
+        newInspection = getLastInspection({ inspType: "Forestry Field Crew" });
+    }
+
+    function getGuidesheetObjs() {
+        newGuidesheetModel = newInspection.getInspection().getGuideSheets().toArray()[0];
+        newGuideSheetItems = newGuidesheetModel.getItems().toArray();
+    }
+
+    function updateInspectionAndGuidesheet() {
+        aa.guidesheet.updateGGuidesheet(newGuidesheetModel, newGuidesheetModel.getAuditID());
+        aa.inspection.editInspection(newInspection);                       
+    }
    
 }
