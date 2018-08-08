@@ -158,64 +158,6 @@
           }
     ]
   },
-  "Building/Permit/Plans/NA": {
-    "PaymentReceiveAfter": [
-      {
-        "preScript": "",
-        "postScript": "postScript35-Plans",
-        "metadata": {
-          "description": "To run automated script based on JSON rules",
-          "operators": {
-            
-          }
-        },
-        "criteria": {
-          "isCreatedByACA": "",
-          "balanceAllowed": false,
-          "recordStatus": [
-            "Payment Pending"
-          ]
-        },
-        "action": {
-          "activateTask": [
-            
-          ],
-          "daysOut": "",
-          "deactivateTask": [
-            
-          ],
-          "deleteTask": [
-            
-          ],
-          "updateTask": [
-            {
-              "task": "Permit Issuance",
-              "status": "Issued"
-            }
-          ],
-          "invoiceFees": "",
-          "createChild": "",
-          "createParent": "",
-          "addCondition": "",
-          "addConditionSeverity": "",
-          "conditionType": "",
-          "removeCondition": "",
-          "addComment": "",
-          "newStatus": "Issued",
-          "assignToUserID": "",
-          "assessFees": [
-            {
-              "feeSchedule": "",
-              "feeCode": "",
-              "feeQuantity": "",
-              "feeInvoice": "",
-              "feePeriod": ""
-            }
-          ]
-        }
-      }
-    ]
-  },
   "Building/Permit/Plans/Amendment": {
     "WorkflowTaskUpdateAfter": [
       {
@@ -661,62 +603,6 @@
           "removeCondition": "",
           "addComment": "",
           "newStatus": "Closed",
-          "assignToUserID": "",
-          "assessFees": [
-            {
-              "feeSchedule": "",
-              "feeCode": "",
-              "feeQuantity": "",
-              "feeInvoice": "",
-              "feePeriod": ""
-            }
-          ]
-        }
-      }
-    ],
-    "PaymentReceiveAfter": [
-      {
-        "preScript": "",
-        "postScript": "postScript35-NewBuilding",
-        "metadata": {
-          "description": "To run automated script based on JSON rules",
-          "operators": {
-            
-          }
-        },
-        "criteria": {
-          "isCreatedByACA": "",
-          "balanceAllowed": false,
-          "recordStatus": [
-            "Payment Pending"
-          ]
-        },
-        "action": {
-          "activateTask": [
-            
-          ],
-          "daysOut": "",
-          "deactivateTask": [
-            
-          ],
-          "deleteTask": [
-            
-          ],
-          "updateTask": [
-            {
-              "task": "Permit Issuance",
-              "status": "Issued"
-            }
-          ],
-          "invoiceFees": "",
-          "createChild": "",
-          "createParent": "",
-          "addCondition": "",
-          "addConditionSeverity": "",
-          "conditionType": "",
-          "removeCondition": "",
-          "addComment": "",
-          "newStatus": "Issued",
           "assignToUserID": "",
           "assessFees": [
             {

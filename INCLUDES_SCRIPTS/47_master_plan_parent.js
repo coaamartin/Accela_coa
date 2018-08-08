@@ -1,8 +1,10 @@
 if (appMatch("Building/Permit/New Building/NA"))
 {
+    var r = false;
     var masterPlan = AInfo["Single Family Master Plans"] || AInfo["Multi Family Master Plans"];
     //get the Building/Permit/Master/NA record with application name containing masterPlan
-    var r = getCapsByAppNameLike("Building", "Permit", "Master", "NA", masterPlan);
+    if(masterPlan)
+        r = getCapsByAppNameLike("Building", "Permit", "Master", "NA", masterPlan);
     //relate as parent
     if (r)
     {
@@ -46,7 +48,7 @@ function getCapsByAppNameLike(gaGroup, gaType, gaSubTyp, gaCat, gaName)
         {
         var thisCapId = aa.cap.getCapID(apsArray[aps].getID1(), apsArray[aps].getID2(), apsArray[aps].getID3()).getOutput();
         var myCap = aa.cap.getCap(thisCapId).getOutput();
-        if (myCap.getSpecialText() && myCap.getSpecialText().indexOf(gaName) > -1)
+        if (myCap && myCap.getSpecialText() && myCap.getSpecialText().indexOf(gaName) > -1)
             {
             logDebug("getAppIdByName(" + gaGroup + "," + gaType + "," + gaName + ") Returns " + thisCapId.getCustomID()); 
             return thisCapId;
