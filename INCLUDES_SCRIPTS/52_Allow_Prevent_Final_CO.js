@@ -24,7 +24,7 @@
 			if ("CHECKED".equals(AInfo[requiredArray[x]]) && !"CHECKED".equals(AInfo[receivedArray[x]]))
 			{
 				allreceived = false;
-				missingCriteriaString += AInfo[requiredArray[x]] + ", ";
+				missingCriteriaString += AInfo[receivedArray[x]] + ", ";
 			}
 		}
 
