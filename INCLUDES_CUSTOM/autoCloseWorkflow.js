@@ -58,7 +58,10 @@ function autoCloseWorkflow() {
     if (!matched) {
         recTypesAry = new Array();
         recTypesAry = [ "Building/Permit/New Building/NA", "Building/Permit/Plans/NA" ];
-        matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Permit Issuance", "Issued", "Issued");
+        if(bldScript2_noContractorCheck())
+            matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Permit Issuance", "Issued", "Issued");
+        else
+            logDebug("No LP on file.  Not issuing permit")
         //Specs don't mention anything for Ready to Issuematched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Ready to Issue", "Permit Issuance", "Issued", "Issued");
         
         //extra steps for #2
