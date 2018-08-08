@@ -7,7 +7,7 @@ function UpdateWFAddInspAndCreateNewRecord(){
 		//create a child record 
 	    var ChildCapId=createChild("Forestry","Request","Planting","NA","Tree Planting Wait List");
 		//update WfTask Tree Planting Intake
-		updateTask("Tree Planting Intake","Add to List","","","",ChildCapId);
+		closeTask("Tree Planting Intake","Add to List","","","",ChildCapId);
 		//enter "Staff" in Custom Field "Source of Request" 
 		editAppSpecific("Source of Request","Staff",ChildCapId);
 		//Activate wfTask Site Review
