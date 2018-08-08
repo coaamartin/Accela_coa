@@ -12,11 +12,11 @@ logDebug("Script 395 Starting");
 if(ifTracer(inspType == "Routine Inspections" && inspResult == "Ready for Final", 'inspType == "Routine Inspections" && inspResult == "Ready for Final"')) {
     var rows = loadASITable('POND TYPES');
     if(ifTracer(rows, 'Pond Type list has rows')) {
-        updateTask("Active Permit", "Ready for Final Certification", "", "");
-        updateTask("Final Certification", "Upload Pending", "", "");
+        resultWorkflowTask("Active Permit", "Ready for Final Certification", "", "");
+        resultWorkflowTask("Final Certification", "Upload Pending", "", "");
     } else {
-        updateTask("Active Permit", "Ready for Closure No Pond", "", "");
-        updateTask("Closure", "Pending Final Inspection", "", "");
+        resultWorkflowTask("Active Permit", "Ready for Closure No Pond", "", "");
+        resultWorkflowTask("Closure", "Pending Final Inspection", "", "");
         createPendingInspection('WAT_SW','Final Inspection');
     }
  }
