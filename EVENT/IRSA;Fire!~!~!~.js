@@ -105,7 +105,7 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 pEParams = aa.util.newHashtable();
 addParameter(pEParams, "$$FullAddress$$", getCapFullAddress());
 pRParams = aa.util.newHashtable();
-addParameter(vRParams, "Record ID", capIDString);
+addParameter(pRParams, "Record ID", capIDString);
 emailContactsWithReportLinkASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
 
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
