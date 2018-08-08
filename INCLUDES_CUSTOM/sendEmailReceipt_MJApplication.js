@@ -18,6 +18,8 @@ function sendEmailReceipt_MJApplication(emailTemplateName) {
 			return false;
 		}
 		var toEmail = applicant.getEmail();
+logDebug("Email: " + toEmail);
+logDebug("EmailTemplateName: " + emailTemplateName);
 
 		var eParams = aa.util.newHashtable();
 
