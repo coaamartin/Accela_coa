@@ -19,9 +19,9 @@ function getInspections(options) {
 
 		for (var i in inspArray) {
 			if (
-                (settings.inspType = null || String(settings.inspType).equals(inspArray[i].getInspectionType()))
-                && (settings.inspResult = null || String(settings.inspResult).equals(inspArray[i].getInspectionStatus()))
-                && (settings.inspId = null || settings.inspId == inspArray[i].getIdNumber())
+                (settings.inspType == null || String(settings.inspType).equals(inspArray[i].getInspectionType()))
+                && (settings.inspResult == null || String(settings.inspResult).equals(inspArray[i].getInspectionStatus()))
+                && (settings.inspId == null || settings.inspId == inspArray[i].getIdNumber())
             ) {
                 retInspections.push(inspArray[i]);
 			}

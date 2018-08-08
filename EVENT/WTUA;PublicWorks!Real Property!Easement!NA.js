@@ -27,7 +27,7 @@ var statusToCheck = "Complete";
 //printObjProps(wfTask);
 
 if(ifTracer(workflowTasks.indexOf("" + wfTask) > -1, 'workflowTasks.indexOf(wfTask) > -1' )) {
-	checkWorkFlowTaskAndSendEmail(workFlowParentTask, workFlowParentStatus, workflowTasks, taskToUpdated, Status, statusToCheck, "PW EASEMENT RESUBMITAL #296");
+    checkWorkFlowTaskAndSendEmail(workFlowParentTask, workFlowParentStatus, workflowTasks, taskToUpdated, Status, statusToCheck, "PW EASEMENT RESUBMITAL #296");
 }
 
 /*
@@ -41,24 +41,19 @@ Functional Area : Records
 
 Notes :
 ASI Field Name "Signed Easement Due Date  " Not "Signed License Due Date"
-
-Sample Call:
-UpdateASIFieldBasedOnworkFlowTask("Signatures", "Received City Signatures", "Signed Easement Due Date", 60)
  */
-
-var workflowTaskName = "Signatures";
-var workflowStatus = "Received City Signatures";
-var ASIFieldName = "Signed Easement Due Date";
-var daysOut = 60;
-UpdateASIFieldBasedOnworkFlowTask(workflowTaskName, workflowStatus, ASIFieldName, daysOut);
+//Script 162
+if(matches(wfTask, "Completeness Check #2", "Plans Coordination") && wfStatus == "Ready for Signatures"){
+    editAppSpecific("Signed Easement Due Date", dateAdd(null, 60), capId);
+}
 
 if($iTrc(wfTask == "Completeness Check" && wfStatus == "Ready to Pay", 'wfTask == "Completeness Check" && wfStatus == "Ready to Pay"')){
-	pWrksScript293_addFeeEmailReadyToPay();
+    pWrksScript293_addFeeEmailReadyToPay();
 }
 
 if($iTrc(wfTask == "Signatures" && wfStatus == "Pending Owner Signature", 'wfTask == "Signatures" && wfStatus == "Pending Owner Signature"')){
-	if(balanceDue == 0) pWrksScript303_reqOwnerSigEmail();
-	pWrksScript305_updateTaskDueDate();
+    if(balanceDue == 0) pWrksScript303_reqOwnerSigEmail();
+    pWrksScript305_updateTaskDueDate();
 }
 
 if($iTrc(wfTask == "Completeness Check" && wfStatus == "Incomplete", 'wfTask == "Completeness Check" && wfStatus == "Incomplete"')){

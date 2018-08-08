@@ -12,8 +12,8 @@ Author: Ali Othman
 Functional Area : Workflow, Custom Fields
 
 Sample Call:
-	updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submittal Number");
-	
+    updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submittal Number");
+    
 Notes:
     For record type Water/Utility/Master/Study, we don't have any custom field called Submittal Number
 */
@@ -30,5 +30,10 @@ updateSubmittalNumber("Application Submittal", ["Complete","Accepted"], "Submitt
 include("45_LicenseAgreementEmailResubmittal");
 
 if(wfTask == "Signatures" && wfStatus == "Pending Owner Signature"){
-	pWrksScript305_updateTaskDueDate();
+    pWrksScript305_updateTaskDueDate();
+}
+
+//Script 162
+if(wfTask == "Plans Coordination" && wfStatus == "Ready for Signatures"){
+    editAppSpecific("Signed License Due Date", dateAdd(null, 60), capId);
 }

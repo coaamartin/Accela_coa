@@ -13,9 +13,6 @@ function getContactObjsByCap(itemCap) {
         capContactArray = capContactResult.getOutput();
     }
 
-    //aa.print("getContactObj returned " + capContactArray.length + " contactObj(s)");
-    //aa.print("typesToLoad: " + typesToLoad);
-
     if (capContactArray) {
         for (yy in capContactArray) {
             //exclude inactive contacts
@@ -27,6 +24,6 @@ function getContactObjsByCap(itemCap) {
             }
         }
     }
-    //logDebug("getContactObj returned " + cArray.length + " contactObj(s)");
+
     return cArray;
 }

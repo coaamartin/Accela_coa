@@ -3,8 +3,6 @@ function pWrksScript305_updateTaskDueDate(){
     try{
         var newDueDate = dateAdd(wfDateMMDDYYYY, 180);
         editTaskDueDate("Signatures", newDueDate);
-        editAppSpecific("Signed Easement Due Date", newDueDate);
-        editAppSpecific("Signed License Due Date", newDueDate);
     }
     catch(err){
         showMessage = true;
