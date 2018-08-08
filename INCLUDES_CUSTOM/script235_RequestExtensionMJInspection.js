@@ -12,37 +12,10 @@ function requestExtensionMJInspection() {
     for (s in inspectionTypesAry) {
         if (inspType == inspectionTypesAry[s] && inspResult == "Request for Extension") {
 
-            var inspResultObj = aa.inspection.getInspections(capId);
-            var vInsp;
-            var x = 0;
-            var inspComments;
-            var newInspSchedDate;
-
-            if (inspResultObj.getSuccess()) {
-
-                inspResultObj = inspResultObj.getOutput();
-
-                for (x in inspResultObj) {
-
-                    vInsp = inspResultObj[x];
-
-                    if (vInsp.getInspectionType() == inspType) {
-
-                        //copy comments from existing inspection to new
-                        inspComments = vInsp.getInspectionComments();
-                        
-                        logDebug("Inspection: " + vInsp.getIdNumber());
-                        logDebug("Inspection Comments: " + vInsp.getInspectionComments());
-                        
-                        newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
-
-                        scheduleInspectDate(inspType, newInspSchedDate, null, null, inspComments);
-                        break;
-                    }
-                }
-            } else {
-                logDebug("Failed to get inspections: " + inspResultObj.getErrorMessage());
-            }
+            var daysToAdd = 7;
+			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
+			//Schedule the inspection with the result comments from the current inspection.
+			scheduleInspectDate(inspType, newInspSchedDate, null, null, inspResultComment);
         }
     }
 }
