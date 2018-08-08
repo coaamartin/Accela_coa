@@ -32,7 +32,7 @@ function requestExtensionMJInspection() {
 					if (vInsp.getInspectionType() == inspType) {
 						
 						//copy comments from existing inspection to new
-						inspComments = inspResultObj.getInspectionComments();        
+						inspComments = vInsp.getInspectionComments();        
 						newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
         
 						scheduleInspectDate(inspType, newInspSchedDate, null, null, inspComments);
