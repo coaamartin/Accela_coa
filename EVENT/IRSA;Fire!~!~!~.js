@@ -97,7 +97,9 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 
 	//copy checklist to new inspection
 	var newInspId = getScheduledInspId(newInspType);
-
+	if (newInspId) {
+		copyGuideSheetItemsByStatus(inspId, newInspId);
+	}
 }
 
 // notify all contacts and attach to record communications
