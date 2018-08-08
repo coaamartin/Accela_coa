@@ -14,7 +14,7 @@ function requestExtensionMJInspection() {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Request for Extension") {	
 		
 			logDebug("CapId: " + capId);
-			logDebut("InspId: " + inspId);
+			logDebug("InspId: " + inspId);
 			var inspResultObj = aa.inspection.getInspections(capId);
 			var vInsp;
 			var x = 0;
