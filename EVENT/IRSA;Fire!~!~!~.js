@@ -52,6 +52,7 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	//schedule follow up inspection based on working days
 	//var dToday = new Date();
 	//var td = aa.date.parseDate(dateAddHC2(dToday,daysAhead,true));
+	var schedDate = dateAddHC2(null,daysAhead,true)
 	//var targetDateString = ("0" + td.getMonth()).slice(-2) + "/" + ("0" + td.getDayOfMonth()).slice(-2) + "/" + td.getYear();
 	//var oneDay = 24*60*60*1000; // number of millisec in a day
 	//var targetDate = new Date(targetDateString);
@@ -93,8 +94,8 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 		}
 	}
 
-	scheduleInspection(newInspType,daysAhead,inspector);
-
+	//scheduleInspection(newInspType,daysAhead,inspector);
+	scheduleInspectDate(newInspType,schedDate,inspector)
 	//copy checklist to new inspection
 	var newInspId = getScheduledInspId(newInspType);
 	if (newInspId) {
