@@ -113,49 +113,6 @@
           ]
         }
       }
-    ],
-    "WorkflowTaskUpdateAfter": [
-        {
-            "preScript": "",
-            "postScript": "",
-            "metadata": {
-              "description": "To run automated script based on JSON rules - Script 418 c",
-              "operators": {
-                  "status":"",
-                  "customFields":"!="
-                      }
-            },
-            "criteria": {
-              "task": ["Accepted In House"],
-              "status": ["Route for Review"],
-              "customFields": {
-                "Master Plan Type": "Other"
-              },
-              "isCreatedByACA": "",
-              "balanceAllowed": "",
-              "recordStatus": [
-              ]
-            },
-            "action": {
-              "activateTask": ["Structural Plan Review","Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review",
-     "Fire Life Safety Review" , "Bldg Life Safety Review", "Structural Engineering Review"],
-              "daysOut": "21",
-              "deactivateTask": [],
-              "updateTask": [              ],
-              "addComment": "",
-              "newStatus": "",
-              "assignToUserID": "",
-              "assessFees": [
-                {
-                  "feeSchedule": "",
-                  "feeCode": "",
-                  "feeQuantity": "",
-                  "feeInvoice": "",
-                  "feePeriod": ""
-                }
-              ]
-            }
-          }
     ]
   },
   "Building/Permit/Plans/Amendment": {
