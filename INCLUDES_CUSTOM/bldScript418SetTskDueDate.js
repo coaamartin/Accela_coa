@@ -4,7 +4,7 @@ function bldScript418SetTskDueDate(){
         var taskToUpdateDueDte = [];
         var daysForDueDate = 0;
         
-        if(appMath("Building/Permit/New Building/NA")){
+        if(appMatch("Building/Permit/New Building/NA")){
             var projCat = AInfo["Project Category"];
             
             if(projCat == "Custom Home"){
@@ -36,7 +36,7 @@ function bldScript418SetTskDueDate(){
         
         if(taskToUpdateDueDte.length > 0)
             for(tsk in taskToUpdateDueDte)
-                editTaskDueDate(taskToUpdateDueDte[tsk], dateAdd(wfDateMMDDYYYY, daysForDueDate))
+                editTaskDueDate(taskToUpdateDueDte[tsk], dateAdd(wfDateMMDDYYYY, daysForDueDate, true))
     }
     catch(err){
         showMessage = true;
