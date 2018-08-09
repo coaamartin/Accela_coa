@@ -18,7 +18,7 @@ function requestExtensionMJInspection() {
 			var vInspComments;
 			
 			if (inspResultComment != "" || inspResultComment != null) {
-				vInspComments = inspResultcomment;				
+				vInspComments = inspResultComment;				
 			} else {
 				vInspComments = inspComment;
 			}
