@@ -24,11 +24,11 @@ logDebug('Script 154 starting');
 (function () {
 	var  inspector = null;
 
-	if (ifTracer(inspType == "Planting" &&  matches(inspResult, "Yes - Staked", "Yes Not Staked"), 'inspType == "Planting" &&  matches(inspResult, "Yes - Staked", "Yes Not Staked")')) {
+	if (ifTracer(inspType == "Planting" &&  matches(inspResult, "Yes - Staked", "Yes - Not Staked"), 'inspType == "Planting" &&  matches(inspResult, "Yes - Staked", "Yes Not Staked")')) {
 		x = getGISBufferInfo("AURORACO","Forestry Index Mapbook Poly","0.01","PlantBookUpdatePhase") 
 		if(ifTracer(x.length != null && x.length > 0, 'found inspector')) {
 			inspector = (x[0]["PlantBookUpdatePhase"])
 		}
-		createInspection("Non-warranty Inspection",  aa.date.parseDate(dateAdd(null, 365, inspector)));
+		scheduleInspection("Non-warranty Inspection", 365, inspector);
 	}
 })();
