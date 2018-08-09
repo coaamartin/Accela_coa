@@ -93,7 +93,7 @@ Created By: Silver Lining Solutions
 */
 
 if (ifTracer(wfTask == "Review Distribution" && wfStatus == "In Review", 'wf:Review Distribution/In Review')) {
-    script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2()
+    if(countOfTaskStatus("Review Distribution", "In Review") > 1) script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2()
 }
 
 /*
