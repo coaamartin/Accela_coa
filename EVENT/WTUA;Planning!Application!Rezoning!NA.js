@@ -134,8 +134,6 @@ Desc:			Spec:  (from spec: 273/Script-273-version3.pdf) and tracker comments
 Created By: Silver Lining Solutions
 */
 
-if(currentUserID == "TLEDEZMA") aa.print(isHistTaskStatus("Review Distribution", "In Review"));
-
 if (wfTask == "Review Distribution" && wfStatus == "In Review") {
-    script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule();
+    if(countOfTaskStatus("Review Distribution", "In Review") > 1) script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule();
 }
