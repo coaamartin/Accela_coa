@@ -15,6 +15,7 @@ function requestExtensionMJInspection() {
             var daysToAdd = 7;
 			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
 			
+			var inspResultComment;
 			var vInspComments;
 			
 			if (inspResultComment != "" || inspResultComment != null) {
