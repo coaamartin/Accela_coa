@@ -13,14 +13,10 @@ function script24_ForestryInspectionResultAutomation() {
             guideTypeName: "FORESTRY INSPECTOR",
             guideItemValue: 'Yes'
         });
-               printObjProps(curGuideSheetItems[0]);
-
 
     if (ifTracer(inspType == "Forestry Inspection" && inspResult == "Complete", 'inspType == "Forestry Inspection" && inspResult == "Complete"' )) {
         
-     //   logDebug('curGuideSheetItems.length: ' + curGuideSheetItems.length);
-      //  logDebug('curInspection.length: ' + curInspection.length);
-     //   printObjProps(curInspection);
+    //   printObjProps(curInspection);
       //  printObjProps(curInspection[0].getInspection());
      //   printObjProps(curInspection[0].getInspection().getActivity());
 
