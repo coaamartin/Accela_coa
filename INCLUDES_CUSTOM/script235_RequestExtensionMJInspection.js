@@ -15,7 +15,7 @@ function requestExtensionMJInspection() {
             var daysToAdd = 7;
 			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
 			//Schedule the inspection with the result comments from the current inspection.
-			scheduleInspectDate(inspType, newInspSchedDate, null, null, inspResultComment);
+			scheduleInspectDate(inspType, newInspSchedDate, currentUserID, null, inspResultComment);
         }
     }
 }
