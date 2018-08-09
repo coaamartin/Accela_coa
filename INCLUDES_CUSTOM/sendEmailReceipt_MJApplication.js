@@ -12,7 +12,7 @@ function sendEmailReceipt_MJApplication(){
 			return false;
 		}
         var toEmail = applicant.getEmail();
-        var emailTemplateName = "LIC MJ STATE FEE RECEIPT"
+        var emailTemplateName = "LIC MJ STATE FEE RECEIPT";
 
 		var eParams = aa.util.newHashtable();
 
