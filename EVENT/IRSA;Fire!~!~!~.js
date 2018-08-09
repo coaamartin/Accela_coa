@@ -48,11 +48,15 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	else if(numFailInsp >= 4 )
 	{	//schedule 1 days out
 		daysAhead = 1;	}
-
+	showDebug = true
+	logDebug("daysAhead " + daysAhead)
 	//schedule follow up inspection based on working days
 	//var dToday = new Date();
 	//var td = aa.date.parseDate(dateAddHC2(dToday,daysAhead,true));
 	var schedDate = dateAddHC2(null,daysAhead,true)
+	var schedDate2 = dateAddHC(null,daysAhead,true)
+	logDebug("schedDate " + schedDate)
+	logDebug("schedDate2 " + schedDate2)
 	//var targetDateString = ("0" + td.getMonth()).slice(-2) + "/" + ("0" + td.getDayOfMonth()).slice(-2) + "/" + td.getYear();
 	//var oneDay = 24*60*60*1000; // number of millisec in a day
 	//var targetDate = new Date(targetDateString);
