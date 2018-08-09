@@ -14,3 +14,7 @@ Sample Call:
 */
 //Script 324
 addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
+
+if(ifTracer(wfTask == "Accepted In House" && wfStatus == "Route for Review", 'wf:Accepted In House/Route for Review')){
+    bldScript418SetTskDueDate();
+}
