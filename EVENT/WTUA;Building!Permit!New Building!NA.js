@@ -46,7 +46,7 @@ if($iTrc(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Proce
     bldScript25_invoiceCaptialNParkFees();
 }
 
-if($iTrc(wfTask == "Accepted In House" && wfStatus == "Routed for Review", 'wf:Accepted In House/Route for Review')){
+if($iTrc(wfTask == "Accepted In House" && wfStatus == "Routed for Review", 'wf:Accepted In House/Routed for Review')){
     bldScript418SetTskDueDate();
 }
 
