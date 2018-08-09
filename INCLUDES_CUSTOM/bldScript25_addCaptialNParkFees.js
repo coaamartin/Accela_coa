@@ -63,8 +63,8 @@ function bldScript25_addCaptialNParkFees(){
         else feeQtyIrrOther = 1;
         
         //Calculate materials cost valuation for Tax use fee and county fee
-        var materialsCost = asiValues["Materials Cost"];
-        var valuation = asiValues["Valuation"];
+        var materialsCost = AInfo["Materials Cost"];
+        var valuation = AInfo["Valuation"];
         if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
                 && parseFloat(materialsCost) <= (parseFloat(valuation) / 2)) {
             feeQtyCty = feeQtyBldUse = parseFloat(valuation)/2;
