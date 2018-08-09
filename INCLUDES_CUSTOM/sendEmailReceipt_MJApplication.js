@@ -3,7 +3,7 @@
  * 
  * 
  */
-function sendEmailReceipt_MJApplication() {
+function sendEmailReceipt_MJApplication(){
 	
 		//send email
 		var applicant = getContactByType("Applicant", capId);
@@ -37,8 +37,8 @@ logDebug("Amount: " + PaymentTotalPaidAmount);
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 
 		var files = new Array();
-        var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
-        //var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, files);
+        //var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
+       var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, files);
 		if (!sent) {
 			logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 			return false;
