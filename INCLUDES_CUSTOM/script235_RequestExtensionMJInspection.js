@@ -14,8 +14,18 @@ function requestExtensionMJInspection() {
 
             var daysToAdd = 7;
 			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
+			
+			var inspResultComment;
+			var vInspComments;
+			
+			if (inspResultComment != "" || inspResultComment != null) {
+				vInspComments = inspResultComment;				
+			} else {
+				vInspComments = inspComment;
+			}
+			
 			//Schedule the inspection with the result comments from the current inspection.
-			scheduleInspectDate(inspType, newInspSchedDate, currentUserID, null, inspResultComment);
+			scheduleInspectDate(inspType, newInspSchedDate, currentUserID, null, vInspComments);
         }
     }
 }

@@ -77,7 +77,7 @@ function bldScript25_addCaptialNParkFees(){
         if($iTrc(feeQty14 > 0, feeQty14 + '> 0')) updateFee(feeItem14, feeSched, feePeriod, feeQty14, invFee);
         if($iTrc(valAmt > 0, valAmt + '> 0')) updateFee(feeItemPermit, feeSched, feePeriod, valAmt, invFee);
         if($iTrc(feeQtyIrr > 0, feeQtyIrr + '> 0')) updateFee(feeItemIrr, feeSched, feePeriod, feeQtyIrr, invFee);
-        if($iTrc(feeQtyIrrOther > 0, feeQtyIrr + '> 0')) updateFee(feeQtyIrrOther, feeSched, feePeriod, feeQtyIrrOther, invFee);
+        if($iTrc(feeQtyIrrOther > 0, feeQtyIrrOther + '> 0')) updateFee(feeQtyIrrOther, feeSched, feePeriod, feeQtyIrrOther, invFee);
         
         if($iTrc(county == "ARAPAHOE" && feeQtyCty > 0, 'county fee > 0')) {
             updateFee(feeAraCty1, feeSched, feePeriod, feeQtyCty, invFee);
