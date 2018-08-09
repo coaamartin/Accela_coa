@@ -52,7 +52,7 @@
         },
         {
           "preScript": "",
-          "postScript": "253_postscript",
+          "postScript": "153_postscript",
           "metadata": {
             "description": "Script 153",
             "operators": {
