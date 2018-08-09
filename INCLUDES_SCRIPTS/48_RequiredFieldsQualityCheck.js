@@ -1,22 +1,25 @@
 //SWAKIL
 if ("Quality Check".equals(wfTask) && "Approved".equals(wfStatus))
 {	
-	var z = getAppSpecific("Total Finished Area Sq Ft");
-	var y = getAppSpecific("Project Category");
-	var x = getAppSpecific("Construction Type");
-	var w = getAppSpecific("Occupancy Group");
-	var v = getAppSpecific("Maximum Occupancy");
-	var u = getAppSpecific("# of Residential Units");
-	var t = getAppSpecific("Single Family Detached Home");
-	var s = getAppSpecific("Special Inspections");
-	var r = getAppSpecific("Materials Cost");
-	var q = getAppSpecific("Valuation");
-	var p = getAppSpecific("Homeowner acting as Contractor");
+	var isMissing = false;
+	var missingFields = "";
+	var reqFieldsArray = ["Total Finished Area Sq Ft", "Project Category", "Construction Type", "Occupancy Group", "Maximum Occupancy", 
+	"# of Residential Units", "Single Family Detached Home", "Special Inspections", "Materials Cost", "Valuation", "Homeowner acting as Contractor"];
 
-		if(!p || !q || !r || !s || !t || !u || !v || !w || !x || !y || !z  ){
+	for (var x in reqFieldsArray)
+	{
+		if (!AInfo[reqFieldsArray[x]] || AInfo[reqFieldsArray[x]] == "")
+		{
+			isMissing = true;
+			missingFields += reqFieldsArray[x] + ", ";
+		}
+	}
+
+		if(isMissing){
+			missingFields = missingFields.substring(0, missingFields.length - 2);
 			cancel=true;
 			showMessage=true;
-	        comment("Not all Required Custom fields are populated for QC Approval.");
+	        comment("Not all Required Custom fields are populated for QC Approval. The following fields are missing: " + missingFields);
 			
 		}
 }
