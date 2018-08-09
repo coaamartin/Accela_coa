@@ -12,11 +12,8 @@ function sendEmailReceipt_MJApplication(){
 			return false;
 		}
         var toEmail = applicant.getEmail();
-       // var emailTemplateName = "LIC MJ ADDITIONAL INFO # 210"
         var emailTemplateName = "LIC MJ STATE FEE RECEIPT"
-logDebug("Email: " + toEmail);
-logDebug("EmailTemplateName: " + emailTemplateName);
-logDebug("Amount: " + PaymentTotalPaidAmount);
+
 		var eParams = aa.util.newHashtable();
 
 		//load ASi and ASIT
@@ -25,16 +22,34 @@ logDebug("Amount: " + PaymentTotalPaidAmount);
 		var asiValues = new Array();
 		loadAppSpecific(asiValues)
 		useAppSpecificGroupName = olduseAppSpecificGroupName;
-        logDebug("State License Number: " + asiValues["State License Number"]);
-        
+        //logDebug("State License Number: " + asiValues["State License Number"]);
+        	
+	adResult = aa.address.getAddressByCapId(capId).getOutput(); 
+    for(x in adResult)
+    {
+        var adType = adResult[x].getAddressType(); 
+        var stNum = adResult[x].getHouseNumberStart();
+        var preDir =adResult[x].getStreetDirection();
+        var stName = adResult[x].getStreetName(); 
+        var stType = adResult[x].getStreetSuffix();
+        var city = adResult[x].getCity();
+        var state = adResult[x].getState();
+        var zip = adResult[x].getZip();
+    }
+
+var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
+var appName = cap.getSpecialText();
         
 
         addParameter(eParams, "$$date$$", sysDateMMDDYYYY);
         addParameter(eParams, "$$amountPaid$$", PaymentTotalPaidAmount);
-		addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
+        addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
+        addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+        addParameter(eParams, "$$FullAddress$$", primaryAddress);
+        addParameter(eParams, "$$ApplicationName$$", appName);
 
 		var files = new Array();
         var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
