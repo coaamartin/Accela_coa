@@ -2,7 +2,7 @@
     "Forestry/Request/Planting/NA": {
       "InspectionResultSubmitAfter": [
         {
-          "preScript": "",
+          "preScript": "153_prescript",
           "postScript": "",
           "metadata": {
             "description": "Script 153",
@@ -11,9 +11,6 @@
             }
           },
           "criteria": {
-            "task": [
-                "Tree Planting Intake Review"
-            ],
             "inspectionTypePerformed": [
                 "Forestry Site Review"
             ],
@@ -38,6 +35,7 @@
             "rangeType": "Days",
             "range": 0,
             "sameInspector": true,
+            "inspectionCopyComment": false,
             "createCondition": "",
             "createConditionType": "",
             "createConditionSeverity": "",
