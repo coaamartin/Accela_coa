@@ -3,14 +3,13 @@ function bldScript25_invoiceCaptialNParkFees(){
     logDebug("bldScript25_invoiceCaptialNParkFees() started");
     try{
         var $iTrc = ifTracer,
-            feeItem12 = "BLD_NEW_12",
-            feeItem14 = "BLD_NEW_14",
-			feeItemPermit = "BLD_NEW_01",
-            feePeriod = "FINAL";
+            feePeriod = "FINAL",
+            feeItemArry = ["BLD_NEW_12", "BLD_NEW_14", "BLD_NEW_01", "WAT_IP_01", "WAT_IP_02", "BLD_NEW_06", "BLD_NEW_07", "BLD_NEW_05", "BLD_NEW_13"];
         
-            if($iTrc(feeExists(feeItem12), 'feeExists(' + feeItem12 + ')')) invoiceFee(feeItem12, feePeriod);
-            if($iTrc(feeExists(feeItem14), 'feeExists(' + feeItem14 + ')')) invoiceFee(feeItem14, feePeriod);
-            if($iTrc(feeExists(feeItemPermit), 'feeExists(' + feeItemPermit + ')')) invoiceFee(feeItemPermit, feePeriod);
+        for(aFee in feeItemArry){
+            var feeItem = feeItemArry[aFee];
+            if($iTrc(feeExists(feeItem), feeItem + ' exists')) invoiceFee(feeItem, feePeriod);
+        }
     }
     catch(err){
         showDebug = true;
