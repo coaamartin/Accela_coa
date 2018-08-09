@@ -12,8 +12,8 @@ function sendEmailReceipt_MJApplication(){
 			return false;
 		}
         var toEmail = applicant.getEmail();
-        var emailTemplateName = "LIC MJ ADDITIONAL INFO # 210"
-        //var emailTemplateName = "LIC MJ STATE FEE RECEIPT"
+       // var emailTemplateName = "LIC MJ ADDITIONAL INFO # 210"
+        var emailTemplateName = "LIC MJ STATE FEE RECEIPT"
 logDebug("Email: " + toEmail);
 logDebug("EmailTemplateName: " + emailTemplateName);
 logDebug("Amount: " + PaymentTotalPaidAmount);
@@ -37,8 +37,8 @@ logDebug("Amount: " + PaymentTotalPaidAmount);
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 
 		var files = new Array();
-        //var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
-       var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, files);
+        var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
+       //var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, files);
 		if (!sent) {
 			logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 			return false;
