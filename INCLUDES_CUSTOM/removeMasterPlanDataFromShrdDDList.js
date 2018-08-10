@@ -1,6 +1,6 @@
 
 function removeMasterPlanDataFromShrdDDList(appStatusArray, stdChoiceName) {
-
+    logDebug("removeMasterPlanDataFromShrdDDList() started");
     var statusMatch = false;
     var currentAppStatus = cap.getCapModel().getCapStatus();
 
@@ -13,8 +13,11 @@ function removeMasterPlanDataFromShrdDDList(appStatusArray, stdChoiceName) {
             }
             deactivateSD(stdChoiceName, appName);
             clearBizDomainCache();
+			logDebug("removeMasterPlanDataFromShrdDDList() ended with true");
             return true;
         }
     }//for all status options
+	
+	logDebug("removeMasterPlanDataFromShrdDDList() ended with false");
     return false;
 }
