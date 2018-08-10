@@ -6,7 +6,7 @@ try{
 		var description=getAppSpecific("Description");
 		var priority=getAppSpecific("Work Order Priority");
 		if (isBlankOrNull(location)|| isBlankOrNull(description) || isBlankOrNull(priority)){
-			throw "Content incomplete please populate workflow information to use this status";
+			throw "Missing Information. Info Fields Description, Location, and Work Order Priority in the WORK ORDER INFORMATION section must be filled out prior to saving this task status.";
 		}
 	}
 }catch(e){
