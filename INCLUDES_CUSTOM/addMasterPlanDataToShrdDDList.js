@@ -66,5 +66,6 @@ function addMasterPlanDataToShrdDDList(asiFieldName, recordReqStatus, inactivate
     if (!added.getSuccess()) {
         logDebug("**WARN DDL '" + sharedDDLName + "' - Add Row failed, Error: " + added.getErrorMessage());
     }
+	clearBizDomainCache();
     logDebug("addMasterPlanDataToShrdDDList() ended");
 }
