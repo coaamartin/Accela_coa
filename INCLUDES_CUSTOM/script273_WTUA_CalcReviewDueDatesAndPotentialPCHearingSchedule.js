@@ -116,6 +116,14 @@ function script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule(){
                                     + subdDate.getYear();
                 editAppSpecific("Applicant 3rd Submission Date",subdDateStr); 
             }
+			else {
+				// else if not null still update submission date
+                var subdDate = aa.date.parseDate(dateAddHC2("",15, true));
+                var subdDateStr = ("0" + subdDate.getMonth()).slice(-2) + "/" 
+                                    + ("0" + subdDate.getDayOfMonth()).slice(-2) + "/" 
+                                    + subdDate.getYear();
+                editAppSpecific("Applicant 3rd Submission Date",subdDateStr); 
+			}
         
             // update planning commission date if found
             if (newPlnMtg != null) {
