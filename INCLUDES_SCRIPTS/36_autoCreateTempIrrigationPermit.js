@@ -1,6 +1,6 @@
 //created by swakil
 
-autoCreateTempIrrigationPermit("Plan Review", [ "Approved" ], "Water/Water/Lawn Irrigation/Permit", "WAT_IRR_PLAN_RESUB");
+autoCreateTempIrrigationPermit("Plan Review", [ "Approved" ], "Water/Water/Lawn Irrigation/Permit", "WAT_IRR_PLAN_APPRVD");
 
 function autoCreateTempIrrigationPermit(wfTaskName, workflowStatusArray, appTypeStr, emailTemplate) {
 	if (wfTask == wfTaskName) {
@@ -33,16 +33,21 @@ function autoCreateTempIrrigationPermit(wfTaskName, workflowStatusArray, appType
 			copyOwner(capId, createChildResult);
 			copyContacts(capId, createChildResult);
 
+			//build ACA URL
+			var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+			acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));  
+			var recURL = acaSite + getACAUrl(createChildResult);
+
    		   //get contact
 		   var aContact = getContactByType("Applicant", capId);
 		   if (aContact) fullName = aContact.getFullName() || aContact.getFirstName() + " " + aContact.getLastName();
 
 			var eParams = aa.util.newHashtable();
-			addParameter(eParams, "$$altid$$", cap.getCapModel().getAltID());
-			addParameter(eParams, "$$capAlias$$", cap.getCapType().getAlias());
-			addParameter(eParams, "$$FullName$$", cap.getCapStatus());
-			addParameter(eParams, "$$wfComment$$", wfComment);
-			addParameter(eParams, "$$todayDate$$", sysDateMMDDYYYY);
+			addParameter(eParams, "$$altid$$", capId.getCustomID());
+			addParameter(eParams, "$$alias$$", cap.getCapType().getAlias());
+			addParameter(eParams, "$$contactFullName$$", fullName);
+			addParameter(eParams, "$$date$$", sysDateMMDDYYYY);
+			addParameter(eParams, "$$acaLink$$", recURL);
 		
 			var sent = emailContacts("Applicant", emailTemplate, eParams, "", "", "N", "");		
 
