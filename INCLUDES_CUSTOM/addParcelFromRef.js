@@ -12,7 +12,7 @@ function addParcelFromRef(parParcel) // optional capID
 
 			var prclArr = prclObj.getOutput();
 			if (prclArr.length == 1) {
-				//aa.print("Got past prclArr in addParcelFromRef()");
+				logDebug("Got past prclArr in addParcelFromRef()");
 
 				var prcl = prclArr[0].getParcelModel();
 				var refParcelNumber = prcl.getParcelNumber();
@@ -33,7 +33,6 @@ function addParcelFromRef(parParcel) // optional capID
 				}
 			}
 		}
-
 		return true;
 	} catch (err) {
 		comment("A JavaScript Error occurred:  Custom Function: addParcelFromRef: " + err.message);
