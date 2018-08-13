@@ -1,18 +1,20 @@
-function addParcelFromRef(parParcel) // optional capID
+function addParcelFromRef(parParcel)  // optional capID
 {
-	//modified function addParcelAndOwnerFromRefAddress()
-	try {
+//modified function addParcelAndOwnerFromRefAddress()
+	try{
 		var itemCap = capId
 		if (arguments.length > 1)
 			itemCap = arguments[1]; // use cap ID specified in args
 
 		var prclObj = aa.parcel.getParceListForAdmin(parParcel, null, null, null, null, null, null, null, null, null);
-		if (prclObj.getSuccess()) {
+		if (prclObj.getSuccess() )
+		{
 			//comment("Got past prclObj...");
 
 			var prclArr = prclObj.getOutput();
-			if (prclArr.length == 1) {
-				logDebug("Got past prclArr in addParcelFromRef()");
+			if (prclArr.length > 0)
+			{
+				//aa.print("Got past prclArr in addParcelFromRef()");
 
 				var prcl = prclArr[0].getParcelModel();
 				var refParcelNumber = prcl.getParcelNumber();
@@ -21,24 +23,25 @@ function addParcelFromRef(parParcel) // optional capID
 				prcl.setPrimaryParcelFlag("N");
 
 				// first add the parcel
-				var capParModel = aa.parcel.warpCapIdParcelModel2CapParcelModel(itemCap, prcl);
+				var capParModel = aa.parcel.warpCapIdParcelModel2CapParcelModel(itemCap,prcl);
 
 				var createPMResult = aa.parcel.createCapParcel(capParModel.getOutput());
-				if (createPMResult.getSuccess()) {
+				if (createPMResult.getSuccess())
+				{
 					logDebug("created CAP Parcel");
-					return true;
-				} else {
-					logDebug("**WARNING: Failed to create the cap Parcel " + createPMResult.getErrorMessage());
-					return false;
+					//aa.print("created CAP Parcel");
 				}
-			} else {
-				logDebug("**WARNING: More then one parcel found.");
+				else
+				{ 
+					logDebug("**WARNING: Failed to create the cap Parcel " + createPMResult.getErrorMessage()); 
+					//aa.print("**WARNING: Failed to create the cap Parcel " + createPMResult.getErrorMessage()); 
+				}
 			}
-		} else {
-			logDebug("**WARNING: Failed to get parcel list: " + prclObj.getErrorMessage());
 		}
-		
-	} catch (err) {
-		comment("A JavaScript Error occurred:  Custom Function: addParcelFromRef: " + err.message);
+
+		return true;
+	}
+	catch (err){
+	comment("A JavaScript Error occurred:  Custom Function: addParcelFromRef: " + err.message);
 	}
 }
