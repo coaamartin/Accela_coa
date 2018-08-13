@@ -16,7 +16,7 @@ function processNotOfViolInsp(iType, iResult, createNewInsp, insp2Create, update
         var inspDaysAhead = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(dateAdd(inspResultDate, 7, true)));
         if($iTrc(inspType == iType && inspResult == iResult, inspType + ' == ' + iType + ' && ' + inspResult + ' == ' + iResult)){
             if($iTrc(createNewInsp, "create new inspection"))
-                scheduleInspection(insp2Create, inspDaysAhead, inspector, null, newInspReqComments);
+                scheduleInspection(insp2Create, inspDaysAhead, currentUserID, null, newInspReqComments);
             if($iTrc(updateWf, "update worflow")){
                 if(!isTaskActive(wfTsk2Update))
                     activateTask(wfTsk2Update);

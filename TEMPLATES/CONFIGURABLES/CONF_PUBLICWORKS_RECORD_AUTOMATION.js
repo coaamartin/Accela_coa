@@ -1,5 +1,5 @@
 {
-  "PublicWorks/Pavement Design/NA/NA": {
+  "PublicWorks/Pavement Design/NA/NA": ;{
     "ConvertToRealCAPAfter": [
       {
         "preScript": "",
@@ -109,7 +109,7 @@
             "Manager Review"
           ],
           "status": [
-            "Approved"
+            "Request Complete"
           ],
           "workFlow": {
             "Traffic Investigation": ["No Change Warranted"]
@@ -165,7 +165,7 @@
             "No Change Warranted"
           ],
           "workFlow": {
-            "Manager Review": ["Approved"]
+            "Manager Review": ["Request Complete"]
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",

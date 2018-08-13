@@ -1,4 +1,4 @@
-//Start - 226 MJ Testing Facility License Creation
+//Start - 227 MJ Retail Transporter License Creation
 logDebug("etw capId: " + capId);
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
@@ -77,18 +77,18 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		var vEmailTemplate;
 		var vReportTemplate;
 
-		if (appMatch("Licenses/Marijuana/Testing Facility/License", vLicenseID) && (wfStatus == "Issued")) {
+		if (appMatch("Licenses/Marijuana/Retail Transporter/License", vLicenseID) && (wfStatus == "Issued")) {
 			vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
 			vReportTemplate = "MJ_License";
 			tmpCap = capId;
 			capId = vLicenseID;
-			scheduleInspection("MJ AMED Inspection", 77, "DALLEN", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Mechanical", 77, "SLCLARK", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Life Safety", 77, "SLCLARK", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "DALLEN", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Structural", 77, "SLCLARK", " ", "Scheduled by Script 226");
+			scheduleInspection("MJ AMED Inspection", 77, "DALLEN", " ", "Scheduled by Script 227");
+			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 227");
+			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 227");
+			scheduleInspection("MJ Building Inspections - Mechanical", 77, "SLCLARK", " ", "Scheduled by Script 227");
+			scheduleInspection("MJ Building Inspections - Life Safety", 77, "SLCLARK", " ", "Scheduled by Script 227");
+			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "DALLEN", " ", "Scheduled by Script 227");
+			scheduleInspection("MJ Building Inspections - Structural", 77, "SLCLARK", " ", "Scheduled by Script 227");
 			capId = tmpCap;
 		}
 
@@ -117,4 +117,4 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 
 	}
 }
-//End - MJ Testing Facility License Creation
+//End - 227 MJ Retail Transporter License Creation

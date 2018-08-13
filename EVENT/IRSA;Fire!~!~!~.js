@@ -33,7 +33,7 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 		{ inspector = assignedStaff; }
 	
 	//determine inspection date based on rules
-	numFailInsp = getAppSpecific("Number of Failed Inspections");
+	numFailInsp = parseInt(getAppSpecific("Number of Failed Inspections"));
 	
 	var daysAhead = 0;
 	if((inspResult == "Fail" || inspResult == "Violations Found") && numFailInsp == 1 )
@@ -48,14 +48,19 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	else if(numFailInsp >= 4 )
 	{	//schedule 1 days out
 		daysAhead = 1;	}
-
+	showDebug = true
+	logDebug("daysAhead " + daysAhead)
 	//schedule follow up inspection based on working days
-	var dToday = new Date();
-	var td = aa.date.parseDate(dateAddHC2(dToday,daysAhead,true));
-	var targetDateString = ("0" + td.getMonth()).slice(-2) + "/" + ("0" + td.getDayOfMonth()).slice(-2) + "/" + td.getYear();
-	var oneDay = 24*60*60*1000; // number of millisec in a day
-	var targetDate = new Date(targetDateString);
-	var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
+	//var dToday = new Date();
+	//var td = aa.date.parseDate(dateAddHC2(dToday,daysAhead,true));
+	var schedDate = dateAddHC2(null,daysAhead,true)
+	var schedDate2 = dateAddHC(null,daysAhead,true)
+	logDebug("schedDate " + schedDate)
+	logDebug("schedDate2 " + schedDate2)
+	//var targetDateString = ("0" + td.getMonth()).slice(-2) + "/" + ("0" + td.getDayOfMonth()).slice(-2) + "/" + td.getYear();
+	//var oneDay = 24*60*60*1000; // number of millisec in a day
+	//var targetDate = new Date(targetDateString);
+	//var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
 
 	//delete full Custom List on the record
 	removeASITable("Fire Violations");
@@ -93,8 +98,8 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 		}
 	}
 
-	scheduleInspection(newInspType,daysOut,inspector);
-
+	//scheduleInspection(newInspType,daysAhead,inspector);
+	scheduleInspectDate(newInspType,schedDate,inspector)
 	//copy checklist to new inspection
 	var newInspId = getScheduledInspId(newInspType);
 	if (newInspId) {

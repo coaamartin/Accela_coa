@@ -33,7 +33,7 @@ Author: Yazan Barghouth
 Functional Area : Records
 
 Sample Call:
-	calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
+    calculateAndAssessConstructionBuildingFees("BLD_NEW_CON", [ "BLD_NEW_12", "BLD_NEW_14" ], "Quality Check", [ "Approved" ], "Fee Processing", [ "Ready to Pay" ]);
 
 */
 //removed this call, it is not peforming the calculations. Using bldScript25_addFees() instead
@@ -43,7 +43,11 @@ if($iTrc(wfTask == "Quality Check" && wfStatus == "Approved", 'wf:Quality Check/
 }
 
 if($iTrc(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Processing/Ready to Pay')){
-	bldScript25_invoiceCaptialNParkFees();
+    bldScript25_invoiceCaptialNParkFees();
+}
+
+if($iTrc(wfTask == "Accepted In House" && wfStatus == "Routed for Review", 'wf:Accepted In House/Routed for Review')){
+    bldScript418SetTskDueDate();
 }
 
 /*
@@ -56,16 +60,16 @@ Author: Yazan Barghouth
 Functional Area : Records
 
 Sample Call:
-	activateWorkflowTasks();
+    activateWorkflowTasks();
 
 Notes:
-	- Workflow task names are not accurate (not as in config)
-	- Use arrays reviewTasksAry and activeReviewTasksAry to edit and correct task names
+    - Workflow task names are not accurate (not as in config)
+    - Use arrays reviewTasksAry and activeReviewTasksAry to edit and correct task names
 */
 
 activateWorkflowTasks();
 if($iTrc(!isTaskStatus("Quality Check", "Approved"), '!isTaskStatus("Quality Check", "Approved")'))
-	deactivateTask("Fee Processing");
+    deactivateTask("Fee Processing");
 
 /*
 Title : Update Permit Expiration with every Resubmittal (WorkflowTaskUpdateAfter) 
@@ -84,14 +88,14 @@ Functional Area : Records
 
 Sample Call:
 updatePermitExpirationCF([ "Accept Plans", "Accepted In House", "Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review",
-		"Bldg Life Safety Review", "Fire Life Safety Review", "Structural Engineering Review", "Real Property Review", "Planning Review", "Water Review", "Zoning Review",
-		"Engineering Review", "Traffic Review", "Waste Water Review", "Forestry Review" ], "Resubmittal Requested", "Application Expiration Date");
+        "Bldg Life Safety Review", "Fire Life Safety Review", "Structural Engineering Review", "Real Property Review", "Planning Review", "Water Review", "Zoning Review",
+        "Engineering Review", "Traffic Review", "Waste Water Review", "Forestry Review" ], "Resubmittal Requested", "Application Expiration Date");
 */
 
 updatePermitExpirationCF([ "Accept Plans", "Accepted In House", "Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review",
-		"Bldg Life Safety Review", "Fire Life Safety Review", "Structural Engineering Review", "Real Property Review", "Planning Review", "Water Review", "Zoning Review",
-		"Engineering Review", "Traffic Review", "Waste Water Review", "Forestry Review" ], "Resubmittal Requested", "Application Expiration Date");
-		
+        "Bldg Life Safety Review", "Fire Life Safety Review", "Structural Engineering Review", "Real Property Review", "Planning Review", "Water Review", "Zoning Review",
+        "Engineering Review", "Traffic Review", "Waste Water Review", "Forestry Review" ], "Resubmittal Requested", "Application Expiration Date");
+        
 /*
 Title : Auto Create Tap Application record (WorkflowTaskUpdateAfter)
 Purpose : If criteria: If wfTask = Water Review and wfStatus = "Approved" and the TSI field "Is a TAP record required" is equal to
@@ -122,7 +126,7 @@ var parentBuildingSqFt = "Total Finished Area Sq Ft"
 var utilityServiceRecord = "Water/Utility/Service/NA";
 
 autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIsTAPrecordrequired, tsiNumberOfTaprecords, childRecordToCreated, ofResidentialUnitsASI,
-		BuildingSqFt, parentofResidentialUnitsASI, parentBuildingSqFt);
-		
+        BuildingSqFt, parentofResidentialUnitsASI, parentBuildingSqFt);
+        
 
 bldScript48_addForestryFee();

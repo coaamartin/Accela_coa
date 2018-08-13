@@ -1,4 +1,5 @@
-//Start - 226 MJ Testing Facility License Creation
+//Start - 230 MJ Retail Cultivation License Creation
+
 logDebug("etw capId: " + capId);
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
@@ -70,25 +71,25 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		//Update License Workflow
 		tmpCap = capId;
 		capId = vLicenseID;
-		updateTask("License Status", "Active", "Updated by Script 226_CreateMJTestingFacilityLicense", "Update by Script 226_CreateMJTestingFacilityLicense");
+		updateTask("License Status", "Active", "Updated by Script 230_CreateMJRetailCultivationLicense", "Update by Script 230_CreateMJRetailCultivationLicense");
 		capId = tmpCap;
 
 		//Generate license report and email
 		var vEmailTemplate;
 		var vReportTemplate;
 
-		if (appMatch("Licenses/Marijuana/Testing Facility/License", vLicenseID) && (wfStatus == "Issued")) {
+		if (appMatch("Licenses/Marijuana/Retail Cultivation/License", vLicenseID) && (wfStatus == "Issued")) {
 			vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
 			vReportTemplate = "MJ_License";
 			tmpCap = capId;
 			capId = vLicenseID;
-			scheduleInspection("MJ AMED Inspection", 77, "DALLEN", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Mechanical", 77, "SLCLARK", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Life Safety", 77, "SLCLARK", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "DALLEN", " ", "Scheduled by Script 226");
-			scheduleInspection("MJ Building Inspections - Structural", 77, "SLCLARK", " ", "Scheduled by Script 226");
+			scheduleInspection("MJ AMED Inspection", 77, "DALLEN", " ", "Scheduled by Script 230");
+			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 230");
+			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 230");
+			scheduleInspection("MJ Building Inspections - Mechanical", 77, "SLCLARK", " ", "Scheduled by Script 230");
+			scheduleInspection("MJ Building Inspections - Life Safety", 77, "SLCLARK", " ", "Scheduled by Script 230");
+			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "DALLEN", " ", "Scheduled by Script 230");
+			scheduleInspection("MJ Building Inspections - Structural", 77, "SLCLARK", " ", "Scheduled by Script 230");
 			capId = tmpCap;
 		}
 
@@ -117,4 +118,4 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 
 	}
 }
-//End - MJ Testing Facility License Creation
+//End - 230 MJ Retail Cultivation License Creation

@@ -48,7 +48,7 @@ if(wfTask =="Inspection Phase"  && wfStatus=="Final"){
 
 if(wfTask == "Backflow Preventor" && wfStatus == "Final"){
 	deactCoOIfNotChecked();
-	script40_backFlowPreventerEmail()
+	include("40_backFlowPreventerEmail");
 }
 
 /*

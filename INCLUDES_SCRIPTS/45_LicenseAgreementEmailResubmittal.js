@@ -1,34 +1,35 @@
-if(isTaskActive("Plans Coordination")){
-  var checkTasks = ["Engineering Review", "Real Property Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review", "Risk Management Review", "Planning Review"];
-  var statusCheck = "Resubmittal Requested";
+var checkTasks = ["Engineering Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review"];
+if (exists(wfTask, checkTasks))
+{
+  var isAllComplete = isListComplete(checkTasks);
+  var isAllStatusComplete = isListCompleteStatus(checkTasks);
 
-  var isActive = isListActive(checkTasks);
-  if(!isActive){
-    var listHasResubmittal = isResubmittal(checkTasks);
-    if(listHasResubmittal){
-      sendEmailToApplicant();
-    }
+  if (isAllComplete && !isAllStatusComplete)
+  {
+    sendEmailToApplicant();
+    updateTask("Plans Coordination", "Resubmittal Requested", "Update via script");
   }
 }
 
-function isListActive(checkTasks){
-  for(i in checkTasks){
-    active = isTaskActive(checkTasks[i]);
-    if(active){
-      return true;
-    }
+
+function isListComplete(checkList)
+{
+  var isComplete = true;
+  for (var x in checkList)
+  {
+    if (!isTaskComplete(checkList[x])) return false;
   }
-  return false;
+  return isComplete;
 }
 
-function isResubmittal(){
-  for(i in checkTasks){
-    status = taskStatus(checkTasks[i]);
-    if(status.equals(statusCheck)){
-      return true;
-    }
+
+function isListCompleteStatus(tasks2Check)
+{
+  for (var y in tasks2Check)
+  {
+    if (!"Complete".equals(taskStatus(tasks2Check[y]))) return false;
   }
-  return false;
+  return true;
 }
 
 function sendEmailToApplicant(){
