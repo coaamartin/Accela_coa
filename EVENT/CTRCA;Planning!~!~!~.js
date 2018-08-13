@@ -13,11 +13,14 @@ Events: ApplicationSubmitAfter, ConvertToRealCapAfter
 
 Notes:
 	This is the part for the events, ACA Pageflow scripts are in 2 more separated files
+
+8/13/18 - ETW Updated to also add parcel GIS objects
 */
 
 try {
 	removeDuplicatesFromMultipleParcelsTable();
 	createAPOfromMultipleParcelsTable();
+	copyParcelGisObjects();
 } catch (ex) {
 	logDebug("**WARN add additional parcels from ASIT 'MULTIPLEPARCELS' failed, " + ex);
 }
