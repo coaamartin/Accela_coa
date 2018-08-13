@@ -24,7 +24,7 @@ function copyContacts2(srcCapId, destCapId, options) {
 
 		for (yy in contacts) {
 
-            if(settings.contactType == null || contacts[yy].getCapContactModel().getContactType() == pContactType) {
+            if(settings.contactType == null || contacts[yy].getCapContactModel().getContactType() == settings.contactType) {
                 var newContact = contacts[yy].getCapContactModel();
 
                 if(settings.copyContactAddressList == true) {
