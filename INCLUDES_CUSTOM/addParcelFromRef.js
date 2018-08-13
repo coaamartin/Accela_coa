@@ -26,14 +26,18 @@ function addParcelFromRef(parParcel) // optional capID
 				var createPMResult = aa.parcel.createCapParcel(capParModel.getOutput());
 				if (createPMResult.getSuccess()) {
 					logDebug("created CAP Parcel");
-					//aa.print("created CAP Parcel");
+					return true;
 				} else {
 					logDebug("**WARNING: Failed to create the cap Parcel " + createPMResult.getErrorMessage());
-					//aa.print("**WARNING: Failed to create the cap Parcel " + createPMResult.getErrorMessage()); 
+					return false;
 				}
+			} else {
+				logDebug("**WARNING: More then one parcel found.");
 			}
+		} else {
+			logDebug("**WARNING: Failed to get parcel list: " + prclObj.getErrorMessage());
 		}
-		return true;
+		
 	} catch (err) {
 		comment("A JavaScript Error occurred:  Custom Function: addParcelFromRef: " + err.message);
 	}
