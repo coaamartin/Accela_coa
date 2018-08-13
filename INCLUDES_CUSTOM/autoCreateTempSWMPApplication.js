@@ -53,6 +53,8 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
             copyAddresses(capId, createChildResult);
             copyParcels(capId, createChildResult);
             copyOwner(capId, createChildResult);
+            logDebug('calling copyContacts2()');
+            copyContacts2(capId, createChildResult, { contactType: 'Project Owner' });
             copyContacts2(capId, createChildResult, { contactType: 'Applicant' });
             copyContacts2(capId, createChildResult, { contactType: 'Developer' });
             //copyContactsByType(capId, createChildResult, "Applicant");
