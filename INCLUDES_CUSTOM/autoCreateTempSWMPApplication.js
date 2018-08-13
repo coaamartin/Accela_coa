@@ -56,8 +56,8 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
             copyContacts2(capId, createChildResult, { contactType: 'Applicant' });
             copyContacts2(capId, createChildResult, { contactType: 'Developer' });
             //copyContactsByType(capId, createChildResult, "Applicant");
-            copyContacts(capId, createChildResult);
-            removeContactsFromCapByType(createChildResult, "Outside Agency");
+           // copyContacts(capId, createChildResult);
+          //  removeContactsFromCapByType(createChildResult, "Outside Agency");
 
             var projectOwner = getContactByType("Project Owner", capId);
             if (projectOwner && projectOwner.getEmail() != null && projectOwner.getEmail() != "") {
