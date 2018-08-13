@@ -26,6 +26,11 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
             var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+122));
             logDebug("lookForPlanningMtgDate = " + lookForPlanningMtgDate);
             //Find the closest meeting to lookForPlanningMtgDate between lookForStartDate and lookForEndDate 
+			showDebug = true
+			logDebug("lookForPlanningMtgDate " + lookForPlanningMtgDate)
+			logDebug("lookForStartDate " + lookForStartDate)
+			logDebug("lookForEndDate " + lookForEndDate)
+			
             var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
         
             // update review comments
