@@ -69,16 +69,20 @@ if (contact) {
 		aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
 	}
 	
-	var vEmailTemplate = "Template TBD";
+	var vEmailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
+    var reportName = "JD_TEST_SSRS";
+    var LicenseType = "Licenses/Contractor/Arborist/License";
+    var rptParams = aa.util.newHashtable();
+    rptParams.put("Record_ID", licenseNbr);
 	var vEParams = aa.util.newHashtable();
-	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
+	addParameter(vEParams, "$$LicenseType$$", LicenseType);
 	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
-	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
-	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
+	addParameter(vEParams, "$$ApplicationID$$", licenseNbr);
+	addParameter(vEParams, "$$altID$$", licenseNbr);
 
 	tmpCap = capId;
 	capId = createdApp;
-	emailContacts("All",vEmailTemplate, vEParams, null,null);
+	emailContacts("All",vEmailTemplate, vEParams, reportName,rptParams);
 	capId = tmpCap;
 	
 } else { //contact required exist on child (current) record
