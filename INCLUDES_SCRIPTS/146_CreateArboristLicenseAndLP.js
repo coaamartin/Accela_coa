@@ -26,7 +26,8 @@ var contact = getContactByType(contactType, capId);
 if (contact) {
 	logDebug("Creating Ref LP");
 	vExpDate = new Date();
-	vNewExpDate = new Date(vExpDate.getFullYear(), 11,31);
+	// TODO?   Assume if issued after October, let expire next year
+	vNewExpDate = new Date(vExpDate.getFullYear() + (vExpDate.getMonth > 9 ? 1 : 0), 11,31);
 
 	var licenseNbr;
 	var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());

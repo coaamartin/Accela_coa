@@ -33,8 +33,8 @@ if (balanceDue == 0) {
 		// Get current expiration date.
 		vLicenseObj = new licenseObject(null, vLicenseID);
 		vExpDate = new Date();
-		// All licenses expire on 12/31
-		vNewExpDate = new Date(vExpDate.getFullYear(), 11, 31);
+		// All licenses expire on 12/31, if after march assume next year
+		vNewExpDate = new Date(vExpDate.getFullYear() + (vExpDate.getMonth > 2 ? 1 : 0), 11, 31);
 
 		// Update license expiration date
 		logDebug("Updating Expiration Date to: " + vNewExpDate);
