@@ -26,11 +26,6 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
             var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+122));
             logDebug("lookForPlanningMtgDate = " + lookForPlanningMtgDate);
             //Find the closest meeting to lookForPlanningMtgDate between lookForStartDate and lookForEndDate 
-			showDebug = true
-			logDebug("lookForPlanningMtgDate " + lookForPlanningMtgDate)
-			logDebug("lookForStartDate " + lookForStartDate)
-			logDebug("lookForEndDate " + lookForEndDate)
-			
             var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
         
             // update review comments
@@ -48,8 +43,8 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
               logDebug("newHearingDate = " + newHearingDate);           
               editAppSpecific("Projected Planning Commission Date",newHearingDate);
             } else {
-                logDebug("Script 275: WARNING - there is no planning commission date within 45 days of your target date!");
-                comment("<B><Font Color=RED>WARNING - there is no planning commission date within 45 days of your target date!</Font></B>");
+                logDebug("Script 275: WARNING - there is no planning commission date within 12 weeks of your target date!");
+                comment("<B><Font Color=RED>WARNING - there is no planning commission date within 12 weeks of your target date!</Font></B>");
             }
         }
         else if ( !(AInfo["2nd Review Comments Due Date"]) ) {
@@ -65,7 +60,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
             var lookForStartDate        = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
             
             //Set up the 'look forward' from the target date for searching
-            var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+45));
+            var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+42));
             
             //Find the closest meeting to lookForPlanningMtgDate between lookForStartDate and lookForEndDate 
             var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
@@ -108,7 +103,7 @@ if (wfTask == "Review Distribution" && wfStatus == "In Review") {
             var lookForStartDate        = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
             
             //Set up the 'look forward' from the target date for searching
-            var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY, +45));
+            var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY, +35));
             
             //Find the closest meeting to lookForPlanningMtgDate between lookForStartDate and lookForEndDate 
             var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");

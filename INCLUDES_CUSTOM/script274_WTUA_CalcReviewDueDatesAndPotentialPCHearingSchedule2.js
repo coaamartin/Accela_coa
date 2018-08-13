@@ -19,7 +19,7 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
         var lookForStartDate        = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
         
         //Set up the 'look forward' from the target date for searching
-        var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+45));
+        var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+84));
         
         //Find the closest meeting to lookForPlanningMtgDate between lookForStartDate and lookForEndDate 
         var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
@@ -63,7 +63,7 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
             var lookForStartDate        = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
             
             //Set up the 'look forward' from the target date for searching
-            var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+45));
+            var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,+56));
             
             //Find the closest meeting to lookForPlanningMtgDate between lookForStartDate and lookForEndDate 
             var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
@@ -114,7 +114,7 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
             var lookForStartDate        = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY,0));
             
             //Set up the 'look forward' from the target date for searching
-            var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY, +45));
+            var lookForEndDate          = aa.date.parseDate(aa.date.addDate(lookForMMDDYYYY, +28));
             
             //Find the closest meeting to lookForPlanningMtgDate between lookForStartDate and lookForEndDate 
             var newPlnMtg = getClosestAvailableMeeting("Planning Commission", lookForPlanningMtgDate, lookForStartDate, lookForEndDate, "PLANNING COMMISSION");
