@@ -7,7 +7,7 @@
 function copyContacts2(srcCapId, destCapId, options) {
     var settings = {
          contactType: null,  //if not null, filters by contact type
-         copyContactAddressList = true
+         copyContactAddressList: true
     };
     for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
 
