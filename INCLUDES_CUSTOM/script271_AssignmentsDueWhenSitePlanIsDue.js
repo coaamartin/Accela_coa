@@ -23,12 +23,21 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 					aa.print("script271: **WARNING get parent capModel is null.  Nothing to update");
 				} else {
 					var workflowResult = aa.workflow.getTasks(thisParentCap);
+					var vThisWorkflow = aa.workflow.getTasks(CapId);
 					if (workflowResult.getSuccess()) {
 						var wfObj = workflowResult.getOutput();
 					} else { 
 						aa.print("script271:  **ERROR: Failed to get workflow object: " + s_capResult.getErrorMessage()); 
 						return; 
 					}
+					
+					if (vThisWorkflow.getSuccess()) {
+						var vThisWorkflowObj = vThisWorkflow.getOutput();
+					} else {
+						aa.print("script271:  **ERROR: Failed to get this workflow object: " + s_capResult.getErrorMessage()); 
+						return; 
+					}
+					
 					for (i in wfObj)
 					{
 						var fTask = wfObj[i];
@@ -55,6 +64,11 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 							//					thisDueDateMinute+":"+
 							//					thisDueDateSecond;
 							aa.print("script271: Setting WF DUE DATE to:"+thisDueDate);
+							
+							for (i in vThisWorkflowObj) {
+								var vTask = vThisWorkflowObj[i];
+								vTask.setDaysDue(null);								
+							}
 							
 							editTaskDueDate("Completeness Review",thisDueDate);
 							editTaskDueDate("Traffic Study Manager Review",thisDueDate);
