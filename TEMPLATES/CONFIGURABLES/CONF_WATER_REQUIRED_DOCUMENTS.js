@@ -47,7 +47,7 @@
             "Warranty Work Punchlist"
           ],
           "requirementType": "STANDARD",
-          "validationMessage": "Warrant Work Punch List is required for Warranty Work Required status"
+          "validationMessage": "Warranty Work Punch List is required for Warranty Work Required status"
         }
       }
     ]
