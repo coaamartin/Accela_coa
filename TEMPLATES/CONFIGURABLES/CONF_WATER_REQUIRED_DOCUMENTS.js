@@ -39,7 +39,7 @@
             "Final Acceptance Inspection"
           ],
           "status": [
-            "Warranty Work Required"
+            "Warranty Work Required","Complete"
           ]
         },
         "action": {
