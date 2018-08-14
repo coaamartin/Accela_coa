@@ -22,7 +22,7 @@
                     vGuideSheetArray = getGuideSheetObjects(vInspId);
                     yy = 0;
                     for (yy in vGuideSheetArray) {
-                        if (vGuideSheetObj.gsType = "FORESTRY INSPECTOR" && vGuideSheetObj.text = "Removal" && vGuideSheetObj.status = "Yes") {
+                        if (vGuideSheetObj.gsType == "FORESTRY INSPECTOR" && vGuideSheetObj.text == "Removal" && vGuideSheetObj.status == "Yes") {
                             vHasInspAndGuideSheetItem = true;
                             break;
                         }
