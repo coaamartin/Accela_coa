@@ -1,4 +1,4 @@
-function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
+function createPPBMPRecord(workFlowTask, workflowStatusArray, asitNames) {
     logDebug("createPPBMPRecord() started");
     try{
         //In case the permit is issued from other event, we hard code the task and status.
@@ -50,14 +50,17 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitName) {
                     return ;
                 }
                 recordParentCapId = parents[0];
-                var pondTypes = loadASITable(asitName, recordParentCapId);
-                if (!pondTypes) {
-                    logDebug("Parent " + recordParentCapId.getCustomID() + " has no " + asitName + " table");
-                    logDebug("createPPBMPRecord() ended: no ASIT On parent");
-                    return ;
+                for(var asitName in asitNames) {
+                    var tbl = loadASITable(asitName, recordParentCapId);
+                    if (!tbl) {
+                        logDebug("Parent " + recordParentCapId.getCustomID() + " has no " + asitName + " table");
+                        logDebug("createPPBMPRecord() ended: no ASIT On parent");
+                        return ;
+                    }
+                    
+                    addASITable(asitName, tbl, childCapId);
                 }
-                
-                addASITable(asitName, pondTypes, childCapId);
+           
             }
         } else {
             logDebug("createPPBMPRecord() ended: wfTask No Match");
