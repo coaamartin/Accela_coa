@@ -12,7 +12,7 @@ Author: Yazan Barghouth
 Functional Area : Records
 
 Sample Call:
-	createPPBMPRecord("Re Certification", [ "Accepted" ], "POND TYPES");
+	createPPBMPRecord("Re Certification", [ "Accepted" ], ["POND TYPES"]);
 	
 Notes:
 	- Task name 'Re Certification' not Recertification
@@ -37,6 +37,6 @@ if (ifTracer(wfTask=="Fee Processing" &&
 } 
 
 //Script 100
-createPPBMPRecord("Permit Issued", [ "Complete" ], "POND TYPES");
+createPPBMPRecord("Permit Issued", [ "Complete" ], ["POND TYPES", "BOND INFORMATION"]);
 
 script399_BondEmailAndAwaitingBondTaskStatus();
