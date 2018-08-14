@@ -49,31 +49,20 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 							thisDueDateDay = thisDueDateDay.substr(thisDueDateDay.length-2);
 							var thisDueDateYear = "00"+thisAADueDate.year;
 							thisDueDateYear = thisDueDateYear.substr(thisDueDateYear.length-4);
-							/*var thisDueDateHour = "00"+thisAADueDate.hourOfDay;
-							thisDueDateHour = thisDueDateHour.substr(thisDueDateHour.length-2);
-							var thisDueDateMinute = "00"+thisAADueDate.minute;
-							thisDueDateMinute = thisDueDateMinute.substr(thisDueDateMinute.length-2);
-							var thisDueDateSecond = "00"+thisAADueDate.second;
-							thisDueDateSecond = thisDueDateSecond.substr(thisDueDateSecond.length-2);
-							*/
 							var thisDueDate =	thisDueDateMonth+"/"+
 												thisDueDateDay+"/"+
 												thisDueDateYear;
-							//					thisDueDateYear+" "+
-							//					thisDueDateHour+":"+
-							//					thisDueDateMinute+":"+
-							//					thisDueDateSecond;
 							aa.print("script271: Setting WF DUE DATE to:"+thisDueDate);
 							
 							for (i in vThisWorkflowObj) {
 								var vTask = vThisWorkflowObj[i];
 								var vDaysDue = 0;
-								vTask.setDaysDue(vDaysDue);
+								vTask.setDaysDue(vDaysDue);						
+							}
 							editTaskDueDate("Completeness Review",thisDueDate);
 							editTaskDueDate("Traffic Study Manager Review",thisDueDate);
 							editTaskDueDate("Traffic Study Supervisor Review",thisDueDate);
-							editTaskDueDate("Traffic Study Staff Review",thisDueDate);								
-							}
+							editTaskDueDate("Traffic Study Staff Review",thisDueDate);		
 						}
 					}
 				}
