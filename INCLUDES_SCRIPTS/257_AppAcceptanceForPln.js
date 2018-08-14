@@ -42,7 +42,7 @@ function script257_AppAcceptanceForPln(workFlowTask, workFlowStatus, firstReview
         logDebug("*****Enter NEW script257_AppAcceptanceForPln function*****");
 
         
-        if (iTracer(isEmpty(firstReviewDate), 'isEmpty(firstReviewDate)')) 
+        if (ifTracer(isEmpty(firstReviewDate), 'isEmpty(firstReviewDate)')) 
         {
             // If Custom Field "1st Review Comments Due date" is null
             // Then update it with Today + 15 days
