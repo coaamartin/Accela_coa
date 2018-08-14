@@ -37,6 +37,7 @@ if (ifTracer(wfTask=="Fee Processing" &&
 } 
 
 //Script 100
+logDebug('Script 100 Starting')
 createPPBMPRecord("Permit Issued", [ "Complete" ], ["POND TYPES", "BOND INFORMATION"]);
 
 script399_BondEmailAndAwaitingBondTaskStatus();
