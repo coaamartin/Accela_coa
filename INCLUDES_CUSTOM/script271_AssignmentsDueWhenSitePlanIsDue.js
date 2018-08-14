@@ -23,7 +23,7 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 					aa.print("script271: **WARNING get parent capModel is null.  Nothing to update");
 				} else {
 					var workflowResult = aa.workflow.getTasks(thisParentCap);
-					var vThisWorkflow = aa.workflow.getTasks(CapId);
+					var vThisWorkflow = aa.workflow.getTasks(capId);
 					if (workflowResult.getSuccess()) {
 						var wfObj = workflowResult.getOutput();
 					} else { 
