@@ -43,9 +43,10 @@ function createTempWaterChild(emailTemplate) {
         if (privateStormSewerUtilityPermitTsiVal == "Yes") {
             createTempChild("Private Storm Sewer Utility Permit", "Private Storm Sewer Permit", emailTemplate);
         }
-        if (stormWaterUtilityPermitRequiredTsiVal == "Yes") {
-            createTempChild("Storm Water Utility Permit", "Storm Water Permit", emailTemplate);
-        }
+      //  if (stormWaterUtilityPermitRequiredTsiVal == "Yes") {
+        //    createTempChild("Storm Water Utility Permit", "Storm Water Permit", emailTemplate);
+        //}   Storm water not icluded in script tracker 219
+		
         if (privateFireLineUtilityPermitTsiVal == "Yes") {
             // For private fire line utility permit, create a child record for each fire line
             var privateFireLinesCount = 0;

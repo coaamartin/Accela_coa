@@ -40,8 +40,8 @@ if (appMatch(appType[i])) {
                 var capDetails = aa.cap.getCap(capId).getOutput();
                 var appName = capDetails.getSpecialText();
                 var newCapModel = aa.cap.getCap(newId).getOutput().getCapModel();
-                newCapModel.setSpecialText(appName);
-                aa.cap.editCapByPK(newCapModel);
+                //newCapModel.setSpecialText(appName);
+                //aa.cap.editCapByPK(newCapModel);
 
                 //Set Description.
                 var capView = aa.cap.getCapViewByID(capId).getOutput();
@@ -50,7 +50,7 @@ if (appMatch(appType[i])) {
                 if (workDescResult.getSuccess()) {
                     var workDesObj = workDescResult.getOutput().getCapWorkDesModel();
                     workDesObj.setDescription(capDetailsDesc);
-                    aa.cap.editCapWorkDes(workDesObj);
+                    aa.cap.editCapWorkDes(newCapModel + workDesObj);
                 }
             }
         }
