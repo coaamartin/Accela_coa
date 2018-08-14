@@ -21,15 +21,13 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 				var thisParentCapModel = aa.cap.getCap(thisParentCap).getOutput();;
 				if (thisParentCapModel == null) {
 					aa.print("script271: **WARNING get parent capModel is null.  Nothing to update");
-				}
-				else {
+				} else {
 					var workflowResult = aa.workflow.getTasks(thisParentCap);
-					if (workflowResult.getSuccess())
+					if (workflowResult.getSuccess()) {
 						var wfObj = workflowResult.getOutput();
-					else
-					{ 
-							aa.print("script271:  **ERROR: Failed to get workflow object: " + s_capResult.getErrorMessage()); 
-							return; 
+					} else { 
+						aa.print("script271:  **ERROR: Failed to get workflow object: " + s_capResult.getErrorMessage()); 
+						return; 
 					}
 					for (i in wfObj)
 					{
@@ -42,19 +40,20 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 							thisDueDateDay = thisDueDateDay.substr(thisDueDateDay.length-2);
 							var thisDueDateYear = "00"+thisAADueDate.year;
 							thisDueDateYear = thisDueDateYear.substr(thisDueDateYear.length-4);
-							var thisDueDateHour = "00"+thisAADueDate.hourOfDay;
+							/*var thisDueDateHour = "00"+thisAADueDate.hourOfDay;
 							thisDueDateHour = thisDueDateHour.substr(thisDueDateHour.length-2);
 							var thisDueDateMinute = "00"+thisAADueDate.minute;
 							thisDueDateMinute = thisDueDateMinute.substr(thisDueDateMinute.length-2);
 							var thisDueDateSecond = "00"+thisAADueDate.second;
 							thisDueDateSecond = thisDueDateSecond.substr(thisDueDateSecond.length-2);
-							
+							*/
 							var thisDueDate =	thisDueDateMonth+"/"+
 												thisDueDateDay+"/"+
-												thisDueDateYear+" "+
-												thisDueDateHour+":"+
-												thisDueDateMinute+":"+
-												thisDueDateSecond;
+												thisDueDateYear;
+							//					thisDueDateYear+" "+
+							//					thisDueDateHour+":"+
+							//					thisDueDateMinute+":"+
+							//					thisDueDateSecond;
 							aa.print("script271: Setting WF DUE DATE to:"+thisDueDate);
 							
 							editTaskDueDate("Completeness Review",thisDueDate);
