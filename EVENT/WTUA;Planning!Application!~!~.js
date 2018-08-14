@@ -69,7 +69,7 @@ autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Receiv
 
 logDebug("script 257: started");
 if(!appMatch(("Planning/Application/Address/*"))) {
-    include("script257_AppAcceptanceForPln");
+    include("257_AppAcceptanceForPln");
 }
 
   
