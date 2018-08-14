@@ -50,15 +50,15 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitNames) {
                     return ;
                 }
                 recordParentCapId = parents[0];
-                for(var asitName in asitNames) {
-                    var tbl = loadASITable(asitName, recordParentCapId);
+                for(var idx in asitNames) {
+                    var tbl = loadASITable(asitNames[idx], recordParentCapId);
                     if (!tbl) {
-                        logDebug("Parent " + recordParentCapId.getCustomID() + " has no " + asitName + " table");
+                        logDebug("Parent " + recordParentCapId.getCustomID() + " has no " + asitNames[idx] + " table");
                         logDebug("createPPBMPRecord() ended: no ASIT On parent");
                         return ;
                     }
                     
-                    addASITable(asitName, tbl, childCapId);
+                    addASITable(asitNames[idx], tbl, childCapId);
                 }
            
             }
