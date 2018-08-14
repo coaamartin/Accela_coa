@@ -44,7 +44,7 @@
         },
         "action": {
           "requiredDocuments": [
-            "Warranty Work Punchlist"
+            "Warranty Work Punch List" 
           ],
           "requirementType": "STANDARD", 
           "validationMessage": "Warranty Work Punch List is required for Warranty Work Required status"
