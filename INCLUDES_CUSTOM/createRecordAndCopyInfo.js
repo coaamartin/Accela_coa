@@ -40,7 +40,7 @@ if (appMatch(appType[i])) {
                 var capDetails = aa.cap.getCap(capId).getOutput();
                 var appName = capDetails.getSpecialText();
                 var newCapModel = aa.cap.getCap(newId).getOutput().getCapModel();
-                //newCapModel.setSpecialText(appName);
+                newCapModel.setSpecialText(appName);
                 //aa.cap.editCapByPK(newCapModel);
 
                 //Set Description.
