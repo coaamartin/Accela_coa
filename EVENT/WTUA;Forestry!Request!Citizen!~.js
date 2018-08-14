@@ -68,5 +68,7 @@ if (wfTask == "Crew Work" && wfStatus == "Removal") {
 }
 
 // Start Script 27 Create Planting Record
-include("27_Create_Planting_Record");
+if (wfTask == "Inspection Phase" && wfStatus == "Complete" && getAppSpecific("No Replant") != "CHECKED") {
+	include("27_Create_Planting_Record");
+}
 // End Script 27 Create Planting Record
