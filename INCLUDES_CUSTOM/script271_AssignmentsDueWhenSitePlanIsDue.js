@@ -68,13 +68,12 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 							for (i in vThisWorkflowObj) {
 								var vTask = vThisWorkflowObj[i];
 								var vDaysDue = 0;
-								vTask.setDaysDue(vDaysDue);								
-							}
-							
+								vTask.setDaysDue(vDaysDue);
 							editTaskDueDate("Completeness Review",thisDueDate);
 							editTaskDueDate("Traffic Study Manager Review",thisDueDate);
 							editTaskDueDate("Traffic Study Supervisor Review",thisDueDate);
-							editTaskDueDate("Traffic Study Staff Review",thisDueDate);
+							editTaskDueDate("Traffic Study Staff Review",thisDueDate);								
+							}
 						}
 					}
 				}
