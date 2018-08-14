@@ -67,7 +67,8 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 							
 							for (i in vThisWorkflowObj) {
 								var vTask = vThisWorkflowObj[i];
-								vTask.setDaysDue(null);								
+								var vDaysDue = 0;
+								vTask.setDaysDue(vDaysDue);								
 							}
 							
 							editTaskDueDate("Completeness Review",thisDueDate);
