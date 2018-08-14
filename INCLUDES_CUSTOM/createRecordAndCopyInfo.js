@@ -49,7 +49,7 @@ if (appMatch(appType[i])) {
                 var workDescResult = aa.cap.getCapWorkDesByPK(newId);
                 if (workDescResult.getSuccess()) {
                     var workDesObj = workDescResult.getOutput().getCapWorkDesModel();
-                    workDescObj.setDescription(appName + " : " + capDetailsDesc);
+                    workDesObj.setDescription(appName + " : " + capDetailsDesc);
                     aa.cap.editCapWorkDesc(workDescObj);
                 }
             }
