@@ -1,5 +1,5 @@
 // Begin script 27 Create Planting Record
-    if (wfTask == "Inspection Phase" && wfStatus == "Completed" && getAppSpecific("No Replant") == "UNCHECKED") {
+    if (wfTask == "Inspection Phase" && wfStatus == "Completed" && getAppSpecific("No Replant") != "CHECKED") {
         var vPlantRecId;
 
         //Check for inspection and guide sheet item
@@ -22,6 +22,7 @@
                     vGuideSheetArray = getGuideSheetObjects(vInspId);
                     yy = 0;
                     for (yy in vGuideSheetArray) {
+                        vGuideSheetObj = vGuideSheetArray[yy];
                         if (vGuideSheetObj.gsType == "FORESTRY INSPECTOR" && vGuideSheetObj.text == "Removal" && vGuideSheetObj.status == "Yes") {
                             vHasInspAndGuideSheetItem = true;
                             break;
