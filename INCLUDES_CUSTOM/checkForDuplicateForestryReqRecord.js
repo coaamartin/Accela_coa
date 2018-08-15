@@ -9,13 +9,13 @@ try{
 			// check parcel matching
 			var sameParcelCapId=getCapByParcel(appType,capId,sOfReq);
 			if (sameParcelCapId!=false && sameParcelCapId!=null){
-				  var detailedDesc=workDescGet(capId);
-				  updateWorkDesc(String(detailedDesc) + "-Possible duplicate of record " + sameParcelCapId.getCustomID() ,capId);    
+				var detailedDesc= workDescGet(capId) != null ? workDescGet(capId) + '-' : '';
+				updateWorkDesc(String(detailedDesc) + "Possible duplicate of record " + sameParcelCapId.getCustomID() ,capId);    
 			}
 		}else if(sameAddressCapId!=null){
 			 // get the detail description and append the record id to it
-			  var detailedDesc= workDescGet(capId) != null ? workDescGet(capId) : '';
-			  updateWorkDesc(String(detailedDesc) + "-Possible duplicate of record " + sameAddressCapId.getCustomID() ,capId);    
+			  var detailedDesc= workDescGet(capId) != null ? workDescGet(capId) + '-' : '';
+			  updateWorkDesc(String(detailedDesc) + "Possible duplicate of record " + sameAddressCapId.getCustomID() ,capId);    
 		}
 		
 	}
