@@ -126,6 +126,7 @@ function autoCloseWorkflow() {
             emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
             
             setCodeReference("Issued");
+            logDebug('Going to activate Inspection Phase')
             activateTask("Inspection Phase");
             autoCreateInsp = true;//Script 202
             deacSpecInspCheck = true;//Script 205
