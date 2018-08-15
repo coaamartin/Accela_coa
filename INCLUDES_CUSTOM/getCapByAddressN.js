@@ -27,7 +27,7 @@ function getCapByAddressN(ats,capId,sOfRequest){
 			}
 		// loop through related caps
 		for (cappy in capIdArray){
-			if(cappy = capId) {
+			if(capIdArray[cappy] = capId) {
 				continue;	//make sure its not the same record.
 			}
 
