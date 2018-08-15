@@ -51,7 +51,7 @@ if (balanceDue == 0) {
 			aa.cap.updateProject(renewalCapProject);
 		}
 
-		var vEmailTemplate = "TBD LICENSE RENEWAL EMAIL";
+		var vEmailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", "Arborist Contractor License");
 		addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
