@@ -111,7 +111,7 @@ function autoCloseWorkflow() {
     }
 
     //#3
-    if (!matched) {
+    if (ifTracer(!matched, '!matched')) {
         logDebug("match #3");
         recTypesAry = new Array();
         recTypesAry = [ "Building/Permit/No Plans/NA" ];
@@ -119,13 +119,14 @@ function autoCloseWorkflow() {
             matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Submitted", "Permit Issuance", "Issued", "Issued");
         else logDebug("No LP on file.  Not issuing permit");
         
-        if(matched){
+        if(ifTracer(matched, 'match #3 inner criteria')) {
             //send email()
             var lpEmail = getPrimLPEmailByCapId(capId);
             addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
             emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
             
             setCodeReference("Issued");
+            activateTask("Inspection Phase");
             autoCreateInsp = true;//Script 202
             deacSpecInspCheck = true;//Script 205
             
