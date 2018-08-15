@@ -87,8 +87,10 @@ try {
 
 		copyCapDetailInfo(parentCapId, capId);
 
-		copyCapWorkDesInfo(parentCapId, capId);
-
+		if (!appMatch("Building/*/*/Amendment",capId)) {
+			copyCapWorkDesInfo(parentCapId, capId);
+		}
+	
 		//Copy ASI
 		var pASI = [];
 		loadAppSpecific(pASI,parentCapId);
