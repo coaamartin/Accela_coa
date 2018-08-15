@@ -1,2 +1,2 @@
-logDebug('tada');
-aa.print('hello');
+logDebug('ASOSFB - Startig script 26');
+checkForDuplicateForestryReqRecord();

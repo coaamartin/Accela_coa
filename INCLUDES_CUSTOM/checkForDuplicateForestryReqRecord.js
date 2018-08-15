@@ -14,7 +14,7 @@ try{
 			}
 		}else if(sameAddressCapId!=null){
 			 // get the detail description and append the record id to it
-			  var detailedDesc=workDescGet(capId);
+			  var detailedDesc= workDescGet(capId) != null ? workDescGet(capId) : '';
 			  updateWorkDesc(String(detailedDesc) + "-Possible duplicate of record " + sameAddressCapId.getCustomID() ,capId);    
 		}
 		
