@@ -9,7 +9,7 @@
         { colName: 'Abatement #', colValue: capIDString },
         { colnName: 'Type', colValue: AInfo['Abatement Type'] }
     ]
-    */
+    */ 
 function updateAsiTableRow(tableName, columnName, newValue, options) {
     var settings = {
         capId: capId,
