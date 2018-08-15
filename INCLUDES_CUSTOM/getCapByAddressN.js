@@ -27,6 +27,10 @@ function getCapByAddressN(ats,capId,sOfRequest){
 			}
 		// loop through related caps
 		for (cappy in capIdArray){
+			if(cappy = capId) {
+				continue;	//make sure its not the same record.
+			}
+
 			var relcap = aa.cap.getCap(capIdArray[cappy].getCapID()).getOutput();
 			// get cap type
 			reltype = relcap.getCapType().toString();
