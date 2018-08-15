@@ -10,7 +10,7 @@ try{
 			var sameParcelCapId=getCapByParcel(appType,capId,sOfReq);
 			if (sameParcelCapId!=false && sameParcelCapId!=null){
 				var detailedDesc= workDescGet(capId) != null ? workDescGet(capId) + '-' : '';
-				updateWorkDesc(String(detailedDesc) + "Possible duplicate of record " + sameParcelCapId.getCustomID() ,capId);    
+				updateWorkDesc(String(detailedDesc) + "Possible duplicate of record " + sameAddressCapId.getCustomID() ,capId);    
 			}
 		}else if(sameAddressCapId!=null){
 			 // get the detail description and append the record id to it
