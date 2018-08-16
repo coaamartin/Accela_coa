@@ -44,16 +44,20 @@ function script400_WatTapApplicationInspectionAutomation() {
         } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
             if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
+                    var meterNbr = getMeterNumber();
+                    editAppSpecific("Water Meter Number", meterNbr, capId);
                     //get parent
                     parentCapId = getParent();
                     if(ifTracer(parentCapId, 'parent found')) {
                         //make sure parent is a permit (Building/Permit/*/*)
                         parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
                         parentCapTypeString = parentCapScriptModel.getCapType().toString();
-                        if(ifTracer(parentCapTypeString.indexOf('Building/Permit/') > -1, 'parent = Building/Permit/*/*')) {
+                      //  if(ifTracer(parentCapTypeString.indexOf('Building/Permit/') > -1, 'parent = Building/Permit/*/*')) {
                             //there is no water meter number field - make a comment per email from christy dtd 20180605
-                            createCapComment('Water Meter Number: ' + getMeterNumber(), parentCapId);
-                        }
+                       //     createCapComment('Water Meter Number: ' + getMeterNumber(), parentCapId);
+                            //update any parent type Water Meter Number asi per qa testing note dtd 8/16 
+                        editAppSpecific("Water Meter Number", meterNbr, parentCapId);
+                            //   }
                     }
                     
                 } else {    //failed
