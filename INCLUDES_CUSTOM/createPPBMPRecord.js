@@ -43,17 +43,17 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitNames) {
                 rB1ExpResult.setExpStatus("Active");
                 aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
                 
-                var parents = getParents("PublicWorks/Civil Plan/Review/NA")
-                if(!parents || parents.length == 0){
-                    logDebug("**WARN no parents found for record, capId=" + capId + ", altId=" + capIDString);
-                    logDebug("createPPBMPRecord() ended: no parent");
-                    return ;
-                }
-                recordParentCapId = parents[0];
+                // var parents = getParents("PublicWorks/Civil Plan/Review/NA")
+                // if(!parents || parents.length == 0){
+                //     logDebug("**WARN no parents found for record, capId=" + capId + ", altId=" + capIDString);
+                //     logDebug("createPPBMPRecord() ended: no parent");
+                //     return ;
+                // }
+                // recordParentCapId = parents[0];
                 for(var idx in asitNames) {
-                    var tbl = loadASITable(asitNames[idx], recordParentCapId);
+                    var tbl = loadASITable(asitNames[idx], capId);
                     if (!tbl) {
-                        logDebug("Parent " + recordParentCapId.getCustomID() + " has no " + asitNames[idx] + " table");
+                        logDebug("Parent " + capId.getCustomID() + " has no " + asitNames[idx] + " table");
                         logDebug("createPPBMPRecord() ended: no ASIT On parent");
                         return ;
                     }
