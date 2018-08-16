@@ -12,25 +12,5 @@ logDebug("*** BEGIN process_WF_JSON_Rules for CRM (Public Works) ***");
 process_WF_JSON_Rules(capId, wfTask, wfStatus);
 logDebug("*** FINISH process_WF_JSON_Rules for CRM (Public Works) ***");
 
-//Start Logic For Building Workflow Statuses that trigger when comments status updates are published to the shadow record which will push to CRM System
-if (appMatch("PublicWorks/Traffic/Traffic Engineering Request/NA")) {
-
-var parent = getParent();
-
-if(parent){
-	if(matches(wfStatus,"Accepted","Workorder Drafted","Generated","Assigned","Assigned to Supervisor","Draft Work Order")){
-
-		createCapComment(wfComment,parent);
-		updateAppStatus("In Progress","Updated via Script",parent);
-
-
-	}
-
-	if(matches(wfStatus,"Request Complete","Complete","Refer to Code Enforcement","No Change Warranted","Refer to Forestry","Completed","Approved","Denied")){
-
-		createCapComment(wfComment,parent);
-		updateAppStatus("Completed","Updated via Script",parent);
-
-		}
-	}
-}
+//Retreive Custom CRM Logic File
+includesCrmCustomWorkflowRules();

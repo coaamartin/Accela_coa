@@ -35,25 +35,5 @@ logDebug("*** BEGIN process_WF_JSON_Rules for CRM (FIRE) ***");
 process_WF_JSON_Rules(capId, wfTask, wfStatus);
 logDebug("*** FINISH process_WF_JSON_Rules for CRM (Fire) ***");
 
-//Start Logic For Building Workflow Statuses that trigger when comments status updates are published to the shadow record which will push to CRM System
-if (appMatch("Fire/Complaint/NA/NA")||appMatch("Fire/Primary Inspection/NA/NA")||appMatch("Fire/Special Inspection/NA/NA")) {
-
-var parent = getParent();
-if(parent){
-	if(matches(wfStatus,"Research","Violation","In Progress")){
-
-		createCapComment(wfComment,parent);
-		updateAppStatus("In Progress","Updated via Script",parent);
-
-
-}
-
-	if(matches(wfStatus,"Withdrawn","Compliance/Complete","No Violation","Complete","Inactive")){
-
-		createCapComment(wfComment,parent);
-		updateAppStatus("Completed","Updated via Script",parent);
-
-
-		}
-	}
-}
+//Retreive Custom CRM Logic File
+includesCrmCustomWorkflowRules();
