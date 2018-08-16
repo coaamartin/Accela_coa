@@ -45,7 +45,7 @@ if ("Inspection Passed".equals(inspResult)) {
 // end script 352
 
 // start script 356
-if ("Extension - Fee".equals(inspResult)) {
+if (matches(inspResult,"Extension - Fee", "No Show")) {
 		addFee("ENF_HI_05","ENF_HI","FINAL",1,"Y");
 }
 
