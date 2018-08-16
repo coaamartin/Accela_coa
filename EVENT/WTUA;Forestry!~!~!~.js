@@ -11,3 +11,6 @@ logDebug("*** BEGIN process_WF_JSON_Rules for CRM (FORESTRY) ***");
 // execute workflow propagation rules
 process_WF_JSON_Rules(capId, wfTask, wfStatus);
 logDebug("*** FINISH process_WF_JSON_Rules for CRM (FORESTRY) ***");
+
+//Retreive Custom CRM Logic File
+includesCrmCustomWorkflowRules();

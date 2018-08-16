@@ -12,3 +12,5 @@ logDebug("*** BEGIN process_WF_JSON_Rules for CRM (Public Works) ***");
 process_WF_JSON_Rules(capId, wfTask, wfStatus);
 logDebug("*** FINISH process_WF_JSON_Rules for CRM (Public Works) ***");
 
+//Retreive Custom CRM Logic File
+includesCrmCustomWorkflowRules();
