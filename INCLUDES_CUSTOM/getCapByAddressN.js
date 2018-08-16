@@ -27,6 +27,7 @@ function getCapByAddressN(ats,capId,sOfRequest){
 			}
 		// loop through related caps
 		for (cappy in capIdArray){
+			if(capIdArray[cappy].getCustomID() == capId.getCustomID()) { continue; }
 			var relcap = aa.cap.getCap(capIdArray[cappy].getCapID()).getOutput();
 			// get cap type
 			reltype = relcap.getCapType().toString();

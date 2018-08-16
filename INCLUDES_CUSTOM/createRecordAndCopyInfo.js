@@ -40,17 +40,17 @@ if (appMatch(appType[i])) {
                 var capDetails = aa.cap.getCap(capId).getOutput();
                 var appName = capDetails.getSpecialText();
                 var newCapModel = aa.cap.getCap(newId).getOutput().getCapModel();
-                //newCapModel.setSpecialText(appName);
+                newCapModel.setSpecialText(appName);
                 //aa.cap.editCapByPK(newCapModel);
 
-                //Set Description.
+                //Set Description = app name + description.
                 var capView = aa.cap.getCapViewByID(capId).getOutput();
                 var capDetailsDesc = capView.getCapWorkDesModel().getDescription();
                 var workDescResult = aa.cap.getCapWorkDesByPK(newId);
                 if (workDescResult.getSuccess()) {
                     var workDesObj = workDescResult.getOutput().getCapWorkDesModel();
-                    workDesObj.setDescription(capDetailsDesc);
-                    aa.cap.editCapWorkDes(newCapModel + workDesObj);
+                    workDesObj.setDescription(appName + " : " + capDetailsDesc);
+                    aa.cap.editCapWorkDes(workDesObj);
                 }
             }
         }
@@ -58,3 +58,4 @@ if (appMatch(appType[i])) {
 }
 }
 }
+
