@@ -72,8 +72,6 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 		editTaskDueDate("Traffic Study Supervisor Review",thisDueDate);
 		editTaskDueDate("Traffic Study Staff Review",thisDueDate);
 		}
-}
-		
 	}
 	catch(err){
 		showMessage = true;
