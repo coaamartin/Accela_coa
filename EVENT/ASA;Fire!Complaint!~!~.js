@@ -2,7 +2,7 @@
 //script 186 & 187	Schedule Fire Inspection on submission
 //
 //Record Types:		Fire/Complaint/*/*
-//Event: 			CTRCA
+//Event: 			ASA
 //Desc:				
 //IRSA
 //	 	criteria:	If the record is submitted from ACA
@@ -27,6 +27,9 @@ if (x && x.length > 0) {
 	{
 		scheduleInspection("FD Complaint Inspection",0, user);
 		assignCap(user);
+		assignTask("Assign Complaint", user);
+		closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
+		activateTask("Inspection");
 	}
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
