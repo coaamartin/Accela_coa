@@ -8,7 +8,7 @@ Building/Permit/~/~
 Email template created "BLD RESUBMITTAL NOTIFICATION"
 necessary vars:  $$wfTask$$, $$wfComment$$
 */
-
+logDebug("Start executing 60_ResubmittalRequestedNotification");
 var targetStatusArray = ["Resubmittal Requested"];
 if (exists(wfStatus, targetStatusArray))
 {
@@ -40,4 +40,4 @@ if (exists(wfStatus, targetStatusArray))
 		//update record status
 		updateAppStatus("Resubmittal Requested", "");
 }
-
+logDebug("Finished executing 60_ResubmittalRequestedNotification");
