@@ -70,7 +70,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		thisLicExpOb = vLicenseObj.b1Exp
 		expUnit = thisLicExpOb.getExpUnit()
 		expInt = thisLicExpOb.getExpInterval()
-		if (expUnit == "Months") {
+		if (expUnit == "MONTHS") {
 			newExpDate = dateAddMonths(null, expInt);
 			} 
 		vLicenseObj.setExpiration(newExpDate);
