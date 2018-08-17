@@ -67,6 +67,15 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		vLicenseObj = new licenseObject(null, vLicenseID);
 		vLicenseObj.setStatus("Active");
 
+		thisLicExpOb = vLicenseObj.b1Exp
+		expUnit = thisLicExpOb.getExpUnit()
+		expInt = thisLicExpOb.getExpInterval()
+		if (expUnit == "Months") {
+			newExpDate = dateAddMonths(null, expInt);
+			} 
+		vLicenseObj.setExpiration(newExpDate);
+
+		
 		//Update License Workflow
 		tmpCap = capId;
 		capId = vLicenseID;
