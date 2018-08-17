@@ -12,7 +12,7 @@ logDebug("Start executing 60_ResubmittalRequestedNotification");
 var targetStatusArray = ["Resubmittal Requested"];
 if (exists(wfStatus, targetStatusArray))
 {
-		var contacts = "Applicant,Contractor";
+		var contacts = "Applicant,Contractor(s)";
 		var emailtemplate = "BLD RESUBMITTAL NOTIFICATION";
 		//build ACA URL
 		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
