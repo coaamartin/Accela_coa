@@ -14,6 +14,7 @@
 function script271_AssignmentsDueWhenSitePlanIsDue() {
 	aa.print("script271_AssignmentsDueWhenSitePlanIsDue started.");
 	try{
+		var thisDueDate;
 		if ( wfTask == "Application Submittal" && wfStatus == "Accepted" ) {
 			var thisParentCap = getParent();
 			if (thisParentCap) {
@@ -49,7 +50,7 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 							thisDueDateDay = thisDueDateDay.substr(thisDueDateDay.length-2);
 							var thisDueDateYear = "00"+thisAADueDate.year;
 							thisDueDateYear = thisDueDateYear.substr(thisDueDateYear.length-4);
-							var thisDueDate =	thisDueDateMonth+"/"+
+							thisDueDate =	thisDueDateMonth+"/"+
 												thisDueDateDay+"/"+
 												thisDueDateYear;
 							aa.print("script271: Setting WF DUE DATE to:"+thisDueDate);
@@ -69,8 +70,8 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 		
 		if (wfTask == "Completeness Review" && wfStatus == "Complete") {
 			editTaskDueDate("Traffic Study Manager Review",thisDueDate);
-		editTaskDueDate("Traffic Study Supervisor Review",thisDueDate);
-		editTaskDueDate("Traffic Study Staff Review",thisDueDate);
+			editTaskDueDate("Traffic Study Supervisor Review",thisDueDate);
+			editTaskDueDate("Traffic Study Staff Review",thisDueDate);
 		}
 	}
 	catch(err){
