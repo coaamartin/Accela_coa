@@ -60,15 +60,20 @@ function script271_AssignmentsDueWhenSitePlanIsDue() {
 								vTask.setDaysDue(vDaysDue);						
 							}
 							editTaskDueDate("Completeness Review",thisDueDate);
-							editTaskDueDate("Traffic Study Manager Review",thisDueDate);
-							editTaskDueDate("Traffic Study Supervisor Review",thisDueDate);
-							editTaskDueDate("Traffic Study Staff Review",thisDueDate);		
 						}
 					}
 				}
 			}
 			else aa.print("script271: No parent site plan found!");
 		}
+		
+		if (wfTask == "Completeness Review" && wfStatus == "Complete") {
+			editTaskDueDate("Traffic Study Manager Review",thisDueDate);
+		editTaskDueDate("Traffic Study Supervisor Review",thisDueDate);
+		editTaskDueDate("Traffic Study Staff Review",thisDueDate);
+		}
+}
+		
 	}
 	catch(err){
 		showMessage = true;
