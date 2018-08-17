@@ -22,6 +22,9 @@ if (parentCapId != null && vGoodToRenew) {
 	//Copy ASIT from license to renewal
 	copyASITables(parentCapId,capId);
 
+	// Copy LP
+	copyLicensedProf(parentCapId, capId);
+	
 	//Copy Contacts from license to renewal
 	copyContacts3_0(parentCapId,capId);
 	
