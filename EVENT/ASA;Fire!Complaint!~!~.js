@@ -17,11 +17,11 @@ logDebug("Script 186/187 START");
 
 var x = new Array;
 inspUserObj = null;
-x = getGISBufferInfo("AURORACO","Fire Response Zones Run Order","0.01","BATTALION_FIRSTDUE");
+x = getGISBufferInfo("AURORACO","Fire Response Zones Run Order","0.01","FIRSTDUE");
 logDebug("x =" + x);
 if (x && x.length > 0) {
-	logDebug(x[0]["BATTALION_FIRSTDUE"]);
-	var refUser = x[0]["BATTALION_FIRSTDUE"];
+	logDebug(x[0]["FIRSTDUE"]);
+	var refUser = x[0]["FIRSTDUE"];
 	var user = lookup("FIRE STATION", refUser);
 	if (user != null && user != "")
 	{
