@@ -27,6 +27,8 @@ if (x && x.length > 0) {
 	{
 		scheduleInspection("FD Complaint Inspection",0, user);
 		assignCap(user);
+		assignTask("Assign Complaint", user);
+		closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
 	}
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
@@ -40,3 +42,8 @@ else{
 
 logDebug("Script 186 END");
 aa.sendMail("eric@esilverliningsolutions.com", "eric@esilverliningsolutions.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+
+
+
+
+logDebug("Script 187 END");
