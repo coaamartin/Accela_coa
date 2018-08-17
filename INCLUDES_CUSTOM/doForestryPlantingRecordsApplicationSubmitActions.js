@@ -15,7 +15,7 @@ Notes:
 */
 
 function doForestryPlantingRecordsApplicationSubmitActions(inspectionTypeForestrySiteReview, workflowTask, workflowStatusArray, workflowComment, activateTaskName,treeInformaionCustomListName) {
-    scheduleForestryRequestPlantingSiteReview(inspectionTypeForestrySiteReview);
+   // scheduleForestryRequestPlantingSiteReview(inspectionTypeForestrySiteReview);
     closeTreePlantingIntakeTask(workflowTask, workflowStatusArray, workflowComment, activateTaskName);
     ////TODO:
     ///populateTreeInformationCustomList(treeInformaionCustomListName);

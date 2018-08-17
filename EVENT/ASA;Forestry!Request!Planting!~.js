@@ -1,8 +1,8 @@
 //Script 60 - User story 3
 
-createAndAssignPendingInspection("FT_TREE_PMT", "Forestry Site Review");
+//createAndAssignPendingInspection("FT_TREE_PMT", "Forestry Site Review");
 
-
+scheduleForestryRequestPlantingSiteReview("Forestry Site Review");
 /*
 Script ID-Trees from GIS:   
 Paul H. Rose
