@@ -68,3 +68,7 @@ Notes:
 */
 
 setCodeReference("Issued");
+
+
+//Script ID#60  Resubmittal Requested Notification 
+include("60_ResubmittalRequestedNotification");
