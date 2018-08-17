@@ -25,17 +25,17 @@ if (x && x.length > 0) {
 	var user = lookup("FIRE STATION", refUser);
 	if (user != null && user != "")
 	{
-		scheduleInspection("Fire Complaint",0, user);
+		scheduleInspection("FD Complaint Inspection",0, user);
 		assignCap(user);
 	}
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
-		scheduleInspection("Fire Complaint",0);
+		scheduleInspection("FD Complaint Inspection",0);
 	}
 }
 else{
 	comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
-	scheduleInspection("Fire Complaint",0);
+	scheduleInspection("FD Complaint Inspection",0);
 }
 
 logDebug("Script 186 END");
