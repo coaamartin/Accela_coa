@@ -49,10 +49,6 @@ try {
 
 	if (parentCapId) {
 
-
-		// Set Application ID value to parentCapId, defect 36
-		editAppSpecific4ACA("Application ID", parentCapId.getCustomID());
-
 		parentCap = aa.cap.getCapViewBySingle4ACA(parentCapId);
 
 		//Copy Address
@@ -102,6 +98,9 @@ try {
 		
 		copyAppSpecificTableForLic(parentCapId, capId);
 
+		// Set Application ID value to parentCapId, defect 36
+		editAppSpecific4ACA("Application ID", parentCapId.getCustomID());
+		
 		aa.env.setValue("CapModel", cap);
 	}
 } catch (err) {
