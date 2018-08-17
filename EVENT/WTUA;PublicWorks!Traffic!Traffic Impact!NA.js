@@ -16,3 +16,10 @@ Functional Area : Records
 if (wfStatus=="Resubmittal Requested"){
 	deactivateTask(wfTask);
 }
+
+//script 271 - set due dates on traffic review tasks
+if (wfTask == "Completeness Review" && wfStatus == "Complete") {
+	editTaskDueDate("Traffic Study Manager Review",thisDueDate);
+	editTaskDueDate("Traffic Study Supervisor Review",thisDueDate);
+	editTaskDueDate("Traffic Study Staff Review",thisDueDate);	
+}
