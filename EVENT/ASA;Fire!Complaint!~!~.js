@@ -30,6 +30,7 @@ if (x && x.length > 0) {
 		assignTask("Assign Complaint", user);
 		closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
 		activateTask("Inspection");
+		assignTask("Inspection", user);
 	}
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
