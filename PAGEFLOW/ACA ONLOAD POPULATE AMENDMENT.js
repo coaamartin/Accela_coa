@@ -49,6 +49,10 @@ try {
 
 	if (parentCapId) {
 
+
+		// Set Application ID value to parentCapId, defect 36
+		editAppSpecific4ACA("Application ID", parentCapId.getCustomID());
+
 		parentCap = aa.cap.getCapViewBySingle4ACA(parentCapId);
 
 		//Copy Address
