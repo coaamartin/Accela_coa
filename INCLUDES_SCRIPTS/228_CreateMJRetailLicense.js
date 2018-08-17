@@ -109,7 +109,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
 
 		var vRParams = aa.util.newHashtable();
-		addParameter(vRParams, "p1Value", vLicenseID.getCustomID());
+		addParameter(vRParams, "Record_ID", vLicenseID.getCustomID());
 
 		//does $$acadocdownloadurl$$ need to be added here?
 		tmpCap = capId;
