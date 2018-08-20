@@ -53,6 +53,7 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 				
 				for (i in guideSheetsAry[g].info){
 					if (guideSheetsAry[g].info[i] == asitFieldName) {
+						logDebug("Found the correct ASI: " + guideSheetsAry[g].info[i];)
 						asiFieldValue = guideSheetsAry[g].info[i];
 					}
 				}
