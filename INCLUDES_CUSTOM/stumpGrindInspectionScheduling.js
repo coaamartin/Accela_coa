@@ -14,6 +14,7 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 
 	if (inspType == inspectionType) {
 		var resultMatched = false;
+		var asiFieldValue = null;		
 		for (s in inspectionResultArray) {
 			if (inspResult == inspectionResultArray[s]) {
 				resultMatched = true;
@@ -25,7 +26,7 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 			return false;
 		}
 
-		//get checkListItemName value:
+		//get checkListItemName value and asitFieldName value:
 		var guideSheetsAry = getGuideSheetObjects(inspId);
 		if (!guideSheetsAry || guideSheetsAry.length == 0) {
 			logDebug("**WARN getGuideSheetObjects failed, capId=" + capId);
@@ -33,42 +34,22 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 			for (g in guideSheetsAry) {
 				if (guideSheetsAry[g].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
 					resultMatched = (String(guideSheetsAry[g].status).toLowerCase() == "yes");
+					logDebug("Successfully retrieved checklist and item name");
+					guideSheetsAry[g].loadInfo();
+					for(i in guideSheetsAry[g].info) {
+						if(guideSheetsAry[g].info[i] != null) {
+							asiFieldValue = guideSheetsAry[g].info[i];
+						} else {
+							asiFieldValue = "NOT CHECKED";
+						}
+					}
+					aa.print(asitFieldName + "=" + asiFieldValue);
 				}
 			}
 		}
 
 		if (!resultMatched) {
 			return false;
-		} else {			
-			logDebug("Successfully retrieved checklist and item name");
-		}
-
-		var asiFieldValue = null;
-		
-		for (g in guideSheetsAry) {
-			if (guideSheetsAry[g].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
-				logDebug(guideSheetsAry[g].validInfo);
-				guideSheetsAry[g].loadInfo();
-				logDebug(guideSheetsAry[g].validInfo);
-				
-				for(i in guideSheetsAry[g].info) {
-					asiFieldValue = guideSheetsAry[g].info[i];
-				}
-				/*
-				if (useAppSpecificGroupName) {
-					var olduseAppSpecificGroupName = useAppSpecificGroupName;
-					useAppSpecificGroupName = false;
-					asiFieldValue = getAppSpecific(asitFieldName);
-					useAppSpecificGroupName = olduseAppSpecificGroupName;
-				} else {
-					asiFieldValue = AInfo[asitFieldName];
-				}
-				*/
-				
-				logDebug("asiFieldValue = " + asiFieldValue);
-				logDebug("asitFieldName = " + asitFieldName);
-				aa.print(asitFieldName + "=" + asiFieldValue);
-			}
 		}
 	
 		var inspToSched = null;
