@@ -83,8 +83,8 @@ function updateWorkflowWithPlantTreeStatus(chkWfTaskName, newWfStatus, schedInsp
 					aa.workflow.handleDisposition(capId, tasks[t].getStepNumber(), newWfStatus, aa.date.getCurrentDate(), "by script, 1 day past due", "by script, 1 day past due",
 							aa.person.getCurrentUser().getOutput(), "B");
 
-					var dateToSched = dateAdd(now, 5, useWorkingDays);
-					//dateToSched = nextWorkDay(dateToSched);
+					var dateToSched = dateAdd(now, 4);
+					dateToSched = nextWorkDay(dateToSched);
 					scheduleInspectDate(schedInspeType, dateToSched);
 					logDebug("wf task processed, and new inspection scheduled on " + dateToSched);
 				}//1 day past
