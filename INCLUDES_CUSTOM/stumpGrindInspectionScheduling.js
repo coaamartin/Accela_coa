@@ -39,16 +39,26 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 
 		if (!resultMatched) {
 			return false;
+		} else {			
+			logDebug("Successfully retrieved checklist and item name");
 		}
 
 		var asiFieldValue;
+		
+		for (g in guideSheetsAry) {
+				if (guideSheetsAry[g].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
+					guideSheetsAry[g].loadInfo();
+				}
+			}
+		
+		
 		if (useAppSpecificGroupName) {
 			var olduseAppSpecificGroupName = useAppSpecificGroupName;
 			useAppSpecificGroupName = false;
 			asiFieldValue = getAppSpecific(asitFieldName);
 			useAppSpecificGroupName = olduseAppSpecificGroupName;
 		} else {
-		asiFieldValue = AInfo[asitFieldName];
+			asiFieldValue = AInfo[asitFieldName];
 		}
 		logDebug("asiFieldValue = " + asiFieldValue);
 		logDebug("asitFieldName = " + asitFieldName);
