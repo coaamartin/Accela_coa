@@ -36,7 +36,6 @@ var capId = null;
 
 try {
 	updateWorkflowWithPlantTreeStatus("Property Owner Response", "Plant Tree", "Planting");
-	logDebug("Date to Schedule" + dateToSched);
 } catch (ex) {
 	logDebug("**ERROR batch failed, error: " + ex);
 }
@@ -84,11 +83,18 @@ function updateWorkflowWithPlantTreeStatus(chkWfTaskName, newWfStatus, schedInsp
 					aa.workflow.handleDisposition(capId, tasks[t].getStepNumber(), newWfStatus, aa.date.getCurrentDate(), "by script, 1 day past due", "by script, 1 day past due",
 							aa.person.getCurrentUser().getOutput(), "B");
 
-					var dateToSched = dateAdd(now, 5, useWorkingDays);
+					//var dateToSched = dateAdd(now, 5, useWorkingDays);
+					
+					var dateToSched = now;
+					var i = 0;
+					while(i<5) {
+						dateToSched = nextWorkDay(dateToSched);
+						i++;
+					}
+					
 					//dateToSched = nextWorkDay(dateToSched);
 					scheduleInspectDate(schedInspeType, dateToSched);
 					logDebug("wf task processed, and new inspection scheduled on " + dateToSched);
-					return dateToSched;
 				}//1 day past
 			}//task matched and is active
 		}//for all tasks
