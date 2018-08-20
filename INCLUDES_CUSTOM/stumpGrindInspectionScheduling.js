@@ -42,14 +42,16 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 		}
 
 		var asiFieldValue = null;
-		if (useAppSpecificGroupName) {
+		/*if (useAppSpecificGroupName) {
 			var olduseAppSpecificGroupName = useAppSpecificGroupName;
 			useAppSpecificGroupName = false;
 			asiFieldValue = getAppSpecific(asitFieldName);
 			useAppSpecificGroupName = olduseAppSpecificGroupName;
-		} else {
+		} else {*/
 			asiFieldValue = AInfo[asitFieldName];
-		}
+		//}
+		logDebug("asiFieldValue = " + asiFieldValue);
+		logDebug("asitFieldName = " + asitFieldName);
 		aa.print(asitFieldName + "=" + asiFieldValue);
 		var inspToSched = null;
 		if (asiFieldValue && asiFieldValue != null && asiFieldValue == "CHECKED") {
