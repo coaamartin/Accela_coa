@@ -11,6 +11,7 @@
  * @returns {Boolean}
  */
 function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, checkListItemName, asitFieldName, schedTypeIfChecked, schedTypeIfNotChecked, department) {
+	logDebug("Begin Script 379");
 
 	if (inspType == inspectionType) {
 		var resultMatched = false;
@@ -34,7 +35,6 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 			for (g in guideSheetsAry) {
 				if (guideSheetsAry[g].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
 					resultMatched = (String(guideSheetsAry[g].status).toLowerCase() == "yes");
-					logDebug("Successfully retrieved checklist and item name");
 					guideSheetsAry[g].loadInfo();
 					for(i in guideSheetsAry[g].info) {
 						if(guideSheetsAry[g].info[i] != null) {
@@ -43,6 +43,7 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 							asiFieldValue = "NOT CHECKED";
 						}
 					}
+					logDebug("Successfully retrieved checklist and ASI value");
 					aa.print(asitFieldName + "=" + asiFieldValue);
 				}
 			}
@@ -55,8 +56,10 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 		var inspToSched = null;
 		if (asiFieldValue && asiFieldValue != null && asiFieldValue == "CHECKED") {
 			inspToSched = schedTypeIfChecked;
+			logDebug("Scheduled inspection type " + schedTypeIfChecked);
 		} else {
 			inspToSched = schedTypeIfNotChecked;
+			logDebug("Scheduled inspection type " + schedTypeIfNotChecked);
 		}
 
 		//Schedule Inspection and assign to department
@@ -74,8 +77,10 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 		user.setLastName("");
 		user.setUserID("");
 		var schedResult = aa.inspection.scheduleInspection(capId, user, aa.date.parseDate(dateAdd(null, 0)), null, inspToSched, "Scheduled via Script");
+		
 	} else {
 		return false;
 	}
+	logDebug("Finished Script 379");
 	return true;
 }
