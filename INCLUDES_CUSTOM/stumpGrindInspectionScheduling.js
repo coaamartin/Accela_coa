@@ -41,14 +41,14 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 			return false;
 		}
 
-		var asiFieldValue = null;
+		var asiFieldValue;
 		/*if (useAppSpecificGroupName) {
 			var olduseAppSpecificGroupName = useAppSpecificGroupName;
 			useAppSpecificGroupName = false;
 			asiFieldValue = getAppSpecific(asitFieldName);
 			useAppSpecificGroupName = olduseAppSpecificGroupName;
 		} else {*/
-			asiFieldValue = AInfo[asitFieldName];
+		asiFieldValue = AInfo[asitFieldName];
 		//}
 		logDebug("asiFieldValue = " + asiFieldValue);
 		logDebug("asitFieldName = " + asitFieldName);
