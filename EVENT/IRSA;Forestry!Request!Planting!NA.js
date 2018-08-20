@@ -17,7 +17,7 @@ Notes:
 	- Inspection correct result is Passed (Complete not found)
 */
 
-stumpGrindInspectionScheduling("Non-warranty Inspection", [ "Passed" ], "Grind Stump", "Priority 1 Stump Grind", "Priority 1 Stump Grind", "Priority 2 Stump Grind","FORESTRY/NA/NA/NA/NA/FT_FC");
+stumpGrindInspectionScheduling("Non-warranty Inspection", [ "Passed" ], "Grind Stump", "Priority 1 Stump Grind?", "Priority 1 Stump Grind", "Priority 2 Stump Grind","FORESTRY/NA/NA/NA/NA/FT_FC");
 
 
 logDebug('Script 154 starting');
