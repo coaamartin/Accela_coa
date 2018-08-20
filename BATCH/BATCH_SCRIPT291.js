@@ -82,17 +82,14 @@ function updateWorkflowWithPlantTreeStatus(chkWfTaskName, newWfStatus, schedInsp
 					//for some reason branchTask() did not work?!
 					aa.workflow.handleDisposition(capId, tasks[t].getStepNumber(), newWfStatus, aa.date.getCurrentDate(), "by script, 1 day past due", "by script, 1 day past due",
 							aa.person.getCurrentUser().getOutput(), "B");
-
-					//var dateToSched = dateAdd(now, 5, useWorkingDays);
 					
+					//schedule inspection in 5 working days
 					var dateToSched = now;
 					var i = 0;
-					while(i<5) {
+					while(i < 5) {
 						dateToSched = nextWorkDay(dateToSched);
 						i++;
 					}
-					
-					//dateToSched = nextWorkDay(dateToSched);
 					scheduleInspectDate(schedInspeType, dateToSched);
 					logDebug("wf task processed, and new inspection scheduled on " + dateToSched);
 				}//1 day past
