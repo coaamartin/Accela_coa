@@ -1,6 +1,7 @@
 
 function cancelForestryInspection(workFlowTask, workflowStatusArray, inspTypeToCancel) {
-
+	logDebug("Begin Script 377");
+	logDebug(workflowStatusArray);
 	if (wfTask == workFlowTask) {
 
 		var statusMatch = false;
