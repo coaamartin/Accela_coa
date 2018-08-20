@@ -52,14 +52,9 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 				logDebug(guideSheetsAry[g].validInfo);
 				
 				for(i in guideSheetsAry[g].info) {
-					logDebug(guideSheetsAry[g].info[i]);
-					
-					if(guideSheetsAry[g].info[i] == asitFieldName) {
-						logDebug("Found the correct ASI: " + guideSheetsAry[g].item.getAsiName());
-						asiFieldValue = guideSheetsAry[g].item.getAttributeValue();
-					}
+					asiFieldValue = guideSheetsAry[g].info[i];
 				}
-				
+				/*
 				if (useAppSpecificGroupName) {
 					var olduseAppSpecificGroupName = useAppSpecificGroupName;
 					useAppSpecificGroupName = false;
@@ -68,6 +63,8 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 				} else {
 					asiFieldValue = AInfo[asitFieldName];
 				}
+				*/
+				
 				logDebug("asiFieldValue = " + asiFieldValue);
 				logDebug("asitFieldName = " + asitFieldName);
 				aa.print(asitFieldName + "=" + asiFieldValue);
