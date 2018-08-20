@@ -47,9 +47,9 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 		
 		for (g in guideSheetsAry) {
 			if (guideSheetsAry[g].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
-				logDebug(guideSheeysAry[g].validInfo);
+				logDebug(guideSheetsAry[g].validInfo);
 				guideSheetsAry[g].loadInfo();
-				logDebug(guideSheeysAry[g].validInfo);
+				logDebug(guideSheetsAry[g].validInfo);
 				
 				if (useAppSpecificGroupName) {
 					var olduseAppSpecificGroupName = useAppSpecificGroupName;
