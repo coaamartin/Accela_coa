@@ -51,6 +51,9 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 				guideSheetsAry[g].loadInfo();
 				logDebug(guideSheetsAry[g].validInfo);
 				
+				asiFieldValue = guideSheetsAry[g].info[asitFieldName];
+				
+				
 				if (useAppSpecificGroupName) {
 					var olduseAppSpecificGroupName = useAppSpecificGroupName;
 					useAppSpecificGroupName = false;
