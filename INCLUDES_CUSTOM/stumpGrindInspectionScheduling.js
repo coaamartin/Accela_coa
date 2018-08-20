@@ -51,11 +51,9 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 				guideSheetsAry[g].loadInfo();
 				logDebug(guideSheetsAry[g].validInfo);
 				
-				for (i in guideSheetsAry[g].info){
-					if (guideSheetsAry[g].info[i] == asitFieldName) {
-						logDebug("Found the correct ASI: " + guideSheetsAry[g].info[i]);
-						asiFieldValue = guideSheetsAry[g].info[i];
-					}
+				if(guideSheetsAry[g].item.getAsiName() == asitFieldName) {
+					logDebug("Found the correct ASI: " + guideSheetsAry[g].item.getAsiName());
+					asiFieldValue = guideSheetsAry[g].item.getAttributeValue();
 				}
 				
 				if (useAppSpecificGroupName) {
