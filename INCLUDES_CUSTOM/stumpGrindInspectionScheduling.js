@@ -52,6 +52,8 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 				logDebug(guideSheetsAry[g].validInfo);
 				
 				for(i in guideSheetsAry[g].info) {
+					logDebug(guideSheetsAry[g].info[i]);
+					
 					if(guideSheetsAry[g].info[i] == asitFieldName) {
 						logDebug("Found the correct ASI: " + guideSheetsAry[g].item.getAsiName());
 						asiFieldValue = guideSheetsAry[g].item.getAttributeValue();
