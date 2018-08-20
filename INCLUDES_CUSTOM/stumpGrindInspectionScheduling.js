@@ -46,23 +46,23 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 		var asiFieldValue;
 		
 		for (g in guideSheetsAry) {
-				if (guideSheetsAry[g].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
-					guideSheetsAry[g].loadInfo();
+			if (guideSheetsAry[g].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
+				guideSheetsAry[g].loadInfo();
+				
+				if (useAppSpecificGroupName) {
+					var olduseAppSpecificGroupName = useAppSpecificGroupName;
+					useAppSpecificGroupName = false;
+					asiFieldValue = getAppSpecific(asitFieldName);
+					useAppSpecificGroupName = olduseAppSpecificGroupName;
+				} else {
+					asiFieldValue = AInfo[asitFieldName];
 				}
+				logDebug("asiFieldValue = " + asiFieldValue);
+				logDebug("asitFieldName = " + asitFieldName);
+				aa.print(asitFieldName + "=" + asiFieldValue);
 			}
-		
-		
-		if (useAppSpecificGroupName) {
-			var olduseAppSpecificGroupName = useAppSpecificGroupName;
-			useAppSpecificGroupName = false;
-			asiFieldValue = getAppSpecific(asitFieldName);
-			useAppSpecificGroupName = olduseAppSpecificGroupName;
-		} else {
-			asiFieldValue = AInfo[asitFieldName];
 		}
-		logDebug("asiFieldValue = " + asiFieldValue);
-		logDebug("asitFieldName = " + asitFieldName);
-		aa.print(asitFieldName + "=" + asiFieldValue);
+	
 		var inspToSched = null;
 		if (asiFieldValue && asiFieldValue != null && asiFieldValue == "CHECKED") {
 			inspToSched = schedTypeIfChecked;
