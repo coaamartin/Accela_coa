@@ -52,7 +52,7 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 				logDebug(guideSheetsAry[g].validInfo);
 				
 				for (i in guideSheetsAry[g].info){
-					if (guideSheetsAry[g].info[i] == asitFieldName {
+					if (guideSheetsAry[g].info[i] == asitFieldName) {
 						asiFieldValue = guideSheetsAry[g].info[i];
 					}
 				}
