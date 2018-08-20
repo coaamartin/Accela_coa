@@ -43,7 +43,7 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 			logDebug("Successfully retrieved checklist and item name");
 		}
 
-		var asiFieldValue;
+		var asiFieldValue = null;
 		
 		for (g in guideSheetsAry) {
 			if (guideSheetsAry[g].gsType == "FORESTRY INSPECTOR" && guideSheetsAry[g].text == checkListItemName) {
@@ -51,8 +51,11 @@ function stumpGrindInspectionScheduling(inspectionType, inspectionResultArray, c
 				guideSheetsAry[g].loadInfo();
 				logDebug(guideSheetsAry[g].validInfo);
 				
-				asiFieldValue = guideSheetsAry[g].info[asitFieldName];
-				
+				for (i in guideSheetsAry[g].info){
+					if (guideSheetsAry[g].info[i] == asitFieldName {
+						asiFieldValue = guideSheetsAry[g].info[i];
+					}
+				}
 				
 				if (useAppSpecificGroupName) {
 					var olduseAppSpecificGroupName = useAppSpecificGroupName;
