@@ -27,7 +27,7 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
         // update review comments
 		//Specs say to check for Resubmital requested,but only prelminary plat has this status
 		var updateCustField = true;
-		if(appMatch("Planning/Application/Preliminary Plat/NA") && !isHistTaskStatus("Review Distribution", "Resubmittal Requested")) updateCustField = false;
+		//if(appMatch("Planning/Application/Preliminary Plat/NA") && !isHistTaskStatus("Review Distribution", "Resubmittal Requested")) updateCustField = false;
 		
         if(updateCustField){
             var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
@@ -71,7 +71,7 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
             // update review comments
 		    //Specs say to check for Resubmital requested,but only prelminary plat has this status
 		    var updateCustField = true;
-		    if(appMatch("Planning/Application/Preliminary Plat/NA") && !isHistTaskStatus("Review Distribution", "Resubmittal Requested")) updateCustField = false;
+		    //if(appMatch("Planning/Application/Preliminary Plat/NA") && !isHistTaskStatus("Review Distribution", "Resubmittal Requested")) updateCustField = false;
 		    
             if(updateCustField){
                 var revdDate = aa.date.parseDate(dateAddHC2("",15, true));
@@ -123,7 +123,7 @@ function script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2(){
                 // update review comments
 		        //Specs say to check for Resubmital requested,but only prelminary plat has this status
 		        var updateCustField = true;
-		        if(appMatch("Planning/Application/Preliminary Plat/NA") && !isHistTaskStatus("Review Distribution", "Resubmittal Requested")) updateCustField = false;
+		        //if(appMatch("Planning/Application/Preliminary Plat/NA") && !isHistTaskStatus("Review Distribution", "Resubmittal Requested")) updateCustField = false;
 		        
                 if(updateCustField){
                     var revdDate = aa.date.parseDate(dateAddHC2("",10, true));
