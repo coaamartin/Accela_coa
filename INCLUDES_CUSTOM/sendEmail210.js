@@ -39,13 +39,13 @@ function sendEmail210(){
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
 
-	var sent = aa.document.sendEmailByTemplateName("noreply@aurora.gov", toEmail, "", emailTemplate, eParams, files);
+	emailWithReportLinkASync(toEmail, emailTemplate, eParams, "", "", "N", "");
+		
+	//var sent = aa.document.sendEmailByTemplateName("noreply@aurora.gov", toEmail, "", emailTemplate, eParams, files);
+	//if (!sent) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 	//emailContacts(toEmail, emailTemplate, eParams, "", "");
 	//sendNotification("noreply@aurora.gov", toEmail, "", emailTemplate, eParams, "", capId);
-	
 	//var sendResult = sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplate,eParams,"");
-	
-	if (!sent) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 	
 	/*
 	if (!sent.getSuccess()) {
@@ -53,4 +53,8 @@ function sendEmail210(){
 		return false;
 	}
 	*/
+	
+	
+	
+	
 }
