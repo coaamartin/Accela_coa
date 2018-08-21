@@ -40,8 +40,13 @@ function sendEmail210(){
 	addParameter(eParams, "$$ApplicationName$$", appName);
 
 	//var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplate, eParams, files);
-	//var sent = emailContacts(toEmail, emailTemplate, eParams, "", "");
-	sendNotification("noreply@aurora.gov", toEmail, "", emailTemplate, eParams, "", capID);
+	//emailContacts(toEmail, emailTemplate, eParams, "", "");
+	//sendNotification("noreply@aurora.gov", toEmail, "", emailTemplate, eParams, "", capId);
+	
+	var sendResult = sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplate,eParams,"",capId);
+	
+	if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+	
 	/*
 	if (!sent.getSuccess()) {
 		logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
