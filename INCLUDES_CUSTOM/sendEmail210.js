@@ -9,8 +9,8 @@ function sendEmail210(){
 	}
 	var toEmail = applicant.getEmail();
 	var files = new Array();
-	// use the correct parameters related to the email template provided + wfComment
 	
+	// use the correct parameters related to the email template provided + wfComment
 	adResult = aa.address.getAddressByCapId(capId).getOutput(); 
 			for(x in adResult)
 			{
@@ -39,22 +39,6 @@ function sendEmail210(){
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
 
+	//send email to applicant, no report included
 	emailWithReportLinkASync(toEmail, emailTemplate, eParams, "", "", "N", "");
-		
-	//var sent = aa.document.sendEmailByTemplateName("noreply@aurora.gov", toEmail, "", emailTemplate, eParams, files);
-	//if (!sent) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-	//emailContacts(toEmail, emailTemplate, eParams, "", "");
-	//sendNotification("noreply@aurora.gov", toEmail, "", emailTemplate, eParams, "", capId);
-	//var sendResult = sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplate,eParams,"");
-	
-	/*
-	if (!sent.getSuccess()) {
-		logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-		return false;
-	}
-	*/
-	
-	
-	
-	
 }
