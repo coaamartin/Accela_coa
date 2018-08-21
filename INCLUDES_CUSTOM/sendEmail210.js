@@ -39,7 +39,8 @@ function sendEmail210(){
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
 
-	var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplate, eParams, files);
+	//var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplate, eParams, files);
+	var sent = emailContacts(toEmail, emailTemplate, eParams, "", "");
 	if (!sent.getSuccess()) {
 		logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 		return false;
