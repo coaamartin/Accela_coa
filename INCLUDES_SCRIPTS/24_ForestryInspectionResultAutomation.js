@@ -105,7 +105,10 @@ function script24_ForestryInspectionResultAutomation() {
 
         closeAllTasks(capId, 'closed by script 24');
         updateAppStatus('Compliance','Status set by script 24', capId);
-        createChildGeneric('Enforcement', 'Incident', 'Zoning', 'NA', {});
+        var childCapId = createChildGeneric('Enforcement', 'Incident', 'Zoning', 'NA', {});
+        
+        if(ifTracer(childCapId, 'child was generated'))
+            updateWorkDesc(workDescGet(capId) + " " + inspResultDate + " - " + inspComment, childCapId);
     }
 
 
