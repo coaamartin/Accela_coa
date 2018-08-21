@@ -41,9 +41,10 @@ function sendEmail210(){
 
 	//var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplate, eParams, files);
 	var sent = emailContacts(toEmail, emailTemplate, eParams, "", "");
+	/*
 	if (!sent.getSuccess()) {
 		logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 		return false;
 	}
-	
+	*/
 }
