@@ -43,7 +43,7 @@ function sendEmail210(){
 	//emailContacts(toEmail, emailTemplate, eParams, "", "");
 	//sendNotification("noreply@aurora.gov", toEmail, "", emailTemplate, eParams, "", capId);
 	
-	var sendResult = sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplate,eParams,"",capId);
+	var sendResult = sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplate,eParams,"");
 	
 	if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 	
