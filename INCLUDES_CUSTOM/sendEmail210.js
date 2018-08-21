@@ -41,7 +41,7 @@ function sendEmail210(){
 
 	//var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplate, eParams, files);
 	//var sent = emailContacts(toEmail, emailTemplate, eParams, "", "");
-	sendNotification("noreply@aurora.gov",applicant.getEmail(),"",emailTemplateName,eParams,"",capId);
+	sendNotification("noreply@aurora.gov", toEmail, "", emailTemplate, eParams, "", capId);
 	/*
 	if (!sent.getSuccess()) {
 		logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
