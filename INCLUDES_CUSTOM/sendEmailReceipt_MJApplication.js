@@ -24,34 +24,37 @@ function sendEmailReceipt_MJApplication(){
 	var payments = payResult.getOutput();
 	var paynum = payments.length - 1;
 	
-	for (paynum in payments) {			
-		logDebug("Debug point 1");		
-		var feeResult = aa.finance.getFeeItemByCapID(capId);
-		if (!feeResult.getSuccess()) {
-			logDebug("**ERROR: error retrieving fee items " + feeResult.getErrorMessage());
-			return false;
-		}
-		var feeArray = feeResult.getOutput();
+	for (var i = 0; i < payments.length; i++) {			
+		if (i == paynum) {
 		
-		for (var feeNumber in feeArray) {
-			logDebug("Debug point 2");
-			var feeItem = feeArray[feeNumber];
-			var pfResult = aa.finance.getPaymentFeeItems(capId, null);
-			if (!pfResult.getSuccess()) {
-				logDebug("**ERROR: error retrieving fee payment items " + pfResult.getErrorMessage());
+			logDebug("Debug point 1");		
+			var feeResult = aa.finance.getFeeItemByCapID(capId);
+			if (!feeResult.getSuccess()) {
+				logDebug("**ERROR: error retrieving fee items " + feeResult.getErrorMessage());
 				return false;
 			}
-
-			var pfObj = pfResult.getOutput();
+			var feeArray = feeResult.getOutput();
 			
-			for (i in pfObj) {
-				logDebug("Debug point 3");
-				if (feeItem == "LIC_MJRC_01" || feeItem == "LIC_MJRPM_01" || feeItem == "LIC_MJST_05" || feeItem == "LIC_MJTST_01" || feeItem == "LIC_MJTR_01"  || feeItem == "LIC_MJ_01") {
-					stateFee = true;
-					logDebug("State fee is present");
-				} else {
-					auroraFee = true;
-					logDebug("Local fee is present");
+			for (var feeNumber in feeArray) {
+				logDebug("Debug point 2");
+				var feeItem = feeArray[feeNumber];
+				var pfResult = aa.finance.getPaymentFeeItems(capId, null);
+				if (!pfResult.getSuccess()) {
+					logDebug("**ERROR: error retrieving fee payment items " + pfResult.getErrorMessage());
+					return false;
+				}
+
+				var pfObj = pfResult.getOutput();
+				
+				for (j in pfObj) {
+					logDebug("Debug point 3");
+					if (feeItem == "LIC_MJRC_01" || feeItem == "LIC_MJRPM_01" || feeItem == "LIC_MJST_05" || feeItem == "LIC_MJTST_01" || feeItem == "LIC_MJTR_01"  || feeItem == "LIC_MJ_01") {
+						stateFee = true;
+						logDebug("State fee is present");
+					} else {
+						auroraFee = true;
+						logDebug("Local fee is present");
+					}
 				}
 			}
 		}
