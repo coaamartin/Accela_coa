@@ -40,8 +40,10 @@ function sendEmailReceipt_MJApplication(){
 		
 		if(feeResult == "LIC_MJRC_01" || feeResult == "LIC_MJRPM_01" || feeResult == "LIC_MJST_05" || feeResult == "LIC_MJTST_01" || feeResult == "LIC_MJTR_01"  || feeResult == "LIC_MJ_01") {
 			stateFee = true;
+			logDebug("State fee is present");
 		} else {
 			auroraFee = true;
+			logDebug("Local fee is present");
 		}
 	}
 		
