@@ -25,6 +25,7 @@ function sendEmailReceipt_MJApplication(){
 	var paynum = payments.length - 1;
 	
 	for (var i = 0; i < payments.length; i++) {			
+		logDebug("Number of payments: " + payments.length);
 		if (i == paynum) {
 		
 			logDebug("Debug point 1");		
