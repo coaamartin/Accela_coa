@@ -24,7 +24,7 @@ function sendEmailReceipt_MJApplication(){
 	var payments = payResult.getOutput();
 	
 	for (var paynum in payments) {
-		var payment = payments[paynum];
+		var payment = payments[payments.length - 1];
 		var payStatus = payment.getPaymentStatus();
 
 		if (payStatus != "Paid") {
