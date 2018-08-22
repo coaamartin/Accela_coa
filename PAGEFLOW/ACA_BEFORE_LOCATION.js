@@ -22,6 +22,7 @@ var showDebug = false; // Set to true to see debug messages in popup window
 var useAppSpecificGroupName = false; // Use Group name when populating App Specific Info Values
 var useTaskSpecificGroupName = false; // Use Group name when populating Task Specific Info Values
 var cancel = false;
+var useCustomScriptFile = true; // if true, use Events->Custom Script, else use Events->Scripts->INCLUDES_CUSTOM
 /*------------------------------------------------------------------------------------------------------/
 | END User Configurable Parameters
 /------------------------------------------------------------------------------------------------------*/
@@ -31,8 +32,6 @@ var message = ""; // Message String
 var debug = ""; // Debug String
 var br = "<BR>"; // Break Tag
 
-var SCRIPT_VERSION = 3.0;
-var useCustomScriptFile = true;  // if true, use Events->Custom Script, else use Events->Scripts->INCLUDES_CUSTOM
 var useSA = false;
 var SA = null;
 var SAScript = null;
@@ -47,20 +46,17 @@ if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
 }
 
 if (SA) {
-    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA,useCustomScriptFile));
-    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS_ASB", SA,useCustomScriptFile));
-    eval(getScriptText("INCLUDES_ACCELA_GLOBALS", SA,useCustomScriptFile));
+    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA, useCustomScriptFile));
     eval(getScriptText(SAScript, SA));
 } else {
-    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS",null,useCustomScriptFile));
-    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS_ASB",null,useCustomScriptFile));
-    eval(getScriptText("INCLUDES_ACCELA_GLOBALS",null,useCustomScriptFile));
+    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, useCustomScriptFile));
 }
 
-eval(getScriptText("INCLUDES_CUSTOM",null,useCustomScriptFile));
+//eval(getScriptText("INCLUDES_CUSTOM", null, useCustomScriptFile));
 
 function getScriptText(vScriptName, servProvCode, useProductScripts) {
-    if (!servProvCode)  servProvCode = aa.getServiceProviderCode();
+    if (!servProvCode)
+        servProvCode = aa.getServiceProviderCode();
     vScriptName = vScriptName.toUpperCase();
     var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
     try {
@@ -83,13 +79,8 @@ var appTypeString = appTypeResult.toString();           // Convert application t
 var appTypeArray = appTypeString.split("/");            // Array of application type string
 // page flow custom code begin
 try{
-    var addrModel = cap.getAddressModel();
-    var addrAttrs = new Array();
-    var $iTrc = ifTracer;
-    loadAddressAttributes4ACA(addrAttrs);
-
     //Script 26
-    if(appTypeString.startsWith("Forestry/Request")){
+    if(ifTracer(appTypeString.startsWith("Forestry/Request"), '"Forestry/Request"')){
         
         var capIdsArray = capIdsGetByAddr4ACA(); //Get all records for same address
         var forestryRecsOpen = false;
@@ -103,14 +94,16 @@ try{
             var sameAddrAppTypeString = sameAddrCap.getCapType().toString();
             var sameAddrAppTypeArray = sameAddrAppTypeString.split("/");
 
+            logDebug("sameAddrAltId:" + sameAddrAltId + ", status: " + sameAddrCapStatus);
             //if type is Forestry/Request and a status match cancel
-            if(sameAddrAppTypeString.startsWith("Forestry/Request") && matches(sameAddrCapStatus, "Wait List", "Assigned", "Submitted", "Working")){
-                message += "Possible duplicate of record " + sameAddrAltId;
-                
+            if(ifTracer(sameAddrAppTypeString.startsWith("Forestry/Request") &&
+                        matches(sameAddrCapStatus, "Wait List", "Assigned", "Submitted", "Working"),
+                        'Forestry/Request with correct status')){
+                message += "Possible duplicate of record " + sameAddrAltId + ". Please call Forestry Department.";
+                break;
             }
         }
     }//END Script 26
-    
     showMessage = cancel = message.length ? true : false;
 }
 catch(err){
@@ -120,7 +113,6 @@ catch(err){
 }
 
 // page flow custom code end
-
 if (debug.indexOf("**ERROR") > 0) {
     aa.env.setValue("ErrorCode", "1");
     aa.env.setValue("ErrorMessage", debug);
@@ -188,4 +180,20 @@ function capIdsGetByAddr4ACA() {
         else
             return false;
     }
+}
+
+/*
+ * Helper
+ * 
+ * Desc:            
+ * Used to display results of boolean condition
+ * often wrapped in if statement as follows:
+ *  if(ifTracer(''foo == 'bar', 'foo equals bar')) {}
+ * 
+*/
+
+function ifTracer (cond, msg) {
+    cond = cond ? true : false;
+    logDebug((cond).toString().toUpperCase() + ': ' + msg);
+    return cond;
 }
