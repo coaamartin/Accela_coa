@@ -55,7 +55,7 @@ function sendEmailReceipt_MJApplication(){
 		var olduseAppSpecificGroupName = useAppSpecificGroupName;
 		useAppSpecificGroupName = false;
 		var asiValues = new Array();
-		loadAppSpecific(asiValues)
+		loadAppSpecific(asiValues);
 		useAppSpecificGroupName = olduseAppSpecificGroupName;
 		//logDebug("State License Number: " + asiValues["State License Number"]);
 			
@@ -103,7 +103,7 @@ function sendEmailReceipt_MJApplication(){
 		var olduseAppSpecificGroupName = useAppSpecificGroupName;
 		useAppSpecificGroupName = false;
 		var asiValues = new Array();
-		loadAppSpecific(asiValues)
+		loadAppSpecific(asiValues);
 		useAppSpecificGroupName = olduseAppSpecificGroupName;
 		//logDebug("State License Number: " + asiValues["State License Number"]);
 			
