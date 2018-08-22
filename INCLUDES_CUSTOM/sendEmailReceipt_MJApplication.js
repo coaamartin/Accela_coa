@@ -25,7 +25,7 @@ function sendEmailReceipt_MJApplication(){
 	var paynum = payments.length - 1;
 	
 	for (paynum in payments) {			
-				
+		logDebug("Debug point 1");		
 		var feeResult = aa.finance.getFeeItemByCapID(capId);
 		if (!feeResult.getSuccess()) {
 			logDebug("**ERROR: error retrieving fee items " + feeResult.getErrorMessage());
@@ -34,6 +34,7 @@ function sendEmailReceipt_MJApplication(){
 		var feeArray = feeResult.getOutput();
 		
 		for (var feeNumber in feeArray) {
+			logDebug("Debug point 2");
 			var feeItem = feeArray[feeNumber];
 			var pfResult = aa.finance.getPaymentFeeItems(capId, null);
 			if (!pfResult.getSuccess()) {
@@ -44,7 +45,7 @@ function sendEmailReceipt_MJApplication(){
 			var pfObj = pfResult.getOutput();
 			
 			for (i in pfObj) {
-
+				logDebug("Debug point 3");
 				if (feeItem == "LIC_MJRC_01" || feeItem == "LIC_MJRPM_01" || feeItem == "LIC_MJST_05" || feeItem == "LIC_MJTST_01" || feeItem == "LIC_MJTR_01"  || feeItem == "LIC_MJ_01") {
 					stateFee = true;
 					logDebug("State fee is present");
