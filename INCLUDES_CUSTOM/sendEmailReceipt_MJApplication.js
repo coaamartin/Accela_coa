@@ -27,9 +27,10 @@ function sendEmailReceipt_MJApplication(){
 		var payment = payments[paynum];
 		var payStatus = payment.getPaymentStatus();
 
-		if (payStatus != "Paid")
-			logDebug("Fee is not in 'Paid' status")); // not in paid status
-
+		if (payStatus != "Paid") {
+			logDebug("Fee is not in 'Paid' status"); // not in paid status
+		}
+		
 		var feeResult = aa.finance.getFeeItemByCapID(capId);
 
 		if (!feeResult.getSuccess()) {
@@ -96,7 +97,6 @@ function sendEmailReceipt_MJApplication(){
 	if(auroraFee != null && auroraFee == true) {
 		//insert non-state logic here
 		var emailTemplateName = "LIC MJ FEE RECEIPT";
-
 		var eParams = aa.util.newHashtable();
 
 		//load ASi and ASIT
