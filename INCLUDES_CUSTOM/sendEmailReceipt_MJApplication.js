@@ -18,7 +18,7 @@ function sendEmailReceipt_MJApplication(){
 	
 		if (!payResult.getSuccess()) {
 			logDebug("**ERROR: error retrieving payments " + payResult.getErrorMessage());
-			return false
+			return false;
 		}
 	
 	var payments = payResult.getOutput();
@@ -34,7 +34,7 @@ function sendEmailReceipt_MJApplication(){
 
 		if (!feeResult.getSuccess()) {
 			logDebug("**ERROR: error retrieving fee items " + feeResult.getErrorMessage());
-			return false
+			return false;
 		}
 		
 		if(feeResult == LIC_MJRC_01 || feeResult == LIC_MJRPM_01 || feeResult == LIC_MJST_05 || feeResult == LIC_MJTST_01 || feeResult == LIC_MJTR_01  || feeResult == LIC_MJ_01) {
