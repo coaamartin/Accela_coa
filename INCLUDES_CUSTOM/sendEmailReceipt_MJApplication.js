@@ -37,7 +37,7 @@ function sendEmailReceipt_MJApplication(){
 			
 			for (var j = 0; j < feeArray.length; j++) {
 				logDebug("Debug point 2");
-				var feeItem = feeArray[feeNumber];
+				var feeItem = feeArray[j];
 				var pfResult = aa.finance.getPaymentFeeItems(capId, null);
 				if (!pfResult.getSuccess()) {
 					logDebug("**ERROR: error retrieving fee payment items " + pfResult.getErrorMessage());
