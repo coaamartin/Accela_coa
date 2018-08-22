@@ -22,9 +22,9 @@ function sendEmailReceipt_MJApplication(){
 		}
 	
 	var payments = payResult.getOutput();
-	
-	for (var paynum in payments) {
-		var payment = payments[payments.length - 1];
+	var paynum = payments.length - 1;
+	//for (var paynum in payments) {
+		var payment = payments[paynum];
 		var payStatus = payment.getPaymentStatus();
 
 		if (payStatus != "Paid") {
@@ -45,7 +45,7 @@ function sendEmailReceipt_MJApplication(){
 			auroraFee = true;
 			logDebug("Local fee is present");
 		}
-	}
+	//}
 		
 	if(stateFee != null && stateFee == true) {
 		
