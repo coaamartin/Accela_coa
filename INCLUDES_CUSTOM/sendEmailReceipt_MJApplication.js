@@ -23,58 +23,39 @@ function sendEmailReceipt_MJApplication(){
 								
 	var payments = payResult.getOutput();
 	var paynum = payments.length - 1;
-
-	//var payment = payments[paynum];
-	//var payStatus = payment.getPaymentStatus();
-
-	//if (payStatus != "Paid") {
-	//	logDebug("Fee is not in 'Paid' status"); // not in paid status
-	//}
 	
-	
-								/*
-								var feeResult = aa.finance.getFeeItemByCapID(capId);
-								var fees = feeResult.getOutput();
-								
-								if (!feeResult.getSuccess()) {
-								logDebug("**ERROR: error retrieving fee items " + feeResult.getErrorMessage());
-								return false;
-								}
-								
-								for (var feenum in fees) {
-									if(feeResult == "LIC_MJRC_01" || feeResult == "LIC_MJRPM_01" || feeResult == "LIC_MJST_05" || feeResult == "LIC_MJTST_01" || feeResult == "LIC_MJTR_01"  || feeResult == "LIC_MJ_01") {
-										stateFee = true;
-										logDebug("State fee is present");
-									} else {
-										auroraFee = true;
-										logDebug("Local fee is present");
-									}
-								}*/
-	
-	
-	
-	for (payments[paynum]) {			
-								
-		var paymentFeeItemsResult = aa.finance.getPaymentFeeItems(capId, null);
-		var paymentFeeItems = paymentFeeItemsResult.getOutput();
+	for (paynum in payments) {			
+				
+		var feeResult = aa.finance.getFeeItemByCapID(capId);
+		if (!feeResult.getSuccess()) {
+			logDebug("**ERROR: error retrieving fee items " + feeResult.getErrorMessage());
+			return false;
+		}
+		var feeArray = feeResult.getOutput();
 		
-		for (var feenum in paymentFeeItems) {
-			if(paymentFeeItems == "LIC_MJRC_01" || paymentFeeItems == "LIC_MJRPM_01" || paymentFeeItems == "LIC_MJST_05" || paymentFeeItems == "LIC_MJTST_01" || paymentFeeItems == "LIC_MJTR_01"  || paymentFeeItems == "LIC_MJ_01") {
-				stateFee = true;
-				logDebug("State fee is present");
-			} else {
-				auroraFee = true;
-				logDebug("Local fee is present");
+		for (var feeNumber in feeArray) {
+			var feeItem = feeArray[feeNumber];
+			var pfResult = aa.finance.getPaymentFeeItems(capId, null);
+			if (!pfResult.getSuccess()) {
+				logDebug("**ERROR: error retrieving fee payment items " + pfResult.getErrorMessage());
+				return false;
+			}
+
+			var pfObj = pfResult.getOutput();
+			
+			for (i in pfObj) {
+
+				if (feeItem == "LIC_MJRC_01" || feeItem == "LIC_MJRPM_01" || feeItem == "LIC_MJST_05" || feeItem == "LIC_MJTST_01" || feeItem == "LIC_MJTR_01"  || feeItem == "LIC_MJ_01") {
+					stateFee = true;
+					logDebug("State fee is present");
+				} else {
+					auroraFee = true;
+					logDebug("Local fee is present");
+				}
 			}
 		}
-		
 	}
 	
-	
-	
-	
-	
-		
 	if(stateFee != null && stateFee == true) {
 		
 		//insert state logic here
