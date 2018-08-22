@@ -1,5 +1,4 @@
 //Start - 228 MJ Retail License Creation/Update Script
-logDebug("etw capId: " + capId);
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;
@@ -111,7 +110,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		var vRParams = aa.util.newHashtable();
 		addParameter(vRParams, "Record_ID", vLicenseID.getCustomID());
 
-		//does $$acadocdownloadurl$$ need to be added here?
+		// Generate report/email and save to new License record
 		tmpCap = capId;
 		capId = vLicenseID;
 		emailContacts("All", vEmailTemplate, vEParams, vReportTemplate, vRParams);
