@@ -38,7 +38,7 @@ function sendEmailReceipt_MJApplication(){
 			return false;
 		}
 		
-		if(feeResult == LIC_MJRC_01 || feeResult == LIC_MJRPM_01 || feeResult == LIC_MJST_05 || feeResult == LIC_MJTST_01 || feeResult == LIC_MJTR_01  || feeResult == LIC_MJ_01) {
+		if(feeResult == "LIC_MJRC_01" || feeResult == "LIC_MJRPM_01" || feeResult == "LIC_MJST_05" || feeResult == "LIC_MJTST_01" || feeResult == "LIC_MJTR_01"  || feeResult == "LIC_MJ_01") {
 			stateFee = true;
 		} else {
 			auroraFee = true;
