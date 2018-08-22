@@ -1,6 +1,4 @@
 //Start - 229 MJ Retail Product Manufacturer License Creation
-
-logDebug("etw capId: " + capId);
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;
@@ -100,13 +98,6 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 			capId = tmpCap;
 		}
 
-		//are these the parameters used in the email or report?
-		
-		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
-        var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
-        var recordDeepUrl = getACARecordURL(subStrIndex)
-                
-
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
@@ -115,9 +106,9 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		//addParameter(vEParams, "$$recordDeepUrl$$", recordACAUrl);
 
 		var vRParams = aa.util.newHashtable();
-		addParameter(vRParams, "p1Value", vLicenseID.getCustomID());
+		addParameter(vRParams, "Record_ID", vLicenseID.getCustomID());
 
-		//does $$acadocdownloadurl$$ need to be added here?
+		// Generate report/email and save to new License record
 		tmpCap = capId;
 		capId = vLicenseID;
 		emailContacts("All", vEmailTemplate, vEParams, vReportTemplate, vRParams);
