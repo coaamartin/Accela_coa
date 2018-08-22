@@ -24,14 +24,14 @@ function sendEmailReceipt_MJApplication(){
 	var payments = payResult.getOutput();
 	var paynum = payments.length - 1;
 
-	var payment = payments[paynum];
-	var payStatus = payment.getPaymentStatus();
+	//var payment = payments[paynum];
+	//var payStatus = payment.getPaymentStatus();
 
-	if (payStatus != "Paid") {
-		logDebug("Fee is not in 'Paid' status"); // not in paid status
-	}
+	//if (payStatus != "Paid") {
+	//	logDebug("Fee is not in 'Paid' status"); // not in paid status
+	//}
 	
-	for (payment) {			
+	
 								/*
 								var feeResult = aa.finance.getFeeItemByCapID(capId);
 								var fees = feeResult.getOutput();
@@ -50,7 +50,11 @@ function sendEmailReceipt_MJApplication(){
 										logDebug("Local fee is present");
 									}
 								}*/
-
+	
+	
+	
+	for (payments[paynum]) {			
+								
 		var paymentFeeItemsResult = aa.finance.getPaymentFeeItems(capId, null);
 		var paymentFeeItems = paymentFeeItemsResult.getOutput();
 		
