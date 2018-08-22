@@ -35,7 +35,7 @@ function sendEmailReceipt_MJApplication(){
 			}
 			var feeArray = feeResult.getOutput();
 			
-			for (var feeNumber in feeArray) {
+			for (var j = 0; j < feeArray.length; j++) {
 				logDebug("Debug point 2");
 				var feeItem = feeArray[feeNumber];
 				var pfResult = aa.finance.getPaymentFeeItems(capId, null);
@@ -43,18 +43,14 @@ function sendEmailReceipt_MJApplication(){
 					logDebug("**ERROR: error retrieving fee payment items " + pfResult.getErrorMessage());
 					return false;
 				}
-
-				var pfObj = pfResult.getOutput();
 				
-				for (j in pfObj) {
-					logDebug("Debug point 3");
-					if (feeItem == "LIC_MJRC_01" || feeItem == "LIC_MJRPM_01" || feeItem == "LIC_MJST_05" || feeItem == "LIC_MJTST_01" || feeItem == "LIC_MJTR_01"  || feeItem == "LIC_MJ_01") {
-						stateFee = true;
-						logDebug("State fee is present");
-					} else {
-						auroraFee = true;
-						logDebug("Local fee is present");
-					}
+				if (feeItem.toString() == "LIC_MJRC_01" || feeItem.toString() == "LIC_MJRPM_01" || feeItem.toString() == "LIC_MJST_05" || feeItem.toString() == "LIC_MJTST_01" || feeItem.toString() == "LIC_MJTR_01"  || feeItem.toString() == "LIC_MJ_01") {
+					stateFee = true;
+					logDebug("State fee is present");
+				} else {
+					logDebug("Fee item: " + feeItem);
+					auroraFee = true;
+					logDebug("Local fee is present");
 				}
 			}
 		}
