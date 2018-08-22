@@ -93,6 +93,53 @@
             "removeCondition": "",
             "removeConditionType": ""
           }
+        },
+        {
+          "preScript": "",
+          "postScript": "",
+          "metadata": {
+            "description": "Script 153 c: from comment in SP",
+            "operators": {
+              
+            }
+          },
+          "criteria": {
+            "inspectionTypePerformed": [
+                "Forestry Site Review"
+            ],
+            "inspectionResult": [
+                "Plant", "Plant - Letter"
+            ]
+          },
+          "action": {
+            "costRangeType": "",
+            "costRange": 0,
+            "costFeeType": "",
+            "costFeeSchedule": "",
+            "costFeeName": "",
+            "costFeeAmount": 0,
+            "caseCreationType": "",
+            "caseFailureStatus": [
+              
+            ],
+            "caseType": "",
+            "caseCopyComments": false,
+            "inspectionType": "Planting",
+            "rangeType": "Days",
+            "range": 0,
+            "sameInspector": true,
+            "inspectionCopyComment": false,
+            "createCondition": "",
+            "createConditionType": "",
+            "createConditionSeverity": "",
+            "feeSchedule": "",
+            "feeName": "",
+            "feeAmount": 0,
+            "taskName": "Site Review",
+            "taskStatus": "Plant",
+            "removeCondition": "",
+            "removeConditionType": ""
+          }
         }
       ]
     }

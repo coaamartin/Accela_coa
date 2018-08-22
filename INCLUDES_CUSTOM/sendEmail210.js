@@ -9,8 +9,8 @@ function sendEmail210(){
 	}
 	var toEmail = applicant.getEmail();
 	var files = new Array();
-	// use the correct parameters related to the email template provided + wfComment
 	
+	// use the correct parameters related to the email template provided + wfComment
 	adResult = aa.address.getAddressByCapId(capId).getOutput(); 
 			for(x in adResult)
 			{
@@ -39,10 +39,6 @@ function sendEmail210(){
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
 
-	var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplate, eParams, files);
-	if (!sent.getSuccess()) {
-		logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-		return false;
-	}
-	
+	//send email to applicant, no report included
+	emailWithReportLinkASync(toEmail, emailTemplate, eParams, "", "", "N", "");
 }
