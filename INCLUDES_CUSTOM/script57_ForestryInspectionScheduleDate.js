@@ -17,7 +17,12 @@ function script57_ForestryInspectionScheduleDate() {
 		if (thisCap != null ) {
 			var thisCapModel = thisCap.getCapModel();
 			if (thisCapModel != null) {
-				var thisWorkDesc = thisCapModel.getCapWorkDesModel().description;
+				if (thisCapModel.getCapWorkDesModel()) {
+					var thisWorkDesc = thisCapModel.getCapWorkDesModel().description
+				}
+				else {
+					var thisWorkDesc = "";
+				}
 				//Get Tree Info List data, loop through them and add to a text var 
 				var thisAppSpecTable = loadASITable("TREE INFORMATION", capId);
 				var row, treeId, treeMgtUnit;
