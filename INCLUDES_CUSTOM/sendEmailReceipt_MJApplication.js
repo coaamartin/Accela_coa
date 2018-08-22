@@ -23,21 +23,23 @@ function sendEmailReceipt_MJApplication(){
 	
 	var payments = payResult.getOutput();
 	var paynum = payments.length - 1;
-	//for (var paynum in payments) {
-		var payment = payments[paynum];
-		var payStatus = payment.getPaymentStatus();
 
-		if (payStatus != "Paid") {
-			logDebug("Fee is not in 'Paid' status"); // not in paid status
-		}
-		
-		var feeResult = aa.finance.getFeeItemByCapID(capId);
+	var payment = payments[paynum];
+	var payStatus = payment.getPaymentStatus();
 
-		if (!feeResult.getSuccess()) {
-			logDebug("**ERROR: error retrieving fee items " + feeResult.getErrorMessage());
-			return false;
-		}
+	if (payStatus != "Paid") {
+		logDebug("Fee is not in 'Paid' status"); // not in paid status
+	}
 		
+	var feeResult = aa.finance.getFeeItemByCapID(capId);
+	var fees = feeResult.getOutput();
+	
+	if (!feeResult.getSuccess()) {
+	logDebug("**ERROR: error retrieving fee items " + feeResult.getErrorMessage());
+	return false;
+	}
+	
+	for (var feenum in feeResult) {
 		if(feeResult == "LIC_MJRC_01" || feeResult == "LIC_MJRPM_01" || feeResult == "LIC_MJST_05" || feeResult == "LIC_MJTST_01" || feeResult == "LIC_MJTR_01"  || feeResult == "LIC_MJ_01") {
 			stateFee = true;
 			logDebug("State fee is present");
@@ -45,7 +47,8 @@ function sendEmailReceipt_MJApplication(){
 			auroraFee = true;
 			logDebug("Local fee is present");
 		}
-	//}
+	}
+
 		
 	if(stateFee != null && stateFee == true) {
 		
