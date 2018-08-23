@@ -37,3 +37,7 @@ logDebug('Script 154 starting');
             resultWorkflowTask("Quality Control", "Complete Not Staked");
     }
 })();
+
+if(ifTracer(inspType == "Forestry Site Review", 'inspection: Forestry Site Review')){
+	forestryScript153_forestryReviewInsp();
+}
