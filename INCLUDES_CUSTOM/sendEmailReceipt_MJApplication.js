@@ -131,6 +131,8 @@ function sendEmailReceipt_MJApplication(){
 	logDebug("vStateFee equals " + vStateFee);
 	logDebug("vLocalFee equals " + vLocalFee);
 	
+	logDebug("Applicant email: " + toEmail);
+	
 	
 	
 	if(vStateFee != null && vStateFee == true) {
