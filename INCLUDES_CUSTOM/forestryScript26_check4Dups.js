@@ -26,7 +26,7 @@ function forestryScript26_check4Dups(){
             if(possibleDupAltIds.length > 0){
                 cancel = true;
                 showMessage = true;
-                comment("Possible duplicates: " + + possibleDupAltIds.substring(0, possibleDupAltIds.length -1););
+                comment("Possible duplicates: " + + possibleDupAltIds.substring(0, possibleDupAltIds.length -1));
             }
         }
     }
