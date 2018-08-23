@@ -51,15 +51,20 @@ function sendEmailReceipt_MJApplication(){
 	var ff = 0;
 	
 	for (ff in feeObjArr) {
+		logDebug("Debug Point 1");
         var pfResult = aa.finance.getPaymentFeeItems(capId, null);
         if (pfResult.getSuccess()) {
 			var pfObj = pfResult.getOutput();
 			
 			for (ij in pfObj) {
+				logDebug("Debug Point 2");
 				if (feeObjArr[ff].getFeeSeqNbr() == pfObj[ij].getFeeSeqNbr() && pfObj[ij].getPaymentSeqNbr() == vPaymentSeqNbr) {
+					logDebug("Debug Point 3");
 					if (feeObjArr[ff].getFeeCod() == "LIC_MJRC_01" || feeObjArr[ff].getFeeCod() == "LIC_MJRPM_01" || feeObjArr[ff].getFeeCod() == "LIC_MJST_05" || feeObjArr[ff].getFeeCod() == "LIC_MJTST_01" || feeObjArr[ff].getFeeCod() == "LIC_MJTR_01" || feeObjArr[ff].getFeeCod() == "LIC_MJ_01") {
+						logDebug("State fee is present");
 						vStateFee = true;
 					} else {
+						logDebug("Local fee is present");
 						vLocalFee = true;
 					}
 				}
