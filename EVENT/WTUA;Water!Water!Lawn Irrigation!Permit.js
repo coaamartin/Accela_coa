@@ -20,4 +20,5 @@ UpdateworkFlowTaskDueDate(workFlowTasktobeChecked, numberOfdayes);
 
 script193_WatIrrigationAddInspFee();
 
-script195_ActivateFeeIrrPermit();
+include("script195_ActivateFeeIrrPermit");
+
