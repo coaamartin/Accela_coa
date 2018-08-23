@@ -1,8 +1,3 @@
-
-/**
- * 
- * 
- */
 function sendEmailReceipt_MJApplication(){
 
 	var applicant = getContactByType("Applicant", capId);
@@ -13,14 +8,12 @@ function sendEmailReceipt_MJApplication(){
 	var toEmail = applicant.getEmail();
 	var vStateFee;
 	var vLocalFee;
-	
 	var vPayment;
 	var vPayments;
 	var vPaymentSeqNbr = 0;
 	
 	// Get all payments on the record
-	vPayments = aa.finance.getPaymentByCapID(capId, null);
-	
+	vPayments = aa.finance.getPaymentByCapID(capId, null);	
 	if (vPayments.getSuccess() == true) {
 		vPayments = vPayments.getOutput();
 		var y = 0;
@@ -37,7 +30,6 @@ function sendEmailReceipt_MJApplication(){
 	}
 	
 	var feeResult = aa.fee.getFeeItems(capId);
-	
 	if (feeResult.getSuccess()) {
 		var feeObjArr = feeResult.getOutput();
 	} else {
@@ -46,17 +38,16 @@ function sendEmailReceipt_MJApplication(){
 	}
 
 	var ff = 0;
-	
+	//loop through fee items
 	for (ff in feeObjArr) {
-		logDebug("Debug Point 1");
         var pfResult = aa.finance.getPaymentFeeItems(capId, null);
         if (pfResult.getSuccess()) {
 			var pfObj = pfResult.getOutput();
-			
+			//match fee items to sequence number
 			for (ij in pfObj) {
-				logDebug("Debug Point 2");
 				if (feeObjArr[ff].getFeeSeqNbr() == pfObj[ij].getFeeSeqNbr() && pfObj[ij].getPaymentSeqNbr() == vPaymentSeqNbr) {
 					logDebug("Debug Point 3");
+					//check for state and local fees
 					if (feeObjArr[ff].getFeeCod() == "LIC_MJRC_01" || feeObjArr[ff].getFeeCod() == "LIC_MJRPM_01" || feeObjArr[ff].getFeeCod() == "LIC_MJST_05" || feeObjArr[ff].getFeeCod() == "LIC_MJTST_01" || feeObjArr[ff].getFeeCod() == "LIC_MJTR_01" || feeObjArr[ff].getFeeCod() == "LIC_MJ_01") {
 						logDebug("State fee is present");
 						vStateFee = true;
@@ -68,10 +59,6 @@ function sendEmailReceipt_MJApplication(){
 			}
 		}
 	}
-	
-	logDebug("vStateFee equals " + vStateFee);
-	logDebug("vLocalFee equals " + vLocalFee);
-	logDebug("Applicant email: " + toEmail);
 	
 	if(vStateFee != null && vStateFee != "" && vStateFee == true) {
 		var emailTemplateName = "LIC MJ STATE FEE RECEIPT";
@@ -111,7 +98,7 @@ function sendEmailReceipt_MJApplication(){
 		addParameter(eParams, "$$FullAddress$$", primaryAddress);
 		addParameter(eParams, "$$ApplicationName$$", appName);
 
-		logDebug("CapID = " + capId);
+		//send email
 		emailWithReportLinkASync(toEmail, emailTemplateName, eParams, "", "", "N", "");
 	}
 	
@@ -152,7 +139,7 @@ function sendEmailReceipt_MJApplication(){
 		addParameter(eParams, "$$FullAddress$$", primaryAddress);
 		addParameter(eParams, "$$ApplicationName$$", appName);
 
-		logDebug("CapID = " + capId);
+		//send email
 		emailWithReportLinkASync(toEmail, emailTemplateName, eParams, "", "", "N", "");
 	}
 }
