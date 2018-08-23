@@ -18,7 +18,7 @@ function forestryScript26_check4Dups(){
                 var relStatus = relCap.getCapStatus();
                 var relSoR = getAppSpecific("Source of Request",relCapId);
                 
-                if(reltype.startsWith("Forestry/Request") && matches(relStatus, "Wait List", "Assigned", "Submitted", "Working") && relSoR == sourceOfRequest){
+                if(relType.startsWith("Forestry/Request") && matches(relStatus, "Wait List", "Assigned", "Submitted", "Working") && relSoR == sourceOfRequest){
                     possibleDupAltIds += relCapId.getCustomID() + ",";
                 }
             }
