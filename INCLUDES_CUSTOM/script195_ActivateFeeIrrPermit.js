@@ -9,7 +9,40 @@ function script195_ActivateFeeIrrPermit() {
 	logDebug("script195_ActivateFeeIrrPermit started.");
 	try{
 		if (wfTask==("Application Submitted") && wfStatus ==("Application Fee Submitted")) {
-			emailContact("Aurora template TBD", "Please pay your fees   This is a system generated email. Do not reply.", "Applicant");
+			var emailTemplate="IP LAWN IRRIGATION ACCEPTED # 195"
+			var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
+			var appName = cap.getSpecialText();
+			
+			//get full address
+			adResult = aa.address.getAddressByCapId(capId).getOutput(); 
+			for(x in adResult)
+			{
+				var adType = adResult[x].getAddressType(); 
+				var stNum = adResult[x].getHouseNumberStart();
+				var preDir =adResult[x].getStreetDirection();
+				var stName = adResult[x].getStreetName(); 
+				var stType = adResult[x].getStreetSuffix();
+				var city = adResult[x].getCity();
+				var state = adResult[x].getState();
+				var zip = adResult[x].getZip();
+			}
+	
+			var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
+			var eParams = aa.util.newHashtable();
+			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
+			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
+			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+			addParameter(eParams, "$$wfTask$$", wfTask);
+			addParameter(eParams, "$$wfStatus$$", wfStatus);
+			addParameter(eParams, "$$wfDate$$", wfDate);
+			addParameter(eParams, "$$wfComment$$", wfComment);
+			addParameter(eParams, "$$acaRecordUrl$$", acaUrl);
+			addParameter(eParams, "$$FullAddress$$", primaryAddress);
+			addParameter(eParams, "$$ApplicationName$$", appName);
+			
+			//send email to applicant
+			emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
+			
 		}
 	} catch(err){
 		showMessage = true;
