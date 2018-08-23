@@ -11,34 +11,62 @@ function sendEmailReceipt_MJApplication(){
 		return false;
 	}
 	var toEmail = applicant.getEmail();
-	var stateFee = null;
-	var auroraFee = null;
+	var vStateFee = null;
+	var vLocalFee = null;
 	
 	var vPayment;
 	var vPayments;
 	var vPaymentSeqNbr = 0;
-	var vFeeCodetoCheck = "CAN_RET_030";
 	
 	// Get all payments on the record
 	vPayments = aa.finance.getPaymentByCapID(capId, null);
 	
 	if (vPayments.getSuccess() == true) {
-    vPayments = vPayments.getOutput();
-    var y = 0;
-    // Loop through payments to get the latest by highest SEQ number
-    for (y in vPayments) {
-        vPayment = vPayments[y];
-        if (vPayment.getPaymentSeqNbr() > vPaymentSeqNbr) {
-            vPaymentSeqNbr = vPayment.getPaymentSeqNbr();
-        }
-    }
-    if (vPaymentSeqNbr != null && vPaymentSeqNbr != "") {
-        //if (feeBalanceByPayment(vFeeCodetoCheck,vPaymentSeqNbr) == 0) {
-        //    aa.print("Fee item " + vFeeCodetoCheck + " was paid with this payment is has a balance of 0");
-        //}
-		logDebug("The latest payment has a sequence number of " + vPaymentSeqNbr);
+		vPayments = vPayments.getOutput();
+		var y = 0;
+		// Loop through payments to get the latest by highest SEQ number
+		for (y in vPayments) {
+			vPayment = vPayments[y];
+			if (vPayment.getPaymentSeqNbr() > vPaymentSeqNbr) {
+				vPaymentSeqNbr = vPayment.getPaymentSeqNbr();
+			}
+		}
+		if (vPaymentSeqNbr != null && vPaymentSeqNbr != "") {
+			//if (feeBalanceByPayment(vFeeCodetoCheck,vPaymentSeqNbr) == 0) {
+			//    aa.print("Fee item " + vFeeCodetoCheck + " was paid with this payment is has a balance of 0");
+			//}
+			logDebug("The latest payment has a sequence number of " + vPaymentSeqNbr);
+		}
 	}
-}
+	
+	var feeResult = aa.fee.getFeeItems(capId);
+	
+	if (feeResult.getSuccess()) {
+		var feeObjArr = feeResult.getOutput();
+	} else {
+		logDebug("**ERROR: getting fee items: " + capContResult.getErrorMessage());
+		return false		
+	}
+
+	var ff = 0;
+	
+	for (ff in feeObjArr) {
+        var pfResult = aa.finance.getPaymentFeeItems(capId, null);
+        if (pfResult.getSuccess()) {
+			var pfObj = pfResult.getOutput();
+			
+			for (ij in pfObj) {
+				if (feeObjArr[ff].getFeeSeqNbr() == pfObj[ij].getFeeSeqNbr() && pfObj[ij].getPaymentSeqNbr() == vPaymentSeqNbr) {
+					if (feeObjArr[ff].getFeeCod() == "LIC_MJRC_01" || feeObjArr[ff].getFeeCod() == "LIC_MJRPM_01" || feeObjArr[ff].getFeeCod() == "LIC_MJST_05" || feeObjArr[ff].getFeeCod() == "LIC_MJTST_01" || feeObjArr[ff].getFeeCod() == "LIC_MJTR_01" || feeObjArr[ff].getFeeCod() == "LIC_MJ_01") {
+						vStateFee = true;
+					} else {
+						vLocalFee = true;
+					}
+				}
+			}
+		}
+	}
+
 	
 	
 	
@@ -99,7 +127,7 @@ function sendEmailReceipt_MJApplication(){
 	
 	
 	
-	if(stateFee != null && stateFee == true) {
+	if(vStateFee != null && vStateFee == true) {
 		
 		//insert state logic here
 		var emailTemplateName = "LIC MJ STATE FEE RECEIPT";
@@ -148,7 +176,7 @@ function sendEmailReceipt_MJApplication(){
 		}
 	}
 	
-	if(auroraFee != null && auroraFee == true) {
+	if(vLocalFee != null && vLocalFee == true) {
 		//insert non-state logic here
 		var emailTemplateName = "LIC MJ FEE RECEIPT";
 		var eParams = aa.util.newHashtable();
