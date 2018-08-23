@@ -11,8 +11,8 @@ function sendEmailReceipt_MJApplication(){
 		return false;
 	}
 	var toEmail = applicant.getEmail();
-	var vStateFee = null;
-	var vLocalFee = null;
+	var vStateFee;
+	var vLocalFee;
 	
 	var vPayment;
 	var vPayments;
@@ -32,9 +32,6 @@ function sendEmailReceipt_MJApplication(){
 			}
 		}
 		if (vPaymentSeqNbr != null && vPaymentSeqNbr != "") {
-			//if (feeBalanceByPayment(vFeeCodetoCheck,vPaymentSeqNbr) == 0) {
-			//    aa.print("Fee item " + vFeeCodetoCheck + " was paid with this payment is has a balance of 0");
-			//}
 			logDebug("The latest payment has a sequence number of " + vPaymentSeqNbr);
 		}
 	}
@@ -71,73 +68,12 @@ function sendEmailReceipt_MJApplication(){
 			}
 		}
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	var payResult = aa.finance.getPaymentByCapID(capId, null);
-								
-	if (!payResult.getSuccess()) {
-		logDebug("**ERROR: error retrieving payments " + payResult.getErrorMessage());
-		return false;
-	}
-								
-	var payments = payResult.getOutput();
-	var paynum = payments.length - 1;
-	
-	for (var i = 0; i < payments.length; i++) {			
-		logDebug("Number of payments: " + payments.length);
-		if (i == paynum) {
-		
-			logDebug("Debug point 1");		
-			var feeResult = aa.finance.getFeeItemByCapID(capId);
-			if (!feeResult.getSuccess()) {
-				logDebug("**ERROR: error retrieving fee items " + feeResult.getErrorMessage());
-				return false;
-			}
-			var feeArray = feeResult.getOutput();
-			
-			for (var j = 0; j < feeArray.length; j++) {
-				logDebug("Debug point 2");
-				var feeItem = feeArray[j];
-				var pfResult = aa.finance.getPaymentFeeItems(capId, null);
-				if (!pfResult.getSuccess()) {
-					logDebug("**ERROR: error retrieving fee payment items " + pfResult.getErrorMessage());
-					return false;
-				}
-				
-				if (feeItem.toString() == "LIC_MJRC_01" || feeItem.toString() == "LIC_MJRPM_01" || feeItem.toString() == "LIC_MJST_05" || feeItem.toString() == "LIC_MJTST_01" || feeItem.toString() == "LIC_MJTR_01"  || feeItem.toString() == "LIC_MJ_01") {
-					stateFee = true;
-					logDebug("State fee is present");
-				} else {
-					logDebug("Fee item: " + feeItem);
-					auroraFee = true;
-					logDebug("Local fee is present");
-				}
-			}
-		}
-	}
-	*/
 	
 	logDebug("vStateFee equals " + vStateFee);
 	logDebug("vLocalFee equals " + vLocalFee);
-	
 	logDebug("Applicant email: " + toEmail);
 	
-	
-	
-	if(vStateFee != null && vStateFee == true) {
-		
-		//insert state logic here
+	if(vStateFee != null && vStateFee != "" && vStateFee == true) {
 		var emailTemplateName = "LIC MJ STATE FEE RECEIPT";
 
 		var eParams = aa.util.newHashtable();
@@ -175,19 +111,11 @@ function sendEmailReceipt_MJApplication(){
 		addParameter(eParams, "$$FullAddress$$", primaryAddress);
 		addParameter(eParams, "$$ApplicationName$$", appName);
 
-		//var files = new Array();
-		//var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
-		//var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, files);
+		logDebug("CapID = " + capId);
 		emailWithReportLinkASync(toEmail, emailTemplateName, eParams, "", "", "N", "");
-		
-		//if (!sent) {
-		//	logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-		//	return false;
-		//}
 	}
 	
-	if(vLocalFee != null && vLocalFee == true) {
-		//insert non-state logic here
+	if(vLocalFee != null && vLocalFee != "" && vLocalFee == true) {
 		var emailTemplateName = "LIC MJ FEE RECEIPT";
 		var eParams = aa.util.newHashtable();
 
@@ -224,14 +152,7 @@ function sendEmailReceipt_MJApplication(){
 		addParameter(eParams, "$$FullAddress$$", primaryAddress);
 		addParameter(eParams, "$$ApplicationName$$", appName);
 
-		//var files = new Array();
-		//var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
-		//var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, files);
+		logDebug("CapID = " + capId);
 		emailWithReportLinkASync(toEmail, emailTemplateName, eParams, "", "", "N", "");
-		
-		//if (!sent) {
-		//	logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-		//	return false;
-		//}
 	}
 }
