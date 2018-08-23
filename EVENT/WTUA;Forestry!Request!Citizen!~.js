@@ -59,12 +59,46 @@ if (wfTask == "Crew Work" && wfStatus == "Removal") {
 							copyContacts: true
 						}
 						var plantingRecordId = createChildGeneric("Forestry", "Request", "Planting", "NA", options);
+						var tmpId = capId;
+						capId = plantingRecordId;
+						resultWorkflowTask("Tree Planting Intake", "Add to List", "","");
+						resultWorkflowTask("Site Review","Plant","","");
+						resultWorkflowTask("Property Owner Response", "Plant Tree","","");
+						activateTask("Quality Control");
+						scheduleInspection("Planting",5);
+						if (plantingRecordId) {
+							for (var gsitems in fgs) {
+								var t = fgs[gsitems]; // guidesheet item
+								t.loadInfoTables();
+								if (t.validTables) {
+									var g = (t.infoTables["NEW TREE PLANTING"] ? t.infoTables["NEW TREE PLANTING"] : []);
+									for (var fvi in g) {
+										var fvit = g[fvi];
+										var thisViolation = [{
+												colName: "Location",
+												colValue: String(fvit["Location"])
+											}, {
+												colName: "Quantity",
+												colValue: String(fvit["Quantity"])
+											}, {
+												colName: "Species",
+												colValue: String(fvit["Species"])
+											}, {
+												colName: "Comments",
+												colValue: String(fvit["Comments"])
+											}
+										];
+										addAsiTableRow("NEW TREE PLANTING", thisViolation);
+									}
+								}
+							}
+						}
+						capId = tmpId;
 					}
 				}
 			}
 		}
 	}
-
 }
 
 // Start Script 27 Create Planting Record
