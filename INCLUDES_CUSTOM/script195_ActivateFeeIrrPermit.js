@@ -8,7 +8,7 @@ function script195_ActivateFeeIrrPermit() {
 	
 	logDebug("script195_ActivateFeeIrrPermit started.");
 	try{
-		if (wfTask==("Application Submitted") && wfStatus ==("Application Fee Submitted")) {
+		if (wfTask==("Application Submittal") && wfStatus ==("Application Fee Submitted")) {
 			var emailTemplate="IP LAWN IRRIGATION ACCEPTED # 195"
 			var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
 			var appName = cap.getSpecialText();
