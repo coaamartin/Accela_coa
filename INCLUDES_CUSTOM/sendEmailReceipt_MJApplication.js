@@ -175,13 +175,15 @@ function sendEmailReceipt_MJApplication(){
 		addParameter(eParams, "$$FullAddress$$", primaryAddress);
 		addParameter(eParams, "$$ApplicationName$$", appName);
 
-		var files = new Array();
-		var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
+		//var files = new Array();
+		//var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
 		//var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, files);
-		if (!sent) {
-			logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-			return false;
-		}
+		emailWithReportLinkASync(toEmail, emailTemplateName, eParams, "", "", "N", "");
+		
+		//if (!sent) {
+		//	logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
+		//	return false;
+		//}
 	}
 	
 	if(vLocalFee != null && vLocalFee == true) {
@@ -222,12 +224,14 @@ function sendEmailReceipt_MJApplication(){
 		addParameter(eParams, "$$FullAddress$$", primaryAddress);
 		addParameter(eParams, "$$ApplicationName$$", appName);
 
-		var files = new Array();
-		var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
+		//var files = new Array();
+		//var sent = sendNotification("noreply@aurora.gov",toEmail,"",emailTemplateName,eParams,files);
 		//var sent = aa.document.sendEmailByTemplateName("", toEmail, "", emailTemplateName, eParams, files);
-		if (!sent) {
-			logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-			return false;
-		}
+		emailWithReportLinkASync(toEmail, emailTemplateName, eParams, "", "", "N", "");
+		
+		//if (!sent) {
+		//	logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
+		//	return false;
+		//}
 	}
 }
