@@ -14,6 +14,43 @@ function sendEmailReceipt_MJApplication(){
 	var stateFee = null;
 	var auroraFee = null;
 	
+	var vPayment;
+	var vPayments;
+	var vPaymentSeqNbr = 0;
+	var vFeeCodetoCheck = "CAN_RET_030";
+	
+	// Get all payments on the record
+	vPayments = aa.finance.getPaymentByCapID(capId, null);
+	
+	if (vPayments.getSuccess() == true) {
+    vPayments = vPayments.getOutput();
+    var y = 0;
+    // Loop through payments to get the latest by highest SEQ number
+    for (y in vPayments) {
+        vPayment = vPayments[y];
+        if (vPayment.getPaymentSeqNbr() > vPaymentSeqNbr) {
+            vPaymentSeqNbr = vPayment.getPaymentSeqNbr();
+        }
+    }
+    if (vPaymentSeqNbr != null && vPaymentSeqNbr != "") {
+        //if (feeBalanceByPayment(vFeeCodetoCheck,vPaymentSeqNbr) == 0) {
+        //    aa.print("Fee item " + vFeeCodetoCheck + " was paid with this payment is has a balance of 0");
+        //}
+		logDebug("The latest payment has a sequence number of " + vPaymentSeqNbr);
+	}
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	var payResult = aa.finance.getPaymentByCapID(capId, null);
 								
 	if (!payResult.getSuccess()) {
@@ -56,6 +93,11 @@ function sendEmailReceipt_MJApplication(){
 			}
 		}
 	}
+	*/
+	
+	
+	
+	
 	
 	if(stateFee != null && stateFee == true) {
 		
