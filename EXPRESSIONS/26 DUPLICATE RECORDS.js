@@ -27,46 +27,14 @@ function formatDate(dateString,pattern){
 
 
 try{
-	function getRelatedCapsByAddressBefore(ats) 
-	{
-	    
- 	    // get caps with same address
- 	    capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
-	    if (capAddResult.getSuccess())
-	    	{ var capIdArray=capAddResult.getOutput(); }
-	    else
-	    	{ logDebug("**ERROR: getting similar addresses: " + capAddResult.getErrorMessage());  return false; }
-        
-        
-	    // loop through related caps
-	    for (cappy in capIdArray)
-	    	{
-	    	// get file date
-	    	relcap = aa.cap.getCap(capIdArray[cappy].getCapID()).getOutput();
-        
-	    	// get cap type
-        
-	    	reltype = relcap.getCapType().toString();
-        
-	    	var isMatch = true;
-	    	var ata = ats.split("/");
-	    	if (ata.length != 4)
-	    		logDebug("**ERROR: The following Application Type String is incorrectly formatted: " + ats);
-	    	else
-	    		for (xx in ata)
-	    			if (!ata[xx].equals(appTypeArray[xx]) && !ata[xx].equals("*"))
-	    				isMatch = false;
-        
-	    	if (isMatch)			
-	    		retArr.push(capIdArray[cappy]);
-        
-	    	} // loop through related caps
-        
-	    if (retArr.length > 0)
-	    	return retArr;
-		
-	}
-	
+	function matches(eVal, argList) {
+    	for (var i = 1; i < arguments.length; i++) {
+    		if (arguments[i] == eVal) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
     var aa = expression.getScriptRoot();
     var id1=expression.getValue("$$capID1$$").value;
     var id2=expression.getValue("$$capID2$$").value;
@@ -81,7 +49,6 @@ try{
     var appTypeString=expression.getValue("CAP::capType").value;
     var dtlDesc=expression.getValue("CAP::capWorkDescriptionModel*description");
 
-
     var totalRowCount = expression.getTotalRowCount();
 
 	if(currentUserID == "TLEDEZMA")
@@ -92,27 +59,38 @@ try{
 		var dupRecs = "";
 		
 		var AddressHouseNumber = addrsParts[0];
-		var AddressStreetName = addrsParts[1];
-		var AddressStreetSuffix = addrsParts[2];
-		var AddressZip = addrsParts[3];
-		var AddressStreetDirection = addrsParts[4];
-		
+		var AddressStreetDirection = addrsParts[1];
+		var AddressStreetName = addrsParts[2];
+		var AddressStreetSuffix = addrsParts[3];
+		var AddressZip = addrsParts[4];
+		/*1,N,DEL MAR,CIR,80011 */
 		var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
 	    if (capAddResult.getSuccess()){ capIdArray=capAddResult.getOutput(); }
 		
 		
 	    for (cappy in capIdArray){
-	    	var relcap = aa.cap.getCap(capIdArray[cappy].getCapID()).getOutput();
-			dupRecs += relcap.getCapID().getCustomID() + ",";
+	    	var relCap = aa.cap.getCap(capIdArray[cappy].getCapID()).getOutput();
+			var relCapTypeString = relCap.getCapType().toString();
+            var relCapStatus = relCap.getCapStatus();
+			if(relCapTypeString.startsWith("Forestry/Request") && matches(relCapStatus, "Wait List", "Assigned", "Submitted", "Working")){
+			    dupRecs += relCap.getCapID().getCustomID() + ",";
+			}
 		}
 		
-		dtlDesc.value = "Possible duplicate records " + dupRecs.substring(0, dupRecs.length -1);
-		expression.setReturn(dtlDesc);
+		if(dupRecs.length > 0){
+			dtlDesc.message = "There are possible duplicates";
+		    dtlDesc.value = "Possible duplicate records " + dupRecs.substring(0, dupRecs.length -1);
+		    expression.setReturn(dtlDesc);
+		}
+		else{
+			dtlDesc.message = "No possible duplicates";
+		    expression.setReturn(dtlDesc);
+		}
 	}
 	
 }
 catch(err){
-    dtlDesc.message = "Error:" + err + ".";
+    dtlDesc.message = "Error:" + err + ". Line: " + err.lineNumber;
     expression.setReturn(dtlDesc);
 	
 }
