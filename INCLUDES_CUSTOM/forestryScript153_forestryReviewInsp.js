@@ -5,7 +5,7 @@ function forestryScript153_forestryReviewInsp(){
             if(ifTracer(isTaskActive("Tree Planting Intake"), 'isTaskActive("Tree Planting Intake")'))
                 resultWorkflowTask("Tree Planting Intake", "Add to List");
             
-            if(ifTracer(!isScheduled("Planting"), 'Planting inspection scheduled')){
+            if(ifTracer(!isScheduled("Planting"), 'Planting inspection NOT scheduled')){
                 var plantInspId = scheduleInspectionCustom("Planting", 35);
                 copyGuideSheetItemsByStatus(inspId, plantInspId);
             }
