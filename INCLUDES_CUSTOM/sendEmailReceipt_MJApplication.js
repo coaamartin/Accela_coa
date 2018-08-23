@@ -128,7 +128,8 @@ function sendEmailReceipt_MJApplication(){
 	}
 	*/
 	
-	
+	logDebug("vStateFee equals " + vStateFee);
+	logDebug("vLocalFee equals " + vLocalFee);
 	
 	
 	
