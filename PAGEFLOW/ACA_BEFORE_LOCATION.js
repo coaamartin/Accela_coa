@@ -80,7 +80,7 @@ var appTypeArray = appTypeString.split("/");            // Array of application 
 // page flow custom code begin
 try{
     //Script 26
-    if(ifTracer(appTypeString.startsWith("Forestry/Request"), '"Forestry/Request"')){
+    if(ifTracer(appTypeString.startsWith("Forestry/"), '"Forestry/"')){
         
         var capIdsArray = capIdsGetByAddr4ACA(); //Get all records for same address
         var forestryRecsOpen = false;
@@ -95,11 +95,11 @@ try{
             var sameAddrAppTypeArray = sameAddrAppTypeString.split("/");
 
             logDebug("sameAddrAltId:" + sameAddrAltId + ", status: " + sameAddrCapStatus);
-            //if type is Forestry/Request and a status match cancel
-            if(ifTracer(sameAddrAppTypeString.startsWith("Forestry/Request") &&
+            //if type is Forestry/ and a status match cancel
+            if(ifTracer(sameAddrAppTypeString.startsWith("Forestry/") &&
                         matches(sameAddrCapStatus, "Wait List", "Assigned", "Submitted", "Working"),
-                        'Forestry/Request with correct status')){
-                message += "Possible duplicate of record " + sameAddrAltId + ". Please call Forestry Department.";
+                        'Forestry with correct status')){
+                message += "It appears someone has already submitted a request for this Address.  Please call Forestry Department at 303-739-7177 if you wish to submit an additional request.<BR>";
                 break;
             }
         }
