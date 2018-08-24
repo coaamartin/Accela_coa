@@ -6,6 +6,7 @@
 logDebug("script195_ActivateFeeIrrPermit started.");
 try{
 	if (wfTask=="Application Submittal" && wfStatus =="Application Fee Submitted") {
+		var applicant = getContactByType("Applicant", capId);
 		var toEmail = applicant.getEmail();
 		var emailTemplate="IP LAWN IRRIGATION ACCEPTED # 195"
 		var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
