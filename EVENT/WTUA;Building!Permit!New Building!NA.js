@@ -120,9 +120,9 @@ var tsiIsTAPrecordrequired = "Is a TAP record required?";
 var tsiNumberOfTaprecords = "Number of TAP records needed";
 var childRecordToCreated = "Water/Water/Tap/Application";
 var ofResidentialUnitsASI = "Number of Residential Units";
-var parentofResidentialUnitsASI = "# of Residential Units"
+var parentofResidentialUnitsASI = "# of Residential Units";
 var BuildingSqFt = "Building Sq Ft";
-var parentBuildingSqFt = "Total Finished Area Sq Ft"
+var parentBuildingSqFt = "Total Finished Area Sq Ft";
 var utilityServiceRecord = "Water/Utility/Service/NA";
 
 autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIsTAPrecordrequired, tsiNumberOfTaprecords, childRecordToCreated, ofResidentialUnitsASI,
