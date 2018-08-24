@@ -6,6 +6,7 @@
 logDebug("script195_ActivateFeeIrrPermit started.");
 try{
 	if (wfTask=="Application Submittal" && wfStatus =="Application Fee Submitted") {
+		var toEmail = applicant.getEmail();
 		var emailTemplate="IP LAWN IRRIGATION ACCEPTED # 195"
 		var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
 		var appName = cap.getSpecialText();
@@ -21,7 +22,8 @@ try{
 		addParameter(eParams, "$$ApplicationName$$", appName);
 		
 		//send email to applicant
-		emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
+		//emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
+		emailWithReportLinkASync(toEmail, emailTemplate, eParams, "", "", "N", "");
 		
 	}
 } catch(err){
