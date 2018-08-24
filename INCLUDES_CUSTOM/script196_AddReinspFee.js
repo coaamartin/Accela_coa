@@ -20,7 +20,7 @@ function script196_AddReinspFee() {
 	
 	logDebug("script196_AddReinspFee started.");
 	try { 
-		if (inspResult == "Failed") {
+		if (inspResult == "Fail") {
 			updateTask("Inspection","Reinspection Required","updated by script","updated by script");
 			deactivateTask("Inspection");
 			activateTask("Fee Processing");
