@@ -7,7 +7,7 @@ function forestryScript153_forestryReviewInsp(){
             
             if(ifTracer(!isScheduled("Planting"), 'Planting inspection NOT scheduled')){
                 var plantInspId = scheduleInspectionCustom("Planting", 35);
-                copyGuideSheetItemsByStatus(inspId, plantInspId);
+				copyGSItemsByStatusAndSheeType(inspId, plantInspId, "FORESTRY INSPECTOR", "Yes");
             }
             
             resultWorkflowTask("Site Review", "Plant");
