@@ -1,6 +1,5 @@
 function forestryScript26_check4Dups(){
     try{
-        var sourceOfRequest = AInfo["Source of Request"];
         var checkForDups = AInfo["Check for Duplicates"];
         var possibleDupAltIds = "";
         
@@ -16,9 +15,8 @@ function forestryScript26_check4Dups(){
                 // get cap type
                 var relType = relCap.getCapType().toString();
                 var relStatus = relCap.getCapStatus();
-                var relSoR = getAppSpecific("Source of Request",relCapId);
                 
-                if(relType.startsWith("Forestry/Request") && matches(relStatus, "Wait List", "Assigned", "Submitted", "Working") && relSoR == sourceOfRequest){
+                if(relType.startsWith("Forestry/Request") && matches(relStatus, "Wait List", "Assigned", "Submitted", "Working")){
                     possibleDupAltIds += relCapId.getCustomID() + ",";
                 }
             }
