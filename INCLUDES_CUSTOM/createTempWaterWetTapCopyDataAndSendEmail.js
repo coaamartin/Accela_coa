@@ -21,6 +21,7 @@ function createTempWaterWetTapCopyDataAndSendEmail(emailTemplate) {
 		aa.cap.createAppHierarchy(capId, childCapId);
 	}
 	editAppSpecific("Application ID",capId.getCustomID());
+	editAppSpecific("Utility Permit Number",capId.getCustomID(), childCapId);
 
 	if (childCapId != null) {
 		var rNewLicIdString = childCapId.getCustomID();
