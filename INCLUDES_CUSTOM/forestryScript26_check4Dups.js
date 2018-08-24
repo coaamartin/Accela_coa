@@ -16,7 +16,7 @@ function forestryScript26_check4Dups(){
                 var relType = relCap.getCapType().toString();
                 var relStatus = relCap.getCapStatus();
                 
-                if(relType.startsWith("Forestry/Request") && matches(relStatus, "Wait List", "Assigned", "Submitted", "Working")){
+                if(relType.startsWith("Forestry/") && matches(relStatus, "Wait List","Assigned","Submitted","Working","No Plant","Planted","Removed","Complete Not Stake", "Complete Staked","Warranty Failed")){
                     possibleDupAltIds += relCapId.getCustomID() + ",";
                 }
             }
