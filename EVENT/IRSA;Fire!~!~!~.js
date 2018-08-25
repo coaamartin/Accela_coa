@@ -62,11 +62,18 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 	//var targetDate = new Date(targetDateString);
 	//var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
 
+	//scheduleInspection(newInspType,daysAhead,inspector);
+	scheduleInspectDate(newInspType,schedDate,inspector);
+	//copy checklist to new inspection
+	var newInspId = getScheduledInspId(newInspType);
+	if (newInspId) {
+		copyGuideSheetItemsByStatus(inspId, newInspId);
+	}
+	
 	//delete full Custom List on the record
 	removeASITable("Fire Violations");
 
 	//insert a row for each item on the checklist that was in violation
-
 	var gsi = getGuideSheetObjects(inspId);
 	if (gsi) {
 		for (var gs in gsi) {
@@ -98,13 +105,7 @@ if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection
 		}
 	}
 
-	//scheduleInspection(newInspType,daysAhead,inspector);
-	scheduleInspectDate(newInspType,schedDate,inspector)
-	//copy checklist to new inspection
-	var newInspId = getScheduledInspId(newInspType);
-	if (newInspId) {
-		copyGuideSheetItemsByStatus(inspId, newInspId);
-	}
+
 }
 
 // notify all contacts and attach to record communications
