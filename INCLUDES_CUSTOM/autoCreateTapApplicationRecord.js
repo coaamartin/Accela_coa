@@ -32,7 +32,7 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 				var childRecordToCreatedStructure = childRecordToCreated.split("/");
 				//var utilityServiceRecordStructure = utilityServiceRecord.split("/");
 				
-				/*
+				
 				createChildGeneric(
 					childRecordToCreatedStructure[0], 
 					childRecordToCreatedStructure[1], 
@@ -46,29 +46,29 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 						copyOwner: true,
 						copyContacts: true,
 						customFields: [
-							{ key: "ofResidentialUnitsASI", val: AInfo[parentofResidentialUnitsASI] },
-							{ key: "BuildingSqFt", val: AInfo[parentBuildingSqFt] }
+							{ key: ofResidentialUnitsASI, val: AInfo[parentofResidentialUnitsASI] },
+							{ key: BuildingSqFt, val: AInfo[parentBuildingSqFt] }
 						] 					
 					}
 				)
-				*/
 				
-				 var appCreateResult = aa.cap.createApp(childRecordToCreatedStructure[0], childRecordToCreatedStructure[1], childRecordToCreatedStructure[2],
-				 		childRecordToCreatedStructure[3], "");
+				
+				//var appCreateResult = aa.cap.createApp(childRecordToCreatedStructure[0], childRecordToCreatedStructure[1], childRecordToCreatedStructure[2],
+				// 		childRecordToCreatedStructure[3], "");
 
-				 if (appCreateResult.getSuccess()) {
-				 	var newId = appCreateResult.getOutput();
-				 	aa.cap.createAppHierarchy(capId, newId);
-				 	copyAddresses(capId, newId);
-				 	copyParcels(capId, newId);
-				 	copyOwner(capId, newId);
-				 	copyContacts(capId, newId);
-				 	editAppSpecific(ofResidentialUnitsASI, AInfo[parentofResidentialUnitsASI], newId);
-				 	editAppSpecific(BuildingSqFt, AInfo[parentBuildingSqFt], newId);
-				 	logDebug("child cap has been created and copy the data : " + newId);
-				 } else {
-				 	logDebug("Unable to create planting record ex. : " + appCreateResult.getErrorMessage());
-				 }
+				// if (appCreateResult.getSuccess()) {
+				// 	var newId = appCreateResult.getOutput();
+				// 	aa.cap.createAppHierarchy(capId, newId);
+				// 	copyAddresses(capId, newId);
+				// 	copyParcels(capId, newId);
+				// 	copyOwner(capId, newId);
+				// 	copyContacts(capId, newId);
+				// 	editAppSpecific(ofResidentialUnitsASI, AInfo[parentofResidentialUnitsASI], newId);
+				// 	editAppSpecific(BuildingSqFt, AInfo[parentBuildingSqFt], newId);
+				// 	logDebug("child cap has been created and copy the data : " + newId);
+				// } else {
+				// 	logDebug("Unable to create planting record ex. : " + appCreateResult.getErrorMessage());
+				//}
 
 				//Removed the creation of the Utility Service record per latest specs.
 			}
