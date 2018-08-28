@@ -8,6 +8,7 @@ function failedMJInspectionAutomation() {
 	
 	//define number of days to schedule next inspection
 	var daysToAdd = 7;
+	var emailTemplateName = "LIC MJ INSPECTION CORRECTION REPORT # 231";
 		
 	//check for failed inspections, schedule new inspection, and email applicant with report
 	for (s in inspectionTypesAry) {
@@ -16,22 +17,15 @@ function failedMJInspectionAutomation() {
 			//schedule new inspection 7 days out from failed inspection date
 			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
 			scheduleInspectDate(inspType, newInspSchedDate);
-			
-			//get applicant
-			var applicant = getContactByType("Applicant", capId);
-			if (!applicant || !applicant.getEmail()) {
-				logDebug("**WARN no applicant found on or no email capId=" + capId);
-				return false;
-			}
 
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 
-			var reportTemplate = "";
+			var reportTemplate = "MJ_License";
 			var reportParams = aa.util.newHashtable();
-			addParameter(reportParams, "RecordID", capIDString);
+			addParameter(reportParams, "Record_ID", capIDString);
 			
 			if (inspId) {
 				addParameter(eParams, "$$inspId$$", inspId);
@@ -49,7 +43,8 @@ function failedMJInspectionAutomation() {
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			emailContacts("Applicant", "LIC MJ INSPECTION CORRECTION REPORT # 231", eParams, reportTemplate, reportParams);
+			//emailContacts("Applicant", "LIC MJ INSPECTION CORRECTION REPORT # 231", eParams, reportTemplate, reportParams);
+			emailContactsWithReportLinkASync("Applicant", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
 			
 			return true;
 		}
