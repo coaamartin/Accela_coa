@@ -26,7 +26,6 @@ function failedMJInspectionAutomation() {
 			var reportTemplate = "MJ_Compliance_Corrections_Letter";
 			var reportParams = aa.util.newHashtable();
 			addParameter(reportParams, "InspActNumber", inspId);
-			logDebug("Inspection ID: " + inspId);
 			
 			if (inspId) {
 				addParameter(eParams, "$$inspId$$", inspId);
@@ -44,7 +43,6 @@ function failedMJInspectionAutomation() {
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			//emailContacts("Applicant", "LIC MJ INSPECTION CORRECTION REPORT # 231", eParams, reportTemplate, reportParams);
 			emailContactsWithReportLinkASync("Applicant", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
 			
 			return true;
