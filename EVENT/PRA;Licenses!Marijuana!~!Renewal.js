@@ -1,4 +1,3 @@
-
 // Renewal script
 if (balanceDue == 0) {
 
