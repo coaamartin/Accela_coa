@@ -60,7 +60,7 @@ function createLicenseCoA(initStatus, copyASI, licWfTask, licWfStatus){
                 }
             vLicenseObj.setExpiration(newExpDate);
 
-            updateTask(licWfTask, licWfStatus, "Issued via EMSE", "Issued via EMSE", vLicenseCapID);
+            updateTask(licWfTask, licWfStatus, "Issued via EMSE", "Issued via EMSE", null, vLicenseCapID);
 
             logDebug("createLicenseCoA() started.");
             return vLicenseCapID;
