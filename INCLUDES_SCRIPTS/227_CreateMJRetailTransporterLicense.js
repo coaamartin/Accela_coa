@@ -1,4 +1,6 @@
 //Start - 227 MJ Retail Transporter License Creation
+
+// DB remove event logic
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;
@@ -74,29 +76,33 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		vLicenseObj.setExpiration(newExpDate);
 		
 		//Update License Workflow
-		tmpCap = capId;
-		capId = vLicenseID;
-		updateTask("License Status", "Active", "Updated by Script 226_CreateMJTestingFacilityLicense", "Update by Script 226_CreateMJTestingFacilityLicense");
-		capId = tmpCap;
+		// DB remove capID assignment
+		//tmpCap = capId;
+		//capId = vLicenseID;
+		//updateTask("License Status", "Active", "Updated by Script 226_CreateMJTestingFacilityLicense", "Update by Script 226_CreateMJTestingFacilityLicense");
+		updateTask("License Status", "Active", "Updated by Script 226_CreateMJTestingFacilityLicense", "Update by Script 226_CreateMJTestingFacilityLicense",vLicenseID);
+		//capId = tmpCap;
 
 		//Generate license report and email
 		var vEmailTemplate;
 		var vReportTemplate;
 
-		if (appMatch("Licenses/Marijuana/Retail Transporter/License", vLicenseID) && (wfStatus == "Issued")) {
+		//if (appMatch("Licenses/Marijuana/Retail Transporter/License", vLicenseID) && (wfStatus == "Issued")) {
 			vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
 			vReportTemplate = "MJ_License";
-			tmpCap = capId;
-			capId = vLicenseID;
+			//tmpCap = capId;
+			//capId = vLicenseID;
+			
+			// create a custom function for scheduleInspection that uses 1. a capId param 2. uses dateAddHC. 3. use 55 business days instead of 77 cal days
 			scheduleInspection("MJ AMED Inspection", 77, "DALLEN", " ", "Scheduled by Script 227");
-			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 227");
+			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 227"); 
 			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 227");
 			scheduleInspection("MJ Building Inspections - Mechanical", 77, "SLCLARK", " ", "Scheduled by Script 227");
 			scheduleInspection("MJ Building Inspections - Life Safety", 77, "SLCLARK", " ", "Scheduled by Script 227");
 			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "DALLEN", " ", "Scheduled by Script 227");
 			scheduleInspection("MJ Building Inspections - Structural", 77, "SLCLARK", " ", "Scheduled by Script 227");
-			capId = tmpCap;
-		}
+			//capId = tmpCap;
+		//}
 
 		//are these the parameters used in the email or report?
 		
@@ -108,7 +114,8 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
-		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
+		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());\
+		//DB -Add deeplink to rcord - verify email template
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
 		//addParameter(vEParams, "$$recordDeepUrl$$", recordACAUrl);
 
@@ -116,10 +123,10 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		addParameter(vRParams, "Record_ID", vLicenseID.getCustomID());
 
 		// Generate report/email and save to new License record
-		tmpCap = capId;
-		capId = vLicenseID;
+		//tmpCap = capId;
+		//capId = vLicenseID;
 		emailContacts("All", vEmailTemplate, vEParams, vReportTemplate, vRParams);
-		capId = tmpCap;
+		//capId = tmpCap;
 
 	}
 }
