@@ -77,17 +77,34 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 	}
 }
 
-
-
-//removeContactsNonApplicantFromCap()
+//removes all non-applicant contacts. if a primary applicant is set, removes all other applicants
 function removeContactsNonApplicantFromCap(itemCapId){
     var cons = aa.people.getCapContactByCapID(itemCapId).getOutput();
-    for (x in cons){
+	var primaryPresent = null;
+    for (x in cons) {
         conSeqNum = cons[x].getPeople().getContactSeqNumber();
-	    if (conSeqNum){	
+	    if (conSeqNum) {	
 			if (cons[x].getPeople().getContactType() != "Applicant") {
 				aa.people.removeCapContact(itemCapId, conSeqNum);
+			} else if (cons[x].getPeople.getFlag() == "Y") {
+				primaryPresent = true;
+			} else {
+				primaryPresent = false;
 			}
 	    }
     }
+	
+	if (primaryPresent = true) {
+		for (y in cons) {
+			conSeqNum = cons[y].getPeople().getContactSeqNumber();
+			if (conSeqNum) {
+				if (cons[y].getPeople.getFlag() != "Y") {
+					aa.people.removeCapContact(itemCapId, conSeqNum);
+				}
+			} else {
+				logDebug("There are no remaining contacts on this record");
+			}
+		}
+	}
+	logDebug("Removed Non-Applicant Contacts from TMP record");
 }
