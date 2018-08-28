@@ -29,7 +29,8 @@ function addInspectionFeeAndSendEmail(workFlowTask, workflowStatusArray, asiFiel
 			feeAmt = 30.75;
 		}
 
-		addFee("WAT_IPLAN_01", "WAT_IPLAN", "FINAL", feeAmt, "Y");
+		// disabled see comments in script 191
+		//addFee("WAT_IPLAN_01", "WAT_IPLAN", "FINAL", feeAmt, "Y");
 
 		var ownerEmail = null, applicantEmail = null;
 		var owners = aa.owner.getOwnerByCapId(capId);
