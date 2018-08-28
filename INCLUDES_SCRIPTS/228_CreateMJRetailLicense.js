@@ -1,8 +1,4 @@
 //Start - 228 MJ Retail License Creation/Update Script
-
-/************************************************************************************
- * DECOMMISSIONED THIS SCRIPT.  MOVED TO createLicenseCoA(), sendMJLic()
- ************************************************************************************/
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;

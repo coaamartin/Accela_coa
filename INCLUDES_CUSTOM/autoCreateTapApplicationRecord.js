@@ -33,7 +33,7 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 				//var utilityServiceRecordStructure = utilityServiceRecord.split("/");
 				
 				
-				var childCapId = createChildGeneric(
+				createChildGeneric(
 					childRecordToCreatedStructure[0], 
 					childRecordToCreatedStructure[1], 
 					childRecordToCreatedStructure[2],
@@ -52,7 +52,6 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 					}
 				)
 				
-				removeContactsNonApplicantFromCap(childCapId);
 				
 				//var appCreateResult = aa.cap.createApp(childRecordToCreatedStructure[0], childRecordToCreatedStructure[1], childRecordToCreatedStructure[2],
 				// 		childRecordToCreatedStructure[3], "");
@@ -75,18 +74,4 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 			}
 		}
 	}
-}
-
-//removes all non-applicant contacts
-function removeContactsNonApplicantFromCap(itemCapId){
-    var cons = aa.people.getCapContactByCapID(itemCapId).getOutput();
-    for (x in cons) {
-        conSeqNum = cons[x].getPeople().getContactSeqNumber();
-	    if (conSeqNum) {	
-			if (cons[x].getPeople().getContactType() != "Applicant") {
-				aa.people.removeCapContact(itemCapId, conSeqNum);
-			} 
-	    }
-    }
-	logDebug("Removed Non-Applicant Contacts from TMP record");
 }
