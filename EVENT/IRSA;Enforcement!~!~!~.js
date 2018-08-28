@@ -108,7 +108,7 @@ if(inspType == "Snow Fee 2nd Re-Inspection"){
     enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abate/Summons", null, null, false, "Snow Fee 2nd Reinspect", "Snow Abate/Summons");
 }
 
-if(inspType == "Initial Housing Inspectionn"){
+if(inspType == "Initial Housing Inspection"){
     //Script 346
     enfProcessInspResult("Initial Housing Inspection", "Inspection Failed", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "Initial Inspection", "Inspection Failed");
     enfProcessInspResult("Initial Housing Inspection", "Inspection Passed", null, null, false, "Initial Inspection", "Inspection Passed");
@@ -121,7 +121,7 @@ if(inspType == "1st Housing Re-Inspection"){
     //Script 346
     enfProcessInspResult("1st Housing Re-Inspection", "Inspection Failed", "2nd Housing Re-Inspection", "2nd Re-Inspection Scheduled Date", false, "1st Re-inspection","Inspection Failed");
     enfProcessInspResult("1st Housing Re-Inspection", "Inspection Passed", null, null, false, "1st Re-inspection","Inspection Passed");
-    enfProcessInspResult("1st Housing Re-Inspection", "Extension - Fee", "1st Housing Re-Inspectio,", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - Fee");
+    enfProcessInspResult("1st Housing Re-Inspection", "Extension - Fee", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - Fee");
     enfProcessInspResult("1st Housing Re-Inspection", "Extension - No Fee", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - No Fee");
 }
 
