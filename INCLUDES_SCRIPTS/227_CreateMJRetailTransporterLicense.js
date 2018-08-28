@@ -1,5 +1,7 @@
 //Start - 227 MJ Retail Transporter License Creation
-
+/************************************************************************************
+ * DECOMMISSIONED THIS SCRIPT.  MOVED TO createLicenseCoA(), sendMJLic()
+ ************************************************************************************/
 // DB remove event logic
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
@@ -91,8 +93,6 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 			vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
 			vReportTemplate = "MJ_License";
 			//tmpCap = capId;
-			//capId = vLicenseID;
-			
 			// create a custom function for scheduleInspection that uses 1. a capId param 2. uses dateAddHC. 3. use 55 business days instead of 77 cal days
 			scheduleInspection("MJ AMED Inspection", 77, "DALLEN", " ", "Scheduled by Script 227");
 			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 227"); 
