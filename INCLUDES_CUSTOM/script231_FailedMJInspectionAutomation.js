@@ -25,7 +25,7 @@ function failedMJInspectionAutomation() {
 
 			var reportTemplate = "MJ_Compliance_Corrections_Letter";
 			var reportParams = aa.util.newHashtable();
-			addParameter(reportParams, "Inspection_Sequence_Number", inspId);
+			addParameter(reportParams, "InspActNumber", inspId);
 			logDebug("Inspection ID: " + inspId);
 			
 			if (inspId) {
