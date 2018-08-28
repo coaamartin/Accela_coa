@@ -62,6 +62,7 @@ function createLicenseCoA(initStatus, copyASI, licWfTask, licWfStatus){
 
             updateTask(licWfTask, licWfStatus, "Issued via EMSE", "Issued via EMSE", vLicenseCapID);
 
+            logDebug("createLicenseCoA() started.");
             return vLicenseCapID;
         }
     }

@@ -1,5 +1,5 @@
 //Scripts 226, 227
-function sendMJLicEmail(){
+function sendMJLicEmail(itemCap){
     logDebug("sendMJLicEmail() started.");
     try{
         var vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
@@ -10,7 +10,7 @@ function sendMJLicEmail(){
         addParameter(vEParams, "$$wfComment$$", wfComment);
         
         var vRParams = aa.util.newHashtable();
-        addParameter(vRParams, "Record_ID", vLicenseID.getCustomID());
+        addParameter(vRParams, "Record_ID", itemCap.getCustomID());
         
         emailContactsWithReportLinkASync("ALL", vEmailTemplate, vEParams, vReportTemplate, vRParams, null, null);
     }
