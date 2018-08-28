@@ -57,7 +57,14 @@ function emailContactsWithReportLinkASync(pSendEmailToContactTypes, pEmailTempla
 		logDebug("pChangeReportName is defined");
 		vChangeReportName = pChangeReportName;
 	}
-	
+    
+    var itemCap = capId;
+    if (arguments.length == 8){
+        if (arguments[7] != null){
+            logDebug("Using capId: " + arguments[7]);
+            itemCap = arguments[7];
+        }
+    }	
 	
 	logDebug("Provided contact types to send to: " + pSendEmailToContactTypes);
 
