@@ -60,17 +60,18 @@ function createLicenseCoA(initStatus, copyASI, licWfTask, licWfStatus){
                 }
             vLicenseObj.setExpiration(newExpDate);
 
-            updateTask(licWfTask, licWfStatus, "Issued via EMSE", "Issued via EMSE", null, vLicenseCapID);
+            var processCode = getWfProcessCodeByCapId(vLicenseCapID);
+            updateTask(licWfTask, licWfStatus, "Issued via EMSE", "Issued via EMSE", processCode, vLicenseCapID);
 
             logDebug("createLicenseCoA() ended. Created lic: " + vLicenseCapID.getCustomID());
             return vLicenseCapID;
         }
-		else{
-			logDebug("createLicenseCoA() ended. A parent license was found. Lic Already exists: " + vLicenseCapID.getCustomID())
-			return vLicenseCapID;
-		}
-		logDebug("createLicenseCoA() ended with false.");
-		return false;
+        else{
+            logDebug("createLicenseCoA() ended. A parent license was found. Lic Already exists: " + vLicenseCapID.getCustomID())
+            return vLicenseCapID;
+        }
+        logDebug("createLicenseCoA() ended with false.");
+        return false;
     }
     catch(err){
         showMessage = true;
