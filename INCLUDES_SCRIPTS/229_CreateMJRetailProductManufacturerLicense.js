@@ -77,7 +77,6 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 			} 
 		vLicenseObj.setExpiration(newExpDate);
 		
-		
 		//Update License Workflow
 		tmpCap = capId;
 		capId = vLicenseID;

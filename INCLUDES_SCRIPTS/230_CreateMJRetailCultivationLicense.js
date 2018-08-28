@@ -1,4 +1,7 @@
 //Start - 230 MJ Retail Cultivation License Creation
+/*************************************************
+ * DECOMMISSIONED: MOVED TO createLicenseCoA() and sendMJLic()
+ **************************************************/
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;
@@ -65,6 +68,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		//Activate the license records expiration cycle
 		vLicenseObj = new licenseObject(null, vLicenseID);
 		vLicenseObj.setStatus("Active");
+		
 		thisLicExpOb = vLicenseObj.b1Exp
 		expUnit = thisLicExpOb.getExpUnit()
 		expInt = thisLicExpOb.getExpInterval()
