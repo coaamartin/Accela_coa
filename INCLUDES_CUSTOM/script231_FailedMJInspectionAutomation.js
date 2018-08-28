@@ -29,7 +29,6 @@ function failedMJInspectionAutomation() {
 			
 			if (inspId) {
 				addParameter(eParams, "$$inspId$$", inspId);
-				reportParams.put("inspId", inspId);
 			}
 			if (inspResult)
 				addParameter(eParams, "$$inspResult$$", inspResult);
