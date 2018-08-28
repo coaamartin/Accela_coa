@@ -1,4 +1,7 @@
 //Start - 229 MJ Retail Product Manufacturer License Creation
+/*************************************************
+ * DECOMMISSIONED: MOVED TO createLicenseCoA() and sendMJLic()
+ **************************************************/
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;
@@ -65,6 +68,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		//Activate the license records expiration cycle
 		vLicenseObj = new licenseObject(null, vLicenseID);
 		vLicenseObj.setStatus("Active");
+		
 		thisLicExpOb = vLicenseObj.b1Exp
 		expUnit = thisLicExpOb.getExpUnit()
 		expInt = thisLicExpOb.getExpInterval()
@@ -72,6 +76,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 			newExpDate = dateAddMonths(null, expInt);
 			} 
 		vLicenseObj.setExpiration(newExpDate);
+		
 		
 		//Update License Workflow
 		tmpCap = capId;
