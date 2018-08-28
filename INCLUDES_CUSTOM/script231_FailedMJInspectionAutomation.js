@@ -25,7 +25,7 @@ function failedMJInspectionAutomation() {
 
 			var reportTemplate = "MJ_License";
 			var reportParams = aa.util.newHashtable();
-			addParameter(reportParams, "Record_ID", capIDString);
+			addParameter(reportParams, "Record_ID", capId);
 			
 			if (inspId) {
 				addParameter(eParams, "$$inspId$$", inspId);
