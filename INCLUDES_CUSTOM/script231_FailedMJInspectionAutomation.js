@@ -23,9 +23,9 @@ function failedMJInspectionAutomation() {
 			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 
-			var reportTemplate = "MJ_License";
+			var reportTemplate = "MJ_Compliance_Corrections_Letter";
 			var reportParams = aa.util.newHashtable();
-			addParameter(reportParams, "Record_ID", capId);
+			addParameter(reportParams, "Inspection_Sequence_Number", inspId);
 			
 			if (inspId) {
 				addParameter(eParams, "$$inspId$$", inspId);
