@@ -11,6 +11,7 @@ if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Is
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Life Safety", 55, "SLCLARK", " ", "Scheduled by Script 229", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Security Inspections - 3rd Party", 55, "DALLEN", " ", "Scheduled by Script 229", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Structural", 55, "SLCLARK", " ", "Scheduled by Script 229", newLicCapId);
+        scheduleInspectionWithCapIdBusinessDays("MJ Zoning Inspections", 55, "SLCLARK", " ", "Scheduled by Script 229", newLicCapId);
     }
     //END Script 229
 }
