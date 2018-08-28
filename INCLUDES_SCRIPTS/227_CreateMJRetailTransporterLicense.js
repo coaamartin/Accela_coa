@@ -117,7 +117,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
-		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());\
+		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
 		//DB -Add deeplink to rcord - verify email template
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
 		//addParameter(vEParams, "$$recordDeepUrl$$", recordACAUrl);
