@@ -62,14 +62,16 @@ function createLicenseCoA(initStatus, copyASI, licWfTask, licWfStatus){
 
             updateTask(licWfTask, licWfStatus, "Issued via EMSE", "Issued via EMSE", null, vLicenseCapID);
 
-            logDebug("createLicenseCoA() started.");
+            logDebug("createLicenseCoA() ended. Created lic: " + vLicenseCapID.getCustomID());
             return vLicenseCapID;
         }
+		logDebug("createLicenseCoA() ended with false.");
+		return false;
     }
     catch(err){
         showMessage = true;
         comment("Error on custom function createLicenseCoA(). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
         logDebug("Error on custom function createLicenseCoA(). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
     }
-    logDebug("createLicenseCoA() started.");
+    logDebug("createLicenseCoA() ended.");
 }//END createLicenseCoA()
