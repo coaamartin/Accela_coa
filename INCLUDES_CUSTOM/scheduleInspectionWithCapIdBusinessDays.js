@@ -5,6 +5,7 @@ function scheduleInspectionWithCapIdBusinessDays(iType,DaysAhead) // optional in
     var inspectorObj = null;
     var inspTime = null;
     var inspComm = "Scheduled via Script";
+	var vCapId = capId;
     if (arguments.length >= 3) 
         if (arguments[2] != null){
             var inspRes = aa.person.getUser(arguments[2])
