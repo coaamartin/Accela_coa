@@ -1,5 +1,8 @@
 //Start - 227 MJ Retail Transporter License Creation
 
+/*************************************************
+ * DECOMMISSIONED: MOVED TO createLicenseCoA() and sendMJLic()
+ **************************************************/
 // DB remove event logic
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;

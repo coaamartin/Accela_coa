@@ -1,4 +1,7 @@
 //Start - 226 MJ Testing Facility License Creation
+/*************************************************
+ * DECOMMISSIONED: MOVED TO createLicenseCoA() and sendMJLic()
+ **************************************************/
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;
