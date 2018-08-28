@@ -86,7 +86,7 @@ function removeContactsNonApplicantFromCap(itemCapId){
 	    if (conSeqNum) {	
 			if (cons[x].getPeople().getContactType() != "Applicant") {
 				aa.people.removeCapContact(itemCapId, conSeqNum);
-			} else if (cons[x].getPeople.getFlag() == "Y") {
+			} else if (cons[x].getPeopleModel.getFlag() == "Y") {
 				primaryPresent = true;
 			} else {
 				primaryPresent = false;
@@ -98,7 +98,7 @@ function removeContactsNonApplicantFromCap(itemCapId){
 		for (y in cons) {
 			conSeqNum = cons[y].getPeople().getContactSeqNumber();
 			if (conSeqNum) {
-				if (cons[y].getPeople.getFlag() != "Y") {
+				if (cons[y].getPeopleModel.getFlag() != "Y") {
 					aa.people.removeCapContact(itemCapId, conSeqNum);
 				}
 			} else {
