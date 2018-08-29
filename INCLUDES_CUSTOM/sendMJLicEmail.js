@@ -12,7 +12,7 @@ function sendMJLicEmail(itemCap){
         var vRParams = aa.util.newHashtable();
         addParameter(vRParams, "Record_ID", itemCap.getCustomID());
         
-        emailContactsWithReportLinkASync("Applicant,Responsible Party", vEmailTemplate, vEParams, vReportTemplate, vRParams, null, null, itemCap);
+        emailContactsWithReportLinkASync("Applicant,Responsible Party,Business Owner", vEmailTemplate, vEParams, vReportTemplate, vRParams, null, null, itemCap);
     }
     catch(err){
         showMessage = true;
