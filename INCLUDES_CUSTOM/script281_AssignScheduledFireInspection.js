@@ -56,6 +56,24 @@ function script281_AssignScheduledFireInspection(){
                     case "AURORACO/FIRE/NA/NA/NA/NA/FS11":
                         userID = "FIRE STATION 11";
                         break;
+                    case "AURORACO/FIRE/NA/NA/NA/NA/FS12":
+                        userID = "FIRE STATION 12";
+                        break;
+                    case "AURORACO/FIRE/NA/NA/NA/NA/FS13":
+                        userID = "FIRE STATION 13";
+                        break;
+                    case "AURORACO/FIRE/NA/NA/NA/NA/FS14":
+                        userID = "FIRE STATION 14";
+                        break;
+                    case "AURORACO/FIRE/NA/NA/NA/NA/FS15":
+                        userID = "FIRE STATION 15";
+                        break;
+                    case "AURORACO/FIRE/NA/NA/NA/NA/FS16":
+                        userID = "FIRE STATION 16";
+                        break;
+                    case "AURORACO/FIRE/NA/NA/NA/NA/FS17":
+                        userID = "FIRE STATION 17";
+                        break;
                     default:
                         break;
                 }
