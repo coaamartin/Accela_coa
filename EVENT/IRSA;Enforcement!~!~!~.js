@@ -408,30 +408,10 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     
     var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Summons Issuance",0, currentUserID);
     
-    if(newInspId) {
-		var checkList2Copy = "";
-        var clItemStatus2Copy = [];
-        switch(inspResult + ""){
-            case "Skip to Summons":
-                clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
-                break;
-            case "Snow Abate/Summons":
-                clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
-                break;
-            case "Abate/Summons":
-                clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
-                break;
-            case "Issue Summons":
-                clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
-                break;
-            default:
-                break;
-        }
+    if(newInspId) {=
+        var clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
 		
-		if(appMatch("Enforcement/Incident/Snow/NA")) checkList2Copy = 'Snow';
-		if(appMatch("Enforcement/Incident/Zoning/NA")) checkList2Copy = '';
-        
-        if(clItemStatus2Copy.length > 0 && checkList2Copy != "") copyGSItemsByStatusAndSheeType(inspId, newInspId, checkList2Copy, clItemStatus2Copy, capId, newChildCapId);
+        if(clItemStatus2Copy.length > 0) copyCheckListByItemStatus(inspId, newInspId, clItemStatus2Copy, capId, newChildCapId);
     }
 }           
 logDebug("Script 343 END");
@@ -487,17 +467,19 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     // get the inspector from GIS and assign the rec to this user
     inspUserObj = null;
     x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
-    logDebug(x[0]["OFFICER_NAME"]);
-    
-    var offFullName = x[0]["OFFICER_NAME"];
-    
-    var offFname = offFullName.substr(0,offFullName.indexOf(' '));
-    logDebug(offFname);
-    
-    var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
-    logDebug(offLname);
-    
-    inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+	if(x[0]){
+        logDebug(x[0]["OFFICER_NAME"]);
+        
+        var offFullName = x[0]["OFFICER_NAME"];
+        
+        var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+        logDebug(offFname);
+        
+        var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+        logDebug(offLname);
+        
+        inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+	}
     
     var appName = "Recordation created for Record Number " + capId.customID;
     var newChildCapId = createChild('Enforcement','Incident','Record with County','NA',appName);
@@ -514,16 +496,9 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Recordation Photos",0, currentUserID);
     
     if(newInspId) {
-        var clItemStatus2Copy = [];
-        switch(inspResult + ""){
-            case "Abate/Record":
-                clItemStatus2Copy = ['Abate/Record'];
-                break;
-            default:
-                break;
-        }
-        
-        if(clItemStatus2Copy.length > 0) copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', clItemStatus2Copy, capId, newChildCapId);
+        var clItemStatus2Copy = ["Abate/Record", "Record/Summons", "Record"];
+		
+        if(clItemStatus2Copy.length > 0) copyCheckListByItemStatus(inspId, newInspId, clItemStatus2Copy, capId, newChildCapId);
     }
 }           
 logDebug("Script 345 END");
