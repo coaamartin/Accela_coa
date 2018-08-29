@@ -8,7 +8,7 @@ function scheduleInspectionCustom4CapId(itemCap, iType,DaysAhead) // optional in
     if (arguments.length >= 4) 
         if (arguments[3] != null)
         {
-        var inspRes = aa.person.getUser(arguments[2])
+        var inspRes = aa.person.getUser(arguments[3])
         if (inspRes.getSuccess())
             var inspectorObj = inspRes.getOutput();
         }

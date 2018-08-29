@@ -372,7 +372,7 @@ closeTask("Incident Status","Closed","","");
 //*********************************************************************************************************
 logDebug("Script 343 START");
 if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || inspResult == "Abate/Summons" ||
-	inspResult == "Issue Summons" )
+    inspResult == "Issue Summons" )
 {
     logDebug("Script 343: criteria met");
     
@@ -391,25 +391,22 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     
     inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
     
-    var currentCapId = capId;
+    //var currentCapId = capId;
     var appName = "Summons created for Record Number " + capId.customID;
-    var newChild = createChild('Enforcement','Incident','Summons','NA',appName);
-    var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
-    copyRecordDetailsLocal(capId, newChild);
+    var newChildCapId = createChild('Enforcement','Incident','Summons','NA',appName);
+    var appHierarchy = aa.cap.createAppHierarchy(capId, newChildCapId);
+    copyRecordDetailsLocal(capId, newChildCapId);
     
-    copyAddresses(capId, newChild);
-    copyParcels(capId, newChild);
-    copyOwner(capId, newChild);
+    copyAddresses(capId, newChildCapId);
+    copyParcels(capId, newChildCapId);
+    copyOwner(capId, newChildCapId);
     
+    if(inspUserObj != null) 
+        assignCap(inspUserObj.getUserID(), newChildCapId);
     
+    var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Summons Issuance",0, currentUserID);
     
-
-    capId = newChild;
-    if(inspUserObj != null)
-        { assignCap(inspUserObj.getUserID()); }
-    scheduleInspection("Summons Issuance",0, currentUserID);
-    capId = currentCapId;
-
+    if(newInspId) aa.print("newInspId:" + newInspId);
 }           
 logDebug("Script 343 END");
 
