@@ -78,10 +78,10 @@ function script281_AssignScheduledFireInspection(){
                         break;
                 }
             }
-            
-            if(userID != null)
-                assignInspection(inspId,userID);
         }
+        
+        if(userID != null)
+            assignInspection(inspId,userID);
     }
     catch(err){
         logDebug("Error on script281_AssignScheduledFireInspection(). Please contact administrator. Err: " + err);
