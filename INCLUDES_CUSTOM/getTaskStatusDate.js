@@ -26,7 +26,7 @@ function getTaskStatusDate(vWfTask, vWfStatus) // optional process name, capId
 	if (workflowResult.getSuccess())
 		wfObj = workflowResult.getOutput();
 	else {
-		logDebug("**ERROR: Failed to get workflow object: " + wfObj.getErrorMessage());
+		logDebug("**ERROR: Failed to get workflow object");
 		return false;
 	}
 
