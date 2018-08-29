@@ -379,17 +379,19 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     // get the inspector from GIS and assign the rec to this user
     inspUserObj = null;
     x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
-    logDebug(x[0]["OFFICER_NAME"]);
-    
-    var offFullName = x[0]["OFFICER_NAME"];
-    
-    var offFname = offFullName.substr(0,offFullName.indexOf(' '));
-    logDebug(offFname);
-    
-    var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
-    logDebug(offLname);
-    
-    inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+	if(x[0]){
+        logDebug(x[0]["OFFICER_NAME"]);
+        
+        var offFullName = x[0]["OFFICER_NAME"];
+        
+        var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+        logDebug(offFname);
+        
+        var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+        logDebug(offLname);
+        
+        inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+	}
     
     //var currentCapId = capId;
     var appName = "Summons created for Record Number " + capId.customID;
