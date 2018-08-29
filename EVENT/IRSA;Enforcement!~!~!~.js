@@ -421,6 +421,8 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
             case "Issue Summons":
                 clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
                 break;
+            default:
+                break;
         }
         
         if(clItemStatus2Copy.length > 0) copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', clItemStatus2Copy, capId, targetCapId);
