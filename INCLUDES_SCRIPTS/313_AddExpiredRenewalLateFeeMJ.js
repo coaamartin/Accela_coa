@@ -22,17 +22,12 @@ if (vLicenseId != null && vLicenseId != false) {
 	// Get the date of submittal to compare against license expiration.
 	// For ACA submitted records it will be the Application Acceptance - Submitted date.
 	// For non ACA submitted records it will be the Application Acceptance - Application Received date.
-	var vCompareDateString;
-	if (cap.isCreatedByACA() == true) {
-		vCompareDateString = getTaskStatusDate("Application Acceptance", "Submitted");
-	} else {
-		vCompareDateString = getTaskStatusDate("Application Acceptance", "Application Received");
-	}
-	logDebug("Delinquent fee check. ACA submittal: " + cap.isCreatedByACA() + " Expiration Date: " + vExpDateString + " Compare Date: " + vCompareDateString);
-	if (vCompareDateString != null && vCompareDateString != false) {
-		vCompareDate = new Date(vCompareDateString);
+	var vCompareDate = new Date();;
+	logDebug("Delinquent fee check. ACA submittal: " + cap.isCreatedByACA() + " Expiration Date: " + vExpDateString + " Compare Date: " + vCompareDate);
+	if (vCompareDate != null && vCompareDate != false) {
+		//vCompareDate = new Date(vCompareDateString);
 		if (vExpDate < vCompareDate) {
-			logDebug("Assessing delinquent fee. ACA submittal: " + cap.isCreatedByACA() + " Expiration Date: " + vExpDateString + " Compare Date: " + vCompareDateString);
+			logDebug("Assessing delinquent fee. ACA submittal: " + cap.isCreatedByACA() + " Expiration Date: " + vExpDateString + " Compare Date: " + vCompareDate);
 			if (appMatch("Licenses/Marijuana/Retail Cultivation/Renewal")) {
 				updateFee("LIC_MJRC_03", "LIC_MJ_RC", "FINAL", 1, "Y");				
 			} else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Renewal")) {
