@@ -425,7 +425,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
                 break;
         }
         
-        if(clItemStatus2Copy.length > 0) copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', clItemStatus2Copy, capId, targetCapId);
+        if(clItemStatus2Copy.length > 0) copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', clItemStatus2Copy, capId, newChildCapId);
     }
 }           
 logDebug("Script 343 END");
