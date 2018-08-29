@@ -408,7 +408,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     
     var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Summons Issuance",0, currentUserID);
     
-    if(newInspId) {=
+    if(newInspId) {
         var clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
 		
         if(clItemStatus2Copy.length > 0) copyCheckListByItemStatus(inspId, newInspId, clItemStatus2Copy, capId, newChildCapId);
