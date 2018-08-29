@@ -407,6 +407,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Summons Issuance",0, currentUserID);
     
     if(newInspId) {
+		var checkList2Copy = "";
         var clItemStatus2Copy = [];
         switch(inspResult + ""){
             case "Skip to Summons":
@@ -424,8 +425,11 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
             default:
                 break;
         }
+		
+		if(appMatch("Enforcement/Incident/Snow/NA")) checkList2Copy = 'Snow';
+		if(appMatch("Enforcement/Incident/Zoning/NA")) checkList2Copy = '';
         
-        if(clItemStatus2Copy.length > 0) copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', clItemStatus2Copy, capId, newChildCapId);
+        if(clItemStatus2Copy.length > 0 && checkList2Copy != "") copyGSItemsByStatusAndSheeType(inspId, newInspId, checkList2Copy, clItemStatus2Copy, capId, newChildCapId);
     }
 }           
 logDebug("Script 343 END");
@@ -493,25 +497,32 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     
     inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
     
-    var currentCapId = capId;
     var appName = "Recordation created for Record Number " + capId.customID;
-    var newChild = createChild('Enforcement','Incident','Record with County','NA',appName);
-    var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
-    copyRecordDetailsLocal(capId, newChild);
-    copyContacts(capId, newChild);
-    copyAddresses(capId, newChild);
-    copyParcels(capId, newChild);
-    copyOwner(capId, newChild);
+    var newChildCapId = createChild('Enforcement','Incident','Record with County','NA',appName);
+    var appHierarchy = aa.cap.createAppHierarchy(capId, newChildCapId);
+    copyRecordDetailsLocal(capId, newChildCapId);
+    copyContacts(capId, newChildCapId);
+    copyAddresses(capId, newChildCapId);
+    copyParcels(capId, newChildCapId);
+    copyOwner(capId, newChildCapId);
     
+    if(inspUserObj != null) 
+        assignCap(inspUserObj.getUserID(), newChildCapId);
     
+    var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Recordation Photos",0, currentUserID);
     
-
-    capId = newChild;
-    if(inspUserObj != null)
-        { assignCap(inspUserObj.getUserID()); }
-    scheduleInspection("Recordation Photos",0, currentUserID);
-    capId = currentCapId;
-
+    if(newInspId) {
+        var clItemStatus2Copy = [];
+        switch(inspResult + ""){
+            case "Abate/Record":
+                clItemStatus2Copy = ['Abate/Record'];
+                break;
+            default:
+                break;
+        }
+        
+        if(clItemStatus2Copy.length > 0) copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', clItemStatus2Copy, capId, newChildCapId);
+    }
 }           
 logDebug("Script 345 END");
 
