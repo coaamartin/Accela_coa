@@ -1,33 +1,36 @@
 //copyGSItemsByStatusAndSheeType()
 // copy guidesheet items by type and item status
-function copyGSItemsByStatusAndSheeType(fromInspId, toInspId, gsType, itemStatus){
+function copyGSItemsByStatusAndSheeType(fromInspId, toInspId, gsType, itemStatus){ //OPTIONAL: fromCap, toCap
     try{
+        logDebug("Copying checklist items with status of " + itemStatus + " from checklist " + gsType);
         //use capId by default
-        var itemCap = capId;
+        var fromCap = capId;
+        var toCap = capId;
         //previous inspection and current inspection
         var pInsp, cInsp;
         
         //optional capId
-        if (arguments.length > 4) itemCap = arguments[4];
+        if (arguments.length > 4) fromCap = arguments[4];
+        if (arguments.length > 5) toCap = arguments[5];
+        
+        logDebug("Copying from record: " + fromCap.getCustomID() + " to " + toCap.getCustomID()); 
         
         //Get inspections
-        var insps = aa.inspection.getInspections(itemCap).getOutput();
-        if (!insps || insps.length == 0) return false;
+        var insps = aa.inspection.getInspections(fromCap).getOutput();
+        if (!insps || insps.length == 0) { logDebug("No inspections in " + fromCap.getCustomID()); return false;}
         
         for (var i in insps)
-        {
             if (insps[i].getIdNumber() == fromInspId)
-            {
                 pInsp = insps[i].getInspection();
-            }
-            else if (insps[i].getIdNumber() == toInspId)
-            {
-                cInsp = insps[i].getInspection();
-            }
-        }
+        
+        var inspsTo = aa.inspection.getInspections(toCap).getOutput();
+        for(var i in inspsTo)
+            if (inspsTo[i].getIdNumber() == toInspId)
+                cInsp = inspsTo[i].getInspection();
+        
         
         //If cannot find inspections then return false
-        if (!pInsp || !cInsp) return false;
+        if (!pInsp || !cInsp) { logDebug("No inspections found."); return false; }
         
         for (var i in insps)
         {
@@ -49,8 +52,11 @@ function copyGSItemsByStatusAndSheeType(fromInspId, toInspId, gsType, itemStatus
                     var gGuideSheetItemModel = gGuideSheetItemModels.get(j);
                     var gGuideSheetType = gGuideSheetItemModel.getGuideType();
                     var gGuideSheetItemStatus = gGuideSheetItemModel.getGuideItemStatus();
-                    if(gGuideSheetType == gsType && gGuideSheetItemStatus == itemStatus)
-                        guideSheetItemList.add(gGuideSheetItemModel);
+                    if(gGuideSheetType == gsType){ 
+                        for(idxStatus in itemStatus)
+                            if(gGuideSheetItemStatus == itemStatus[idxStatus])
+                                guideSheetItemList.add(gGuideSheetItemModel);
+                    }
                 }
             }
         
@@ -62,7 +68,7 @@ function copyGSItemsByStatusAndSheeType(fromInspId, toInspId, gsType, itemStatus
         }       
         if (guideSheetList.size() > 0) {
             
-            var copyResult = aa.guidesheet.copyGGuideSheetItems(guideSheetList, itemCap, parseInt(toInspId), aa.getAuditID());
+            var copyResult = aa.guidesheet.copyGGuideSheetItems(guideSheetList, toCap, parseInt(toInspId), aa.getAuditID());
             if (copyResult.getSuccess()) {
                 logDebug("Successfully copy guideSheet items");
                 return true;

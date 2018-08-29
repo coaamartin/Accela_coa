@@ -407,7 +407,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Summons Issuance",0, currentUserID);
     
     if(newInspId) {
-		copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', 'Summons');
+		copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', ['Summons', 'Abate/Summons', 'Record/Summons'], capId, targetCapId);
 	}
 }           
 logDebug("Script 343 END");
