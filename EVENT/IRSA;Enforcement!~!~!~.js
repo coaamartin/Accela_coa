@@ -407,8 +407,24 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Summons Issuance",0, currentUserID);
     
     if(newInspId) {
-		copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', ['Summons', 'Abate/Summons', 'Record/Summons'], capId, targetCapId);
-	}
+        var clItemStatus2Copy = [];
+        switch(inspResult + ""){
+            case "Skip to Summons":
+                clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
+                break;
+            case "Snow Abate/Summons":
+                clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
+                break;
+            case "Abate/Summons":
+                clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
+                break;
+            case "Issue Summons":
+                clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
+                break;
+        }
+        
+        if(clItemStatus2Copy.length > 0) copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', clItemStatus2Copy, capId, targetCapId);
+    }
 }           
 logDebug("Script 343 END");
 
