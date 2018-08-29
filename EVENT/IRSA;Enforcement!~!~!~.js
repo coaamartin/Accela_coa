@@ -406,7 +406,9 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     
     var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Summons Issuance",0, currentUserID);
     
-    if(newInspId) aa.print("newInspId:" + newInspId);
+    if(newInspId) {
+		copyGSItemsByStatusAndSheeType(inspId, newInspId, 'Snow', 'Summons');
+	}
 }           
 logDebug("Script 343 END");
 
