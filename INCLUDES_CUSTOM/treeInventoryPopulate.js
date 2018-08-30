@@ -15,10 +15,11 @@ function treeInventoryPopulate()
 		var capAddress = thisHouseNumberStart + thisStreetDirection + thisStreetName + thisStreetSuffix
 		// get tree data
 		var arrGIS = new Array;
-		arrGIS = getGISBufferInfo("AURORACO","Trees","100","TREE_ID_NO","ADDRESS")
+		newRow = new Array();
+		arrGIS = getGISBufferInfo("AURORACO","Trees","100","TREE_ID_NO","MAN_UNIT","DIAMETER","SPECIES","ADDRESS")
 		logDebug("arrGIS Length " + arrGIS.length)
 		for(x in arrGIS){
-			newRow = new Array();
+			//newRow = new Array();
 			var thisGIS = arrGIS[x];
 			var treeIdNo = thisGIS["TREE_ID_NO"];
 			var manUnit = thisGIS["MAN_UNIT"];
@@ -28,19 +29,15 @@ function treeInventoryPopulate()
 			if(TreeAdd == capAddress)
 				{
 				logDebug("Tree " + treeIdNo + " has an address match TreeAdd " + TreeAdd + " = capAddress " + capAddress)
-				newRow["Tree ID"] = new asiTableValObj("Tree ID", treeIdNo, "N");	
-				if (manUnit && manUnit != "")
-					{newRow["Management Unit"] = new asiTableValObj("Management Unit", manUnit, "N");}
-				else 
-					{newRow["Management Unit"] = new asiTableValObj("Management Unit", "", "N");}
-				if (diameter && diameter != "")
-					{newRow["Existing Diameter"] = new asiTableValObj("Existing Diameter", diameter, "N");}
-				else 
-					{newRow["Existing Diameter"] = new asiTableValObj("Existing Diameter", "", "N");}
-				if (species && species != "")
-					{newRow["Species"] = new asiTableValObj("Species", species, "N");}
-				else 
-					{newRow["Species"] = new asiTableValObj("Species", "", "N");}
+				logDebug("treeIdNo " + treeIdNo)
+				logDebug("manUnit " + manUnit)
+				logDebug("diameter " + diameter)
+				logDebug("species " + species)
+				//newRow["Tree ID"] = new asiTableValObj("Tree ID", treeIdNo, "N");	
+				newRow["Tree ID"] = treeIdNo
+				newRow["Management Unit"] = manUnit
+				newRow["Existing Diameter"] = diameter
+				newRow["Species"] = species
 				addToASITable("TREE INFORMATION", newRow);
 				}
 			}
