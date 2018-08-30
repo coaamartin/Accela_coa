@@ -158,6 +158,10 @@ if(inspType == "Summons Issuance"){
     enfProcessInspResult("Summons Issuance", "Compliance", null, null, false, "Summons Issuance", "Compliance");
     enfProcessInspResult("Summons Issuance", "Cancelled", null, null, false, "Summons Issuance", "Cancelled");
     enfProcessInspResult("Summons Issuance", "Taken and Stored - Citation", "Pre Court Action", "Pre Court Action", false, "Pre Summons Photos", "Taken and Stored - Citation");
+    
+    if(inspResult == "Taken and Stored - Citation" || inspResult == "Personal Service"){
+        deactivateTask("Mail Summons");
+    }
 }
 
 if(inspType == "Pre Court Action"){
@@ -236,7 +240,7 @@ if(inspType == "Snow Abatement Order"){
         var next2Days = aa.util.parseDate(dateAdd(null, 2));
         var inspDays = days_between(currDate, next2Days);
         scheduleInspection("Post Abatement Inspection", inspDays);
-		resultWorkflowTask("Pre Abatement Photos", "Taken and Stored");
+        resultWorkflowTask("Pre Abatement Photos", "Taken and Stored");
     }
 }
 
@@ -380,7 +384,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     // get the inspector from GIS and assign the rec to this user
     inspUserObj = null;
     x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
-	if(x[0]){
+    if(x[0]){
         logDebug(x[0]["OFFICER_NAME"]);
         
         var offFullName = x[0]["OFFICER_NAME"];
@@ -392,7 +396,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
         logDebug(offLname);
         
         inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
-	}
+    }
     
     //var currentCapId = capId;
     var appName = "Summons created for Record Number " + capId.customID;
@@ -411,7 +415,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     
     if(newInspId) {
         var clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons', 'Citation/Summons'];
-		
+        
         if(clItemStatus2Copy.length > 0) copyCheckListByItemStatus(inspId, newInspId, clItemStatus2Copy, capId, newChildCapId);
     }
 }           
@@ -468,7 +472,7 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     // get the inspector from GIS and assign the rec to this user
     inspUserObj = null;
     x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
-	if(x[0]){
+    if(x[0]){
         logDebug(x[0]["OFFICER_NAME"]);
         
         var offFullName = x[0]["OFFICER_NAME"];
@@ -480,7 +484,7 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
         logDebug(offLname);
         
         inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
-	}
+    }
     
     var appName = "Recordation created for Record Number " + capId.customID;
     var newChildCapId = createChild('Enforcement','Incident','Record with County','NA',appName);
@@ -498,7 +502,7 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     
     if(newInspId) {
         var clItemStatus2Copy = ["Abate/Record", "Record/Summons", "Record"];
-		
+        
         if(clItemStatus2Copy.length > 0) copyCheckListByItemStatus(inspId, newInspId, clItemStatus2Copy, capId, newChildCapId);
     }
 }           
