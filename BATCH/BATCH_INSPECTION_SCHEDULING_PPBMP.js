@@ -62,7 +62,7 @@ var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
 
 useAppSpecificGroupName = false;
 
-try {
+//try {
 	showDebug = true
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	var tmpAry = RECORD_TYPE.split("/");
@@ -83,7 +83,8 @@ try {
 	
 	var sysYear = aa.date.getCurrentDate().getYear();
 	
-	logDebug2("<br><Font Color=BLACK> Processing " + capIDList.length + " records");
+	logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records");
+	logDebug2("DB HERE")
 	for (c in capIDList) {
 		showDebug = true
 		capId = capIDList[c].getCapID();
@@ -137,9 +138,9 @@ try {
 
 		}//same year
 	}//for all capIds
-} catch (ex) {
-	logDebug("**ERROR: Exception while running batch job , Error: " + ex);
-}
+//} catch (ex) {
+	//logDebug("**ERROR: Exception while running batch job , Error: " + ex);
+//}
 
 /**
  * Format a ScriptDate mm/dd/yyyy
