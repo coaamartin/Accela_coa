@@ -85,7 +85,7 @@ try {
 	
 	logDebug2("<br><Font Color=BLACK> Processing " + capIDList.length + " records");
 	for (c in capIDList) {
-
+		showDebug = true
 		capId = capIDList[c].getCapID();
 		logDebug2("capId " + capId);
 		capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
@@ -99,6 +99,7 @@ try {
 		tmpCap = tmpCap.getOutput();
 		tmpCap = tmpCap.getCapModel();
 
+		logDebug2("DB HERE")
 		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
 
