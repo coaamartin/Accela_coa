@@ -101,6 +101,7 @@ var emailText = "";
 		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
 		logDebug2("<Font Color=BLACK> <br> nextInspectionDate " + nextInspectionDate)
 		if (nextInspectionDate == null || nextInspectionDate == "") {
+			logDebug2("<br> No Inspection Date is set. Moving to next record.");
 			continue;
 		}//date null/empty
 
@@ -135,7 +136,9 @@ var emailText = "";
 				logDebug2("<BR> Assigning Supervisor to inspection ID " + lastSchedInspectionSeq )
 			}
 
-		}//same year
+		} else {
+			logDebug2("<br> Inspection year and system year do not match. Moving to next record.");
+		}
 	}//for all capIds
 //} catch (ex) {
 	//logDebug("**ERROR: Exception while running batch job , Error: " + ex);
