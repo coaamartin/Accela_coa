@@ -105,6 +105,7 @@ var emailText = "";
 		}//date null/empty
 
 		nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
+		logDebug2("<BR> nextInspectionYear " + nextInspectionYear + " sysYear " + sysYear)
 		if (nextInspectionYear == sysYear) {
 
 			//schedule only, then try to assign
