@@ -87,6 +87,7 @@ try {
 	for (c in capIDList) {
 
 		capId = capIDList[c].getCapID();
+		logDebug2("capId " + capId);
 		capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
 		logDebug2("<br><Font Color=RED> Processing record " + capIDString)
 		var tmpCap = aa.cap.getCap(capId);
