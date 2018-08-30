@@ -83,14 +83,11 @@ var emailText = "";
 	
 	var sysYear = aa.date.getCurrentDate().getYear();
 	
-	logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records");
-	logDebug2("DB HERE")
+	logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
 	for (c in capIDList) {
-		showDebug = true
 		capId = capIDList[c].getCapID();
-		logDebug2("capId " + capId);
 		capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
-		logDebug2("<br><Font Color=RED> Processing record " + capIDString)
+		logDebug2("<Font Color=BLUE> Processing record " + capIDString + "<br>")
 		var tmpCap = aa.cap.getCap(capId);
 		if (!tmpCap.getSuccess()) {
 			logDebug("**INFO failed to get CapModel " + capId);
@@ -100,10 +97,9 @@ var emailText = "";
 		tmpCap = tmpCap.getOutput();
 		tmpCap = tmpCap.getCapModel();
 
-		logDebug2("DB HERE")
 		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
-
+		logDebug2("nextInspectionDate " + nextInspectionDate + "<br>")
 		if (nextInspectionDate == null || nextInspectionDate == "") {
 			continue;
 		}//date null/empty
@@ -113,7 +109,8 @@ var emailText = "";
 
 			//schedule only, then try to assign
 			var lastInspectorId = getLastInspector(INSPECTION_NAME);
-
+			logDebug2("INSPECTION_NAME " + INSPECTION_NAME + "<br>")
+			logDebug2("lastInspectorId " + lastInspectorId + "<br>")
 			if (lastInspectorId == null) {
 				//we can't assign to last inspector, and we can get supervisor
 				logDebug("**INFO: Last Inspector ID or LastInsprction of same type is null, -- scheduling without assign");
@@ -122,7 +119,7 @@ var emailText = "";
 			}
 
 			scheduleInspectDate(INSPECTION_NAME, nextInspectionDate);
-
+			
 			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
 			if (lastSchedInspectionObj == null) {
 				logDebug("**INFO failed to scheduleInspectDate() " + capId + " " + INSPECTION_NAME);
