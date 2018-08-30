@@ -11,23 +11,46 @@
 //3. If the record type Forestry/Request/Planting/* then schedule inspection type “Forestry Site Review” to the assigned person in the record assigned to.
 //4. Take all the address fields that have data and concatenate into a string and update the Application Name field.
 //5. If record type Forestry/Request/Citizen/* get value from Custom Field “Source of Request” if value is Staff then insert status of “Assigned” and add the comments “Proactive” in the comments on the workflow task “Tree Request Intake” and move the work flow task forward by Activating the workflow task “Inspection Phase”.
-//6. If Record Type Forestry/Request/Citizen/NA or Forestry/Permit/Na/NA Create Scheduled inspection of type “Forestry Inspection” with the inspector assigned to the record assigned to with the current date. 
+//6. If Record Type Forestry/Request/Citizen/NA or Forestry/Permit/Na/NA Create Scheduled inspection of type “Forestry Inspection” with the inspector assigned to the record assigned to with the current date.
+var vGISInfo;
+var vInspectorID;
 
-var inspectorID = getAssignedStaff();
+/*
+// Update ASI
+var vGISTownship = getGISInfo("AURORACO","City Limits","JURISDICTION");
+var vGISRange = getGISInfo("AURORACO","City Limits","Shape.STArea()") + " : " + getGISInfo("AURORACO","Parcels","Shape.StLength()");
+var vGISSection = getGISInfo("AURORACO","City Limits","Shape.StLength()");
 
-if (typeof(inspectorID) != "undefined" && inspectorID != null && inspectorID != "") {
+var vAreaName = vGISTownship + " : " + vGISRange + " : " + 0 +  " : " + vGISSection;
+
+logDebug("Area Info: " + vAreaName);
+*/
+
+// Get inspector from GIS
+vGISInfo = getGISBufferInfo("AURORACO", "Forestry Index Mapbook Poly", "0.01", "PlantBookUpdatePhase");
+if (ifTracer(vGISInfo.length != null && vGISInfo.length > 0, 'found inspector')) {
+	vInspectorID = (x[0]["PlantBookUpdatePhase"]);
+}
+
+if (typeof(vInspectorID) != "undefined" && vInspectorID != null && vInspectorID != "") {
+	// Assign record to inspector
+	assignCap(vInspectorID);
+	
+	// Schedule inspections
 	if (appMatch("Forestry/Request/Planting/*") == true) {
-		scheduleInspection("Forestry Site Review", 0, inspectorID);
+		scheduleInspection("Forestry Site Review", 0, vInspectorID);
 	} else if (appMatch("Forestry/Request/Citizen/NA") == true || appMatch("Forestry/Permit/NA/NA") == true) {
-		scheduleInspection("Forestry Inspection", 0, inspectorID);
+		scheduleInspection("Forestry Inspection", 0, vInspectorID);
 	}
 }
 
+// Edit application name with address
 var vAddress = getAddressInALine();
 if (vAddress != null) {
 	editAppName(vAddress);
 }
 
+// Update workflow
 if (appMatch("Forestry/Request/Citizen/*")) {
 	var vASIValue = getAppSpecific("Source of Request");
 	if (vASIValue != null && vASIValue != "") {
