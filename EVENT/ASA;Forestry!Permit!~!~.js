@@ -8,6 +8,7 @@ else
 	{ logDebug("**WARNING: Getting GIS objects for CAP.  Reason is: " + gisObjResult.getErrorType() + ":" + gisObjResult.getErrorMessage()); }
 
 //Script 198
+showDebug = true
 treeInventoryPopulate()
 
 
