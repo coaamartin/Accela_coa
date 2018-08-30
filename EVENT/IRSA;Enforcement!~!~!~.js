@@ -373,7 +373,7 @@ closeTask("Incident Status","Closed","","");
 //*********************************************************************************************************
 logDebug("Script 343 START");
 if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || inspResult == "Abate/Summons" ||
-    inspResult == "Issue Summons" )
+    inspResult == "Issue Summons" || inspResult == "Citation/Summons")
 {
     logDebug("Script 343: criteria met");
     
@@ -410,7 +410,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Summons Issuance",0, currentUserID);
     
     if(newInspId) {
-        var clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons'];
+        var clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons', 'Citation/Summons'];
 		
         if(clItemStatus2Copy.length > 0) copyCheckListByItemStatus(inspId, newInspId, clItemStatus2Copy, capId, newChildCapId);
     }
