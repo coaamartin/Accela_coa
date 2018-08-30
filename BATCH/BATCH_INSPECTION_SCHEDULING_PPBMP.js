@@ -265,14 +265,14 @@ function assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, 
 }
 
 function assignSupervisor(lastSchedInspectionSeq, lastInspectorId) {
-	var lookupTableJsonStr = getScriptText(INSPECTORS_SUPERVISORS_TABLE);
-	var lookupTableJsonObj = JSON.parse(lookupTableJsonStr);
-	var superVisor = lookupTableJsonObj[lastInspectorId];
+	superVisor = lookup("PPBMP_INSPECTORS_SUPERVISORS_TABLE",lastInspectorId)
+	//var lookupTableJsonStr = getScriptText(INSPECTORS_SUPERVISORS_TABLE);
+	//var lookupTableJsonObj = JSON.parse(lookupTableJsonStr);
+	//var superVisor = lookupTableJsonObj[lastInspectorId];
 	if (!superVisor) {
 		logDebug("**INFO could not get supervisor for " + lastInspectorId);
 		return;
 	}
-
 	assignInspection(lastSchedInspectionSeq, superVisor);
 }
 function logDebug2(dstr)
