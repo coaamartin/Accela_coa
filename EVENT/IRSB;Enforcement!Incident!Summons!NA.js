@@ -57,10 +57,9 @@ if("Pre Court Action".equals(inspType)){
 	
 	if(inspResult == "7 - Citation File to CA"){
 	    if (inspId && currInspStatus != "6 - Citation File to Liaison" ) {
-	    		cancel = true;
-	    		showMessage = true;
-	    		comment("Inspection can't be resulted with this status.   Initial status has to be 6 - Citation File to Liaison");
-	    	}
+	    	cancel = true;
+	    	showMessage = true;
+	    	comment("Inspection can't be resulted with this status.   Initial status has to be 6 - Citation File to Liaison");
 	    }
 	}
 }
