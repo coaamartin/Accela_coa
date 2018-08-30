@@ -132,7 +132,7 @@ var emailText = "";
 			var assignTolastInsp = assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId);
 			if (!assignTolastInsp) {
 				var supervisor = assignSupervisor(lastSchedInspectionSeq, lastInspectorId);
-				logDebug2("<BR> Assigning Supervisor " + supervisor + "to Inspection ID " + lastSchedInspectionSeq )
+				logDebug2("<BR> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq )
 			}
 
 		} else {
