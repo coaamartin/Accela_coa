@@ -99,29 +99,28 @@ var emailText = "";
 
 		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
-		logDebug2("<Font Color=BLACK> <br> nextInspectionDate " + nextInspectionDate)
+		logDebug2("<Font Color=BLACK> <br> nextInspectionDate: " + nextInspectionDate)
 		if (nextInspectionDate == null || nextInspectionDate == "") {
 			logDebug2("<br> No Inspection Date is set. Moving to next record.");
 			continue;
 		}//date null/empty
 
 		nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
-		logDebug2("<br> nextInspectionYear " + nextInspectionYear + " sysYear " + sysYear)
+		logDebug2("<br> nextInspectionYear: " + nextInspectionYear + ", sysYear: " + sysYear)
 		if (nextInspectionYear == sysYear) {
 
 			//schedule only, then try to assign
 			var lastInspectorId = getLastInspector(INSPECTION_NAME);
-			logDebug2("<br> lastInspectorId " + lastInspectorId)
+			logDebug2("<br> lastInspectorId: " + lastInspectorId)
 			if (lastInspectorId == null) {
-				//we can't assign to last inspector, and we can get supervisor
-				logDebug("**INFO: Last Inspector ID or LastInsprction of same type is null, -- scheduling without assign");
+				//we can't assign to last inspector, and we can't get supervisor
+				logDebug2("<br> Last Inspector ID is null, scheduling without assignment");
 				scheduleInspectDate(INSPECTION_NAME, nextInspectionDate);
 				continue;
 			}
 
-			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " to nextInspectionDate " + nextInspectionDate );
-			logDebug2("<BR> scheduleInspectDate " + scheduleInspectDate(INSPECTION_NAME, nextInspectionDate));
-			
+			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " on " + nextInspectionDate);		
+			scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)
 			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
 			if (lastSchedInspectionObj == null) {
 				logDebug("**INFO failed to scheduleInspectDate() " + capId + " " + INSPECTION_NAME);
@@ -132,8 +131,8 @@ var emailText = "";
 
 			var assignTolastInsp = assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId);
 			if (!assignTolastInsp) {
-				assignSupervisor(lastSchedInspectionSeq, lastInspectorId);
-				logDebug2("<BR> Assigning Supervisor to inspection ID " + lastSchedInspectionSeq )
+				var supervisor = assignSupervisor(lastSchedInspectionSeq, lastInspectorId);
+				logDebug2("<BR> Assigning Supervisor " + supervisor + "to Inspection ID " + lastSchedInspectionSeq )
 			}
 
 		} else {
@@ -279,6 +278,7 @@ function assignSupervisor(lastSchedInspectionSeq, lastInspectorId) {
 		return;
 	}
 	assignInspection(lastSchedInspectionSeq, superVisor);
+	return superVisor;
 }
 function logDebug2(dstr)
 	{
