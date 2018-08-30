@@ -1,22 +1,21 @@
 // Script 421
 if ("Zoning Initial Inspection".equals(inspType) && "Citation/Summons".equals(inspResult)) {
-	var holdId = capId;
+	//var holdId = capId;
 	var r = getRelatedCapsByAddress("Enforcement/Incident/Summons/NA");
 	if (r && r.length > 0) {
 		for (var i in r) {
-			capId = aa.cap.getCapID(r[i].getID1(), r[i].getID2(), r[i].getID3()).getOutput();
-			var thisCap = aa.cap.getCapBasicInfo(capId).getOutput();
-			logDebug("related summons address: " + capId.getCustomID() + " has status " + thisCap.getCapStatus());
+			recCapId = aa.cap.getCapID(r[i].getID1(), r[i].getID2(), r[i].getID3()).getOutput();
+			var thisCap = aa.cap.getCapBasicInfo(recCapId).getOutput();
+			logDebug("related summons address: " + recCapId.getCustomID() + " has status " + thisCap.getCapStatus());
 			if ("NFZV - 1 Year".equals(thisCap.getCapStatus())) {
 				activateTask("Pre Summons Photos");
 				updateAppStatus("Pending Citation", "Updated by Script 421");
-				var thisInsp = scheduleInspectionCustom("Summons Issuance", dateAdd(null, 0), currentUserID);
+				var thisInsp = scheduleInspectionCustom4CapId(recCapId, "Summons Issuance", 0, currentUserID);
 				logDebug("inspection is " + thisInsp);
 			}
 		}
-
 	}
-	capId = holdId;
+	//capId = holdId;
 }
 // End Script 421
 
