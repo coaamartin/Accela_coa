@@ -79,13 +79,15 @@ try {
 	} else {
 		capIDList = capIDList.getOutput();
 	}
-
+	
 	var sysYear = aa.date.getCurrentDate().getYear();
-
+	
+	logDebug2("<br><Font Color=BLACK> Processing " + capIDList.length + " records");
 	for (c in capIDList) {
 
 		capId = capIDList[c].getCapID();
-
+		capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
+		logDebug2("<br><Font Color=RED> Processing record " + capIDString)
 		var tmpCap = aa.cap.getCap(capId);
 		if (!tmpCap.getSuccess()) {
 			logDebug("**INFO failed to get CapModel " + capId);
@@ -269,3 +271,13 @@ function assignSupervisor(lastSchedInspectionSeq, lastInspectorId) {
 
 	assignInspection(lastSchedInspectionSeq, superVisor);
 }
+function logDebug2(dstr)
+	{
+	// function of the same name in ACVCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
+	if(showDebug)
+		{
+		aa.print(dstr)
+		emailText+= dstr + "<br>";
+		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr)
+		}
+	}
