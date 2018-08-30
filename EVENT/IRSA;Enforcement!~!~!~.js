@@ -77,35 +77,35 @@ if(inspType == "Snow Initial Inspection"){
     enfProcessInspResult("Snow Initial Inspection", "Snow Fee Served", null, null, false, "Initial Investigation", "Taken and Stored");
     enfProcessInspResult("Snow Initial Inspection", "Taken and Stored", "Snow Fee 1st Re-Inspection", "nextWorkDay", true, "Initial Investigation", "Taken and Stored");
     enfProcessInspResult("Snow Initial Inspection", "No Violation Observed", null, null, false, "Initial Investigation", "No Violation Observed");
-    enfProcessInspResult("Snow Initial Inspection", "Visit/Attempted Contact", "Snow Warning Inspection", "nextWorkDay", true, "Initial Investigation", "Attempted Contact");
+    enfProcessInspResult("Snow Initial Inspection", "Visit/Attempted Contact", "Snow Initial Inspection", "nextWorkDay", true, "Initial Investigation", "Visit/Attempted Contact");
     enfProcessInspResult("Snow Initial Inspection", "Refer to Other Department", null, null, false, "Initial Investigation", "Refer to Other Department");
-    enfProcessInspResult("Snow Initial Inspection", "Skip to Summons", null, null, false, "Initial Investigation", "Skip to Summons");
-    enfProcessInspResult("Snow Initial Inspection", "Skip to City Abatement", null, null, false, "Initial Investigation", "Skip to Abatement");
+    enfProcessInspResult("Snow Initial Inspection", "Skip to Summons", "Summons Issuance", "nextWorkDay", true, "Initial Investigation", "Skip to Summons");
+    enfProcessInspResult("Snow Initial Inspection", "Skip to City Abatement", "City Abatement Order", "nextWorkDay", true, "Initial Investigation", "Skip to City Abatement");
 }
 
 if(inspType == "Snow Warning Inspection"){
     //Script 346
-    enfProcessInspResult("Snow Warning Inspection", "Snow Fee Posted", null, null, false, "Snow Warning Reinspect", "Snow Fee Posted");
-    enfProcessInspResult("Snow Warning Inspection", "Snow Fee Served", null, null, false, "Snow Warning Reinspect", "Snow Fee Served");
-    enfProcessInspResult("Snow Warning Inspection", "Snow Compliance", null, null, false, "Snow Warning Reinspect", "Snow Compliance");
-    enfProcessInspResult("Snow Warning Inspection", "New Snow Extension", "Snow Warning Inspection", "nextWorkDay", true, "Snow Warning Reinspect", "New Snow Extension");
+    enfProcessInspResult("Snow Warning Inspection", "Snow Fee Posted", null, null, false, "Snow Warning Re-Inspect", "Snow Fee Posted");
+    enfProcessInspResult("Snow Warning Inspection", "Snow Fee Served", null, null, false, "Snow Warning Re-Inspect", "Snow Fee Served");
+    enfProcessInspResult("Snow Warning Inspection", "Snow Compliance", null, null, false, "Snow Warning Re-Inspect", "Snow Compliance");
+    enfProcessInspResult("Snow Warning Inspection", "New Snow Extension", "Snow Warning Inspection", "nextWorkDay", true, "Snow Warning Re-Inspect", "New Snow Extension");
 }
 
 if(inspType == "Snow Fee 1st Re-Inspection"){
     //Script 346
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Fee Posted", null, null, false, "Snow Fee 1st Reinspect", "Snow Fee Posted");
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Fee Served", null, null, false, "Snow Fee 1st Reinspect", "Snow Fee Served");
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Taken and Stored", "Snow Fee 2nd Re-Inspection", "nextWorkDay", true, "Snow Fee 1st Reinspect", "Taken and Stored");
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Compliance", null, null, false, "Snow Fee 1st Reinspect", "Snow Compliance");
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "New Snow Extension", "Snow Fee 1st Re-Inspection", "nextWorkDay", true, "Snow Fee 1st Reinspect", "New Snow Extension");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Fee Posted", null, null, false, "Snow Fee 1st Re-Inspect", "Snow Fee Posted");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Fee Served", null, null, false, "Snow Fee 1st Re-Inspect", "Snow Fee Served");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Taken and Stored", "Snow Fee 2nd Re-Inspection", "nextWorkDay", true, "Snow Fee 1st Re-Inspect", "Taken and Stored");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Compliance", null, null, false, "Snow Fee 1st Re-Inspect", "Snow Compliance");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "New Snow Extension", "Snow Fee 1st Re-Inspection", "nextWorkDay", true, "Snow Fee 1st Re-Inspect", "New Snow Extension");
 }
 
 if(inspType == "Snow Fee 2nd Re-Inspection"){
     //Script 346
-    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Compliance", null, null, false, "Snow Fee 2nd Reinspect", "Snow Compliance");
-    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "New Snow Extension", "Snow Fee 2nd Re-Inspection", "nextWorkDay", true, "Snow Fee 2nd Reinspect", "New Snow Extension");
-    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abatement", null, null, false, "Snow Fee 2nd Reinspect", "Snow Abatement");
-    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abate/Summons", null, null, false, "Snow Fee 2nd Reinspect", "Snow Abate/Summons");
+    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Compliance", null, null, false, "Snow Fee 2nd Re-Inspect", "Snow Compliance");
+    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "New Snow Extension", "Snow Fee 2nd Re-Inspection", "nextWorkDay", true, "Snow Fee 2nd Re-Inspect", "New Snow Extension");
+    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abatement", null, null, false, "Snow Fee 2nd Re-Inspect", "Snow Abatement");
+    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abate/Summons", null, null, false, "Snow Fee 2nd Re-Inspect", "Snow Abate/Summons");
 }
 
 if(inspType == "Initial Housing Inspection"){
