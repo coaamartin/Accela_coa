@@ -87,7 +87,7 @@ var emailText = "";
 	for (c in capIDList) {
 		capId = capIDList[c].getCapID();
 		capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
-		logDebug2("<Font Color=BLUE> Processing record " + capIDString + "<br>")
+		logDebug2("<Font Color=BLUE> <br> Processing record " + capIDString)
 		var tmpCap = aa.cap.getCap(capId);
 		if (!tmpCap.getSuccess()) {
 			logDebug("**INFO failed to get CapModel " + capId);
@@ -99,18 +99,18 @@ var emailText = "";
 
 		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
-		logDebug2("<Font Color=BLACK> nextInspectionDate " + nextInspectionDate + "<br>")
+		logDebug2("<Font Color=BLACK> <br> nextInspectionDate " + nextInspectionDate)
 		if (nextInspectionDate == null || nextInspectionDate == "") {
 			continue;
 		}//date null/empty
 
 		nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
-		logDebug2("nextInspectionYear " + nextInspectionYear + " sysYear " + sysYear)
+		logDebug2("<br> nextInspectionYear " + nextInspectionYear + " sysYear " + sysYear)
 		if (nextInspectionYear == sysYear) {
 
 			//schedule only, then try to assign
 			var lastInspectorId = getLastInspector(INSPECTION_NAME);
-			logDebug2("lastInspectorId " + lastInspectorId + "<br>")
+			logDebug2("<br> lastInspectorId " + lastInspectorId)
 			if (lastInspectorId == null) {
 				//we can't assign to last inspector, and we can get supervisor
 				logDebug("**INFO: Last Inspector ID or LastInsprction of same type is null, -- scheduling without assign");
@@ -118,8 +118,8 @@ var emailText = "";
 				continue;
 			}
 
-			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " to nextInspectionDate " + nextInspectionDate + "<BR>")
-			logDebug2(scheduleInspectDate(INSPECTION_NAME, nextInspectionDate));
+			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " to nextInspectionDate " + nextInspectionDate )
+			logDebug2("<BR> scheduleInspectDate " + scheduleInspectDate(INSPECTION_NAME, nextInspectionDate));
 			
 			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
 			if (lastSchedInspectionObj == null) {
