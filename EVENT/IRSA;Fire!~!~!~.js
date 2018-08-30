@@ -13,7 +13,7 @@ include("5_fireCompleteOrNoViolations");
 //******************************************************************************
 logDebug("Script 15 - Start");
 var newInspType = null;
-if ((inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection")
+if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection")
 	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail") )
 {
 	logDebug("Script 15 - criteria met");
@@ -122,7 +122,7 @@ if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResul
 	editAppSpecific("Number of Failed Inspections", 0);
 	closeTask("Inspection","Compliance/Complete","closed by script 15","closed by script 15");
 	updateAppStatus("Complete","updated by script 15");
-	closeCap(currentUserId);
+	closeCap(currentUserID);
 }
 logDebug("Script 15 - End");
 
