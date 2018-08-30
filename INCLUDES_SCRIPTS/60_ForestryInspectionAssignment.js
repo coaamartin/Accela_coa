@@ -29,7 +29,7 @@ logDebug("Area Info: " + vAreaName);
 // Get inspector from GIS
 vGISInfo = getGISBufferInfo("AURORACO", "Forestry Index Mapbook Poly", "0.01", "PlantBookUpdatePhase");
 if (ifTracer(vGISInfo.length != null && vGISInfo.length > 0, 'found inspector')) {
-	vInspectorID = (x[0]["PlantBookUpdatePhase"]);
+	vInspectorID = (vGISInfo[0]["PlantBookUpdatePhase"]);
 }
 
 if (typeof(vInspectorID) != "undefined" && vInspectorID != null && vInspectorID != "") {
