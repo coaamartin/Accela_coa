@@ -148,13 +148,16 @@ var emailText = "";
  * @returns {String} formatted date
  */
 function formatDateX(scriptDate) {
-	var ret = "";
-	ret += scriptDate.getMonth().toString().length == 1 ? "0" + scriptDate.getMonth() : scriptDate.getMonth();
-	ret += "/";
-	ret += scriptDate.getDayOfMonth().toString().length == 1 ? "0" + scriptDate.getDayOfMonth() : scriptDate.getDayOfMonth();
-	ret += "/";
-	ret += scriptDate.getYear();
-	return ret;
+	if(scriptDate != null)
+		{
+		var ret = "";
+		ret += scriptDate.getMonth().toString().length == 1 ? "0" + scriptDate.getMonth() : scriptDate.getMonth();
+		ret += "/";
+		ret += scriptDate.getDayOfMonth().toString().length == 1 ? "0" + scriptDate.getDayOfMonth() : scriptDate.getDayOfMonth();
+		ret += "/";
+		ret += scriptDate.getYear();
+		return ret;
+		}
 }
 
 /**
