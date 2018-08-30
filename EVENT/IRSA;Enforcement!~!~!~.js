@@ -229,13 +229,14 @@ if(inspType == "Post Abatement Inspection - Graffiti Only"){
 
 if(inspType == "Snow Abatement Order"){
     //Script 346
-    enfProcessInspResult("Snow Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Sign Removed");
+    enfProcessInspResult("Snow Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
     
     if(inspResult == "Taken and Stored"){
         var currDate = aa.util.parseDate(dateAdd(null, 0));
         var next2Days = aa.util.parseDate(dateAdd(null, 2));
         var inspDays = days_between(currDate, next2Days);
         scheduleInspection("Post Abatement Inspection", inspDays);
+		resultWorkflowTask("Pre Abatement Photos", "Taken and Stored");
     }
 }
 
@@ -265,7 +266,7 @@ if(inspType == "City Abatement Order"){
         var wfTsk = "Pre Abatement Photos";
         var wfSts = "Taken and Stored";
         if(!isTaskActive(wfTsk)) activateTask(wfTsk);
-        resultWorkflowTask(wfTsk, wfSts, "", "");
+            resultWorkflowTask(wfTsk, wfSts, "", "");
     }
 }
 
