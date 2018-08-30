@@ -63,6 +63,7 @@ var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
 useAppSpecificGroupName = false;
 
 try {
+	showDebug = true
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	var tmpAry = RECORD_TYPE.split("/");
 	capTypeModel.setGroup(tmpAry[0]);
