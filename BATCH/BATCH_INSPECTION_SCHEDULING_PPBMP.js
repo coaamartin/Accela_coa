@@ -118,7 +118,7 @@ var emailText = "";
 				continue;
 			}
 
-			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " to nextInspectionDate " + nextInspectionDate )
+			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " to nextInspectionDate " + nextInspectionDate );
 			logDebug2("<BR> scheduleInspectDate " + scheduleInspectDate(INSPECTION_NAME, nextInspectionDate));
 			
 			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
