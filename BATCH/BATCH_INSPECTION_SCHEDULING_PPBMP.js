@@ -99,13 +99,13 @@ var emailText = "";
 
 		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
-		logDebug2("nextInspectionDate " + nextInspectionDate + "<br>")
+		logDebug2("<Font Color=BLACK> nextInspectionDate " + nextInspectionDate + "<br>")
 		if (nextInspectionDate == null || nextInspectionDate == "") {
 			continue;
 		}//date null/empty
 
 		nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
-		logDebug2("<BR> nextInspectionYear " + nextInspectionYear + " sysYear " + sysYear)
+		logDebug2("nextInspectionYear " + nextInspectionYear + " sysYear " + sysYear)
 		if (nextInspectionYear == sysYear) {
 
 			//schedule only, then try to assign
@@ -118,7 +118,7 @@ var emailText = "";
 				continue;
 			}
 
-			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " to date " + nextInspectionDate)
+			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " to nextInspectionDate " + nextInspectionDate + "<BR>")
 			logDebug2(scheduleInspectDate(INSPECTION_NAME, nextInspectionDate));
 			
 			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
