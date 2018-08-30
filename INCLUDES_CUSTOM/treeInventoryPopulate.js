@@ -1,6 +1,7 @@
 function treeInventoryPopulate()
 	{
 	// get address
+	
 	var myAddr = aa.address.getAddressByCapId(capId);
 	var addrArray = new Array();
 	var addrArray = myAddr.getOutput();
