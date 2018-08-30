@@ -110,7 +110,6 @@ var emailText = "";
 
 			//schedule only, then try to assign
 			var lastInspectorId = getLastInspector(INSPECTION_NAME);
-			logDebug2("INSPECTION_NAME " + INSPECTION_NAME + "<br>")
 			logDebug2("lastInspectorId " + lastInspectorId + "<br>")
 			if (lastInspectorId == null) {
 				//we can't assign to last inspector, and we can get supervisor
@@ -119,6 +118,7 @@ var emailText = "";
 				continue;
 			}
 
+			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " to date " + nextInspectionDate)
 			logDebug2(scheduleInspectDate(INSPECTION_NAME, nextInspectionDate));
 			
 			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
