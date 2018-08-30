@@ -27,7 +27,7 @@ function treeInventoryPopulate()
 			if(TreeAdd == capAddress)
 				{
 				logDebug("Tree " + treeIdNo + " has an address match TreeAdd " + TreeAdd + " = capAddress " + capAddress)
-				if (!doesASITRowExist("TREE INFORMATION", "Tree ID", treeIdNo)) {
+				//if (!doesASITRowExist("TREE INFORMATION", "Tree ID", treeIdNo)) {
 					newRow = new Array();
 					newRow["Tree ID"] = new asiTableValObj("Tree ID", treeIdNo, "N");	
 					if (manUnit && manUnit != "")
@@ -43,7 +43,7 @@ function treeInventoryPopulate()
 					else 
 						newRow["Species"] = new asiTableValObj("Species", "", "N");
 					addToASITable("TREE INFORMATION", newRow);
-					}
+					//}
 				}
 			else
 				{
