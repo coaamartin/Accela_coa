@@ -118,7 +118,7 @@ var emailText = "";
 				continue;
 			}
 
-			scheduleInspectDate(INSPECTION_NAME, nextInspectionDate);
+			logDebug2(scheduleInspectDate(INSPECTION_NAME, nextInspectionDate));
 			
 			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
 			if (lastSchedInspectionObj == null) {
@@ -131,6 +131,7 @@ var emailText = "";
 			var assignTolastInsp = assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId);
 			if (!assignTolastInsp) {
 				assignSupervisor(lastSchedInspectionSeq, lastInspectorId);
+				logDebug2("<BR> Assigning Supervisor to inspection ID " + lastSchedInspectionSeq )
 			}
 
 		}//same year
