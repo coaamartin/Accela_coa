@@ -61,7 +61,7 @@ var INSPECTORS_SUPERVISORS_TABLE = aa.env.getValue("INSPECTORS_SUPERVISORS_TABLE
 var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
 
 useAppSpecificGroupName = false;
-
+var emailText = "";		
 //try {
 	showDebug = true
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
