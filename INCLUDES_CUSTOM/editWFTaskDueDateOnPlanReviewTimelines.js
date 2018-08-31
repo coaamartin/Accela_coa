@@ -2,7 +2,7 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
     //Set workflow due date based on plan review timelines {
     var stdTimeline = 0;
     var civilPlanSheets = AInfo["Civil Plan Sheets"];
-    //var submittalNum = AInfo["Submittal Number"];
+    var submittalNum = AInfo["Submittal Number"];
     //var sigPlanSheets = AInfo["Signature Plan Sheets"];
     //var verticalConst = AInfo["Vertical Construction/Short Review"];
     
