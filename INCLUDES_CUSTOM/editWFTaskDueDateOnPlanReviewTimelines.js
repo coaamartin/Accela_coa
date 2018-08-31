@@ -12,7 +12,7 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
     if(sigPlanSheets) sigPlanSheets = parseInt(sigPlanSheets);
     else sigPlanSheets = 0;
     
-    /*if(ifTracer(appMatch("PublicWorks/Civil Plan/Review/NA"), 'Civil Plan Review')){
+    if(ifTracer(appMatch("PublicWorks/Civil Plan/Review/NA"), 'Civil Plan Review')){
         if(submittalNum){
             submittalNum = parseInt(submittalNum);
             if(ifTracer(submittalNum == 1, 'submittalNum == 1')){
@@ -33,7 +33,7 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
             }
         }
     }
-    if(ifTracer(appMatch("PublicWorks/Civil Plan/Revision/NA"), 'Civil Plan Revision')){
+    /*if(ifTracer(appMatch("PublicWorks/Civil Plan/Revision/NA"), 'Civil Plan Revision')){
         if(submittalNum){
             submittalNum = parseInt(submittalNum);
             if(ifTracer(submittalNum == 1, 'submittalNum == 1')){
