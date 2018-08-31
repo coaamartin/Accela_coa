@@ -1,5 +1,5 @@
 {
-  "PublicWorks/Pavement Design/NA/NA": ;{
+  "PublicWorks/Pavement Design/NA/NA": {
     "ConvertToRealCAPAfter": [
       {
         "preScript": "",
@@ -112,7 +112,9 @@
             "Request Complete"
           ],
           "workFlow": {
-            "Traffic Investigation": ["No Change Warranted"]
+            "Traffic Investigation": [
+              "No Change Warranted"
+            ]
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",
@@ -165,7 +167,9 @@
             "No Change Warranted"
           ],
           "workFlow": {
-            "Manager Review": ["Request Complete"]
+            "Manager Review": [
+              "Request Complete"
+            ]
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",
@@ -205,7 +209,7 @@
       }
     ]
   },
- "PublicWorks/Real Property/License Agreement/NA": {
+  "PublicWorks/Real Property/License Agreement/NA": {
     "WorkflowTaskUpdateAfter": [
       {
         "preScript": "",
@@ -624,7 +628,7 @@
         }
       }
     ]
- },
+  },
   "PublicWorks/Drainage/NA/NA": {
     "WorkflowTaskUpdateAfter": [
       {
@@ -642,7 +646,7 @@
             "Ready to Pay"
           ],
           "customFields": {
-            "Review Type": "Master Drainage Report"       
+            "Review Type": "Master Drainage Report"
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",
@@ -693,7 +697,7 @@
             "Ready to Pay"
           ],
           "customFields": {
-            "Review Type": "Preliminary Drainage Letter"          
+            "Review Type": "Preliminary Drainage Letter"
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",
@@ -744,7 +748,7 @@
             "Ready to Pay"
           ],
           "customFields": {
-            "Review Type": "Preliminary Drainage Report"          
+            "Review Type": "Preliminary Drainage Report"
           },
           "isCreatedByACA": "",
           "balanceAllowed": "",
@@ -798,7 +802,10 @@
           "status": [
             "Ready to Pay"
           ],
-          "customFields": {},
+          "customFields": {
+            "Review Fee?": "Yes",
+            "Submittal Number": "1"
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -832,6 +839,58 @@
             }
           ]
         }
+      },
+      {
+        "preScript": "",
+        "postScript": "",
+        "metadata": {
+          "description": "123",
+          "operators": {}
+        },
+        "criteria": {
+          "task": [
+            "Quality Check"
+          ],
+          "status": [
+            "Ready to Pay"
+          ],
+          "customFields": {
+            "Review Fee?": "Yes",
+            "Submittal Number": "3"
+          },
+          "isCreatedByACA": "",
+          "balanceAllowed": "",
+          "recordStatus": []
+        },
+        "action": {
+          "prescript": "",
+          "activateTask": [],
+          "daysOut": "",
+          "deactivateTask": [],
+          "deleteTask": [],
+          "updateTask": [
+            {
+              "task": "",
+              "status": ""
+            }
+          ],
+          "invoiceFees": "Y",
+          "createChild": "",
+          "createParent": "",
+          "addCondition": "",
+          "removeCondition": "",
+          "addComment": "",
+          "newStatus": "",
+          "assessFees": [
+            {
+              "feeSchedule": "PW_CIVIL_01",
+              "feeCode": "PW_CIVIL_07",
+              "feeQuantity": 1,
+              "feeInvoice": "Y",
+              "feePeriod": "FINAL"
+            }
+          ]
+        }
       }
     ]
   },
@@ -851,7 +910,10 @@
           "status": [
             "Ready to Pay"
           ],
-          "customFields": {},
+          "customFields": {
+            "Review Fee?": "Yes",
+            "Submittal Number": "1"
+          },
           "isCreatedByACA": "",
           "balanceAllowed": "",
           "recordStatus": []
@@ -895,9 +957,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 383",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
