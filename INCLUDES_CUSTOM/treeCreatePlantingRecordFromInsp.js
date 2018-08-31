@@ -63,10 +63,12 @@ function treeCreatePlantingRecordFromInsp(inspId)
 			activateTask("Quality Control");
 			scheduleInspection("Planting", dateAdd(null,5,true));
 			//get GIS objects
+			logDebug("DB1")
 			var gisIdForLayer = "";
-			var gisObjResult = aa.gis.getCapGISObjects(capId); // get gis objects on the cap
+			var gisObjResult = aa.gis.getCapGISObjects(plantingRecordId); // get gis objects on the cap
 			if (gisObjResult.getSuccess()) 	
-				var fGisObj = gisObjResult.getOutput();
+				var fGisObj = gisObjResult.getOutput();	
+				logDebug("DB2")
 			else
 				{ logDebug("**WARNING: Getting GIS objects for CAP.  Reason is: " + gisObjResult.getErrorType() + ":" + gisObjResult.getErrorMessage()); }
 			treeInventoryPopulate()
