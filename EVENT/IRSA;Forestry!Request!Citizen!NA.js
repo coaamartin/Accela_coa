@@ -35,5 +35,7 @@ if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Other", "PR1"
 
 if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Complete")) {
 	//Script 201
-	treeCreatePlantingRecordFromInsp(inspId)
+	var childArray = getChildren("Forestry/Request/Planting/NA", capId);
+    if (!childArray || childArray.length == 0)
+		{treeCreatePlantingRecordFromInsp(inspId)}
 	}
