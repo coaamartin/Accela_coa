@@ -57,14 +57,14 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
         if(ifTracer(verticalConst == "Yes", 'verticalConst == "Yes"')) stdTimeline = 5;
     }
     
-    /*if(ifTracer(appMatch("PublicWorks/Drainage/NA/NA"), 'Drainage Record')){
+    if(ifTracer(appMatch("PublicWorks/Drainage/NA/NA"), 'Drainage Record')){
         if(submittalNum){
             submittalNum = parseInt(submittalNum);
             if(ifTracer(submittalNum == 1, 'submittalNum == 1')) stdTimeline = 15;
             if(ifTracer(submittalNum == 2, 'submittalNum == 2')) stdTimeline = 10;
             if(ifTracer(submittalNum >= 3, 'submittalNum == 3')) stdTimeline = 5;
         }
-    }*/
+    }
     
     //if(ifTracer(stdTimeline > 0, 'stdTimeline > 0'))
     //    editWFTaskDueDatebyName("review", stdTimeline, true);
