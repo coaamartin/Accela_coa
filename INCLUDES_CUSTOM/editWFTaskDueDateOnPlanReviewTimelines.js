@@ -6,9 +6,9 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
     var sigPlanSheets = AInfo["Signature Plan Sheets"];
     var verticalConst = AInfo["Vertical Construction/Short Review"];
     
-    //if(civilPlanSheets) civilPlanSheets = parseInt(civilPlanSheets);
-    //else civilPlanSheets = 0;
-    //    
+    if(civilPlanSheets) civilPlanSheets = parseInt(civilPlanSheets);
+    else civilPlanSheets = 0;
+        
     //if(sigPlanSheets) sigPlanSheets = parseInt(sigPlanSheets);
     //else sigPlanSheets = 0;
     
