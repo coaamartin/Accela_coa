@@ -35,6 +35,5 @@ if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Other", "PR1"
 
 if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Complete")) {
 	//Script 201
-	showDebug = true
 	treeCreatePlantingRecordFromInsp(inspId)
 	}

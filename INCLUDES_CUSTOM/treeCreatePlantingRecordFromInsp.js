@@ -65,6 +65,7 @@ function treeCreatePlantingRecordFromInsp(inspId)
 			//get GIS objects
 			copyParcelGisObjects();
 			treeInventoryPopulate(plantingRecordId)
+			newDetailInfo = ""
 			if (plantingRecordId) {
 				fgsi.loadInfoTables();
 				if (fgsi.validTables) {
@@ -86,9 +87,14 @@ function treeCreatePlantingRecordFromInsp(inspId)
 							}
 						];
 						addAsiTableRow("NEW TREE PLANTING", thisViolation);
+						if(newDetailInfo == "")
+							{var newDetailInfo = fvit["Location"] + " " + fvit["Quantity"] + " " + fvit["Species"] + " " + fvit["Comments"]}
+						else
+							{var newDetailInfo = newDetailInfo + ". " + fvit["Location"] + " " + fvit["Quantity"] + " " + fvit["Species"] + " " + fvit["Comments"]}
 					}
 				}
 			}
+			updateWorkDesc(newDetailInfo)
 			capId = tmpId;
 		}
 	}
