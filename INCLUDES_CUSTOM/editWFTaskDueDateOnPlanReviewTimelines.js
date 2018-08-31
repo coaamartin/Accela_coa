@@ -68,25 +68,3 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
     if(ifTracer(stdTimeline > 0, 'stdTimeline > 0'))
         editWFTaskDueDatebyName("review", stdTimeline, true);
 }
-
-function findCivilConstructionPlanReviewTimeline(num, sheets) {
-    logDebug("findCivilConstructionPlanReviewTimeline(" + num + "," + sheets + ")");
-    var timeLineSC = "Civil Construction Plan Review Timelines";
-    var bizDomScriptResult = aa.bizDomain.getBizDomain(timeLineSC);
-
-    if (bizDomScriptResult.getSuccess()) {
-        bizDomScriptArray = bizDomScriptResult.getOutput().toArray()
-            for (var i in bizDomScriptArray) {
-                var thisNum = bizDomScriptArray[i].getBizdomainValue().split(",")[0];
-                if (num != thisNum) {
-                    continue;
-                }
-                var rangeLow = bizDomScriptArray[i].getBizdomainValue().split(",")[1].split("-")[0];
-                var rangeHigh = bizDomScriptArray[i].getBizdomainValue().split(",")[1].split("-")[1];
-
-                if (sheets >= rangeLow && sheets <= rangeHigh) {
-                    return parseInt(bizDomScriptArray[i].getDescription());
-                }
-            }
-    }
-}
