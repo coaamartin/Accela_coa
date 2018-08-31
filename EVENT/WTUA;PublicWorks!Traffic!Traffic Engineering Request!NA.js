@@ -48,7 +48,8 @@ if(ifTracer(wfTask=="Manager Review" && wfStatus=="Request Complete",'wfTask & w
 logDebug('Script 171 Starting')
 if (ifTracer(wfTask=="Manager Review" && wfStatus=="Request Complete",'wfTask & wfStatus match')) {
     include("171_UpdateWorkFlowAdCreateChildRecs");
-    script268_MakeFieldsNullIfNoWorkOrderrder();
+	//Disabled per testing session with public works on 8/31/2018
+    //script268_MakeFieldsNullIfNoWorkOrderrder();
 }
 
 if(ifTracer(wfTask == "Draft Workorder" && wfStatus == "Workorder Drafted", 'wf:Draft Workorder/Workorder Drafted')){
