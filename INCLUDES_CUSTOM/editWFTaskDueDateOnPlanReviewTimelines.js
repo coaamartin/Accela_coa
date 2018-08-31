@@ -3,7 +3,7 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
     var stdTimeline = 0;
     var civilPlanSheets = AInfo["Civil Plan Sheets"];
     var submittalNum = AInfo["Submittal Number"];
-    var sigPlanSheets = AInfo["Signature Plan Sheets"];
+    //var sigPlanSheets = AInfo["Signature Plan Sheets"];
     //var verticalConst = AInfo["Vertical Construction/Short Review"];
     //if(civilPlanSheets) civilPlanSheets = parseInt(civilPlanSheets);
     //else civilPlanSheets = 0;
