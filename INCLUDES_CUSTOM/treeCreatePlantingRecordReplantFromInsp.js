@@ -45,4 +45,3 @@ function treeCreatePlantingRecordReplantFromInsp(inspId)
 		aa.cap.copyCapWorkDesInfo(capId, plantingRecordId);
 		}
 	}
-}
