@@ -1,7 +1,7 @@
 //junk script to demonstrate a few EMSE tricks
 //written by jmain and amartin
 
-logDebug("Entering Hello World");
+aa.env.setValue("ScriptReturnMessage", "Entering Hello World");
 
 var today = new Date();
 var todaystring = today.toString();
@@ -12,10 +12,10 @@ var anumber = 123.4 * 17.45
 //build a string
 var astring = "Hello!  Today is " + todaystring + " and a number is " + anumber.toString();
 
-logDebug(astring);
+aa.env.setValue("ScriptReturnMessage", astring);
 
 //log the record id...
 var record = "hello there";
-logDebug("The record ID is: " + record);
+aa.env.setValue("ScriptReturnMessage", record);
 
-logDebug("we're finished with this script");
+aa.env.setValue("ScriptReturnMessage", "we're finished with this script");
