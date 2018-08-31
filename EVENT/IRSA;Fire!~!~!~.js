@@ -113,7 +113,7 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 pEParams = aa.util.newHashtable();
 addParameter(pEParams, "$$FullAddress$$", getCapFullAddress());
 pRParams = aa.util.newHashtable();
-addParameter(pRParams, "Record ID", capIDString);
+addParameter(pRParams, "FolderRSN", capIDString);
 emailContactsWithReportLinkASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
 
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
@@ -125,4 +125,3 @@ if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResul
 	closeCap(currentUserID);
 }
 logDebug("Script 15 - End");
-
