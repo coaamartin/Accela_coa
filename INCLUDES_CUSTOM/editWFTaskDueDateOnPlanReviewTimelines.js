@@ -3,7 +3,7 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
     var stdTimeline = 0;
     var civilPlanSheets = AInfo["Civil Plan Sheets"];
     var submittalNum = AInfo["Submittal Number"];
-    var sigPlanSheets = AInfo["Signature Plan Sheets"];
+    //var sigPlanSheets = AInfo["Signature Plan Sheets"];
     //var verticalConst = AInfo["Vertical Construction/Short Review"];
     //if(civilPlanSheets) civilPlanSheets = parseInt(civilPlanSheets);
     //else civilPlanSheets = 0;
@@ -65,8 +65,8 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
         }
     }*/
     
-    if(ifTracer(stdTimeline > 0, 'stdTimeline > 0'))
-        editWFTaskDueDatebyName("review", stdTimeline, true);
+    //if(ifTracer(stdTimeline > 0, 'stdTimeline > 0'))
+    //    editWFTaskDueDatebyName("review", stdTimeline, true);
 }
 
 function findCivilConstructionPlanReviewTimeline(num, sheets) {
