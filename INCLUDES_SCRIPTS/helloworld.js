@@ -15,7 +15,7 @@ var astring = "Hello!  Today is " + todaystring + " and a number is " + anumber.
 aa.env.setValue("ScriptReturnMessage", astring);
 
 //log the record id...
-var record = "hello there";
-aa.env.setValue("ScriptReturnMessage", record);
+var record = "The Capid is: " + capId;
+//aa.env.setValue("ScriptReturnMessage", record);
 
-aa.env.setValue("ScriptReturnMessage", "we're finished with this script");
+aa.env.setValue("ScriptReturnMessage", record);
