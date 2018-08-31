@@ -1,7 +1,11 @@
-function treeInventoryPopulate()
+function treeInventoryPopulate(vCapId)
 	{
+	var tmpId = capId;
 	// get address
-	
+	if(vCapId != null)
+		{
+		capId = vCapId;
+		}
 	var myAddr = aa.address.getAddressByCapId(capId);
 	var addrArray = new Array();
 	var addrArray = myAddr.getOutput();
@@ -16,6 +20,7 @@ function treeInventoryPopulate()
 		// get tree data
 		var arrGIS = new Array;
 		newRow = new Array();
+
 		arrGIS = getGISBufferInfo("AURORACO","Trees","100","TREE_ID_NO","MAN_UNIT","DIAMETER","SPECIES","ADDRESS")
 		logDebug("arrGIS Length " + arrGIS.length)
 		for(x in arrGIS){
@@ -28,12 +33,6 @@ function treeInventoryPopulate()
 			var TreeAdd = thisGIS["ADDRESS"];
 			if(TreeAdd == capAddress)
 				{
-				logDebug("Tree " + treeIdNo + " has an address match TreeAdd " + TreeAdd + " = capAddress " + capAddress)
-				logDebug("treeIdNo " + treeIdNo)
-				logDebug("manUnit " + manUnit)
-				logDebug("diameter " + diameter)
-				logDebug("species " + species)
-				//newRow["Tree ID"] = new asiTableValObj("Tree ID", treeIdNo, "N");	
 				newRow["Tree ID"] = treeIdNo
 				newRow["Management Unit"] = manUnit
 				newRow["Existing Diameter"] = diameter
@@ -42,4 +41,5 @@ function treeInventoryPopulate()
 				}
 			}
 		}
+	capId = tmpId;
 	}

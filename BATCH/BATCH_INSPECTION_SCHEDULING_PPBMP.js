@@ -61,8 +61,9 @@ var INSPECTORS_SUPERVISORS_TABLE = aa.env.getValue("INSPECTORS_SUPERVISORS_TABLE
 var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
 
 useAppSpecificGroupName = false;
-
-try {
+var emailText = "";		
+//try {
+	showDebug = true
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	var tmpAry = RECORD_TYPE.split("/");
 	capTypeModel.setGroup(tmpAry[0]);
@@ -79,13 +80,14 @@ try {
 	} else {
 		capIDList = capIDList.getOutput();
 	}
-
+	
 	var sysYear = aa.date.getCurrentDate().getYear();
-
+	
+	logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
 	for (c in capIDList) {
-
 		capId = capIDList[c].getCapID();
-
+		capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
+		logDebug2("<Font Color=BLUE> <br> Processing record " + capIDString)
 		var tmpCap = aa.cap.getCap(capId);
 		if (!tmpCap.getSuccess()) {
 			logDebug("**INFO failed to get CapModel " + capId);
@@ -97,26 +99,28 @@ try {
 
 		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
-
+		logDebug2("<Font Color=BLACK> <br> nextInspectionDate: " + nextInspectionDate)
 		if (nextInspectionDate == null || nextInspectionDate == "") {
+			logDebug2("<br> No Inspection Date is set. Moving to next record.");
 			continue;
 		}//date null/empty
 
 		nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
+		logDebug2("<br> nextInspectionYear: " + nextInspectionYear + ", sysYear: " + sysYear)
 		if (nextInspectionYear == sysYear) {
 
 			//schedule only, then try to assign
 			var lastInspectorId = getLastInspector(INSPECTION_NAME);
-
+			logDebug2("<br> lastInspectorId: " + lastInspectorId)
 			if (lastInspectorId == null) {
-				//we can't assign to last inspector, and we can get supervisor
-				logDebug("**INFO: Last Inspector ID or LastInsprction of same type is null, -- scheduling without assign");
+				//we can't assign to last inspector, and we can't get supervisor
+				logDebug2("<br> Last Inspector ID is null, scheduling without assignment");
 				scheduleInspectDate(INSPECTION_NAME, nextInspectionDate);
 				continue;
 			}
 
-			scheduleInspectDate(INSPECTION_NAME, nextInspectionDate);
-
+			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " on " + nextInspectionDate);		
+			scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)
 			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
 			if (lastSchedInspectionObj == null) {
 				logDebug("**INFO failed to scheduleInspectDate() " + capId + " " + INSPECTION_NAME);
@@ -127,14 +131,17 @@ try {
 
 			var assignTolastInsp = assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId);
 			if (!assignTolastInsp) {
-				assignSupervisor(lastSchedInspectionSeq, lastInspectorId);
+				var supervisor = assignSupervisor(lastSchedInspectionSeq, lastInspectorId);
+				logDebug2("<BR> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq )
 			}
 
-		}//same year
+		} else {
+			logDebug2("<br> Inspection year and system year do not match. Moving to next record.");
+		}
 	}//for all capIds
-} catch (ex) {
-	logDebug("**ERROR: Exception while running batch job , Error: " + ex);
-}
+//} catch (ex) {
+	//logDebug("**ERROR: Exception while running batch job , Error: " + ex);
+//}
 
 /**
  * Format a ScriptDate mm/dd/yyyy
@@ -142,13 +149,16 @@ try {
  * @returns {String} formatted date
  */
 function formatDateX(scriptDate) {
-	var ret = "";
-	ret += scriptDate.getMonth().toString().length == 1 ? "0" + scriptDate.getMonth() : scriptDate.getMonth();
-	ret += "/";
-	ret += scriptDate.getDayOfMonth().toString().length == 1 ? "0" + scriptDate.getDayOfMonth() : scriptDate.getDayOfMonth();
-	ret += "/";
-	ret += scriptDate.getYear();
-	return ret;
+	if(scriptDate != null)
+		{
+		var ret = "";
+		ret += scriptDate.getMonth().toString().length == 1 ? "0" + scriptDate.getMonth() : scriptDate.getMonth();
+		ret += "/";
+		ret += scriptDate.getDayOfMonth().toString().length == 1 ? "0" + scriptDate.getDayOfMonth() : scriptDate.getDayOfMonth();
+		ret += "/";
+		ret += scriptDate.getYear();
+		return ret;
+		}
 }
 
 /**
@@ -259,13 +269,24 @@ function assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, 
 }
 
 function assignSupervisor(lastSchedInspectionSeq, lastInspectorId) {
-	var lookupTableJsonStr = getScriptText(INSPECTORS_SUPERVISORS_TABLE);
-	var lookupTableJsonObj = JSON.parse(lookupTableJsonStr);
-	var superVisor = lookupTableJsonObj[lastInspectorId];
+	superVisor = lookup("PPBMP_INSPECTORS_SUPERVISORS_TABLE",lastInspectorId)
+	//var lookupTableJsonStr = getScriptText(INSPECTORS_SUPERVISORS_TABLE);
+	//var lookupTableJsonObj = JSON.parse(lookupTableJsonStr);
+	//var superVisor = lookupTableJsonObj[lastInspectorId];
 	if (!superVisor) {
 		logDebug("**INFO could not get supervisor for " + lastInspectorId);
 		return;
 	}
-
 	assignInspection(lastSchedInspectionSeq, superVisor);
+	return superVisor;
 }
+function logDebug2(dstr)
+	{
+	// function of the same name in ACVCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
+	if(showDebug)
+		{
+		aa.print(dstr)
+		emailText+= dstr + "<br>";
+		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr)
+		}
+	}
