@@ -33,7 +33,7 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
             }
         }
     }
-    /*if(ifTracer(appMatch("PublicWorks/Civil Plan/Revision/NA"), 'Civil Plan Revision')){
+    if(ifTracer(appMatch("PublicWorks/Civil Plan/Revision/NA"), 'Civil Plan Revision')){
         if(submittalNum){
             submittalNum = parseInt(submittalNum);
             if(ifTracer(submittalNum == 1, 'submittalNum == 1')){
@@ -57,7 +57,7 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
         if(ifTracer(verticalConst == "Yes", 'verticalConst == "Yes"')) stdTimeline = 5;
     }
     
-    if(ifTracer(appMatch("PublicWorks/Drainage/NA/NA"), 'Drainage Record')){
+    /*if(ifTracer(appMatch("PublicWorks/Drainage/NA/NA"), 'Drainage Record')){
         if(submittalNum){
             submittalNum = parseInt(submittalNum);
             if(ifTracer(submittalNum == 1, 'submittalNum == 1')) stdTimeline = 15;
