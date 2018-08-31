@@ -1,4 +1,4 @@
-git add -A
-git commit -a -m "JMP Changes"
-git pull
-git push
+echo git add -A
+echo git commit -a -m "JMP Changes"
+echo git pull
+echo git push
