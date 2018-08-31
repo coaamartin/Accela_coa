@@ -35,21 +35,18 @@ if (ifTracer(wfTask=="Manager Review" && wfStatus=="Approved",'wfTask & wfStatus
     //Script 174 End
 }
 
-
-if(ifTracer(wfTask=="Manager Review" && wfStatus=="Request Complete",'wfTask & wfStatus match')){
-	//Script 174 - From testing session on 8/31/2018
-    if (AInfo["Final Response Required"]=="CHECKED"){
-        var res=addAdHocTask("ADHOC_WORKFLOW","Final Response Sent", "");
-    }
-//Script 174 END 
-}
-
 //script 171
 logDebug('Script 171 Starting')
 if (ifTracer(wfTask=="Manager Review" && wfStatus=="Request Complete",'wfTask & wfStatus match')) {
     include("171_UpdateWorkFlowAdCreateChildRecs");
 	//Disabled per testing session with public works on 8/31/2018
     //script268_MakeFieldsNullIfNoWorkOrderrder();
+	
+	//Script 174 - From testing session on 8/31/2018
+    if (AInfo["Final Response Required"]=="CHECKED"){
+        var res=addAdHocTask("ADHOC_WORKFLOW","Final Response Sent", "");
+    }
+    //Script 174 END 
 }
 
 if(ifTracer(wfTask == "Draft Workorder" && wfStatus == "Workorder Drafted", 'wf:Draft Workorder/Workorder Drafted')){
