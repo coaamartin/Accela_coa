@@ -15,7 +15,7 @@ var astring = "Hello!  Today is " + todaystring + " and a number is " + anumber.
 aa.print(astring);
 
 //log the record id...
-var record = aa.cap.getCap(CapId).getOutput();
+var record = "hello there";
 aa.print("The record ID is: " + record);
 
 aa.print("we're finished with this script");
