@@ -2,15 +2,15 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
     //Set workflow due date based on plan review timelines {
     var stdTimeline = 0;
     var civilPlanSheets = AInfo["Civil Plan Sheets"];
-    //var submittalNum = AInfo["Submittal Number"];
-    //var sigPlanSheets = AInfo["Signature Plan Sheets"];
-    //var verticalConst = AInfo["Vertical Construction/Short Review"];
+    var submittalNum = AInfo["Submittal Number"];
+    var sigPlanSheets = AInfo["Signature Plan Sheets"];
+    var verticalConst = AInfo["Vertical Construction/Short Review"];
     
-    //if(civilPlanSheets) civilPlanSheets = parseInt(civilPlanSheets);
-    //else civilPlanSheets = 0;
-    //    
-    //if(sigPlanSheets) sigPlanSheets = parseInt(sigPlanSheets);
-    //else sigPlanSheets = 0;
+    if(civilPlanSheets) civilPlanSheets = parseInt(civilPlanSheets);
+    else civilPlanSheets = 0;
+        
+    if(sigPlanSheets) sigPlanSheets = parseInt(sigPlanSheets);
+    else sigPlanSheets = 0;
     
     /*if(ifTracer(appMatch("PublicWorks/Civil Plan/Review/NA"), 'Civil Plan Review')){
         if(submittalNum){
