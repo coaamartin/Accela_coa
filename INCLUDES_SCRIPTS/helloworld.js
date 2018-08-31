@@ -19,3 +19,4 @@ var record = aa.date.getCurrentDate().getYear();
 //aa.env.setValue("ScriptReturnMessage", record);
 
 aa.env.setValue("ScriptReturnMessage", record);
+logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
