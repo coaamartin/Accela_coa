@@ -30,7 +30,8 @@ Notes:
 	
 */
 
-doForestryRecordsApplicationSubmitActions("Forestry_Inspector_Assignments", "Tree Inspect", "Forestry Inspection");
+//commented out due to diplicate functionality from Script 60
+//doForestryRecordsApplicationSubmitActions("Forestry_Inspector_Assignments", "Tree Inspect", "Forestry Inspection");
 
 /*
 Title : Forestry Record Application Submission Actions (ApplicationSubmitAfter,ConvertToRealCapAfter)
@@ -79,4 +80,3 @@ else
 
 //Script 198
 treeInventoryPopulate()
-
