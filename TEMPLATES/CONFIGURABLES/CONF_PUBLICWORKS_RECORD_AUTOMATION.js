@@ -101,15 +101,15 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "Script 172. If Manager Review is resulted after Traffic Investigation",
+          "description": "Script 172a.",
           "operators": {}
         },
         "criteria": {
           "task": [
-            "Manager Review"
+            "Request Complete"
           ],
           "status": [
-            "Request Complete"
+            "Complete"
           ],
           "workFlow": {
             "Traffic Investigation": [
@@ -125,13 +125,13 @@
           "activateTask": [],
           "daysOut": "",
           "deactivateTask": [
-            "Generate Work Order"
+            ""
           ],
           "deleteTask": [],
           "updateTask": [
             {
-              "task": "Application Submittal",
-              "status": "Complete"
+              "task": "",
+              "status": ""
             }
           ],
           "invoiceFees": "",
@@ -154,21 +154,21 @@
       },
       {
         "preScript": "",
-        "postScript": "deactivateAllActiveTsks",
+        "postScript": "",
         "metadata": {
-          "description": "Script 172. If Traffic Investigation is resulted after Manager Review",
+          "description": "Script 172b.",
           "operators": {}
         },
         "criteria": {
           "task": [
-            "Traffic Investigation"
+            "Request Complete"
           ],
           "status": [
-            "No Change Warranted"
+            "Complete"
           ],
           "workFlow": {
-            "Manager Review": [
-              "Request Complete"
+            "Traffic Investigation": [
+              "Refer to Code Enforcement"
             ]
           },
           "isCreatedByACA": "",
@@ -180,13 +180,13 @@
           "activateTask": [],
           "daysOut": "",
           "deactivateTask": [
-            "Generate Work Order"
+            ""
           ],
           "deleteTask": [],
           "updateTask": [
             {
-              "task": "Application Submittal",
-              "status": "Complete"
+              "task": "",
+              "status": ""
             }
           ],
           "invoiceFees": "",
@@ -195,7 +195,117 @@
           "addCondition": "",
           "removeCondition": "",
           "addComment": "",
-          "newStatus": "No Change Warranted",
+          "newStatus": "Refer to Code Enforcement",
+          "assessFees": [
+            {
+              "feeSchedule": "",
+              "feeCode": " ",
+              "feeQuantity": 0,
+              "feeInvoice": "",
+              "feePeriod": ""
+            }
+          ]
+        }
+      },
+      {
+        "preScript": "",
+        "postScript": "",
+        "metadata": {
+          "description": "Script 172c.",
+          "operators": {}
+        },
+        "criteria": {
+          "task": [
+            "Request Complete"
+          ],
+          "status": [
+            "Complete"
+          ],
+          "workFlow": {
+            "Traffic Investigation": [
+              "Refer to Forestry"
+            ]
+          },
+          "isCreatedByACA": "",
+          "balanceAllowed": "",
+          "recordStatus": []
+        },
+        "action": {
+          "prescript": "",
+          "activateTask": [],
+          "daysOut": "",
+          "deactivateTask": [
+            ""
+          ],
+          "deleteTask": [],
+          "updateTask": [
+            {
+              "task": "",
+              "status": ""
+            }
+          ],
+          "invoiceFees": "",
+          "createChild": "",
+          "createParent": "",
+          "addCondition": "",
+          "removeCondition": "",
+          "addComment": "",
+          "newStatus": "Refer to Forestry",
+          "assessFees": [
+            {
+              "feeSchedule": "",
+              "feeCode": " ",
+              "feeQuantity": 0,
+              "feeInvoice": "",
+              "feePeriod": ""
+            }
+          ]
+        }
+      },
+      {
+        "preScript": "",
+        "postScript": "",
+        "metadata": {
+          "description": "Script 172d.",
+          "operators": {}
+        },
+        "criteria": {
+          "task": [
+            "Request Complete"
+          ],
+          "status": [
+            "Complete"
+          ],
+          "workFlow": {
+            "Traffic Investigation": [
+              "Draft Work Order"
+            ]
+          },
+          "isCreatedByACA": "",
+          "balanceAllowed": "",
+          "recordStatus": []
+        },
+        "action": {
+          "prescript": "",
+          "activateTask": [],
+          "daysOut": "",
+          "deactivateTask": [
+            ""
+          ],
+          "deleteTask": [],
+          "updateTask": [
+            {
+              "task": "",
+              "status": ""
+            }
+          ],
+          "invoiceFees": "",
+          "createChild": "",
+          "createParent": "",
+          "addCondition": "",
+          "removeCondition": "",
+          "addComment": "",
+          "newStatus": "Work Order Complete",
           "assessFees": [
             {
               "feeSchedule": "",
