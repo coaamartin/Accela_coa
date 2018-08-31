@@ -1,8 +1,11 @@
 function treeInventoryPopulate(vCapId)
 	{
+	var tmpId = capId;
 	// get address
-	if(vCapId == null)
-		{vCapId = capId}
+	if(vCapId != null)
+		{
+		capId = vCapId;
+		}
 	var myAddr = aa.address.getAddressByCapId(capId);
 	var addrArray = new Array();
 	var addrArray = myAddr.getOutput();
@@ -17,6 +20,7 @@ function treeInventoryPopulate(vCapId)
 		// get tree data
 		var arrGIS = new Array;
 		newRow = new Array();
+
 		arrGIS = getGISBufferInfo("AURORACO","Trees","100","TREE_ID_NO","MAN_UNIT","DIAMETER","SPECIES","ADDRESS")
 		logDebug("arrGIS Length " + arrGIS.length)
 		for(x in arrGIS){
@@ -37,4 +41,5 @@ function treeInventoryPopulate(vCapId)
 				}
 			}
 		}
+	capId = tmpId;
 	}
