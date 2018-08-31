@@ -16,5 +16,8 @@ Notes:
 
 updateSubmittalNumber("Completeness Check", ["Complete","Accepted"], "Submittal Number");
 
-
-
+if (wfTask == "Quality Check" && wfStatus == "Route for Review"){
+    //Script 192
+    editWFTaskDueDateOnPlanReviewTimelines();
+	//END Script 192
+}

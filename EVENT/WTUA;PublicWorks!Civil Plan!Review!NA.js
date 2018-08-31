@@ -47,7 +47,11 @@ Sample Call : editWFTaskDueDateOnPlanReviewTimelines()
 Notes		: The Standard choice "Civil Construction Plan Review Timelines" must be provided by Aurora
 			  For Now ,the number of workflow due days is not available , alternatively use 0 days 
 /------------------------------------------------------------------------------------------------------*/
-editWFTaskDueDateOnPlanReviewTimelines();
+if (wfTask == "Quality Check" && wfStatus == "Route for Review"){
+    //Script 192
+    editWFTaskDueDateOnPlanReviewTimelines();
+	//END Script 192
+}
 
 /*
 Title : Civil Plans and Drainage update Submittal Number (WorkflowTaskUpdateAfter)
