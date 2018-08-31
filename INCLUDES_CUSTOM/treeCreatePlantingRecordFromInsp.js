@@ -71,7 +71,7 @@ function treeCreatePlantingRecordFromInsp(inspId)
 				logDebug("DB2")
 			else
 				{ logDebug("**WARNING: Getting GIS objects for CAP.  Reason is: " + gisObjResult.getErrorType() + ":" + gisObjResult.getErrorMessage()); }
-			treeInventoryPopulate(capId)
+			treeInventoryPopulate(plantingRecordId)
 			if (plantingRecordId) {
 				fgsi.loadInfoTables();
 				if (fgsi.validTables) {
