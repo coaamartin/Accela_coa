@@ -11,7 +11,7 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
     if(sigPlanSheets) sigPlanSheets = parseInt(sigPlanSheets);
     else sigPlanSheets = 0;
     
-    if(ifTracer(appMatch("PublicWorks/Civil Plan/Review/NA"), 'Civil Plan Review')){
+    if(appMatch("PublicWorks/Civil Plan/Review/NA")){
         //if(submittalNum){
         //    submittalNum = parseInt(submittalNum);
         //    if(ifTracer(submittalNum == 1, 'submittalNum == 1')){
