@@ -1,4 +1,4 @@
-function treeInventoryPopulate()
+function treeInventoryPopulate(vCapId)
 	{
 	// get address
 	
@@ -28,12 +28,6 @@ function treeInventoryPopulate()
 			var TreeAdd = thisGIS["ADDRESS"];
 			if(TreeAdd == capAddress)
 				{
-				logDebug("Tree " + treeIdNo + " has an address match TreeAdd " + TreeAdd + " = capAddress " + capAddress)
-				logDebug("treeIdNo " + treeIdNo)
-				logDebug("manUnit " + manUnit)
-				logDebug("diameter " + diameter)
-				logDebug("species " + species)
-				//newRow["Tree ID"] = new asiTableValObj("Tree ID", treeIdNo, "N");	
 				newRow["Tree ID"] = treeIdNo
 				newRow["Management Unit"] = manUnit
 				newRow["Existing Diameter"] = diameter
