@@ -1,3 +1,1 @@
-logDebug("blah blah");
-logDebug(capId);
-logDebug("JMP was here - Yea!!");
+include("JP_JUNK_DELETE");
