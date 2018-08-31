@@ -14,9 +14,7 @@ Notes:
     For record type Water/Utility/Master/Study, we don't have any custom field called Submittal Number
 */
 
-
-
-updateSubmittalNumber("Application Submittal", ["Complete", "Accepted"], "Submittal Number");
+updateSubmittalNumber("Completeness Check", ["Complete","Accepted"], "Submittal Number");
 
 
 

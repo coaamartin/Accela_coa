@@ -41,7 +41,6 @@ Notes:
 // script 18
 // EK updated this script to include Application Submittal and Accepted
 updateSubmittalNumber("Completeness Check", ["Complete","Accepted"], "Submittal Number");
-updateSubmittalNumber("Application Submittal", ["Complete","Accepted"], "Submittal Number");
 
 if($iTrc(wfTask == "Plans Coordination" && wfStatus == "Resubmittal Requested", 'wfTask == "Plans Coordination" && wfStatus == "Resubmittal Requested"')){
 	//Script 125
