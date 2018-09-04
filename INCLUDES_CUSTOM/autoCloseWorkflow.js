@@ -56,7 +56,7 @@ function autoCloseWorkflow() {
     
     //#2
     if (!matched) {
-        logDebug("match #3");
+        logDebug("match #2");
         recTypesAry = new Array();
         recTypesAry = [ "Building/Permit/New Building/NA", "Building/Permit/Plans/NA" ];
 		//validateParentCapStatus() is part of script 2.  Permit cannot be issued if Parent Master is Unapproved
