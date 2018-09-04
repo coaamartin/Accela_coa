@@ -40,7 +40,6 @@ if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
 		SAScript = bzr.getOutput().getDescription();
 	}
 }
-
 if (SA) {
 	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", SA));
 	eval(getScriptText("INCLUDES_ACCELA_GLOBALS", SA));
