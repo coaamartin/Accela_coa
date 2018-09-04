@@ -81,7 +81,7 @@ function updateCustomFieldAndScheduleInspection() {
         }
 
         //the inspection is next month
-		logDebug2("Inspection month: " + inspectionMonth.indexOf(nextMonthNumber);
+		logDebug2("Inspection month: " + inspectionMonth.indexOf(nextMonthNumber));
         if (inspectionMonth.indexOf(nextMonthNumber) != -1) {
             //values [12 months], [24 months]
             var inspectionFrequency = getAppSpecific("Inspection Frequency");
