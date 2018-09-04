@@ -2,9 +2,9 @@
 function failedMJInspectionAutomation() {
 	
 	// list MJ inspection types
-	var inspectionTypesAry = [ "MJ AMED Inspection", "MJ Building Inspection - Electrical", "MJ Building Inspection - Life Safety",
-		"MJ Building Inspection - Mechanical", "MJ Building Inspection - Plumbing", "MJ Building Inspection - Structural", "MJ Security Inspection - 3rd Party",
-		"MJ Zoning Inspection" ];
+	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
+		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
+		"MJ Zoning Inspections" ];
 	
 	//define number of days to schedule next inspection
 	var daysToAdd = 7;
