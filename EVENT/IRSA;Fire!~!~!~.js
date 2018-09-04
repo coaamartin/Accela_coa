@@ -25,6 +25,8 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 		{newInspType = "FD Follow-Up";}
 	if (inspType == "FD Initial Unscheduled Inspection")
 		{newInspType = "FD Follow-Up";}
+	if (inspType == "FD Follow-Up")
+		{newInspType = "FD Follow-Up";}
 		
 	//assign inspector based on inspector assigned to the record
 	var inspector = null;
