@@ -69,7 +69,7 @@ function updateCustomFieldAndScheduleInspection() {
     for (r in capIdScriptModelList) {
         capId = capIdScriptModelList[r].getCapID();
         capId = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput();
-        aa.print("#######################");
+        aa.print("<br>#######################<br>");
         var olduseAppSpecificGroupName = useAppSpecificGroupName;
         useAppSpecificGroupName = false;
 
