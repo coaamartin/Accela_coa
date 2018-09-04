@@ -23,7 +23,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                 if($iTrc(!isNaN(newInspDateOrDays), 'newInspDateOrDays is a number, use this as inspection days'))
                     numOfDays4Insp = parseInt(newInspDateOrDays);
                 else if($iTrc(newInspDateOrDays.equalsIgnoreCase("nextWorkDay"), 'nextWorkDay == ' + newInspDateOrDays)){
-                    var nextWorkDayDate = dateAdd(null, 1, true);
+                    var nextWorkDayDate = dateAddHC2(null, 1, true);
                     numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWorkDayDate));
                 }
                 else custField = AInfo[newInspDateOrDays];
