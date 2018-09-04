@@ -175,7 +175,7 @@ function getAssignedStaff(capId) {
         cd = cdScriptObj.getCapDetailModel();
         assignedStaff = cd.getAsgnStaff();
 
-        return assignedStaff
+        return assignedStaff;
 
     } catch (e) {
         aa.debug("getAssignedStaff ", e);
