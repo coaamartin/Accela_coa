@@ -41,7 +41,7 @@ var capId = null;
 try {
     updateCustomFieldAndScheduleInspection();
 } catch (ex) {
-    aa.print("**ERROR batch failed, error: " + ex);
+    logDebug2("**ERROR batch failed, error: " + ex);
 }
 
 /**
@@ -54,7 +54,7 @@ function updateCustomFieldAndScheduleInspection() {
     var capModel = aa.cap.getCapModel().getOutput();
     capModel.setCapType(capTypeModel);
     var capIdScriptModelList = aa.cap.getCapIDListByCapModel(capModel).getOutput();
-    aa.print("**INFO total records=" + capIdScriptModelList.length);
+    logDebug2("**INFO total records=" + capIdScriptModelList.length);
 
     var now = new Date();
     var nextMonthDate = dateAddMonths(now, 1);
@@ -64,42 +64,43 @@ function updateCustomFieldAndScheduleInspection() {
     if (parseInt(nextMonthNumber) < 10) {
         nextMonthNumber = "0" + nextMonthNumber;
     }
-    aa.print("**INFO nextMonthDate=" + nextMonthDate + " // nextMonthNumber=" + nextMonthNumber);
+    logDebug2("**INFO nextMonthDate=" + nextMonthDate + " // nextMonthNumber=" + nextMonthNumber);
 
     for (r in capIdScriptModelList) {
         capId = capIdScriptModelList[r].getCapID();
         capId = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput();
-        aa.print("<br>#######################<br>");
+        logDebug2("<br>#######################<br>");
         var olduseAppSpecificGroupName = useAppSpecificGroupName;
         useAppSpecificGroupName = false;
 
         //sample value for inspectionMonth asi [01 January]
         var inspectionMonth = getAppSpecific("Inspection Month");
         if (inspectionMonth == null || inspectionMonth == "") {
-            aa.print("**INFO Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID() + " Inspection Month is null, SKIP...");
+            logDebug2("**INFO Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID() + " Inspection Month is null, SKIP...");
             continue;
         }
 
         //the inspection is next month
+		logDebug2("Inspection month: " + inspectionMonth.indexOf(nextMonthNumber);
         if (inspectionMonth.indexOf(nextMonthNumber) != -1) {
             //values [12 months], [24 months]
             var inspectionFrequency = getAppSpecific("Inspection Frequency");
 
             if (inspectionFrequency == null || inspectionFrequency == "") {
-                aa.print("**WARN Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID() + "Inspection Frequency is null, SKIP...");
+                logDebug2("**WARN Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID() + "Inspection Frequency is null, SKIP...");
                 continue;
             }
 
             inspectionFrequency = inspectionFrequency.split(" ")[0];
             inspectionFrequency = parseInt(inspectionFrequency);
 
-            aa.print("**INFO Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID() + " // inspectionFrequency=" + inspectionFrequency + " // inspectionMonth=" + inspectionMonth);
+            logDebug2("**INFO Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID() + " // inspectionFrequency=" + inspectionFrequency + " // inspectionMonth=" + inspectionMonth);
 
             //Get last ScheduledDate
             var inspecs = aa.inspection.getInspections(capId);
             inspecs = inspecs.getOutput();
             if (inspecs == null || inspecs.length == 0) {
-                aa.print("**WARN no old inspections were found, SKIP...");
+                logDebug2("**WARN no old inspections were found, SKIP...");
                 continue;
             }
 
@@ -122,18 +123,18 @@ function updateCustomFieldAndScheduleInspection() {
             }//for all inspections
 
             if (lastSchedDate == null) {
-                aa.print("**WARN could not find lastSchedDate, SKIP...");
+                logDebug2("**WARN could not find lastSchedDate, SKIP...");
             }
 
             lastSchedDate = convertDate(lastSchedDate);
             //we calc dateDiff using nextMonth (which is due date, not current month)
             var diff = dateDiff(nextMonthDate, lastSchedDate); // in minus if lastSchedDate is in past
             diff = Math.ceil(diff / 30);
-            aa.print("**INFO lastSchedDate=" + lastSchedDate + " MonthsDiff=" + diff);
+            logDebug2("**INFO lastSchedDate=" + lastSchedDate + " MonthsDiff=" + diff);
 
             //diff > 0 means in future
             if (diff > 0 || Math.abs(diff) < inspectionFrequency) {
-                aa.print("**INFO next inspection could be already scheduled, SKIP...");
+                logDebug2("**INFO next inspection could be already scheduled, SKIP...");
                 continue;
             }
 
@@ -141,14 +142,14 @@ function updateCustomFieldAndScheduleInspection() {
             var nextSchedDate = dateAddMonths(lastSchedDate, inspectionFrequency);
             nextSchedDate = dateAdd(nextSchedDate, -1);
             nextSchedDate = nextWorkDay(nextSchedDate);
-            aa.print("**INFO need to sched inspection " + lastSchedType + " On " + nextSchedDate);
+            logDebug2("**INFO need to sched inspection " + lastSchedType + " On " + nextSchedDate);
             try {
                 if(getAssignedStaff(capId))
                     scheduleInspectDate(lastSchedType, nextSchedDate, getAssignedStaff(capId));
                 else
                     scheduleInspectDate(lastSchedType, nextSchedDate);
             } catch (ex) {
-                aa.print("ERR scheduleInspectDate : " + ex);
+                logDebug2("ERR scheduleInspectDate : " + ex);
             }
         }//inspection is next month
 
