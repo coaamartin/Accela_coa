@@ -36,7 +36,7 @@ if (vLicenseId != null && vLicenseId != false) {
 				updateFee("LIC_MJST_02", "LIC_MJ_STORE", "FINAL", 1, "Y");				
 			} else if (appMatch("Licenses/Marijuana/Retail Transporter/Renewal")) {
 				updateFee("LIC_MJTR_03", "LIC_MJ_TRANS", "FINAL", 1, "Y");			
-			} else if (appMatch("Licenses/Marijuana/Retail Testing Facility/Renewal")) {
+			} else if (appMatch("Licenses/Marijuana/Testing Facility/Renewal")) {
 				updateFee("LIC_MJTST_03", "LIC_MJ_TEST", "FINAL", 1, "Y");				
 			} else {
 				logDebug("Invalid renewal record type");
