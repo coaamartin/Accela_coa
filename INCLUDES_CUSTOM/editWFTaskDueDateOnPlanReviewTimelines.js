@@ -19,6 +19,8 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
                 if(ifTracer(civilPlanSheets <= 39, 'civilPlanSheets <= 39')) stdTimeline = 15;
                 if(ifTracer(civilPlanSheets >= 40 && civilPlanSheets <= 59, 'civilPlanSheets >= 40 && civilPlanSheets <= 59')) stdTimeline = 20;
                 if(ifTracer(civilPlanSheets >= 60, 'civilPlanSheets >= 60')) stdTimeline = 25;
+                
+                if(ifTracer(AInfo["ASAP Project?"] == "Yes", 'ASAP Project')) stdTimeline = 10;
             }
             if(ifTracer(submittalNum == 2, 'submittalNum == 2')){
                 if(ifTracer(civilPlanSheets <= 39, 'civilPlanSheets <= 39')) stdTimeline = 10;
@@ -31,8 +33,12 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
                 if(ifTracer(sigPlanSheets >= 40 && sigPlanSheets <= 59, 'sigPlanSheets >= 40 && sigPlanSheets <= 59')) stdTimeline = 10;
                 if(ifTracer(sigPlanSheets >= 60, 'sigPlanSheets >= 60')) stdTimeline = 10;
             }
+            if(ifTracer(submittalNum >= 2 && AInfo["ASAP Project?"] == "Yes", 'submittalNum >= 2 && AInfo["ASAP Project?"] == "Yes"')) stdTimeline = 5;
         }
+        
+        if(verticalConst == "Yes") stdTimeline = 5;
     }
+    
     if(ifTracer(appMatch("PublicWorks/Civil Plan/Revision/NA"), 'Civil Plan Revision'))
         stdTimeline = 5;
     
