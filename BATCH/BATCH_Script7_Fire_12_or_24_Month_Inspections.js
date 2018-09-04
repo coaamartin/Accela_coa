@@ -81,7 +81,9 @@ function updateCustomFieldAndScheduleInspection() {
         }
 
         //the inspection is next month
-		aa.print("Inspection month: " + inspectionMonth.indexOf(nextMonthNumber));
+		aa.print("Inspection month indexOf: " + inspectionMonth.indexOf(nextMonthNumber));
+		aa.print("Inspection month: " + inspectionMonth);
+		aa.print("Next month number: " + nextMonthNumber);
         if (inspectionMonth.indexOf(nextMonthNumber) != -1) {
             //values [12 months], [24 months]
             var inspectionFrequency = getAppSpecific("Inspection Frequency");
