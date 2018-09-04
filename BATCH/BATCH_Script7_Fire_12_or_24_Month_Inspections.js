@@ -140,13 +140,14 @@ function updateCustomFieldAndScheduleInspection() {
 
             //schedule same inspection, on date (lastSchedDate + inspectionFrequency)
             var nextSchedDate = dateAddMonths(lastSchedDate, inspectionFrequency);
+			var lastInspectorId = getLastInspector(lastSchedType);
             nextSchedDate = dateAdd(nextSchedDate, -1);
             nextSchedDate = nextWorkDay(nextSchedDate);
             aa.print("<br>**INFO need to sched inspection " + lastSchedType + " On " + nextSchedDate);
             try {
-                if(getAssignedStaff(capId)) {
+                if(lastInspectorId) {
 					aa.print("<br>Scheduling with inspector assignment");
-                    scheduleInspectDate(lastSchedType, nextSchedDate, getAssignedStaff(capId));
+                    scheduleInspectDate(lastSchedType, nextSchedDate, lastInspectorId);
                 } else {
 					aa.print("<br>Scheduling without inspector assignment");
                     scheduleInspectDate(lastSchedType, nextSchedDate);
@@ -160,19 +161,19 @@ function updateCustomFieldAndScheduleInspection() {
     }//for all caps
 }
 
-function getAssignedStaff(capId) {
+/*function getAssignedStaff(capId) {
     try {
         var assignedStaff = "";
         var cdScriptObjResult = aa.cap.getCapDetail(capId);
         if (!cdScriptObjResult.getSuccess()) {
-            aa.debug("<br>**ERROR: No cap detail script object : ",
+            aa.print("<br>**ERROR: No cap detail script object : ",
                     cdScriptObjResult.getErrorMessage());
             return false;
         }
 
         var cdScriptObj = cdScriptObjResult.getOutput();
         if (!cdScriptObj) {
-            aa.debug("<br>**ERROR: No cap detail script object", "");
+            aa.print("<br>**ERROR: No cap detail script object", "");
             return false;
         }
         cd = cdScriptObj.getCapDetailModel();
@@ -181,7 +182,7 @@ function getAssignedStaff(capId) {
         return assignedStaff;
 
     } catch (e) {
-        aa.debug("getAssignedStaff ", e);
+        aa.print("getAssignedStaff ", e);
         return false;
     }
-}
+}*/
