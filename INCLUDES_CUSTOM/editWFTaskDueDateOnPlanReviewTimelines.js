@@ -33,29 +33,8 @@ function editWFTaskDueDateOnPlanReviewTimelines() {
             }
         }
     }
-    if(ifTracer(appMatch("PublicWorks/Civil Plan/Revision/NA"), 'Civil Plan Revision')){
-        if(submittalNum){
-            submittalNum = parseInt(submittalNum);
-            if(ifTracer(submittalNum == 1, 'submittalNum == 1')){
-                if(ifTracer(civilPlanSheets <= 39, 'civilPlanSheets <= 39')) stdTimeline = 15;
-                if(ifTracer(civilPlanSheets >= 40 && civilPlanSheets <= 59, 'civilPlanSheets >= 40 && civilPlanSheets <= 59')) stdTimeline = 20;
-                if(ifTracer(civilPlanSheets >= 60, 'civilPlanSheets >= 60')) stdTimeline = 25;
-            }
-            if(ifTracer(submittalNum == 2, 'submittalNum == 2')){
-                if(ifTracer(civilPlanSheets <= 39, 'civilPlanSheets <= 39')) stdTimeline = 10;
-                if(ifTracer(civilPlanSheets >= 40 && civilPlanSheets <= 59, 'civilPlanSheets >= 40 && civilPlanSheets <= 59')) stdTimeline = 15;
-                if(ifTracer(civilPlanSheets >= 60, 'civilPlanSheets >= 60')) stdTimeline = 20;
-            
-            }
-            if(ifTracer(submittalNum >= 3, 'submittalNum == 3')){
-                if(ifTracer(civilPlanSheets <= 39, 'civilPlanSheets <= 39')) stdTimeline = 5;
-                if(ifTracer(civilPlanSheets >= 40 && civilPlanSheets <= 59, 'civilPlanSheets >= 40 && civilPlanSheets <= 59')) stdTimeline = 10;
-                if(ifTracer(civilPlanSheets >= 60, 'civilPlanSheets >= 60')) stdTimeline = 10;
-            }
-        }
-        
-        if(ifTracer(verticalConst == "Yes", 'verticalConst == "Yes"')) stdTimeline = 5;
-    }
+    if(ifTracer(appMatch("PublicWorks/Civil Plan/Revision/NA"), 'Civil Plan Revision'))
+        stdTimeline = 5;
     
     if(ifTracer(appMatch("PublicWorks/Drainage/NA/NA"), 'Drainage Record')){
         if(submittalNum){
