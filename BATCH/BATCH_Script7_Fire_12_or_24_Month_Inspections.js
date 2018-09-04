@@ -144,10 +144,13 @@ function updateCustomFieldAndScheduleInspection() {
             nextSchedDate = nextWorkDay(nextSchedDate);
             aa.print("<br>**INFO need to sched inspection " + lastSchedType + " On " + nextSchedDate);
             try {
-                if(getAssignedStaff(capId))
+                if(getAssignedStaff(capId)) {
+					aa.print("<br>Scheduling with inspector assignment");
                     scheduleInspectDate(lastSchedType, nextSchedDate, getAssignedStaff(capId));
-                else
+                } else {
+					aa.print("<br>Scheduling without inspector assignment");
                     scheduleInspectDate(lastSchedType, nextSchedDate);
+				}
             } catch (ex) {
                 aa.print("<br>ERR scheduleInspectDate : " + ex);
             }
