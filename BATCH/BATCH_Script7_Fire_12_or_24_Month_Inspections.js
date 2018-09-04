@@ -70,13 +70,14 @@ function updateCustomFieldAndScheduleInspection() {
         capId = capIdScriptModelList[r].getCapID();
         capId = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput();
         aa.print("<br>#######################<br>");
+		aa.print("**INFO Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID());
         var olduseAppSpecificGroupName = useAppSpecificGroupName;
         useAppSpecificGroupName = false;
 
         //sample value for inspectionMonth asi [01 January]
         var inspectionMonth = getAppSpecific("Inspection Month");
         if (inspectionMonth == null || inspectionMonth == "") {
-            aa.print("**INFO Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID() + " Inspection Month is null, SKIP...");
+            aa.print("<br>Inspection Month is null, SKIP...");
             continue;
         }
 
@@ -89,20 +90,20 @@ function updateCustomFieldAndScheduleInspection() {
             var inspectionFrequency = getAppSpecific("Inspection Frequency");
 
             if (inspectionFrequency == null || inspectionFrequency == "") {
-                aa.print("**WARN Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID() + "Inspection Frequency is null, SKIP...");
+                aa.print("<br>**WARN Inspection Frequency is null, SKIP...");
                 continue;
             }
 
             inspectionFrequency = inspectionFrequency.split(" ")[0];
             inspectionFrequency = parseInt(inspectionFrequency);
 
-            aa.print("**INFO Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID() + " // inspectionFrequency=" + inspectionFrequency + " // inspectionMonth=" + inspectionMonth);
+            aa.print("<br>**INFO inspectionFrequency=" + inspectionFrequency + " // inspectionMonth=" + inspectionMonth);
 
             //Get last ScheduledDate
             var inspecs = aa.inspection.getInspections(capId);
             inspecs = inspecs.getOutput();
             if (inspecs == null || inspecs.length == 0) {
-                aa.print("**WARN no old inspections were found, SKIP...");
+                aa.print("<br>**WARN no old inspections were found, SKIP...");
                 continue;
             }
 
@@ -125,18 +126,18 @@ function updateCustomFieldAndScheduleInspection() {
             }//for all inspections
 
             if (lastSchedDate == null) {
-                aa.print("**WARN could not find lastSchedDate, SKIP...");
+                aa.print("<br>**WARN could not find lastSchedDate, SKIP...");
             }
 
             lastSchedDate = convertDate(lastSchedDate);
             //we calc dateDiff using nextMonth (which is due date, not current month)
             var diff = dateDiff(nextMonthDate, lastSchedDate); // in minus if lastSchedDate is in past
             diff = Math.ceil(diff / 30);
-            aa.print("**INFO lastSchedDate=" + lastSchedDate + " MonthsDiff=" + diff);
+            aa.print("<br>**INFO lastSchedDate=" + lastSchedDate + " MonthsDiff=" + diff);
 
             //diff > 0 means in future
             if (diff > 0 || Math.abs(diff) < inspectionFrequency) {
-                aa.print("**INFO next inspection could be already scheduled, SKIP...");
+                aa.print("<br>**INFO next inspection could be already scheduled, SKIP...");
                 continue;
             }
 
@@ -144,14 +145,14 @@ function updateCustomFieldAndScheduleInspection() {
             var nextSchedDate = dateAddMonths(lastSchedDate, inspectionFrequency);
             nextSchedDate = dateAdd(nextSchedDate, -1);
             nextSchedDate = nextWorkDay(nextSchedDate);
-            aa.print("**INFO need to sched inspection " + lastSchedType + " On " + nextSchedDate);
+            aa.print("<br>**INFO need to sched inspection " + lastSchedType + " On " + nextSchedDate);
             try {
                 if(getAssignedStaff(capId))
                     scheduleInspectDate(lastSchedType, nextSchedDate, getAssignedStaff(capId));
                 else
                     scheduleInspectDate(lastSchedType, nextSchedDate);
             } catch (ex) {
-                aa.print("ERR scheduleInspectDate : " + ex);
+                aa.print("<br>ERR scheduleInspectDate : " + ex);
             }
         }//inspection is next month
 
@@ -164,14 +165,14 @@ function getAssignedStaff(capId) {
         var assignedStaff = "";
         var cdScriptObjResult = aa.cap.getCapDetail(capId);
         if (!cdScriptObjResult.getSuccess()) {
-            aa.debug("**ERROR: No cap detail script object : ",
+            aa.debug("<br>**ERROR: No cap detail script object : ",
                     cdScriptObjResult.getErrorMessage());
             return false;
         }
 
         var cdScriptObj = cdScriptObjResult.getOutput();
         if (!cdScriptObj) {
-            aa.debug("**ERROR: No cap detail script object", "");
+            aa.debug("<br>**ERROR: No cap detail script object", "");
             return false;
         }
         cd = cdScriptObj.getCapDetailModel();
