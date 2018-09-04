@@ -36,8 +36,11 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                         numOfDays4Insp = parseInt(custField);
                 }
                 
+                var nextWD = nextWorkDay(dateAdd(null, numOfDays4Insp - 1));
+                numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWD));
+                
                 var newInspId = scheduleInspectionCustom(newInsp, numOfDays4Insp);
-				autoAssignInspection(newInspId)
+                autoAssignInspection(newInspId)
                 if($iTrc(carryOverFailedCheckList && newInspId, 'copy failed checklist items to inspId: ' + newInspId)) {
                     if($iTrc(inspType == "Snow Initial Inspection" && inspResult == "Skip to Summons"))
                         copyCheckListByItemStatus(inspId, newInspId, ["Summons"]);
