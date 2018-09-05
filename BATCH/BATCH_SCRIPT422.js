@@ -1,12 +1,12 @@
 /*
 Script 422
-Batch: 	Daily batch to update all "NFZV - 1 year" conditions on addresses to "Condition Met",
+Batch: 	Daily batch to update all "NFZV - 1 year" conditions on parcels to "Condition Met",
 that were applied equal or greater than 365 days ago.
 Also update the record status of the "Summons Case" from "NFZV -1 Year" to "Compliance".
 Frequency of Batch - Nightly
 7/7/18 JHS
 
-There are no EMSE APIs to retrieve non-std address conditions, so we need to use SQL to obtain
+There are no EMSE APIs to retrieve non-std parcel conditions, so we need to use SQL to obtain
  */
 
 var systemUserObj = aa.person.getUser("ADMIN").getOutput();
@@ -15,23 +15,23 @@ var conditionName = "NFZV - 1 Year";
 var oneYearAgo = new Date();
 oneYearAgo.setYear(oneYearAgo.getYear() - 1);
 var capBiz = aa.proxyInvoker.newInstance("com.accela.aa.aamain.cap.CapBusiness", null).getOutput();
-var addressCondBiz = aa.proxyInvoker.newInstance("com.accela.aa.aamain.address.AddressConditionBusiness").getOutput();
-var sql = "select L1_ADDRESS_NBR,L1_CON_NBR FROM L3ADDRES_CONDIT LC WHERE LC.L1_CON_DES = '" + conditionName + "' " +
+var parcelCondBiz = aa.proxyInvoker.newInstance("com.accela.aa.aamain.parcel.ParcelConditionBusiness").getOutput();
+var sql = "select L1_PARCEL_NBR,L1_CON_NBR FROM L1CONDIT LC WHERE LC.L1_CON_DES = '" + conditionName + "' " +
 	" AND lc.L1_CON_ISS_DD < '" + (oneYearAgo.getMonth() + 1) + "/" + (oneYearAgo.getDate()) + "/" + (oneYearAgo.getFullYear() + 1900) + "' " +
 	" AND lc.serv_prov_code='" + aa.getServiceProviderCode() + "' " +
 	" AND REC_STATUS = 'A'";
 
 var array = doSQL(sql);
 
-if (addressCondBiz) {
+if (parcelCondBiz) {
 	for (var i in array) {
 		aa.print("------------------------------------------");
-		aa.print("Removing Condition " + array[i].L1_CON_NBR + " from address : " + array[i].L1_ADDRESS_NBR + " ");
-		addressCondBiz.removeAddressCondition(aa.getServiceProviderCode(), array[i].L1_ADDRESS_NBR, array[i].L1_CON_NBR, "ADMIN");
-		var capListForAddr = capBiz.getCapViewListByRefAddressID(aa.getServiceProviderCode(), parseInt(array[i].L1_ADDRESS_NBR), "Enforcement").toArray();
-		for (var j in capListForAddr) {
-			var capId = capListForAddr[j].getCapID();
-			if (appMatch("Enforcement/Incident/Summons/NA", capListForAddr[j].getCapType().toString().split("/")) && "NFZV - 1 Year".equals(capListForAddr[j].getCapStatus())) {
+		aa.print("Removing Condition " + array[i].L1_CON_NBR + " from parcel : " + array[i].L1_PARCEL_NBR + " ");
+		parcelCondBiz.removeParcelCondition(aa.getServiceProviderCode(), array[i].L1_PARCEL_NBR, array[i].L1_CON_NBR, "ADMIN");
+		var capListForPrcl = capBiz.getCapViewListByRefParcelID(aa.getServiceProviderCode(), parseInt(array[i].L1_PARCEL_NBR), "Enforcement").toArray();
+		for (var j in capListForPrcl) {
+			var capId = capListForPrcl[j].getCapID();
+			if (appMatch("Enforcement/Incident/Summons/NA", capListForPrcl[j].getCapType().toString().split("/")) && "NFZV - 1 Year".equals(capListForPrcl[j].getCapStatus())) {
 				aa.print("Summons Record with 'NFZV - 1 Year' Status: " + capId.getCustomID());
 				updateAppStatus("Compliance", "Updated by Script 422", capId);
 			}
