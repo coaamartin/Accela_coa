@@ -76,7 +76,8 @@ function passedMJInspectionAutomation() {
 					addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 				
 				//send email with report attachment
-				emailContacts(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
+				//emailContacts(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
+				emailWithReportLinkASync(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams, "N", "");
 				logDebug("***INFO: Ending Script 232***");
 				return true;
 			}			
@@ -102,7 +103,6 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 		 for (i in projectScriptModels) {
 			 vRenewalCounter = vRenewalCounter + 1;
 		 }
-		
 		return vRenewalCounter;
 	} else {
 		logDebug("ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for complete: " + result.getErrorMessage());
