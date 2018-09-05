@@ -1,6 +1,6 @@
 
 function passedMJInspectionAutomation() {
-	
+	logDebug("***INFO: Beginning Script 232");
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
@@ -14,7 +14,7 @@ function passedMJInspectionAutomation() {
 	//check for passed inspections, schedule new inspection, and email inspection contact with report
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
-			
+
 			var vIsMJLicense = false;	
 			var vIsRetailStoreLicense = false;
 			
@@ -22,12 +22,13 @@ function passedMJInspectionAutomation() {
 			vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
 	
 			if (vIsMJLicense == true) {
-				
+				logDebug("Inspection Type: " + inspType);
+				logDebug("Inspection Result: " + inspResult);
 				//check if license is Marijuana/Retail Store
 				if (vIsMJRetailStoreLicense == true) {
 					
 					var vChildren = getChildren("Licenses/Marijuana/*/Renewal", capId);
-					
+					logDebug("vChildren Value: " + vChildren);
 					//check if more than one child renewal record exists
 					if (vChildren != false && vChildren != null && vChildren.length > 1) {
 						
@@ -82,11 +83,10 @@ function passedMJInspectionAutomation() {
 					addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 				
 				//send email with report attachment
-				emailContacts("Inspection Contact", "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
+				emailContacts(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
 			
+				return true;
 			}			
-		
-			return true;
 		}
 	}
 	
