@@ -1,6 +1,6 @@
 
 function passedMJInspectionAutomation() {
-	logDebug("***INFO: Beginning Script 232");
+	logDebug("***INFO: Beginning Script 232***");
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
@@ -27,7 +27,8 @@ function passedMJInspectionAutomation() {
 				//check if license is Marijuana/Retail Store
 				if (vIsMJRetailStoreLicense == true) {
 					
-					var vChildren = getChildren("Licenses/Marijuana/*/Renewal", capId);
+					//var vChildren = getChildren("Licenses/Marijuana/*/Renewal", capId);
+					var vChildren = getRenewalCapByParentCapIDForReview(capId);
 					logDebug("vChildren Value: " + vChildren);
 					//check if more than one child renewal record exists
 					if (vChildren != false && vChildren != null && vChildren.length > 1) {
@@ -84,7 +85,7 @@ function passedMJInspectionAutomation() {
 				
 				//send email with report attachment
 				emailContacts(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
-			
+				logDebug("***INFO: Ending Script 232***");
 				return true;
 			}			
 		}
