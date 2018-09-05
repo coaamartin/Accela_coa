@@ -28,7 +28,7 @@ function passedMJInspectionAutomation() {
 				if (vIsMJRetailStoreLicense == true) {
 					
 					//var vChildren = getChildren("Licenses/Marijuana/*/Renewal", capId);
-					var vChildren = getRenewalCapByParentCapIDForReview(capId);
+					var vChildren = getRenewalCapByParentCapIDForComplete(capId);
 					logDebug("vChildren Value: " + vChildren);
 					//check if more than one child renewal record exists
 					if (vChildren != false && vChildren != null && vChildren.length > 1) {
@@ -46,6 +46,7 @@ function passedMJInspectionAutomation() {
 					}					
 				} else {
 					
+					//schedule new inspection 3 months out from passed inspection date
 					//schedule new inspection 3 months out from passed inspection date
 					daysToAdd = 90;
 					var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
@@ -92,4 +93,25 @@ function passedMJInspectionAutomation() {
 	}
 	
 	return false;
+}
+
+function getRenewalCapByParentCapIDForComplete(parentCapid) {
+	if (parentCapid == null || aa.util.instanceOfString(parentCapid)) {
+		return null;
+	}
+	//1. Get parent license for review
+	var result = aa.cap.getProjectByMasterID(parentCapid, "Renewal", "Complete");
+	if (result.getSuccess()) {
+		projectScriptModels = result.getOutput();
+		if (projectScriptModels == null || projectScriptModels.length == 0) {
+			logDebug("ERROR: Failed to get renewal CAP by parent CAPID(" + parentCapid + ") for complete");
+			return null;
+		}
+		//2. return parent CAPID.
+		projectScriptModel = projectScriptModels[0];
+		return projectScriptModel;
+	} else {
+		logDebug("ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for complete: " + result.getErrorMessage());
+		return null;
+	}
 }
