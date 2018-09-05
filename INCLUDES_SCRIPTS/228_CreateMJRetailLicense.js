@@ -94,12 +94,12 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 			vReportTemplate = "MJ_License";
 			tmpCap = capId;
 			capId = vLicenseID;
-			scheduleInspection("MJ AMED Inspection", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ AMED Inspections", 77, "DALLEN", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Mechanical", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Life Safety", 77, "SLCLARK", " ", "Scheduled by Script 228");
-			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "DALLEN", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Structural", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			capId = tmpCap;
 		}

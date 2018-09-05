@@ -97,7 +97,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 			//capId = vLicenseID;
 			
 			// create a custom function for scheduleInspection that uses 1. a capId param 2. uses dateAddHC. 3. use 55 business days instead of 77 cal days
-			scheduleInspection("MJ AMED Inspection", 77, "DALLEN", " ", "Scheduled by Script 227");
+			scheduleInspection("MJ AMED Inspections", 77, "DALLEN", " ", "Scheduled by Script 227");
 			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 227"); 
 			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 227");
 			scheduleInspection("MJ Building Inspections - Mechanical", 77, "SLCLARK", " ", "Scheduled by Script 227");
