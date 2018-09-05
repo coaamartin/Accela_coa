@@ -30,10 +30,9 @@ function passedMJInspectionAutomation() {
 					//var vChildren = getChildren("Licenses/Marijuana/*/Renewal", capId);
 					var vChildren = getRenewalCountByParentCapIDForComplete(capId);
 					
-					
 					logDebug("vChildren Value: " + vChildren);
 					//check if more than one child renewal record exists
-					if (vChildren != false && vChildren != null && vChildren.length > 1) {
+					if (vChildren != false && vChildren != null && vChildren > 1) {
 						
 						//schedule new inspection 6 months out from passed inspection date
 						daysToAdd = 180;
@@ -111,7 +110,6 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 			return null;
 		}
 		//2. return parent CAPID.
-		//projectScriptModel = projectScriptModels[0];
 		 for (i in projectScriptModels) {
 			 vRenewalCounter = vRenewalCounter + 1;
 		 }
