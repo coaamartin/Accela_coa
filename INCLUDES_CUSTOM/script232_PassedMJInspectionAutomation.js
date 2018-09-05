@@ -3,20 +3,18 @@ function passedMJInspectionAutomation() {
 	logDebug("***INFO: Beginning Script 232***");
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
-		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
+		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Buidling Inspections - Structural", "MJ Security Inspections - 3rd Party",
 		"MJ Zoning Inspections" ];
 	
 	//define number of days to schedule next inspection
 	var daysToAdd;
-		
-	
 		
 	//check for passed inspections, schedule new inspection, and email inspection contact with report
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
 
 			var vIsMJLicense = false;	
-			var vIsRetailStoreLicense = false;
+			var vIsMJRetailStoreLicense = false;
 			
 			vIsMJLicense = appMatch("Licenses/Marijuana/*/License");		
 			vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
@@ -47,7 +45,6 @@ function passedMJInspectionAutomation() {
 					}					
 				} else {
 					
-					//schedule new inspection 3 months out from passed inspection date
 					//schedule new inspection 3 months out from passed inspection date
 					daysToAdd = 90;
 					var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
