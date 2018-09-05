@@ -55,7 +55,7 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 				if(childCapId){
 				    logDebug("Created child record: " + childCapId.getCustomID() + " with capId " + childCapId);
 				    if(copyPrimContactByType(capId, childCapId, "Applicant")) ;
-				    else copyContacts(capId, childCapId);
+				    else copyContactsByType(capId, childCapId, "Applicant");
 				}
 				
 				//var appCreateResult = aa.cap.createApp(childRecordToCreatedStructure[0], childRecordToCreatedStructure[1], childRecordToCreatedStructure[2],
