@@ -1,6 +1,5 @@
 
 function passedMJInspectionAutomation() {
-	logDebug("***INFO: Beginning Script 232***");
 	
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
@@ -11,6 +10,7 @@ function passedMJInspectionAutomation() {
 	var daysToAdd;
 	var vIsMJLicense;
 	var vIsMJRetailStoreLicense;
+	var emailTemplate = "LIC MJ COMPLIANCE #232";
 		
 	//check for passed inspections, schedule new inspection, and email inspection contact with report
 	for (s in inspectionTypesAry) {
@@ -47,25 +47,19 @@ function passedMJInspectionAutomation() {
 					scheduleInspectDate(inspType, newInspSchedDate);	
 				}
 				
-				//get inspection contact
-				/*var inspectionContact = getContactByType("Inspection Contact", capId);
-				if (!inspectionContact || !inspectionContact.getEmail()) {
-					logDebug("**WARN no inspection contact found on or no email capId=" + capId);
-					return false;
-				}*/
 				var eParams = aa.util.newHashtable();
-				var emailTemplate = "LIC MJ COMPLIANCE #232";
 				addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 				addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 				addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+				
 				if (inspId) {
 					addParameter(eParams, "$$inspId$$", inspId);
 					//reportParams.put("inspId", inspId);
 				}
 				if (inspResult)
 					addParameter(eParams, "$$inspResult$$", inspResult);
-				//if (inspResultDate)
-				//	addParameter(eParams, "$$inspResultDate$$", inspResultDate);
+				if (inspResultDate)
+					addParameter(eParams, "$$inspResultDate$$", inspResultDate);
 				if (inspGroup)
 					addParameter(eParams, "$$inspGroup$$", inspGroup);
 				if (inspType)
@@ -73,15 +67,12 @@ function passedMJInspectionAutomation() {
 				if (inspSchedDate)
 					addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 				
-				var reportTemplate = "";
+				var reportTemplate = "MJ_Compliance_Corrections_Letter";
 				var reportParams = aa.util.newHashtable();
-				addParameter(reportParams, "RecordID", capIDString);
+				addParameter(reportParams, "InspActNumber", inspId);
 				
-				//send email with report attachment
-				//emailContacts(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
-				//emailWithReportLinkASync(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, "", "", "N", "");
-				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, "", "", "N", "", capId);
-				logDebug("***INFO: Ending Script 232***");
+				//send email with report attachment		
+				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
 				return true;
 			}			
 		}
