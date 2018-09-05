@@ -8,8 +8,7 @@ if (ifTracer(inspType == "Forestry Inspection" && matches(inspResult, "PR1", "PR
 }
 
 // Start Script 27 Create Planting Record
-var vReplantASI = getAppSpecific("No Replant");
-if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Other", "PR1", "PR2", "PR20") && (vReplantASI = "UNCHECKED")) {
+if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Other", "PR1", "PR2", "PR20")) {
 	treeCreatePlantingRecordReplantFromInsp(inspId)
 }
 // End Script 27 Create Planting Record
