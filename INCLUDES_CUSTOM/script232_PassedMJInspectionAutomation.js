@@ -11,10 +11,10 @@ function passedMJInspectionAutomation() {
 		
 	//check for passed inspections, schedule new inspection, and email inspection contact with report
 	for (s in inspectionTypesAry) {
+		var vIsMJLicense = false;	
+		var vIsMJRetailStoreLicense = false;
+		
 		if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
-
-			var vIsMJLicense = false;	
-			var vIsMJRetailStoreLicense = false;
 			
 			vIsMJLicense = appMatch("Licenses/Marijuana/*/License");		
 			vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
