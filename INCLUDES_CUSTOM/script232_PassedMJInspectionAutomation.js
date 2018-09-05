@@ -1,6 +1,7 @@
 
 function passedMJInspectionAutomation() {
 	logDebug("***INFO: Beginning Script 232***");
+	
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Buidling Inspections - Structural", "MJ Security Inspections - 3rd Party",
@@ -8,27 +9,22 @@ function passedMJInspectionAutomation() {
 	
 	//define number of days to schedule next inspection
 	var daysToAdd;
+	var vIsMJLicense;
+	var vIsMJRetailStoreLicense;
 		
 	//check for passed inspections, schedule new inspection, and email inspection contact with report
 	for (s in inspectionTypesAry) {
-		var vIsMJLicense = false;	
-		var vIsMJRetailStoreLicense = false;
-		
-		if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
-			
-			vIsMJLicense = appMatch("Licenses/Marijuana/*/License");		
-			vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
-	
-			if (vIsMJLicense == true) {
-				logDebug("Inspection Type: " + inspType);
-				logDebug("Inspection Result: " + inspResult);
+		vIsMJLicense = false;	
+		vIsMJRetailStoreLicense = false;
+		vIsMJLicense = appMatch("Licenses/Marijuana/*/License");
+		if (vIsMJLicense == true) {
+			if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
+				vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
+				
 				//check if license is Marijuana/Retail Store
 				if (vIsMJRetailStoreLicense == true) {
-					
-					//var vChildren = getChildren("Licenses/Marijuana/*/Renewal", capId);
 					var vChildren = getRenewalCountByParentCapIDForComplete(capId);
 					
-					logDebug("vChildren Value: " + vChildren);
 					//check if more than one child renewal record exists
 					if (vChildren != false && vChildren != null && vChildren > 1) {
 						
@@ -57,16 +53,13 @@ function passedMJInspectionAutomation() {
 					logDebug("**WARN no inspection contact found on or no email capId=" + capId);
 					return false;
 				}
-
 				var eParams = aa.util.newHashtable();
 				addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 				addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 				addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-
 				var reportTemplate = "";
 				var reportParams = aa.util.newHashtable();
 				addParameter(reportParams, "RecordID", capIDString);
-				
 				if (inspId) {
 					addParameter(eParams, "$$inspId$$", inspId);
 					reportParams.put("inspId", inspId);
@@ -89,7 +82,6 @@ function passedMJInspectionAutomation() {
 			}			
 		}
 	}
-	
 	return false;
 }
 
@@ -97,7 +89,7 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 	if (parentCapid == null || aa.util.instanceOfString(parentCapid)) {
 		return null;
 	}
-	//1. Get parent license for review
+	//1. Get parent license for analysis
 	var result = aa.cap.getProjectByMasterID(parentCapid, "Renewal", "Complete");
 	var vRenewalCounter = 0;
 	if (result.getSuccess()) {
@@ -106,7 +98,7 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 			logDebug("ERROR: Failed to get renewal CAP by parent CAPID(" + parentCapid + ") for complete");
 			return null;
 		}
-		//2. return parent CAPID.
+		//2. return number of completed renewals
 		 for (i in projectScriptModels) {
 			 vRenewalCounter = vRenewalCounter + 1;
 		 }
