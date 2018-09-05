@@ -116,7 +116,7 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 			 vRenewalCounter = vRenewalCounter + 1;
 		 }
 		
-		return vChildrenCounter;
+		return vRenewalCounter;
 	} else {
 		logDebug("ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for complete: " + result.getErrorMessage());
 		return null;
