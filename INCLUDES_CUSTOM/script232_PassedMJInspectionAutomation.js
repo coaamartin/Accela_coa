@@ -29,6 +29,8 @@ function passedMJInspectionAutomation() {
 					
 					//var vChildren = getChildren("Licenses/Marijuana/*/Renewal", capId);
 					var vChildren = getRenewalCapByParentCapIDForComplete(capId);
+					
+					
 					logDebug("vChildren Value: " + vChildren);
 					//check if more than one child renewal record exists
 					if (vChildren != false && vChildren != null && vChildren.length > 1) {
@@ -108,8 +110,8 @@ function getRenewalCapByParentCapIDForComplete(parentCapid) {
 			return null;
 		}
 		//2. return parent CAPID.
-		projectScriptModel = projectScriptModels[0];
-		return projectScriptModel;
+		//projectScriptModel = projectScriptModels[0];
+		return projectScriptModels;
 	} else {
 		logDebug("ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for complete: " + result.getErrorMessage());
 		return null;
