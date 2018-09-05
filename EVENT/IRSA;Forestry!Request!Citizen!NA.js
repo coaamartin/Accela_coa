@@ -10,7 +10,7 @@ if (ifTracer(inspType == "Forestry Inspection" && matches(inspResult, "PR1", "PR
 // Start Script 27 Create Planting Record
 if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Other", "PR1", "PR2", "PR20")) {
 	logDebug("Inspection type and result criteria is met");
-	if (AInfo["No Replant"] == "Unchecked") {
+	if (AInfo["No Replant"] == "UNCHECKED") {
 		logDebug("No Replant is Unchecked");
 		treeCreatePlantingRecordReplantFromInsp(inspId);
 	}
