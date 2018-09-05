@@ -26,6 +26,10 @@ function requestExtensionMJInspection() {
 			
 			//Schedule the inspection with the result comments from the current inspection.
 			scheduleInspectDate(inspType, newInspSchedDate, currentUserID, null, vInspComments);
-        }
+			var newInspId = getScheduledInspId(inspType);
+			if (newInspId) {
+				copyGuideSheetItemsByStatus(inspId, newInspId);
+			}
+		}
     }
 }
