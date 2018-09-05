@@ -64,8 +64,8 @@ function passedMJInspectionAutomation() {
 				}
 				if (inspResult)
 					addParameter(eParams, "$$inspResult$$", inspResult);
-				if (inspResultDate)
-					addParameter(eParams, "$$inspResultDate$$", inspResultDate);
+				//if (inspResultDate)
+				//	addParameter(eParams, "$$inspResultDate$$", inspResultDate);
 				if (inspGroup)
 					addParameter(eParams, "$$inspGroup$$", inspGroup);
 				if (inspType)
