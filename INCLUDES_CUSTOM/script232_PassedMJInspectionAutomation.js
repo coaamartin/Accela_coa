@@ -80,7 +80,7 @@ function passedMJInspectionAutomation() {
 				//send email with report attachment
 				//emailContacts(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
 				//emailWithReportLinkASync(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, "", "", "N", "");
-				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, "", "", "N", "");
+				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, "", "", "N", "", capId);
 				logDebug("***INFO: Ending Script 232***");
 				return true;
 			}			
