@@ -24,7 +24,7 @@ function emailContactsWithReportAttachASync(pSendEmailToContactTypes, pEmailTemp
 		
 	//Initialize optional parameters	
 	var vEParams = aa.util.newHashtable();
-	var vReportTemplate = null;
+	var vReportTemplate = "";
 	var vRParams = aa.util.newHashtable();
 	var vAddAdHocTask = true;
 	var vChangeReportName = "";	
