@@ -62,7 +62,7 @@ function passedMJInspectionAutomation() {
 				addParameter(reportParams, "RecordID", capIDString);
 				if (inspId) {
 					addParameter(eParams, "$$inspId$$", inspId);
-					reportParams.put("inspId", inspId);
+					//reportParams.put("inspId", inspId);
 				}
 				if (inspResult)
 					addParameter(eParams, "$$inspResult$$", inspResult);
@@ -77,7 +77,7 @@ function passedMJInspectionAutomation() {
 				
 				//send email with report attachment
 				//emailContacts(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
-				emailWithReportLinkASync(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams, "N", "");
+				emailWithReportLinkASync(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, "", "", "N", "");
 				logDebug("***INFO: Ending Script 232***");
 				return true;
 			}			
