@@ -4,7 +4,7 @@ if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Is
     if(newLicCapId){
         sendMJLicEmail(newLicCapId);
         
-        scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspection", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
+        scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspections", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Plumbing", 84, "SLCLARK", " ", "Scheduled by Script 228", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Electrical", 84, "SLCLARK", " ", "Scheduled by Script 228", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Mechanical", 84, "SLCLARK", " ", "Scheduled by Script 228", newLicCapId);

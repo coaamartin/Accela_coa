@@ -1,10 +1,10 @@
 if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Issuance/Issued')){
-    //Script 229 start
+    //Script 230 start
     var newLicCapId = createLicenseCoA("Active", true, "License Status", "Active");
     if(newLicCapId){
         sendMJLicEmail(newLicCapId);
         
-        scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspection", 84, "DALLEN", " ", "Scheduled by Script 230", newLicCapId);
+        scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspections", 84, "DALLEN", " ", "Scheduled by Script 230", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Plumbing", 84, "SLCLARK", " ", "Scheduled by Script 230", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Electrical", 84, "SLCLARK", " ", "Scheduled by Script 230", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Mechanical", 84, "SLCLARK", " ", "Scheduled by Script 230", newLicCapId);
@@ -13,5 +13,5 @@ if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Is
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Structural", 84, "SLCLARK", " ", "Scheduled by Script 230", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Zoning Inspections", 84, "DALLEN", " ", "Scheduled by Script 230", newLicCapId);
     }
-    //END Script 229
+    //END Script 230
 }

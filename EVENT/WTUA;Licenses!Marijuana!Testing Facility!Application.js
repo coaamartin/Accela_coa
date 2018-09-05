@@ -1,10 +1,10 @@
-//create MJ Testing Facility License from Issued MJ Testing Facility application  script 228
+//create MJ Testing Facility License from Issued MJ Testing Facility application  script 226
 if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Issuance/Issued')){
     var newLicCapId = createLicenseCoA("Active", true, "License Status", "Active");
     if(newLicCapId){
         sendMJLicEmail(newLicCapId);
         
-        scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspection", 84, "DALLEN", " ", "Scheduled by Script 226", newLicCapId);
+        scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspections", 84, "DALLEN", " ", "Scheduled by Script 226", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Plumbing", 84, "SLCLARK", " ", "Scheduled by Script 226", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Electrical", 84, "SLCLARK", " ", "Scheduled by Script 226", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Mechanical", 84, "SLCLARK", " ", "Scheduled by Script 226", newLicCapId);
