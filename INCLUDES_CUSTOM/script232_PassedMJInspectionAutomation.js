@@ -67,13 +67,13 @@ function passedMJInspectionAutomation() {
 				if (inspSchedDate)
 					addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 				
-				var reportTemplate = "MJ_Compliance_Corrections_Letter";
+				var reportTemplate = "";
 				var reportParams = aa.util.newHashtable();
 				addParameter(reportParams, "InspActNumber", inspId);
 				
 				//send email with report attachment		
-				//emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, "", "N", "");
-				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams); //minimal
+				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
+
 				
 				return true;
 			}			
