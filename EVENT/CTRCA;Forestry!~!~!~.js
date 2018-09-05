@@ -55,9 +55,9 @@ doForestryPlantingRecordsApplicationSubmitActions("Forestry Site Review", "Tree 
 //4. Take all the address fields that have data and concatenate into a string and update the Application Name field.
 //5. If record type Forestry/Request/Citizen/* get value from Custom Field “Source of Request” if value is Staff then insert status of “Assigned” and add the comments “Proactive” in the comments on the workflow task “Tree Request Intake” and move the work flow task forward by Activating the workflow task “Inspection Phase”.
 //6. If Record Type Forestry/Request/Citizen/NA or Forestry/Permit/Na/NA Create Scheduled inspection of type “Forestry Inspection” with the inspector assigned to the record assigned to with the current date. 
-
-include("60_ForestryInspectionAssignment");
-
+if (publicUser) {
+	include("60_ForestryInspectionAssignment");
+}
 //End Script 60 - User story 3
 
 //Populate GIS objects
