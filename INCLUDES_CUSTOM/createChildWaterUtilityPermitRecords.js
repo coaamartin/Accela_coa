@@ -27,7 +27,7 @@ function createChildWaterUtilityPermitRecords() {
                         logDebug("Created Child " + cCapId.getCustomID());
                         // copy Owner
                         copyOwner(capId, cCapId);
-                        editAppSpecific("Utility Permit Type", "Private Fire Lines",cCapId);
+                        editAppSpecific("Utility Permit Type", "Private Fire Line Permit",cCapId);
                     }
                 }
             }
