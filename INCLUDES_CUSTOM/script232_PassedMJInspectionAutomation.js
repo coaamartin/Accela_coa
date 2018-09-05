@@ -54,12 +54,10 @@ function passedMJInspectionAutomation() {
 					return false;
 				}*/
 				var eParams = aa.util.newHashtable();
+				var emailTemplate = "LIC MJ COMPLIANCE #232";
 				addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 				addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 				addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-				var reportTemplate = "";
-				var reportParams = aa.util.newHashtable();
-				addParameter(reportParams, "RecordID", capIDString);
 				if (inspId) {
 					addParameter(eParams, "$$inspId$$", inspId);
 					//reportParams.put("inspId", inspId);
@@ -75,10 +73,14 @@ function passedMJInspectionAutomation() {
 				if (inspSchedDate)
 					addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 				
+				var reportTemplate = "";
+				var reportParams = aa.util.newHashtable();
+				addParameter(reportParams, "RecordID", capIDString);
+				
 				//send email with report attachment
 				//emailContacts(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
 				//emailWithReportLinkASync(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, "", "", "N", "");
-				emailContactsWithReportLinkASync("Inspection Contact", "LIC MJ COMPLIANCE #232", eParams, "", "", "N", "");
+				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, "", "", "N", "");
 				logDebug("***INFO: Ending Script 232***");
 				return true;
 			}			
