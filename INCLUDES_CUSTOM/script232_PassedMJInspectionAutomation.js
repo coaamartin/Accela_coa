@@ -48,11 +48,11 @@ function passedMJInspectionAutomation() {
 				}
 				
 				//get inspection contact
-				var inspectionContact = getContactByType("Inspection Contact", capId);
+				/*var inspectionContact = getContactByType("Inspection Contact", capId);
 				if (!inspectionContact || !inspectionContact.getEmail()) {
 					logDebug("**WARN no inspection contact found on or no email capId=" + capId);
 					return false;
-				}
+				}*/
 				var eParams = aa.util.newHashtable();
 				addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 				addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
@@ -77,7 +77,8 @@ function passedMJInspectionAutomation() {
 				
 				//send email with report attachment
 				//emailContacts(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, reportTemplate, reportParams);		
-				emailWithReportLinkASync(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, "", "", "N", "");
+				//emailWithReportLinkASync(inspectionContact, "LIC MJ COMPLIANCE #232", eParams, "", "", "N", "");
+				emailContactsWithReportLinkASync("Inspection Contact", "LIC MJ COMPLIANCE #232", eParams, "", "", "N", "");
 				logDebug("***INFO: Ending Script 232***");
 				return true;
 			}			
