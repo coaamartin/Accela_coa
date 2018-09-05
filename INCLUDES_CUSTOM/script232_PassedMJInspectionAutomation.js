@@ -28,7 +28,7 @@ function passedMJInspectionAutomation() {
 				if (vIsMJRetailStoreLicense == true) {
 					
 					//var vChildren = getChildren("Licenses/Marijuana/*/Renewal", capId);
-					var vChildren = getRenewalCapByParentCapIDForComplete(capId);
+					var vChildren = getRenewalCountByParentCapIDForComplete(capId);
 					
 					
 					logDebug("vChildren Value: " + vChildren);
@@ -97,12 +97,13 @@ function passedMJInspectionAutomation() {
 	return false;
 }
 
-function getRenewalCapByParentCapIDForComplete(parentCapid) {
+function getRenewalCountByParentCapIDForComplete(parentCapid) {
 	if (parentCapid == null || aa.util.instanceOfString(parentCapid)) {
 		return null;
 	}
 	//1. Get parent license for review
 	var result = aa.cap.getProjectByMasterID(parentCapid, "Renewal", "Complete");
+	var vRenewalCounter = 0;
 	if (result.getSuccess()) {
 		projectScriptModels = result.getOutput();
 		if (projectScriptModels == null || projectScriptModels.length == 0) {
@@ -111,7 +112,11 @@ function getRenewalCapByParentCapIDForComplete(parentCapid) {
 		}
 		//2. return parent CAPID.
 		//projectScriptModel = projectScriptModels[0];
-		return projectScriptModels;
+		 for (i in projectScriptModels) {
+			 vRenewalCounter = vRenewalCounter + 1;
+		 }
+		
+		return vChildrenCounter;
 	} else {
 		logDebug("ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for complete: " + result.getErrorMessage());
 		return null;
