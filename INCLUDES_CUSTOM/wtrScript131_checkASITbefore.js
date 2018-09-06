@@ -14,7 +14,7 @@ function wtrScript131_checkASITbefore(){
                 var minRows = 1;
                 var rowsNeededInTable = "";
                 loadASITablesBefore4CoA();
-				logDebug("SIZE.length:" + SIZE.length);
+				
                 if(ifTracer(permitType == "Water Main Utility Permit", 'permitType == "Water Main Utility Permit"')){
                     watMatRows = WATERMATERIAL.length;
                     for(x in WATERMATERIAL){
@@ -37,7 +37,7 @@ function wtrScript131_checkASITbefore(){
                         var col1 = SIZE[x]["Size"];
                         var col2 = SIZE[x]["Number of Taps"];       
                         var col3 = SIZE[x]["Location Description"];
-                        var col4 = SIZE[X]["Complete"];
+                        var col4 = SIZE[x]["Complete"];
                         
                         logDebug("col1:" + col1 );
                         logDebug("col2:" + col2 );
