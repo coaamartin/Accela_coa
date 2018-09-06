@@ -65,8 +65,9 @@ try{
         var appTypeAlias = cap.getCapType().getAlias();
         var capStatus = cap.getCapStatus();
         // if permit already expired or closed or rejected then no need to check the expiration date
-        if( matches(capStatus, "Expired", "Withdrawn", "Complete", "Unapproved")) continue;
-        
+        //if( matches(capStatus, "Expired", "Withdrawn", "Complete", "Unapproved")) continue;
+        if(capStatus != "Issued") continue;
+		
         printDebug("ALT ID is : "+ altId);
         var addressLine = "";
         var adResult = aa.address.getPrimaryAddressByCapID(capId,"Y");
