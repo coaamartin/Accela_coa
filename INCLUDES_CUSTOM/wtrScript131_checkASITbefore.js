@@ -25,7 +25,7 @@ function wtrScript131_checkASITbefore(){
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
                         logDebug("col3:" + col3 + ";col3.length():" + col3.length());
-                        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
+                        if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
                         else
@@ -43,7 +43,7 @@ function wtrScript131_checkASITbefore(){
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
                         logDebug("col3:" + col3 + ";col3.length():" + col3.length());
                         logDebug("col4:" + col4 + ";col4.length():" + col4.length());
-                        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0) || (col4.length()!=0)){
+                        if((col1 != null) || (col2 != null) || (col3 != null) || (col4 != null)){
                            doCancel = false;
                         }
                         else
@@ -60,7 +60,7 @@ function wtrScript131_checkASITbefore(){
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
                         logDebug("col3:" + col3 + ";col3.length():" + col3.length());
-                        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
+                        if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
                         else
@@ -77,7 +77,7 @@ function wtrScript131_checkASITbefore(){
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
                         logDebug("col3:" + col3 + ";col3.length():" + col3.length());
-                        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
+                        if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
                         else
@@ -94,7 +94,7 @@ function wtrScript131_checkASITbefore(){
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
                         logDebug("col3:" + col3 + ";col3.length():" + col3.length());
-                        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
+                        if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
                         else
@@ -111,7 +111,7 @@ function wtrScript131_checkASITbefore(){
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
                         logDebug("col3:" + col3 + ";col3.length():" + col3.length());
-                        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
+                        if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
                         else
