@@ -15,7 +15,7 @@ function wtrScript131_checkASITbefore(){
                 var rowsNeededInTable = "";
                 loadASITablesBefore();
                 
-                if(permitType == "Water Main Utility Permit"){
+                if(ifTracer(permitType == "Water Main Utility Permit", 'permitType == "Water Main Utility Permit"')){
                     watMatRows = WATERMATERIAL.length;
                     for(x in WATERMATERIAL){
                         var col1 = WATERMATERIAL[x]["Size of Pipe"];
@@ -50,7 +50,7 @@ function wtrScript131_checkASITbefore(){
                             doCancel = true;
                     }
                 }
-                if(permitType == "Sanitary Sewer Permit"){//SANITARYSEWERMATERIAL
+                if(ifTracer(permitType == "Sanitary Sewer Permit", 'permitType == "Sanitary Sewer Permit"')){//SANITARYSEWERMATERIAL
                     swpRows = SANITARYSEWERMATERIAL.length;
                     for(x in SANITARYSEWERMATERIAL){
                         var col1 = SANITARYSEWERMATERIAL[x]["Size of Pipe"];
@@ -67,7 +67,7 @@ function wtrScript131_checkASITbefore(){
                             doCancel = true;
                     }
                 }
-                if(permitType == "Public Storm Sewer Permit"){//PUBLICSTORMMATERIAL
+                if(ifTracer(permitType == "Public Storm Sewer Permit", 'permitType == "Public Storm Sewer Permit"')){//PUBLICSTORMMATERIAL
                     psspRows = PUBLICSTORMMATERIAL.length;
                     for(x in PUBLICSTORMMATERIAL){
                         var col1 = PUBLICSTORMMATERIAL[x]["Size of Pipe"];
@@ -84,7 +84,7 @@ function wtrScript131_checkASITbefore(){
                             doCancel = true;
                     }
                 }
-                if(permitType == "Private Storm Sewer Permit"){//PRIVATESTORMMATERIAL
+                if(ifTracer(permitType == "Private Storm Sewer Permit", 'permitType == "Private Storm Sewer Permit"')){//PRIVATESTORMMATERIAL
                     privSspRows = PRIVATESTORMMATERIAL.length;
                     for(x in PRIVATESTORMMATERIAL){
                         var col1 = PRIVATESTORMMATERIAL[x]["Size of Pipe"];
@@ -101,7 +101,7 @@ function wtrScript131_checkASITbefore(){
                             doCancel = true;
                     }
                 }
-                if(permitType == "Private Fire Line Permit"){//PRIVATEFIRELINEMATERIAL
+                if(ifTracer(permitType == "Private Fire Line Permit", 'permitType == "Private Fire Line Permit"')){//PRIVATEFIRELINEMATERIAL
                     privFireRows = PRIVATEFIRELINEMATERIAL.length;
                     for(x in PRIVATEFIRELINEMATERIAL){
                         var col1 = PRIVATEFIRELINEMATERIAL[x]["Size of Pipe"];
@@ -123,7 +123,7 @@ function wtrScript131_checkASITbefore(){
             catch(err){
                 if(watMatRows   < minRows && sizeRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER MATERIAL"; }
                 if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "SIZE"; }
-				if(sizeRows     < minRows && watMatRows < minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "SIZE and WATER MATERIAL"; }
+                if(sizeRows     < minRows && watMatRows < minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "SIZE and WATER MATERIAL"; }
                 if(swpRows      < minRows && permitType == "Sanitary Sewer Permit")      { doCancel = true; rowsNeededInTable = "SANITARY SEWER MATERIAL"; }
                 if(psspRows     < minRows && permitType == "Public Storm Sewer Permit")  { doCancel = true; rowsNeededInTable = "PUBLIC STORM MATERIAL"; }
                 if(privSspRows  < minRows && permitType == "Private Storm Sewer Permit") { doCancel = true; rowsNeededInTable = "PRIVATE STORM MATERIAL"; }
