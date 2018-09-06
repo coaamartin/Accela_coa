@@ -5,7 +5,7 @@ function checkIfPassedInspections(InspectionType){
 			if (result==null) {
 				throw "There must be an initial inspection of status passed for the inspection type " + InspectionType ;
 			}else if (result!=""){
-				throw result + " is not passed" ;
+				throw result + " is not Final" ;
 			}		
 		}
 		

@@ -24,10 +24,11 @@ function checkInspectionType(insp2Check){
             if (insp2Check!=inspList[xx].getInspectionType() && inspTypeLength==insp2checkLength){
                 var newInspType=inspType.replace(inspTypeArray[finalLocation],"Final");
                 if (newInspType==insp2Check){
+                    isMatch=true;
                     if (!inspList[xx].getInspectionStatus().equals(status2check)){
                         resultInspType=inspList[xx].getInspectionType();
-                        if(!checkInspectionResult(resultInspType, status2check)){
-                            isMatch=true;
+                        if(checkInspectionResult(resultInspType, status2check)){
+							resultInspType = "";
                             break;
                         }
                     }
