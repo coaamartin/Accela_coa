@@ -14,7 +14,8 @@ function wtrScript131_checkASITbefore(){
                 var minRows = 1;
                 var rowsNeededInTable = "";
                 loadASITablesBefore();
-                
+                aa.print(TABSIZE.length);
+				aa.print(SIZE.length);
                 if(ifTracer(permitType == "Water Main Utility Permit", 'permitType == "Water Main Utility Permit"')){
                     watMatRows = WATERMATERIAL.length;
                     for(x in WATERMATERIAL){
