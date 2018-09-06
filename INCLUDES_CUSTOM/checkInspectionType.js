@@ -26,7 +26,7 @@ function checkInspectionType(insp2Check){
                 if (newInspType==insp2Check){
                     if (!inspList[xx].getInspectionStatus().equals(status2check)){
                         resultInspType=inspList[xx].getInspectionType();
-                        if(!checkInspectionResult(result, status2check)){
+                        if(!checkInspectionResult(resultInspType, status2check)){
                             isMatch=true;
                             break;
                         }
