@@ -121,12 +121,12 @@ function wtrScript131_checkASITbefore(){
                 
             }
             catch(err){
-                if(watMatRows   < minRows) { doCancel = true; rowsNeededInTable = "WATER MATERIAL"; }
+                if(watMatRows   < minRows) { doCancel = true; rowsNeededInTable = "WATER MATERIAL and SIZE"; }
                 if(sizeRows     < minRows) { doCancel = true; rowsNeededInTable = "SIZE"; }
                 if(swpRows      < minRows) { doCancel = true; rowsNeededInTable = "SANITARY SEWER MATERIAL"; }
                 if(psspRows     < minRows) { doCancel = true; rowsNeededInTable = "PUBLIC STORM MATERIAL"; }
                 if(privSspRows  < minRows) { doCancel = true; rowsNeededInTable = "PRIVATE STORM MATERIAL"; }
-                if(privFireRows < minRows) { doCancel = true; rowsNeededInTable = "PRIVATE STORM MATERIAL"; }
+                if(privFireRows < minRows) { doCancel = true; rowsNeededInTable = "PRIVATE FIRE LINE MATERIAL"; }
             }
             
             if(doCancel){
