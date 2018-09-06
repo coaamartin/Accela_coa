@@ -69,6 +69,7 @@ function wtrScript131_checkASITbefore(){
                 }
                 if(ifTracer(permitType == "Public Storm Sewer Permit", 'permitType == "Public Storm Sewer Permit"')){//PUBLICSTORMMATERIAL
                     psspRows = PUBLICSTORMMATERIAL.length;
+					logDebug("psspRows: " + psspRows);
                     for(x in PUBLICSTORMMATERIAL){
                         var col1 = PUBLICSTORMMATERIAL[x]["Size of Pipe"];
                         var col2 = PUBLICSTORMMATERIAL[x]["Pipe Material"];       
