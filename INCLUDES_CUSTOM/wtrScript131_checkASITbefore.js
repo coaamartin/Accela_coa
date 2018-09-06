@@ -22,9 +22,9 @@ function wtrScript131_checkASITbefore(){
                         var col2 = WATERMATERIAL[x]["Pipe Material"];       
                         var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];
                         
-                        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
-                        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
-                        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
+                        logDebug("col1:" + col1 );
+                        logDebug("col2:" + col2 );
+                        logDebug("col3:" + col3 );
                         if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
@@ -39,10 +39,10 @@ function wtrScript131_checkASITbefore(){
                         var col3 = SIZE[x]["Location Description"];
                         var col4 = SIZE[X]["Complete"];
                         
-                        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
-                        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
-                        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
-                        logDebug("col4:" + col4 + ";col4.length():" + col4.length());
+                        logDebug("col1:" + col1 );
+                        logDebug("col2:" + col2 );
+                        logDebug("col3:" + col3 );
+                        logDebug("col4:" + col4 );
                         if((col1 != null) || (col2 != null) || (col3 != null) || (col4 != null)){
                            doCancel = false;
                         }
@@ -57,9 +57,9 @@ function wtrScript131_checkASITbefore(){
                         var col2 = SANITARYSEWERMATERIAL[x]["Pipe Material"];       
                         var col3 = SANITARYSEWERMATERIAL[x]["Length in Lineal Feet"];
                         
-                        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
-                        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
-                        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
+                        logDebug("col1:" + col1);
+                        logDebug("col2:" + col2);
+                        logDebug("col3:" + col3);
                         if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
@@ -74,9 +74,9 @@ function wtrScript131_checkASITbefore(){
                         var col2 = PUBLICSTORMMATERIAL[x]["Pipe Material"];       
                         var col3 = PUBLICSTORMMATERIAL[x]["Length in Lineal Feet"];
                         
-                        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
-                        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
-                        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
+                        logDebug("col1:" + col1);
+                        logDebug("col2:" + col2);
+                        logDebug("col3:" + col3);
                         if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
@@ -91,9 +91,9 @@ function wtrScript131_checkASITbefore(){
                         var col2 = PRIVATESTORMMATERIAL[x]["Pipe Material"];       
                         var col3 = PRIVATESTORMMATERIAL[x]["Length in Lineal Feet"];
                         
-                        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
-                        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
-                        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
+                        logDebug("col1:" + col1);
+                        logDebug("col2:" + col2);
+                        logDebug("col3:" + col3);
                         if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
@@ -108,9 +108,9 @@ function wtrScript131_checkASITbefore(){
                         var col2 = PRIVATEFIRELINEMATERIAL[x]["Pipe Material"];       
                         var col3 = PRIVATEFIRELINEMATERIAL[x]["Length in Lineal Feet"];
                         
-                        logDebug("col1:" + col1 + ";col1.length():" + col1.length());
-                        logDebug("col2:" + col2 + ";col2.length():" + col2.length());
-                        logDebug("col3:" + col3 + ";col3.length():" + col3.length());
+                        logDebug("col1:" + col1);
+                        logDebug("col2:" + col2);
+                        logDebug("col3:" + col3);
                         if((col1 != null) || (col2 != null) || (col3 != null)){
                            doCancel = false;
                         }
