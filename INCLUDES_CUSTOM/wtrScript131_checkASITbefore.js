@@ -130,7 +130,8 @@ function wtrScript131_checkASITbefore(){
                 if(privSspRows  < minRows && permitType == "Private Storm Sewer Permit") { doCancel = true; rowsNeededInTable = "PRIVATE STORM MATERIAL"; }
                 if(privFireRows < minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "PRIVATE FIRE LINE MATERIAL"; }
             }
-            
+            logDebug("watMatRows:" + watMatRows);
+			logDebug("sizeRows:" + sizeRows)
 			if(watMatRows   < minRows && sizeRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER MATERIAL"; }
             if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "SIZE"; }
             if(sizeRows     < minRows && watMatRows < minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "SIZE and WATER MATERIAL"; }
