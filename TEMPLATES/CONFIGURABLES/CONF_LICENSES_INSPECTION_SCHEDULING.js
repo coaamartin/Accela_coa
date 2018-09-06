@@ -1,5 +1,5 @@
 {
-  "Licenses/Marijuana/Testing Facility/Application": { 
+  "Licenses/Marijuana/Testing Facility/Application": {
     "ApplicationSubmitAfter": [
       {
         "preScript": "",
