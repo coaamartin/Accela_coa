@@ -1,1 +1,1 @@
-//doConfigurableScriptActions();
+doConfigurableScriptActions();
