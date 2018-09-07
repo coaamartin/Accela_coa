@@ -1,4 +1,4 @@
-doConfigurableScriptActions();
+//doConfigurableScriptActions();
 
 //Start - proximity alerts
 include("Caution_Homes");
