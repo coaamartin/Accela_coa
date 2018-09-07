@@ -1,5 +1,6 @@
 //doConfigurableScriptActions();
-showDebug = true
+// commented this out as it is already being called in the ApplicationSubmitAfter master script
+
 //Start - proximity alerts
 include("Caution_Homes");
 include("Marijuana_Retail_Businesses");
