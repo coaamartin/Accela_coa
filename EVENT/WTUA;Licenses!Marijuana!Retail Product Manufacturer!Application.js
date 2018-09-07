@@ -1,3 +1,4 @@
+showDebug = true;
 if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Issuance/Issued')){
     //Script 230 start
     var newLicCapId = createLicenseCoA("Active", true, "License Status", "Active");
