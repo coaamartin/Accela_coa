@@ -34,7 +34,7 @@ function getPrimaryParcelAttributesAndUpdateCustomField(stdForestryInspectorAssi
 					// Get GIS Information
 					var vArea = getGISInfoArray("AURORACO", "Forestry Index Mapbook Poly", "TRS_NO");
 					for (i in vArea) {
-						logDebug("Area: " + vArea);
+						logDebug("Area: " + vArea[i]);
 					}
 					//Save to ASI field
 					editAppSpecific("Area Number", vArea);
