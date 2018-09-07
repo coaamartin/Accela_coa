@@ -9,7 +9,7 @@ function getPrimaryParcelAttributesAndUpdateCustomField(stdForestryInspectorAssi
             //  Assume only one return
             if (vTownship.length > 0 && vRange.length > 0 && vSection.length > 0) {
                 // Format Data
-                vArea = vTownship[0] + vRange[0] + "0" + vSection[0];
+                vArea = vTownship[0] + " " + vRange[0] + " " + "0" + " " + vSection[0];
                 logDebug("Area: " + vArea);
                 //Save to ASI field
                 editAppSpecific("Area Number", vArea); 
