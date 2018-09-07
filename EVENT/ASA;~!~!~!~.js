@@ -1,5 +1,5 @@
 //doConfigurableScriptActions();
-
+showDebug = true
 //Start - proximity alerts
 include("Caution_Homes");
 include("Marijuana_Retail_Businesses");
