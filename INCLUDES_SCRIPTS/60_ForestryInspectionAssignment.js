@@ -39,7 +39,6 @@ if (typeof(vInspectorID) != "undefined" && vInspectorID != null && vInspectorID 
 	// Schedule inspections
 	if (appMatch("Forestry/Request/Planting/*") == true) {
 		scheduleInspection("Forestry Site Review", 0, vInspectorID);
-		scheduleInspection("Forestry Inspection", 0, vInspectorID);
 	} else if (appMatch("Forestry/Request/Citizen/NA") == true || appMatch("Forestry/Permit/NA/NA") == true) {
 		scheduleInspection("Forestry Inspection", 0, vInspectorID);
 	}
