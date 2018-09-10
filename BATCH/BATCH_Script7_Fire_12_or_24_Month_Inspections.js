@@ -105,7 +105,9 @@ function updateCustomFieldAndScheduleInspection() {
             }
 
             var lastSchedDate = null;
-            var lastSchedType = null;
+            //commenting out references to lastSchedType - AuroraCO wants the inspection type to always be "FD Primary Inspection" from this batch job 
+			//var lastSchedType = null;
+			var inspSchedType = "FD Primary Inspection";
 
             for (i in inspecs) {
                 if (inspecs[i].getScheduledDate() == null) {
@@ -113,11 +115,11 @@ function updateCustomFieldAndScheduleInspection() {
                 }
                 if (lastSchedDate == null) {
                     lastSchedDate = inspecs[i].getScheduledDate();
-                    lastSchedType = inspecs[i].getInspectionType();
+                    //lastSchedType = inspecs[i].getInspectionType();
                 } else {
                     if (dateDiff(inspecs[i].getScheduledDate(), lastSchedDate) < 0) {
                         lastSchedDate = inspecs[i].getScheduledDate();
-                        lastSchedType = inspecs[i].getInspectionType();
+                        //lastSchedType = inspecs[i].getInspectionType();
                     }
                 }
             }//for all inspections
@@ -146,14 +148,14 @@ function updateCustomFieldAndScheduleInspection() {
 			var inspectorId = getAssignedStaff(capId);
             nextSchedDate = dateAdd(nextSchedDate, -1);
             nextSchedDate = nextWorkDay(nextSchedDate);
-            aa.print("<br>**INFO need to sched inspection " + lastSchedType + " On " + nextSchedDate);
+            aa.print("<br>**INFO need to sched inspection " + inspSchedType + " On " + nextSchedDate);
             try {
                 if(inspectorId) {
 					aa.print("<br>Scheduling with inspector assignment");
-                    scheduleInspectDate(lastSchedType, nextSchedDate, inspectorId);
+                    scheduleInspectDate(inspSchedType, nextSchedDate, inspectorId);
                 } else {
 					aa.print("<br>Scheduling without inspector assignment");
-                    scheduleInspectDate(lastSchedType, nextSchedDate);
+                    scheduleInspectDate(inspSchedType, nextSchedDate);
 				}
             } catch (ex) {
                 aa.print("<br>ERR scheduleInspectDate : " + ex);
