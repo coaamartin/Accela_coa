@@ -36,5 +36,8 @@ if (parentCapId != null && vGoodToRenew) {
 
 	//Copy application name from license to renewal
 	editAppName(getAppName(parentCapId),capId);
+	
+	//Copy Cap Detail Info from license to renewal
+	aa.cap.copyCapDetailInfo(parentCapId, capId);
 }
 //End Core Renewal Functionality
