@@ -34,12 +34,12 @@ function createTempWaterWetTapCopyDataAndSendEmail(emailTemplate) {
 		var igArr = ["LIST OF SUBCONTRACTORS", "PRIVATE FIRE LINE MATERIAL", "PRIVATE STORM MATERIAL", "PUBLIC STORM MATERIAL", "SANITARY SEWER MATERIAL", "WATER MATERIAL"];
 		copyASITables( capId, childCapId, igArr );
 		
-		var recordApplicant = getContactByType("Applicant", capId);
+		var recordApplicant = getContactByType("Developer", capId);
 		if (recordApplicant) {
 			applicantEmail = recordApplicant.getEmail();
 		}
 		if (applicantEmail == null || applicantEmail == "") {
-			logDebug("**WARN Applicant on record " + capId + " has no email");
+			logDebug("**WARN Developer on record " + capId + " has no email");
 
 		} else {
 			var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
