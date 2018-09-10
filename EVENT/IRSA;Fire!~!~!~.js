@@ -116,7 +116,9 @@ pEParams = aa.util.newHashtable();
 addParameter(pEParams, "$$FullAddress$$", getCapFullAddress());
 pRParams = aa.util.newHashtable();
 addParameter(pRParams, "FolderRSN", capIDString);
-emailContactsWithReportLinkASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
+//Script 15 is the single exception to the report rule -- attaching to email rather than sending link
+//emailContactsWithReportLinkASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
+emailContactsWithReportAttachASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
 
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
 {
