@@ -37,9 +37,9 @@ if (parentCapId != null && vGoodToRenew) {
 	//Copy application name from license to renewal
 	editAppName(getAppName(parentCapId),capId);
 	
-	if(appMatch("Licenses/Marijuana/*/Renewal") == true); {
+	if(appMatch("Licenses/Marijuana/*/License") == true); {
 		var vStateLicNum = getAppSpecific("State License Number", parentCapId);
-		editAppSpecific("State License Number", vStateLicNum);
+		editAppSpecific("State License Number", vStateLicNum, capId);
 	}
 	
 	//Copy Cap Detail Info from license to renewal
