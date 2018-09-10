@@ -64,7 +64,7 @@ function updateCustomFieldAndScheduleInspection() {
     if (parseInt(nextMonthNumber) < 10) {
         nextMonthNumber = "0" + nextMonthNumber;
     }
-    aa.print("**INFO nextMonthDate=" + nextMonthDate + " // nextMonthNumber=" + nextMonthNumber);
+    aa.print("**INFO nextMonthDate = " + nextMonthDate + " // nextMonthNumber = " + nextMonthNumber);
 
     for (r in capIdScriptModelList) {
         capId = capIdScriptModelList[r].getCapID();
@@ -94,7 +94,7 @@ function updateCustomFieldAndScheduleInspection() {
             inspectionFrequency = inspectionFrequency.split(" ")[0];
             inspectionFrequency = parseInt(inspectionFrequency);
 
-            aa.print("<br>**INFO inspectionFrequency=" + inspectionFrequency + " // inspectionMonth=" + inspectionMonth);
+            aa.print("<br>**INFO inspectionFrequency = " + inspectionFrequency + " // inspectionMonth = " + inspectionMonth);
 
             //Get last ScheduledDate
             var inspecs = aa.inspection.getInspections(capId);
@@ -127,7 +127,8 @@ function updateCustomFieldAndScheduleInspection() {
             }
 
             lastSchedDate = convertDate(lastSchedDate);
-            //we calc dateDiff using nextMonth (which is due date, not current month)
+            
+			//we calc dateDiff using nextMonth (which is due date, not current month)
             var diff = dateDiff(nextMonthDate, lastSchedDate); // in minus if lastSchedDate is in past
             diff = Math.ceil(diff / 30);
             aa.print("<br>**INFO lastSchedDate=" + lastSchedDate + " MonthsDiff=" + diff);
@@ -140,14 +141,16 @@ function updateCustomFieldAndScheduleInspection() {
 
             //schedule same inspection, on date (lastSchedDate + inspectionFrequency)
             var nextSchedDate = dateAddMonths(lastSchedDate, inspectionFrequency);
-			var lastInspectorId = getLastInspector(lastSchedType);
+			//change to script 20 - scheduling inspection for user assigned to record rather than inspector who completed previous inspection
+			//var lastInspectorId = getLastInspector(lastSchedType);
+			var inspectorId = getAssignedStaff();
             nextSchedDate = dateAdd(nextSchedDate, -1);
             nextSchedDate = nextWorkDay(nextSchedDate);
             aa.print("<br>**INFO need to sched inspection " + lastSchedType + " On " + nextSchedDate);
             try {
-                if(lastInspectorId) {
+                if(inspectorId) {
 					aa.print("<br>Scheduling with inspector assignment");
-                    scheduleInspectDate(lastSchedType, nextSchedDate, lastInspectorId);
+                    scheduleInspectDate(lastSchedType, nextSchedDate, inspectorId);
                 } else {
 					aa.print("<br>Scheduling without inspector assignment");
                     scheduleInspectDate(lastSchedType, nextSchedDate);
@@ -186,3 +189,4 @@ function updateCustomFieldAndScheduleInspection() {
         return false;
     }
 }*/
+
