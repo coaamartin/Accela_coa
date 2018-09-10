@@ -143,7 +143,7 @@ function updateCustomFieldAndScheduleInspection() {
             var nextSchedDate = dateAddMonths(lastSchedDate, inspectionFrequency);
 			//change to script 20 - scheduling inspection for user assigned to record rather than inspector who completed previous inspection
 			//var lastInspectorId = getLastInspector(lastSchedType);
-			var inspectorId = getAssignedStaff();
+			var inspectorId = getAssignedStaff(capId);
             nextSchedDate = dateAdd(nextSchedDate, -1);
             nextSchedDate = nextWorkDay(nextSchedDate);
             aa.print("<br>**INFO need to sched inspection " + lastSchedType + " On " + nextSchedDate);
@@ -164,7 +164,7 @@ function updateCustomFieldAndScheduleInspection() {
     }//for all caps
 }
 
-/*function getAssignedStaff(capId) {
+function getAssignedStaff(capId) {
     try {
         var assignedStaff = "";
         var cdScriptObjResult = aa.cap.getCapDetail(capId);
@@ -188,5 +188,5 @@ function updateCustomFieldAndScheduleInspection() {
         aa.print("getAssignedStaff ", e);
         return false;
     }
-}*/
+}
 
