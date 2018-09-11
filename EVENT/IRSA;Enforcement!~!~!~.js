@@ -166,19 +166,20 @@ if(inspType == "Summons Issuance"){
 
 if(inspType == "Pre Court Action"){
     //Script 346
-    enfProcessInspResult("Pre Court Action", "1 - Create Summons File", null, null, false, "Pre Court Action"," 1 - Create Summons File");
-    enfProcessInspResult("Pre Court Action", "2 - Summons to Court Liaison", null, null, false, "Pre Court Action"," 2 - Summons to Court Liaison");
-    enfProcessInspResult("Pre Court Action", "3 - File to Court Liaison", null, null, false, "Pre Court Action"," 3 - File to Court Liaison");
-    enfProcessInspResult("Pre Court Action", "4 - Summons to Docketing", null, null, false, "Pre Court Action"," 4 - Summons to Docketing");
-    enfProcessInspResult("Pre Court Action", "5 - Summons File to CA", "Pre Trial Inspection", 0, false, "Pre Court Action"," 5 - Summons File to CA");
-    enfProcessInspResult("Pre Court Action", "6 - Citation File to CA", "Pre Trial Inspection", 0, false, "Pre Court Action"," 6 - Citation File to CA");
+    enfProcessInspResult("Pre Court Action", "1 - Create Summons File", null, null, false, "Pre Court Action","1 - Create Summons File");
+    enfProcessInspResult("Pre Court Action", "2 - Summons to Court Liaison", null, null, false, "Pre Court Action","2 - Summons to Court Liaison");
+    enfProcessInspResult("Pre Court Action", "3 - File to Court Liaison", null, null, false, "Pre Court Action","3 - File to Court Liaison");
+    enfProcessInspResult("Pre Court Action", "4 - Summons to Docketing", null, null, false, "Pre Court Action","4 - Summons to Docketing");
+    enfProcessInspResult("Pre Court Action", "5 - Summons File to CA", "Pre Court Investigation", 0, false, "Pre Court Action","5 - Summons File to CA");
+    enfProcessInspResult("Pre Court Action", "6 - Citation File to Liaison", null, null, false, "Pre Court Action","6 - Citation File to Liaison");
+    enfProcessInspResult("Pre Court Action", "7 - Citation File to CA", "Pre Court Investigation", 0, false, "Pre Court Action","7 - Citation File to CA");
 }
 
-if(inspType == "Pre Trial Inspection"){
+if(inspType == "Pre Court Inspection"){
     //Script 346
-    enfProcessInspResult("Pre Trial Inspection", "Compliance", null, null, false, "Pre Court Investigation", "Compliance");
-    enfProcessInspResult("Pre Trial Inspection", "Non-Compliance", null, null, false, "Pre Court Investigation", "Non-Compliance");
-    enfProcessInspResult("Pre Trial Inspection", "Unverifiable", null, null, false, "Pre Court Investigation", "Unverifiable");
+    enfProcessInspResult("Pre Court Inspection", "Compliance", null, null, false, "Pre Court Investigation", "Compliance");
+    enfProcessInspResult("Pre Court Inspection", "Non-Compliance", null, null, false, "Pre Court Investigation", "Non-Compliance");
+    enfProcessInspResult("Pre Court Inspection", "Unverifiable", null, null, false, "Pre Court Investigation", "Unverifiable");
 }
 
 if(inspType == "Legal Resolution"){
