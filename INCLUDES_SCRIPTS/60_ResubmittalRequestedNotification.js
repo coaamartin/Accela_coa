@@ -38,6 +38,8 @@ if (exists(wfStatus, targetStatusArray))
 		emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
 
 		//update record status
-		updateAppStatus("Resubmittal Requested", "");
+		// Commented this out at the request of the clienbt for Christy Paulin 9/11/2018
+		//updateAppStatus("Resubmittal Requested", "");
+		
 }
 logDebug("Finished executing 60_ResubmittalRequestedNotification");
