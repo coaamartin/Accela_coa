@@ -82,7 +82,8 @@ var emailText = "";
 		capIDList = capIDList.getOutput();
 	}
 	
-	var sysYear = aa.date.getCurrentDate().getYear();
+	//var sysYear = aa.date.getCurrentDate().getYear();
+	var sysDate = aa.date.getCurrentDate();
 	
 	logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
 	for (c in capIDList) {
@@ -107,7 +108,7 @@ var emailText = "";
 		}//date null/empty
 
 		
-		var nextYear = dateAdd(nextInspectionDate, 365);
+		var nextYear = dateAdd(sysDate, 365);
 		
 		//nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
 		//logDebug2("<br> nextInspectionYear: " + nextInspectionYear + ", sysYear: " + sysYear);
