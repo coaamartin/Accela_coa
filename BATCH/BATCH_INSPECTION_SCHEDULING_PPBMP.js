@@ -114,10 +114,7 @@ var emailText = "";
 		
 		logDebug2("<br> nextYear: " + nextYear);
 		
-		//if (nextInspectionYear == sysYear) {
-		
-		logDebug2("<br> dateDiff(nextInspectionDate, nextYear):" + dateDiff(nextInspectionDate, nextYear));
-		logDebug2("<br> dateDiff(nextInspectionDate, currentDate):" + dateDiff(nextInspectionDate, currentDate));
+		//check if nextInspectionDate falls within the next calendar year
 		if (dateDiff(nextInspectionDate, nextYear) < 365 && dateDiff(nextInspectionDate, currentDate) > 0) {
 			
 			//schedule only, then try to assign
@@ -131,20 +128,22 @@ var emailText = "";
 			//}
 
 			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " on " + nextInspectionDate);		
-			scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)
+			scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)			
 			
-			//var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
-			//if (lastSchedInspectionObj == null) {
-			//	logDebug("**INFO failed to scheduleInspectDate() " + capId + " " + INSPECTION_NAME);
-			//	continue;
-			//}
+			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
+			if (lastSchedInspectionObj == null) {
+				logDebug("**INFO failed to scheduleInspectDate() " + capId + " " + INSPECTION_NAME);
+				continue;
+			}
 
-			//var lastSchedInspectionSeq = lastSchedInspectionObj.getIdNumber();
-
+			var lastSchedInspectionSeq = lastSchedInspectionObj.getIdNumber();
+			
+			//inspections are always assigned to supervisor, not to previous inspector; code is commented out
 			//var assignTolastInsp = assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId);
+			
 			//if (!assignTolastInsp) {
-			//	var supervisor = assignSupervisor(lastSchedInspectionSeq, lastInspectorId);
-			//	logDebug2("<BR> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq )
+			var supervisor = assignSupervisor(lastSchedInspectionSeq);
+			logDebug2("<BR> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq )
 			//}
 
 		} else {
@@ -217,7 +216,8 @@ function getLastScheduledInspection(capId, inspectionType) {
  * @returns {Boolean}
  */
  
-function assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId) {
+ //old function, no longer being used
+/*function assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId) {
 	if (lastInspectorId == null) {
 		return false;
 	}
@@ -280,9 +280,10 @@ function assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, 
 	}
 
 	return false;
-}
+}*/
 
-function assignSupervisor(lastSchedInspectionSeq, lastInspectorId) {
+//old version of this function, no longer being used
+/*function assignSupervisor(lastSchedInspectionSeq, lastInspectorId) {
 	superVisor = lookup("PPBMP_INSPECTORS_SUPERVISORS_TABLE",lastInspectorId)
 	//var lookupTableJsonStr = getScriptText(INSPECTORS_SUPERVISORS_TABLE);
 	//var lookupTableJsonObj = JSON.parse(lookupTableJsonStr);
@@ -293,11 +294,22 @@ function assignSupervisor(lastSchedInspectionSeq, lastInspectorId) {
 	}
 	assignInspection(lastSchedInspectionSeq, superVisor);
 	return superVisor;
+}*/
+
+function assignSupervisor(lastSchedInspectionSeq) {			
+	var inspSupervisor = lookup("PPBMP_INSPECTORS_SUPERVISORS_TABLE", "PPBMP_SUPERVISOR");
+
+	if (!inspSupervisor) {
+		logDebug2("<br>**INFO could not retrieve PPBMP_SUPERVISOR from PPBMP_INSPECTORS_SUPERVISORS_TABLE");
+		return;
+	}
+	assignInspection(lastSchedInspectionSeq, inspSupervisor);
+	return inspSupervisor;
 }
 
 function logDebug2(dstr)
 	{
-	// function of the same name in ACVCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
+	// function of the same name in ACCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
 	if(showDebug)
 		{
 		aa.print(dstr)
