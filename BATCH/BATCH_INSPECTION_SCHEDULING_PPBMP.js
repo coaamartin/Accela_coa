@@ -117,7 +117,7 @@ var emailText = "";
 		
 		//if (nextInspectionYear == sysYear) {
 		
-		if (nextInspectionDate <= nextYear) {
+		if (nextInspectionDate <= nextYear && nextInspectionDate >= sysDate) {
 			
 			//schedule only, then try to assign
 			//var lastInspectorId = getLastInspector(INSPECTION_NAME);
@@ -147,7 +147,8 @@ var emailText = "";
 			//}
 
 		} else {
-			logDebug2("<br> Inspection year and system year do not match. Moving to next record.");
+			//logDebug2("<br> Inspection year and system year do not match. Moving to next record.");
+			logDebug2("<br> Next Inspection Date does not fall within the next year. Moving to next record");
 		}
 	}//for all capIds
 //} catch (ex) {
