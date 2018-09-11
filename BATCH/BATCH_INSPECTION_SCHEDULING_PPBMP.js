@@ -116,6 +116,8 @@ var emailText = "";
 		
 		//if (nextInspectionYear == sysYear) {
 		
+		logDebug2("<br> dateDiff(nextYear, nextInspectionDate):" + dateDiff(nextYear, nextInspectionDate));
+		logDebug2("<br> dateDiff(nextInspectionDate, currentDate):" + dateDiff(nextInspectionDate, currentDate));
 		if (dateDiff(nextYear, nextInspectionDate) < 365 && dateDiff(nextInspectionDate, currentDate) > 0) {
 			
 			//schedule only, then try to assign
