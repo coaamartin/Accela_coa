@@ -83,9 +83,11 @@ var emailText = "";
 	}
 	
 	//var sysYear = aa.date.getCurrentDate().getYear();
-	var sysDate = aa.date.getCurrentDate();
+	var currentDate = new Date;
+	var nextYear = dateAddMonths(currentDate, 12);	
 	
 	logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
+	
 	for (c in capIDList) {
 		capId = capIDList[c].getCapID();
 		capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
@@ -106,9 +108,6 @@ var emailText = "";
 			logDebug2("<br> No Inspection Date is set. Moving to next record.");
 			continue;
 		}//date null/empty
-
-		
-		var nextYear = dateAdd(sysDate, 365);
 		
 		//nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
 		//logDebug2("<br> nextInspectionYear: " + nextInspectionYear + ", sysYear: " + sysYear);
@@ -117,7 +116,7 @@ var emailText = "";
 		
 		//if (nextInspectionYear == sysYear) {
 		
-		if (nextInspectionDate <= nextYear && nextInspectionDate >= sysDate) {
+		if (dateDiff(nextYear, nextInspectionDate) < 365 && dateDiff(nextInspectionDate, currentDate) > 0) {
 			
 			//schedule only, then try to assign
 			//var lastInspectorId = getLastInspector(INSPECTION_NAME);
