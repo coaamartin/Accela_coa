@@ -29,7 +29,8 @@ function createTempWaterWetTapCopyDataAndSendEmail(emailTemplate) {
 		copyParcels(capId, childCapId);
 		copyOwner(capId, childCapId);
 		copyContacts3_0(capId, childCapId);
-		copyDetailedDescription(capId,childCapId);
+		//copyDetailedDescription(capId,childCapId);
+		editAppName(AInfo["Utility Permit Type"], childCapId);
 		
 		var igArr = ["LIST OF SUBCONTRACTORS", "PRIVATE FIRE LINE MATERIAL", "PRIVATE STORM MATERIAL", "PUBLIC STORM MATERIAL", "SANITARY SEWER MATERIAL", "WATER MATERIAL"];
 		copyASITables( capId, childCapId, igArr );
