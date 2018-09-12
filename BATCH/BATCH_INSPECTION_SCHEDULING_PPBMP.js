@@ -82,6 +82,8 @@ var emailText = "";
 		capIDList = capIDList.getOutput();
 	}
 	
+	var capStatus;
+	
 	//var sysYear = aa.date.getCurrentDate().getYear();
 	var currentDate = new Date;
 	var nextYear = dateAddMonths(currentDate, 12);	
@@ -100,55 +102,61 @@ var emailText = "";
 
 		tmpCap = tmpCap.getOutput();
 		tmpCap = tmpCap.getCapModel();
-
 		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
-		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
-		logDebug2("<Font Color=BLACK> <br> nextInspectionDate: " + nextInspectionDate)
-		if (nextInspectionDate == null || nextInspectionDate == "") {
-			logDebug2("<br> No Inspection Date is set. Moving to next record.");
-			continue;
-		}//date null/empty
 		
-		//nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
-		//logDebug2("<br> nextInspectionYear: " + nextInspectionYear + ", sysYear: " + sysYear);
-		
-		logDebug2("<br> nextYear: " + nextYear);
-		
-		//check if nextInspectionDate falls within the next calendar year
-		if (dateDiff(nextInspectionDate, nextYear) < 365 && dateDiff(nextInspectionDate, currentDate) > 0) {
-			
-			//schedule only, then try to assign
-			//var lastInspectorId = getLastInspector(INSPECTION_NAME);
-			//logDebug2("<br> lastInspectorId: " + lastInspectorId)
-			//if (lastInspectorId == null) {
-			//	//we can't assign to last inspector, and we can't get supervisor
-			//	logDebug2("<br> Last Inspector ID is null, scheduling without assignment");
-			//	scheduleInspectDate(INSPECTION_NAME, nextInspectionDate);
-			//	continue;
-			//}
-
-			logDebug2("<BR> Scheduling " + INSPECTION_NAME + " on " + nextInspectionDate);		
-			scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)			
-			
-			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
-			if (lastSchedInspectionObj == null) {
-				logDebug("**INFO failed to scheduleInspectDate() " + capId + " " + INSPECTION_NAME);
+		capStatus =  = cap.getCapStatus();
+		if (capStatus == "Active") {
+			var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
+			logDebug2("<Font Color=BLACK> <br> nextInspectionDate: " + nextInspectionDate)
+			if (nextInspectionDate == null || nextInspectionDate == "") {
+				logDebug2("<br> No Inspection Date is set. Moving to next record.");
 				continue;
+			}//date null/empty
+			
+			//nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
+			//logDebug2("<br> nextInspectionYear: " + nextInspectionYear + ", sysYear: " + sysYear);
+			
+			logDebug2("<br> nextYear: " + nextYear);
+			
+			//check if nextInspectionDate falls within the next calendar year
+			if (dateDiff(nextInspectionDate, nextYear) < 365 && dateDiff(nextInspectionDate, currentDate) > 0) {
+				
+				//schedule only, then try to assign
+				//var lastInspectorId = getLastInspector(INSPECTION_NAME);
+				//logDebug2("<br> lastInspectorId: " + lastInspectorId)
+				//if (lastInspectorId == null) {
+				//	//we can't assign to last inspector, and we can't get supervisor
+				//	logDebug2("<br> Last Inspector ID is null, scheduling without assignment");
+				//	scheduleInspectDate(INSPECTION_NAME, nextInspectionDate);
+				//	continue;
+				//}
+
+				logDebug2("<br> Scheduling " + INSPECTION_NAME + " on " + nextInspectionDate);		
+				scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)			
+				
+				var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
+				if (lastSchedInspectionObj == null) {
+					logDebug2("<br>**INFO failed to scheduleInspectDate() " + capId + " " + INSPECTION_NAME);
+					continue;
+				}
+
+				var lastSchedInspectionSeq = lastSchedInspectionObj.getIdNumber();
+				
+				//inspections are always assigned to supervisor, not to previous inspector; code is commented out
+				//var assignTolastInsp = assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId);
+				
+				//if (!assignTolastInsp) {
+				var supervisor = assignSupervisor(lastSchedInspectionSeq);
+				logDebug2("<br> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq )
+				//}
+
+			} else {
+				//logDebug2("<br> Inspection year and system year do not match. Moving to next record.");
+				logDebug2("<br> Next Inspection Date does not fall within the next year. Moving to next record");
 			}
-
-			var lastSchedInspectionSeq = lastSchedInspectionObj.getIdNumber();
-			
-			//inspections are always assigned to supervisor, not to previous inspector; code is commented out
-			//var assignTolastInsp = assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId);
-			
-			//if (!assignTolastInsp) {
-			var supervisor = assignSupervisor(lastSchedInspectionSeq);
-			logDebug2("<BR> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq )
-			//}
-
 		} else {
-			//logDebug2("<br> Inspection year and system year do not match. Moving to next record.");
-			logDebug2("<br> Next Inspection Date does not fall within the next year. Moving to next record");
+			logDebug2("<br>Skipping record; status must be 'Active'");
+			continue;
 		}
 	}//for all capIds
 //} catch (ex) {
