@@ -89,11 +89,11 @@ for (c in capIDList) {
 		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
 		
 		if (nextInspectionDate == null || nextInspectionDate == "") {
-			logDebug2("<br> No Inspection Date is set. Moving to next record.");
+			logDebug2("<br> Skipping record; no Inspection Date is set.");
 			continue;
 		}
 		logDebug2("<br> nextInspectionDate: " + nextInspectionDate)
-		logDebug2("; nextYear: " + nextYear);
+		logDebug2(": nextYear: " + nextYear);
 		
 		//check if nextInspectionDate falls within the next calendar year
 		if (dateDiff(nextInspectionDate, nextYear) <= 365 && dateDiff(nextInspectionDate, nextYear) >= 1) {
@@ -110,9 +110,9 @@ for (c in capIDList) {
 			//get inspection ID of most recently scheduled inspection, assign to supervisor
 			var lastSchedInspectionSeq = lastSchedInspectionObj.getIdNumber();
 			var supervisor = assignSupervisor(lastSchedInspectionSeq);
-			logDebug2("<br> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq);
+				logDebug2("<br> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq);
 		} else {
-			logDebug2("<br> Next Inspection Date does not fall within the next year. Moving to next record");
+			logDebug2("<br> Skipping record; next Inspection Date does not fall within the next year.");
 		}
 	} else {
 		logDebug2("<br>Skipping record; status must be 'Active'");
