@@ -60,3 +60,9 @@ if ( wfTask == "Permit Issuance" && wfStatus == "Issued" ) {
 		createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
 	}
 }
+
+if(wfTask == "Fee Processing" && wfStatus == "No Fees Required"){
+	if ("Water Main Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Fire Line Permit".equals(AInfo["Utility Permit Type"])) {
+		createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
+	}
+}
