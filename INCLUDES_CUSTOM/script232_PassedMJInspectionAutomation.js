@@ -29,20 +29,20 @@ function passedMJInspectionAutomation() {
 					if (vChildren != false && vChildren != null && vChildren > 1) {
 						
 						//schedule new inspection 6 months out from passed inspection date
-						daysToAdd = 180;
+						daysToAdd = 182;
 						var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 						scheduleInspectDate(inspType, newInspSchedDate);
 					} else {
 						
 						//schedule new inspection 3 months out from passed inspection date
-						daysToAdd = 90;
+						daysToAdd = 91;
 						var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 						scheduleInspectDate(inspType, newInspSchedDate);						
 					}					
 				} else {
 					
 					//schedule new inspection 3 months out from passed inspection date
-					daysToAdd = 90;
+					daysToAdd = 91;
 					var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 					scheduleInspectDate(inspType, newInspSchedDate);	
 				}
