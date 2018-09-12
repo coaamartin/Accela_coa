@@ -105,10 +105,12 @@ var emailText = "";
 		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 		
 		capStatus = tmpCap.getCapStatus();
-		logDebug2("<br>Record status: " + capStatus);
+		logDebug2("<Font Color=BLACK><br>Record status: " + capStatus);
+		
+		//skip record if status is not 'Active'
 		if (capStatus == "Active") {
 			var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
-			logDebug2("<Font Color=BLACK> <br> nextInspectionDate: " + nextInspectionDate)
+			logDebug2("<br> nextInspectionDate: " + nextInspectionDate)
 			if (nextInspectionDate == null || nextInspectionDate == "") {
 				logDebug2("<br> No Inspection Date is set. Moving to next record.");
 				continue;
@@ -305,6 +307,7 @@ function getLastScheduledInspection(capId, inspectionType) {
 	return superVisor;
 }*/
 
+//finds user ID of supervisor from PPBMP_INSPECTORS_SUPERVISORS_TABLE standard choice and assigns inspection based on passed in sequence ID
 function assignSupervisor(lastSchedInspectionSeq) {			
 	var inspSupervisor = lookup("PPBMP_INSPECTORS_SUPERVISORS_TABLE", "PPBMP_SUPERVISOR");
 
