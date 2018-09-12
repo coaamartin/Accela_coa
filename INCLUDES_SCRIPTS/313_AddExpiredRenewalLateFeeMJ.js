@@ -18,8 +18,8 @@ if (vLicenseId != null && vLicenseId != false) {
 	vLicExp_dd = (vLicExp_dd < 10) ? '0' + vLicExp_dd : vLicExp_dd;
 	vLicExp_yyyy = vExpDate.getFullYear();
 	vExpDateString = vLicExp_mm + "/" + vLicExp_dd + "/" + vLicExp_yyyy;
+	vExpDateString = dateAdd(vExpDateString, 7);
 	vExpDate = new Date(vExpDateString);
-	vExpDate = dateAdd(vExpDate, 7);
 	// Get the date of submittal to compare against license expiration.
 	// For ACA submitted records it will be the Application Acceptance - Submitted date.
 	// For non ACA submitted records it will be the Application Acceptance - Application Received date.
