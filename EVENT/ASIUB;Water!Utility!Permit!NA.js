@@ -1,2 +1,3 @@
-wtrScript131_checkASITbefore();
+if(currentUserID == "TLEDEZMA")
+    wtrScript131_checkASITbefore();
 
