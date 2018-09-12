@@ -104,7 +104,8 @@ var emailText = "";
 		tmpCap = tmpCap.getCapModel();
 		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 		
-		capStatus = cap.getCapStatus();
+		capStatus = tmpCap.getCapStatus();
+		logDebug2("<br>Record status: " + capStatus);
 		if (capStatus == "Active") {
 			var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
 			logDebug2("<Font Color=BLACK> <br> nextInspectionDate: " + nextInspectionDate)
