@@ -42,6 +42,7 @@ var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
 var emailText = "";		
 useAppSpecificGroupName = false;
 
+showDebug = true;
 var capStatus;
 var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 var tmpAry = RECORD_TYPE.split("/");
