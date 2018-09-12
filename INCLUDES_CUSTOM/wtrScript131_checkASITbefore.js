@@ -140,32 +140,32 @@ function wtrScript131_checkASITbefore(){
             }
             catch(err2){
                 if(watMatRows   < minRows && sizeRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER MATERIAL"; }
-                if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER TAP SIZE"; }
-                if(sizeRows     < minRows && watMatRows < minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER TAP SIZE and WATER MATERIAL"; }
+                if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE"; }
+                if(sizeRows     < minRows && watMatRows < minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE and WATER MATERIAL"; }
                 
                 if(swpRows      < minRows && permitType == "Sanitary Sewer Permit")      { doCancel = true; rowsNeededInTable = "SANITARY SEWER MATERIAL"; }
                 if(psspRows     < minRows && permitType == "Public Storm Sewer Permit")  { doCancel = true; rowsNeededInTable = "PUBLIC STORM MATERIAL"; }
                 if(privSspRows  < minRows && permitType == "Private Storm Sewer Permit") { doCancel = true; rowsNeededInTable = "PRIVATE STORM MATERIAL"; }
                 
                 if(privFireRows < minRows && sizeRows >= minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "PRIVATE FIRE LINE MATERIAL"; }
-                if(sizeRows     < minRows && privFireRows >= minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "WATER TAP SIZE"; }
-                if(sizeRows     < minRows && privFireRows < minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "WATER TAP SIZE and PRIVATE FIRE LINE MATERIAL"; }
+                if(sizeRows     < minRows && privFireRows >= minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "WET TAP SIZE"; }
+                if(sizeRows     < minRows && privFireRows < minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "WET TAP SIZE and PRIVATE FIRE LINE MATERIAL"; }
                 
                 logDebug("Error on wtrScript131_checkASITbefore(). Err: " + err2);
             }
             logDebug("watMatRows:" + watMatRows);
             logDebug("sizeRows:" + sizeRows)
             if(watMatRows   < minRows && sizeRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER MATERIAL"; }
-            if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER TAP SIZE"; }
-            if(sizeRows     < minRows && watMatRows < minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER TAP SIZE and WATER MATERIAL"; }
+            if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE"; }
+            if(sizeRows     < minRows && watMatRows < minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE and WATER MATERIAL"; }
             
             if(swpRows      < minRows && permitType == "Sanitary Sewer Permit")      { doCancel = true; rowsNeededInTable = "SANITARY SEWER MATERIAL"; }
             if(psspRows     < minRows && permitType == "Public Storm Sewer Permit")  { doCancel = true; rowsNeededInTable = "PUBLIC STORM MATERIAL"; }
             if(privSspRows  < minRows && permitType == "Private Storm Sewer Permit") { doCancel = true; rowsNeededInTable = "PRIVATE STORM MATERIAL"; }
                 
             if(privFireRows < minRows && sizeRows >= minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "PRIVATE FIRE LINE MATERIAL"; }
-            if(sizeRows     < minRows && privFireRows >= minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "WATER TAP SIZE"; }
-            if(sizeRows     < minRows && privFireRows < minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "WATER TAP SIZE and PRIVATE FIRE LINE MATERIAL"; }
+            if(sizeRows     < minRows && privFireRows >= minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "WET TAP SIZE"; }
+            if(sizeRows     < minRows && privFireRows < minRows && permitType == "Private Fire Line Permit")   { doCancel = true; rowsNeededInTable = "WET TAP SIZE and PRIVATE FIRE LINE MATERIAL"; }
             
             if(doCancel){
                 cancel = true;
