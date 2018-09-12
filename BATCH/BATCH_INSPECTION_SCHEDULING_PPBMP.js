@@ -125,7 +125,7 @@ var emailText = "";
 			logDebug2("<br> dateDiff(nextInspectionDate, nextYear): " + dateDiff(nextInspectionDate, nextYear));
 			logDebug2("<br> dateDiff(nextInspectionDate, currentDate): " + dateDiff(nextInspectionDate, currentDate));
 			
-			if (dateDiff(nextInspectionDate, nextYear) < 365 && dateDiff(nextInspectionDate, currentDate) >= 0) {
+			if (dateDiff(nextInspectionDate, nextYear) <= 365 && dateDiff(nextInspectionDate, nextYear) >= 1) {
 				
 				//schedule only, then try to assign
 				//var lastInspectorId = getLastInspector(INSPECTION_NAME);
