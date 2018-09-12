@@ -88,6 +88,8 @@ try {
 		copyCapDetailInfo(parentCapId, capId);
 
 		if (!appMatch("Building/*/*/Amendment",capId)) {
+			var parentappname= parentCap.getSpecialText() ;
+			cap.setSpecialText(parentappname);
 			copyCapWorkDesInfo(parentCapId, capId);
 		}
 	
