@@ -1,39 +1,19 @@
 /*Title : Inspection Scheduling
-Purpose : Automatically schedule an inspection for a record type, assigning same inspector from last time (if available)
-Author: Yazan Barghouth
+Purpose : Automatically schedule an inspection for a record type, assigning to supervisor
+Author: Erich von Trapp
 
 Functional Area : Batch Job
 
 Description: 
-- Automatically schedule an inspection for a record type, assigning same inspector from last time (if available)
-If no previous inspection were scheduled/resulted for the CAP, an inspection is scheduled without being assigned to a user.
-If last inspector is not available (workload wise) the supervisor will be assigned to the new scheduled inspection
-- required parameters: 
-	DATE_FIELD_NAME: ASI field name that contains inspection date
-	INSPECTION_NAME: inspection name to schedule
-	INSPECTORS_SUPERVISORS_TABLE: file name, of a lookup table lists inspectors and their supervisors
-	RECORD_TYPE: record type to work with
+- Automatically schedule an inspection for a record type, assigning to supervisor
+- Record must be in "Active" status
+- Schedule inspection only if Date of Next Inspection ASI falls within the next 365 days
+- Schedule inspection on Date of Next Inspection (ASI)
 
-- INSPECTORS_SUPERVISORS_TABLE sample JSON: {"inspectorUserID":"superVisorNameUserID",...}
-- should be all upper case to match getUserID() in search
-{
-  "AMMAN05": "SABA",
-  "AMMAN06": "SABA",
-}
-
--- Last Inspector Availability:
-using method aa.inspection.getInspectorsWorkload()
-this returns how much % free load the user have (double number 0.0 - 1.0, ex 0.3 means 30%)
-
-the inspection being assigned "Units" value is used 
-with "Daily Inspection Units", to calculate how much load this inspection will need (a percentage %)
-
-then this value compared to user's Free load.
-
-Parameters:
+Required Parameters:
 DATE_FIELD_NAME: ASI field name (date) used to schedule inspection
 INSPECTION_NAME: the inspection type to be scheduled
-INSPECTORS_SUPERVISORS_TABLE: file name, of a lookup table lists inspectors and their supervisors
+INSPECTORS_SUPERVISORS_TABLE: Standard Choice; a map to the supervisor's user ID
 RECORD_TYPE: record type to be processed (4 levels)
 */
 
@@ -59,121 +39,87 @@ var DATE_FIELD_NAME = aa.env.getValue("DATE_FIELD_NAME");
 var INSPECTION_NAME = aa.env.getValue("INSPECTION_NAME");
 var INSPECTORS_SUPERVISORS_TABLE = aa.env.getValue("INSPECTORS_SUPERVISORS_TABLE");
 var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
-
-useAppSpecificGroupName = false;
 var emailText = "";		
+useAppSpecificGroupName = false;
 
-//try {
-	showDebug = true
-	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
-	var tmpAry = RECORD_TYPE.split("/");
-	capTypeModel.setGroup(tmpAry[0]);
-	capTypeModel.setType(tmpAry[1]);
-	capTypeModel.setSubType(tmpAry[2]);
-	capTypeModel.setCategory(tmpAry[3]);
+var capStatus;
+var capTypeModel = aa.cap.getCapTypeModel().getOutput();
+var tmpAry = RECORD_TYPE.split("/");
+capTypeModel.setGroup(tmpAry[0]);
+capTypeModel.setType(tmpAry[1]);
+capTypeModel.setSubType(tmpAry[2]);
+capTypeModel.setCategory(tmpAry[3]);
+var capModel = aa.cap.getCapModel().getOutput();
+capModel.setCapType(capTypeModel);
+var capIDList = aa.cap.getCapIDListByCapModel(capModel);
+if (!capIDList.getSuccess()) {
+	logDebug("**INFO failed to get capIds list " + capIDList.getErrorMessage());
+	capIDList = new Array();//empty array script will exit
+} else {
+	capIDList = capIDList.getOutput();
+}
 
-	var capModel = aa.cap.getCapModel().getOutput();
-	capModel.setCapType(capTypeModel);
-	var capIDList = aa.cap.getCapIDListByCapModel(capModel);
-	if (!capIDList.getSuccess()) {
-		logDebug("**INFO failed to get capIds list " + capIDList.getErrorMessage());
-		capIDList = new Array();//empty array script will exit
-	} else {
-		capIDList = capIDList.getOutput();
+var currentDate = new Date;
+var nextYear = dateAddMonths(currentDate, 12);	
+
+logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
+
+//process list of records
+for (c in capIDList) {
+	capId = capIDList[c].getCapID();
+	capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
+	logDebug2("<Font Color=BLUE> <br> Processing record " + capIDString)
+	var tmpCap = aa.cap.getCap(capId);
+	if (!tmpCap.getSuccess()) {
+		logDebug("**INFO failed to get CapModel " + capId);
+		continue;
 	}
+
+	tmpCap = tmpCap.getOutput();
+	tmpCap = tmpCap.getCapModel();
+	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 	
-	var capStatus;
+	//get record status
+	capStatus = tmpCap.getCapStatus();
+	logDebug2("<Font Color=BLACK><br>Record status: " + capStatus);
 	
-	//var sysYear = aa.date.getCurrentDate().getYear();
-	var currentDate = new Date;
-	var nextYear = dateAddMonths(currentDate, 12);	
-	
-	logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
-	
-	for (c in capIDList) {
-		capId = capIDList[c].getCapID();
-		capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
-		logDebug2("<Font Color=BLUE> <br> Processing record " + capIDString)
-		var tmpCap = aa.cap.getCap(capId);
-		if (!tmpCap.getSuccess()) {
-			logDebug("**INFO failed to get CapModel " + capId);
+	//skip record if status is not 'Active'
+	if (capStatus == "Active") {
+		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
+		
+		if (nextInspectionDate == null || nextInspectionDate == "") {
+			logDebug2("<br> No Inspection Date is set. Moving to next record.");
 			continue;
 		}
-
-		tmpCap = tmpCap.getOutput();
-		tmpCap = tmpCap.getCapModel();
-		tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
+		logDebug2("<br> nextInspectionDate: " + nextInspectionDate)
+		logDebug2("; nextYear: " + nextYear);
 		
-		capStatus = tmpCap.getCapStatus();
-		logDebug2("<Font Color=BLACK><br>Record status: " + capStatus);
-		
-		//skip record if status is not 'Active'
-		if (capStatus == "Active") {
-			var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
-			logDebug2("<br> nextInspectionDate: " + nextInspectionDate)
-			if (nextInspectionDate == null || nextInspectionDate == "") {
-				logDebug2("<br> No Inspection Date is set. Moving to next record.");
+		//check if nextInspectionDate falls within the next calendar year
+		if (dateDiff(nextInspectionDate, nextYear) <= 365 && dateDiff(nextInspectionDate, nextYear) >= 1) {
+			
+			logDebug2("<br> Scheduling " + INSPECTION_NAME + " on " + nextInspectionDate);		
+			scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)			
+			
+			var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
+			if (lastSchedInspectionObj == null) {
+				logDebug2("<br>**INFO failed to scheduleInspectDate() " + capId + " " + INSPECTION_NAME);
 				continue;
-			}//date null/empty
-			
-			//nextInspectionYear = aa.date.parseDate(nextInspectionDate).getYear();
-			//logDebug2("<br> nextInspectionYear: " + nextInspectionYear + ", sysYear: " + sysYear);
-			
-			logDebug2("<br> nextYear: " + nextYear);
-			
-			//check if nextInspectionDate falls within the next calendar year
-			logDebug2("<br> dateDiff(nextInspectionDate, nextYear): " + dateDiff(nextInspectionDate, nextYear));
-			logDebug2("<br> dateDiff(nextInspectionDate, currentDate): " + dateDiff(nextInspectionDate, currentDate));
-			
-			if (dateDiff(nextInspectionDate, nextYear) <= 365 && dateDiff(nextInspectionDate, nextYear) >= 1) {
-				
-				//schedule only, then try to assign
-				//var lastInspectorId = getLastInspector(INSPECTION_NAME);
-				//logDebug2("<br> lastInspectorId: " + lastInspectorId)
-				//if (lastInspectorId == null) {
-				//	//we can't assign to last inspector, and we can't get supervisor
-				//	logDebug2("<br> Last Inspector ID is null, scheduling without assignment");
-				//	scheduleInspectDate(INSPECTION_NAME, nextInspectionDate);
-				//	continue;
-				//}
-
-				logDebug2("<br> Scheduling " + INSPECTION_NAME + " on " + nextInspectionDate);		
-				scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)			
-				
-				var lastSchedInspectionObj = getLastScheduledInspection(capId, INSPECTION_NAME);
-				if (lastSchedInspectionObj == null) {
-					logDebug2("<br>**INFO failed to scheduleInspectDate() " + capId + " " + INSPECTION_NAME);
-					continue;
-				}
-
-				var lastSchedInspectionSeq = lastSchedInspectionObj.getIdNumber();
-				
-				//inspections are always assigned to supervisor, not to previous inspector; code is commented out
-				//var assignTolastInsp = assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId);
-				
-				//if (!assignTolastInsp) {
-				var supervisor = assignSupervisor(lastSchedInspectionSeq);
-				logDebug2("<br> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq )
-				//}
-
-			} else {
-				//logDebug2("<br> Inspection year and system year do not match. Moving to next record.");
-				logDebug2("<br> Next Inspection Date does not fall within the next year. Moving to next record");
 			}
-		} else {
-			logDebug2("<br>Skipping record; status must be 'Active'");
-			continue;
-		}
-	}//for all capIds
-//} catch (ex) {
-	//logDebug("**ERROR: Exception while running batch job , Error: " + ex);
-//}
 
-/**
- * Format a ScriptDate mm/dd/yyyy
- * @param scriptDate
- * @returns {String} formatted date
- */
+			//get inspection ID of most recently scheduled inspection, assign to supervisor
+			var lastSchedInspectionSeq = lastSchedInspectionObj.getIdNumber();
+			var supervisor = assignSupervisor(lastSchedInspectionSeq);
+			logDebug2("<br> Assigning Supervisor " + supervisor + " to Inspection ID " + lastSchedInspectionSeq);
+		} else {
+			logDebug2("<br> Next Inspection Date does not fall within the next year. Moving to next record");
+		}
+	} else {
+		logDebug2("<br>Skipping record; status must be 'Active'");
+		continue;
+	}
+}
+
+//formats date in MM/DD/YYYY format
 function formatDateX(scriptDate) {
 	if(scriptDate != null)
 		{
@@ -187,12 +133,7 @@ function formatDateX(scriptDate) {
 		}
 }
 
-/**
- * return last scheduled inspection (object) that has max id
- * @param capId
- * @param inspectionType
- * @returns Inspection Object
- */
+//returns object of most recently scheduled inspection
 function getLastScheduledInspection(capId, inspectionType) {
 	//get inspections for this cap (of type INSPECTION_NAME, and SCHED)
 	var capInspections = aa.inspection.getInspections(capId);
@@ -219,101 +160,9 @@ function getLastScheduledInspection(capId, inspectionType) {
 	return schedInspWithMaxId;
 }
 
-/***
- * this method tries to assign a scheduled inspection to a specific Inspecrot(User) if User's workload allows that.
- * <br/>Inspection workload percentage is calculated (InspectionsUnit/dailyInspectorUnits), if this percentage less than or equals
- * <br/>Inspector available workload (remaining capacity) then the inspection is assigned.
- * @param capId
- * @param lastSchedInspectionObj
- * @param nextInspectionDate
- * @param lastInspectorId
- * @returns {Boolean}
- */
- 
- //old function, no longer being used
-/*function assignSameInspector(capId, lastSchedInspectionObj, nextInspectionDate, lastInspectorId) {
-	if (lastInspectorId == null) {
-		return false;
-	}
-
-	if (lastSchedInspectionObj == null) {
-		return false;
-	}
-	var lastSchedInspectionSeq = lastSchedInspectionObj.getIdNumber();
-
-	var inspectionGroup = lastSchedInspectionObj.getInspection().getActivity().getInspectionGroup();
-	var inspectionType = lastSchedInspectionObj.getInspection().getActivity().getActivityDescription();
-
-	var inspTypeObj = aa.inspection.getInspectionType(inspectionGroup, inspectionType);
-	if (inspTypeObj.getSuccess()) {
-		inspTypeObj = inspTypeObj.getOutput();
-	} else {
-		return false;
-	}
-	if (inspTypeObj == null || inspTypeObj[0].length == 0) {
-		return false;
-	}
-	//get inspection units (used in calculation later)
-	var inspectionUnits = inspTypeObj[0].getInspUnits();
-
-	//get inspector Department
-	var lastInspectorUser = aa.person.getUser(lastInspectorId);
-	if (!lastInspectorUser.getSuccess()) {
-		return false;
-	}
-	lastInspectorUser = lastInspectorUser.getOutput();
-
-	//get work load for this inspection
-	var ary = new Array();
-	ary.push(lastSchedInspectionSeq);
-	var workLoad = aa.inspection.getInspectorsWorkload(ary, capId, aa.date.parseDate(nextInspectionDate));
-	if (!workLoad.getSuccess()) {
-		return false;
-	}
-
-	workLoad = workLoad.getOutput();//ArrayList
-
-	//check lastInspector is in the list
-	var userIndex = workLoad.indexOf(lastInspectorUser);
-	if (userIndex < 0) {
-		return false;
-	}
-	//User's Daily Inspection Units (absolute number)
-	var dailyInspectorUnits = workLoad.get(userIndex).getDailyInspUnits();
-	//remaining capacity for inspector (Free percentage)
-	var inspectorAvailableWorkLoadPercentage = workLoad.get(userIndex).getWorkload();
-
-	//calculate how much % this inspection will cost the inspector
-	var inspectionRequiredWorkloadPercentage = 0.0;
-	inspectionRequiredWorkloadPercentage = (parseFloat(inspectionUnits) / parseFloat(dailyInspectorUnits));
-
-	//if cost% is within inspectors capacity (Free %)
-	if (inspectorAvailableWorkLoadPercentage >= inspectionRequiredWorkloadPercentage) {
-		assignInspection(lastSchedInspectionSeq, lastInspectorId);
-		return true;
-	}
-
-	return false;
-}*/
-
-//old version of this function, no longer being used
-/*function assignSupervisor(lastSchedInspectionSeq, lastInspectorId) {
-	superVisor = lookup("PPBMP_INSPECTORS_SUPERVISORS_TABLE",lastInspectorId)
-	//var lookupTableJsonStr = getScriptText(INSPECTORS_SUPERVISORS_TABLE);
-	//var lookupTableJsonObj = JSON.parse(lookupTableJsonStr);
-	//var superVisor = lookupTableJsonObj[lastInspectorId];
-	if (!superVisor) {
-		logDebug("**INFO could not get supervisor for " + lastInspectorId);
-		return;
-	}
-	assignInspection(lastSchedInspectionSeq, superVisor);
-	return superVisor;
-}*/
-
 //finds user ID of supervisor from PPBMP_INSPECTORS_SUPERVISORS_TABLE standard choice and assigns inspection based on passed in sequence ID
 function assignSupervisor(lastSchedInspectionSeq) {			
 	var inspSupervisor = lookup("PPBMP_INSPECTORS_SUPERVISORS_TABLE", "PPBMP_SUPERVISOR");
-
 	if (!inspSupervisor) {
 		logDebug2("<br>**INFO could not retrieve PPBMP_SUPERVISOR from PPBMP_INSPECTORS_SUPERVISORS_TABLE");
 		return;
@@ -322,13 +171,12 @@ function assignSupervisor(lastSchedInspectionSeq) {
 	return inspSupervisor;
 }
 
-function logDebug2(dstr)
-	{
+function logDebug2(dstr) {
+	
 	// function of the same name in ACCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
-	if(showDebug)
-		{
+	if(showDebug) {
 		aa.print(dstr)
 		emailText+= dstr + "<br>";
 		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr)
-		}
 	}
+}
