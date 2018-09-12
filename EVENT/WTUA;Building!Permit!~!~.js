@@ -38,7 +38,7 @@ if(wfTask =="Inspection Phase"  && wfStatus == "Temporary CO Issued"){
 }
 
 if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO"){
-	closeWfTaskCertificateOfOccupancy();
+	//closeWfTaskCertificateOfOccupancy();
 	deactCoOIfNotChecked();
 }
 
