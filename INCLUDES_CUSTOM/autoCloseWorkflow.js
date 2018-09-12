@@ -30,21 +30,22 @@ function autoCloseWorkflow() {
     var deacSpecInspCheck = false;//To use for script 205
     var autoCreateInsp = false;//To use for script 202
     
-    //#1
+    //Script #35
     recTypesAry = [ "Building/Permit/Plans/Amendment", "Building/Permit/New Building/Amendment", "Building/Permit/Master/Amendment", "Building/Permit/Master/NA" ];
     matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Payment Pending", "Fee Processing", "Complete", "Approved");
     if(matched){
         logDebug("matched #1");
         setCodeReference("Complete");
         //Send email for case #1
-        
         var emailTemplate = "BLD PLANS APPROVED # 35";
         var lpEmail = getPrimLPEmailByCapId(capId);
         addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
         var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParams,reportFile,capID4Email);
         if (!sendResult) { logDebug("autoCloseWorkflow: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
-        else { logDebug("autoCloseWorkflow: Sent email to applicant "+applicantEmail)}  
-        
+			else { logDebug("autoCloseWorkflow: Sent email to applicant "+applicantEmail)}  
+        var sendResult2 = sendNotification("noreply@aurora.gov",lpEmail,"",emailTemplate,eParams,reportFile,capID4Email);
+        if (!sendResult2) { logDebug("autoCloseWorkflow: UNABLE TO SEND NOTICE!  ERROR: "+sendResult2); }
+			else { logDebug("autoCloseWorkflow: Sent email to applicant "+lpEmail)}         
         //Script 324
         if(appMatch("Building/Permit/Master/NA")){
             logDebug("Calling Script 324 from PRA");
@@ -54,7 +55,6 @@ function autoCloseWorkflow() {
         deacSpecInspCheck = true;//Script 205
     }
     
-    //#2
     if (!matched) {
         logDebug("match #2");
         recTypesAry = new Array();
@@ -104,7 +104,11 @@ function autoCloseWorkflow() {
             var lpEmail = getPrimLPEmailByCapId(capId);
             addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
             emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
-            
+            if(lpEmail != null)
+			{
+				emailContactsIncludesLP("PRIMARYLP", issuedEmlTemplate, eParams, reportTemplate, reportParams);
+			}
+		
             autoCreateInsp = true;//Script 202
             deacSpecInspCheck = true;//Script 205
         }//matched
@@ -124,7 +128,10 @@ function autoCloseWorkflow() {
             var lpEmail = getPrimLPEmailByCapId(capId);
             addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
             emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
-            
+            if(lpEmail != null)
+			{
+				emailContactsIncludesLP("PRIMARYLP", issuedEmlTemplate, eParams, reportTemplate, reportParams);
+			}            
             setCodeReference("Issued");
             logDebug('Going to activate Inspection Phase')
             activateTask("Inspection Phase");
