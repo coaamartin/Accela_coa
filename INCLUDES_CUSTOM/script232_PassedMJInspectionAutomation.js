@@ -30,20 +30,20 @@ function passedMJInspectionAutomation() {
 						
 						//schedule new inspection 6 months out from passed inspection date
 						daysToAdd = 180;
-						var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
+						var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 						scheduleInspectDate(inspType, newInspSchedDate);
 					} else {
 						
 						//schedule new inspection 3 months out from passed inspection date
 						daysToAdd = 90;
-						var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
+						var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 						scheduleInspectDate(inspType, newInspSchedDate);						
 					}					
 				} else {
 					
 					//schedule new inspection 3 months out from passed inspection date
 					daysToAdd = 90;
-					var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
+					var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 					scheduleInspectDate(inspType, newInspSchedDate);	
 				}
 				
@@ -54,7 +54,6 @@ function passedMJInspectionAutomation() {
 				
 				if (inspId) {
 					addParameter(eParams, "$$inspId$$", inspId);
-					//reportParams.put("inspId", inspId);
 				}
 				if (inspResult)
 					addParameter(eParams, "$$inspResult$$", inspResult);
@@ -67,14 +66,13 @@ function passedMJInspectionAutomation() {
 				if (inspSchedDate)
 					addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 				
-				var reportTemplate = "";
+				var reportTemplate = "MJ_Compliance_Corrections_Letter";
 				var reportParams = aa.util.newHashtable();
 				addParameter(reportParams, "InspActNumber", inspId);
 				
 				//send email with report attachment		
 				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
 
-				
 				return true;
 			}			
 		}

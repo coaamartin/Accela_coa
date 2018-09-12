@@ -13,7 +13,7 @@ include("5_fireCompleteOrNoViolations");
 //******************************************************************************
 logDebug("Script 15 - Start");
 var newInspType = null;
-if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection")
+if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection")
 	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail") )
 {
 	logDebug("Script 15 - criteria met");
@@ -27,6 +27,8 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 		{newInspType = "FD Follow-Up";}
 	if (inspType == "FD Follow-Up")
 		{newInspType = "FD Follow-Up";}
+	if (inspType == "FD Complaint Follow-Up Inspection")
+		{newInspType = "FD Complaint Follow-Up Inspection";}
 		
 	//assign inspector based on inspector assigned to the record
 	var inspector = null;
@@ -64,8 +66,8 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 	//var targetDate = new Date(targetDateString);
 	//var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
 
-	//scheduleInspection(newInspType,daysAhead,inspector);
-	scheduleInspectDate(newInspType,schedDate,inspector);
+	scheduleInspection(newInspType,daysAhead,inspector);
+	//scheduleInspectDate(newInspType,schedDate,inspector);
 	//copy checklist to new inspection
 	var newInspId = getScheduledInspId(newInspType);
 	if (newInspId) {
@@ -116,7 +118,9 @@ pEParams = aa.util.newHashtable();
 addParameter(pEParams, "$$FullAddress$$", getCapFullAddress());
 pRParams = aa.util.newHashtable();
 addParameter(pRParams, "FolderRSN", capIDString);
-emailContactsWithReportLinkASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
+//Script 15 is the single exception to the report rule -- attaching to email rather than sending link
+//emailContactsWithReportLinkASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
+emailContactsWithReportAttachASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
 
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
 {

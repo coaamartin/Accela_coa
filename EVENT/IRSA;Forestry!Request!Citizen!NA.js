@@ -9,8 +9,8 @@ if (ifTracer(inspType == "Forestry Inspection" && matches(inspResult, "PR1", "PR
 
 // Start Script 27 Create Planting Record
 if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Other", "PR1", "PR2", "PR20")) {
-	if (AInfo["No Replant"] == "Unchecked") {
-		treeCreatePlantingRecordReplantFromInsp(inspId)
+	if (!getAppSpecific("No Replant", capId)) {
+		treeCreatePlantingRecordReplantFromInsp(inspId);
 	}
 }
 // End Script 27 Create Planting Record
@@ -18,6 +18,8 @@ if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Other", "PR1"
 if ("Forestry Inspection".equals(inspType) && matches(inspResult, "Complete")) {
 	//Script 201
 	var childArray = getChildren("Forestry/Request/Planting/NA", capId);
-    if (!childArray || childArray.length == 0)
-		{treeCreatePlantingRecordFromInsp(inspId)}
+    if (!childArray || childArray.length == 0) {
+		treeCreatePlantingRecordFromInsp(inspId);
 	}
+}
+logDebug("Script 27 Ending");

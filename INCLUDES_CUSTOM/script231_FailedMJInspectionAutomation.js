@@ -42,7 +42,7 @@ function failedMJInspectionAutomation() {
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			emailContactsWithReportLinkASync("Applicant", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
+			emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
 			
 			return true;
 		}
