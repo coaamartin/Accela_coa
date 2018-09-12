@@ -86,7 +86,7 @@ for (c in capIDList) {
 	
 	//skip record if status is not 'Active'
 	if (capStatus == "Active") {
-		var nextInspectionDate = getAppSpecific(DATE_FIELD_NAME);
+		var nextInspectionDate = formatDateX(getAppSpecific(DATE_FIELD_NAME));
 		
 		if (nextInspectionDate == null || nextInspectionDate == "") {
 			logDebug2("<br> Skipping record; no Inspection Date is set.");
