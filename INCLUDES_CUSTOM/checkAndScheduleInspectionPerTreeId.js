@@ -23,7 +23,7 @@ function checkAndScheduleInspectionPerTreeId(inspType, guideSheetType, asitField
 
 	for (i in asitValues) {
 		var treeId = asitValues[i]["Tree ID"].fieldValue;
-		var existingDiameter = asitvalues[i]["Existing Diameter"].fieldValue;
+		var existingDiameter = asitValues[i]["Existing Diameter"].fieldValue;
 		if (!hasInspection(inspections, treeId, inspType)) {
 			var capDetails = aa.cap.getCapDetail(capId).getOutput();
 			var asgnUserID = capDetails.getAsgnStaff();
