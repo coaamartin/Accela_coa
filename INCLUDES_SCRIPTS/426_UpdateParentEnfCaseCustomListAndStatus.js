@@ -22,6 +22,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     if (matchARecordType([
         "Enforcement/Incident/Abatement/NA"
     ], appTypeString)) {
+		logDebug("Abatement Record");
         tableName = 'ABATEMENT INFORMATION';
         colKeyName = 'Abatement #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
@@ -58,6 +59,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 if(AInfo["Contractor Fee - Board-Up"]) feeB = parseFloat(AInfo["Contractor Fee - Board-Up"]);
                 
                 var feeTotal = feeG + feeW + feeS + feeT + feeB;
+				logDebug("feeTotal:" + feeTotal);
                 
                 //updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feeTotal, 'N');
