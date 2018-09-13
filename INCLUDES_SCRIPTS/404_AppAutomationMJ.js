@@ -60,10 +60,9 @@ function getLastCreatedInspection(capId, inspectionType) {
 	var schedInspWithMaxId = null;
 	//find last one (we created)
 	for (i in capInspections) {
-		if (capInspections[i].getInspectionType() == inspectionType && formatDateX(capInspections[i].getScheduledDate()) == nextInspectionDate && capInspections[i].getInspectionStatus() == "Pending") {
+		if (capInspections[i].getInspectionType() == inspectionType && capInspections[i].getInspectionStatus() == "Pending") {
 
 			//if multiple scheduled of same type, make sure to get last one (maxID)
-			//this effects calculating WorkLoad (assignSameInspector method)
 			if (schedInspWithMaxId == null || schedInspWithMaxId.getIdNumber() < capInspections[i].getIdNumber()) {
 				schedInspWithMaxId = capInspections[i];
 			}
