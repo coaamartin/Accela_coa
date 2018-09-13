@@ -51,13 +51,24 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
                 
                 var feeG, feeW, feeS, feeT, feeB = 0;
+                logDebug("feeG:" + feeG);
+                logDebug("feeW:" + feeW);
+                logDebug("feeS:" + feeS);
+                logDebug("feeT:" + feeT);
+                logDebug("feeB:" + feeB);
+                if(AInfo["Contractor Fee - Graffiti"] != null) feeG = parseFloat(AInfo["Contractor Fee - Graffiti"]);
+                if(AInfo["Contractor Fee - Weeds"] != null) feeW = parseFloat(AInfo["Contractor Fee - Weeds"]);
+                if(AInfo["Contractor Fee - Snow"] != null) feeS = parseFloat(AInfo["Contractor Fee - Snow"]);
+                if(AInfo["Contractor Fee - Trash"] != null) feeT = parseFloat(AInfo["Contractor Fee - Trash"]);
+                if(AInfo["Contractor Fee - Board-Up"] != null) feeB = parseFloat(AInfo["Contractor Fee - Board-Up"]);
                 
-                if(AInfo["Contractor Fee - Graffiti"]) feeG = parseFloat(AInfo["Contractor Fee - Graffiti"]);
-                if(AInfo["Contractor Fee - Weeds"]) feeW = parseFloat(AInfo["Contractor Fee - Weeds"]);
-                if(AInfo["Contractor Fee - Snow"]) feeS = parseFloat(AInfo["Contractor Fee - Snow"]);
-                if(AInfo["Contractor Fee - Trash"]) feeT = parseFloat(AInfo["Contractor Fee - Trash"]);
-                if(AInfo["Contractor Fee - Board-Up"]) feeB = parseFloat(AInfo["Contractor Fee - Board-Up"]);
-                
+				
+                logDebug("feeG:" + feeG);
+                logDebug("feeW:" + feeW);
+                logDebug("feeS:" + feeS);
+                logDebug("feeT:" + feeT);
+                logDebug("feeB:" + feeB);
+				
                 var feeTotal = feeG + feeW + feeS + feeT + feeB;
 				logDebug("feeTotal:" + feeTotal);
                 
