@@ -254,9 +254,16 @@ if(inspType == "Abatement Approval"){
     
     if(inspResult == "Bill and Photo Approved"){
         var currDate = aa.util.parseDate(dateAdd(null, 0));
-        var next10Days = aa.util.parseDate(dateAdd(null, 10));
+        var next10Days = aa.util.parseDate(nextWorkDay(dateAdd(null, 9)));
         var inspDays = days_between(currDate, next10Days);
-        scheduleInspection("Abatement Approval", inspDays);
+        //scheduleInspection("Abatement Approval", inspDays);
+        var iObjResult = aa.inspection.getInspection(capId, inspId);
+        if(!iObjResult.getSuccess()) logDebug("Unable to get inspection object to update schedule date");
+        else {
+            var iObj = iObjResult.getOutput();
+            iObj.setScheduledDate(aa.date.parseDate(dateAdd(null, inspDays)));
+            aa.inspection.editInspection(iObj)
+        }
     }
 }
 
