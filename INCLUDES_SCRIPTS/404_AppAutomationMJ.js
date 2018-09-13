@@ -33,7 +33,7 @@ for (i in inspectionTypesAry) {
 	}
 	
 	//create inspection
-	createPendingInspection(vInspGroup, vInspType);
+	createPendingInspection(vInspGroup, vInspType, capId);
 
 	//get sequence ID for most recently created inspection
 	var lastInspectionObj = getLastCreatedInspection(capId, vInspType);
@@ -43,7 +43,8 @@ for (i in inspectionTypesAry) {
 	}
 	
 	var lastInspectionSeq = lastInspectionObj.getIdNumber();
-
+	logDebug("Most recent scheduled inspection: " + lastInspectionSeq);
+	
 	//assign inspection to inspector
 	assignInspection(lastInspectionSeq, vInspector);
 }
@@ -69,17 +70,4 @@ function getLastCreatedInspection(capId, inspectionType) {
 		}
 	}
 	return schedInspWithMaxId;
-}
-
-//formats date in MM/DD/YYYY format
-function formatDateX(scriptDate) {
-	if(scriptDate != null) {
-		var ret = "";
-		ret += scriptDate.getMonth().toString().length == 1 ? "0" + scriptDate.getMonth() : scriptDate.getMonth();
-		ret += "/";
-		ret += scriptDate.getDayOfMonth().toString().length == 1 ? "0" + scriptDate.getDayOfMonth() : scriptDate.getDayOfMonth();
-		ret += "/";
-		ret += scriptDate.getYear();
-		return ret;
-	}
 }
