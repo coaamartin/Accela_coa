@@ -13,8 +13,10 @@ var vCapType;
 
 if (appMatch("Licenses/Marijuana/*/Application")) {
 	vCapType = "Application";
-} else {
+} else if (appMatch("Licenses/Marijuana/*/License")) {
 	vCapType = "License";
+} else {
+	vCapType = null;
 }
 
 //check for failed MJ inspections
@@ -24,4 +26,4 @@ failedMJInspectionAutomation(vCapType);
 passedMJInspectionAutomation();
 
 //check for extension requests on MJ inspections
-requestExtensionMJInspection();
+requestExtensionMJInspection(vCapType);
