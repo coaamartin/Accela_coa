@@ -200,7 +200,7 @@ if (vUsersDefaultModule == "Forestry") {
 		// loop through matching records and display message
 		if (retArr.length > 0) {
 			showMessage = true;
-			comment("The following records already exists for the address(es) selected:");
+			comment("The following records already exist for the address(es) selected:");
 			z = 0;
 			for (z in retArr) {
 				relcap = aa.cap.getCap(retArr[z].getCapID()).getOutput();
