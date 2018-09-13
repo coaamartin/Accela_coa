@@ -1,5 +1,11 @@
 
 function failedMJInspectionAutomation() {
+	var vIsApp = false;
+	var daysToAdd;
+	
+	if appMatch("Licenses/Marijuana/*/Application") {
+		vIsApp = true;
+	}
 	
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
@@ -7,9 +13,13 @@ function failedMJInspectionAutomation() {
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
 	
 	//define number of days to schedule next inspection
-	var daysToAdd = 7;
+	if (vIsApp){
+		daysToAdd = 1;
+	} else {
+		daysToAdd = 7;
+	}
 	var emailTemplateName = "LIC MJ INSPECTION CORRECTION REPORT # 231";
-		
+			
 	//check for failed inspections, schedule new inspection, and email applicant with report
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Failed") {
@@ -47,6 +57,5 @@ function failedMJInspectionAutomation() {
 			return true;
 		}
 	}
-
 	return false;
 }
