@@ -47,6 +47,10 @@ if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO" && vCoOASI == "CHECK
 
 if(wfTask =="Inspection Phase"  && wfStatus=="Final"){
 	deactCoOIfNotChecked();
+	
+	if (allwfTasksComplete(capId, "Inspection Phase") == false) {
+		updateAppStatus("Issued","Status updated via script 6"); 
+	}
 }
 
 if(wfTask == "Backflow Preventor" && wfStatus == "Final"){
