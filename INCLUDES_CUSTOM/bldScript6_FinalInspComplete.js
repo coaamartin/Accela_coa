@@ -20,7 +20,7 @@ function bldScript6_FinalInspComplete(){
                 closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
 			}
 			
-			if (allwfTasksComplete(capId, "Inspection Phase") == false) {
+			if (allwfTasksComplete(capId) == false) {
 					updateAppStatus("Issued","Status updated via script 6"); 
 			}
         }
