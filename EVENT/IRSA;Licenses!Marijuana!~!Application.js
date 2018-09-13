@@ -9,8 +9,16 @@ Functional Area : Records
 
 */
 
+var vCapType;
+
+if appMatch("Licenses/Marijuana/*/Application") {
+	vCapType = "Application";
+}
+
+logDebug("Cap Type? " + vCapType);
+
 //check for failed MJ inspections
-failedMJInspectionAutomation();	
+failedMJInspectionAutomation(vCapType);	
 
 //check for passed MJ inspections
 passedMJInspectionAutomation();
