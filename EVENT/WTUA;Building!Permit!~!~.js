@@ -48,7 +48,7 @@ if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO" && vCoOASI == "CHECK
 if(wfTask =="Inspection Phase"  && wfStatus=="Final"){
 	deactCoOIfNotChecked();
 	
-	if (allwfTasksComplete(capId, "Inspection Phase") == false) {
+	if (allwfTasksComplete(capId) == false) {
 		updateAppStatus("Issued","Status updated via script 6"); 
 	}
 }
