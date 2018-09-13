@@ -36,7 +36,5 @@ Sample Call : checkIfPassedInspections(inspType)
 
 */
 if(!appMatch("Building/Permit/No Plans/NA")) {
-	if (inspType != "Reroof Final"){
-		checkIfPassedInspections(inspType)
-	}
+	checkIfPassedInspections(inspType)
 }
