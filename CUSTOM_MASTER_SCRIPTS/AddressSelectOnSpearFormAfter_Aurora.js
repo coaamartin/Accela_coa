@@ -175,7 +175,7 @@ if (vUsersDefaultModule == "Forestry") {
 		} else {
 			logDebug("**ERROR: getting similar addresses: " + capAddResult.getErrorMessage());
 		}
-		// loop through related caps to check for the correct type
+		// loop through related caps to check for the correct type and of the correct status
 		y = 0;
 		for (y in capIdArray) {
 			relcap = aa.cap.getCap(capIdArray[y].getCapID()).getOutput();
@@ -191,6 +191,10 @@ if (vUsersDefaultModule == "Forestry") {
 					if (!ata[xx].equals(reltypeArr[xx]) && !ata[xx].equals("*")) {					
 						isMatch = false;
 					}
+				}
+				// Exclude records that are "Complete"
+				if (relcap.getCapStatus() == "Complete") {
+					isMatch = false;
 				}
 			}
 			if (isMatch) {				
