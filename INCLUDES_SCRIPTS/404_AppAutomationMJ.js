@@ -33,7 +33,7 @@ for (i in inspectionTypesAry) {
 	}
 	
 	//create inspection
-	createPendingInspection(vInspGroup, vInspTypeType);
+	createPendingInspection(vInspGroup, vInspType);
 
 	//get sequence ID for most recently created inspection
 	var lastInspectionObj = getLastCreatedInspection(capId, vInspType);
