@@ -11,7 +11,7 @@ Functional Area : Records
 
 var vCapType;
 
-if appMatch("Licenses/Marijuana/*/Application") {
+if (appMatch("Licenses/Marijuana/*/Application")) {
 	vCapType = "Application";
 } else {
 	vCapType = "License";
