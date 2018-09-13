@@ -49,11 +49,11 @@ if(wfTask =="Inspection Phase"  && wfStatus=="Final"){
 	deactCoOIfNotChecked();
 	
     if (allTasksComplete("BLDNEWCON") == false) {
-    updateAppStatus("Issued","Status updated via script 6"); 
+    updateAppStatus("Issued","Status updated via script); 
 	}
 	
     if (allTasksComplete("BLDMASTER") == false) {
-    updateAppStatus("Issued","Status updated via script 6"); 
+    updateAppStatus("Issued","Status updated via script); 
 					}
 	
 }
