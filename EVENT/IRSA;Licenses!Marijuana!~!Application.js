@@ -17,8 +17,6 @@ if (appMatch("Licenses/Marijuana/*/Application")) {
 	vCapType = "License";
 }
 
-logDebug("Cap Type? " + vCapType);
-
 //check for failed MJ inspections
 failedMJInspectionAutomation(vCapType);	
 
