@@ -19,7 +19,7 @@ function failedMJInspectionAutomation(vCapType) {
 	//check for failed inspections, schedule new inspection, and email applicant with report
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Failed") {
-			var vInspector = getLastInspector(inspId);
+			var vInspector = getInspectorByInspID(inspId, capId);
 			var vInspType = inspType;
 			var vInspStatus = "Scheduled";
 			
