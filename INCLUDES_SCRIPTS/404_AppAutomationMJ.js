@@ -5,18 +5,29 @@ var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections", "MJ
 var vInspType;
 var vInspGroup;
 var vInspector;
+var vAppType;
 
 //determine inspection group based on application type
 if (appMatch("Licenses/Marijuana/Testing Facility/Application")) {
 	vInspGroup = "LIC_MJ_TST";
+	vAppType = "Licenses/Marijuana/Testing Facility/Application";
+	logDebug("Application type: " + vAppType);
 } else if (appMatch("Licenses/Marijuana/Retail Transporter/Application")) {
 	vInspGroup = "LIC_MJ_TRANS ";
+	vAppType = "Licenses/Marijuana/Retail Transporter/Application";
+	logDebug("Application type: " + vAppType);
 } else if (appMatch("Licenses/Marijuana/Retail Store/Application")) {
 	vInspGroup = "LIC_MJ_RST";
+	vAppType = "Licenses/Marijuana/Retail Store/Application";
+	logDebug("Application type: " + vAppType);
 } else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application")) {
 	vInspGroup = "LIC_MJ_RPM";
-} else if (appMatch( "Licenses/Marijuana/Retail Cultivation/Application")) {
+	vAppType = "Licenses/Marijuana/Retail Product Manufacturer/Application";
+	logDebug("Application type: " + vAppType);
+} else if (appMatch("Licenses/Marijuana/Retail Cultivation/Application")) {
 	vInspGroup = "LIC_MJ_RC";
+	vAppType = "Licenses/Marijuana/Retail Cultivation/Application";
+	logDebug("Application type: " + vAppType);
 } else {
 	logDebug("Error: No match for application type");
 }
