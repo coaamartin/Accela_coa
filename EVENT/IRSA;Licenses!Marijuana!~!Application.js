@@ -13,6 +13,8 @@ var vCapType;
 
 if appMatch("Licenses/Marijuana/*/Application") {
 	vCapType = "Application";
+} else {
+	vCapType = "License";
 }
 
 logDebug("Cap Type? " + vCapType);
