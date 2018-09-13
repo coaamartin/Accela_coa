@@ -45,8 +45,8 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             }
         } else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
             //WTUA
-            if(ifTracer(wfTask == "Invoicing" && (wfStatus =="Invoiced" || wfStatus =="Invoiced - City Paid"), "wfTask == Invoicing && wfStatus == Invoiced OR Invoiced City Paid")) {
-                // wfTask == "Invoicing" && wfStatus =="Invoiced"
+            if(ifTracer(wfTask == "Recordation" && wfStatus =="Submit Recording", 'wfTask == "Recordation" && wfStatus =="Submit Recording"')) {
+                // wfTask == "Recordation" && wfStatus =="Submit Recording"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
             } else if(ifTracer(wfTask == "Recordation" && (wfStatus =="Submit Recording"), "wfTask == Recordation && wfStatus == Submit Recording")) {
