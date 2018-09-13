@@ -44,8 +44,7 @@ function checkAndScheduleInspectionPerTreeId(inspType, guideSheetType, asitField
 		
 		}//treeId matched
 	}//for all asitValues
-	updateInspectionInfo(inspectionIdTreeIdMap, guideSheetType);
-	updateInspectionInfo(inspectionIdExistingDiameterMap, guideSheetType);
+	updateInspectionInfo(inspectionIdTreeIdMap, inspectionIdExistingDiameterMap, guideSheetType);
 	
 	return true;
 }
