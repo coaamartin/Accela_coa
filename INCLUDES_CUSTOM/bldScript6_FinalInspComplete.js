@@ -16,6 +16,9 @@ function bldScript6_FinalInspComplete(){
             
             if($iTrc(appTypeString == "Building/Permit/No Plans/NA", 'appTypeString == "Building/Permit/No Plans/NA"'))
                 closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			
+			if (allTasksComplete() == false) {
+					updateAppStatus("Issued","Status updated via script 6"); }
         }
     }
     catch(err){
