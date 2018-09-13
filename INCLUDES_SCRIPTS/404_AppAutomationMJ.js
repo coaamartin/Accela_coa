@@ -7,15 +7,15 @@ var vInspGroup;
 var vInspector;
 
 //determine inspection group based on application type
-if (appMatch("Licenses/Marijuana/Testing Facility/Application") {
+if (appMatch("Licenses/Marijuana/Testing Facility/Application")) {
 	vInspGroup = "LIC_MJ_TST";
-} else if (appMatch("Licenses/Marijuana/Retail Transporter/Application") {
+} else if (appMatch("Licenses/Marijuana/Retail Transporter/Application")) {
 	vInspGroup = "LIC_MJ_TRANS ";
-} else if (appMatch("Licenses/Marijuana/Retail Store/Application") {
+} else if (appMatch("Licenses/Marijuana/Retail Store/Application")) {
 	vInspGroup = "LIC_MJ_RST";
-} else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application") {
+} else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application")) {
 	vInspGroup = "LIC_MJ_RPM";
-} else if (appMatch( "Licenses/Marijuana/Retail Cultivation/Application") {
+} else if (appMatch( "Licenses/Marijuana/Retail Cultivation/Application")) {
 	vInspGroup = "LIC_MJ_RC";
 } else {
 	logDebug("Error: No match for application type");
