@@ -23,10 +23,6 @@ function failedMJInspectionAutomation(vCapType) {
 			var vInspType = inspType;
 			var vInspStatus = "Scheduled";
 			
-			logDebug("Inspector ID: " + vInspector);
-			logDebug("CapID: " + capId);
-			logDebug("InspID: " + inspId);
-			
 			//schedule new inspection 7 days out from failed inspection date
 			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
 			scheduleInspectDate(vInspType, newInspSchedDate);
