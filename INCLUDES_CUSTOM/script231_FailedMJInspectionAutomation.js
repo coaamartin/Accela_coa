@@ -19,10 +19,24 @@ function failedMJInspectionAutomation(vCapType) {
 	//check for failed inspections, schedule new inspection, and email applicant with report
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Failed") {
+			var vInspector = getInspector(inspId);
 			
 			//schedule new inspection 7 days out from failed inspection date
 			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
 			scheduleInspectDate(inspType, newInspSchedDate);
+			
+			//get sequence ID for most recently created inspection
+			var lastInspectionObj = getLastCreatedInspection(capId, inspType);
+			if (lastInspectionObj == null) {
+				logDebug("Failed to find most recent inspection of type " + inspType);
+				continue;
+			}
+			
+			var lastInspectionSeq = lastInspectionObj.getIdNumber();
+			
+			//assign inspection to inspector
+			assignInspection(lastInspectionSeq, vInspector);
+			
 
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
@@ -54,4 +68,27 @@ function failedMJInspectionAutomation(vCapType) {
 		}
 	}
 	return false;
+}
+
+//returns object of most recently scheduled inspection
+function getLastCreatedInspection(capId, inspectionType) {
+	//get inspections for this cap (of type inspectionType)
+	var capInspections = aa.inspection.getInspections(capId);
+	if (!capInspections.getSuccess()) {
+		return false;
+	}
+	capInspections = capInspections.getOutput();
+
+	var schedInspWithMaxId = null;
+	//find last one (we created)
+	for (i in capInspections) {
+		if (capInspections[i].getInspectionType() == inspectionType && capInspections[i].getInspectionStatus() == "Scheduled") {
+
+			//if multiple scheduled of same type, make sure to get last one (maxID)
+			if (schedInspWithMaxId == null || schedInspWithMaxId.getIdNumber() < capInspections[i].getIdNumber()) {
+				schedInspWithMaxId = capInspections[i];
+			}
+		}
+	}
+	return schedInspWithMaxId;
 }
