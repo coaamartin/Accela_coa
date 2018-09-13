@@ -16,6 +16,9 @@ function failedMJInspectionAutomation(vCapType) {
 	}
 	var emailTemplateName = "LIC MJ INSPECTION CORRECTION REPORT # 231";
 			
+	logDebug("vCapType?: " + vCapType);			
+	logDebug("daysToAdd?: " + daysToAdd);		
+			
 	//check for failed inspections, schedule new inspection, and email applicant with report
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Failed") {
