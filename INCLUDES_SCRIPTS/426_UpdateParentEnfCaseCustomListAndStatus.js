@@ -61,7 +61,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 				logDebug("feeTotal:" + feeTotal);
                 
                 //updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
-                updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feeTotal, 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', parseFloat(feeTotal), 'N');
             } else if(ifTracer(wfTask == "Recordation" && (wfStatus =="Submit Recording"), "wfTask == Recordation && wfStatus == Submit Recording")) {
                 // wfTask == "Recordation" && wfStatus =="Submit Recording"
                 updateAbatementAdminCharge();
