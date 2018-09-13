@@ -45,10 +45,22 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             }
         } else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
             //WTUA
-            if(ifTracer(wfTask == "Recordation" && wfStatus =="Submit Recording", 'wfTask == "Recordation" && wfStatus =="Submit Recording"')) {
-                // wfTask == "Recordation" && wfStatus =="Submit Recording"
+            if(ifTracer(wfTask == "Invoicing" && (wfStatus =="Invoiced" || wfStatus =="Invoiced - City Paid"), "wfTask == Invoicing && wfStatus == Invoiced OR Invoiced City Paid")) {
+                // wfTask == "Invoicing" && wfStatus =="Invoiced"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
-                updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
+                
+                var feeG, feeW, feeS, feeT, feeB = 0;
+                
+                if(AInfo["Contractor Fee - Graffiti"]) feeG = parseFloat(AInfo["Contractor Fee - Graffiti"]);
+                if(AInfo["Contractor Fee - Weeds"]) feeW = parseFloat(AInfo["Contractor Fee - Weeds"]);
+                if(AInfo["Contractor Fee - Snow"]) feeS = parseFloat(AInfo["Contractor Fee - Snow"]);
+                if(AInfo["Contractor Fee - Trash"]) feeT = parseFloat(AInfo["Contractor Fee - Trash"]);
+                if(AInfo["Contractor Fee - Board-Up"]) feeB = parseFloat(AInfo["Contractor Fee - Board-Up"]);
+                
+                var feeTotal = feeG + feeW + feeS + feeT + feeB;
+                
+                //updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feeTotal, 'N');
             } else if(ifTracer(wfTask == "Recordation" && (wfStatus =="Submit Recording"), "wfTask == Recordation && wfStatus == Submit Recording")) {
                 // wfTask == "Recordation" && wfStatus =="Submit Recording"
                 updateAbatementAdminCharge();
@@ -321,14 +333,14 @@ function getChildrenWithActiveTasks() {
         if (ifTracer(children && children.length > 0, 'Children found.'))
         {
             for (var c in children)
-        	{
-        		childCapId = children[c];
-        		{
+            {
+                childCapId = children[c];
+                {
                     if(activeTasksCheck({capId: childCapId})) {
                         childrenWithActiveTasks.push(childCapId);
                     }
                 }
-        	}
+            }
             
         }
     }
