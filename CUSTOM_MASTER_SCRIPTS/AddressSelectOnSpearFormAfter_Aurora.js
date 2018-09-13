@@ -145,7 +145,7 @@ var vUsersDefaultModule = getUserDefaultModule(vCurrentUser);
 
 logDebug("Users Default Module: " + vUsersDefaultModule);
 
-var ats = "Forestry/Request/*/*";
+var ats = "Forestry/Request/Citizen/NA";
 var ata = ats.split("/");
 var x = 0;
 var y = 0;
