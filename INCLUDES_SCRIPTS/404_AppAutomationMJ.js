@@ -19,7 +19,6 @@ if (appMatch("Licenses/Marijuana/Testing Facility/Application")) {
 	vInspGroup = "LIC_MJ_RC";
 } else {
 	logDebug("Error: No match for application type");
-	return false;
 }
 
 //loop through array to schedule each type of inspection
