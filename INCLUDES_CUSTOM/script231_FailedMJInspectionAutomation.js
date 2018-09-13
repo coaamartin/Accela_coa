@@ -1,13 +1,7 @@
 
-function failedMJInspectionAutomation() {
-	var vIsApp = false;
+function failedMJInspectionAutomation(vCapType) {
+
 	var daysToAdd;
-	
-	if appMatch("Licenses/Marijuana/*/Application") {
-		vIsApp = true;
-	}
-	
-	logDebug("Is app? " + vIsApp);
 	
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
@@ -15,7 +9,7 @@ function failedMJInspectionAutomation() {
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
 	
 	//define number of days to schedule next inspection
-	if (vIsApp == true){
+	if (vCapType == "Application"){
 		daysToAdd = 1;
 	} else {
 		daysToAdd = 7;
