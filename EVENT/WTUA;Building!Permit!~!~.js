@@ -37,8 +37,11 @@ if(wfTask =="Inspection Phase"  && wfStatus == "Temporary CO Issued"){
 	closeWfTaskCertificateOfOccupancy();
 }
 
-if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO"){
-	//closeWfTaskCertificateOfOccupancy();
+var vCoOASI = getAppSpecific("Certificate of Occupancy");
+
+if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO" && vCoOASI == "CHECKED"){
+	activateWfTaskCertificateOfOccupancy();
+} else {
 	deactCoOIfNotChecked();
 }
 
