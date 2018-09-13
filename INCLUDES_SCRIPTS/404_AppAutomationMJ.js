@@ -5,6 +5,7 @@ var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections", "MJ
 var vInspType;
 var vInspGroup;
 var vInspector;
+var vLastInspStatus = "Pending";
 
 //determine inspection group based on application type
 if (appMatch("Licenses/Marijuana/Testing Facility/Application")) {
@@ -36,7 +37,7 @@ for (i in inspectionTypesAry) {
 	createPendingInspection(vInspGroup, vInspType, capId);
 
 	//get sequence ID for most recently created inspection
-	var lastInspectionObj = getLastCreatedInspection(capId, vInspType);
+	var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vLastInspStatus);
 	if (lastInspectionObj == null) {
 		logDebug("Failed to find most recent inspection of type " + vInspType);
 		continue;
@@ -49,26 +50,3 @@ for (i in inspectionTypesAry) {
 }
 
 logDebug("Ending Script 404: MJ Application Automation");
-
-//returns object of most recently scheduled inspection
-function getLastCreatedInspection(capId, inspectionType) {
-	//get inspections for this cap (of type inspectionType)
-	var capInspections = aa.inspection.getInspections(capId);
-	if (!capInspections.getSuccess()) {
-		return false;
-	}
-	capInspections = capInspections.getOutput();
-
-	var schedInspWithMaxId = null;
-	//find last one (we created)
-	for (i in capInspections) {
-		if (capInspections[i].getInspectionType() == inspectionType && capInspections[i].getInspectionStatus() == "Pending") {
-
-			//if multiple scheduled of same type, make sure to get last one (maxID)
-			if (schedInspWithMaxId == null || schedInspWithMaxId.getIdNumber() < capInspections[i].getIdNumber()) {
-				schedInspWithMaxId = capInspections[i];
-			}
-		}
-	}
-	return schedInspWithMaxId;
-}
