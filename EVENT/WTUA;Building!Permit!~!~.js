@@ -48,14 +48,11 @@ if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO" && vCoOASI == "CHECK
 if(wfTask =="Inspection Phase"  && wfStatus=="Final"){
 	deactCoOIfNotChecked();
 	
-    if (allTasksComplete("BLDNEWCON") == false) {
+    if (allTasksComplete() == false){
     updateAppStatus("Issued","Status updated via script"); 
 	}
 	
-    if (allTasksComplete("BLDMASTER") == false) {
-    updateAppStatus("Issued","Status updated via script"); 
-					}
-	
+
 }
 
 if(wfTask == "Backflow Preventor" && wfStatus == "Final"){
