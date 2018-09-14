@@ -20,6 +20,9 @@ function passedMJInspectionAutomation() {
 		if (vIsMJLicense == true) {
 			if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
 				vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
+				var vInspector = getInspectorByInspID(inspId, capId);
+				var vInspType = inspType;
+				var vInspStatus = "Scheduled";
 				
 				//check if license is Marijuana/Retail Store
 				if (vIsMJRetailStoreLicense == true) {
@@ -32,19 +35,55 @@ function passedMJInspectionAutomation() {
 						daysToAdd = 182;
 						var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 						scheduleInspectDate(inspType, newInspSchedDate);
+						
+						//get sequence ID for most recently created inspection
+						var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
+						if (lastInspectionObj == null) {
+							logDebug("Failed to find most recent inspection of type " + vInspType);
+							continue;
+						}
+						
+						var lastInspectionSeq = lastInspectionObj.getIdNumber();
+						
+						//assign inspection to inspector
+						assignInspection(lastInspectionSeq, vInspector);
 					} else {
 						
 						//schedule new inspection 3 months out from passed inspection date
 						daysToAdd = 91;
 						var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
-						scheduleInspectDate(inspType, newInspSchedDate);						
+						scheduleInspectDate(inspType, newInspSchedDate);	
+
+						//get sequence ID for most recently created inspection
+						var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
+						if (lastInspectionObj == null) {
+							logDebug("Failed to find most recent inspection of type " + vInspType);
+							continue;
+						}
+						
+						var lastInspectionSeq = lastInspectionObj.getIdNumber();
+						
+						//assign inspection to inspector
+						assignInspection(lastInspectionSeq, vInspector);
 					}					
 				} else {
 					
 					//schedule new inspection 3 months out from passed inspection date
 					daysToAdd = 91;
 					var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
-					scheduleInspectDate(inspType, newInspSchedDate);	
+					scheduleInspectDate(inspType, newInspSchedDate);
+					
+					//get sequence ID for most recently created inspection
+					var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
+					if (lastInspectionObj == null) {
+						logDebug("Failed to find most recent inspection of type " + vInspType);
+						continue;
+					}
+					
+					var lastInspectionSeq = lastInspectionObj.getIdNumber();
+					
+					//assign inspection to inspector
+					assignInspection(lastInspectionSeq, vInspector);
 				}
 				
 				var eParams = aa.util.newHashtable();
