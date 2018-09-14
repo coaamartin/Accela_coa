@@ -81,7 +81,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
 			
-			if(getRenewalByParentCapIDForPending(capId) {
+			if (getRenewalByParentCapIDForPending(capId)) {
 				logDebug2("Found renewal on license. Record ID: " + renewalCapID);
 			}
 			
