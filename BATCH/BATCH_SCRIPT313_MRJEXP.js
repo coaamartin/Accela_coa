@@ -39,8 +39,6 @@ showDebug = true;
 
 checkExpiredUpdateAppStatus("Delinquent", 7, "Expired", emailTemplate);
 
-
-
 /**
  * if license is app has a certain status, and record is expired for certain number of days, update record status and email Applicant
  * @param currentAppStatus app must have this status
@@ -84,6 +82,8 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			var edit = aa.cap.editCapByPK(thisCap.getCapModel());
 			if (!edit.getSuccess()) {
 				logDebug2("<br>**WARN Update app status failed, error:" + edit.getErrorMessage());
+			} else {
+				logDebug2("<br>Successfully updated record status to " + newAppStatus);
 			}
 
 			if (!emailTemplate || emailTemplate == null || emailTemplate == "") {
