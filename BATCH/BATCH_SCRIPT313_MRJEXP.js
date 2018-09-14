@@ -59,7 +59,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 	capModel.setCapStatus(currentAppStatus);
 
 	var capIdScriptModelList = aa.cap.getCapIDListByCapModel(capModel).getOutput();
-	logDebug2("<br><Font Color=RED> Processing " + capIdScriptModelList.length + " records <br>");
+	logDebug2("<br><Font Color=RED> Processing " + capIdScriptModelList.length + " " + currentAppStatus + " records <br>");
 	
 	for (r in capIdScriptModelList) {
 		capId = capIdScriptModelList[r].getCapID();
@@ -73,6 +73,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 		expResult = expResult.getOutput();
 
 		var thisCap = null;
+		
 		//new Date() is 2nd param --> result is positive number, more common to compare > expiredSinceDays
 		var expSince = dateDiff(expResult.getExpDate(), new Date());
 		if (expSince > expiredSinceDays) {
@@ -107,7 +108,8 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			if (!sent.getSuccess()) {
 				logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			}
-		}//more than n days
+		} else {
+			logDebug2("<br> Skipping record, still within 7 day grace period");
 		logDebug2("<br>#######################");
 	}//for all caps
 }
