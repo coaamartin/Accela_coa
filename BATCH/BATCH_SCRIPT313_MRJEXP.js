@@ -162,7 +162,6 @@ function getRenewalByParentCapIDForPending(parentCapid) {
 		 }
 		return renewalCapID;
 	} else {
-		logDebug2("<br>ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for Pending: " + result.getErrorMessage());
 		return null;
 	}
 }
