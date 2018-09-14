@@ -57,5 +57,3 @@ function script260_EmailExcelEnergyOnInspectionResult() {
         }
     }
 }
-
-ddodd@auroragov.org
