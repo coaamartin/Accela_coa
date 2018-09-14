@@ -33,8 +33,8 @@ function script260_EmailExcelEnergyOnInspectionResult() {
 	
     if (ifTracer(sendEmail, "sendEmail is truthy")) {
         setChecklistItemText();
-        if (inspComment)
-            addParameter(emailParams, "$$inspComment$$", inspComment);
+        if (inspResultComment)
+            addParameter(emailParams, "$$inspComment$$", inspResultComment);
         addParameter(emailParams, "$$FullAddress$$", getCapFullAddress());
         emailAsync2("", emailTemplate, emailParams);
 }
@@ -57,3 +57,5 @@ function script260_EmailExcelEnergyOnInspectionResult() {
         }
     }
 }
+
+ddodd@auroragov.org
