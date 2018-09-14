@@ -111,7 +111,7 @@ function script83_TapAppFees() {
                     updateFee("WAT_TA_33", feeSched, feePeriod, 1, feeInv);
                 }
                 
-                if(matches(sizeWtrMeter, '2"', '3"', '4"', '6"', '8"', '10"', '12"','Other')){
+                if(matches(sizeWtrMeter, '3"', '4"', '6"', '8"', '10"', '12"','Other')){
                     if(avrDailyDemd) {
                         avrDailyDemd = parseFloat(avrDailyDemd);
                         updateFee("WAT_TA_39", feeSched, feePeriod, avrDailyDemd, feeInv)
@@ -215,7 +215,7 @@ function script83_TapAppFees() {
                         updateFee("WAT_TA2_33", feeSched, feePeriod, 1, feeInv);
                     }
                     
-                    if(matches(sizeWtrMeter, '2"', '3"', '4"', '6"', '8"', '10"', '12"','Other')){
+                    if(matches(sizeWtrMeter, '3"', '4"', '6"', '8"', '10"', '12"','Other')){
                         if(avrDailyDemd) {
                             avrDailyDemd = parseFloat(avrDailyDemd);
                             updateFee("WAT_TA2_39", feeSched, feePeriod, avrDailyDemd, feeInv)
