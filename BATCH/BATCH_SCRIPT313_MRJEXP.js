@@ -68,7 +68,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 
 		var expResult = aa.expiration.getLicensesByCapID(capId);
 		if (!expResult.getSuccess()) {
-			logDebug2("<br>****WARN failed to get expiration of capId " + capId);
+			logDebug2("<br>****WARN failed to get expiration of capId " + capIDString);
 			continue;
 		}
 		expResult = expResult.getOutput();
@@ -78,8 +78,14 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 		//new Date() is 2nd param --> result is positive number, more common to compare > expiredSinceDays
 		var expSince = dateDiff(expResult.getExpDate(), new Date());
 		if (expSince > expiredSinceDays) {
+			
+			var renewalCapID = getRenewalByParentCapIDForPending(capId);
+			
+			if(getRenewalByParentCapIDForPending(capId) {
+				logDebug2("Found renewal on license. Record ID: " + renewalCapID);
+			}
+			
 			thisCap = aa.cap.getCap(capId).getOutput();
-
 			thisCap.getCapModel().setCapStatus(newAppStatus);
 			var edit = aa.cap.editCapByPK(thisCap.getCapModel());
 			if (!edit.getSuccess()) {
@@ -96,7 +102,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			var applicant = false;
 			applicant = getContactByType("Applicant", capId);
 			if (!applicant || !applicant.getEmail()) {
-				logDebug2("<br>**WARN no applicant found or no email capId=" + capId);
+				logDebug2("<br>**WARN no applicant found or no email capId=" + capIDString);
 				continue;
 			}
 
@@ -124,5 +130,29 @@ function logDebug2(dstr) {
 		aa.print(dstr)
 		emailText+= dstr + "<br>";
 		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr)
+	}
+}
+
+function getRenewalByParentCapIDForPending(parentCapid) {
+	if (parentCapid == null || aa.util.instanceOfString(parentCapid)) {
+		return null;
+	}
+	//1. Get parent license for analysis
+	var result = aa.cap.getProjectByMasterID(parentCapid, "Renewal", "Pending");
+	if (result.getSuccess()) {
+		projectScriptModels = result.getOutput();
+		if (projectScriptModels == null || projectScriptModels.length == 0) {
+			logDebug2("<br>ERROR: Failed to get renewal CAP by parent CAPID(" + parentCapid + ") for Pending");
+			return null;
+		}
+		//2. return number of completed renewals
+		 for (i in projectScriptModels) {
+			renewalCapID = projectScriptModels[i].getCapID();
+			renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
+		 }
+		return renewalCapIDString;
+	} else {
+		logDebug2("<br>ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for Pending: " + result.getErrorMessage());
+		return null;
 	}
 }
