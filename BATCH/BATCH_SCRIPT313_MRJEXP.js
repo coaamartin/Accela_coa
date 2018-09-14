@@ -110,6 +110,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			}
 		} else {
 			logDebug2("<br> Skipping record, still within 7 day grace period");
+		}
 		logDebug2("<br>#######################");
 	}//for all caps
 }
