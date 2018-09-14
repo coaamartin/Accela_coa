@@ -63,7 +63,8 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 	
 	for (r in capIdScriptModelList) {
 		capId = capIdScriptModelList[r].getCapID();
-		logDebug2("<Font Color=BLUE> <br> Processing record " + capId + "<Font Color=BLACK>");
+		capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()
+		logDebug2("<Font Color=BLUE> <br> Processing record " + capIDString + "<Font Color=BLACK>");
 
 		var expResult = aa.expiration.getLicensesByCapID(capId);
 		if (!expResult.getSuccess()) {
@@ -92,8 +93,8 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 				continue;
 			}
 
-			var applicant = getContactByType("Applicant", capId);
-			applicant = false;
+			var applicant = false;
+			applicant = getContactByType("Applicant", capId);
 			if (!applicant || !applicant.getEmail()) {
 				logDebug2("<br>**WARN no applicant found or no email capId=" + capId);
 				continue;
@@ -104,12 +105,13 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
 
+			//need to update the email function being used to ASYNC
 			var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
 			if (!sent.getSuccess()) {
 				logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			}
 		} else {
-			logDebug2("<br> Skipping record, still within 7 day grace period");
+			logDebug2("<br> Skipping record; still within 7-day grace period");
 		}
 		logDebug2("<br>#######################");
 	}//for all caps
