@@ -34,7 +34,7 @@ if (ifTracer(vGISInfo.length != null && vGISInfo.length > 0, 'found inspector'))
 
 if (typeof(vInspectorID) != "undefined" && vInspectorID != null && vInspectorID != "") {
 	// Assign record to inspector
-	assignCap(vInspectorID);
+	assignCap(vInspectorID.toUpperCase());
 	
 	// Schedule inspections
 	if (appMatch("Forestry/Request/Planting/*") == true) {
