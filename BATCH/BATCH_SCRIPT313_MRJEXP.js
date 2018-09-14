@@ -112,7 +112,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 	}//for all caps
 }
 
-function logDebug22(dstr) {
+function logDebug2(dstr) {
 	
 	// function of the same name in ACCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
 	if(showDebug) {
