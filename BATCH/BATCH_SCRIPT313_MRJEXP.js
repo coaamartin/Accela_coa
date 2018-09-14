@@ -81,7 +81,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
 			
-			if (getRenewalByParentCapIDForPending(capId)) {
+			if (renewalCapID) {
 				logDebug2("Found renewal on license. Record ID: " + renewalCapID);
 			}
 			
@@ -133,16 +133,16 @@ function logDebug2(dstr) {
 	}
 }
 
-function getRenewalByParentCapIDForPending(parentCapid) {
+function getRenewalByParentCapIDForPending(parentCapid) {	
 	if (parentCapid == null || aa.util.instanceOfString(parentCapid)) {
 		return null;
 	}
+	
 	//1. Get parent license for analysis
-	var result = aa.cap.getProjectByMasterID(parentCapid, "Renewal", "Pending");
+	var result = aa.cap.getProjectByMasterID(parentCapid, "Renewal", "Incomplete");	
 	if (result.getSuccess()) {
 		projectScriptModels = result.getOutput();
 		if (projectScriptModels == null || projectScriptModels.length == 0) {
-			logDebug2("<br>ERROR: projectScriptModels is null or has no renewal records");
 			return null;
 		}
 		//2. return number of completed renewals
