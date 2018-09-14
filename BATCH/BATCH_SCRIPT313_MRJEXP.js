@@ -34,13 +34,12 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 
 var capId = null;
+var emailTemplate = "LIC MJ INACTIVE LICENSE # 313";
+showDebug = true;
 
-try {
-	var emailTemplate = "LIC MJ INACTIVE LICENSE # 313";
-	checkExpiredUpdateAppStatus("Delinquent", 7, "Expired", emailTemplate);
-} catch (ex) {
-	logDebug("**ERROR batch failed, error: " + ex);
-}
+checkExpiredUpdateAppStatus("Delinquent", 7, "Expired", emailTemplate);
+
+
 
 /**
  * if license is app has a certain status, and record is expired for certain number of days, update record status and email Applicant
@@ -62,15 +61,15 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 	capModel.setCapStatus(currentAppStatus);
 
 	var capIdScriptModelList = aa.cap.getCapIDListByCapModel(capModel).getOutput();
-	logDebug("**INFO Total records=" + capIdScriptModelList.length);
-
+	logDebug2("<br><Font Color=RED> Processing " + capIdScriptModelList.length + " records <br>");
+	
 	for (r in capIdScriptModelList) {
 		capId = capIdScriptModelList[r].getCapID();
-		logDebug("**INFO -------- capID=" + capId);
+		logDebug2("<Font Color=BLUE> <br> Processing record " + capId + "<Font Color=BLACK");
 
 		var expResult = aa.expiration.getLicensesByCapID(capId);
 		if (!expResult.getSuccess()) {
-			logDebug("****WARN failed to get expiration of capId " + capId);
+			logDebug2("<br>****WARN failed to get expiration of capId " + capId);
 			continue;
 		}
 		expResult = expResult.getOutput();
@@ -84,18 +83,18 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			thisCap.getCapModel().setCapStatus(newAppStatus);
 			var edit = aa.cap.editCapByPK(thisCap.getCapModel());
 			if (!edit.getSuccess()) {
-				logDebug("**WARN Update app status failed, error:" + edit.getErrorMessage());
+				logDebug2("<br>**WARN Update app status failed, error:" + edit.getErrorMessage());
 			}
 
 			if (!emailTemplate || emailTemplate == null || emailTemplate == "") {
-				logDebug("**WARN EMAIL_TEMPLATE_NAME parameter not set, batch will skip sending email");
+				logDebug2("<br>**WARN EMAIL_TEMPLATE_NAME parameter not set, batch will skip sending email");
 				continue;
 			}
 
 			var applicant = getContactByType("Applicant", capId);
 			applicant = false;
 			if (!applicant || !applicant.getEmail()) {
-				logDebug("**WARN no applicant found or no email capId=" + capId);
+				logDebug2("<br>**WARN no applicant found or no email capId=" + capId);
 				continue;
 			}
 
@@ -106,9 +105,19 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 
 			var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
 			if (!sent.getSuccess()) {
-				logDebug("**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
+				logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			}
 		}//more than n days
-		logDebug("#######################");
+		logDebug2("<br>#######################");
 	}//for all caps
+}
+
+function logDebug22(dstr) {
+	
+	// function of the same name in ACCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
+	if(showDebug) {
+		aa.print(dstr)
+		emailText+= dstr + "<br>";
+		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr)
+	}
 }
