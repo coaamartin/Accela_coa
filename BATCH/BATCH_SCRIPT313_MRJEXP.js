@@ -142,7 +142,7 @@ function getRenewalByParentCapIDForPending(parentCapid) {
 	if (result.getSuccess()) {
 		projectScriptModels = result.getOutput();
 		if (projectScriptModels == null || projectScriptModels.length == 0) {
-			logDebug2("<br>ERROR: Failed to get renewal CAP by parent CAPID(" + parentCapid + ") for Pending");
+			logDebug2("<br>ERROR: projectScriptModels is null or has no renewal records");
 			return null;
 		}
 		//2. return number of completed renewals
