@@ -21,6 +21,7 @@ function passedMJInspectionAutomation() {
 			if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
 				vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
 				var vInspector = getInspectorByInspID(inspId, capId);
+				logDebug("vInspector: " + vInspector);
 				var vInspType = inspType;
 				var vInspStatus = "Scheduled";
 				
