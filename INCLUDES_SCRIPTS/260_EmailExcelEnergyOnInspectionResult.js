@@ -24,6 +24,7 @@ function script260_EmailExcelEnergyOnInspectionResult() {
 							guideItemName: "Temporary Meter Release" || "Final Meter Release",
 							guideItemValue: 'Yes'
 						});
+						logDebug("guideSheets: " + guideSheets);
 						emailParams.put("$$checkListItemName$$", guideSheets);
                     }
                 }
@@ -38,6 +39,7 @@ function script260_EmailExcelEnergyOnInspectionResult() {
 							guideItemName: "Temporary Meter Release" || "Final Meter Release",
 							guideItemValue: 'Yes'
 						});
+						logDebug("guideSheets: " + guideSheets);
 						emailParams.put("$$checkListItemName$$", guideSheets);
                     }
                 }
