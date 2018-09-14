@@ -18,8 +18,8 @@ function script260_EmailExcelEnergyOnInspectionResult() {
                         sendEmail = true;
                         setChecklistItemFlag();
 
-						logDebug("guideSheet type: " + guideSheetObject.gsType);
-						addParameter(emailParams, "$$checkListItemName$$", guideSheetObject.gsType);
+						logDebug("guideSheet type: " + guideSheetObject.text);
+						addParameter(emailParams, "$$checkListItemName$$", guideSheetObject.text);
                     }
                 }
                 if(ifTracer(guideSheetObject.text == 'Final Meter Release', "guideSheetObject.text == 'Temporary Meter Release'")) {
@@ -27,8 +27,8 @@ function script260_EmailExcelEnergyOnInspectionResult() {
                         sendEmail = true;
                         setChecklistItemFlag();
 						
-						logDebug("guideSheet type: " + guideSheetObject.gsType);
-						addParameter(emailParams, "$$checkListItemName$$", guideSheetObject.gsType);
+						logDebug("guideSheet type: " + guideSheetObject.text);
+						addParameter(emailParams, "$$checkListItemName$$", guideSheetObject.text);
                     }
                 }
             }
@@ -38,8 +38,8 @@ function script260_EmailExcelEnergyOnInspectionResult() {
 	
     if (ifTracer(sendEmail, "sendEmail is truthy")) {
         setChecklistItemText();
-        if (inspComment)
-            addParameter(emailParams, "$$inspComment$$", inspComment);
+        if (inspComments)
+            addParameter(emailParams, "$$inspComment$$", inspComments);
         addParameter(emailParams, "$$FullAddress$$", getCapFullAddress());
         emailAsync2("", emailTemplate, emailParams);
 }
