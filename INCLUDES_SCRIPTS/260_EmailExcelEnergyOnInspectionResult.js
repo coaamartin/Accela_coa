@@ -16,18 +16,36 @@ function script260_EmailExcelEnergyOnInspectionResult() {
                 if(ifTracer(guideSheetObject.text == 'Temporary Meter Release', "guideSheetObject.text == 'Temporary Meter Release'")) {
                     if(ifTracer(guideSheetObject.status == 'Yes', "guideSheetObject.text == 'Yes'")) {
                         sendEmail = true;
-                        setChecklistItemFlag()
+                        setChecklistItemFlag();
+						
+						var guideSheets = getGuideSheetItems({
+							inspId: inspId,
+							guideTypeName: "Electrical Meter Release" || "Gas Meter Release",
+							guideItemName: "Temporary Meter Release" || "Final Meter Release",
+							guideItemValue: 'Yes'
+						});
+						emailParams.put("$$checkListItemName$$", guideSheets);
                     }
                 }
                 if(ifTracer(guideSheetObject.text == 'Final Meter Release', "guideSheetObject.text == 'Temporary Meter Release'")) {
                     if(ifTracer(guideSheetObject.status == 'Yes', "guideSheetObject.text == 'Yes'")) {
                         sendEmail = true;
                         setChecklistItemFlag();
+						
+						var guideSheets = getGuideSheetItems({
+							inspId: inspId,
+							guideTypeName: "Electrical Meter Release" || "Gas Meter Release",
+							guideItemName: "Temporary Meter Release" || "Final Meter Release",
+							guideItemValue: 'Yes'
+						});
+						emailParams.put("$$checkListItemName$$", guideSheets);
                     }
                 }
             }
         }
     }
+	
+	
     if (ifTracer(sendEmail, "sendEmail is truthy")) {
         setChecklistItemText();
         if (inspComment)
