@@ -80,10 +80,10 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 		if (expSince > expiredSinceDays) {
 			
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
-			
+			var renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
 			//check for incomplete renewals
-			if (renewalCapID) {
-				logDebug2("<br>Found incomplete renewal on license. Record ID: " + renewalCapID);
+			if (renewalCapIDString) {
+				logDebug2("<br>Found incomplete renewal on license. Record ID: " + renewalCapIDString);
 				assessMJLateFee(renewalCapID);
 			}
 			
@@ -150,9 +150,8 @@ function getRenewalByParentCapIDForPending(parentCapid) {
 		//2. return number of completed renewals
 		 for (i in projectScriptModels) {
 			renewalCapID = projectScriptModels[i].getCapID();
-			renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
 		 }
-		return renewalCapIDString;
+		return renewalCapID;
 	} else {
 		logDebug2("<br>ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for Pending: " + result.getErrorMessage());
 		return null;
@@ -208,12 +207,12 @@ function updateFeebyCapID(fcode, fsched, fperiod, fqty, finvoice, pDuplicate, pF
 		for (feeNum in feeList) {
 			if (feeList[feeNum].getFeeitemStatus().equals("INVOICED")) {
 				if (pDuplicate == "Y") {
-					logDebug("Invoiced fee " + fcode + " found, subtracting invoiced amount from update qty.");
+					logDebug2("<br>Invoiced fee " + fcode + " found, subtracting invoiced amount from update qty.");
 					adjustedQty = adjustedQty - feeList[feeNum].getFeeUnit();
 					invFeeFound = true;
 				} else {
 					invFeeFound = true;
-					logDebug("Invoiced fee " + fcode + " found.  Not updating this fee. Not assessing new fee " + fcode);
+					logDebug2("<br>Invoiced fee " + fcode + " found.  Not updating this fee. Not assessing new fee " + fcode);
 				}
 			}
 
@@ -229,18 +228,18 @@ function updateFeebyCapID(fcode, fsched, fperiod, fqty, finvoice, pDuplicate, pF
 				var editResult = aa.finance.editFeeItemUnit(targetCapID, adjustedQty + feeList[feeNum].getFeeUnit(), feeSeq);
 				feeUpdated = true;
 				if (editResult.getSuccess()) {
-					logDebug("Updated Qty on Existing Fee Item: " + fcode + " to Qty: " + fqty);
+					logDebug2("<br>Updated Qty on Existing Fee Item: " + fcode + " to Qty: " + fqty);
 					if (finvoice == "Y") {
 						feeSeqList.push(feeSeq);
 						paymentPeriodList.push(fperiod);
 					}
 				} else {
-					logDebug("**ERROR: updating qty on fee item (" + fcode + "): " + editResult.getErrorMessage());
+					logDebug2("<br>**ERROR: updating qty on fee item (" + fcode + "): " + editResult.getErrorMessage());
 					break
 				}
 			}
 	} else {
-		logDebug("**ERROR: getting fee items (" + fcode + "): " + getFeeResult.getErrorMessage())
+		logDebug2("<br>**ERROR: getting fee items (" + fcode + "): " + getFeeResult.getErrorMessage())
 	}
 
 	// Add fee if no fee has been updated OR invoiced fee already exists and duplicates are allowed
