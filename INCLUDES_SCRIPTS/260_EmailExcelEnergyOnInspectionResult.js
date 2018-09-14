@@ -17,8 +17,6 @@ function script260_EmailExcelEnergyOnInspectionResult() {
                     if(ifTracer(guideSheetObject.status == 'Yes', "guideSheetObject.text == 'Yes'")) {
                         sendEmail = true;
                         setChecklistItemFlag();
-
-						logDebug("guideSheet type: " + guideSheetObject.text);
 						addParameter(emailParams, "$$checkListItemName$$", guideSheetObject.text);
                     }
                 }
@@ -26,8 +24,6 @@ function script260_EmailExcelEnergyOnInspectionResult() {
                     if(ifTracer(guideSheetObject.status == 'Yes', "guideSheetObject.text == 'Yes'")) {
                         sendEmail = true;
                         setChecklistItemFlag();
-						
-						logDebug("guideSheet type: " + guideSheetObject.text);
 						addParameter(emailParams, "$$checkListItemName$$", guideSheetObject.text);
                     }
                 }
@@ -35,13 +31,12 @@ function script260_EmailExcelEnergyOnInspectionResult() {
         }
     }
 	
-	
     if (ifTracer(sendEmail, "sendEmail is truthy")) {
         setChecklistItemText();
-        if (inspComments)
-            addParameter(emailParams, "$$inspComment$$", inspComments);
+        if (inspComment)
+            addParameter(emailParams, "$$inspComment$$", inspComment);
         addParameter(emailParams, "$$FullAddress$$", getCapFullAddress());
-        emailAsync2("", emailTemplate, emailParams);
+        emailAsync2("Applicant", emailTemplate, emailParams);
 }
 
     function setChecklistItemFlag() {
@@ -61,5 +56,4 @@ function script260_EmailExcelEnergyOnInspectionResult() {
             emailParams.put("$$checkListItem1$$","Gas Meter");
         }
     }
-
 }
