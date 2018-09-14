@@ -48,8 +48,8 @@ if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO" && vCoOASI == "CHECK
 if(wfTask =="Inspection Phase"  && wfStatus=="Final"){
 	deactCoOIfNotChecked();
 	
-   if ((allTasksComplete("NEWBLD") == false) || (allTasksComplete("NEWBLD") == false)){
-					updateAppStatus("Issued","Status updated via script 6");				
+   if ((allTasksComplete("BLD_NEWCON") == false) || (allTasksComplete("BLD_MASTER") == false)){
+					updateAppStatus("Issued","Status updated via script");				
 			}
 
 }
