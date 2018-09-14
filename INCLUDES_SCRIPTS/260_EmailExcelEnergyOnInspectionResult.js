@@ -36,7 +36,7 @@ function script260_EmailExcelEnergyOnInspectionResult() {
         if (inspComment)
             addParameter(emailParams, "$$inspComment$$", inspComment);
         addParameter(emailParams, "$$FullAddress$$", getCapFullAddress());
-        emailAsync2("Applicant", emailTemplate, emailParams);
+        emailAsync2("", emailTemplate, emailParams);
 }
 
     function setChecklistItemFlag() {
