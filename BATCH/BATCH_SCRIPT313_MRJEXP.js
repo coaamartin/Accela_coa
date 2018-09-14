@@ -78,10 +78,10 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 		//check if delinquent record is outside 7-day grace period
 		var expSince = dateDiff(expResult.getExpDate(), new Date());
 		if (expSince > expiredSinceDays) {
-			
+			var renewalCapIDString = null;
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
 			if (renewalCapID) {
-				var renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
+				renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
 			}
 			
 			logDebug2("<br>Checking for incomplete renewals... ");
