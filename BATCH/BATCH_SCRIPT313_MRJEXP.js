@@ -65,7 +65,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 	
 	for (r in capIdScriptModelList) {
 		capId = capIdScriptModelList[r].getCapID();
-		logDebug2("<Font Color=BLUE> <br> Processing record " + capId + "<Font Color=BLACK");
+		logDebug2("<Font Color=BLUE> <br> Processing record " + capId + "<Font Color=BLACK>");
 
 		var expResult = aa.expiration.getLicensesByCapID(capId);
 		if (!expResult.getSuccess()) {
