@@ -19,13 +19,14 @@ function script260_EmailExcelEnergyOnInspectionResult() {
                         setChecklistItemFlag();
 						
 						var guideSheets = getGuideSheetItems({
+							capId: capId,
 							inspId: inspId,
-							guideTypeName: "Electrical Meter Release" || "Gas Meter Release",
-							guideItemName: "Temporary Meter Release" || "Final Meter Release",
+							guideTypeName: 'Electrical Meter Release' || 'Gas Meter Release',
+							guideItemName: 'Temporary Meter Release' || 'Final Meter Release',
 							guideItemValue: 'Yes'
 						});
-						logDebug("guideSheets: " + guideSheets);
-						emailParams.put("$$checkListItemName$$", guideSheets);
+						logDebug("guideSheets: " + guideSheets[0]);
+						emailParams.put("$$checkListItemName$$", guideSheets[0]);
                     }
                 }
                 if(ifTracer(guideSheetObject.text == 'Final Meter Release', "guideSheetObject.text == 'Temporary Meter Release'")) {
@@ -34,13 +35,14 @@ function script260_EmailExcelEnergyOnInspectionResult() {
                         setChecklistItemFlag();
 						
 						var guideSheets = getGuideSheetItems({
+							capId: capId,
 							inspId: inspId,
-							guideTypeName: "Electrical Meter Release" || "Gas Meter Release",
-							guideItemName: "Temporary Meter Release" || "Final Meter Release",
+							guideTypeName: 'Electrical Meter Release' || 'Gas Meter Release',
+							guideItemName: 'Temporary Meter Release' || 'Final Meter Release',
 							guideItemValue: 'Yes'
 						});
-						logDebug("guideSheets: " + guideSheets);
-						emailParams.put("$$checkListItemName$$", guideSheets);
+						logDebug("guideSheets: " + guideSheets[0]);
+						emailParams.put("$$checkListItemName$$", guideSheets[0]);
                     }
                 }
             }
