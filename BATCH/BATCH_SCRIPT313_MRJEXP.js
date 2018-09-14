@@ -80,7 +80,9 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 		if (expSince > expiredSinceDays) {
 			
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
-			var renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
+			if (renewalCapID) {
+				var renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
+			}
 			
 			logDebug2("<br>Checking for incomplete renewals... ");
 			
