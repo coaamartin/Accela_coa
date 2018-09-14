@@ -81,12 +81,11 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
 			var renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
-			//check for incomplete renewals
+			//check for incomplete renewals, assess late fee
 			if (renewalCapIDString) {
 				logDebug2("<br>Found incomplete renewal on license. Record ID: " + renewalCapIDString);
-				if (assessMJLateFee(renewalCapID)) {
-					logDebug2("<br>Assessed late fee on Renewal Record ID " + renewalCapIDString);
-				}
+				assessMJLateFee(renewalCapID);
+				logDebug2("<br>Assessed late fee on Renewal Record ID " + renewalCapIDString);
 			}
 			
 			thisCap = aa.cap.getCap(capId).getOutput();
@@ -168,11 +167,11 @@ function assessMJLateFee(renewalCapID) {
 	} else if (appMatch("Licenses/Marijuana/Retail Store/Renewal", renewalCapID)) {
 		addFee("LIC_MJST_02", "LIC_MJ_STORE", "FINAL", 1, "Y", renewalCapID);				
 	} else if (appMatch("Licenses/Marijuana/Retail Transporter/Renewal", renewalCapID)) {
-		addFee("LIC_MJTR_03", "LIC_MJ_TRANS", "FINAL", 1, renewalCapID);			
+		addFee("LIC_MJTR_03", "LIC_MJ_TRANS", "FINAL", 1, "Y", renewalCapID);			
 	} else if (appMatch("Licenses/Marijuana/Testing Facility/Renewal", renewalCapID)) {
 		addFee("LIC_MJTST_03", "LIC_MJ_TEST", "FINAL", 1, "Y", renewalCapID);				
 	} else {
 		logDebug2("<br>Invalid renewal record type");
-		return null;
+		return false;
 	}	
 }
