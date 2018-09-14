@@ -83,9 +83,8 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			
 			//check for incomplete renewals
 			if (renewalCapID) {
-				logDebug2("<br>Found renewal on license. Record ID: " + renewalCapID + ". Checking if fees are paid in full.");
-				var balanceDue = getBalanceDue(renewalCapID);
-				logDebug2("<br>Balance due on renewal is " + balanceDue);
+				logDebug2("<br>Found incomplete renewal on license. Record ID: " + renewalCapID);
+				assessMJLateFee(renewalCapID);
 			}
 			
 			thisCap = aa.cap.getCap(capId).getOutput();
@@ -160,12 +159,95 @@ function getRenewalByParentCapIDForPending(parentCapid) {
 	}
 }
 
-function getBalanceDue(targetCapId) {
-	var invArray = aa.finance.getInvoiceByCapID(targetCapId, null).getOutput()
-	for (var invCount in invArray) {
-		var thisInvoice = invArray[invCount];
-		var balDue = thisInvoice.getInvoiceModel().getBalanceDue();
-		
-		return balDue;
-	}
+function assessMJLateFee(renewalCapID) {
+	if (appMatch("Licenses/Marijuana/Retail Cultivation/Renewal", renewalCapID)) {
+		updateFeebyCapID("LIC_MJRC_03", "LIC_MJ_RC", "FINAL", 1, "Y", "N", null, renewalCapID);				
+	} else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Renewal", renewalCapID)) {
+		updateFeebyCapID("LIC_MJRPM_03", "LIC_MJ_RPM", "FINAL", 1, "Y", "N", null, renewalCapID);				
+	} else if (appMatch("Licenses/Marijuana/Retail Store/Renewal", renewalCapID)) {
+		updateFeebyCapID("LIC_MJST_02", "LIC_MJ_STORE", "FINAL", 1, "Y", "N", null, renewalCapID);				
+	} else if (appMatch("Licenses/Marijuana/Retail Transporter/Renewal", renewalCapID)) {
+		updateFeebyCapID("LIC_MJTR_03", "LIC_MJ_TRANS", "FINAL", 1, "Y", "N", null, renewalCapID);			
+	} else if (appMatch("Licenses/Marijuana/Testing Facility/Renewal", renewalCapID)) {
+		updateFeebyCapID("LIC_MJTST_03", "LIC_MJ_TEST", "FINAL", 1, "Y", "N", null, renewalCapID);				
+	} else {
+		logDebug2("<br>Invalid renewal record type");
+	}	
 }
+
+function updateFeebyCapID(fcode, fsched, fperiod, fqty, finvoice, pDuplicate, pFeeSeq, targetCapID) {
+	// Updates an assessed fee with a new Qty.  If not found, adds it; else if invoiced fee found, adds another with adjusted qty.
+	// optional param pDuplicate -if "N", won't add another if invoiced fee exists (SR5085)
+	// Script will return fee sequence number if new fee is added otherwise it will return null (SR5112)
+	// Optional param pSeqNumber, Will attempt to update the specified Fee Sequence Number or Add new (SR5112)
+	// 12/22/2008 - DQ - Correct Invoice loop to accumulate instead of reset each iteration
+
+	// If optional argument is blank, use default logic (i.e. allow duplicate fee if invoiced fee is found)
+	if (pDuplicate == null || pDuplicate.length == 0)
+		pDuplicate = "Y";
+	else
+		pDuplicate = pDuplicate.toUpperCase();
+
+	var invFeeFound = false;
+	var adjustedQty = fqty;
+	var feeSeq = null;
+	feeUpdated = false;
+
+	if (pFeeSeq == null)
+		getFeeResult = aa.finance.getFeeItemByFeeCode(targetCapID, fcode, fperiod);
+	else
+		getFeeResult = aa.finance.getFeeItemByPK(targetCapID, pFeeSeq);
+
+	if (getFeeResult.getSuccess()) {
+		if (pFeeSeq == null)
+			var feeList = getFeeResult.getOutput();
+		else {
+			var feeList = new Array();
+			feeList[0] = getFeeResult.getOutput();
+		}
+		for (feeNum in feeList) {
+			if (feeList[feeNum].getFeeitemStatus().equals("INVOICED")) {
+				if (pDuplicate == "Y") {
+					logDebug("Invoiced fee " + fcode + " found, subtracting invoiced amount from update qty.");
+					adjustedQty = adjustedQty - feeList[feeNum].getFeeUnit();
+					invFeeFound = true;
+				} else {
+					invFeeFound = true;
+					logDebug("Invoiced fee " + fcode + " found.  Not updating this fee. Not assessing new fee " + fcode);
+				}
+			}
+
+			if (feeList[feeNum].getFeeitemStatus().equals("NEW")) {
+				adjustedQty = adjustedQty - feeList[feeNum].getFeeUnit();
+			}
+		}
+
+		for (feeNum in feeList)
+			if (feeList[feeNum].getFeeitemStatus().equals("NEW") && !feeUpdated) // update this fee item
+			{
+				var feeSeq = feeList[feeNum].getFeeSeqNbr();
+				var editResult = aa.finance.editFeeItemUnit(targetCapID, adjustedQty + feeList[feeNum].getFeeUnit(), feeSeq);
+				feeUpdated = true;
+				if (editResult.getSuccess()) {
+					logDebug("Updated Qty on Existing Fee Item: " + fcode + " to Qty: " + fqty);
+					if (finvoice == "Y") {
+						feeSeqList.push(feeSeq);
+						paymentPeriodList.push(fperiod);
+					}
+				} else {
+					logDebug("**ERROR: updating qty on fee item (" + fcode + "): " + editResult.getErrorMessage());
+					break
+				}
+			}
+	} else {
+		logDebug("**ERROR: getting fee items (" + fcode + "): " + getFeeResult.getErrorMessage())
+	}
+
+	// Add fee if no fee has been updated OR invoiced fee already exists and duplicates are allowed
+	if (!feeUpdated && adjustedQty != 0 && (!invFeeFound || invFeeFound && pDuplicate == "Y"))
+		feeSeq = addFee(fcode, fsched, fperiod, adjustedQty, finvoice);
+	else
+		feeSeq = null;
+	updateFeeItemInvoiceFlag(feeSeq, finvoice);
+	return feeSeq;
+} 
