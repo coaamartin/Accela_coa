@@ -75,14 +75,17 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 
 		var thisCap = null;
 		
-		//new Date() is 2nd param --> result is positive number, more common to compare > expiredSinceDays
+		//check if delinquent record is outside 7-day grace period
 		var expSince = dateDiff(expResult.getExpDate(), new Date());
 		if (expSince > expiredSinceDays) {
 			
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
 			
+			//check for incomplete renewals
 			if (renewalCapID) {
-				logDebug2("Found renewal on license. Record ID: " + renewalCapID);
+				logDebug2("<br>Found renewal on license. Record ID: " + renewalCapID + ". Checking if fees are paid in full.");
+				var balanceDue = getBalanceDue(renewalCapID);
+				logDebug2("<br>Balance due on renewal is " + balanceDue);
 			}
 			
 			thisCap = aa.cap.getCap(capId).getOutput();
@@ -154,5 +157,15 @@ function getRenewalByParentCapIDForPending(parentCapid) {
 	} else {
 		logDebug2("<br>ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for Pending: " + result.getErrorMessage());
 		return null;
+	}
+}
+
+function getBalanceDue(targetCapId) {
+	var invArray = aa.finance.getInvoiceByCapID(targetCapId, null).getOutput()
+	for (var invCount in invArray) {
+		var thisInvoice = invArray[invCount];
+		var balDue = thisInvoice.getInvoiceModel().getBalanceDue();
+		
+		return balDue;
 	}
 }
