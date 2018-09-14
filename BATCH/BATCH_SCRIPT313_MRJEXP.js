@@ -87,7 +87,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			//check for incomplete renewals, assess late fee
 			if (renewalCapIDString) {
 				logDebug2("<br>Found incomplete renewal on license. Record ID: " + renewalCapIDString);
-				if (assessMJLateFee(renewalCapID))
+				if (assessMJLateFee(renewalCapID)) {
 					logDebug2("<br>Assessed late fee on Renewal Record ID " + renewalCapIDString);
 				}
 			} else {
