@@ -124,10 +124,10 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 
 			//need to update the email function being used to ASYNC
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
-			var sent = emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
-			if (!sent.getSuccess()) {
-				logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
-			}
+			emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
+			//if (!sent.getSuccess()) {
+			//	logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
+			//}
 		} else {
 			logDebug2("<br> Skipping record; still within 7-day grace period");
 		}
