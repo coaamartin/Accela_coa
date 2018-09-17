@@ -70,6 +70,20 @@ function dateAddHC2(td, amt)
 	}
 	// ignore non-working days and simply use calendar days increment
 	else{
+		nonWorking = checkHolidayCalendar(dDate);
+		while (nonWorking) 
+		{
+			i++;
+			failsafe++
+			if (amt >= 0 ) {
+				dDate = convertDate(dateAdd(dDate,1));
+			}
+			else{
+				dDate = convertDate(dateAdd(dDate,-1));
+			}
+				nonWorking = checkHolidayCalendar(dDate);
+		}
+		
 		dDate.setDate(dDate.getDate() + parseInt(amt, 10));
 	}
 	return (dDate.getMonth() + 1) + "/" + dDate.getDate() + "/" + dDate.getFullYear();
