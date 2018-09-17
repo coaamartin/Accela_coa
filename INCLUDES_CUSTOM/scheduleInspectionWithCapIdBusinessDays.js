@@ -1,4 +1,4 @@
-function scheduleInspectionWithCapIdBusinessDays(iType,DaysAhead) // optional inspector ID.  This function requires dateAddHC function
+function scheduleInspectionWithCapIdBusinessDays(iType,DaysAhead) // optional inspector ID.  This function requires dateAddHC2 function
 {
     // DQ - Added Optional 4th parameter inspTime Valid format is HH12:MIAM or AM (SR5110) 
     // DQ - Added Optional 5th parameter inspComm ex. to call without specifying other options params scheduleInspection("Type",5,null,null,"Schedule Comment");
@@ -25,7 +25,7 @@ function scheduleInspectionWithCapIdBusinessDays(iType,DaysAhead) // optional in
         if (arguments[5] != null)
             vCapId = arguments[5];
                                     
-    var schedRes = aa.inspection.scheduleInspection(vCapId, inspectorObj, aa.date.parseDate(dateAddHC(null,DaysAhead)), inspTime, iType, inspComm)
+    var schedRes = aa.inspection.scheduleInspection(vCapId, inspectorObj, aa.date.parseDate(dateAddHC2(null,DaysAhead)), inspTime, iType, inspComm)
     
     if (schedRes.getSuccess())
         logDebug("Successfully scheduled inspection : " + iType + " for " + dateAddHC(null,DaysAhead));
