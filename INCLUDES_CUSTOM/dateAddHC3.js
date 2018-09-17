@@ -33,6 +33,7 @@ function dateAddHC3(td, amt)
 			// handle positive date changes
 			if (amt >= 0) {
 				nonWorking = checkHolidayCalendarIgnoreWeekends(dDate);
+				logDebug("Checkpoint 4. nonWorking value: " + nonWorking);
 				if (!nonWorking){
 					i++;
 					failsafe++;
@@ -56,7 +57,7 @@ function dateAddHC3(td, amt)
 				}
 			}
 		}
-		logDebug("Checkpoint 4. dDate: " + dDate);
+		logDebug("Checkpoint 5. dDate: " + dDate);
 		// we have identified the target date using the working calendar, now we need
 		// to confirm that the target date is a working day
 		nonWorking = checkHolidayCalendar(dDate);
