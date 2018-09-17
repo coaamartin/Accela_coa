@@ -34,6 +34,7 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 var emailText = "";		
 var capId = null;
+var emailTemplate = "LIC MJ INACTIVE LICENSE # 313";
 showDebug = true;
 
 checkExpiredUpdateAppStatus("Delinquent", 7, "Expired", emailTemplate);
@@ -46,7 +47,7 @@ checkExpiredUpdateAppStatus("Delinquent", 7, "Expired", emailTemplate);
  * @param emailTemplate used to send email
  */
 function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppStatus, emailTemplate) {
-	var emailTemplate = "LIC MJ INACTIVE LICENSE # 313";
+	
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	capTypeModel.setGroup("Licenses");
 	capTypeModel.setType("Marijuana");
