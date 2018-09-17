@@ -7,6 +7,8 @@ Building/Permit/~/~
 
 Email template created "BLD RESUBMITTAL NOTIFICATION"
 necessary vars:  $$wfTask$$, $$wfComment$$
+
+written by SWAKIL
 */
 logDebug("Start executing 60_ResubmittalRequestedNotification");
 var targetStatusArray = ["Resubmittal Requested"];
