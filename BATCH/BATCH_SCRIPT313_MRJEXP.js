@@ -123,11 +123,11 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
 
-			emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
+			var sent = emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "", capId);
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
-			//if (!sent.getSuccess()) {
-			//	logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
-			//}
+			if (!sent.getSuccess()) {
+				logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
+			}
 		} else {
 			logDebug2("<br> Skipping record; still within 7-day grace period");
 		}
