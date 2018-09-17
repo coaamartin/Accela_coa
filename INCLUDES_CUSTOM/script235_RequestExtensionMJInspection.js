@@ -22,7 +22,7 @@ function requestExtensionMJInspection(vCapType) {
 			var vInspType = inspType;
 			var vInspStatus = "Scheduled";
 		
-			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
+			var newInspSchedDate = dateAddHC3(inspSchedDate, daysToAdd);
 			
 			var inspResultComment;
 			var vInspComments;
