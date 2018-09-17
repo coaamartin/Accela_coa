@@ -125,7 +125,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 
 			var sent = emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "", capId);
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
-			if (!sent.getSuccess()) {
+			if (!sent) {
 				logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			}
 		} else {
