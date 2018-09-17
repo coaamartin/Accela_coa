@@ -15,24 +15,43 @@ Notes:
 	supported email variables: $$altID$$, $$recordAlias$$, $$recordStatus$$
 */
 
-function getScriptText(e) {
-	var t = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		t = arguments[1];
-	e = e.toUpperCase();
-	var n = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var r = n.getScriptByPK(t, e, "ADMIN");
-		return r.getScriptText() + ""
-	} catch (i) {
-		return ""
-	}
+function getMasterScriptText(vScriptName)
+{
+    var servProvCode = aa.getServiceProviderCode();
+    if (arguments.length > 1) servProvCode = arguments[1]; // use different serv prov code
+    vScriptName = vScriptName.toUpperCase();    
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    try {
+        var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(),vScriptName);
+        return emseScript.getScriptText() + ""; 
+        } 
+	catch(err)
+		{
+		return "";
+		}
+}
+
+function getScriptText(vScriptName)
+{
+    var servProvCode = aa.getServiceProviderCode();
+    if (arguments.length > 1) servProvCode = arguments[1]; // use different serv prov code
+    vScriptName = vScriptName.toUpperCase();    
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    try {
+        var emseScript = emseBiz.getScriptByPK(servProvCode,vScriptName,"ADMIN");
+        return emseScript.getScriptText() + ""; 
+        } 
+	catch(err)
+		{
+        return "";
+		}
 }
 
 var SCRIPT_VERSION = 3.0;
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-eval(getScriptText("INCLUDES_CUSTOM", null, true));
+eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getMasterScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getMasterScriptText("INCLUDES_CUSTOM"));
+
 var emailText = "";		
 var capId = null;
 var emailTemplate = "LIC MJ INACTIVE LICENSE # 313";
