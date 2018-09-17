@@ -1,4 +1,4 @@
-function dateAddHC2(td, amt)
+function dateAddHC3(td, amt)
 // perform date arithmetic on a string; uses the agency holiday calendar to test for business days
 // td can be "mm/dd/yyyy" (or any string that will convert to JS date)
 // amt can be positive or negative (5, -3) days
@@ -7,6 +7,8 @@ function dateAddHC2(td, amt)
 // function corrected by SLS Eric Koontz
 //     correctly adjust the target date to ensure that the date returned is a workind day
 //     correctly handle a zero date adjustment 
+//
+// chabged checkHolidayCalendar to checkHolidayCalendarIgnoreWeekends
 {
    	var useWorking = false;
 	if (arguments.length == 3)
