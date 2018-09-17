@@ -32,7 +32,7 @@ function dateAddHC3(td, amt)
 		while (i < Math.abs(amt) && failsafe < 600) {
 			// handle positive date changes
 			if (amt >= 0) {
-				nonWorking = checkHolidayCalendarIgnoreWeekends(dDate);
+				//nonWorking = checkHolidayCalendarIgnoreWeekends(dDate);
 				logDebug("Checkpoint 4. nonWorking value: " + nonWorking);
 				if (!nonWorking){
 					i++;
