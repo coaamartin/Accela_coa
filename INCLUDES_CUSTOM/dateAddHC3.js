@@ -24,16 +24,13 @@ function dateAddHC3(td, amt)
 	var nonWorking = false;
 	var failsafe = 0;
 
-	logDebug("Checkpoint 1. useWorking: " + useWorking);
-	logDebug("Checkpoint 2. dDate: " + dDate);
-	logDebug("Checkpoint 3. amt: " + amt);
 	// incorporate logic that will increment the date without counting non-working days
 	if (useWorking){
 		while (i < Math.abs(amt) && failsafe < 600) {
 			// handle positive date changes
 			if (amt >= 0) {
+				//skip this check, we want to schedule based on calendar days first
 				//nonWorking = checkHolidayCalendarIgnoreWeekends(dDate);
-				logDebug("Checkpoint 4. nonWorking value: " + nonWorking);
 				if (!nonWorking){
 					i++;
 					failsafe++;
@@ -57,7 +54,7 @@ function dateAddHC3(td, amt)
 				}
 			}
 		}
-		logDebug("Checkpoint 5. dDate: " + dDate);
+
 		// we have identified the target date using the working calendar, now we need
 		// to confirm that the target date is a working day
 		nonWorking = checkHolidayCalendar(dDate);
