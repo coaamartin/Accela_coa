@@ -24,7 +24,7 @@ function failedMJInspectionAutomation(vCapType) {
 			var vInspStatus = "Scheduled";
 			
 			//schedule new inspection 7 days out from failed inspection date
-			var newInspSchedDate = dateAddHC2(inspResultDate, daysToAdd, "Y");
+			var newInspSchedDate = dateAddHC3(inspResultDate, daysToAdd, "Y");
 			scheduleInspectDate(vInspType, newInspSchedDate);
 			
 			//get sequence ID for most recently created inspection
