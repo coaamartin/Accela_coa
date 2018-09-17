@@ -18,6 +18,10 @@ Notes:
 /*------------------------------------------------------------------------------------------------------/
 | INCLUDE SCRIPTS (Core functions, batch includes, custom functions)
 /------------------------------------------------------------------------------------------------------*/
+currentUserID = "ADMIN";
+useAppSpecificGroupName = false;
+
+
 SCRIPT_VERSION = 3.0;
 var useSA = false;
 var SA = null;
@@ -69,7 +73,6 @@ function getScriptText(vScriptName) {
 		return "";
 	}
 }
-
 
 
 
