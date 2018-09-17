@@ -124,7 +124,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 
 			//need to update the email function being used to ASYNC
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
-			emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
+			emailContactsWithReportLinkASync('Applicant', emailTemplate, eParams, "", "", 'N', "");
 			//if (!sent.getSuccess()) {
 			//	logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			//}
