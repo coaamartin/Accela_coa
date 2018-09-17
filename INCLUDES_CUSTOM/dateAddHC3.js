@@ -5,7 +5,7 @@ function dateAddHC3(td, amt)
 // if optional parameter #3 is present, use working days only
 // 
 // function corrected by SLS Eric Koontz
-//     correctly adjust the target date to ensure that the date returned is a workind day
+//     correctly adjust the target date to ensure that the date returned is a working day
 //     correctly handle a zero date adjustment 
 //
 // chabged checkHolidayCalendar to checkHolidayCalendarIgnoreWeekends
@@ -53,7 +53,7 @@ function dateAddHC3(td, amt)
 				}
 			}
 		}
-		
+		logDebug("Checkpoint. dDate: " + dDate);
 		// we have identified the target date using the working calendar, now we need
 		// to confirm that the target date is a working day
 		nonWorking = checkHolidayCalendarIgnoreWeekends(dDate);

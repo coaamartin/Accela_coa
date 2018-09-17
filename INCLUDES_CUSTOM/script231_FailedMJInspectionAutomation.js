@@ -24,6 +24,7 @@ function failedMJInspectionAutomation(vCapType) {
 			var vInspStatus = "Scheduled";
 			
 			//schedule new inspection daysToAdd number of days from inspection result date
+			logDebug("Days to add: " + daysToAdd);
 			var newInspSchedDate = dateAddHC3(inspResultDate, daysToAdd, "Y");
 			scheduleInspectDate(vInspType, newInspSchedDate);
 			
