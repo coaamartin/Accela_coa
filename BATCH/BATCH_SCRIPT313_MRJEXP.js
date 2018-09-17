@@ -123,7 +123,8 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
 
 			//need to update the email function being used to ASYNC
-			var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
+			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
+			var sent = emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
 			if (!sent.getSuccess()) {
 				logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			}
