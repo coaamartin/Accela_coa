@@ -32,6 +32,7 @@ function getScriptText(e) {
 var SCRIPT_VERSION = 3.0;
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getScriptText("INCLUDES_CUSTOM", null, true));
 var emailText = "";		
 var capId = null;
 var emailTemplate = "LIC MJ INACTIVE LICENSE # 313";
@@ -122,9 +123,8 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
 
-			//need to update the email function being used to ASYNC
+			emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
-			emailContactsWithReportLinkASync("Applicant", "LIC MJ INACTIVE LICENSE # 313", eParams);
 			//if (!sent.getSuccess()) {
 			//	logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			//}
