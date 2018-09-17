@@ -34,7 +34,6 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 var emailText = "";		
 var capId = null;
-
 showDebug = true;
 
 checkExpiredUpdateAppStatus("Delinquent", 7, "Expired", emailTemplate);
@@ -124,7 +123,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 
 			//need to update the email function being used to ASYNC
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
-			emailContactsWithReportLinkASync('Applicant', emailTemplate, eParams, "", "", 'N', "");
+			emailContactsWithReportLinkASync("Applicant", "LIC MJ INACTIVE LICENSE # 313", eParams, "", "", "N", "");
 			//if (!sent.getSuccess()) {
 			//	logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			//}
