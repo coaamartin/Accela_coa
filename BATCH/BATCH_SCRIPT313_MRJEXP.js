@@ -123,7 +123,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
 
-			emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "", capId);
+			emailContactsWithReportLinkASync("Applicant", emailTemplate, eParams, "", "", "N", "");
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
 			//if (!sent) {
 			//	logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
