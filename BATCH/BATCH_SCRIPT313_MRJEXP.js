@@ -203,7 +203,7 @@ function logDebug2(dstr) {
 	if(showDebug) {
 		aa.print(dstr)
 		emailText+= dstr + "<br>";
-		//aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr)
+		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr)
 	}
 }
 
