@@ -8,8 +8,8 @@ function script260_EmailExcelEnergyOnInspectionResult() {
         sendEmail = false,
         emailTemplate = 'BLD EXCEL ENERGY # 260',
         emailParams = aa.util.newHashtable();
-		var inspResultComment;
-		var inspComment;
+		//var inspResultComment;
+		//var inspComment;
 
     if (ifTracer(guideSheetObjects &&  guideSheetObjects.length > 0, "GuideSheet(s) Exists")) {
         for (idx in guideSheetObjects) {
@@ -38,9 +38,10 @@ function script260_EmailExcelEnergyOnInspectionResult() {
         if (inspResultComment) {
             addParameter(emailParams, "$$inspComment$$", inspResultComment);
 		}
-		if (inspComment) {
-			addParameter(emailParams, "$$inspComment$$", inspComment);
-		}
+		else
+			if (inspComment) {
+		    	addParameter(emailParams, "$$inspComment$$", inspComment);
+		    }
         addParameter(emailParams, "$$FullAddress$$", getCapFullAddress());
         emailAsync2("", emailTemplate, emailParams);
 }
