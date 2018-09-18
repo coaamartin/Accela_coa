@@ -47,9 +47,12 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 		//var ccEmail = "";
 		
 		var vODAProjectCoordinator = getAppSpecific("ODA Project Coordinator");
-		
 		var vODAPCUserID = lookup("ODA_PC", vODAProjectCoordinator);
 		var vODAPCEmail = getUserEmail(vODAPCUserID);
+		
+		var vODAProjectManager = getAppSpecific("ODA Project Manager");
+		var vODAPMUserID = lookup("ODA_PM", vODAProjectManager);
+		var vODAPMEmail = getUserEmail(vODAPMUserID);
 		
 		/*var projectCoord = asiValues["ODA Project Coordinator"];
 		var projectMan = asiValues["ODA Project Manager"];
@@ -95,6 +98,7 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 		addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
 		addParameter(eParams, "$$wfHours$$", wfHours);
 		addParameter(eParams, "$$ODACoordinatorEmail", vODAPCEmail);
+		addParameter(eParams, "$$ODAProjectManagerEmail", vODAPMEmail);
 		addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
 
 		emailWithReportLinkASync("Responsible Party,Consultant", emailTemplate, eParams, "", "", "N", "");
