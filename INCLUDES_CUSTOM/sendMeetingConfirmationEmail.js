@@ -97,8 +97,8 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 		addParameter(eParams, "$$wfComment$$", wfComment);
 		addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
 		addParameter(eParams, "$$wfHours$$", wfHours);
-		addParameter(eParams, "$$ODACoordinatorEmail", vODAPCEmail);
-		addParameter(eParams, "$$ODAProjectManagerEmail", vODAPMEmail);
+		addParameter(eParams, "$$ODACoordinatorEmail$$", vODAPCEmail);
+		addParameter(eParams, "$$ODAProjectManagerEmail$$", vODAPMEmail);
 		addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
 
 		emailWithReportLinkASync("Responsible Party,Consultant", emailTemplate, eParams, "", "", "N", "");
