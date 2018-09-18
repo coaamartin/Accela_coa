@@ -132,7 +132,7 @@ autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoCheck, tsiIs
 bldScript48_addForestryFee();
 
 //script 51
-if(wfTask =="Inspection Phase" && (wfStatus== "Expired" || wfStatus=="Final")){
+if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 	deactivateTask("Backflow Preventor");
 	deactivateTask("Water Meter");
 }
