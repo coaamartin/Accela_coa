@@ -11,6 +11,7 @@ if(parent){
 
 		createCapComment(wfComment,parent);
 		updateAppStatus("In Progress","Updated via Script",parent);
+		createCapComment(wfComment);
 
 
 	}
@@ -19,7 +20,7 @@ if(parent){
 
 		createCapComment(wfComment,parent);
 		updateAppStatus("Completed","Updated via Script",parent);
-
+		createCapComment(wfComment);
 
 		}
 	}
@@ -36,11 +37,13 @@ if (appMatch("Building/Enforcement/Notice of Violation/NA")) {
         if(matches(wfStatus,"Fire Call","Assigned","In Progress","Extension","Issue Summons","Notice of Violation","Third Notice","First Notice","Second Notice","Non Compliance")){
             createCapComment(wfComment,parent);
             updateAppStatus("In Progress","Updated via Script",parent);
+			createCapComment(wfComment);
         }
         
         if(matches(wfStatus,"Duplicate","Referred","Complete","Reasign to another Division","No Violation Observed","Compliance")){
             createCapComment(wfComment,parent);
             updateAppStatus("Completed","Updated via Script",parent);
+			createCapComment(wfComment);
         }
     }
 }
@@ -58,6 +61,7 @@ if(parent){
 
 		createCapComment(wfComment,parent);
 		updateAppStatus("In Progress","Updated via Script",parent);
+		createCapComment(wfComment);
 
 
 			}
@@ -66,6 +70,7 @@ if(parent){
 
 		createCapComment(wfComment,parent);
 		updateAppStatus("Completed","Updated via Script",parent);
+		createCapComment(wfComment);
 
 
 			}
@@ -85,6 +90,7 @@ if(parent){
 
 		createCapComment(wfComment,parent);
 		updateAppStatus("In Progress","Updated via Script",parent);
+		createCapComment(wfComment);
 
 
 }
@@ -93,6 +99,7 @@ if(parent){
 
 		createCapComment(wfComment,parent);
 		updateAppStatus("Completed","Updated via Script",parent);
+		createCapComment(wfComment);
 
 
 		}
@@ -113,6 +120,7 @@ if(parent){
 
 		createCapComment(wfComment,parent);
 		updateAppStatus("In Progress","Updated via Script",parent);
+		createCapComment(wfComment);
 
 
 	}
@@ -121,6 +129,7 @@ if(parent){
 
 		createCapComment(wfComment,parent);
 		updateAppStatus("Completed","Updated via Script",parent);
+		createCapComment(wfComment);
 
 		}
 	}
