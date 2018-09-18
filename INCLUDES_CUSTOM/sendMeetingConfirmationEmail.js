@@ -15,7 +15,8 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 			return false;
 		}
 
-		var toEmail = "";
+		//deprecated email functionality
+		/*var toEmail = "";
 		var responsibleParty = getContactByType("Responsible Party", capId);
 		if (!responsibleParty || !responsibleParty.getEmail()) {
 			logDebug("**WARN no 'Responsible Party' found or has no email capId=" + capId);
@@ -31,7 +32,7 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 				toEmail += ";";
 			}
 			toEmail += consultant.getEmail();
-		}
+		}*/
 
 		var asiValues = new Array();
 		if (useAppSpecificGroupName) {
@@ -43,9 +44,10 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 			asiValues = AInfo;
 		}
 
-		var ccEmail = "";
+		//var ccEmail = "";
 		
 		var vODAProjectCoordinator = getAppSpecific("ODA Project Coordinator");
+		
 		var vODAPCUserID = lookup("ODA_PC", vODAProjectCoordinator);
 		var vODAPCEmail = getUserEmail(vODAPCUserID);
 		
@@ -83,7 +85,7 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 		
 		var eParams = aa.util.newHashtable();
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
+		addParameter(eParams, "$$capAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 		addParameter(eParams, "$$balance$$", feeBalance(""));
 		addParameter(eParams, "$$wfTask$$", wfTask);
@@ -94,10 +96,12 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 		addParameter(eParams, "$$wfHours$$", wfHours);
 		addParameter(eParams, "$$ODACoordinatorEmail", vODAPCEmail);
 
-		var sent = aa.document.sendEmailByTemplateName("", toEmail, ccEmail, emailTemplate, eParams, null);
+		emailWithReportLinkASync("Responsible Party,Consultant", emailTemplate, eParams, "", "", "N", "");
+		
+		/*var sent = aa.document.sendEmailByTemplateName("", toEmail, ccEmail, emailTemplate, eParams, null);
 		if (!sent.getSuccess()) {
 			logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-		}
+		}*/
 	} else {
 		return false;
 	}
