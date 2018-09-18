@@ -44,7 +44,12 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 		}
 
 		var ccEmail = "";
-		var projectCoord = asiValues["ODA Project Coordinator"];
+		
+		var vODAProjectCoordinator = getAppSpecific("ODA Project Coordinator");
+		var vODAPCUserID = lookup("ODA_PC", vODAProjectCoordinator);
+		var vODAPCEmail = getUserEmail(vODAPCUserID);
+		
+		/*var projectCoord = asiValues["ODA Project Coordinator"];
 		var projectMan = asiValues["ODA Project Manager"];
 		
 		if (projectCoord != null && projectCoord != "") {
@@ -73,7 +78,9 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 					}
 				}
 			}
-		}
+		}*/
+		
+		
 		var eParams = aa.util.newHashtable();
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
@@ -85,6 +92,7 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 		addParameter(eParams, "$$wfComment$$", wfComment);
 		addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
 		addParameter(eParams, "$$wfHours$$", wfHours);
+		addParameter(eParams, "$$ODACoordinatorEmail", vODAPCEmail);
 
 		var sent = aa.document.sendEmailByTemplateName("", toEmail, ccEmail, emailTemplate, eParams, null);
 		if (!sent.getSuccess()) {
