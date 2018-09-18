@@ -101,7 +101,7 @@ function sendMeetingConfirmationEmail(workFlowTask, workflowStatusArray, emailTe
 		addParameter(eParams, "$$ODAProjectManagerEmail$$", vODAPMEmail);
 		addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
 
-		emailWithReportLinkASync("Responsible Party,Consultant", emailTemplate, eParams, "", "", "N", "");
+		emailContactsWithReportLinkASync("Responsible Party,Consultant", emailTemplate, eParams, "", "", "N", "");
 		
 		/*var sent = aa.document.sendEmailByTemplateName("", toEmail, ccEmail, emailTemplate, eParams, null);
 		if (!sent.getSuccess()) {
