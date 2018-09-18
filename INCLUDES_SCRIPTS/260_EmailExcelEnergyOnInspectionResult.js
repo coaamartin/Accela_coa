@@ -36,7 +36,7 @@ function script260_EmailExcelEnergyOnInspectionResult() {
 	
     if (ifTracer(sendEmail, "sendEmail is truthy")) {
         setChecklistItemText();
-		if(eventName == "V360InspectionResultSubmitAfter")
+		if(vEventName == "V360InspectionResultSubmitAfter")
 			inspectionComment = inspComment;
 		else
 			inspectionComment = inspResultComment;
