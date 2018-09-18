@@ -13,12 +13,12 @@ if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Pr
     for(i in feeArray){ 
 	    var aFee=feeArray[i];
 		var thisFeeSeq = feeExistsGetSeqNbr(aFee, "NEW");
-		if(thisFeeSeq) {thisFeeSeqList.push(thisFeeSeq); thisFeePeriodList("FINAL"); }
+		if(thisFeeSeq) {thisFeeSeqList.push(thisFeeSeq); thisFeePeriodList.push("FINAL"); }
 	}
     for(i in feeArray2){ 
 	    var aFee=feeArray2[i];
 		var thisFeeSeq = feeExistsGetSeqNbr(aFee, "NEW");
-		if(thisFeeSeq) {thisFeeSeqList.push(thisFeeSeq); thisFeePeriodList("FINAL"); }
+		if(thisFeeSeq) {thisFeeSeqList.push(thisFeeSeq); thisFeePeriodList.push("FINAL"); }
 	}
 	
 	if (thisFeeSeqList.length)
