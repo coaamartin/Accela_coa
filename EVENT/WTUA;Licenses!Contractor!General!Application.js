@@ -9,7 +9,7 @@ if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) {
 	if ("Residential Building".equals(AInfo["Contractor Type"])) {
 		theFee = 180;
 	}
-	updateFee("LIC_020", "LIC_CONTRACTOR_GENERAL", "FINAL", theFee, "N");
+	updateFee("LIC_020", "LIC_CONTRACTOR_GENERAL", "FINAL", theFee, "Y");
 	// end Script 427
 }
 
