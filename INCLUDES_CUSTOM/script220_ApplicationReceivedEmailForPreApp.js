@@ -25,10 +25,14 @@ function script220_ApplicationReceivedEmailForPreApp() {
         var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
         var reportFile = [];
         var emailParams = aa.util.newHashtable();
+		var vODAProjectCoordinator = getAppSpecific("ODA Project Coordinator");
+		var vODAPCUserID = lookup("ODA_PC", vODAProjectCoordinator);
+		var vODAPCEmail = getUserEmail(vODAPCUserID);
         
         addParameter(emailParams, "$$altID$$", capIDString);
         addParameter(emailParams, "$$ApplicationName$$", capName);
         addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
+		addParameter(emailParams, "$$ODACoordinatorEmail", vODAPCEmail);
         
         var resParEmail = getContactEmailAddress("Responsible Party", capId);
         var ccEmails = "";
