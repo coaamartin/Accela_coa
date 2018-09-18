@@ -10,6 +10,7 @@ function script260_EmailExcelEnergyOnInspectionResult() {
         emailParams = aa.util.newHashtable();
 		//var inspResultComment;
 		//var inspComment;
+		var inspectionComment = "";
 
     if (ifTracer(guideSheetObjects &&  guideSheetObjects.length > 0, "GuideSheet(s) Exists")) {
         for (idx in guideSheetObjects) {
@@ -35,13 +36,12 @@ function script260_EmailExcelEnergyOnInspectionResult() {
 	
     if (ifTracer(sendEmail, "sendEmail is truthy")) {
         setChecklistItemText();
-        if (inspResultComment) {
-            addParameter(emailParams, "$$inspComment$$", inspResultComment);
-		}
+		if(eventName == "V360InspectionResultSubmitAfter")
+			inspectionComment = inspComment;
 		else
-			if (inspComment) {
-		    	addParameter(emailParams, "$$inspComment$$", inspComment);
-		    }
+			inspectionComment = inspResultComment;
+		
+		addParameter(emailParams, "$$inspComment$$", inspectionComment);
         addParameter(emailParams, "$$FullAddress$$", getCapFullAddress());
         emailAsync2("", emailTemplate, emailParams);
 }
