@@ -21,7 +21,7 @@ if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Pr
 		if(thisFeeSeq) {thisFeeSeqList.push(thisFeeSeq); thisFeePeriodList.push("FINAL"); }
 	}
 	
-	if (thisFeeSeqList.length)
+	if (thisFeeSeqList.length > 0)
 	{
 	    invoiceResult = aa.finance.createInvoice(capId, thisFeeSeqList, thisFeePeriodList);
 	    if (invoiceResult.getSuccess())

@@ -31,18 +31,13 @@ function script400_WatTapApplicationInspectionAutomation() {
 
             
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
-            if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
-                if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
-                    if (ifTracer(!getMeterNumber(), 'getMeterNumber() == falsy')) {
-                        cancel = true;
-                        showMessage = true;
-                        comment('Water Meter Number must not be null to status inspection as passed.');                            
-                        logDebug('Water Meter Number must not be null to status inspection as passed.');                            
-                    }
-                }
+            if (ifTracer(!getMeterNumber(), 'getMeterNumber() == falsy')) {
+                cancel = true;
+                showMessage = true;
+                comment('Water Meter Number must not be null to status inspection as passed.');                            
+                logDebug('Water Meter Number must not be null to status inspection as passed.');                            
             }
         } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
-            if (ifTracer(inspType == 'Meter Set Inspection', 'inspType == Meter Set Inspection')) {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
                     var meterNbr = getMeterNumber();
                     editAppSpecific("Water Meter Number", meterNbr, capId);
@@ -64,9 +59,7 @@ function script400_WatTapApplicationInspectionAutomation() {
                     addParameter(emailParams, "$$inspComment$$", inspComment);
                     emailContactsWithCCs(toContactTypes, emailTemplate, emailParams, reportName, reportParams, "N", "", ccContactTypes);
                 }
-            }
         }
-
     }
     catch(err){
 		showMessage = true;
