@@ -155,11 +155,11 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 
 
 function checkCompletedMJInspections(newInspSchedDate) {
-	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
+	var inspectionTypesArray = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
 	var vAllInspPass = false;
-	for (s in inspectionTypesAry) {
+	for (i in inspectionTypesArray) {
 		logDebug("##############");
 		logDebug("Inspection Type: " + inspType);
 		logDebug("inspResultDate: " + inspResultDate);
