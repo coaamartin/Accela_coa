@@ -76,7 +76,7 @@ function passedMJInspectionAutomation() {
 					scheduleInspectDate(inspType, newInspSchedDate);
 					
 					logDebug("checkCompletedMJInspections result: " + checkCompletedMJInspections(newInspSchedDate));
-					if (checkCompletedMJInspections(newInspSchedDate) {
+					if (checkCompletedMJInspections(newInspSchedDate)) {
 						//update ASI
 						editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
 					}
@@ -155,7 +155,6 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 
 
 function checkCompletedMJInspections(newInspSchedDate) {
-	
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
