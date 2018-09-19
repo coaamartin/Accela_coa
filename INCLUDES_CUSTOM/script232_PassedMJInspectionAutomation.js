@@ -184,7 +184,7 @@ function checkCompletedMJInspections(newInspSchedDate) {
 	
 		for (i in vInspectionTypesArray) {
 			if (vCapInspType == vInspectionTypesArray[i]) {
-				if (vCapInspDate != null) {
+				//if (vCapInspDate != null) {
 					logDebug("##############");
 					logDebug("Inspection Type: " + vInspectionTypesArray[i]);
 					//logDebug("vCapInspDate: " + vCapInspDate);
@@ -203,7 +203,7 @@ function checkCompletedMJInspections(newInspSchedDate) {
 						logDebug("Failed the check");
 						vAllInspPass = false;
 					} 
-				}
+				//}
 			}
 			
 		}
