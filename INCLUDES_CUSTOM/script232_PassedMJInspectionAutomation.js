@@ -183,7 +183,8 @@ function checkCompletedMJInspections(newInspSchedDate) {
 				logDebug("vCapInspResult: " + vCapInspResult);
 				logDebug("##############");
 				
-				if (!(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
+				if (!(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
+					logDebug("Failed the check");
 					vAllInspPass = false;
 				} 
 			}
