@@ -6,7 +6,7 @@ if ( balanceDue <= 0 && !(AInfo["Paying with Bond"] == 'Yes') )
 {
 	logDebug("Balans due is <= 0 AND Paying with Bond is NOT YES - sending email, updating workflow, adding inspection...");
 	
-	activeTask("Permit Issued") 
+	activateTask("Permit Issued") 
 	logDebug("JMP - Permit Issued = ActiveTask");
 	
 	updateTask("Permit Issued", "Awaiting Approval", "EMSE", "Script");
