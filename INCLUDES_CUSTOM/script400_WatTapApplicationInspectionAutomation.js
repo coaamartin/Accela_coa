@@ -30,14 +30,14 @@ function script400_WatTapApplicationInspectionAutomation() {
             idx;
 
             
-		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
+		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1 || eventName.indexOf("InspectionResultModifyBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
             if (ifTracer(!getMeterNumber(), 'getMeterNumber() == falsy')) {
                 cancel = true;
                 showMessage = true;
                 comment('Water Meter Number must not be null to status inspection as passed.');                            
                 logDebug('Water Meter Number must not be null to status inspection as passed.');                            
             }
-        } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
+        } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName.indexOf("InspectionResultModifyAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
                     var meterNbr = getMeterNumber();
                     editAppSpecific("Water Meter Number", meterNbr, capId);
