@@ -16,15 +16,17 @@ if ( balanceDue <= 0 && !(AInfo["Paying with Bond"] == 'Yes') )
 	closeTask("Fee Processing","Fees Paid", "Closed by Script 14");
 	logDebug("JMP - Fee Processing = CloseTask");
 	
-	var reportname = "JD_TEST_REPORT";
-	var template = "JD_TEST_TEMPLATE";
-	var contact = "Applicant";
-	var joke = "Where there's a will, there's a relative.";
+	var reportname = "Stormwater_Quality_Permit";
+	var template = "SWMP PAYMENT RECEIVED # 361";
+	var contact = "Applicant"; //comma delimted list of contact types
+	//var joke = "Where there's a will, there's a relative.";
 
 	var emailparams = aa.util.newHashtable();
-	emailparams.put("$$Joke$$", joke);
+	//emailparams.put("$$Joke$$", joke);
+	
 	var reportparams = aa.util.newHashtable();
-	reportparams.put("DEPARTMENT", "Administrator");
+	//reportparams.put("Record_ID", "jhgjklhkj");
+	
 	emailContacts(contact, template, emailparams, reportname, reportparams, "N", "");
 	
 }
