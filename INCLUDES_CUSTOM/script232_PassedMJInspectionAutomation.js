@@ -161,13 +161,13 @@ function checkCompletedMJInspections(newInspSchedDate) {
 	var vAllInspPass = false;
 	for (i in inspectionTypesArray) {
 		logDebug("##############");
-		logDebug("Inspection Type: " + inspType);
+		logDebug("Inspection Type: " + inspectionTypesArray[i]);
 		logDebug("inspResultDate: " + inspResultDate);
 		logDebug("inspSchedDate: " + inspSchedDate);
 		logDebug("newInspSchedDate: " + newInspSchedDate);
 		logDebug("inspResult: " + inspResult);
 		logDebug("##############");
-		if (!(inspResultDate <= newInspSchedDate && inspResultDate >= inspSchedDate && (inspResult == "Passed" || inspResult == "Passed - Minor Violations"))) {
+		if (inspType == inspectionTypesArray[i] && !(inspResultDate <= newInspSchedDate && inspResultDate >= inspSchedDate && (inspResult == "Passed" || inspResult == "Passed - Minor Violations"))) {
 			vAllInspPass = false;
 		} 
 		vAllInspPass = true;
