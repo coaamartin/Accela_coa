@@ -89,7 +89,7 @@ function script83_TapAppFees() {
                 if(resUnits) updateFee("WAT_TA_16", feeSched, feePeriod, parseFloat(resUnits), feeInv);
                 if(stubOut == "Yes") updateFee("WAT_TA_44", feeSched, feePeriod, 1, feeInv);
                 
-                updateFee("WAT_TA_17", feeSched, feePeriod, 1, feeInv);
+                if(resUnits) updateFee("WAT_TA_17", feeSched, feePeriod, parseFloat(resUnits), feeInv);
                 
                 if(sizeWtrMeter == '3/4"') updateFee("WAT_TA_18", feeSched, feePeriod, 1, feeInv);
                 if(sizeWtrMeter == '1"') updateFee("WAT_TA_19", feeSched, feePeriod, 1, feeInv);
@@ -193,7 +193,7 @@ function script83_TapAppFees() {
                     if(resUnits) updateFee("WAT_TA2_16", feeSched, feePeriod, parseFloat(resUnits), feeInv);
                     if(stubOut == "Yes") updateFee("WAT_TA2_44", feeSched, feePeriod, 1, feeInv);
                     
-                    updateFee("WAT_TA2_17", feeSched, feePeriod, 1, feeInv);
+                    if(resUnits) updateFee("WAT_TA2_17", feeSched, feePeriod, parseFloat(resUnits), feeInv);
                     
                     if(sizeWtrMeter == '3/4"')   updateFee("WAT_TA2_18", feeSched, feePeriod, 1, feeInv);
                     if(sizeWtrMeter == '1"')     updateFee("WAT_TA2_19", feeSched, feePeriod, 1, feeInv);
