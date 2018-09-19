@@ -281,8 +281,9 @@ function getInspectionsThisCycle(newInspSchedDate) {
 						var inspID = inspArray[i].getIdNumber();
 						var compID = compArray[j].getIdNumber();
 						
-						
-						var pos = retInspections.getInspectionType().indexOf(inspArray[i].getInspectionType());
+						for (p in retInspections) {
+							var pos = retInspections[p].getInspectionType().indexOf(inspArray[i].getInspectionType());
+						}
 						if (pos != -1) {
 							logDebug("This type has been found in the array");
 							if (retInspections[pos].getIdNumber() < inspID ||  retInspections[pos].getIdNumber() < compID) {
