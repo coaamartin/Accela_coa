@@ -164,7 +164,7 @@ function checkCompletedMJInspections(newInspSchedDate) {
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
 	
-	var vAllInspPass = false;
+	var vAllInspPass = true;
 	
 	for (j in vCapInspections) {
 		vCapInspType = vCapInspections[j].getInspectionType();
@@ -174,17 +174,20 @@ function checkCompletedMJInspections(newInspSchedDate) {
 		
 		
 		for (i in vInspectionTypesArray) {
-			logDebug("##############");
-			logDebug("Inspection Type: " + vInspectionTypesArray[i]);
-			logDebug("vCapInspDate: " + vCapInspDate);
-			logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
-			logDebug("newInspSchedDate: " + newInspSchedDate);
-			logDebug("vCapInspResult: " + vCapInspResult);
-			logDebug("##############");
-			if (vCapInspType == vInspectionTypesArray[i] && !(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
-				vAllInspPass = false;
-			} 
-			vAllInspPass = true;
+			if (vCapInspType == vInspectionTypesArray[i]) {
+				logDebug("##############");
+				logDebug("Inspection Type: " + vInspectionTypesArray[i]);
+				logDebug("vCapInspDate: " + vCapInspDate);
+				logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
+				logDebug("newInspSchedDate: " + newInspSchedDate);
+				logDebug("vCapInspResult: " + vCapInspResult);
+				logDebug("##############");
+				
+				if (!(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
+					vAllInspPass = false;
+				} 
+			}
+			
 		}
 	}
 	logDebug("vAllInspPass: " + vAllInspPass);
