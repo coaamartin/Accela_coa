@@ -155,6 +155,7 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 
 
 function checkCompletedMJInspections(newInspSchedDate) {
+	var newInspSchedDate = new Date(newInspSchedDate);
 	var vCapInspections = getInspections();
 	var vCapInspType;
 	var vCapInspResult;
@@ -169,30 +170,36 @@ function checkCompletedMJInspections(newInspSchedDate) {
 	for (j in vCapInspections) {
 		vCapInspType = vCapInspections[j].getInspectionType();
 		vCapInspResult = vCapInspections[j].getInspectionStatus();
-		vCapInspSchedDate = vCapInspections[j].getScheduledDate();
 		vCapInspDate = vCapInspections[j].getInspectionDate();
+		vCapInspSchedDate = vCapInspections[j].getScheduledDate();
+		
+		vCapInspDate = convertDate(vCapInspDate);
+		vCapInspSchedDate = convertDate(vCapInspSchedDate);
+		
 		
 		
 		for (i in vInspectionTypesArray) {
 			if (vCapInspType == vInspectionTypesArray[i]) {
-				logDebug("##############");
-				logDebug("Inspection Type: " + vInspectionTypesArray[i]);
-				logDebug("vCapInspDate: " + vCapInspDate);
-				logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
-				logDebug("newInspSchedDate: " + newInspSchedDate);
-				logDebug("vCapInspResult: " + vCapInspResult);
-				logDebug("##############");
-				
-				if (!(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
-					logDebug("Failed the check");
-					vAllInspPass = false;
-				} 
+				if (vCapInspDate != null) {
+					logDebug("##############");
+					logDebug("Inspection Type: " + vInspectionTypesArray[i]);
+					logDebug("vCapInspDate: " + vCapInspDate);
+					logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
+					logDebug("newInspSchedDate: " + newInspSchedDate);
+					logDebug("vCapInspResult: " + vCapInspResult);
+					logDebug("##############");
+					
+					if (!(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
+						logDebug("Failed the check");
+						vAllInspPass = false;
+					} 
+				}
 			}
 			
 		}
 	}
 	logDebug("vAllInspPass: " + vAllInspPass);
-	if (vAllInspPass = true) {
+	if (vAllInspPass == true) {
 		return true;
 	} else {
 		return false;
