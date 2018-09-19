@@ -155,22 +155,37 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 
 
 function checkCompletedMJInspections(newInspSchedDate) {
-	var inspectionTypesArray = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
+	var vCapInspections = getInspections();
+	var vCapInspType;
+	var vCapInspResult;
+	var vCapInspSchedDate;
+	var vCapInspDate;
+	var vInspectionTypesArray = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
+	
 	var vAllInspPass = false;
-	for (i in inspectionTypesArray) {
-		logDebug("##############");
-		logDebug("Inspection Type: " + inspectionTypesArray[i]);
-		logDebug("inspResultDate: " + inspResultDate);
-		logDebug("inspSchedDate: " + inspSchedDate);
-		logDebug("newInspSchedDate: " + newInspSchedDate);
-		logDebug("inspResult: " + inspResult);
-		logDebug("##############");
-		if (inspType == inspectionTypesArray[i] && !(inspResultDate <= newInspSchedDate && inspResultDate >= inspSchedDate && (inspResult == "Passed" || inspResult == "Passed - Minor Violations"))) {
-			vAllInspPass = false;
-		} 
-		vAllInspPass = true;
+	
+	for (j in vCapInspections) {
+		vCapInspType = vCapInspections[j].getInspectionType();
+		vCapInspResult = vCapInspections[j].getInspectionStatus();
+		vCapInspSchedDate = vCapInspections[j].getScheduledDate();
+		vCapInspDate = vCapInspections[j].getInspectionDate();
+		
+		
+		for (i in vInspectionTypesArray) {
+			logDebug("##############");
+			logDebug("Inspection Type: " + vInspectionTypesArray[i]);
+			logDebug("vCapInspDate: " + vCapInspDate);
+			logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
+			logDebug("newInspSchedDate: " + newInspSchedDate);
+			logDebug("vCapInspResult: " + vCapInspResult);
+			logDebug("##############");
+			if (vCapInspType == vInspectionTypesArray[i] && !(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
+				vAllInspPass = false;
+			} 
+			vAllInspPass = true;
+		}
 	}
 	logDebug("vAllInspPass: " + vAllInspPass);
 	if (vAllInspPass = true) {
