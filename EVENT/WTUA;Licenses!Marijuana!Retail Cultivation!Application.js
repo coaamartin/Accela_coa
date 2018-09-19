@@ -1,6 +1,10 @@
 if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Issuance/Issued')){
     //Script 229 start
     var newLicCapId = createLicenseCoA("Active", true, "License Status", "Active");
+	var tDate = new Date();
+	var initialInspDate = dateAdd(tDate, 84);
+	var nextInspDate = dateAdd(initialInspDate, 91);
+	
     if(newLicCapId){
         sendMJLicEmail(newLicCapId);
         
@@ -12,6 +16,9 @@ if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Is
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Structural", 84, "SLCLARK", " ", "Scheduled by Script 229", newLicCapId);
 		scheduleInspectionWithCapIdBusinessDays("MJ Security Inspections - 3rd Party", 84, "DALLEN", " ", "Scheduled by Script 229", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Zoning Inspections", 84, "DALLEN", " ", "Scheduled by Script 229", newLicCapId);
+		
+		editAppSpecific("Initial Inspection Date", initialInspDate);
+		editAppSpecific("Next Inspection Date", nextInspDate);
     }
     //END Script 229
 }
