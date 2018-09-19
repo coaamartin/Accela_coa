@@ -284,12 +284,19 @@ function getInspectionsThisCycle(newInspSchedDate) {
 						
 						var pos = retInspections.indexOf(inspArray[i].getInspectionType());
 						if (pos != -1) {
-							if (inspID >= compID) {
-								retInspections[pos] = inspArray[i];
+							logDebug("This type has been found in the array");
+							if (retInspections[pos].getIdNumber() < inspID ||  retInspections[pos].getIdNumber() < compID) {
+								if (inspID >= compID) {
+									retInspections[pos] = inspArray[i];
+								} else {
+									retInspections[pos] = compArray[j];
+								}							
 							}
 						} else {
 							if (inspID >= compID) {
 								retInspections.push(inspArray[i]);
+							} else {
+								retInspections.push(compArray[j]);
 							}
 						} /*else {
 							var pos = retInspections.indexOf(inspArray[i].getInspectionType());
