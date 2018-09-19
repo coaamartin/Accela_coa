@@ -173,11 +173,15 @@ function checkCompletedMJInspections(newInspSchedDate) {
 		vCapInspDate = vCapInspections[j].getInspectionDate();
 		vCapInspSchedDate = vCapInspections[j].getScheduledDate();
 		
-		vCapInspDate = convertDate(vCapInspDate);
-		vCapInspSchedDate = convertDate(vCapInspSchedDate);
+		if (vCapInspDate != null) {
+			vCapInspDate = convertDate(vCapInspDate);
+		}
+		if (vCapInspSchedDate != null) {
+			vCapInspSchedDate = convertDate(vCapInspSchedDate);
+		}
 		
 		
-		
+	
 		for (i in vInspectionTypesArray) {
 			if (vCapInspType == vInspectionTypesArray[i]) {
 				if (vCapInspDate != null) {
