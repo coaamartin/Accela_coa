@@ -155,31 +155,133 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 
 
 function checkCompletedMJInspections(newInspSchedDate) {
-	var inspectionTypesArray = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
+	var newInspSchedDate = new Date(newInspSchedDate);
+	var vCapInspections = getInspectionsThisCycle(newInspSchedDate);
+	var vCapInspType;
+	var vCapInspResult;
+	var vCapInspSchedDate;
+	var vCapInspDate;
+	var vInspectionTypesArray = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
-	var vAllInspPass = false;
-	for (i in inspectionTypesArray) {
-		logDebug("##############");
-		logDebug("Inspection Type: " + inspectionTypesArray[i]);
-		logDebug("inspResultDate: " + inspResultDate);
-		logDebug("inspSchedDate: " + inspSchedDate);
-		logDebug("newInspSchedDate: " + newInspSchedDate);
-		logDebug("inspResult: " + inspResult);
-		logDebug("##############");
-		if (inspType == inspectionTypesArray[i] && !(inspResultDate <= newInspSchedDate && inspResultDate >= inspSchedDate && (inspResult == "Passed" || inspResult == "Passed - Minor Violations"))) {
-			vAllInspPass = false;
-		} 
-		vAllInspPass = true;
+	
+	var vAllInspPass = true;
+	
+	for (j in vCapInspections) {
+		vCapInspType = vCapInspections[j].getInspectionType();
+		vCapInspResult = vCapInspections[j].getInspectionStatus();
+		//vCapInspDate = vCapInspections[j].getInspectionDate();
+		//vCapInspSchedDate = vCapInspections[j].getScheduledDate();
+		
+		/*if (vCapInspDate != null) {
+			vCapInspDate = convertDate(vCapInspDate);
+		}
+		if (vCapInspSchedDate != null) {
+			vCapInspSchedDate = convertDate(vCapInspSchedDate);
+		}*/
+		
+		
+	
+		for (i in vInspectionTypesArray) {
+			if (vCapInspType == vInspectionTypesArray[i]) {
+				//if (vCapInspDate != null) {
+					logDebug("##############");
+					logDebug("Inspection Type: " + vInspectionTypesArray[i]);
+					//logDebug("vCapInspDate: " + vCapInspDate);
+					//logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
+					//logDebug("newInspSchedDate: " + newInspSchedDate);
+					logDebug("vCapInspResult: " + vCapInspResult);
+					logDebug("inspectionID: " + vCapInspections[j].getIdNumber());
+					logDebug("##############");
+					
+					/*if (!(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
+						logDebug("Failed the check");
+						vAllInspPass = false;
+					} */
+					
+					if (!(vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations")) {
+						logDebug("Failed the check");
+						vAllInspPass = false;
+					} 
+				//}
+			}
+			
+		}
 	}
 	logDebug("vAllInspPass: " + vAllInspPass);
-	if (vAllInspPass = true) {
+	if (vAllInspPass == true) {
 		return true;
 	} else {
 		return false;
 	}
 }
 
+//returns array of the most recent inspections from the given inspection cycle
+function getInspectionsThisCycle(newInspSchedDate) {
+
+	var retInspections = [];
+	
+	var priArray = aa.inspection.getInspections(capId);
+	var secArray = aa.inspection.getInspections(capId);
+	
+	var vCapInspDate;
+	var vCompInspDate;
+	var vCapInspSchedDate;
+	var vCapCompSchedDate;
+	
+	if (priArray.getSuccess()) {
+		
+		var inspArray = priArray.getOutput();
+		var compArray = secArray.getOutput();
+
+		for (i in inspArray) {
+			for (j in compArray) {		
+				vCapInspDate = inspArray[i].getInspectionDate();
+				vCompInspDate = compArray[j].getInspectionDate();
+				vCapInspSchedDate = inspArray[i].getScheduledDate();
+				vCapCompSchedDate = compArray[j].getScheduledDate();
+				
+				if (vCapInspDate != null) {
+					vCapInspDate = convertDate(vCapInspDate);
+				}
+				if (vCompInspDate != null) {
+					vCompInspDate = convertDate(vCompInspDate);
+				}
+				if (vCapInspSchedDate != null) {
+					vCapInspSchedDate = convertDate(vCapInspSchedDate);
+				}
+				if (vCapCompSchedDate != null) {
+					vCapCompSchedDate = convertDate(vCapCompSchedDate);
+				}
+				
+				if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate) {
+				
+					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
+						var inspID = inspArray[i].getIdNumber();
+						var compID = compArray[j].getIdNumber();
+						
+						if (inspID > compID) {
+							var pos = retInspections.indexOf(getInspectionType());
+							if (pos != -1) {
+								retInspections[pos] = inspArray[i];
+							} else {
+								retInspections.push(inspArray[i]);
+							}
+						} else {
+							var pos = retInspections.indexOf(getInspectionType());
+							if (pos != -1) {
+								retInspections[pos] = compArray[j];
+							} else {
+								retInspections.push(compArray[j]);
+							}
+						}
+					}
+				}
+			}
+		}
+	} 
+	return retInspections;
+}
 
 
 
