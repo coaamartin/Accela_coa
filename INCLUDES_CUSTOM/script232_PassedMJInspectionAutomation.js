@@ -262,7 +262,7 @@ function getInspectionsThisCycle(newInspSchedDate) {
 					logDebug("vCompInspDate: " + vCompInspDate);
 					logDebug("vCapCompSchedDate: " + vCapCompSchedDate);
 					logDebug("newInspSchedDate: " + newInspSchedDate);
-					logDebug("vCapInspResult: " + vCapInspResult);
+					//logDebug("vCapInspResult: " + vCapInspResult);
 					logDebug("inspectionID: " + inspArray[i].getIdNumber());
 					logDebug("inspectionID: " + compArray[j].getIdNumber());
 					logDebug("##############");
