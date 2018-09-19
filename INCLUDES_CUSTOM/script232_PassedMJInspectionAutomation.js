@@ -234,7 +234,7 @@ function getInspectionsThisCycle(newInspSchedDate) {
 		var inspArray = priArray.getOutput();
 		var compArray = secArray.getOutput();
 
-		for (i in inspArray) {
+		for (i = 0; i < inspArray.length; i++) {
 			for (j in compArray) {		
 				vCapInspDate = inspArray[i].getInspectionDate();
 				vCompInspDate = compArray[j].getInspectionDate();
@@ -281,21 +281,24 @@ function getInspectionsThisCycle(newInspSchedDate) {
 						var inspID = inspArray[i].getIdNumber();
 						var compID = compArray[j].getIdNumber();
 						
-						if (inspID > compID) {
-							var pos = retInspections.indexOf(inspArray[i].getInspectionType());
-							if (pos != -1) {
+						
+						var pos = retInspections.indexOf(inspArray[i].getInspectionType());
+						if (pos != -1) {
+							if (inspID >= compID) {
 								retInspections[pos] = inspArray[i];
-							} else {
-								retInspections.push(inspArray[i]);
 							}
 						} else {
+							if (inspID >= compID) {
+								retInspections.push(inspArray[i]);
+							}
+						} /*else {
 							var pos = retInspections.indexOf(inspArray[i].getInspectionType());
 							if (pos != -1) {
 								retInspections[pos] = compArray[j];
 							} else {
 								retInspections.push(compArray[j]);
 							}
-						}
+						}*/
 					}
 				}
 			}
