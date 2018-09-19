@@ -254,23 +254,30 @@ function getInspectionsThisCycle(newInspSchedDate) {
 					vCapCompSchedDate = convertDate(vCapCompSchedDate);
 				}
 				
-					logDebug("##############");
-					logDebug("Inspection Type: " + inspArray[i].getInspectionType());
-					logDebug("Inspection Type: " + compArray[j].getInspectionType());
-					logDebug("vCapInspDate: " + vCapInspDate);
-					logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
-					logDebug("vCompInspDate: " + vCompInspDate);
-					logDebug("vCapCompSchedDate: " + vCapCompSchedDate);
-					logDebug("newInspSchedDate: " + newInspSchedDate);
-					//logDebug("vCapInspResult: " + vCapInspResult);
-					logDebug("inspectionID: " + inspArray[i].getIdNumber());
-					logDebug("inspectionID: " + compArray[j].getIdNumber());
-					logDebug("##############");
+					
 				
 				
-				if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate) {
 				
-					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
+				
+				if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
+					
+					if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
+						
+						logDebug("##############");
+						logDebug("Inspection Type: " + inspArray[i].getInspectionType());
+						logDebug("Inspection Type: " + compArray[j].getInspectionType());
+						logDebug("vCapInspDate: " + vCapInspDate);
+						logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
+						logDebug("vCompInspDate: " + vCompInspDate);
+						logDebug("vCapCompSchedDate: " + vCapCompSchedDate);
+						logDebug("newInspSchedDate: " + newInspSchedDate);
+						//logDebug("vCapInspResult: " + vCapInspResult);
+						logDebug("inspectionID: " + inspArray[i].getIdNumber());
+						logDebug("inspectionID: " + compArray[j].getIdNumber());
+						logDebug("##############");
+						
+						
+						
 						var inspID = inspArray[i].getIdNumber();
 						var compID = compArray[j].getIdNumber();
 						
