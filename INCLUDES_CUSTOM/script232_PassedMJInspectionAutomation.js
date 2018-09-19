@@ -70,11 +70,16 @@ function passedMJInspectionAutomation() {
 				} else {
 					
 					//schedule new inspection 3 months out from passed inspection date
-					daysToAdd = 91;
 					//var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
+					daysToAdd = 91;
 					var newInspSchedDate = getAppSpecific("Next Inspection Date");
 					scheduleInspectDate(inspType, newInspSchedDate);
-					editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
+					
+					logDebug("checkCompletedMJInspections result: " + checkCompletedMJInspections(newInspSchedDate));
+					if (checkCompletedMJInspections(newInspSchedDate) {
+						//update ASI
+						editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
+					}
 					
 					//get sequence ID for most recently created inspection
 					var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
@@ -145,3 +150,42 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 		return null;
 	}
 }
+
+
+
+
+function checkCompletedMJInspections(newInspSchedDate) {
+	
+	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
+		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
+		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
+	
+	for (s in inspectionTypesAry) {
+		if (!(inspResultDate <= newInspSchedDate && inspResultDate >= inspSchedDate && (inspResult == "Passed" || inspResult == "Passed - Minor Violations"))) {
+			return false;
+		} 
+		return true;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
