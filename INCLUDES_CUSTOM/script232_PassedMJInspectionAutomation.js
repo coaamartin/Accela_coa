@@ -75,7 +75,7 @@ function passedMJInspectionAutomation() {
 					var newInspSchedDate = getAppSpecific("Next Inspection Date");
 					scheduleInspectDate(inspType, newInspSchedDate);
 					
-					logDebug("checkCompletedMJInspections result: " + checkCompletedMJInspections(newInspSchedDate));
+					//logDebug("checkCompletedMJInspections result: " + checkCompletedMJInspections(newInspSchedDate));
 					if (checkCompletedMJInspections(newInspSchedDate)) {
 						//update ASI
 						editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
