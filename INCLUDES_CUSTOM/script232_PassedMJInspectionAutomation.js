@@ -160,6 +160,13 @@ function checkCompletedMJInspections(newInspSchedDate) {
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
 	
 	for (s in inspectionTypesAry) {
+		logDebug("##############");
+		logDebug("Inspection Type: " + inspType);
+		logDebug("inspResultDate: " + inspResultDate);
+		logDebug("inspSchedDate: " + inspSchedDate);
+		logDebug("newInspSchedDate: " + newInspSchedDate);
+		logDebug("inspResult: " + inspResult);
+		logDebug("##############");
 		if (!(inspResultDate <= newInspSchedDate && inspResultDate >= inspSchedDate && (inspResult == "Passed" || inspResult == "Passed - Minor Violations"))) {
 			return false;
 		} 
