@@ -267,7 +267,7 @@ function getInspectionsThisCycle(newInspSchedDate) {
 						
 						var inspID = inspArray[i].getIdNumber();
 						var compID = compArray[j].getIdNumber();
-						var pos;
+						var pos = -1;
 						
 						for (p = 0; p < retInspections.length; p++) {
 							logDebug("What is the count of p?" + p);
