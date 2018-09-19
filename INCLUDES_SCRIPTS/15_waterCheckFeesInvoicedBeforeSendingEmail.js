@@ -24,7 +24,7 @@ for (var fee in allfees)
 logDebug("hasbeeninvoiced: " + hasbeeninvoiced);
 
 //put a message on the website if necessary
-if (wfTask == "Fee Processing" && wfStatus == "Ready to Pay" || numfees <= 0 || !hasbeeninvoiced)
+if (wfTask == "Fee Processing" && wfStatus == "Ready to Pay" && wfStatus != "No Fees Required" || numfees <= 0 || !hasbeeninvoiced)
 {
 	cancel = true;
 	showMessage = true;
