@@ -158,7 +158,7 @@ function checkCompletedMJInspections(newInspSchedDate) {
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
-	
+	var vAllInspPass = false;
 	for (s in inspectionTypesAry) {
 		logDebug("##############");
 		logDebug("Inspection Type: " + inspType);
@@ -168,9 +168,15 @@ function checkCompletedMJInspections(newInspSchedDate) {
 		logDebug("inspResult: " + inspResult);
 		logDebug("##############");
 		if (!(inspResultDate <= newInspSchedDate && inspResultDate >= inspSchedDate && (inspResult == "Passed" || inspResult == "Passed - Minor Violations"))) {
-			return false;
+			vAllInspPass = false;
 		} 
+		vAllInspPass = true;
+	}
+	logDebug("vAllInspPass: " + vAllInspPass);
+	if (vAllInspPass = true) {
 		return true;
+	} else {
+		return false;
 	}
 }
 
