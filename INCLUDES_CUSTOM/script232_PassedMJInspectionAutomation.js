@@ -255,14 +255,15 @@ function getInspectionsThisCycle(newInspSchedDate) {
 				}
 				
 					logDebug("##############");
-					logDebug("Inspection Type: " + vInspectionTypesArray[i]);
+					logDebug("Inspection Type: " + inspArray[i].getInspectionType());
+					logDebug("Inspection Type: " + compArray[j].getInspectionType());
 					logDebug("vCapInspDate: " + vCapInspDate);
 					logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
 					logDebug("vCompInspDate: " + vCompInspDate);
 					logDebug("vCapCompSchedDate: " + vCapCompSchedDate);
 					logDebug("newInspSchedDate: " + newInspSchedDate);
 					logDebug("vCapInspResult: " + vCapInspResult);
-					logDebug("inspectionID: " + inspArray[j].getIdNumber());
+					logDebug("inspectionID: " + inspArray[i].getIdNumber());
 					logDebug("inspectionID: " + compArray[j].getIdNumber());
 					logDebug("##############");
 				
