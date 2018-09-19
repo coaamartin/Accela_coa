@@ -229,9 +229,9 @@ function getInspectionsThisCycle(newInspSchedDate) {
 	var vCapInspSchedDate;
 	var vCapCompSchedDate;
 	
-	if (initArray.getSuccess()) {
+	if (priArray.getSuccess()) {
 		
-		var inspArray = initArray.getOutput();
+		var inspArray = priArray.getOutput();
 		var compArray = secArray.getOutput();
 
 		for (i in inspArray) {
