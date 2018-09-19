@@ -13,7 +13,6 @@ Sample Call:
 // Script 64
 if (balanceDue == 0 && "Ready to Pay".equals(taskStatus("License Issuance"))) {
 	include("64_CreateProfessionalLicenseAndLP");
-	updateTask("License Issuance","Issued","Updated by PRA;Licenses!Professional!General!Application","");
 	closeTask("License Issuance","Issued","Updated by PRA;Licenses!Professional!General!Application","");
 }
 
