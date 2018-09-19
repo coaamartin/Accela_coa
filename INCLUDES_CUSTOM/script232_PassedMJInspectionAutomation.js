@@ -71,8 +71,10 @@ function passedMJInspectionAutomation() {
 					
 					//schedule new inspection 3 months out from passed inspection date
 					daysToAdd = 91;
-					var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
+					//var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
+					var newInspSchedDate = getAppSpecific("Next Inspection Date");
 					scheduleInspectDate(inspType, newInspSchedDate);
+					editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd);
 					
 					//get sequence ID for most recently created inspection
 					var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
