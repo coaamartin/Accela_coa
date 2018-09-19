@@ -2,26 +2,7 @@
 Written by JMAIN
 */
 
-logDebug("starting script...")
-
-//determine if "Fee Processing" is the current task
-var currenttask = wfTask;
-logDebug("currenttask is: " + currenttask);
-var currentstatus = wfStatus;
-logDebug("currentstatus is: " + currentstatus);
-
-var correcttask = "Fee Processing";
-var iscorrecttask = false;
-if (currenttask == correcttask)
-{
-	iscorrecttask = true;	
-}
-logDebug("iscorrecttask: " + iscorrecttask);
-
-//determine if "Ready to Pay" is current status
-var taskstatustocheck = "Ready to Pay";
-var iscorrectstatus = isTaskStatus(correcttask, taskstatustocheck);
-logDebug("iscorrectstatus: " + iscorrectstatus);
+logDebug("starting script COA #15...")
 
 //are there any fees?
 var allfees = loadFees();
@@ -43,12 +24,12 @@ for (var fee in allfees)
 logDebug("hasbeeninvoiced: " + hasbeeninvoiced);
 
 //put a message on the website if necessary
-if (iscorrecttask && iscorrectstatus && (numfees > 0) && hasbeeninvoiced == false)
+if (wfTask == "Fee Processing" && wfStatus == "Ready to Pay" || numfees <= 0 || !hasbeeninvoiced)
 {
-	logDebug("Fees must be added AND invoiced before Ready to Pay can be activated!");
 	cancel = true;
 	showMessage = true;
 	comment("Fees must be added AND invoiced before Ready to Pay can be activated!");
+	logDebug("Fees must be added AND invoiced before Ready to Pay can be activated!");
 }
 
 // code to pretty print the content of allfees

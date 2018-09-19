@@ -17,12 +17,13 @@ if ("ECKO and Initial Inspection".equals(inspType) && "Passed".equals(inspResult
         schedInspection("Routine Inspections", true, "Days", 30, "");
         //restore capId
         capId = tempCapId;
-        //set app status to closed
-        updateAppStatus("Closed", "Closed Via Script")
+        //update wfTask and set app status to closed
+		updateTask("Permit Issued","Complete","Updated by script COA #12","Updated by script COA #12");
+        updateAppStatus("Closed", "Closed Via Script");
     }
     else
     {
-        logDebug("Problem locating child permit for record " + capId.getCustomID())
+        logDebug("Problem locating child permit for record " + capId.getCustomID());
     }
     
 
@@ -32,7 +33,7 @@ else if ("ECKO and Initial Inspection".equals(inspType) && "Failed".equals(inspR
     //Auto send email with inspection comments included to applicant (need email template) 
     //(Need to know if schedule another inspection or will Applicant schedule in ACA from COA Water staff)  
     var contact = "Applicant";
-    var template = "JD_TEST_TEMPLATE";
+    var template = "SWMP ECKO INITIAL INSPECTION FAIL # 363";
     var emailparams = aa.util.newHashtable();
     emailparams.put("$$inspComments$$", inspResultComment);
     emailContacts(contact, template, emailparams, "", "", "N", "");
