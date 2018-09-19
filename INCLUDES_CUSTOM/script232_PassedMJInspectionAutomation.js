@@ -156,7 +156,7 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 
 function checkCompletedMJInspections(newInspSchedDate) {
 	var newInspSchedDate = new Date(newInspSchedDate);
-	var vCapInspections = getInspections();
+	var vCapInspections = getInspectionsThisCycle(newInspSchedDate);
 	var vCapInspType;
 	var vCapInspResult;
 	var vCapInspSchedDate;
@@ -170,15 +170,15 @@ function checkCompletedMJInspections(newInspSchedDate) {
 	for (j in vCapInspections) {
 		vCapInspType = vCapInspections[j].getInspectionType();
 		vCapInspResult = vCapInspections[j].getInspectionStatus();
-		vCapInspDate = vCapInspections[j].getInspectionDate();
-		vCapInspSchedDate = vCapInspections[j].getScheduledDate();
+		//vCapInspDate = vCapInspections[j].getInspectionDate();
+		//vCapInspSchedDate = vCapInspections[j].getScheduledDate();
 		
-		if (vCapInspDate != null) {
+		/*if (vCapInspDate != null) {
 			vCapInspDate = convertDate(vCapInspDate);
 		}
 		if (vCapInspSchedDate != null) {
 			vCapInspSchedDate = convertDate(vCapInspSchedDate);
-		}
+		}*/
 		
 		
 	
@@ -187,13 +187,19 @@ function checkCompletedMJInspections(newInspSchedDate) {
 				if (vCapInspDate != null) {
 					logDebug("##############");
 					logDebug("Inspection Type: " + vInspectionTypesArray[i]);
-					logDebug("vCapInspDate: " + vCapInspDate);
-					logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
-					logDebug("newInspSchedDate: " + newInspSchedDate);
+					//logDebug("vCapInspDate: " + vCapInspDate);
+					//logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
+					//logDebug("newInspSchedDate: " + newInspSchedDate);
 					logDebug("vCapInspResult: " + vCapInspResult);
+					logDebug("inspectionID: " + vCapInspections[j].getIdNumber());
 					logDebug("##############");
 					
-					if (!(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
+					/*if (!(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
+						logDebug("Failed the check");
+						vAllInspPass = false;
+					} */
+					
+					if (!(vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations")) {
 						logDebug("Failed the check");
 						vAllInspPass = false;
 					} 
@@ -210,6 +216,64 @@ function checkCompletedMJInspections(newInspSchedDate) {
 	}
 }
 
+//returns array of the most recent inspections from the given inspection cycle
+function getInspectionsThisCycle(newInspSchedDate) {
+
+	var retInspections = [];
+	
+	var priArray = aa.inspection.getInspections(capId);
+	var secArray = aa.inspection.getInspections(capId);
+	
+	var vCapInspDate;
+	var vCompInspDate;
+	var vCapInspSchedDate;
+	var vCapCompSchedDate;
+	
+	if (initArray.getSuccess()) {
+		
+		var inspArray = initArray.getOutput();
+		var compArray = secArray.getOutput();
+
+		for (i in inspArray) {
+			for (j in compArray) {		
+				vCapInspDate = inspArray[i].getInspectionDate();
+				vCompInspDate = compArray[j].getInspectionDate();
+				vCapInspSchedDate = inspArray[i].getScheduledDate();
+				vCapCompSchedDate = compArray[j].getScheduledDate();
+				
+				if (vCapInspDate != null) {
+					vCapInspDate = convertDate(vCapInspDate);
+				}
+				if (vCompInspDate != null) {
+					vCompInspDate = convertDate(vCompInspDate);
+				}
+				if (vCapInspSchedDate != null) {
+					vCapInspSchedDate = convertDate(vCapInspSchedDate);
+				}
+				if (vCapCompSchedDate != null) {
+					vCapCompSchedDate = convertDate(vCapCompSchedDate);
+				}
+				
+				if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate) {
+				
+					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
+						var inspID = inspArray[i].getIdNumber();
+						var compID = compArray[j].getIdNumber();
+						
+						if (inspID > compID) {
+							retInspections.push(inspArray[i]);
+						} else {
+							retInspections.push(compArray[j]);
+						}
+					}
+				}
+			
+			}
+		}
+		
+	} 
+	return retInspections;
+}
 
 
 
