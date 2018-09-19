@@ -261,14 +261,14 @@ function getInspectionsThisCycle(newInspSchedDate) {
 						var compID = compArray[j].getIdNumber();
 						
 						if (inspID > compID) {
-							var pos = retInspections.indexOf(getInspectionType());
+							var pos = retInspections.indexOf(inspArray[i].getInspectionType());
 							if (pos != -1) {
 								retInspections[pos] = inspArray[i];
 							} else {
 								retInspections.push(inspArray[i]);
 							}
 						} else {
-							var pos = retInspections.indexOf(getInspectionType());
+							var pos = retInspections.indexOf(inspArray[i].getInspectionType());
 							if (pos != -1) {
 								retInspections[pos] = compArray[j];
 							} else {
