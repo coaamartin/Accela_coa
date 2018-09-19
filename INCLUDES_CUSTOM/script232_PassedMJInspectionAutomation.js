@@ -272,6 +272,7 @@ function getInspectionsThisCycle(newInspSchedDate) {
 						for (p = 0; p < retInspections.length; p++) {
 							pos = retInspections[p].getInspectionType().indexOf(inspArray[i].getInspectionType());
 						}
+						logDebug("pos: " + pos);
 						if (pos == -1) {
 							if (inspID >= compID) {
 								retInspections.push(inspArray[i]);
