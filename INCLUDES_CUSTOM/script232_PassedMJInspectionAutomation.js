@@ -253,8 +253,6 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				vCapInspSchedDate = inspArray[i].getScheduledDate();
 				vCapCompSchedDate = compArray[j].getScheduledDate();
 				
-				
-				
 				if (vCapInspDate != null) {
 					vCapInspDate = convertDate(vCapInspDate);
 				}
@@ -316,10 +314,6 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 						}
 				
 				} else {
-					logDebug("vFirstCycle = false");
-					
-					
-					
 					if (vCapInspSchedDate > vBeginCycle && vCapCompSchedDate > vBeginCycle && vCapInspSchedDate < newInspSchedDate && vCapCompSchedDate < newInspSchedDate) {
 						if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 							if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
