@@ -28,4 +28,4 @@ passedMJInspectionAutomation();
 //check for extension requests on MJ inspections
 requestExtensionMJInspection(vCapType);
 
-aa.sendEmail("noreply@accela.com", "evontrapp@etechconsultingllc.com", "", "DEBUG", debug)
+aa.sendMail("noreply@accela.com", "evontrapp@etechconsultingllc.com", "", "DEBUG", debug)
