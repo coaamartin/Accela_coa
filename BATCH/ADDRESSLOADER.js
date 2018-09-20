@@ -504,6 +504,7 @@ try{
 		var hsNum = addr.getHouseNumberStart();
 		var stName = addr.getStreetName();
 		var city = addr.getCity();
+		var unit = addr.getUnitStart();
 		var seqNum = parseInt(addr.getSourceNumber());
 
 		searchRefAddressModel = aa.proxyInvoker.newInstance("com.accela.aa.aamain.address.RefAddressModel").getOutput();
@@ -511,6 +512,7 @@ try{
 			searchRefAddressModel.setStreetName(stName);
 			searchRefAddressModel.setHouseNumberStart(hsNum);
 			searchRefAddressModel.setCity(city);
+			searchRefAddressModel.setUnitStart(unit);
 
 		//Look up the refAddressModel.
 		var searchResult = aa.address.getRefAddressByServiceProviderRefAddressModel(searchRefAddressModel);
