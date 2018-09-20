@@ -57,7 +57,7 @@ var capId = null;
 var emailTemplate = "LIC MJ INACTIVE LICENSE # 313";
 showDebug = true;
 
-checkExpiredUpdateAppStatus("Delinquent", 7, "Expired", emailTemplate);
+checkExpiredUpdateAppStatus("Delinquent", 8, "Expired", emailTemplate);
 
 /**
  * if license is app has a certain status, and record is expired for certain number of days, update record status and email Applicant
