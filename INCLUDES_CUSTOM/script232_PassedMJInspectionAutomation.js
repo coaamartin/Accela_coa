@@ -273,9 +273,8 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				if (vCapCompSchedDate != null) {
 					vCapCompSchedDate = convertDate(vCapCompSchedDate);
 				}
-				
-				/*if (vFirstCycle == true) {
-					logDebug("vFirstCycle = true");
+
+				if (vCapInspSchedDate >= vBeginCycle && vCapCompSchedDate >= vBeginCycle && vCapInspSchedDate <= newInspSchedDate && vCapCompSchedDate <= newInspSchedDate) {
 					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 						if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
 							
@@ -320,55 +319,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 							}
 						}
 					}
-				
-				} else {*/
-					if (vCapInspSchedDate >= vBeginCycle && vCapCompSchedDate >= vBeginCycle && vCapInspSchedDate <= newInspSchedDate && vCapCompSchedDate <= newInspSchedDate) {
-						if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
-							if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
-								
-								logDebug("##############");
-								logDebug("Inspection Type: " + inspArray[i].getInspectionType());
-								logDebug("Inspection Type: " + compArray[j].getInspectionType());
-								logDebug("vCapInspDate: " + vCapInspDate);
-								logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
-								logDebug("vCompInspDate: " + vCompInspDate);
-								logDebug("vCapCompSchedDate: " + vCapCompSchedDate);
-								logDebug("newInspSchedDate: " + newInspSchedDate);
-								logDebug("inspectionID: " + inspArray[i].getIdNumber());
-								logDebug("inspectionID: " + compArray[j].getIdNumber());
-								logDebug("##############");
-								
-								var inspID = inspArray[i].getIdNumber();
-								var compID = compArray[j].getIdNumber();
-								var pos = -1;
-								
-								for (p in retInspections) {
-									pos = retInspections[p].getInspectionType().indexOf(inspArray[i].getInspectionType());
-									if (pos == 0) {
-										pos = p;
-										break;
-									}							
-								}
-								if (pos == -1) {
-									if (inspID >= compID) {
-										retInspections.push(inspArray[i]);
-									} else {
-										retInspections.push(compArray[j]);
-									}
-								} else {
-									logDebug("This type has been found in the array");
-									if (retInspections[pos].getIdNumber() <= inspID ||  retInspections[pos].getIdNumber() <= compID) {
-										if (inspID >= compID) {
-											retInspections[pos] = inspArray[i];
-										} else {
-											retInspections[pos] = compArray[j];
-										}							
-									}
-								}
-							}
-						}
-					}
-				//}
+				}
 			}
 		}
 	} 
