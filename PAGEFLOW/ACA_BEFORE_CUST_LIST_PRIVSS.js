@@ -77,9 +77,9 @@ try{
             if(permitType == "Private Storm Sewer Permit"){
                 if (typeof (PRIVATESTORMMATERIAL) == "object") {
                     for(x in PRIVATESTORMMATERIAL){
-                        var col1 = PUBLICSTORMMATERIAL[x]["Size of Pipe"];
-                        var col2 = PUBLICSTORMMATERIAL[x]["Pipe Material"];       
-                        var col3 = PUBLICSTORMMATERIAL[x]["Length in Lineal Feet"];
+                        var col1 = PRIVATESTORMMATERIAL[x]["Size of Pipe"];
+                        var col2 = PRIVATESTORMMATERIAL[x]["Pipe Material"];       
+                        var col3 = PRIVATESTORMMATERIAL[x]["Length in Lineal Feet"];
                         
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
