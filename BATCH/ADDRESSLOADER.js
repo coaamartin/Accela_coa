@@ -241,7 +241,7 @@ function processLine(line) {
 				 // logDebug("line value: " + pIndex +  ", " + pieceDataName + ", " + pieceValue);
 				
 				if (String(pieceValue).trim() == "") continue;
-
+				logDebug("DONB 1.1 pieceDataName " + pieceDataName)
 				switch (pieceDataName) {
 					case "PARCEL_NO": 
 							newAddr.setParcelNumber(String(pieceValue).trim());
