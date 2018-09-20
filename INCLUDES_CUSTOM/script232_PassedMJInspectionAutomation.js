@@ -13,12 +13,12 @@ function passedMJInspectionAutomation() {
 	var emailTemplate = "LIC MJ COMPLIANCE #232";
 		
 	//check for passed inspections, schedule new inspection, and email inspection contact with report
-	for (s in inspectionTypesAry) {
+	//for (s in inspectionTypesAry) {
 		vIsMJLicense = false;	
 		vIsMJRetailStoreLicense = false;
 		vIsMJLicense = appMatch("Licenses/Marijuana/*/License");
 		if (vIsMJLicense == true) {
-			if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
+			//if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
 				vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
 				var vInspector = getInspectorByInspID(inspId, capId);
 				logDebug("vInspector: " + vInspector);
@@ -123,9 +123,9 @@ function passedMJInspectionAutomation() {
 				//emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
 
 				return true;
-			}			
+			//}			
 		}
-	}
+	//}
 	return false;
 }
 
@@ -235,7 +235,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 	if (vFirstCycle) {
 		vBeginCycle.setMonth(initialInspSchedDate.getMonth());
 		vBeginCycle.setFullYear(initialInspSchedDate.getFullYear());
-		vBeginCycle.setDate(initialInspSchedDate.getDate() - 91);
+		vBeginCycle.setDate(initialInspSchedDate.getDate());
 		vBeginCycle = new Date(vBeginCycle);
 	} else {
 		vBeginCycle.setMonth(newInspSchedDate.getMonth());
