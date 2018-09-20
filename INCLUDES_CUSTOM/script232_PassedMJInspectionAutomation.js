@@ -226,7 +226,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 	
 	logDebug("dateDiff(newInspSchedDate, initialInspSchedDate): " + dateDiff(newInspSchedDate, initialInspSchedDate));
 	
-	if (dateDiff(fileDate, newInspSchedDate) <= 84) {
+	if (dateDiff(fileDate, newInspSchedDate) <= 175) {
 		vFirstCycle = true;
 		logDebug("vFirstCycle = true");
 	}
