@@ -74,14 +74,14 @@ function passedMJInspectionAutomation() {
 					daysToAdd = 91;
 					var newInspSchedDate = getAppSpecific("Next Inspection Date");
 					var initialInspSchedDate = getAppSpecific("Initial Inspection Date");
-					scheduleInspectDate(inspType, newInspSchedDate);
+					
 					
 					//logDebug("checkCompletedMJInspections result: " + checkCompletedMJInspections(newInspSchedDate));
 					if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate)) {
 						//update ASI
 						editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
 					}
-					
+					scheduleInspectDate(inspType, newInspSchedDate);
 					//get sequence ID for most recently created inspection
 					var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
 					if (lastInspectionObj == null) {
