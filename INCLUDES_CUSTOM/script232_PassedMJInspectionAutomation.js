@@ -30,10 +30,11 @@ function passedMJInspectionAutomation() {
 				if (vIsMJRetailStoreLicense == true) {
 					var vChildren = getRenewalCountByParentCapIDForComplete(capId);
 					
-					//check if more than one child renewal record exists
+					//check if more than 300 days has passed since the initial inspection
 					//if (vChildren != false && vChildren != null && vChildren > 1) {
 					if (dateDiff(initialInspSchedDate, today) >= 300) {
-					
+						
+						logDebug("Switching to 6-month inspection cycle for MJ Store");
 						//schedule new inspection 6 months out from passed inspection date
 						daysToAdd = 182;
 					} else {
