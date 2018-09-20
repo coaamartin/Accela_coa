@@ -237,7 +237,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 	if (vFirstCycle) {
 		vBeginCycle.setMonth(initialInspSchedDate.getMonth());
 		vBeginCycle.setFullYear(initialInspSchedDate.getFullYear());
-		vBeginCycle.setDate(initialInspSchedDate.getDate());
+		vBeginCycle.setDate(initialInspSchedDate.getDate()-1);
 		vBeginCycle = new Date(vBeginCycle);
 	} else {
 		vBeginCycle.setMonth(newInspSchedDate.getMonth());
