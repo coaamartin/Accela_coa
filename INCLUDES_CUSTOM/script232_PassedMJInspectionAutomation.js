@@ -270,7 +270,6 @@ function getInspectionsThisCycle(newInspSchedDate) {
 						var pos = -1;
 						
 						for (p = 0; p < retInspections.length; p++) {
-							logDebug("What is the count of p?" + p);
 							var currentInspType = inspArray[i].getInspectionType();
 							pos = retInspections[p].getInspectionType().indexOf(currentInspType);
 						}
@@ -283,7 +282,7 @@ function getInspectionsThisCycle(newInspSchedDate) {
 							}
 						} else {
 							logDebug("This type has been found in the array");
-							if (retInspections[pos].getIdNumber() < inspID ||  retInspections[pos].getIdNumber() < compID) {
+							if (retInspections[pos].getIdNumber() <= inspID ||  retInspections[pos].getIdNumber() <= compID) {
 								if (inspID >= compID) {
 									retInspections[pos] = inspArray[i];
 								} else {
