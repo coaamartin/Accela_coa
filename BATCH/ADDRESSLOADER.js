@@ -533,6 +533,7 @@ try{
 							var refPrclObj = aa.parcel.getParceListForAdmin(parcel, null, null, null, null, null, null, null, null, null);
 							if (refPrclObj.getSuccess()) {
 								var prclArr = refPrclObj.getOutput();
+								logDebug("DONB1")
 								if (prclArr.length == 0) {
 									logDebug("No valid parcel exists with this number: " + parcel);
 								}else{
@@ -613,6 +614,7 @@ try{
 			}
 		// address exists, update eligible fields
 			}else{  
+				logDebug("DONB2")
 				var numOfAdds = refAddressModelArray.length;
 				 // logDebug("numOfAdds: " + numOfAdds);
 				
@@ -649,6 +651,7 @@ try{
 					if (!matches(parcel, " ", null)) {
 						addrParcelList = new Array;
 						var addrParcelList = getAddressParcels(hsNum, stName, city);     // local function
+						logDebug("DONB3")
 						if (addrParcelList.length){
 							var skip = false;
 							for (l in addrParcelList){
@@ -895,6 +898,7 @@ function getAddressParcels(addressStart, streetName, city){
 		var addrParcelOutput = parcelInfoModelResult.getOutput();
 		//logDebug("addrParcelOutput.length: " + addrParcelOutput.length);
 		var parcelArray = new Array();
+		logDebug("DONB4")
 		if (addrParcelOutput.length) {
 			for(i in addrParcelOutput){
 				var parcelModel = addrParcelOutput[i].getParcelModel();
