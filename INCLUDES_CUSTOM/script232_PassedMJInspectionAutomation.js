@@ -268,6 +268,8 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				//if (vFirstCycle == true) {
 					//logDebug("vFirstCycle = true");
 					var vBeginCycle =  new Date();
+					vBeginCycle.setDate(newInspSchedDate.getMonth());
+					vBeginCycle.setDate(newInspSchedDate.getFullYear());
 					vBeginCycle.setDate(newInspSchedDate.getDate() - 91);
 					vBeginCycle = new Date(vBeginCycle);
 					
