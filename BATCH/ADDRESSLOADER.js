@@ -501,6 +501,7 @@ try{
 		logDebug("addrType " + addrType)
 		var addr = addrArray[2];
 		logDebug("addr " + addr)
+		logDebug("DONB7 " + addr.getHouseNumberStart())
 		var attrArray = addrArray[3];
 		logDebug("attrArray " + attrArray)
 	}
