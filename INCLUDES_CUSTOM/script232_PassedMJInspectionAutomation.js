@@ -155,7 +155,7 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 
 function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 	var newInspSchedDate = new Date(newInspSchedDate);
-	var initialInspSchedDate = new Date (initialInspSchedDate);
+	var initialInspSchedDate = new Date(initialInspSchedDate);
 	var vCapInspections = getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate);
 	var vCapInspType;
 	var vCapInspResult;
@@ -265,9 +265,13 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 					vCapCompSchedDate = convertDate(vCapCompSchedDate);
 				}
 				
-				//if (vFirstCycle == false) {
-					//logDebug("vFirstCycle = false");
-					//var vBeginCycle = dateAdd(newInspSchedDate, -91)
+				//if (vFirstCycle == true) {
+					//logDebug("vFirstCycle = true");
+					var vBeginCycle =  new Date();
+					vBeginCycle.setDate(newInspSchedDate - 91);
+					vBeginCycle = new Date(vBeginCycle);
+					
+					logDebug("vBeginCycle: " + vBeginCycle);
 					
 					//if (vCapInspSchedDate > vBeginCycle && vCapCompSchedDate > vBeginCycle && vCapInspSchedDate < newInspSchedDate && vCapCompSchedDate < newInspSchedDate) {
 						if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
