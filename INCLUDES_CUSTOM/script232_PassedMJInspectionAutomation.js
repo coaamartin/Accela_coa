@@ -236,7 +236,13 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 		logDebug("vFirstCycle = true");
 	}
 	
+	var vBeginCycle =  new Date();
+	vBeginCycle.setMonth(newInspSchedDate.getMonth());
+	vBeginCycle.setFullYear(newInspSchedDate.getFullYear());
+	vBeginCycle.setDate(newInspSchedDate.getDate() - 91);
+	vBeginCycle = new Date(vBeginCycle);
 	
+	logDebug("vBeginCycle: " + vBeginCycle);
 	
 	if (priArray.getSuccess()) {
 		
@@ -267,16 +273,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				
 				if (vFirstCycle == true) {
 					logDebug("vFirstCycle = true");
-					var vBeginCycle =  new Date();
-					vBeginCycle.setMonth(newInspSchedDate.getMonth());
-					vBeginCycle.setFullYear(newInspSchedDate.getFullYear());
-					vBeginCycle.setDate(newInspSchedDate.getDate() - 91);
-					vBeginCycle = new Date(vBeginCycle);
-					
-					logDebug("vBeginCycle: " + vBeginCycle);
-					
-					
-						if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
+							if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 							if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
 								
 								logDebug("##############");
@@ -323,6 +320,9 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				
 				} else {
 					logDebug("vFirstCycle = false");
+					
+					
+					
 					if (vCapInspSchedDate > vBeginCycle && vCapCompSchedDate > vBeginCycle && vCapInspSchedDate < newInspSchedDate && vCapCompSchedDate < newInspSchedDate) {
 						if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 							if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
