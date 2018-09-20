@@ -23,6 +23,7 @@ function passedMJInspectionAutomation() {
 				var vInspStatus = "Scheduled";
 				var initialInspSchedDate = getAppSpecific("Initial Inspection Date");
 				var newInspSchedDate = getAppSpecific("Next Inspection Date");
+				var today = new Date();
 				
 				initialInspSchedDate = new Date(initialInspSchedDate);
 				
