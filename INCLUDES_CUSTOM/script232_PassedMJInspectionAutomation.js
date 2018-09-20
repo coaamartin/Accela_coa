@@ -274,7 +274,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 					vCapCompSchedDate = convertDate(vCapCompSchedDate);
 				}
 				
-				if (vFirstCycle == true) {
+				/*if (vFirstCycle == true) {
 					logDebug("vFirstCycle = true");
 					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 						if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
@@ -321,7 +321,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 						}
 					}
 				
-				} else {
+				} else {*/
 					if (vCapInspSchedDate >= vBeginCycle && vCapCompSchedDate >= vBeginCycle && vCapInspSchedDate < newInspSchedDate && vCapCompSchedDate < newInspSchedDate) {
 						if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 							if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
@@ -368,7 +368,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 							}
 						}
 					}
-				}
+				//}
 			}
 		}
 	} 
