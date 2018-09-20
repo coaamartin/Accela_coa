@@ -28,7 +28,7 @@ function passedMJInspectionAutomation() {
 				
 				//check if license is Marijuana/Retail Store
 				if (vIsMJRetailStoreLicense == true) {
-					var vChildren = getRenewalCountByParentCapIDForComplete(capId);
+					//var vChildren = getRenewalCountByParentCapIDForComplete(capId);
 					
 					//check if more than 300 days has passed since the initial inspection
 					//if (vChildren != false && vChildren != null && vChildren > 1) {
