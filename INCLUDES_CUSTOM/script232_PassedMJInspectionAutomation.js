@@ -271,7 +271,7 @@ function getInspectionsThisCycle(newInspSchedDate) {
 						
 						for (p in retInspections) {
 							var currentInspType = inspArray[i].getInspectionType();
-							pos = retInspections.getInspectionType().indexOf(currentInspType);
+							pos = retInspections[p].getInspectionType().indexOf(currentInspType);
 						}
 						logDebug("pos: " + pos);
 						if (pos == -1) {
