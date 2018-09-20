@@ -1,16 +1,12 @@
 
 function passedMJInspectionAutomation() {
-	
-	// list MJ inspection types
-	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
-		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
-		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
-	
-	//define number of days to schedule next inspection
 	var daysToAdd;
 	var vIsMJLicense;
 	var vIsMJRetailStoreLicense;
 	var emailTemplate = "LIC MJ COMPLIANCE #232";
+	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
+		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
+		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
 		
 	//check for passed inspections, schedule new inspection, and email inspection contact with report
 	//for (s in inspectionTypesAry) {
@@ -25,6 +21,8 @@ function passedMJInspectionAutomation() {
 				logDebug("vInspector: " + vInspector);
 				var vInspType = inspType;
 				var vInspStatus = "Scheduled";
+				var initialInspSchedDate = getAppSpecific("Initial Inspection Date");
+				var newInspSchedDate = getAppSpecific("Next Inspection Date");
 				
 				//check if license is Marijuana/Retail Store
 				if (vIsMJRetailStoreLicense == true) {
@@ -35,8 +33,11 @@ function passedMJInspectionAutomation() {
 						
 						//schedule new inspection 6 months out from passed inspection date
 						daysToAdd = 182;
-						var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 						scheduleInspectDate(inspType, newInspSchedDate);
+						if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate)) {
+							//update ASI
+							editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
+						}
 						
 						//get sequence ID for most recently created inspection
 						var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
@@ -53,9 +54,12 @@ function passedMJInspectionAutomation() {
 						
 						//schedule new inspection 3 months out from passed inspection date
 						daysToAdd = 91;
-						var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
-						scheduleInspectDate(inspType, newInspSchedDate);	
-
+						scheduleInspectDate(inspType, newInspSchedDate);
+						if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate)) {
+							//update ASI
+							editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
+						}
+						
 						//get sequence ID for most recently created inspection
 						var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
 						if (lastInspectionObj == null) {
@@ -71,14 +75,8 @@ function passedMJInspectionAutomation() {
 				} else {
 					
 					//schedule new inspection 3 months out from passed inspection date
-					//var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 					daysToAdd = 91;
-					var initialInspSchedDate = getAppSpecific("Initial Inspection Date");
-					var newInspSchedDate = getAppSpecific("Next Inspection Date");
-					
-
 					scheduleInspectDate(inspType, newInspSchedDate);
-					//logDebug("checkCompletedMJInspections result: " + checkCompletedMJInspections(newInspSchedDate));
 					if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate)) {
 						//update ASI
 						editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
@@ -121,7 +119,7 @@ function passedMJInspectionAutomation() {
 				addParameter(reportParams, "InspActNumber", inspId);
 				
 				//send email with report attachment		
-				//emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
+				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
 
 				return true;
 			}			
@@ -130,6 +128,7 @@ function passedMJInspectionAutomation() {
 	return false;
 }
 
+//returns the number of completed renewals on a parent license
 function getRenewalCountByParentCapIDForComplete(parentCapid) {
 	if (parentCapid == null || aa.util.instanceOfString(parentCapid)) {
 		return null;
@@ -154,58 +153,35 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 	}
 }
 
-
+//scans array of inspections from current quarterly inspection cycle, returns true if all 8 inspection types are present
 function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 	var newInspSchedDate = new Date(newInspSchedDate);
 	var initialInspSchedDate = new Date(initialInspSchedDate);
 	var vCapInspections = getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate);
 	var vCapInspType;
 	var vCapInspResult;
-	var vCapInspSchedDate;
-	var vCapInspDate;
+	var vInspTypeCounter = 0;
 	var vInspectionTypesArray = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
-	
-	//var vAllInspPass = false;
-	var vInspTypeCounter = 0;
-	
+
 	for (j in vCapInspections) {
 		vCapInspType = vCapInspections[j].getInspectionType();
 		vCapInspResult = vCapInspections[j].getInspectionStatus();
-		//vCapInspDate = vCapInspections[j].getInspectionDate();
-		//vCapInspSchedDate = vCapInspections[j].getScheduledDate();
-		
-		/*if (vCapInspDate != null) {
-			vCapInspDate = convertDate(vCapInspDate);
-		}
-		if (vCapInspSchedDate != null) {
-			vCapInspSchedDate = convertDate(vCapInspSchedDate);
-		}*/
 		
 		for (i in vInspectionTypesArray) {
 			if (vCapInspType == vInspectionTypesArray[i]) {
 
-				logDebug("##############");
+				/*logDebug("##############");
 				logDebug("Inspection Type: " + vInspectionTypesArray[i]);
-				//logDebug("vCapInspDate: " + vCapInspDate);
-				//logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
-				//logDebug("newInspSchedDate: " + newInspSchedDate);
 				logDebug("vCapInspResult: " + vCapInspResult);
 				logDebug("inspectionID: " + vCapInspections[j].getIdNumber());
-				logDebug("##############");
+				logDebug("##############");*/
 				
-				if (!(vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations")) {
-					logDebug("Failed the check");
-					//vAllInspPass = false;
-				} 
 				vInspTypeCounter++;	
 			}
 		}
-		//vInspTypeCounter++;
 	}
-	logDebug("vInspTypeCounter: " + vInspTypeCounter);
-	//logDebug("vAllInspPass: " + vAllInspPass);
 	if (vInspTypeCounter == 8) {
 		return true;
 	} else {
@@ -228,8 +204,6 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 	var vBeginCycle =  new Date();
 	var vFirstCycle = false;
 	
-	logDebug("dateDiff(newInspSchedDate, initialInspSchedDate): " + dateDiff(newInspSchedDate, initialInspSchedDate));
-	
 	if (dateDiff(fileDate, newInspSchedDate) <= 175) {
 		vFirstCycle = true;
 	}
@@ -245,9 +219,6 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 		vBeginCycle.setDate(newInspSchedDate.getDate() - 92);
 		vBeginCycle = new Date(vBeginCycle);
 	}
-
-	
-	logDebug("vBeginCycle: " + vBeginCycle);
 	
 	if (priArray.getSuccess()) {
 		
@@ -278,7 +249,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 						if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
 							
-							logDebug("##############");
+							/*logDebug("##############");
 							logDebug("Inspection Type: " + inspArray[i].getInspectionType());
 							logDebug("Inspection Type: " + compArray[j].getInspectionType());
 							logDebug("vCapInspDate: " + vCapInspDate);
@@ -288,7 +259,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 							logDebug("newInspSchedDate: " + newInspSchedDate);
 							logDebug("inspectionID: " + inspArray[i].getIdNumber());
 							logDebug("inspectionID: " + compArray[j].getIdNumber());
-							logDebug("##############");
+							logDebug("##############");*/
 							
 							var inspID = inspArray[i].getIdNumber();
 							var compID = compArray[j].getIdNumber();
@@ -308,7 +279,6 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 									retInspections.push(compArray[j]);
 								}
 							} else {
-								logDebug("This type has been found in the array");
 								if (retInspections[pos].getIdNumber() <= inspID ||  retInspections[pos].getIdNumber() <= compID) {
 									if (inspID >= compID) {
 										retInspections[pos] = inspArray[i];
