@@ -270,7 +270,7 @@ function getInspectionsThisCycle(newInspSchedDate) {
 						var pos = -1;
 						
 						//for (p = 0; p < retInspections.length; p++) {
-							pos = retInspections[].getInspectionType().indexOf(inspArray[i].getInspectionType());
+							pos = retInspections.getInspectionType().indexOf(inspArray[i].getInspectionType());
 						//}
 						logDebug("pos: " + pos);
 						if (pos == -1) {
