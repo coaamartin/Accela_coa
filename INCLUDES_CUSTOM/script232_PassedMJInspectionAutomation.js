@@ -1,5 +1,5 @@
 
-function passedMJInspectionAutomation() {
+function passedMJInspectionAutomation(vCapType) {
 	var daysToAdd;
 	var vIsMJLicense;
 	var vIsMJRetailStoreLicense;
@@ -10,10 +10,10 @@ function passedMJInspectionAutomation() {
 		
 	//check for passed inspections, schedule new inspection, and email inspection contact with report
 	//for (s in inspectionTypesAry) {
-		vIsMJLicense = false;	
+		//vIsMJLicense = false;	
 		vIsMJRetailStoreLicense = false;
 		vIsMJLicense = appMatch("Licenses/Marijuana/*/License");
-		if (vIsMJLicense == true) {
+		if (vCapType == "License") {
 			//if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
 			if (inspResult == "Passed" || inspResult == "Passed - Minor Violations") {
 				vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
@@ -95,6 +95,32 @@ function passedMJInspectionAutomation() {
 
 				return true;
 			}			
+		} else {
+			var eParams = aa.util.newHashtable();
+			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
+			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
+			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+			
+			if (inspId) {
+				addParameter(eParams, "$$inspId$$", inspId);
+			}
+			if (inspResult)
+				addParameter(eParams, "$$inspResult$$", inspResult);
+			if (inspResultDate)
+				addParameter(eParams, "$$inspResultDate$$", inspResultDate);
+			if (inspGroup)
+				addParameter(eParams, "$$inspGroup$$", inspGroup);
+			if (inspType)
+				addParameter(eParams, "$$inspType$$", inspType);
+			if (inspSchedDate)
+				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
+			
+			var reportTemplate = "MJ_Compliance_Corrections_Letter";
+			var reportParams = aa.util.newHashtable();
+			addParameter(reportParams, "InspActNumber", inspId);
+			
+			//send email with report attachment		
+			emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
 		}
 	//}
 	return false;

@@ -65,7 +65,7 @@ function failedMJInspectionAutomation(vCapType) {
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
+			emailContactsWithReportLinkASync("Inspection Contact", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
 			
 			return true;
 		}
