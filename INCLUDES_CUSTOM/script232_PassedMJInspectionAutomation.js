@@ -91,7 +91,7 @@ function passedMJInspectionAutomation() {
 				addParameter(reportParams, "InspActNumber", inspId);
 				
 				//send email with report attachment		
-				//emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
+				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
 
 				return true;
 			}			
