@@ -226,7 +226,7 @@ function processLine(line) {
 	try {
 	
 	var returnValue = true;
-	pieces = line.split("|");
+	pieces = line.split(",");
 	for (pIndex in pieces) {
 
 		pieceValue = pieces[pIndex];

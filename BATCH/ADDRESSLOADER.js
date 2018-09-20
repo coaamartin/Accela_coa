@@ -241,7 +241,6 @@ function processLine(line) {
 				 // logDebug("line value: " + pIndex +  ", " + pieceDataName + ", " + pieceValue);
 				
 				if (String(pieceValue).trim() == "") continue;
-				logDebug("DONB 1.1 pieceDataName " + pieceDataName)
 				switch (pieceDataName) {
 					case "PARCEL_NO": 
 							newAddr.setParcelNumber(String(pieceValue).trim());
@@ -306,7 +305,6 @@ function processLine(line) {
 							break;
 					case "HOUSE_NUMBER_START":
 							newAddr.setHouseNumberStart(parseInt(String(pieceValue).trim()));
-							logDebug("DONB8 HOUSE_NUMBER_START " + pieceValue)
 							break;
 					case "INSPECTION_DISTRICT":
 							newAddr.setInspectionDistrict(String(pieceValue).trim());
@@ -497,14 +495,9 @@ function processAddress(addrArray){
 try{	
 	for(i in addrArray){
 		var parcel = addrArray[0];
-		logDebug("parcel " + parcel)
 		var addrType = addrArray[1];
-		logDebug("addrType " + addrType)
 		var addr = addrArray[2];
-		logDebug("addr " + addr)
-		logDebug("DONB7 " + addr.getHouseNumberStart())
 		var attrArray = addrArray[3];
-		logDebug("attrArray " + attrArray)
 	}
 	
 		/* does refAddress already exist - search by some key fields */
@@ -539,7 +532,6 @@ try{
 							var refPrclObj = aa.parcel.getParceListForAdmin(parcel, null, null, null, null, null, null, null, null, null);
 							if (refPrclObj.getSuccess()) {
 								var prclArr = refPrclObj.getOutput();
-								logDebug("DONB1")
 								if (prclArr.length == 0) {
 									logDebug("No valid parcel exists with this number: " + parcel);
 								}else{
@@ -620,7 +612,6 @@ try{
 			}
 		// address exists, update eligible fields
 			}else{  
-				logDebug("DONB2")
 				var numOfAdds = refAddressModelArray.length;
 				 // logDebug("numOfAdds: " + numOfAdds);
 				
@@ -658,10 +649,8 @@ try{
 						addrParcelList = new Array;
 						logDebug("hsNum " + hsNum + "stName " + stName + "city " + city)
 						var addrParcelList = getAddressParcels(hsNum, stName, city);     // local function
-						logDebug("DONB3 " + addrParcelList)
 						//if (addrParcelList.length){
 						if (addrParcelList){
-							logDebug("DONB5")
 							var skip = false;
 							for (l in addrParcelList){
 								var existingParcel = addrParcelList[l];
@@ -907,7 +896,6 @@ function getAddressParcels(addressStart, streetName, city){
 		var addrParcelOutput = parcelInfoModelResult.getOutput();
 		//logDebug("addrParcelOutput.length: " + addrParcelOutput.length);
 		var parcelArray = new Array();
-		logDebug("DONB4")
 		if (addrParcelOutput.length) {
 			for(i in addrParcelOutput){
 				var parcelModel = addrParcelOutput[i].getParcelModel();
