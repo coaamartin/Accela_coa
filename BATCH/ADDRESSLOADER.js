@@ -651,7 +651,7 @@ try{
 					if (!matches(parcel, " ", null)) {
 						addrParcelList = new Array;
 						var addrParcelList = getAddressParcels(hsNum, stName, city);     // local function
-						logDebug("DONB3")
+						logDebug("DONB3" + addrParcelList.length)
 						if (addrParcelList.length){
 							var skip = false;
 							for (l in addrParcelList){
