@@ -24,13 +24,16 @@ function passedMJInspectionAutomation() {
 				var initialInspSchedDate = getAppSpecific("Initial Inspection Date");
 				var newInspSchedDate = getAppSpecific("Next Inspection Date");
 				
+				initialInspSchedDate = new Date(initialInspSchedDate);
+				
 				//check if license is Marijuana/Retail Store
 				if (vIsMJRetailStoreLicense == true) {
 					var vChildren = getRenewalCountByParentCapIDForComplete(capId);
 					
 					//check if more than one child renewal record exists
-					if (vChildren != false && vChildren != null && vChildren > 1) {
-						
+					//if (vChildren != false && vChildren != null && vChildren > 1) {
+					if (dateDiff(initialInspSchedDate, today) >= 300) {
+					
 						//schedule new inspection 6 months out from passed inspection date
 						daysToAdd = 182;
 					} else {
@@ -96,7 +99,7 @@ function passedMJInspectionAutomation() {
 }
 
 //returns the number of completed renewals on a parent license
-function getRenewalCountByParentCapIDForComplete(parentCapid) {
+/*function getRenewalCountByParentCapIDForComplete(parentCapid) {
 	if (parentCapid == null || aa.util.instanceOfString(parentCapid)) {
 		return null;
 	}
@@ -118,7 +121,7 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 		logDebug("ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for complete: " + result.getErrorMessage());
 		return null;
 	}
-}
+}*/
 
 //scans array of inspections from current quarterly inspection cycle, returns true if all 8 inspection types are present
 function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate, daysToAdd) {
