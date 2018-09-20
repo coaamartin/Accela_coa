@@ -229,6 +229,15 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 	
 	var vFirstCycle = false;
 	
+	logDebug("dateDiff(newInspSchedDate, initialInspSchedDate): " + dateDiff(newInspSchedDate, initialInspSchedDate));
+	
+	if (dateDiff(newInspSchedDate, initialInspSchedDate) == 84) {
+		vFirstCycle = true;
+		logDebug("vFirstCycle = true");
+	}
+	
+	
+	
 	if (priArray.getSuccess()) {
 		
 		var inspArray = priArray.getOutput();
@@ -241,10 +250,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				vCapInspSchedDate = inspArray[i].getScheduledDate();
 				vCapCompSchedDate = compArray[j].getScheduledDate();
 				
-				if (dateDiff(newInspSchedDate, initialInspSchedDate) == 84) {
-					vFirstCycle = true;
-					logDebug("vFirstCycle = true");
-				}
+				
 				
 				if (vCapInspDate != null) {
 					vCapInspDate = convertDate(vCapInspDate);
