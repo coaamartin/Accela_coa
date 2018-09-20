@@ -269,7 +269,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 					//logDebug("vFirstCycle = true");
 					var vBeginCycle =  new Date();
 					vBeginCycle.setDate(newInspSchedDate - 91);
-					vBeginCycle = new Date(vBeginCycle);
+					//vBeginCycle = new Date(vBeginCycle);
 					
 					logDebug("vBeginCycle: " + vBeginCycle);
 					
