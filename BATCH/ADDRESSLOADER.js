@@ -647,6 +647,7 @@ try{
 					
 					// determine if address is already associated to the incoming parcel
 					if (!matches(parcel, " ", null)) {
+						addrParcelList = new Array;
 						var addrParcelList = getAddressParcels(hsNum, stName, city);     // local function
 						if (addrParcelList.length){
 							var skip = false;
