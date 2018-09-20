@@ -179,11 +179,17 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate, daysToA
 		vBeginCycle.setMonth(initialInspSchedDate.getMonth());
 		vBeginCycle.setFullYear(initialInspSchedDate.getFullYear());
 		vBeginCycle.setDate(initialInspSchedDate.getDate() - 1);
+		vBeginCycle.setHours(0);
+		vBeginCycle.setMinutes(0);
+		vBeginCycle.setSeconds(0);
 		vBeginCycle = new Date(vBeginCycle);
 	} else {
 		vBeginCycle.setMonth(newInspSchedDate.getMonth());
 		vBeginCycle.setFullYear(newInspSchedDate.getFullYear());
 		vBeginCycle.setDate(newInspSchedDate.getDate() - daysToAdd);
+		vBeginCycle.setHours(0);
+		vBeginCycle.setMinutes(0);
+		vBeginCycle.setSeconds(0);
 		vBeginCycle = new Date(vBeginCycle);
 	}
 	
