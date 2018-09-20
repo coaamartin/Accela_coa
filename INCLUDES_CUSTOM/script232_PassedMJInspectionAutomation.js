@@ -259,6 +259,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				}
 				
 				if (vFirstCycle == false) {
+					logDebug("vFirstCycle = false");
 					var vBeginCycle = dateAdd(newInspSchedDate, -91)
 					
 					if (vCapInspSchedDate > vBeginCycle && vCapCompSchedDate > vBeginCycle && vCapInspSchedDate < newInspSchedDate && vCapCompSchedDate < newInspSchedDate) {
@@ -306,7 +307,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 					}
 				
 				} else {
-				
+					logDebug("vFirstCycle = true");
 				
 					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 						if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
