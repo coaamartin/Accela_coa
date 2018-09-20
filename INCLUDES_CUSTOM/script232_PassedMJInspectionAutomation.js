@@ -202,6 +202,7 @@ function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 				//vInspTypeCounter++;	
 			}
 		}
+		vInspTypeCounter++;
 	}
 	logDebug("vInspTypeCounter: " + vInspTypeCounter);
 	//logDebug("vAllInspPass: " + vAllInspPass);
