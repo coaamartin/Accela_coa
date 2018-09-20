@@ -200,10 +200,11 @@ function mainProcess() {
 				// process the line
 				var addrArray = new Array();
 				var addrArray = processLine(String(line));
-				for(x in addrArray)
+				myaddress = addrArray[2]
+				for(x in myaddress)
 					{
 					logDebug("DONB11")
-					logDebug(x + " " + addrArray[x])
+					logDebug(x + " " + myaddress[x])
 					}
 				
 				// create new or update existing addr, xref with parcel, update templates
