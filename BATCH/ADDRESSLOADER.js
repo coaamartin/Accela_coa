@@ -651,8 +651,10 @@ try{
 					if (!matches(parcel, " ", null)) {
 						addrParcelList = new Array;
 						var addrParcelList = getAddressParcels(hsNum, stName, city);     // local function
-						logDebug("DONB3" + addrParcelList.length)
-						if (addrParcelList.length){
+						logDebug("DONB3")
+						//if (addrParcelList.length){
+						if (addrParcelList){
+							logDebug("DONB5")
 							var skip = false;
 							for (l in addrParcelList){
 								var existingParcel = addrParcelList[l];
