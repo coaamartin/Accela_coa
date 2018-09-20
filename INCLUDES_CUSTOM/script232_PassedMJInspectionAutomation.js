@@ -19,6 +19,7 @@ function passedMJInspectionAutomation() {
 		vIsMJLicense = appMatch("Licenses/Marijuana/*/License");
 		if (vIsMJLicense == true) {
 			//if (inspType == inspectionTypesAry[s] && (inspResult == "Passed" || inspResult == "Passed - Minor Violations")) {
+			if (inspResult == "Passed" || inspResult == "Passed - Minor Violations") {
 				vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/Retail Store/License");
 				var vInspector = getInspectorByInspID(inspId, capId);
 				logDebug("vInspector: " + vInspector);
@@ -123,7 +124,7 @@ function passedMJInspectionAutomation() {
 				//emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
 
 				return true;
-			//}			
+			}			
 		}
 	//}
 	return false;
@@ -198,7 +199,7 @@ function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 					logDebug("Failed the check");
 					//vAllInspPass = false;
 				} 
-				vInspTypeCounter++;	
+				//vInspTypeCounter++;	
 			}
 		}
 	}
