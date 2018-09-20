@@ -72,10 +72,9 @@ function passedMJInspectionAutomation() {
 					//schedule new inspection 3 months out from passed inspection date
 					//var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 					daysToAdd = 91;
-					var newInspSchedDate = getAppSpecific("Next Inspection Date");
 					var initialInspSchedDate = getAppSpecific("Initial Inspection Date");
-					
-					
+					var newInspSchedDate = getAppSpecific("Next Inspection Date");
+										
 					//logDebug("checkCompletedMJInspections result: " + checkCompletedMJInspections(newInspSchedDate));
 					if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate)) {
 						//update ASI
@@ -184,19 +183,19 @@ function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 		for (i in vInspectionTypesArray) {
 			if (vCapInspType == vInspectionTypesArray[i]) {
 
-					logDebug("##############");
-					logDebug("Inspection Type: " + vInspectionTypesArray[i]);
-					//logDebug("vCapInspDate: " + vCapInspDate);
-					//logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
-					//logDebug("newInspSchedDate: " + newInspSchedDate);
-					logDebug("vCapInspResult: " + vCapInspResult);
-					logDebug("inspectionID: " + vCapInspections[j].getIdNumber());
-					logDebug("##############");
-					
-					if (!(vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations")) {
-						logDebug("Failed the check");
-						//vAllInspPass = false;
-					} 
+				logDebug("##############");
+				logDebug("Inspection Type: " + vInspectionTypesArray[i]);
+				//logDebug("vCapInspDate: " + vCapInspDate);
+				//logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
+				//logDebug("newInspSchedDate: " + newInspSchedDate);
+				logDebug("vCapInspResult: " + vCapInspResult);
+				logDebug("inspectionID: " + vCapInspections[j].getIdNumber());
+				logDebug("##############");
+				
+				if (!(vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations")) {
+					logDebug("Failed the check");
+					//vAllInspPass = false;
+				} 
 				vInspTypeCounter++;	
 			}
 		}
@@ -268,7 +267,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				if (vFirstCycle == true) {
 					logDebug("vFirstCycle = true");
 							if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
-							if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
+							if (vCapInspDate < newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate < newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
 								
 								logDebug("##############");
 								logDebug("Inspection Type: " + inspArray[i].getInspectionType());
