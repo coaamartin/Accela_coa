@@ -496,9 +496,13 @@ function processAddress(addrArray){
 try{	
 	for(i in addrArray){
 		var parcel = addrArray[0];
+		logDebug("parcel " + parcel)
 		var addrType = addrArray[1];
+		logDebug("addrType " + addrType)
 		var addr = addrArray[2];
+		logDebug("addr " + addr)
 		var attrArray = addrArray[3];
+		logDebug("attrArray " + attrArray)
 	}
 	
 		/* does refAddress already exist - search by some key fields */
