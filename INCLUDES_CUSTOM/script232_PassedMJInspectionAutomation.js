@@ -41,7 +41,7 @@ function passedMJInspectionAutomation() {
 						var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
 						if (lastInspectionObj == null) {
 							logDebug("Failed to find most recent inspection of type " + vInspType);
-							continue;
+							//continue;
 						}
 						
 						var lastInspectionSeq = lastInspectionObj.getIdNumber();
@@ -59,7 +59,7 @@ function passedMJInspectionAutomation() {
 						var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
 						if (lastInspectionObj == null) {
 							logDebug("Failed to find most recent inspection of type " + vInspType);
-							continue;
+							//continue;
 						}
 						
 						var lastInspectionSeq = lastInspectionObj.getIdNumber();
@@ -87,7 +87,7 @@ function passedMJInspectionAutomation() {
 					var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
 					if (lastInspectionObj == null) {
 						logDebug("Failed to find most recent inspection of type " + vInspType);
-						continue;
+						//continue;
 					}
 					
 					var lastInspectionSeq = lastInspectionObj.getIdNumber();
