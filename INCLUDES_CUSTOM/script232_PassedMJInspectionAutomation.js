@@ -284,11 +284,10 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 								
 								for (p in retInspections) {
 									pos = retInspections[p].getInspectionType().indexOf(inspArray[i].getInspectionType());
-									pos = p;
-									break;
-								
-								
-								
+									if (pos == 0) {
+										pos = p;
+										break;
+									}							
 								}
 								//logDebug("pos: " + pos);
 								if (pos == -1) {
