@@ -241,7 +241,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				vCapInspSchedDate = inspArray[i].getScheduledDate();
 				vCapCompSchedDate = compArray[j].getScheduledDate();
 				
-				if (dateDiff(newInspSchedDate, initialInspSchedDate == 84)) {
+				if (dateDiff(newInspSchedDate, initialInspSchedDate) == 84) {
 					vFirstCycle = true;
 					logDebug("vFirstCycle = true");
 				}
