@@ -86,7 +86,7 @@ function passedMJInspectionAutomation() {
 				addParameter(reportParams, "InspActNumber", inspId);
 				
 				//send email with report attachment		
-				emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
+				//emailContactsWithReportLinkASync("Inspection Contact", emailTemplate, eParams, reportTemplate, reportParams, "N", "");
 
 				return true;
 			}			
@@ -139,11 +139,10 @@ function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate, day
 		for (i in vInspectionTypesArray) {
 			if (vCapInspType == vInspectionTypesArray[i]) {
 
-				/*logDebug("##############");
+				logDebug("##############");
 				logDebug("Inspection Type: " + vInspectionTypesArray[i]);
 				logDebug("vCapInspResult: " + vCapInspResult);
 				logDebug("inspectionID: " + vCapInspections[j].getIdNumber());
-				logDebug("##############");*/
 				
 				vInspTypeCounter++;	
 			}
@@ -193,6 +192,8 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate, daysToA
 		vBeginCycle = new Date(vBeginCycle);
 	}
 	
+	logDebug("vBeginCycle: " + vBeginCycle);
+	
 	if (priArray.getSuccess()) {
 		
 		var inspArray = priArray.getOutput();
@@ -222,7 +223,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate, daysToA
 					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 						if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
 							
-							/*logDebug("##############");
+							logDebug("##############");
 							logDebug("Inspection Type: " + inspArray[i].getInspectionType());
 							logDebug("Inspection Type: " + compArray[j].getInspectionType());
 							logDebug("vCapInspDate: " + vCapInspDate);
@@ -232,7 +233,6 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate, daysToA
 							logDebug("newInspSchedDate: " + newInspSchedDate);
 							logDebug("inspectionID: " + inspArray[i].getIdNumber());
 							logDebug("inspectionID: " + compArray[j].getIdNumber());
-							logDebug("##############");*/
 							
 							var inspID = inspArray[i].getIdNumber();
 							var compID = compArray[j].getIdNumber();
@@ -252,8 +252,8 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate, daysToA
 									retInspections.push(compArray[j]);
 								}
 							} else {
-								if (retInspections[pos].getIdNumber() <= inspID ||  retInspections[pos].getIdNumber() <= compID) {
-									if (inspID >= compID) {
+								if (retInspections[pos].getIdNumber() < inspID ||  retInspections[pos].getIdNumber() < compID) {
+									if (inspID > compID) {
 										retInspections[pos] = inspArray[i];
 									} else {
 										retInspections[pos] = compArray[j];
@@ -268,24 +268,3 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate, daysToA
 	} 
 	return retInspections;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
