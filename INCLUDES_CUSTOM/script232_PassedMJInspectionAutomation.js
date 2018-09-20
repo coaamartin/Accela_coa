@@ -199,10 +199,10 @@ function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 					logDebug("Failed the check");
 					//vAllInspPass = false;
 				} 
-				//vInspTypeCounter++;	
+				vInspTypeCounter++;	
 			}
 		}
-		vInspTypeCounter++;
+		//vInspTypeCounter++;
 	}
 	logDebug("vInspTypeCounter: " + vInspTypeCounter);
 	//logDebug("vAllInspPass: " + vAllInspPass);
