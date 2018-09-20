@@ -33,68 +33,35 @@ function passedMJInspectionAutomation() {
 						
 						//schedule new inspection 6 months out from passed inspection date
 						daysToAdd = 182;
-						scheduleInspectDate(inspType, newInspSchedDate);
-						if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate)) {
-							//update ASI
-							editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
-						}
-						
-						//get sequence ID for most recently created inspection
-						var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
-						if (lastInspectionObj == null) {
-							logDebug("Failed to find most recent inspection of type " + vInspType);
-							//continue;
-						}
-						
-						var lastInspectionSeq = lastInspectionObj.getIdNumber();
-						
-						//assign inspection to inspector
-						assignInspection(lastInspectionSeq, vInspector);
 					} else {
 						
 						//schedule new inspection 3 months out from passed inspection date
 						daysToAdd = 91;
-						scheduleInspectDate(inspType, newInspSchedDate);
-						if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate)) {
-							//update ASI
-							editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
-						}
-						
-						//get sequence ID for most recently created inspection
-						var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
-						if (lastInspectionObj == null) {
-							logDebug("Failed to find most recent inspection of type " + vInspType);
-							//continue;
-						}
-						
-						var lastInspectionSeq = lastInspectionObj.getIdNumber();
-						
-						//assign inspection to inspector
-						assignInspection(lastInspectionSeq, vInspector);
 					}					
 				} else {
 					
 					//schedule new inspection 3 months out from passed inspection date
 					daysToAdd = 91;
-					scheduleInspectDate(inspType, newInspSchedDate);
-					if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate)) {
-						//update ASI
-						editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
-					}
-					
-					//get sequence ID for most recently created inspection
-					var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
-					if (lastInspectionObj == null) {
-						logDebug("Failed to find most recent inspection of type " + vInspType);
-						//continue;
-					}
-					
-					var lastInspectionSeq = lastInspectionObj.getIdNumber();
-					
-					//assign inspection to inspector
-					assignInspection(lastInspectionSeq, vInspector);
 				}
 				
+				scheduleInspectDate(inspType, newInspSchedDate);
+				if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate, daysToAdd)) {
+					//update ASI
+					editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
+				}
+				
+				//get sequence ID for most recently created inspection
+				var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
+				if (lastInspectionObj == null) {
+					logDebug("Failed to find most recent inspection of type " + vInspType);
+					//continue;
+				}
+				
+				var lastInspectionSeq = lastInspectionObj.getIdNumber();
+				
+				//assign inspection to inspector
+				assignInspection(lastInspectionSeq, vInspector);
+			
 				var eParams = aa.util.newHashtable();
 				addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 				addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
@@ -154,10 +121,10 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 }
 
 //scans array of inspections from current quarterly inspection cycle, returns true if all 8 inspection types are present
-function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
+function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate, daysToAdd) {
 	var newInspSchedDate = new Date(newInspSchedDate);
 	var initialInspSchedDate = new Date(initialInspSchedDate);
-	var vCapInspections = getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate);
+	var vCapInspections = getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate, daysToAdd);
 	var vCapInspType;
 	var vCapInspResult;
 	var vInspTypeCounter = 0;
@@ -190,7 +157,7 @@ function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 }
 
 //returns array of the most recent inspections from the given inspection cycle
-function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
+function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate, daysToAdd) {
 
 	var retInspections = [];
 	
@@ -211,12 +178,12 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 	if (vFirstCycle) {
 		vBeginCycle.setMonth(initialInspSchedDate.getMonth());
 		vBeginCycle.setFullYear(initialInspSchedDate.getFullYear());
-		vBeginCycle.setDate(initialInspSchedDate.getDate()-1);
+		vBeginCycle.setDate(initialInspSchedDate.getDate() - 1);
 		vBeginCycle = new Date(vBeginCycle);
 	} else {
 		vBeginCycle.setMonth(newInspSchedDate.getMonth());
 		vBeginCycle.setFullYear(newInspSchedDate.getFullYear());
-		vBeginCycle.setDate(newInspSchedDate.getDate() - 92);
+		vBeginCycle.setDate(newInspSchedDate.getDate() - daysToAdd);
 		vBeginCycle = new Date(vBeginCycle);
 	}
 	
