@@ -650,8 +650,9 @@ try{
 					// determine if address is already associated to the incoming parcel
 					if (!matches(parcel, " ", null)) {
 						addrParcelList = new Array;
+						logDebug("hsNum " + hsNum + "stName " + stName + "city " + city)
 						var addrParcelList = getAddressParcels(hsNum, stName, city);     // local function
-						logDebug("DONB3")
+						logDebug("DONB3 " + addrParcelList)
 						//if (addrParcelList.length){
 						if (addrParcelList){
 							logDebug("DONB5")
