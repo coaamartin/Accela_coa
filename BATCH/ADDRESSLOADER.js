@@ -234,7 +234,7 @@ function processLine(line) {
 			//  template data update
 			var attrArray = new Array(); 
 			logDebug("DONB 1.01 line " + line)
-			pieces = line.split("|");
+			pieces = line.split(",");
 			for (pIndex in pieces) {
 				pieceValue = pieces[pIndex];
 				pieceDataName = lineFormat[pIndex];
