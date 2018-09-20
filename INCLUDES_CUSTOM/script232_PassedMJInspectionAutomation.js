@@ -242,7 +242,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 	} else {
 		vBeginCycle.setMonth(newInspSchedDate.getMonth());
 		vBeginCycle.setFullYear(newInspSchedDate.getFullYear());
-		vBeginCycle.setDate(newInspSchedDate.getDate() - 91);
+		vBeginCycle.setDate(newInspSchedDate.getDate() - 92);
 		vBeginCycle = new Date(vBeginCycle);
 	}
 
