@@ -200,6 +200,11 @@ function mainProcess() {
 				// process the line
 				var addrArray = new Array();
 				var addrArray = processLine(String(line));
+				for(x in addrArray)
+					{
+					logDebug("DONB11")
+					logDebug(x + " " + addrArray[x])
+					}
 				
 				// create new or update existing addr, xref with parcel, update templates
 				processAddress(addrArray);
@@ -306,6 +311,7 @@ function processLine(line) {
 							break;
 					case "HOUSE_NUMBER_START":
 							newAddr.setHouseNumberStart(parseInt(String(pieceValue).trim()));
+							logDebug("DONB8")
 							break;
 					case "INSPECTION_DISTRICT":
 							newAddr.setInspectionDistrict(String(pieceValue).trim());
