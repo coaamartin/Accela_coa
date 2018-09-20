@@ -223,21 +223,27 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 	var vCompInspDate;
 	var vCapInspSchedDate;
 	var vCapCompSchedDate;
-	
+	var vBeginCycle =  new Date();
 	var vFirstCycle = false;
 	
 	logDebug("dateDiff(newInspSchedDate, initialInspSchedDate): " + dateDiff(newInspSchedDate, initialInspSchedDate));
 	
 	if (dateDiff(fileDate, newInspSchedDate) <= 175) {
 		vFirstCycle = true;
-		logDebug("vFirstCycle = true");
 	}
 	
-	var vBeginCycle =  new Date();
-	vBeginCycle.setMonth(newInspSchedDate.getMonth());
-	vBeginCycle.setFullYear(newInspSchedDate.getFullYear());
-	vBeginCycle.setDate(newInspSchedDate.getDate() - 91);
-	vBeginCycle = new Date(vBeginCycle);
+	if (vFirstCycle) {
+		vBeginCycle.setMonth(initialInspSchedDate.getMonth());
+		vBeginCycle.setFullYear(initialInspSchedDate.getFullYear());
+		vBeginCycle.setDate(initialInspSchedDate.getDate() - 91);
+		vBeginCycle = new Date(vBeginCycle);
+	} else {
+		vBeginCycle.setMonth(newInspSchedDate.getMonth());
+		vBeginCycle.setFullYear(newInspSchedDate.getFullYear());
+		vBeginCycle.setDate(newInspSchedDate.getDate() - 91);
+		vBeginCycle = new Date(vBeginCycle);
+	}
+
 	
 	logDebug("vBeginCycle: " + vBeginCycle);
 	
