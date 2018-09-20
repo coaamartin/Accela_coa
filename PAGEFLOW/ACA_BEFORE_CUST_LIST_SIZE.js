@@ -74,25 +74,27 @@ try{
         if(appTypeString == "Water/Utility/Permit/NA"){
 			myloadASITables4ACA();
             var permitType = AInfo["Utility Permit Type"];
-            if(permitType == "Water Main Utility Permit"){
-                if (typeof (WATERMATERIAL) == "object") {
-                    for(x in WATERMATERIAL){
-                        var col1 = WATERMATERIAL[x]["Size of Pipe"];
-                        var col2 = WATERMATERIAL[x]["Pipe Material"];       
-                        var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];
+            if(permitType == "Private Fire Line Permit" || permitType == "Water Main Utility Permit"){
+                if (typeof (SIZE) == "object") {
+                    for(x in SIZE){
+                        var col1 = SIZE[x]["Size"];
+                        var col2 = SIZE[x]["Number of Taps"];       
+                        var col3 = SIZE[x]["Location Description"];
+                        var col4 = SIZE[x]["Complete"];
                         
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
                         logDebug("col3:" + col3 + ";col3.length():" + col3.length());
-                        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0)){
+                        logDebug("col4:" + col4 + ";col4.length():" + col4.length());
+                        if((col1.length() != 0) || (col2.length()!=0) || (col3.length()!=0) || (col3.length()!=0)){
                             cancel = false;
                         }
                         else
-                            message += "You must add at least 1 row in  WATER MATERIAL.";
+                            message += "You must add at least 1 row in  SIZE.";
                     }
                 }
                 else
-                    message += "You must add at least 1 row in  WATER MATERIAL.";
+                    message += "You must add at least 1 row in  SIZE.";
             }
         }
         //end Scripting for Water/Utility/Permit/NA

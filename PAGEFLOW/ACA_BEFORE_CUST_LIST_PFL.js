@@ -74,12 +74,12 @@ try{
         if(appTypeString == "Water/Utility/Permit/NA"){
 			myloadASITables4ACA();
             var permitType = AInfo["Utility Permit Type"];
-            if(permitType == "Water Main Utility Permit"){
-                if (typeof (WATERMATERIAL) == "object") {
-                    for(x in WATERMATERIAL){
-                        var col1 = WATERMATERIAL[x]["Size of Pipe"];
-                        var col2 = WATERMATERIAL[x]["Pipe Material"];       
-                        var col3 = WATERMATERIAL[x]["Length in Lineal Feet"];
+            if(permitType == "Private Fire Line Permit"){
+                if (typeof (PRIVATEFIRELINEMATERIAL) == "object") {
+                    for(x in PRIVATEFIRELINEMATERIAL){
+                        var col1 = PRIVATEFIRELINEMATERIAL[x]["Size of Pipe"];
+                        var col2 = PRIVATEFIRELINEMATERIAL[x]["Pipe Material"];       
+                        var col3 = PRIVATEFIRELINEMATERIAL[x]["Length in Lineal Feet"];
                         
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
@@ -88,11 +88,11 @@ try{
                             cancel = false;
                         }
                         else
-                            message += "You must add at least 1 row in  WATER MATERIAL.";
+                            message += "You must add at least 1 row in PRIVATE FIRE LINE MATERIAL.";
                     }
                 }
                 else
-                    message += "You must add at least 1 row in  WATER MATERIAL.";
+                    message += "You must add at least 1 row in PRIVATE FIRE LINE MATERIAL.";
             }
         }
         //end Scripting for Water/Utility/Permit/NA
