@@ -127,7 +127,7 @@ function passedMJInspectionAutomation() {
 //scans array of inspections from current quarterly inspection cycle, returns true if all 8 inspection types are present
 function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate, daysToAdd) {
 	var newInspSchedDate = new Date(newInspSchedDate);
-	var initialInspSchedDate = new Date(initialInspSchedDate);
+	//var initialInspSchedDate = new Date(initialInspSchedDate);
 	var vCapInspections = getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate, daysToAdd);
 	var vCapInspType;
 	var vCapInspResult;
