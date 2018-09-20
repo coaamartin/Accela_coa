@@ -241,9 +241,9 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 				vCapInspSchedDate = inspArray[i].getScheduledDate();
 				vCapCompSchedDate = compArray[j].getScheduledDate();
 				
-				if (dateAdd(newInspSchedDate, -84) == initialInspSchedDate) {
-					vFirstCycle = true;
-				}
+				//if (dateDiff(newInspSchedDate, initialInspSchedDate == 84) {
+				//	vFirstCycle = true;
+				//}
 				
 				if (vCapInspDate != null) {
 					vCapInspDate = convertDate(vCapInspDate);
@@ -258,11 +258,11 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 					vCapCompSchedDate = convertDate(vCapCompSchedDate);
 				}
 				
-				if (vFirstCycle == false) {
-					logDebug("vFirstCycle = false");
-					var vBeginCycle = dateAdd(newInspSchedDate, -91)
+				//if (vFirstCycle == false) {
+					//logDebug("vFirstCycle = false");
+					//var vBeginCycle = dateAdd(newInspSchedDate, -91)
 					
-					if (vCapInspSchedDate > vBeginCycle && vCapCompSchedDate > vBeginCycle && vCapInspSchedDate < newInspSchedDate && vCapCompSchedDate < newInspSchedDate) {
+					//if (vCapInspSchedDate > vBeginCycle && vCapCompSchedDate > vBeginCycle && vCapInspSchedDate < newInspSchedDate && vCapCompSchedDate < newInspSchedDate) {
 						if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
 							if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
 								
@@ -284,8 +284,13 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 								
 								for (p in retInspections) {
 									pos = retInspections[p].getInspectionType().indexOf(inspArray[i].getInspectionType());
+									pos = p;
+									break;
+								
+								
+								
 								}
-								logDebug("pos: " + pos);
+								//logDebug("pos: " + pos);
 								if (pos == -1) {
 									if (inspID >= compID) {
 										retInspections.push(inspArray[i]);
@@ -304,9 +309,9 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 								}
 							}
 						}
-					}
+					//}
 				
-				} else {
+				/*} else {
 					logDebug("vFirstCycle = true");
 				
 					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
@@ -350,7 +355,7 @@ function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 							}
 						}
 					}
-				}
+				}*/
 			}
 		}
 	} 
