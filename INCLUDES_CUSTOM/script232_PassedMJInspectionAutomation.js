@@ -165,7 +165,8 @@ function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
 	
-	var vAllInspPass = true;
+	//var vAllInspPass = false;
+	var vInspTypeCounter = 0;
 	
 	for (j in vCapInspections) {
 		vCapInspType = vCapInspections[j].getInspectionType();
@@ -182,7 +183,7 @@ function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 		
 		for (i in vInspectionTypesArray) {
 			if (vCapInspType == vInspectionTypesArray[i]) {
-				//if (vCapInspDate != null) {
+
 					logDebug("##############");
 					logDebug("Inspection Type: " + vInspectionTypesArray[i]);
 					//logDebug("vCapInspDate: " + vCapInspDate);
@@ -192,22 +193,18 @@ function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 					logDebug("inspectionID: " + vCapInspections[j].getIdNumber());
 					logDebug("##############");
 					
-					/*if (!(vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && (vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations"))) {
-						logDebug("Failed the check");
-						vAllInspPass = false;
-					} */
-					
 					if (!(vCapInspResult == "Passed" || vCapInspResult == "Passed - Minor Violations")) {
 						logDebug("Failed the check");
-						vAllInspPass = false;
+						//vAllInspPass = false;
 					} 
-				//}
+				vInspTypeCounter++;	
 			}
 			
 		}
 	}
-	logDebug("vAllInspPass: " + vAllInspPass);
-	if (vAllInspPass == true) {
+	logDebug("vInspTypeCounter: " + vInspTypeCounter);
+	//logDebug("vAllInspPass: " + vAllInspPass);
+	if (vInspTypeCounter == 8) {
 		return true;
 	} else {
 		return false;
