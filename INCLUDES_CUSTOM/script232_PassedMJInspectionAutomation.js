@@ -73,10 +73,11 @@ function passedMJInspectionAutomation() {
 					//var newInspSchedDate = dateAdd(inspSchedDate, daysToAdd);
 					daysToAdd = 91;
 					var newInspSchedDate = getAppSpecific("Next Inspection Date");
+					var initialInspSchedDate = getAppSpecific("Initial Inspection Date");
 					scheduleInspectDate(inspType, newInspSchedDate);
 					
 					//logDebug("checkCompletedMJInspections result: " + checkCompletedMJInspections(newInspSchedDate));
-					if (checkCompletedMJInspections(newInspSchedDate)) {
+					if (checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate)) {
 						//update ASI
 						editAppSpecific("Next Inspection Date", dateAdd(newInspSchedDate, daysToAdd));
 					}
@@ -152,9 +153,10 @@ function getRenewalCountByParentCapIDForComplete(parentCapid) {
 }
 
 
-function checkCompletedMJInspections(newInspSchedDate) {
+function checkCompletedMJInspections(newInspSchedDate, initialInspSchedDate) {
 	var newInspSchedDate = new Date(newInspSchedDate);
-	var vCapInspections = getInspectionsThisCycle(newInspSchedDate);
+	var initialInspSchedDate = new Date (initialInspSchedDate);
+	var vCapInspections = getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate);
 	var vCapInspType;
 	var vCapInspResult;
 	var vCapInspSchedDate;
@@ -213,7 +215,7 @@ function checkCompletedMJInspections(newInspSchedDate) {
 }
 
 //returns array of the most recent inspections from the given inspection cycle
-function getInspectionsThisCycle(newInspSchedDate) {
+function getInspectionsThisCycle(newInspSchedDate, initialInspSchedDate) {
 
 	var retInspections = [];
 	
@@ -225,17 +227,23 @@ function getInspectionsThisCycle(newInspSchedDate) {
 	var vCapInspSchedDate;
 	var vCapCompSchedDate;
 	
+	var vFirstCycle = false;
+	
 	if (priArray.getSuccess()) {
 		
 		var inspArray = priArray.getOutput();
 		var compArray = secArray.getOutput();
 
-		for (i = 0; i < inspArray.length; i++) {
+		for (i in inspArray) {
 			for (j in compArray) {		
 				vCapInspDate = inspArray[i].getInspectionDate();
 				vCompInspDate = compArray[j].getInspectionDate();
 				vCapInspSchedDate = inspArray[i].getScheduledDate();
 				vCapCompSchedDate = compArray[j].getScheduledDate();
+				
+				if (dateAdd(newInspSchedDate, -84) == initialInspSchedDate) {
+					vFirstCycle = true;
+				}
 				
 				if (vCapInspDate != null) {
 					vCapInspDate = convertDate(vCapInspDate);
@@ -250,43 +258,94 @@ function getInspectionsThisCycle(newInspSchedDate) {
 					vCapCompSchedDate = convertDate(vCapCompSchedDate);
 				}
 				
-				if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
-					if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
-						
-						logDebug("##############");
-						logDebug("Inspection Type: " + inspArray[i].getInspectionType());
-						logDebug("Inspection Type: " + compArray[j].getInspectionType());
-						logDebug("vCapInspDate: " + vCapInspDate);
-						logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
-						logDebug("vCompInspDate: " + vCompInspDate);
-						logDebug("vCapCompSchedDate: " + vCapCompSchedDate);
-						logDebug("newInspSchedDate: " + newInspSchedDate);
-						logDebug("inspectionID: " + inspArray[i].getIdNumber());
-						logDebug("inspectionID: " + compArray[j].getIdNumber());
-						logDebug("##############");
-						
-						var inspID = inspArray[i].getIdNumber();
-						var compID = compArray[j].getIdNumber();
-						var pos = -1;
-						
-						for (p in retInspections) {
-							pos = retInspections[p].getInspectionType().indexOf(inspArray[i].getInspectionType());
-						}
-						logDebug("pos: " + pos);
-						if (pos == -1) {
-							if (inspID >= compID) {
-								retInspections.push(inspArray[i]);
-							} else {
-								retInspections.push(compArray[j]);
-							}
-						} else {
-							logDebug("This type has been found in the array");
-							if (retInspections[pos].getIdNumber() <= inspID ||  retInspections[pos].getIdNumber() <= compID) {
-								if (inspID >= compID) {
-									retInspections[pos] = inspArray[i];
+				if (vFirstCycle == false) {
+					var vBeginCycle = dateAdd(newInspSchedDate, -91)
+					
+					if (vCapInspSchedDate > vBeginCycle && vCapCompSchedDate > vBeginCycle && vCapInspSchedDate < newInspSchedDate && vCapCompSchedDate < newInspSchedDate) {
+						if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
+							if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
+								
+								logDebug("##############");
+								logDebug("Inspection Type: " + inspArray[i].getInspectionType());
+								logDebug("Inspection Type: " + compArray[j].getInspectionType());
+								logDebug("vCapInspDate: " + vCapInspDate);
+								logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
+								logDebug("vCompInspDate: " + vCompInspDate);
+								logDebug("vCapCompSchedDate: " + vCapCompSchedDate);
+								logDebug("newInspSchedDate: " + newInspSchedDate);
+								logDebug("inspectionID: " + inspArray[i].getIdNumber());
+								logDebug("inspectionID: " + compArray[j].getIdNumber());
+								logDebug("##############");
+								
+								var inspID = inspArray[i].getIdNumber();
+								var compID = compArray[j].getIdNumber();
+								var pos = -1;
+								
+								for (p in retInspections) {
+									pos = retInspections[p].getInspectionType().indexOf(inspArray[i].getInspectionType());
+								}
+								logDebug("pos: " + pos);
+								if (pos == -1) {
+									if (inspID >= compID) {
+										retInspections.push(inspArray[i]);
+									} else {
+										retInspections.push(compArray[j]);
+									}
 								} else {
-									retInspections[pos] = compArray[j];
-								}							
+									logDebug("This type has been found in the array");
+									if (retInspections[pos].getIdNumber() <= inspID ||  retInspections[pos].getIdNumber() <= compID) {
+										if (inspID >= compID) {
+											retInspections[pos] = inspArray[i];
+										} else {
+											retInspections[pos] = compArray[j];
+										}							
+									}
+								}
+							}
+						}
+					}
+				
+				} else {
+				
+				
+					if ((inspArray[i].getInspectionType() == compArray[j].getInspectionType())) {
+						if (vCapInspDate <= newInspSchedDate && vCapInspDate >= vCapInspSchedDate && vCapInspDate != null && vCompInspDate <= newInspSchedDate && vCompInspDate >= vCapCompSchedDate && vCompInspDate != null) {	
+							
+							logDebug("##############");
+							logDebug("Inspection Type: " + inspArray[i].getInspectionType());
+							logDebug("Inspection Type: " + compArray[j].getInspectionType());
+							logDebug("vCapInspDate: " + vCapInspDate);
+							logDebug("vCapInspSchedDate: " + vCapInspSchedDate);
+							logDebug("vCompInspDate: " + vCompInspDate);
+							logDebug("vCapCompSchedDate: " + vCapCompSchedDate);
+							logDebug("newInspSchedDate: " + newInspSchedDate);
+							logDebug("inspectionID: " + inspArray[i].getIdNumber());
+							logDebug("inspectionID: " + compArray[j].getIdNumber());
+							logDebug("##############");
+							
+							var inspID = inspArray[i].getIdNumber();
+							var compID = compArray[j].getIdNumber();
+							var pos = -1;
+							
+							for (p in retInspections) {
+								pos = retInspections[p].getInspectionType().indexOf(inspArray[i].getInspectionType());
+							}
+							logDebug("pos: " + pos);
+							if (pos == -1) {
+								if (inspID >= compID) {
+									retInspections.push(inspArray[i]);
+								} else {
+									retInspections.push(compArray[j]);
+								}
+							} else {
+								logDebug("This type has been found in the array");
+								if (retInspections[pos].getIdNumber() <= inspID ||  retInspections[pos].getIdNumber() <= compID) {
+									if (inspID >= compID) {
+										retInspections[pos] = inspArray[i];
+									} else {
+										retInspections[pos] = compArray[j];
+									}							
+								}
 							}
 						}
 					}
