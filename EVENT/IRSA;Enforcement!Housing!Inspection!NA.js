@@ -1,6 +1,6 @@
 
-if(inspType == "Initial Housing Inspection" && inspResult == "Inspection Passed"){
-   if(currentUserID == "TLEDEZMA") wtrScript350_archiveLists();
+if(ifTracer(inspType == "Initial Housing Inspection" && inspResult == "Inspection Passed", 'Initial Housing Inspection/Inspection Passed')){
+   if(ifTracer(currentUserID == "TLEDEZMA", 'user:TLEDEZMA')) wtrScript350_archiveLists();
 }
 
 //script 351
