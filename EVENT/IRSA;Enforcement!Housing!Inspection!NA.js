@@ -1,3 +1,8 @@
+
+if(inspType == "Initial Housing Inspection" && inspResult == "Inspection Passed"){
+   if(currentUserID == "TLEDEZMA") wtrScript350_archiveLists();
+}
+
 //script 351
 
 var feeCode;
@@ -48,5 +53,7 @@ if ("Inspection Passed".equals(inspResult)) {
 if (matches(inspResult,"Extension - Fee", "No Show")) {
 		addFee("ENF_HI_05","ENF_HI","FINAL",1,"Y");
 }
+
+
 
  
