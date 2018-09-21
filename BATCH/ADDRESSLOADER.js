@@ -640,7 +640,7 @@ try{
 					refAddModel.setZip(addr.getZip());
 					refAddModel.setUnitType(addr.getUnitType());
 					refAddModel.setUnitType(addr.getUnitType());
-					refAddModel.setStreetSuffix(addr.setStreetSuffix());
+					refAddModel.setStreetSuffix(addr.getStreetSuffix()); 
 					
 					var aResult = aa.address.editRefAddress(refAddModel);
 					if (aResult.getSuccess()){
