@@ -13,7 +13,7 @@ function wtrScript350_archiveLists(){
         var valuesList = aa.util.newArrayList();
         valuesList.add(val2Check);
         searchConditionMap.put(columnName, valuesList);
-        
+        var capIdModel = aa.cap.getCapIDModel(capId.getID1(), capId.getID2(), capId.getID3()).getOutput();
         
         /*****************************************************************************************/
         /* BUILDING INSPECTION VIOLATIONS                                                        */
