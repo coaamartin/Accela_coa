@@ -198,6 +198,7 @@ function mainProcess() {
 				line = docString.nextLine();
 				
 				// process the line
+				logDebug("<br> DONB 1 processing line " + line + "<br>")
 				var addrArray = new Array();
 				var addrArray = processLine(String(line));
 
@@ -224,7 +225,7 @@ function processLine(line) {
 			var addrBusUtil = aa.proxyInvoker.newInstance("com.accela.aa.aamain.address.AddressBusinessUtil").getOutput();
 			var sourceSequenceNum = addrBusUtil.getSourceSeqNumber(aa.getServiceProviderCode(), "ADMIN");
 			// logDebug("addrBusUtil.sourceSequenceNum: " + sourceSequenceNum);
-				
+
 			// set for all addresses
 			newAddr.setAuditDate(new Date());
 			newAddr.setAuditID("ADMIN");
@@ -233,7 +234,6 @@ function processLine(line) {
 			
 			//  template data update
 			var attrArray = new Array(); 
-			logDebug("DONB 1.01 line " + line)
 			pieces = line.split(",");
 			for (pIndex in pieces) {
 				pieceValue = pieces[pIndex];
@@ -638,6 +638,9 @@ try{
 					refAddModel.setLevelNumberEnd(addr.getLevelNumberEnd());
 					refAddModel.setValidateFlag(addr.getValidateFlag());
 					refAddModel.setZip(addr.getZip());
+					refAddModel.setUnitType(addr.getUnitType());
+					refAddModel.setUnitType(addr.getUnitType());
+					refAddModel.setStreetSuffix(addr.setStreetSuffix());
 					
 					var aResult = aa.address.editRefAddress(refAddModel);
 					if (aResult.getSuccess()){
