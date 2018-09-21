@@ -8,7 +8,7 @@ function addAppSpecificTableInforsCustom(tableName, capIDModel, asitFieldArray/*
     {
         return;
     }
-    aa.print("Here");
+
     var asitTableScriptModel = aa.appSpecificTableScript.createTableScriptModel();
     var asitTableModel = asitTableScriptModel.getTabelModel();
     var rowList = asitTableModel.getRows();
