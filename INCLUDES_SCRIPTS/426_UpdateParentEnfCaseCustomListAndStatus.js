@@ -97,6 +97,8 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         colKeyName = 'Case #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter || eventName = 'InspectionResultModifyAfter'")) {
             //IRSA
+			aa.print("inspType:" + inspType + ".");
+			aa.print("inspResult:" + inspResult + ".");
             if(ifTracer(inspType.equals("Summons Issuance") && (inspResult.equals("Letter to be Sent") || inspResult.equals("Personal Service")), 'inspType == "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service")')) {
                 // inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")
                 row = [
