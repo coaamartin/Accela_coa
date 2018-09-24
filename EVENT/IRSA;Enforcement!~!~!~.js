@@ -1,5 +1,5 @@
 logDebug("DONB 101 " + capId)
-aa.print("inspType@2:" + inspType);
+
 if(inspType == "Zoning Initial Inspection"){
     //Script 346
     //                    Inspection to check for,    Insp result         New inspection                  Custom field to get date for new insp, copy failed GS, wfTask2Update, status for WF task
@@ -20,7 +20,7 @@ if(inspType == "Zoning Initial Inspection"){
     enfProcessInspResult("Zoning Initial Inspection", "Final Notice Served", "Zoning Final Inspection", "Final Notice Reinspection Days", true, "Initial Investigation", "Final Notice Served");
     enfProcessInspResult("Zoning Initial Inspection", "Final Letter Sent", "Zoning Final Inspection", "Final Notice Reinspection Days", true, "Initial Investigation", "Final Letter Sent");
 }
-aa.print("inspType@23:" + inspType);
+
 if(inspType == "Zoning Follow-Up Inspection"){
     //Script 346
     enfProcessInspResult("Zoning Follow-Up Inspection", "Ext Req on Re-Inspect", "Zoning Follow-Up Inspection", "Follow-Up Extension Date", true, "Follow-Up Investigation" ,"Ext Req on Re-Inspect");
@@ -149,12 +149,12 @@ if(inspType == "4th Housing Re-Inspection"){
     enfProcessInspResult("4th Housing Re-Inspection", "Extension - Fee", "4th Housing Re-Inspection", "4th Re-Inspection Scheduled Date", false, "4th Re-inspection", "Extension - Fee");
     enfProcessInspResult("4th Housing Re-Inspection", "Extension - No Fee", "4th Housing Re-Inspection", "4th Re-Inspection Scheduled Date", false, "4th Re-inspection", "Extension - No Fee");
 }
-aa.print("inspType@152:" + inspType);
-if(inspType == "Summons Issuance"){aa.print("inspType@153:" + inspType);
+
+if(inspType == "Summons Issuance"){
     //Script 346
     enfProcessInspResult("Summons Issuance", "Taken and Stored - Summons", null, null, false, "Pre Summons Photos", "Taken and Stored - Summons");
-    enfProcessInspResult("Summons Issuance", "Visit/Attempted Contact", null, null, false, "Summons Issuance", "Visit/Attempted Contact");aa.print("inspType@156:" + inspType);
-    enfProcessInspResult("Summons Issuance", "Personal Service", "Pre Court Action", 0, false, "Summons Issuance", "Personal Service");aa.print("inspType@157:" + inspType);
+    enfProcessInspResult("Summons Issuance", "Visit/Attempted Contact", null, null, false, "Summons Issuance", "Visit/Attempted Contact");
+    enfProcessInspResult("Summons Issuance", "Personal Service", "Pre Court Action", 0, false, "Summons Issuance", "Personal Service");
     enfProcessInspResult("Summons Issuance", "Letter to be Sent", "Pre Court Action", 0, false, "Summons Issuance", "Letter to be Sent");
     enfProcessInspResult("Summons Issuance", "Compliance", null, null, false, "Summons Issuance", "Compliance");
     enfProcessInspResult("Summons Issuance", "Cancelled", null, null, false, "Summons Issuance", "Cancelled");
@@ -199,7 +199,7 @@ if(inspType == "NOV Release Inspection"){
     enfProcessInspResult("NOV Release Inspection", "Failed", "NOV Release Inspection", 90, false, "NOV Release Inspection", "Failed");
     enfProcessInspResult("NOV Release Inspection", "New Owner", null, null, false, "NOV Release Inspection", "New Owner");
 }
-aa.print("inspType@202:" + inspType);
+
 if(inspType == "Board-Up Abatement Order"){
     //Script 346
     enfProcessInspResult("Board-Up Abatement Order", "Called in Service Request", null, null, false, "Abatement Request", "Completed Service Request");
@@ -211,7 +211,7 @@ if(inspType == "Graffiti Abatement Order"){
     enfProcessInspResult("Graffiti Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
     enfProcessInspResult("Graffiti Abatement Order", "Taken and Stored", "Post Abatement Inspection - Graffiti Only", 0, false, "Pre Abatement Photos", "Taken and Stored");
 }
-aa.print("inspType@214:" + inspType);
+
 if(inspType == "Post Abatement Inspection"){
     //Script 346
     enfProcessInspResult("Post Abatement Inspection", "Rescheduled Upon Re-Inspect", null, null, false, "Post Abatement Photos", "Rescheduled Upon Re-Inspect");
@@ -226,13 +226,13 @@ if(inspType == "Post Abatement Inspection"){
         scheduleInspection("Abatement Approval", inspDays);
     }
 }
-aa.print("inspType@229:" + inspType);
+
 if(inspType == "Post Abatement Inspection - Graffiti Only"){
     //Script 
     enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Taken and Stored", "Abatement Approval", 0, false, "Post Abatement Photos", "No Violation Observed");
     enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Cancelled", null, null, false, "Post Abatement Photos", "Cancelled");
 }
-aa.print("inspType@235:" + inspType);
+
 if(inspType == "Snow Abatement Order"){
     //Script 346
     enfProcessInspResult("Snow Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
@@ -245,7 +245,7 @@ if(inspType == "Snow Abatement Order"){
         resultWorkflowTask("Pre Abatement Photos", "Taken and Stored");
     }
 }
-aa.print("inspType@248:" + inspType);
+
 if(inspType == "Abatement Approval"){
     //Script 346
     enfProcessInspResult("Abatement Approval", "Bill and Photo Denied", "Abatement Approval", "nextWorkDay", false, "Abatement Approval", "Bill and Photo Denied");
@@ -267,7 +267,7 @@ if(inspType == "Abatement Approval"){
         }
     }
 }
-aa.print("inspType@270:" + inspType);
+
 if(inspType == "City Abatement Order"){
     //Script 346
     enfProcessInspResult("City Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
@@ -282,7 +282,7 @@ if(inspType == "City Abatement Order"){
             resultWorkflowTask(wfTsk, wfSts, "", "");
     }
 }
-aa.print("inspType@285:" + inspType);
+
 if(inspType == "Regular Abatement Order"){
     //Script 346
     enfProcessInspResult("Regular Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
@@ -297,7 +297,7 @@ if(inspType == "Regular Abatement Order"){
         resultWorkflowTask(wfTsk, wfSts, "", "");
     }
 }
-aa.print("inspType@300:" + inspType);
+
 disableTokens = true;
 holdCapId = capId;
 parentArray = getParents("*/*/*/*");
@@ -372,7 +372,7 @@ if (inspType == "Follow-Up Investigation" && inspResult == "Abated") {
 updateTask("Incident Status","Violation Abated","Updated by Inspection Result","Note");
 closeTask("Incident Status","Closed","","");
 }
-aa.print("inspType@375:" + inspType);
+
 //*********************************************************************************************************
 //script 343        Create Child Summons to Court Record
 //

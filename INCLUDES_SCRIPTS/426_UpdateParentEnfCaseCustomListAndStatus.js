@@ -27,7 +27,6 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         colKeyName = 'Abatement #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter OR Modify After")) {
             //IRSA
-			if(inspType.getClass().indexOf("InspectionTypeModel") > -1) inspType = inspType.getType();
             if(ifTracer(inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored", 'inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored"')) {
                 // inspResult == Taken and Stored (create row)
                 addAsiTableRow(tableName, [
@@ -97,9 +96,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         tableName = 'SUMMONS TO COURT INFORMATION';
         colKeyName = 'Case #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter || eventName = 'InspectionResultModifyAfter'")) {
-            //IRSA
-			//if(inspType.getClass().indexOf("InspectionTypeModel") > -1) inspType = inspType.getType();
-			aa.print("inspType:" + inspType);
+            //IRSA			
             if(ifTracer(inspType.equals("Summons Issuance") && (inspResult.equals("Letter to be Sent") || inspResult.equals("Personal Service")), 'inspType == "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service")')) {
                 // inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")
                 row = [
