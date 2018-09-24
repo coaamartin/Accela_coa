@@ -19,36 +19,33 @@ function script193_WatIrrigationAddInspFee() {
     
 	logDebug("script193_WatIrrigationAddInspFee() started.");
 	try{
-		if (ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wfTask == Fee Processing && wfStatus == Ready to Pay')) 
-		{
             
-            var emailTemplate = 'WAT_IRRIGATION PLAN REVIEW INVOICED #193',
-                  toContactTypes = 'Applicant',
-                  ccContactTypes = 'All',
-                  emailparams = aa.util.newHashtable(),
-                  reportname = ""
-                  reportparams = aa.util.newHashtable(),
-                  applicant = getContactByType("Applicant", capId);
+		var emailTemplate = 'WAT_IRRIGATION PLAN REVIEW INVOICED #193',
+			  toContactTypes = 'Applicant',
+			  ccContactTypes = 'All',
+			  emailparams = aa.util.newHashtable(),
+			  reportname = ""
+			  reportparams = aa.util.newHashtable(),
+			  applicant = getContactByType("Applicant", capId);
 
-            //email params
-           if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
-                logDebug("applicant.contactName - " + applicant.contactName);
-                emailparams.put("$$ContactFullName$$", applicant.contactName);
-           }
-           
-           //report params
-            reportparams.put("DEPARTMENT", "Administrator");
+		//email params
+	   if(ifTracer(applicant, 'found applicant, will send ContactFullName')) {
+			logDebug("applicant.contactName - " + applicant.contactName);
+			emailparams.put("$$ContactFullName$$", applicant.contactName);
+	   }
+	   
+	   //report params
+		reportparams.put("DEPARTMENT", "Administrator");
 
-            //create fee
-            if(AInfo['Type of Property'] == 'Single Family Residential') {
-                addFee('WAT_IP_01', 'WAT_IP', 'FINAL', 1, "Y");                
-            } else {
-                addFee('WAT_IP_02', 'WAT_IP', 'FINAL', 1, "Y");                
-            }
+		//create fee
+		if(AInfo['Type of Property'] == 'Single Family Residential') {
+			addFee('WAT_IP_01', 'WAT_IP', 'FINAL', 1, "Y");                
+		} else {
+			addFee('WAT_IP_02', 'WAT_IP', 'FINAL', 1, "Y");                
+		}
 
-            //send email
-            emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
-     }
+		//send email
+		emailContactsWithCCs(toContactTypes, emailTemplate, emailparams, reportname, reportparams, "N", "", ccContactTypes);
 }
 catch(err){
 		showMessage = true;
