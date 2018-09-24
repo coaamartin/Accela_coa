@@ -58,12 +58,15 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                 resultWorkflowTask(wfTsk, wfSts, "Updated via enfProcessInspResult()", "Updated via enfProcessInspResult()");
             }
             
-            
+            var irComment = "";
+			if(vEventName == "InspectionResultModifyAfter") irComment = inspResultComment;
+			else irComment = inspComment
+			
             //Add a cap comment to the record
             //Get inspector from inspection
             var inspector = getInspectorByInspID(inspId) == false ? "" : getInspectorByInspID(inspId);
             //Prepare comment text
-            var vComment = inspector + " - " + inspResult + " - " + (inspComment == null ? "" : inspComment);
+            var vComment = inspector + " - " + inspResult + " - " + (irComment == null ? "" : irComment);
             var comDate = aa.date.parseDate(inspResultDate);
             var capCommentScriptModel = aa.cap.createCapCommentScriptModel();
             capCommentScriptModel.setCapIDModel(capId);
