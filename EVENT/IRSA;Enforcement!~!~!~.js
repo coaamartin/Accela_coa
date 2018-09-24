@@ -372,6 +372,7 @@ updateTask("Incident Status","Violation Abated","Updated by Inspection Result","
 closeTask("Incident Status","Closed","","");
 }
 
+aa.print("inspType@374:" + inspType);
 //*********************************************************************************************************
 //script 343        Create Child Summons to Court Record
 //
@@ -428,6 +429,7 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     }
 }           
 logDebug("Script 343 END");
+aa.print("inspType@431:" + inspType);
 
 //*********************************************************************************************************
 //script 344        Create Child Abatement
@@ -462,7 +464,7 @@ createChildAbatement("Snow Fee 2nd Re-Inspection",      "Snow Abate/Summons",   
 createChildAbatement("Snow Fee 2nd Re-Inspection",      "Snow Abatement",           "Snow Abatement Order",     "Snow");
           
 logDebug("Script 344 END");
-
+aa.print("inspType@465:" + inspType);
 //*********************************************************************************************************
 //script 345        Create Recordation Child
 //
@@ -515,4 +517,6 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     }
 }           
 logDebug("Script 345 END");
+aa.print("inspType@518:" + inspType);
+
 
