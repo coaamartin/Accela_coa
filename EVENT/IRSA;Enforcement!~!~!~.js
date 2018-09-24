@@ -150,11 +150,11 @@ if(inspType == "4th Housing Re-Inspection"){
     enfProcessInspResult("4th Housing Re-Inspection", "Extension - No Fee", "4th Housing Re-Inspection", "4th Re-Inspection Scheduled Date", false, "4th Re-inspection", "Extension - No Fee");
 }
 aa.print("inspType@152:" + inspType);
-if(inspType == "Summons Issuance"){
+if(inspType == "Summons Issuance"){aa.print("inspType@153:" + inspType);
     //Script 346
     enfProcessInspResult("Summons Issuance", "Taken and Stored - Summons", null, null, false, "Pre Summons Photos", "Taken and Stored - Summons");
-    enfProcessInspResult("Summons Issuance", "Visit/Attempted Contact", null, null, false, "Summons Issuance", "Visit/Attempted Contact");
-    enfProcessInspResult("Summons Issuance", "Personal Service", "Pre Court Action", 0, false, "Summons Issuance", "Personal Service");
+    enfProcessInspResult("Summons Issuance", "Visit/Attempted Contact", null, null, false, "Summons Issuance", "Visit/Attempted Contact");aa.print("inspType@156:" + inspType);
+    enfProcessInspResult("Summons Issuance", "Personal Service", "Pre Court Action", 0, false, "Summons Issuance", "Personal Service");aa.print("inspType@157:" + inspType);
     enfProcessInspResult("Summons Issuance", "Letter to be Sent", "Pre Court Action", 0, false, "Summons Issuance", "Letter to be Sent");
     enfProcessInspResult("Summons Issuance", "Compliance", null, null, false, "Summons Issuance", "Compliance");
     enfProcessInspResult("Summons Issuance", "Cancelled", null, null, false, "Summons Issuance", "Cancelled");
