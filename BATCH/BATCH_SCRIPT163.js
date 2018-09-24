@@ -77,6 +77,7 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 		capId = capIdScriptModelList[r].getCapID();
 		logDebug("**INFO -------------- " + capId);
 		var capStatus = capId.getAppStatus();
+		LogBatchDebug("Current app status: " + capStatus);
 		if(capStatus != "Withdrawn" && capStatus != "Archived" && capStatus != "Recorded") {
 		   var certInsExpDate = getAppSpecific(asiFieldName);
 		   if (certInsExpDate == null || certInsExpDate == "") {
