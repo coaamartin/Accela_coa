@@ -25,7 +25,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 		logDebug("Abatement Record");
         tableName = 'ABATEMENT INFORMATION';
         colKeyName = 'Abatement #';
-        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
+        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter OR Modify After")) {
             //IRSA
             if(ifTracer(inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored", 'inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored"')) {
                 // inspResult == Taken and Stored (create row)
@@ -95,7 +95,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     ], appTypeString)) {
         tableName = 'SUMMONS TO COURT INFORMATION';
         colKeyName = 'Case #';
-        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
+        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter || eventName = 'InspectionResultModifyAfter'")) {
             //IRSA
             if(ifTracer(inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service"), 'inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service")')) {
                 // inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")
@@ -152,7 +152,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     ], appTypeString)) {
         tableName = 'NOV RECORDATION INFORMATION';
         colKeyName = 'NOV Record #';
-        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
+        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter OR Modify After")) {
             //IRSA
             if(ifTracer(inspType == "NOV Release Inspection", 'inspType == "NOV Release Inspection"')) {
                 // inspType == "NOV Inspection"
