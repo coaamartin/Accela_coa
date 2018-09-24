@@ -18,7 +18,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         return;
     }
     logDebug('parentCapId: ' + parentCapId);
-
+	
     if (matchARecordType([
         "Enforcement/Incident/Abatement/NA"
     ], appTypeString)) {
@@ -27,6 +27,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         colKeyName = 'Abatement #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter OR Modify After")) {
             //IRSA
+			if(inspType.getClass().indexOf("InspectionTypeModel") > -1) inspType = inspType.getType();
             if(ifTracer(inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored", 'inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored"')) {
                 // inspResult == Taken and Stored (create row)
                 addAsiTableRow(tableName, [
@@ -97,22 +98,8 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         colKeyName = 'Case #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter || eventName = 'InspectionResultModifyAfter'")) {
             //IRSA
-			aa.print("inspType:" + inspType + ".");
-			aa.print("inspResult:" + inspResult + ".");
-			
-for (var i in inspType){
-    if (typeof(inspType[i]) == "function"){
-        aa.print("==> " + i + " = " + inspType[i]);
-    }
-}
-
-
-			
-for (var i in inspType){
-    if (typeof(inspType[i]) != "function"){
-        aa.print("==> " + i + " = " + inspType[i]);
-    }
-}
+			if(inspType.getClass().indexOf("InspectionTypeModel") > -1) inspType = inspType.getType();
+			aa.print("inspType:" + inspType);
             if(ifTracer(inspType.equals("Summons Issuance") && (inspResult.equals("Letter to be Sent") || inspResult.equals("Personal Service")), 'inspType == "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service")')) {
                 // inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")
                 row = [
