@@ -105,10 +105,18 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     { colName: 'Issue Date', colValue: inspResultDate }
                 ];
                 var respPeople = getContacts( { contactType: "Responsible Party" });
-                if(respPeople.length > 0) {
+				if(respPeople.length > 0) {
                     for(var rp in respPeople) {
-                        if(respPeople[rp].getFlag() == "Y") {
-                            row.push({ colName: 'Defendant', colValue: respPeople[rp].getFullName() });
+						if(respPeople[rp].getFlag() == "Y") {
+							var name = "";
+                            if(respPeople[rp].getFullName() != null)
+                            	name = respPeople[rp].getFullName();
+                            
+                            if(respPeople[rp].getFullName() == null && respPeople[rp].getBusinessName() == null)
+                            	name = respPeople[rp].getFirstName() + " " + respPeople[rp].getLastName();
+                            else if(respPeople[rp].getFullName() == null)
+                            	name = respPeople[rp].getBusinessName()
+                            row.push({ colName: 'Defendant', colValue: name });
                         }
                     }
                 }
