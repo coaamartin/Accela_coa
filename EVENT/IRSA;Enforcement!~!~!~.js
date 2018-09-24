@@ -1,4 +1,5 @@
 logDebug("DONB 101 " + capId)
+aa.print("inspType@2:" + inspType);
 if(inspType == "Zoning Initial Inspection"){
     //Script 346
     //                    Inspection to check for,    Insp result         New inspection                  Custom field to get date for new insp, copy failed GS, wfTask2Update, status for WF task
@@ -266,7 +267,7 @@ if(inspType == "Abatement Approval"){
         }
     }
 }
-
+aa.print("inspType@270:" + inspType);
 if(inspType == "City Abatement Order"){
     //Script 346
     enfProcessInspResult("City Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
@@ -281,7 +282,7 @@ if(inspType == "City Abatement Order"){
             resultWorkflowTask(wfTsk, wfSts, "", "");
     }
 }
-
+aa.print("inspType@285:" + inspType);
 if(inspType == "Regular Abatement Order"){
     //Script 346
     enfProcessInspResult("Regular Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
@@ -296,7 +297,7 @@ if(inspType == "Regular Abatement Order"){
         resultWorkflowTask(wfTsk, wfSts, "", "");
     }
 }
-
+aa.print("inspType@300:" + inspType);
 disableTokens = true;
 holdCapId = capId;
 parentArray = getParents("*/*/*/*");
@@ -371,8 +372,7 @@ if (inspType == "Follow-Up Investigation" && inspResult == "Abated") {
 updateTask("Incident Status","Violation Abated","Updated by Inspection Result","Note");
 closeTask("Incident Status","Closed","","");
 }
-
-aa.print("inspType@374:" + inspType);
+aa.print("inspType@375:" + inspType);
 //*********************************************************************************************************
 //script 343        Create Child Summons to Court Record
 //
@@ -429,7 +429,6 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     }
 }           
 logDebug("Script 343 END");
-aa.print("inspType@431:" + inspType);
 
 //*********************************************************************************************************
 //script 344        Create Child Abatement
@@ -464,7 +463,7 @@ createChildAbatement("Snow Fee 2nd Re-Inspection",      "Snow Abate/Summons",   
 createChildAbatement("Snow Fee 2nd Re-Inspection",      "Snow Abatement",           "Snow Abatement Order",     "Snow");
           
 logDebug("Script 344 END");
-aa.print("inspType@465:" + inspType);
+
 //*********************************************************************************************************
 //script 345        Create Recordation Child
 //
@@ -517,6 +516,4 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     }
 }           
 logDebug("Script 345 END");
-aa.print("inspType@518:" + inspType);
-
 
