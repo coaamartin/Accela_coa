@@ -105,6 +105,14 @@ for (var i in inspType){
         aa.print("==> " + i + " = " + inspType[i]);
     }
 }
+
+
+			
+for (var i in inspType){
+    if (typeof(inspType[i]) != "function"){
+        aa.print("==> " + i + " = " + inspType[i]);
+    }
+}
             if(ifTracer(inspType.equals("Summons Issuance") && (inspResult.equals("Letter to be Sent") || inspResult.equals("Personal Service")), 'inspType == "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service")')) {
                 // inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")
                 row = [
