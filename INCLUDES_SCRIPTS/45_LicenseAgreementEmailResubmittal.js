@@ -1,3 +1,5 @@
+//written by swakil edited by jmain
+
 var checkTasks = ["Engineering Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review"];
 if (exists(wfTask, checkTasks))
 {
@@ -7,7 +9,7 @@ if (exists(wfTask, checkTasks))
   if (isAllComplete && !isAllStatusComplete)
   {
     sendEmailToApplicant();
-    updateTask("Plans Coordination", "Resubmittal Requested", "Update via script");
+    updateTask("Plans Coordination", "Resubmittal Requested", "Update via script COA #45");
   }
 }
 
