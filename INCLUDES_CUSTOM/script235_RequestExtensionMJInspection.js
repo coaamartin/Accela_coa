@@ -2,6 +2,7 @@
 function requestExtensionMJInspection(vCapType) {
 
 	var daysToAdd;
+	var inspDate = inspObj.getInspectionDate().getMonth() + "/" + inspObj.getInspectionDate().getDayOfMonth() + "/" + inspObj.getInspectionDate().getYear();
    
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
@@ -22,7 +23,7 @@ function requestExtensionMJInspection(vCapType) {
 			var vInspType = inspType;
 			var vInspStatus = "Scheduled";
 		
-			var newInspSchedDate = dateAddHC3(inspSchedDate, daysToAdd, "Y");
+			var newInspSchedDate = dateAddHC3(inspDate, daysToAdd, "Y");
 			
 			var inspResultComment;
 			var vInspComments;
