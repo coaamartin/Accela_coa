@@ -7,7 +7,7 @@ Written by JMAIN
 if (balanceDue > 0)
 {
   //email the applicant
-  var contact = "Applicant"; //Cont
+  var contact = "Applicant,Contractor(s)";
   var template = "BLD_INVOICEDFEES";
   var fullName = "";
   //get contact

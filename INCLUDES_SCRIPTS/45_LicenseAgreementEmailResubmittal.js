@@ -1,6 +1,6 @@
 //written by swakil edited by jmain
 
-var checkTasks = ["Engineering Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review"];
+var checkTasks = ["Engineering Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review", "Risk Management Review", "Real Property Review", "Planning Review"];
 if (exists(wfTask, checkTasks))
 {
   var isAllComplete = isListComplete(checkTasks);
