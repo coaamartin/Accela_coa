@@ -1,4 +1,6 @@
 /*
+THIS SCRIPT IS DECOMISSIONED. THE BATCH JOB IS CALLED BATCH_SCRIPT312_MJDEL and the script being used for this batch job is LICENSE_EXPIRATION
+
 Title : Update App Status 'Delinquent' (Batch)
 
 Purpose : If the expiration date on the record is in the past and the license has not been renewed (License status is Expired)
