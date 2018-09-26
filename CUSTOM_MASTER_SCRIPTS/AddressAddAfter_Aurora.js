@@ -141,7 +141,7 @@ var vAddressModel = aa.env.getValue("AddressModel");
 for (x in vAddressModel) {
 	logDebug(x + " : " + vAddressModel[x]);
 }
-
+showDebug = true;
 
 //
 // Check for invoicing of fees
