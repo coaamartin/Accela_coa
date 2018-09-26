@@ -7,7 +7,6 @@ function sendEmail210(){
 		logDebug("**WARN no applicant found or no email capId=" + capId);
 		return false;
 	}
-	var toEmail = applicant.getEmail();
 	var files = new Array();
 	
 	// use the correct parameters related to the email template provided + wfComment
@@ -40,5 +39,5 @@ function sendEmail210(){
 	addParameter(eParams, "$$ApplicationName$$", appName);
 
 	//send email to applicant, no report included
-	emailWithReportLinkASync(toEmail, emailTemplate, eParams, "", "", "N", "");
+	emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
 }
