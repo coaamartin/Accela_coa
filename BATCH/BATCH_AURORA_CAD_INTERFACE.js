@@ -172,8 +172,7 @@ function deleteCadRows()
 			aa.print("Deleting refAddrid: " + refAddrid);
 			LogBatchDebug("DEBUG", "Caution record on Aurora Address ID will be removed: " + refAddrid);			
 			LogBatchDebug("DEBUG", "Condition is: " + conId);
-			aa.addressconditionscript.removeaddresscondition(refAddrid, conId);
-			
+			aa.addressCondition.removeAddressCondition(refAddrid, conId);
         }
         sStmt.close();
         conn.close();
