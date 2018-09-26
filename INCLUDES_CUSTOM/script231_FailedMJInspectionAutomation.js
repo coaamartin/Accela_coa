@@ -2,7 +2,7 @@
 function failedMJInspectionAutomation(vCapType) {
 
 	var daysToAdd;
-	var today = new Date();
+	var inspDate = inspObj.getInspectionStatusDate().getMonth() + "/" + inspObj.getInspectionStatusDate().getDayOfMonth() + "/" + inspObj.getInspectionStatusDate().getYear();
 	
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
@@ -26,7 +26,7 @@ function failedMJInspectionAutomation(vCapType) {
 			
 			//schedule new inspection daysToAdd number of days from inspection result date
 			logDebug("Days to add: " + daysToAdd);
-			var newInspSchedDate = dateAddHC3(today, daysToAdd, "Y");
+			var newInspSchedDate = dateAddHC3(inspDate, daysToAdd, "Y");
 			scheduleInspectDate(vInspType, newInspSchedDate);
 			
 			//get sequence ID for most recently created inspection
