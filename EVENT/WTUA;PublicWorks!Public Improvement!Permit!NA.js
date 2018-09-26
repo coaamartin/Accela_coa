@@ -183,87 +183,14 @@ function doPIPCalculation(closureLength, sidewalkLength, parkingLaneLength, perm
 //****************************************************************************************
 // Start of script 183
 //****************************************************************************************
-logDebug("Script 183 START");
-
-var doReviewFee = getAppSpecific("Review Fee"); // y/n field indicating whether a review fee should be included
-var strOccFee = getAppSpecific("Street Occupancy Fee Amount"); // this value is what is already in the ASI field before the script and will be added to the total of the rows
-
-if (doReviewFee == "Yes"){
-    //Add Traffic Control Plan Review fee PW_PIP_35
-    logDebug("Script 183 calculating Review Fee");
-    addFee("PW_PIP_35","PW_PIP","FINAL",1,"N");
-}
-    
-if (wfTask == "TCP Review" && wfStatus == "Estimate Fee")
-{
-    logDebug("Script 183 Conditions met - will calculate fees per spec");
-    var strOccFeeTotal = 0;
-    var strOccFeeAmount = 0;
-    
-    var closureLength = null;
-    var sidewalkLength = null;
-    var parkingLaneLength = null;
-    var permitParkingLength = null;
-    var meteredParkingLength = null;
-    var bikeLaneLength = null;
-    var peak = null;
-    var detour = null;
-    var durationOfClosureInDays = null;
-    var roadwayType = null;
-    var workZoneLength = null;
-    var numberOfLanesClosed = null;
-    var strOccFee = getAppSpecific("Street Occupancy Fee Amount");
-    
-    //Add to the Street Occupancy fee based on ASI
-    logDebug("Script 183 Calculating Street Occ Fee");
-
-    if (strOccFee != null)
-        strOccFeeTotal = parseFloat(strOccFee);
-
-
-    var table = loadASITable("TRAFFIC CONTROL INFORMATION");
-    for (var i in table) {
-        row = table[i];
-        closureLength = row["Closure Length"].fieldValue;
-        sidewalkLength = row["Sidewalk Length"].fieldValue;
-        parkingLaneLength = row["Parking Lane Length"].fieldValue;
-        permitParkingLength = row["Permit Parking Length"].fieldValue;
-        meteredParkingLength = row["Metered Parking Length"].fieldValue;
-        bikeLaneLength = row["Bike Lane Length"].fieldValue;
-        peak = row["Peak"].fieldValue;
-        detour = row["Detour"].fieldValue;
-        durationOfClosureInDays = row["Duration of Closure in Days"].fieldValue;
-        roadwayType = row["Roadway Type"].fieldValue;
-        workZoneLength = row["Work Zone Length"].fieldValue;
-        numberOfLanesClosed = row["Number of Lanes Closed"].fieldValue;
-        
-        logDebug("i = " + i + " row = " + row + " cl = " + closureLength);
-        logDebug("cl  = " + closureLength);
-        logDebug("swl = " + sidewalkLength);
-        logDebug("pll = " + parkingLaneLength);
-        logDebug("ppl = " + permitParkingLength);
-        logDebug("mpl = " + meteredParkingLength);
-        logDebug("bll = " + bikeLaneLength);
-        logDebug("p   = " + peak);
-        logDebug("d   = " + detour);
-        logDebug("dcd = " + durationOfClosureInDays);
-        logDebug("rt  = " + roadwayType);
-        logDebug("wzl = " + workZoneLength);
-        logDebug("nlc = " + numberOfLanesClosed);
-        
-        var strOccFeeAmount = doPIPCalculation(closureLength, sidewalkLength, parkingLaneLength, permitParkingLength, meteredParkingLength, bikeLaneLength,
-                                                peak, detour, durationOfClosureInDays, roadwayType, workZoneLength, numberOfLanesClosed);
-        
-        var strOccFeeTotal = strOccFeeTotal + strOccFeeAmount;
-        logDebug("amount = " + strOccFeeAmount + " & total = " + strOccFeeTotal);
-        
-    }
-    addFee("PW_PIP_30","PW_PIP","FINAL",strOccFeeTotal,"N");
-
-    logDebug("Street Occupation Fee = " + strOccFeeTotal);
+if (ifTracer(wfTask == "TCP Review" && wfStatus == "Estimate Fee", 'wfTask == "TCP Review" && wfStatus == "Estimate Fee"')){
+    pubWrksScript183_assessFeesScenario1();
 }
 
-logDebug("Script 183 END");
+if(ifTracer(wfTask == "TCP Review" && wfStatus == "Ready to Pay", 'wfTask == "TCP Review" && wfStatus == "Ready to Pay"')){
+	var scrt183Fees = ["PW_PIP_30", "PW_PIP_35", "PW_PIP_36"];
+	for(f in scrt183Fees){ if(feeExists(scrt183Fees[f])) invoiceFee(scrt183Fees[f], "FINAL"); }
+}
 
 if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Estimate Fee", 'wf:Fee Processing/Estimate Fee')){
     pubWrksScript183_assessFees();
