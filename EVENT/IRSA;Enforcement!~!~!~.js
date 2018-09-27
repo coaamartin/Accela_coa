@@ -202,7 +202,7 @@ if(inspType == "NOV Release Inspection"){
 
 if(inspType == "Board-Up Abatement Order"){
     //Script 346
-    enfProcessInspResult("Board-Up Abatement Order", "Called in Service Request", null, null, false, "Abatement Request", "Completed Service Request");
+    enfProcessInspResult("Board-Up Abatement Order", "Called In Service Request", null, null, false, "Abatement Request", "Called Service Request");
     enfProcessInspResult("Board-Up Abatement Order", "Taken and Stored", "Post Abatement Inspection", "nextWorkDay", false, "Pre Abatement Photos", "Taken and Stored");
 }
 
@@ -219,7 +219,7 @@ if(inspType == "Post Abatement Inspection"){
     enfProcessInspResult("Post Abatement Inspection", "Cancelled", null, null, false, "Post Abatement Photos", "Cancelled");
     
     if(inspResult == "Taken and Stored"){
-        updateTask("Post Abatement Photos", "No Violation Observed", "", "");
+        updateTask("Post Abatement Photos", "Taken and Stored", "", "");
         var currDate = aa.util.parseDate(dateAdd(null, 0));
         var next3Days = aa.util.parseDate(dateAdd(null, 3));
         var inspDays = days_between(currDate, next3Days);
