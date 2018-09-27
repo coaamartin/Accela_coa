@@ -71,7 +71,7 @@ function failedMJInspectionAutomation(vCapType) {
 			
 			logDebug("doing this syncronously...");
 			aa.env.setValue("eventType","Batch Process");
-			emailWithReportLinkASync("evontrapp@etechconsultingllc.com,erich.vontrapp@gmail.com", emailTemplateName, "", "", "", "N", "");
+			emailWithReportLinkASync("evontrapp@etechconsultingllc.com", emailTemplateName, "", "", "", "N", "");
 			return true;
 		}
 	}
