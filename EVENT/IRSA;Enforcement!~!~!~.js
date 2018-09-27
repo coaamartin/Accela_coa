@@ -241,10 +241,8 @@ if(inspType == "Snow Abatement Order"){
 		
 		
         var currDate = aa.util.parseDate(dateAdd(null, 0));
-        //var next2Days = aa.util.parseDate(dateAdd(null, 2));
 		var nextWD = nextWorkDay(dateAdd(null, 2 - 1));
         numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWD));
-        var inspDays = days_between(currDate, next2Days);
         scheduleInspection("Post Abatement Inspection", numOfDays4Insp);
         resultWorkflowTask("Pre Abatement Photos", "Taken and Stored");
     }
