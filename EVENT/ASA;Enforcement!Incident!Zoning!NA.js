@@ -9,6 +9,8 @@ or created proactively in the field by a code officer. The script needs to:
 		and assign the same code officer to the task "Initial Investigation" that was assigned to the record.
 		
 */
+//ajm added for testing
+include("ajm_test");
 
 var thisInsp = scheduleInspectionCustom("Zoning Initial Inspection", 0);
 logDebug("inspection is " + thisInsp);
@@ -22,5 +24,4 @@ if (thisInsp) {
 	}
 }
 
-//ajm added for testing
-include("ajm_test");
+
