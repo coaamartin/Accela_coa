@@ -37,7 +37,7 @@ function isListCompleteStatus(tasks2Check)
 function sendEmailToApplicant(){
   var contacts = "Applicant";
   var template = "PW_UPDATE_PLANS_FOR_LICENSE_AGREEMENT";
-  var lictype = getAppSpecific("LICENSE AGREEMENT INFORMATION") + ""; //force string
+  var lictype = getAppSpecific("License Type") + ""; //force string
   var wireless = getAppSpecific("Wireless Facility") + ""; //force string
   var flagpole = getAppSpecific("Flag Poles") + ""; //force string
   var emailparams = aa.util.newHashtable();
