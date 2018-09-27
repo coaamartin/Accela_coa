@@ -219,7 +219,7 @@ if(inspType == "Post Abatement Inspection"){
     enfProcessInspResult("Post Abatement Inspection", "Canceled", null, null, false, "Post Abatement Photos", "Canceled");
     
     if(inspResult == "Taken and Stored"){
-        updateTask("Post Abatement Photos", "Taken and Stored", "", "");
+        resultWorkflowTask("Post Abatement Photos", "Taken and Stored");
         var currDate = aa.util.parseDate(dateAdd(null, 0));
         var next3Days = aa.util.parseDate(dateAdd(null, 3));
         var inspDays = days_between(currDate, next3Days);
@@ -229,8 +229,8 @@ if(inspType == "Post Abatement Inspection"){
 
 if(inspType == "Post Abatement Inspection - Graffiti Only"){
     //Script 
-    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Taken and Stored", "Abatement Approval", 0, false, "Post Abatement Photos", "No Violation Observed");
-    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Cancelled", null, null, false, "Post Abatement Photos", "Cancelled");
+    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Taken and Stored", "Abatement Approval", 0, false, "Post Abatement Photos", "Taken and Stored");
+    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Cancelled", null, null, false, "Post Abatement Photos", "Canceled");
 }
 
 if(inspType == "Snow Abatement Order"){
@@ -238,10 +238,12 @@ if(inspType == "Snow Abatement Order"){
     enfProcessInspResult("Snow Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
     
     if(inspResult == "Taken and Stored"){
+		
+		
         var currDate = aa.util.parseDate(dateAdd(null, 0));
-        var next2Days = aa.util.parseDate(dateAdd(null, 2));
-        var inspDays = days_between(currDate, next2Days);
-        scheduleInspection("Post Abatement Inspection", inspDays);
+		var nextWD = nextWorkDay(dateAdd(null, 2 - 1));
+        numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWD));
+        scheduleInspection("Post Abatement Inspection", numOfDays4Insp);
         resultWorkflowTask("Pre Abatement Photos", "Taken and Stored");
     }
 }
@@ -251,9 +253,10 @@ if(inspType == "Abatement Approval"){
     enfProcessInspResult("Abatement Approval", "Bill and Photo Denied", "Abatement Approval", "nextWorkDay", false, "Abatement Approval", "Bill and Photo Denied");
     enfProcessInspResult("Abatement Approval", "Invoice Approved", null, null, false, "Abatement Approval", "Invoice Approved");
     enfProcessInspResult("Abatement Approval", "Invoice Denied", "Abatement Approval", "nextWorkDay", false, "Abatement Approval", "Invoice Denied");
-    enfProcessInspResult("Abatement Approval", "Grafitti Abatement Redo", "Post Abatement Inspection - Graffiti Only", 0, false, "Abatement Approval", "Grafitti Abatement Redo");
+    enfProcessInspResult("Abatement Approval", "Graffiti Abatement Redo", "Post Abatement Inspection - Graffiti Only", 0, false, "Abatement Approval", "Graffiti Abatement Redo");
     
     if(inspResult == "Bill and Photo Approved"){
+		resultWorkflowTask("Abatement Approval", "Bill and Photo Approved");
         var currDate = aa.util.parseDate(dateAdd(null, 0));
         var next10Days = aa.util.parseDate(nextWorkDay(dateAdd(null, 9)));
         var inspDays = days_between(currDate, next10Days);
@@ -516,4 +519,3 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     }
 }           
 logDebug("Script 345 END");
-
