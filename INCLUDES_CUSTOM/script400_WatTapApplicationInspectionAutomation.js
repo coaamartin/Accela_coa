@@ -34,14 +34,14 @@ function script400_WatTapApplicationInspectionAutomation() {
             if (ifTracer(inspResult == 'Pass' && !getMeterNumber(), 'inspResult == Pass && getMeterNumber() == false')) {
                 cancel = true;
                 showMessage = true;
-                comment('Water Meter Number must not be null to status inspection as Pass.');                            
-                logDebug('Water Meter Number must not be null to status inspection as Pass.');                            
+                comment("'Water Meter Number' field from the 'Tap Application' checklist must not be blank to status inspection as Pass.");                            
+                logDebug("'Water Meter Number' field from the 'Tap Application' checklist must not be blank to status inspection as Pass.");                            
             }
 			if (ifTracer(inspResult == 'Fail' && getMeterNumber(), 'inspResult == Fail && getMeterNumber() == true')) {
                 cancel = true;
                 showMessage = true;
-                comment('Water Meter Number must be blank to status inspection as Fail.');                            
-                logDebug('Water Meter Number must be blank to status inspection as Fail.');                            
+                comment("'Water Meter Number' field from the 'Tap Application' checklist must be blank to status inspection as Pass.");                            
+                logDebug("'Water Meter Number' field from the 'Tap Application' checklist must be blank to status inspection as Pass.");                            
             }
         } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName.indexOf("InspectionResultModifyAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
