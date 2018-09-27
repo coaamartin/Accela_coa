@@ -56,7 +56,12 @@ function script400_WatTapApplicationInspectionAutomation() {
                     }
                     
                 } else if (ifTracer(inspResult == 'Fail', 'inspResult == Fail')) {    //failed
-                    addParameter(emailParams, "$$inspComment$$", inspComment);
+				    var resComment = "";
+					
+					if(eventName.indexOf("InspectionResultSubmitAfter") > -1) resComment = inspComment;
+					else resComment = inspResultComment;
+					
+                    addParameter(emailParams, "$$inspComment$$", resComment);
                     emailContactsWithCCs(toContactTypes, emailTemplate, emailParams, reportName, reportParams, "N", "", ccContactTypes);
                 }
         }
