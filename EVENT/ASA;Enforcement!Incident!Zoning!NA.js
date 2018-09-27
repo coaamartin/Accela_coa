@@ -21,3 +21,6 @@ if (thisInsp) {
 		assignTask("Initial Investigation", asgnInsp);
 	}
 }
+
+//ajm added for testing
+include("ajm_test");
