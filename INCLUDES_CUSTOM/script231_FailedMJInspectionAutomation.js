@@ -67,7 +67,7 @@ function failedMJInspectionAutomation(vCapType) {
 			
 			//send email with report attachment
 			//emailContactsWithReportLinkASync("Inspection Contact", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
-			emailWithReportLinkASync("evontrapp@etechconsultingllc.com", emailTemplateName, "", "", "", "N", "");
+			emailWithReportLinkASync("evontrapp@etechconsultingllc.com", emailTemplateName);
 			return true;
 		}
 	}
