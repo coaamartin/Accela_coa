@@ -219,7 +219,7 @@ if(inspType == "Post Abatement Inspection"){
     enfProcessInspResult("Post Abatement Inspection", "Canceled", null, null, false, "Post Abatement Photos", "Canceled");
     
     if(inspResult == "Taken and Stored"){
-        updateTask("Post Abatement Photos", "Taken and Stored", "", "");
+        resultWorkflowTask("Post Abatement Photos", "Taken and Stored");
         var currDate = aa.util.parseDate(dateAdd(null, 0));
         var next3Days = aa.util.parseDate(dateAdd(null, 3));
         var inspDays = days_between(currDate, next3Days);
