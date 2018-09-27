@@ -25,10 +25,9 @@ function deleteCadRows()
 			counter = counter + 1;
 			var refAddrid = rSet.getString("b1_contact_type");
 			var conId = rSet.getString("Organizationname");
-			
-			aa.print("Showing refAddrid: " + refAddrid);
-			LogBatchDebug("DEBUG", "The Contact is: " + refAddrid);			
-			LogBatchDebug("DEBUG", "The Organization is: " + conId);
+
+			LogDebug("The Contact is: " + refAddrid);			
+			LogDebug("The Organization is: " + conId);
 			//aa.addressCondition.removeAddressCondition(refAddrid, conId);
         }
         sStmt.close();
