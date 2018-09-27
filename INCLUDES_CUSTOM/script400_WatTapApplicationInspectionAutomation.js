@@ -31,11 +31,17 @@ function script400_WatTapApplicationInspectionAutomation() {
 
             
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1 || eventName.indexOf("InspectionResultModifyBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
-            if (ifTracer(!getMeterNumber(), 'getMeterNumber() == false')) {
+            if (ifTracer(inspResult == 'Pass' && !getMeterNumber(), 'inspResult == Pass && getMeterNumber() == false')) {
                 cancel = true;
                 showMessage = true;
-                comment('Water Meter Number must not be null to status inspection as passed.');                            
-                logDebug('Water Meter Number must not be null to status inspection as passed.');                            
+                comment('Water Meter Number must not be null to status inspection as Pass.');                            
+                logDebug('Water Meter Number must not be null to status inspection as Pass.');                            
+            }
+			if (ifTracer(inspResult == 'Fail' && getMeterNumber(), 'inspResult == Fail && getMeterNumber() == true')) {
+                cancel = true;
+                showMessage = true;
+                comment('Water Meter Number must be populated to status inspection as Fail.');                            
+                logDebug('Water Meter Number must be populated to status inspection as Fail.');                            
             }
         } else if (ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName.indexOf("InspectionResultModifyAfter") > -1, 'eventName.indexOf(InspectionResultSubmitAfter) > -1'))  {
                 if (ifTracer(inspResult == 'Pass', 'inspResult == Pass')) {
