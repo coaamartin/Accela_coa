@@ -35,10 +35,14 @@ function isListCompleteStatus(tasks2Check)
 }
 
 function sendEmailToApplicant(){
-  var contact = "Applicant";
-  var template = "JD_TEST_TEMPLATE";
-  var joke = "Where there's a will, there's a relative.";
+  var contacts = "Applicant";
+  var template = "PW_UPDATE_PLANS_FOR_LICENSE_AGREEMENT";
+  var lictype = getAppSpecific("LICENSE AGREEMENT INFORMATION") + ""; //force string
+  var wireless = getAppSpecific("Wireless Facility") + ""; //force string
+  var flagpole = getAppSpecific("Flag Poles") + ""; //force string
   var emailparams = aa.util.newHashtable();
-  emailparams.put("$$Joke$$", joke);
-  emailContacts(contact, template, emailparams, "", "", "N", "");
+  emailparams.put("$$lictype$$", lictype)
+  emailparams.put("$$wireless$$", wireless);
+  emailparams.put("$$flagpole$$", flagpole);
+  emailContacts(contacts, template, emailparams, "", "", "N", "");
 }
