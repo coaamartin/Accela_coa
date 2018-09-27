@@ -66,12 +66,8 @@ function failedMJInspectionAutomation(vCapType) {
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			//emailContactsWithReportLinkASync("Inspection Contact", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
-			
-			
-			//logDebug("doing this syncronously...");
-			//aa.env.setValue("eventType","Batch Process");
-			emailWithReportLinkASync("evontrapp@etechconsultingllc.com", emailTemplateName, "", "", "", "N", "");
+			emailContactsWithReportLinkASync("Inspection Contact", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
+
 			return true;
 		}
 	}
