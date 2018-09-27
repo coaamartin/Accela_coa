@@ -67,7 +67,11 @@ function failedMJInspectionAutomation(vCapType) {
 			
 			//send email with report attachment
 			//emailContactsWithReportLinkASync("Inspection Contact", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
-			emailWithReportLinkASync("evontrapp@etechconsultingllc.com", emailTemplateName);
+			
+			
+			logDebug("doing this syncronously...");
+			aa.env.setValue("eventType","Batch Process");
+			emailWithReportLinkASync("evontrapp@etechconsultingllc.com,erich.vontrapp@gmail.com", emailTemplateName, "", "", "", "N", "");
 			return true;
 		}
 	}
