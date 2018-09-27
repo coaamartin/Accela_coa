@@ -214,9 +214,9 @@ if(inspType == "Graffiti Abatement Order"){
 
 if(inspType == "Post Abatement Inspection"){
     //Script 346
-    enfProcessInspResult("Post Abatement Inspection", "Rescheduled Upon Re-Inspect", null, null, false, "Post Abatement Photos", "Rescheduled Upon Re-Inspect");
+    enfProcessInspResult("Post Abatement Inspection", "Rescheduled Upon Re-Inspect", null, null, false, "Post Abatement Photos", "Rescheduled upon Re-Inspect");
     enfProcessInspResult("Post Abatement Inspection", "Rescheduled", null, null, false, "Post Abatement Photos", "Rescheduled");
-    enfProcessInspResult("Post Abatement Inspection", "Cancelled", null, null, false, "Post Abatement Photos", "Cancelled");
+    enfProcessInspResult("Post Abatement Inspection", "Canceled", null, null, false, "Post Abatement Photos", "Canceled");
     
     if(inspResult == "Taken and Stored"){
         updateTask("Post Abatement Photos", "Taken and Stored", "", "");
