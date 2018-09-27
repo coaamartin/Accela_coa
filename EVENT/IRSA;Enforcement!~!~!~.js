@@ -519,17 +519,3 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     }
 }           
 logDebug("Script 345 END");
-
-
-if(currentUserID == "TLEDEZMA") {
-	var eParams = aa.util.newHashtable();
-addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-var files = new Array();
-
-var sent = aa.document.sendEmailByTemplateName("", "antonio.ledezma@gmail.com", "", "JD_TEST_TEMPLATE", eParams, files);
-if (!sent.getSuccess()) {
-    logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-}
-else
-	logDebug("Sent successfully");
-}
