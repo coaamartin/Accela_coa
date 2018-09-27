@@ -31,7 +31,7 @@ function script400_WatTapApplicationInspectionAutomation() {
 
             
 		if (ifTracer(eventName.indexOf("InspectionResultSubmitBefore") > -1 || eventName.indexOf("InspectionResultModifyBefore") > -1, 'eventName.indexOf(InspectionResultSubmitBefore) > -1')) {
-            if (ifTracer(!getMeterNumber(), 'getMeterNumber() == falsy')) {
+            if (ifTracer(!getMeterNumber(), 'getMeterNumber() == false')) {
                 cancel = true;
                 showMessage = true;
                 comment('Water Meter Number must not be null to status inspection as passed.');                            
@@ -55,7 +55,7 @@ function script400_WatTapApplicationInspectionAutomation() {
                             //   }
                     }
                     
-                } else {    //failed
+                } else if (ifTracer(inspResult == 'Fail', 'inspResult == Fail')) {    //failed
                     addParameter(emailParams, "$$inspComment$$", inspComment);
                     emailContactsWithCCs(toContactTypes, emailTemplate, emailParams, reportName, reportParams, "N", "", ccContactTypes);
                 }
