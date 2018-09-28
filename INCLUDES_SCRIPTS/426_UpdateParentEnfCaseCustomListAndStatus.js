@@ -322,12 +322,13 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, readonly) {
     var colsToUpdate = [];
     colsToUpdate[fieldName] = value;
+	aa.print("capIDString:" + capIDString)
     aa.print("ParentCapId:" + parentCapId );
 	aa.print("tableName:" + tableName);
 	aa.print("colKeyName:" + colKeyName);
 	aa.print("fieldName:" + fieldName);
 	aa.print("value:" + value);
-	aa.print("colsToUpdate:" + colsToUpdate);
+	aa.print("colsToUpdate:" + colsToUpdate[fieldName]);
     if(!updateASITRows(tableName, colKeyName, capIDString, colsToUpdate, parentCapId))
     {
         addAsiTableRow(tableName, [
