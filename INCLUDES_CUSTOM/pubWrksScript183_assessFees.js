@@ -49,8 +49,8 @@ function pubWrksScript183_assessFees(){
             if(feeItem != "" && feeQty > 0) {
                 logDebug("Adding fee " + feeItem + " with quantity of " + feeQty + ". For " + impvType + ".");
                 updateFee(feeItem, feeSched, feePeriod, feeQty, feeInv);
-                feeItem = ""; feeQty = 0;
                 feesAdded.push(feeItem);
+                feeItem = ""; feeQty = 0;
                 logDebug("*****************************************************************************************");
             }
         }
