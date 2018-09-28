@@ -34,8 +34,7 @@ function coa_emailLicenseProfessionals(lptypes,emailtemplate,emailparams,report,
 		if (lptypesarray.indexOf(lptype) != -1)
 		{
 			logDebug("Sending email to " + lpemail);
-			logDebug("doing this syncronously...");
-			aa.env.setValue("eventType","Batch Process");
+			//aa.env.setValue("eventType","Batch Process");
 			emailWithReportLinkASync(lpemail, emailtemplate, emailparams, report, reportparams, "N", "");
 		}
 	}
