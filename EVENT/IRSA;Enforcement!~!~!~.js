@@ -5,10 +5,6 @@ function deleteCadRows()
 {
 	 var cadQuery = getRemovedCADAddresses();
 
-	aa.print('---------------------------------------------------------------');
-	aa.print(cadQuery);
-	aa.print('---------------------------------------------------------------');
-
         var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
         var ds = initialContext.lookup("java:/AA");
         var conn = ds.getConnection();
