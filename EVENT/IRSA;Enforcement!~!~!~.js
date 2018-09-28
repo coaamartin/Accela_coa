@@ -17,13 +17,13 @@ function deleteCadRows()
 			var refAddrid = rSet.getString("b1_contact_type");
 			var conId = rSet.getString("Organizationname");
 
-			LogDebug("The Contact is: " + refAddrid);			
-			LogDebug("The Organization is: " + conId);
+			logDebug("The Contact is: " + refAddrid);			
+			logDebug("The Organization is: " + conId);
 			//aa.addressCondition.removeAddressCondition(refAddrid, conId);
         }
         sStmt.close();
         conn.close();
-	    LogDebug("Done with this:" + counter);
+	    logDebug("Done with this:" + counter);
 }
 
 //Get addresses to be remove(It was removed from CAD).
