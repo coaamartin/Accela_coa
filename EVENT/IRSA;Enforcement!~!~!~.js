@@ -30,7 +30,7 @@ function deleteCadRows()
 function getRemovedCADAddresses()
 {
 	var altId = capId.getCustomID();
-	var cadQuery = "exec spreport_ch_people_buildingmanager_subreport " + altId;
+	var cadQuery = "exec spreport_ch_people_buildingmanager_subreport '" + altId + "'";
 	return cadQuery;
 }
 //end ajm add
