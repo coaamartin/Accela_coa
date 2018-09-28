@@ -1,5 +1,6 @@
 //Test of alternative reality
 //ajm added for testing
+logDebug("Entering AJM TEST");
 deleteCadRows();
 
 function deleteCadRows()
