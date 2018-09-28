@@ -260,6 +260,7 @@
 			"Project Owner",
 			"Applicant"
           ],
+		  "notifyLPTypes":["Contractor"],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
           "additionalEmailsTo": [],

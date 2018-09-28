@@ -1,5 +1,5 @@
 //ajm added for testing
-deleteCadRows();
+//deleteCadRows();
 
 function deleteCadRows()
 {
