@@ -42,9 +42,10 @@ function sendEmailToApplicant(){
   var wireless = "Adrianwireless" + ""; //force string
   var flagpole = "Adrianflagpoles" + ""; //force string
   var emailparams = aa.util.newHashtable();
-  emailparams.put("$$lictype$$", lictype)
-  emailparams.put("$$wireless$$", wireless);
-  emailparams.put("$$flagpole$$", flagpole);
+  emailparams.put("$$PERMITID$$", lictype)
+  emailparams.put("$$TASKCOMMENTS$$", wireless);
+  emailparams.put("$$PERMITADDR$$", flagpole);
+  emailparams.put("$$PERMITWRKDESC$$", flagpole); 
   emailContacts(contacts, template, emailparams, "", "", "N", "");
 }
 //end ajm add
