@@ -18,11 +18,11 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         return;
     }
     logDebug('parentCapId: ' + parentCapId);
-	
+    
     if (matchARecordType([
         "Enforcement/Incident/Abatement/NA"
     ], appTypeString)) {
-		logDebug("Abatement Record");
+        logDebug("Abatement Record");
         tableName = 'ABATEMENT INFORMATION';
         colKeyName = 'Abatement #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter OR Modify After")) {
@@ -56,9 +56,9 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 if(AInfo["Contractor Fee - Snow"] != null) feeS = parseFloat(AInfo["Contractor Fee - Snow"]);
                 if(AInfo["Contractor Fee - Trash"] != null) feeT = parseFloat(AInfo["Contractor Fee - Trash"]);
                 if(AInfo["Contractor Fee - Board-Up"] != null) feeB = parseFloat(AInfo["Contractor Fee - Board-Up"]);
-                				
+                                
                 var feeTotal = feeG + feeW + feeS + feeT + feeB;
-				logDebug("feeTotal:" + feeTotal);
+                logDebug("feeTotal:" + feeTotal);
                 
                 //updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feeTotal + "", 'N');
@@ -96,7 +96,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         tableName = 'SUMMONS TO COURT INFORMATION';
         colKeyName = 'Case #';
         if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter || eventName = 'InspectionResultModifyAfter'")) {
-            //IRSA			
+            //IRSA          
             if(ifTracer(inspType.equals("Summons Issuance") && (inspResult.equals("Letter to be Sent") || inspResult.equals("Personal Service")), 'inspType == "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service")')) {
                 // inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")
                 row = [
@@ -105,17 +105,17 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     { colName: 'Issue Date', colValue: inspResultDate }
                 ];
                 var respPeople = getContacts( { contactType: "Responsible Party" });
-				if(respPeople.length > 0) {
+                if(respPeople.length > 0) {
                     for(var rp in respPeople) {
-						if(respPeople[rp].getFlag() == "Y") {
-							var name = "";
+                        if(respPeople[rp].getFlag() == "Y") {
+                            var name = "";
                             if(respPeople[rp].getFullName() != null)
-                            	name = respPeople[rp].getFullName();
+                                name = respPeople[rp].getFullName();
                             
                             if(respPeople[rp].getFullName() == null && respPeople[rp].getBusinessName() == null)
-                            	name = respPeople[rp].getFirstName() + " " + respPeople[rp].getLastName();
+                                name = respPeople[rp].getFirstName() + " " + respPeople[rp].getLastName();
                             else if(respPeople[rp].getFullName() == null)
-                            	name = respPeople[rp].getBusinessName()
+                                name = respPeople[rp].getBusinessName()
                             row.push({ colName: 'Defendant', colValue: name });
                         }
                     }
@@ -319,12 +319,11 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 
 
 function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, readonly) {
-    if(!updateAsiTableRow(tableName, fieldName, value, { 
-        capId: parentCapId,
-        colFilters: [
-            { colName: colKeyName, colValue: capIDString}
-        ]}) 
-    ) {
+    var colsToUpdate = [];
+    colsToUpdate[fieldName] = value;
+    
+    if(!updateASITRows(tableName, colKeyName, capIDString, colsToUpdate, parentCapId))
+    {
         addAsiTableRow(tableName, [
             { colName: fieldName, colValue: value }
         ], { capId: parentCapId });
