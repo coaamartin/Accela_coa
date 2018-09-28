@@ -317,19 +317,31 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     
 }
 
-
-
 function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, readonly) {
-    var colsToUpdate = [];
-    colsToUpdate[fieldName] = value;
-    
-    if(!updateASITRows(tableName, colKeyName, capIDString, colsToUpdate, parentCapId))
-    {
+    if(!updateAsiTableRow(tableName, fieldName, value, { 
+        capId: parentCapId,
+        colFilters: [
+            { colName: colKeyName, colValue: capIDString}
+        ]}) 
+    ) {
         addAsiTableRow(tableName, [
             { colName: fieldName, colValue: value }
         ], { capId: parentCapId });
     }
 }
+
+
+//function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, readonly) {
+//    var colsToUpdate = [];
+//    colsToUpdate[fieldName] = value;
+//    
+//    if(!updateASITRows(tableName, colKeyName, capIDString, colsToUpdate, parentCapId))
+//    {
+//        addAsiTableRow(tableName, [
+//            { colName: fieldName, colValue: value }
+//        ], { capId: parentCapId });
+//    }
+//}
 
 function getChildrenWithActiveTasks() {
   //  var parentCapId = getParent(),
