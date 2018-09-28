@@ -31,7 +31,7 @@ function deleteCadRows()
 function getRemovedCADAddresses()
 {
 	var altId = capId.getCustomID();
-	var cadQuery = "exec spreport_ch_people_buildingmanager_subreport '" + altId + "'";
+	var cadQuery = "exec spreport_ch_people_buildingmanager_subreport " + altId + "";
 	return cadQuery;
 }
 
@@ -39,8 +39,8 @@ function sendEmailToApplicant(){
   var contacts = "Applicant";
   var template = "PW_UPDATE_PLANS_FOR_LICENSE_AGREEMENT";
   var lictype = "Adrianlictype" + ""; //force string
-  var wireless = "Adrianwireless + ""; //force string
-  var flagpole = "Adrianflagpoles + ""; //force string
+  var wireless = "Adrianwireless" + ""; //force string
+  var flagpole = "Adrianflagpoles" + ""; //force string
   var emailparams = aa.util.newHashtable();
   emailparams.put("$$lictype$$", lictype)
   emailparams.put("$$wireless$$", wireless);
