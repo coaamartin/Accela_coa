@@ -37,7 +37,7 @@ function getRemovedCADAddresses()
 
 function sendEmailToApplicant(){
   var contacts = "Applicant";
-  var template = "PW_UPDATE_PLANS_FOR_LICENSE_AGREEMENT";
+  var template = "PW_LIC_AGR_REV";
   var lictype = "Adrianlictype" + ""; //force string
   var wireless = "Adrianwireless" + ""; //force string
   var flagpole = "Adrianflagpoles" + ""; //force string
