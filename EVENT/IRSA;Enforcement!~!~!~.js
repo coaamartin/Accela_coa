@@ -1,3 +1,6 @@
+//ajm added for testing
+include("ajm_test");
+
 logDebug("DONB 101 " + capId)
 
 if(inspType == "Zoning Initial Inspection"){
