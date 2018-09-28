@@ -20,6 +20,7 @@ function updateASITRows(tableName, colName, colValue, updateArray){
 	for(eachRow in tRows){
 		var aRow = tRows[eachRow];
 		aa.print("aRow[colName]:" + aRow[colName]);
+		aa.print("aRow[colName] == colValue:" + aRow[colName] == colValue);
 		if(aRow[colName] == colValue){
 			for(i in updateArray){
 				aRow[i] = updateArray[i];		

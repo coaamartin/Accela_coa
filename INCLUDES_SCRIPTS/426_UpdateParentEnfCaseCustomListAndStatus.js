@@ -329,6 +329,7 @@ function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, r
 	aa.print("fieldName:" + fieldName);
 	aa.print("value:" + value);
 	aa.print("colsToUpdate:" + colsToUpdate[fieldName]);
+	aa.print("capIDString:" + capIDString);
     if(!updateASITRows(tableName, colKeyName, capIDString, colsToUpdate, parentCapId))
     {
         addAsiTableRow(tableName, [
