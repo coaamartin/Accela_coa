@@ -58,6 +58,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 if(AInfo["Contractor Fee - Board-Up"] != null) feeB = parseFloat(AInfo["Contractor Fee - Board-Up"]);
                                 
                 var feeTotal = feeG + feeW + feeS + feeT + feeB;
+				feeTotal = feeTotal.toFixed(2);
                 logDebug("feeTotal:" + feeTotal);
                 
                 //updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
