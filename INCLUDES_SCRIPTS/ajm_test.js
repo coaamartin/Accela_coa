@@ -1,18 +1,10 @@
 //Test of alternative reality
-var SCRIPT_VERSION = 3.0;
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-var currentUserID = aa.env.getValue("CurrentUserID"); // Current User
-
+//ajm added for testing
 deleteCadRows();
 
 function deleteCadRows()
 {
 	 var cadQuery = getRemovedCADAddresses();
-
-	aa.print('---------------------------------------------------------------');
-	aa.print(cadQuery);
-	aa.print('---------------------------------------------------------------');
 
         var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
         var ds = initialContext.lookup("java:/AA");
@@ -26,19 +18,34 @@ function deleteCadRows()
 			var refAddrid = rSet.getString("b1_contact_type");
 			var conId = rSet.getString("Organizationname");
 
-			LogDebug("The Contact is: " + refAddrid);			
-			LogDebug("The Organization is: " + conId);
+			logDebug("The Contact is: " + refAddrid);			
+			logDebug("The Organization is: " + conId);
 			//aa.addressCondition.removeAddressCondition(refAddrid, conId);
         }
         sStmt.close();
         conn.close();
-	    LogBatchDebug("DEBUG", "Done with this:" + counter);
+	    logDebug("Done with this:" + counter);
+		sendEmailToApplicant();
 }
 
 //Get addresses to be remove(It was removed from CAD).
 function getRemovedCADAddresses()
 {
 	var altId = capId.getCustomID();
-	var cadQuery = "exec spreport_ch_people_buildingmanager_subreport " + altId;
+	var cadQuery = "exec spreport_ch_people_buildingmanager_subreport " + altId + "";
 	return cadQuery;
 }
+
+function sendEmailToApplicant(){
+  var contacts = "Applicant";
+  var template = "PW_UPDATE_PLANS_FOR_LICENSE_AGREEMENT";
+  var lictype = "Adrianlictype" + ""; //force string
+  var wireless = "Adrianwireless + ""; //force string
+  var flagpole = "Adrianflagpoles + ""; //force string
+  var emailparams = aa.util.newHashtable();
+  emailparams.put("$$lictype$$", lictype)
+  emailparams.put("$$wireless$$", wireless);
+  emailparams.put("$$flagpole$$", flagpole);
+  emailContacts(contacts, template, emailparams, "", "", "N", "");
+}
+//end ajm add
