@@ -6,9 +6,7 @@
         "postScript": "",
         "metadata": {
           "description": "To run automated script based on JSON rules",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -29,9 +27,7 @@
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -41,9 +37,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 333",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -53,19 +47,16 @@
             "Incomplete"
           ]
         },
-        
         "action": {
           "notificationTemplate": "PW LICENSE AG INCOMPLETE COMPLETENESS CHECK # 333 A",
           "notificationReport": "",
           "notifyContactTypes": [
             "Applicant",
-	    "Project Owner"
+            "Project Owner"
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -75,9 +66,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 333",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -86,7 +75,7 @@
           "status": [
             "Ready to Pay"
           ],
-           "customFields": {
+          "customFields": {
             "Review Fee?": "Yes"
           }
         },
@@ -95,13 +84,11 @@
           "notificationReport": "",
           "notifyContactTypes": [
             "Applicant",
-	    "Project Owner"
+            "Project Owner"
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -111,14 +98,11 @@
         "postScript": "",
         "metadata": {
           "description": "Script #334",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
             "Plans Coordination"
-
           ],
           "status": [
             "Ready for Signatures"
@@ -132,9 +116,7 @@
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -144,9 +126,7 @@
         "postScript": "",
         "metadata": {
           "description": "To validate record based on JSON rules",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -164,9 +144,7 @@
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -180,9 +158,7 @@
         "postScript": "",
         "metadata": {
           "description": "To validate record based on JSON rules. Script 168",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -200,9 +176,7 @@
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -212,16 +186,14 @@
         "postScript": "",
         "metadata": {
           "description": "To validate record based on JSON rules. Script 168",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
             "Verify Testing Approved"
           ],
           "status": [
-            "Rejected", "Additional Testing Required"
+            "Additional Testing Required"
           ]
         },
         "action": {
@@ -232,9 +204,7 @@
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -244,9 +214,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 167",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -264,9 +232,7 @@
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -276,9 +242,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 383",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -292,13 +256,13 @@
           "notificationTemplate": "PW READY TO PAY #123",
           "notificationReport": "",
           "notifyContactTypes": [
-            "Contractor(s)"
+            "Contractor(s)",
+			"Project Owner",
+			"Applicant"
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -312,9 +276,7 @@
         "postScript": "",
         "metadata": {
           "description": "To validate record based on JSON rules",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -332,9 +294,7 @@
           ],
           "url4ACA": "",
           "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [
-            
-          ],
+          "additionalEmailsTo": [],
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
@@ -348,9 +308,7 @@
         "postScript": "",
         "metadata": {
           "description": "To validate record based on JSON rules",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -384,9 +342,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 123",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -417,9 +373,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 402",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -449,9 +403,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 402",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -481,9 +433,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 402",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -518,9 +468,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 123",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -551,9 +499,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 402",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -584,9 +530,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 402",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -621,9 +565,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 123",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -653,10 +595,41 @@
         "preScript": "",
         "postScript": "",
         "metadata": {
-          "description": "Script 402",
-          "operators": {
-            
+          "description": "Script 10",
+          "operators": {}
+        },
+        "criteria": {
+          "task": [
+            "Quality Check"
+          ],
+          "status": [
+            "Route for Review"
+          ],
+          "customFields": {
+            "Submittal Number": "1"
           }
+        },
+        "action": {
+          "notificationTemplate": "PW OUTSIDE REVIEWER EMAIL #10",
+          "notificationReport": "",
+          "notifyContactTypes": [
+            "Outside Agency"
+          ],
+          "url4ACA": "",
+          "fromEmail": "noreply@auroraco.gov",
+          "additionalEmailsTo": [
+            ""
+          ],
+          "createFromParent": "",
+          "reportingInfoStandards": ""
+        }
+      },
+      {
+        "preScript": "",
+        "postScript": "",
+        "metadata": {
+          "description": "Script 402",
+          "operators": {}
         },
         "criteria": {
           "task": [
@@ -687,9 +660,7 @@
         "postScript": "",
         "metadata": {
           "description": "Script 402",
-          "operators": {
-            
-          }
+          "operators": {}
         },
         "criteria": {
           "task": [
