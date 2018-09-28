@@ -9,11 +9,16 @@ function pubWrksScript183_assessFeesScenario1(){
         var reAppFee     = AInfo["Re-Application Fee"];
         var revFee       = AInfo["Review Fee"];
         var trafCtrlInfo = loadASITable("TRAFFIC CONTROL INFORMATION");
+		
+		var reAppFeeItem = "PW_PIP_36";
+		var revFeeItem = "PW_PIP_35";
         
         if(reAppFee == "Yes")
-            updateFee("PW_PIP_36", feeSched, feePeriod, 1, feeInv);
+            updateFee(reAppFeeItem, feeSched, feePeriod, 1, feeInv);
+		else { if(feeExists(reAppFeeItem)) removeFee(reAppFeeItem, feePeriod); }
         if(revFee == "Yes")
-            updateFee("PW_PIP_35", feeSched, feePeriod, 1, feeInv);
+            updateFee(revFeeItem, feeSched, feePeriod, 1, feeInv);
+		else { if(feeExists(revFeeItem)) removeFee(revFeeItem, feePeriod); }
         
         for(eachRow in trafCtrlInfo){
             var aRow = trafCtrlInfo[eachRow];

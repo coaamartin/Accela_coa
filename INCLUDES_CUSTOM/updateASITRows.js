@@ -13,7 +13,7 @@ function updateASITRows(tableName, colName, colValue, updateArray){
 	for(eachRow in tRows){
 		var aRow = tRows[eachRow];
 		
-		if(aRow[colName] == colValue){
+		if(aRow[colName].toString() == colValue.toString()){
 			for(i in updateArray){
 				aRow[i] = updateArray[i];		
 			}

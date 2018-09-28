@@ -1,5 +1,5 @@
 //ajm added for testing
-deleteCadRows();
+//deleteCadRows();
 
 function deleteCadRows()
 {
@@ -562,7 +562,7 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     if(inspUserObj != null) 
         assignCap(inspUserObj.getUserID(), newChildCapId);
     
-    var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Recordation Photos",0, currentUserID);
+    var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "NOV Recordation Photos",0, currentUserID);
     
     if(newInspId) {
         var clItemStatus2Copy = ["Abate/Record", "Record/Summons", "Record"];

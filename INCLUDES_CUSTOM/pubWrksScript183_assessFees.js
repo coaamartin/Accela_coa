@@ -8,6 +8,8 @@ function pubWrksScript183_assessFees(){
         var feePeriod = "FINAL";
         var feeQty = 0;
         var feeInv = "N";
+        var feesAdded = [];
+        var possibleFees = ["PW_PIP_13","PW_PIP_15","PW_PIP_16","PW_PIP_14","PW_PIP_23","PW_PIP_31","PW_PIP_32","PW_PIP_03","PW_PIP_34","PW_PIP_17","PW_PIP_05","PW_PIP_37","PW_PIP_20","PW_PIP_22","PW_PIP_04","PW_PIP_11","PW_PIP_19","PW_PIP_18","PW_PIP_12","PW_PIP_02","PW_PIP_10","PW_PIP_01","PW_PIP_07","PW_PIP_21","PW_PIP_09","PW_PIP_08","PW_PIP_24","PW_PIP_06"];
         
         for(var i in typeOfImpvs){
             var aRow = typeOfImpvs[i];
@@ -47,9 +49,15 @@ function pubWrksScript183_assessFees(){
             if(feeItem != "" && feeQty > 0) {
                 logDebug("Adding fee " + feeItem + " with quantity of " + feeQty + ". For " + impvType + ".");
                 updateFee(feeItem, feeSched, feePeriod, feeQty, feeInv);
+                feesAdded.push(feeItem);
                 feeItem = ""; feeQty = 0;
                 logDebug("*****************************************************************************************");
             }
+        }
+        
+        for(posFee in possibleFees){
+            var pFee = possibleFees[posFee];
+            if(!contains(feesAdded, pFee)) { if(feeExists(pFee)) removeFee(pFee, feePeriod); }
         }
     }
     catch(err){

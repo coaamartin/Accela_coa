@@ -199,4 +199,6 @@ if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Pr
 	var scrt183Fees = ["PW_PIP_30", "PW_PIP_35", "PW_PIP_36"];
 	for(f in scrt183Fees){ if(feeExists(scrt183Fees[f])) invoiceFee(scrt183Fees[f], "FINAL"); }
     //END Script 183
+	
+	//invoiceNewFeesOneInvoice(capId);
 }
