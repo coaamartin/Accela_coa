@@ -1,5 +1,5 @@
 //ajm added for testing
-//deleteCadRows();
+deleteCadRows();
 
 function deleteCadRows()
 {
@@ -39,8 +39,8 @@ function sendEmailToApplicant(){
   var contacts = "Applicant";
   var template = "PW_LIC_AGR_REV";
   var lictype = "Adrianlictype" + ""; //force string
-  var wireless = "Adrianwireless" + ""; //force string
-  var flagpole = "Adrianflagpoles" + ""; //force string
+  var wireless = "Adrianwireless + ""; //force string
+  var flagpole = "Adrianflagpoles + ""; //force string
   var emailparams = aa.util.newHashtable();
   emailparams.put("$$PERMITID$$", lictype)
   emailparams.put("$$TASKCOMMENTS$$", wireless);
