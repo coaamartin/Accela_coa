@@ -304,11 +304,13 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             parentCapTypeString = parentCapScriptModel.getCapType().toString();
             if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Zoning') > -1, 'parent = Zoning Violation Charge')) {
                 //parent is Zoning Violation Charge
-                 amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02") + feeAmount("ENF_ABT_05") + feeAmount("ENF_ABT_06") 
+                 amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02") + feeAmount("ENF_ABT_05") + feeAmount("ENF_ABT_06");
+				 amt = amt.toFixed(2);
                  updateOrCreateValueInASITable(tableName, colKeyName, 'Admin Charge', amt.toString(), 'N');
             } else if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Snow') > -1, 'parent = Snow Violation Case')) {
                 //parent is Snow Violation Case
-                 amt = feeAmount2("ENF_ABT_01", { capId: parentCapId }) + feeAmount2("ENF_ABT_02", { capId: parentCapId })
+                 amt = feeAmount2("ENF_ABT_01", { capId: parentCapId }) + feeAmount2("ENF_ABT_02", { capId: parentCapId });
+				 amt = amt.toFixed(2);
                  updateOrCreateValueInASITable(tableName, colKeyName, 'Admin Charge', amt.toString(), 'N');
             }
         } 
