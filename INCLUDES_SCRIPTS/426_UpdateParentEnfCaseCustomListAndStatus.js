@@ -275,7 +275,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             //if current record is the only record open, close parent
             var parentCapId = getParent();
             var parentCap = aa.cap.getCap(parentCapId).getOutput();
-            var parentCapStatus = parentCap.getStatus();
+            var parentCapStatus = parentCap.getCapStatus();
             var parentAppString = parentCap.getCapType().toString();
     
             if (matchARecordType([
