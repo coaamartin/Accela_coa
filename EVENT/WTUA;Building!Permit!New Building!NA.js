@@ -1,7 +1,4 @@
 var $iTrc = ifTracer;
-
-logDebug("Entering JMP TEST");
-
 /* Title :  Create child water utility permit records (WorkflowTaskUpdateAfter)
 
 Purpose :   If workflow task = "Fire Life Safety Review" and workflow status = "Approved" and the TSI field "Is there a private fire line" =
@@ -138,9 +135,4 @@ bldScript48_addForestryFee();
 if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 	deactivateTask("Backflow Preventor");
 	deactivateTask("Water Meter");
-}
-
-
-if(wfTask =="Certificate of Occupancy" && !wfStatus== "Inactive"){
-	include("JMPCRAZY101");
 }
