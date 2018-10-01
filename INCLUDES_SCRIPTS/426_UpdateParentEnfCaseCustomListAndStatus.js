@@ -271,7 +271,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         updateOrCreateValueInASITable(tableName, colKeyName, 'Release #', AInfo['Release Reception #'], 'N');
     
         var childrenWithActiveTasks = getChildrenWithActiveTasks();
-        if(ifTracer(childrenWithActiveTasks.length <= 1, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 1')) {
+        if(ifTracer(childrenWithActiveTasks.length == 0, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 0')) {
             //if current record is the only record open, close parent
             var parentCapId = getParent();
             var parentCap = aa.cap.getCap(parentCapId).getOutput();
@@ -366,6 +366,12 @@ function getChildrenWithActiveTasks() {
             {
                 childCapId = children[c];
                 {
+					var childAltId = childCapId.getCustomID();
+					
+					if(childAltId == capIDString) {
+						logDebug("Skipping current record: " + childAltId);
+						continue;
+					}
                     if(activeTasksCheck({capId: childCapId})) {
                         childrenWithActiveTasks.push(childCapId);
                     }
