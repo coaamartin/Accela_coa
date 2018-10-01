@@ -339,9 +339,9 @@ function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, r
     
     if(!updateASITRows(tableName, colKeyName, capIDString, colsToUpdate, parentCapId))
     {
-		var recNumFiled = "";
-	    if(tableName == "NOV RECORDATION INFORMATION") recNumFiled = "NOV Record #";
-		if(tableName == "SUMMONS TO COURT INFORMATION") recNumFiled = "Case #";
+		var recNumField = "";
+	    if(tableName == "NOV RECORDATION INFORMATION") recNumField = "NOV Record #";
+		if(tableName == "SUMMONS TO COURT INFORMATION") recNumField = "Case #";
 		if(tableName == "ABATEMENT INFORMATION") recNumField = "Abatement #";
 		
 		
