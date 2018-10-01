@@ -170,7 +170,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     maxInsp = getLastInspection({ inspType: "NOV Release Inspection" });
                     if(maxInsp) {
                         dte = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
-                        updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
+                        updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', formatDteStringToMMDDYYYY(dte), 'N');
                     }
                 } else {
                     updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', inspSchedDate, 'N');
@@ -179,7 +179,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 maxInsp = getLastInspection({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
                 if(maxInsp) {
                     dte = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
-                    updateOrCreateValueInASITable(tableName, colKeyName, 'Compliance Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
+                    updateOrCreateValueInASITable(tableName, colKeyName, 'Compliance Date', formatDteStringToMMDDYYYY(dte), 'N');
                 }
              }
         }  else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
