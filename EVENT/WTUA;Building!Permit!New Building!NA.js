@@ -137,7 +137,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 	deactivateTask("Water Meter");
 }
 
-logDebug("Entering JMP TEST");
-if(wfTask =="Certificate of Occupancy" && wfStatus== "Inactive"){
-	Include("JMPCRAZY101");
+
+if(wfTask =="Certificate of Occupancy" && !wfStatus== "Inactive"){
+	include("JMPCRAZY101");
 }
