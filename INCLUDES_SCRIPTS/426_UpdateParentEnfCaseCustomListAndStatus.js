@@ -339,9 +339,15 @@ function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, r
     
     if(!updateASITRows(tableName, colKeyName, capIDString, colsToUpdate, parentCapId))
     {
+		var recNumFiled = "";
+	    if(tableName == "NOV RECORDATION INFORMATION") recNumFiled = "NOV Record #";
+		if(tableName == "SUMMONS TO COURT INFORMATION") recNumFiled = "Case #";
+		if(tableName == "ABATEMENT INFORMATION") recNumField = "Abatement #";
+		
+		
         addAsiTableRow(tableName, [
             { colName: fieldName, colValue: value },
-			{ colName: 'Abatement #', colValue: capIDString }
+			{ colName: recNumField, colValue: capIDString }
         ], { capId: parentCapId });
     }
 }
