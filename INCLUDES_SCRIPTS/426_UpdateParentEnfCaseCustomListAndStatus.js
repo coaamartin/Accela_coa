@@ -175,7 +175,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 } else {
                     updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', inspSchedDate, 'N');
                 }
-                updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Inspections', getCompletedInspections({}).toString(), 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Inspections', getCompletedInspections({}).length.toString(), 'N');
                 maxInsp = getLastInspection({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
                 if(maxInsp) {
                     dte = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
