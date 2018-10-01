@@ -1,4 +1,3 @@
-include("ajm_test");
 
 logDebug("DONB 101 " + capId)
 
