@@ -281,7 +281,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             if (matchARecordType([
                 "Enforcement/Housing/Inspection/NA",
                 "Enforcement/Incident/Zoning/NA"
-            ], appTypeString)) {
+            ], parentAppString)) {
                 closeAllTasks(parentCapId, 'closed by script 426');
                 if(parentAppString == "Enforcement/Housing/Inspection/NA") {
                     updateAppStatus("Pending Housing Inspection",'Status set by script 426', parentCapId);
