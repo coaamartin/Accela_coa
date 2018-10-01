@@ -1,4 +1,7 @@
 var $iTrc = ifTracer;
+
+logDebug("Entering JMP TEST");
+
 /* Title :  Create child water utility permit records (WorkflowTaskUpdateAfter)
 
 Purpose :   If workflow task = "Fire Life Safety Review" and workflow status = "Approved" and the TSI field "Is there a private fire line" =
