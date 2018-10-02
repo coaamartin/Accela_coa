@@ -78,7 +78,7 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 		logDebug("**INFO -------------- " + capId);
 		var capOutput = aa.cap.getCap(capId).getOutput();
 		var capStatus = capOutput.getCapStatus();
-		if(capStatus != "Withdrawn" && capStatus != "Archived" && capStatus != "Recorded") {
+		if(capStatus != "Withdrawn") {
 		   var certInsExpDate = getAppSpecific(asiFieldName);
 		   if (certInsExpDate == null || certInsExpDate == "") {
 				   logDebug("**WARN 'Certificate of Insurance Expiration Date' is null, SKIP...");
@@ -90,7 +90,8 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 			var expDiff = days_between(certInsExpDate, currDate);
 			expDiff = parseInt(expDiff);
 			if (expDiff == daysAhead) {
-				var cc = getContactByType("Insurance Agency", capId);
+				
+				/*var cc = getContactByType("Insurance Agency", capId);
 				if (!cc) {
 					cc = "";
 				} else {
@@ -102,7 +103,7 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 					projOwner = "";
 				} else {
 					projOwner = projOwner.getEmail();
-				}
+				}*/
 					   
 				var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
 				acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
@@ -111,17 +112,19 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				var thisCap = aa.cap.getCap(capId).getOutput();
 				var eParams = aa.util.newHashtable();
 				addParameter(eParams, "$$altID$$", thisCap.getCapModel().getAltID());
-				//addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
-				//addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
 				addParameter(eParams, "$$acaRecordUrl$$", recordURL);
-					   
-				var sent = sendNotification("",projOwner,cc,emailTemplateName,eParams,null); 
-				if (!sent) {
-					logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-				}
-				else {
-					LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID());
-				}					
+				//addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
+				//addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());					   
+				
+				emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "");
+				
+				//var sent = sendNotification("",projOwner,cc,emailTemplateName,eParams,null); 
+				//if (!sent) {
+				//	logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
+				//}
+				//else {
+				//	LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID());
+				//}					
 						
 				//var sent = aa.document.sendEmailByTemplateName("", projOwner, cc, emailTemplateName, eParams, null);
 				//if (!sent.getSuccess()) {
