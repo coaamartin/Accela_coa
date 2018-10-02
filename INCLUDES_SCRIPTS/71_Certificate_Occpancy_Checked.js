@@ -3,6 +3,8 @@
 //   if it is unchecked then stop the workflow progression and give an error message that says “There is not a Certificate of Occupancy required on this record.” 
 */
 
+logDebug("JMP JMP Alert: ------------------------>> Called Script Item #71 - Certificate of Occupancy checked");
+
 if(wfTask =="Certificate of Occupancy" && wfStatus== "Final CO Issued")
 {
   
