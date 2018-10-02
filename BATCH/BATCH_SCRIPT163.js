@@ -104,6 +104,44 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				} else {
 					projOwner = projOwner.getEmail();
 				}*/
+				
+
+				//Send the email  -- owners don't have emails all the time so making applicant the Toemail and adding owner email to cc email
+				var applicantEmail = null, projectOwnerEmail = null, insuranceAgencyEmail = null;
+				
+				//find applicant email
+				var recordApplicant = getContactByType("Applicant", capId);
+				if (recordApplicant) {
+					applicantEmail = recordApplicant.getEmail();
+					LogBatchDebug("LOG", "Applicant Email: " + applicantEmail, true);
+				}
+				
+				//find insurance agency email
+				var recordInsuranceAgency = getContactByType("Insurance Agency", capId);
+				if (recordInsuranceAgency) {
+					insuranceAgencyEmail = recordInsuranceAgency.getEmail();
+					LogBatchDebug("LOG", "Insurance Agency Email: " + insuranceAgencyEmail);
+				}
+				
+				//find project owner email
+				var recordProjectOwner = getContactByType("Project Owner", capId);
+				if (recordProjectOwner) {
+					projectOwnerEmail = recordProjectOwner.getEmail();
+					LogBatchDebug("LOG", "Project Owner Email: " + projectOwnerEmail);
+				}
+
+				//build CC email list
+				var ccEmail = "";
+				if (insuranceAgencyEmail != null && insuranceAgencyEmail != "") {
+					ccEmail = insuranceAgencyEmail;
+				}
+				if (applicantEmail != null && applicantEmail != "") {
+					if (ccEmail != "") {
+						ccEmail += ";" + applicantEmail;
+					} else {
+						ccEmail = applicantEmail;
+					}
+				}
 					   
 				var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
 				acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
@@ -116,12 +154,9 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				//addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 				//addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());					   
 				
-				LogBatchDebug("LOG", "**INFO Sending email to Insurance Agency, Project Owner, and Applicant contacts", true);
-				var sent = emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "");
-				
-				//var sent = sendNotification("",projOwner,cc,emailTemplateName,eParams,null); 
+				var sent = sendNotification("",projectOwnerEmail, cc, emailTemplateName, eParams, null); 
 				if (!sent) {
-					LogBatchDebug("LOG","**WARN sending email failed, error:" + sent.getErrorMessage(), true);
+					LogBatchDebug("LOG", "**WARN sending email failed, error:" + sent.getErrorMessage(), true);
 				}
 				else {
 					LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID(), true);
@@ -138,8 +173,6 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 	}//for all caps
     useAppSpecificGroupName = olduseAppSpecificGroupName;
 }
-
-
 
 function LogBatchDebug(etype, edesc, createEventLog) {
 
@@ -159,4 +192,3 @@ function LogBatchDebug(etype, edesc, createEventLog) {
         }
         debug += msg;
 }
-
