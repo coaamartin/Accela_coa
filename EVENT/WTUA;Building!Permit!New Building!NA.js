@@ -19,6 +19,8 @@ Sample Call : createChildWaterUtilityPermitRecords()
 
 */
 
+include("jmp_test_echo");
+
 createChildWaterUtilityPermitRecords();
 script207_SetTotalSqFtOnFireRecord();
 
