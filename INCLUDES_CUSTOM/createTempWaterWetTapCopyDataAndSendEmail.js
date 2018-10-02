@@ -53,7 +53,8 @@ function createTempWaterWetTapCopyDataAndSendEmail(emailTemplate) {
 			var reportFile = [];
 			acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
 			acaURL = acaURL.substr(0, acaURL.toUpperCase().indexOf("/ADMIN"));
-			acaURL += "/urlrouting.ashx?type=1005&module=Water&capId1=" + childCapId.getID1() + "&capId2=" + childCapId.getID2() + "&capId3=" + childCapId.getID3() + "&AgencyCode=" + aa.getServiceProviderCode();
+			//acaURL += "/urlrouting.ashx?type=1005&module=Water&capId1=" + childCapId.getID1() + "&capId2=" + childCapId.getID2() + "&capId3=" + childCapId.getID3() + "&AgencyCode=" + aa.getServiceProviderCode();
+			acaURL += "/urlrouting.ashx?type=1000&module=Water&capId1=" + childCapId.getID1() + "&capId2=" + childCapId.getID2() + "&capId3=" + childCapId.getID3() + "&AgencyCode=" + aa.getServiceProviderCode();
 			var emailParams = aa.util.newHashtable();
 			addParameter(emailParams, "$$deeplink$$", acaURL);
 			addParameter(emailParams, "$$childAltID$$", childCapId.getCustomID());
