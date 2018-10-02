@@ -117,7 +117,7 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				//addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());					   
 				
 				LogBatchDebug("LOG", "**INFO Sending email to Insurance Agency, Project Owner, and Applicant contacts", true);
-				emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "");
+				emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "", capId);
 				
 				//var sent = sendNotification("",projOwner,cc,emailTemplateName,eParams,null); 
 				//if (!sent) {
