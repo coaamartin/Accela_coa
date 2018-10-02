@@ -105,8 +105,7 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 					projOwner = projOwner.getEmail();
 				}*/
 				
-				
-				
+
 				//Send the email  -- owners don't have emails all the time so making applicant the Toemail and adding owner email to cc email
 				var applicantEmail = null, projectOwnerEmail = null, insuranceAgencyEmail = null;
 				
@@ -114,21 +113,21 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				var recordApplicant = getContactByType("Applicant", capId);
 				if (recordApplicant) {
 					applicantEmail = recordApplicant.getEmail();
-					logDebug("Applicant Email " + applicantEmail);
+					LogBatchDebug("LOG", "Applicant Email: " + applicantEmail, true);
 				}
 				
 				//find insurance agency email
 				var recordInsuranceAgency = getContactByType("Insurance Agency", capId);
 				if (recordInsuranceAgency) {
 					insuranceAgencyEmail = recordInsuranceAgency.getEmail();
-					logDebug("Insurance Agency Email " + insuranceAgencyEmail);
+					LogBatchDebug("LOG", "Insurance Agency Email: " + insuranceAgencyEmail);
 				}
 				
 				//find project owner email
 				var recordProjectOwner = getContactByType("Project Owner", capId);
 				if (recordProjectOwner) {
 					projectOwnerEmail = recordProjectOwner.getEmail();
-					logDebug("Project Owner Email " + projectOwnerEmail);
+					LogBatchDebug("LOG", "Project Owner Email: " + projectOwnerEmail);
 				}
 
 				//build CC email list
@@ -155,9 +154,9 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				//addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 				//addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());					   
 				
-				var sent = sendNotification("",projectOwnerEmail,cc,emailTemplateName,eParams,null); 
+				var sent = sendNotification("",projectOwnerEmail, cc, emailTemplateName, eParams, null); 
 				if (!sent) {
-					LogBatchDebug("LOG","**WARN sending email failed, error:" + sent.getErrorMessage(), true);
+					LogBatchDebug("LOG", "**WARN sending email failed, error:" + sent.getErrorMessage(), true);
 				}
 				else {
 					LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID(), true);
@@ -174,8 +173,6 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 	}//for all caps
     useAppSpecificGroupName = olduseAppSpecificGroupName;
 }
-
-
 
 function LogBatchDebug(etype, edesc, createEventLog) {
 
@@ -195,4 +192,3 @@ function LogBatchDebug(etype, edesc, createEventLog) {
         }
         debug += msg;
 }
-
