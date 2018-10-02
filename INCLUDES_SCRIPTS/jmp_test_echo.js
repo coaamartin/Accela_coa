@@ -1,6 +1,6 @@
 //Test for JMP
 //ajm added for testing
 
-logDebug("Entering JMP TEST");
+logDebug("JMP JMP ------------------------>> Testing logDebug JMP");
 
 //end ajm add
