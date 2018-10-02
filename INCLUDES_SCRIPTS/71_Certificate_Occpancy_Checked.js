@@ -2,7 +2,7 @@
 /* If Inspection Phase workflow task has the status of ‘Ready for CO’ verify the Info Field ‘Certificate of Occupancy’ is checked, 
    if it is unchecked then stop the workflow progression and give an error message that says “There is not a Certificate of Occupancy required on this record.” */
 
-if(wfTask =="Certificate of Occupancy" && wfStatus== "Ready for CO"){
+if(wfTask =="Certificate of Occupancy" && wfStatus== "Final CO Issued"){
   
   var tmpUASGN = useAppSpecificGroupName;
   useAppSpecificGroupName=false;
