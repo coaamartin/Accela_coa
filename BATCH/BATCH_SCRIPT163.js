@@ -45,7 +45,7 @@ var capId = null;
 try {
         var emailTemplateName = aa.env.getValue("EMAIL_TEMPLATE");
         if (!emailTemplateName || emailTemplateName == null || emailTemplateName == "") {
-			emailTemplateName = 'PW LIC AGR RENEWAL #163';
+			emailTemplateName = "PW LIC AGR RENEWAL #163";
 		} 
 		var daysAhead = aa.env.getValue("DAYS_AHEAD");
 		if (!daysAhead) {
@@ -117,7 +117,9 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				//addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());					   
 				
 				LogBatchDebug("LOG", "**INFO Sending email to Insurance Agency, Project Owner, and Applicant contacts", true);
-				emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "", capId);
+				
+				aa.env.setValue("eventType","Batch Process"); 
+				emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "");
 				
 				//var sent = sendNotification("",projOwner,cc,emailTemplateName,eParams,null); 
 				//if (!sent) {
