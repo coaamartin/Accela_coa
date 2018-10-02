@@ -38,6 +38,10 @@ if (exists(wfStatus, targetStatusArray))
 		emailparams.put("$$wfComment$$", wfComment);
 		emailparams.put("$$wfTask$$", wfTask);
 		emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
+		
+		//jmain edit - add LPs to email...
+		var lptypes = "Contractor";
+		coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
 
 		//update record status
 		// Commented this out at the request of the clienbt for Christy Paulin 9/11/2018
