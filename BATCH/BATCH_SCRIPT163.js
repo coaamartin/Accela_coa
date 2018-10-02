@@ -141,10 +141,10 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				
 				var sent = sendNotification("",projectOwnerEmail, ccEmail, emailTemplateName, eParams, null); 
 				if (!sent) {
-					LogBatchDebug("LOG", "**WARN sending email failed, error:" + sent.getErrorMessage(), true);
+					LogBatchDebug("LOG", "**WARN Sending email failed, error:" + sent.getErrorMessage(), true);
 				}
 				else {
-					LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID(), true);
+					LogBatchDebug("LOG", "**INFO Email Sent successfully for record " + thisCap.getCapModel().getAltID(), true);
 				}				
 						
 				//var sent = aa.document.sendEmailByTemplateName("", projOwner, cc, emailTemplateName, eParams, null);
