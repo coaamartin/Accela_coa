@@ -117,17 +117,15 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				//addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());					   
 				
 				LogBatchDebug("LOG", "**INFO Sending email to Insurance Agency, Project Owner, and Applicant contacts", true);
-				
-				aa.env.setValue("eventType","Batch Process"); 
-				emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "");
+				var sent = emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "");
 				
 				//var sent = sendNotification("",projOwner,cc,emailTemplateName,eParams,null); 
-				//if (!sent) {
-				//	logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-				//}
-				//else {
-				//	LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID());
-				//}					
+				if (!sent) {
+					LogBatchDebug("LOG","**WARN sending email failed, error:" + sent.getErrorMessage(), true);
+				}
+				else {
+					LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID(), true);
+				}					
 						
 				//var sent = aa.document.sendEmailByTemplateName("", projOwner, cc, emailTemplateName, eParams, null);
 				//if (!sent.getSuccess()) {
