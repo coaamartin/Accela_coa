@@ -70,18 +70,18 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 	
 	capIdScriptModelList = capListResult.getOutput();
 	
-	logDebug("**INFO total records=" + capIdScriptModelList.length);
+	LogBatchDebug("LOG", "**INFO total records=" + capIdScriptModelList.length, true);
 	var olduseAppSpecificGroupName = useAppSpecificGroupName;
 	useAppSpecificGroupName = false;
 	for (r in capIdScriptModelList) {
 		capId = capIdScriptModelList[r].getCapID();
-		logDebug("**INFO -------------- " + capId);
+		LogBatchDebug("LOG", "**INFO -------------- " + capId, true);
 		var capOutput = aa.cap.getCap(capId).getOutput();
 		var capStatus = capOutput.getCapStatus();
 		if(capStatus != "Withdrawn") {
 		   var certInsExpDate = getAppSpecific(asiFieldName);
 		   if (certInsExpDate == null || certInsExpDate == "") {
-				   logDebug("**WARN 'Certificate of Insurance Expiration Date' is null, SKIP...");
+				   LogBatchDebug("LOG", "**WARN 'Certificate of Insurance Expiration Date' is null, SKIP...", true);
 				   continue;
 			}
 		   
@@ -116,7 +116,8 @@ function sendCertificateofInsuranceExpirationNotification(emailTemplateName, day
 				//addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 				//addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());					   
 				
-				emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "");
+				LogBatchDebug("LOG", "**INFO Sending email to Insurance Agency, Project Owner, and Applicant contacts", true);
+				emailContactsWithReportLinkASync("Insurance Agency,Project Owner,Applicant", emailTemplateName, eParams, "", "", "N", "", capId);
 				
 				//var sent = sendNotification("",projOwner,cc,emailTemplateName,eParams,null); 
 				//if (!sent) {
