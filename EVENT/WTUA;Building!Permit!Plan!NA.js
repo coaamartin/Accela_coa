@@ -39,8 +39,3 @@ Notes:
 
 activateWorkflowTasks();
 
-//JMP - 10/2/2018 - Script Item #71 - Certificate of Occupancy checked
-/* If Inspection Phase workflow task has the status of ‘Ready for CO’ verify the Info Field ‘Certificate of Occupancy’ is checked, 
-   if it is unchecked then stop the workflow progression and give an error message that says “There is not a Certificate of Occupancy required on this record.”
-   */
-include("71-Certificate_Occpancy_Checked");
