@@ -16,6 +16,10 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
   if (inspResultObj.getSuccess()) 
   {
     var inspList = inspResultObj.getOutput();
+	
+	//jmain debug
+	var stuff = printObject(inspList);
+	logDebug(stuff);
 
 	for ((xx in inspList)
 	{
