@@ -24,13 +24,13 @@ for (var fee in allfees)
 logDebug("hasbeeninvoiced: " + hasbeeninvoiced);
 
 //put a message on the website if necessary
-//if (wfTask == "Fee Processing" && (wfStatus == "Ready to Pay" || numfees <= 0 || !hasbeeninvoiced))
-//{
-//	cancel = true;
-//	showMessage = true;
-//	comment("Fees must be added AND invoiced before Ready to Pay can be activated!");
-//	logDebug("Fees must be added AND invoiced before Ready to Pay can be activated!");
-//}
+if (wfTask == "Fee Processing" && wfStatus == "Ready to Pay" && (numfees <= 0 || !hasbeeninvoiced))
+{
+	cancel = true;
+	showMessage = true;
+	comment("Fees must be added AND invoiced before Ready to Pay can be activated!");
+	logDebug("Fees must be added AND invoiced before Ready to Pay can be activated!");
+}
 
 //if no fees required, allow things to move on...
 if (wfTask == "Fee Processing" && wfStatus == "No Fees Required")
