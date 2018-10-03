@@ -16,9 +16,8 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
     inspList = inspResultObj.getOutput();
 	for (xx in inspList) 
 	{
-	  var inspId = inspList[xx].getIdNumber();
-	  
-	  var inspResult = aa.inspection.getInspection(capId, inspId);	
+	  inspId = inspList[xx].getIdNumber();	  
+	  inspResult = aa.inspection.getInspection(capId, inspId);	
 
       logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled  inspResult=" + inspResult + "");	  
 		
