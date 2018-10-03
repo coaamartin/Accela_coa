@@ -45,4 +45,9 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
 	  }
 	}   
   }
+  
+  comment("<h3 style='background-color:rgb(255, 0, 0);'>Just completed logic block. </h3>");
+  deactivateTask("Inspection Phase");
+  cancel = true;  
+  
 }
