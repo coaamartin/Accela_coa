@@ -104,8 +104,8 @@ function permitNoPlansFeeCalculation(workFlowTask, workflowStatusArray, permitFe
         }
 
         if (feeQty > 0) {
-            updateFee(feeCodesAry["ARAPAHOE_FEE_1"], feeSched, "FINAL", feeQty, "N");
-            updateFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "N");
+            updateFee(feeCodesAry["ARAPAHOE_FEE_1"], feeSched, "FINAL", feeQty, "Y");
+            updateFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "Y");
         }
     }//county = Arapahoe   
     
@@ -117,7 +117,7 @@ function permitNoPlansFeeCalculation(workFlowTask, workflowStatusArray, permitFe
         }
 
         if (feeQty > 0) {
-            updateFee(feeCodesAry["BUILDING_DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
+            updateFee(feeCodesAry["BUILDING_DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "Y");
         }
        
     //Building Use Tax Fee
@@ -134,7 +134,7 @@ function permitNoPlansFeeCalculation(workFlowTask, workflowStatusArray, permitFe
     }
 
     if (feeQty > 0) {
-        updateFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "N");
+        updateFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "Y");
     }//END Building Use Tax Fee
 	
 try{    
@@ -144,7 +144,7 @@ try{
         var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
         if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal ) > 0) {
             if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")){
-            updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
+            updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "Y");
             }
         } else {
             logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
@@ -160,7 +160,7 @@ try{
         else if(valuation && valuation != null && valuation != "") feeAmt = parseFloat(valuation);
         
         if (feeAmt > 0) {
-            updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
+            updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "Y");
         } else {
             logDebug("**WARN " + permitFeeTypeAsiName + " is empty and Valuation is empty, no fees added");
         }
