@@ -4,18 +4,30 @@
 */
 
 logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled");
+logDebug("Inspection Results: " + inspResult);
+logDebug(inspResult.length());
 
 if(wfTask =="Inspection Phase" && wfStatus== "Ready For CO") 
 {
   
-/*  if ("Pending".equals(inspResult)) || ("Scheduled".equals(inspResult)) 
+  if ("Pending".equals(inspResult))
   {
-*/	  
+ 
 	showMessage = true;
 	comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed. </h2>");
 	deactivateTask("Inspection Phase");
 	cancel = true;
 	
-//  }
+  }
+  
+  if ("Scheduled".equals(inspResult))
+  {
+ 
+	showMessage = true;
+	comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed. </h2>");
+	deactivateTask("Inspection Phase");
+	cancel = true;
+	
+  }
   
 }
