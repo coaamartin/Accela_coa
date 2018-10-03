@@ -23,7 +23,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                 if($iTrc(!isNaN(newInspDateOrDays), 'newInspDateOrDays is a number, use this as inspection days'))
                     numOfDays4Insp = parseInt(newInspDateOrDays);
                 else if($iTrc(newInspDateOrDays.equalsIgnoreCase("nextWorkDay"), 'nextWorkDay == ' + newInspDateOrDays)){
-                    var nextWorkDayDate = dateAdd(null, 1, true);
+                    var nextWorkDayDate = dateAddHC2(null, 1, true);
                     numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWorkDayDate));
                 }
                 else custField = AInfo[newInspDateOrDays];
@@ -36,8 +36,21 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                         numOfDays4Insp = parseInt(custField);
                 }
                 
+                var nextWD = nextWorkDay(dateAdd(null, numOfDays4Insp - 1));
+                numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWD));
+                
                 var newInspId = scheduleInspectionCustom(newInsp, numOfDays4Insp);
-                if($iTrc(carryOverFailedCheckList && newInspId, 'copy failed checklist items to inspId: ' + newInspId)) copyFailedGSItems(inspId, newInspId);
+				
+                autoAssignInspectionCoA(newInspId);
+				
+                if($iTrc(carryOverFailedCheckList && newInspId, 'copy failed checklist items to inspId: ' + newInspId)) {
+                    if($iTrc(inspType == "Snow Initial Inspection" && inspResult == "Skip to Summons"))
+                        copyCheckListByItemStatus(inspId, newInspId, ["Summons"]);
+                    else if($iTrc(inspType == "Snow Initial Inspection" && inspResult == "Skip to City Abatement"))
+                        copyCheckListByItemStatus(inspId, newInspId, ["Abate"]);
+                    else
+                        copyFailedGSItems(inspId, newInspId);
+                }
             }
             
             //If workflow task and task status are passed on the parameter, do the update here
@@ -47,12 +60,15 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                 resultWorkflowTask(wfTsk, wfSts, "Updated via enfProcessInspResult()", "Updated via enfProcessInspResult()");
             }
             
-            
+            var irComment = "";
+			if(vEventName == "InspectionResultModifyAfter") irComment = inspResultComment;
+			else irComment = inspComment
+			
             //Add a cap comment to the record
             //Get inspector from inspection
             var inspector = getInspectorByInspID(inspId) == false ? "" : getInspectorByInspID(inspId);
             //Prepare comment text
-            var vComment = inspector + " - " + inspResult + " - " + (inspComment == null ? "" : inspComment);
+            var vComment = inspector + " - " + inspResult + " - " + (irComment == null ? "" : irComment);
             var comDate = aa.date.parseDate(inspResultDate);
             var capCommentScriptModel = aa.cap.createCapCommentScriptModel();
             capCommentScriptModel.setCapIDModel(capId);

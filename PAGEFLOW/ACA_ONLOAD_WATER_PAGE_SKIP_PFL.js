@@ -157,7 +157,7 @@ Storm Water Permit
 Water Main Utility Permit 
 */
 
-	var thisPageValue = "Private Fire Lines";  // change per page
+	var thisPageValue = "Private Fire Line Permit";  // change per page
 	var showPage = (thisPageValue.equals(AInfo["Utility Permit Type"]));
 
 	if (!showPage) {    

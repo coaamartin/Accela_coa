@@ -18,9 +18,9 @@ function getCompletedInspections(options) {
         for (xx in inspList) {
             if(
                 (!inspList[xx].getInspectionStatus().toUpperCase().equals("SCHEDULED"))
-                && (settings.inspType = null || String(settings.inspType).equals(inspArray[i].getInspectionType()))
+                && (settings.inspType == null || String(settings.inspType).equals(inspList[xx].getInspectionType()))
             ){
-                completedInspections.push(inspList[xx]);
+                completedInspections.push(inspList[xx].getInspectionType());
             }
         }
     }    

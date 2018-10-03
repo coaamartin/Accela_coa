@@ -1,6 +1,6 @@
 /*------------------------------------------------------------------------------------------------------/
 | Program : ACA ONLOAD POPULATE AMENDMENT
-| Event   : ACA ONLOAD 
+| Event   : ACA ONLOAD
 |
 | Usage   : Used to pre-populate contacts on amendment records from the amendment parent.
 |
@@ -13,18 +13,21 @@
 |     will no longer be considered a "Master" script and will not be supported in future releases.  If
 |     changes are made, please add notes above.
 /------------------------------------------------------------------------------------------------------*/
-var showMessage = false;						// Set to true to see results in popup window
-var showDebug = false;							// Set to true to see debug messages in popup window
-var message =	"";								// Message String
-var debug = "";									// Debug String
-var br = "<BR>";								// Break Tag
+var showMessage = false; // Set to true to see results in popup window
+var showDebug = false; // Set to true to see debug messages in popup window
+var message = ""; // Message String
+var debug = ""; // Debug String
+var br = "<BR>"; // Break Tag
 var cancel = false;
 
 var cap = aa.env.getValue("CapModel");
 var capId = cap.getCapID();
-var servProvCode = capId.getServiceProviderCode()       		// Service Provider Code
-var currentUserID = aa.env.getValue("CurrentUserID");
-if (currentUserID.indexOf("PUBLICUSER") == 0) { currentUserID = "ADMIN" ; publicUser = true }  // ignore public users
+var servProvCode = capId.getServiceProviderCode() // Service Provider Code
+	var currentUserID = aa.env.getValue("CurrentUserID");
+if (currentUserID.indexOf("PUBLICUSER") == 0) {
+	currentUserID = "ADMIN";
+	publicUser = true
+} // ignore public users
 
 var useAppSpecificGroupName = false;
 
@@ -87,16 +90,24 @@ try {
 
 		copyCapDetailInfo(parentCapId, capId);
 
-		if (!appMatch("Building/*/*/Amendment",capId)) {
+		if (!appMatch("Building/*/*/Amendment", capId)) {
+			var parentappname = parentCap.getSpecialText();
+			cap.setSpecialText(parentappname);
 			copyCapWorkDesInfo(parentCapId, capId);
 		}
-	
+
 		//Copy ASI
 		var pASI = [];
-		loadAppSpecific(pASI,parentCapId);
-		copyAppSpecificForAmendment(pASI);
-		
-		copyAppSpecificTableForLic(parentCapId, capId);
+		loadAppSpecific(pASI, parentCapId);
+
+		if (appMatch("PublicWorks/Civil Plan/*/*", capId)) {
+			editAppSpecific4ACA("EDN", pASI["EDN"]);
+		} else {
+			copyAppSpecificForAmendment(pASI);
+			copyAppSpecificTableForLic(parentCapId, capId);
+		}
+		// Set Application ID value to parentCapId, defect 36
+		editAppSpecific4ACA("Application ID", parentCapId.getCustomID());
 
 		aa.env.setValue("CapModel", cap);
 	}
@@ -442,47 +453,39 @@ function copyAppSpecificTableForLic(srcCapId, targetCapId) {
 
 }
 
-function getTableName(capId)
-{
+function getTableName(capId) {
 	var tableName = null;
 	var result = aa.appSpecificTableScript.getAppSpecificGroupTableNames(capId);
-	if(result.getSuccess())
-	{
+	if (result.getSuccess()) {
 		tableName = result.getOutput();
-		if(tableName!=null)
-		{
+		if (tableName != null) {
 			return tableName;
 		}
 	}
 	return tableName;
 }
 
-function IsStrInArry(eVal,argArr) {
-   	for (x in argArr){
-   		if (eVal == argArr[x]){
-   			return true;
-   		}
- 	  }	
+function IsStrInArry(eVal, argArr) {
+	for (x in argArr) {
+		if (eVal == argArr[x]) {
+			return true;
+		}
+	}
 	return false;
 }
 
-function getAppSpecificTableForLic(capId,tableName)
-{
+function getAppSpecificTableForLic(capId, tableName) {
 	appSpecificTable = null;
-	var s_result = aa.appSpecificTableScript.getAppSpecificTableModel(capId,tableName);
-	if(s_result.getSuccess())
-	{
+	var s_result = aa.appSpecificTableScript.getAppSpecificTableModel(capId, tableName);
+	if (s_result.getSuccess()) {
 		appSpecificTable = s_result.getOutput();
-		if (appSpecificTable == null || appSpecificTable.length == 0)
-		{
+		if (appSpecificTable == null || appSpecificTable.length == 0) {
 			logDebug("WARNING: no appSpecificTable on this CAP:" + capId);
 			appSpecificTable = null;
 		}
-	}
-	else
-	{
+	} else {
 		logDebug("ERROR: Failed to appSpecificTable: " + s_result.getErrorMessage());
-		appSpecificTable = null;	
+		appSpecificTable = null;
 	}
 	return appSpecificTable;
 }
@@ -517,22 +520,21 @@ function copyAppSpecificForAmendment(AInfo) // copy all App Specific info
 }
 
 function loadAppSpecific(thisArr) {
-	// 
+	//
 	// Returns an associative array of App Specific Info
 	// Optional second parameter, cap ID to load from
 	//
-	
-	var itemCap = capId;
-	if (arguments.length == 2) itemCap = arguments[1]; // use cap ID specified in args
 
-    var appSpecInfoResult = aa.appSpecificInfo.getByCapID(itemCap);
-	if (appSpecInfoResult.getSuccess())
-	 	{
+	var itemCap = capId;
+	if (arguments.length == 2)
+		itemCap = arguments[1]; // use cap ID specified in args
+
+	var appSpecInfoResult = aa.appSpecificInfo.getByCapID(itemCap);
+	if (appSpecInfoResult.getSuccess()) {
 		var fAppSpecInfoObj = appSpecInfoResult.getOutput();
 
-		for (loopk in fAppSpecInfoObj)
-			{
+		for (loopk in fAppSpecInfoObj) {
 			thisArr[fAppSpecInfoObj[loopk].checkboxDesc] = fAppSpecInfoObj[loopk].checklistComment;
-			}
 		}
 	}
+}

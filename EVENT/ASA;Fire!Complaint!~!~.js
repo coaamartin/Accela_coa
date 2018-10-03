@@ -2,7 +2,7 @@
 //script 186 & 187	Schedule Fire Inspection on submission
 //
 //Record Types:		Fire/Complaint/*/*
-//Event: 			CTRCA
+//Event: 			ASA
 //Desc:				
 //IRSA
 //	 	criteria:	If the record is submitted from ACA
@@ -17,25 +17,29 @@ logDebug("Script 186/187 START");
 
 var x = new Array;
 inspUserObj = null;
-x = getGISBufferInfo("AURORACO","Fire Response Zones Run Order","0.01","BATTALION_FIRSTDUE");
+x = getGISBufferInfo("AURORACO","Fire Response Zones Run Order","0.01","FIRSTDUE");
 logDebug("x =" + x);
 if (x && x.length > 0) {
-	logDebug(x[0]["BATTALION_FIRSTDUE"]);
-	var refUser = x[0]["BATTALION_FIRSTDUE"];
+	logDebug(x[0]["FIRSTDUE"]);
+	var refUser = x[0]["FIRSTDUE"];
 	var user = lookup("FIRE STATION", refUser);
 	if (user != null && user != "")
 	{
-		scheduleInspection("Fire Complaint",0, user);
+		scheduleInspection("FD Complaint Inspection",0, user);
 		assignCap(user);
+		assignTask("Assign Complaint", user);
+		closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
+		activateTask("Inspection");
+		assignTask("Inspection", user);
 	}
 	else{
 		comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
-		scheduleInspection("Fire Complaint",0);
+		scheduleInspection("FD Complaint Inspection",0);
 	}
 }
 else{
 	comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
-	scheduleInspection("Fire Complaint",0);
+	scheduleInspection("FD Complaint Inspection",0);
 }
 
 logDebug("Script 186 END");

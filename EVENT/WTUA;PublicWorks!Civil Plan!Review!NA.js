@@ -47,7 +47,11 @@ Sample Call : editWFTaskDueDateOnPlanReviewTimelines()
 Notes		: The Standard choice "Civil Construction Plan Review Timelines" must be provided by Aurora
 			  For Now ,the number of workflow due days is not available , alternatively use 0 days 
 /------------------------------------------------------------------------------------------------------*/
-editWFTaskDueDateOnPlanReviewTimelines();
+if (wfTask == "Quality Check" && wfStatus == "Route for Review"){
+    //Script 192
+    editWFTaskDueDateOnPlanReviewTimelines();
+	//END Script 192
+}
 
 /*
 Title : Civil Plans and Drainage update Submittal Number (WorkflowTaskUpdateAfter)
@@ -64,13 +68,8 @@ Sample Call:
 Notes:
     For record type Water/Utility/Master/Study, we don't have any custom field called Submittal Number
 */
-
-
 // per customer direction during script testing, it was determined that this functionality should 
 // be completed on task 'Completeness Check' and status 'Complete'
 // script 18
 // EK updated this script to include Application Submittal and Accepted
 updateSubmittalNumber("Completeness Check", ["Complete","Accepted"], "Submittal Number");
-updateSubmittalNumber("Application Submittal", ["Complete","Accepted"], "Submittal Number");
-
-

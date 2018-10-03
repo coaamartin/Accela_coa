@@ -18,13 +18,14 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         return;
     }
     logDebug('parentCapId: ' + parentCapId);
-
+    
     if (matchARecordType([
         "Enforcement/Incident/Abatement/NA"
     ], appTypeString)) {
+        logDebug("Abatement Record");
         tableName = 'ABATEMENT INFORMATION';
         colKeyName = 'Abatement #';
-        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
+        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter OR Modify After")) {
             //IRSA
             if(ifTracer(inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored", 'inspType!= "Post Abatement Inspection" && inspResult == "Taken and Stored"')) {
                 // inspResult == Taken and Stored (create row)
@@ -48,7 +49,20 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             if(ifTracer(wfTask == "Invoicing" && (wfStatus =="Invoiced" || wfStatus =="Invoiced - City Paid"), "wfTask == Invoicing && wfStatus == Invoiced OR Invoiced City Paid")) {
                 // wfTask == "Invoicing" && wfStatus =="Invoiced"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
-                updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
+                
+                var feeG = feeW = feeS = feeT = feeB = 0;
+                if(AInfo["Contractor Fee - Graffiti"] != null) feeG = parseFloat(AInfo["Contractor Fee - Graffiti"]);
+                if(AInfo["Contractor Fee - Weeds"] != null) feeW = parseFloat(AInfo["Contractor Fee - Weeds"]);
+                if(AInfo["Contractor Fee - Snow"] != null) feeS = parseFloat(AInfo["Contractor Fee - Snow"]);
+                if(AInfo["Contractor Fee - Trash"] != null) feeT = parseFloat(AInfo["Contractor Fee - Trash"]);
+                if(AInfo["Contractor Fee - Board-Up"] != null) feeB = parseFloat(AInfo["Contractor Fee - Board-Up"]);
+                                
+                var feeTotal = feeG + feeW + feeS + feeT + feeB;
+				feeTotal = feeTotal.toFixed(2);
+                logDebug("feeTotal:" + feeTotal);
+                
+                //updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feeTotal + "", 'N');
             } else if(ifTracer(wfTask == "Recordation" && (wfStatus =="Submit Recording"), "wfTask == Recordation && wfStatus == Submit Recording")) {
                 // wfTask == "Recordation" && wfStatus =="Submit Recording"
                 updateAbatementAdminCharge();
@@ -82,9 +96,9 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     ], appTypeString)) {
         tableName = 'SUMMONS TO COURT INFORMATION';
         colKeyName = 'Case #';
-        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
-            //IRSA
-            if(ifTracer(inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service"), 'inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service")')) {
+        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter || eventName = 'InspectionResultModifyAfter'")) {
+            //IRSA          
+            if(ifTracer(inspType.equals("Summons Issuance") && (inspResult.equals("Letter to be Sent") || inspResult.equals("Personal Service")), 'inspType == "Summons Issuance" && (inspResult == "Letter to be Sent" || inspResult == "Personal Service")')) {
                 // inspType== "Summons Issuance" && (inspResult == "Letter to be Sent" && inspResult == "Personal Service")
                 row = [
                     { colName: 'Case #', colValue: capIDString },
@@ -95,7 +109,15 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 if(respPeople.length > 0) {
                     for(var rp in respPeople) {
                         if(respPeople[rp].getFlag() == "Y") {
-                            row.push({ colName: 'Defendant', colValue: respPeople[rp].getFullName() });
+                            var name = "";
+                            if(respPeople[rp].getFullName() != null)
+                                name = respPeople[rp].getFullName();
+                            
+                            if(respPeople[rp].getFullName() == null && respPeople[rp].getBusinessName() == null)
+                                name = respPeople[rp].getFirstName() + " " + respPeople[rp].getLastName();
+                            else if(respPeople[rp].getFullName() == null)
+                                name = respPeople[rp].getBusinessName()
+                            row.push({ colName: 'Defendant', colValue: name });
                         }
                     }
                 }
@@ -139,7 +161,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     ], appTypeString)) {
         tableName = 'NOV RECORDATION INFORMATION';
         colKeyName = 'NOV Record #';
-        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1, "EventName == InspectionResultSubmitAfter")) {
+        if(ifTracer(eventName.indexOf("InspectionResultSubmitAfter") > -1 || eventName == "InspectionResultModifyAfter", "EventName == InspectionResultSubmitAfter OR Modify After")) {
             //IRSA
             if(ifTracer(inspType == "NOV Release Inspection", 'inspType == "NOV Release Inspection"')) {
                 // inspType == "NOV Inspection"
@@ -148,16 +170,16 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     maxInsp = getLastInspection({ inspType: "NOV Release Inspection" });
                     if(maxInsp) {
                         dte = maxInsp.getScheduledDate().getMonth() + "/" + maxInsp.getScheduledDate().getDayOfMonth() + "/" + maxInsp.getScheduledDate().getYear();
-                        updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
+                        updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', formatDteStringToMMDDYYYY(dte), 'N');
                     }
                 } else {
                     updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', inspSchedDate, 'N');
                 }
-                updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Inspections', getCompletedInspections({}), 'N');
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Inspections', getCompletedInspections({}).length.toString(), 'N');
                 maxInsp = getLastInspection({ inspType: "NOV Release Inspection", inspResult: "Compliance" });
                 if(maxInsp) {
                     dte = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
-                    updateOrCreateValueInASITable(tableName, colKeyName, 'Compliance Date', aa.util.formatDate(dte, "MM/dd/YYYY"), 'N');
+                    updateOrCreateValueInASITable(tableName, colKeyName, 'Compliance Date', formatDteStringToMMDDYYYY(dte), 'N');
                 }
              }
         }  else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
@@ -249,17 +271,17 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         updateOrCreateValueInASITable(tableName, colKeyName, 'Release #', AInfo['Release Reception #'], 'N');
     
         var childrenWithActiveTasks = getChildrenWithActiveTasks();
-        if(ifTracer(childrenWithActiveTasks.length == 1, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 1')) {
+        if(ifTracer(childrenWithActiveTasks.length == 0, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 0')) {
             //if current record is the only record open, close parent
             var parentCapId = getParent();
             var parentCap = aa.cap.getCap(parentCapId).getOutput();
-            var parentCapStatus = parentCap.getStatus();
+            var parentCapStatus = parentCap.getCapStatus();
             var parentAppString = parentCap.getCapType().toString();
     
             if (matchARecordType([
                 "Enforcement/Housing/Inspection/NA",
                 "Enforcement/Incident/Zoning/NA"
-            ], appTypeString)) {
+            ], parentAppString)) {
                 closeAllTasks(parentCapId, 'closed by script 426');
                 if(parentAppString == "Enforcement/Housing/Inspection/NA") {
                     updateAppStatus("Pending Housing Inspection",'Status set by script 426', parentCapId);
@@ -282,11 +304,13 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             parentCapTypeString = parentCapScriptModel.getCapType().toString();
             if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Zoning') > -1, 'parent = Zoning Violation Charge')) {
                 //parent is Zoning Violation Charge
-                 amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02") + feeAmount("ENF_ABT_05") + feeAmount("ENF_ABT_06") 
+                 amt = feeAmount("ENF_ABT_01") + feeAmount("ENF_ABT_02") + feeAmount("ENF_ABT_05") + feeAmount("ENF_ABT_06");
+				 amt = amt.toFixed(2);
                  updateOrCreateValueInASITable(tableName, colKeyName, 'Admin Charge', amt.toString(), 'N');
             } else if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Snow') > -1, 'parent = Snow Violation Case')) {
                 //parent is Snow Violation Case
-                 amt = feeAmount2("ENF_ABT_01", { capId: parentCapId }) + feeAmount2("ENF_ABT_02", { capId: parentCapId })
+                 amt = feeAmount2("ENF_ABT_01", { capId: parentCapId }) + feeAmount2("ENF_ABT_02", { capId: parentCapId });
+				 amt = amt.toFixed(2);
                  updateOrCreateValueInASITable(tableName, colKeyName, 'Admin Charge', amt.toString(), 'N');
             }
         } 
@@ -295,17 +319,35 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     
 }
 
+//function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, readonly) {
+//    if(!updateAsiTableRow(tableName, fieldName, value, { 
+//        capId: parentCapId,
+//        colFilters: [
+//            { colName: colKeyName, colValue: capIDString}
+//        ]}) 
+//    ) {
+//        addAsiTableRow(tableName, [
+//            { colName: fieldName, colValue: value }
+//        ], { capId: parentCapId });
+//    }
+//}
 
 
 function updateOrCreateValueInASITable(tableName, colKeyName,fieldName, value, readonly) {
-    if(!updateAsiTableRow(tableName, fieldName, value, { 
-        capId: parentCapId,
-        colFilters: [
-            { colName: colKeyName, colValue: capIDString}
-        ]}) 
-    ) {
+    var colsToUpdate = [];
+    colsToUpdate[fieldName] = value;
+    
+    if(!updateASITRows(tableName, colKeyName, capIDString, colsToUpdate, parentCapId))
+    {
+		var recNumField = "";
+	    if(tableName == "NOV RECORDATION INFORMATION") recNumField = "NOV Record #";
+		if(tableName == "SUMMONS TO COURT INFORMATION") recNumField = "Case #";
+		if(tableName == "ABATEMENT INFORMATION") recNumField = "Abatement #";
+		
+		
         addAsiTableRow(tableName, [
-            { colName: fieldName, colValue: value }
+            { colName: fieldName, colValue: value },
+			{ colName: recNumField, colValue: capIDString }
         ], { capId: parentCapId });
     }
 }
@@ -321,14 +363,20 @@ function getChildrenWithActiveTasks() {
         if (ifTracer(children && children.length > 0, 'Children found.'))
         {
             for (var c in children)
-        	{
-        		childCapId = children[c];
-        		{
+            {
+                childCapId = children[c];
+                {
+					var childAltId = childCapId.getCustomID();
+					
+					if(childAltId == capIDString) {
+						logDebug("Skipping current record: " + childAltId);
+						continue;
+					}
                     if(activeTasksCheck({capId: childCapId})) {
                         childrenWithActiveTasks.push(childCapId);
                     }
                 }
-        	}
+            }
             
         }
     }

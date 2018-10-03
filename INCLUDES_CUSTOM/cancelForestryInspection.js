@@ -1,6 +1,6 @@
 
 function cancelForestryInspection(workFlowTask, workflowStatusArray, inspTypeToCancel) {
-
+	logDebug("Begin Script 377");
 	if (wfTask == workFlowTask) {
 
 		var statusMatch = false;
@@ -29,11 +29,15 @@ function cancelForestryInspection(workFlowTask, workflowStatusArray, inspTypeToC
 				if (!canceled.getSuccess()) {
 					logDebug("**WARN cancelInspection failed capId=" + capId + " InspectionId=" + inspections[i].getIdNumber() + " Error:" + inspections.getErrorMessage());
 				}
+				logDebug("Canceled Foresty Site Review Inspection");
+				logDebug("End Script 377");
 				return canceled.getSuccess();
 			}//Scheduled inspection found
 		}//for all inspections
 	} else {
+		logDebug("Wrong workflow status: End Script 377");
 		return false;
+		
 	}
 
 	return false;

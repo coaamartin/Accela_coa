@@ -37,13 +37,21 @@ if(wfTask =="Inspection Phase"  && wfStatus == "Temporary CO Issued"){
 	closeWfTaskCertificateOfOccupancy();
 }
 
-if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO"){
-	closeWfTaskCertificateOfOccupancy();
+var vCoOASI = getAppSpecific("Certificate of Occupancy");
+
+if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO" && vCoOASI == "CHECKED"){
+	activateTask("Certificate Of Occupancy");
+} else {
 	deactCoOIfNotChecked();
 }
 
 if(wfTask =="Inspection Phase"  && wfStatus=="Final"){
 	deactCoOIfNotChecked();
+	
+   if ((allTasksComplete("BLD_NEWCON") == false) || (allTasksComplete("BLD_MASTER") == false)){
+					updateAppStatus("Issued","Status updated via script");				
+			}
+
 }
 
 if(wfTask == "Backflow Preventor" && wfStatus == "Final"){

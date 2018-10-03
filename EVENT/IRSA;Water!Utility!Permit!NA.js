@@ -24,6 +24,3 @@ var rptParams = aa.util.newHashtable();
 rptParams.put("altID", cap.getCapModel().getAltID());
 
 checkInspectionsResultAndSendEmail("PPBMP INSPECTION # 102", "REPORT_NAME", rptParams, "Date of next Inspection");
-
-// written by SWAKIL
-include("9_WaterPermitCheckInspectionsComplete");

@@ -1,25 +1,25 @@
 
 /* 
 Script 359
-Batch - Remove condition "Snow Warning" from all addresses June 15th every year
+Batch - Remove condition "Snow Warning" from all parcels June 15th every year
 7/2/18 JHS
 
-There are no EMSE APIs to retrieve non-std address conditions, so we need to use SQL to obtain
+There are no EMSE APIs to retrieve non-std parcel conditions, so we need to use SQL to obtain
 */
 
-var conditionName = "Snow Warning";
-var addressCondBiz = aa.proxyInvoker.newInstance("com.accela.aa.aamain.address.AddressConditionBusiness").getOutput();
-var sql = "select L1_ADDRESS_NBR,L1_CON_NBR FROM L3ADDRES_CONDIT LC WHERE LC.L1_CON_DES = 'Snow Warning' " + 
+var sql = "select L1_PARCEL_NBR,L1_CON_NBR FROM L1CONDIT LC WHERE LC.L1_CON_DES = 'Snow Warning' " + 
 	" AND lc.serv_prov_code='" + aa.getServiceProviderCode() + "' " +
 	" AND REC_STATUS = 'A'";
 	
 var msg = "";
-var array = doSQL(sql);
+var condArray = doSQL(sql);
 
-if (addressCondBiz) {
-	for (var i in array) {
-		msg += "Removing Condition " + array[i].L1_CON_NBR + " from address : " + array[i].L1_ADDRESS_NBR + " ";
-		addressCondBiz.removeAddressCondition(aa.getServiceProviderCode(), array[i].L1_ADDRESS_NBR, array[i].L1_CON_NBR,"ADMIN");
+if (condArray) {
+	for (var i in condArray) {
+		msg += "Removing Condition " + condArray[i].L1_CON_NBR + " from address : " + condArray[i].L1_PARCEL_NBR + " ";
+		var removeCondRes = aa.parcelCondition.removeParcelCondition(condArray[i].L1_CON_NBR, condArray[i].L1_PARCEL_NBR);
+		if(removeCondRes.getSuccess()) aa.print("Condition successfully removed on parcel " + condArray[i].L1_PARCEL_NBR);
+		else {aa.print("Unable to remove condition on parcel " + condArray[i].L1_PARCEL_NBR + ". Error: " + removeCondRes.getErrorMessage())}
 	}
 }
 

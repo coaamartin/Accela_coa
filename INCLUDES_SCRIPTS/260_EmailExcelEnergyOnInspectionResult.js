@@ -8,6 +8,9 @@ function script260_EmailExcelEnergyOnInspectionResult() {
         sendEmail = false,
         emailTemplate = 'BLD EXCEL ENERGY # 260',
         emailParams = aa.util.newHashtable();
+		//var inspResultComment;
+		//var inspComment;
+		var inspectionComment = "";
 
     if (ifTracer(guideSheetObjects &&  guideSheetObjects.length > 0, "GuideSheet(s) Exists")) {
         for (idx in guideSheetObjects) {
@@ -16,22 +19,29 @@ function script260_EmailExcelEnergyOnInspectionResult() {
                 if(ifTracer(guideSheetObject.text == 'Temporary Meter Release', "guideSheetObject.text == 'Temporary Meter Release'")) {
                     if(ifTracer(guideSheetObject.status == 'Yes', "guideSheetObject.text == 'Yes'")) {
                         sendEmail = true;
-                        setChecklistItemFlag()
+                        setChecklistItemFlag();
+						addParameter(emailParams, "$$checkListItemName$$", guideSheetObject.text);
                     }
                 }
                 if(ifTracer(guideSheetObject.text == 'Final Meter Release', "guideSheetObject.text == 'Temporary Meter Release'")) {
                     if(ifTracer(guideSheetObject.status == 'Yes', "guideSheetObject.text == 'Yes'")) {
                         sendEmail = true;
                         setChecklistItemFlag();
+						addParameter(emailParams, "$$checkListItemName$$", guideSheetObject.text);
                     }
                 }
             }
         }
     }
+	
     if (ifTracer(sendEmail, "sendEmail is truthy")) {
         setChecklistItemText();
-        if (inspComment)
-            addParameter(emailParams, "$$inspComment$$", inspComment);
+		if(vEventName == "V360InspectionResultSubmitAfter")
+			inspectionComment = inspComment;
+		else
+			inspectionComment = inspResultComment;
+		
+		addParameter(emailParams, "$$inspComment$$", inspectionComment);
         addParameter(emailParams, "$$FullAddress$$", getCapFullAddress());
         emailAsync2("", emailTemplate, emailParams);
 }
@@ -53,5 +63,4 @@ function script260_EmailExcelEnergyOnInspectionResult() {
             emailParams.put("$$checkListItem1$$","Gas Meter");
         }
     }
-
 }

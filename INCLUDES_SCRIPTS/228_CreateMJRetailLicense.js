@@ -1,5 +1,8 @@
 //Start - 228 MJ Retail License Creation/Update Script
-logDebug("etw capId: " + capId);
+
+/*************************************************
+ * DECOMMISSIONED: MOVED TO createLicenseCoA() and sendMJLic()
+ **************************************************/
 if (wfTask == "License Issuance" && wfStatus == "Issued") {
 	var vParentArry;
 	var vLicenseID;
@@ -67,6 +70,15 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		vLicenseObj = new licenseObject(null, vLicenseID);
 		vLicenseObj.setStatus("Active");
 
+		thisLicExpOb = vLicenseObj.b1Exp
+		expUnit = thisLicExpOb.getExpUnit()
+		expInt = thisLicExpOb.getExpInterval()
+		if (expUnit == "MONTHS") {
+			newExpDate = dateAddMonths(null, expInt);
+			} 
+		vLicenseObj.setExpiration(newExpDate);
+
+		
 		//Update License Workflow
 		tmpCap = capId;
 		capId = vLicenseID;
@@ -82,12 +94,12 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 			vReportTemplate = "MJ_License";
 			tmpCap = capId;
 			capId = vLicenseID;
-			scheduleInspection("MJ AMED Inspection", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ AMED Inspections", 77, "DALLEN", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Plumbing", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Electrical", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Mechanical", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Life Safety", 77, "SLCLARK", " ", "Scheduled by Script 228");
-			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "SLCLARK", " ", "Scheduled by Script 228");
+			scheduleInspection("MJ Security Inspections - 3rd Party", 77, "DALLEN", " ", "Scheduled by Script 228");
 			scheduleInspection("MJ Building Inspections - Structural", 77, "SLCLARK", " ", "Scheduled by Script 228");
 			capId = tmpCap;
 		}
@@ -100,9 +112,9 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
 
 		var vRParams = aa.util.newHashtable();
-		addParameter(vRParams, "p1Value", vLicenseID.getCustomID());
+		addParameter(vRParams, "Record_ID", vLicenseID.getCustomID());
 
-		//does $$acadocdownloadurl$$ need to be added here?
+		// Generate report/email and save to new License record
 		tmpCap = capId;
 		capId = vLicenseID;
 		emailContacts("All", vEmailTemplate, vEParams, vReportTemplate, vRParams);

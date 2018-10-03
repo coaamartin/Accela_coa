@@ -35,5 +35,6 @@ Notes :
 Sample Call : checkIfPassedInspections(inspType)
 
 */
-if(!appMatch("Building/Permit/No Plans/NA"))
-	{checkIfPassedInspections(inspType)}
+if(!appMatch("Building/Permit/No Plans/NA")) {
+	checkIfPassedInspections(inspType)
+}

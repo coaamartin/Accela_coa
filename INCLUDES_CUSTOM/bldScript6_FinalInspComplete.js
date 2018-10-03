@@ -8,14 +8,21 @@ function bldScript6_FinalInspComplete(){
             
         if($iTrc(inspResult == "Final" && !pendOrSched, 'New Building && inspResult == "Final" AND no pending or scheduled inspections')){
             if($iTrc(appTypeString == "Building/Permit/New Building/NA", 'New Building'))
-                if($iTrc(lettersReceived && !certOfOccup, 'lettersReceived && !certOfOccup'))
+                if($iTrc(lettersReceived && !certOfOccup, 'lettersReceived && !certOfOccup')) {
                     closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+				}
             
-            if($iTrc(appTypeString == "Building/Permit/Plans/NA" && !certOfOccup, 'appTypeString == "Building/Permit/Plans/NA" && !certOfOccup'))
+            if($iTrc(appTypeString == "Building/Permit/Plans/NA" && !certOfOccup, 'appTypeString == "Building/Permit/Plans/NA" && !certOfOccup')) {
                 closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
             
-            if($iTrc(appTypeString == "Building/Permit/No Plans/NA", 'appTypeString == "Building/Permit/No Plans/NA"'))
+            if($iTrc(appTypeString == "Building/Permit/No Plans/NA", 'appTypeString == "Building/Permit/No Plans/NA"')) {
                 closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+			
+			if ((allTasksComplete("BLD_NEWCON") == false) || (allTasksComplete("BLD_MASTER") == false)){
+					updateAppStatus("Issued","Status updated via script 6");				
+			}
         }
     }
     catch(err){

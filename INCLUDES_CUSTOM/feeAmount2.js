@@ -26,7 +26,7 @@ function feeAmount2(feestr, options) {
 		if (feestr.equals(feeObjArr[ff].getFeeCod()) && (!settings.checkStatus || exists(feeObjArr[ff].getFeeitemStatus(), statusArray))) {
             feeTotal += feeObjArr[ff].getFee();
         }
-
-        return feeTotal;
     }
+
+    return feeTotal;
 } 

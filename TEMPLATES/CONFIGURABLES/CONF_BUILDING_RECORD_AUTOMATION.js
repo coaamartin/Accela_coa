@@ -206,7 +206,9 @@
           ],
           "daysOut": "",
           "deactivateTask": [
-            "Certificate of Occupancy"
+            "Certificate of Occupancy",
+			"Blackflow Preventor", 
+			"Water Meter"
           ],
           "deleteTask": [
             
@@ -263,7 +265,9 @@
           ],
           "daysOut": "",
           "deactivateTask": [
-            "Certificate of Occupancy"
+            "Certificate of Occupancy",
+			"Backflow Preventor",
+			"Water Meter"
           ],
           "deleteTask": [
             
@@ -384,7 +388,9 @@
           ],
           "daysOut": "",
           "deactivateTask": [
-            "Certificate of Occupancy"
+            "Certificate of Occupancy",
+			"Blackflow Preventor", 
+			"Water Meter"
           ],
           "deleteTask": [
             

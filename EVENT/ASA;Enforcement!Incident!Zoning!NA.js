@@ -10,6 +10,7 @@ or created proactively in the field by a code officer. The script needs to:
 		
 */
 
+
 var thisInsp = scheduleInspectionCustom("Zoning Initial Inspection", 0);
 logDebug("inspection is " + thisInsp);
 if (thisInsp) {
@@ -21,3 +22,5 @@ if (thisInsp) {
 		assignTask("Initial Investigation", asgnInsp);
 	}
 }
+
+

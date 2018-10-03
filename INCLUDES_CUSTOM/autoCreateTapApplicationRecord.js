@@ -32,7 +32,8 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 				var childRecordToCreatedStructure = childRecordToCreated.split("/");
 				//var utilityServiceRecordStructure = utilityServiceRecord.split("/");
 				
-				createChildGeneric(
+				
+				var childCapId = createChildGeneric(
 					childRecordToCreatedStructure[0], 
 					childRecordToCreatedStructure[1], 
 					childRecordToCreatedStructure[2],
@@ -43,15 +44,21 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 						copyParcels: true,
 						copyAddresses: true,   
 						copyOwner: true,
-						copyContacts: true,
+						copyContacts: false,
 						customFields: [
-							{ key: "ofResidentialUnitsASI", val: AInfo[parentofResidentialUnitsASI] },
-							{ key: "BuildingSqFt", val: AInfo[parentBuildingSqFt] }
+							{ key: ofResidentialUnitsASI, val: AInfo[parentofResidentialUnitsASI] },
+							{ key: BuildingSqFt, val: AInfo[parentBuildingSqFt] }
 						] 					
 					}
 				)
 				
-				// var appCreateResult = aa.cap.createApp(childRecordToCreatedStructure[0], childRecordToCreatedStructure[1], childRecordToCreatedStructure[2],
+				if(childCapId){
+				    logDebug("Created child record: " + childCapId.getCustomID() + " with capId " + childCapId);
+				    if(copyPrimContactByType(capId, childCapId, "Applicant")) ;
+				    else copyContactsByType(capId, childCapId, "Applicant");
+				}
+				
+				//var appCreateResult = aa.cap.createApp(childRecordToCreatedStructure[0], childRecordToCreatedStructure[1], childRecordToCreatedStructure[2],
 				// 		childRecordToCreatedStructure[3], "");
 
 				// if (appCreateResult.getSuccess()) {
@@ -66,7 +73,7 @@ function autoCreateTapApplicationRecord(workflowTasktoCheck, workflowStatustoChe
 				// 	logDebug("child cap has been created and copy the data : " + newId);
 				// } else {
 				// 	logDebug("Unable to create planting record ex. : " + appCreateResult.getErrorMessage());
-				// }
+				//}
 
 				//Removed the creation of the Utility Service record per latest specs.
 			}

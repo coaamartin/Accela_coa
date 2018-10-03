@@ -18,6 +18,7 @@ var numberOfdayes = 30;
 UpdateworkFlowTaskDueDate(workFlowTasktobeChecked, numberOfdayes);
 
 
-script193_WatIrrigationAddInspFee();
+//Scripts 193 is now fired from ASA, script 195 no longer needed
+//script193_WatIrrigationAddInspFee();
+//include("script195_ActivateFeeIrrPermit");
 
-script195_ActivateFeeIrrPermit();

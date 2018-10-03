@@ -1,41 +1,58 @@
 
-function failedMJInspectionAutomation() {
+function failedMJInspectionAutomation(vCapType) {
+
+	var daysToAdd;
+	var inspDate = inspObj.getInspectionDate().getMonth() + "/" + inspObj.getInspectionDate().getDayOfMonth() + "/" + inspObj.getInspectionDate().getYear();
 	
 	// list MJ inspection types
-	var inspectionTypesAry = [ "MJ AMED Inspection", "MJ Building Inspection - Electrical", "MJ Building Inspection - Life Safety",
-		"MJ Building Inspection - Mechanical", "MJ Building Inspection - Plumbing", "MJ Building Inspection - Structural", "MJ Security Inspection - 3rd Party",
-		"MJ Zoning Inspection" ];
+	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
+		"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
+		"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
 	
 	//define number of days to schedule next inspection
-	var daysToAdd = 7;
-		
+	if (vCapType == "Application"){
+		daysToAdd = 1;
+	} else {
+		daysToAdd = 7;
+	}
+	var emailTemplateName = "LIC MJ INSPECTION CORRECTION REPORT # 231";		
+			
 	//check for failed inspections, schedule new inspection, and email applicant with report
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Failed") {
+			var vInspector = getInspectorByInspID(inspId, capId);
+			var vInspType = inspType;
+			var vInspStatus = "Scheduled";
 			
-			//schedule new inspection 7 days out from failed inspection date
-			var newInspSchedDate = dateAdd(inspResultDate, daysToAdd);
-			scheduleInspectDate(inspType, newInspSchedDate);
+			//schedule new inspection daysToAdd number of days from inspection result date
+			logDebug("Days to add: " + daysToAdd);
+			var newInspSchedDate = dateAddHC3(inspDate, daysToAdd, "Y");
+			scheduleInspectDate(vInspType, newInspSchedDate);
 			
-			//get applicant
-			var applicant = getContactByType("Applicant", capId);
-			if (!applicant || !applicant.getEmail()) {
-				logDebug("**WARN no applicant found on or no email capId=" + capId);
-				return false;
+			//get sequence ID for most recently created inspection
+			var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
+			if (lastInspectionObj == null) {
+				logDebug("Failed to find most recent inspection of type " + vInspType);
+				continue;
 			}
+			
+			var lastInspectionSeq = lastInspectionObj.getIdNumber();
+			
+			//assign inspection to inspector
+			assignInspection(lastInspectionSeq, vInspector);
+			
 
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 
-			var reportTemplate = "";
+			var reportTemplate = "MJ_Compliance_Corrections_Letter";
 			var reportParams = aa.util.newHashtable();
-			addParameter(reportParams, "RecordID", capIDString);
+			addParameter(reportParams, "InspActNumber", inspId);
 			
 			if (inspId) {
 				addParameter(eParams, "$$inspId$$", inspId);
-				reportParams.put("inspId", inspId);
 			}
 			if (inspResult)
 				addParameter(eParams, "$$inspResult$$", inspResult);
@@ -49,11 +66,10 @@ function failedMJInspectionAutomation() {
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			
 			//send email with report attachment
-			emailContacts("Applicant", "LIC MJ INSPECTION CORRECTION REPORT # 231", eParams, reportTemplate, reportParams);
-			
+			emailContactsWithReportLinkASync("Inspection Contact", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
+
 			return true;
 		}
 	}
-
 	return false;
 }

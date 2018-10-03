@@ -33,7 +33,7 @@ var capBiz = aa.proxyInvoker.newInstance("com.accela.aa.aamain.cap.CapBusiness",
 var addressCondBiz = aa.proxyInvoker.newInstance("com.accela.aa.aamain.address.AddressConditionBusiness").getOutput();
 var sql = "select L1_ADDRESS_NBR,L1_CON_NBR FROM L3ADDRES_CONDIT LC WHERE LC.L1_CON_DES = '" + conditionName + "' " +
 	" AND lc.L1_CON_ISS_DD < '" + (sixMonthsAgo.getMonth() + 1) + "/" + (sixMonthsAgo.getDate()) + "/" + (sixMonthsAgo.getFullYear()) + "' " +
-	" AND lc.L1_CON_STATUS_TYP = 'Applied' " + 
+	" AND lc.L1_CON_STATUS = 'Applied' " + 
 	" AND lc.serv_prov_code='" + aa.getServiceProviderCode() + "' " +
 	" AND REC_STATUS = 'A'";
 
@@ -41,13 +41,27 @@ var array = doSQL(sql);
 
 for (var i in array) {
 	aa.print("------------------------------------------");
-	aa.print("Resolving Condition " + array[i].L1_CON_NBR + " from address : " + array[i].L1_ADDRESS_NBR + " ");
-	addressCondBiz.editAddressConditionStatusToMet(aa.getServiceProviderCode(),parseInt(array[i].L1_ADDRESS_NBR), parseInt(array[i].L1_CON_NBR), "ADMIN");
+	var condNbr = array[i].L1_CON_NBR;
+	var addrNbr = array[i].L1_ADDRESS_NBR;
+	aa.print("Resolving Condition " + condNbr + " from address : " + addrNbr + " ");
+	var condModel = aa.addressCondition.getAddressCondition(addrNbr, condNbr);
+	
+	if(!condModel.getSuccess()) { aa.print("Unable to get address condition model for address ref number " + addrNbr); }
+	
+	var cond = condModel.getOutput();
+	cond.setConditionStatus("Condition Met");
+	
+	var cUpdateRes = aa.addressCondition.editAddressCondition(cond);
+	if(!cUpdateRes.getSuccess())
+		aa.print("Unable to update condition to met, error: " + cUpdateRes.getErrorMessage());
+	else
+		aa.print("Successfully updated condition " + condNbr);
+	
 	aa.print("Searching for Chronic Violator reset");
 	var conditionName = "('NOV Issued','Chronic Violator')";
-	var sql = "select L1_CON_DES,L1_ADDRESS_NBR,L1_CON_STATUS_TYP,L1_CON_NBR FROM L3ADDRES_CONDIT LC WHERE LC.L1_CON_DES IN " + conditionName + " " +
-	" AND L1_ADDRESS_NBR = " + array[i].L1_ADDRESS_NBR + " " +
-	" AND lc.L1_CON_STATUS_TYP = 'Applied' " + 
+	var sql = "select L1_CON_DES,L1_ADDRESS_NBR,L1_CON_STATUS,L1_CON_NBR FROM L3ADDRES_CONDIT LC WHERE LC.L1_CON_DES IN " + conditionName + " " +
+	" AND L1_ADDRESS_NBR = " + addrNbr + " " +
+	" AND lc.L1_CON_STATUS = 'Applied' " + 
 	" AND lc.serv_prov_code='" + aa.getServiceProviderCode() + "' " +
 	" AND REC_STATUS = 'A'";
 	var array2 = doSQL(sql);
@@ -57,17 +71,30 @@ for (var i in array) {
 			appliedCount++;
 		}
 	}
-	if (appliedCount <= 2) {
-		aa.print("2 or less active NOVs, looking for Chronic Violator condition to resolve");
+	if (appliedCount < 2) {
+		aa.print("1 or less active NOVs, looking for Chronic Violator condition to resolve");
 		for (var j in array2) {
 			if ("Chronic Violator".equals(array2[j].L1_CON_DES)) {
-				aa.print("Resolving Chronic Violator Condition " + array2[j].L1_CON_NBR + " from address : " + array2[j].L1_ADDRESS_NBR + " ");
-				addressCondBiz.editAddressConditionStatusToMet(aa.getServiceProviderCode(),parseInt(array2[j].L1_ADDRESS_NBR), parseInt(array2[j].L1_CON_NBR), "ADMIN");
+			    var chronicCondNbr = array2[j].L1_CON_NBR;
+				var chronicAddrNbr = array2[j].L1_ADDRESS_NBR;
+				aa.print("Resolving Chronic Violator Condition " + chronicCondNbr + " from address : " + chronicAddrNbr + " ");
+            	var condModel2 = aa.addressCondition.getAddressCondition(chronicAddrNbr, chronicCondNbr);
+            	
+            	if(!condModel2.getSuccess()) { aa.print("Unable to get address condition model for address ref number " + addrNbr); }
+            	
+            	var cond2 = condModel2.getOutput();
+            	cond2.setConditionStatus("Condition Met");
+            	
+            	var cUpdateRes2 = aa.addressCondition.editAddressCondition(cond2);
+            	if(!cUpdateRes2.getSuccess())
+            		aa.print("Unable to update condition to met, error: " + cUpdateRes2.getErrorMessage());
+            	else
+            		aa.print("Successfully updated condition " + chronicCondNbr);
 			}
 		}
 	}
 	else {
-		aa.print("3 or more active NOVs, any Chronic Violator Status conditions will remain applied");
+		aa.print("2 or more active NOVs, any Chronic Violator Status conditions will remain applied");
 	}
 		
 }

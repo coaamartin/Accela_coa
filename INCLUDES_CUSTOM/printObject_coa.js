@@ -6,10 +6,10 @@ function printObject(theobject)
 	var debugline = "";
 	for (var item in theobject )
 	{	
-		debugline += ">>>>>>>>> ITEM " + item + " <<<<<<<<<";
+		debugline += "*********** ITEM " + item + " ***********<br>";
 		for (var prop in theobject[item])
 		{
-			debugline += prop + ":" + theobject[item][prop] + ", ";
+			debugline += prop + ":" + theobject[item][prop] + "<br>";
 		}
 		debugline += "<br><br>";
 	}

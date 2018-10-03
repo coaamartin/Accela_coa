@@ -5,7 +5,6 @@ that were applied equal or greater than 365 days ago.
 Also update the record status of the "Summons Case" from "NFZV -1 Year" to "Compliance".
 Frequency of Batch - Nightly
 7/7/18 JHS
-
 There are no EMSE APIs to retrieve non-std address conditions, so we need to use SQL to obtain
  */
 
@@ -19,6 +18,7 @@ var addressCondBiz = aa.proxyInvoker.newInstance("com.accela.aa.aamain.address.A
 var sql = "select L1_ADDRESS_NBR,L1_CON_NBR FROM L3ADDRES_CONDIT LC WHERE LC.L1_CON_DES = '" + conditionName + "' " +
 	" AND lc.L1_CON_ISS_DD < '" + (oneYearAgo.getMonth() + 1) + "/" + (oneYearAgo.getDate()) + "/" + (oneYearAgo.getFullYear() + 1900) + "' " +
 	" AND lc.serv_prov_code='" + aa.getServiceProviderCode() + "' " +
+	" AND lc.L1_CON_STATUS = 'Applied' " +  
 	" AND REC_STATUS = 'A'";
 
 var array = doSQL(sql);
@@ -26,8 +26,23 @@ var array = doSQL(sql);
 if (addressCondBiz) {
 	for (var i in array) {
 		aa.print("------------------------------------------");
-		aa.print("Removing Condition " + array[i].L1_CON_NBR + " from address : " + array[i].L1_ADDRESS_NBR + " ");
-		addressCondBiz.removeAddressCondition(aa.getServiceProviderCode(), array[i].L1_ADDRESS_NBR, array[i].L1_CON_NBR, "ADMIN");
+		var condNbr = array[i].L1_CON_NBR;
+    	var addrNbr = array[i].L1_ADDRESS_NBR;
+		aa.print("Removing Condition " + condNbr + " from address : " + addrNbr + " ");
+		//addressCondBiz.removeAddressCondition(aa.getServiceProviderCode(), array[i].L1_ADDRESS_NBR, array[i].L1_CON_NBR, "ADMIN");
+    	var condModel = aa.addressCondition.getAddressCondition(addrNbr, condNbr);
+    	
+    	if(!condModel.getSuccess()) { aa.print("Unable to get address condition model for address ref number " + addrNbr); }
+    	
+    	var cond = condModel.getOutput();
+    	cond.setConditionStatus("Condition Met");
+    	
+    	var cUpdateRes = aa.addressCondition.editAddressCondition(cond);
+    	if(!cUpdateRes.getSuccess())
+    		aa.print("Unable to update condition to met, error: " + cUpdateRes.getErrorMessage());
+    	else
+    		aa.print("Successfully updated condition " + condNbr);
+		
 		var capListForAddr = capBiz.getCapViewListByRefAddressID(aa.getServiceProviderCode(), parseInt(array[i].L1_ADDRESS_NBR), "Enforcement").toArray();
 		for (var j in capListForAddr) {
 			var capId = capListForAddr[j].getCapID();

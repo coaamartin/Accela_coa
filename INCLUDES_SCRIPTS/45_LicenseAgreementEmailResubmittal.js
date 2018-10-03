@@ -1,4 +1,6 @@
-var checkTasks = ["Engineering Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review"];
+//written by swakil edited by jmain
+
+var checkTasks = ["Engineering Review", "Water Dept Review", "Life Safety Review", "Traffic Review", "Parks Review", "Risk Management Review", "Real Property Review", "Planning Review"];
 if (exists(wfTask, checkTasks))
 {
   var isAllComplete = isListComplete(checkTasks);
@@ -7,7 +9,7 @@ if (exists(wfTask, checkTasks))
   if (isAllComplete && !isAllStatusComplete)
   {
     sendEmailToApplicant();
-    updateTask("Plans Coordination", "Resubmittal Requested", "Update via script");
+    updateTask("Plans Coordination", "Resubmittal Requested", "Update via script COA #45");
   }
 }
 
@@ -33,10 +35,14 @@ function isListCompleteStatus(tasks2Check)
 }
 
 function sendEmailToApplicant(){
-  var contact = "Applicant";
-  var template = "JD_TEST_TEMPLATE";
-  var joke = "Where there's a will, there's a relative.";
+  var contacts = "Applicant";
+  var template = "PW_UPDATE_PLANS_FOR_LICENSE_AGREEMENT";
+  var lictype = getAppSpecific("License Type") + ""; //force string
+  var wireless = getAppSpecific("Wireless Facility") + ""; //force string
+  var flagpole = getAppSpecific("Flag Poles") + ""; //force string
   var emailparams = aa.util.newHashtable();
-  emailparams.put("$$Joke$$", joke);
-  emailContacts(contact, template, emailparams, "", "", "N", "");
+  emailparams.put("$$lictype$$", lictype)
+  emailparams.put("$$wireless$$", wireless);
+  emailparams.put("$$flagpole$$", flagpole);
+  emailContacts(contacts, template, emailparams, "", "", "N", "");
 }

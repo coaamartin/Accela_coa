@@ -24,7 +24,7 @@ function emailContactsWithReportLinkASync(pSendEmailToContactTypes, pEmailTempla
 		
 	//Initialize optional parameters	
 	var vEParams = aa.util.newHashtable();
-	var vReportTemplate = null;
+	var vReportTemplate = "";
 	var vRParams = aa.util.newHashtable();
 	var vAddAdHocTask = true;
 	var vChangeReportName = "";	
@@ -57,7 +57,14 @@ function emailContactsWithReportLinkASync(pSendEmailToContactTypes, pEmailTempla
 		logDebug("pChangeReportName is defined");
 		vChangeReportName = pChangeReportName;
 	}
-	
+    
+    var itemCap = capId;
+    if (arguments.length == 8){
+        if (arguments[7] != null){
+            logDebug("Using capId: " + arguments[7]);
+            itemCap = arguments[7];
+        }
+    }	
 	
 	logDebug("Provided contact types to send to: " + pSendEmailToContactTypes);
 
@@ -90,7 +97,7 @@ function emailContactsWithReportLinkASync(pSendEmailToContactTypes, pEmailTempla
 	envParameters.put("reportTemplate", vReportTemplate);
 	envParameters.put("vRParams", vRParams);
 	envParameters.put("vChangeReportName", vChangeReportName);
-	envParameters.put("CapId", capId);
+	envParameters.put("CapId", itemCap);
 	envParameters.put("vAddAdHocTask", vAddAdHocTask);
 
 	//Start modification to support batch script
@@ -102,7 +109,7 @@ function emailContactsWithReportLinkASync(pSendEmailToContactTypes, pEmailTempla
 		aa.env.setValue("reportTemplate", vReportTemplate);
 		aa.env.setValue("vRParams", vRParams);
 		aa.env.setValue("vChangeReportName", vChangeReportName);
-		aa.env.setValue("CapId", capId);
+		aa.env.setValue("CapId", itemCap);
 		aa.env.setValue("vAddAdHocTask", vAddAdHocTask);
 		//call sendEmailASync script
 		logDebug("Attempting to run Non-Async: " + vAsyncScript);

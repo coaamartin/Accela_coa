@@ -6,38 +6,43 @@ function createChildAbatement(iType, iResult, schedIType, setFieldValue)
         
         var currentCapId = capId;
         var appName = "Abatement created for Record Number " + capId.customID;
-        var newChild = createChild('Enforcement','Incident','Abatement','NA',appName);
-        var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
-        copyRecordDetailsLocal(capId, newChild);
-        copyContacts(capId, newChild);
-        copyAddresses(capId, newChild);
-        copyParcels(capId, newChild);
-        copyOwner(capId, newChild);
+        var newChildCapId = createChild('Enforcement','Incident','Abatement','NA',appName);
+        var appHierarchy = aa.cap.createAppHierarchy(capId, newChildCapId);
+        copyRecordDetailsLocal(capId, newChildCapId);
+        copyContacts(capId, newChildCapId);
+        copyAddresses(capId, newChildCapId);
+        copyParcels(capId, newChildCapId);
+        copyOwner(capId, newChildCapId);
         
         // get the inspector from GIS and assign the rec to this user
         inspUserObj = null;
         x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
-        logDebug(x[0]["OFFICER_NAME"]);
-        
-        capId = newChild;
-        
-        var offFullName = x[0]["OFFICER_NAME"];
-        
-        var offFname = offFullName.substr(0,offFullName.indexOf(' '));
-        logDebug(offFname);
-        
-        var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
-        logDebug(offLname);
-        
-        inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+		if(x[0]){
+            logDebug(x[0]["OFFICER_NAME"]);
+            
+            var offFullName = x[0]["OFFICER_NAME"];
+            
+            var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+            logDebug(offFname);
+            
+            var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+            logDebug(offLname);
+            
+            inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+		}
+		
         if(inspUserObj != null)
-            { assignCap(inspUserObj.getUserID()); }
+        { assignCap(inspUserObj.getUserID(), newChildCapId); }
 
-        scheduleInspection(schedIType,0, currentUserID);
-        
-        capId = currentCapId;
+		var newInspId = scheduleInspectionCustom4CapId(newChildCapId, schedIType,0, currentUserID);
+		
+		if(newInspId){
+            var clItemStatus2Copy = ["Abate/Record", "Abate/Summons", "Abate"];
+		
+            if(clItemStatus2Copy.length > 0) copyCheckListByItemStatus(inspId, newInspId, clItemStatus2Copy, capId, newChildCapId);
+		}
     
-        editAppSpecific("Abatement Type", setFieldValue, newChild); 
+        editAppSpecific("Abatement Type", setFieldValue, newChildCapId); 
 
     }
 }

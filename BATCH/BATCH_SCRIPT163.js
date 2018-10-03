@@ -45,7 +45,7 @@ var capId = null;
 try {
         var emailTemplateName = aa.env.getValue("EMAIL_TEMPLATE");
         if (!emailTemplateName || emailTemplateName == null || emailTemplateName == "") {
-			emailTemplateName = 'PW LIC AGR RENEWAL #163';
+			emailTemplateName = "PW LIC AGR RENEWAL #163";
 		} 
 		var daysAhead = aa.env.getValue("DAYS_AHEAD");
 		if (!daysAhead) {
@@ -64,76 +64,102 @@ try {
 * @param asiFieldName to get Date value and compare with
 */
 function sendCertificateofInsuranceExpirationNotification(emailTemplateName, daysAhead, asiFieldName) {
-        LogBatchDebug("LOG", "Looking for records that will expire in 60 days on the date " +  dateAdd(null, daysAhead), true);
-        var capListResult = aa.cap.getByAppType("PublicWorks", "Real Property", "License Agreement", "NA");
-        if(!capListResult.getSuccess()) {LogBatchDebug("DEBUG", "Unable to get records " + capListResult.getErrorMessage(), true); return ; }
-        
-        capIdScriptModelList = capListResult.getOutput();
-        
-        logDebug("**INFO total records=" + capIdScriptModelList.length);
-        var olduseAppSpecificGroupName = useAppSpecificGroupName;
-        useAppSpecificGroupName = false;
-        for (r in capIdScriptModelList) {
-               capId = capIdScriptModelList[r].getCapID();
-               logDebug("**INFO -------------- " + capId);
-               var certInsExpDate = getAppSpecific(asiFieldName);
-               if (certInsExpDate == null || certInsExpDate == "") {
-                       logDebug("**WARN 'Certificate of Insurance Expiration Date' is null, SKIP...");
-                       continue;
-               }
-               
-        var currDate = aa.util.parseDate(dateAdd(null, 0));
-        certInsExpDate = aa.util.parseDate(certInsExpDate);
-               var expDiff = days_between(certInsExpDate, currDate);
-               expDiff = parseInt(expDiff);
-               if (expDiff == daysAhead) {
-                       var cc = getContactByType("Insurance Agency", capId);
-                       if (!cc) {
-                               cc = "";
-                       } else {
-                               cc = cc.getEmail();
-                       }
-                       
-                       var projOwner = getContactByType("Project Owner", capId);
-                       if (!projOwner) {
-                               projOwner = "";
-                       } else {
-                               projOwner = projOwner.getEmail();
-                       }
-                       
-                       var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
-            acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
-            var recordURL = getACARecordURL(acaURLDefault);
-                       
-                       var thisCap = aa.cap.getCap(capId).getOutput();
-                       var eParams = aa.util.newHashtable();
-                       addParameter(eParams, "$$altID$$", thisCap.getCapModel().getAltID());
-                       //addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
-                       //addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
-            addParameter(eParams, "$$acaRecordUrl$$", recordURL);
-                       
-						var sent = sendNotification("",projOwner,cc,emailTemplateName,eParams,null); 
-						if (!sent) {
-                               logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-							}
-						else {
-								LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID());}					
+	LogBatchDebug("LOG", "Looking for records that will expire in 60 days on the date " +  dateAdd(null, daysAhead), true);
+	var capListResult = aa.cap.getByAppType("PublicWorks", "Real Property", "License Agreement", "NA");
+	if(!capListResult.getSuccess()) {LogBatchDebug("DEBUG", "Unable to get records " + capListResult.getErrorMessage(), true); return ; }
+	
+	capIdScriptModelList = capListResult.getOutput();
+	
+	LogBatchDebug("LOG", "**INFO Total Records = " + capIdScriptModelList.length, true);
+	var olduseAppSpecificGroupName = useAppSpecificGroupName;
+	useAppSpecificGroupName = false;
+	for (r in capIdScriptModelList) {
+		capId = capIdScriptModelList[r].getCapID();
+		var capOutput = aa.cap.getCap(capId).getOutput();
+		var capStatus = capOutput.getCapStatus();
+		LogBatchDebug("LOG", "**INFO Processing Record: " + capOutput.getCapModel().getAltID(), true);
+		if(capStatus != "Withdrawn") {
+		   var certInsExpDate = getAppSpecific(asiFieldName);
+		   if (certInsExpDate == null || certInsExpDate == "") {
+				   LogBatchDebug("LOG", "**WARN 'Certificate of Insurance Expiration Date' is null, SKIP...", true);
+				   continue;
+			}
+		   
+			var currDate = aa.util.parseDate(dateAdd(null, 0));
+			certInsExpDate = aa.util.parseDate(certInsExpDate);
+			var expDiff = days_between(certInsExpDate, currDate);
+			expDiff = parseInt(expDiff);
+			if (expDiff == daysAhead) {
+
+				//Send the email  -- owners don't have emails all the time so making applicant the Toemail and adding owner email to cc email
+				var applicantEmail = null, projectOwnerEmail = null, insuranceAgencyEmail = null;
+				
+				//find applicant email
+				var recordApplicant = getContactByType("Applicant", capId);
+				if (recordApplicant) {
+					applicantEmail = recordApplicant.getEmail();
+					//LogBatchDebug("LOG", "Applicant Email: " + applicantEmail, true);
+				}
+				
+				//find insurance agency email
+				var recordInsuranceAgency = getContactByType("Insurance Agency", capId);
+				if (recordInsuranceAgency) {
+					insuranceAgencyEmail = recordInsuranceAgency.getEmail();
+					//LogBatchDebug("LOG", "Insurance Agency Email: " + insuranceAgencyEmail);
+				}
+				
+				//find project owner email
+				var recordProjectOwner = getContactByType("Project Owner", capId);
+				if (recordProjectOwner) {
+					projectOwnerEmail = recordProjectOwner.getEmail();
+					//LogBatchDebug("LOG", "Project Owner Email: " + projectOwnerEmail);
+				}
+
+				//build CC email list
+				var ccEmail = "";
+				if (insuranceAgencyEmail != null && insuranceAgencyEmail != "") {
+					ccEmail = insuranceAgencyEmail;
+				}
+				if (applicantEmail != null && applicantEmail != "") {
+					if (ccEmail != "") {
+						ccEmail += ";" + applicantEmail;
+					} else {
+						ccEmail = applicantEmail;
+					}
+				}
+					   
+				var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+				acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+				var recordURL = getACARecordURL(acaURLDefault);
+					   
+				var thisCap = aa.cap.getCap(capId).getOutput();
+				var eParams = aa.util.newHashtable();
+				addParameter(eParams, "$$altID$$", thisCap.getCapModel().getAltID());
+				addParameter(eParams, "$$acaRecordUrl$$", recordURL);
+				//addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
+				//addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());					   
+				
+				var sent = sendNotification("",projectOwnerEmail, ccEmail, emailTemplateName, eParams, null); 
+				if (!sent) {
+					LogBatchDebug("LOG", "**WARN Sending email failed, error:" + sent.getErrorMessage(), true);
+				}
+				else {
+					LogBatchDebug("LOG", "**INFO Email Sent successfully for record " + thisCap.getCapModel().getAltID(), true);
+				}				
 						
-						
-						
-						
-                       //var sent = aa.document.sendEmailByTemplateName("", projOwner, cc, emailTemplateName, eParams, null);
-                       //if (!sent.getSuccess()) {
-                               //logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
-                       //}
-                      // else
-                               //LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID());
-               }//60 days
-        }//for all caps
-        useAppSpecificGroupName = olduseAppSpecificGroupName;
+				//var sent = aa.document.sendEmailByTemplateName("", projOwner, cc, emailTemplateName, eParams, null);
+				//if (!sent.getSuccess()) {
+					//logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
+				//}
+				// else
+					//LogBatchDebug("LOG", "Email Sent successfully for record " + thisCap.getCapModel().getAltID());
+			} else {
+				LogBatchDebug("LOG", "**WARN 'Certificate of Insurance Expiration Date' is not 60 days out, SKIP...", true);
+			}
+		}
+	}//for all caps
+    useAppSpecificGroupName = olduseAppSpecificGroupName;
 }
-
-
 
 function LogBatchDebug(etype, edesc, createEventLog) {
 
@@ -153,4 +179,3 @@ function LogBatchDebug(etype, edesc, createEventLog) {
         }
         debug += msg;
 }
-

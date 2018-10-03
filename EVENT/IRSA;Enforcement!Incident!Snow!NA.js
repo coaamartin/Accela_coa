@@ -28,5 +28,5 @@ function getSameInspector(){
 logDebug("Script 357 Starting");
 if(ifTracer(inspResult == "Snow Warning Posted" || inspResult == "Snow Warning Served", "inspResult == Snow Warning Served or Posted")) {
 //	addrAddCondition(null, 'Code Violations', 'Applied', "Snow Warning", inspResult + ' - Added per script 357', 'Notice', 'N');
-	addAddressStdCondition(null, 'Code Violations', 'Snow Warning')
+	addParcelStdCondition(null, 'Code Violations', 'Snow Warning')
 } 

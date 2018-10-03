@@ -20,27 +20,27 @@ function emailWithReportLinkASync(pSendToEmailAddresses, pEmailTemplate, pEParam
 		
 	//Initialize optional parameters	
 	var vEParams = aa.util.newHashtable();
-	var vReportTemplate = null;
+	var vReportTemplate = "";
 	var vRParams = aa.util.newHashtable();
 	var vAddAdHocTask = true;
 	var vChangeReportName = "";	
 
-	if (pEParams != undefined) {
+	if (pEParams != undefined && pEParams != null && pEParams != "") {
 		logDebug("pEParams is defined");
 		vEParams = pEParams;
 	}
 	
-	if (pReportTemplate != undefined) {
+	if (pReportTemplate != undefined && pReportTemplate != null && pReportTemplate != "") {
 		logDebug("pReportTemplate is defined");
 		vReportTemplate = pReportTemplate;
 	}
 
-	if (pRParams != undefined) {
+	if (pRParams != undefined && pRParams != null && pRParams != "") {
 		logDebug("pRParams is defined");
 		vRParams = pRParams;
 	}
 	
-	if (pAddAdHocTask != undefined) {
+	if (pAddAdHocTask != undefined && pAddAdHocTask != null && pAddAdHocTask != "") {
 		logDebug("pAddAdHocTask is defined");
 		if (pAddAdHocTask == "N") {
 			vAddAdHocTask = false;
@@ -49,10 +49,18 @@ function emailWithReportLinkASync(pSendToEmailAddresses, pEmailTemplate, pEParam
 		}
 	}
 	
-	if (pChangeReportName != undefined) {
+	if (pChangeReportName != undefined && pChangeReportName != null && pChangeReportName != "") {
 		logDebug("pChangeReportName is defined");
 		vChangeReportName = pChangeReportName;
 	}
+	
+	var itemCap = capId;
+    if (arguments.length == 8){
+        if (arguments[7] != null){
+            logDebug("Using capId: " + arguments[7]);
+            itemCap = arguments[7];
+        }
+    }
 
 	//Save variables to the hash table and call sendEmailASync script. This allows for the email to contain an ACA deep link for the document
 	envParameters.put("sendToEmailAddresses", pSendToEmailAddresses);
@@ -61,7 +69,8 @@ function emailWithReportLinkASync(pSendToEmailAddresses, pEmailTemplate, pEParam
 	envParameters.put("reportTemplate", vReportTemplate);
 	envParameters.put("vRParams", vRParams);
 	envParameters.put("vChangeReportName", vChangeReportName);
-	envParameters.put("CapId", capId);
+	envParameters.put("CapId", itemCap);
+	envParameters.put("vAddAdHocTask", vAddAdHocTask);
 
 	//Start modification to support batch script
 	var vEvntTyp = aa.env.getValue("eventType");
@@ -72,7 +81,8 @@ function emailWithReportLinkASync(pSendToEmailAddresses, pEmailTemplate, pEParam
 		aa.env.setValue("reportTemplate", vReportTemplate);
 		aa.env.setValue("vRParams", vRParams);
 		aa.env.setValue("vChangeReportName", vChangeReportName);
-		aa.env.setValue("CapId", capId);
+		aa.env.setValue("CapId", itemCap);
+		aa.env.setValue("vAddAdHocTask", vAddAdHocTask);
 		//call sendEmailASync script
 		logDebug("Attempting to run Non-Async: " + vAsyncScript);
 		aa.includeScript(vAsyncScript);

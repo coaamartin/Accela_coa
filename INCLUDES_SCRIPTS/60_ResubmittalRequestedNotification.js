@@ -7,6 +7,8 @@ Building/Permit/~/~
 
 Email template created "BLD RESUBMITTAL NOTIFICATION"
 necessary vars:  $$wfTask$$, $$wfComment$$
+
+written by SWAKIL
 */
 logDebug("Start executing 60_ResubmittalRequestedNotification");
 var targetStatusArray = ["Resubmittal Requested"];
@@ -36,8 +38,14 @@ if (exists(wfStatus, targetStatusArray))
 		emailparams.put("$$wfComment$$", wfComment);
 		emailparams.put("$$wfTask$$", wfTask);
 		emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
+		
+		//jmain edit - add LPs to email...
+		var lptypes = "Contractor";
+		coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
 
 		//update record status
-		updateAppStatus("Resubmittal Requested", "");
+		// Commented this out at the request of the clienbt for Christy Paulin 9/11/2018
+		//updateAppStatus("Resubmittal Requested", "");
+		
 }
 logDebug("Finished executing 60_ResubmittalRequestedNotification");

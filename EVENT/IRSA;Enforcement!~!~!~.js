@@ -1,4 +1,6 @@
+
 logDebug("DONB 101 " + capId)
+
 if(inspType == "Zoning Initial Inspection"){
     //Script 346
     //                    Inspection to check for,    Insp result         New inspection                  Custom field to get date for new insp, copy failed GS, wfTask2Update, status for WF task
@@ -77,38 +79,38 @@ if(inspType == "Snow Initial Inspection"){
     enfProcessInspResult("Snow Initial Inspection", "Snow Fee Served", null, null, false, "Initial Investigation", "Taken and Stored");
     enfProcessInspResult("Snow Initial Inspection", "Taken and Stored", "Snow Fee 1st Re-Inspection", "nextWorkDay", true, "Initial Investigation", "Taken and Stored");
     enfProcessInspResult("Snow Initial Inspection", "No Violation Observed", null, null, false, "Initial Investigation", "No Violation Observed");
-    enfProcessInspResult("Snow Initial Inspection", "Visit/Attempted Contact", "Snow Warning Inspection", "nextWorkDay", true, "Initial Investigation", "Attempted Contact");
+    enfProcessInspResult("Snow Initial Inspection", "Visit/Attempted Contact", "Snow Initial Inspection", "nextWorkDay", true, "Initial Investigation", "Visit/Attempted Contact");
     enfProcessInspResult("Snow Initial Inspection", "Refer to Other Department", null, null, false, "Initial Investigation", "Refer to Other Department");
-    enfProcessInspResult("Snow Initial Inspection", "Skip to Summons", null, null, false, "Initial Investigation", "Skip to Summons");
-    enfProcessInspResult("Snow Initial Inspection", "Skip to City Abatement", null, null, false, "Initial Investigation", "Skip to Abatement");
+    enfProcessInspResult("Snow Initial Inspection", "Skip to Summons", "Summons Issuance", "nextWorkDay", true, "Initial Investigation", "Skip to Summons");
+    enfProcessInspResult("Snow Initial Inspection", "Skip to City Abatement", "City Abatement Order", "nextWorkDay", true, "Initial Investigation", "Skip to City Abatement");
 }
 
 if(inspType == "Snow Warning Inspection"){
     //Script 346
-    enfProcessInspResult("Snow Warning Inspection", "Snow Fee Posted", null, null, false, "Snow Warning Reinspect", "Snow Fee Posted");
-    enfProcessInspResult("Snow Warning Inspection", "Snow Fee Served", null, null, false, "Snow Warning Reinspect", "Snow Fee Served");
-    enfProcessInspResult("Snow Warning Inspection", "Snow Compliance", null, null, false, "Snow Warning Reinspect", "Snow Compliance");
-    enfProcessInspResult("Snow Warning Inspection", "New Snow Extension", "Snow Warning Inspection", "nextWorkDay", true, "Snow Warning Reinspect", "New Snow Extension");
+    enfProcessInspResult("Snow Warning Inspection", "Snow Fee Posted", null, null, false, "Snow Warning Re-Inspect", "Snow Fee Posted");
+    enfProcessInspResult("Snow Warning Inspection", "Snow Fee Served", null, null, false, "Snow Warning Re-Inspect", "Snow Fee Served");
+    enfProcessInspResult("Snow Warning Inspection", "Snow Compliance", null, null, false, "Snow Warning Re-Inspect", "Snow Compliance");
+    enfProcessInspResult("Snow Warning Inspection", "New Snow Extension", "Snow Warning Inspection", "nextWorkDay", true, "Snow Warning Re-Inspect", "New Snow Extension");
 }
 
 if(inspType == "Snow Fee 1st Re-Inspection"){
     //Script 346
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Fee Posted", null, null, false, "Snow Fee 1st Reinspect", "Snow Fee Posted");
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Fee Served", null, null, false, "Snow Fee 1st Reinspect", "Snow Fee Served");
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Taken and Stored", "Snow Fee 2nd Re-Inspection", "nextWorkDay", true, "Snow Fee 1st Reinspect", "Taken and Stored");
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Compliance", null, null, false, "Snow Fee 1st Reinspect", "Snow Compliance");
-    enfProcessInspResult("Snow Fee 1st Re-Inspection", "New Snow Extension", "Snow Fee 1st Re-Inspection", "nextWorkDay", true, "Snow Fee 1st Reinspect", "New Snow Extension");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Fee Posted", null, null, false, "Snow Fee 1st Re-Inspect", "Snow Fee Posted");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Fee Served", null, null, false, "Snow Fee 1st Re-Inspect", "Snow Fee Served");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Taken and Stored", "Snow Fee 2nd Re-Inspection", "nextWorkDay", true, "Snow Fee 1st Re-Inspect", "Taken and Stored");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "Snow Compliance", null, null, false, "Snow Fee 1st Re-Inspect", "Snow Compliance");
+    enfProcessInspResult("Snow Fee 1st Re-Inspection", "New Snow Extension", "Snow Fee 1st Re-Inspection", "nextWorkDay", true, "Snow Fee 1st Re-Inspect", "New Snow Extension");
 }
 
 if(inspType == "Snow Fee 2nd Re-Inspection"){
     //Script 346
-    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Compliance", null, null, false, "Snow Fee 2nd Reinspect", "Snow Compliance");
-    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "New Snow Extension", "Snow Fee 2nd Re-Inspection", "nextWorkDay", true, "Snow Fee 2nd Reinspect", "New Snow Extension");
-    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abatement", null, null, false, "Snow Fee 2nd Reinspect", "Snow Abatement");
-    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abate/Summons", null, null, false, "Snow Fee 2nd Reinspect", "Snow Abate/Summons");
+    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Compliance", null, null, false, "Snow Fee 2nd Re-Inspect", "Snow Compliance");
+    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "New Snow Extension", "Snow Fee 2nd Re-Inspection", "nextWorkDay", true, "Snow Fee 2nd Re-Inspect", "New Snow Extension");
+    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abatement", null, null, false, "Snow Fee 2nd Re-Inspect", "Snow Abatement");
+    enfProcessInspResult("Snow Fee 2nd Re-Inspection", "Snow Abate/Summons", null, null, false, "Snow Fee 2nd Re-Inspect", "Snow Abate/Summons");
 }
 
-if(inspType == "Initial Housing Inspectionn"){
+if(inspType == "Initial Housing Inspection"){
     //Script 346
     enfProcessInspResult("Initial Housing Inspection", "Inspection Failed", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "Initial Inspection", "Inspection Failed");
     enfProcessInspResult("Initial Housing Inspection", "Inspection Passed", null, null, false, "Initial Inspection", "Inspection Passed");
@@ -121,7 +123,7 @@ if(inspType == "1st Housing Re-Inspection"){
     //Script 346
     enfProcessInspResult("1st Housing Re-Inspection", "Inspection Failed", "2nd Housing Re-Inspection", "2nd Re-Inspection Scheduled Date", false, "1st Re-inspection","Inspection Failed");
     enfProcessInspResult("1st Housing Re-Inspection", "Inspection Passed", null, null, false, "1st Re-inspection","Inspection Passed");
-    enfProcessInspResult("1st Housing Re-Inspection", "Extension - Fee", "1st Housing Re-Inspectio,", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - Fee");
+    enfProcessInspResult("1st Housing Re-Inspection", "Extension - Fee", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - Fee");
     enfProcessInspResult("1st Housing Re-Inspection", "Extension - No Fee", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - No Fee");
 }
 
@@ -158,23 +160,28 @@ if(inspType == "Summons Issuance"){
     enfProcessInspResult("Summons Issuance", "Compliance", null, null, false, "Summons Issuance", "Compliance");
     enfProcessInspResult("Summons Issuance", "Cancelled", null, null, false, "Summons Issuance", "Cancelled");
     enfProcessInspResult("Summons Issuance", "Taken and Stored - Citation", "Pre Court Action", "Pre Court Action", false, "Pre Summons Photos", "Taken and Stored - Citation");
+    
+    if(inspResult == "Taken and Stored - Citation" || inspResult == "Personal Service"){
+        deactivateTask("Mail Summons");
+    }
 }
 
 if(inspType == "Pre Court Action"){
     //Script 346
-    enfProcessInspResult("Pre Court Action", "1 - Create Summons File", null, null, false, "Pre Court Action"," 1 - Create Summons File");
-    enfProcessInspResult("Pre Court Action", "2 - Summons to Court Liaison", null, null, false, "Pre Court Action"," 2 - Summons to Court Liaison");
-    enfProcessInspResult("Pre Court Action", "3 - File to Court Liaison", null, null, false, "Pre Court Action"," 3 - File to Court Liaison");
-    enfProcessInspResult("Pre Court Action", "4 - Summons to Docketing", null, null, false, "Pre Court Action"," 4 - Summons to Docketing");
-    enfProcessInspResult("Pre Court Action", "5 - Summons File to CA", "Pre Trial Inspection", 0, false, "Pre Court Action"," 5 - Summons File to CA");
-    enfProcessInspResult("Pre Court Action", "6 - Citation File to CA", "Pre Trial Inspection", 0, false, "Pre Court Action"," 6 - Citation File to CA");
+    enfProcessInspResult("Pre Court Action", "1 - Create Summons File", null, null, false, "Pre Court Action","1 - Create Summons File");
+    enfProcessInspResult("Pre Court Action", "2 - Summons to Court Liaison", null, null, false, "Pre Court Action","2 - Summons to Court Liaison");
+    enfProcessInspResult("Pre Court Action", "3 - File to Court Liaison", null, null, false, "Pre Court Action","3 - File to Court Liaison");
+    enfProcessInspResult("Pre Court Action", "4 - Summons to Docketing", null, null, false, "Pre Court Action","4 - Summons to Docketing");
+    enfProcessInspResult("Pre Court Action", "5 - Summons File to CA", "Pre Court Investigation", 0, false, "Pre Court Action","5 - Summons File to CA");
+    enfProcessInspResult("Pre Court Action", "6 - Citation File to Liaison", null, null, false, "Pre Court Action","6 - Citation File to Liaison");
+    enfProcessInspResult("Pre Court Action", "7 - Citation File to CA", "Pre Court Investigation", 0, false, "Pre Court Action","7 - Citation File to CA");
 }
 
-if(inspType == "Pre Trial Inspection"){
+if(inspType == "Pre Court Inspection"){
     //Script 346
-    enfProcessInspResult("Pre Trial Inspection", "Compliance", null, null, false, "Pre Court Investigation", "Compliance");
-    enfProcessInspResult("Pre Trial Inspection", "Non-Compliance", null, null, false, "Pre Court Investigation", "Non-Compliance");
-    enfProcessInspResult("Pre Trial Inspection", "Unverifiable", null, null, false, "Pre Court Investigation", "Unverifiable");
+    enfProcessInspResult("Pre Court Inspection", "Compliance", null, null, false, "Pre Court Investigation", "Compliance");
+    enfProcessInspResult("Pre Court Inspection", "Non-Compliance", null, null, false, "Pre Court Investigation", "Non-Compliance");
+    enfProcessInspResult("Pre Court Inspection", "Unverifiable", null, null, false, "Pre Court Investigation", "Unverifiable");
 }
 
 if(inspType == "Legal Resolution"){
@@ -196,7 +203,7 @@ if(inspType == "NOV Release Inspection"){
 
 if(inspType == "Board-Up Abatement Order"){
     //Script 346
-    enfProcessInspResult("Board-Up Abatement Order", "Called in Service Request", null, null, false, "Abatement Request", "Completed Service Request");
+    enfProcessInspResult("Board-Up Abatement Order", "Called In Service Request", null, null, false, "Abatement Request", "Called Service Request");
     enfProcessInspResult("Board-Up Abatement Order", "Taken and Stored", "Post Abatement Inspection", "nextWorkDay", false, "Pre Abatement Photos", "Taken and Stored");
 }
 
@@ -208,12 +215,12 @@ if(inspType == "Graffiti Abatement Order"){
 
 if(inspType == "Post Abatement Inspection"){
     //Script 346
-    enfProcessInspResult("Post Abatement Inspection", "Rescheduled Upon Re-Inspect", null, null, false, "Post Abatement Photos", "Rescheduled Upon Re-Inspect");
+    enfProcessInspResult("Post Abatement Inspection", "Rescheduled Upon Re-Inspect", null, null, false, "Post Abatement Photos", "Rescheduled upon Re-Inspect");
     enfProcessInspResult("Post Abatement Inspection", "Rescheduled", null, null, false, "Post Abatement Photos", "Rescheduled");
-    enfProcessInspResult("Post Abatement Inspection", "Cancelled", null, null, false, "Post Abatement Photos", "Cancelled");
+    enfProcessInspResult("Post Abatement Inspection", "Canceled", null, null, false, "Post Abatement Photos", "Canceled");
     
     if(inspResult == "Taken and Stored"){
-        updateTask("Post Abatement Photos", "No Violation Observed", "", "");
+        resultWorkflowTask("Post Abatement Photos", "Taken and Stored");
         var currDate = aa.util.parseDate(dateAdd(null, 0));
         var next3Days = aa.util.parseDate(dateAdd(null, 3));
         var inspDays = days_between(currDate, next3Days);
@@ -223,19 +230,22 @@ if(inspType == "Post Abatement Inspection"){
 
 if(inspType == "Post Abatement Inspection - Graffiti Only"){
     //Script 
-    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Taken and Stored", "Abatement Approval", 0, false, "Post Abatement Photos", "No Violation Observed");
-    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Cancelled", null, null, false, "Post Abatement Photos", "Cancelled");
+    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Taken and Stored", "Abatement Approval", 0, false, "Post Abatement Photos", "Taken and Stored");
+    enfProcessInspResult("Post Abatement Inspection - Graffiti Only", "Cancelled", null, null, false, "Post Abatement Photos", "Canceled");
 }
 
 if(inspType == "Snow Abatement Order"){
     //Script 346
-    enfProcessInspResult("Snow Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Sign Removed");
+    enfProcessInspResult("Snow Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
     
     if(inspResult == "Taken and Stored"){
+		
+		
         var currDate = aa.util.parseDate(dateAdd(null, 0));
-        var next2Days = aa.util.parseDate(dateAdd(null, 2));
-        var inspDays = days_between(currDate, next2Days);
-        scheduleInspection("Post Abatement Inspection", inspDays);
+		var nextWD = nextWorkDay(dateAdd(null, 2 - 1));
+        numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWD));
+        scheduleInspection("Post Abatement Inspection", numOfDays4Insp);
+        resultWorkflowTask("Pre Abatement Photos", "Taken and Stored");
     }
 }
 
@@ -244,13 +254,21 @@ if(inspType == "Abatement Approval"){
     enfProcessInspResult("Abatement Approval", "Bill and Photo Denied", "Abatement Approval", "nextWorkDay", false, "Abatement Approval", "Bill and Photo Denied");
     enfProcessInspResult("Abatement Approval", "Invoice Approved", null, null, false, "Abatement Approval", "Invoice Approved");
     enfProcessInspResult("Abatement Approval", "Invoice Denied", "Abatement Approval", "nextWorkDay", false, "Abatement Approval", "Invoice Denied");
-    enfProcessInspResult("Abatement Approval", "Grafitti Abatement Redo", "Post Abatement Inspection - Graffiti Only", 0, false, "Abatement Approval", "Grafitti Abatement Redo");
+    enfProcessInspResult("Abatement Approval", "Graffiti Abatement Redo", "Post Abatement Inspection - Graffiti Only", 0, false, "Abatement Approval", "Graffiti Abatement Redo");
     
     if(inspResult == "Bill and Photo Approved"){
+		resultWorkflowTask("Abatement Approval", "Bill and Photo Approved");
         var currDate = aa.util.parseDate(dateAdd(null, 0));
-        var next10Days = aa.util.parseDate(dateAdd(null, 10));
+        var next10Days = aa.util.parseDate(nextWorkDay(dateAdd(null, 9)));
         var inspDays = days_between(currDate, next10Days);
-        scheduleInspection("Abatement Approval", inspDays);
+        //scheduleInspection("Abatement Approval", inspDays);
+        var iObjResult = aa.inspection.getInspection(capId, inspId);
+        if(!iObjResult.getSuccess()) logDebug("Unable to get inspection object to update schedule date");
+        else {
+            var iObj = iObjResult.getOutput();
+            iObj.setScheduledDate(aa.date.parseDate(dateAdd(null, inspDays)));
+            aa.inspection.editInspection(iObj)
+        }
     }
 }
 
@@ -265,7 +283,7 @@ if(inspType == "City Abatement Order"){
         var wfTsk = "Pre Abatement Photos";
         var wfSts = "Taken and Stored";
         if(!isTaskActive(wfTsk)) activateTask(wfTsk);
-        resultWorkflowTask(wfTsk, wfSts, "", "");
+            resultWorkflowTask(wfTsk, wfSts, "", "");
     }
 }
 
@@ -372,44 +390,47 @@ closeTask("Incident Status","Closed","","");
 //*********************************************************************************************************
 logDebug("Script 343 START");
 if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || inspResult == "Abate/Summons" ||
-	inspResult == "Issue Summons" )
+    inspResult == "Issue Summons" || inspResult == "Citation/Summons")
 {
     logDebug("Script 343: criteria met");
     
     // get the inspector from GIS and assign the rec to this user
     inspUserObj = null;
     x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
-    logDebug(x[0]["OFFICER_NAME"]);
+    if(x[0]){
+        logDebug(x[0]["OFFICER_NAME"]);
+        
+        var offFullName = x[0]["OFFICER_NAME"];
+        
+        var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+        logDebug(offFname);
+        
+        var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+        logDebug(offLname);
+        
+        inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+    }
     
-    var offFullName = x[0]["OFFICER_NAME"];
-    
-    var offFname = offFullName.substr(0,offFullName.indexOf(' '));
-    logDebug(offFname);
-    
-    var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
-    logDebug(offLname);
-    
-    inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
-    
-    var currentCapId = capId;
+    //var currentCapId = capId;
     var appName = "Summons created for Record Number " + capId.customID;
-    var newChild = createChild('Enforcement','Incident','Summons','NA',appName);
-    var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
-    copyRecordDetailsLocal(capId, newChild);
+    var newChildCapId = createChild('Enforcement','Incident','Summons','NA',appName);
+    var appHierarchy = aa.cap.createAppHierarchy(capId, newChildCapId);
+    copyRecordDetailsLocal(capId, newChildCapId);
     
-    copyAddresses(capId, newChild);
-    copyParcels(capId, newChild);
-    copyOwner(capId, newChild);
+    copyAddresses(capId, newChildCapId);
+    copyParcels(capId, newChildCapId);
+    copyOwner(capId, newChildCapId);
     
+    if(inspUserObj != null) 
+        assignCap(inspUserObj.getUserID(), newChildCapId);
     
+    var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "Summons Issuance",0, currentUserID);
     
-
-    capId = newChild;
-    if(inspUserObj != null)
-        { assignCap(inspUserObj.getUserID()); }
-    scheduleInspection("Summons Issuance",0, currentUserID);
-    capId = currentCapId;
-
+    if(newInspId) {
+        var clItemStatus2Copy = ['Summons', 'Abate/Summons', 'Record/Summons', 'Citation/Summons'];
+        
+        if(clItemStatus2Copy.length > 0) copyCheckListByItemStatus(inspId, newInspId, clItemStatus2Copy, capId, newChildCapId);
+    }
 }           
 logDebug("Script 343 END");
 
@@ -464,37 +485,38 @@ if (inspResult == "Abate/Record" || inspResult == "Record with County" )
     // get the inspector from GIS and assign the rec to this user
     inspUserObj = null;
     x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
-    logDebug(x[0]["OFFICER_NAME"]);
+    if(x[0]){
+        logDebug(x[0]["OFFICER_NAME"]);
+        
+        var offFullName = x[0]["OFFICER_NAME"];
+        
+        var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+        logDebug(offFname);
+        
+        var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+        logDebug(offLname);
+        
+        inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+    }
     
-    var offFullName = x[0]["OFFICER_NAME"];
-    
-    var offFname = offFullName.substr(0,offFullName.indexOf(' '));
-    logDebug(offFname);
-    
-    var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
-    logDebug(offLname);
-    
-    inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
-    
-    var currentCapId = capId;
     var appName = "Recordation created for Record Number " + capId.customID;
-    var newChild = createChild('Enforcement','Incident','Record with County','NA',appName);
-    var appHierarchy = aa.cap.createAppHierarchy(capId, newChild);
-    copyRecordDetailsLocal(capId, newChild);
-    copyContacts(capId, newChild);
-    copyAddresses(capId, newChild);
-    copyParcels(capId, newChild);
-    copyOwner(capId, newChild);
+    var newChildCapId = createChild('Enforcement','Incident','Record with County','NA',appName);
+    var appHierarchy = aa.cap.createAppHierarchy(capId, newChildCapId);
+    copyRecordDetailsLocal(capId, newChildCapId);
+    copyContacts(capId, newChildCapId);
+    copyAddresses(capId, newChildCapId);
+    copyParcels(capId, newChildCapId);
+    copyOwner(capId, newChildCapId);
     
+    if(inspUserObj != null) 
+        assignCap(inspUserObj.getUserID(), newChildCapId);
     
+    var newInspId = scheduleInspectionCustom4CapId(newChildCapId, "NOV Recordation Photos",0, currentUserID);
     
-
-    capId = newChild;
-    if(inspUserObj != null)
-        { assignCap(inspUserObj.getUserID()); }
-    scheduleInspection("Recordation Photos",0, currentUserID);
-    capId = currentCapId;
-
+    if(newInspId) {
+        var clItemStatus2Copy = ["Abate/Record", "Record/Summons", "Record"];
+        
+        if(clItemStatus2Copy.length > 0) copyCheckListByItemStatus(inspId, newInspId, clItemStatus2Copy, capId, newChildCapId);
+    }
 }           
 logDebug("Script 345 END");
-

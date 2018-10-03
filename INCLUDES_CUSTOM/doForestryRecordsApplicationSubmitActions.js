@@ -18,9 +18,9 @@ Notes:
 function doForestryRecordsApplicationSubmitActions(stdForestryInspectorAssignments, inspectionGroupCode, inspectionTypeForestryInspection) {
     getPrimaryParcelAttributesAndUpdateCustomField(stdForestryInspectorAssignments);
     updateApplicationNameWithAddressInfo();
-    createAndAssignPendingInspection(inspectionGroupCode, inspectionTypeForestryInspection);
+    //commented out due to duplicate functionality from Script 60
+	//createAndAssignPendingInspection(inspectionGroupCode, inspectionTypeForestryInspection);
 }
-
 
 
 

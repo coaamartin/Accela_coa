@@ -29,6 +29,10 @@ function createPPBMPRecord(workFlowTask, workflowStatusArray, asitNames) {
             if(childCapId){
                 copyOwner(capId, childCapId);
                 copyAppSpecific(childCapId);
+				editAppName(getAppName(capId), childCapId);
+				aa.cap.copyCapWorkDesInfo(capId, childCapId);
+				
+				
                 updateAppStatus("Issued", "", childCapId);
                 var thirtyDaysAhead = nextWorkDay(dateAdd(null, 30));
                 var days4Insp = days_between(aa.util.parseDate(dateAdd(null, 0)), aa.util.parseDate(thirtyDaysAhead));

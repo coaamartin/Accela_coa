@@ -1,3 +1,24 @@
+
+if(ifTracer(inspType == "Initial Housing Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
+}
+
+if(ifTracer(inspType == "1st Housing Re-Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
+}
+
+if(ifTracer(inspType == "2nd Housing Re-Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
+}
+
+if(ifTracer(inspType == "3rd Housing Re-Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
+}
+
+if(ifTracer(inspType == "4th Housing Re-Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
+}
+
 //script 351
 
 var feeCode;
@@ -48,5 +69,7 @@ if ("Inspection Passed".equals(inspResult)) {
 if (matches(inspResult,"Extension - Fee", "No Show")) {
 		addFee("ENF_HI_05","ENF_HI","FINAL",1,"Y");
 }
+
+
 
  

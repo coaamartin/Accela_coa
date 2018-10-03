@@ -20,6 +20,8 @@ function createTempWaterWetTapCopyDataAndSendEmail(emailTemplate) {
 		childCapId = createChildResult.getOutput();
 		aa.cap.createAppHierarchy(capId, childCapId);
 	}
+	editAppSpecific("Application ID",capId.getCustomID());
+	editAppSpecific("Utility Permit Number",capId.getCustomID(), childCapId);
 
 	if (childCapId != null) {
 		var rNewLicIdString = childCapId.getCustomID();
@@ -27,24 +29,32 @@ function createTempWaterWetTapCopyDataAndSendEmail(emailTemplate) {
 		copyParcels(capId, childCapId);
 		copyOwner(capId, childCapId);
 		copyContacts3_0(capId, childCapId);
-		copyDetailedDescription(capId,childCapId);
+		//copyDetailedDescription(capId,childCapId);
+		editAppName(AInfo["Utility Permit Type"], childCapId);
 		
-		var igArr = ["LIST OF SUBCONTRACTORS", "PRIVATE FIRE LINE MATERIAL", "PRIVATE STORM MATERIAL", "PUBLIC STORM MATERIAL", "SANITARY SEWER MATERIAL", "WATER MATERIAL"];
-		copyASITables( capId, childCapId, igArr );
+		//var igArr = ["LIST OF SUBCONTRACTORS", "PRIVATE FIRE LINE MATERIAL", "PRIVATE STORM MATERIAL", "PUBLIC STORM MATERIAL", "SANITARY SEWER MATERIAL", "WATER MATERIAL"];
+		//copyASITables( capId, childCapId, igArr );
+		copyASITableByTName("SIZE", capId, childCapId);
 		
-		var recordApplicant = getContactByType("Applicant", capId);
+		if(AInfo["Utility Permit Type"] == "Private Fire Line Permit") 
+		    copyASITableByTName("PRIVATE FIRE LINE MATERIAL", capId, childCapId);
+		if(AInfo["Utility Permit Type"] == "Water Main Utility Permit") 
+		    copyASITableByTName("WATER MATERIAL", capId, childCapId);
+		
+		var recordApplicant = getContactByType("Developer", capId);
 		if (recordApplicant) {
 			applicantEmail = recordApplicant.getEmail();
 		}
 		if (applicantEmail == null || applicantEmail == "") {
-			logDebug("**WARN Applicant on record " + capId + " has no email");
+			logDebug("**WARN Developer on record " + capId + " has no email");
 
 		} else {
 			var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
 			var reportFile = [];
 			acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
 			acaURL = acaURL.substr(0, acaURL.toUpperCase().indexOf("/ADMIN"));
-			acaURL += "/urlrouting.ashx?type=1005&module=Water&capId1=" + childCapId.getID1() + "&capId2=" + childCapId.getID2() + "&capId3=" + childCapId.getID3() + "&AgencyCode=" + aa.getServiceProviderCode();
+			//acaURL += "/urlrouting.ashx?type=1005&module=Water&capId1=" + childCapId.getID1() + "&capId2=" + childCapId.getID2() + "&capId3=" + childCapId.getID3() + "&AgencyCode=" + aa.getServiceProviderCode();
+			acaURL += "/urlrouting.ashx?type=1000&module=Water&capId1=" + childCapId.getID1() + "&capId2=" + childCapId.getID2() + "&capId3=" + childCapId.getID3() + "&AgencyCode=" + aa.getServiceProviderCode();
 			var emailParams = aa.util.newHashtable();
 			addParameter(emailParams, "$$deeplink$$", acaURL);
 			addParameter(emailParams, "$$childAltID$$", childCapId.getCustomID());
