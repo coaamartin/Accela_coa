@@ -1,6 +1,22 @@
 
-if(ifTracer(inspType == "Initial Housing Inspection" && inspResult == "Inspection Passed", 'Initial Housing Inspection/Inspection Passed')){
-   if(ifTracer(currentUserID == "TLEDEZMA" || currentUserID == "DKOONTZ", 'user:TLEDEZMA or DKOONTZ')) wtrScript350_archiveLists();
+if(ifTracer(inspType == "Initial Housing Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
+}
+
+if(ifTracer(inspType == "1st Housing Re-Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
+}
+
+if(ifTracer(inspType == "2nd Housing Re-Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
+}
+
+if(ifTracer(inspType == "3rd Housing Re-Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
+}
+
+if(ifTracer(inspType == "4th Housing Re-Inspection" && matches(inspResult, "Inspection Passed", "Inspection Failed"), 'Initial Housing Inspection/Inspection Passed OR Failed')){
+   wtrScript350_archiveLists();
 }
 
 //script 351
