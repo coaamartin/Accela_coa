@@ -14,7 +14,8 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
   if (inspResultObj.getSuccess()) 
   {
     var inspList = inspResultObj.getOutput();
-	for (xx in inspList) 
+	var ExitLoop = false;
+	for ((xx in inspList) && !ExitLoop) 
 	{
 	  inspResult = "NadaJP" + "";
 	  inspId = inspList[xx].getIdNumber();
@@ -24,8 +25,6 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
 	  //var inspResult = aa.inspection.getInspection(capId, inspId) + "";	
 	  //inspResult = String(inspList[xx].getInspectionStatus);  	  
 	  //String(aa.inspection.getInspection(capId,inspId).getOutput().getInspectionStatus()))
-
-      logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled  inspResult=" + inspResult + "");	  
 		
 	  if ("Pending".equals(inspResult))
 	  {
@@ -34,6 +33,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
 		comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed. </h2>");
 		deactivateTask("Inspection Phase");
 		cancel = true;
+		ExitLoop = true;
 		
 	  }
 	  
@@ -44,6 +44,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
 		comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed. </h2>");
 		deactivateTask("Inspection Phase");
 		cancel = true;
+		ExitLoop = true;
 		
 	  }
 	}   
