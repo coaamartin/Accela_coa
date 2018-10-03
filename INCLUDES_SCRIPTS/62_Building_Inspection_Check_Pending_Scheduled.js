@@ -40,7 +40,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
 	}   
   }
   
-  if FoundStatus
+  if (FoundStatus)
   {
 	showMessage = true;
 	comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed. </h2>");
