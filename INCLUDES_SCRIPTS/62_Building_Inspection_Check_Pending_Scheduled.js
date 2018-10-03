@@ -4,30 +4,44 @@
 */
 
 logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled");
+
+
+var inspResult = aa.inspection.getInspection(capId, inspId);
+
 logDebug("Inspection Results: " + inspResult);
 logDebug(inspResult.length());
 
 if(wfTask =="Inspection Phase" && wfStatus== "Ready For CO") 
 {
-  
-  if ("Pending".equals(inspResult))
+  var inspResultObj = aa.inspection.getInspections(capId);
+  if (inspResultObj.getSuccess()) 
   {
- 
-	showMessage = true;
-	comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed. </h2>");
-	deactivateTask("Inspection Phase");
-	cancel = true;
-	
+    inspList = inspResultObj.getOutput();
+	for (xx in inspList) 
+	{
+	  var inspId = inspList[xx].getIdNumber();
+	  
+	  var inspResult = aa.inspection.getInspection(capId, inspId);			
+		
+	  if ("Pending".equals(inspResult))
+	  {
+	 
+		showMessage = true;
+		comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed. </h2>");
+		deactivateTask("Inspection Phase");
+		cancel = true;
+		
+	  }
+	  
+	  if ("Scheduled".equals(inspResult))
+	  {
+	 
+		showMessage = true;
+		comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed. </h2>");
+		deactivateTask("Inspection Phase");
+		cancel = true;
+		
+	  }
+	}   
   }
-  
-  if ("Scheduled".equals(inspResult))
-  {
- 
-	showMessage = true;
-	comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed. </h2>");
-	deactivateTask("Inspection Phase");
-	cancel = true;
-	
-  }
-  
 }
