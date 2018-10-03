@@ -4,6 +4,9 @@
 */
 
 logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled");
+
+var inspResult = aa.inspection.getInspection(capId, inspId);
+
 logDebug("Inspection Results: " + inspResult);
 logDebug(inspResult.length());
 
