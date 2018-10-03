@@ -5,7 +5,7 @@
 
 logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled");
 
-if(wfTask =="Inspection Phase" && wfStatus== "Ready For CO") 
+if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO") 
 {
 	
   logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled  within loop ");	  
