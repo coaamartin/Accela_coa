@@ -5,7 +5,7 @@
  * @returns {Boolean}
  */
 function permitNoPlansFeeCalculation(workFlowTask, workflowStatusArray, permitFeeTypeAsiName, permitFeeTypeTotalAsiName, gisSvcName, gisLayerName, gisAttrName) {
-    logDebug("permitWithPlansFeeCalculation started.");
+    logDebug("permitNoPlansFeeCalculation started.");
     var canAddFees = false;
 
     if (workFlowTask && workFlowTask != null && workflowStatusArray && workflowStatusArray != null) {
@@ -138,13 +138,14 @@ function permitNoPlansFeeCalculation(workFlowTask, workflowStatusArray, permitFe
     }//END Building Use Tax Fee
 	
 try{    
+	updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", 1, "Y");
     //Building Fee (Flat Fee)
-    var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
+    /*var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
     if (asiValues[permitFeeTypeAsiName] && asiValues[permitFeeTypeAsiName] != null && asiValues[permitFeeTypeAsiName] != "" && asiValues[permitFeeTypeAsiName] != "Other" && parseFloat(permitTypeTotal)> 0) {
         var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
         if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal ) > 0) {
             if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")){
-            updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "Y");
+            updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", 1, "Y");
             }
         } else {
             logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
@@ -165,11 +166,12 @@ try{
             logDebug("**WARN " + permitFeeTypeAsiName + " is empty and Valuation is empty, no fees added");
         }
     }
+	*/
     
 }
 catch (err) {
     handleError(err, "Error on Building Fee script");
 }
-    logDebug("permitWithPlansFeeCalculation ended.");
+    logDebug("permitNoPlansFeeCalculation ended.");
     return true;
 }
