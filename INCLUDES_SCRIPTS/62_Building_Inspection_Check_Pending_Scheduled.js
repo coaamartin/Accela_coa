@@ -7,6 +7,9 @@ logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_
 
 if(wfTask =="Inspection Phase" && wfStatus== "Ready For CO") 
 {
+	
+  logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled  within loop ");	  
+  
   var inspResultObj = aa.inspection.getInspections(capId);
   if (inspResultObj.getSuccess()) 
   {
