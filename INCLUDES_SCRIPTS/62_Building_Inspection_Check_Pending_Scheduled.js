@@ -21,7 +21,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
 	var stuff = printObject(inspList);
 	logDebug(stuff);
 
-	for ((xx in inspList)
+	for (xx in inspList)
 	{
 	  inspResult = "NadaJP" + "";
 	  inspId = inspList[xx].getIdNumber();
