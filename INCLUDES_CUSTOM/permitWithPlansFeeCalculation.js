@@ -79,7 +79,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
         }
         
         if(feeQtyCh > 0 && feeCodesAry["BUILDING_CHICKEN_FEE"]){
-            updateFee(feeCodesAry["BUILDING_CHICKEN_FEE"], feeSched, "FINAL", 1, "Y");
+            updateFee(feeCodesAry["BUILDING_CHICKEN_FEE"], feeSched, "FINAL", 1, "N");
             return true;
         }
     }//END Chicken Coops Fee
@@ -135,8 +135,8 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
         }
 
         if (feeQty > 0) {
-            updateFee(feeCodesAry["ARAPAHOE_FEE_1"], feeSched, "FINAL", feeQty, "Y");
-            updateFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "Y");
+            updateFee(feeCodesAry["ARAPAHOE_FEE_1"], feeSched, "FINAL", feeQty, "N");
+            updateFee(feeCodesAry["ARAPAHOE_FEE_2"], feeSched, "FINAL", feeQty, "N");
         }
     }//county = Arapahoe   
     
@@ -148,7 +148,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
         }
 
         if (feeQty > 0) {
-            updateFee(feeCodesAry["BUILDING_DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "Y");
+            updateFee(feeCodesAry["BUILDING_DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
         }
        
     //Building Use Tax Fee
@@ -165,7 +165,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
     }
 
     if (feeQty > 0) {
-        updateFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "Y");
+        updateFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "N");
     }//END Building Use Tax Fee
 	
 try{    
@@ -175,7 +175,7 @@ try{
         var permitTypeTotal = asiValues[permitFeeTypeTotalAsiName];
         if (permitTypeTotal && permitTypeTotal != null && permitTypeTotal != "" && parseFloat(permitTypeTotal ) > 0) {
             if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")){
-            updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "Y");
+            updateFee(feeCodesAry["BUILDING_FEE_FLAT"], feeSched, "FINAL", parseFloat(permitTypeTotal), "N");
             }
         } else {
             logDebug("**WARN " + permitFeeTypeAsiName + " is NOT empty and " + permitFeeTypeTotalAsiName + " is empty, no fees added");
@@ -191,7 +191,7 @@ try{
         else if(valuation && valuation != null && valuation != "") feeAmt = parseFloat(valuation);
         
         if (feeAmt > 0) {
-            updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "Y");
+            updateFee(feeCodesAry["BUILDING_FEE_VALUATION"], feeSched, "FINAL", parseFloat(valuation), "N");
         } else {
             logDebug("**WARN " + permitFeeTypeAsiName + " is empty and Valuation is empty, no fees added");
         }
