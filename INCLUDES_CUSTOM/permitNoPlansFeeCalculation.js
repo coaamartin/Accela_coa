@@ -1,4 +1,3 @@
-
 /**
  * calculate and add a Fee based on criteria 
  * @param workFlowTask add the fee when wfTask match this, optional send null to ignore (for ASA)
