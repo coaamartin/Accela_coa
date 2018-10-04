@@ -28,7 +28,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
         {
             var doccategory = listofdocuments[i]["docCategory"];
             
-            logDebug("JMP JMP JMP ------------------------------------->> Inside loop of listofdocuments: " + docCategory + "");
+            logDebug("JMP JMP JMP ------------------------------------->> Inside loop of listofdocuments: " + doccategory + "");
             //if (doccategory == neededdocument)
             //{
             //    docuploaded = true;
