@@ -55,8 +55,8 @@ function enfScript350_inpsCustListBldgInfo(){
                                          "Hallway:","Kitchen:","Laundry Room:",
                                          "Living Room:","Patio:","Stairs:","Sun Room:")) unitsFailed++;
                 
-                if(matches(roomCol, "Tenant Refusal","R. B. R.","Tenent Ill - Pass")) unitsNoAccess++;
-                if(matches(roomCol, "Dog on Premises","Lockout","Tenent Ill - Reinspect")) unitsNoAccRei++;
+                if(matches(roomCol, "Tenant Refusal","R. B. R.","Tenant Ill - Pass")) unitsNoAccess++;
+                if(matches(roomCol, "Dog on Premises","Lockout","Tenant Ill - Re-Inspect")) unitsNoAccRei++;
             }
             
             for(eachInsp in inspectionInfoTblArr){

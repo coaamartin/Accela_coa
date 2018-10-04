@@ -19,6 +19,7 @@ function createTempChild(appNameAppendix, utilityPermitType, emailTemplate) {
         removeContactsFromCapByType(childCapId, "Agency Reviewer");
         // Update the child Utility Permit Type ASI
         editAppSpecific("Utility Permit Type", utilityPermitType, childCapId);
+        editAppSpecific("Civil Plan number", capIDString, childCapId);
         // Send an email
         //sendEmail(emailTemplate);
         var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
@@ -46,6 +47,7 @@ function createTempChild(appNameAppendix, utilityPermitType, emailTemplate) {
             if (!sendResult) { logDebug("createTempChild: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
             else { logDebug("createTempChild: Sent email notification to "+emailTo)}
         }
+		
     } else {
         logDebug("**WARN creating a temporary child failed, error:" + sent.getErrorMessage());
     }
