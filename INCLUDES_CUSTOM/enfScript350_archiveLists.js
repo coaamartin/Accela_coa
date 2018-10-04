@@ -26,7 +26,7 @@ function enfScript350_archiveLists(){
         for(each in bldgIv) {
             var aRow = bldgIv[each];
             
-            if(aRow[col2Check] == val2Check || aRow[col2Check4Bld] == "No Violation")){
+            if(aRow[col2Check] == val2Check || aRow[col2Check4Bld] == "No Violation"){
                 var rowFieldArray = [];
                 var fieldRow = aa.util.newHashMap();
                 fieldRow.put("Inspection Type", inspType);
