@@ -1,6 +1,18 @@
 function enfScript350_updateCustInspCustList(){
     logDebug("enfScript350_updateCustInspCustList() started");
     try{
+		var iType;
+		var isDate;
+		
+		if(ifTracer(matches(vEventName, "InspectionScheduleAfter", "InspectionMultipleScheduleAfter"), 'InspectionScheduleAfter')){
+			iType = inspType;
+			isDate = inspSchedDate;
+		}
+		else{
+		    iType = arguments[0];
+            isDate = arguments[1];			
+		}
+        
         var $iTrc = ifTracer;
         var inspsTable = "INSPECTION INFORMATION";
         var iTypeColValue = "";
@@ -13,17 +25,17 @@ function enfScript350_updateCustInspCustList(){
             for(eachRow in tableArr){
                 var aRow = tableArr[eachRow];
                 for(col in aRow)
-                    if(col == "Inspection Type" && (inspType + "") == aRow[col]) rowExists = true;
+                    if(col == "Inspection Type" && (iType + "") == aRow[col]) rowExists = true;
             }
         }
         
-        var row = [{colName: 'Inspection Type', colValue: inspType},
-                   {colName: 'Inspection Date', colValue: formatDteStringToMMDDYYYY(inspSchedDate)}];
+        var row = [{colName: 'Inspection Type', colValue: iType},
+                   {colName: 'Inspection Date', colValue: formatDteStringToMMDDYYYY(isDate)}];
         
-        //if(!updateAsiTableRow(inspsTable, "Inspection Date", formatDteStringToMMDDYYYY(inspSchedDate), { 
+        //if(!updateAsiTableRow(inspsTable, "Inspection Date", formatDteStringToMMDDYYYY(isDate), { 
         //    capId: capId,
         //    colFilters: [
-        //        { colName: "Inspection Type", colValue: inspType}
+        //        { colName: "Inspection Type", colValue: iType}
         //    ]})
         //) {
         //    addAsiTableRow(inspsTable, row);
@@ -32,10 +44,10 @@ function enfScript350_updateCustInspCustList(){
         if($iTrc(!rowExists, 'row does not exits, inserting it'))   
             addAsiTableRow(inspsTable, row);
         if($iTrc(rowExists, 'row exists, updating the "Inspection Date"'))
-            updateAsiTableRow(inspsTable, "Inspection Date", formatDteStringToMMDDYYYY(inspSchedDate), {
+            updateAsiTableRow(inspsTable, "Inspection Date", formatDteStringToMMDDYYYY(isDate), {
                     capId: capId,
                     colFilters: [
-                        { colName: "Inspection Type", colValue: inspType}
+                        { colName: "Inspection Type", colValue: iType}
                     ]});
     }
     catch(err){

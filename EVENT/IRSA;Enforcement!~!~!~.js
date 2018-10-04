@@ -117,6 +117,14 @@ if(inspType == "Initial Housing Inspection"){
     enfProcessInspResult("Initial Housing Inspection", "Extension - Fee", "Initial Housing Inspection", "Initial Inspection Scheduled Date", false, "Initial Inspection", "Extension - Fee");
     enfProcessInspResult("Initial Housing Inspection", "Extension - No Fee", "Initial Housing Inspection", "Initial Inspection Scheduled Date", false, "Initial Inspection", "Extension - No Fee");
     enfProcessInspResult("Initial Housing Inspection", "No Show", "Initial Housing Inspection", "Initial Inspection Scheduled Date", false, "Initial Inspection", "No Show");
+    //END Script 346
+    
+    //Script 350
+    if(ifTracer(appMatch("Enforcement/Housing/Inspection/NA"), 'Housing Inspection Record')){
+        if(matches(inspResult, "Extension - Fee", "Extension - No Fee", "No Show")) enfScript350_updateCustInspCustList("Initial Housing Inspection", AInfo["Initial Inspection Scheduled Date"]);
+        if(inspResult == "Inspection Failed") enfScript350_updateCustInspCustList("1st Housing Re-Inspection", AInfo["1st Re-Inspection Scheduled Date"]);
+    }
+    //END script 350
 }
 
 if(inspType == "1st Housing Re-Inspection"){
@@ -125,6 +133,14 @@ if(inspType == "1st Housing Re-Inspection"){
     enfProcessInspResult("1st Housing Re-Inspection", "Inspection Passed", null, null, false, "1st Re-inspection","Inspection Passed");
     enfProcessInspResult("1st Housing Re-Inspection", "Extension - Fee", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - Fee");
     enfProcessInspResult("1st Housing Re-Inspection", "Extension - No Fee", "1st Housing Re-Inspection", "1st Re-Inspection Scheduled Date", false, "1st Re-inspection","Extension - No Fee");
+    //END script 346
+    
+    //Script 350
+    if(ifTracer(appMatch("Enforcement/Housing/Inspection/NA"), 'Housing Inspection Record')){
+        if(matches(inspResult, "Extension - Fee", "Extension - No Fee")) enfScript350_updateCustInspCustList("1st Housing Re-Inspection", AInfo["1st Re-Inspection Scheduled Date"]);
+        if(inspResult == "Inspection Failed") enfScript350_updateCustInspCustList("2nd Housing Re-Inspection", AInfo["2nd Re-Inspection Scheduled Date"]);
+    }
+    //END script 350
 }
 
 if(inspType == "2nd Housing Re-Inspection"){
@@ -133,6 +149,14 @@ if(inspType == "2nd Housing Re-Inspection"){
     enfProcessInspResult("2nd Housing Re-Inspection", "Inspection Passed", null, null, false, "2nd Re-inspection", "Inspection Passed");
     enfProcessInspResult("2nd Housing Re-Inspection", "Extension - Fee", "2nd Housing Re-Inspection", "2nd Re-Inspection Scheduled Date", false, "2nd Re-inspection", "Extension - Fee");
     enfProcessInspResult("2nd Housing Re-Inspection", "No Show", "2nd Housing Re-Inspection", "2nd Re-Inspection Scheduled Date", false, "2nd Re-inspection", "No Show");
+    //END script 346
+    
+    //Script 350
+    if(ifTracer(appMatch("Enforcement/Housing/Inspection/NA"), 'Housing Inspection Record')){
+        if(matches(inspResult, "Extension - Fee", "No Show")) enfScript350_updateCustInspCustList("2nd Housing Re-Inspection", AInfo["2nd Re-Inspection Scheduled Date"]);
+        if(inspResult == "Inspection Failed") enfScript350_updateCustInspCustList("3rd Housing Re-Inspection", AInfo["3rd Re-Inspection Scheduled Date"]);
+    }
+    //END script 350
 }
 
 if(inspType == "3rd Housing Re-Inspection"){
@@ -141,6 +165,14 @@ if(inspType == "3rd Housing Re-Inspection"){
     enfProcessInspResult("3rd Housing Re-Inspection", "Inspection Passed", null, null, false, "3rd Re-inspection", "Inspection Passed");
     enfProcessInspResult("3rd Housing Re-Inspection", "Extension - Fee", "3rd Housing Re-Inspection", "3rd Re-Inspection Scheduled Date", false, "3rd Re-inspection", "Extension - Fee");
     enfProcessInspResult("3rd Housing Re-Inspection", "Extension - No Fee", "3rd Housing Re-Inspection", "3rd Re-Inspection Scheduled Date", false, "3rd Re-inspection", "Extension - No Fee");
+    //END script 346
+    
+    //Script 350
+    if(ifTracer(appMatch("Enforcement/Housing/Inspection/NA"), 'Housing Inspection Record')){
+        if(matches(inspResult, "Extension - Fee", "Extension - No Fee")) enfScript350_updateCustInspCustList("3rd Housing Re-Inspection", AInfo["3rd Re-Inspection Scheduled Date"]);
+        if(inspResult == "Inspection Failed") enfScript350_updateCustInspCustList("4th Housing Re-Inspection", AInfo["4th Re-Inspection Scheduled Date"]);
+    }
+    //END script 350
 }
 
 if(inspType == "4th Housing Re-Inspection"){
@@ -149,6 +181,13 @@ if(inspType == "4th Housing Re-Inspection"){
     enfProcessInspResult("4th Housing Re-Inspection", "Inspection Passed", null, null, false, "4th Re-inspection", "Inspection Passed");
     enfProcessInspResult("4th Housing Re-Inspection", "Extension - Fee", "4th Housing Re-Inspection", "4th Re-Inspection Scheduled Date", false, "4th Re-inspection", "Extension - Fee");
     enfProcessInspResult("4th Housing Re-Inspection", "Extension - No Fee", "4th Housing Re-Inspection", "4th Re-Inspection Scheduled Date", false, "4th Re-inspection", "Extension - No Fee");
+    //END script 346
+    
+    //Script 350
+    if(ifTracer(appMatch("Enforcement/Housing/Inspection/NA"), 'Housing Inspection Record')){
+        if(matches(inspResult, "Extension - Fee", "Extension - No Fee")) enfScript350_updateCustInspCustList("4th Housing Re-Inspection", AInfo["4th Re-Inspection Scheduled Date"]);
+    }
+    //END script 350
 }
 
 if(inspType == "Summons Issuance"){
@@ -239,10 +278,10 @@ if(inspType == "Snow Abatement Order"){
     enfProcessInspResult("Snow Abatement Order", "Completed Service Request", null, null, false, "Abatement Request", "Completed Service Request");
     
     if(inspResult == "Taken and Stored"){
-		
-		
+        
+        
         var currDate = aa.util.parseDate(dateAdd(null, 0));
-		var nextWD = nextWorkDay(dateAdd(null, 2 - 1));
+        var nextWD = nextWorkDay(dateAdd(null, 2 - 1));
         numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWD));
         scheduleInspection("Post Abatement Inspection", numOfDays4Insp);
         resultWorkflowTask("Pre Abatement Photos", "Taken and Stored");
@@ -257,7 +296,7 @@ if(inspType == "Abatement Approval"){
     enfProcessInspResult("Abatement Approval", "Graffiti Abatement Redo", "Post Abatement Inspection - Graffiti Only", 0, false, "Abatement Approval", "Graffiti Abatement Redo");
     
     if(inspResult == "Bill and Photo Approved"){
-		resultWorkflowTask("Abatement Approval", "Bill and Photo Approved");
+        resultWorkflowTask("Abatement Approval", "Bill and Photo Approved");
         var currDate = aa.util.parseDate(dateAdd(null, 0));
         var next10Days = aa.util.parseDate(nextWorkDay(dateAdd(null, 9)));
         var inspDays = days_between(currDate, next10Days);

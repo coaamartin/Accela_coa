@@ -1,21 +1,15 @@
 // Script 350
 function enfScript350_archiveLists(){
-	logDebug("enfScript350_archiveLists() started");
+    logDebug("enfScript350_archiveLists() started");
     try{
         var bldgIv = loadASITable("BUILDING INSPECTION VIOLATIONS");
         var unitIv = loadASITable("UNIT INSPECTION VIOLATIONS");
         var archiveTable = "BDG INSP VIOLATIONS ARCHIVE";
         var unitArchTable = "UNIT INSP VIOLATIONS ARCHIVE";
         var col2Check = "Corrected";
-		var col2Check4Bld = "Area";
-		var col2Chk4Tenant = "Room";
+        var col2Check4Bld = "Area";
+        var col2Chk4Tenant = "Room";
         var val2Check = "Yes";
-        var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
-        // Create a List object to add the value of Column.
-        var columnName = col2Check;
-        var valuesList = aa.util.newArrayList();
-        valuesList.add(val2Check);
-        searchConditionMap.put(columnName, valuesList);
         var capIdModel = aa.cap.getCapIDModel(capId.getID1(), capId.getID2(), capId.getID3()).getOutput();
         
         /*****************************************************************************************/
@@ -49,7 +43,17 @@ function enfScript350_archiveLists(){
         
         var tableName = "BUILDING INSPECTION VIOLATIONS";
         
-        var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIdModel, tableName, searchConditionMap/** Map<columnName, List<columnValue>> **/);
+        var searchConditionMap1 = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
+        // Create a List object to add the value of Column.
+        var columnName = col2Check;
+        var valuesList = aa.util.newArrayList();
+        valuesList.add(val2Check);
+        searchConditionMap1.put(columnName, valuesList);
+        var vl2 = aa.util.newArrayList();
+        vl2.add("No Violation");
+        searchConditionMap1.put(col2Check4Bld, vl2);
+        
+        var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIdModel, tableName, searchConditionMap1/** Map<columnName, List<columnValue>> **/);
         if (appSpecificTableInfo.getSuccess())
         {
             var appSpecificTableModel = appSpecificTableInfo.getOutput().getAppSpecificTableModel();
@@ -105,7 +109,20 @@ function enfScript350_archiveLists(){
         
         var unitViolTn = "UNIT INSPECTION VIOLATIONS";
         
-        var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIdModel, unitViolTn, searchConditionMap/** Map<columnName, List<columnValue>> **/);
+        var searchConditionMap2 = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
+        // Create a List object to add the value of Column.
+        var columnName = col2Check;
+        var valuesList = aa.util.newArrayList();
+        valuesList.add(val2Check);
+        searchConditionMap2.put(columnName, valuesList);
+        var vl3 = aa.util.newArrayList();
+        vl3.add("Tenant Refusal");
+        vl3.add("R. B. R.");
+        vl3.add("Tenant Ill - Pass");
+        vl3.add("No Violation");
+        searchConditionMap2.put(col2Chk4Tenant, vl3);
+        
+        var appSpecificTableInfo = aa.appSpecificTableScript.getAppSpecificTableInfo(capIdModel, unitViolTn, searchConditionMap2/** Map<columnName, List<columnValue>> **/);
         if (appSpecificTableInfo.getSuccess())
         {
             var appSpecificTableModel = appSpecificTableInfo.getOutput().getAppSpecificTableModel();
@@ -137,5 +154,5 @@ function enfScript350_archiveLists(){
         comment("Error on custom function enfScript350_archiveLists(). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
         logDebug("Error on custom function enfScript350_archiveLists(). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
     }
-	logDebug("enfScript350_archiveLists() ended");
+    logDebug("enfScript350_archiveLists() ended");
 }//END enfScript350_archiveLists()
