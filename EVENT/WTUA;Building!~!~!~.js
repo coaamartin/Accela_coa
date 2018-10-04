@@ -30,6 +30,9 @@ licEditExpInfo(null, AInfo["Permit Expiration Date"]);
 |
 /------------------------------------------------------------------------------------------------------*/
 
+logDebug("WTUB;Building/*/*/* ------------------------>> Status check on Event flow");
+include("74_Building_WF_Accept_Plans_Withdrawn");
+
 if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
 	var tasksToCheck = [ "Mechanical Plan Review", "Electrical Plan Review", "Plumbing Plan Review", "Structural Plan Review" ];
 	createAutoInspection(tasksToCheck);
