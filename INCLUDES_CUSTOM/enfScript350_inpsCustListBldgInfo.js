@@ -10,6 +10,7 @@ function enfScript350_inpsCustListBldgInfo(){
         var inspectionInfoTblArr = [];
         var bldgNumbers = [];
         var unitNumbers = [];
+		var unitsFailedArr = [];
         var numberOfBuildings = 0;
         var numberOfUnits = 0;
         var unitsFailed = 0;
@@ -53,7 +54,12 @@ function enfScript350_inpsCustListBldgInfo(){
                 if(matches(roomCol, "Basement:","Bedroom 1:","Bedroom 2:","Bedroom 3:",
                                          "Bathroom 1:","Bathroom 2:","Dining Room:","Entire Unit:",
                                          "Hallway:","Kitchen:","Laundry Room:",
-                                         "Living Room:","Patio:","Stairs:","Sun Room:")) unitsFailed++;
+                                         "Living Room:","Patio:","Stairs:","Sun Room:")) {
+                    if(unitsFailedArr.indexOf(colValue) == -1){ 
+					    unitsFailed++;
+						unitsFailedArr.push(colValue);
+					}
+				}
                 
                 if(matches(roomCol, "Tenant Refusal","R. B. R.","Tenant Ill - Pass")) unitsNoAccess++;
                 if(matches(roomCol, "Dog on Premises","Lockout","Tenant Ill - Re-Inspect")) unitsNoAccRei++;
@@ -61,11 +67,13 @@ function enfScript350_inpsCustListBldgInfo(){
             
             for(eachInsp in inspectionInfoTblArr){
                 var inspRow = inspectionInfoTblArr[eachInsp];
-                inspRow["# of Units Inspected"] = numberOfUnits+ "";
-                inspRow["Units - Passed"]       = unitsNoViol+ "";
-                inspRow["Units - Failed"]       = unitsFailed+ "";
-                inspRow["Units - No Access"]    = unitsNoAccess+ "";
-                inspRow["Units - No Access/Re-Inspect"] = unitsNoAccRei+ "";
+				if(inspRow["Validated"] == "UNCHECKED"){
+                    inspRow["# of Units Inspected"] = numberOfUnits+ "";
+                    inspRow["Units - Passed"]       = unitsNoViol+ "";
+                    inspRow["Units - Failed"]       = unitsFailed+ "";
+                    inspRow["Units - No Access"]    = unitsNoAccess+ "";
+                    inspRow["Units - No Access/Re-Inspect"] = unitsNoAccRei+ "";
+				}
             }
             
             //updateAsiTableRow(inspectionsTable, "# of Units Inspected", numberOfUnits);
