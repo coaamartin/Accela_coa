@@ -117,6 +117,14 @@ if(inspType == "Initial Housing Inspection"){
     enfProcessInspResult("Initial Housing Inspection", "Extension - Fee", "Initial Housing Inspection", "Initial Inspection Scheduled Date", false, "Initial Inspection", "Extension - Fee");
     enfProcessInspResult("Initial Housing Inspection", "Extension - No Fee", "Initial Housing Inspection", "Initial Inspection Scheduled Date", false, "Initial Inspection", "Extension - No Fee");
     enfProcessInspResult("Initial Housing Inspection", "No Show", "Initial Housing Inspection", "Initial Inspection Scheduled Date", false, "Initial Inspection", "No Show");
+	//END Script 346
+	
+	//Script 350
+    if(ifTracer(appMatch("Enforcement/Housing/Inspection/NA"), 'Housing Inspection Record')){
+		if(matches(inspResult, "Extension - Fee", "Extension - No Fee", "No Show")) enfScript350_updateCustInspCustList("Initial Housing Inspection", AInfo["Initial Inspection Scheduled Date"]);
+		if(inspResult == "Inspection Failed") enfScript350_updateCustInspCustList("1st Housing Re-Inspection", AInfo["1st Re-Inspection Scheduled Date"]);
+	}
+	//END script 350
 }
 
 if(inspType == "1st Housing Re-Inspection"){
