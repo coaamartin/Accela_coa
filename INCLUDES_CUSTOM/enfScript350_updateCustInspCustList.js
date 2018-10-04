@@ -30,7 +30,13 @@ function enfScript350_updateCustInspCustList(){
         }
         
         var row = [{colName: 'Inspection Type', colValue: iType},
-                   {colName: 'Inspection Date', colValue: formatDteStringToMMDDYYYY(isDate)}];
+                   {colName: 'Inspection Date', colValue: formatDteStringToMMDDYYYY(isDate)},
+                   {colName: '# of Bldgs Inspected', colValue: "0"},
+                   {colName: '# of Units Inspected', colValue: "0"},
+                   {colName: 'Units - Passed', colValue: "0"},
+                   {colName: 'Units - Failed', colValue: "0"},
+                   {colName: 'Units - No Access', colValue: "0"},
+                   {colName: 'Units - No Access/Re-Inspect', colValue: "0"}];
         
         //if(!updateAsiTableRow(inspsTable, "Inspection Date", formatDteStringToMMDDYYYY(isDate), { 
         //    capId: capId,
