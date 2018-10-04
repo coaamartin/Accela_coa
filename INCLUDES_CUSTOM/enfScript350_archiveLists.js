@@ -7,6 +7,7 @@ function enfScript350_archiveLists(){
         var archiveTable = "BDG INSP VIOLATIONS ARCHIVE";
         var unitArchTable = "UNIT INSP VIOLATIONS ARCHIVE";
         var col2Check = "Corrected";
+		var col2Check4Bld = "Area";
 		var col2Chk4Tenant = "Room";
         var val2Check = "Yes";
         var searchConditionMap = aa.util.newHashMap(); // Map<columnName, List<columnValue>>
@@ -25,7 +26,7 @@ function enfScript350_archiveLists(){
         for(each in bldgIv) {
             var aRow = bldgIv[each];
             
-            if(aRow[col2Check] == val2Check || matches(aRow[col2Chk4Tenant], "Tenant Refusal","R. B. R.","Tenant Ill - Pass")){
+            if(aRow[col2Check] == val2Check || aRow[col2Check4Bld] == "No Violation")){
                 var rowFieldArray = [];
                 var fieldRow = aa.util.newHashMap();
                 fieldRow.put("Inspection Type", inspType);
@@ -83,7 +84,7 @@ function enfScript350_archiveLists(){
         for(each in unitIv) {
             var aRow = unitIv[each];
             
-            if(aRow[col2Check] == val2Check){
+            if(aRow[col2Check] == val2Check || matches(aRow[col2Chk4Tenant], "Tenant Refusal","R. B. R.","Tenant Ill - Pass", "No Violation")){
                 var rowFieldArray = [];
                 var fieldRow = aa.util.newHashMap();
                 fieldRow.put("Inspection Type", inspType);
