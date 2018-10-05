@@ -49,7 +49,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
       OhNoBadMatch = true;
     }       
 
-    if (!OhNoBadMatch)       
+    if !(OhNoBadMatch)       
     {
 
        var thealtid = capId.getCustomID();
