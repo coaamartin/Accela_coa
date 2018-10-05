@@ -28,10 +28,10 @@ if("Pre Court Action".equals(inspType)){
 	    }
 	    else{
 	        if (matches(inspResult,"3 - File to Court Liaison")){
-	        	if (inspId && currInspStatus != "2 - Summons to Court Liaiso" ) {
+	        	if (inspId && currInspStatus != "2 - Summons to Court Liaison" ) {
 	        		cancel = true;
 	        		showMessage = true;
-	        		comment("Inspection can't be resulted with this status.   Previous status must be '2 - Summons to Court Liaiso'");
+	        		comment("Inspection can't be resulted with this status.   Previous status must be '2 - Summons to Court Liaison'");
 	        	}
 	        }
 			else{
