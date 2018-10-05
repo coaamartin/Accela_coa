@@ -27,7 +27,27 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
     if (Let1 !== Let1a) 
     {
       OhNoBadMatch = true;
-    }     
+    }  
+
+    if (Let2 !== Let2a) 
+    {
+      OhNoBadMatch = true;
+    }   
+    
+    if (Let3 !== Let3a) 
+    {
+      OhNoBadMatch = true;
+    }  
+
+    if (Let4 !== Let4a) 
+    {
+      OhNoBadMatch = true;
+    }   
+    
+    if (Let5 !== Let5a) 
+    {
+      OhNoBadMatch = true;
+    }       
 
 
 }
