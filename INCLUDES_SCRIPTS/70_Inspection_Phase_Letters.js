@@ -74,7 +74,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
     {
       cancel = true;
       showMessage = true;
-      logDebug("<h2 style='background-color:rgb(255, 0, 0);'>Hello JP .. ahhh here we go.</h2>");
+      logDebug("<h2 style='background-color:rgb(255, 0, 0);'>YIKES .. Required Documents do NOT match .. thanks for playing </h2>");
     }    
 
 
