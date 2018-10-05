@@ -19,8 +19,6 @@ Sample Call : createChildWaterUtilityPermitRecords()
 
 */
 
-include("70_Inspection_Phase_Letters");
-
 createChildWaterUtilityPermitRecords();
 script207_SetTotalSqFtOnFireRecord();
 
