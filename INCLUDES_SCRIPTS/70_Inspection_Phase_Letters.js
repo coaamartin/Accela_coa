@@ -9,54 +9,71 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #70 - 70_Inspect
 
 if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO") 
 {
-
-    //Parsed from #11
-
-    //get some facts about this application
-    //var asi_isprojectphased = getAppSpecific("Is this project going to be phased?");
-    //var neededdocument = "Phase Work Plan";
-
-    //has the needed document been uploaded?
-
-    var thealtid = capId.getCustomID();
-    var capIdobject = aa.cap.getCapID(thealtid).getOutput();
-    var documentsobject = aa.document.getCapDocumentList(capIdobject, "ADMIN");
-    if (documentsobject.getSuccess())
-    {
-        var listofdocuments = documentsobject.getOutput();
-        for (var i in listofdocuments)
-        {
-            var doccategory = listofdocuments[i]["docCategory"];
-            
-            logDebug("JMP JMP JMP ------------------------------------->> Inside loop of listofdocuments: " + doccategory + "");
-            //if (doccategory == neededdocument)
-            //{
-            //    docuploaded = true;
-            //}           
-        }
-    }           
-    
+   
+    var OhNoBadMatch = false;
+   
     var Let1 = getAppSpecific("Waterproofing Letter Required") + "";
     var Let2 = getAppSpecific("ILC Letter Required") + "";
-    var Let3 = getAppSpecific("Foundation Letter Required ") + "";
+    var Let3 = getAppSpecific("Foundation Letter Required") + "";
     var Let4 = getAppSpecific("Footing - Pier - Cassion Letter Required") + "";
     var Let5 = getAppSpecific("Drain Letter Required") + "";
-      
-      
-      
-      //Waterproofing Letter Required
-      //ILC Letter Required
-      //Foundation Letter Required  
-      //Footing - Pier - Cassion Letter Required
-      //Drain Letter Required
-
-
-    //raise a message if necessary
-    //if (asi_isprojectphased == "Yes" && !docuploaded)
     
-   cancel = true;
-   showMessage = true;
-   logDebug("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There is not a Certificate of Occupancy required on this record.</h2>");
-
+    var Let1a = getAppSpecific("Waterproofing Letter Received") + "";
+    var Let2a = getAppSpecific("ILC Letter Received") + "";
+    var Let3a = getAppSpecific("Foundation Letter Received") + "";
+    var Let4a = getAppSpecific("Footing - Pier - Cassion Letter Received") + "";
+    var Let5a = getAppSpecific("Drain Letter Received") + "";
     
+    if Let1 !== Let1a 
+    {
+      OhNoBadMatch = true;
+    }  
+    
+    if Let2 !== Let2a 
+    {
+      OhNoBadMatch = true;
+    }   
+    
+    if Let3 !== Let3a 
+    {
+      OhNoBadMatch = true;
+    }  
+
+    if Let4 !== Let4a 
+    {
+      OhNoBadMatch = true;
+    }   
+    
+    if Let5 !== Let5a 
+    {
+      OhNoBadMatch = true;
+    }       
+
+    if (!OhNoBadMatch)       
+    {
+
+       var thealtid = capId.getCustomID();
+       var capIdobject = aa.cap.getCapID(thealtid).getOutput();
+       var documentsobject = aa.document.getCapDocumentList(capIdobject, "ADMIN");
+       if (documentsobject.getSuccess())
+       {
+           var listofdocuments = documentsobject.getOutput();
+           for (var i in listofdocuments)
+           {
+               var doccategory = listofdocuments[i]["docCategory"];
+               
+               logDebug("JMP JMP JMP ------------------------------------->> Inside loop of listofdocuments: " + doccategory + "");
+ 
+           }
+       }           
+
+   
+    }
+    
+    if (OhNoBadMatch)
+    {
+      cancel = true;
+      showMessage = true;
+      logDebug("<h2 style='background-color:rgb(255, 0, 0);'>Hello JP .. ahhh here we go.</h2>");
+    }
 }
