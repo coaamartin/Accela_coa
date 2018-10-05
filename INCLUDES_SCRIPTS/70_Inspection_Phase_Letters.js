@@ -74,7 +74,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
     {
       cancel = true;
       showMessage = true;
-      logDebug("<h2 style='background-color:rgb(255, 0, 0);'>Issue with matching documents within Info Fields where documents received do not match documents required.  Please update and try again </h2>");
+      logDebug("<h2 style='background-color:rgb(255, 0, 0);'>Issue exists in Info Fields where documents received do not match documents required.  Please update and try again .. </h2>");
       
     }    
 
