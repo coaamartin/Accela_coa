@@ -282,7 +282,7 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 	var readyCount = 0;
 	var nextInspDate = getAppSpecific("Next Inspection Date");
 	for (i in cycleInspections) {
-		if (cycleInspections[i].getInspectionStatus == "Passed - Notification Sent") {
+		if (cycleInspections[i].getInspectionStatus() == "Passed - Notification Sent") {
 			readyCount++;
 		}
 	}
