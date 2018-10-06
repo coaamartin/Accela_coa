@@ -22,20 +22,6 @@ function getMasterScriptText(vScriptName)
 		}
 }
 
-/*function getScriptText(e) {
-	var t = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		t = arguments[1];
-	e = e.toUpperCase();
-	var n = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var r = n.getScriptByPK(t, e, "ADMIN");
-		return r.getScriptText() + ""
-	} catch (i) {
-		return ""
-	}
-}*/
-
 function getScriptText(vScriptName)
 {
     var servProvCode = aa.getServiceProviderCode();
@@ -53,8 +39,6 @@ function getScriptText(vScriptName)
 }
 
 var SCRIPT_VERSION = 3.0;
-//eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-//eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getMasterScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getMasterScriptText("INCLUDES_CUSTOM"));
@@ -221,7 +205,7 @@ var bldgInspCount = 0;
 var bldgInspId;
 var bldgInspResult;
 var bldgInspResultDate;
-var bldgInspType;
+var bldgInspType = "MJ Building Inspections";
 var bldgInspSchedDate;
 
 	for (i in cycleInspections) {
@@ -246,13 +230,17 @@ var bldgInspSchedDate;
 				bldgInspId = cycleInspections[i].getIdNumber();
 				bldgInspResult = cycleInspections[i].getInspectionStatus();
 				bldgInspResultDate = cycleInspections[i].getInspectionDate();
-				bldgInspType = "MJ Building Inspection";
 				bldgInspSchedDate = cycleInspections[i].getScheduledDate();
 			} else {
 				logDebug2("Sending notification for Inspection Type " + cycleInspections[i].getInspectionType());
 				
 				//send email with report attachment
 				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");
+				if (cycleInspections[i].getInspectionStatus() == "Passed") {
+					cycleInspections[i].setInspectionStatus("Passed - Notified");
+				} else {
+					cycleInspections[i].setInspectionStatus("Passed - Minor Violations - Notified");
+				}
 			}
 		}
 	}
