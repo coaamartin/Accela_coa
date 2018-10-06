@@ -123,13 +123,18 @@ function getCycleInspections(capId) {
 	
 	var inspWithMaxId = null;
 	
+	
+	
+	
 	logDebug2("Begin Cycle Date: " + beginCycleDate);
 	logDebug2("Next Inspection Date: " + nextInspDate);
 	
 	
 	//find inspections within this quarterly cycle
 	for (i in capInspections) {
-		if (capInspections[i].getScheduledDate() < nextInspDate && capInspections[i].getScheduledDate() >= beginCycleDate) {
+		var inspSchedDate = capInspections[i].getInspectionDate();
+		inspSchedDate = convertDate(inspSchedDate);
+		if (inspSchedDate < nextInspDate && inspSchedDate >= beginCycleDate) {
 			logDebug2("We aren't getting here, are we...");
 			//if multiple scheduled of same type, make sure to get last one (maxID)
 			if (inspWithMaxId == null || (inspWithMaxId.getInspectionType() == capInspections[i].getInspectionType() && inspWithMaxId.getIdNumber() < capInspections[i].getIdNumber())) {
