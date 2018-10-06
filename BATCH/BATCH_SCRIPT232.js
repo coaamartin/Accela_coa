@@ -163,16 +163,16 @@ function scheduleNextInspections(cycleInspections, capId) {
 			var inspector = cycleInspections[i].getInspector();
 			var inspType = cycleInspections[i].getInspectionType();
 			var nextInspDate = getAppSpecific("Next Inspection Date");
-			scheduleInspectDate(inspType, nextInspDate);
+			scheduleInspectDate(inspType, nextInspDate, inspector);
 			
 			//get sequence ID for most recently created inspection and assign to inspector
-			var lastInspectionObj = getLastCreatedInspection(capId, inspType, "Scheduled");
+			/*var lastInspectionObj = getLastCreatedInspection(capId, inspType, "Scheduled");
 			if (lastInspectionObj == null) {
 				logDebug2("Failed to find most recent inspection of type " + inspType);
 			}
 
 			var lastInspectionSeq = lastInspectionObj.getIdNumber();
-			assignInspection(lastInspectionSeq, inspector);
+			assignInspection(lastInspectionSeq, inspector);*/
 		}
 	}
 }
