@@ -98,11 +98,6 @@ for (c in capIDList) {
 	//skip record if status is not 'Active'
 	if (capStatus == "Active") {
 		var cycleInspections = getCycleInspections(capId);
-		
-		//debug text                            <<<<<----------------------------------
-		for (j in cycleInspections) {
-			logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
-		}
 		if (cycleInspections) {
 			scheduleNextInspections(cycleInspections);
 			sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel);
@@ -192,8 +187,6 @@ function scheduleNextInspections(cycleInspections) {
 				scheduleInspectDate(inspType, nextInspDate, inspector);
 				inspCounter++;
 			}
-			
-			
 		}
 	}
 	if (inspCounter != 0) {
@@ -215,7 +208,6 @@ var bldgInspSchedDate;
 
 	for (i in cycleInspections) {
 		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
-		
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", recordCapScriptModel.getCapModel().getAltID());
 			addParameter(eParams, "$$recordAlias$$", recordCapScriptModel.getCapModel().getCapType().getAlias());
@@ -288,6 +280,9 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 	for (i in cycleInspections) {
 		if (cycleInspections[i].getInspectionStatus() == "Passed - Notification Sent") {
 			readyCount++;
+		} else if (dateDiff(cycleInspections[i].getScheduledDate(), nextInspDate) <= 7) {
+			logDebug2("dateDiff: " + dateDiff(cycleInspections[i].getScheduledDate(), nextInspDate)); //debug text, remove eventually                           <<<<<----------------------------------
+			readyCount++;
 		}
 	}
 	if (readyCount == 8) {
@@ -304,8 +299,7 @@ function getInspectorByInspID(iNumber) {
     if (!iObjResult.getSuccess()) {
         logDebug2("**WARNING retrieving inspection " + iNumber + " : " + iObjResult.getErrorMessage());
         return false;
-    }
-    
+    }    
     iObj = iObjResult.getOutput();
     inspUserObj = aa.person.getUser(iObj.getInspector().getFirstName(),iObj.getInspector().getMiddleName(),iObj.getInspector().getLastName()).getOutput();
     return inspUserObj.getUserID();
