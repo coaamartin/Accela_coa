@@ -23,10 +23,7 @@ if (appMatch("Licenses/Marijuana/*/Application")) {
 failedMJInspectionAutomation(vCapType);	
 
 //check for passed MJ inspections
-passedMJInspectionAutomation(vCapType);
+//passedMJInspectionAutomation(vCapType);
 
 //check for extension requests on MJ inspections
 requestExtensionMJInspection(vCapType);
-
-//debug for testing purposes
-//aa.sendMail("noreply@accela.com", "evontrapp@etechconsultingllc.com", "", "DEBUG", debug)
