@@ -72,6 +72,7 @@ for (c in capIDList) {
 		continue;
 	}
 	tmpCap = tmpCap.getOutput();
+	var recordCapScriptModel = tmpCap.getOutput();
 	tmpCap = tmpCap.getCapModel();
 	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 	
@@ -89,7 +90,7 @@ for (c in capIDList) {
 		}
 		
 		scheduleNextInspections(cycleInspections);
-		sendNotificationsPassedInsp(cycleInspections);
+		sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel);
 		
 	} else {
 		logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
@@ -180,7 +181,7 @@ function scheduleNextInspections(cycleInspections) {
 
 
 //send notifications for passed inspections
-function sendNotificationsPassedInsp(cycleInspections) {
+function sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel) {
 var bldgInspCount = 0;
 var bldgInspId;
 var bldgInspResult;
@@ -192,9 +193,9 @@ var bldgInspSchedDate;
 		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
 		
 			var eParams = aa.util.newHashtable();
-			addParameter(eParams, "$$altID$$", aa.cap.getCapModel().getAltID());
-			addParameter(eParams, "$$recordAlias$$", aa.cap.getCapType().getAlias());
-			addParameter(eParams, "$$recordStatus$$", aa.cap.getCapStatus());
+			addParameter(eParams, "$$altID$$", recordCapScriptModel.getCapModel().getAltID());
+			addParameter(eParams, "$$recordAlias$$", recordCapScriptModel.getCapModel().getCapType().getAlias());
+			addParameter(eParams, "$$recordStatus$$", recordCapScriptModel.getCapModel().getCapStatus());
 			addParameter(eParams, "$$inspId$$", cycleInspections[i].getIdNumber());
 			addParameter(eParams, "$$inspResult$$", cycleInspections[i].getInspectionStatus());
 			addParameter(eParams, "$$inspResultDate$$", cycleInspections[i].getInspectionDate());
@@ -223,9 +224,9 @@ var bldgInspSchedDate;
 	
 	if (bldgInspCount == 5) {
 		var eParams = aa.util.newHashtable();
-		addParameter(eParams, "$$altID$$", aa.cap.getCapModel().getAltID());
-		addParameter(eParams, "$$recordAlias$$", aa.cap.getCapType().getAlias());
-		addParameter(eParams, "$$recordStatus$$", aa.cap.getCapStatus());
+		addParameter(eParams, "$$altID$$", recordCapScriptModel.getCapModel().getAltID());
+		addParameter(eParams, "$$recordAlias$$", recordCapScriptModel.getCapModel().getCapType().getAlias());
+		addParameter(eParams, "$$recordStatus$$", recordCapScriptModel.getCapModel().getCapStatus());
 		addParameter(eParams, "$$inspId$$", bldgInspId);
 		addParameter(eParams, "$$inspResult$$", bldgInspResult);
 		addParameter(eParams, "$$inspResultDate$$", bldgInspResultDate);
