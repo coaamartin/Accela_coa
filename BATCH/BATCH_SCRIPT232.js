@@ -69,6 +69,7 @@ if (!capIDList.getSuccess()) {
 }
 //ATTN, this will need to be updated to accomodate MJ Store                           <<<<<----------------------------------
 var daysToAdd = 91;
+var nextInspDate = getAppSpecific("Next Inspection Date");
 var vIsMJRetailStoreLicense;
 var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 	"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
@@ -132,7 +133,7 @@ function getCycleInspections(capId) {
 	var returnArray = [];
 	
 	//establish date boundaries for this cycle
-	var nextInspDate = getAppSpecific("Next Inspection Date");
+	//var nextInspDate = getAppSpecific("Next Inspection Date");
 	if (nextInspDate == null || nextInspDate == "") {
 			logDebug2("<Font Color=RED> Skipping record; Next Inpsection Date field is empty<Font Color=BLACK>");
 			return false;
@@ -239,9 +240,6 @@ var bldgInspSchedDate;
 				//update inspection status to reflect that notification was sent
 				cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
 				aa.inspection.editInspection(cycleInspections[i]);
-				//var tmpInspObj = cycleInspections[i].getInspection();
-				//aa.inspection.resultInspection(recordCapScriptModel, cycleInspections[i].getIdNumber().toString(), "Passed - Notification Sent", cycleInspections[i].getInspectionDate(), cycleInspections[i].getInspectionComments(), "");
-				//resultInspection(inspType, inspStatus, resultDate, resultComment)
 			}
 		}
 	}
@@ -276,6 +274,21 @@ var bldgInspSchedDate;
 		}
 	}
 }
+
+
+//checks to see if all eight inspections have passed during the quarterly cycle and updates next inspection date accordingly
+function updateNextInspectionDate(cycleInspections) {
+	var readyCount = 0;
+	for (i in cycleInspections) {
+		if (cycleInspections[i].getInspectionStatus == "Passed - Notification Sent") {
+			readyCount++;
+		}
+	}
+	if (readyCount == 8) {
+		editAppSpecific("Next Inspection Date", dateAdd(nextInspDate, daysToAdd));
+	}
+}
+
 
 
 //Get inspector by inspection ID
