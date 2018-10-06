@@ -76,13 +76,18 @@ for (c in capIDList) {
 	
 	//get record status
 	capStatus = tmpCap.getCapStatus();
-	logDebug2("<Font Color=BLACK><br>Record status: " + capStatus);
+	logDebug2("<Font Color=BLACK>Record status: " + capStatus);
 	
 	//skip record if status is not 'Active'
 	if (capStatus == "Active") {
-	
+		var cycleInspections = getCycleInspections(tmpCap);
+		
+		//debug text
+		for (j in cycleInspections) {
+			logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
+		}
 	} else {
-		logDebug2("<br>Skipping record; status must be 'Active'");
+		logDebug2("Skipping record; status must be 'Active'");
 		continue;
 	}
 
@@ -90,9 +95,52 @@ for (c in capIDList) {
 }
 
 
+//formats date in MM/DD/YYYY format
+function formatDateX(scriptDate) {
+	if(scriptDate != null)
+		{
+		var ret = "";
+		ret += scriptDate.getMonth().toString().length == 1 ? "0" + scriptDate.getMonth() : scriptDate.getMonth();
+		ret += "/";
+		ret += scriptDate.getDayOfMonth().toString().length == 1 ? "0" + scriptDate.getDayOfMonth() : scriptDate.getDayOfMonth();
+		ret += "/";
+		ret += scriptDate.getYear();
+		return ret;
+		}
+}
 
+//returns object of inspections from current quarterly cycle
+function getCycleInspections(capId) {
+	//get inspections for this cap
+	var capInspections = aa.inspection.getInspections(capId);
+	if (!capInspections.getSuccess()) {
+		logDebug2("Failed to retrieve inspections from Record " + aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID());
+		return false;
+	}
+	capInspections = capInspections.getOutput();
 
+	var returnArray = [];
+	
+	var nextInspDate = getAppSpecific("Next Inspection Date");
+	nextInspDate = new Date(nextInspDate);
+	var beginCycleDate = nextInspDate - 91;
+	
+	//find inspections within this quarterly cycle
+	for (i in capInspections) {
+		if (capInspections[i].getScheduledDate() < nextInspDate && capInspections[i]..getScheduledDate() >= beginCycleDate) {
 
+			returnArray.push(capInspections[i]);
+		
+			//if multiple scheduled of same type, make sure to get last one (maxID)
+			//this effects calculating WorkLoad (assignSameInspector method)
+			//if (schedInspWithMaxId == null || schedInspWithMaxId.getIdNumber() < capInspections[i].getIdNumber()) {
+			//	schedInspWithMaxId = capInspections[i];
+			//}
+			//return capInspections[i];
+		}//last sched inspection
+	}//for all cap inspections
+	return capInspections;
+}
 
 
 
