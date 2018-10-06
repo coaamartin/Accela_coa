@@ -134,8 +134,10 @@ function getCycleInspections(capId) {
 			//if multiple scheduled of same type, make sure to get last one (maxID)
 			if (inspWithMaxId == null || (inspWithMaxId.getInspectionType() == capInspections[i].getInspectionType() && inspWithMaxId.getIdNumber() < capInspections[i].getIdNumber())) {
 				inspWithMaxId = capInspections[i];
+				returnArray.push(inspWithMaxId);
+			} else {
+				returnArray.push(capInspections[i];
 			}
-			returnArray.push(inspWithMaxId);
 		}//last sched inspection
 	}//for all cap inspections
 	return returnArray;
