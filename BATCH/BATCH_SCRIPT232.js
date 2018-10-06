@@ -6,7 +6,23 @@ Functional Area : Batch Job
 
 */
 
-function getScriptText(e) {
+function getMasterScriptText(vScriptName)
+{
+    var servProvCode = aa.getServiceProviderCode();
+    if (arguments.length > 1) servProvCode = arguments[1]; // use different serv prov code
+    vScriptName = vScriptName.toUpperCase();    
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    try {
+        var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(),vScriptName);
+        return emseScript.getScriptText() + ""; 
+        } 
+	catch(err)
+		{
+		return "";
+		}
+}
+
+/*function getScriptText(e) {
 	var t = aa.getServiceProviderCode();
 	if (arguments.length > 1)
 		t = arguments[1];
@@ -18,11 +34,30 @@ function getScriptText(e) {
 	} catch (i) {
 		return ""
 	}
+}*/
+
+function getScriptText(vScriptName)
+{
+    var servProvCode = aa.getServiceProviderCode();
+    if (arguments.length > 1) servProvCode = arguments[1]; // use different serv prov code
+    vScriptName = vScriptName.toUpperCase();    
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    try {
+        var emseScript = emseBiz.getScriptByPK(servProvCode,vScriptName,"ADMIN");
+        return emseScript.getScriptText() + ""; 
+        } 
+	catch(err)
+		{
+        return "";
+		}
 }
 
 var SCRIPT_VERSION = 3.0;
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+//eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+//eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getMasterScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getMasterScriptText("INCLUDES_CUSTOM"));
 
 //define batch job parameters
 var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
