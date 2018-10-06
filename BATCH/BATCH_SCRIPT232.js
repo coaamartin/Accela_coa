@@ -237,8 +237,8 @@ var bldgInspSchedDate;
 				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");				
 				
 				//update inspection status to reflect that notification was sent
-				var tmpInspObj = cycleInspections[i].getInspection();
-				tmpInspObj.resultInspection(recordCapScriptModel, cycleInspections[i].getIdNumber(), "Passed - Notification Sent", cycleInspections[i].getInspectionDate(), getInspectionComments(), "");
+				//var tmpInspObj = cycleInspections[i].getInspection();
+				aa.inspection.resultInspection(recordCapScriptModel, cycleInspections[i].getIdNumber(), "Passed - Notification Sent", cycleInspections[i].getInspectionDate(), getInspectionComments(), "");
 			}
 		}
 	}
