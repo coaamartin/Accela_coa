@@ -192,9 +192,9 @@ var bldgInspSchedDate;
 		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
 		
 			var eParams = aa.util.newHashtable();
-			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
-			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+			addParameter(eParams, "$$altID$$", aa.cap.getCapModel().getAltID());
+			addParameter(eParams, "$$recordAlias$$", aa.cap.getCapType().getAlias());
+			addParameter(eParams, "$$recordStatus$$", aa.cap.getCapStatus());
 			addParameter(eParams, "$$inspId$$", cycleInspections[i].getIdNumber());
 			addParameter(eParams, "$$inspResult$$", cycleInspections[i].getInspectionStatus());
 			addParameter(eParams, "$$inspResultDate$$", cycleInspections[i].getInspectionDate());
