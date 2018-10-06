@@ -71,10 +71,6 @@ if (!capIDList.getSuccess()) {
 var daysToAdd = 91;
 var nextInspDate = getAppSpecific("Next Inspection Date");
 var vIsMJRetailStoreLicense;
-var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
-	"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
-	"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
-
 vIsMJRetailStoreLicense = false;
 vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/*/License");
 
@@ -95,7 +91,7 @@ for (c in capIDList) {
 	tmpCap = tmpCap.getCapModel();
 	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 	
-	if (appMatch("Licenses/Marijuana/*/License")) {
+	if (appMatch("Licenses/Marijuana/*/License", capId)) {
 		//get record status
 		capStatus = tmpCap.getCapStatus();
 		logDebug2("<Font Color=BLACK>Record status: " + capStatus);
