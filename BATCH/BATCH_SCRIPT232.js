@@ -82,10 +82,13 @@ for (c in capIDList) {
 	if (capStatus == "Active") {
 		var cycleInspections = getCycleInspections(capId);
 		
-		//debug text
+		//debug text                            <<<<<----------------------------------
 		for (j in cycleInspections) {
 			logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
 		}
+		
+		scheduleNextInspections(cycleInspections);
+		
 	} else {
 		logDebug2("Skipping record; status must be 'Active'");
 		continue;
@@ -97,7 +100,8 @@ for (c in capIDList) {
 
 //returns object of inspections from current quarterly cycle
 function getCycleInspections(capId) {
-	//get inspections for this cap
+	
+	//get all inspections for this cap
 	var capInspections = aa.inspection.getInspections(capId);
 	if (!capInspections.getSuccess()) {
 		logDebug2("Failed to retrieve inspections from Record " + aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID());
@@ -105,9 +109,11 @@ function getCycleInspections(capId) {
 	}
 	capInspections = capInspections.getOutput();
 	var returnArray = [];
+	
+	//establish date boundaries
 	var nextInspDate = getAppSpecific("Next Inspection Date");
 	if (nextInspDate == null || nextInspDate == "") {
-			logDebug2("Skipping record, Next Inpsection Date field is empty");
+			logDebug2("Skipping record; Next Inpsection Date field is empty");
 			return false;
 	} else {
 		nextInspDate = new Date(nextInspDate);
@@ -121,30 +127,18 @@ function getCycleInspections(capId) {
 	beginCycleDate.setSeconds(0);
 	beginCycleDate = new Date(beginCycleDate);
 	
-	var inspWithMaxId = null;
-	
-	
-	
-	
+	//debug text, remove eventually                           <<<<<----------------------------------
 	logDebug2("Begin Cycle Date: " + beginCycleDate);
 	logDebug2("Next Inspection Date: " + nextInspDate);
 	
-	
-	//find inspections within this quarterly cycle
+	//filter to inspections within this quarterly cycle
 	for (i in capInspections) {
 		var inspSchedDate = capInspections[i].getScheduledDate();
 		inspSchedDate = convertDate(inspSchedDate);
 		if (inspSchedDate < nextInspDate && inspSchedDate >= beginCycleDate) {
-			//if multiple scheduled of same type, make sure to get last one (maxID)
-			//if (inspWithMaxId == null || (inspWithMaxId.getInspectionType() == capInspections[i].getInspectionType() && inspWithMaxId.getIdNumber() < capInspections[i].getIdNumber())) {
-			//	inspWithMaxId = capInspections[i];
-			//	returnArray.push(inspWithMaxId);
-			//} else {
-			//	returnArray.push(capInspections[i]);
-			//}
 			
-			var pos = -1;
-							
+			//if multiple inspections of the same type, add the most recent
+			var pos = -1;				
 			for (p in returnArray) {
 				pos = returnArray[p].getInspectionType().indexOf(capInspections[i].getInspectionType());
 				if (pos == 0) {
@@ -157,13 +151,27 @@ function getCycleInspections(capId) {
 			} else {
 				returnArray[pos] = capInspections[i];
 			}
-			
-			
-			
-		}//last sched inspection
-	}//for all cap inspections
+		}
+	}
 	return returnArray;
 }
+
+//schedules inspections that have a status of "Passed" or "Passed - Minor Violations"
+function scheduleNextInspections(cycleInspections) {
+	for (i in cycleInspections) {
+		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
+			var inspType = cycleInspections[i].getInspectionType();
+			var nextInspDate = getAppSpecific("Next Inspection Date");
+			scheduleInspectDate(inspType, nextInspDate);
+		}
+	}
+}
+
+
+
+
+
+
 
 
 
