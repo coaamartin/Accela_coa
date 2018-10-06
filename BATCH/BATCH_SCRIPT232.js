@@ -241,7 +241,7 @@ var bldgInspSchedDate;
 			addParameter(reportParams, "InspActNumber", cycleInspections[i].getIdNumber());
 
 			//only send one notification for building inspections when all five building types have been passed
-			if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections")) {
+			if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
 				bldgInspCount++;
 				bldgInspId = cycleInspections[i].getIdNumber();
 				bldgInspResult = cycleInspections[i].getInspectionStatus();
