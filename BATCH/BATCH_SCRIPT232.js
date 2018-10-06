@@ -127,6 +127,11 @@ function getCycleInspections(capId) {
 	
 	//find inspections within this quarterly cycle
 	for (i in capInspections) {
+		if (nextInspDate == null || nextInspDate == "") {
+			logDebug2("Skipping record, Next Inpsection Date field is empty");
+			return false;
+		}
+		
 		if (capInspections[i].getScheduledDate() < nextInspDate && capInspections[i]..getScheduledDate() >= beginCycleDate) {
 
 			returnArray.push(capInspections[i]);
