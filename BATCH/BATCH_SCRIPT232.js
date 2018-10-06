@@ -72,7 +72,7 @@ for (c in capIDList) {
 		continue;
 	}
 	tmpCap = tmpCap.getOutput();
-	var recordCapScriptModel = tmpCap.getOutput();
+	var recordCapScriptModel = tmpCap;
 	tmpCap = tmpCap.getCapModel();
 	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 	
