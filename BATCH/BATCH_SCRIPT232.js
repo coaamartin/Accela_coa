@@ -80,7 +80,7 @@ for (c in capIDList) {
 	
 	//skip record if status is not 'Active'
 	if (capStatus == "Active") {
-		var cycleInspections = getCycleInspections(tmpCap);
+		var cycleInspections = getCycleInspections(capId);
 		
 		//debug text
 		for (j in cycleInspections) {
