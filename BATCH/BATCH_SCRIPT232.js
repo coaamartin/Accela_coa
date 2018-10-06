@@ -238,7 +238,7 @@ var bldgInspSchedDate;
 				
 				//update inspection status to reflect that notification was sent
 				//var tmpInspObj = cycleInspections[i].getInspection();
-				aa.inspection.resultInspection(recordCapScriptModel, cycleInspections[i].getIdNumber(), "Passed - Notification Sent", cycleInspections[i].getInspectionDate(), getInspectionComments(), "");
+				aa.inspection.resultInspection(recordCapScriptModel, cycleInspections[i].getIdNumber(), "Passed - Notification Sent", cycleInspections[i].getInspectionDate(), cycleInspections[i].getInspectionComments(), "");
 			}
 		}
 	}
