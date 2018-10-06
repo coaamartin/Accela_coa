@@ -187,8 +187,18 @@ function scheduleNextInspections(cycleInspections) {
 			var inspector = getInspectorByInspID(cycleInspections[i].getIdNumber());
 			var inspType = cycleInspections[i].getInspectionType();
 			var nextInspDate = getAppSpecific("Next Inspection Date");
-			scheduleInspectDate(inspType, nextInspDate, inspector);
-			inspCounter++;
+			
+			if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
+				scheduleInspectDate(inspType, nextInspDate, inspector);
+				cycleInspections[i].setInspectionStatus("Passed - Notification Pending");
+				aa.inspection.editInspection(cycleInspections[i]);
+				inspCounter++;
+			} else {
+				scheduleInspectDate(inspType, nextInspDate, inspector);
+				inspCounter++;
+			}
+			
+			
 		}
 	}
 	if (inspCounter != 0) {
