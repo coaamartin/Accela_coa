@@ -132,7 +132,7 @@ function getCycleInspections(capId) {
 	
 	//find inspections within this quarterly cycle
 	for (i in capInspections) {
-		var inspSchedDate = capInspections[i].getInspectionDate();
+		var inspSchedDate = capInspections[i].getScheduledDate();
 		inspSchedDate = convertDate(inspSchedDate);
 		if (inspSchedDate < nextInspDate && inspSchedDate >= beginCycleDate) {
 			logDebug2("We aren't getting here, are we...");
