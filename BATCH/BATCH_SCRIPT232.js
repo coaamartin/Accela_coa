@@ -235,12 +235,9 @@ var bldgInspSchedDate;
 				logDebug2("Sending notification for Inspection Type " + cycleInspections[i].getInspectionType());
 				
 				//send email with report attachment
-				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");
-				if (cycleInspections[i].getInspectionStatus() == "Passed") {
-					cycleInspections[i].setInspectionStatus("Passed - Notified");
-				} else {
-					cycleInspections[i].setInspectionStatus("Passed - Minor Violations - Notified");
-				}
+				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");				
+				cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
+
 			}
 		}
 	}
