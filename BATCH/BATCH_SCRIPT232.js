@@ -163,6 +163,7 @@ function scheduleNextInspections(cycleInspections, capId) {
 			var inspector = cycleInspections[i].getInspector();
 			var inspType = cycleInspections[i].getInspectionType();
 			var nextInspDate = getAppSpecific("Next Inspection Date");
+			logDebug2("Inspector: " + inspector);
 			scheduleInspectDate(inspType, nextInspDate, inspector);
 			
 			//get sequence ID for most recently created inspection and assign to inspector
