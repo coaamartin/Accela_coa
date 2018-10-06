@@ -97,8 +97,8 @@ function logDebug2(dstr) {
 	
 	// function of the same name in ACCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
 	if(showDebug) {
-		aa.print(dstr)
-		emailText+= dstr + "<br>";
-		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr)
+		aa.print(dstr + "<br>");
+		//emailText+= dstr + "<br>";
+		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr);
 	}
 }
