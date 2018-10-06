@@ -118,9 +118,7 @@ function getCycleInspections(capId) {
 		return false;
 	}
 	capInspections = capInspections.getOutput();
-
 	var returnArray = [];
-	
 	var nextInspDate = getAppSpecific("Next Inspection Date");
 	if (nextInspDate == null || nextInspDate == "") {
 			logDebug2("Skipping record, Next Inpsection Date field is empty");
@@ -130,9 +128,13 @@ function getCycleInspections(capId) {
 	}
 	var beginCycleDate = nextInspDate - 91;
 	
+	logDebug2("Begin Cycle Date: " + beginCycleDate);
+	logDebug2("Next Inspection Date: " + nextInspDate);
+	
+	
 	//find inspections within this quarterly cycle
 	for (i in capInspections) {
-		if (capInspections[i].getScheduledDate() < nextInspDate && capInspections[i]..getScheduledDate() >= beginCycleDate) {
+		if (capInspections[i].getScheduledDate() < nextInspDate && capInspections[i].getScheduledDate() >= beginCycleDate) {
 
 			returnArray.push(capInspections[i]);
 		
