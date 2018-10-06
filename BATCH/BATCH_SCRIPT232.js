@@ -30,6 +30,8 @@ useAppSpecificGroupName = false;
 
 showDebug = true;
 var capStatus;
+
+//grab all Licenses/Marijuana/*/License records
 var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 var tmpAry = RECORD_TYPE.split("/");
 capTypeModel.setGroup(tmpAry[0]);
@@ -46,25 +48,45 @@ if (!capIDList.getSuccess()) {
 	capIDList = capIDList.getOutput();
 }
 
-
 var daysToAdd;
 var vIsMJLicense;
 var vIsMJRetailStoreLicense;
 var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 	"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 	"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
-	
 
 vIsMJRetailStoreLicense = false;
 vIsMJLicense = appMatch("Licenses/Marijuana/*/License");
-
 
 logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
 
 for (c in capIDList) {
 	capId = capIDList[c].getCapID();
 	capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
-	logDebug2("<Font Color=BLUE> <br> Processing record " + capIDString)
+	logDebug2("<Font Color=BLUE> Processing record " + capIDString)
+	
+	var tmpCap = aa.cap.getCap(capId);
+	if (!tmpCap.getSuccess()) {
+		logDebug("**INFO failed to get CapModel " + capId);
+		continue;
+	}
+	tmpCap = tmpCap.getOutput();
+	tmpCap = tmpCap.getCapModel();
+	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
+	
+	//get record status
+	capStatus = tmpCap.getCapStatus();
+	logDebug2("<Font Color=BLACK><br>Record status: " + capStatus);
+	
+	//skip record if status is not 'Active'
+	if (capStatus == "Active") {
+	
+	} else {
+		logDebug2("<br>Skipping record; status must be 'Active'");
+		continue;
+	}
+
+	
 }
 
 
