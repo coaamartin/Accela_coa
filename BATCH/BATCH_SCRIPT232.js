@@ -87,7 +87,7 @@ for (c in capIDList) {
 			logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
 		}
 		
-		scheduleNextInspections(cycleInspections, capId);
+		scheduleNextInspections(cycleInspections);
 		
 	} else {
 		logDebug2("Skipping record; status must be 'Active'");
@@ -156,26 +156,15 @@ function getCycleInspections(capId) {
 	return returnArray;
 }
 
-//schedules inspections that have a status of "Passed" or "Passed - Minor Violations"
-function scheduleNextInspections(cycleInspections, capId) {
+//schedules inspections that have a status of "Passed" or "Passed - Minor Violations" and assigns to previous inspector
+function scheduleNextInspections(cycleInspections) {
 	for (i in cycleInspections) {
 		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
-			var inspector = getInspectorByInspID(cycleInspections[i].getIdNumber(), capId);
+			var inspector = getInspectorByInspID(cycleInspections[i].getIdNumber());
 			var inspType = cycleInspections[i].getInspectionType();
 			var nextInspDate = getAppSpecific("Next Inspection Date");
 			scheduleInspectDate(inspType, nextInspDate, inspector);
 			
-			
-			
-			//get sequence ID for most recently created inspection and assign to inspector
-			/*var lastInspectionObj = getLastCreatedInspection(capId, inspType, "Scheduled");
-			if (lastInspectionObj == null) {
-				logDebug2("Failed to find most recent inspection of type " + inspType);
-			}
-
-			var lastInspectionSeq = lastInspectionObj.getIdNumber();
-			
-			assignInspection(lastInspectionSeq, inspector);*/
 		}
 	}
 }
@@ -204,17 +193,9 @@ function getLastCreatedInspection(capId, inspectionType, inspectionStatus) {
 }
 
 //Get inspector by inspection ID
-function getInspectorByInspID(iNumber){
-        // optional capId
-    // updates the inspection and assigns to a new user
-    // requires the inspection id and the user name
-    // V2 8/3/2011.  If user name not found, looks for the department instead
-    //
+function getInspectorByInspID(iNumber) {
 
-    var itemCap = capId
-    if (arguments.length > 2)
-        itemCap = arguments[2]; // use cap ID specified in args
-
+    var itemCap = capId;
     var iObjResult = aa.inspection.getInspection(itemCap, iNumber);
     if (!iObjResult.getSuccess()) {
         logDebug("**WARNING retrieving inspection " + iNumber + " : " + iObjResult.getErrorMessage());
