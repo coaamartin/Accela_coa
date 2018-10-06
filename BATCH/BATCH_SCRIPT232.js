@@ -223,9 +223,9 @@ var bldgInspSchedDate;
 	
 	if (bldgInspCount == 5) {
 		var eParams = aa.util.newHashtable();
-		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
-		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
-		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+		addParameter(eParams, "$$altID$$", aa.cap.getCapModel().getAltID());
+		addParameter(eParams, "$$recordAlias$$", aa.cap.getCapType().getAlias());
+		addParameter(eParams, "$$recordStatus$$", aa.cap.getCapStatus());
 		addParameter(eParams, "$$inspId$$", bldgInspId);
 		addParameter(eParams, "$$inspResult$$", bldgInspResult);
 		addParameter(eParams, "$$inspResultDate$$", bldgInspResultDate);
