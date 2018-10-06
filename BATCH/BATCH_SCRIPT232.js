@@ -237,8 +237,11 @@ var bldgInspSchedDate;
 				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");				
 				
 				//update inspection status to reflect that notification was sent
+				cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
+				aa.inspection.editInspection(cycleInspections[i]);
 				//var tmpInspObj = cycleInspections[i].getInspection();
-				aa.inspection.resultInspection(recordCapScriptModel, cycleInspections[i].getIdNumber(), "Passed - Notification Sent", cycleInspections[i].getInspectionDate(), cycleInspections[i].getInspectionComments(), "");
+				//aa.inspection.resultInspection(recordCapScriptModel, cycleInspections[i].getIdNumber().toString(), "Passed - Notification Sent", cycleInspections[i].getInspectionDate(), cycleInspections[i].getInspectionComments(), "");
+				//resultInspection(inspType, inspStatus, resultDate, resultComment)
 			}
 		}
 	}
@@ -267,6 +270,7 @@ var bldgInspSchedDate;
 			if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
 				if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
 					cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
+					aa.inspection.editInspection(cycleInspections[i]);
 				}
 			}
 		}
