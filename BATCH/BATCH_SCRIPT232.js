@@ -3,7 +3,6 @@ Purpose : Automatically schedule inspections and send out relevant notificatons 
 Author: Erich von Trapp
 
 Functional Area : Batch Job
-
 */
 
 function getMasterScriptText(vScriptName)
@@ -238,7 +237,8 @@ var bldgInspSchedDate;
 				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");				
 				
 				//update inspection status to reflect that notification was sent
-				cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
+				var tmpInspObj = cycleInspections[i].getInspection();
+				tmpInspObj.resultInspection(recordCapScriptModel, cycleInspections[i].getIdNumber(), "Passed - Notification Sent", cycleInspections[i].getInspectionDate(), getInspectionComments(), "");
 			}
 		}
 	}
