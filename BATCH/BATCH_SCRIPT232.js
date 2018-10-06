@@ -135,33 +135,35 @@ function getCycleInspections(capId) {
 		var inspSchedDate = capInspections[i].getScheduledDate();
 		inspSchedDate = convertDate(inspSchedDate);
 		if (inspSchedDate < nextInspDate && inspSchedDate >= beginCycleDate) {
-			logDebug2("We aren't getting here, are we...");
 			//if multiple scheduled of same type, make sure to get last one (maxID)
-			if (inspWithMaxId == null || (inspWithMaxId.getInspectionType() == capInspections[i].getInspectionType() && inspWithMaxId.getIdNumber() < capInspections[i].getIdNumber())) {
-				inspWithMaxId = capInspections[i];
-				returnArray.push(inspWithMaxId);
-			} else {
-				returnArray.push(capInspections[i]);
+			//if (inspWithMaxId == null || (inspWithMaxId.getInspectionType() == capInspections[i].getInspectionType() && inspWithMaxId.getIdNumber() < capInspections[i].getIdNumber())) {
+			//	inspWithMaxId = capInspections[i];
+			//	returnArray.push(inspWithMaxId);
+			//} else {
+			//	returnArray.push(capInspections[i]);
+			//}
+			
+			var pos = -1;
+							
+			for (p in returnArray) {
+				pos = returnArray[p].getInspectionType().indexOf(capInspections[i].getInspectionType());
+				if (pos == 0) {
+					pos = p;
+					break;
+				}							
 			}
+			if (pos == -1) {
+				returnArray.push(capInspections[i]);
+			} else {
+				returnArray[pos] = capInspections[i];
+			}
+			
+			
+			
 		}//last sched inspection
 	}//for all cap inspections
 	return returnArray;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
