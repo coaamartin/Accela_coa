@@ -34,7 +34,7 @@ var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 var tmpAry = RECORD_TYPE.split("/");
 capTypeModel.setGroup(tmpAry[0]);
 capTypeModel.setType(tmpAry[1]);
-capTypeModel.setSubType(tmpAry[2]);
+//capTypeModel.setSubType(tmpAry[2]);
 capTypeModel.setCategory(tmpAry[3]);
 var capModel = aa.cap.getCapModel().getOutput();
 capModel.setCapType(capTypeModel);
