@@ -112,8 +112,17 @@ function getCycleInspections(capId) {
 	} else {
 		nextInspDate = new Date(nextInspDate);
 	}
-	var beginCycleDate = new Date();
-	beginCycleDate.setDate(nextInspDate.getDate() - daysToAdd); 
+	var beginCycleDate = new Date();	
+	beginCycleDate.setMonth(nextInspDate.getMonth());
+	beginCycleDate.setFullYear(nextInspDate.getFullYear());
+	beginCycleDate.setDate(nextInspDate.getDate() - daysToAdd);
+	beginCycleDate.setHours(0);
+	beginCycleDate.setMinutes(0);
+	beginCycleDate.setSeconds(0);
+	beginCycleDate = new Date(beginCycleDate);
+	
+	
+	
 	logDebug2("Begin Cycle Date: " + beginCycleDate);
 	logDebug2("Next Inspection Date: " + nextInspDate);
 	
