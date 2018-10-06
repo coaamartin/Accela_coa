@@ -121,7 +121,7 @@ function getCycleInspections(capId) {
 	beginCycleDate.setSeconds(0);
 	beginCycleDate = new Date(beginCycleDate);
 	
-	
+	var schedInspWithMaxId = null;
 	
 	logDebug2("Begin Cycle Date: " + beginCycleDate);
 	logDebug2("Next Inspection Date: " + nextInspDate);
@@ -130,18 +130,15 @@ function getCycleInspections(capId) {
 	//find inspections within this quarterly cycle
 	for (i in capInspections) {
 		if (capInspections[i].getScheduledDate() < nextInspDate && capInspections[i].getScheduledDate() >= beginCycleDate) {
-
-			returnArray.push(capInspections[i]);
-		
+			
 			//if multiple scheduled of same type, make sure to get last one (maxID)
-			//this effects calculating WorkLoad (assignSameInspector method)
-			//if (schedInspWithMaxId == null || schedInspWithMaxId.getIdNumber() < capInspections[i].getIdNumber()) {
-			//	schedInspWithMaxId = capInspections[i];
-			//}
-			//return capInspections[i];
+			if (schedInspWithMaxId == null || schedInspWithMaxId.getInspectionType() == capInspections[i].getInspectionType() && schedInspWithMaxId.getIdNumber() < capInspections[i].getIdNumber()) {
+				schedInspWithMaxId = capInspections[i];
+			}
+			returnArray.push(schedInspWithMaxId);
 		}//last sched inspection
 	}//for all cap inspections
-	return capInspections;
+	return returnArray;
 }
 
 
