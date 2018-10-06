@@ -107,17 +107,16 @@ for (c in capIDList) {
 		for (j in cycleInspections) {
 			logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
 		}
-		
-		scheduleNextInspections(cycleInspections);
-		sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel);
-		updateNextInspectionDate(cycleInspections, daysToAdd);
+		if (cycleInspections) {
+			scheduleNextInspections(cycleInspections);
+			sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel);
+			updateNextInspectionDate(cycleInspections, daysToAdd);
+		}
 		
 	} else {
 		logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
 		continue;
 	}
-
-	
 }
 
 
@@ -287,10 +286,10 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 		}
 	}
 	if (readyCount == 8) {
+		logDebug2("Updating Next Inspection Date to: " + dateAdd(nextInspDate, daysToAdd));
 		editAppSpecific("Next Inspection Date", dateAdd(nextInspDate, daysToAdd));
 	}
 }
-
 
 
 //Get inspector by inspection ID
