@@ -57,7 +57,7 @@ var tmpAry = RECORD_TYPE.split("/");
 capTypeModel.setGroup(tmpAry[0]);
 capTypeModel.setType(tmpAry[1]);
 //capTypeModel.setSubType(tmpAry[2]);
-//capTypeModel.setCategory(tmpAry[3]);
+capTypeModel.setCategory(tmpAry[3]);
 var capModel = aa.cap.getCapModel().getOutput();
 capModel.setCapType(capTypeModel);
 var capIDList = aa.cap.getCapIDListByCapModel(capModel);
@@ -91,32 +91,27 @@ for (c in capIDList) {
 	tmpCap = tmpCap.getCapModel();
 	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 	
-	if (appMatch("Licenses/Marijuana/*/License", capId)) {
-		//get record status
-		capStatus = tmpCap.getCapStatus();
-		logDebug2("<Font Color=BLACK>Record status: " + capStatus);
+	//get record status
+	capStatus = tmpCap.getCapStatus();
+	logDebug2("<Font Color=BLACK>Record status: " + capStatus);
+	
+	//skip record if status is not 'Active'
+	if (capStatus == "Active") {
+		var cycleInspections = getCycleInspections(capId);
 		
-		//skip record if status is not 'Active'
-		if (capStatus == "Active") {
-			var cycleInspections = getCycleInspections(capId);
-			
-			//debug text                            <<<<<----------------------------------
-			for (j in cycleInspections) {
-				logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
-			}
-			if (cycleInspections) {
-				scheduleNextInspections(cycleInspections);
-				sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel);
-				updateNextInspectionDate(cycleInspections, daysToAdd);
-			}
-			
-		} else {
-			logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
-			continue;
+		//debug text                            <<<<<----------------------------------
+		for (j in cycleInspections) {
+			logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
 		}
-	}
-	
-	
+		if (cycleInspections) {
+			scheduleNextInspections(cycleInspections);
+			sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel);
+			updateNextInspectionDate(cycleInspections, daysToAdd);
+		}
+	} else {
+		logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
+		continue;
+	}	
 }
 
 
