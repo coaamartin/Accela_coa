@@ -104,7 +104,7 @@ function getCycleInspections(capId) {
 		return false;
 	}
 	capInspections = capInspections.getOutput();
-	var returnArray = [];
+	var returnArray;
 	var nextInspDate = getAppSpecific("Next Inspection Date");
 	if (nextInspDate == null || nextInspDate == "") {
 			logDebug2("Skipping record, Next Inpsection Date field is empty");
