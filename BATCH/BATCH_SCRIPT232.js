@@ -110,6 +110,7 @@ for (c in capIDList) {
 		
 		scheduleNextInspections(cycleInspections);
 		sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel);
+		updateNextInspectionDate(cycleInspections, daysToAdd);
 		
 	} else {
 		logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
@@ -133,7 +134,7 @@ function getCycleInspections(capId) {
 	var returnArray = [];
 	
 	//establish date boundaries for this cycle
-	//var nextInspDate = getAppSpecific("Next Inspection Date");
+	var nextInspDate = getAppSpecific("Next Inspection Date");
 	if (nextInspDate == null || nextInspDate == "") {
 			logDebug2("<Font Color=RED> Skipping record; Next Inpsection Date field is empty<Font Color=BLACK>");
 			return false;
@@ -277,8 +278,9 @@ var bldgInspSchedDate;
 
 
 //checks to see if all eight inspections have passed during the quarterly cycle and updates next inspection date accordingly
-function updateNextInspectionDate(cycleInspections) {
+function updateNextInspectionDate(cycleInspections, daysToAdd) {
 	var readyCount = 0;
+	var nextInspDate = getAppSpecific("Next Inspection Date");
 	for (i in cycleInspections) {
 		if (cycleInspections[i].getInspectionStatus == "Passed - Notification Sent") {
 			readyCount++;
