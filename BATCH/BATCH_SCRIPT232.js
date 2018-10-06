@@ -236,8 +236,9 @@ var bldgInspSchedDate;
 				
 				//send email with report attachment
 				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");				
+				
+				//update inspection status to reflect that notification was sent
 				cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
-
 			}
 		}
 	}
@@ -260,6 +261,15 @@ var bldgInspSchedDate;
 		
 		//send email with report attachment
 		emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");
+		
+		//update inspection status to reflect that notification was sent
+		for (i in cycleInspections) {
+			if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
+				if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
+					cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
+				}
+			}
+		}
 	}
 }
 
