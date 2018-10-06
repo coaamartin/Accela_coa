@@ -51,13 +51,13 @@ useAppSpecificGroupName = false;
 showDebug = true;
 var capStatus;
 
-//grab all Licenses/Marijuana/*/License records
+//grab all Licenses/Marijuana/*/* records
 var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 var tmpAry = RECORD_TYPE.split("/");
 capTypeModel.setGroup(tmpAry[0]);
 capTypeModel.setType(tmpAry[1]);
 //capTypeModel.setSubType(tmpAry[2]);
-capTypeModel.setCategory(tmpAry[3]);
+//capTypeModel.setCategory(tmpAry[3]);
 var capModel = aa.cap.getCapModel().getOutput();
 capModel.setCapType(capTypeModel);
 var capIDList = aa.cap.getCapIDListByCapModel(capModel);
@@ -95,28 +95,32 @@ for (c in capIDList) {
 	tmpCap = tmpCap.getCapModel();
 	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 	
-	//get record status
-	capStatus = tmpCap.getCapStatus();
-	logDebug2("<Font Color=BLACK>Record status: " + capStatus);
-	
-	//skip record if status is not 'Active'
-	if (capStatus == "Active") {
-		var cycleInspections = getCycleInspections(capId);
+	if (appMatch("Licenses/Marijuana/*/License")) {
+		//get record status
+		capStatus = tmpCap.getCapStatus();
+		logDebug2("<Font Color=BLACK>Record status: " + capStatus);
 		
-		//debug text                            <<<<<----------------------------------
-		for (j in cycleInspections) {
-			logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
+		//skip record if status is not 'Active'
+		if (capStatus == "Active") {
+			var cycleInspections = getCycleInspections(capId);
+			
+			//debug text                            <<<<<----------------------------------
+			for (j in cycleInspections) {
+				logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
+			}
+			if (cycleInspections) {
+				scheduleNextInspections(cycleInspections);
+				sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel);
+				updateNextInspectionDate(cycleInspections, daysToAdd);
+			}
+			
+		} else {
+			logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
+			continue;
 		}
-		if (cycleInspections) {
-			scheduleNextInspections(cycleInspections);
-			sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel);
-			updateNextInspectionDate(cycleInspections, daysToAdd);
-		}
-		
-	} else {
-		logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
-		continue;
 	}
+	
+	
 }
 
 
