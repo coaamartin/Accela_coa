@@ -136,7 +136,7 @@ function getCycleInspections(capId) {
 				inspWithMaxId = capInspections[i];
 				returnArray.push(inspWithMaxId);
 			} else {
-				returnArray.push(capInspections[i];
+				returnArray.push(capInspections[i]);
 			}
 		}//last sched inspection
 	}//for all cap inspections
