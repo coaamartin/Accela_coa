@@ -90,7 +90,7 @@ for (c in capIDList) {
 		scheduleNextInspections(cycleInspections);
 		
 	} else {
-		logDebug2("<Font Color=RED> Skipping record; status must be 'Active'");
+		logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
 		continue;
 	}
 
@@ -113,7 +113,7 @@ function getCycleInspections(capId) {
 	//establish date boundaries
 	var nextInspDate = getAppSpecific("Next Inspection Date");
 	if (nextInspDate == null || nextInspDate == "") {
-			logDebug2("<Font Color=RED> Skipping record; Next Inpsection Date field is empty");
+			logDebug2("<Font Color=RED> Skipping record; Next Inpsection Date field is empty<Font Color=BLACK>");
 			return false;
 	} else {
 		nextInspDate = new Date(nextInspDate);
@@ -169,7 +169,7 @@ function scheduleNextInspections(cycleInspections) {
 		}
 	}
 	if (inspCounter != 0) {
-		logDebug2("<Font Color=GREEN> Scheduled " + inspCounter + " new inspections");
+		logDebug2("<Font Color=GREEN> Scheduled " + inspCounter + " new inspections<Font Color=BLACK>");
 	} else {
 		logDebug2("No new inspections were scheduled");
 	}
