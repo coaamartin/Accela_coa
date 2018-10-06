@@ -87,7 +87,7 @@ for (c in capIDList) {
 			logDebug2("Inspection ID :" + cycleInspections[j].getIdNumber());
 		}
 		
-		scheduleNextInspections(cycleInspections);
+		scheduleNextInspections(cycleInspections, capId);
 		
 	} else {
 		logDebug2("Skipping record; status must be 'Active'");
@@ -157,34 +157,32 @@ function getCycleInspections(capId) {
 }
 
 //schedules inspections that have a status of "Passed" or "Passed - Minor Violations"
-function scheduleNextInspections(cycleInspections) {
+function scheduleNextInspections(cycleInspections, capId) {
 	for (i in cycleInspections) {
 		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
+			var inspector = cycleInspections[i].getInspector();
 			var inspType = cycleInspections[i].getInspectionType();
 			var nextInspDate = getAppSpecific("Next Inspection Date");
 			scheduleInspectDate(inspType, nextInspDate);
+			
+			//get sequence ID for most recently created inspection and assign to inspector
+			var lastInspectionObj = getLastCreatedInspection(capId, inspType, "Scheduled");
+			if (lastInspectionObj == null) {
+				logDebug2("Failed to find most recent inspection of type " + inspType);
+			}
+
+			var lastInspectionSeq = lastInspectionObj.getIdNumber();
+			assignInspection(lastInspectionSeq, inspector);
 		}
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+//used to print debug from batch process
 function logDebug2(dstr) {
 	
 	// function of the same name in ACCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
 	if(showDebug) {
 		aa.print(dstr + "<br>");
-		//emailText+= dstr + "<br>";
 		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr);
 	}
 }
