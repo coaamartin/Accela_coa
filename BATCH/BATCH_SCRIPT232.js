@@ -47,8 +47,8 @@ if (!capIDList.getSuccess()) {
 } else {
 	capIDList = capIDList.getOutput();
 }
-
-var daysToAdd;
+//ATTN, this will need to be updated to accomodate MJ Store                           <<<<<----------------------------------
+var daysToAdd = 91;
 var vIsMJLicense;
 var vIsMJRetailStoreLicense;
 var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
@@ -95,20 +95,6 @@ for (c in capIDList) {
 }
 
 
-//formats date in MM/DD/YYYY format
-function formatDateX(scriptDate) {
-	if(scriptDate != null)
-		{
-		var ret = "";
-		ret += scriptDate.getMonth().toString().length == 1 ? "0" + scriptDate.getMonth() : scriptDate.getMonth();
-		ret += "/";
-		ret += scriptDate.getDayOfMonth().toString().length == 1 ? "0" + scriptDate.getDayOfMonth() : scriptDate.getDayOfMonth();
-		ret += "/";
-		ret += scriptDate.getYear();
-		return ret;
-		}
-}
-
 //returns object of inspections from current quarterly cycle
 function getCycleInspections(capId) {
 	//get inspections for this cap
@@ -126,8 +112,8 @@ function getCycleInspections(capId) {
 	} else {
 		nextInspDate = new Date(nextInspDate);
 	}
-	var beginCycleDate = nextInspDate - 91;
-	
+	var beginCycleDate = new Date();
+	beginCycleDate.setDate(nextInspDate.getDate() - daysToAdd); 
 	logDebug2("Begin Cycle Date: " + beginCycleDate);
 	logDebug2("Next Inspection Date: " + nextInspDate);
 	
