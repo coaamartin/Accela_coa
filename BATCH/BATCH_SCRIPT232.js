@@ -24,10 +24,12 @@ var SCRIPT_VERSION = 3.0;
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 
-var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
+//define batch job parameters
 var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
-useAppSpecificGroupName = false;
+var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
+var REPORT_TEMPLATE = aa.env.getValue("REPORT_TEMPLATE");
 
+useAppSpecificGroupName = false;
 showDebug = true;
 var capStatus;
 
@@ -49,14 +51,13 @@ if (!capIDList.getSuccess()) {
 }
 //ATTN, this will need to be updated to accomodate MJ Store                           <<<<<----------------------------------
 var daysToAdd = 91;
-var vIsMJLicense;
 var vIsMJRetailStoreLicense;
 var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
 	"MJ Building Inspections - Mechanical", "MJ Building Inspections - Plumbing", "MJ Building Inspections - Structural", "MJ Security Inspections - 3rd Party",
 	"MJ Zoning Inspections", "MJ Building Inspections", "MJ Code Enforcement Inspections", "MJ Planning Inspections", "MJ Security Inspections - Police" ];
 
 vIsMJRetailStoreLicense = false;
-vIsMJLicense = appMatch("Licenses/Marijuana/*/License");
+vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/*/License");
 
 logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
 
@@ -88,6 +89,7 @@ for (c in capIDList) {
 		}
 		
 		scheduleNextInspections(cycleInspections);
+		sendNotificationsPassedInsp(cycleInspections);
 		
 	} else {
 		logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
@@ -110,7 +112,7 @@ function getCycleInspections(capId) {
 	capInspections = capInspections.getOutput();
 	var returnArray = [];
 	
-	//establish date boundaries
+	//establish date boundaries for this cycle
 	var nextInspDate = getAppSpecific("Next Inspection Date");
 	if (nextInspDate == null || nextInspDate == "") {
 			logDebug2("<Font Color=RED> Skipping record; Next Inpsection Date field is empty<Font Color=BLACK>");
@@ -137,7 +139,7 @@ function getCycleInspections(capId) {
 		inspSchedDate = convertDate(inspSchedDate);
 		if (inspSchedDate < nextInspDate && inspSchedDate >= beginCycleDate) {
 			
-			//if multiple inspections of the same type, add the most recent
+			//if multiple inspections of the same type, only add the most recent
 			var pos = -1;				
 			for (p in returnArray) {
 				pos = returnArray[p].getInspectionType().indexOf(capInspections[i].getInspectionType());
@@ -155,6 +157,7 @@ function getCycleInspections(capId) {
 	}
 	return returnArray;
 }
+
 
 //schedules inspections that have a status of "Passed" or "Passed - Minor Violations" and assigns to previous inspector
 function scheduleNextInspections(cycleInspections) {
@@ -175,9 +178,73 @@ function scheduleNextInspections(cycleInspections) {
 	}
 }
 
+
+//send notifications for passed inspections
+function sendNotificationsPassedInsp(cycleInspections) {
+var bldgInspCount = 0;
+var bldgInspId;
+var bldgInspResult;
+var bldgInspResultDate;
+var bldgInspType;
+var bldgInspSchedDate;
+
+	for (i in cycleInspections) {
+		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
+		
+			var eParams = aa.util.newHashtable();
+			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
+			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
+			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+			addParameter(eParams, "$$inspId$$", cycleInspections[i].getIdNumber());
+			addParameter(eParams, "$$inspResult$$", cycleInspections[i].getInspectionStatus());
+			addParameter(eParams, "$$inspResultDate$$", cycleInspections[i].getInspectionDate());
+			addParameter(eParams, "$$inspType$$", cycleInspections[i].getInspectionType());
+			addParameter(eParams, "$$inspSchedDate$$", cycleInspections[i].getScheduledDate());
+			
+			var reportParams = aa.util.newHashtable();
+			addParameter(reportParams, "InspActNumber", cycleInspections[i].getIdNumber());
+
+			//only send one notification for building inspections when all five building types have been passed
+			if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") {
+				bldgInspCount++;
+				bldgInspId = cycleInspections[i].getIdNumber();
+				bldgInspResult = cycleInspections[i].getInspectionStatus();
+				bldgInspResultDate = cycleInspections[i].getInspectionDate();
+				bldgInspType = "MJ Building Inspection";
+				bldgInspSchedDate = cycleInspections[i].getScheduledDate();
+			} else {
+				logDebug2("Sending notification for Inspection Type " + cycleInspections[i].getInspectionType());
+				
+				//send email with report attachment
+				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");
+			}
+		}
+	}
+	
+	if (bldgInspCount == 5) {
+		var eParams = aa.util.newHashtable();
+		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
+		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
+		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
+		addParameter(eParams, "$$inspId$$", bldgInspId);
+		addParameter(eParams, "$$inspResult$$", bldgInspResult);
+		addParameter(eParams, "$$inspResultDate$$", bldgInspResultDate);
+		addParameter(eParams, "$$inspType$$", bldgInspType);
+		addParameter(eParams, "$$inspSchedDate$$", bldgInspSchedDate);
+		
+		var reportParams = aa.util.newHashtable();
+		addParameter(reportParams, "InspActNumber", bldgInspId);
+		
+		logDebug2("Sending notification for Inspection Type " + bldgInspType);
+		
+		//send email with report attachment
+		emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");
+	}
+}
+
+
 //Get inspector by inspection ID
 function getInspectorByInspID(iNumber) {
-
     var itemCap = capId;
     var iObjResult = aa.inspection.getInspection(itemCap, iNumber);
     if (!iObjResult.getSuccess()) {
@@ -190,7 +257,7 @@ function getInspectorByInspID(iNumber) {
     return inspUserObj.getUserID();
 }
 
-//used to print debug from batch process
+//prints debug from batch process
 function logDebug2(dstr) {
 	
 	// function of the same name in ACCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
