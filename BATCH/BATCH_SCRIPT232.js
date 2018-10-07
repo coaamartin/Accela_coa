@@ -104,7 +104,7 @@ for (c in capIDList) {
 			updateNextInspectionDate(cycleInspections, daysToAdd);
 		}
 	} else {
-		logDebug2("<Font Color=RED> Skipping record; status must be 'Active'<Font Color=BLACK>");
+		logDebug2("<Font Color=RED> Skipping record; <Font Color=BLACK>status must be 'Active'");
 		continue;
 	}	
 }
@@ -125,7 +125,7 @@ function getCycleInspections(capId) {
 	//establish date boundaries for this cycle
 	var nextInspDate = getAppSpecific("Next Inspection Date");
 	if (nextInspDate == null || nextInspDate == "") {
-			logDebug2("<Font Color=RED> Skipping record; Next Inpsection Date field is empty<Font Color=BLACK>");
+			logDebug2("<Font Color=RED> Skipping record; <Font Color=BLACK>Next Inpsection Date field is empty");
 			return false;
 	} else {
 		nextInspDate = new Date(nextInspDate);
@@ -285,11 +285,9 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 			cycleInspections[i].setScheduledDate(aa.date.parseDate(nextInspDate));
 			aa.inspection.editInspection(cycleInspections[i]);
 			logDebug2("Failed inspection is within 7 days of cycle end. Moving to next cycle");
-			logDebug2("dateDiff: " + dateDiff(cycleInspections[i].getScheduledDate(), nextInspDate)); //debug text, remove eventually                           <<<<<----------------------------------
 			readyCount++;
 		}
 	}
-	logDebug2("readyCount: " + readyCount);
 	if (readyCount == 8) {
 		logDebug2("Updating Next Inspection Date to: " + dateAdd(nextInspDate, daysToAdd));
 		editAppSpecific("Next Inspection Date", dateAdd(nextInspDate, daysToAdd));
