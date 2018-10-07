@@ -232,7 +232,7 @@ var bldgInspSchedDate;
 				logDebug2("Sending notification for Inspection Type " + cycleInspections[i].getInspectionType());
 				
 				//send email with report attachment
-				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "", capId);				
+				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, "MJ_Compliance_Corrections_Letter", reportParams, "N", "", capId);				
 				
 				//update inspection status to reflect that notification was sent
 				cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
@@ -258,7 +258,7 @@ var bldgInspSchedDate;
 		logDebug2("Sending notification for Inspection Type " + bldgInspType);
 		
 		//send email with report attachment
-		emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "", capId);
+		emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, "MJ_Compliance_Corrections_Letter", reportParams, "N", "", capId);
 		
 		//update inspection status to reflect that notification was sent
 		for (i in cycleInspections) {
