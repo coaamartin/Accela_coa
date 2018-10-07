@@ -226,7 +226,7 @@ var bldgInspSchedDate;
 				bldgInspCount++;
 				bldgInspId = cycleInspections[i].getIdNumber();
 				bldgInspResult = cycleInspections[i].getInspectionStatus();
-				bldgInspResultDate = cycleInspections[i].getInspectionDate();
+				bldgInspResultDate = aa.date.parseDate(cycleInspections[i].getInspectionDate());
 				bldgInspSchedDate = cycleInspections[i].getScheduledDate();
 			} else {
 				logDebug2("Sending notification for Inspection Type " + cycleInspections[i].getInspectionType());
@@ -284,7 +284,7 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 			//nextInspDate = new Date(nextInspDate);
 			cycleInspections[i].setScheduledDate(aa.date.parseDate(nextInspDate));
 			aa.inspection.editInspection(cycleInspections[i]);
-			logDebug2("Failed inspection is within 7 days of cycle end. Moving to next cycle");
+			logDebug2("Failed inspection is within 7 days of cycle end. Moving inspection to next cycle");
 			readyCount++;
 		}
 	}
