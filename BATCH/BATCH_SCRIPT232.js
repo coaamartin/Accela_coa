@@ -214,7 +214,7 @@ var bldgInspSchedDate;
 			addParameter(eParams, "$$recordStatus$$", recordCapScriptModel.getCapModel().getCapStatus());
 			addParameter(eParams, "$$inspId$$", cycleInspections[i].getIdNumber());
 			addParameter(eParams, "$$inspResult$$", cycleInspections[i].getInspectionStatus());
-			addParameter(eParams, "$$inspResultDate$$", cycleInspections[i].getInspectionDate());
+			addParameter(eParams, "$$inspResultDate$$", formatDateX(cycleInspections[i].getInspectionDate()));
 			addParameter(eParams, "$$inspType$$", cycleInspections[i].getInspectionType());
 			addParameter(eParams, "$$inspSchedDate$$", cycleInspections[i].getScheduledDate());
 			
