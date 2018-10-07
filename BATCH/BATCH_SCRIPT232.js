@@ -103,6 +103,8 @@ for (c in capIDList) {
 		//check if license is Marijuana/Retail Store
 		if (appMatch("Licenses/Marijuana/Retail Store/License", capId)) {
 			logDebug2("MJ Retail Store License detected");
+			
+			logDebug2("dateDiff :" + dateDiff(initialInspDate, today));
 			//check if more than 300 days have passed since the initial inspection
 			if (dateDiff(initialInspDate, today) >= 300) {
 				logDebug("Switching to 6-month inspection cycle for MJ Store");
@@ -231,7 +233,7 @@ var bldgInspType = "MJ Building Inspections";
 var bldgInspSchedDate;
 
 	for (i in cycleInspections) {
-		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
+		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations" || cycleInspections[i].getInspectionStatus() == "Passed - Notification Pending") {
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", recordCapScriptModel.getCapModel().getAltID());
 			addParameter(eParams, "$$recordAlias$$", recordCapScriptModel.getCapModel().getCapType().getAlias());
