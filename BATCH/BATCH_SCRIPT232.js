@@ -281,8 +281,8 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 		if (cycleInspections[i].getInspectionStatus() == "Passed - Notification Sent" || cycleInspections[i].getInspectionStatus() == "Passed - Notification Pending") {
 			readyCount++;
 		} else if (dateDiff(cycleInspections[i].getScheduledDate(), nextInspDate) <= 7) {
-			nextInspDate = new Date(nextInspDate);
-			cycleInspections[i].setScheduledDate(nextInspDate);
+			//nextInspDate = new Date(nextInspDate);
+			cycleInspections[i].setScheduledDate(aa.date.parseDate(nextInspDate));
 			aa.inspection.editInspection(cycleInspections[i]);
 			logDebug2("Failed inspection is within 7 days of cycle end. Moving to next cycle");
 			logDebug2("dateDiff: " + dateDiff(cycleInspections[i].getScheduledDate(), nextInspDate)); //debug text, remove eventually                           <<<<<----------------------------------
