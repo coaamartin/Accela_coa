@@ -69,10 +69,8 @@ if (!capIDList.getSuccess()) {
 }
 //ATTN, this will need to be updated to accomodate MJ Store                           <<<<<----------------------------------
 //var daysToAdd = 91;
-var initialInspDate = getAppSpecific("Initial Inspection Date");
 var nextInspDate = getAppSpecific("Next Inspection Date");
 var today = new Date;
-//initialInspDate = new Date(initialInspDate);
 //var isMJRetailStoreLicense = false;
 
 logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
@@ -92,6 +90,9 @@ for (c in capIDList) {
 	var recordCapScriptModel = tmpCap;
 	tmpCap = tmpCap.getCapModel();
 	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
+	
+	var initialInspDate = getAppSpecific("Initial Inspection Date");
+	initialInspDate = new Date(initialInspDate);
 	
 	//get record status
 	capStatus = tmpCap.getCapStatus();
