@@ -47,6 +47,7 @@ var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
 var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
 var REPORT_TEMPLATE = aa.env.getValue("REPORT_TEMPLATE");
 
+aa.env.setValue("eventType","Batch Process");
 useAppSpecificGroupName = false;
 showDebug = true;
 var capStatus;
