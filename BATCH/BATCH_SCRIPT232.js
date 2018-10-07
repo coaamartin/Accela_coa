@@ -47,7 +47,6 @@ var RECORD_TYPE = aa.env.getValue("RECORD_TYPE");
 var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
 var REPORT_TEMPLATE = aa.env.getValue("REPORT_TEMPLATE");
 
-aa.env.setValue("eventType","Batch Process");
 useAppSpecificGroupName = false;
 showDebug = true;
 var capStatus;
@@ -69,18 +68,19 @@ if (!capIDList.getSuccess()) {
 	capIDList = capIDList.getOutput();
 }
 //ATTN, this will need to be updated to accomodate MJ Store                           <<<<<----------------------------------
-var daysToAdd = 91;
+//var daysToAdd = 91;
+var initialInspDate = getAppSpecific("Initial Inspection Date");
 var nextInspDate = getAppSpecific("Next Inspection Date");
-var vIsMJRetailStoreLicense;
-vIsMJRetailStoreLicense = false;
-vIsMJRetailStoreLicense = appMatch("Licenses/Marijuana/*/License");
+var today = new Date;
+//var isMJRetailStoreLicense = false;
 
 logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
 
 for (c in capIDList) {
 	capId = capIDList[c].getCapID();
-	capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()	
-	logDebug2("<Font Color=BLUE> Processing record " + capIDString)
+	capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID();
+	
+	logDebug2("<Font Color=BLUE> Processing record " + capIDString);
 	
 	var tmpCap = aa.cap.getCap(capId);
 	if (!tmpCap.getSuccess()) {
@@ -98,6 +98,28 @@ for (c in capIDList) {
 	
 	//skip record if status is not 'Active'
 	if (capStatus == "Active") {
+		
+		//check if license is Marijuana/Retail Store
+		if (appMatch("Licenses/Marijuana/Retail Store/License", capId)) {
+			
+			//check if more than 300 days has passed since the initial inspection
+			if (dateDiff(initialInspDate, today) >= 300) {
+				logDebug("Switching to 6-month inspection cycle for MJ Store");
+				
+				//schedule new inspection 6 months out from passed inspection date
+				daysToAdd = 182;
+			} else {
+				
+				//schedule new inspection 3 months out from passed inspection date
+				daysToAdd = 91;
+			}					
+		} else {
+			
+			//schedule new inspection 3 months out from passed inspection date
+			daysToAdd = 91;
+		}
+		
+		
 		var cycleInspections = getCycleInspections(capId);
 		if (cycleInspections) {
 			scheduleNextInspections(cycleInspections);
@@ -233,7 +255,7 @@ var bldgInspSchedDate;
 				logDebug2("Sending notification for Inspection Type " + cycleInspections[i].getInspectionType());
 				
 				//send email with report attachment
-				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, "MJ_Compliance_Corrections_Letter", reportParams, "N", "", capId);				
+				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");				
 				
 				//update inspection status to reflect that notification was sent
 				cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
@@ -259,7 +281,7 @@ var bldgInspSchedDate;
 		logDebug2("Sending notification for Inspection Type " + bldgInspType);
 		
 		//send email with report attachment
-		emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, "MJ_Compliance_Corrections_Letter", reportParams, "N", "", capId);
+		emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");
 		
 		//update inspection status to reflect that notification was sent
 		for (i in cycleInspections) {
