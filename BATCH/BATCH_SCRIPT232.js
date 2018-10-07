@@ -285,6 +285,7 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 			readyCount++;
 		}
 	}
+	logDebug2("readyCount: " + readyCount);
 	if (readyCount == 8) {
 		logDebug2("Updating Next Inspection Date to: " + dateAdd(nextInspDate, daysToAdd));
 		editAppSpecific("Next Inspection Date", dateAdd(nextInspDate, daysToAdd));
