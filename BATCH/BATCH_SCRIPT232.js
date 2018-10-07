@@ -278,7 +278,7 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 	var readyCount = 0;
 	var nextInspDate = getAppSpecific("Next Inspection Date");
 	for (i in cycleInspections) {
-		if (cycleInspections[i].getInspectionStatus() == "Passed - Notification Sent") {
+		if (cycleInspections[i].getInspectionStatus() == "Passed - Notification Sent" || cycleInspections[i].getInspectionStatus() == "Passed - Notification Pending") {
 			readyCount++;
 		} else if (dateDiff(cycleInspections[i].getScheduledDate(), nextInspDate) <= 7) {
 			logDebug2("dateDiff: " + dateDiff(cycleInspections[i].getScheduledDate(), nextInspDate)); //debug text, remove eventually                           <<<<<----------------------------------
