@@ -107,8 +107,8 @@ for (c in capIDList) {
 			logDebug2("Initial Inspection Date: " + initialInspDate);
 			logDebug2("Today: " + today);
 			logDebug2("dateDiff :" + dateDiff(initialInspDate, today));
-			//check if more than 275 days have passed since the initial inspection
-			if (dateDiff(initialInspDate, today) >= 275) {
+			//check if more than 281 days have passed since the initial inspection (365 days - 84 days, the period between record creation and initial inspection)
+			if (dateDiff(initialInspDate, today) >= 281) {
 				logDebug2("Switching to 6-month inspection cycle for MJ Store Licenses");
 				
 				//schedule new inspection 6 months out from passed inspection date
