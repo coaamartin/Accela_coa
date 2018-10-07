@@ -91,8 +91,8 @@ for (c in capIDList) {
 	tmpCap = tmpCap.getCapModel();
 	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 	
-	var initialInspDate = getAppSpecific("Initial Inspection Date");
-	initialInspDate = new Date(initialInspDate);
+	//var initialInspDate = getAppSpecific("Initial Inspection Date");
+	//initialInspDate = new Date(initialInspDate);
 	
 	//get record status
 	capStatus = tmpCap.getCapStatus();
@@ -104,12 +104,12 @@ for (c in capIDList) {
 		//check if license is Marijuana/Retail Store
 		if (appMatch("Licenses/Marijuana/Retail Store/License", capId)) {
 			logDebug2("MJ Retail Store License detected");
-			logDebug2("Initial Inspection Date: " + initialInspDate);
+			logDebug2("File Date: " + fileDate);
 			logDebug2("Today: " + today);
-			logDebug2("dateDiff :" + dateDiff(initialInspDate, today));
+			logDebug2("dateDiff :" + dateDiff(fileDate, today));
 			//check if more than 300 days have passed since the initial inspection
 			if (dateDiff(initialInspDate, today) >= 300) {
-				logDebug("Switching to 6-month inspection cycle for MJ Store");
+				logDebug2("Switching to 6-month inspection cycle for MJ Store Licenses");
 				
 				//schedule new inspection 6 months out from passed inspection date
 				daysToAdd = 182;
