@@ -1,7 +1,6 @@
 /*Title : Passed MJ Inspection Automation
 Purpose : Automatically schedule inspections and send out relevant notificatons on quarterly cycle for MJ Licenses
-Author: Erich von Trapp
-
+Author: Erich von Trapp - ETech Consulting, LLC
 Functional Area : Batch Job
 */
 
@@ -50,13 +49,13 @@ var REPORT_TEMPLATE = aa.env.getValue("REPORT_TEMPLATE");
 useAppSpecificGroupName = false;
 showDebug = true;
 var capStatus;
+var today = new Date;
 
-//grab all Licenses/Marijuana/*/* records
+//grab all Licenses/Marijuana/*/License records
 var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 var tmpAry = RECORD_TYPE.split("/");
 capTypeModel.setGroup(tmpAry[0]);
 capTypeModel.setType(tmpAry[1]);
-//capTypeModel.setSubType(tmpAry[2]);
 capTypeModel.setCategory(tmpAry[3]);
 var capModel = aa.cap.getCapModel().getOutput();
 capModel.setCapType(capTypeModel);
@@ -67,11 +66,6 @@ if (!capIDList.getSuccess()) {
 } else {
 	capIDList = capIDList.getOutput();
 }
-//ATTN, this will need to be updated to accomodate MJ Store                           <<<<<----------------------------------
-//var daysToAdd = 91;
-//var nextInspDate = getAppSpecific("Next Inspection Date");
-var today = new Date;
-//var isMJRetailStoreLicense = false;
 
 logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
 
@@ -92,7 +86,6 @@ for (c in capIDList) {
 	tmpAsiGroups = tmpCap.getAppSpecificInfoGroups();
 	
 	var initialInspDate = getAppSpecific("Initial Inspection Date");
-	initialInspDate = new Date(initialInspDate);
 	
 	//get record status
 	capStatus = tmpCap.getCapStatus();
@@ -103,27 +96,26 @@ for (c in capIDList) {
 		
 		//check if license is Marijuana/Retail Store
 		if (appMatch("Licenses/Marijuana/Retail Store/License", capId)) {
-			logDebug2("MJ Retail Store License detected");
-			logDebug2("Initial Inspection Date: " + initialInspDate);
-			logDebug2("Today: " + today);
-			logDebug2("dateDiff :" + dateDiff(initialInspDate, today));
+
 			//check if more than 281 days have passed since the initial inspection (365 days - 84 days, the period between record creation and initial inspection)
-			if (dateDiff(initialInspDate, today) >= 281) {
-				logDebug2("Switching to 6-month inspection cycle for MJ Store Licenses");
+			if (!(initialInspDate == null || initialInspDate == "")) {
+				initialInspDate = new Date(initialInspDate);
+				if (dateDiff(initialInspDate, today) >= 281) {
+					logDebug2("Switching to 6-month inspection cycle for MJ Store Licenses");
 				
-				//schedule new inspection 6 months out from passed inspection date
-				daysToAdd = 182;
-			} else {
+					//schedule new inspection 6 months out from passed inspection date
+					daysToAdd = 182;
+				} else {
 				
-				//schedule new inspection 3 months out from passed inspection date
-				daysToAdd = 91;
-			}					
+					//schedule new inspection 3 months out from passed inspection date
+					daysToAdd = 91;
+				}
+			}				
 		} else {
 			
 			//schedule new inspection 3 months out from passed inspection date
 			daysToAdd = 91;
 		}
-		
 		
 		var cycleInspections = getCycleInspections(capId);
 		if (cycleInspections) {
@@ -167,10 +159,6 @@ function getCycleInspections(capId) {
 	beginCycleDate.setSeconds(0);
 	beginCycleDate = new Date(beginCycleDate);
 	
-	//debug text, remove eventually                           <<<<<----------------------------------
-	logDebug2("Begin Cycle Date: " + beginCycleDate);
-	logDebug2("Next Inspection Date: " + nextInspDate);
-	
 	//filter to inspections within this quarterly cycle
 	for (i in capInspections) {
 		var inspSchedDate = capInspections[i].getScheduledDate();
@@ -206,6 +194,7 @@ function scheduleNextInspections(cycleInspections) {
 			var inspType = cycleInspections[i].getInspectionType();
 			var nextInspDate = getAppSpecific("Next Inspection Date");
 			
+			//for building inspections, update inspection status and wait for other building inspections to be completed
 			if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
 				scheduleInspectDate(inspType, nextInspDate, inspector);
 				cycleInspections[i].setInspectionStatus("Passed - Notification Pending");
@@ -249,7 +238,7 @@ var bldgInspSchedDate;
 			var reportParams = aa.util.newHashtable();
 			addParameter(reportParams, "InspActNumber", cycleInspections[i].getIdNumber());
 
-			//only send one notification for building inspections when all five building types have been passed
+			//check to see if all five building inspection types have been passed
 			if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
 				bldgInspCount++;
 				bldgInspId = cycleInspections[i].getIdNumber();
@@ -269,6 +258,7 @@ var bldgInspSchedDate;
 		}
 	}
 	
+	//only send one notification for building inspections when all five building inspection types have been passed
 	if (bldgInspCount == 5) {
 		var eParams = aa.util.newHashtable();
 		addParameter(eParams, "$$altID$$", recordCapScriptModel.getCapModel().getAltID());
@@ -353,8 +343,6 @@ function formatDateX(scriptDate) {
 
 //prints debug from batch process
 function logDebug2(dstr) {
-	
-	// function of the same name in ACCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
 	if(showDebug) {
 		aa.print(dstr + "<br>");
 		aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr);
