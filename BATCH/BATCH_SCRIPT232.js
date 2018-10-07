@@ -102,8 +102,8 @@ for (c in capIDList) {
 		
 		//check if license is Marijuana/Retail Store
 		if (appMatch("Licenses/Marijuana/Retail Store/License", capId)) {
-			
-			//check if more than 300 days has passed since the initial inspection
+			logDebug2("MJ Retail Store License detected");
+			//check if more than 300 days have passed since the initial inspection
 			if (dateDiff(initialInspDate, today) >= 300) {
 				logDebug("Switching to 6-month inspection cycle for MJ Store");
 				
