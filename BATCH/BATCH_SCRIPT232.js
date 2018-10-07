@@ -226,7 +226,7 @@ var bldgInspSchedDate;
 				bldgInspCount++;
 				bldgInspId = cycleInspections[i].getIdNumber();
 				bldgInspResult = cycleInspections[i].getInspectionStatus();
-				bldgInspResultDate = aa.date.parseDate(cycleInspections[i].getInspectionDate());
+				bldgInspResultDate = formatDateX(cycleInspections[i].getInspectionDate());
 				bldgInspSchedDate = cycleInspections[i].getScheduledDate();
 			} else {
 				logDebug2("Sending notification for Inspection Type " + cycleInspections[i].getInspectionType());
@@ -306,6 +306,21 @@ function getInspectorByInspID(iNumber) {
     iObj = iObjResult.getOutput();
     inspUserObj = aa.person.getUser(iObj.getInspector().getFirstName(),iObj.getInspector().getMiddleName(),iObj.getInspector().getLastName()).getOutput();
     return inspUserObj.getUserID();
+}
+
+
+//formats date in MM/DD/YYYY format
+function formatDateX(scriptDate) {
+	if(scriptDate != null)
+		{
+		var ret = "";
+		ret += scriptDate.getMonth().toString().length == 1 ? "0" + scriptDate.getMonth() : scriptDate.getMonth();
+		ret += "/";
+		ret += scriptDate.getDayOfMonth().toString().length == 1 ? "0" + scriptDate.getDayOfMonth() : scriptDate.getDayOfMonth();
+		ret += "/";
+		ret += scriptDate.getYear();
+		return ret;
+		}
 }
 
 //prints debug from batch process
