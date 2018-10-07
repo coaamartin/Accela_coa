@@ -72,7 +72,7 @@ if (!capIDList.getSuccess()) {
 var initialInspDate = getAppSpecific("Initial Inspection Date");
 var nextInspDate = getAppSpecific("Next Inspection Date");
 var today = new Date;
-initialInspDate = new Date(initialInspDate);
+//initialInspDate = new Date(initialInspDate);
 //var isMJRetailStoreLicense = false;
 
 logDebug2("<br><Font Color=RED> Processing " + capIDList.length + " records <br>");
