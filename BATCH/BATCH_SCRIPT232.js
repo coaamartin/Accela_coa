@@ -69,7 +69,7 @@ if (!capIDList.getSuccess()) {
 }
 //ATTN, this will need to be updated to accomodate MJ Store                           <<<<<----------------------------------
 //var daysToAdd = 91;
-var nextInspDate = getAppSpecific("Next Inspection Date");
+//var nextInspDate = getAppSpecific("Next Inspection Date");
 var today = new Date;
 //var isMJRetailStoreLicense = false;
 
