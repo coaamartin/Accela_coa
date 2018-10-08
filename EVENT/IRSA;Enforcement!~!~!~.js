@@ -216,11 +216,11 @@ if(inspType == "Pre Court Action"){
     enfProcessInspResult("Pre Court Action", "7 - Citation File to CA", "Pre Court Investigation", 0, false, "Pre Court Action","7 - Citation File to CA");
 }
 
-if(inspType == "Pre Court Inspection"){
+if(inspType == "Pre Court Investigation"){
     //Script 346
-    enfProcessInspResult("Pre Court Inspection", "Compliance", null, null, false, "Pre Court Investigation", "Compliance");
-    enfProcessInspResult("Pre Court Inspection", "Non-Compliance", null, null, false, "Pre Court Investigation", "Non-Compliance");
-    enfProcessInspResult("Pre Court Inspection", "Unverifiable", null, null, false, "Pre Court Investigation", "Unverifiable");
+    enfProcessInspResult("Pre Court Investigation", "Compliance", null, null, false, "Pre Court Investigation", "Compliance");
+    enfProcessInspResult("Pre Court Investigation", "Non-Compliance", null, null, false, "Pre Court Investigation", "Non-Compliance");
+    enfProcessInspResult("Pre Court Investigation", "Unverifiable", null, null, false, "Pre Court Investigation", "Unverifiable");
 }
 
 if(inspType == "Legal Resolution"){
