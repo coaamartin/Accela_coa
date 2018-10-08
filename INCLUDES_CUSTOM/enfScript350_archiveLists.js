@@ -99,6 +99,7 @@ function enfScript350_archiveLists(){
                 fieldRow.put("Object", aRow["Object"] + "");
                 fieldRow.put("Location", aRow["Location"] + "");
                 fieldRow.put("Violation", aRow["Violation"] + "");
+				fieldRow.put("24 Hour", aRow["24 Hour"] + "");
                 fieldRow.put("Notes", aRow["Notes"] + "");
                 fieldRow.put("Corrected", aRow["Corrected"] + "");
                 rowFieldArray.push(fieldRow);
