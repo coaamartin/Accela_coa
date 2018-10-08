@@ -14,9 +14,8 @@
 
 logDebug ("script22 () started")
 var docCategory = checkIfDocUploaded("Outside Agency");
-logDebug("Doc Category " + docCategory);
-logDebug("publicUser:" + publicUser);
-if(ifTracer( /*publicUser && */(capStatus=="Waiting on Documents" || capStatus=="Upload Signature Set" ) && docCategory == "Outside Agency", 'publicUser && status is Waiting on Documents or Upload Signature Set')) 
+
+if(ifTracer( publicUser && (capStatus=="Waiting  on Documents" || capStatus=="Waiting on Documents" || capStatus=="Upload Signature Set" ) && docCategory == "Outside Agency", 'publicUser && status is Waiting on Documents or Upload Signature Set')) 
  {  
 	activateTask("Completeness Check");
 	editTaskDueDate("Completeness Check",dateAdd(null, 0));
@@ -24,4 +23,3 @@ if(ifTracer( /*publicUser && */(capStatus=="Waiting on Documents" || capStatus==
 }
 logDebug ("script22 () end")
 
-aa.sendMail("jal@byrnesoftware.com", "antonio.ledezma@gmail.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
