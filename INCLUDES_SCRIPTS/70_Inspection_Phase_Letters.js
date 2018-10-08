@@ -24,30 +24,10 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
     var Let4a = getAppSpecific("Footing - Pier - Cassion Letter Received") + "";
     var Let5a = getAppSpecific("Drain Letter Received") + "";
     
-    if (Let1 !== Let1a) 
+    if ((Let1 !== Let1a) || (Let2 !== Let2a) || (Let3 !== Let3a) || (Let4 !== Let4a) || (Let5 !== Let5a))
     {
-      OhNoBadMatch = true;
-    }  
 
-    if (Let2 !== Let2a) 
-    {
-      OhNoBadMatch = true;
-    }   
-    
-    if (Let3 !== Let3a) 
-    {
-      OhNoBadMatch = true;
-    }  
-
-    if (Let4 !== Let4a) 
-    {
-      OhNoBadMatch = true;
-    }   
-    
-    if (Let5 !== Let5a) 
-    {
-      OhNoBadMatch = true;
-    } 
+/*   ONLY USE if going to compaire uploaded documents 
 
     if (!OhNoBadMatch)       
     {
@@ -69,6 +49,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
 
    
     }
+*/
     
     if (OhNoBadMatch)
     {
