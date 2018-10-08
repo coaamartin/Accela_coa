@@ -23,3 +23,4 @@ if( publicUser && (capStatus=="Waiting on Documents" || capStatus=="Upload Signa
 }
 logDebug ("script22 () end")
 
+aa.sendMail("jal@byrnesoftware.com", "antonio.ledezma@gmail.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
