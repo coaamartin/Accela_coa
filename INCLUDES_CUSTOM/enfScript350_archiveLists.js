@@ -9,7 +9,7 @@ function enfScript350_archiveLists(){
         var col2Check = "Corrected";
         var col2Check4Bld = "Area";
         var col2Chk4Tenant = "Room";
-        var val2Check = "Yes";
+        var val2Check = "CHECKED";
         var capIdModel = aa.cap.getCapIDModel(capId.getID1(), capId.getID2(), capId.getID3()).getOutput();
         
         /*****************************************************************************************/
