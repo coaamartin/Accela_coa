@@ -125,7 +125,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             } else if(ifTracer(inspType == 'Pre Court Action' && (inspResult == "5 - Summons File to CA" || inspResult == "7 - Citation File to CA"), 'inspType == "Pre Court Action" && (inspResult == "5 - Summons File to CA" || inspResult == "7 - Citation File to CA")')) {
                 // inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
-                if(inspResult == "5 - Summons File to CA") {
+                if(inspResult == "5 - Summons File to CA" || inspResult == "7 - Citation File to CA") {
                     updateOrCreateValueInASITable(tableName, colKeyName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');                    
                 }
             } else if(ifTracer(inspType == "Legal Resolution" && inspResult == "Complete", 'inspType == "Legal Resolution" && inspResult == "Complete"')) {
