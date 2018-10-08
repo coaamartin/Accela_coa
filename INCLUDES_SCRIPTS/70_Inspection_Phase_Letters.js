@@ -27,29 +27,32 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
     if ((Let1 !== Let1a) || (Let2 !== Let2a) || (Let3 !== Let3a) || (Let4 !== Let4a) || (Let5 !== Let5a))
     {
 
+      OhNoBadMatch = true;
+      
 /*   ONLY USE if going to compaire uploaded documents 
 
-    if (!OhNoBadMatch)       
-    {
-
-       var thealtid = capId.getCustomID();
-       var capIdobject = aa.cap.getCapID(thealtid).getOutput();
-       var documentsobject = aa.document.getCapDocumentList(capIdobject, "ADMIN");
-       if (documentsobject.getSuccess())
+       if (!OhNoBadMatch)       
        {
-           var listofdocuments = documentsobject.getOutput();
-           for (var i in listofdocuments)
-           {
-               var doccategory = listofdocuments[i]["docCategory"];
-               
-               logDebug("JMP JMP JMP ------------------------------------->> Inside loop of listofdocuments: " + doccategory + "");
- 
-           }
-       }           
 
-   
-    }
+          var thealtid = capId.getCustomID();
+          var capIdobject = aa.cap.getCapID(thealtid).getOutput();
+          var documentsobject = aa.document.getCapDocumentList(capIdobject, "ADMIN");
+          if (documentsobject.getSuccess())
+          {
+              var listofdocuments = documentsobject.getOutput();
+              for (var i in listofdocuments)
+              {
+                  var doccategory = listofdocuments[i]["docCategory"];
+                  
+                  logDebug("JMP JMP JMP ------------------------------------->> Inside loop of listofdocuments: " + doccategory + "");
+    
+              }
+          }           
+
+      
+       }
 */
+    }
     
     if (OhNoBadMatch)
     {
