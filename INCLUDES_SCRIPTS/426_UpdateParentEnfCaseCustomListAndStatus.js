@@ -212,6 +212,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 					var newInspId = scheduleInspectionCustom4CapId(capId, "NOV Release Inspection",numOfDays4Insp);
 				
 				updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', formatDteStringToMMDDYYYY(dateAdd(null, numOfDays4Insp)), 'N');
+				updateOrCreateValueInASITable(tableName, colKeyName, 'Last Inspection Date', inspResultDate, 'N');
 			}
 			
         }  else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
