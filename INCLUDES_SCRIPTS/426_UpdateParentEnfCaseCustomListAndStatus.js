@@ -184,7 +184,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     updateOrCreateValueInASITable(tableName, colKeyName, 'Compliance Date', formatDteStringToMMDDYYYY(dte), 'N');
                 }
             }
-			if(ifTracer(inspType == "NOV Recordation Photos" && inspResult == "Taken and Stored", 'inspType == "NOV Release Inspection" && inpsResult == "Taken and Stored"')){
+			if(ifTracer(inspType == "NOV Recordation Photos" && inspResult == "Taken and Stored", 'inspType == "NOV Release Inspection" && inspResult == "Taken and Stored"')){
 				// get the inspector from GIS and assign the rec to this user
                 inspUserObj = null;
                 x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
