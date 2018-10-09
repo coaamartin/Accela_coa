@@ -5,12 +5,12 @@
 
 logDebug("JMP JMP Alert: ------------------------>> Script Item #66_Building_Inspection_Failed_Passed_Final");
 
-if (inspType.toUpperCase() = "FAILED")
+if match((inspType.toUpperCase() = "FAILED","PASSED","FINAL"))
 {
-  //editAppSpecific("Permit Expiration Date",dateAdd(null,180));  
+  editAppSpecific("Permit Expiration Date",dateAdd(null,180));  
 }
 
-if (inspType.toUpperCase() = "PASSED")
+/*if (inspType.toUpperCase() = "PASSED")
 {
   //editAppSpecific("Permit Expiration Date",dateAdd(null,180));  
 }
@@ -19,4 +19,4 @@ if (inspType.toUpperCase() = "FINAL")
 {
   //editAppSpecific("Permit Expiration Date",dateAdd(null,180));  
 }
-
+*/
