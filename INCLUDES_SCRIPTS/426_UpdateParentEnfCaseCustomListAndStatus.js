@@ -190,9 +190,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 addAsiTableRow(tableName, [
                     { colName: 'NOV Record #', colValue: capIDString },
                     { colName: 'Recordation Date', colValue: AInfo['Record Reception Date'] },
-                    { colName: 'Recordation #', colValue: AInfo['Record Reception #'] },
-                    { colName: 'Release Date', colValue: AInfo['Release Reception Date'] },
-                    { colName: 'Release #', colValue: AInfo['Release Reception #'] }
+                    { colName: 'Recordation #', colValue: AInfo['Record Reception #'] }
                 ], { capId: parentCapId });
             } else if(ifTracer(wfTask == "Release NOV" && wfStatus == "Record Reception", 'wfTask == "Release NOV" && wfStatus == "Record Reception"')) {
                 // wfTask == "Release NOV" && wfStatus == "Record Reception"
