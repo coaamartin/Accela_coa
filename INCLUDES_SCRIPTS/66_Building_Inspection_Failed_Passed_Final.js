@@ -4,6 +4,7 @@
 */
 
 logDebug("Alert: ------------------------>> Script Item #66_Building_Inspection_Failed_Passed_Final");
+//just confirming deploy
 
 if (matches(inspType.toUpperCase(),"FAILED","PASSED","FINAL"))
 {
