@@ -13,7 +13,7 @@ var inspResultObj = aa.inspection.getInspections(capId);
          {
             
 				//if (matches(inspList[index].getInspectionStatus().toUpperCase(), "FAILED", "PASSED", "FINAL")) {
-  		   var ShowInspName = inspList[index].inspType
+  		   var ShowInspName = inspList[index].inspType + "";
 
          //logDebug("Hello JP - Print Object = " + printObject(inspList[index]));
          
