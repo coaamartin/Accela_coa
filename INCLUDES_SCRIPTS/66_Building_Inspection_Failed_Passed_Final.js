@@ -17,6 +17,8 @@ var inspResultObj = aa.inspection.getInspections(capId);
   		   //var InspContents = inspList[index];
          var GetName = inspList[index];
          var ShowInspName = GetName;
+         
+         //
 
          //logDebug("Hello JP - Print Object = " + printObject(inspList[index]));
          
