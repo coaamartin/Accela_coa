@@ -62,7 +62,7 @@ function enfScript350_inpsCustListBldgInfo(){
 				}
                 
                 if(matches(roomCol, "Tenant Refusal","R. B. R.","Tenant Ill - Pass")) unitsNoAccess++;
-                if(matches(roomCol, "Dog on Premises","Lockout","Tenant Ill - Re-Inspect")) unitsNoAccRei++;
+                if(matches(roomCol, "Dog on Premises","Lockout","Tenant Ill - Re-Inspect") && aRow["Corrected"] != "CHECKED") unitsNoAccRei++;
             }
             
             for(eachInsp in inspectionInfoTblArr){
