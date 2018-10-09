@@ -16,7 +16,7 @@ var inspResultObj = aa.inspection.getInspections(capId);
   		   var ShowInspName = inspList[index].getElementsByTagName("INSPECTION_NAME");
                //scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)
                
-         logDebug("JMP JMP Alert: ------------------------>> Script Item #66 = " & ShowInspName
+         logDebug("JMP JMP Alert: ------------------------>> Script Item #66 = " + ShowInspName);
 				
 
          }
