@@ -4,6 +4,7 @@
 */
 
 logDebug("JMP JMP Alert: ------------------------>> Script Item #66_Building_Inspection_Failed_Passed_Final");
+logDebug(aa.inspType + "");
 
 var inspResultObj = aa.inspection.getInspections(capId);
 		if (inspResultObj.getSuccess()) 
@@ -13,7 +14,8 @@ var inspResultObj = aa.inspection.getInspections(capId);
          {
             
 				//if (matches(inspList[index].getInspectionStatus().toUpperCase(), "FAILED", "PASSED", "FINAL")) {
-  		   var ShowInspName = inspList[index].inspType + "";
+  		   var InspContents = inspList[index];
+         var ShowInspName = InspContents.inspType + "";
 
          //logDebug("Hello JP - Print Object = " + printObject(inspList[index]));
          
