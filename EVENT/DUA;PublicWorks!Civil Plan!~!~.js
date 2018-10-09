@@ -12,10 +12,9 @@
 //
 //
 
-logDebug ("script22 () started")
-var docCategory = checkIfDocUploaded("Outside Agency");
-
-if(ifTracer( publicUser && (capStatus=="Waiting  on Documents" || capStatus=="Waiting on Documents" || capStatus=="Upload Signature Set" ) && docCategory == "Outside Agency", 'publicUser && status is Waiting on Documents or Upload Signature Set')) 
+logDebug ("script22 () started");
+var notOutsideReview = checkDocNotOfType("Outside Agency");
+if( publicUser && (capStatus=="Waiting  on Documents" || capStatus=="Waiting on Documents" || capStatus=="Upload Signature Set" ) && notOutsideReview) 
  {  
 	activateTask("Completeness Check");
 	editTaskDueDate("Completeness Check",dateAdd(null, 0));
