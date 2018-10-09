@@ -7,61 +7,64 @@ try{
 	if(codeDistrict && codeDistrict.length > 0){
 		addParcelDistrict(null,codeDistrict[0]["CODE_NUMBER"]);
 	}
-	params = aa.util.newHashtable();
-	var record = aa.cap.getCap(capId).getOutput();
-	var capType=record.getCapType();
-	capType=capType.toString();
-	var appTypeArray= new Array();
-	appTypeArray=capType.split("/");
-	addParameter(params, "$$appTypeFirstLevel$$", appTypeArray[0]);
 	
-	var phoneNumber = "";
-	var module = appTypeArray[0];
-	if(module == "Building"){
-	
-	phoneNumber = "303-739-7000"
-	
+	if(publicUser){
+	    params = aa.util.newHashtable();
+	    var record = aa.cap.getCap(capId).getOutput();
+	    var capType=record.getCapType();
+	    capType=capType.toString();
+	    var appTypeArray= new Array();
+	    appTypeArray=capType.split("/");
+	    addParameter(params, "$$appTypeFirstLevel$$", appTypeArray[0]);
+	    
+	    var phoneNumber = "";
+	    var module = appTypeArray[0];
+	    if(module == "Building"){
+	    
+	    phoneNumber = "303-739-7000"
+	    
+	    }
+	    if(module == "Planning"){
+	    
+	    phoneNumber = "303-739-7000"
+	    
+	    }
+	    if(module == "Enforcement"){
+	    
+	    phoneNumber = "303-739-7000"
+	    
+	    }
+	    if(module == "PublicWorks"){
+	    
+	    phoneNumber = "303-739-7300"
+	    
+	    }
+	    if(module == "Water"){
+	    
+	    phoneNumber = "303-739-7370"
+	    
+	    }
+	    
+	    var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+        acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
+        addParameter(params,"$$acaURL$$",acaSite);
+	    addParameter(params, "$$deptPhoneNumber$$", phoneNumber);
+	    //getACARecordParam4Notification(params,acaUrl);
+	    addParameter(params, "$$recordAlias$$", cap.getCapType().getAlias());
+	    //addParameter(params, "$$acaRecordUrl$$", acaUrl);
+	    getRecordParams4Notification(params);
+	    getContactParams4Notification(params,"Applicant");
+	    getContactParams4Notification(params,"License Holder");
+	    getContactParams4Notification(params,"Constituent");
+	    getContactParams4Notification(params,"Complainant");
+	    getContactParams4Notification(params,"Reporting Party");
+	    getContactParams4Notification(params,"Contact");
+	    getContactParams4Notification(params,"Arborist Applicant");
+	    getContactParams4Notification(params,"Contractor Applicant");
+	    getContactParams4Notification(params,"Responsible Party");
+	    
+	    sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null); 
 	}
-	if(module == "Planning"){
-	
-	phoneNumber = "303-739-7000"
-	
-	}
-	if(module == "Enforcement"){
-	
-	phoneNumber = "303-739-7000"
-	
-	}
-	if(module == "PublicWorks"){
-	
-	phoneNumber = "303-739-7300"
-	
-	}
-	if(module == "Water"){
-	
-	phoneNumber = "303-739-7370"
-	
-	}
-	
-	var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-    acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-    addParameter(params,"$$acaURL$$",acaSite);
-	addParameter(params, "$$deptPhoneNumber$$", phoneNumber);
-	//getACARecordParam4Notification(params,acaUrl);
-	addParameter(params, "$$recordAlias$$", cap.getCapType().getAlias());
-	//addParameter(params, "$$acaRecordUrl$$", acaUrl);
-	getRecordParams4Notification(params);
-	getContactParams4Notification(params,"Applicant");
-	getContactParams4Notification(params,"License Holder");
-	getContactParams4Notification(params,"Constituent");
-	getContactParams4Notification(params,"Complainant");
-	getContactParams4Notification(params,"Reporting Party");
-	getContactParams4Notification(params,"Contact");
-	getContactParams4Notification(params,"Arborist Applicant");
-	getContactParams4Notification(params,"Contractor Applicant");
-	getContactParams4Notification(params,"Responsible Party");
-	
-	sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null); 
 	
 } catch (err) {
 	logDebug("A JavaScript Error occurred: CTRCA:*/*/*/*: copyParcelGisObjects():" + err.lineNumber + ". Err Message: " + err.message);
