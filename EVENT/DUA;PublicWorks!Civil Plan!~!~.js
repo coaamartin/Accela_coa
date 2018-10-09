@@ -14,8 +14,8 @@
 
 logDebug ("script22 () started")
 var docCategory = checkIfDocUploaded("Outside Agency");
-//logDebug("Doc Category " + docCategory);
-if( publicUser && (capStatus=="Waiting on Documents" || capStatus=="Upload Signature Set" ) && docCategory == "Outside Agency") 
+
+if(ifTracer( publicUser && (capStatus=="Waiting  on Documents" || capStatus=="Waiting on Documents" || capStatus=="Upload Signature Set" ) && docCategory == "Outside Agency", 'publicUser && status is Waiting on Documents or Upload Signature Set')) 
  {  
 	activateTask("Completeness Check");
 	editTaskDueDate("Completeness Check",dateAdd(null, 0));

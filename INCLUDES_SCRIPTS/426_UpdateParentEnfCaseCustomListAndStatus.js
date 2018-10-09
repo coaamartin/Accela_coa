@@ -122,10 +122,10 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     }
                 }
                 addAsiTableRow(tableName, row, { capId: parentCapId });
-            } else if(ifTracer(inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA"), 'inspType == "Pre Court Action" && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")')) {
+            } else if(ifTracer(inspType == 'Pre Court Action' && (inspResult == "5 - Summons File to CA" || inspResult == "7 - Citation File to CA"), 'inspType == "Pre Court Action" && (inspResult == "5 - Summons File to CA" || inspResult == "7 - Citation File to CA")')) {
                 // inspType == 'Pre Court Action' && (inspResult == "Summons File to CA" || inspResult == "Citation File to CA")
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Arraign Date', AInfo['Arraignment Date'], 'N');
-                if(nspResult == "Summons File to CA") {
+                if(inspResult == "5 - Summons File to CA" || inspResult == "7 - Citation File to CA") {
                     updateOrCreateValueInASITable(tableName, colKeyName, 'Notice of Hearing', AInfo['Notice of Hearing'], 'N');                    
                 }
             } else if(ifTracer(inspType == "Legal Resolution" && inspResult == "Complete", 'inspType == "Legal Resolution" && inspResult == "Complete"')) {
@@ -143,9 +143,10 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="Trial", 'wfTask == "Legal Hearing" && wfStatus =="Trial"')) {
                 // wfTask == "Legal Hearing" && wfStatus =="Trial"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Trial Date', AInfo["Trial Date"], 'N');
-            } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year", 'wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year')) {
+            } else if(ifTracer(wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year", 'wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year"')) {
                 // wfTask == "Legal Hearing" && wfStatus =="NFZV - 1 Year"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
+				updateOrCreateValueInASITable(tableName, colKeyName, 'Disposition', wfStatus, 'N');
             } else if(ifTracer(wfTask == "Legal Hearing" && 
                         (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"
                         || wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"
