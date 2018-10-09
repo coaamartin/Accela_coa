@@ -14,8 +14,8 @@ var inspResultObj = aa.inspection.getInspections(capId);
          {
             
 				//if (matches(inspList[index].getInspectionStatus().toUpperCase(), "FAILED", "PASSED", "FINAL")) {
-  		   var InspContents = inspList[index].getOutput;
-         var ShowInspName = InspContents.inspType + "";
+  		   var InspContents = inspList[index];
+         var ShowInspName = InspContents.inspType.getOutput();
 
          //logDebug("Hello JP - Print Object = " + printObject(inspList[index]));
          
