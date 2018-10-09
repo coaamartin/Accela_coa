@@ -13,7 +13,9 @@ var inspResultObj = aa.inspection.getInspections(capId);
          {
             
 				//if (matches(inspList[index].getInspectionStatus().toUpperCase(), "FAILED", "PASSED", "FINAL")) {
-  		   var ShowInspName = inspList[index].name;         
+  		   var ShowInspName = inspList[index].get    
+
+         logDebug("Hello JP - Print Object = " + printObject(inspList[index]));
          
                //scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)
                
