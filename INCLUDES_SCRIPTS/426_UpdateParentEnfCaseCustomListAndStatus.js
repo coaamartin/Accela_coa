@@ -218,11 +218,15 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             //WTUA
             if(ifTracer(wfTask == "Record NOV" && wfStatus == "Record Reception", 'wfTask == "Record NOV" && wfStatus == "Record Reception"')) {
                 // wfTask == "Record NOV" && wfStatus == "Record Reception"
-                addAsiTableRow(tableName, [
+                /*addAsiTableRow(tableName, [
                     { colName: 'NOV Record #', colValue: capIDString },
                     { colName: 'Recordation Date', colValue: AInfo['Record Reception Date'] },
                     { colName: 'Recordation #', colValue: AInfo['Record Reception #'] }
-                ], { capId: parentCapId });
+                ], { capId: parentCapId });*/
+				updateOrCreateValueInASITable(tableName, colKeyName, 'NOV Record #', colValue: capIDString, 'N');
+				updateOrCreateValueInASITable(tableName, colKeyName, 'Recordation Date', colValue: AInfo['Record Reception Date'], 'N');
+				updateOrCreateValueInASITable(tableName, colKeyName, 'Recordation #', colValue: AInfo['Record Reception #'], 'N');
+				
             } else if(ifTracer(wfTask == "Release NOV" && wfStatus == "Record Reception", 'wfTask == "Release NOV" && wfStatus == "Record Reception"')) {
                 // wfTask == "Release NOV" && wfStatus == "Record Reception"
                 updateRecordWithCountyUponCompletion();
