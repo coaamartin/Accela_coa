@@ -3,7 +3,7 @@
 // if there are then prevent the wf task from proceeding and present a message stating "There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed.  
 */
 
-logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled");
+//logDebug("JMP JMP Alert: ------------------------>> Called Script Item #62 - 62_Building_Inspection_Check_Pending_Scheduled");
 
 if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO") 
 {
@@ -23,8 +23,8 @@ if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO")
 
 	for (xx in inspList)
 	{
-	  inspResult = "NadaJP" + "";
-	  inspId = inspList[xx].getIdNumber();
+	  //inspResult = "NadaJP" + "";
+	  //inspId = inspList[xx].getIdNumber();
 	  inspResult = inspList[xx].getInspectionStatus();
 		
 	  if ("Pending".equals(inspResult))
