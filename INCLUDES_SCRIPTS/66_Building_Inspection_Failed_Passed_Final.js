@@ -7,6 +7,6 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #66_Building_Ins
 
 if matches(inspType.toUpperCase,"FAILED", "PASSED", "FINAL")
 {
-  editAppSpecific("Permit Expiration Date",dateAdd(null,180));  
+  //editAppSpecific("Permit Expiration Date",dateAdd(null,180));  
 }
 
