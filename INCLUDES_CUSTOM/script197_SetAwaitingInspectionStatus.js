@@ -7,11 +7,13 @@
 //              Action update the record status to “Awaiting Inspection”
 //
 //Created By: Silver Lining Solutions
+//
+// UPDATED JMP 10/9/2018 - Per update from chuck, Sprinkler System has been renamed to Sprinkler System Rough.  
 
 function script197_SetAwaitingInspectionStatus() {
 	logDebug("script197_SetAwaitingInspectionStatus() started.");
 	try {
-		if(inspType == "Sprinkler System" ){
+		if(inspType == "Sprinkler System Rough" ){
 			updateAppStatus("Awaiting Inspection");
 		}
 	}
