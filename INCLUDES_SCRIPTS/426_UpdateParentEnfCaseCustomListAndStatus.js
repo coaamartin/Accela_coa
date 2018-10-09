@@ -11,7 +11,8 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         dte,
         maxInsp,
         eventName = aa.env.getValue("EventName"),
-        parentCapId = getParent();
+        parentCapId = getParent(),
+		currDate = aa.util.parseDate(dateAdd(null, 0));
 
     if(parentCapId == false) {
         logDebug('ERROR: :The record does not have an associated parent record.')
@@ -182,16 +183,50 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     dte = maxInsp.getInspectionStatusDate().getMonth() + "/" + maxInsp.getInspectionStatusDate().getDayOfMonth() + "/" + maxInsp.getInspectionStatusDate().getYear();
                     updateOrCreateValueInASITable(tableName, colKeyName, 'Compliance Date', formatDteStringToMMDDYYYY(dte), 'N');
                 }
-             }
+            }
+			if(ifTracer(inspType == "NOV Recordation Photos" && inspResult == "Taken and Stored", 'inspType == "NOV Release Inspection" && inpsResult == "Taken and Stored"')){
+				// get the inspector from GIS and assign the rec to this user
+                inspUserObj = null;
+                x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
+                if(x[0]){
+                    logDebug(x[0]["OFFICER_NAME"]);
+                    
+                    var offFullName = x[0]["OFFICER_NAME"];
+                    
+                    var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+                    logDebug(offFname);
+                    
+                    var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+                    logDebug(offLname);
+                    
+                    inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+                }
+	            
+				var nextWD = nextWorkDay(dateAdd(null, 89));
+                var numOfDays4Insp = days_between(currDate, aa.util.parseDate(nextWD));
+				
+	            if(inspUserObj != null){
+	                var newInspId = scheduleInspectionCustom4CapId(capId, "NOV Release Inspection",numOfDays4Insp, inspUserObj.getUserID());
+	            }
+				else
+					var newInspId = scheduleInspectionCustom4CapId(capId, "NOV Release Inspection",numOfDays4Insp);
+				
+				updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', formatDteStringToMMDDYYYY(dateAdd(null, numOfDays4Insp)), 'N');
+			}
+			
         }  else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
             //WTUA
             if(ifTracer(wfTask == "Record NOV" && wfStatus == "Record Reception", 'wfTask == "Record NOV" && wfStatus == "Record Reception"')) {
                 // wfTask == "Record NOV" && wfStatus == "Record Reception"
-                addAsiTableRow(tableName, [
+                /*addAsiTableRow(tableName, [
                     { colName: 'NOV Record #', colValue: capIDString },
                     { colName: 'Recordation Date', colValue: AInfo['Record Reception Date'] },
                     { colName: 'Recordation #', colValue: AInfo['Record Reception #'] }
-                ], { capId: parentCapId });
+                ], { capId: parentCapId });*/
+				//updateOrCreateValueInASITable(tableName, colKeyName, 'NOV Record #', capIDString, 'N');
+				updateOrCreateValueInASITable(tableName, colKeyName, 'Recordation Date', AInfo['Record Reception Date'], 'N');
+				updateOrCreateValueInASITable(tableName, colKeyName, 'Recordation #', AInfo['Record Reception #'], 'N');
+				
             } else if(ifTracer(wfTask == "Release NOV" && wfStatus == "Record Reception", 'wfTask == "Release NOV" && wfStatus == "Record Reception"')) {
                 // wfTask == "Release NOV" && wfStatus == "Record Reception"
                 updateRecordWithCountyUponCompletion();

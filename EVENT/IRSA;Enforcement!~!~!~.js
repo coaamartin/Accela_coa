@@ -230,7 +230,7 @@ if(inspType == "Legal Resolution"){
 
 if(inspType == "NOV Recordation Photos"){
     //Script 346
-    enfProcessInspResult("NOV Recordation Photos", "Taken and Stored ", null, null, false, "Recordation Photos", "Taken and Stored");
+    enfProcessInspResult("NOV Recordation Photos", "Taken and Stored", null, null, false, "Recordation Photos", "Taken and Stored");
 }
 
 if(inspType == "NOV Release Inspection"){
