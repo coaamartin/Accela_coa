@@ -223,7 +223,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     { colName: 'Recordation Date', colValue: AInfo['Record Reception Date'] },
                     { colName: 'Recordation #', colValue: AInfo['Record Reception #'] }
                 ], { capId: parentCapId });*/
-				updateOrCreateValueInASITable(tableName, colKeyName, 'NOV Record #', capIDString, 'N');
+				//updateOrCreateValueInASITable(tableName, colKeyName, 'NOV Record #', capIDString, 'N');
 				updateOrCreateValueInASITable(tableName, colKeyName, 'Recordation Date', AInfo['Record Reception Date'], 'N');
 				updateOrCreateValueInASITable(tableName, colKeyName, 'Recordation #', AInfo['Record Reception #'], 'N');
 				
