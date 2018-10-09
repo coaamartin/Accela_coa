@@ -184,7 +184,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                     updateOrCreateValueInASITable(tableName, colKeyName, 'Compliance Date', formatDteStringToMMDDYYYY(dte), 'N');
                 }
             }
-			if(ifTracer(inspType == "NOV Recordation Photos" && inspResult == "Taken and Stored", 'inspType == "NOV Release Inspection" && inpsResult == "Taken and Stored"')){
+			if(ifTracer(inspType == "NOV Recordation Photos" && inspResult == "Taken and Stored", 'inspType == "NOV Release Inspection" && inspResult == "Taken and Stored"')){
 				// get the inspector from GIS and assign the rec to this user
                 inspUserObj = null;
                 x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
@@ -212,6 +212,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 					var newInspId = scheduleInspectionCustom4CapId(capId, "NOV Release Inspection",numOfDays4Insp);
 				
 				updateOrCreateValueInASITable(tableName, colKeyName, 'Next Inspection Date', formatDteStringToMMDDYYYY(dateAdd(null, numOfDays4Insp)), 'N');
+				updateOrCreateValueInASITable(tableName, colKeyName, 'Last Inspection Date', inspResultDate, 'N');
 			}
 			
         }  else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
