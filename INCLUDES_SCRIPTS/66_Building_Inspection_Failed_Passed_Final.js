@@ -15,8 +15,8 @@ var inspResultObj = aa.inspection.getInspections(capId);
             
 				//if (matches(inspList[index].getInspectionStatus().toUpperCase(), "FAILED", "PASSED", "FINAL")) {
   		   //var InspContents = inspList[index];
-         var GetName = inspList[index].getOutput();
-         var ShowInspName = GetName;
+         var GetName = inspList[index];
+         var ShowInspName = GetName.getOutput();
          
          //
 
@@ -24,7 +24,7 @@ var inspResultObj = aa.inspection.getInspections(capId);
          
                //scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)
                
-         logDebug("JMP JMP Alert: ------------------------>> Script Item #66 = " + ShowInspName.inspType + "");
+         logDebug("JMP JMP Alert: ------------------------>> Script Item #66 = " + ShowInspName.inspType);
 				
 
          }
