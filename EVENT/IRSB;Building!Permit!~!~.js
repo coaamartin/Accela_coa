@@ -38,6 +38,8 @@ Sample Call : checkIfPassedInspections(inspType)
 
 */
 
+logDebug("HERE in IRSB = " + appMatch)
+
 if (matches(appMatch,"Building/Permit/Master/NA","Building/Permits/Plans/NA","Building/Permits/No Plans/NA"))
 {
 include("66_Building_Inspection_Failed_Passed_Final");
