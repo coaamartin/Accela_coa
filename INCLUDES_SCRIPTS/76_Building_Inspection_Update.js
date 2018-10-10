@@ -16,10 +16,10 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
 			for (index in inspList) 
          {
             
-  		   var ShowInspName = inspList[index].getInspectionType()
+  		   var ShowInspName = inspList[index].getInspectionType();
                //scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)
                
-         logDebug("JMP JMP Alert: ------------------------>> Script Item #66 = " & ShowInspName
+         logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " & ShowInspName);
 				
 
          }
