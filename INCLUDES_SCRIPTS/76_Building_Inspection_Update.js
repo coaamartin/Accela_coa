@@ -10,61 +10,53 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
 {
   
   var inspResultObj = aa.inspection.getInspections(capId);
-	if (inspResultObj.getSuccess()) 
-   {
-      var foundInspection = false;
-      
+  if (inspResultObj.getSuccess()) 
+  {      
 		var inspList = inspResultObj.getOutput();
-			for (index in inspList) 
-         {            
-  		      var showInspName = inspList[index].getInspectionType() + "";
-            
-            if (showInspName == "Roofing")
-            { 
-
-              inspList[index].setInspectionStatus("Pending");
-              aa.inspection.editInspection(inspList[index]);
-
-            }    
-            
-            if (showInspName == "Engineering Inspection")
-            { 
-              inspList[index].setInspectionStatus("Pending");
-              aa.inspection.editInspection(inspList[index]);
-            }  
-            
-            if (showInspName == "Grade Inspection")
-            { 
-              inspList[index].setInspectionStatus("Pending");
-              aa.inspection.editInspection(inspList[index]);
-            }  
-            
-            if (showInspName == "Zoning Inspection")
-            { 
-              inspList[index].setInspectionStatus("Pending");
-              aa.inspection.editInspection(inspList[index]);
-            }    
-
-            if (showInspName == "Water Service/Sanitary Service Inspection")
-            { 
-              inspList[index].setInspectionStatus("Pending");
-              aa.inspection.editInspection(inspList[index]);   
-
-            }
-
-            if (showInspName == "Irrigation Inspection")
-            { 
-              inspList[index].setInspectionStatus("Pending");
-              aa.inspection.editInspection(inspList[index]);                  
-            }      
-
-         //logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
-         //logDebug("Hello JP - Print Object = " + printObject(in);
-         //OK JP - Just testing         
-         }
+      for (index in inspList)          
+      {            
+   
+         var foundInspection = false;
+         var showInspName = inspList[index].getInspectionType() + "";
          
+         if (showInspName == "Roofing")
+         { 
+           foundInspection = true;
+         }    
+         
+         if (showInspName == "Engineering Inspection")
+         { 
+           foundInspection = true;
+         }  
+         
+         if (showInspName == "Grade Inspection")
+         { 
+           foundInspection = true;
+         }  
+         
+         if (showInspName == "Zoning Inspection")
+         { 
+           foundInspection = true;
+         }    
 
-   }
+         if (showInspName == "Water Service/Sanitary Service Inspection")
+         { 
+           foundInspection = true;  
+         }
+
+         if (showInspName == "Irrigation Inspection")
+         { 
+           foundInspection = true;               
+         }   
+
+         if (foundInspection)            
+         {               
+           inspList[index].setInspectionStatus("Pending");
+           aa.inspection.editInspection(inspList[index]);                  
+         } 
+       
+      }
+  }
 
 
 }
