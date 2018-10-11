@@ -19,6 +19,27 @@ if(ifTracer(inspType == "4th Housing Re-Inspection" && matches(inspResult, "Insp
    enfScript350_archiveLists();
 }
 
+
+if(ifTracer(inspType == "Initial Housing Inspection" && inspResult == "Inspection Passed", 'Initial Housing Inspection/Inspection Passed')){
+   enfScript350_archiveInspInformation();
+}
+
+if(ifTracer(inspType == "1st Housing Re-Inspection" && inspResult == "Inspection Passed", 'Initial Housing Inspection/Inspection Passed')){
+   enfScript350_archiveInspInformation();                                   
+}
+
+if(ifTracer(inspType == "2nd Housing Re-Inspection" && inspResult == "Inspection Passed", 'Initial Housing Inspection/Inspection Passed')){
+   enfScript350_archiveInspInformation();                                   
+}
+
+if(ifTracer(inspType == "3rd Housing Re-Inspection" && inspResult == "Inspection Passed", 'Initial Housing Inspection/Inspection Passed')){
+   enfScript350_archiveInspInformation();                                   
+}
+
+if(ifTracer(inspType == "4th Housing Re-Inspection" && inspResult == "Inspection Passed", 'Initial Housing Inspection/Inspection Passed')){
+   enfScript350_archiveInspInformation();
+}
+
 //script 351
 
 var feeCode;
