@@ -23,6 +23,26 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
             { 
               foundInspection = true;
             }    
+            
+            if (showInspName == “Engineering Inspection”)
+            { 
+              foundInspection = true;
+            }    
+            
+            if (showInspName == “Grade Inspection”)
+            { 
+              foundInspection = true;
+            }   
+            
+            if (showInspName == “Zoning Inspection”)
+            { 
+              foundInspection = true;
+            }  
+
+            if (showInspName == “Irrigation Inspection” )
+            { 
+              foundInspection = true;
+            }
          
                       
          
