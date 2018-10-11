@@ -20,6 +20,7 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
                //scheduleInspectDate(INSPECTION_NAME, nextInspectionDate)
                
          logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " & ShowInspName);
+         //OK JP - Just testing
 				
 
          }
