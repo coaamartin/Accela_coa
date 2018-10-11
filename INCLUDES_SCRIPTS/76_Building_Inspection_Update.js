@@ -18,7 +18,7 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
             
   		   var showInspName = String(inspList[index].getInspectionType());
                
-         logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " & (showInspName));
+         logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
          //logDebug("Hello JP - Print Object = " + printObject(in);
          //OK JP - Just testing
 				
