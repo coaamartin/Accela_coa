@@ -241,8 +241,9 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Date', AInfo['Abatement Completed Date'], 'N');
    //    updateOrCreateValueInASITable(tableName, colKeyName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
-        updateAbatementAdminCharge();
-        updateOrCreateValueInASITable(tableName, colKeyName, 'Lien Amount', feesInvoicedTotal.toString(), 'N');
+        var adminAmt = updateAbatementAdminCharge();
+		var lienAmt = (adminAmt + feesInvoicedTotal).toFixed(2);
+        updateOrCreateValueInASITable(tableName, colKeyName, 'Lien Amount', lienAmt.toString(), 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Release Date', AInfo["Release Reception Date"], 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Released to County Date', AInfo["Released to County Date"], 'N');
     
@@ -331,7 +332,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         var parentCapId,
             parentCapScriptModel,
             parentCapTypeString,
-            amt;
+            amt = 0;
     
         parentCapId = getParent();
         if(ifTracer(parentCapId, 'parent found')) { 
@@ -348,7 +349,9 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
 				 amt = amt.toFixed(2);
                  updateOrCreateValueInASITable(tableName, colKeyName, 'Admin Charge', amt.toString(), 'N');
             }
-        } 
+        }
+
+        return amt;
     }   
     
     
