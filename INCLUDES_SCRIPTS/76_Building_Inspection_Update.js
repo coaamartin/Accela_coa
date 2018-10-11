@@ -47,17 +47,19 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
             if (showInspName == "Irrigation Inspection")
             { 
               foundInspection = true;
-            }              
+            }      
+
+            if (foundInspection)
+            {
+              inspList[index].setInspectionStatus("Pending");
+            }            
          
          //logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
          //logDebug("Hello JP - Print Object = " + printObject(in);
          //OK JP - Just testing         
          }
          
-         if (foundInspection)
-         {
-           inspList[index].setInspectionStatus("Pending");
-         }
+
    }
 
 
