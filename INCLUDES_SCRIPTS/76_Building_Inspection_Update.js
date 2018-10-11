@@ -18,6 +18,11 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
 			for (index in inspList) 
          {            
   		      var showInspName = inspList[index].getInspectionType() + "";
+            
+            if (showInspName == "Roofing")
+            { 
+              foundInspection = true;
+            }    
          
                       
          
