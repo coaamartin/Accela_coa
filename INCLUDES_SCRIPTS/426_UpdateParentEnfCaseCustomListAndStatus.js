@@ -69,7 +69,21 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 updateAbatementAdminCharge();
             } else if(ifTracer(wfTask == "Recordation" && wfStatus =="Record Reception", "wfTask == Recordation && wfStatus == Record Reception")) {
                 // wfTask == "Recordation" && wfStatus =="Record Reception"
-                updateOrCreateValueInASITable(tableName, colKeyName, 'Lien Amount', feesInvoicedTotal.toString(), 'N');
+				var feeG = feeW = feeS = feeT = feeB = 0;
+                if(AInfo["Contractor Fee - Graffiti"] != null) feeG = parseFloat(AInfo["Contractor Fee - Graffiti"]);
+                if(AInfo["Contractor Fee - Weeds"] != null) feeW = parseFloat(AInfo["Contractor Fee - Weeds"]);
+                if(AInfo["Contractor Fee - Snow"] != null) feeS = parseFloat(AInfo["Contractor Fee - Snow"]);
+                if(AInfo["Contractor Fee - Trash"] != null) feeT = parseFloat(AInfo["Contractor Fee - Trash"]);
+                if(AInfo["Contractor Fee - Board-Up"] != null) feeB = parseFloat(AInfo["Contractor Fee - Board-Up"]);
+                                
+                var feeTotal = feeG + feeW + feeS + feeT + feeB;
+				feeTotal = feeTotal.toFixed(2);
+                logDebug("feeTotal:" + feeTotal);
+				
+				var adminAmt = updateAbatementAdminCharge();
+		        var lienAmt = (adminAmt + feeTotal).toFixed(2);
+				
+                updateOrCreateValueInASITable(tableName, colKeyName, 'Lien Amount', lienAmt.toString(), 'N');
             } else if(ifTracer(wfTask == "Release Lien" && wfStatus =="Record Reception", "wfTask == Release Lien && wfStatus == Record Reception")) {
                 // wfTask == "Release Lien" && wfStatus =="Record Reception"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Release Date', AInfo["Release Reception Date"], 'N');
