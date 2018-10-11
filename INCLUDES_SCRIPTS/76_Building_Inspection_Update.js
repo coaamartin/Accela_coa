@@ -19,36 +19,6 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
          {            
   		      var showInspName = inspList[index].getInspectionType() + "";
          
-            if (showInspName == "Roofing")
-            { 
-              foundInspection = true;
-            }      
-            
-            if (showInspName == “Engineering Inspection”)
-            { 
-              foundInspection = true;
-            }    
-            
-            if (showInspName == “Grade Inspection”)
-            { 
-              foundInspection = true;
-            }   
-            
-            if (showInspName == “Zoning Inspection”)
-            { 
-              foundInspection = true;
-            }  
-
-            if (showInspName == “Water Service/Sanitary Service Inspection”)
-            { 
-              foundInspection = true;
-            }  
-                     
-            if (showInspName == “Irrigation Inspection” )
-            { 
-              foundInspection = true;
-            }
-
                       
          
          //logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
