@@ -21,10 +21,20 @@ function autoAssignInspectionCoA(iNumber){
 	inspTypeArr = inspTypeResult.getOutput();
 
     if (inspTypeArr == null || inspTypeArr.length == 0) {
-		logDebug("**ERROR no inspection type found") ;
-		return false ;
+		logDebug("ERROR no inspection type found using inspection group. Trying with no inspection group") ;
+		inspTypeResult = aa.inspection.getInspectionType("", iObj.getInspectionType())
+
+	    if (!inspTypeResult.getSuccess()){
+	    	logDebug("**ERROR retrieving inspection Type " + inspTypeResult.getErrorMessage()) ;
+	    	return false ;
+	    }
+		
+		inspTypeArr = inspTypeResult.getOutput();
 	}
 
+	if (inspTypeArr == null || inspTypeArr.length == 0)
+		{ logDebug("**ERROR no inspection type found") ; return false ; }
+	
 	thisInspType = inspTypeArr[0]; // assume first
 
 	inspSeq = thisInspType.getSequenceNumber();

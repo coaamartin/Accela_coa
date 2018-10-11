@@ -41,7 +41,7 @@ function enfProcessInspResult(iType, iResult, newInsp, newInspDateOrDays, carryO
                 
                 var newInspId = scheduleInspectionCustom(newInsp, numOfDays4Insp);
 				
-                //autoAssignInspectionCoA(newInspId);
+                autoAssignInspectionCoA(newInspId);
 				
                 if($iTrc(carryOverFailedCheckList && newInspId, 'copy failed checklist items to inspId: ' + newInspId)) {
                     if($iTrc(inspType == "Snow Initial Inspection" && inspResult == "Skip to Summons"))
