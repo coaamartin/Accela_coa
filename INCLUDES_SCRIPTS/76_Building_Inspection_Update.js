@@ -22,41 +22,40 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
             if (showInspName == "Roofing")
             { 
 
-              inspList[index].setInspectionStatus("Passed");
+              inspList[index].setInspectionStatus("Pending");
               aa.inspection.editInspection(inspList[index]);
 
-              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Roofing");
             }    
             
             if (showInspName == "Engineering Inspection")
             { 
               inspList[index].setInspectionStatus("Pending");
-              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Engineering Inspection");
+              aa.inspection.editInspection(inspList[index]);
             }  
             
             if (showInspName == "Grade Inspection")
             { 
               inspList[index].setInspectionStatus("Pending");
-              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Grade Inspection");
+              aa.inspection.editInspection(inspList[index]);
             }  
             
             if (showInspName == "Zoning Inspection")
             { 
               inspList[index].setInspectionStatus("Pending");
-              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Zoning Inspection");
+              aa.inspection.editInspection(inspList[index]);
             }    
 
             if (showInspName == "Water Service/Sanitary Service Inspection")
             { 
               inspList[index].setInspectionStatus("Pending");
-              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Water Service/Sanitary Service Inspection");        
+              aa.inspection.editInspection(inspList[index]);   
 
             }
 
             if (showInspName == "Irrigation Inspection")
             { 
               inspList[index].setInspectionStatus("Pending");
-              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Irrigation Inspection");                    
+              aa.inspection.editInspection(inspList[index]);                  
             }      
 
          //logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
