@@ -12,6 +12,8 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
   var inspResultObj = aa.inspection.getInspections(capId);
 	if (inspResultObj.getSuccess()) 
    {
+      var foundInspection = false;
+      
 		var inspList = inspResultObj.getOutput();
 			for (index in inspList) 
          {            
@@ -19,37 +21,44 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
          
             if (showInspName == "Roofing")
             { 
-              inspList[index].setInspectionStatus("Pending");
+              foundInspection = true;
             }      
             
             if (showInspName == “Engineering Inspection”)
             { 
-              inspList[index].setInspectionStatus("Pending");
+              foundInspection = true;
             }    
             
             if (showInspName == “Grade Inspection”)
             { 
-              inspList[index].setInspectionStatus("Pending");
+              foundInspection = true;
             }   
             
             if (showInspName == “Zoning Inspection”)
             { 
-              inspList[index].setInspectionStatus("Pending");
+              foundInspection = true;
             }  
 
             if (showInspName == “Water Service/Sanitary Service Inspection”)
             { 
-              inspList[index].setInspectionStatus("Pending");
+              foundInspection = true;
             }  
                      
             if (showInspName == “Irrigation Inspection” )
             { 
-              inspList[index].setInspectionStatus("Pending");
-            } 
+              foundInspection = true;
+            }
+
+                      
          
          //logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
          //logDebug("Hello JP - Print Object = " + printObject(in);
-         //OK JP - Just testing
+         //OK JP - Just testing         
+         }
+         
+         if (foundInspection)
+         {
+          //inspList[index].setInspectionStatus("Pending");
          }
    }
 
