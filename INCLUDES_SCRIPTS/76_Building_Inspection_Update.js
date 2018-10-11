@@ -21,39 +21,42 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
             
             if (showInspName == "Roofing")
             { 
-              foundInspection = true;
+              inspList[index].setInspectionStatus("Pending");
+              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Roofing");
+             
             }    
             
             if (showInspName == "Engineering Inspection")
             { 
-              foundInspection = true;
+              inspList[index].setInspectionStatus("Pending");
+              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Engineering Inspection");
             }  
             
             if (showInspName == "Grade Inspection")
             { 
-              foundInspection = true;
+              inspList[index].setInspectionStatus("Pending");
+              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Grade Inspection");
             }  
             
             if (showInspName == "Zoning Inspection")
             { 
-              foundInspection = true;
+              inspList[index].setInspectionStatus("Pending");
+              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Zoning Inspection");
             }    
 
             if (showInspName == "Water Service/Sanitary Service Inspection")
             { 
-              foundInspection = true;
+              inspList[index].setInspectionStatus("Pending");
+              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Water Service/Sanitary Service Inspection");        
+
             }
 
             if (showInspName == "Irrigation Inspection")
             { 
-              foundInspection = true;
+              inspList[index].setInspectionStatus("Pending");
+              logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Irrigation Inspection");                    
             }      
 
-            if (foundInspection)
-            {
-              inspList[index].setInspectionStatus("Pending");
-            }            
-         
          //logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
          //logDebug("Hello JP - Print Object = " + printObject(in);
          //OK JP - Just testing         
