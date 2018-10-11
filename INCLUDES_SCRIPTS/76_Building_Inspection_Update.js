@@ -24,27 +24,30 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
               foundInspection = true;
             }    
             
-            if (showInspName == “Engineering Inspection”)
-            { 
-              foundInspection = true;
-            }    
-            
-            if (showInspName == “Grade Inspection”)
-            { 
-              foundInspection = true;
-            }   
-            
-            if (showInspName == “Zoning Inspection”)
+            if (showInspName == "Engineering Inspection")
             { 
               foundInspection = true;
             }  
+            
+            if (showInspName == "Grade Inspection")
+            { 
+              foundInspection = true;
+            }  
+            
+            if (showInspName == "Zoning Inspection")
+            { 
+              foundInspection = true;
+            }    
 
-            if (showInspName == “Irrigation Inspection” )
+            if (showInspName == "Water Service/Sanitary Service Inspection")
             { 
               foundInspection = true;
             }
-         
-                      
+
+            if (showInspName == "Irrigation Inspection")
+            { 
+              foundInspection = true;
+            }              
          
          //logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
          //logDebug("Hello JP - Print Object = " + printObject(in);
@@ -53,7 +56,7 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
          
          if (foundInspection)
          {
-          //inspList[index].setInspectionStatus("Pending");
+           inspList[index].setInspectionStatus("Pending");
          }
    }
 
