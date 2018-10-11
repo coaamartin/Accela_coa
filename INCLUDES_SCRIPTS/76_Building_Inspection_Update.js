@@ -21,8 +21,9 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
             
             if (showInspName == "Roofing")
             { 
-              aa.inspection.editInspection(inspList[index]);
+
               inspList[index].setInspectionStatus("Passed");
+              aa.inspection.editInspection(inspList[index]);
 
               logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + "Roofing");
             }    
