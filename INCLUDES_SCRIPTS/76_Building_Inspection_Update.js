@@ -14,16 +14,43 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
    {
 		var inspList = inspResultObj.getOutput();
 			for (index in inspList) 
-         {
-            
-  		   var showInspName = String(inspList[index].getInspectionType());
-               
-         logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
+         {            
+  		   var showInspName = inspList[index].getInspectionType() + "";
+         
+         if (showInspName == "Roofing")
+         { 
+           inspList[index].setInspectionStatus("Pending");
+         }      
+         
+         if (showInspName == “Engineering Inspection”)
+         { 
+           inspList[index].setInspectionStatus("Pending");
+         }    
+         
+         if (showInspName == “Grade Inspection”)
+         { 
+           inspList[index].setInspectionStatus("Pending");
+         }   
+         
+         if (showInspName == “Zoning Inspection”)
+         { 
+           inspList[index].setInspectionStatus("Pending");
+         }  
+
+         if (showInspName == “Water Service/Sanitary Service Inspection”)
+         { 
+           inspList[index].setInspectionStatus("Pending");
+         }  
+                  
+         if (showInspName == “Irrigation Inspection” )
+         { 
+           inspList[index].setInspectionStatus("Pending");
+         } 
+         
+         //logDebug("JMP JMP Alert: ------------------------>> Script Item #76 = " + (showInspName));
          //logDebug("Hello JP - Print Object = " + printObject(in);
          //OK JP - Just testing
-				
-
-         }
+	
    }
 
 
