@@ -1,20 +1,17 @@
-function feeAmount2(feestr, options) {
-    var settings = {
-        capId: capId,
-        checkStatus: false
-    };
-    for (var attr in options) { settings[attr] = options[attr]; } //optional params - overriding default settings
-
+function feeAmount2(feestr, itemCap) {
+    var checkStatus = false;
 	var statusArray = new Array();
 
 	//get optional arguments
-	if (settings.checkStatus == true) {
+	if (arguments.length > 2) {
+		checkStatus = true;
 		for (var i = 1; i < arguments.length; i++)
 			statusArray.push(arguments[i]);
 	}
 
+
 	var feeTotal = 0;
-	var feeResult = aa.fee.getFeeItems(settings.capId, feestr, null);
+	var feeResult = aa.fee.getFeeItems(itemCap, feestr, null);
 	if (feeResult.getSuccess()) {
 		var feeObjArr = feeResult.getOutput();
 	} else {
@@ -23,10 +20,10 @@ function feeAmount2(feestr, options) {
 	}
 
 	for (ff in feeObjArr) {
-		if (feestr.equals(feeObjArr[ff].getFeeCod()) && (!settings.checkStatus || exists(feeObjArr[ff].getFeeitemStatus(), statusArray))) {
+		if (feestr.equals(feeObjArr[ff].getFeeCod()) && (!checkStatus || exists(feeObjArr[ff].getFeeitemStatus(), statusArray))) {
             feeTotal += feeObjArr[ff].getFee();
         }
     }
 
     return feeTotal;
-} 
+}
