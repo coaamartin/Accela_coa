@@ -14,7 +14,7 @@ logDebug ("script94 START");
 if (capStatus != "Special Assessment" && balanceDue == 0 ) 
 {
 	logDebug ("script94 criteria met");
-	updateTask("Recordation","Lien Paid","updated by script","updated by script");
-	activateTask("Release Lien");
+	resultWorkflowTask("Recordation","Lien Paid","updated by script","updated by script");
+	//activateTask("Release Lien");
 }
 logDebug ("script94 END");
