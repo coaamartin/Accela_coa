@@ -96,7 +96,22 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             }        
         } else if(ifTracer(eventName == "PaymentReceiveAfter", "EventName == PaymentReceiveAfter")) {
             //PRA
-            if(ifTracer(balanceDue == 0,'balanceDue = 0')) {
+			var parentCapId,
+            parentCapScriptModel,
+            parentCapTypeString,
+            parentBalance = 0;
+    
+            parentCapId = getParent();
+            if(ifTracer(parentCapId, 'parent found')) {
+                parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
+                parentCapTypeString = parentCapScriptModel.getCapType().toString();
+                if(ifTracer(parentCapTypeString.indexOf('Enforcement/Incident/Snow') > -1, 'parent = Snow Violation Case')) {
+                    //parent is Snow Violation Case
+                    parentBalance = getBalanceByCapId("", "", true, parentCapId);
+                }
+            }			
+			
+            if(ifTracer(balanceDue == 0 && parentBalance == 0,'balanceDue = 0')) {
                 paymentDateArr = PaymentDate.split('-');
                 yyyy = paymentDateArr[0].toString();
                 mm = paymentDateArr[1].toString();
