@@ -7,5 +7,6 @@ for (i in vChecklistItems) {
 		cancel = true;
 		showMessage = true;
 		comment("Every checklist item must be resulted. Please review checklist items before submitting inspection results");
+		break;
 	}
 }
