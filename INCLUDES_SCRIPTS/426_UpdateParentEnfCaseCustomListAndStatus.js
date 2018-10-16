@@ -291,7 +291,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
    //    updateOrCreateValueInASITable(tableName, colKeyName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
         var adminAmt = updateAbatementAdminCharge();
-		var lienAmt = (adminAmt + feesInvoicedTotal).toFixed(2);
+		var lienAmt = (parseFloat(adminAmt) + parseFloat(feesInvoicedTotal)).toFixed(2);
         updateOrCreateValueInASITable(tableName, colKeyName, 'Lien Amount', lienAmt.toString(), 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Release Date', AInfo["Release Reception Date"], 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Released to County Date', AInfo["Released to County Date"], 'N');
