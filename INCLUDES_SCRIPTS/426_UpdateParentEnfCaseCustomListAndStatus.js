@@ -184,7 +184,27 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                         ), 'wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons"')) {
                 // wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Disposition', wfStatus + " - " + wfComment, 'N');
-				scheduleInspection("Legal Resolution", 0);
+				
+				inspUserObj = null;
+                x = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","OFFICER_NAME");
+                if(x[0]){
+                    logDebug(x[0]["OFFICER_NAME"]);
+                    
+                    var offFullName = x[0]["OFFICER_NAME"];
+                    
+                    var offFname = offFullName.substr(0,offFullName.indexOf(' '));
+                    logDebug(offFname);
+                    
+                    var offLname = offFullName.substr(offFullName.indexOf(' ')+1);
+                    logDebug(offLname);
+                    
+                    inspUserObj = aa.person.getUser(offFname,null,offLname).getOutput();
+                }
+                
+                if(inspUserObj != null)
+                    scheduleInspectionCustom4CapId(capId, "Legal Resolution",0, inspUserObj.getUserID());
+				else
+					scheduleInspection("Legal Resolution",0);
             }
         }         
     } else if (matchARecordType([
@@ -294,6 +314,23 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
         updateOrCreateValueInASITable(tableName, colKeyName, 'NFZV Date', AInfo["NFZV - 1 Year Date"], 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Summons #', AInfo['Court Z-Number'], 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Issue Date', AInfo['Court Z-Number'], 'N');
+		
+		var respPeople = getContacts( { contactType: "Responsible Party" });
+        if(respPeople.length > 0) {
+            for(var rp in respPeople) {
+                if(respPeople[rp].getFlag() == "Y") {
+                    var name = "";
+                    if(respPeople[rp].getFullName() != null)
+                        name = respPeople[rp].getFullName();
+                    
+                    if(respPeople[rp].getFullName() == null && respPeople[rp].getBusinessName() == null)
+                        name = respPeople[rp].getFirstName() + " " + respPeople[rp].getLastName();
+                    else if(respPeople[rp].getFullName() == null)
+                        name = respPeople[rp].getBusinessName()
+                }
+            }
+        }
+		updateOrCreateValueInASITable(tableName, colKeyName, 'Defendant', name, 'N');
     
         var childrenWithActiveTasks = getChildrenWithActiveTasks();
         if(ifTracer(childrenWithActiveTasks.length == 1, 'childrenWithActiveTasks && childrenWithActiveTasks.length == 1')) {
