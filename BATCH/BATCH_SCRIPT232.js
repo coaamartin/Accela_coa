@@ -234,6 +234,7 @@ var bldgInspSchedDate;
 			addParameter(eParams, "$$inspResultDate$$", formatDateX(cycleInspections[i].getInspectionDate()));
 			addParameter(eParams, "$$inspType$$", cycleInspections[i].getInspectionType());
 			addParameter(eParams, "$$inspSchedDate$$", cycleInspections[i].getScheduledDate());
+			addParameter(eParams, "$$inspResultComment$$", cycleInspections[i].getInspectionComments());
 			
 			var reportParams = aa.util.newHashtable();
 			addParameter(reportParams, "InspActNumber", cycleInspections[i].getIdNumber());
@@ -302,7 +303,7 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 			//nextInspDate = new Date(nextInspDate);
 			cycleInspections[i].setScheduledDate(aa.date.parseDate(nextInspDate));
 			aa.inspection.editInspection(cycleInspections[i]);
-			logDebug2("Failed inspection is within 7 days of cycle end. Moving inspection to next cycle");
+			logDebug2("Failed inspection is within 6 days of cycle end. Moving inspection to next cycle");
 			readyCount++;
 		}
 	}
