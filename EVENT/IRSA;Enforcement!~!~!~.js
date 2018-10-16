@@ -81,7 +81,7 @@ if(inspType == "Snow Initial Inspection"){
     enfProcessInspResult("Snow Initial Inspection", "No Violation Observed", null, null, false, "Initial Investigation", "No Violation Observed");
     enfProcessInspResult("Snow Initial Inspection", "Visit/Attempted Contact", "Snow Initial Inspection", "nextWorkDay", true, "Initial Investigation", "Visit/Attempted Contact");
     enfProcessInspResult("Snow Initial Inspection", "Refer to Other Department", null, null, false, "Initial Investigation", "Refer to Other Department");
-    enfProcessInspResult("Snow Initial Inspection", "Skip to Summons", "Summons Issuance", "nextWorkDay", true, "Initial Investigation", "Skip to Summons");
+    enfProcessInspResult("Snow Initial Inspection", "Skip to Summons", null, null, false, "Initial Investigation", "Skip to Summons");
     enfProcessInspResult("Snow Initial Inspection", "Skip to City Abatement", "City Abatement Order", "nextWorkDay", true, "Initial Investigation", "Skip to City Abatement");
 }
 
