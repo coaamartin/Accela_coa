@@ -180,11 +180,11 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             } else if(ifTracer(wfTask == "Legal Hearing" && 
                         (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"
                         || wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"
-                        || wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"
-                        || wfStatus == "FTA"
-                        ), 'wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"')) {
+                        || wfStatus == "Non-Compliance New Summons"
+                        ), 'wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons"')) {
                 // wfTask == "Legal Hearing" && (wfStatus == "NFZV - 1 Year" || wfStatus == "Compliance"|| wfStatus == "Dismissed" || wfStatus == "Dismissed - Lack of Service"|| wfStatus == "Non-Compliance New Summons" || wfStatus == "Non-Compliance"|| wfStatus == "FTA"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Disposition', wfStatus + " - " + wfComment, 'N');
+				scheduleInspection("Legal Resolution", 0);
             }
         }         
     } else if (matchARecordType([
