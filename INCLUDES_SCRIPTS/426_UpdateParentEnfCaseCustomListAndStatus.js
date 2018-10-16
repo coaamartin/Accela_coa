@@ -81,7 +81,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 logDebug("feeTotal:" + feeTotal);
 				
 				var adminAmt = updateAbatementAdminCharge();
-		        var lienAmt = (adminAmt + feeTotal).toFixed(2);
+		        var lienAmt = (parseFloat(adminAmt) + parseFloat(feeTotal)).toFixed(2);
 				
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Lien Amount', lienAmt.toString(), 'N');
             } else if(ifTracer(wfTask == "Release Lien" && wfStatus =="Record Reception", "wfTask == Release Lien && wfStatus == Record Reception")) {
