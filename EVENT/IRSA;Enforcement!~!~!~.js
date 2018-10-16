@@ -459,6 +459,11 @@ if (inspResult == "Skip to Summons" || inspResult == "Snow Abate/Summons" || ins
     copyAddresses(capId, newChildCapId);
     copyParcels(capId, newChildCapId);
     copyOwner(capId, newChildCapId);
+	
+	if(inspResult == "Skip to Summons" && appMatch("Enforcement/Housing/Inspection/NA")){
+	    copyASITableByTName("UNIT INSPECTION VIOLATIONS", capId, newChildCapId);
+	    copyASITableByTName("BUILDING INSPECTION VIOLATIONS", capId, newChildCapId);
+	}
     
     if(inspUserObj != null) 
         assignCap(inspUserObj.getUserID(), newChildCapId);
