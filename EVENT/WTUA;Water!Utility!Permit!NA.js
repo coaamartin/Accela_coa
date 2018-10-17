@@ -41,7 +41,7 @@ var wasSuccessful = false;
 wasSuccessful = checkNoFeeAndUpdateTask(capId, "Fee Processing", [ "No Fees Required" ], "MESSAGE_NOTICE_PUBLIC WORKS", "Permit Issuance", "Issued","Issued");
 if (wasSuccessful) 
 {
-  //make sure to move to Permit Issuance  
+  activateTask("Permit Issuance");
 }
 
 //SWAKIL - Email
