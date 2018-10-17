@@ -41,7 +41,10 @@ function failedMJInspectionAutomation(vCapType) {
 			
 			//assign inspection to inspector
 			assignInspection(lastInspectionSeq, vInspector);
-			CopyChecklist(lastInspectionSeq);
+			
+			//copy checklist items from failed inspection to the new inspection
+			var sourceChecklist = getSourceGuideSheetList();
+			copyGuideSheetsFromSourceInspection(sourceChecklist, lastInspectionSeq);
 
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
