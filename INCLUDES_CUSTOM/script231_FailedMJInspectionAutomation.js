@@ -3,6 +3,7 @@ function failedMJInspectionAutomation(vCapType) {
 
 	var daysToAdd;
 	var inspDate = inspObj.getInspectionDate().getMonth() + "/" + inspObj.getInspectionDate().getDayOfMonth() + "/" + inspObj.getInspectionDate().getYear();
+	var inspResultComment = inspObj.getInspectionComments();
 	
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
@@ -64,6 +65,8 @@ function failedMJInspectionAutomation(vCapType) {
 				addParameter(eParams, "$$inspType$$", inspType);
 			if (inspSchedDate)
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
+			if (inspResultComment)
+				addParameter(eParams, "$$inspResultComment$$", inspResultComment);
 			
 			//send email with report attachment
 			emailContactsWithReportLinkASync("Inspection Contact", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");
