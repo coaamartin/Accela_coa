@@ -37,9 +37,12 @@ Sample Call:
 Supported Email Parameters:
 	$$altID$$,$$recordAlias$$,$$recordStatus$$,$$balance$$,$$wfTask$$,$$wfStatus$$,$$wfDate$$,$$wfComment$$,$$wfStaffUserID$$,$$wfHours$$
 */
-
-checkNoFeeAndUpdateTask(capId, "Fee Processing", [ "No Fees Required" ], "MESSAGE_NOTICE_PUBLIC WORKS", "Permit Issuance", "Issued","Issued");
-
+var wasSuccessful = false;
+wasSuccessful = checkNoFeeAndUpdateTask(capId, "Fee Processing", [ "No Fees Required" ], "MESSAGE_NOTICE_PUBLIC WORKS", "Permit Issuance", "Issued","Issued");
+if wasSuccessful 
+{
+  //make sure to move to Permit Issuance  
+}
 
 //SWAKIL - Email
 include("41_EmailWaterUtilityPermit");
