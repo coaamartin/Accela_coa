@@ -64,6 +64,10 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 
                 //updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feeTotal + "", 'N');
+				
+				if(ifTracer(wfStatus =="Invoiced - City Paid"), 'wfStatus =="Invoiced - City Paid"'){
+					updateAbatementUponCompletion();
+				}
             } else if(ifTracer(wfTask == "Recordation" && (wfStatus =="Submit Recording"), "wfTask == Recordation && wfStatus == Submit Recording")) {
                 // wfTask == "Recordation" && wfStatus =="Submit Recording"
                 updateAbatementAdminCharge();
@@ -87,13 +91,19 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
             } else if(ifTracer(wfTask == "Release Lien" && wfStatus =="Record Reception", "wfTask == Release Lien && wfStatus == Record Reception")) {
                 // wfTask == "Release Lien" && wfStatus =="Record Reception"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Release Date', AInfo["Release Reception Date"], 'N');
+				updateAbatementUponCompletion();
             } else if(ifTracer(wfTask == "Recordation" && wfStatus =="Released to County", "wfTask == Recordation && wfStatus == Released to County")) {
                 // wfTask == "Recordation" && wfStatus =="Released to County"
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Released to County Date', AInfo["Released to County Date"], 'N');
-            } else if(ifTracer((wfTask == "Recordation" && wfStatus =="Released to County") || (wfTask == "Invoicing" && wfStatus =="Invoiced - City Paid"), '(wfTask == "Recordation" && wfStatus =="Released to County") || (wfTask == "Invoicing" && wfStatus =="Invoiced - City Paid")')) {
+				updateAbatementUponCompletion();
+            } 
+			//REMOVED because they are being checked on the previous if statements.
+			/*else if(ifTracer((wfTask == "Recordation" && wfStatus =="Released to County") ||
+			                   (wfTask == "Invoicing" && wfStatus =="Invoiced - City Paid") ||
+							   (wfTask == "Release Lien" && wfStatus =="Record Reception"), '(wfTask == "Recordation" && wfStatus =="Released to County") || (wfTask == "Invoicing" && wfStatus =="Invoiced - City Paid") || (wfTask == "Release Lien" && wfStatus =="Record Reception")')) {
                 // wfTask == "Recordation" && wfStatus =="Released to County"
                 updateAbatementUponCompletion();
-            }        
+            }*/       
         } else if(ifTracer(eventName == "PaymentReceiveAfter", "EventName == PaymentReceiveAfter")) {
             //PRA
 			var parentCapId,
