@@ -60,7 +60,10 @@ function LogBatchDebug(etype, edesc, createEventLog) {
 }
 
 //Batch Parameters:
-var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
+//var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
+var EMAIL_TEMPLATE = "PW_LIC_AGR_REV";
+aa.print(EMAIL_TEMPLATE);
+aa.print("that was the email template");
 var SET_NAME = aa.env.getValue("SET_NAME");
 
 if (SET_NAME == null || SET_NAME == "") {
@@ -125,6 +128,11 @@ aa.print("Adrian in notifyRecordsForRenewal function");
 function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 	aa.print("Adrian sending emails");
 	var applicant = getContactByType("President", recordCapId);
+	var altId = recordCapId.getCustomID();
+	var cap = aa.cap.getCap(recordCapId).getOutput();
+	var appTypeAlias = cap.getCapType().getAlias();
+	var capStatus = cap.getCapStatus();
+	
 	if (!applicant || applicant.getEmail() == null || applicant.getEmail() == "") 
 	{
 		var applicant = getContactByType("Board Member", recordCapId);
@@ -137,11 +145,23 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 	else {
 		aa.print("sending email to HOA contact: " + applicant.getEmail());
 		var emailParams = aa.util.newHashtable();
-		addParameter(emailParams, "$$altID$$", recordCap.getCapModel().getAltID());
-		addParameter(emailParams, "$$recordAlias$$", recordCap.getCapModel().getCapType().getAlias());
-		addParameter(emailParams, "$$recordStatus$$", recordCap.getCapModel().getCapStatus());
-		//aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", EMAIL_TEMPLATE, emailParams, new Array())
-		//sendNotification("",applicant.getEmail(),"",EMAIL_TEMPLATE,emailParams,new Array()); 
-		sendNotification("","amartin@auroragov.org","",EMAIL_TEMPLATE,emailParams,new Array()); 		
+		addParameter(emailParams, "$$PERMITID$$", altId);
+		aa.print("the alias is: " + altId);
+        addParameter(emailParams, "$$TASKCOMMENTS$$", dateAdd(null, 0));
+        addParameter(emailParams, "$$capAlias$$", appTypeAlias);
+        addParameter(emailParams, "$$PERMITADDR$$", "1234 Fake St");
+        addParameter(emailParams, "$$PERMITWRKDESC$$", "www.google.com");
+
+				var subject = 'Meeting Agendas Change';
+				var content = 'Hello! Meetingagendas have changed.';
+				var from = 'noreplay@auroragov.org';
+				var cc = '';
+				var doc = aa.util.newArrayList();
+				var result = aa.meeting.sendEmail(subject, content, from, email, cc, doc);
+				if(result.getSuccess())
+				{
+					aa.print("To:"+result.getOutput());
+				}
+		aa.print("Email Sent to: " + applicant.getEmail());		
 	}
 }
