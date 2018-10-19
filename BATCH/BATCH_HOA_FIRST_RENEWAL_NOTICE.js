@@ -34,6 +34,7 @@ function getScriptText(e) {
 		return ""
 	}
 }
+logDebug("Adrian script starting");
 
 var SCRIPT_VERSION = 3.0;
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
@@ -59,6 +60,7 @@ try {
  * notify records for renewal
  */
 function notifyRecordsForRenewal() {
+logDebug("Adrian in notifyRecordsForRenewal function");
 /*
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	capTypeModel.setGroup("MiscServices");
@@ -80,6 +82,7 @@ function notifyRecordsForRenewal() {
     var capListResult = aa.cap.getCapIDsByAppSpecificInfoDateRange("GENERAL INFORMATION", "Date Last Updated", expDate, expDate);
     printDebug("Processing records with 'GENERAL INFORMATION.Date Last Updated' custom field = " + expDateString);
     var capList = capListResult.getOutput();
+	logDebug("Adrian ready to parse capList");
     for (xx in capList) {
         var capId = capList[xx].getCapID();
 		logDebug("Notifying capId=" + CapId);
@@ -100,6 +103,7 @@ function notifyRecordsForRenewal() {
  * @param recordCap
  */
 function notifyApplicantOrAddToSet(recordCapId, recordCap) {
+	logDebug("Adrian sending emails");
 	var applicant = getContactByType("President", recordCapId);
 	if (!applicant || applicant.getEmail() == null || applicant.getEmail() == "") 
 	{
