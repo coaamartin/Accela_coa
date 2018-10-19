@@ -37,9 +37,10 @@ function getScriptText(e) {
 logDebug("Adrian script starting");
 
 var SCRIPT_VERSION = 3.0;
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-eval(getScriptText("INCLUDES_CUSTOM", null, true));
+var useCustomScriptFile = true;  // if true, use Events->Custom Script, else use Events->Scripts->INCLUDES_CUSTOM
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, useCustomScriptFile));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, useCustomScriptFile));
+eval(getScriptText("INCLUDES_CUSTOM", null, useCustomScriptFile));
 
 //Batch Parameters:
 var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
