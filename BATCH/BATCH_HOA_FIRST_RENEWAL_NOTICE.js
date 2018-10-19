@@ -154,14 +154,14 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 
 				var subject = 'Meeting Agendas Change';
 				var content = 'Hello! Meetingagendas have changed.';
-				var from = 'noreply@accela.com';
+				var from = 'noreply@aurora.gov';
 				var cc = '';
 				var doc = aa.util.newArrayList();
-				var result = aa.meeting.sendEmail(subject, content, from, email, cc, doc);
+				var result = aa.meeting.sendEmail(subject, content, from, email, cc, doc);		
 				if(result.getSuccess())
 				{
-					aa.print("To:"+result.getOutput());
-				}
-		aa.print("Email Sent to: " + applicant.getEmail());		
+					aa.print("Failed due to: "+result.getOutput());
+					aa.print(result);
+				}	
 	}
 }
