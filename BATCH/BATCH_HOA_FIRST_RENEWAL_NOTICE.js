@@ -34,7 +34,7 @@ function getScriptText(e) {
 		return ""
 	}
 }
-printDebug("Adrian script starting");
+aa.print("Adrian script starting");
 
 var SCRIPT_VERSION = 3.0;
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
