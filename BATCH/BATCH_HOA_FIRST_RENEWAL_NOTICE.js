@@ -37,10 +37,27 @@ function getScriptText(e) {
 printDebug("Adrian script starting");
 
 var SCRIPT_VERSION = 3.0;
-var useCustomScriptFile = true;  // if true, use Events->Custom Script, else use Events->Scripts->INCLUDES_CUSTOM
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, useCustomScriptFile));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, useCustomScriptFile));
-eval(getScriptText("INCLUDES_CUSTOM", null, useCustomScriptFile));
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+
+function LogBatchDebug(etype, edesc, createEventLog) {
+
+	var msg = etype + " : " + edesc;
+
+	if (etype == "ERROR") {
+		msg = "<font color='red' size=2>" + msg + "</font><BR>"
+	} else {
+		msg = "<font color='green' size=2>" + msg + "</font><BR>"
+	}
+	if (etype == "DEBUG") {
+
+		aa.print(msg);
+
+	} else {
+		aa.print(msg);
+	}
+	debug += msg;
+}
 
 //Batch Parameters:
 var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
@@ -52,16 +69,19 @@ if (SET_NAME == null || SET_NAME == "") {
 
 aa.set.createSet(SET_NAME, SET_NAME);
 try {
+	LogBatchDebug("DEBUG", "Start BATCH_HOA_FIRST_RENEWAL_NOTICE", false);
+	LogBatchDebug("DEBUG", scriptTime, false);
 	notifyRecordsForRenewal();
 } catch (ex) {
-	printDebug("**ERROR hoa renewal batch failed, error: " + ex);
+	LogBatchDebug("DEBUG", "**ERROR hoa renewal batch failed, error: " + ex);	
+	aa.print("**ERROR hoa renewal batch failed, error: " + ex);
 }
 
 /**
  * notify records for renewal
  */
 function notifyRecordsForRenewal() {
-printDebug("Adrian in notifyRecordsForRenewal function");
+aa.print("Adrian in notifyRecordsForRenewal function");
 /*
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	capTypeModel.setGroup("MiscServices");
@@ -72,25 +92,25 @@ printDebug("Adrian in notifyRecordsForRenewal function");
 	var capModel = aa.cap.getCapModel().getOutput();
 	capModel.setCapType(capTypeModel);
 	var capIdScriptModelList = aa.cap.getCapIDListByCapModel(capModel).getOutput();
-	printDebug("total records=" + capIdScriptModelList.length);
+	aa.print("total records=" + capIdScriptModelList.length);
 	for (r in capIdScriptModelList) {
-		printDebug("#######################");
+		aa.print("#######################");
 		var tmpCapId = capIdScriptModelList[r].getCapID()
 */		
 	var expDate = aa.date.parseDate(dateAdd(null, 30));
     var expDateString = dateAdd(null, 30);
     //Process Records
     var capListResult = aa.cap.getCapIDsByAppSpecificInfoDateRange("GENERAL INFORMATION", "Date Last Updated", expDate, expDate);
-    printDebug("Processing records with 'GENERAL INFORMATION.Date Last Updated' custom field = " + expDateString);
+    aa.print("Processing records with 'GENERAL INFORMATION.Date Last Updated' custom field = " + expDateString);
     var capList = capListResult.getOutput();
-	printDebug("Adrian ready to parse capList");
+	aa.print("Adrian ready to parse capList");
     for (xx in capList) {
         var capId = capList[xx].getCapID();
-		printDebug("Notifying capId=" + CapId);
+		aa.print("Notifying capId=" + CapId);
 		var recordCapScriptModel = aa.cap.getCap(CapId).getOutput();
 
 		if (recordCapScriptModel.getAuditStatus() != "A") {
-			printDebug("Skipping record, AuditStatus=" + recordCapScriptModel.getAuditStatus());
+			aa.print("Skipping record, AuditStatus=" + recordCapScriptModel.getAuditStatus());
 			continue;
 		}
 
@@ -104,7 +124,7 @@ printDebug("Adrian in notifyRecordsForRenewal function");
  * @param recordCap
  */
 function notifyApplicantOrAddToSet(recordCapId, recordCap) {
-	printDebug("Adrian sending emails");
+	aa.print("Adrian sending emails");
 	var applicant = getContactByType("President", recordCapId);
 	if (!applicant || applicant.getEmail() == null || applicant.getEmail() == "") 
 	{
@@ -112,11 +132,11 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 		if (!applicant || applicant.getEmail() == null || applicant.getEmail() == "")
 		{
 		var added = aa.set.addCapSetMember(SET_NAME, recordCapId);
-		printDebug("no President or Board Member, or no email for them, record added to SET .. " + added.getSuccess());
+		aa.print("no President or Board Member, or no email for them, record added to SET .. " + added.getSuccess());
 		}
 	} 
 	else {
-		printDebug("sending email to HOA contact: " + applicant.getEmail());
+		aa.print("sending email to HOA contact: " + applicant.getEmail());
 		var emailParams = aa.util.newHashtable();
 		addParameter(emailParams, "$$altID$$", recordCap.getCapModel().getAltID());
 		addParameter(emailParams, "$$recordAlias$$", recordCap.getCapModel().getCapType().getAlias());
