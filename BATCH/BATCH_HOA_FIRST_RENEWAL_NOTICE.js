@@ -70,7 +70,6 @@ if (SET_NAME == null || SET_NAME == "") {
 aa.set.createSet(SET_NAME, SET_NAME);
 try {
 	LogBatchDebug("DEBUG", "Start BATCH_HOA_FIRST_RENEWAL_NOTICE", false);
-	LogBatchDebug("DEBUG", scriptTime, false);
 	notifyRecordsForRenewal();
 } catch (ex) {
 	LogBatchDebug("DEBUG", "**ERROR hoa renewal batch failed, error: " + ex);	
@@ -106,15 +105,15 @@ aa.print("Adrian in notifyRecordsForRenewal function");
 	aa.print("Adrian ready to parse capList");
     for (xx in capList) {
         var capId = capList[xx].getCapID();
-		aa.print("Notifying capId=" + CapId);
-		var recordCapScriptModel = aa.cap.getCap(CapId).getOutput();
+		aa.print("Notifying capId=" + capId);
+		var recordCapScriptModel = aa.cap.getCap(capId).getOutput();
 
 		if (recordCapScriptModel.getAuditStatus() != "A") {
 			aa.print("Skipping record, AuditStatus=" + recordCapScriptModel.getAuditStatus());
 			continue;
 		}
 
-		notifyApplicantOrAddToSet(CapId, recordCapScriptModel);
+		notifyApplicantOrAddToSet(capId, recordCapScriptModel);
 	}//for all License caps
 }
 
