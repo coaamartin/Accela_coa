@@ -154,7 +154,7 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 
 				var subject = 'Meeting Agendas Change';
 				var content = 'Hello! Meetingagendas have changed.';
-				var from = 'noreplay@auroragov.org';
+				var from = 'noreply@accela.com';
 				var cc = '';
 				var doc = aa.util.newArrayList();
 				var result = aa.meeting.sendEmail(subject, content, from, email, cc, doc);
