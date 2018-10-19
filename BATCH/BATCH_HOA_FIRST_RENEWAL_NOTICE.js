@@ -34,7 +34,7 @@ function getScriptText(e) {
 		return ""
 	}
 }
-logDebug("Adrian script starting");
+printDebug("Adrian script starting");
 
 var SCRIPT_VERSION = 3.0;
 var useCustomScriptFile = true;  // if true, use Events->Custom Script, else use Events->Scripts->INCLUDES_CUSTOM
@@ -54,14 +54,14 @@ aa.set.createSet(SET_NAME, SET_NAME);
 try {
 	notifyRecordsForRenewal();
 } catch (ex) {
-	logDebug("**ERROR hoa renewal batch failed, error: " + ex);
+	printDebug("**ERROR hoa renewal batch failed, error: " + ex);
 }
 
 /**
  * notify records for renewal
  */
 function notifyRecordsForRenewal() {
-logDebug("Adrian in notifyRecordsForRenewal function");
+printDebug("Adrian in notifyRecordsForRenewal function");
 /*
 	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
 	capTypeModel.setGroup("MiscServices");
@@ -72,9 +72,9 @@ logDebug("Adrian in notifyRecordsForRenewal function");
 	var capModel = aa.cap.getCapModel().getOutput();
 	capModel.setCapType(capTypeModel);
 	var capIdScriptModelList = aa.cap.getCapIDListByCapModel(capModel).getOutput();
-	logDebug("total records=" + capIdScriptModelList.length);
+	printDebug("total records=" + capIdScriptModelList.length);
 	for (r in capIdScriptModelList) {
-		logDebug("#######################");
+		printDebug("#######################");
 		var tmpCapId = capIdScriptModelList[r].getCapID()
 */		
 	var expDate = aa.date.parseDate(dateAdd(null, 30));
@@ -83,14 +83,14 @@ logDebug("Adrian in notifyRecordsForRenewal function");
     var capListResult = aa.cap.getCapIDsByAppSpecificInfoDateRange("GENERAL INFORMATION", "Date Last Updated", expDate, expDate);
     printDebug("Processing records with 'GENERAL INFORMATION.Date Last Updated' custom field = " + expDateString);
     var capList = capListResult.getOutput();
-	logDebug("Adrian ready to parse capList");
+	printDebug("Adrian ready to parse capList");
     for (xx in capList) {
         var capId = capList[xx].getCapID();
-		logDebug("Notifying capId=" + CapId);
+		printDebug("Notifying capId=" + CapId);
 		var recordCapScriptModel = aa.cap.getCap(CapId).getOutput();
 
 		if (recordCapScriptModel.getAuditStatus() != "A") {
-			logDebug("Skipping record, AuditStatus=" + recordCapScriptModel.getAuditStatus());
+			printDebug("Skipping record, AuditStatus=" + recordCapScriptModel.getAuditStatus());
 			continue;
 		}
 
@@ -104,7 +104,7 @@ logDebug("Adrian in notifyRecordsForRenewal function");
  * @param recordCap
  */
 function notifyApplicantOrAddToSet(recordCapId, recordCap) {
-	logDebug("Adrian sending emails");
+	printDebug("Adrian sending emails");
 	var applicant = getContactByType("President", recordCapId);
 	if (!applicant || applicant.getEmail() == null || applicant.getEmail() == "") 
 	{
@@ -112,11 +112,11 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 		if (!applicant || applicant.getEmail() == null || applicant.getEmail() == "")
 		{
 		var added = aa.set.addCapSetMember(SET_NAME, recordCapId);
-		logDebug("no President or Board Member, or no email for them, record added to SET .. " + added.getSuccess());
+		printDebug("no President or Board Member, or no email for them, record added to SET .. " + added.getSuccess());
 		}
 	} 
 	else {
-		logDebug("sending email to HOA contact: " + applicant.getEmail());
+		printDebug("sending email to HOA contact: " + applicant.getEmail());
 		var emailParams = aa.util.newHashtable();
 		addParameter(emailParams, "$$altID$$", recordCap.getCapModel().getAltID());
 		addParameter(emailParams, "$$recordAlias$$", recordCap.getCapModel().getCapType().getAlias());
