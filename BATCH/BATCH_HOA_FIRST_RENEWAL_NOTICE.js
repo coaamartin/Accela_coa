@@ -38,6 +38,7 @@ function getScriptText(e) {
 var SCRIPT_VERSION = 3.0;
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getScriptText("INCLUDES_CUSTOM", null, true));
 
 //Batch Parameters:
 var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
