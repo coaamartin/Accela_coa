@@ -60,10 +60,7 @@ function LogBatchDebug(etype, edesc, createEventLog) {
 }
 
 //Batch Parameters:
-//var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
-var EMAIL_TEMPLATE = "PW_LIC_AGR_REV";
-aa.print(EMAIL_TEMPLATE);
-aa.print("that was the email template");
+
 var SET_NAME = aa.env.getValue("SET_NAME");
 
 if (SET_NAME == null || SET_NAME == "") {
@@ -132,6 +129,10 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 	var cap = aa.cap.getCap(recordCapId).getOutput();
 	var appTypeAlias = cap.getCapType().getAlias();
 	var capStatus = cap.getCapStatus();
+//var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
+var EMAIL_TEMPLATE = "BLD LIC EXPIRED # 97";
+aa.print(EMAIL_TEMPLATE);
+aa.print("that was the email template");
 	
 	if (!applicant || applicant.getEmail() == null || applicant.getEmail() == "") 
 	{
@@ -145,23 +146,22 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 	else {
 		aa.print("sending email to HOA contact: " + applicant.getEmail());
 		var emailParams = aa.util.newHashtable();
-		addParameter(emailParams, "$$PERMITID$$", altId);
+		addParameter(emailParams, "$$altID$$", altId);
 		aa.print("the alias is: " + altId);
-        addParameter(emailParams, "$$TASKCOMMENTS$$", dateAdd(null, 0));
-        addParameter(emailParams, "$$capAlias$$", appTypeAlias);
-        addParameter(emailParams, "$$PERMITADDR$$", "1234 Fake St");
-        addParameter(emailParams, "$$PERMITWRKDESC$$", "www.google.com");
+		var reportFile = [];
+	var capID4Email = aa.cap.createCapIDScriptModel(recordCapId.getID1(),recordCapId.getID2(),recordCapId.getID3());	
+        //addParameter(emailParams, "$$TASKCOMMENTS$$", dateAdd(null, 0));
+        //addParameter(emailParams, "$$capAlias$$", appTypeAlias);
+        //addParameter(emailParams, "$$PERMITADDR$$", "1234 Fake St");
+        //addParameter(emailParams, "$$PERMITWRKDESC$$", "www.google.com");
 
-				var subject = 'Meeting Agendas Change';
-				var content = 'Hello! Meetingagendas have changed.';
-				var from = 'noreply@aurora.gov';
-				var cc = '';
-				var doc = aa.util.newArrayList();
-				var result = aa.meeting.sendEmail(subject, content, from, email, cc, doc);		
-				if(result.getSuccess())
-				{
-					aa.print("Failed due to: "+result.getOutput());
-					aa.print(result);
-				}	
+		//aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", EMAIL_TEMPLATE, emailParams, new Array())
+		//sendNotification("",applicant.getEmail(),"",EMAIL_TEMPLATE,emailParams,new Array()); 
+			var sent = sendNotification("noreply@auroragov.org",applicant.getEmail(),"",EMAIL_TEMPLATE,emailParams,reportFile,capID4Email); 
+            if (!sent) {
+                aa.print("**WARN sending email applicant failed, error:" + sent.getErrorMessage());
+                return false;
+            }
+		aa.print("Email Sent to: " + applicant.getEmail());		
 	}
 }
