@@ -70,7 +70,10 @@ if (SET_NAME == null || SET_NAME == "") {
 aa.set.createSet(SET_NAME, SET_NAME);
 try {
 	LogBatchDebug("DEBUG", "Start BATCH_HOA_FIRST_RENEWAL_NOTICE", false);
-	notifyRecordsForRenewal();
+	notifyRecordsForRenewal();	//this one is set up for testing - it grabs all going back a year
+	//notifyRecordsForRenewal30();
+	//notifyRecordsForRenewal15();
+	//notifyRecordsForRenewal5();	
 } catch (ex) {
 	LogBatchDebug("DEBUG", "**ERROR hoa renewal batch failed, error: " + ex);	
 	aa.print("**ERROR hoa renewal batch failed, error: " + ex);
@@ -79,25 +82,64 @@ try {
 /**
  * notify records for renewal
  */
-function notifyRecordsForRenewal() {
-aa.print("Adrian in notifyRecordsForRenewal function");
-/*
-	var capTypeModel = aa.cap.getCapTypeModel().getOutput();
-	capTypeModel.setGroup("MiscServices");
-	capTypeModel.setType("Neighborhood");
-	capTypeModel.setSubType("Association");
-	capTypeModel.setCategory("NA");
+ function notifyRecordsForRenewal() {
+	var expDate = aa.date.parseDate(dateAdd(null, 1));
+	var expDate2 = aa.date.parseDate(dateAdd(null, -365));
+    var expDateString = dateAdd(null, 0);
+    //Process Records
+    var capListResult = aa.cap.getCapIDsByAppSpecificInfoDateRange("GENERAL INFORMATION", "Date Last Updated", expDate2, expDate);
+    aa.print("Processing records with 'GENERAL INFORMATION.Date Last Updated' custom field = " + expDateString);
+    var capList = capListResult.getOutput();
+	aa.print("Check that HOA in Registered and Expired Status");
+    for (xx in capList) {
+        var capId = capList[xx].getCapID();
+        var cap = aa.cap.getCap(capId).getOutput();
+        var appTypeString = cap.getCapType().toString();
+        var appTypeAlias = cap.getCapType().getAlias();
+		//aa.print("type is " + appTypeString);
+        var capStatus = cap.getCapStatus();
+        if(capStatus == "Registered and Expired" && appTypeString == "MiscServices/Neighborhood/Association/Renewal") {
+			aa.print("Status is: " + capStatus);
+			aa.print("Notifying capId=" + capId);
+			var recordCapScriptModel = aa.cap.getCap(capId).getOutput();
+			notifyApplicantOrAddToSet(capId, recordCapScriptModel);					
+		}
 
-	var capModel = aa.cap.getCapModel().getOutput();
-	capModel.setCapType(capTypeModel);
-	var capIdScriptModelList = aa.cap.getCapIDListByCapModel(capModel).getOutput();
-	aa.print("total records=" + capIdScriptModelList.length);
-	for (r in capIdScriptModelList) {
-		aa.print("#######################");
-		var tmpCapId = capIdScriptModelList[r].getCapID()
-*/		
-	var expDate = aa.date.parseDate(dateAdd(null, 30));
-    var expDateString = dateAdd(null, 30);
+	}
+}
+
+function notifyRecordsForRenewal30() {
+	var expDate = aa.date.parseDate(dateAdd(null, -335));
+    var expDateString = dateAdd(null, -335);
+    //Process Records
+    var capListResult = aa.cap.getCapIDsByAppSpecificInfoDateRange("GENERAL INFORMATION", "Date Last Updated", expDate, expDate);
+    aa.print("Processing records with 'GENERAL INFORMATION.Date Last Updated' custom field = " + expDateString);
+    var capList = capListResult.getOutput();
+	aa.print("Check that HOA in Registered and Expired Status");
+    for (xx in capList) {
+        var capId = capList[xx].getCapID();
+        var cap = aa.cap.getCap(capId).getOutput();
+        var appTypeString = cap.getCapType().toString();
+        var appTypeAlias = cap.getCapType().getAlias();
+        var capStatus = cap.getCapStatus();
+        if(capStatus = "Registered and Expired") {
+			aa.print("Status is: " + capStatus);
+			aa.print("Notifying capId=" + capId);
+			var recordCapScriptModel = aa.cap.getCap(capId).getOutput();
+
+			if (recordCapScriptModel.getAuditStatus() != "A") {
+				aa.print("Skipping record, AuditStatus=" + recordCapScriptModel.getAuditStatus());
+			continue;
+			}
+		}
+
+		notifyApplicantOrAddToSet(capId, recordCapScriptModel);
+	}
+}
+
+function notifyRecordsForRenewal15() {
+	var expDate = aa.date.parseDate(dateAdd(null, -350));
+    var expDateString = dateAdd(null, -350);
     //Process Records
     var capListResult = aa.cap.getCapIDsByAppSpecificInfoDateRange("GENERAL INFORMATION", "Date Last Updated", expDate, expDate);
     aa.print("Processing records with 'GENERAL INFORMATION.Date Last Updated' custom field = " + expDateString);
@@ -105,16 +147,52 @@ aa.print("Adrian in notifyRecordsForRenewal function");
 	aa.print("Adrian ready to parse capList");
     for (xx in capList) {
         var capId = capList[xx].getCapID();
-		aa.print("Notifying capId=" + capId);
-		var recordCapScriptModel = aa.cap.getCap(capId).getOutput();
+        var cap = aa.cap.getCap(capId).getOutput();
+        var appTypeString = cap.getCapType().toString();
+        var appTypeAlias = cap.getCapType().getAlias();
+        var capStatus = cap.getCapStatus();
+        if(capStatus = "Registered and Expired") {
+			aa.print("Status is: " + capStatus);
+			aa.print("Notifying capId=" + capId);
+			var recordCapScriptModel = aa.cap.getCap(capId).getOutput();
 
-		if (recordCapScriptModel.getAuditStatus() != "A") {
-			aa.print("Skipping record, AuditStatus=" + recordCapScriptModel.getAuditStatus());
+			if (recordCapScriptModel.getAuditStatus() != "A") {
+				aa.print("Skipping record, AuditStatus=" + recordCapScriptModel.getAuditStatus());
 			continue;
+			}
 		}
 
 		notifyApplicantOrAddToSet(capId, recordCapScriptModel);
-	}//for all License caps
+	}
+}
+
+function notifyRecordsForRenewal5() {
+	var expDate = aa.date.parseDate(dateAdd(null, -360));
+    var expDateString = dateAdd(null, -360);
+    //Process Records
+    var capListResult = aa.cap.getCapIDsByAppSpecificInfoDateRange("GENERAL INFORMATION", "Date Last Updated", expDate, expDate);
+    aa.print("Processing records with 'GENERAL INFORMATION.Date Last Updated' custom field = " + expDateString);
+    var capList = capListResult.getOutput();
+	aa.print("Adrian ready to parse capList");
+    for (xx in capList) {
+        var capId = capList[xx].getCapID();
+        var cap = aa.cap.getCap(capId).getOutput();
+        var appTypeString = cap.getCapType().toString();
+        var appTypeAlias = cap.getCapType().getAlias();
+        var capStatus = cap.getCapStatus();
+        if(capStatus = "Registered and Expired") {
+			aa.print("Status is: " + capStatus);
+			aa.print("Notifying capId=" + capId);
+			var recordCapScriptModel = aa.cap.getCap(capId).getOutput();
+
+			if (recordCapScriptModel.getAuditStatus() != "A") {
+				aa.print("Skipping record, AuditStatus=" + recordCapScriptModel.getAuditStatus());
+			continue;
+			}
+		}
+
+		notifyApplicantOrAddToSet(capId, recordCapScriptModel);
+	}
 }
 
 /**
@@ -129,10 +207,13 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 	var cap = aa.cap.getCap(recordCapId).getOutput();
 	var appTypeAlias = cap.getCapType().getAlias();
 	var capStatus = cap.getCapStatus();
-//var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
-var EMAIL_TEMPLATE = "BLD LIC EXPIRED # 97";
-aa.print(EMAIL_TEMPLATE);
-aa.print("that was the email template");
+	//var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
+	//aa.print(EMAIL_TEMPLATE);
+	var EMAIL_TEMPLATE = "BLD LIC EXPIRED # 97";
+	var EMAIL_TEMPLATE = "MISC HOA RENEWAL NOTICE";	
+
+	aa.print("The template is " + EMAIL_TEMPLATE);
+	aa.print("that was the email template");
 	
 	if (!applicant || applicant.getEmail() == null || applicant.getEmail() == "") 
 	{
@@ -146,22 +227,18 @@ aa.print("that was the email template");
 	else {
 		aa.print("sending email to HOA contact: " + applicant.getEmail());
 		var emailParams = aa.util.newHashtable();
+		var expDateString = dateAdd(null, 30);		
 		addParameter(emailParams, "$$altID$$", altId);
+        addParameter(emailParams, "$$ContactFullName$$", "Dear HOA Representative");		
 		aa.print("the alias is: " + altId);
 		var reportFile = [];
-	var capID4Email = aa.cap.createCapIDScriptModel(recordCapId.getID1(),recordCapId.getID2(),recordCapId.getID3());	
-        //addParameter(emailParams, "$$TASKCOMMENTS$$", dateAdd(null, 0));
-        //addParameter(emailParams, "$$capAlias$$", appTypeAlias);
-        //addParameter(emailParams, "$$PERMITADDR$$", "1234 Fake St");
-        //addParameter(emailParams, "$$PERMITWRKDESC$$", "www.google.com");
+		var capID4Email = aa.cap.createCapIDScriptModel(recordCapId.getID1(),recordCapId.getID2(),recordCapId.getID3());	
 
-		//aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", EMAIL_TEMPLATE, emailParams, new Array())
-		//sendNotification("",applicant.getEmail(),"",EMAIL_TEMPLATE,emailParams,new Array()); 
-			var sent = sendNotification("noreply@auroragov.org",applicant.getEmail(),"",EMAIL_TEMPLATE,emailParams,reportFile,capID4Email); 
-            if (!sent) {
-                aa.print("**WARN sending email applicant failed, error:" + sent.getErrorMessage());
-                return false;
-            }
+		var sent = sendNotification("noreply@auroragov.org",applicant.getEmail(),"",EMAIL_TEMPLATE,emailParams,reportFile,capID4Email); 
+        if (!sent) {
+            aa.print("**WARN sending the HOA renewal email failed, error:" + sent.getErrorMessage());
+            return false;
+        }
 		aa.print("Email Sent to: " + applicant.getEmail());		
 	}
 }
