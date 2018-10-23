@@ -27,7 +27,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       //addParameter(eParams, "$$testpic$$", urlstring);
       
       //emailContacts(contacts, emailtemplate, eParams, "", "", "N", "");
-      logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", contacts, "", emailTemplate, eParams, capId4Email, null).getSuccess());
+      logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", contacts, "", emailtemplate, eParams, capId4Email, null).getSuccess());
 
    }
 }
