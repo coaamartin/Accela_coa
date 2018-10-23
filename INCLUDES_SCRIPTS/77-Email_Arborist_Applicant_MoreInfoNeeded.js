@@ -11,6 +11,10 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
    if (wfComment != null && typeof wfComment !== 'undefined') 
       
    {
+       //var thisCap = aa.cap.getCap(capId).getOutput();
+      
+      var eParams = aa.util.newHashtable();
+      var contacts = "All";
 
    }
 }
