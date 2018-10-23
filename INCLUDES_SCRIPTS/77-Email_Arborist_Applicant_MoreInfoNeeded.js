@@ -27,7 +27,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
       addParameter(eParams, "$$scriptid$$", "77");
       addParameter(eParams, "$$signature$$", "James M. Porter");
-      addParameter(eParams, "$$testpic$$, urlstring);
+      addParameter(eParams, "$$testpic$$", urlstring);
       
       //emailContacts(contacts, emailtemplate, eParams, "", "", "N", "");
       logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", contacts, "", emailtemplate, eParams, capId4Email, null).getSuccess());
