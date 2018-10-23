@@ -16,6 +16,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       var eParams = aa.util.newHashtable();
       var contacts = "All";
       var emailtemplate = "JMP EMAIL TEMPLATE";
+      var urlstring = "http://img-s-msn-com.akamaized.net/tenant/amp/entityid/BBOK9ZF.img?h=488&w=799&m=6&q=60&o=f&l=f&x=916&y=734"
       
       addParameter(eParams, "$$wfComment$$", wfComment);
       addParameter(eParams, "$$altID$$", altId);
