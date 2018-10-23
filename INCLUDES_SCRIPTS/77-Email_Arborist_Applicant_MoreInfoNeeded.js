@@ -18,6 +18,9 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       var emailtemplate = "JMP EMAIL TEMPLATE";
       
       addParameter(eParams, "$$wfComment$$", wfComment);
+      addParameter(eParams, "$$altID$$", altId);
+      addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
+      addParameter(eParams, "$$scriptid$$", "77");
 
    }
 }
