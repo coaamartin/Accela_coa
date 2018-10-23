@@ -22,7 +22,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       //addParameter(eParams, "$$altID$$", altId);
       addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
       addParameter(eParams, "$$scriptid$$", "77");
-      addParameter(eParams, "$$testpic$$", urlstring);
+      //addParameter(eParams, "$$testpic$$", urlstring);
       
       emailContacts(contacts, emailtemplate, eParams, "", "", "N", "");
 
