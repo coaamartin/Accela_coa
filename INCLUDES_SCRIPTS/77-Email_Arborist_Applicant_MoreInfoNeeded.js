@@ -15,6 +15,9 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       
       var eParams = aa.util.newHashtable();
       var contacts = "All";
+      var emailtemplate = "JMP EMAIL TEMPLATE";
+      
+      addParameter(eParams, "$$wfComment$$", wfComment);
 
    }
 }
