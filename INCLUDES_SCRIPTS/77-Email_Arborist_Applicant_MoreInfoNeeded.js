@@ -21,6 +21,8 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       addParameter(eParams, "$$altID$$", altId);
       addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
       addParameter(eParams, "$$scriptid$$", "77");
+      
+      emailContacts(contacts, emailtemplate, eParams, "", "", "N", "");
 
    }
 }
