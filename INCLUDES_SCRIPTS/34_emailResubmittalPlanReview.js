@@ -10,8 +10,8 @@ if(wfTask=="Plan Review" && wfStatus=="Resubmittal Requested"){
 	//wfComment is NOT included as a built-in so we must add it if the email template requires this variable
 	
 	//get contact
-	var aContact = getContactByType(contact, capId);
-	if (aContact) fullName = aContact.getFullName() || aContact.getFirstName() + " " + aContact.getLastName();	
+	//var aContact = getContactByType(contact, capId);
+	//if (aContact) fullName = aContact.getFullName() || aContact.getFirstName() + " " + aContact.getLastName();	
 	
 	var eParams = aa.util.newHashtable();
 	//addParameter(eParams, "$$altid$$", cap.getCapModel().getAltID());
