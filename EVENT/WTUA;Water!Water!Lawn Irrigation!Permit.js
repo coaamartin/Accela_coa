@@ -12,6 +12,9 @@ Notes :
 Sample Call:
 UpdateworkFlowTaskDueDate("Note",30)
  */
+ 
+ // Added 10-26-18 JMP
+ include("78_Auto-Schedule-Type-Irrigation");
 
 var workFlowTasktobeChecked = "Note";
 var numberOfdayes = 30;
