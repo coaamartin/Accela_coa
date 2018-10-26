@@ -11,7 +11,7 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #78 - 78_Auto-Sc
 if(wfTask =="Application Submittal" && !wfStatus== "Withdrawn")     
 {
    
-   logDebug("Not withdrawn"); 
+   logDebug(AInfo['Type of Property'] + ""); 
    
    /*
    
