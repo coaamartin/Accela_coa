@@ -18,7 +18,7 @@ if (inspections.getSuccess())
       {
         logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - OK I found a Leftover");
         //createInspection(thisInspection.getInspectionType() + "",  aa.date.parseDate(dateAdd(null, 1, true)));
-        aa.inspection.scheduleInspection(capId, null, aa.date.parseDate(dateAdd(null, 1, true), null, thisInspection.getInspectionType() + "", null);
+        aa.inspection.scheduleInspection(capId, null, aa.date.parseDate(dateAdd(null, 1, true)), null, thisInspection.getInspectionType() + "", null);
       }
    }
 }
