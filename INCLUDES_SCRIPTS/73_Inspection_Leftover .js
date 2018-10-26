@@ -14,7 +14,7 @@ if (inspections.getSuccess())
 	for (i in inspections) 
    {
 	   var thisInspection = inspections[i];
-  	   if (thisInspection.getInspectionStatus() == "Leftover") 
+  	   if (thisInspection.getInspectionStatus() == "Left Over") 
       {
         logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - OK I found a Leftover");
         //createInspection("Forestry Field Crew",  aa.date.parseDate(dateAdd(null, 1, true)));
