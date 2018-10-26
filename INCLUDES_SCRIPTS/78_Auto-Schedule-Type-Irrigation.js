@@ -13,38 +13,13 @@ if(wfTask =="Application Submittal" && !wfStatus== "Withdrawn")
    
    logDebug(AInfo['Type of Property'] + ""); 
    
-   /*
-   
-   var capInspections = aa.inspection.getInspections(capId);
-	if (!capInspections.getSuccess()) 
+   if(AInfo['Type of Property'] == 'Single Family Residential') 
    {
-     if(AInfo['Type of Property'] == 'Single Family Residential') 
-      {
-			addFee('WAT_IP_01', 'WAT_IP', 'FINAL', 1, "Y");                
-		} else {
-			addFee('WAT_IP_02', 'WAT_IP', 'FINAL', 1, "Y");                
-		}
-)
-     {   
-     scheduleInspection("
-     
-     } 
-     
-     if(AInfo['Type of Property'] == 'Single Family Residential') {
-			addFee('WAT_IP_01', 'WAT_IP', 'FINAL', 1, "Y");                
-		} else {
-			addFee('WAT_IP_02', 'WAT_IP', 'FINAL', 1, "Y");                
-		}
-
-  Check existing Inspections .. 
-  
-  Assign
-
-
-
-
-
-  */
+		scheduleInspection("Single Family Res Lawn/Irrigation Inspection", dateAdd(null, 0));            
+	} else 
+   {
+	   scheduleInspection("Commercial Lawn/Irrigation Inspection", dateAdd(null, 0));       
+	}
 
 }
 
