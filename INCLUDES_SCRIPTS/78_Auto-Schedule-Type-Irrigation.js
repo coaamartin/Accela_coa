@@ -16,7 +16,10 @@ if(wfTask =="Application Submittal" && !wfStatus== "Withdrawn")
    if(AInfo['Type of Property'] == 'Single Family Residential') 
    {
 		scheduleInspection("Single Family Res Lawn/Irrigation Inspection", dateAdd(null, 0));            
-	} else 
+	} 
+   
+   else 
+      
    {
 	   scheduleInspection("Commercial Lawn/Irrigation Inspection", dateAdd(null, 0));       
 	}
