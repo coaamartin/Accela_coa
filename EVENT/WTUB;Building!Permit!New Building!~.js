@@ -14,5 +14,3 @@ Sample Call : checkSpecialInspections()
 
 checkSpecialInspections();
 
-include("73_Inspection_Leftover");
-

@@ -20,6 +20,7 @@ Sample Call : createChildWaterUtilityPermitRecords()
 */
 
 include("76_Building_Inspection_Update");
+include("73_Inspection_Leftover");  
 
 createChildWaterUtilityPermitRecords();
 script207_SetTotalSqFtOnFireRecord();
