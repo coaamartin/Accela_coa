@@ -11,18 +11,22 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #78 - 78_Auto-Sc
 if(wfTask =="Application Submittal" && !wfStatus== "Withdrawn")     
 {
    
-   logDebug(AInfo['Type of Property'] + ""); 
-   
-   if(AInfo['Type of Property'] == 'Single Family Residential') 
+   var inspectionExist = aa.inspection.getInspections(settings.capId);
+	if (!inspectionExist.getSuccess()) 
    {
-		scheduleInspection("Single Family Res Lawn/Irrigation Inspection", dateAdd(null, 0));            
-	} 
-   
-   else 
       
-   {
-	   scheduleInspection("Commercial Lawn/Irrigation Inspection", dateAdd(null, 0));       
-	}
-
+   
+      if(AInfo['Type of Property'] == 'Single Family Residential') 
+      {
+         scheduleInspection("Single Family Res Lawn/Irrigation Inspection", dateAdd(null, 0));            
+      } 
+      
+      else 
+         
+      {
+         scheduleInspection("Commercial Lawn/Irrigation Inspection", dateAdd(null, 0));       
+      }
+      
+   }
 }
 
