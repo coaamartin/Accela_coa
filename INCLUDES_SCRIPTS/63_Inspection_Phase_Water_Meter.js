@@ -26,7 +26,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
          
          logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - " + currentTask.getTaskDescription() + "")
          
-			if (currentTask.getTaskDescription().equals("Water Meter") || currentTask.getTaskDescription().equals("Backflow Preventor")) 
+			if ((currentTask.getTaskDescription() + "" == "Water Meter") || (currentTask.getTaskDescription() + "" == "Backflow Preventor"))
 			{
 			  logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - SUCCESS!!! Within Water Meter and/or Backflow Preventer ");;
 			}  
