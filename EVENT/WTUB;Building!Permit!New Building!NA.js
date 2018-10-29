@@ -8,6 +8,7 @@
   if there are then prevent the wf task from proceeding and present a message stating "There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed.
 */
    
+include("63_Inspection_Phase_Water_Meter");
 include("70_Inspection_Phase_Letters");   
 include("71_Certificate_Occpancy_Checked");	
 include("62_Building_Inspection_Check_Pending_Scheduled");
