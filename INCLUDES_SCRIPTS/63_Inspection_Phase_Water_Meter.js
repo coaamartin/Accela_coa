@@ -28,8 +28,12 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
          
 			if ((currentTask.getTaskDescription() + "" == "Water Meter") || (currentTask.getTaskDescription() + "" == "Backflow Preventor"))
 			{
-			  logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - Active: " + currentTask.getActiveFlag() + "");;
+			  if (currentTask.getActiveFlag() + "" == "Y")
+           {  
+	         showMessage = true;
+	         comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are workflow tasks still active, Inspection Phase workflow can't proceed.. </h2>");        
            cancel = true;
+           }
 			}  
                     
 		}	
