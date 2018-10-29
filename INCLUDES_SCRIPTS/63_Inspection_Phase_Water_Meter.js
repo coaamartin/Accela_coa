@@ -35,6 +35,9 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
             
             if ((currentTask.getTaskDescription() + "" == "Water Meter") || (currentTask.getTaskDescription() + "" == "Backflow Preventor"))
             {
+               
+              logDebug( currentTask.getActiveFlag() + "");               
+               
               if (currentTask.getActiveFlag() + "" == "Y")
               {  
                foundMatch = false;
