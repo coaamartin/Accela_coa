@@ -24,7 +24,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
 		{
 			var currentTask = wfObjs[inx];
          
-         logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - " + currentTask.wfTask + "")
+         logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - " + currentTask.getTaskDescription() + "")
          
 			if (currentTask.wfTask.equals("Water Meter") || currentTask.wfTask.equals("Backflow Preventer")) 
 			{
