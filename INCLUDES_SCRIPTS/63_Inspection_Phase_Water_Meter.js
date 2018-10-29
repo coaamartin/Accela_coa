@@ -31,14 +31,13 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
          
          if (appMatch("Building/Permit/New Building/NA"))
          {  
-            logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - appMatch - Building/Permit/New Building/NA");
-            
+          
             if ((currentTask.getTaskDescription() + "" == "Water Meter") || (currentTask.getTaskDescription() + "" == "Backflow Preventor"))
             {
                
               logDebug( currentTask.getActiveFlag() + "");               
                
-              if (currentTask.getActiveFlag() + "" == "Y")
+              if (currentTask.getActiveFlag() == "Y")
               {  
                foundMatch = true;
               }
@@ -49,10 +48,9 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
          
          if (appMatch("Building/Permits/Plans/NA"))
          {
-            logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - appMatch - Building/Permits/Plans/NA");           
             if ((currentTask.getTaskDescription() + "" == "Backflow Preventor"))
             {
-              if (currentTask.getActiveFlag() + "" == "Y")
+              if (currentTask.getActiveFlag() == "Y")
               {  
                foundMatch = true;
               }
@@ -69,4 +67,5 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
       comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are workflow tasks still active, Inspection Phase workflow can't proceed.. </h2>");        
       cancel = true;      
    } 
+   
 }
