@@ -12,7 +12,7 @@
  
 */
 
-logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - Inspection_Leftover");
+logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - Inspection_Leftover .. dbl check JP");
 
 if(wfTask =="Inspection Phase" && wfStatus== "Final") 
 {   
