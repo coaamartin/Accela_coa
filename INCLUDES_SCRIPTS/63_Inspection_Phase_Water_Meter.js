@@ -30,7 +30,9 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
          logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - " + currentTask.getTaskDescription() + "")
          
          if (appMatch("Building/Permit/New Building/NA"))
-         {       
+         {  
+            logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - appMatch - Building/Permit/New Building/NA");
+            
             if ((currentTask.getTaskDescription() + "" == "Water Meter") || (currentTask.getTaskDescription() + "" == "Backflow Preventor"))
             {
               if (currentTask.getActiveFlag() + "" == "Y")
@@ -44,7 +46,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
          
          if (appMatch("Building/Permits/Plans/NA"))
          {
-            
+            logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - appMatch - Building/Permits/Plans/NA");           
             if ((currentTask.getTaskDescription() + "" == "Backflow Preventor"))
             {
               if (currentTask.getActiveFlag() + "" == "Y")
