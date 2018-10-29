@@ -40,7 +40,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
                
               if (currentTask.getActiveFlag() + "" == "Y")
               {  
-               foundMatch = false;
+               foundMatch = true;
               }
             }  
          }
@@ -54,7 +54,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
             {
               if (currentTask.getActiveFlag() + "" == "Y")
               {  
-               foundMatch = false;
+               foundMatch = true;
               }
             }       
          }
