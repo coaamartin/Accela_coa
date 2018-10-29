@@ -15,7 +15,7 @@ if(wfTask =="Certificate of Occupancy" && wfStatus== "Ready for CO")     // "Fin
   var cOO = getAppSpecific("Certificate of Occupancy") + "";
   useAppSpecificGroupName = tmpUASGN;
   
-  if (cOO != "" )
+  if (cOO = "" )
     {
 		showMessage = true;
 		comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There is not a Certificate of Occupancy required on this record.</h2>");
