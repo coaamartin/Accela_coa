@@ -15,8 +15,11 @@
 logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - Inspection_Leftover .. dbl check JP");
 
 if(wfTask =="Inspection Phase" && wfStatus== "Final") 
-{   
- var workflowResult = aa.workflow.getTasks(capId);
+{
+   
+   var foundMatch = false;
+   var workflowResult = aa.workflow.getTasks(capId);
+   
 	if (workflowResult.getSuccess()) 
 	{
 		wfObjs = workflowResult.getOutput();
@@ -26,17 +29,39 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
          
          logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - " + currentTask.getTaskDescription() + "")
          
-			if ((currentTask.getTaskDescription() + "" == "Water Meter") || (currentTask.getTaskDescription() + "" == "Backflow Preventor"))
-			{
-			  if (currentTask.getActiveFlag() + "" == "Y")
-           {  
-	         showMessage = true;
-	         comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are workflow tasks still active, Inspection Phase workflow can't proceed.. </h2>");        
-           cancel = true;
-           }
-			}  
-                    
+         if (appMatch("Building/Permit/New Building/NA"))
+         {       
+            if ((currentTask.getTaskDescription() + "" == "Water Meter") || (currentTask.getTaskDescription() + "" == "Backflow Preventor"))
+            {
+              if (currentTask.getActiveFlag() + "" == "Y")
+              {  
+               foundMatch = false;
+              }
+            }  
+         }
+         
+         
+         
+         if (appMatch("Building/Permits/Plans/NA"))
+         {
+            
+            if ((currentTask.getTaskDescription() + "" == "Backflow Preventor"))
+            {
+              if (currentTask.getActiveFlag() + "" == "Y")
+              {  
+               foundMatch = false;
+              }
+            }       
+         }
+         
+         
 		}	
 	}
-
+   
+   if (foundMatch)
+   {
+      showMessage = true;
+      comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There are workflow tasks still active, Inspection Phase workflow can't proceed.. </h2>");        
+      cancel = true;      
+   } 
 }
