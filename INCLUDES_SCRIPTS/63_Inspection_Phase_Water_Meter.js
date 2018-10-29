@@ -29,6 +29,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Final")
 			if ((currentTask.getTaskDescription() + "" == "Water Meter") || (currentTask.getTaskDescription() + "" == "Backflow Preventor"))
 			{
 			  logDebug("JMP JMP Alert: ------------------------>> Script Item #63 - Active: " + currentTask.getActiveFlag() + "");;
+           cancel = true;
 			}  
                     
 		}	
