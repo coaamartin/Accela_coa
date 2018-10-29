@@ -12,12 +12,10 @@ if(wfTask == "Inspection Phase" && wfStatus == "Ready for CO")     // "Final CO 
   
   useAppSpecificGroupName=false;
   
-  var doesCheckExist = getAppSpecific("Certificate of Occupancy") + "";
+  var doesCheckExist = getAppSpecific("Certificate of Occupancy");
   useAppSpecificGroupName = tmpUASGN;
   
-  logDebug("JMP JMP Alert: ------------------------>>" + doesCheckExist + "");
-  
-  if (doesCheckExist == "")
+  if (doesCheckExist == null)
    {
 		showMessage = true;
 		comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - There is not a Certificate of Occupancy required on this record.</h2>");
