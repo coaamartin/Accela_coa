@@ -1,33 +1,21 @@
-/* JMP - 10/26/2018 - Script Item #73 - Inspection_Leftover 
+/* JMP - 10/26/2018 - Script Item #72 - Inspection_Pending
 
-// If status of 'Leftover' on any scheduled inspection, then automatically schedule the same inspection for the next business day.
+//   If status of ‘Failed’, ‘Passed’ or ‘Cancelled’ on any scheduled inspection, then auto create that same inspection type and make it ‘Pending’ 
+     this applies to all inspection types. Example – if a Mechanical Rough inspection type is given a status of ‘Failed’ then auto create another Mechanical Rough inspection type as Pending.
+ 
  
 */
 
-logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - Inspection_Leftover");
+logDebug("JMP JMP Alert: ------------------------>> Script Item #72 - Inspection Type Failed/Passed/Cancelled");
 
+var inspGroup = "BLD_NEW_CON";
 
-if (inspResult == "Left Over")
-{
-  aa.inspection.scheduleInspection(capId, null, aa.date.parseDate(dateAdd(null, 1, true)), null, inspType + "", null); 
-  logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - OK working with current Leftover ... Scheduled New Inspection type and not replicate = " + inspType + "");  
+if ((inspResult == "Failed") || (inspResult == "Passed") || (inspResult == "Cancelled"))
+{   
+  createPendingInspection(inspGroup, inspType + "");
+  
+  logDebug("JMP JMP Alert: ------------------------>> Script Item #72 - OK working with Inspection type Failed/Passed/Cancelled " + inspResult + "");  
 }  
  
-/* 
-var inspections = aa.inspection.getInspections(capId);
-if (inspections.getSuccess()) 
-{
-   inspections = inspections.getOutput();
-	for (i in inspections) 
-   {
-	   var thisInspection = inspections[i];
-  	   if (thisInspection.getInspectionStatus() == "Left Over") 
-      {
-        logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - OK I found a Leftover");
-        //createInspection(thisInspection.getInspectionType() + "",  aa.date.parseDate(dateAdd(null, 1, true)));
-        aa.inspection.scheduleInspection(capId, null, aa.date.parseDate(dateAdd(null, 1, true)), null, thisInspection.getInspectionType() + "", null);
-      }
-   }
-}
-*/
+
 
