@@ -19,6 +19,50 @@ var foundInspecion = false;
 
 if(wfTask =="Permit Issuance" && wfStatus== "Issued") 
 {
+   
+  var inspResultObj = aa.inspection.getInspections(capId);
+  if (inspResultObj.getSuccess()) 
+  {      
+		var inspList = inspResultObj.getOutput();
+      var showInspName = ''; 
+      
+      for (index in inspList)          
+      {            
+         showInspName = inspList[index].getInspectionType() + "";
+         
+         if ((showInspName == "Roofing") || (showInspName == "Engineering Inspection") || (showInspName == "Grade Inspection") || (showInspName == "Zoning Inspection") || (showInspName == "Water Service/Sanitary Service Inspection") || (showInspName == "Irrigation Inspection"))
+         { 
+            
+          foundInspecion = true;    
+
+           //inspList[index].setInspectionStatus("Pending");
+           //aa.inspection.editInspection(inspList[index]);                  
+         } 
+      
+      }
+  } 
+  
+  if (!foundInspecion)   // TEST JP
+  {   
+  
+     createPendingInspection(inspGroup,"Roofing");
+     createPendingInspection(inspGroup,"Engineering Inspection");
+     createPendingInspection(inspGroup,"Grade Inspection");
+     createPendingInspection(inspGroup,"Zoning Inspection");
+     createPendingInspection(inspGroup,"Water Service/Sanitary Service Inspection");
+     createPendingInspection(inspGroup,"Irrigation Inspection");
+  }  
+     
+     /*    
+     
+     createInspection("Roofing",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Engineering Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Grade Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Zoning Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Water Service/Sanitary Service Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Irrigation Inspection",  aa.date.parseDate(dateAdd(null, 0, true)));      
+      
+  } 
   
   var inspResultObj = aa.inspection.getInspections(capId);
   if (inspResultObj.getSuccess()) 
@@ -40,19 +84,5 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
          } 
       
       }
-  }   
-  
-  
-  if (!foundInspecion)   // TEST JP
-  {   
-     createInspection("Roofing",  aa.date.parseDate(dateAdd(null, 0, true))); 
-     createInspection("Engineering Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
-     createInspection("Grade Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
-     createInspection("Zoning Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
-     createInspection("Water Service/Sanitary Service Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
-     createInspection("Irrigation Inspection",  aa.date.parseDate(dateAdd(null, 0, true)));      
-      
-  } 
-  
-
+  }  
 }
