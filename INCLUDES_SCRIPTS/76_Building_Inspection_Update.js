@@ -6,7 +6,7 @@
 
 function createInspection(type, date) 
 {
-  aa.inspection.scheduleInspection(capId, null, date, null, type, curInspection[0].getInspection().requestComment);
+  aa.inspection.scheduleInspection(capId, null, date, null, type, null);
 
 }
 
