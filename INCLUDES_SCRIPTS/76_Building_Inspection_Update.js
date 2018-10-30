@@ -16,6 +16,7 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #76 - 76_Buildin
 //var foundInspecionArray = [0, 0, 0, 0, 0];
 
 var foundInspecion = false;
+var inspGroup = "BLD_NEW_CON";
 
 if(wfTask =="Permit Issuance" && wfStatus== "Issued") 
 {
