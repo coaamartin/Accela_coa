@@ -6,7 +6,14 @@
 
 logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - Inspection_Leftover");
 
+var $iTrc = ifTracer
+if ($iTrc(inspResult == "Left Over"))
+{
    
+  logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - OK working with current Leftover");  
+}  
+ 
+/* 
 var inspections = aa.inspection.getInspections(capId);
 if (inspections.getSuccess()) 
 {
@@ -22,5 +29,5 @@ if (inspections.getSuccess())
       }
    }
 }
-
+*/
 

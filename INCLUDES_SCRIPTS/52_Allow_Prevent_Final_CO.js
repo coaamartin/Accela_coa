@@ -25,9 +25,16 @@
 			{
 				allreceived = false;
 				missingCriteriaString += requiredArray[x] + ", ";
+            
+     			cancel = true;
+			   showMessage = true;
+			   comment("The following items are not complete: " + missingCriteriaString.substring(0, missingCriteriaString.length - 2));
+            break;
+            
 			}
-		}
 
+      }
+      
 		//get inspections and check to see if there are any that are scheduled or pending
 		var inspResult = aa.inspection.getInspections(capId);
 		var insps = inspResult.getOutput();
