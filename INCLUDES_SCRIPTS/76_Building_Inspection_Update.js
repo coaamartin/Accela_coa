@@ -15,7 +15,13 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #76 - 76_Buildin
 //var inspectionArray = ["Roofing", "Engineering Inspection", "Grade Inspection", "Zoning Inspection", "Water Service/Sanitary Service Inspection", "Irrigation Inspection"];
 //var foundInspecionArray = [0, 0, 0, 0, 0];
 
-var foundInspecion = false;
+var foundRoofingInspecion = false;
+var foundEngineerInspecion = false;
+var foundGradeInspecion = false;
+var foundZoneInspecion = false;
+var foundWaterInspecion = false;
+var foundIrrigationInspecion = false;
+
 var inspGroup = "BLD_NEW_CON";
 
 if(wfTask =="Permit Issuance" && wfStatus== "Issued") 
@@ -31,27 +37,67 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
       {            
          showInspName = inspList[index].getInspectionType() + "";
          
-         if ((showInspName == "Roofing") || (showInspName == "Engineering Inspection") || (showInspName == "Grade Inspection") || (showInspName == "Zoning Inspection") || (showInspName == "Water Service/Sanitary Service Inspection") || (showInspName == "Irrigation Inspection"))
-         { 
-            
-          foundInspecion = true;    
-
-           //inspList[index].setInspectionStatus("Pending");
-           //aa.inspection.editInspection(inspList[index]);                  
+         if (showInspName == "Roofing") 
+         {             
+          foundRoofingInspecion = true;                   
          } 
-      
+         
+         if (showInspName == "Engineering Inspection") 
+         {             
+          foundEngineerInspecion = true;                   
+         }   
+
+         if (showInspName == "Grade Inspection") 
+         {             
+          foundGradeInspecion = true;                   
+         }  
+
+         if (showInspName == "Zoning Inspection") 
+         {             
+          foundZoneInspecion = true;                   
+         }   
+
+         if (showInspName == "Water Service/Sanitary Service Inspection") 
+         {             
+          foundWaterInspecion  = true;                   
+         }      
+
+         if (showInspName == "Irrigation Inspection") 
+         {             
+          foundIrrigationInspecion  = true;                   
+         }            
+     
       }
   } 
   
-  if (!foundInspecion)   // TEST JP
+  if (!foundRoofingInspecion)
   {   
+   createPendingInspection(inspGroup,"Roofing");
+  }
   
-     createPendingInspection(inspGroup,"Roofing");
-     createPendingInspection(inspGroup,"Engineering Inspection");
-     createPendingInspection(inspGroup,"Grade Inspection");
-     createPendingInspection(inspGroup,"Zoning Inspection");
-     createPendingInspection(inspGroup,"Water Service/Sanitary Service Inspection");
-     createPendingInspection(inspGroup,"Irrigation Inspection");
+  if (!foundEngineerInspecion)
+  {  
+   createPendingInspection(inspGroup,"Engineering Inspection");
+  }
+  
+  if(!foundGradeInspecion)
+  {
+   createPendingInspection(inspGroup,"Grade Inspection");
+  }
+  
+  if(!foundZoneInspecion)
+  {   
+   createPendingInspection(inspGroup,"Zoning Inspection");
+  }
+
+  if(!foundWaterInspecion)
+  {
+   createPendingInspection(inspGroup,"Water Service/Sanitary Service Inspection");
+  }
+  
+  if(!foundIrrigationInspecion)
+  {   
+   createPendingInspection(inspGroup,"Irrigation Inspection");
   }  
      
      /*    
