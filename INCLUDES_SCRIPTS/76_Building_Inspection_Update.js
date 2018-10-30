@@ -4,7 +4,13 @@
 // are to automatically move to ‘Pending’ status in the Inspection tab. 
 */
 
-logDebug("JMP JMP Alert: ------------------------>> Script Item #76 - 76_Building_Inspection_Update");
+function createInspection(type, date) 
+{
+  aa.inspection.scheduleInspection(capId, null, date, null, type, curInspection[0].getInspection().requestComment);
+
+}
+
+logDebug("JMP JMP Alert: ------------------------>> Script Item #76 - 76_Building_Inspection_Update ... Need to see if createInspecion still not working ");
 
 //var inspectionArray = ["Roofing", "Engineering Inspection", "Grade Inspection", "Zoning Inspection", "Water Service/Sanitary Service Inspection", "Irrigation Inspection"];
 //var foundInspecionArray = [0, 0, 0, 0, 0];
@@ -48,14 +54,5 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
       
   } 
   
-    function createInspection(type, date) {
-        aa.inspection.scheduleInspection(capId, null, date, null, type, curInspection[0].getInspection().requestComment);
-
-    }
-  
-  
-  
-  
-
 
 }
