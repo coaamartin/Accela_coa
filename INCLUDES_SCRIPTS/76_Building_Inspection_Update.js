@@ -39,16 +39,19 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
   
   if (!foundInspecion)   
   {   
-     createInspection("Roofing",  aa.date.parseDate(dateAdd(null, 1, true))); 
-     createInspection("Engineering Inspection",  aa.date.parseDate(dateAdd(null, 1, true))); 
-     createInspection("Grade Inspection",  aa.date.parseDate(dateAdd(null, 1, true))); 
-     createInspection("Zoning Inspection",  aa.date.parseDate(dateAdd(null, 1, true))); 
-     createInspection("Water Service/Sanitary Service Inspection",  aa.date.parseDate(dateAdd(null, 1, true))); 
-     createInspection("Irrigation Inspection",  aa.date.parseDate(dateAdd(null, 1, true)));      
+     createInspection("Roofing",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Engineering Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Grade Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Zoning Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Water Service/Sanitary Service Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
+     createInspection("Irrigation Inspection",  aa.date.parseDate(dateAdd(null, 0, true)));      
       
   } 
   
-  // Create inspections not existing 
+    function createInspection(type, date) {
+        aa.inspection.scheduleInspection(capId, null, date, null, type, curInspection[0].getInspection().requestComment);
+
+    }
   
   
   
