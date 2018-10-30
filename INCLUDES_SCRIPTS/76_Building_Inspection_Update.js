@@ -4,7 +4,7 @@
 // are to automatically move to ‘Pending’ status in the Inspection tab. 
 */
 
-function createInspection(type, date) 
+function createInspection(type, date) // JMP
 {
   aa.inspection.scheduleInspection(capId, null, date, null, type, null);
 
