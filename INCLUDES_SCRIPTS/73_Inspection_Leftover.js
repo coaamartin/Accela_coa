@@ -10,7 +10,7 @@ var $iTrc = ifTracer
 if ($iTrc(inspResult == "Left Over"))
 {
    
-  logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - OK working with current Leftover");  
+  logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - OK working with current Leftover ... Inspection type = " + $iTrc(inspType) + "");  
 }  
  
 /* 
