@@ -6,11 +6,11 @@
 
 logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - Inspection_Leftover");
 
-var $iTrc = ifTracer
-if ($iTrc(inspResult == "Left Over"))
+
+if (inspResult == "Left Over")
 {
-   
-  logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - OK working with current Leftover ... Inspection type = " + inspType + "");  
+  aa.inspection.scheduleInspection(capId, null, aa.date.parseDate(dateAdd(null, 1, true)), null, inspType + "", null); 
+  logDebug("JMP JMP Alert: ------------------------>> Script Item #73 - OK working with current Leftover ... Scheduled New Inspection type and not replicate = " + inspType + "");  
 }  
  
 /* 
