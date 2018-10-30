@@ -37,7 +37,7 @@ if(wfTask =="Permit Issuance" && wfStatus== "Issued")
   }   
   
   
-  if (!foundInspecion)   
+  if (!foundInspecion)   // TEST JP
   {   
      createInspection("Roofing",  aa.date.parseDate(dateAdd(null, 0, true))); 
      createInspection("Engineering Inspection",  aa.date.parseDate(dateAdd(null, 0, true))); 
