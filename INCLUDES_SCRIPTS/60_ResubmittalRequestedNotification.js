@@ -40,11 +40,11 @@ if (exists(wfStatus, targetStatusArray))
 		//emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
       
       //JMP - 10/31 - Updated as jmain's does send email to Contractor
-      var lptypes = "Applicant";
-		coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
+      //var lptypes = "Applicant";
+		//coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
 		
 		//jmain edit - add LPs to email...
-		var lptypes = "Contractor";
+		var lptypes = "Applicant,Contractor";
 		coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
 
 		//update record status
