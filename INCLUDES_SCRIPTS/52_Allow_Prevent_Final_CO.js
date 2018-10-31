@@ -48,14 +48,12 @@
 
 			if ("Pending".equals(thisInspStatus) || "Scheduled".equals(thisInspStatus))
 			{
-				inspExists = true;
-			}
-		}
-
-		if (inspExists && !allreceived && exists(appTypeString, apply2Records))
-		{
+            
 			cancel = true;
 			showMessage = true;
 			comment("The following items are not complete: " + missingCriteriaString.substring(0, missingCriteriaString.length - 2));
+         
+			}
 		}
+
 	}
