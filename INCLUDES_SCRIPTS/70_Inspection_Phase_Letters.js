@@ -7,7 +7,7 @@
 
 logDebug("JMP JMP Alert: ------------------------>> Script Item #70 - 70_Inspection_Phase_Letters");
 
-if(wfTask =="Inspection Phase" && wfStatus== "Ready for CO") 
+if((wfTask == "Inspection Phase" && wfStatus== "Ready for CO") || (wfTask == "Inspection Phase" && wfStatus == "Final"))   // Final added for requirements on #56 to cover both requirements
 {
    
     var OhNoBadMatch = false;
