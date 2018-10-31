@@ -23,7 +23,7 @@
 
 		for (var x in requiredArray)
 		{
-			if ("CHECKED".equals(AInfo[requiredArray[x]]) && !"CHECKED".equals(AInfo[receivedArray[x]]))
+			if (("CHECKED".equals(AInfo[requiredArray[x]]) && !"CHECKED".equals(AInfo[receivedArray[x]])))
 			{
 				allreceived = false;
 				missingCriteriaString += requiredArray[x] + ", ";
@@ -31,7 +31,6 @@
      			cancel = true;
 			   showMessage = true;
 			   comment("The following items are not complete: " + missingCriteriaString.substring(0, missingCriteriaString.length - 2));
-            break;
             
 			}
 
