@@ -37,14 +37,12 @@ if (exists(wfStatus, targetStatusArray))
 		emailparams.put("$$acaURL$$", recURL);
 		emailparams.put("$$wfComment$$", wfComment);
 		emailparams.put("$$wfTask$$", wfTask);
-		//emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
+		emailContacts(contacts, emailtemplate, emailparams, "", "", "N", capId);
+      logDebug("JMP .. Just sent email to Applicant");
       
-      //JMP - 10/31 - Updated as jmain's does send email to Contractor
-      //var lptypes = "Applicant";
-		//coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
-		
+	
 		//jmain edit - add LPs to email...
-		var lptypes = "Applicant,Contractor";
+		var lptypes = "Contractor";
 		coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
 
 		//update record status
