@@ -14,7 +14,7 @@ logDebug("Start executing 60_ResubmittalRequestedNotification");
 var targetStatusArray = ["Resubmittal Requested"];
 if (exists(wfStatus, targetStatusArray))
 {
-		var contacts = "Applicant,Contractor(s)";
+		var contacts = "Applicant";
 		var emailtemplate = "BLD RESUBMITTAL NOTIFICATION";
 		//build ACA URL
 		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
@@ -38,6 +38,10 @@ if (exists(wfStatus, targetStatusArray))
 		emailparams.put("$$wfComment$$", wfComment);
 		emailparams.put("$$wfTask$$", wfTask);
 		//emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
+      
+      //JMP - 10/31 - Updated as jmain's does send email to Contractor
+      var lptypes = "Applicant";
+		coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
 		
 		//jmain edit - add LPs to email...
 		var lptypes = "Contractor";
