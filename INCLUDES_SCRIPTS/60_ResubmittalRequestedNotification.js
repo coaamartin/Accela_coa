@@ -37,7 +37,7 @@ if (exists(wfStatus, targetStatusArray))
 		emailparams.put("$$acaURL$$", recURL);
 		emailparams.put("$$wfComment$$", wfComment);
 		emailparams.put("$$wfTask$$", wfTask);
-		emailContacts(contacts, emailtemplate, emailparams, "", "", "N", capId);
+		emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
       logDebug("JMP .. Just sent email to Applicant");
       
 	
