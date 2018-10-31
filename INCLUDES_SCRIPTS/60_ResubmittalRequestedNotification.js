@@ -37,7 +37,7 @@ if (exists(wfStatus, targetStatusArray))
 		emailparams.put("$$acaURL$$", recURL);
 		emailparams.put("$$wfComment$$", wfComment);
 		emailparams.put("$$wfTask$$", wfTask);
-		emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
+		//emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
 		
 		//jmain edit - add LPs to email...
 		var lptypes = "Contractor";
