@@ -7,9 +7,10 @@
   If status 'Ready For CO' is selected on Inspection Phase wf task, verify there are no Pending or Scheduled inspections and verify that there are no other workflow tasks active, 
   if there are then prevent the wf task from proceeding and present a message stating "There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed.
 */
-   
+
+include("70_Inspection_Phase_Letters");      
 include("63_Inspection_Phase_Water_Meter");
-include("70_Inspection_Phase_Letters");   
+include("52_Allow_Prevent_Final_CO");   
 include("71_Certificate_Occpancy_Checked");	
 include("62_Building_Inspection_Check_Pending_Scheduled");
 
