@@ -11,8 +11,7 @@
 */
 
 include("70_Inspection_Phase_Letters");      
-include("63_Inspection_Phase_Water_Meter");
-include("52_Allow_Prevent_Final_CO");   
+include("63_Inspection_Phase_Water_Meter"); 
 include("71_Certificate_Occpancy_Checked");	
 include("62_Building_Inspection_Check_Pending_Scheduled");
 
