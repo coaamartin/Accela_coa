@@ -18,6 +18,8 @@
 		var requiredArray = ["ILC Letter Required", "Foundation Letter Required", "Footing - Pier - Cassion Letter Required", "Drain Letter Required", "Waterproofing Letter Required"];
 		var receivedArray = ["ILC Letter Received", "Foundation Letter Received", "Footing - Pier - Cassion Letter Received", "Drain Letter Received", "Waterproofing Letter Received"];
 		var missingCriteriaString = "";
+      
+      logDebug("JMP JMP Alert: ------------------------>> Script Item #52 - 52_Allow_Prevent_Final_CO");
 
 		for (var x in requiredArray)
 		{
