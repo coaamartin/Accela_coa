@@ -157,7 +157,7 @@ try{
 
 	if (emailAddress.length)
 		// aa.sendMail("noreply@accela.com", emailAddress, "", batchJobName + " Results", emailText);
-		email(emailAddress, "noreply@accela.com", batchJobName + " Results", emailText);
+		email(emailAddress, "noreply@aurora.gov", batchJobName + " Results", emailText);
 
 } catch (err) {
 	logDebug("ERROR: " + err.message + " In " + batchJobName + " Line " + err.lineNumber);
@@ -376,7 +376,7 @@ function processLine(line) {
 								if (returnValue == false){
 									logDebug("Address " + fullAddress + " has an invalid Street Type of " + streetType);
 								}else{
-									newAddr.setStreetSuffix(returnValue);
+									newAddr.setStreetSuffix(streetType); //ajm changed this from returnValue
 								}											 	
 							}
 						break;
