@@ -176,7 +176,7 @@ function mainProcess() {
 		if (docString) {
 			line = docString.nextLine();				
 			// process the header line
-			logDebug("<br> COA Skipping header line " + line + "<br>")
+			//logDebug("<br> COA Skipping header line " + line + "<br>")
 			
 			while (docString.hasNextLine()) {
 				if (elapsed() > maxSeconds) { // only continue if time hasn't expired
