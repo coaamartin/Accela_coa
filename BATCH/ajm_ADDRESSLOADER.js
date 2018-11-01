@@ -133,11 +133,10 @@ lineFormat = ["PARCEL_NO", "FULL_ADDRESS", "DESCRIPTION", "STATUS", "CITY", "COU
 "TEMPLATE_NAME_3" , "ATTRIBUTE_NAME_3" , "ATTRIBUTE_VALUE_3", "TEMPLATE_NAME_4" , "ATTRIBUTE_NAME_4" , "ATTRIBUTE_VALUE_4", 
 "TEMPLATE_NAME_5" , "ATTRIBUTE_NAME_5" , "ATTRIBUTE_VALUE_5"];
 */
-lineFormat = ["FULL_ADDRESS", "PARCEL_NO", "DESCRIPTION", "STATUS", "CITY", "COUNTRY", "COUNTY", "DISTANCE", "EVENT_ID", "HOUSE_FRACTION_END", "HOUSE_FRACTION_START", 
-"HOUSE_NUMBER_ALPHA_END", "HOUSE_NUMBER_ALPHA_START", "HOUSE_NUMBER_END", "HOUSE_NUMBER_START", "INSPECTION_DISTRICT", "INSPECTION_DISTRICT_PREFIX",
-"LEVEL_NUMBER_END", "LEVEL_NUMBER_START", "LEVEL_PREFIX", "NEIGHBERHOOD_PREFIX", "NEIGHBORHOOD", "PRIMARY_FLAG", "SECONDARY_ROAD", "SECONDARY_ROAD_NUMBER",
-"SOURCE_FLAG", "STATE", "STREET_DIRECTION", "STREET_NAME", "STREET_PREFIX", "STREET_SUFFIX", "STREET_SUFFIX_DIRECTION", 
-"UNIT_END", "UNIT_START", "UNIT_TYPE", "VALIDATE_FLAG", "X_COORDINATOR", "Y_COORDINATOR", "ZIP", "ADDRESS_TYPE","ADDRESS_TYPE_FLAG", "ADDRESS_LINE_1", "ADDRESS_LINE_2",
+lineFormat = ["PARCEL_NO", "DESCRIPTION","HOUSE_NUMBER_START","STREET_DIRECTION","STREET_NAME","STREET_SUFFIX","STREET_SUFFIX_DIRECTION","UNIT_START","UNIT_TYPE","CITY","STATE","ZIP","COUNTY","COUNTRY","FULL_ADDRESS","STATUS","ADDRESS_TYPE","ADDRESS_TYPE_FLAG","PRIMARY_FLAG","VALIDATE_FLAG","DISTANCE", "EVENT_ID", "HOUSE_FRACTION_END", "HOUSE_FRACTION_START", 
+"HOUSE_NUMBER_ALPHA_END", "HOUSE_NUMBER_ALPHA_START", "HOUSE_NUMBER_END",  "INSPECTION_DISTRICT", "INSPECTION_DISTRICT_PREFIX",
+"LEVEL_NUMBER_END", "LEVEL_NUMBER_START", "LEVEL_PREFIX", "NEIGHBERHOOD_PREFIX", "NEIGHBORHOOD",  "SECONDARY_ROAD", "SECONDARY_ROAD_NUMBER",
+"SOURCE_FLAG",    "STREET_PREFIX","UNIT_END",    "X_COORDINATOR", "Y_COORDINATOR",   "ADDRESS_LINE_1", "ADDRESS_LINE_2",
 "TEMPLATE_NAME_1" , "ATTRIBUTE_NAME_1" , "ATTRIBUTE_VALUE_1" , "TEMPLATE_NAME_2" , "ATTRIBUTE_NAME_2" , "ATTRIBUTE_VALUE_2" , 
 "TEMPLATE_NAME_3" , "ATTRIBUTE_NAME_3" , "ATTRIBUTE_VALUE_3", "TEMPLATE_NAME_4" , "ATTRIBUTE_NAME_4" , "ATTRIBUTE_VALUE_4", 
 "TEMPLATE_NAME_5" , "ATTRIBUTE_NAME_5" , "ATTRIBUTE_VALUE_5"];
@@ -171,34 +170,14 @@ try{
 /*| <===========Functions================>*/
 
 function mainProcess() {
-	// get the file
-	/*cs = aa.proxyInvoker.newInstance("com.accela.aa.util.FTPUtil").getOutput();
-	FTPUtil = cs;
-	try {
-		aa.util.deleteFile("c:\\temp\\data.txt"); // delete it if it exists
-		ftpClient = new Packages.org.apache.commons.net.ftp.FTPClient;
-		ftpClient.connect(ftpSite);
-		ftpClient.login(ftpUser, ftpPass);
-		ftpClient.changeWorkingDirectory(ftpDirectory);
-		ftpClient.setFileType(0); //ascii
-		ftpClient.enterLocalPassiveMode();
-		fout = new java.io.FileOutputStream("c:\\temp\\data.txt");
-		ftpClient.retrieveFile(fileName, fout);
-		fout.flush();
-		fout.close();
-		if (deleteFile) ftpClient.deleteFile(fileName);
-		ftpClient.logout();
-		ftpClient.disconnect();
-	}
-	catch (err) {
-		logDebug("Error getting file from FTP site : " + err);
-		return;
-	}
-	*/
 	try {
 		docString = openDocument(fileName);
 		fContent = "";
 		if (docString) {
+			//line = docString.nextLine();				
+			// process the header line
+			//logDebug("<br> COA Skipping header line " + line + "<br>")
+			
 			while (docString.hasNextLine()) {
 				if (elapsed() > maxSeconds) { // only continue if time hasn't expired
 					logDebug("A script timeout has caused partial completion of this process.  Please re-run.  " + elapsed() + " seconds elapsed, " + maxSeconds + " allowed.") ;
@@ -206,9 +185,7 @@ function mainProcess() {
 					break; 
 				}	
 				line = docString.nextLine();
-				
-				// process the line
-				logDebug("<br> DONB 1 processing line " + line + "<br>")
+				logDebug("<br> COA processing 1 line " + line + "<br>")				
 				var addrArray = new Array();
 				var addrArray = processLine(String(line));
 
