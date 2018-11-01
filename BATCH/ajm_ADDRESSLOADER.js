@@ -219,7 +219,7 @@ function processLine(line) {
 			for (pIndex in pieces) {
 				pieceValue = pieces[pIndex];
 				pieceDataName = lineFormat[pIndex];
-				 // logDebug("line value: " + pIndex +  ", " + pieceDataName + ", " + pieceValue);
+				  logDebug("line value: " + pIndex +  ", " + pieceDataName + ", " + pieceValue);
 				
 				if (String(pieceValue).trim() == "") continue;
 				switch (pieceDataName) {
