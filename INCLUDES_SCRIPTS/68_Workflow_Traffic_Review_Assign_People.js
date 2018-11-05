@@ -20,7 +20,7 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   {
   logDebug("Within code block to assign individual WFTASK of Traffic Review");
   
-  //var taskUserObj = currentTask.getTaskItem().getAssignedUser();
+  var taskUserObj = currentTask.getTaskItem().getAssignedUser();
   
   logDebug(taskUserObj);
   
