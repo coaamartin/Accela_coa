@@ -4,7 +4,13 @@
 | 8/14/2017 - nma - adding xapoFailover Y/N logic; fixed issue with null addrType exception
 | 8/23/2017 - nma - removed UID logic, including the EXT_UID field, 
 |					xapo failover will be a separate script; removed xapoFailover parm
+| 11/01/2018 ajm modified to allow a header line and reordered columns.  Also supplied proper street_suffix.
 /------------------------------------------------------------------------------------------------------*/
+/* Paste into excel as an example of a properly formatted excel.  Be sure to save as type CSV file.
+Parcel,Description,House#,Street Prefix,Street Name,Street Type,Street Dir,Unit,Unit Type,City,State,Zip,County,Country,Full Address,Status,Address Type,Address Type Flag,Primary Flag,Validate Flag,Template Type1,Template Name1,Template Value1,Template Type2,Template Name12,Template Value2
+9999-00000-1234567,Adrian test,1177,S,HELENA,CIR,,,,AURORA,CO,80017,,,1177 S HELENA CIR,A,ADDRESS,A,Y,,ADDRESS ATTRIBUTES,BLOCK,77-187,ADDRESS ATTRIBUTES,LOT,Adrian
+9999-00000-1234567,Adrian test,1176,S,HELENA,CIR,,,,AURORA,CO,80017,,,1176 S HELENA CIR,A,ADDRESS,A,Y,,ADDRESS ATTRIBUTES,BLOCK,77-187,ADDRESS ATTRIBUTES,LOT,Adrian
+*/
 /*------------------------------------------------------------------------------------------------------/
 |
 | START: USER CONFIGURABLE PARAMETERS
@@ -170,7 +176,7 @@ function mainProcess() {
 		if (docString) {
 			line = docString.nextLine();				
 			// process the header line
-			logDebug("<br> COA Skipping header line " + line + "<br>")
+			//logDebug("<br> COA Skipping header line " + line + "<br>")
 			
 			while (docString.hasNextLine()) {
 				if (elapsed() > maxSeconds) { // only continue if time hasn't expired
@@ -219,7 +225,7 @@ function processLine(line) {
 			for (pIndex in pieces) {
 				pieceValue = pieces[pIndex];
 				pieceDataName = lineFormat[pIndex];
-				  logDebug("line value: " + pIndex +  ", " + pieceDataName + ", " + pieceValue);
+				  //logDebug("line value: " + pIndex +  ", " + pieceDataName + ", " + pieceValue);
 				
 				if (String(pieceValue).trim() == "") continue;
 				switch (pieceDataName) {
