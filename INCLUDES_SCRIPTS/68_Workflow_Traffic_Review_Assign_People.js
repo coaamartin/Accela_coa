@@ -13,5 +13,6 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
 {
   logDebug("Within code block to assign individual");
   //assignTask("Assigned to","Brianna Medema")
+  AssignTask("Traffic Review","Brianna Medema");	
 }
 
