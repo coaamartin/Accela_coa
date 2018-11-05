@@ -17,8 +17,11 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   var currentTask = taskResult.getOutput();
   if (currentTask != null && currentTask != "") 
   {
-  logDebug("Within code block to assign individual AFTER getting the WFTASK of Traffic Review");
+  logDebug("Within code block to assign individual WFTASK of Traffic Review");
+  
   editTaskSpecific("Traffic Review", "Assigned", "Brianna Medema");
+  
+  logDebug("Assigned Brianna Medema .. double check ");
   //AssignTask("Traffic Review","Brianna Medema");	
   }
 
