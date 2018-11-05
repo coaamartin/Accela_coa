@@ -5,6 +5,14 @@
  
 */
 
+function getWFTaskAssignedUser(task)
+{
+    var workflowTask = aa.workflow.getTask(capId, task);
+    var fTask = workflowTask.getOutput();
+    var taskUserObj = fTask.getTaskItem().getAssignedUser();
+    return taskUserObj;
+}
+
 logDebug("JMP JMP Alert: ------------------------>> Script Item #68 - 68_Workflow_Traffic_Review_Assign_People");
 
 logDebug (AInfo["Project Category"] + "");
@@ -16,10 +24,13 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   var taskResult = aa.workflow.getTask(capId, "Traffic Review");
   var currentTask = taskResult.getOutput();
   if (currentTask != null && currentTask != "") 
+     
   {
   logDebug("Within code block to assign individual WFTASK of Traffic Review");
   
-  logDebug(getWFTaskAssignedUser("Traffic Review"));
+  var taskUserObj = currentTask.getTaskItem().getAssignedUser();
+  
+  logDebug(taskUserObj);
   
   //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
   editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
@@ -29,14 +40,6 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   //AssignTask("Traffic Review","Brianna Medema");	
   }
 
-}
-
-function getWFTaskAssignedUser(task)
-{
-    var workflowTask = aa.workflow.getTask(capId, task);
-    var fTask = workflowTask.getOutput();
-    var taskUserObj = fTask.getTaskItem().getAssignedUser();
-    return taskUserObj;
 }
 
 
