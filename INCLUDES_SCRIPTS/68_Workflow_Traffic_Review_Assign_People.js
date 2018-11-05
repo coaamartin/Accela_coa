@@ -5,6 +5,22 @@
  
 */
 
+function getAssignedUser() {
+	if (capId != null) {
+		capDetail = aa.cap.getCapDetail(capId).getOutput();
+
+		userObj = aa.person.getUser(capDetail.getAsgnStaff());
+		if (userObj.getSuccess()) {
+			staff = userObj.getOutput();
+			userID = staff.getUserID();
+			return userID;
+		} else {
+			return false;
+		}
+	} else
+		return false;
+}
+
 logDebug("JMP JMP Alert: ------------------------>> Script Item #68 - 68_Workflow_Traffic_Review_Assign_People");
 
 logDebug (AInfo["Project Category"] + "");
@@ -20,7 +36,7 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   {
   logDebug("Within code block to assign individual WFTASK of Traffic Review");
   
-  var taskUserObj = currentTask.getTaskItem().getAssignedUser()
+  var taskUserObj = currentTask.getTaskItem().getAssignedUser();
   
   logDebug(taskUserObj);
   
