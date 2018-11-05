@@ -18,6 +18,7 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   if (currentTask != null && currentTask != "") 
   {
   logDebug("Within code block to assign individual AFTER getting the WFTASK of Traffic Review");
+  currentTask.setSysUser("Brianna Medema");
   //AssignTask("Traffic Review","Brianna Medema");	
   }
 
