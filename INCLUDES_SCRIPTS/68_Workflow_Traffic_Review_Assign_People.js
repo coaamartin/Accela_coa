@@ -19,11 +19,13 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   {
   logDebug("Within code block to assign individual WFTASK of Traffic Review");
   
-  editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
-  editTaskSpecific("Traffic Review", "Assigned To", "Brianna Medema");
-  editTaskSpecific("Traffic Review", "Assigned", "Brianna Medema");
+  var assignedTo = getTaskSpecific("Traffic Review", "Assigned to");
   
-  logDebug("Assigned Brianna Medema .. double check ");
+  //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
+  //editTaskSpecific("Traffic Review", "Assigned To", "Brianna Medema");
+  //editTaskSpecific("Traffic Review", "Assigned", "Brianna Medema");
+  
+  logDebug("Assigned Brianna Medema .. double check " + assignedTo + "");
   //AssignTask("Traffic Review","Brianna Medema");	
   }
 
