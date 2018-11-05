@@ -5,22 +5,6 @@
  
 */
 
-function getAssignedUser() {
-	if (capId != null) {
-		capDetail = aa.cap.getCapDetail(capId).getOutput();
-
-		userObj = aa.person.getUser(capDetail.getAsgnStaff());
-		if (userObj.getSuccess()) {
-			staff = userObj.getOutput();
-			userID = staff.getUserID();
-			return userID;
-		} else {
-			return false;
-		}
-	} else
-		return false;
-}
-
 logDebug("JMP JMP Alert: ------------------------>> Script Item #68 - 68_Workflow_Traffic_Review_Assign_People");
 
 logDebug (AInfo["Project Category"] + "");
@@ -47,7 +31,29 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   logDebug("Assigned Brianna Medema .. double check ");
   //AssignTask("Traffic Review","Brianna Medema");	
   }
+  
 
+}
+
+function getAssignedUser() 
+{
+	if (capId != null) 
+   {
+		capDetail = aa.cap.getCapDetail(capId).getOutput();
+
+		userObj = aa.person.getUser(capDetail.getAsgnStaff());
+		if (userObj.getSuccess()) 
+      {
+			staff = userObj.getOutput();
+			userID = staff.getUserID();
+			return userID;
+		} 
+      else 
+      {
+			return false;
+		}
+	} else
+		return false;
 }
 
 
