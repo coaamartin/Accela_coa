@@ -35,14 +35,15 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       
       if(applicantEmail)
       {      
-         addParameter(eParams, "$$wfComment$$", wfComment);
-         addParameter(eParams, "$$altID$$", altId);
+         //addParameter(eParams, "$$wfComment$$", wfComment);   //Not included in update template 
+         addParameter(eParams, "$$altid$$", altId);
          addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
          addParameter(eParams, "$$capAlias$$", capName);
          addParameter(eParams, "$$FirstName$$", recordApplicant.getFirstName());
          addParameter(eParams, "$$LastName$$", recordApplicant.getLastName());
          
          //emailContacts(contacts, emailtemplate, eParams, "", "", "N", "");
+
          logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", applicantEmail, "", emailtemplate, eParams, capId4Email, null).getSuccess());
       }
    }
