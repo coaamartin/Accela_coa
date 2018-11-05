@@ -19,6 +19,8 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   {
   logDebug("Within code block to assign individual WFTASK of Traffic Review");
   
+  logDebug(currentTask.getWFTaskAssignedUser());
+  
   //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
   editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
   //editTaskSpecific("Traffic Review", "Assigned", "Brianna Medema");
