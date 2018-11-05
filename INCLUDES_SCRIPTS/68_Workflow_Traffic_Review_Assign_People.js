@@ -35,7 +35,7 @@ function getWFTaskAssignedUser(task)
 {
     var workflowTask = aa.workflow.getTask(capId, task);
     var fTask = workflowTask.getOutput();
-    var taskUserObj = fTask.getTaskItem().getAssignedUser()
+    var taskUserObj = fTask.getTaskItem().getAssignedUser();
     return taskUserObj;
 }
 
