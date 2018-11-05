@@ -19,7 +19,7 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   {
   logDebug("Within code block to assign individual WFTASK of Traffic Review");
   
-  logDebug(currentTask.getWFTaskAssignedUser());
+  logDebug(getWFTaskAssignedUser("Traffic Review"));
   
   //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
   editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
@@ -30,3 +30,13 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   }
 
 }
+
+function getWFTaskAssignedUser(task)
+{
+    var workflowTask = aa.workflow.getTask(capId, task);
+    var fTask = workflowTask.getOutput();
+    var taskUserObj = fTask.getTaskItem().getAssignedUser()
+    return taskUserObj;
+}
+
+
