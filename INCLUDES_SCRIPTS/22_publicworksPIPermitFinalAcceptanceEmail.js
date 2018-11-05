@@ -21,7 +21,10 @@ if (currenttask == "Final Acceptance" && currentstatus == "Complete")
 	logDebug("Starting Async Email...");
 	
 	//what contact types should get an email - comma delimited string of contact types
-	var allowedcontacttypes = "Applicant,Developer,Contractor(s)";
+	//var allowedcontacttypes = "Applicant,Developer,Contractor(s)";
+   // 11-5-18 per instructions update to All contact types (Script tracker #22)
+   
+   var allowedcontacttypes = "All";
 		
 	//send email to all contacts with the apropriate template and report
 	var emailtemplate = "PI PERMIT FINAL ACCEPTANCE";
