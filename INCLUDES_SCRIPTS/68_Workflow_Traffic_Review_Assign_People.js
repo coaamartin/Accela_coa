@@ -20,15 +20,15 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   {
   logDebug("Within code block to assign individual WFTASK of Traffic Review");
   
-  var taskUserObj = currentTask.getTaskItem().getAssignedUser();
+  //var taskUserObj = currentTask.getTaskItem().getAssignedUser();
   
   logDebug(taskUserObj);
   
   //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
-  editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
+  //editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
   //editTaskSpecific("Traffic Review", "Assigned", "Brianna Medema");
   
-  //logDebug("Assigned Brianna Medema .. double check ");
+  logDebug("Assigned Brianna Medema .. double check ");
   //AssignTask("Traffic Review","Brianna Medema");	
   }
 
