@@ -16,22 +16,35 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       //Get the capId type needed for the email function
 		var capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
       var altId = capId.getCustomID();
+      var recordApplicant = getContactByType("Applicant", capId);
+      var applicantEmail = null;
+      
+      var cap = aa.cap.getCap(capId).getOutput();
+      var capName = cap.getSpecialText();
+      
+      if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") 
+      {
+        logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+      } else 
+      {
+        applicantEmail = recordApplicant.getEmail();
+      }
       
       var eParams = aa.util.newHashtable();
-      var contacts = "jmporter@auroragov.org";
-      var emailtemplate = "JMP EMAIL TEMPLATE";
-      var urlstring = "http://img-s-msn-com.akamaized.net/tenant/amp/entityid/BBOK9ZF.img?h=488&w=799&m=6&q=60&o=f&l=f&x=916&y=734"
+      var emailtemplate = "ARBORIST LICENSE NEEDS MORE INFO # 77";
       
-      addParameter(eParams, "$$wfComment$$", wfComment);
-      addParameter(eParams, "$$altID$$", altId);
-      addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
-      addParameter(eParams, "$$scriptid$$", "77");
-      addParameter(eParams, "$$signature$$", "James M. Porter");
-      addParameter(eParams, "$$testpic$$", urlstring);
-      
-      //emailContacts(contacts, emailtemplate, eParams, "", "", "N", "");
-      logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", contacts, "", emailtemplate, eParams, capId4Email, null).getSuccess());
-
+      if(applicantEmail)
+      {      
+         addParameter(eParams, "$$wfComment$$", wfComment);
+         addParameter(eParams, "$$altID$$", altId);
+         addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
+         addParameter(eParams, "$$capAlias$$", capName);
+         addParameter(eParams, "$$FirstName$$", recordApplicant.getFirstName());
+         addParameter(eParams, "$$LastName$$", recordApplicant.getLastName());
+         
+         //emailContacts(contacts, emailtemplate, eParams, "", "", "N", "");
+         logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", applicantEmail, "", emailtemplate, eParams, capId4Email, null).getSuccess());
+      }
    }
 }
 
