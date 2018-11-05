@@ -5,14 +5,6 @@
  
 */
 
-function getWFTaskAssignedUser(task)
-{
-    var workflowTask = aa.workflow.getTask(capId, task);
-    var fTask = workflowTask.getOutput();
-    var taskUserObj = fTask.getTaskItem().getAssignedUser();
-    return taskUserObj;
-}
-
 logDebug("JMP JMP Alert: ------------------------>> Script Item #68 - 68_Workflow_Traffic_Review_Assign_People");
 
 logDebug (AInfo["Project Category"] + "");
