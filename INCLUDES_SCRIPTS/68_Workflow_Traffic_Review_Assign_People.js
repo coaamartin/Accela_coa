@@ -13,6 +13,12 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
 {
   logDebug("Within code block to assign individual");
   //assignTask("Assigned to","Brianna Medema")
-  AssignTask("Traffic Review","Brianna Medema");	
-}
+  var taskResult = aa.workflow.getTask(capId, "Traffic Review");
+  var currentTask = taskResult.getOutput();
+  if (currentTask != null && currentTask != "") 
+  {
+  logDebug("Within code block to assign individual AFTER getting the WFTASK of Traffic Review");
+  //AssignTask("Traffic Review","Brianna Medema");	
+  }
 
+}
