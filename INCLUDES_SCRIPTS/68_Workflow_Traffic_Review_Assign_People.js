@@ -11,5 +11,10 @@ if(wfTask == "Traffic Review" && (!wfStatus == "Not Required"))
 {
   
   logDebug (AInfo["Project Category"] + "");
+  
+  if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Category"] == "Business Use Building") || (AInfo["Project Category"] == "Factory Use Building") || (AInfo["Project Category"] == "Group E Building") || (AInfo["Project Category"] == "Group U Building") || (AInfo["Project Category"] == "Hotel Building") || (AInfo["Project Category"] == "Institutional Use Building") || (AInfo["Project Category"] == "Mercantile Use Building") || (AInfo["Project Category"] == "Non-Res Addition") || (AInfo["Project Category"] == "Storage Use Building"))
+  {
+     assignTask("Assigned to","Brianna Medema")
+  }
 
 }

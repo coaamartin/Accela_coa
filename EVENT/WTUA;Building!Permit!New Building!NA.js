@@ -21,8 +21,6 @@ Sample Call : createChildWaterUtilityPermitRecords()
 
 include("76_Building_Inspection_Update");
 
-include("68_Workflow_Traffic_Review_Assign_People");  //EMSE TEST 
-
 createChildWaterUtilityPermitRecords();
 script207_SetTotalSqFtOnFireRecord();
 
