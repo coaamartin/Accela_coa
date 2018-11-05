@@ -32,9 +32,6 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   //AssignTask("Traffic Review","Brianna Medema");	
   }
   
-
-}
-
 function getAssignedUser() 
 {
 	if (capId != null) 
@@ -54,6 +51,10 @@ function getAssignedUser()
 		}
 	} else
 		return false;
+}  
+
 }
+
+
 
 
