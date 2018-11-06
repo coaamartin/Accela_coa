@@ -24,7 +24,7 @@ if ("Pre Submital Meetings".equals(wfTask) && "Email Applicant".equals(wfStatus)
       var TSI = TSIResult.getOutput();
       for (a1 in TSI) 
       {
-        logDebug("JMP - IN TSI " + fTask.getTaskDescription() + "");  
+        logDebug("JMP - IN TSI :" + fTask.getTaskDescription() + "");  
       
       }
     }
