@@ -10,15 +10,24 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #80 - 80-Require
 if ("Pre Submital Meetings".equals(wfTask) && "Email Applicant".equals(wfStatus)) 
 {
 
-    var TSIFieldChecked = false;
-    
-    var tsiArray = new Array(); 
-    loadTaskSpecific(tsiArray);
-    
-	 for (i in tsiArray)
+  var workflowResult = aa.workflow.getTasks(itemCap);
+  var wfObj = workflowResult.getOutput();
+
+  for (i in wfObj) 
+  {
+    var fTask = wfObj[i];
+    var stepnumber = fTask.getStepNumber();
+    var processID = fTask.getProcessID();
+    var TSIResult = aa.taskSpecificInfo.getTaskSpecificInfoByTask(itemCap, processID, stepnumber)
+    if (TSIResult.getSuccess()) 
     {
-    logDebug ("JMP here .. Lets look at the tsiArray = " + tsiArray[i] + "");
-    
+      var TSI = TSIResult.getOutput();
+      for (a1 in TSI) 
+      {
+        logDebug("JMP - IN TSI " + fTask.getTaskDescription() + "");  
+      
+      }
     }
+  }  
 }
 
