@@ -9,6 +9,8 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #80 - 80-Require
 
 if ("Pre Submital Meetings".equals(wfTask) && "Email Applicant".equals(wfStatus)) 
 {   
+
+   logDebug("JMP JMP Alert WITHIN LOOP : ------------------------>> ");
    var i = 0;
 	var itemCap = capId;
   	var workflowResult = aa.workflow.getTasks(itemCap);
