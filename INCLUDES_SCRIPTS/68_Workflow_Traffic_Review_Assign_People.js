@@ -27,7 +27,7 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   logDebug(taskUserObj);
   
   activateTask("Traffic Review");
-  assignTask("Traffic Review","Brianna Medema");
+  assignTask("Traffic Review","PW/NA/NA/NA/NA/PW/Brianna Medema");
   
   //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
   //editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
