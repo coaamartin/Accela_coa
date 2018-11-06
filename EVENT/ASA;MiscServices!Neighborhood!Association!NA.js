@@ -1,11 +1,15 @@
-//Script ??
-//Record Types:	MISCServices/Neighborhood/Association/NA
+// Begin script to update the Multiple Parcels table with actual parcels
+ if(!publicUser){
+  if (typeof(MULTIPLEPARCELS) == "object")
+  {
+   createMPTableFromParcels();
+  }
+ }
+// End script to update the Multiple Parcels table with actual parcels
 
-//Event: 		ASA:
 
-//Desc:			Runs when an HOA renewal completes in ACA.
-//
-
-logDebug ("ASA MISC () started");
-
-logDebug ("ASA MISC () end");
+if (matches(currentUserID, "ADMIN")) {
+showDebug = false;
+showMessage = false;
+}
+include("EMSE:SetContactRelationshipToContactType");
