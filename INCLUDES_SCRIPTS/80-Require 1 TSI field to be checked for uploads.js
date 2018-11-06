@@ -60,6 +60,4 @@ function getTaskSpecific(wfName, itemName) { // optional: itemCap
 	return false;
 }
 
-  
-}
 
