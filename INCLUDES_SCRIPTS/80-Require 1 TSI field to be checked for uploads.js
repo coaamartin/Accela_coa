@@ -22,8 +22,14 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
       var fTask = wfObj[i];
 		var stepnumber = fTask.getStepNumber();
 		var processID = fTask.getProcessID();
-		if ("Pre Submittal Meetings".equals(fTask.getTaskDescription())) 
+      
+      logDebug("JMP JMP Post Pre Submittal : 1 ------------------------>> ");
+      
+		if ("Pre Submittal Meetings".equals(fTask.getTaskDescription()))          
+      
       { 
+      
+         logDebug("JMP JMP Post Pre Submittal : 2 ------------------------>> ");
 			var TSIResult = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(itemCap, processID, stepnumber, "Pre Submittal Meetings");
 			if (TSIResult.getSuccess()) 
          {
