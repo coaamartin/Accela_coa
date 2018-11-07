@@ -34,12 +34,10 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
             logDebug("JMP JMP Post Pre Submittal : ------------------------>> ");
 				var TSI = TSIResult.getOutput();
 				if (TSI != null) 
-            {
-               var TSIArray = new Array();
-					var TSInfoModel = TSI.getTaskSpecificInfoModel(); //Demo JP
-               for (dmyIttr in TSIInfoModel) 
+               
+            for (dmyIttr in TSI) 
                {
-                  logDebug("JMP - IN TSI :" + TSInfoModel[dmyIttr]);
+                  logDebug("JMP - IN TSI :" + TSI[dmyIttr]);
                }
             }
          }      
