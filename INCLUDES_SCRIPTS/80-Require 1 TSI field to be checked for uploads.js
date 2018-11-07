@@ -52,7 +52,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
 	
    }
    
-   if (!foundCheckBox) then
+   if (!foundCheckBox)
    {
       showMessage = true;
 	   comment("<h2 style='background-color:rgb(255, 0, 0);'>Email applicant requires at least one document type to be checked for the upload to continue.</h2>");
