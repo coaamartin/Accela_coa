@@ -10,8 +10,7 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #80 - 80-Require
 if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
 {   
 
-   logDebug("JMP JMP Alert WITHIN LOOP : ------------------------>> ");  //testjp
-   
+   var foundCheckBox = false;   
 	var workflowResult = aa.workflow.getTasks(capId);
    var wfObj = workflowResult.getOutput();
    
@@ -37,13 +36,25 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
                
             for (dmyIttr in TSI) //JMP 
             {          
-              logDebug("JMP - IN TSI :" + TSI[dmyIttr].getCheckboxDesc());   // JMP
+            
+              //logDebug("JMP - IN TSI :" + TSI[dmyIttr].getCheckboxDesc());   // JMP
               logDebug("JMP - Comment TSI :" + TSI[dmyIttr].getChecklistComment());   // JMP
+              if (TSI[dmyIttr].getChecklistComment().ignoreCase == "CHECKED") 
+              {
+                 foundCheckBox = true;
+              }
             }
             
          }      
       }
 	
+   }
+   
+   if (!foundCheckBox) then
+   {
+      showMessage = true;
+	   comment("<h2 style='background-color:rgb(255, 0, 0);'>Email Applicant requires at least one document type to be checked for upload.</h2>");
+      cancel = true;
    }
 } 
  
