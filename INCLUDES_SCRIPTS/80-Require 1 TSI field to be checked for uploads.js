@@ -11,44 +11,34 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
 {   
 
    logDebug("JMP JMP Alert WITHIN LOOP : ------------------------>> ");
-
-	var itemCap = capId;
-  	var workflowResult = aa.workflow.getTasks(itemCap);
+   
+   var i = 0;
+	var workflowResult = aa.workflow.getTasks(CapId);
    var wfObj = workflowResult.getOutput();
+   
    for (i in wfObj) 
    {
-		var fTask = wfObj[i];
+      var fTask = wfObj[i];
 		var stepnumber = fTask.getStepNumber();
 		var processID = fTask.getProcessID();
-
-		//var TSIResult = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(itemCap, processID, stepnumber, "Pre Submital Meetings");
-		//if (TSIResult.getSuccess()) 
-      //{
-         
-         var tsiArray = new Array(); 
-         loadTaskSpecific(tsiArray);
-         
-         if (Number(TSIArray[tsi]) > 0)
+		if ("Pre Submittal Meetings".equals(fTask.getTaskDescription())) 
+      { 
+			var TSIResult = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(itemCap, processID, stepnumber, "Pre Submittal Meetings");
+			if (TSIResult.getSuccess()) 
          {
-            for (tsi in TSIArray) 
+				var TSI = TSIResult.getOutput();
+				if (TSI != null) 
             {
-              logDebug("JMP - IN TSI :" + TSIArray[tsi]);
+					var TSInfoModel = TSI.getTaskSpecificInfoModel();
+               for (dmyIttr in TSIInfoModel) 
+               {
+                  logDebug("JMP - IN TSI :" + TSInfoModel[dmyIttr]);
+               }
             }
-         }   
-         /*
-			var TSI = TSIResult.getOutput();
-			if (TSI != null) 
-         {
-				var TSIArray = new Array();
-				var TSInfoModel = TSI.getTaskSpecificInfoModel();
-				var itemValue = TSInfoModel.getChecklistComment();
-				logDebug("JMP - IN TSI :" + itemValue);
-			} 
-         */
-         
-		//} // found workflow task
-	} // each task
-
+         }      
+      }
+	
+   }
 } 
  
 
