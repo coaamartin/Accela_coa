@@ -20,17 +20,16 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
 		var stepnumber = fTask.getStepNumber();
 		var processID = fTask.getProcessID();
       
-      logDebug("JMP JMP Post Pre Submittal : 1 ------------------------>> ");
+      //logDebug("JMP JMP Post Pre Submittal : 1 ------------------------>> ");
       
 		if ("Pre Submittal Meetings".equals(fTask.getTaskDescription()))          
       // tempjp
       { 
       
-         logDebug("JMP JMP Post Pre Submittal : 2 ------------------------>> ");
-			var TSIResult = aa.taskSpecificInfo.getTaskSpecificInfoByTask(capId, processID, stepnumber)  // 
+         var TSIResult = aa.taskSpecificInfo.getTaskSpecificInfoByTask(capId, processID, stepnumber)  // 
 			if (TSIResult.getSuccess()) 
          {
-            logDebug("JMP JMP Post Pre Submittal : ------------------------>> ");
+            
             var TSI = TSIResult.getOutput();
             if (TSI != null) 
                
@@ -38,7 +37,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
             {          
             
               //logDebug("JMP - IN TSI :" + TSI[dmyIttr].getCheckboxDesc());   // JMP
-              logDebug("JMP - Comment TSI :" + TSI[dmyIttr].getChecklistComment());   // JMP
+              //logDebug("JMP - Comment TSI :" + TSI[dmyIttr].getChecklistComment());   // JMP
               if (TSI[dmyIttr].getChecklistComment().ignoreCase == "CHECKED") 
               {
                  foundCheckBox = true;
@@ -53,7 +52,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
    if (!foundCheckBox) then
    {
       showMessage = true;
-	   comment("<h2 style='background-color:rgb(255, 0, 0);'>Email Applicant requires at least one document type to be checked for upload.</h2>");
+	   comment("<h2 style='background-color:rgb(255, 0, 0);'>Email applicant requires at least one document type to be checked for the upload to continue.</h2>");
       cancel = true;
    }
 } 
