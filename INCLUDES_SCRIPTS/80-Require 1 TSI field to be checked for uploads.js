@@ -21,9 +21,9 @@ if ("Pre Submital Meetings".equals(wfTask) && "Email Applicant".equals(wfStatus)
 		var stepnumber = fTask.getStepNumber();
 		var processID = fTask.getProcessID();
 
-		var TSIResult = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(itemCap, processID, stepnumber, "Pre Submital Meetings");
-		if (TSIResult.getSuccess()) 
-      {
+		//var TSIResult = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(itemCap, processID, stepnumber, "Pre Submital Meetings");
+		//if (TSIResult.getSuccess()) 
+      //{
          
          var tsiArray = new Array(); 
          loadTaskSpecific(tsiArray);
@@ -43,7 +43,7 @@ if ("Pre Submital Meetings".equals(wfTask) && "Email Applicant".equals(wfStatus)
 			} 
          */
          
-		} // found workflow task
+		//} // found workflow task
 	} // each task
 
 } 
