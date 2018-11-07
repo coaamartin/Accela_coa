@@ -28,7 +28,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
          var tsiArray = new Array(); 
          loadTaskSpecific(tsiArray);
          
-         if (Number(TSIArray[tsi]) > 0))
+         if (Number(TSIArray[tsi]) > 0)
          {
             for (tsi in TSIArray) 
             {
