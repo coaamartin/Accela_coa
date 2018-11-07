@@ -37,7 +37,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
                
             for (dmyIttr in TSI) 
             {          
-              logDebug("JMP - IN TSI :" + TSI[dmyIttr]);
+              logDebug("JMP - IN TSI :" + TSI[dmyIttr]);   // JMP
             }
             
          }      
