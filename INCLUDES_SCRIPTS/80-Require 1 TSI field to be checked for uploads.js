@@ -35,7 +35,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
             var TSI = TSIResult.getOutput();
             if (TSI != null) 
                
-            for (dmyIttr in TSI) 
+            for (dmyIttr in TSI) //JMP 
             {          
               logDebug("JMP - IN TSI :" + TSI[a1].getCheckboxDesc());   // JMP
             }
