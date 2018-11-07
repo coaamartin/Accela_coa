@@ -35,7 +35,8 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
 				var TSI = TSIResult.getOutput();
 				if (TSI != null) 
             {
-					var TSInfoModel = TSI.getTaskSpecificInfoModel();
+               var TSIArray = new Array();
+					var TSInfoModel = TSI.getTaskSpecificInfoModel(); //Demo JP
                for (dmyIttr in TSIInfoModel) 
                {
                   logDebug("JMP - IN TSI :" + TSInfoModel[dmyIttr]);
