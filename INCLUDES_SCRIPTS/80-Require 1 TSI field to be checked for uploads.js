@@ -28,7 +28,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
       { 
       
          logDebug("JMP JMP Post Pre Submittal : 2 ------------------------>> ");
-			var TSIResult = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepnumber, "Email Applicant");
+			var TSIResult = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepnumber, "Email Applicant");  //
 			if (TSIResult.getSuccess()) 
          {
             logDebug("JMP JMP Post Pre Submittal : ------------------------>> ");
