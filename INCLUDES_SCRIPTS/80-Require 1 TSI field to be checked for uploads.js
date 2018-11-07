@@ -7,7 +7,7 @@
 
 logDebug("JMP JMP Alert: ------------------------>> Script Item #80 - 80-Require 1 TSI field to be checked for uploads");
 
-if ("Pre Submital Meetings".equals(wfTask) && "Email Applicant".equals(wfStatus)) 
+if (wfTask == "Pre Submital Meetings")  
 {   
 
    logDebug("JMP JMP Alert WITHIN LOOP : ------------------------>> ");
