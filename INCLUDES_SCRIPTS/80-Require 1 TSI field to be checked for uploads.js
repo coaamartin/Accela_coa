@@ -10,7 +10,7 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #80 - 80-Require
 if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
 {   
 
-   logDebug("JMP JMP Alert WITHIN LOOP : ------------------------>> ");
+   logDebug("JMP JMP Alert WITHIN LOOP : ------------------------>> ");  //testjp
    
 	var workflowResult = aa.workflow.getTasks(capId);
    var wfObj = workflowResult.getOutput();
