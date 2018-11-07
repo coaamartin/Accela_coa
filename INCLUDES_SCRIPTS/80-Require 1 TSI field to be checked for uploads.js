@@ -21,9 +21,18 @@ if ("Pre Submital Meetings".equals(wfTask) && "Email Applicant".equals(wfStatus)
 		var stepnumber = fTask.getStepNumber();
 		var processID = fTask.getProcessID();
 
-		var TSIResult = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(itemCap, processID, stepnumber, itemName);
+		var TSIResult = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(itemCap, processID, stepnumber, "Pre Submital Meetings");
 		if (TSIResult.getSuccess()) 
       {
+         
+         var tsiArray = new Array(); 
+         loadTaskSpecific(tsiArray);
+         
+         for (tsi in TSIArray) 
+         {
+           logDebug("JMP - IN TSI :" + TSIArray[tsi]);
+         }
+         /*
 			var TSI = TSIResult.getOutput();
 			if (TSI != null) 
          {
@@ -32,7 +41,8 @@ if ("Pre Submital Meetings".equals(wfTask) && "Email Applicant".equals(wfStatus)
 				var itemValue = TSInfoModel.getChecklistComment();
 				logDebug("JMP - IN TSI :" + itemValue);
 			} 
-
+         */
+         
 		} // found workflow task
 	} // each task
 
