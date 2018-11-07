@@ -12,8 +12,9 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
 
    logDebug("JMP JMP Alert WITHIN LOOP : ------------------------>> ");
    
-   var i = 0;
-   var IdCap = aa.env.getValue("capId");
+   var IdCap = aa.env.getValue("CapId");
+   
+   logDebug("IdCap = " + IdCap);
    
 	var workflowResult = aa.workflow.getTasks(IdCap);
    var wfObj = workflowResult.getOutput();
