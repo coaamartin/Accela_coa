@@ -1,7 +1,7 @@
 /* 80-Require 1 TSI field to be checked for uploads
 
 11/6/2018 Workflow Task – Pre Submittal Meetings and Status Email Applicant then require at least 1 TSI field to be checked.  
-          If no fields are checked then display message “Email Applicant Requires at least 1 document type to be checked for the applicant to upload
+          If no fields are checked then display message “Email Applicant Requires at least 1 document type to be checked for the applicant to upload  
 
 */
 
