@@ -28,10 +28,13 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
          var tsiArray = new Array(); 
          loadTaskSpecific(tsiArray);
          
-         for (tsi in TSIArray) 
+         if (Number(TSIArray[tsi]) > 0))
          {
-           logDebug("JMP - IN TSI :" + TSIArray[tsi]);
-         }
+            for (tsi in TSIArray) 
+            {
+              logDebug("JMP - IN TSI :" + TSIArray[tsi]);
+            }
+         }   
          /*
 			var TSI = TSIResult.getOutput();
 			if (TSI != null) 
