@@ -24,7 +24,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
       logDebug("JMP JMP Post Pre Submittal : 1 ------------------------>> ");
       
 		if ("Pre Submittal Meetings".equals(fTask.getTaskDescription()))          
-      
+      // tempjp
       { 
       
          logDebug("JMP JMP Post Pre Submittal : 2 ------------------------>> ");
