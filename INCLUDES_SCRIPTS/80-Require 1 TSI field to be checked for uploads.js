@@ -38,6 +38,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
             
               logDebug("JMP - IN TSI :" + TSI[dmyIttr].getCheckboxDesc());   // JMP
               logDebug("JMP - Comment TSI :" + TSI[dmyIttr].getChecklistComment());   // JMP
+              
               if (!TSI[dmyIttr].getChecklistComment() == null)
               {   
                 if (!TSI[dmyIttr].getChecklistComment().ignoreCase == "CHECKED") 
