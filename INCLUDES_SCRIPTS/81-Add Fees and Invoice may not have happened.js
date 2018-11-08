@@ -16,7 +16,7 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #81 - Add Fees a
 if (((wfTask == "Application Acceptance") && (wfStatus == "Ready to Pay")) || ((wfTask == "Application Acceptance") && (wfStatus == "Accepted")))
 {   
 
-   logDebug("JMP JMP -- Balance Due:" + balanceDue + "");   
+   //logDebug("JMP JMP -- Balance Due:" + balanceDue + "");   
 
    if (balanceDue > 0)
    {
