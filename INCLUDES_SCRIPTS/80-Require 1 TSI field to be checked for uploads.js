@@ -43,6 +43,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
                 if (!TSI[dmyIttr].getChecklistComment().ignoreCase == "CHECKED") 
                 {
                    foundCheckBox = true;
+                   logDebug("JMP JMP Found Checkbox ");
                 }
               }  
             }
