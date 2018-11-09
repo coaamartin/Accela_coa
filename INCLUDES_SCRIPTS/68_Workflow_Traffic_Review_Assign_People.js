@@ -23,7 +23,7 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   var workflowTask = aa.workflow.getTask(capId, "Traffic Review");
   var fTask = workflowTask.getOutput();
   var taskUserObj = fTask.getTaskItem().getAssignedUser();
-  var taskUserDept = fTask.getTaskItem().getAssignedDept();
+  var taskUserDept = getAssignedDept();
   
   logDebug(taskUserObj);
   logDebug(taskUserDept); //
