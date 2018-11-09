@@ -46,7 +46,7 @@ function getAssignedUser()
    {
 		capDetail = aa.cap.getCapDetail(capId).getOutput();
 
-		userObj = aa.person.getUser(capDetail.getAsgnStaff());
+		userObj = aa.person.getUser(capDetail.getAsgnStaff());  ///
       
 		if (userObj.getSuccess()) 
       {
