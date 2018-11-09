@@ -71,7 +71,7 @@ function getAssignedDept()
      return "";
    }
     
-   var cdScriptObj = cdScriptObjResult.getOutput();
+   var cdScriptObj = cdScriptObjResult.getOutput();  // JP
    if (!cdScriptObj) 
    {
      return "";
