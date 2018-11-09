@@ -18,25 +18,25 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   if (currentTask != null && currentTask != "") 
      
   {
-  logDebug("Within code block to assign individual WFTASK of Traffic Review");
-  
-  var workflowTask = aa.workflow.getTask(capId, "Traffic Review");
-  var fTask = workflowTask.getOutput();
-  var taskUserObj = fTask.getTaskItem().getAssignedUser();
-  var taskUserDept = getAssignedDept();
-  
-  logDebug(taskUserObj);
-  logDebug(taskUserDept); //
-  
-  activateTask("Traffic Review");
-  assignTask("Traffic Review","PW/NA/NA/NA/NA/PW/Brianna Medema");
-  
-  //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
-  //editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
-  //editTaskSpecific("Traffic Review", "Assigned", "Brianna Medema");
-  
-  logDebug("Assigned Brianna Medema .. double check ");
-  //AssignTask("Traffic Review","Brianna Medema");	
+     logDebug("Within code block to assign individual WFTASK of Traffic Review");
+     
+     var workflowTask = aa.workflow.getTask(capId, "Traffic Review");
+     var fTask = workflowTask.getOutput();
+     var taskUserObj = fTask.getTaskItem().getAssignedUser();
+     var taskUserDept = getAssignedDept();
+     
+     logDebug(taskUserObj);
+     logDebug(taskUserDept); //
+     
+     activateTask("Traffic Review");
+     assignTask("Traffic Review","PW/NA/NA/NA/NA/PW/Brianna Medema");
+     
+     //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
+     //editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
+     //editTaskSpecific("Traffic Review", "Assigned", "Brianna Medema");
+     
+     logDebug("Assigned Brianna Medema .. double check ");
+     //AssignTask("Traffic Review","Brianna Medema");	
   }
   
 function getAssignedUser() 
@@ -65,24 +65,21 @@ function getAssignedDept()
 {
    var asgnDept = "";
    var cdScriptObjResult = aa.cap.getCapDetail(capId);
+   
    if (!cdScriptObjResult.getSuccess()) 
    {
-     aa.debug("**ERROR: No cap detail script object : ", cdScriptObjResult.getErrorMessage());
      return "";
    }
     
    var cdScriptObj = cdScriptObjResult.getOutput();
    if (!cdScriptObj) 
    {
-     aa.debug("**ERROR: No cap detail script object", "");
      return "";
    }
       
    cd = cdScriptObj.getCapDetailModel();
    var asgnDept = cd.getAsgnDept();
-
    return asgnDept;
-
 }
 
 }
