@@ -26,7 +26,7 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
   var taskUserDept = fTask.getTaskItem().getAssignedDept();
   
   logDebug(taskUserObj);
-  logDebug(taskUserDept);
+  logDebug(taskUserDept); //
   
   activateTask("Traffic Review");
   assignTask("Traffic Review","PW/NA/NA/NA/NA/PW/Brianna Medema");
