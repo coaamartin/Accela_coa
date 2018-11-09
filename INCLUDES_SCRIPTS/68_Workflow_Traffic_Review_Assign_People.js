@@ -61,29 +61,35 @@ function getAssignedUser()
 		return false;
 }  
 
-function getAssignedDept() {
-    try {
-        var asgnDept = "";
-        var cdScriptObjResult = aa.cap.getCapDetail(capId);
-        if (!cdScriptObjResult.getSuccess()) {
-            aa.debug("**ERROR: No cap detail script object : ",
-                    cdScriptObjResult.getErrorMessage());
-            return "";
-        }
+function getAssignedDept() 
+{
+    try 
+    {
+      var asgnDept = "";
+      var cdScriptObjResult = aa.cap.getCapDetail(capId);
+      if (!cdScriptObjResult.getSuccess()) 
+      {
+        aa.debug("**ERROR: No cap detail script object : ", cdScriptObjResult.getErrorMessage());
+        return "";
+      }
+    }
+    
+    var cdScriptObj = cdScriptObjResult.getOutput();
+    if (!cdScriptObj) 
+    {
+      aa.debug("**ERROR: No cap detail script object", "");
+      return "";
+    }
+      
+    cd = cdScriptObj.getCapDetailModel();
+    var asgnDept = cd.getAsgnDept();
 
-        var cdScriptObj = cdScriptObjResult.getOutput();
-        if (!cdScriptObj) {
-            aa.debug("**ERROR: No cap detail script object", "");
-            return "";
-        }
-        cd = cdScriptObj.getCapDetailModel();
-        var asgnDept = cd.getAsgnDept();
+    return asgnDept;
 
-        return asgnDept;
-
-    } catch (e) {
-        aa.debug("getAssignedDept ", e);
-        return null;
+    } catch (e) 
+    {
+      aa.debug("getAssignedDept ", e);
+      return null;
     }
 }
 
