@@ -86,7 +86,7 @@ function getAssignedDept()
 
     return asgnDept;
 
-    } catch (e) 
+    catch (e) 
     {
       aa.debug("getAssignedDept ", e);
       return null;
