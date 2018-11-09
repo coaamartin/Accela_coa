@@ -23,7 +23,8 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
      var workflowTask = aa.workflow.getTask(capId, "Traffic Review");
      var fTask = workflowTask.getOutput();
      var taskUserObj = fTask.getTaskItem().getAssignedUser();
-     var taskUserDept = getAssignedDept();
+     
+     //var taskUserDept = getAssignedDept();
      
      logDebug(taskUserObj);
      logDebug(taskUserDept); //
@@ -61,26 +62,7 @@ function getAssignedUser()
 		return false;
 }  
 
-function getAssignedDept() 
-{
-   var asgnDept = "";
-   var cdScriptObjResult = aa.cap.getCapDetail(capId);
-   
-   if (!cdScriptObjResult.getSuccess()) 
-   {
-     return "";
-   }
-    
-   var cdScriptObj = cdScriptObjResult.getOutput();  // JP
-   if (!cdScriptObj) 
-   {
-     return "";
-   }
-      
-   cd = cdScriptObj.getCapDetailModel();
-   var asgnDept = cd.getAsgnDept();
-   return asgnDept;
-}
+
 
 }
 
