@@ -9,7 +9,7 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #58_Rescheduled 
 if ("Final Inspection".equals(inspType) && "Scheduled".equals(inspResult))
 {
  
-  logDebug("JMP - OK trapped for reschedule");
+  logDebug("JMP - OK trapped for reschedule"); //JMP
  
 }
 
