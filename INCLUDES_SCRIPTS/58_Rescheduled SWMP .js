@@ -20,7 +20,6 @@ if ("Final Inspection".equals(inspType))  //JMP
   var todayDateLongForm = months[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear()
   
   emailparams.put("$$todayDate$$", todayDateLongForm);  // JMP
-  emailparams.put($$altID$$,altId);
   emailparams.put($$inspDate$$,inspDate);
   
   emailContacts(contact, template, emailparams, null, null, "N", "");	
