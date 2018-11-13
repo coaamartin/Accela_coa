@@ -4,9 +4,9 @@ status wf step "closure" = "Return Fiscal Security" and email the applicant the 
 If SWMP Permit inspection Type "Final Inspection" = "Fail" 
 then make a follow up final inspection schedulable on ACA  
 */
-include("27_SWMPFinalInspection");
+include("27_SWMPFinalInspection");  
 
-include("58_Rescheduled SWMP");
+include("58_Rescheduled SWMP");  //JMP TEST
 
 
 //script 395
