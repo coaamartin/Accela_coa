@@ -11,14 +11,21 @@ logDebug (AInfo["Project Category"] + "");
 
 if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Category"] == "Business Use Building") || (AInfo["Project Category"] == "Factory Use Building") || (AInfo["Project Category"] == "Group E Building") || (AInfo["Project Category"] == "Group U Building") || (AInfo["Project Category"] == "Hotel Building") || (AInfo["Project Category"] == "Institutional Use Building") || (AInfo["Project Category"] == "Mercantile Use Building") || (AInfo["Project Category"] == "Non-Res Addition") || (AInfo["Project Category"] == "Storage Use Building"))
 {
-  logDebug("Within code block to assign individual");
-  //assignTask("Assigned to","Brianna Medema")
+  logDebug("JMP JMP - Within code block to assign individual");
+
   var taskResult = aa.workflow.getTask(capId, "Traffic Review");
   var currentTask = taskResult.getOutput();
   if (currentTask != null && currentTask != "") 
      
   {
-     logDebug("Within code block to assign individual WFTASK of Traffic Review");
+     logDebug("JMP - JMP = Within code block to assign individual WFTASK of Traffic Review");
+     var assignTo = "Brianna Medema"
+     var userName=assignedTo.split(" ");
+     var userObj = aa.person.getUser(userName[0],null,userName[1]).getOutput();
+     
+     logDebug("JMP - JMP - JMP = " + userName[1] + "");
+     
+     assignTask("Traffic Investigation",userObj.getUserID());
      
      var taskUserResult = aa.person.getUser("Brianna Medema");
 	  if (taskUserResult.getSuccess())
@@ -37,7 +44,7 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
      // logDebug(taskUserDept); //
      
      activateTask("Traffic Review");
-     assignTask("Traffic Review","PW/NA/NA/NA/NA/PW/Brianna Medema");
+     assignTask("Traffic Review","Brianna Medema");
      
      //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
      //editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
