@@ -26,6 +26,7 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
      
      logDebug("JMP - JMP - JMP = " + userName[1] + "");
      
+     activateTask("Traffic Review");     
      assignTask("Traffic Investigation",userObj.getUserID());
      
      var taskUserResult = aa.person.getUser("Brianna Medema");
@@ -44,8 +45,8 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
      logDebug(taskUserObj);
      // logDebug(taskUserDept); //
      
-     activateTask("Traffic Review");
-     assignTask("Traffic Review","Brianna Medema");
+     // activateTask("Traffic Review");
+     // assignTask("Traffic Review","Brianna Medema");
      
      //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
      //editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
