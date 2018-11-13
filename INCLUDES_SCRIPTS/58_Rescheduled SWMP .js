@@ -9,10 +9,13 @@ logDebug("JMP JMP Alert: ------------------------>> Script Item #58_Rescheduled 
 if ("Final Inspection".equals(inspType))  //JMP
 {
  
-  logDebug("JMP - OK trapped for reschedule"); //JMP
+  logDebug("JMP - OK trapped #58 for reschedule"); //JMP
+  
   var contact = "Applicant";
   var template = "SWMP INSPECTION RESCHEDULED";
   var emailparams = aa.util.newHashtable();
+  
+  var todayDateLongForm = months[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear()
   
   emailparams.put("$$todayDate$$", todayDateLongForm);  // JMP
   emailparams.put($$altID$$,altId);
