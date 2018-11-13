@@ -10,6 +10,16 @@ if ("Final Inspection".equals(inspType))  //JMP
 {
  
   logDebug("JMP - OK trapped for reschedule"); //JMP
+  var contact = "Applicant";
+  var template = "SWMP INSPECTION RESCHEDULED";
+  var emailparams = aa.util.newHashtable();
+  
+  emailparams.put("$$inspComments$$", inspResultComment);
+  emailparams.put("$$todayDate$$", todayDateLongForm);
+  emailparams.put($$altID$$,altId);
+  emailparams.put($$inspDate$$,inspDate);
+  
+  emailContacts(contact, template, emailparams, null, null, "N", "");	
  
 }
 
