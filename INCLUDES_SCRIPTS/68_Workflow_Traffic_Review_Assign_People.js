@@ -24,61 +24,14 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
      var userName=assignedTo.split(" ");
      var userObj = aa.person.getUser(userName[0],null,userName[1]).getOutput();
      
-     logDebug("JMP - JMP - JMP = " + userName[1] + "");
+     //logDebug("JMP - JMP - JMP = " + userName[1] + "");
      
      activateTask("Traffic Review");     
      assignTask("Traffic Review",userObj.getUserID()); //
      
-     //var taskUserResult = aa.person.getUser("Brianna Medema");
-	  //if (taskUserResult.getSuccess())
-     //{
-     //  taskUserObj = taskUserResult.getOutput();
-     //  logDebug ("Brianna Medema is in " + taskUserObj + "")  
-     //}
-     
-     //var workflowTask = aa.workflow.getTask(capId, "Traffic Review");
-     //var fTask = workflowTask.getOutput();
-     //var taskUserObj = fTask.getTaskItem().getAssignedUser();
-     
-     //var taskUserDept = getAssignedDept();
-     
-     //logDebug(taskUserObj);
-     // logDebug(taskUserDept); //
-     
-     // activateTask("Traffic Review");
-     // assignTask("Traffic Review","Brianna Medema");
-     
-     //editTaskSpecific("Traffic Review", "ASSIGNED", "Brianna Medema");
-     //editTaskSpecific("Traffic Review", "Assigned to", "Brianna Medema");
-     //editTaskSpecific("Traffic Review", "Assigned", "Brianna Medema");
-     
-     logDebug("Did it assign to Brianna Medema .. double check ");
-     //AssignTask("Traffic Review","Brianna Medema");	
+     logDebug("Did it assign to Brianna Medema? .. double check ");
+
   }
-  
-function getAssignedUser() 
-{
-	if (capId != null) 
-   {
-		capDetail = aa.cap.getCapDetail(capId).getOutput();
-
-		userObj = aa.person.getUser(capDetail.getAsgnStaff());  ///
-      
-		if (userObj.getSuccess()) 
-      {
-			staff = userObj.getOutput();
-			userID = staff.getUserID();
-			return userID;
-		} 
-      else 
-      {
-			return false;
-		}
-	} else
-		return false;
-}  
-
-
 
 }
 
