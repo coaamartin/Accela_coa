@@ -15,12 +15,13 @@ if ("Final Inspection".equals(inspType))  //JMP
   var template = "SWMP INSPECTION RESCHEDULED";
   var emailparams = aa.util.newHashtable();
   
-  var now = new Date();
+  	var now = new Date();
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var todayDateLongForm = months[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear()
   
   emailparams.put("$$todayDate$$", todayDateLongForm);  // JMP
-  emailparams.put($$inspDate$$,inspDate);
+  emailparams.put("$$altID$$",altId);
+  emailparams.put("$$inspDate$$",inspDate);
   
   emailContacts(contact, template, emailparams, null, null, "N", "");	
  
