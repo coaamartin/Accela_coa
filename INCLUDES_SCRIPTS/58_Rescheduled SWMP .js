@@ -14,8 +14,7 @@ if ("Final Inspection".equals(inspType))  //JMP
   var template = "SWMP INSPECTION RESCHEDULED";
   var emailparams = aa.util.newHashtable();
   
-  emailparams.put("$$inspComments$$", inspResultComment);
-  emailparams.put("$$todayDate$$", todayDateLongForm);
+  emailparams.put("$$todayDate$$", todayDateLongForm);  // JMP
   emailparams.put($$altID$$,altId);
   emailparams.put($$inspDate$$,inspDate);
   
