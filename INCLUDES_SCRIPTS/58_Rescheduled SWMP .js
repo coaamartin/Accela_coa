@@ -6,8 +6,6 @@
 
 logDebug("JMP JMP Alert: ------------------------>> Script Item #58_Rescheduled SWMP");
 
-var inspResultComment = "";
-
 if ("Final Inspection".equals(inspType) && "Scheduled".equals(inspResult))
 {
  
@@ -15,4 +13,3 @@ if ("Final Inspection".equals(inspType) && "Scheduled".equals(inspResult))
  
 }
 
-}
