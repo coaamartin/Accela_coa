@@ -19,6 +19,8 @@ if ("Final Inspection".equals(inspType))  //JMP
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var todayDateLongForm = months[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear()
   
+  var inspDate = inspObj.getInspectionDate().getMonth() + "/" + inspObj.getInspectionDate().getDayOfMonth() + "/" + inspObj.getInspectionDate().getYear();
+  
   var capIDString = capId.getCustomID();		
   
   emailparams.put("$$todayDate$$", todayDateLongForm);  // JMP
