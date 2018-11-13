@@ -6,7 +6,7 @@
 
 logDebug("JMP JMP Alert: ------------------------>> Script Item #58_Rescheduled SWMP");
 
-if ("Final Inspection".equals(inspType))
+if ("Final Inspection".equals(inspType))  //JMP
 {
  
   logDebug("JMP - OK trapped for reschedule"); //JMP
