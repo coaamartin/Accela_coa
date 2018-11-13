@@ -19,7 +19,8 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
      
   {
      logDebug("JMP - JMP = Within code block to assign individual WFTASK of Traffic Review");
-     var assignTo = "Brianna Medema"
+     
+     var assignedTo = "Brianna Medema"
      var userName=assignedTo.split(" ");
      var userObj = aa.person.getUser(userName[0],null,userName[1]).getOutput();
      
