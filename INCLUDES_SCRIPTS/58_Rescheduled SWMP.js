@@ -18,10 +18,10 @@ if ("Final Inspection".equals(inspType))  //JMP
   var now = new Date();
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   
-  logDebug(now.getMonth() + "");
   var todayDateLongForm = months[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear()
   
   var capIDString = capId.getCustomID();	
+  var vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
   var recordURL = getACARecordURL(vACAUrl);  
   logDebug(recordURL + ""); //
   
