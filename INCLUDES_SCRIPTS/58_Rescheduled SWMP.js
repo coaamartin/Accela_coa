@@ -6,7 +6,7 @@
 
 logDebug("JMP JMP Alert: ------------------------>> Script Item #58_Rescheduled SWMP");
 
-if ("Final Inspection".equals(inspType))  //JMP
+if ("Final Inspection".equals(inspType)) //JMP
 {
  
   logDebug("JMP - OK trapped #58 for reschedule"); //JMP
@@ -33,6 +33,6 @@ if ("Final Inspection".equals(inspType))  //JMP
   emailparams.put("$$acaRecordUrl$$", recordURL);
   
   // emailContacts(contact, template, emailparams, null, null, "N", "");	
-  emailContacts("jmporter@auroragov.org", template, emailparams, null, null, "N", "");	
+  emailContacts(contact, template, emailparams, null, null, "N", "");	
 }
 
