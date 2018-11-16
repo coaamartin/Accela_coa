@@ -12,6 +12,7 @@ if ("Final Inspection".equals(inspType)) //JMP
   logDebug("JMP - OK trapped #58 for reschedule"); //JMP
   
   var contact = "jmporter@auroragov.org";
+  //var contact = "Applicant";
   var template = "SWMP INSPECTION RESCHEDULED";
   var emailparams = aa.util.newHashtable();
   
@@ -33,6 +34,6 @@ if ("Final Inspection".equals(inspType)) //JMP
   emailparams.put("$$acaRecordUrl$$", recordURL);
   
   // emailContacts(contact, template, emailparams, null, null, "N", "");	
-  emailContacts(contact, template, emailparams, null, null, "N", "");	
+  emailContacts(contact, template, emailparams, null, null, "N", "");	//test code
 }
 
