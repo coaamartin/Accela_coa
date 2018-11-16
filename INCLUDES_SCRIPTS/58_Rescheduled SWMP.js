@@ -21,7 +21,7 @@ if ("Final Inspection".equals(inspType))  //JMP
   
   var capIDString = capId.getCustomID();	
   var recordURL = getACARecordURL(vACAUrl);  
-  logDebug(recordURL + "");
+  logDebug(recordURL + ""); //
   
   emailparams.put("$$todayDate$$", todayDateLongForm);  // JMP
   emailparams.put("$$altID$$",capIDString);
