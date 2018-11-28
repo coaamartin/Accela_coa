@@ -20,18 +20,10 @@ if ("Final Inspection".equals(inspType)) //JMP
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   
   var todayDateLongForm = months[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear()
-  
-  var capIDString = capId.getCustomID();	
-  var vACAUrl = lookup("ACA_CONFIGS", "ACA_SITE");
-  var recordURL = getACARecordURL(vACAUrl);
-
   var inspDate = inspSchedDate;  
-
   
   emailparams.put("$$todayDate$$", todayDateLongForm);  // JMP
-  emailparams.put("$$altID$$",capIDString);
   emailparams.put("$$inspDate$$",inspDate);
-  emailparams.put("$$acaRecordUrl$$", recordURL);
   
   // emailContacts(contact, template, emailparams, null, null, "N", "");	
   emailContacts(contact, template, emailparams, null, null, "N", "");	//test code
