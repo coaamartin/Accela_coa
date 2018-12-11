@@ -43,7 +43,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Date',AInfo['Abatement Completed Date'], 'N');
             } else if(ifTracer(inspType.indexOf("Post Abatement Inspection") > -1 && inspResult == "Cancelled", "inspType Like Abatement Approval && inspResult == Cancelled")) {
                 // inspType LIKE Post Abatement Inspection && inspResult == Cancelled
-                updateAbatementUponCompletion();
+                //updateAbatementUponCompletion();
             }
         } else if(ifTracer(eventName == "WorkflowTaskUpdateAfter", "EventName == WorkflowTaskUpdateAfter")) {
             //WTUA
@@ -65,7 +65,7 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
                 //updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
                 updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feeTotal + "", 'N');
 				
-				if(ifTracer(wfStatus =="Invoiced - City Paid"), 'wfStatus =="Invoiced - City Paid"'){
+				if(ifTracer(wfStatus =="Invoiced - City Paid", 'wfStatus =="Invoiced - City Paid"')){
 					updateAbatementUponCompletion();
 				}
             } else if(ifTracer(wfTask == "Recordation" && (wfStatus =="Submit Recording"), "wfTask == Recordation && wfStatus == Submit Recording")) {
@@ -295,8 +295,8 @@ function script426_UpdateParentEnfCaseCustomListAndStatus() {
     }
 
     function updateAbatementUponCompletion() {
-        updateOrCreateValueInASITable(tableName, colKeyName, 'Type', AInfo['Abatement Type'], 'N');
-        updateOrCreateValueInASITable(tableName, colKeyName, 'Request Date', inspResultDate, 'N');
+		updateOrCreateValueInASITable(tableName, colKeyName, 'Type', AInfo['Abatement Type'], 'N');
+        //updateOrCreateValueInASITable(tableName, colKeyName, 'Request Date', inspResultDate, 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Completed Date', AInfo['Abatement Completed Date'], 'N');
    //    updateOrCreateValueInASITable(tableName, colKeyName, 'Invoiced Date', wfDateMMDDYYYY, 'N');
         updateOrCreateValueInASITable(tableName, colKeyName, 'Bill Amount', feesInvoicedTotal.toString(), 'N');
