@@ -1,4 +1,4 @@
-//500 - OTC prototype - Code from TruePoint from Keith to test new record type
+//501_OTC_Prototype - Code from TruePoint from Keith to test new record type
 
     //#3
     if (ifTracer(!matched, '!matched')) {
