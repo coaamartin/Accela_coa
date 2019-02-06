@@ -26,10 +26,10 @@ if ((AInfo["Project Category"] == "Assembly Building") || (AInfo["Project Catego
      
      //logDebug("JMP - JMP - JMP = " + userName[1] + "");
      
-     activateTask("Traffic Review");     
+     // activateTask("Traffic Review");     
      assignTask("Traffic Review",userObj.getUserID()); //
      
-     logDebug("Did it assign to Brianna Medema? .. double check ");
+     logDebug("#68 completed if Traffic Review was already active");
 
   }
 
