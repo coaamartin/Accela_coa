@@ -3,6 +3,7 @@
 logDebug ("About to prepareAppForRenewal");
 
 prepareAppForRenewal();
+include ("CONVERTTOREALCAPAFTER4RENEW");
 
 //Begin script to assess late fees delinquent MJ renewal
 //include("313_AddExpiredRenewalLateFeeMJ");
