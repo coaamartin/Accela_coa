@@ -39,7 +39,8 @@ if (typeof(vInspectorID) != "undefined" && vInspectorID != null && vInspectorID 
 	// Schedule inspections
 	if (appMatch("Forestry/Request/Planting/*") == true) {
 		scheduleInspection("Forestry Site Review", 0, vInspectorID);
-	} else if (appMatch("Forestry/Request/Citizen/NA") == true || appMatch("Forestry/Permit/NA/NA") == true) {
+//	Removed 2/7/19 per Issue Tracker #13 } else if (appMatch("Forestry/Request/Citizen/NA") == true || appMatch("Forestry/Permit/NA/NA") == true) {
+   	} else if (appMatch("Forestry/Request/Citizen/NA") == true {
 		scheduleInspection("Forestry Inspection", 0, vInspectorID);
 	}
 }
