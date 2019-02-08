@@ -74,6 +74,7 @@ function UpdateMiscNARParent() {
                     copyAddresses(capId, parentCapId);
                     copyParcels(capId, parentCapId);
                     editAppName(childCapScriptModel.specialText, parentCapId);
+					closeTask("Review Application", "Complete", "Closed by Script 45082");
                 }
             }
  		//}
