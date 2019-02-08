@@ -83,4 +83,5 @@ function UpdateMiscNARParent() {
 		comment("Error on custom function “WTUA;MiscServices!Neighborhood!Association!Renewal.js. Please contact administrator. Err: " + err);
 		logDebug("Error on custom function “WTUA;MiscServices!Neighborhood!Association!Renewal.js. Please contact administrator. Err: " + err);
 	}
+}
 	logDebug("WTUA;MiscServices!Neighborhood!Association!Renewal.js ended.");
