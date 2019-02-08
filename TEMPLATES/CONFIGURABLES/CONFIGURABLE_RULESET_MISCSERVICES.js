@@ -1,3 +1,4 @@
+//this must be manually load via accela interface into scripts area.  It acts more like a standard choice than a true script.
 {
   "DocumentUploadAfter": {
     "StandardScripts": [
