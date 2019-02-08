@@ -5,9 +5,9 @@
 // BY: amartin
 // CHANGELOG: 
 
-	 
+logDebug("At start of 5082 outside if");	 
 if (wfTask == "Review Application" && wfStatus == "Complete") {
-
+logDebug("5082 inside if");	 
 
 	var vLicenseID;
 	var vIDArray;
