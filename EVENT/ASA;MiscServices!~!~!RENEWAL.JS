@@ -1,5 +1,5 @@
 // Renewal processing
 
 //Start Core Renewal Functionality
-include("APPLICATIONSUBMITAFTER4RENEW");
+include("427_Core_Renewal_ASA");
 //End Core Renewal Functionality
