@@ -20,7 +20,7 @@ function sendEmailToGIS(){
 			eParams = aa.util.newHashtable();
 			eParams.put("$$todayDate$$", todayDate);
 			eParams.put("$$altid$$",capId.getCustomID());
-			eParams.put("$$capAlias$$",cap.getCapType().getAlias(););
+			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 			if (reportName != null && reportName != "") {
 				var rParams = aa.util.newHashtable();
 				addParameter(rParams, "prmRecordID", altId);
