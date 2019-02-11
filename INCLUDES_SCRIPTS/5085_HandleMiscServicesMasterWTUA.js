@@ -22,8 +22,8 @@ function sendEmailToGIS(){
 			eParams.put("$$altid$$",capId.getCustomID());
 			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 			logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-			//emailContacts(sendEmailToContactTypes, emailTemplate, eParams, null, null, "Y");
-		    emailAsync2("", emailTemplate, eParams);	
+			emailContacts("ALL", emailTemplate, eParams, null, null, "Y");
+		    //emailAsync2("", emailTemplate, eParams);	
 		}
 }
 	logDebug("5085_HandleMiscServicesMasterWTUA.js ended.");
