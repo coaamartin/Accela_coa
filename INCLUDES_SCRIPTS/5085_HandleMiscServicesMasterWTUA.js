@@ -14,7 +14,8 @@ logDebug("5085 calling Email function");
 
 function sendEmailToGIS(){
 		//generate email notices
-		var emailTemplate = "MISC NA MASTER GIS REFERRAL";
+		//var emailTemplate = "MISC NA MASTER GIS REFERRAL";
+		var emailTemplate = "MISC HOA RENEWAL NOTICE";		
 		var todayDate = new Date();
 		if (emailTemplate != null && emailTemplate != "") {
 			logDebug("5085 sending Email to GIS");	
