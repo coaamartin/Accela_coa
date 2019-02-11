@@ -9,7 +9,7 @@ logDebug("At start of 5085_HandleMiscServicesMasterWTUA.js");
 if (wfTask == "Email GIS" && wfStatus == "Email Sent") {
 logDebug("5085 sending Email to GIS");	 
 
-		//sendEmailToGIS();
+		sendEmailToGIS();
 }
 
 function sendEmailToGIS(){
