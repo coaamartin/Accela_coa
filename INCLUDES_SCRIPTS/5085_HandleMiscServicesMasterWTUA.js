@@ -4,7 +4,7 @@
 // DATECREATED: 02/11/2019
 // BY: amartin
 // CHANGELOG: 
-//aa.env.setValue("eventType","Batch Process");
+aa.env.setValue("eventType","Batch Process");
 logDebug("At start of 5085_HandleMiscServicesMasterWTUA.js");	 
 if (wfTask == "Email GIS" && wfStatus == "Email Sent") {
 logDebug("5085 calling Email function");	 
