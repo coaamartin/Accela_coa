@@ -25,7 +25,7 @@ function sendEmailToGIS(){
 			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 			logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 			//emailContacts("Individual", emailTemplate, eParams, null, null, "Y");
-		    //emailAsync2("", emailTemplate, eParams);	
+		    emailAsync2("", emailTemplate, eParams);	
 			emailAsync("amartin@auroragov.org", emailTemplate, eParams, "", "", "", "");			
 		}
 }
