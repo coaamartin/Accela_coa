@@ -13,11 +13,6 @@ logDebug("5085 sending Email to GIS");
 }
 
 function sendEmailToGIS(){
-  var contacts = "Individual";
-  var template = "MISC NA MASTER GIS REFERRAL";
-  var anyparam = "None" + ""; //force string
-  var emailparams = aa.util.newHashtable();
-  emailparams.put("$$PERMITID$$", anyparam)
-  emailContacts(contacts, template, emailparams, "", "", "N", "");
+emailAsync2("", "MISC NA MASTER GIS REFERRAL", "");
 }
 	logDebug("5085_HandleMiscServicesMasterWTUA.js ended.");
