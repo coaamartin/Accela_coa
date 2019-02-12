@@ -63,12 +63,19 @@ function UpdateMiscNARParent() {
                 parentCapId = getParentLicenseCapID(capId);
 
             if(ifTracer(parentCapId, 'parent found')) {
-                //make sure parent is a permit (Water/Water/SWMP/Permit)
+ 
                 childCapScriptModel = aa.cap.getCap(capId).getOutput();
                 parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
                 parentCapTypeString = parentCapScriptModel.getCapType().toString();
                 if(ifTracer(parentCapTypeString == 'MiscServices/Neighborhood/Association/Master', 'parent = MiscServices/Neighborhood/Association/Master')) {
                     // copy data from renewal to parent application
+					// First, remove existing contacts to prevent doubling them up.
+					logDebug("***** Removing Master record contacts *****");
+					removeContactsFromCapByType(parentCapId, "President");
+					removeContactsFromCapByType(parentCapId, "Board Member");
+					removeContactsFromCapByType(parentCapId, "Referral Contact");
+					removeContactsFromCapByType(parentCapId, "Property Manager");
+					//Now proceed with the update
                     copyContacts(capId,parentCapId);
                     copyAppSpecific(parentCapId);
                     copyASIFields(capId,parentCapId);
