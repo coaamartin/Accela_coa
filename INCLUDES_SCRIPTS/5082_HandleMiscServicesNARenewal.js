@@ -34,15 +34,17 @@ logDebug("5082 inside if");
 		// Set record expiration to active
 		vLicenseObj.setStatus("Active");
 		// set parent record status to Active
-		updateAppStatus("Renewed", "Updated by WTUA;MiscServices!Neighborhood!Association!Renewal.js", vLicenseID);
+		updateAppStatus("Active", "Updated by 5082_HandleMiscServicesNARenewal.js", vLicenseID);
 	}
-
+	//Set renewal to Renewed status.
+	updateAppStatus("Renewed", "Updated by 5082_HandleMiscServicesNARenewal.js", capId);
+	
 	//Set renewal to complete, used to prevent more than one renewal record for the same cycle
-	renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
-	if (renewalCapProject != null) {
-		renewalCapProject.setStatus("Renewed");
-		aa.cap.updateProject(renewalCapProject);
-	}
+	//renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
+	//if (renewalCapProject != null) {
+	//	renewalCapProject.setStatus("Renewed");
+	//	aa.cap.updateProject(renewalCapProject);
+	//}
 	
 	// send the email
 	//script84_SendRenewalEmailWhenPermitIssuedComplete();
@@ -50,7 +52,7 @@ logDebug("5082 inside if");
 }
 
 function UpdateMiscNARParent() {
-	logDebug("WTUA;MiscServices!Neighborhood!Association!Renewal.js started.");
+	logDebug("5082_HandleMiscServicesNARenewal.js started.");
 	try{
 		//if (ifTracer(wfTask == "Permit Issued" && wfStatus == "Complete", 'wfTask == Permit Issued && wfStatus == Complete')) 
 		//{
@@ -81,8 +83,8 @@ function UpdateMiscNARParent() {
 	}
 	catch(err){
 		showMessage = true;
-		comment("Error on custom function “WTUA;MiscServices!Neighborhood!Association!Renewal.js. Please contact administrator. Err: " + err);
-		logDebug("Error on custom function “WTUA;MiscServices!Neighborhood!Association!Renewal.js. Please contact administrator. Err: " + err);
+		comment("Error on custom function “5082_HandleMiscServicesNARenewal.js. Please contact administrator. Err: " + err);
+		logDebug("Error on custom function “5082_HandleMiscServicesNARenewal.js. Please contact administrator. Err: " + err);
 	}
 }
-	logDebug("WTUA;MiscServices!Neighborhood!Association!Renewal.js ended.");
+	logDebug("5082_HandleMiscServicesNARenewal.js ended.");
