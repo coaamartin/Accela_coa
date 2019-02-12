@@ -1,6 +1,6 @@
 // SCRIPTNUMBER: 5082
 // SCRIPTFILENAME: 5082_HandleMiscServicesNARenewal.js
-// PURPOSE: Called when master NA record is renewed on ACA
+// PURPOSE: Called when NA Renewal record has review task updated.  The master record then gets updated.
 // DATECREATED: 02/08/2019
 // BY: amartin
 // CHANGELOG: 
@@ -25,22 +25,22 @@ logDebug("5082 inside if");
 		// Get current expiration date.
 		vLicenseObj = new licenseObject(null, vLicenseID);
 		vExpDate = convertDate(vLicenseObj.b1ExpDate);
-		// Extend license expiration by 1 year
+		// Extend expiration by 1 year
 		vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
 
-		// Update license expiration date
+		// Update expiration date
 		logDebug("Updating Expiration Date to: " + vNewExpDate);
 		vLicenseObj.setExpiration(dateAdd(vNewExpDate, 0));
-		// Set license record expiration to active
-		vLicenseObj.setStatus("Active");
-		// set parent record status to Issued
-		updateAppStatus("Issued", "Updated by WTUA;MiscServices!Neighborhood!Association!Renewal.js", vLicenseID);
+		// Set record expiration to active
+		vLicenseObj.setStatus("Renewed");
+		// set parent record status to Active
+		updateAppStatus("Active", "Updated by WTUA;MiscServices!Neighborhood!Association!Renewal.js", vLicenseID);
 	}
 
 	//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 	renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
 	if (renewalCapProject != null) {
-		renewalCapProject.setStatus("Complete");
+		renewalCapProject.setStatus("Renewed");
 		aa.cap.updateProject(renewalCapProject);
 	}
 	
