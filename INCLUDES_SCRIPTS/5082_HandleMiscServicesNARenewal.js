@@ -34,7 +34,7 @@ logDebug("5082 inside if");
 		// Set record expiration to active
 		vLicenseObj.setStatus("Active");
 		// set parent record status to Active
-		updateAppStatus("Active", "Updated by WTUA;MiscServices!Neighborhood!Association!Renewal.js", vLicenseID);
+		updateAppStatus("Renewed", "Updated by WTUA;MiscServices!Neighborhood!Association!Renewal.js", vLicenseID);
 	}
 
 	//Set renewal to complete, used to prevent more than one renewal record for the same cycle
