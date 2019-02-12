@@ -32,7 +32,7 @@ logDebug("5082 inside if");
 		logDebug("Updating Expiration Date to: " + vNewExpDate);
 		vLicenseObj.setExpiration(dateAdd(vNewExpDate, 0));
 		// Set record expiration to active
-		vLicenseObj.setStatus("Renewed");
+		vLicenseObj.setStatus("Active");
 		// set parent record status to Active
 		updateAppStatus("Active", "Updated by WTUA;MiscServices!Neighborhood!Association!Renewal.js", vLicenseID);
 	}
