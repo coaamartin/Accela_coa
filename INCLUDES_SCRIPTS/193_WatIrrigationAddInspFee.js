@@ -22,7 +22,7 @@ Inspection Fee. Fees: Commercial - $138.00 Single Family – $30.75
 // DATECREATED: 02/19/2019
 // BY: JMP 
 // CHANGELOG: 193 was origianlly named script193 .. changing to allign better with updated scripting rules
-function script193_WatIrrigationAddInspFee() {
+function 193_WatIrrigationAddInspFee() {
     
 	logDebug("Script #193_WatIrrigationAddInspFee() started.");
    logDebug("Script #193 - Adding Fee");
