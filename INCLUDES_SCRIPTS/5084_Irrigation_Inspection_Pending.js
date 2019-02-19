@@ -5,6 +5,9 @@
 // BY: JMP 
 // CHANGELOG: 
 
+function 5084_Irrigation_Inspection_Pending() 
+{
+
 logDebug("Script 5084_Irrigation_Inspection_Pending - Started");
 
 var inspGroup = "WAT_LI";
@@ -22,5 +25,5 @@ if (appTypeResult == "Water/Water/Lawn Irrigation/Permit") {
   // logDebug("JMP JMP Alert: ------------------------>> Script Item #72 - OK working with Inspection type Failed/Passed/Cancelled " + inspResult + "");  
 
  
-
+}
 

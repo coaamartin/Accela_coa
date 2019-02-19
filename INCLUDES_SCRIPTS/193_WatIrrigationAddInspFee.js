@@ -1,20 +1,3 @@
-/*Script 193
- * Record Types: Water/Water/Lawn Irrigation/Permit
- * Event: 		WorkflowTaskUpdateAfter (WTUA)
- * 
- * Desc:			
- * Note: Record type changed to Water/Water/Lawn Irrigation/Permit 
- * When the WfTask = “Fee Processing” and the wfStatus = “Ready to Pay” 
- * Action: Then create the Inspection fee and generate an invoice email and with link 
- * to the invoice report and email it to the owner and applicant contacts. 
- * and cc: any other Contacts on the record in addition to Applicant – 
- * NOTE ; Template will be provided by Aurora. 
- *  If the custom field "Type of Project" has a value of "Commercial" then add the
-Commercial Inspection Fee. 
-    If the custom field "Type of Project" has a value of "Residential" then add the Residential
-Inspection Fee. Fees: Commercial - $138.00 Single Family – $30.75
- * 
-*/       
 
 // SCRIPTNUMBER: 193
 // SCRIPTFILENAME: 193_WatIrrigationAddInspFee.js
@@ -22,6 +5,7 @@ Inspection Fee. Fees: Commercial - $138.00 Single Family – $30.75
 // DATECREATED: 02/19/2019
 // BY: JMP 
 // CHANGELOG: 193 was origianlly named script193 .. changing to allign better with updated scripting rules
+
 function 193_WatIrrigationAddInspFee() {
     
 	logDebug("Script #193_WatIrrigationAddInspFee() started.");
@@ -63,4 +47,5 @@ catch(err){
 		logDebug("Error on Script #193_WatIrrigationAddInspFee(). Please contact administrator. Err: " + err);
 	}
 	logDebug("script193_WatIrrigationAddInspFee() ended."); 
+   
 }   //END script193_WatIrrigationAddInspFee();
