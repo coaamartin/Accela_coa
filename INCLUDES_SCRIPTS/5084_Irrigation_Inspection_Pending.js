@@ -5,8 +5,9 @@
 // BY: JMP 
 // CHANGELOG: 
 
-function 5084_Irrigation_Inspection_Pending() 
-{
+5084_Irrigation_Inspection_Pending();
+
+{function 5084_Irrigation_Inspection_Pending() 
 
 logDebug("Script 5084_Irrigation_Inspection_Pending - Started");
 
