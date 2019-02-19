@@ -10,14 +10,14 @@ logDebug("Script 5084_Irrigation_Inspection_Pending - Started");
 var inspGroup = "WAT_LI";
 var inspType = "Single Family Res Lawn/Irrigation Inspection";
 
-if (appTypeResult == "Water/Water/Lawn Irrigation/Permit") {
+if (appTypeResult == "Water/Water/Lawn Irrigation/Permit") 
+{
    
-   logDebug ("Script 5084 - Creating Pending Inspection"); 
+   logDebug ("Script 5084 - Creating Pending Inspection");
 
-   If (AInfo['Type of Property'] == 'Other') {
-   
-     inspType = "Commercial Lawn/Irrigation Inspection";
-   
+   if (AInfo["Type of Property"] == "Other") 
+   {
+      inspType = "Commercial Lawn/Irrigation Inspection";
    }
    createPendingInspection(inspGroup, inspType + "");
   	
