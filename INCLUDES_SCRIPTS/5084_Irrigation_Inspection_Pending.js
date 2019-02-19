@@ -12,7 +12,8 @@ var inspType = "Single Family Res Lawn/Irrigation Inspection";
 
 if (appTypeResult == "Water/Water/Lawn Irrigation/Permit") {
    
-   logDebug (AInfo["Type of Property"] + "");   
+   logDebug ("Script 5084 - Creating Pending Inspection");   
+   createPendingInspection(inspGroup, inspType + "");
   	
 }
   
