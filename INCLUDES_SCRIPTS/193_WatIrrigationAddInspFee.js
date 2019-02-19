@@ -6,7 +6,6 @@
 // BY: JMP 
 // CHANGELOG: 193 was origianlly named script193 .. changing to allign better with updated scripting rules
 
-function 193_WatIrrigationAddInspFee() {
     
 	logDebug("Script #193_WatIrrigationAddInspFee() started.");
    logDebug("Script #193 - Adding Fee");
@@ -48,4 +47,4 @@ catch(err){
 	}
 	logDebug("script193_WatIrrigationAddInspFee() ended."); 
    
-}   //END script193_WatIrrigationAddInspFee();
+
