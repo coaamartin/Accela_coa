@@ -1,4 +1,5 @@
 // written by JMAIN
 include("21_WaterIrrigationPermitPassInspection");
 
-script196_AddReinspFee();
+include("196_WaterIrrigationPermitAddReinspFee");
+//JMP updated script196 = 196_WaterIrrigationPermitAddReinspFee
