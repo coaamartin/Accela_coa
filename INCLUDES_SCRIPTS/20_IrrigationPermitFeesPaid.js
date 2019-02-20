@@ -5,7 +5,7 @@
 // BY: JMP
 // CHANGELOG: written by swakil .. edited by jmain 07/24/2018 - updated email template and param variables.
 
-//logDebug("Script #20 - Irrigation Permit Fees Paid - Start");
+logDebug("Script #20 - Irrigation Permit Fees Paid - Start");
 //logDebug(capStatus + "";);
 
 if ("Payment Pending".equals(capStatus) && balanceDue == 0)
