@@ -11,7 +11,7 @@ logDebug(capStatus + "");
 if (appTypeResult == "Water/Water/Lawn Irrigation/Permit") 
 { 
 
-if ("Payment Pending".equals(capStatus) && balanceDue == 0)
+if (balanceDue == 0)
 {
 	var contacts = "Applicant";
 	var template = "WAT_IP_PERMIT FEES PAID";
@@ -28,12 +28,9 @@ if ("Payment Pending".equals(capStatus) && balanceDue == 0)
 	var eParams = aa.util.newHashtable();
 	emailContacts(contacts, template, eParams, "", "", "N", "");	
 
-	if (isTaskActive("Fee Processing"))
-	{
-		updateTaskAndHandleDisposition("Fee Processing", "Fees Paid");
-		updateAppStatus("Pending Inspection");
-		
-	}
+   updateTaskAndHandleDisposition("Fee Processing", "Fees Paid");
+	updateAppStatus("Pending Inspection");
+
 	
   logDebug("Script #5088 - Irrigation Permit Fees Paid - End");    
   
