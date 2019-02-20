@@ -16,7 +16,9 @@
 	  addFee('WAT_IP_02', 'WAT_IP', 'FINAL', 1, "Y");                
 	}
    
-   logDebug("Script #193 - Done Adding Fee");
+   logDebug("Script #193 - Done Adding Fee and adding Payment Pending to record status");
+   updateAppStatus("Payment Pending");
+   
    
 	try{
             

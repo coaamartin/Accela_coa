@@ -14,23 +14,20 @@ if (appTypeResult == "Water/Water/Lawn Irrigation/Permit")
 if (balanceDue == 0)
 {
 	var contacts = "Applicant";
-	var template = "WAT_IP_PERMIT FEES PAID";
-	
-	//get contact
-	//var aContact = getContactByType(contact, capId);
-	//if (aContact) fullName = aContact.getFullName() || aContact.getFirstName() + " " + aContact.getLastName();	
-
- 	//build ACA URL
-	//var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-	//acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));  
-	//var recURL = acaSite + getACAUrl();
+	var template = "WAT_IP_PERMIT FEES PAID";	
 
 	var eParams = aa.util.newHashtable();
 	emailContacts(contacts, template, eParams, "", "", "N", "");	
 
    updateTaskAndHandleDisposition("Fee Processing", "Fees Paid");
-	updateAppStatus("Pending Inspection");
-
+   
+   var vInspType = inspType;
+	var vInspStatus = "Pending";
+   var lastInspectionObj = getLastCreatedInspection(capId, vInspType, vInspStatus);
+   if (lastInspectionObj != null) 
+   { 
+	  updateAppStatus("Pending Inspection");
+   }  
 	
   logDebug("Script #5088 - Irrigation Permit Fees Paid - End");    
   
