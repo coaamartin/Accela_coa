@@ -22,7 +22,8 @@ Created By: Silver Lining Solutions
 		if (inspResult == "Fail") {
 			updateTask("Inspection","Reinspection Required","updated by script","updated by script");
 			deactivateTask("Inspection");
-			activateTask("Fee Processing");
+			//activateTask("Fee Processing");  'There is NO task for Fee Processing 
+         updateAppStatus("Payment Pending");
 
 
 // set up email notification params
