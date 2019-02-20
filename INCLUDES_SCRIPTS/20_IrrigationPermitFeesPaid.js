@@ -1,5 +1,12 @@
-//written by swakil
-//edited by jmain 07/24/2018 - updated email template and param variables
+// SCRIPTNUMBER: 20
+// SCRIPTFILENAME: 20_IrrigationPermitFeesPaid.js
+// PURPOSE: Updated to handle payments for Water - Irrigation Permit
+// DATECREATED: 02/20/2019
+// BY: JMP
+// CHANGELOG: written by swakil .. edited by jmain 07/24/2018 - updated email template and param variables.
+
+logDebug("Script #20 - Irrigation Permit Fees Paid - Start");
+logDebug(capStatus + "";);
 
 if ("Payment Pending".equals(capStatus) && balanceDue == 0)
 {
@@ -23,7 +30,10 @@ if ("Payment Pending".equals(capStatus) && balanceDue == 0)
 		updateTaskAndHandleDisposition("Fee Processing", "Fees Paid");
 		updateAppStatus("Pending Inspection");
 		
-	}	
+	}
+	
+  logDebug("Script #20 - Irrigation Permit Fees Paid - End");    
+  
 }
 
 
