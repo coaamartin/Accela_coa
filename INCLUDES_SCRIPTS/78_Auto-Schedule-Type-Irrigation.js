@@ -6,6 +6,9 @@
 
 */
 
+if (appTypeResult == "Water/Water/Lawn Irrigation/Permit") 
+{   
+
 logDebug("JMP JMP Alert: ------------------------>> Script Item #78 - 78_Auto-Schedule-Type-Irrigation");
 
 if(wfTask =="Application Submittal" && !wfStatus== "Withdrawn")     
@@ -29,4 +32,4 @@ if(wfTask =="Application Submittal" && !wfStatus== "Withdrawn")
       
    }
 }
-
+}
