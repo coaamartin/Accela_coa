@@ -27,12 +27,12 @@ if ("Payment Pending".equals(capStatus) && balanceDue == 0)
 
 	if (isTaskActive("Fee Processing"))
 	{
-      logDebug("In Fee Processing - JMP - JMP");
       
 		updateTaskAndHandleDisposition("Fee Processing", "Fees Paid");
-		updateAppStatus("Pending Inspection");
 		
 	}
+   
+  updateAppStatus("Pending Inspection");
 	
   logDebug("Script #20 - Irrigation Permit Fees Paid - End");    
   
