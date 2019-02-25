@@ -9,7 +9,9 @@
 
 	logDebug("script 140_AppSubmitAcceptedActivateTrafficInvestigation() started.");
 	try{
+      
 		logDebug("script 140: closing application submittal with accepted.");
+      activateTask("Initial Review"); //Added 2/25/19 per Michelle(True Point) and Aurora Issue Log #1
 		closeTask("Application Submittal", "Accepted", "Auto-Accepted by script", "");
 	}
 	catch(err){
