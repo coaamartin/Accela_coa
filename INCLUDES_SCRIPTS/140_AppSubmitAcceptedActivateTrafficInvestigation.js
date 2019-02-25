@@ -6,7 +6,7 @@
 //				and activate the Traffic Investigation workflow task. 
 //Created By: Silver Lining Solutions
 
-function 140_AppSubmitAcceptedActivateTrafficInvestigation() {
+
 	logDebug("script 140_AppSubmitAcceptedActivateTrafficInvestigation() started.");
 	try{
 		logDebug("script 140: closing application submittal with accepted.");
@@ -18,4 +18,4 @@ function 140_AppSubmitAcceptedActivateTrafficInvestigation() {
 		logDebug("Error on custom function script 140_AppSubmitAcceptedActivateTrafficInvestigation(). Please contact administrator. Err: " + err);
 	}
 	logDebug("script 140_AppSubmitAcceptedActivateTrafficInvestigation() ended.");
-};//END script140_AppSubmitAcceptedActivateTrafficInvestigation();
+
