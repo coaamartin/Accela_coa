@@ -2,7 +2,7 @@
 
 logDebug("140_AppSubmitAcceptedActivateTrafficInvestigation .. within WTUA;PublicWorks!Traffic!Traffic Engineering Request!NA");
 
-if (wfTask=="Application Submittal" && ((wfStatus=="Assigned") || (wfStatus=="Accepted")) 
+if (wfTask=="Application Submittal" && ((wfStatus=="Assigned") || (wfStatus=="Accepted"))) 
 {   
   logDebug("WITHIN 140 LOGIC");
   
