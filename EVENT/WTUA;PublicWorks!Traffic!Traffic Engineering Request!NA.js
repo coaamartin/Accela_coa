@@ -1,4 +1,6 @@
-logdebug("140_AppSubmitAcceptedActivateTrafficInvestigation .. within WTUA;PublicWorks!Traffic!Traffic Engineering Request!NA");
+
+
+logDebug("140_AppSubmitAcceptedActivateTrafficInvestigation .. within WTUA;PublicWorks!Traffic!Traffic Engineering Request!NA");
 
 if (ifTracer((wfTask=="Application Submittal" && wfStatus=="Assigned")))
 {
