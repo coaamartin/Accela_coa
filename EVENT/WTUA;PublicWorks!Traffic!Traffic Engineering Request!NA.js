@@ -1,3 +1,8 @@
+if (ifTracer((wfTask=="Application Submittal" && wfStatus=="Assigned")))
+{
+  include("140_AppSubmitAcceptedActivateTrafficInvestigation");  // Added 2/26/19 per meeting with Deb Meise
+}
+
 //COA Script #6 added by SWAKIL
 include("6_assignedUserDraftWorkOrder");
 
