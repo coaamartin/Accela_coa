@@ -1,6 +1,6 @@
 // ASA:P​ublicWorks/Traffic/Traffic Engineering Request/NA
 
-include("140_AppSubmitAcceptedActivateTrafficInvestigation");
+// include("140_AppSubmitAcceptedActivateTrafficInvestigation"); REMOVED 2/26/2019 - this should never have been placed in this event - this is a WFTask Item AFTER Initial Review
 script175_AssignApplicationSubmittalTask();
 
 /*
