@@ -1,3 +1,5 @@
+logdebug("140_AppSubmitAcceptedActivateTrafficInvestigation .. within WTUA;PublicWorks!Traffic!Traffic Engineering Request!NA");
+
 if (ifTracer((wfTask=="Application Submittal" && wfStatus=="Assigned")))
 {
   include("140_AppSubmitAcceptedActivateTrafficInvestigation");  // Added 2/26/19 per meeting with Deb Meise
