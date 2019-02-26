@@ -2,9 +2,12 @@
 
 logDebug("140_AppSubmitAcceptedActivateTrafficInvestigation .. within WTUA;PublicWorks!Traffic!Traffic Engineering Request!NA");
 
-if (ifTracer((wfTask=="Application Submittal" && wfStatus=="Assigned")))
-{
+if (wfTask=="Application Submittal" && wfStatus=="Assigned")
+{   
+  logDebug("WITHIN 140 LOGIC");
+  
   include("140_AppSubmitAcceptedActivateTrafficInvestigation");  // Added 2/26/19 per meeting with Deb Meise
+  
 }
 
 //COA Script #6 added by SWAKIL
