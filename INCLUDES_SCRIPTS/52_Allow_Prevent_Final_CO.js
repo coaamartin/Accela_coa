@@ -19,8 +19,6 @@
 		var receivedArray = ["ILC Letter Received", "Foundation Letter Received", "Footing - Pier - Cassion Letter Received", "Drain Letter Received", "Waterproofing Letter Received"];
 		var missingCriteriaString = "";
       
-      logDebug("JMP JMP Alert: ------------------------>> Script Item #52 - 52_Allow_Prevent_Final_CO");
-
 		for (var x in requiredArray)
 		{
 			if (("CHECKED".equals(AInfo[requiredArray[x]]) && !"CHECKED".equals(AInfo[receivedArray[x]])))
@@ -51,6 +49,7 @@
             
 			cancel = true;
 			showMessage = true;
+         logDebug("Script #52 .. Inspections are not complete");
 			comment("The following items are not complete: " + missingCriteriaString.substring(0, missingCriteriaString.length - 2));
          
 			}
