@@ -72,14 +72,14 @@ if (inspType == "Check Ownership" && inspResult == "Withdrawn") {
 }
 if (inspType == "Check Ownership" && inspResult == "New Ownership") {
 	logDebug("---------------------> Inspection Check Ownership - New Ownership");	
-	closeAllTasks(capId, "");
+	closeAllTasks(capId, "Script 5089");
 	updateAppStatus("Closed", "Script 5089");	
 }
 if (inspType == "Check Ownership" && inspResult == "No Further Action") {
 	logDebug("---------------------> Inspection Check Ownership - No Further Action");	
 	var capStatus = cap.getCapStatus();	
 	if (capStatus != 'Recorded'){
-		closeAllTasks(capId, "");
+		closeAllTasks(capId, "Script 5089");
 		updateAppStatus("Closed", "Script 5089");	
 	}
 }

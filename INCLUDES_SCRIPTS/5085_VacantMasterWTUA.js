@@ -80,13 +80,22 @@ if (wfTask == "Foreclosure Information" && (wfStatus == "Abandon No NED" || wfSt
 if (wfTask == "Foreclosure Information" && wfStatus == "Closed Info Only") {
 	logDebug("---------------------> Foreclosure Information - Closed Info Only");	
 	//updateTask("Foreclosure Information","Closed Info Only","Updated by script COA #5085","Updated by script COA #5085");
+	var capStatus = cap.getCapStatus();
+	if (capStatus != 'Recorded')
+	{
+	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
+	}
 }
 
 if (wfTask == "Send Registration" && wfStatus == "No Further Action") {
 	logDebug("---------------------> Send Registration - No Further Action");	
-	//updateTask("Foreclosure Information","Closed Info Only","Updated by script COA #5085","Updated by script COA #5085");
+	var capStatus = cap.getCapStatus();
+	if (capStatus != 'Recorded')
+	{
+	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
+	}
 }
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
@@ -107,7 +116,8 @@ if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
 	logDebug("---------------------> Foreclosure Sale Result - Non-Bank Owner");	
-	updateAppStatus("Closed", "Script 5085");	
+	closeAllTasks(capId, "Closed Via Script 5085");	
+    updateAppStatus("Closed", "Closed Via Script 5085");
 }
 
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "Registering") {
@@ -143,7 +153,7 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "New Ownership") {
 			if (!exists("Submitted", "Notice of Assessment")) {
 				if (!exists("Complete", "Assess to County")) {
 					//close all tasks and the record
-					closeAllTasks(capId, "");
+					closeAllTasks(capId, "Script 5085");
 					updateAppStatus("Closed", "Script 5085");	
 				}
 			}
@@ -176,7 +186,7 @@ if (wfTask == "Renewal Registration" && wfStatus == "New Ownership") {
 
 if (wfTask == "Notice of Assessment" && wfStatus == "Not Recorded") {
 	logDebug("---------------------> Notice of Assessment - Not Recorded");	
-		closeAllTasks(capId, "");
+		closeAllTasks(capId, "Script 5085");
 }
 if (wfTask == "Notice of Assessment" && wfStatus == "Record Reception") {
 	logDebug("---------------------> Notice of Assessment - Record Reception");	
@@ -193,7 +203,7 @@ if (wfTask == "Notice of Assessment" && wfStatus == "Submitted") {
 
 if (wfTask == "Record Release of Assessment" && wfStatus == "Not Recorded") {
 	logDebug("---------------------> Record Release of Assessment - Not Recorded");	
-		closeAllTasks(capId, "");
+		closeAllTasks(capId, "Script 5085");
 }
 if (wfTask == "Record Release of Assessment" && wfStatus == "Record Reception") {
 	logDebug("---------------------> Record Release of Assessment - Record Reception");	
@@ -227,7 +237,7 @@ if (wfTask == "New Ownership/Sale of Property" && wfStatus == "New REO") {
 }
 if (wfTask == "New Ownership/Sale of Property" && wfStatus == "New Ownership") {
 	logDebug("---------------------> New Ownership/Sale of Property - New Ownership");	
-	closeAllTasks(capId, "");
+	closeAllTasks(capId, "Script 5085");
 	updateAppStatus("Closed", "Script 5085");	
 }
 if (wfTask == "New Ownership/Sale of Property" && wfStatus == "No County Info") {
