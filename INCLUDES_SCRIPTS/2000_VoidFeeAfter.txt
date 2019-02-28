@@ -1,4 +1,4 @@
-//500 - Void Fee After - Code from TruePoint for better way to handle NSF 
+//2000 - Void Fee After - Code from TruePoint for better way to handle NSF 
 
 var showMessage = false;				// Set to true to see results in popup window
 var showDebug = false;				// Set to true to see debug messages in popup window
