@@ -56,13 +56,14 @@ if (wfTask == "Foreclosure Information" && wfStatus == "NED/REO Recorded") {
 			if (inspRes.getSuccess())
 				{var inspectorObj = inspRes.getOutput();}
 			}			
-		
-	var schedRes = aa.inspection.scheduleInspection(capId, inspectorObj , aa.date.parseDate(dateAdd(null, 1)), null, "Vacant Property Pictures", "");	
-		if (schedRes.getSuccess()){
-			logDebug("Successfully scheduled inspection : " + "Vacant Property Pictures" + " for " + dateAdd(null,1) + " with inspection number: " + schedRes.getOutput());
-		}
-		else {
-			logDebug( "**ERROR: adding scheduling inspection (" + "Vacant Property Pictures" + "): " + schedRes.getErrorMessage());
+	var schedRes = scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);	
+
+	//var schedRes = scheduleInspection(capId, inspectorObj , aa.date.parseDate(dateAdd(null, 1)), null, "Vacant Property Pictures", "");	
+	//	if (schedRes.getSuccess()){
+	//		logDebug("Successfully scheduled inspection : " + "Vacant Property Pictures" + " for " + dateAdd(null,1) + " with inspection number: " + schedRes.getOutput());
+	//	}
+	//	else {
+	//		logDebug( "**ERROR: adding scheduling inspection (" + "Vacant Property Pictures" + "): " + schedRes.getErrorMessage());
 //			activateTask('Vacant Property Pictures'); 
 		}
 	}
