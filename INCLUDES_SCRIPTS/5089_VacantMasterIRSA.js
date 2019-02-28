@@ -57,21 +57,8 @@ try{
 if (inspType == "Check Ownership" && inspResult == "Compliance") {
 	logDebug("---------------------> Inspection Check Ownership - Compliance");	
 	//insert inspection and assign to inspOfficer
-	var schedRes = aa.inspection.scheduleInspection(capId, inspectorObj , aa.date.parseDate(dateAdd(null, 1)), null, "Vacant Property Pictures", "");	
-	if (schedRes.getSuccess()){
-		logDebug("Successfully scheduled inspection : " + "Vacant Property Pictures" + " for " + dateAdd(null,1) + " with inspection number: " + schedRes.getOutput());
-	}
-	else {
-		logDebug( "**ERROR: adding scheduling inspection (" + "Vacant Property Pictures" + "): " + schedRes.getErrorMessage());
-	}
-		
-	var schedRes = aa.inspection.scheduleInspection(capId, inspectorObj , aa.date.parseDate(dateAdd(null, 3)), null, "Check Ownership", "");	
-	if (schedRes.getSuccess()){
-		logDebug("Successfully scheduled inspection : " + "Check Ownership" + " for " + dateAdd(null,3) + " with inspection number: " + schedRes.getOutput());
-	}
-	else {
-	logDebug( "**ERROR: adding scheduling inspection (" + "Check Ownership" + "): " + schedRes.getErrorMessage());
-	}
+	scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);		
+	scheduleInspection("Check Ownership", 3,inspectorObj); //, inspector, null, newInspReqComments);		
 }
 if (inspType == "Check Ownership" && inspResult == "New REO") {
 	logDebug("---------------------> Inspection Check Ownership - New REO");	
@@ -81,13 +68,7 @@ if (inspType == "Check Ownership" && inspResult == "New REO") {
 }
 if (inspType == "Check Ownership" && inspResult == "Withdrawn") {
 	logDebug("---------------------> Inspection Check Ownership - Withdrawn");	
-	var schedRes = aa.inspection.scheduleInspection(capId, inspectorObj , aa.date.parseDate(dateAdd(null, 1)), null, "Check Ownership", "");	
-	if (schedRes.getSuccess()){
-		logDebug("Successfully scheduled inspection : " + "Check Ownership" + " for " + dateAdd(null,1) + " with inspection number: " + schedRes.getOutput());
-	}
-	else {
-	logDebug( "**ERROR: adding scheduling inspection (" + "Check Ownership" + "): " + schedRes.getErrorMessage());
-	}
+	scheduleInspection("Check Ownership", 1,inspectorObj); //, inspector, null, newInspReqComments);	
 }
 if (inspType == "Check Ownership" && inspResult == "New Ownership") {
 	logDebug("---------------------> Inspection Check Ownership - New Ownership");	
@@ -105,23 +86,11 @@ if (inspType == "Check Ownership" && inspResult == "No Further Action") {
 
 if (inspType == "Vacant Property Pictures" && inspResult == "Not Vacant + Pics Taken") {
 	logDebug("---------------------> Inspection Vacant Property Pictures - Not Vacant + Pics Taken");	
-	var schedRes = aa.inspection.scheduleInspection(capId, inspectorObj , aa.date.parseDate(dateAdd(null, 1)), null, "Check Ownership", "");	
-	if (schedRes.getSuccess()){
-		logDebug("Successfully scheduled inspection : " + "Check Ownership" + " for " + dateAdd(null,1) + " with inspection number: " + schedRes.getOutput());
-	}
-	else {
-	logDebug( "**ERROR: adding scheduling inspection (" + "Check Ownership" + "): " + schedRes.getErrorMessage());
-	}	
+	scheduleInspection("Check Ownership", 1,inspectorObj); //, inspector, null, newInspReqComments);		
 }
 if (inspType == "Vacant Property Pictures" && inspResult == "Reschedule") {
 	logDebug("---------------------> Inspection Vacant Property Pictures - Reschedule");	
-	var schedRes = aa.inspection.scheduleInspection(capId, inspectorObj , aa.date.parseDate(dateAdd(null, 1)), null, "Vacant Property Pictures", "");	
-	if (schedRes.getSuccess()){
-		logDebug("Successfully scheduled inspection : " + "Vacant Property Pictures" + " for " + dateAdd(null,1) + " with inspection number: " + schedRes.getOutput());
-	}
-	else {
-	logDebug( "**ERROR: adding scheduling inspection (" + "Vacant Property Pictures" + "): " + schedRes.getErrorMessage());
-	}	
+	scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);		
 }
 
 logDebug("---------------------> 5089_VacantMasterIRSA.js ended.");

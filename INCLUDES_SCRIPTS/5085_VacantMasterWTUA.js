@@ -56,16 +56,7 @@ if (wfTask == "Foreclosure Information" && wfStatus == "NED/REO Recorded") {
 			if (inspRes.getSuccess())
 				{var inspectorObj = inspRes.getOutput();}
 			}			
-	var schedRes = scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);	
-
-	//var schedRes = scheduleInspection(capId, inspectorObj , aa.date.parseDate(dateAdd(null, 1)), null, "Vacant Property Pictures", "");	
-	//	if (schedRes.getSuccess()){
-	//		logDebug("Successfully scheduled inspection : " + "Vacant Property Pictures" + " for " + dateAdd(null,1) + " with inspection number: " + schedRes.getOutput());
-	//	}
-	//	else {
-	//		logDebug( "**ERROR: adding scheduling inspection (" + "Vacant Property Pictures" + "): " + schedRes.getErrorMessage());
-//			activateTask('Vacant Property Pictures'); 
-//		}
+		scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);	
 	}
 }
 if (wfTask == "Foreclosure Information" && wfStatus == "Registration Only") {
@@ -111,15 +102,7 @@ if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
 	if (inspRes.getSuccess())
 		{var inspectorObj = inspRes.getOutput();}
 	}
-	var schedRes = aa.inspection.scheduleInspection(capId, inspectorObj, aa.date.parseDate(dateAdd(null,3)), "", "Check Ownership" , "Scheduled via script 5085")
-
-	if (schedRes.getSuccess()){
-		logDebug("Successfully scheduled inspection : " + "Check Ownership" + " for " + dateAdd(null,3) + " with inspection number: " + schedRes.getOutput());
-	}
-	else {
-		logDebug( "**ERROR: adding scheduling inspection (" + "Check Ownership" + "): " + schedRes.getErrorMessage());
-		activateTask('Vacant Property Pictures'); 
-	}
+	scheduleInspection("Check Ownership", 3,inspectorObj); //, inspector, null, newInspReqComments);	
 }
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
