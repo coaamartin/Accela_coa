@@ -25,7 +25,7 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5085");	
+logDebug("---------------------> At start of 5085 WTUA");	
 
 function assignOfficer(codeDistrict) {			
 var inspOfficer = lookup("CODE_OFFICER_AREA#", codeDistrict);
@@ -96,6 +96,23 @@ if (wfTask == "Send Registration" && wfStatus == "No Further Action") {
 	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
 	}
+}
+if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
+	logDebug("---------------------> Send Registration - Registration Sent");	
+	//Send a registration email ENF VAC REGISTRATION LETTER
+	//generate email notices
+	var emailTemplate = "ENF VAC REGISTRATION LETTER";		
+	var todayDate = new Date();
+	if (emailTemplate != null && emailTemplate != "") {
+		logDebug("5085 sending Registration letter.  Defaulting to contact Individual.");	
+		eParams = aa.util.newHashtable();
+		eParams.put("$$ContactEmail$$", "amartin@auroragov.org");			
+		eParams.put("$$todayDate$$", todayDate);
+		eParams.put("$$altid$$",capId.getCustomID());
+		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+		emailContacts("Individual", emailTemplate, eParams, null, null, "Y");
+	}	
 }
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {

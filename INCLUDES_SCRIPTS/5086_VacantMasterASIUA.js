@@ -30,7 +30,7 @@ function isEmptyOrNull(value) {
 	return value == null || value === undefined || String(value) == "";
 }
 
-logDebug("---------------------> At start of 5086");	
+logDebug("---------------------> At start of 5086 ASIUA");	
 
 if ((AInfo["Reopen Foreclosure Process"] == "Yes"))
 {
@@ -39,7 +39,7 @@ if ((AInfo["Reopen Foreclosure Process"] == "Yes"))
 }
 if (!isEmptyOrNull(AInfo["Unregister"]))
 {
-	logDebug("Within code block to push date");
+	logDebug("Within code block to check date");
 	closeAllTasks(capId, "Script 5086");
 	updateAppStatus("Closed", "Script 5086");	
 }

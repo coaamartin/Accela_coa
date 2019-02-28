@@ -25,7 +25,7 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5087");	
+logDebug("---------------------> At start of 5087 PRA");	
 
 //if fee of a certain type, 
 	var feeResult = aa.fee.getFeeItems(capId);
