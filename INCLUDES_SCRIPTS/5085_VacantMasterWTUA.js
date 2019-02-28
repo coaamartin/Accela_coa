@@ -65,7 +65,7 @@ if (wfTask == "Foreclosure Information" && wfStatus == "NED/REO Recorded") {
 	//	else {
 	//		logDebug( "**ERROR: adding scheduling inspection (" + "Vacant Property Pictures" + "): " + schedRes.getErrorMessage());
 //			activateTask('Vacant Property Pictures'); 
-		}
+//		}
 	}
 }
 if (wfTask == "Foreclosure Information" && wfStatus == "Registration Only") {
