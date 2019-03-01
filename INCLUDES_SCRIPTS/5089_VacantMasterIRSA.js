@@ -37,7 +37,7 @@ function cancelInspections() {
 			var inspId = inspList[xx].getIdNumber();
 			var res=aa.inspection.cancelInspection(capId, inspId);
 			if (res.getSuccess()){
-				aa.debug("Inspection Canceled" , inspId);
+				aa.debug("Inspection Cancelled" , inspId);
 			}
 		}
 	}
