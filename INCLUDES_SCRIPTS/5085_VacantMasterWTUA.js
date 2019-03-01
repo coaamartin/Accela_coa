@@ -5,11 +5,11 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000002-CVM";
+//var myCapId = "19-000003-CVM";
 //var myUserId = "AMARTIN";
 //var eventName = "";
 //var wfTask = "Foreclosure Information";
-//var wfStatus = "NED/REO Recorded";
+//var wfStatus = "Closed Info Only";
 //var wfComment = "";
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
@@ -25,8 +25,21 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5085");	
-
+logDebug("---------------------> At start of 5085 WTUA");	
+function cancelInspections() {
+	logDebug("---------------------> In the cancelInspections function");		
+	var inspResultObj = aa.inspection.getInspections(capId);
+	if (inspResultObj.getSuccess()) {
+		inspList = inspResultObj.getOutput();
+		for (xx in inspList) {
+			var inspId = inspList[xx].getIdNumber();
+			var res=aa.inspection.cancelInspection(capId, inspId);
+			if (res.getSuccess()){
+				aa.debug("Inspection Canceled" , inspId);
+			}
+		}
+	}
+}
 function assignOfficer(codeDistrict) {			
 var inspOfficer = lookup("CODE_OFFICER_AREA#", codeDistrict);
 	if (!inspOfficer) {
@@ -56,15 +69,7 @@ if (wfTask == "Foreclosure Information" && wfStatus == "NED/REO Recorded") {
 			if (inspRes.getSuccess())
 				{var inspectorObj = inspRes.getOutput();}
 			}			
-		
-	var schedRes = aa.inspection.scheduleInspection(capId, inspectorObj , aa.date.parseDate(dateAdd(null, 1)), null, "Vacant Property Pictures", "");	
-		if (schedRes.getSuccess()){
-			logDebug("Successfully scheduled inspection : " + "Vacant Property Pictures" + " for " + dateAdd(null,1) + " with inspection number: " + schedRes.getOutput());
-		}
-		else {
-			logDebug( "**ERROR: adding scheduling inspection (" + "Vacant Property Pictures" + "): " + schedRes.getErrorMessage());
-//			activateTask('Vacant Property Pictures'); 
-		}
+		scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);	
 	}
 }
 if (wfTask == "Foreclosure Information" && wfStatus == "Registration Only") {
@@ -87,19 +92,47 @@ if (wfTask == "Foreclosure Information" && (wfStatus == "Abandon No NED" || wfSt
 }
 if (wfTask == "Foreclosure Information" && wfStatus == "Closed Info Only") {
 	logDebug("---------------------> Foreclosure Information - Closed Info Only");	
-	//updateTask("Foreclosure Information","Closed Info Only","Updated by script COA #5085","Updated by script COA #5085");
+	var capStatus = cap.getCapStatus();
+	if (capStatus != 'Recorded')
+	{
+	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
+	logDebug("---------------------> Foreclosure Information - Cancelling Inspections");		
+	cancelInspections();	
+	}
 }
 
 if (wfTask == "Send Registration" && wfStatus == "No Further Action") {
 	logDebug("---------------------> Send Registration - No Further Action");	
-	//updateTask("Foreclosure Information","Closed Info Only","Updated by script COA #5085","Updated by script COA #5085");
+	var capStatus = cap.getCapStatus();
+	if (capStatus != 'Recorded')
+	{
+	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
+	cancelInspections();		
+	}
+}
+if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
+	logDebug("---------------------> Send Registration - Registration Sent");	
+	aa.env.setValue("eventType","Batch Process");
+	//Send a registration email ENF VAC REGISTRATION LETTER
+	var emailTemplate = "ENF VAC REGISTRATION LETTER";		
+	var todayDate = new Date();
+	if (emailTemplate != null && emailTemplate != "") {
+		logDebug("5085 sending Registration letter.  Defaulting to contact Individual.");	
+		eParams = aa.util.newHashtable();
+		eParams.put("$$ContactEmail$$", "amartin@auroragov.org");			
+		eParams.put("$$todayDate$$", todayDate);
+		eParams.put("$$altid$$",capId.getCustomID());
+		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+		emailContacts("Individual", emailTemplate, eParams, null, null, "Y");
+	}	
 }
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
 	logDebug("---------------------> Foreclosure Sale Result - Withdrawn");	
-	updateTask("Apply Delinquent Registration","Closed","Updated by script COA #5085","Updated by script COA #5085");
+	closeTask("Apply Delinquent Registration","Closed","Updated by script COA #5085");
 
 	//insert inspection and assign to inspOfficer
     if(codeDistrict && codeDistrict.length > 0){
@@ -110,20 +143,14 @@ if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
 	if (inspRes.getSuccess())
 		{var inspectorObj = inspRes.getOutput();}
 	}
-	var schedRes = aa.inspection.scheduleInspection(capId, inspectorObj, aa.date.parseDate(dateAdd(null,3)), "", "Check Ownership" , "Scheduled via script 5085")
-
-	if (schedRes.getSuccess()){
-		logDebug("Successfully scheduled inspection : " + "Check Ownership" + " for " + dateAdd(null,3) + " with inspection number: " + schedRes.getOutput());
-	}
-	else {
-		logDebug( "**ERROR: adding scheduling inspection (" + "Check Ownership" + "): " + schedRes.getErrorMessage());
-		activateTask('Vacant Property Pictures'); 
-	}
+	scheduleInspection("Check Ownership", 3,inspectorObj); //, inspector, null, newInspReqComments);	
 }
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
 	logDebug("---------------------> Foreclosure Sale Result - Non-Bank Owner");	
-	updateAppStatus("Closed", "Script 5085");	
+	closeAllTasks(capId, "Closed Via Script 5085");	
+    updateAppStatus("Closed", "Closed Via Script 5085");
+	cancelInspections();		
 }
 
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "Registering") {
@@ -159,8 +186,9 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "New Ownership") {
 			if (!exists("Submitted", "Notice of Assessment")) {
 				if (!exists("Complete", "Assess to County")) {
 					//close all tasks and the record
-					closeAllTasks(capId, "");
+					closeAllTasks(capId, "Script 5085");
 					updateAppStatus("Closed", "Script 5085");	
+					cancelInspections();		
 				}
 			}
 
@@ -187,12 +215,13 @@ if (wfTask == "Renewal Registration" && wfStatus == "New Ownership") {
 	{
 		closeAllTasks(capId, "");
 		updateAppStatus("Closed", "Script 5085");	
+		cancelInspections();		
 	}	
 }
 
 if (wfTask == "Notice of Assessment" && wfStatus == "Not Recorded") {
 	logDebug("---------------------> Notice of Assessment - Not Recorded");	
-		closeAllTasks(capId, "");
+		closeAllTasks(capId, "Script 5085");
 }
 if (wfTask == "Notice of Assessment" && wfStatus == "Record Reception") {
 	logDebug("---------------------> Notice of Assessment - Record Reception");	
@@ -209,7 +238,7 @@ if (wfTask == "Notice of Assessment" && wfStatus == "Submitted") {
 
 if (wfTask == "Record Release of Assessment" && wfStatus == "Not Recorded") {
 	logDebug("---------------------> Record Release of Assessment - Not Recorded");	
-		closeAllTasks(capId, "");
+		closeAllTasks(capId, "Script 5085");
 }
 if (wfTask == "Record Release of Assessment" && wfStatus == "Record Reception") {
 	logDebug("---------------------> Record Release of Assessment - Record Reception");	
@@ -243,8 +272,9 @@ if (wfTask == "New Ownership/Sale of Property" && wfStatus == "New REO") {
 }
 if (wfTask == "New Ownership/Sale of Property" && wfStatus == "New Ownership") {
 	logDebug("---------------------> New Ownership/Sale of Property - New Ownership");	
-	closeAllTasks(capId, "");
+	closeAllTasks(capId, "Script 5085");
 	updateAppStatus("Closed", "Script 5085");	
+	cancelInspections();		
 }
 if (wfTask == "New Ownership/Sale of Property" && wfStatus == "No County Info") {
 	logDebug("---------------------> New Ownership/Sale of Property - No County Info");	
