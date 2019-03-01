@@ -1,6 +1,6 @@
 
 /*
-2001_OTC_Prototype - Code from TruePoint from Keith to test new record type
+2001_OTC_Permits_ASA - Code from TruePoint from Keith to test new record type
 Event: ASA:Building/Permit/OTC/*
 Title : OTC Permit Fee Calculation and Pending Inspections (ApplicationSubmitAfter) 
 Purpose : Add fees and Pending inspections for OTC permits.

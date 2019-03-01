@@ -38,6 +38,9 @@ Sample Call : checkIfPassedInspections(inspType)
 
 */
 
-if(!appMatch("Building/Permit/No Plans/NA")) {
+
+//Keith changed the line below on 2-27-19
+//if(!appMatch("Building/Permit/No Plans/NA")) {
+if (!appMatch("Building/Permit/No Plans/NA") && !appMatch("Building/Permit/OTC/*")) {
 	checkIfPassedInspections(inspType)
 }
