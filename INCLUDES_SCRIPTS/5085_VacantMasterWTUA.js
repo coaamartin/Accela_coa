@@ -167,6 +167,7 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "Fee + Record Count
 	var taskDueDate = getTaskDueDate("Apply Delinquent Registration");
     newDatePlus90 = dateAdd(null,90);
     editTaskDueDate("Apply Delinquent Registration", newDatePlus90);
+	activateTask("Apply Delinquent Registration");
 }
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "New REO") {
 	logDebug("---------------------> Apply Delinquent Registration - New REO");	
