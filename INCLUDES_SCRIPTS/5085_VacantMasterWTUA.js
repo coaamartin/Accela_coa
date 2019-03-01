@@ -5,11 +5,11 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000002-CVM";
+//var myCapId = "19-000003-CVM";
 //var myUserId = "AMARTIN";
 //var eventName = "";
 //var wfTask = "Foreclosure Information";
-//var wfStatus = "NED/REO Recorded";
+//var wfStatus = "Closed Info Only";
 //var wfComment = "";
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
@@ -26,7 +26,20 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 logDebug("---------------------> At start of 5085 WTUA");	
-
+function cancelInspections() {
+	logDebug("---------------------> In the cancelInspections function");		
+	var inspResultObj = aa.inspection.getInspections(capId);
+	if (inspResultObj.getSuccess()) {
+		inspList = inspResultObj.getOutput();
+		for (xx in inspList) {
+			var inspId = inspList[xx].getIdNumber();
+			var res=aa.inspection.cancelInspection(capId, inspId);
+			if (res.getSuccess()){
+				aa.debug("Inspection Canceled" , inspId);
+			}
+		}
+	}
+}
 function assignOfficer(codeDistrict) {			
 var inspOfficer = lookup("CODE_OFFICER_AREA#", codeDistrict);
 	if (!inspOfficer) {
@@ -85,6 +98,8 @@ if (wfTask == "Foreclosure Information" && wfStatus == "Closed Info Only") {
 	{
 	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
+	logDebug("---------------------> Foreclosure Information - Cancelling Inspections");		
+	cancelInspections();	
 	}
 }
 
@@ -95,6 +110,7 @@ if (wfTask == "Send Registration" && wfStatus == "No Further Action") {
 	{
 	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
+	cancelInspections();		
 	}
 }
 if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
@@ -136,6 +152,7 @@ if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
 	logDebug("---------------------> Foreclosure Sale Result - Non-Bank Owner");	
 	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
+	cancelInspections();		
 }
 
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "Registering") {
@@ -173,6 +190,7 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "New Ownership") {
 					//close all tasks and the record
 					closeAllTasks(capId, "Script 5085");
 					updateAppStatus("Closed", "Script 5085");	
+					cancelInspections();		
 				}
 			}
 
@@ -199,6 +217,7 @@ if (wfTask == "Renewal Registration" && wfStatus == "New Ownership") {
 	{
 		closeAllTasks(capId, "");
 		updateAppStatus("Closed", "Script 5085");	
+		cancelInspections();		
 	}	
 }
 
@@ -257,6 +276,7 @@ if (wfTask == "New Ownership/Sale of Property" && wfStatus == "New Ownership") {
 	logDebug("---------------------> New Ownership/Sale of Property - New Ownership");	
 	closeAllTasks(capId, "Script 5085");
 	updateAppStatus("Closed", "Script 5085");	
+	cancelInspections();		
 }
 if (wfTask == "New Ownership/Sale of Property" && wfStatus == "No County Info") {
 	logDebug("---------------------> New Ownership/Sale of Property - No County Info");	
