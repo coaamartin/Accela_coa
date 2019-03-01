@@ -43,6 +43,7 @@ if (!isEmptyOrNull(AInfo["Unregister"]))
 	logDebug("Within code block to check date");
 	closeAllTasks(capId, "Script 5086");
 	updateAppStatus("Closed", "Script 5086");	
+	cancelInspections();
 }
 if ((AInfo["Record with County"] == "Record Assessment"))
 {

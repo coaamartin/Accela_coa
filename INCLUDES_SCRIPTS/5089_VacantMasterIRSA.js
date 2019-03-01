@@ -73,7 +73,8 @@ if (inspType == "Check Ownership" && inspResult == "Withdrawn") {
 if (inspType == "Check Ownership" && inspResult == "New Ownership") {
 	logDebug("---------------------> Inspection Check Ownership - New Ownership");	
 	closeAllTasks(capId, "Script 5089");
-	updateAppStatus("Closed", "Script 5089");	
+	updateAppStatus("Closed", "Script 5089");
+	cancelInspections();	
 }
 if (inspType == "Check Ownership" && inspResult == "No Further Action") {
 	logDebug("---------------------> Inspection Check Ownership - No Further Action");	
@@ -81,6 +82,7 @@ if (inspType == "Check Ownership" && inspResult == "No Further Action") {
 	if (capStatus != 'Recorded'){
 		closeAllTasks(capId, "Script 5089");
 		updateAppStatus("Closed", "Script 5089");	
+		cancelInspections();	
 	}
 }
 
