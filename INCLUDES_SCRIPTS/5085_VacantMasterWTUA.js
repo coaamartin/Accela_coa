@@ -99,6 +99,7 @@ if (wfTask == "Send Registration" && wfStatus == "No Further Action") {
 }
 if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 	logDebug("---------------------> Send Registration - Registration Sent");	
+	aa.env.setValue("eventType","Batch Process");
 	//Send a registration email ENF VAC REGISTRATION LETTER
 	//generate email notices
 	var emailTemplate = "ENF VAC REGISTRATION LETTER";		
