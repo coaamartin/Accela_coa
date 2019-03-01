@@ -196,7 +196,19 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "New Ownership") {
 		updateAppStatus("Recorded", "Script 5085");
 	}	
 }
-
+if (wfTask == "Apply Delinquent Registration" && wfStatus == "Dispatch CEO") {
+	logDebug("---------------------> Apply Delinquent Registration - Dispatch CEO");
+	//insert inspection and assign to inspOfficer
+    if(codeDistrict && codeDistrict.length > 0){
+		var inspOfficer = assignOfficer(codeDistrict);
+	}
+	if (inspOfficer) {
+	var inspRes = aa.person.getUser(inspOfficer);
+	if (inspRes.getSuccess())
+		{var inspectorObj = inspRes.getOutput();}
+	}	
+	scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);	
+}
 if (wfTask == "Renewal Registration" && wfStatus == "Sent Renewal") {
 	logDebug("---------------------> Renewal Registration - Sent Renewal");	
 	var sysDate = aa.date.getCurrentDate();
