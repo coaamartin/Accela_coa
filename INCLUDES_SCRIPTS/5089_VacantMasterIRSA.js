@@ -123,10 +123,12 @@ if (inspType == "Check Ownership" && inspResult == "No Further Action") {
 
 if (inspType == "Vacant Property Pictures" && inspResult == "Not Vacant + Pics Taken") {
 	logDebug("---------------------> Inspection Vacant Property Pictures - Not Vacant + Pics Taken");	
+	cancelInspectionsByType("Check Ownership");		
 	scheduleInspection("Check Ownership", 1,inspectorObj); //, inspector, null, newInspReqComments);		
 }
 if (inspType == "Vacant Property Pictures" && inspResult == "Reschedule") {
 	logDebug("---------------------> Inspection Vacant Property Pictures - Reschedule");	
+	cancelInspectionsByType("Vacant Property Pictures");		
 	scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);		
 }
 
