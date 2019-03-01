@@ -16,10 +16,15 @@ Notes :
 
 Sample Call : checkIfPassedInspections()
 
+
 */
-if (!appMatch("Building/Permit/No Plans/NA")) {
+//Keith changed the line below on 3-1-19
+//if(!appMatch("Building/Permit/No Plans/NA")) {
+  if(!appMatch("Building/Permit/No Plans/NA") && !appMatch("Building/Permit/OTC/*")) {
 	checkIfPassedInspections(inspType);
 }
+
+
 /*
 Title : Check for Existing Inspection on Same Day (InspectionScheduleBefore) 
 
