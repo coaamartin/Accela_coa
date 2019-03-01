@@ -27,8 +27,37 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5089 IRSA");	
-
+logDebug("---------------------> At start of 5089 IRSA");
+function cancelInspections() {
+	logDebug("---------------------> In the cancelInspections function");		
+	var inspResultObj = aa.inspection.getInspections(capId);
+	if (inspResultObj.getSuccess()) {
+		inspList = inspResultObj.getOutput();
+		for (xx in inspList) {
+			var inspId = inspList[xx].getIdNumber();
+			var res=aa.inspection.cancelInspection(capId, inspId);
+			if (res.getSuccess()){
+				aa.debug("Inspection Canceled" , inspId);
+			}
+		}
+	}
+}	
+function cancelInspectionsByType(inspType) {
+	logDebug("---------------------> In the cancelInspectionsByType function");		
+	var inspResultObj = aa.inspection.getInspections(capId);
+	if (inspResultObj.getSuccess()) {
+		inspList = inspResultObj.getOutput();
+		for (xx in inspList) {
+			if (String(inspList[xx].getInspectionType()).equalsIgnoreCase(inspType)) {
+			var inspId = inspList[xx].getIdNumber();
+			var res=aa.inspection.cancelInspection(capId, inspId);
+			if (res.getSuccess()){
+				aa.debug("Inspection Cancelled" , inspId);
+			}
+			}
+		}
+	}
+}
 function assignOfficer(codeDistrict) {			
 var inspOfficer = lookup("CODE_OFFICER_AREA#", codeDistrict);
 	if (!inspOfficer) {
@@ -78,6 +107,7 @@ if (inspType == "Check Ownership" && inspResult == "New Ownership") {
 }
 if (inspType == "Check Ownership" && inspResult == "Reschedule") {
 	logDebug("---------------------> Inspection Check Ownership - Reschedule");	
+	cancelInspectionsByType("Check Ownership");	
 	newDatePlus30 = dateAdd(null,30);
 	scheduleInspectDate("Check Ownership", newDatePlus30)
 }
