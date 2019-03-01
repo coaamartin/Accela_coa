@@ -92,7 +92,6 @@ if (wfTask == "Foreclosure Information" && (wfStatus == "Abandon No NED" || wfSt
 }
 if (wfTask == "Foreclosure Information" && wfStatus == "Closed Info Only") {
 	logDebug("---------------------> Foreclosure Information - Closed Info Only");	
-	//updateTask("Foreclosure Information","Closed Info Only","Updated by script COA #5085","Updated by script COA #5085");
 	var capStatus = cap.getCapStatus();
 	if (capStatus != 'Recorded')
 	{
@@ -117,7 +116,6 @@ if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 	logDebug("---------------------> Send Registration - Registration Sent");	
 	aa.env.setValue("eventType","Batch Process");
 	//Send a registration email ENF VAC REGISTRATION LETTER
-	//generate email notices
 	var emailTemplate = "ENF VAC REGISTRATION LETTER";		
 	var todayDate = new Date();
 	if (emailTemplate != null && emailTemplate != "") {
@@ -134,7 +132,7 @@ if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
 	logDebug("---------------------> Foreclosure Sale Result - Withdrawn");	
-	updateTask("Apply Delinquent Registration","Closed","Updated by script COA #5085","Updated by script COA #5085");
+	closeTask("Apply Delinquent Registration","Closed","Updated by script COA #5085");
 
 	//insert inspection and assign to inspOfficer
     if(codeDistrict && codeDistrict.length > 0){
