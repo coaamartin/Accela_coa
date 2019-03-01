@@ -54,8 +54,8 @@ try{
 	logDebug("Failed to retrieve code area for code officer assignment: " + err.stack);
 };
 
-if (inspType == "Check Ownership" && inspResult == "Compliance") {
-	logDebug("---------------------> Inspection Check Ownership - Compliance");	
+if (inspType == "Check Ownership" && inspResult == "Verify Vacant") {
+	logDebug("---------------------> Inspection Check Ownership - Verify Vacant");	
 	//insert inspection and assign to inspOfficer
 	scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);		
 	scheduleInspection("Check Ownership", 3,inspectorObj); //, inspector, null, newInspReqComments);		
@@ -75,6 +75,11 @@ if (inspType == "Check Ownership" && inspResult == "New Ownership") {
 	closeAllTasks(capId, "Script 5089");
 	updateAppStatus("Closed", "Script 5089");
 	cancelInspections();	
+}
+if (inspType == "Check Ownership" && inspResult == "Reschedule") {
+	logDebug("---------------------> Inspection Check Ownership - Reschedule");	
+	newDatePlus30 = dateAdd(null,30);
+	scheduleInspectDate("Check Ownership", newDatePlus30)
 }
 if (inspType == "Check Ownership" && inspResult == "No Further Action") {
 	logDebug("---------------------> Inspection Check Ownership - No Further Action");	
