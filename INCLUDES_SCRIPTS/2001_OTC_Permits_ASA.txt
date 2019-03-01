@@ -98,6 +98,7 @@ comment("Finished Looking for OTC Fees and Pending Inspections to Add");
 comment("Checking for County");
     //check County in address:
     var county = null;
+
     var addResult = aa.address.getAddressByCapId(capId);
     if (addResult.getSuccess()) {
         var addResult = addResult.getOutput();
@@ -127,6 +128,11 @@ comment("Checking for County");
 
     //still null? try GIS:
     if (county == null || county == "") {
+
+        var gisSvcName = 'AURORACO';
+        var gisLayerName = 'PARCELS'
+        var gisAttrName = 'COUNTY'
+
         var PARCEL_COUNTY = getGISInfo(gisSvcName, gisLayerName, gisAttrName);
         if (PARCEL_COUNTY) {
             county = PARCEL_COUNTY;
