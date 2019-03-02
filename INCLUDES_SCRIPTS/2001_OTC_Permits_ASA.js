@@ -71,6 +71,13 @@ comment("Looking for OTC Fees and Pending Inspections - UPDATED 2/4 JMP-CoA to S
          updateFee('BLD_OTC_10', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
          createPendingInspection("BLD_OTC", "Framing Final");
          }
+  
+      if (appMatch('*/*/*/Tankless Water Heater')) {
+         updateFee('BLD_OTC_14', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
+         createPendingInspection("BLD_OTC", "Electrical Final");
+         createPendingInspection("BLD_OTC", "Plumbing Final");
+         createPendingInspection("BLD_OTC", "Plumbing Final");
+	    }
 
       if (appMatch('*/*/*/Water Heater')) {
          updateFee('BLD_OTC_11', 'BLD_OTC_FEES', 'FINAL',1, 'Y');

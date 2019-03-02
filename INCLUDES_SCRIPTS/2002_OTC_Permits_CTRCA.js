@@ -54,7 +54,13 @@ comment("CTRCA Pending Inspections - UPDATED 2/21 Keith- to Script #501C");
          createPendingInspection("BLD_OTC", "Framing Final");
          }
 
-      if (appMatch('*/*/*/Water Heater')) {
+	 if (appMatch('*/*/*/Tankless Water Heater')) {
+         createPendingInspection("BLD_OTC", "Mechanical Final");
+         createPendingInspection("BLD_OTC", "Electrical Final");
+         createPendingInspection("BLD_OTC", "Plumbing Final");
+         }
+  
+     if (appMatch('*/*/*/Water Heater')) {
          createPendingInspection("BLD_OTC", "Electrical Final");
          createPendingInspection("BLD_OTC", "Plumbing Final");
          }
