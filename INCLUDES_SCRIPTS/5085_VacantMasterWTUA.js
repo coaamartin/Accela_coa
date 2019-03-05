@@ -119,14 +119,14 @@ if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 	var emailTemplate = "ENF VAC REGISTRATION LETTER";		
 	var todayDate = new Date();
 	if (emailTemplate != null && emailTemplate != "") {
-		logDebug("5085 sending Registration letter.  Defaulting to contact Individual.");	
+		logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
 		eParams = aa.util.newHashtable();
 		eParams.put("$$ContactEmail$$", "amartin@auroragov.org");			
 		eParams.put("$$todayDate$$", todayDate);
 		eParams.put("$$altid$$",capId.getCustomID());
 		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-		emailContacts("Individual", emailTemplate, eParams, null, null, "Y");
+		emailContacts("Property Manager", emailTemplate, eParams, null, null, "Y");
 	}	
 }
 
