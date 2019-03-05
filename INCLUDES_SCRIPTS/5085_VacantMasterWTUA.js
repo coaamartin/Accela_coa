@@ -132,7 +132,7 @@ if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
 	logDebug("---------------------> Foreclosure Sale Result - Withdrawn");	
-	closeTask("Apply Delinquent Registration","Closed","Updated by script COA #5085");
+	closeTask("Send Registration","Closed","Updated by script COA #5085");
 
 	//insert inspection and assign to inspOfficer
     if(codeDistrict && codeDistrict.length > 0){
