@@ -119,20 +119,20 @@ if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 	var emailTemplate = "ENF VAC REGISTRATION LETTER";		
 	var todayDate = new Date();
 	if (emailTemplate != null && emailTemplate != "") {
-		logDebug("5085 sending Registration letter.  Defaulting to contact Individual.");	
+		logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
 		eParams = aa.util.newHashtable();
 		eParams.put("$$ContactEmail$$", "amartin@auroragov.org");			
 		eParams.put("$$todayDate$$", todayDate);
 		eParams.put("$$altid$$",capId.getCustomID());
 		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-		emailContacts("Individual", emailTemplate, eParams, null, null, "Y");
+		emailContacts("Property Manager", emailTemplate, eParams, null, null, "Y");
 	}	
 }
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
 	logDebug("---------------------> Foreclosure Sale Result - Withdrawn");	
-	closeTask("Apply Delinquent Registration","Closed","Updated by script COA #5085");
+	closeTask("Send Registration","Closed","Updated by script COA #5085");
 
 	//insert inspection and assign to inspOfficer
     if(codeDistrict && codeDistrict.length > 0){
@@ -166,8 +166,8 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "Fee + Record Count
 	updateFee("ENF_VAC_DEL1", "ENF_VAC_REGPEN", "FINAL", 1, "N");
 	var taskDueDate = getTaskDueDate("Apply Delinquent Registration");
     newDatePlus90 = dateAdd(null,90);
-    editTaskDueDate("Apply Delinquent Registration", newDatePlus90);
 	activateTask("Apply Delinquent Registration");
+	editTaskDueDate("Apply Delinquent Registration", newDatePlus90);
 }
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "New REO") {
 	logDebug("---------------------> Apply Delinquent Registration - New REO");	
@@ -273,14 +273,14 @@ if (wfTask == "New Ownership/Sale of Property" && wfStatus == "New REO") {
 		var emailTemplate = "ENF VAC REGISTRATION LETTER";		
 		var todayDate = new Date();
 		if (emailTemplate != null && emailTemplate != "") {
-			logDebug("5085 sending Registration letter.  Defaulting to contact Individual.");	
+			logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
 			eParams = aa.util.newHashtable();
 			eParams.put("$$ContactEmail$$", "amartin@auroragov.org");			
 			eParams.put("$$todayDate$$", todayDate);
 			eParams.put("$$altid$$",capId.getCustomID());
 			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 			logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-			emailContacts("Individual", emailTemplate, eParams, null, null, "Y");
+			emailContacts("Property Manager", emailTemplate, eParams, null, null, "Y");
 		}			
 }
 if (wfTask == "New Ownership/Sale of Property" && wfStatus == "New Ownership") {
