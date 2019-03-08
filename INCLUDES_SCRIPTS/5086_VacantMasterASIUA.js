@@ -37,6 +37,9 @@ if ((AInfo["Reopen Foreclosure Process"] == "Yes"))
 	logDebug("Within code block to reopen foreclosure Process");
 	activateTask("Foreclosure Information");   
 	editAppSpecific("Reopen Foreclosure Process", "N");	
+	editAppSpecific("Unregister", "");	
+	updateAppStatus("Monitoring", "Script 5086");		
+	
 }
 if (!isEmptyOrNull(AInfo["Unregister"]))
 {
