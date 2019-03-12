@@ -13,7 +13,7 @@
 logDebug("Script 15 - Start");
 var newInspType = null;
 
-var inspectionExist = aa.inspection.getInspections(settings.capId);
+var inspectionExist = aa.inspection.getInspections(capId);
 if (!inspectionExist.getSuccess()) {
    
 }   
