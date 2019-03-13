@@ -5,9 +5,9 @@
 // BY: amartin
 // CHANGELOG: 
 
-logDebug("At start of 5090 outside if");	 
+logDebug("At start of 5090");	 
 if (wfTask == "Review Application" && wfStatus == "Complete") {
-logDebug("5090 inside if");	 
+logDebug("5090 Review Application - Complete");	 
 
 	var vLicenseID;
 	var vIDArray;
@@ -84,14 +84,21 @@ function UpdateEnfVacParent() {
                     copyParcels(capId, parentCapId);
                     editAppName(childCapScriptModel.specialText, parentCapId);
 					//closeTask("Review Application", "Complete", "Closed by Script 5090");
+					if (ifTracer(AInfo["Unregister"] == "Yes"))
+						{
+							logDebug("Within code block to check date");
+							closeAllTasks(parentCapId, "Script 5086");
+							updateAppStatus(parentCapId,"Closed", "Script 5086");	
+							cancelInspections(parentCapId);
+						}
                 }
             }
  		//}
 	}
 	catch(err){
 		showMessage = true;
-		comment("Error on custom function “5090_HandleEnfVacantRenewal.js. Please contact administrator. Err: " + err);
-		logDebug("Error on custom function “5090_HandleEnfVacantRenewal.js. Please contact administrator. Err: " + err);
+		comment("Error on custom function 5090_HandleEnfVacantRenewal.js. Please contact administrator. Err: " + err);
+		logDebug("Error on custom function 5090_HandleEnfVacantRenewal.js. Please contact administrator. Err: " + err);
 	}
 }
 	logDebug("5090_HandleEnfVacantRenewal.js ended.");
