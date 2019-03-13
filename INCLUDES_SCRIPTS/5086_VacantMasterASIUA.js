@@ -5,12 +5,12 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000002-CVM";
+//var myCapId = "19-000021-CVR";
 //var myUserId = "AMARTIN";
 //var eventName = "ApplicationSpecificInfoUpdateAfter";
 //var wfTask = "Foreclosure Information";
 //var wfStatus = "NED/REO Recorded";
-//var AInfo = "Reopen Foreclosure task";
+//var AInfo = "Unregister";
 //var wfComment = "";
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
@@ -32,7 +32,7 @@ function isEmptyOrNull(value) {
 
 logDebug("---------------------> At start of 5086 ASIUA");	
 
-if ((AInfo["Reopen Foreclosure Process"] == "Y"))
+if ((AInfo["Reopen Foreclosure Process"] == "Yes"))
 {
 	logDebug("Within code block to reopen foreclosure Process");
 	activateTask("Foreclosure Information");   
@@ -41,7 +41,7 @@ if ((AInfo["Reopen Foreclosure Process"] == "Y"))
 	updateAppStatus("Monitoring", "Script 5086");		
 	
 }
-if (AInfo["Unregister"] == "Y")
+if (AInfo["Unregister"] == "Yes")
 {
 	logDebug("Within code block to check date");
 	closeAllTasks(capId, "Script 5086");
