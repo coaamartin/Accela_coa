@@ -88,7 +88,7 @@ function UpdateEnfVacParent() {
 						{
 							logDebug("Within code block to check date");
 							closeAllTasks(parentCapId, "Script 5086");
-							updateAppStatus(parentCapId,"Closed", "Script 5086");	
+							updateAppStatus("Closed", "Script 5086",parentCapId);	
 							cancelInspections(parentCapId);
 						}
                 }
