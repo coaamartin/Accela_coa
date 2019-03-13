@@ -41,7 +41,7 @@ if ((AInfo["Reopen Foreclosure Process"] == "Y"))
 	updateAppStatus("Monitoring", "Script 5086");		
 	
 }
-if (!isEmptyOrNull(AInfo["Unregister"]) && (AInfo["Unregister"] == "Y"))
+if (AInfo["Unregister"] == "Y")
 {
 	logDebug("Within code block to check date");
 	closeAllTasks(capId, "Script 5086");
