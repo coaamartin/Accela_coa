@@ -32,7 +32,7 @@ function isEmptyOrNull(value) {
 
 logDebug("---------------------> At start of 5086 ASIUA");	
 
-if ((AInfo["Reopen Foreclosure Process"] == "Yes"))
+if ((AInfo["Reopen Foreclosure Process"] == "Y"))
 {
 	logDebug("Within code block to reopen foreclosure Process");
 	activateTask("Foreclosure Information");   
@@ -41,7 +41,7 @@ if ((AInfo["Reopen Foreclosure Process"] == "Yes"))
 	updateAppStatus("Monitoring", "Script 5086");		
 	
 }
-if (!isEmptyOrNull(AInfo["Unregister"]))
+if (!isEmptyOrNull(AInfo["Unregister"]) && (AInfo["Unregister"] == "Y"))
 {
 	logDebug("Within code block to check date");
 	closeAllTasks(capId, "Script 5086");
