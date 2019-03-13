@@ -50,7 +50,20 @@ logDebug("5090 Review Application - Complete");
 	//script84_SendRenewalEmailWhenPermitIssuedComplete();
 	UpdateEnfVacParent();	
 }
-
+function cancelInspections(theCapID) {
+	logDebug("---------------------> In the cancelInspections function");		
+	var inspResultObj = aa.inspection.getInspections(theCapID);
+	if (inspResultObj.getSuccess()) {
+		inspList = inspResultObj.getOutput();
+		for (xx in inspList) {
+			var inspId = inspList[xx].getIdNumber();
+			var res=aa.inspection.cancelInspection(theCapID, inspId);
+			if (res.getSuccess()){
+				aa.debug("Inspection Cancelled" , inspId);
+			}
+		}
+	}
+}	
 function UpdateEnfVacParent() {
 	logDebug("5090_HandleEnfVacantRenewal.js started.");
 	try{
