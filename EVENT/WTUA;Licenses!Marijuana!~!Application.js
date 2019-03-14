@@ -10,5 +10,5 @@
 |
 /------------------------------------------------------------------------------------------------------*/
 if ( (wfTask=="City Application Intake" || wfTask=="State Application Intake" || wfTask=="Application Review") && wfStatus=="Additional Info Required"){
-	sendEmail210();
+	210_SendMJEmail();
 }
