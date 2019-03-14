@@ -7,10 +7,14 @@
 	var emailTemplate= "LIC MJ ADDITIONAL INFO # 210";
 	var applicant = getContactByType("Applicant", capId);
 	var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
-	if (!applicant || !applicant.getEmail()) {
-		logDebug("**WARN no applicant found or no email capId=" + capId);
-		return false;
-	}
+	if (!applicant || !applicant.getEmail()) 
+   {
+     logDebug("**WARN SCRIPT#210 - no applicant found or no email capId =" + capId);
+   }
+   
+   else
+      
+   {
 	var files = new Array();
 	
 	// use the correct parameters related to the email template provided + wfComment
@@ -44,3 +48,4 @@
 
 	//send email to applicant, no report included
 	emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
+   }
