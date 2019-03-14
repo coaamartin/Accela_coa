@@ -7,6 +7,10 @@
 	var emailTemplate= "LIC MJ ADDITIONAL INFO # 210";
 	var applicant = getContactByType("Applicant", capId);
 	var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
+   
+   var asiValues = new Array();
+	loadAppSpecific(asiValues);
+      
 	if (!applicant || !applicant.getEmail()) 
    {
      logDebug("**WARN SCRIPT#210 - no applicant found or no email capId =" + capId);
