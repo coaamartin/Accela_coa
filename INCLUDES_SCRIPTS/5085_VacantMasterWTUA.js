@@ -5,11 +5,11 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000003-CVM";
+//var myCapId = "19-000022-CVM";
 //var myUserId = "AMARTIN";
 //var eventName = "";
-//var wfTask = "Foreclosure Information";
-//var wfStatus = "Closed Info Only";
+//var wfTask = "Renewal Registration";
+//var wfStatus = "Sent Renewal";
 //var wfComment = "";
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
@@ -220,6 +220,17 @@ if (wfTask == "Renewal Registration" && wfStatus == "Sent Renewal") {
 	//reopen task 91820 and set new due date
 	activateTask("Apply Delinquent Registration");
 	editTaskDueDate("Apply Delinquent Registration", renewalDate);
+    //update Renewal status and date
+	logDebug("---------------------> Started setting parent renewal date and status ");		
+                var vExpDate = new Date();
+                var vNewExpDate = new Date(vExpDate.getFullYear() + 0, vExpDate.getMonth(), vExpDate.getDate());
+					logDebug("---------------------> cap " +capId);	
+                var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+					logDebug("---------------------> rB1ExpResult " +rB1ExpResult);	
+                rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+                rB1ExpResult.setExpStatus("About to Expire");
+                aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
+	logDebug("---------------------> Completed setting parent renewal date and status ");				
 }
 if (wfTask == "Renewal Registration" && wfStatus == "New Ownership") {
 	logDebug("---------------------> Renewal Registration - New Ownership");	
