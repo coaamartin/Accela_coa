@@ -4,7 +4,7 @@
 // DATECREATED: 03/14/2019
 // BY: jmp
 
-	var emailTemplate="LIC MJ ADDITIONAL INFO # 210"
+	var emailTemplate= "LIC MJ ADDITIONAL INFO # 210";
 	var applicant = getContactByType("Applicant", capId);
 	var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
 	if (!applicant || !applicant.getEmail()) {
@@ -14,7 +14,7 @@
 	var files = new Array();
 	
 	// use the correct parameters related to the email template provided + wfComment
-	adResult = aa.address.getAddressByCapId(capId).getOutput(); 
+	var adResult = aa.address.getAddressByCapId(capId).getOutput(); 
 			for(x in adResult)
 			{
 				var adType = adResult[x].getAddressType(); 
