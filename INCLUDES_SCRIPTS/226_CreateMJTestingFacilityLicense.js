@@ -107,6 +107,21 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
         var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
         var recordDeepUrl = getACARecordURL(subStrIndex)
         
+        var adResult = aa.address.getAddressByCapId(capId).getOutput(); 
+		  for(x in adResult)
+		 {
+			var adType = adResult[x].getAddressType(); 
+			var stNum = adResult[x].getHouseNumberStart();
+			var preDir =adResult[x].getStreetDirection();
+			var stName = adResult[x].getStreetName(); 
+			var stType = adResult[x].getStreetSuffix();
+			var city = adResult[x].getCity();
+			var state = adResult[x].getState();
+			var zip = adResult[x].getZip();
+		}
+	
+	   var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
+        
       var asiValues = new Array();
 	   loadAppSpecific(asiValues);                
 
@@ -115,7 +130,9 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
       addParameter(VEParams, "$$TradeName$$", asiValues["Trade Name"]);
-      addParameter(VEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);      
+      addParameter(VEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);  
+	   addParameter(VEParams, "$$FullAddress$$", primaryAddress);      
+      
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
 		//addParameter(vEParams, "$$recordDeepUrl$$", recordACAUrl);
 
