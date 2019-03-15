@@ -39,6 +39,7 @@
 	var appName = cap.getSpecialText();
 	
 	var eParams = aa.util.newHashtable();
+   
 	addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 	addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
@@ -49,6 +50,10 @@
 	addParameter(eParams, "$$acaRecordUrl$$", acaUrl);
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
+   addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
+   addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
+   
+   $$StateLicenseNumber$$  
 
 	//send email to applicant, no report included
 	emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
