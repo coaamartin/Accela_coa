@@ -106,12 +106,16 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
 		var acaSiteUrl = lookup("ACA_CONFIGS", "ACA_SITE");
         var subStrIndex = acaSiteUrl.toUpperCase().indexOf("/ADMIN");
         var recordDeepUrl = getACARecordURL(subStrIndex)
-                
+        
+      var asiValues = new Array();
+	   loadAppSpecific(asiValues);                
 
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
+      addParameter(VEParams, "$$TradeName$$", asiValues["Trade Name"]);
+      addParameter(VEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);      
 		//addParameter(vEParams, "$$Record_ID$$", vLicenseID.getCustomID);
 		//addParameter(vEParams, "$$recordDeepUrl$$", recordACAUrl);
 
