@@ -32,7 +32,7 @@ sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 var capBiz = aa.proxyInvoker.newInstance("com.accela.aa.aamain.cap.CapBusiness", null).getOutput();
 var addressCondBiz = aa.proxyInvoker.newInstance("com.accela.aa.aamain.address.AddressConditionBusiness").getOutput();
 var sql = "select L1_ADDRESS_NBR,L1_CON_NBR FROM L3ADDRES_CONDIT LC WHERE LC.L1_CON_DES = '" + conditionName + "' " +
-	" AND lc.L1_CON_ISS_DD < '" + (sixMonthsAgo.getMonth() + 1) + "/" + (sixMonthsAgo.getDate()) + "/" + (sixMonthsAgo.getFullYear()) + "' " +
+	" AND lc.L1_CON_ISS_DD > '" + (sixMonthsAgo.getMonth() + 1) + "/" + (sixMonthsAgo.getDate()) + "/" + (sixMonthsAgo.getFullYear()) + "' " +
 	" AND lc.L1_CON_STATUS = 'Applied' " + 
 	" AND lc.serv_prov_code='" + aa.getServiceProviderCode() + "' " +
 	" AND REC_STATUS = 'A'";
