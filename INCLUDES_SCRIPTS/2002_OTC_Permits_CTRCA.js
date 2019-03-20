@@ -46,7 +46,7 @@ comment("CTRCA Pending Inspections - UPDATED 2/21 Keith- to Script #501C");
          }
 
 
-      if (appMatch('*/*/*/Residential Electrical Service Upgrade')) {
+      if (appMatch('*/*/*/Residential Electrical Service')) {
          createPendingInspection("BLD_OTC", "Electrical Final");
          }
 

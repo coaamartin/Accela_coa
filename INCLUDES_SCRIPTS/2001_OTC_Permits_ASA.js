@@ -63,7 +63,7 @@ comment("Looking for OTC Fees and Pending Inspections - UPDATED 2/4 JMP-CoA to S
          }
 
 
-      if (appMatch('*/*/*/Residential Electrical Service Upgrade')) {
+      if (appMatch('*/*/*/Residential Electrical Service')) {
          updateFee('BLD_OTC_09', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
          }
 
