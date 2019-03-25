@@ -300,7 +300,7 @@ if (wfTask == "Record Release of Assessmentt" && wfStatus == "Submitted") {
 	logDebug("---------------------> Record Release of Assessment - Submitted");	
 	updateTask("Record Release of Assessment","Submitted","Updated by script COA #5085","Updated by script COA #5085");
 }
-
+/* Turns out this is simply not used in Amanda
 if (wfTask == "New Ownership/Sale of Property" && wfStatus == "New REO") {
 	logDebug("---------------------> New Ownership/Sale of Property - New REO");	
 	//Send a registration email ENF VAC REGISTRATION LETTER
@@ -330,7 +330,7 @@ if (wfTask == "New Ownership/Sale of Property" && wfStatus == "No County Info") 
     newDatePlus30 = dateAdd(null,30);
     editTaskDueDate("New Ownership/Sale of Property", newDatePlus30);
 }
-
+*/
 if (wfTask == "Check Ownership" && wfStatus == "Verify Vacant") {
 	logDebug("---------------------> Check Ownership - Verify Vacant");	
 	scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);		
