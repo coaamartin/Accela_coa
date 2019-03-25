@@ -82,7 +82,7 @@ try{
 } catch (err) {
 	logDebug("Failed to retrieve code area for code officer assignment: " + err.stack);
 };
-
+/*
 if (inspType == "Check Ownership" && inspResult == "Verify Vacant") {
 	logDebug("---------------------> Inspection Check Ownership - Verify Vacant");	
 	//insert inspection and assign to inspOfficer
@@ -120,18 +120,21 @@ if (inspType == "Check Ownership" && inspResult == "No Further Action") {
 		cancelInspections();	
 	}
 }
+*/
 
 if (inspType == "Vacant Property Pictures" && inspResult == "Not Vacant + Pics Taken") {
 	logDebug("---------------------> Inspection Vacant Property Pictures - Not Vacant + Pics Taken");	
-	cancelInspectionsByType("Check Ownership");		
-	scheduleInspection("Check Ownership", 1,inspectorObj); //, inspector, null, newInspReqComments);		
+	//cancelInspectionsByType("Check Ownership");		
+	//scheduleInspection("Check Ownership", 1,inspectorObj); //, inspector, null, newInspReqComments);		
 }
 if (inspType == "Vacant Property Pictures" && inspResult == "Reschedule") {
 	logDebug("---------------------> Inspection Vacant Property Pictures - Reschedule");	
 	cancelInspectionsByType("Vacant Property Pictures");		
 	scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);		
 }
-
+if (inspType == "Vacant Property Pictures" && inspResult == "Vacant") {
+	logDebug("---------------------> Inspection Vacant Property Pictures - Reschedule");		
+}
 logDebug("---------------------> 5089_VacantMasterIRSA.js ended.");
 //Script Tester footer.  Comment this out when deploying.
 //}	

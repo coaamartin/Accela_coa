@@ -31,6 +31,9 @@ logDebug("---------------------> At start of 5087 PRA");
 	var feeResult = aa.fee.getFeeItems(capId);
 	if (feeResult.getSuccess()) {
 		var feeObjArr = feeResult.getOutput();
+		if (!isTaskActive("Record Release of Assessment")) {
+			activateTask('Record Release of Assessment'); 
+		}		
 	} else {
 		logDebug("**ERROR: getting fee items: " + capContResult.getErrorMessage());
 	}
