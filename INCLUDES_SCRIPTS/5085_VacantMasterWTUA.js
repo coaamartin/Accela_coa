@@ -131,7 +131,7 @@ if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 	if (emailTemplate != null && emailTemplate != "") {
 		logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
 		eParams = aa.util.newHashtable();
-		//eParams.put("$$ContactEmail$$", "amartin@auroragov.org");			
+		eParams.put("$$ContactEmail$$", "");			
 		eParams.put("$$todayDate$$", todayDate);
 		eParams.put("$$altid$$",capId.getCustomID());
 		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
@@ -245,7 +245,7 @@ if (wfTask == "Renewal Registration" && wfStatus == "Sent Renewal") {
 		if (emailTemplate != null && emailTemplate != "") {
 			logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
 			eParams = aa.util.newHashtable();
-			//eParams.put("$$ContactEmail$$", "amartin@auroragov.org");			
+			eParams.put("$$ContactEmail$$", "");			
 			eParams.put("$$todayDate$$", todayDate);
 			eParams.put("$$altid$$",capId.getCustomID());
 			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
