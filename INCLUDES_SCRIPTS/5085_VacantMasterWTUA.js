@@ -136,7 +136,7 @@ if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 		eParams.put("$$altid$$",capId.getCustomID());
 		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-		emailContacts("Property Manager", emailTemplate, eParams, null, null, "Y");
+		emailContacts("All", emailTemplate, eParams, null, null, "Y");
 	}	
 }
 
