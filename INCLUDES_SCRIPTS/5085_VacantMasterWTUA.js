@@ -360,6 +360,8 @@ if (wfTask == "Check Ownership" && wfStatus == "New Ownership") {
 	closeAllTasks(capId, "Script 5089");
 	updateAppStatus("Closed", "Script 5089");
 	cancelInspections();	
+	//Try to force close this known task that pops open even after all the others close.
+	closeTask("Registration Payment Receipt","Closed","Updated by script COA #5085");
 }
 if (wfTask == "Check Ownership" && wfStatus == "Reschedule") {
 	logDebug("---------------------> Check Ownership - Reschedule");	
