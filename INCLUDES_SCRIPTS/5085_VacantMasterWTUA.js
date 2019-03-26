@@ -242,10 +242,10 @@ if (wfTask == "Renewal Registration" && wfStatus == "Sent Renewal") {
 		//generate email notices
 		var emailTemplate = "ENF VAC REGISTRATION LETTER";		
 		var todayDate = new Date();
-		if (emailTemplate != null && emailTemplate != "jwarthan@auroragov.org") {
+		if (emailTemplate != null && emailTemplate != "") {
 			logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
 			eParams = aa.util.newHashtable();
-			eParams.put("$$ContactEmail$$", "");			
+			eParams.put("$$ContactEmail$$", "jwarthan@auroragov.org");			
 			eParams.put("$$todayDate$$", todayDate);
 			eParams.put("$$altid$$",capId.getCustomID());
 			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
