@@ -62,9 +62,8 @@ logDebug("---------------------> At start of 5087 PRA");
 		}
 	}
 	if (vDelFee) {
-		logDebug("---------------------> Found Delinquent Fee.");	
-		activateTask("Record Release of Assessment");  
-		assignTask("Record Release of Assessment", "tburton");			
+		logDebug("---------------------> Found Delinquent Fee - Removing it.");	
+		if(feeExists("ENF_VAC_DEL1")) removeFee("ENF_VAC_DEL1", "FINAL");	
 	}
 	
 
