@@ -26,6 +26,9 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 logDebug("---------------------> At start of 5085 WTUA");	
+//I cannot get the async to work so using non-async by forcing env variable.
+aa.env.setValue("eventType","Batch Process");
+
 function cancelInspections() {
 	logDebug("---------------------> In the cancelInspections function");		
 	var inspResultObj = aa.inspection.getInspections(capId);
@@ -124,19 +127,19 @@ if (wfTask == "Send Registration" && wfStatus == "No Further Action") {
 }
 if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 	logDebug("---------------------> Send Registration - Registration Sent");	
-	aa.env.setValue("eventType","Batch Process");
+
 	//Send a registration email ENF VAC REGISTRATION LETTER
 	var emailTemplate = "ENF VAC REGISTRATION LETTER";		
 	var todayDate = new Date();
 	if (emailTemplate != null && emailTemplate != "") {
 		logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
 		eParams = aa.util.newHashtable();
-		eParams.put("$$ContactEmail$$", "amartin@auroragov");			
+		eParams.put("$$ContactEmail$$", "");			
 		eParams.put("$$todayDate$$", todayDate);
 		eParams.put("$$altid$$",capId.getCustomID());
 		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-		emailContacts("All", emailTemplate, eParams, null, null, "Y");
+		emailContacts("Property Manager", emailTemplate, eParams, null, null, "Y");
 	}	
 }
 
@@ -245,7 +248,7 @@ if (wfTask == "Renewal Registration" && wfStatus == "Sent Renewal") {
 		if (emailTemplate != null && emailTemplate != "") {
 			logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
 			eParams = aa.util.newHashtable();
-			eParams.put("$$ContactEmail$$", "amartin@auroragov.org");			
+			eParams.put("$$ContactEmail$$", "");			
 			eParams.put("$$todayDate$$", todayDate);
 			eParams.put("$$altid$$",capId.getCustomID());
 			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
