@@ -33,6 +33,7 @@ logDebug("---------------------> At start of 5087 PRA");
 		var feeObjArr = feeResult.getOutput();
 		if (!isTaskActive("Record Release of Assessment")) {
 			activateTask('Record Release of Assessment'); 
+			assignTask("Record Release of Assessment", "tburton");			
 		}		
 	} else {
 		logDebug("**ERROR: getting fee items: " + capContResult.getErrorMessage());
@@ -63,6 +64,7 @@ logDebug("---------------------> At start of 5087 PRA");
 	if (vDelFee) {
 		logDebug("---------------------> Found Delinquent Fee.");	
 		activateTask("Record Release of Assessment");  
+		assignTask("Record Release of Assessment", "tburton");			
 	}
 	
 

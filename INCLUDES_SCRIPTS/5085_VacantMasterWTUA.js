@@ -181,6 +181,7 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "Fee + Record Count
     newDatePlus90 = dateAdd(null,90);
 	activateTask("Apply Delinquent Registration");
 	editTaskDueDate("Apply Delinquent Registration", newDatePlus90);
+	assignTask("Apply Delinquent Registration", "rtorres");	
 }
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "New REO") {
 	logDebug("---------------------> Apply Delinquent Registration - New REO");	
@@ -233,6 +234,7 @@ if (wfTask == "Renewal Registration" && wfStatus == "Sent Renewal") {
 	//reopen task 91820 and set new due date
 	activateTask("Apply Delinquent Registration");
 	editTaskDueDate("Apply Delinquent Registration", renewalDate);
+	assignTask("Apply Delinquent Registration", "rtorres");		
     //update Renewal status and date
 	//logDebug("---------------------> Started setting renewal date and status ");		
     //    var vExpDate = new Date();
@@ -343,12 +345,14 @@ if (wfTask == "Check Ownership" && wfStatus == "New REO") {
 	logDebug("---------------------> Check Ownership - New REO");	
 	if (!isTaskActive("Send Registration")) {
 		activateTask('Send Registration'); 
+		assignTask("Send Registration", "rtorres");	
 	}
 }
 if (wfTask == "Check Ownership" && wfStatus == "Withdrawn") {
 	logDebug("---------------------> Check Ownership - Withdrawn");	
 	if (!isTaskActive("Check Ownership")) {
 		activateTask('Check Ownership'); 
+		assignTask("Check Ownership", "rtorres");	
 	}
 }
 if (wfTask == "Check Ownership" && wfStatus == "New Ownership") {
