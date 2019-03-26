@@ -112,6 +112,8 @@ if (wfTask == "Foreclosure Information" && wfStatus == "Closed Info Only") {
     updateAppStatus("Closed", "Closed Via Script 5085");
 	logDebug("---------------------> Foreclosure Information - Cancelling Inspections");		
 	cancelInspections();	
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");			
 	}
 }
 
@@ -122,7 +124,9 @@ if (wfTask == "Send Registration" && wfStatus == "No Further Action") {
 	{
 	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
-	cancelInspections();		
+	cancelInspections();	
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");			
 	}
 }
 if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
@@ -163,7 +167,9 @@ if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
 	logDebug("---------------------> Foreclosure Sale Result - Non-Bank Owner");	
 	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
-	cancelInspections();		
+	cancelInspections();	
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");			
 }
 
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "Registering") {
@@ -203,7 +209,9 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "New Ownership") {
 					//close all tasks and the record
 					closeAllTasks(capId, "Script 5085");
 					updateAppStatus("Closed", "Script 5085");	
-					cancelInspections();		
+					cancelInspections();	
+					var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+					rB1ExpResult.setExpStatus("Inactive");					
 				}
 			}
 
@@ -266,13 +274,17 @@ if (wfTask == "Renewal Registration" && wfStatus == "New Ownership") {
 	{
 		closeAllTasks(capId, "");
 		updateAppStatus("Closed", "Script 5085");	
-		cancelInspections();		
+		cancelInspections();	
+		var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+		rB1ExpResult.setExpStatus("Inactive");				
 	}	
 }
 
 if (wfTask == "Notice of Assessment" && wfStatus == "Not Recorded") {
 	logDebug("---------------------> Notice of Assessment - Not Recorded");	
 		closeAllTasks(capId, "Script 5085");
+		var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+		rB1ExpResult.setExpStatus("Inactive");				
 }
 if (wfTask == "Notice of Assessment" && wfStatus == "Record Reception") {
 	logDebug("---------------------> Notice of Assessment - Record Reception");	
@@ -290,6 +302,8 @@ if (wfTask == "Notice of Assessment" && wfStatus == "Record Reception") {
 if (wfTask == "Record Release of Assessment" && wfStatus == "Not Recorded") {
 	logDebug("---------------------> Record Release of Assessment - Not Recorded");	
 		closeAllTasks(capId, "Script 5085");
+		var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+		rB1ExpResult.setExpStatus("Inactive");				
 }
 if (wfTask == "Record Release of Assessment" && wfStatus == "Record Reception") {
 	logDebug("---------------------> Record Release of Assessment - Record Reception");	
@@ -299,7 +313,9 @@ if (wfTask == "Record Release of Assessment" && wfStatus == "Release All-Recepti
 	logDebug("---------------------> Record Release of Assessment - Release All-Reception");	
 	closeAllTasks(capId, "Script 5085");	
 	cancelInspections();			
-	updateAppStatus("Closed", "Script 5085");	
+	updateAppStatus("Closed", "Script 5085");
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");			
 }
 if (wfTask == "Record Release of Assessmentt" && wfStatus == "Submitted") {
 	logDebug("---------------------> Record Release of Assessment - Submitted");	
@@ -360,6 +376,8 @@ if (wfTask == "Check Ownership" && wfStatus == "New Ownership") {
 	closeAllTasks(capId, "Script 5089");
 	updateAppStatus("Closed", "Script 5089");
 	cancelInspections();	
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");			
 	//Try to force close these known tasks that pop open even after all the others close.
 	closeTask("Registration Payment Receipt","Closed","Updated by script COA #5085");
 	closeTask("Mail Receipt","Closed","Updated by script COA #5085");	
@@ -377,6 +395,8 @@ if (wfTask == "Check Ownership" && wfStatus == "No Further Action") {
 		closeAllTasks(capId, "Script 5089");
 		updateAppStatus("Closed", "Script 5089");	
 		cancelInspections();	
+		var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+		rB1ExpResult.setExpStatus("Inactive");				
 	}
 }
 		

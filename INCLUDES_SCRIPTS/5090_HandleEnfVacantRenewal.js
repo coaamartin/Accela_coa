@@ -103,6 +103,8 @@ function UpdateEnfVacParent() {
 							closeAllTasks(parentCapId, "Script 5086");
 							updateAppStatus("Closed", "Script 5086",parentCapId);	
 							cancelInspections(parentCapId);
+							var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+							rB1ExpResult.setExpStatus("Inactive");					
 						}
                 }
             }
