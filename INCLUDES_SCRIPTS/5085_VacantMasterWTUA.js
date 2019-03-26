@@ -250,7 +250,7 @@ if (wfTask == "Renewal Registration" && wfStatus == "Sent Renewal") {
 			eParams.put("$$altid$$",capId.getCustomID());
 			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 			logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-			emailContacts("Property Manager", emailTemplate, eParams, null, null, "Y");
+			emailContacts("Property Manager,Contact", emailTemplate, eParams, null, null, "Y");
 		}		
 	logDebug("---------------------> Completed setting renewal date and status ");				
 }
