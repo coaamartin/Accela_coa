@@ -5,4 +5,4 @@
 // BY: amartin
 // CHANGELOG: 
 logDebug("Calling 5087 script");
-//include("5087_VacantMasterPRA");
+include("5087_VacantMasterPRA");
