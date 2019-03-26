@@ -312,10 +312,11 @@ if (wfTask == "Record Release of Assessment" && wfStatus == "Record Reception") 
 if (wfTask == "Record Release of Assessment" && wfStatus == "Release All-Reception") {
 	logDebug("---------------------> Record Release of Assessment - Release All-Reception");	
 	closeAllTasks(capId, "Script 5085");	
-	cancelInspections();			
-	updateAppStatus("Closed", "Script 5085");
+	cancelInspections();	
 	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
-	rB1ExpResult.setExpStatus("Inactive");			
+	rB1ExpResult.setExpStatus("Inactive");		
+	updateAppStatus("Closed", "Script 5085");
+		
 }
 if (wfTask == "Record Release of Assessmentt" && wfStatus == "Submitted") {
 	logDebug("---------------------> Record Release of Assessment - Submitted");	
