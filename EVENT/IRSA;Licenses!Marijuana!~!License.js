@@ -9,6 +9,8 @@ Functional Area : Records
 
 */
 
+Include ("5000_CONF_LICENSES_INSPECTION_AUTOMATION");
+
 var vCapType;
 
 if (appMatch("Licenses/Marijuana/*/Application")) {
