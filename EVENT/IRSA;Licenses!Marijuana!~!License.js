@@ -9,7 +9,7 @@ Functional Area : Records
 
 */
 
-Include ("5000_CONF_LICENSES_INSPECTION_AUTOMATION");
+include("5000_CONF_LICENSES_INSPECTION_AUTOMATION");
 
 var vCapType;
 
