@@ -11,6 +11,9 @@ logDebug("5083 calling Email function");
 
 		sendEmailToGIS();
 }
+//Update the Expiration status to Active
+var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+rB1ExpResult.setExpStatus("Active");	
 
 function sendEmailToGIS(){
 		//generate email notices
