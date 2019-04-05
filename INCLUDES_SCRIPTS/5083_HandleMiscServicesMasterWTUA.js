@@ -10,6 +10,7 @@ logDebug("At start of 5083_HandleMiscServicesMasterWTUA.js");
 //Update the Expiration status to Active
 var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
 rB1ExpResult.setExpStatus("Active");	
+aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
 
 if (wfTask == "Email GIS" && wfStatus == "Email Sent") {
 logDebug("5083 calling Email function");	 
