@@ -34,7 +34,7 @@ logDebug("5082 inside if");
 		// Set record expiration to active
 		vLicenseObj.setStatus("Active");
 		// set parent record status to Active
-		updateAppStatus("Pending", "Updated by 5082_HandleMiscServicesNARenewal.js", vLicenseID);
+		updateAppStatus("Active", "Updated by 5082_HandleMiscServicesNARenewal.js", vLicenseID);
 	}
 	//Set renewal to Renewed status.
 	updateAppStatus("Renewed", "Updated by 5082_HandleMiscServicesNARenewal.js", capId);
