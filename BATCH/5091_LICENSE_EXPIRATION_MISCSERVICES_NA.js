@@ -403,6 +403,13 @@ function mainProcess() {
 		if (newAppStatus && newAppStatus != "") {
 			updateAppStatus(String(newAppStatus), "Updated by batch " + batchJobName)
 		}
+		
+		// update the Master Renewal date to today so the clock starts ticking on the 30 day notice and final notice.
+		logDebug("Set renewal date to todays date");		
+        var vNewExpDate = new Date();
+        var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+        rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+        aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());			
 
 		// Create the renewal record. Fires the ASA event for the renewal record.
 		if (createRenewalRecord) {
