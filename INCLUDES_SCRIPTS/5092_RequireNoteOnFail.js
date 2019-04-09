@@ -8,6 +8,7 @@ logDebug('Started script 5092_RequireNoteOnFail');
 
 if (wfStatus == "Fail") //There is only 1 WFStep so no reason to check
 {
+   logDebug(wfComment); 
    
    if (wfComment == "" || wfComment == null)
    {   
