@@ -21,7 +21,9 @@ if (wfStatus == "Fail") //There is only 1 WFStep so no reason to check
    cancel = true;
    
    }
+   // JMP
    else
+      
    {
       
     logDebug(inspResultComment);  
