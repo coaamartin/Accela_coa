@@ -4,11 +4,11 @@
 // DATECREATED: 04/09/2019
 // BY: JMP
 
-logdebug('Started script 5092_RequireNoteOnFail');
+logDebug('Started script 5092_RequireNoteOnFail');
 
 if (WfTask== "Inspection-" && wfStatus == "Fail") 
 {
-   logdebug('Within logic loop with Fail');
+   logDebug('Within logic loop with Fail');
 }  
 
-logdebug('Ended script 5092_RequireNoteOnFail');
+logDebug('Ended script 5092_RequireNoteOnFail');
