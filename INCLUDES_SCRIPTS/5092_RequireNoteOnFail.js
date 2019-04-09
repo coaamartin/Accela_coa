@@ -4,8 +4,8 @@
 // DATECREATED: 04/09/2019
 // BY: JMP
 
-var inspResultComment = getInspectionComments();
-//var inspResultComment = inspComment;
+//var inspResultComment = getInspectionComments();
+var inspResultComment = inspComment;
 
 logDebug('Started script 5092_RequireNoteOnFail');
 
