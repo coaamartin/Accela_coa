@@ -4,11 +4,19 @@
 // DATECREATED: 04/09/2019
 // BY: JMP
 
+var inspResultComment = inspObj.getInspectionComments();
+
 logDebug('Started script 5092_RequireNoteOnFail');
 
-if (wfStatus == "Fail") 
+if (wfStatus == "Fail") //There is only 1 WFStep so no reason to check
 {
-   logDebug('Within logic loop with Fail');
+   
+   if (inspResultComment = "" || inspResultComment = null)
+   {      
+   logDebug('Comments are required when a status of Fail has been indicated');
+   comment("<B><Font Color=RED>Comments are required when a status of Fail has been indicated </Font></B>");
+   cancel = true;
+   }
 }  
 
 logDebug('Ended script 5092_RequireNoteOnFail');
