@@ -4,13 +4,15 @@
 // DATECREATED: 04/09/2019
 // BY: JMP
 
+var wfComment = "";
+
 logDebug('Started script 5092_RequireNoteOnFail');
 
 if (wfStatus == "Fail") //There is only 1 WFStep so no reason to check
 {
-   logDebug(wfComment); 
+   logDebug(wfComment.text); 
    
-   if (wfComment == "" || wfComment == null)
+   if (wfComment == null || typeof wfComment == 'undefined') 
    {   
 
    logDebug('Comments are required when a status of Fail has been indicated');
