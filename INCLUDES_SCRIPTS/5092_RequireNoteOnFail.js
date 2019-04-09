@@ -6,7 +6,7 @@
 
 logDebug('Started script 5092_RequireNoteOnFail');
 
-if (wfTask== "Inspection-" && wfStatus == "Fail") 
+if (wfStatus == "Fail") 
 {
    logDebug('Within logic loop with Fail');
 }  
