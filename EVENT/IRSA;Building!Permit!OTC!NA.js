@@ -1,4 +1,4 @@
-//
+// 4-8-19 created for OTC
 bldScript6_FinalInspComplete();
 
 include("66_Building_Inspection_Failed_Passed_Final");
