@@ -4,15 +4,12 @@
 // DATECREATED: 04/09/2019
 // BY: JMP
 
-//var inspResultComment = getInspectionComments();
-var inspResultComment = inspComment;
-
 logDebug('Started script 5092_RequireNoteOnFail');
 
 if (wfStatus == "Fail") //There is only 1 WFStep so no reason to check
 {
    
-   if (inspResultComment == "" || inspResultComment == null)
+   if (wfComment == "" || wfComment == null)
    {   
 
    logDebug('Comments are required when a status of Fail has been indicated');
@@ -26,7 +23,7 @@ if (wfStatus == "Fail") //There is only 1 WFStep so no reason to check
       
    {
       
-    logDebug(inspResultComment);  
+    logDebug(wfComment);  
       
    }
 }  
