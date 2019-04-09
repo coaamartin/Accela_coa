@@ -112,9 +112,9 @@ try {
 	vEmailTo = "noreply@auroragov.org"; //Testing Only
 	vEmailCC = ""; //Testing Only
 
-	if (aa.env.getValue("FromEmail") != null && aa.env.getValue("FromEmail") != "") {
-		vEmailFrom = aa.env.getValue("FromEmail");
-	}
+	//if (aa.env.getValue("FromEmail") != null && aa.env.getValue("FromEmail") != "") {
+	//	vEmailFrom = aa.env.getValue("FromEmail");
+	//}
 	if (aa.env.getValue("ToEmail") != null && aa.env.getValue("ToEmail") != "") {
 		vEmailTo = aa.env.getValue("ToEmail");
 	}
