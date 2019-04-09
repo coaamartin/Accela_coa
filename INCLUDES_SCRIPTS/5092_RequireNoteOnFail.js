@@ -14,7 +14,7 @@ if (wfStatus == "Fail") //There is only 1 WFStep so no reason to check
    if (inspResultComment = "" || inspResultComment = null)
    {      
    logDebug('Comments are required when a status of Fail has been indicated');
-   comment("<B><Font Color=RED>Comments are required when a status of Fail has been indicated </Font></B>");
+   //comment("<B><Font Color=RED>Comments are required when a status of Fail has been indicated </Font></B>");
    cancel = true;
    }
 }  
