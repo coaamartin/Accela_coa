@@ -5,7 +5,7 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000002-CVM";
+//var myCapId = "19-000032-CVM";
 //var myUserId = "AMARTIN";
 //var eventName = "ApplicationSpecificInfoUpdateAfter";
 //var wfTask = "Foreclosure Information";
@@ -31,9 +31,20 @@ logDebug("---------------------> At start of 5087 PRA");
 	var feeResult = aa.fee.getFeeItems(capId);
 	if (feeResult.getSuccess()) {
 		var feeObjArr = feeResult.getOutput();
+		if (!isTaskActive("Record Release of Assessment")) {
+			activateTask('Record Release of Assessment'); 
+			assignTask("Record Release of Assessment", "tburton");			
+		}		
 	} else {
 		logDebug("**ERROR: getting fee items: " + capContResult.getErrorMessage());
 	}
+		var feeArray = ["ENF_VAC_DEL1"];
+        
+		for(j in feeArray){
+            var aFee = feeArray[j];
+            if(feeExists(aFee)) removeFee(aFee, "FINAL");
+        }	
+	/*
 	var vDelFee;
 	var ff = 0;
 	//loop through fee items
@@ -58,10 +69,10 @@ logDebug("---------------------> At start of 5087 PRA");
 		}
 	}
 	if (vDelFee) {
-		logDebug("---------------------> Found Delinquent Fee.");	
-		activateTask("Record Release of Assessment");  
+		logDebug("---------------------> Found Delinquent Fee - Removing it.");	
+		if(feeExists("ENF_VAC_DEL1")) removeFee("ENF_VAC_DEL1", "FINAL");	
 	}
-	
+*/	
 
 logDebug("---------------------> 5087_VacantMasterPRA.js ended.");
 //Script Tester footer.  Comment this out when deploying.

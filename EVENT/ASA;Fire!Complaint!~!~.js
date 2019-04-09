@@ -39,8 +39,9 @@ if (x && x.length > 0) {
 }
 else{
 	comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
+   closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
 	scheduleInspection("FD Complaint Inspection",0);
 }
 
 logDebug("Script 186 END");
-aa.sendMail("eric@esilverliningsolutions.com", "eric@esilverliningsolutions.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+// aa.sendMail("eric@esilverliningsolutions.com", "eric@esilverliningsolutions.com", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);

@@ -9,6 +9,7 @@
 | Created at	: 05/02/2018 08:28:24
 |
 /------------------------------------------------------------------------------------------------------*/
-if ( (wfTask=="City Application Intake" || wfTask=="State Application Intake" || wfTask=="Application Review") && wfStatus=="Additional Info Required"){
-	sendEmail210();
+if ( (wfTask=="City Application Intake" || wfTask=="State Application Intake" || wfTask=="Application Review") && wfStatus=="Additional Info Required")
+{
+	include("210_SendMJEmail");
 }

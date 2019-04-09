@@ -5,12 +5,12 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000002-CVM";
+//var myCapId = "19-000021-CVR";
 //var myUserId = "AMARTIN";
 //var eventName = "ApplicationSpecificInfoUpdateAfter";
 //var wfTask = "Foreclosure Information";
 //var wfStatus = "NED/REO Recorded";
-//var AInfo = "Reopen Foreclosure task";
+//var AInfo = "Unregister";
 //var wfComment = "";
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
@@ -36,9 +36,13 @@ if ((AInfo["Reopen Foreclosure Process"] == "Yes"))
 {
 	logDebug("Within code block to reopen foreclosure Process");
 	activateTask("Foreclosure Information");   
+	assignTask("Foreclosure Information", "rtorres");		
 	editAppSpecific("Reopen Foreclosure Process", "N");	
+	editAppSpecific("Unregister", "");	
+	updateAppStatus("Monitoring", "Script 5086");		
+	
 }
-if (!isEmptyOrNull(AInfo["Unregister"]))
+if (AInfo["Unregister"] == "Yes")
 {
 	logDebug("Within code block to check date");
 	closeAllTasks(capId, "Script 5086");
@@ -49,12 +53,14 @@ if ((AInfo["Record with County"] == "Record Assessment"))
 {
 	logDebug("Within code block to record assessment");
 	activateTask("Notice of Assessment");   
+	assignTask("Notice of Assessment", "tburton");		
 	editAppSpecific("Record with County", null);
 }
 if ((AInfo["Record with County"] == "Release of Assessment"))
 {
 	logDebug("Within code block to release assessment");
 	activateTask("Record Release of Assessment");   
+	assignTask("Record Release of Assessment", "tburton");			
 	editAppSpecific("Record with County", null);
 }
 

@@ -5,9 +5,9 @@
 // BY: amartin
 // CHANGELOG: 
 
-logDebug("At start of 5090 outside if");	 
+logDebug("At start of 5090");	 
 if (wfTask == "Review Application" && wfStatus == "Complete") {
-logDebug("5090 inside if");	 
+logDebug("5090 Review Application - Complete");	 
 
 	var vLicenseID;
 	var vIDArray;
@@ -50,7 +50,20 @@ logDebug("5090 inside if");
 	//script84_SendRenewalEmailWhenPermitIssuedComplete();
 	UpdateEnfVacParent();	
 }
-
+function cancelInspections(theCapID) {
+	logDebug("---------------------> In the cancelInspections function");		
+	var inspResultObj = aa.inspection.getInspections(theCapID);
+	if (inspResultObj.getSuccess()) {
+		inspList = inspResultObj.getOutput();
+		for (xx in inspList) {
+			var inspId = inspList[xx].getIdNumber();
+			var res=aa.inspection.cancelInspection(theCapID, inspId);
+			if (res.getSuccess()){
+				aa.debug("Inspection Cancelled" , inspId);
+			}
+		}
+	}
+}	
 function UpdateEnfVacParent() {
 	logDebug("5090_HandleEnfVacantRenewal.js started.");
 	try{
@@ -84,14 +97,23 @@ function UpdateEnfVacParent() {
                     copyParcels(capId, parentCapId);
                     editAppName(childCapScriptModel.specialText, parentCapId);
 					//closeTask("Review Application", "Complete", "Closed by Script 5090");
+					if (ifTracer(AInfo["Unregister"] == "Yes"))
+						{
+							logDebug("Within code block to check date");
+							closeAllTasks(parentCapId, "Script 5086");
+							updateAppStatus("Closed", "Script 5086",parentCapId);	
+							cancelInspections(parentCapId);
+							var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+							rB1ExpResult.setExpStatus("Inactive");					
+						}
                 }
             }
  		//}
 	}
 	catch(err){
 		showMessage = true;
-		comment("Error on custom function “5090_HandleEnfVacantRenewal.js. Please contact administrator. Err: " + err);
-		logDebug("Error on custom function “5090_HandleEnfVacantRenewal.js. Please contact administrator. Err: " + err);
+		comment("Error on custom function 5090_HandleEnfVacantRenewal.js. Please contact administrator. Err: " + err);
+		logDebug("Error on custom function 5090_HandleEnfVacantRenewal.js. Please contact administrator. Err: " + err);
 	}
 }
 	logDebug("5090_HandleEnfVacantRenewal.js ended.");

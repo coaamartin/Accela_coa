@@ -5,11 +5,11 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000003-CVM";
+//var myCapId = "19-000022-CVM";
 //var myUserId = "AMARTIN";
 //var eventName = "";
-//var wfTask = "Foreclosure Information";
-//var wfStatus = "Closed Info Only";
+//var wfTask = "Renewal Registration";
+//var wfStatus = "Sent Renewal";
 //var wfComment = "";
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
@@ -26,6 +26,9 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 logDebug("---------------------> At start of 5085 WTUA");	
+//I cannot get the async to work so using non-async by forcing env variable.
+aa.env.setValue("eventType","Batch Process");
+
 function cancelInspections() {
 	logDebug("---------------------> In the cancelInspections function");		
 	var inspResultObj = aa.inspection.getInspections(capId);
@@ -57,6 +60,16 @@ try{
 	logDebug("Failed to retrieve code area for code officer assignment: " + err.stack);
 };
 
+if (wfTask == "Foreclosure Information") {
+    //update Renewal status and date
+	logDebug("---------------------> Started setting renewal date and status ");		
+        var vExpDate = new Date();
+        var vNewExpDate = new Date(vExpDate.getFullYear() + 0, vExpDate.getMonth(), vExpDate.getDate());
+        var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+        rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+        rB1ExpResult.setExpStatus("About to Expire");
+        aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
+}
 if (wfTask == "Foreclosure Information" && wfStatus == "NED/REO Recorded") {
 	logDebug("---------------------> Foreclosure Information - NED/REO Recorded");	
 	if ((AInfo["Dwelling Units"] == "5+ MF")) {
@@ -99,6 +112,8 @@ if (wfTask == "Foreclosure Information" && wfStatus == "Closed Info Only") {
     updateAppStatus("Closed", "Closed Via Script 5085");
 	logDebug("---------------------> Foreclosure Information - Cancelling Inspections");		
 	cancelInspections();	
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");			
 	}
 }
 
@@ -109,19 +124,21 @@ if (wfTask == "Send Registration" && wfStatus == "No Further Action") {
 	{
 	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
-	cancelInspections();		
+	cancelInspections();	
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");			
 	}
 }
 if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 	logDebug("---------------------> Send Registration - Registration Sent");	
-	aa.env.setValue("eventType","Batch Process");
+
 	//Send a registration email ENF VAC REGISTRATION LETTER
 	var emailTemplate = "ENF VAC REGISTRATION LETTER";		
 	var todayDate = new Date();
 	if (emailTemplate != null && emailTemplate != "") {
 		logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
 		eParams = aa.util.newHashtable();
-		eParams.put("$$ContactEmail$$", "amartin@auroragov.org");			
+		eParams.put("$$ContactEmail$$", "");			
 		eParams.put("$$todayDate$$", todayDate);
 		eParams.put("$$altid$$",capId.getCustomID());
 		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
@@ -143,14 +160,16 @@ if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
 	if (inspRes.getSuccess())
 		{var inspectorObj = inspRes.getOutput();}
 	}
-	scheduleInspection("Check Ownership", 3,inspectorObj); //, inspector, null, newInspReqComments);	
+	//scheduleInspection("Check Ownership", 3,inspectorObj); //, inspector, null, newInspReqComments);	
 }
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
 	logDebug("---------------------> Foreclosure Sale Result - Non-Bank Owner");	
 	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
-	cancelInspections();		
+	cancelInspections();	
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");			
 }
 
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "Registering") {
@@ -168,6 +187,7 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "Fee + Record Count
     newDatePlus90 = dateAdd(null,90);
 	activateTask("Apply Delinquent Registration");
 	editTaskDueDate("Apply Delinquent Registration", newDatePlus90);
+	assignTask("Apply Delinquent Registration", "rtorres");	
 }
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "New REO") {
 	logDebug("---------------------> Apply Delinquent Registration - New REO");	
@@ -189,7 +209,9 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "New Ownership") {
 					//close all tasks and the record
 					closeAllTasks(capId, "Script 5085");
 					updateAppStatus("Closed", "Script 5085");	
-					cancelInspections();		
+					cancelInspections();	
+					var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+					rB1ExpResult.setExpStatus("Inactive");					
 				}
 			}
 
@@ -220,6 +242,30 @@ if (wfTask == "Renewal Registration" && wfStatus == "Sent Renewal") {
 	//reopen task 91820 and set new due date
 	activateTask("Apply Delinquent Registration");
 	editTaskDueDate("Apply Delinquent Registration", renewalDate);
+	assignTask("Apply Delinquent Registration", "rtorres");		
+    //update Renewal status and date
+	//logDebug("---------------------> Started setting renewal date and status ");		
+    //    var vExpDate = new Date();
+    //    var vNewExpDate = new Date(vExpDate.getFullYear() + 0, vExpDate.getMonth(), vExpDate.getDate());
+    //    var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+    //    rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+    //    rB1ExpResult.setExpStatus("About to Expire");
+    //    aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
+	//Send a registration email ENF VAC REGISTRATION LETTER
+		//generate email notices
+		var emailTemplate = "ENF VAC REGISTRATION LETTER";		
+		var todayDate = new Date();
+		if (emailTemplate != null && emailTemplate != "") {
+			logDebug("5085 sending Registration letter.  Defaulting to contact Property Manager.");	
+			eParams = aa.util.newHashtable();
+			eParams.put("$$ContactEmail$$", "");			
+			eParams.put("$$todayDate$$", todayDate);
+			eParams.put("$$altid$$",capId.getCustomID());
+			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+			logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+			emailContacts("Property Manager", emailTemplate, eParams, null, null, "Y");
+		}		
+	logDebug("---------------------> Completed setting renewal date and status ");				
 }
 if (wfTask == "Renewal Registration" && wfStatus == "New Ownership") {
 	logDebug("---------------------> Renewal Registration - New Ownership");	
@@ -228,30 +274,36 @@ if (wfTask == "Renewal Registration" && wfStatus == "New Ownership") {
 	{
 		closeAllTasks(capId, "");
 		updateAppStatus("Closed", "Script 5085");	
-		cancelInspections();		
+		cancelInspections();	
+		var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+		rB1ExpResult.setExpStatus("Inactive");				
 	}	
 }
 
 if (wfTask == "Notice of Assessment" && wfStatus == "Not Recorded") {
 	logDebug("---------------------> Notice of Assessment - Not Recorded");	
 		closeAllTasks(capId, "Script 5085");
+		var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+		rB1ExpResult.setExpStatus("Inactive");				
 }
 if (wfTask == "Notice of Assessment" && wfStatus == "Record Reception") {
 	logDebug("---------------------> Notice of Assessment - Record Reception");	
 	var sysDate = aa.date.getCurrentDate();
 	dueDate = dateFormatted('10', '31', sysDate.getYear(), "");
 	//reopen task Assess to County and set new due date
-	activateTask("Assess to County ");
+	//activateTask("Assess to County ");
 	editTaskDueDate("Assess to County", dueDate);
 }
-if (wfTask == "Notice of Assessment" && wfStatus == "Submitted") {
-	logDebug("---------------------> Notice of Assessment - Submitted");	
-	updateTask("Notice of Assessment","Submitted","Updated by script COA #5085","Updated by script COA #5085");
-}
+//if (wfTask == "Notice of Assessment" && wfStatus == "Submitted") {
+//	logDebug("---------------------> Notice of Assessment - Submitted");	
+//	updateTask("Notice of Assessment","Submitted","Updated by script COA #5085","Updated by script COA #5085");
+//}
 
 if (wfTask == "Record Release of Assessment" && wfStatus == "Not Recorded") {
 	logDebug("---------------------> Record Release of Assessment - Not Recorded");	
 		closeAllTasks(capId, "Script 5085");
+		var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+		rB1ExpResult.setExpStatus("Inactive");				
 }
 if (wfTask == "Record Release of Assessment" && wfStatus == "Record Reception") {
 	logDebug("---------------------> Record Release of Assessment - Record Reception");	
@@ -259,13 +311,18 @@ if (wfTask == "Record Release of Assessment" && wfStatus == "Record Reception") 
 }
 if (wfTask == "Record Release of Assessment" && wfStatus == "Release All-Reception") {
 	logDebug("---------------------> Record Release of Assessment - Release All-Reception");	
-	updateAppStatus("Closed", "Script 5085");	
+	closeAllTasks(capId, "Script 5085");	
+	cancelInspections();	
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");		
+	updateAppStatus("Closed", "Script 5085");
+		
 }
 if (wfTask == "Record Release of Assessmentt" && wfStatus == "Submitted") {
 	logDebug("---------------------> Record Release of Assessment - Submitted");	
 	updateTask("Record Release of Assessment","Submitted","Updated by script COA #5085","Updated by script COA #5085");
 }
-
+/* Turns out this is simply not used in Amanda
 if (wfTask == "New Ownership/Sale of Property" && wfStatus == "New REO") {
 	logDebug("---------------------> New Ownership/Sale of Property - New REO");	
 	//Send a registration email ENF VAC REGISTRATION LETTER
@@ -294,6 +351,54 @@ if (wfTask == "New Ownership/Sale of Property" && wfStatus == "No County Info") 
 	var taskDueDate = getTaskDueDate("New Ownership/Sale of Property");
     newDatePlus30 = dateAdd(null,30);
     editTaskDueDate("New Ownership/Sale of Property", newDatePlus30);
+}
+*/
+if (wfTask == "Check Ownership" && wfStatus == "Verify Vacant") {
+	logDebug("---------------------> Check Ownership - Verify Vacant");	
+	scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);		
+	//scheduleInspection("Check Ownership", 3,inspectorObj); //, inspector, null, newInspReqComments);		
+}
+if (wfTask == "Check Ownership" && wfStatus == "New REO") {
+	logDebug("---------------------> Check Ownership - New REO");	
+	if (!isTaskActive("Send Registration")) {
+		activateTask('Send Registration'); 
+		assignTask("Send Registration", "rtorres");	
+	}
+}
+if (wfTask == "Check Ownership" && wfStatus == "Withdrawn") {
+	logDebug("---------------------> Check Ownership - Withdrawn");	
+	if (!isTaskActive("Check Ownership")) {
+		activateTask('Check Ownership'); 
+		assignTask("Check Ownership", "rtorres");	
+	}
+}
+if (wfTask == "Check Ownership" && wfStatus == "New Ownership") {
+	logDebug("---------------------> Check Ownership - New Ownership");	
+	closeAllTasks(capId, "Script 5089");
+	updateAppStatus("Closed", "Script 5089");
+	cancelInspections();	
+	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+	rB1ExpResult.setExpStatus("Inactive");			
+	//Try to force close these known tasks that pop open even after all the others close.
+	closeTask("Registration Payment Receipt","Closed","Updated by script COA #5085");
+	closeTask("Mail Receipt","Closed","Updated by script COA #5085");	
+}
+if (wfTask == "Check Ownership" && wfStatus == "Reschedule") {
+	logDebug("---------------------> Check Ownership - Reschedule");	
+	var taskDueDate = getTaskDueDate("Check Ownership");
+    newDatePlus30 = dateAdd(null,30);
+    editTaskDueDate("Check Ownership", newDatePlus30);	
+}
+if (wfTask == "Check Ownership" && wfStatus == "No Further Action") {
+	logDebug("---------------------> Check Ownership - No Further Action");	
+	var capStatus = cap.getCapStatus();	
+	if (capStatus != 'Recorded'){
+		closeAllTasks(capId, "Script 5089");
+		updateAppStatus("Closed", "Script 5089");	
+		cancelInspections();	
+		var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+		rB1ExpResult.setExpStatus("Inactive");				
+	}
 }
 		
 logDebug("---------------------> 5085_VacantMasterWTUA.js ended.");

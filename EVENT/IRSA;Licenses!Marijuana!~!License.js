@@ -9,6 +9,8 @@ Functional Area : Records
 
 */
 
+// include("5000_CONF_LICENSES_INSPECTION_AUTOMATION");  - NO good .. doesn't like JSON format
+
 var vCapType;
 
 if (appMatch("Licenses/Marijuana/*/Application")) {
