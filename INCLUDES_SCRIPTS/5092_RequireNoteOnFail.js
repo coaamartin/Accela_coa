@@ -6,6 +6,10 @@
 
 logDebug('Started script 5092_RequireNoteOnFail');
 
+var currentstatuscomment = wfComment + "";
+
+logDebug(currentstatuscomment);
+
 if (wfStatus == "Fail" && wfTask == "Inspection") //There is only 1 WFStep so no reason to check wfTask however included for future changes
 {
   
