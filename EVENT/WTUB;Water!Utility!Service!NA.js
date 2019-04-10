@@ -3,6 +3,6 @@
 // DATECREATED: 4/9/2019
 // BY: JMP
 
-//include("5092_RequireNoteOnFail");
+include("5092_RequireNoteOnFail");
 
-logDebug('Removing call for SCRIPT#5092');
+//logDebug('Removing call for SCRIPT#5092');
