@@ -10,7 +10,8 @@ var wfObj = workflowResult.getOutput();
 
 for (i in wfObj)
 {
-  logDebug(wfObj][i].Text);   
+  var fTask = wfObj[i];
+  logDebug(fTask.Name.Text); 
 }
 
 if (wfStatus == "Fail" && wfTask == "Inspection") //There is only 1 WFStep so no reason to check
