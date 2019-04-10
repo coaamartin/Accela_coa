@@ -6,15 +6,7 @@
 
 logDebug('Started script 5092_RequireNoteOnFail');
 
-var wfObj = workflowResult.getOutput();
-
-for (i in wfObj)
-{
-  var fTask = wfObj[i];
-  logDebug(fTask.Name.Text); 
-}
-
-if (wfStatus == "Fail" && wfTask == "Inspection") //There is only 1 WFStep so no reason to check
+if (wfStatus == "Fail" && wfTask == "Inspection") //There is only 1 WFStep so no reason to check wfTask however included for future changes
 {
   
    if (wfComment != null && typeof wfComment !== 'undefined')       
