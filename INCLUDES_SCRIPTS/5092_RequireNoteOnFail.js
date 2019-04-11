@@ -30,7 +30,7 @@ if (wfStatus == "Fail" && wfTask == "Inspection") //There is only 1 WFStep so no
       
    // logDebug(wfComment);  
       
-   }
+   //}
 
    closeTask("Inspection", "Completed", "EMSE ID 5092", "EMSE ID 5092");
 }  
