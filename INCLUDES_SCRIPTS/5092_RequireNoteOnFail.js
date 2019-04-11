@@ -10,7 +10,7 @@ if (wfStatus == "Fail" && wfTask == "Inspection") //There is only 1 WFStep so no
 {
    
   
-   if (typeof wfComment !== 'undefined')      // Ojbect will not exist if blank  
+   if (typeof wfComment !== 'undefined' || wfComment == null)      // Ojbect will not exist if blank  
    {
 
      logDebug('Script#5092 - Comments were not provided when the status of Fail had been indicated');
