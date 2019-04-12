@@ -26,20 +26,19 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 //functions cannot start with a number so I preceded it with func_
-		logDebug("---------------------> right before function.");
-		func_5097_Enforcement_check4Dups();
+func_5097_Enforcement_check4Dups();
+
 function func_5097_Enforcement_check4Dups() {
-			logDebug("---------------------> right before try.");
-		        var possibleDupAltIds = "";	
+	var possibleDupAltIds = "";	
     try{
-		logDebug("---------------------> starting here.");
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
             if(!capAddResult.getSuccess()) return;
             logDebug("---------------------> Found a cap.");
             var capIdArray = capAddResult.getOutput();
-            
+                        logDebug("---------------------> capIdArray: " + capIdArray);
             for (cappy in capIdArray){
                 var relCapId = capIdArray[cappy].getCapID();
+			                        logDebug("---------------------> inside for loop.  relCapId is: " + relCapId);	
                 var relCap = aa.cap.getCap(relCapId).getOutput();
                 // get cap type
                 var relType = relCap.getCapType().toString();
@@ -47,7 +46,8 @@ function func_5097_Enforcement_check4Dups() {
                 //Add new blocks here for other records.
                 if(relType.startsWith("Enforcement/Incident/Vacant/Master") && matches(relStatus, "Application","Monitoring","Recorded","Recorded and Assessed","Recorded and Expired","Registered","Registered and Expired","Registered and Recorded")){
                     possibleDupAltIds += relCapId.getCustomID() + ",";
-                }
+                        logDebug("---------------------> inside If that matches on record and status  " + relType.startsWith); 
+ }
             }
             
             if(possibleDupAltIds.length > 0){
