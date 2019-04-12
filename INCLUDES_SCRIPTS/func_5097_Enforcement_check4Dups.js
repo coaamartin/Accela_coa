@@ -30,6 +30,7 @@ User code generally goes inside the try block below.
 		func_5097_Enforcement_check4Dups();
 function func_5097_Enforcement_check4Dups() {
 			logDebug("---------------------> right before try.");
+		        var possibleDupAltIds = "";	
     try{
 		logDebug("---------------------> starting here.");
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
