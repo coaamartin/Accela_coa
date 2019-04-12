@@ -32,6 +32,7 @@ function func_5097_Enforcement_check4Dups() {
 	var possibleDupAltIds = "";	
     try{
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
+			logDebug("---------------------> var capAddResult is: " + capAddResult);		
             if(!capAddResult.getSuccess()) return;
             logDebug("---------------------> Found a cap.");
             var capIdArray = capAddResult.getOutput();
