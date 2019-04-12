@@ -1,3 +1,4 @@
+aa.env.setValue("eventType","Batch Process");
 function 5097_Enforcement_check4Dups(){
     try{
         //var checkForDups = AInfo["Check for Duplicates"];
