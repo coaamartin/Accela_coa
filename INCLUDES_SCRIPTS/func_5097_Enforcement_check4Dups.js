@@ -26,7 +26,9 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 //functions cannot start with a number so I preceded it with func_
+		logDebug("---------------------> right before function.");
 function func_5097_Enforcement_check4Dups() {
+			logDebug("---------------------> right before try.");
     try{
 		logDebug("---------------------> starting here.");
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
@@ -53,6 +55,7 @@ function func_5097_Enforcement_check4Dups() {
             }
     }
     catch(err){
+				logDebug("---------------------> caught error.");
         showMessage = true;
         comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
         logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
