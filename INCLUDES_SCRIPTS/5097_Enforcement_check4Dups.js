@@ -25,16 +25,9 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-function a5097_Enforcement_check4Dups() {
-	logDebug("---------------------> 5097_Enforcement_check4Dups.js ended.");
-}
-	
-	/*
+//functions cannot start with a number so I preceded it with func_
+function func_5097_Enforcement_check4Dups() {
     try{
-        //var checkForDups = AInfo["Check for Duplicates"];
-        //var possibleDupAltIds = "";
-        
-        //if(ifTracer(checkForDups == "CHECKED", 'Checking for duplicates')){
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
             if(!capAddResult.getSuccess()) return;
             
@@ -57,7 +50,6 @@ function a5097_Enforcement_check4Dups() {
                 showMessage = true;
                 comment("Possible duplicates: " + possibleDupAltIds.substring(0, possibleDupAltIds.length -1));
             }
-        //}
     }
     catch(err){
         showMessage = true;
@@ -66,7 +58,7 @@ function a5097_Enforcement_check4Dups() {
     }
 }
 logDebug("---------------------> 5097_Enforcement_check4Dups.js ended.");
-*/
+
 //Script Tester footer.  Comment this out when deploying.
 //}	
 
