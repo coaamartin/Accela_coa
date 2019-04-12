@@ -26,7 +26,11 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 
-function 5097_Enforcement_check4Dups((){
+function 5097_Enforcement_check4Dups(){
+	logDebug("---------------------> 5097_Enforcement_check4Dups.js ended.");
+}
+	
+	/*
     try{
         //var checkForDups = AInfo["Check for Duplicates"];
         //var possibleDupAltIds = "";
@@ -63,6 +67,7 @@ function 5097_Enforcement_check4Dups((){
     }
 }
 logDebug("---------------------> 5097_Enforcement_check4Dups.js ended.");
+*/
 //Script Tester footer.  Comment this out when deploying.
 //}	
 
