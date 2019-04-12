@@ -1,2 +1,2 @@
 logDebug("ASB:Enforcement/Incident/Vacant/Master");
-5097_Enforcement_check4Dups();
+include("5097_Enforcement_check4Dups");
