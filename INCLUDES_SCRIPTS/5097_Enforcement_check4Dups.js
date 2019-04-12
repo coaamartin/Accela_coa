@@ -25,7 +25,8 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-function 5097_Enforcement_check4Dups(capId){
+var myCapId = capId;
+function 5097_Enforcement_check4Dups(myCapId){
     try{
         //var checkForDups = AInfo["Check for Duplicates"];
         //var possibleDupAltIds = "";
