@@ -27,6 +27,7 @@ User code generally goes inside the try block below.
 //End script Tester header 
 //functions cannot start with a number so I preceded it with func_
 		logDebug("---------------------> right before function.");
+		func_5097_Enforcement_check4Dups();
 function func_5097_Enforcement_check4Dups() {
 			logDebug("---------------------> right before try.");
     try{
