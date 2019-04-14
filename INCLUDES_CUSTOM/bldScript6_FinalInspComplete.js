@@ -20,9 +20,57 @@ function bldScript6_FinalInspComplete(){
                 closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
 			}
 
+			if($iTrc(appTypeString == "Building/Permit/OTC/AC Only", 'appTypeString == "Building/Permit/OTC/AC Only"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Furnace", 'appTypeString == "Building/Permit/OTC/Furnace"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Furnace and AC", 'appTypeString == "Building/Permit/OTC/Furnace and AC"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Furnace AC and Water Heater", 'appTypeString == "Building/Permit/OTC/Furnace AC and Water Heater"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Commercial Roof", 'appTypeString == "Building/Permit/OTC/Commercial Roof"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
             if($iTrc(appTypeString == "Building/Permit/OTC/Gas Pipe", 'appTypeString == "Building/Permit/OTC/Gas Pipe"')) {
                 closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
 			}			
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Residential Electrical Service", 'appTypeString == "Building/Permit/OTC/Residential Electrical Service"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Residential Roof", 'appTypeString == "Building/Permit/OTC/Residential Roof"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Siding", 'appTypeString == "Building/Permit/OTC/Siding"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Tankless Water Heater", 'appTypeString == "Building/Permit/OTC/Tankless Water Heater"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Water Heater", 'appTypeString == "Building/Permit/OTC/Water Heater"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Water Heater and AC", 'appTypeString == "Building/Permit/OTC/Water Heater and AC"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
+
+			if($iTrc(appTypeString == "Building/Permit/OTC/Water Heater and Furnace", 'appTypeString == "Building/Permit/OTC/Water Heater and Furnace"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}
 
 			if ((allTasksComplete("BLD_NEWCON") == false) || (allTasksComplete("BLD_MASTER") == false)){
 					updateAppStatus("Issued","Status updated via script 6");				
