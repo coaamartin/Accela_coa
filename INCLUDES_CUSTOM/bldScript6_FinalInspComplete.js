@@ -19,7 +19,11 @@ function bldScript6_FinalInspComplete(){
             if($iTrc(appTypeString == "Building/Permit/No Plans/NA", 'appTypeString == "Building/Permit/No Plans/NA"')) {
                 closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
 			}
-			
+
+            if($iTrc(appTypeString == "Building/Permit/OTC/Gas Pipe", 'appTypeString == "Building/Permit/OTC/Gas Pipe"')) {
+                closeTask("Inspection Phase", "Final", "Closed via script", "Closed via script");
+			}			
+
 			if ((allTasksComplete("BLD_NEWCON") == false) || (allTasksComplete("BLD_MASTER") == false)){
 					updateAppStatus("Issued","Status updated via script 6");				
 			}
