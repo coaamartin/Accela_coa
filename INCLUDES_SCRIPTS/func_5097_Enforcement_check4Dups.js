@@ -71,7 +71,10 @@ function getScriptText(vScriptName, servProvCode, useProductScripts) {
         return "";
     }
 }
+//func_5097_Enforcement_check4Dups();
 
+function func_5097_Enforcement_check4Dups() {
+	
 var cap = aa.env.getValue("CapModel");
 var capId = cap.getCapID();
 var parentId = cap.getParentCapID();
@@ -134,7 +137,7 @@ if (debug.indexOf("**ERROR") > 0) {
             aa.env.setValue("ErrorMessage", debug);
     }
 }
-
+}
 function capIdsGetByAddr4ACA() {
     //Gets CAPs with the same address as the current CAP, as capId (CapIDModel) object array (array includes current capId)
     //07SSP-00034/SP5015
