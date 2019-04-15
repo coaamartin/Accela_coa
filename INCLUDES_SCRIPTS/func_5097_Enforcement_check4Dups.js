@@ -71,7 +71,7 @@ function getScriptText(vScriptName, servProvCode, useProductScripts) {
         return "";
     }
 }
-//func_5097_Enforcement_check4Dups();
+func_5097_Enforcement_check4Dups();
 
 function func_5097_Enforcement_check4Dups() {
 	
