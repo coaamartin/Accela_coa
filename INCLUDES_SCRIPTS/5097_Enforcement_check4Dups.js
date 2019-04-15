@@ -31,9 +31,10 @@ User code generally goes inside the try block below.
 			var possibleDupAltIds = "";
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
             //if(!capAddResult.getSuccess()) return;
-            
-            var capIdArray = capAddResult.getOutput();
+            var capIdArray = new Array[];
+            capIdArray = capAddResult.getOutput();
             logDebug("---------------------> right before for loop. " + capIdArray);
+			var newId = capIdArray.getCapID();
             for (cappy in capIdArray){
 				            logDebug("---------------------> inside for loop.");
                 var relCapId = capIdArray[cappy].getCapID();
