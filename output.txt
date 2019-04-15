@@ -1,0 +1,45 @@
+ Volume in drive C is Windows
+ Volume Serial Number is 226D-4F29
+
+ Directory of C:\AccelaScripts\Accela_coa\EVENT
+
+ASIUA;Building!Permit!New Building!NA.js
+               1 File(s)             71 bytes
+               0 Dir(s)  155,343,364,096 bytes free
+ Volume in drive C is Windows
+ Volume Serial Number is 226D-4F29
+
+ Directory of C:\AccelaScripts\Accela_coa\INCLUDES_SCRIPTS
+
+
+ Directory of C:\AccelaScripts\Accela_coa
+
+
+ Directory of C:\AccelaScripts\Accela_coa
+
+
+ Directory of C:\AccelaScripts\Accela_coa
+
+
+ Directory of C:\AccelaScripts\Accela_coa
+
+
+ Directory of C:\AccelaScripts\Accela_coa
+
+
+ Directory of C:\AccelaScripts\Accela_coa
+
+
+ Directory of C:\AccelaScripts\Accela_coa
+
+
+ Directory of C:\AccelaScripts\Accela_coa
+
+ Volume in drive C is Windows
+ Volume Serial Number is 226D-4F29
+
+ Directory of C:\AccelaScripts\Accela_coa\INCLUDES_SCRIPTS
+
+12/28/2018  11:11 AM             2,225 80-Require 1 TSI field to be checked for uploads.js
+               1 File(s)          2,225 bytes
+               0 Dir(s)  155,338,194,944 bytes free

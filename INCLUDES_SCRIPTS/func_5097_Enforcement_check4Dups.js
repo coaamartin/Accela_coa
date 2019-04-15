@@ -31,6 +31,32 @@ func_5097_Enforcement_check4Dups();
 function func_5097_Enforcement_check4Dups() {
 	var possibleDupAltIds = "";	
     try{
+    if(ifTracer(appTypeString.startsWith("Enforcement/Incident/Vacant/"), '"Enforcement/Incident/Vacant/"')){
+        
+        var capIdsArray = capIdsGetByAddr4ACA(); //Get all records for same address
+        var forestryRecsOpen = false;
+        //For each record with same address
+        for(eachCapId in capIdsArray){
+            sameAddrCapId = capIdsArray[eachCapId];
+            sameAddrAltId = capIdsArray[eachCapId].getCustomID();
+
+            var sameAddrCap = aa.cap.getCap(sameAddrCapId).getOutput();
+            var sameAddrCapStatus = sameAddrCap.getCapStatus();
+            var sameAddrAppTypeString = sameAddrCap.getCapType().toString();
+            var sameAddrAppTypeArray = sameAddrAppTypeString.split("/");
+
+            logDebug("sameAddrAltId:" + sameAddrAltId + ", status: " + sameAddrCapStatus);
+            //if type is Forestry/ and a status match cancel
+            if(ifTracer(sameAddrAppTypeString.startsWith("Enforcement/Incident/Vacant/Master/") &&
+                        matches(sameAddrCapStatus, "Application","Monitoring","Recorded","Recorded and Assessed","Recorded and Expired","Registered","Registered and Expired","Registered and Recorded"),
+                        'Code Vacancy with correct status')){
+                message += "It appears someone has already submitted a request for this Address.  Please call the Enforcement Department at 303-739-XXXX if you wish to submit an additional request.<BR>";
+possibleDupAltIds +=  "Found1,"; 
+ break;
+            }
+        }
+    }		
+		/*
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
 			logDebug("---------------------> var capAddResult is: " + capAddResult);		
             if(!capAddResult.getSuccess()) return;
@@ -48,8 +74,9 @@ function func_5097_Enforcement_check4Dups() {
                 if(relType.startsWith("Enforcement/Incident/Vacant/Master") && matches(relStatus, "Application","Monitoring","Recorded","Recorded and Assessed","Recorded and Expired","Registered","Registered and Expired","Registered and Recorded")){
                     possibleDupAltIds += relCapId.getCustomID() + ",";
                         logDebug("---------------------> inside If that matches on record and status  " + relType.startsWith); 
- }
+				}
             }
+			*/
             
             if(possibleDupAltIds.length > 0){
                 cancel = true;
@@ -64,6 +91,74 @@ function func_5097_Enforcement_check4Dups() {
         logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
     }
 }
+
+function capIdsGetByAddr4ACA() {
+    //Gets CAPs with the same address as the current CAP, as capId (CapIDModel) object array (array includes current capId)
+    //07SSP-00034/SP5015
+    //
+
+    //Get address(es) on current CAP
+    var addr = cap.getAddressModel();
+
+    if (addr) {
+        
+        var streetName = addr.streetName;
+        var hseNum = addr.houseNumberStart;
+        var streetSuffix = addr.streetSuffix;
+        var zip = addr.zip;
+        var streetDir = addr.streetDirection;
+
+        if (streetDir == "")
+            streetDir = null;
+        if (streetSuffix == "")
+            streetSuffix = null;
+        if (zip == "")
+            zip = null;
+
+        if (hseNum && !isNaN(hseNum)) {
+            hseNum = parseInt(hseNum);
+        } else {
+            hseNum = null;
+        }
+
+        // get caps with same address
+        var capAddResult = aa.cap.getCapListByDetailAddress(streetName, hseNum, streetSuffix, zip, streetDir, null);
+        if (capAddResult.getSuccess())
+            var capArray = capAddResult.getOutput();
+        else {
+            logDebug("**ERROR: getting similar addresses: " + capAddResult.getErrorMessage());
+            return false;
+        }
+
+        var capIdArray = new Array();
+        //convert CapIDScriptModel objects to CapIDModel objects
+        for (i in capArray)
+            capIdArray.push(capArray[i].getCapID());
+        
+        if (capIdArray)
+            return (capIdArray);
+        else
+            return false;
+    }
+}
+
+/*
+ * Helper
+ * 
+ * Desc:            
+ * Used to display results of boolean condition
+ * often wrapped in if statement as follows:
+ *  if(ifTracer(''foo == 'bar', 'foo equals bar')) {}
+ * 
+*/
+
+function ifTracer (cond, msg) {
+    cond = cond ? true : false;
+    logDebug((cond).toString().toUpperCase() + ': ' + msg);
+    return cond;
+}
+
+
 logDebug("---------------------> 5097_Enforcement_check4Dups.js ended.");
 
 //Script Tester footer.  Comment this out when deploying.
