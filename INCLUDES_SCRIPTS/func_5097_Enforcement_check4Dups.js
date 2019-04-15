@@ -99,7 +99,7 @@ function capIdsGetByAddr4ACA() {
     //
 
     //Get address(es) on current CAP
-    var addr = capId.getAddressModel();
+    var addr = cap.getAddressModel(capId);
 
     if (addr) {
         
