@@ -29,7 +29,7 @@ User code generally goes inside the try block below.
 //function 5097_Enforcement_check4Dups() {
     try{
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
-            if(!capAddResult.getSuccess()) return;
+            //if(!capAddResult.getSuccess()) return;
             
             var capIdArray = capAddResult.getOutput();
             
