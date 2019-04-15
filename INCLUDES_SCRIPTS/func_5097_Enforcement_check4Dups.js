@@ -26,16 +26,19 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 //functions cannot start with a number so I preceded it with func_
+
 func_5097_Enforcement_check4Dups();
 
 function func_5097_Enforcement_check4Dups() {
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, useCustomScriptFile));	
 	var possibleDupAltIds = "";	
-var cap = aa.env.getValue("CapModel");
-var capId = cap.getCapID();
-var parentId = cap.getParentCapID();
-var appTypeResult = cap.getCapType();
-var appTypeString = appTypeResult.toString();           // Convert application type to string ("Building/A/B/C")
-var appTypeArray = appTypeString.split("/");            // Array of application type string	
+	var cap = aa.env.getValue("CapModel");
+	var capId = cap.getCapID();
+	var parentId = cap.getParentCapID();
+	var appTypeResult = cap.getCapType();
+	var appTypeString = appTypeResult.toString();           // Convert application type to string ("Building/A/B/C")
+	var appTypeArray = appTypeString.split("/");            // Array of application type string	
+
     try{
     //if(ifTracer(appTypeString.startsWith("Enforcement/Incident/Vacant/"), '"Enforcement/Incident/Vacant/"')){
         
@@ -165,6 +168,22 @@ function ifTracer (cond, msg) {
     return cond;
 }
 
+function getScriptText(vScriptName, servProvCode, useProductScripts) {
+    if (!servProvCode)
+        servProvCode = aa.getServiceProviderCode();
+    vScriptName = vScriptName.toUpperCase();
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    try {
+        if (useProductScripts) {
+            var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+        } else {
+            var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
+        }
+        return emseScript.getScriptText() + "";
+    } catch (err) {
+        return "";
+    }
+}
 
 logDebug("---------------------> 5097_Enforcement_check4Dups.js ended.");
 
