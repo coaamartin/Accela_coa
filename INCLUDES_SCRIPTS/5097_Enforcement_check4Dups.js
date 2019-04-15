@@ -30,7 +30,7 @@ User code generally goes inside the try block below.
 var addResult = aa.address.getAddressByCapId(capId);
 if (addResult.getSuccess()){ 
 	var aoArray = addResult.getOutput();  
-	
+			logDebug("**inside if - aoarray: " + aoArray);
 	if (aoArray.length)	{ 
 		var ao = aoArray[0];
 	}else{ 
@@ -39,10 +39,12 @@ if (addResult.getSuccess()){
 	try{
 		var possibleDupAltIds = "";
 		var capAddResult = aa.cap.getCapListByDetailAddress(ao.getStreetName(),ao.getHouseNumberStart(),ao.getStreetSuffix(),ao.getZip(),ao.getStreetDirection(),null);		
+					logDebug("**inside try- capAddResult: " + capAddResult);
            var capIdArray = new Array();
            capIdArray = capAddResult.getOutput();
 		//var newId = capIdArray.getCapID();
            for (cappy in capIdArray){
+			   					logDebug("**inside for- capIdArray: " + capIdArray);
                var relCapId = capIdArray[cappy].getCapID();
                var relCap = aa.cap.getCap(relCapId).getOutput();
                // get cap type
