@@ -30,6 +30,12 @@ func_5097_Enforcement_check4Dups();
 
 function func_5097_Enforcement_check4Dups() {
 	var possibleDupAltIds = "";	
+var cap = aa.env.getValue("CapModel");
+var capId = cap.getCapID();
+var parentId = cap.getParentCapID();
+var appTypeResult = cap.getCapType();
+var appTypeString = appTypeResult.toString();           // Convert application type to string ("Building/A/B/C")
+var appTypeArray = appTypeString.split("/");            // Array of application type string	
     try{
     //if(ifTracer(appTypeString.startsWith("Enforcement/Incident/Vacant/"), '"Enforcement/Incident/Vacant/"')){
         
@@ -99,7 +105,7 @@ function capIdsGetByAddr4ACA() {
     //
 
     //Get address(es) on current CAP
-    var addr = cap.getAddressModel(capId);
+    var addr = cap.getAddressModel();
 
     if (addr) {
         
