@@ -1,5 +1,5 @@
 //function 5097_Enforcement_check4Dups(){
-	var capId = getCapID();
+	var capId = getCapId();
 	var sameAddressCapId=getCapByAddressN("Enforcement/Incident/Vacant/Master",capId,"Monitoring");
 	logDebug("the message was " + sameAddressCapId);
     try{
