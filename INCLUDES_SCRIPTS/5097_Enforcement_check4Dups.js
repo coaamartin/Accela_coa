@@ -33,8 +33,9 @@ User code generally goes inside the try block below.
             //if(!capAddResult.getSuccess()) return;
             
             var capIdArray = capAddResult.getOutput();
-            
+            logDebug("---------------------> right before for loop. " + capIdArray);
             for (cappy in capIdArray){
+				            logDebug("---------------------> inside for loop.");
                 var relCapId = capIdArray[cappy].getCapID();
                 var relCap = aa.cap.getCap(relCapId).getOutput();
                 // get cap type
