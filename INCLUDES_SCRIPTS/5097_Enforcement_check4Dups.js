@@ -5,7 +5,7 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000022-CVM";
+//var myCapId = "19-000075-CVM";
 //var myUserId = "AMARTIN";
 //var eventName = "";
 //var wfTask = "Renewal Registration";
@@ -27,40 +27,49 @@ User code generally goes inside the try block below.
 //End script Tester header 
 //functions cannot start with a number so I preceded it with func_
 //function 5097_Enforcement_check4Dups() {
-    try{
-			var possibleDupAltIds = "";
-            var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
-            //if(!capAddResult.getSuccess()) return;
-            var capIdArray = new Array[];
-            capIdArray = capAddResult.getOutput();
-            logDebug("---------------------> right before for loop. " + capIdArray);
-			var newId = capIdArray.getCapID();
-            for (cappy in capIdArray){
-				            logDebug("---------------------> inside for loop.");
-                var relCapId = capIdArray[cappy].getCapID();
-                var relCap = aa.cap.getCap(relCapId).getOutput();
-                // get cap type
-                var relType = relCap.getCapType().toString();
-                var relStatus = relCap.getCapStatus();
-                //Add new blocks here for other records.
-                if(relType.startsWith("Enforcement/Incident/Vacant/Master") && matches(relStatus, "Application","Monitoring","Recorded","Recorded and Assessed","Recorded and Expired","Registered","Registered and Expired","Registered and Recorded")){
-                    possibleDupAltIds += relCapId.getCustomID() + ",";
-                }
-            }
-            
-            if(possibleDupAltIds.length > 0){
-                cancel = true;
-                showMessage = true;
-                comment("Possible duplicates: " + possibleDupAltIds.substring(0, possibleDupAltIds.length -1));
-            }
-    }
-    catch(err){
+var addResult = aa.address.getAddressByCapId(capId);
+if (addResult.getSuccess()){ 
+	var aoArray = addResult.getOutput();  
+	
+	if (aoArray.length)	{ 
+		var ao = aoArray[0];
+	}else{ 
+		logDebug("**NOTE: no address for comparison:");
+	}				
+	try{
+		var possibleDupAltIds = "";
+		var capAddResult = aa.cap.getCapListByDetailAddress(ao.getStreetName(),ao.getHouseNumberStart(),ao.getStreetSuffix(),ao.getZip(),ao.getStreetDirection(),null);		
+           var capIdArray = new Array();
+           capIdArray = capAddResult.getOutput();
+		//var newId = capIdArray.getCapID();
+           for (cappy in capIdArray){
+               var relCapId = capIdArray[cappy].getCapID();
+               var relCap = aa.cap.getCap(relCapId).getOutput();
+               // get cap type
+               var relType = relCap.getCapType().toString();
+               var relStatus = relCap.getCapStatus();
+               //Add new blocks here for other records.
+               if(relType.startsWith("Enforcement/Incident/Vacant/Master") && matches(relStatus, "Application","Monitoring","Recorded","Recorded and Assessed","Recorded and Expired","Registered","Registered and Expired","Registered and Recorded")){
+                   possibleDupAltIds += relCapId.getCustomID() + ",";
+               }
+           }
+           
+           if(possibleDupAltIds.length > 0){
+               cancel = true;
+               showMessage = true;
+               comment("Possible duplicates: " + possibleDupAltIds.substring(0, possibleDupAltIds.length -1));
+           }
+	}
+		catch(err){
 		cancel = true;
-        showMessage = true;
-        comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
-        logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
-    }
-//}
+		showMessage = true;
+		comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
+		logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
+		}
+}else{ 
+	logDebug("**NOTE: No Duplicate Addresses Found - Creating a new record. " + addResult.getErrorMessage());
+}			
+
 logDebug("---------------------> 5097_Enforcement_check4Dups.js ended.");
 
 //Script Tester footer.  Comment this out when deploying.
