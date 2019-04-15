@@ -78,14 +78,16 @@ var appTypeResult = cap.getCapType();
 var appTypeString = appTypeResult.toString();           // Convert application type to string ("Building/A/B/C")
 var appTypeArray = appTypeString.split("/");            // Array of application type string
 // page flow custom code begin
+logDebug("right before try");
 try{
     //Script 26
     //if(ifTracer(appTypeString.startsWith("Enforcement/Incident/Vacant/"), '"Enforcement/Incident/Vacant/"')){
-        
+ logDebug("inside try");       
         var capIdsArray = capIdsGetByAddr4ACA(); //Get all records for same address
         var forestryRecsOpen = false;
         //For each record with same address
         for(eachCapId in capIdsArray){
+			logDebug("inside for loop");
             sameAddrCapId = capIdsArray[eachCapId];
             sameAddrAltId = capIdsArray[eachCapId].getCustomID();
 
