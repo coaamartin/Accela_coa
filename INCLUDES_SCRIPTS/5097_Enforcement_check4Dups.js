@@ -28,6 +28,7 @@ User code generally goes inside the try block below.
 //functions cannot start with a number so I preceded it with func_
 //function 5097_Enforcement_check4Dups() {
     try{
+			var possibleDupAltIds = "";
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
             //if(!capAddResult.getSuccess()) return;
             
@@ -52,6 +53,7 @@ User code generally goes inside the try block below.
             }
     }
     catch(err){
+		cancel = true;
         showMessage = true;
         comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
         logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
