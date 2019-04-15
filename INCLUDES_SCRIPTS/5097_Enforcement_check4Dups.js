@@ -1,4 +1,6 @@
-function 5097_Enforcement_check4Dups(){
+//function 5097_Enforcement_check4Dups(){
+	var sameAddressCapId=getCapByAddressN("Enforcement/Incident/Vacant/Master",capId,"Monitoring");
+	logDebug("the message was " + sameAddressCapId);
     try{
         var checkForDups = AInfo["Check for Duplicates"];
         var possibleDupAltIds = "";
@@ -33,4 +35,4 @@ function 5097_Enforcement_check4Dups(){
         comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
         logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
     }
-}
+//}
