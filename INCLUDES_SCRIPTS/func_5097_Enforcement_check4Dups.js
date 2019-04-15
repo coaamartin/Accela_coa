@@ -86,6 +86,7 @@ possibleDupAltIds +=  "Found1,";
     }
     catch(err){
 				logDebug("---------------------> caught error.");
+		cancel = true;
         showMessage = true;
         comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
         logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
@@ -98,7 +99,7 @@ function capIdsGetByAddr4ACA() {
     //
 
     //Get address(es) on current CAP
-    var addr = cap.getAddressModel();
+    var addr = capId.getAddressModel();
 
     if (addr) {
         
