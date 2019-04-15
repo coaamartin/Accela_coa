@@ -80,7 +80,7 @@ var appTypeArray = appTypeString.split("/");            // Array of application 
 // page flow custom code begin
 try{
     //Script 26
-    if(ifTracer(appTypeString.startsWith("Enforcement/Incident/Vacant/"), '"Enforcement/Incident/Vacant/"')){
+    //if(ifTracer(appTypeString.startsWith("Enforcement/Incident/Vacant/"), '"Enforcement/Incident/Vacant/"')){
         
         var capIdsArray = capIdsGetByAddr4ACA(); //Get all records for same address
         var forestryRecsOpen = false;
@@ -103,7 +103,7 @@ try{
                 break;
             }
         }
-    }//END Script 26
+    //}//END Script 26
     showMessage = cancel = message.length ? true : false;
 }
 catch(err){
