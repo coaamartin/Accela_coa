@@ -7,7 +7,7 @@
         
         //if(ifTracer(checkForDups == "CHECKED", 'Checking for duplicates')){
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
-            if(!capAddResult.getSuccess()) return;
+            if(!capAddResult.getSuccess()) {logDebug("the message was no data found. ");};
             
             var capIdArray = capAddResult.getOutput();
             
