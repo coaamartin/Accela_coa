@@ -28,7 +28,7 @@ User code generally goes inside the try block below.
 //functions cannot start with a number so I preceded it with func_
 //function 5097_Enforcement_check4Dups() {
 var addResult = aa.address.getAddressByCapId(capId);
-if (addResult.getSuccess()){ 
+if (!addResult.getSuccess()){ 
 	var aoArray = addResult.getOutput();  
 			logDebug("**inside if - aoarray: " + aoArray);
 	if (aoArray.length)	{ 
