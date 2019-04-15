@@ -1,3 +1,4 @@
+func_5097_Enforcement_check4Dups();
 function func_5097_Enforcement_check4Dups(){
     try{
         var checkForDups = AInfo["Check for Duplicates"];
