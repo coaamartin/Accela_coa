@@ -26,7 +26,7 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 //functions cannot start with a number so I preceded it with func_
-function func_5097_Enforcement_check4Dups() {
+function 5097_Enforcement_check4Dups() {
     try{
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
             if(!capAddResult.getSuccess()) return;
