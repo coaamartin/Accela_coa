@@ -31,7 +31,7 @@ func_5097_Enforcement_check4Dups();
 function func_5097_Enforcement_check4Dups() {
 	var possibleDupAltIds = "";	
     try{
-    if(ifTracer(appTypeString.startsWith("Enforcement/Incident/Vacant/"), '"Enforcement/Incident/Vacant/"')){
+    //if(ifTracer(appTypeString.startsWith("Enforcement/Incident/Vacant/"), '"Enforcement/Incident/Vacant/"')){
         
         var capIdsArray = capIdsGetByAddr4ACA(); //Get all records for same address
         var forestryRecsOpen = false;
@@ -55,7 +55,7 @@ possibleDupAltIds +=  "Found1,";
  break;
             }
         }
-    }		
+    //}		
 		/*
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
 			logDebug("---------------------> var capAddResult is: " + capAddResult);		
