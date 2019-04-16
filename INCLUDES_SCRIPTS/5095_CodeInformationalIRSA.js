@@ -28,6 +28,14 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 logDebug("---------------------> At start of 5095 IRSA");
+logDebug("---------------------> inspection is: " + inspType);
+if(ifTracer(appTypeString == "Enforcement/Incident/Informational/NA", "appTypeString == Enforcement/Incident/Informational/NA")) {
+	logDebug("---------------------> iftracer found: " + appTypeString);
+}
+	logDebug("---------------------> iftracer found result: " + ifTracer(inspResult));
+if(ifTracer(inspResult == "Reinspection 1" || inspResult == "Reinspection 2", "inspResult == Reinspection 1")) {
+	logDebug("---------------------> iftracer found: " + ifTracer(inspResult));
+}
 var currentDate = new Date();
 
 function cancelInspections() {
