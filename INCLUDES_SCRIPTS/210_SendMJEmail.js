@@ -2,7 +2,7 @@
 // SCRIPTFILENAME: 210_SendMJEmail.js
 // PURPOSE: Additional Info Required Email for Licenses MJ Applications
 // DATECREATED: 03/14/2019
-// BY: jmp
+// BY: JMPorter
 
 	var emailTemplate= "LIC MJ ADDITIONAL INFO # 210";
 	var applicant = getContactByType("Applicant", capId);

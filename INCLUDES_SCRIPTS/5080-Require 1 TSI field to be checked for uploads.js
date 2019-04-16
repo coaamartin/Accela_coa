@@ -5,7 +5,7 @@
 
 */
 
-logDebug("JMP JMP Alert: ------------------------>> Script Item #80 - 80-Require 1 TSI field to be checked for uploads");
+logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #80 - 80-Require 1 TSI field to be checked for uploads");
 
 if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
 {   
@@ -20,7 +20,7 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
 		var stepnumber = fTask.getStepNumber();
 		var processID = fTask.getProcessID();
       
-      //logDebug("JMP JMP Post Pre Submittal : 1 ------------------------>> ");
+      //logDebug("JMPorter JMPorter Post Pre Submittal : 1 ------------------------>> ");
       
 		if ("Pre Submittal Meetings".equals(fTask.getTaskDescription()))          
       // tempjp
@@ -33,18 +33,18 @@ if ((wfTask == "Pre Submittal Meetings") && (wfStatus == "Email Applicant"))
             var TSI = TSIResult.getOutput();
             if (TSI != null) 
                
-            for (dmyIttr in TSI) //JMP 
+            for (dmyIttr in TSI) //JMPorter 
             {          
             
-              //logDebug("JMP - IN TSI :" + TSI[dmyIttr].getCheckboxDesc());   // JMP
-              //logDebug("JMP - Comment TSI :" + TSI[dmyIttr].getChecklistComment());   // JMP
+              //logDebug("JMPorter - IN TSI :" + TSI[dmyIttr].getCheckboxDesc());   // JMPorter
+              //logDebug("JMPorter - Comment TSI :" + TSI[dmyIttr].getChecklistComment());   // JMPorter
               
               if (TSI[dmyIttr].getChecklistComment() != null)
               {   
                 if (TSI[dmyIttr].getChecklistComment() == "CHECKED") 
                 {
                    foundCheckBox = true;
-                   //logDebug("JMP JMP Found Checkbox "); //
+                   //logDebug("JMPorter JMPorter Found Checkbox "); //
                 }
               }  
             }

@@ -1,5 +1,5 @@
 //created by swakil
-//Updated per Issue Tracker #8 JMP: 4/11/19
+//Updated per Issue Tracker #8 JMPorter: 4/11/19
 
 logDebug("Script #32 - Start");
 

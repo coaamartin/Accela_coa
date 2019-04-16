@@ -3,7 +3,7 @@
 // SCRIPTFILENAME: 5098_Business_Cancel_Open_Tasks_When_Withdrawn.js
 // PURPOSE: Issue log #56 - Building Permit with Plans - Needa script; to close all open active tasks when the workflow task "Accept Plans" = "Withdrawn";
 // DATECREATED: 04/16/2019
-// BY: JMP
+// BY: JMPorter
 
 
 logDebug("BEGIN: ------------------------>> Script Item #5098 - 5098_Business_Cancel_Open_Tasks_When_Withdrawn");

@@ -11,12 +11,12 @@ If not, then raise message "Fees must be added and invoiced to Accept the Applic
 
 */
 
-logDebug("JMP JMP Alert: ------------------------>> Script Item #81 - Add Fees and Invoice may not have happened");
+logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #81 - Add Fees and Invoice may not have happened");
 
 if (((wfTask == "Application Acceptance") && (wfStatus == "Ready to Pay")) || ((wfTask == "Application Acceptance") && (wfStatus == "Accepted")))
 {   
 
-   //logDebug("JMP JMP -- Balance Due:" + balanceDue + "");   
+   //logDebug("JMPorter JMPorter -- Balance Due:" + balanceDue + "");   
 
    if (balanceDue > 0)
    {

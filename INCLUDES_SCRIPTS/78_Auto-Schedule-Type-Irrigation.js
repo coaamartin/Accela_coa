@@ -1,4 +1,4 @@
-/* JMP - 10/26/2018 - Script Item #78 - 78_Auto-Schedule-Type-Irrigation
+/* JMPorter - 10/26/2018 - Script Item #78 - 78_Auto-Schedule-Type-Irrigation
 
 // ​After Application for irrigation Permit is submitted, auto schedule the correct type of inspection depending on Type of Property dropdown selection.  
 // If the Type of Property dropdown is set to Single Family Residential then schedule a Single Family Res Lawn/Irrigation Inspection as 
@@ -9,7 +9,7 @@
 if (appTypeResult == "Water/Water/Lawn Irrigation/Permit") 
 {   
 
-logDebug("JMP JMP Alert: ------------------------>> Script Item #78 - 78_Auto-Schedule-Type-Irrigation");
+logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #78 - 78_Auto-Schedule-Type-Irrigation");
 
 if(wfTask =="Application Submittal" && !wfStatus== "Withdrawn")     
 {

@@ -13,7 +13,7 @@ Notes: ASA:Building/Permit/OTC/*
 var asiValues = new Array();
 loadAppSpecific(asiValues);
 
-comment("Looking for OTC Fees and Pending Inspections - UPDATED 2/4 JMP-CoA to Script #501");
+comment("Looking for OTC Fees and Pending Inspections - UPDATED 2/4 JMPorter-CoA to Script #501");
       if (appMatch('*/*/*/AC Only')) {
          updateFee('BLD_OTC_01', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
          createPendingInspection("BLD_OTC", "Mechanical Final");

@@ -38,7 +38,7 @@ if (exists(wfStatus, targetStatusArray))
 		emailparams.put("$$wfComment$$", wfComment);
 		emailparams.put("$$wfTask$$", wfTask);
 		emailContacts(contacts, emailtemplate, emailparams, "", "", "N", "");
-      logDebug("JMP .. Just sent email to Applicant");
+      logDebug("JMPorter .. Just sent email to Applicant");
       
 	
 		//jmain edit - add LPs to email...

@@ -2,7 +2,7 @@
 // SCRIPTFILENAME: 5088_LawnIrrigationPermitFeesPaid.js
 // PURPOSE: Update record status depending on inspection state
 // DATECREATED: 02/20/2019
-// BY: JMP
+// BY: JMPorter
 // CHANGELOG: Per issue tracker instructions #26 sent on 2/14
 
 logDebug("Script #5088 - Irrigation Permit Fees Paid - Start");

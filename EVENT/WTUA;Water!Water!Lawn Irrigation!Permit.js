@@ -13,7 +13,7 @@ Sample Call:
 UpdateworkFlowTaskDueDate("Note",30)
  */
  
- // Added 10-26-18 JMP
+ // Added 10-26-18 JMPorter
  include("78_Auto-Schedule-Type-Irrigation");
 
 var workFlowTasktobeChecked = "Note";

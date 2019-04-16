@@ -2,7 +2,7 @@
 // SCRIPTFILENAME: 5084_Irrigation_Inspection_Pending.js
 // PURPOSE: Called when custom field "Type of Property" = "Other" OR "Single Family Residential"
 // DATECREATED: 02/19/2019 
-// BY: JMP 
+// BY: JMPorter 
 // CHANGELOG: 
 
 logDebug("Script 5084_Irrigation_Inspection_Pending - Started");
@@ -25,6 +25,6 @@ if (appTypeResult == "Water/Water/Lawn Irrigation/Permit")
   
   // createPendingInspection(inspGroup, inspType + "");
   
-  // logDebug("JMP JMP Alert: ------------------------>> Script Item #72 - OK working with Inspection type Failed/Passed/Cancelled " + inspResult + "");  
+  // logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #72 - OK working with Inspection type Failed/Passed/Cancelled " + inspResult + "");  
 
 

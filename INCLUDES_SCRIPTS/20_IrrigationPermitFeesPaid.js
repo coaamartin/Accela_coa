@@ -2,7 +2,7 @@
 // SCRIPTFILENAME: 20_IrrigationPermitFeesPaid.js
 // PURPOSE: Updated while working on Water - Irrigation Permit - Leaving functionality for now but added logDebug(s)
 // DATECREATED: 02/20/2019
-// BY: JMP
+// BY: JMPorter
 // CHANGELOG: written by swakil .. edited by jmain 07/24/2018 - updated email template and param variables.
 
 logDebug("Script #20 - Irrigation Permit Fees Paid - Start");

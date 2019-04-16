@@ -3,7 +3,7 @@
 // SCRIPTFILENAME: 193_WatIrrigationAddInspFee.js
 // PURPOSE: Changed to allign with updated scripting rules 
 // DATECREATED: 02/19/2019
-// BY: JMP 
+// BY: JMPorter 
 // CHANGELOG: 193 was origianlly named script193 .. changing to allign better with updated scripting rules
 
     

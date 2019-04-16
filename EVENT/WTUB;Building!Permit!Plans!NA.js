@@ -1,8 +1,8 @@
-/* JMP - 10/2/2018 - Script Item #71 - Certificate of Occupancy checked
+/* JMPorter - 10/2/2018 - Script Item #71 - Certificate of Occupancy checked
   If Inspection Phase workflow task has the status of ‘Ready for CO’ verify the Info Field ‘Certificate of Occupancy’ is checked, 
   if it is unchecked then stop the workflow progression and give an error message that says “There is not a Certificate of Occupancy required on this record.
   
-   JMP - 10/3/2018 - Script Item #62 - Prevent Ready for CO if inspections pending or scheduled or active other wf tasks
+   JMPorter - 10/3/2018 - Script Item #62 - Prevent Ready for CO if inspections pending or scheduled or active other wf tasks
   If status 'Ready For CO' is selected on Inspection Phase wf task, verify there are no Pending or Scheduled inspections and verify that there are no other workflow tasks active, 
   if there are then prevent the wf task from proceeding and present a message stating "There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed.  
 */

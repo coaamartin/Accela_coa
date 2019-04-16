@@ -1,17 +1,18 @@
-/* JMP - 11/13/2018 - Script Item #58_Rescheduled SWMP
 
-// Staff initiated Rescheduling of inspections on final on SWMP permit and echo initial on the application, send an email to the applicant with the date and inspection type.
- 
-*/
+// SCRIPTNUMBER: 58
+// SCRIPTFILENAME: 58_Rescheduled SWMP.js
+// PURPOSE: Additional Info Required Email for Licenses MJ Applications
+// DATECREATED: 03/14/2019
+// BY: JMPorter
 
-logDebug("JMP JMP Alert: ------------------------>> Script Item #58_Rescheduled SWMP");
+logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #58_Rescheduled SWMP");
 
-if ("Final Inspection".equals(inspType)) //JMP
+if ("Final Inspection".equals(inspType)) //JMPorter
 {
  
-  logDebug("JMP - OK trapped #58 for reschedule"); //JMP
+  logDebug("JMPorter - OK trapped #58 for reschedule"); //JMPorter
   
-  var contact = "jmporter@auroragov.org";
+  var contact = "JMPorterorter@auroragov.org";
   //var contact = "Applicant";
   var template = "SWMP INSPECTION RESCHEDULED";
   var emailparams = aa.util.newHashtable();
@@ -22,7 +23,7 @@ if ("Final Inspection".equals(inspType)) //JMP
   var todayDateLongForm = months[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear()
   var inspDate = inspSchedDate;  
   
-  emailparams.put("$$todayDateLongForm$$", todayDateLongForm);  // JMP
+  emailparams.put("$$todayDateLongForm$$", todayDateLongForm);  // JMPorter
   emailparams.put("$$inspDate$$",inspDate);
   
   // emailContacts(contact, template, emailparams, null, null, "N", "");	

@@ -23,7 +23,7 @@ function script205_DeactivateSpecInsp() {
 	logDebug("script205_DeactivateSpecInsp ended.");
 //	if function is used        };//END WTUA:Building/*/*/*;
 
-///TEST JMP to see if update through GITHUB
+///TEST JMPorter to see if update through GITHUB
 
 }
 

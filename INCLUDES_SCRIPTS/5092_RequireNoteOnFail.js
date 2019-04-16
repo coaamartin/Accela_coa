@@ -2,7 +2,7 @@
 // SCRIPTFILENAME: 5092_RequireNoteOnFail.js
 // PURPOSE: Called when status is set to fail and no comment exists
 // DATECREATED: 04/09/2019
-// BY: JMP
+// BY: JMPorter
 
 logDebug('Started script 5092_RequireNoteOnFail');
 
