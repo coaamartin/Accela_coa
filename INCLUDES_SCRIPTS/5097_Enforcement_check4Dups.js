@@ -1,5 +1,23 @@
 //function 5097_Enforcement_check4Dups(){
-	var sameAddressCapId=getCapByAddressN("Enforcement/Incident/Vacant/Master",capId,"Monitoring");
+var params = aa.env.getParamValues();
+var keys = params.keys();
+var key = null;
+while (keys.hasMoreElements()) {
+	key = keys.nextElement();
+	eval("var " + key + " = aa.env.getValue(\"" + key + "\");");
+	logDebug("Loaded Env Variable: " + key + " = " + aa.env.getValue(key));
+}
+
+/*------------------------------------------------------------------------------------------------------/
+| END Event Specific Variables
+/------------------------------------------------------------------------------------------------------*/
+
+if (preExecute.length)
+	doStandardChoiceActions(preExecute, true, 0); // run Pre-execution code
+
+logGlobals(AInfo);
+
+	var vAddress;
 	AddedAddressList = AddedAddressList.toArray();	
 	logDebug("the message was " + AddedAddressList);
 	x = 0;
