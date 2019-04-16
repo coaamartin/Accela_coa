@@ -41,6 +41,14 @@ logGlobals(AInfo);
             var capIdArray = capAddResult.getOutput();
               logDebug("Found something so moving on. " + capIdArray); 
 y=0;			  
+var relCapId = capIdArray[y].getCapID();
+			logDebug("relCapId " + relCapId);
+var relCap = aa.cap.getCap(relCapId).getOutput();
+			logDebug("relCap " + relCap);
+var relType = relCap.getCapType().toString();		
+			logDebug("relType " + relType);
+var relStatus = relCap.getCapStatus();	
+			logDebug("relStatus " + relStatus);
             for (y in capIdArray){
 				            logDebug("inside for loop. ");
                 var relCapId = capIdArray[y].getCapID();
