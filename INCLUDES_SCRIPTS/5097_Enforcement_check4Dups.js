@@ -17,14 +17,14 @@ if (preExecute.length)
 
 logGlobals(AInfo);
 
-	var vAddress;
-	AddedAddressList = AddedAddressList.toArray();	
-	logDebug("the message was " + AddedAddressList);
-	x = 0;
-	for (x in AddedAddressList) {
-		vAddress = AddedAddressList[x];
-	logDebug("the address was " + AddedAddressList);		
-	}
+	//var vAddress;
+	//AddedAddressList = AddedAddressList.toArray();	
+	//logDebug("the message was " + AddedAddressList);
+	//x = 0;
+	//for (x in AddedAddressList) {
+	//	vAddress = AddedAddressList[x];
+	//logDebug("the address was " + AddedAddressList);		
+	//}
     try{
         var checkForDups = AInfo["Check for Duplicates"];
         var possibleDupAltIds = "";
@@ -32,17 +32,18 @@ logGlobals(AInfo);
         //if(ifTracer(checkForDups == "CHECKED", 'Checking for duplicates')){
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
             if(!capAddResult.getSuccess()) {logDebug("the message was no data found. ");};
-            
+            logDebug("Found something so moving on. " + capAddResult);
             var capIdArray = capAddResult.getOutput();
             
             for (cappy in capIdArray){
+				            logDebug("inside for loop. ");
                 var relCapId = capIdArray[cappy].getCapID();
                 var relCap = aa.cap.getCap(relCapId).getOutput();
                 // get cap type
                 var relType = relCap.getCapType().toString();
                 var relStatus = relCap.getCapStatus();
                 
-                if(relType.startsWith("Forestry/") && matches(relStatus, "Wait List","Assigned","Submitted","Working","No Plant","Planted","Removed","Complete Not Stake", "Complete Staked","Warranty Failed")){
+                if(relType.startsWith("Enforcement/Incident/Vacant/Master") && matches(relStatus, "Monitoring","Assigned","Submitted","Working","No Plant","Planted","Removed","Complete Not Stake", "Complete Staked","Warranty Failed")){
                     possibleDupAltIds += relCapId.getCustomID() + ",";
                 }
             }
