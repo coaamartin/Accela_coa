@@ -27,7 +27,7 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5094 IRSA");
+logDebug("---------------------> At start of 5095 IRSA");
 var currentDate = new Date();
 
 function cancelInspections() {
@@ -91,7 +91,7 @@ if (inspType == "Pictures" && inspResult == "Reschedule") {
 	newDate = dateAdd(null,1);
 	scheduleInspectDate("Pictures", newDate)
 }
-
+logDebug("---------------------> At start of Reinspection 1");
 if (inspType == "Reinspection 1") {
 	logDebug("---------------------> Reinspection 1");	
 //start
