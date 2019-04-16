@@ -91,7 +91,7 @@ if (inspType == "Pictures" && inspResult == "Reschedule") {
 	newDate = dateAdd(null,1);
 	scheduleInspectDate("Pictures", newDate)
 }
-logDebug("---------------------> At start of Reinspection 1");
+logDebug("---------------------> At start of Reinspection 1 " + inspType + " " + inspResult);
 if (inspType == "Reinspection 1") {
 	logDebug("---------------------> Reinspection 1");	
 //start
