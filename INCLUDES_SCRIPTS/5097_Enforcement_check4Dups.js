@@ -30,6 +30,11 @@ logGlobals(AInfo);
         var possibleDupAltIds = "";
         
         //if(ifTracer(checkForDups == "CHECKED", 'Checking for duplicates')){
+			logDebug("1 " + AddressStreetName);
+			logDebug("1 " + AddressHouseNumber);
+			logDebug("1 " + AddressStreetSuffix);
+			logDebug("1 " + AddressZip);
+			logDebug("1 " + AddressStreetDirection);			
             var capAddResult = aa.cap.getCapListByDetailAddress(AddressStreetName,parseInt(AddressHouseNumber),AddressStreetSuffix,AddressZip,AddressStreetDirection,null);
             if(!capAddResult.getSuccess()) {logDebug("the message was no data found. ");};
             logDebug("Found something so moving on. " + capAddResult);
