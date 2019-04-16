@@ -5,30 +5,7 @@
 | END User Configurable Parameters
 /------------------------------------------------------------------------------------------------------*/
 
-	eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, useCustomScriptFile));
-	eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, useCustomScriptFile));
 
-
-eval(getScriptText("INCLUDES_CUSTOM", null, useCustomScriptFile));
-
-
-
-function getScriptText(vScriptName, servProvCode, useProductScripts) {
-	if (!servProvCode)
-		servProvCode = aa.getServiceProviderCode();
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		if (useProductScripts) {
-			var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-		} else {
-			var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
-		}
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-	}
-}
 
 
 var params = aa.env.getParamValues();
