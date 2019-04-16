@@ -34,10 +34,11 @@ logGlobals(AInfo);
             if(!capAddResult.getSuccess()) {logDebug("the message was no data found. ");};
             logDebug("Found something so moving on. " + capAddResult);
             var capIdArray = capAddResult.getOutput();
-              logDebug("Found something so moving on. " + capIdArray);          
-            for (cappy in capIdArray){
+              logDebug("Found something so moving on. " + capIdArray); 
+y=0;			  
+            for (y in capIdArray){
 				            logDebug("inside for loop. ");
-                var relCapId = capIdArray[cappy].getCapID();
+                var relCapId = capIdArray[y].getCapID();
                 var relCap = aa.cap.getCap(relCapId).getOutput();
                 // get cap type
                 var relType = relCap.getCapType().toString();
