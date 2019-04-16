@@ -45,8 +45,8 @@ function deleteCadRows()
         }
         sStmt.close();
         conn.close();
-	    logDebug("Done with this:" + counter);
-		//sendEmailToApplicant();
+	    //logDebug("Done with this:" + counter);
+		cleanAndClose(foundDuplicate);
 }
 
 //Get addresses to be remove(It was removed from CAD).
@@ -57,6 +57,14 @@ function getRemovedCADAddresses()
 	return cadQuery;
 }
 
+function cleanAndClose(inFlag){
+	if(inFlag == "True"){
+        cancel = true;
+        showMessage = true;
+        comment("Possible duplicates found.  Cancelling record creation.");	
+	}
+}
+/*
 function sendEmailToApplicant(){
   var contacts = "Applicant";
   var template = "PW_LIC_AGR_REV";
@@ -70,18 +78,5 @@ function sendEmailToApplicant(){
   emailparams.put("$$PERMITWRKDESC$$", flagpole); 
   emailContacts(contacts, template, emailparams, "", "", "N", "");
 }
+*/
 //end ajm add
-            
-            //if(possibleDupAltIds.length > 0){
-            //    cancel = true;
-            //    showMessage = true;
-            //    comment("Possible duplicates: " + possibleDupAltIds.substring(0, possibleDupAltIds.length -1));
-            //}
-        //}
-    //}
-    //catch(err){
-    //    showMessage = true;
-    //    comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
-    //    logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
-    //}
-//}
