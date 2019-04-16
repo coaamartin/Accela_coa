@@ -1,6 +1,11 @@
-//ajm added for testing
-logDebug("Entering AJM TEST");
+// SCRIPTNUMBER: 5097
+// SCRIPTFILENAME: 5097_Enforcement_check4Dups.js
+// PURPOSE: Checks for duplicates records based on address and type.  Makes call to stored procedure.
+// DATECREATED: 04/10/2019
+// BY: amartin
+// CHANGELOG: 
 
+logDebug("---------------------> Starting 5097_Enforcement_check4Dups.js ");
 /*------------------------------------------------------------------------------------------------------/
 | BEGIN Event Specific Variables
 /------------------------------------------------------------------------------------------------------*/
@@ -23,38 +28,33 @@ while (keys.hasMoreElements()) {
 
 logGlobals(AInfo);
 
-deleteCadRows();
+checkForDuplicates();
 
-function deleteCadRows()
+function checkForDuplicates()
 {
-	 var cadQuery = getRemovedCADAddresses();
-
-        var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
-        var ds = initialContext.lookup("java:/AA");
-        var conn = ds.getConnection();
-        var sStmt = conn.prepareStatement(cadQuery);
-		//sStmt.setString(1, 'APD Caution');
-        var rSet = sStmt.executeQuery();
-        var counter = 0;
-        while (rSet.next()) {
-			counter = counter + 1;
-			var foundDuplicate = rSet.getString("Found");
-
-			logDebug("Found a duplicate: " + foundDuplicate);			
-			//aa.addressCondition.removeAddressCondition(refAddrid, conId);
-        }
-        sStmt.close();
-        conn.close();
-	    //logDebug("Done with this:" + counter);
-		cleanAndClose(foundDuplicate);
+	var aQuery = getRemovedCADAddresses();
+    var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
+    var ds = initialContext.lookup("java:/AA");
+    var conn = ds.getConnection();
+    var sStmt = conn.prepareStatement(aQuery);
+    var rSet = sStmt.executeQuery();
+    var counter = 0;
+    while (rSet.next()) {
+		counter = counter + 1;
+		var foundDuplicate = rSet.getString("Found");
+		logDebug("Found a duplicate: " + foundDuplicate);			
+	}
+    sStmt.close();
+    conn.close();
+	//logDebug("Done with this:" + counter);
+	cleanAndClose(foundDuplicate);
 }
 
 //Get addresses to be remove(It was removed from CAD).
 function getRemovedCADAddresses()
 {
-	//var altId = capId.getCustomID();
-	var cadQuery = "exec coa_duplicate_for_address " + AddressValidatedNumber + ",'" + ApplicationTypeLevel1 + "','" + ApplicationTypeLevel2 + "','" + ApplicationTypeLevel3 + "','" + ApplicationTypeLevel4 + "'";
-	return cadQuery;
+	var aQuery = "exec coa_duplicate_for_address " + AddressValidatedNumber + ",'" + ApplicationTypeLevel1 + "','" + ApplicationTypeLevel2 + "','" + ApplicationTypeLevel3 + "','" + ApplicationTypeLevel4 + "'";
+	return aQuery;
 }
 
 function cleanAndClose(inFlag){
@@ -79,4 +79,4 @@ function sendEmailToApplicant(){
   emailContacts(contacts, template, emailparams, "", "", "N", "");
 }
 */
-//end ajm add
+logDebug("---------------------> 5097_Enforcement_check4Dups.js ended.");
