@@ -27,7 +27,7 @@ if(appMatch("Building/Permit/New Building/NA") || appMatch("Building/Permit/Plan
 
 
 if($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wf:Permit Issuance/Issued')){
-    if(appMatch("Building/Permit/New Building/NA") || appMatch("Building/Permit/Plans/NA") || appMatch("Building/Permit/No Plans/NA"))
+    if(appMatch("Building/Permit/New Building/NA") || appMatch("Building/Permit/Plans/NA") || appMatch("Building/Permit/No Plans/NA")|| appMatch("Building/Permit/OTC/*"))
         bldScript2_noContractorCheck();
 }
 
