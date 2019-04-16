@@ -52,7 +52,7 @@ function deleteCadRows()
 //Get addresses to be remove(It was removed from CAD).
 function getRemovedCADAddresses()
 {
-	var altId = capId.getCustomID();
+	//var altId = capId.getCustomID();
 	var cadQuery = "exec coa_duplicate_for_address " + AddressValidatedNumber + ",'" + ApplicationTypeLevel1 + "','" + ApplicationTypeLevel2 + "','" + ApplicationTypeLevel3 + "','" + ApplicationTypeLevel4 + "'";
 	return cadQuery;
 }
