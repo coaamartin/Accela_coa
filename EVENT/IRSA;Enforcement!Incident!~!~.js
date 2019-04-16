@@ -17,3 +17,10 @@ if (matchARecordType([
 ], appTypeString)) {
     include("426_UpdateParentEnfCaseCustomListAndStatus");
 }
+//script 5095
+if (matchARecordType([
+    "Enforcement/Incident/Informational/NA"
+], appTypeString)) {
+    include("5095_CodeInformationalIRSA");
+}
+
