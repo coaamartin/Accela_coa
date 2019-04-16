@@ -86,3 +86,7 @@ Notes:
 */
 //not needed in WTUA
 //permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
+
+// 4/16/2019
+
+include("5098_Business_Cancel_Open_Tasks_When_Withdrawn");
