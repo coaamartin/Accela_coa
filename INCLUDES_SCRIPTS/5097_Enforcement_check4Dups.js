@@ -1,7 +1,13 @@
 //function 5097_Enforcement_check4Dups(){
 	var capId = getCapId();
 	var sameAddressCapId=getCapByAddressN("Enforcement/Incident/Vacant/Master",capId,"Monitoring");
-	logDebug("the message was " + sameAddressCapId);
+	AddedAddressList = AddedAddressList.toArray();	
+	logDebug("the message was " + AddedAddressList);
+	x = 0;
+	for (x in AddedAddressList) {
+		vAddress = AddedAddressList[x];
+	logDebug("the address was " + AddedAddressList);		
+	}
     try{
         var checkForDups = AInfo["Check for Duplicates"];
         var possibleDupAltIds = "";
