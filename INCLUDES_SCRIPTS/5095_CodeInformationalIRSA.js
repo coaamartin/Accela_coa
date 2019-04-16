@@ -33,8 +33,8 @@ if(ifTracer(appTypeString == "Enforcement/Incident/Informational/NA", "appTypeSt
 	logDebug("---------------------> iftracer found: " + appTypeString);
 }
 	logDebug("---------------------> iftracer found result: " + ifTracer(inspResult));
-if(ifTracer(inspResult == "Reinspection 1" || inspResult == "Reinspection 2", "inspResult == Reinspection 1")) {
-	logDebug("---------------------> iftracer found: " + ifTracer(inspResult));
+if(ifTracer(inspType == "Reinspection 1" || inspType == "Reinspection 2", "inspResult == Reinspection 1")) {
+	logDebug("---------------------> iftracer found: " + ifTracer(inspType));
 }
 var currentDate = new Date();
 
