@@ -119,6 +119,7 @@ if (AInfo["Type of Issue"] == "PENNANTS")	{
 
 if (AInfo["Type of Issue"] == "BANNERS")	{
 	updateAppStatus("Banners", "Script 5094");	
+	scheduleInspection("Pictures", 0,inspectorObj); //, inspector, null, newInspReqComments);		
 	reinspectionDays = 16;
 	maxEvents = "Reinspection 4";
 	newDate = dateAdd(currentDate,reinspectionDays);

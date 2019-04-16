@@ -139,9 +139,13 @@ logDebug("---------------------> Total Reinspection Found: " + checkEvents);
 nextEvent = "Reinspection " + checkEvents;
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
+	scheduleInspection("Pictures", 0,inspectorObj); 
+	scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 	
+	//newDate = dateAdd(null,reinspectionDays);
+	//scheduleInspectDate("Reinspection 1", newDate)
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
 		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
-			if (checkEvents = 1) {
+			if (checkEvents > 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
 				editAppSpecific(nextEvent, currentDate);
