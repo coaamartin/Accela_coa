@@ -151,66 +151,6 @@ if (inspType == "Reinspection 1") {
 	}
 }
 
-if (inspType == "Reinspection 1") {
-	logDebug("---------------------> Reinspection 1");	
-	var reinspectionDays = 30;
-	var maxEvents = "Reinspection 1";
-	var eventType = "";
-	if (AInfo["Type of Issue"] == "PENNANTS")
-	{	
-		maxEvents = "Reinspection 1";
-	}
-	if (AInfo["Type of Issue"] == "INFLATABLES")
-	{	
-		maxEvents = "Reinspection 1";
-	}
-	if (AInfo["Type of Issue"] == "BANNERS")
-	{	
-		maxEvents = "Reinspection 4";
-		eventType = "Banner Event ";	
-	}	
-	if (AInfo["Type of Issue"] == "GARAGE SALES")
-	{	
-		maxEvents = "Reinspection 4";
-		eventType = "Garage Sale Event ";		
-	}	
-	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
-	{	
-		maxEvents = "Reinspection 1";
-		updateAppStatus("Closed", "Script 5095");	
-	}		
-	if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
-	{	
-		newDate = dateAdd(null,reinspectionDays);
-	}	
-
-	var checkEvents = 0;
-	var nextEvent;
-	var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
-	logDebug("---------------------> Starting Count of Reinspections");	
-	for (s in inspectionTypesAry) {
-		if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
-			checkEvents = checkEvents + 1;
-			logDebug("---------------------> Reinspection Found: " + checkEvents);		
-		}
-	}
-	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-	nextEvent = "Reinspection 2";
-
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
-		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
-			scheduleInspection("Pictures", 0,inspectorObj); 
-			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
-			eventType = eventType + "2";
-			editAppSpecific(eventType, currentDate);	
-			
-		} else {
-			showMessage = true;
-            comment("************ Create a Zoning record.  This is now a violation.");
-		}
-	}
-}
-
 if (inspType == "Reinspection 2") {
 	logDebug("---------------------> Reinspection 2");	
 	var reinspectionDays = 30;
@@ -257,7 +197,7 @@ if (inspType == "Reinspection 2") {
 	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
 	nextEvent = "Reinspection 3";
 
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
 		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
@@ -271,8 +211,8 @@ if (inspType == "Reinspection 2") {
 	}
 }
 
-if (inspType == "Reinspection 4") {
-	logDebug("---------------------> Reinspection 4");	
+if (inspType == "Reinspection 3") {
+	logDebug("---------------------> Reinspection 3");	
 	var reinspectionDays = 30;
 	var maxEvents = "Reinspection 1";
 	var eventType = "";
@@ -331,8 +271,8 @@ if (inspType == "Reinspection 4") {
 	}
 }
 
-if (inspType == "Reinspection 5") {
-	logDebug("---------------------> Reinspection 5");	
+if (inspType == "Reinspection 4") {
+	logDebug("---------------------> Reinspection 4");	
 	var reinspectionDays = 30;
 	var maxEvents = "Reinspection 1";
 	var eventType = "";
@@ -391,8 +331,8 @@ if (inspType == "Reinspection 5") {
 	}
 }
 
-if (inspType == "Reinspection 6") {
-	logDebug("---------------------> Reinspection 6");	
+if (inspType == "Reinspection 5") {
+	logDebug("---------------------> Reinspection 5");	
 	var reinspectionDays = 30;
 	var maxEvents = "Reinspection 1";
 	var eventType = "";
