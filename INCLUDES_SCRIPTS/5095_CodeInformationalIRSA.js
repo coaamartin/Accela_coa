@@ -90,7 +90,7 @@ if (inspType == "Pictures" && inspResult == "Reschedule") {
 	newDate = dateAdd(null,1);
 	scheduleInspectDate("Pictures", newDate)
 }
-logDebug("---------------------> At start of Reinspection 1 " + inspType + " " + inspResult);
+
 if (inspType == "Reinspection 1") {
 	logDebug("---------------------> Reinspection 1");	
 //start
@@ -191,7 +191,7 @@ if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
 {	
 	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
+//	scheduleInspectDate("Reinspection 1", newDate)
 }	
 //
 var checkEvents = 0;
@@ -257,7 +257,7 @@ if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
 {	
 	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
+//	scheduleInspectDate("Reinspection 1", newDate)
 }	
 //
 var checkEvents = 0;
@@ -323,7 +323,7 @@ if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
 {	
 	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
+//	scheduleInspectDate("Reinspection 1", newDate)
 }	
 //
 var checkEvents = 0;
