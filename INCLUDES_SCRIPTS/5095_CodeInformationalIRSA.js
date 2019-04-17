@@ -5,14 +5,14 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "18-000337-CIE";
+//var myCapId = "19-000097-CIE";
 //var myUserId = "AMARTIN";
-//var eventName = "ApplicationSpecificInfoUpdateAfter";
+//var eventName = "InspectionResultSubmitAfter";
 //var wfTask = "Foreclosure Information";
 //var wfStatus = "NED/REO Recorded";
 //var wfComment = "";
-//var inspType = "Miscellaneous"
-//var inspResult = "Complete"
+//var inspType = "Reinspection 1"
+//var inspResult = "Start of Next Event"
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
 //var runEvent = true; // set to true to simulate the event and run all std choices/scripts for the record type.  
@@ -27,15 +27,6 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5095 IRSA");
-logDebug("---------------------> inspection is: " + inspType);
-if(ifTracer(appTypeString == "Enforcement/Incident/Informational/NA", "appTypeString == Enforcement/Incident/Informational/NA")) {
-	logDebug("---------------------> iftracer found: " + appTypeString);
-}
-	logDebug("---------------------> iftracer found result: " + ifTracer(inspResult));
-if(ifTracer(inspType == "Reinspection 1" || inspType == "Reinspection 2", "inspResult == Reinspection 1")) {
-	logDebug("---------------------> iftracer found: " + ifTracer(inspType));
-}
 var currentDate = new Date();
 
 function cancelInspections() {
@@ -136,7 +127,7 @@ var checkEvents = 0;
 var nextEvent;
 var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
 logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
+//var inspType = aa.inspection.getInspections(capId);
 for (s in inspectionTypesAry) {
 	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
 		checkEvents = checkEvents + 1;
@@ -144,7 +135,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
+nextEvent = "Reinspection " + checkEvents + 1;
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	scheduleInspection("Pictures", 0,inspectorObj); 
@@ -153,7 +144,7 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 	//scheduleInspectDate("Reinspection 1", newDate)
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
 		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
-			if (checkEvents > 1) {
+			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
 				editAppSpecific(nextEvent, currentDate);
@@ -200,7 +191,7 @@ var checkEvents = 0;
 var nextEvent;
 var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
 logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
+//var inspType = aa.inspection.getInspections(capId);
 for (s in inspectionTypesAry) {
 	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
 		checkEvents = checkEvents + 1;
@@ -208,7 +199,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
+nextEvent = "Reinspection " + checkEvents + 2;
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
@@ -260,7 +251,7 @@ var checkEvents = 0;
 var nextEvent;
 var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
 logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
+//var inspType = aa.inspection.getInspections(capId);
 for (s in inspectionTypesAry) {
 	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
 		checkEvents = checkEvents + 1;
@@ -268,7 +259,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
+nextEvent = "Reinspection " + checkEvents + 3;
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
@@ -320,7 +311,7 @@ var checkEvents = 0;
 var nextEvent;
 var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
 logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
+//var inspType = aa.inspection.getInspections(capId);
 for (s in inspectionTypesAry) {
 	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
 		checkEvents = checkEvents + 1;
@@ -328,7 +319,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
+nextEvent = "Reinspection " + checkEvents + 4;
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
@@ -380,7 +371,7 @@ var checkEvents = 0;
 var nextEvent;
 var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
 logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
+//var inspType = aa.inspection.getInspections(capId);
 for (s in inspectionTypesAry) {
 	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
 		checkEvents = checkEvents + 1;
@@ -388,7 +379,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
+nextEvent = "Reinspection " + checkEvents + 5;
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
@@ -440,7 +431,7 @@ var checkEvents = 0;
 var nextEvent;
 var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
 logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
+//var inspType = aa.inspection.getInspections(capId);
 for (s in inspectionTypesAry) {
 	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
 		checkEvents = checkEvents + 1;
@@ -448,7 +439,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
+nextEvent = "Reinspection " + checkEvents + 6;
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
