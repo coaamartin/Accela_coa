@@ -43,13 +43,13 @@ function cancelInspections() {
 		}
 	}
 }	
-function cancelInspectionsByType(inspType) {
+function cancelInspectionsByTypeStatus(inspType,inspStatus) {
 	logDebug("---------------------> In the cancelInspectionsByType function");		
 	var inspResultObj = aa.inspection.getInspections(capId);
 	if (inspResultObj.getSuccess()) {
 		inspList = inspResultObj.getOutput();
 		for (xx in inspList) {
-			if (String(inspList[xx].getInspectionType()).equalsIgnoreCase(inspType)) {
+			if (String(inspList[xx].getInspectionType()).equalsIgnoreCase(inspType) && inspList[xx].getInspectionStatus().equals("Scheduled")) {
 			var inspId = inspList[xx].getIdNumber();
 			var res=aa.inspection.cancelInspection(capId, inspId);
 			if (res.getSuccess()){
