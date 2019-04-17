@@ -209,6 +209,8 @@ logDebug("---------------------> Total Reinspection Found: " + checkEvents);
 nextEvent = "Reinspection 3";
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
+	scheduleInspection("Pictures", 0,inspectorObj); 
+	scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 	
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
 		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
 			if (checkEvents = 1) {
@@ -273,6 +275,8 @@ logDebug("---------------------> Total Reinspection Found: " + checkEvents);
 nextEvent = "Reinspection 4";
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
+	scheduleInspection("Pictures", 0,inspectorObj); 
+	scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 	
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
 		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
 			if (checkEvents = 1) {
@@ -337,6 +341,8 @@ logDebug("---------------------> Total Reinspection Found: " + checkEvents);
 nextEvent = "Reinspection 5";
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
+	scheduleInspection("Pictures", 0,inspectorObj); 
+	scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 	
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
 		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
 			if (checkEvents = 1) {
@@ -401,6 +407,8 @@ logDebug("---------------------> Total Reinspection Found: " + checkEvents);
 nextEvent = "Reinspection 6";
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
+	scheduleInspection("Pictures", 0,inspectorObj); 
+	scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 	
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
 		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
 			if (checkEvents = 1) {
