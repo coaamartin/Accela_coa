@@ -120,7 +120,7 @@ if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
 {	
 	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
+	//scheduleInspectDate("Reinspection 1", newDate)
 }	
 //
 var checkEvents = 0;
@@ -135,7 +135,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents + 1;
+nextEvent = "Reinspection 2";
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	scheduleInspection("Pictures", 0,inspectorObj); 
@@ -147,7 +147,8 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
+				eventType = eventType + 2;
+				editAppSpecific(eventType, currentDate);
 			}
 		}
 	}
@@ -160,6 +161,7 @@ if (inspType == "Reinspection 2") {
 //start
 var reinspectionDays = 30;
 var maxEvents = "Reinspection 1";
+var eventType = "";
 if (AInfo["Type of Issue"] == "PENNANTS")
 {	
 	maxEvents = "Reinspection 1";
@@ -171,10 +173,12 @@ if (AInfo["Type of Issue"] == "INFLATABLES")
 if (AInfo["Type of Issue"] == "BANNERS")
 {	
 	maxEvents = "Reinspection 4";
+	eventType = "Banner Event ";
 }	
 if (AInfo["Type of Issue"] == "GARAGE SALES")
 {	
 	maxEvents = "Reinspection 4";
+	eventType = "Garage Sale Event ";	
 }	
 if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 {	
@@ -199,7 +203,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents + 2;
+nextEvent = "Reinspection 3";
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
@@ -207,7 +211,8 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
+				eventType = eventType + 3;
+				editAppSpecific(eventType, currentDate);
 			}
 		}
 	}
@@ -259,7 +264,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents + 3;
+nextEvent = "Reinspection 4";
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
@@ -267,8 +272,9 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
-			}
+				eventType = eventType + 4;
+				editAppSpecific(eventType, currentDate);
+			}	
 		}
 	}
 }
@@ -319,7 +325,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents + 4;
+nextEvent = "Reinspection 5";
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
@@ -327,7 +333,8 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
+				eventType = eventType + 5;
+				editAppSpecific(eventType, currentDate);
 			}
 		}
 	}
@@ -379,7 +386,7 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents + 5;
+nextEvent = "Reinspection 6";
 var foundInspection = 0;
 if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
@@ -387,7 +394,6 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
 			}
 		}
 	}
@@ -439,19 +445,18 @@ for (s in inspectionTypesAry) {
 	}
 }
 logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents + 6;
-var foundInspection = 0;
-if (checkEvents != 0 && nextEvent <= maxEvents) {
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
+//nextEvent = "Reinspection " + checkEvents + 6;
+//var foundInspection = 0;
+//if (checkEvents != 0 && nextEvent <= maxEvents) {
+//	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
 		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
 			}
 		}
-	}
-}
+//	}
+//}
 
 }
 
