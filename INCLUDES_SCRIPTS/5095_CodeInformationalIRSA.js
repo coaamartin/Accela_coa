@@ -44,12 +44,12 @@ function cancelInspections() {
 	}
 }	
 function cancelInspectionsByTypeStatus(inspType,inspStatus) {
-	logDebug("---------------------> In the cancelInspectionsByType function");		
+	logDebug("---------------------> In the cancelInspectionsByTypeStatus function");		
 	var inspResultObj = aa.inspection.getInspections(capId);
 	if (inspResultObj.getSuccess()) {
 		inspList = inspResultObj.getOutput();
 		for (xx in inspList) {
-			if (String(inspList[xx].getInspectionType()).equalsIgnoreCase(inspType) && inspList[xx].getInspectionStatus().equals("Scheduled")) {
+			if (String(inspList[xx].getInspectionType()).equalsIgnoreCase(inspType) && inspList[xx].getInspectionStatus().equals(inspStatus)) {
 			var inspId = inspList[xx].getIdNumber();
 			var res=aa.inspection.cancelInspection(capId, inspId);
 			if (res.getSuccess()){
@@ -86,7 +86,7 @@ try{
 
 if (inspType == "Pictures" && inspResult == "Reschedule") {
 	logDebug("---------------------> Inspection Pictures - Reschedule");	
-	cancelInspectionsByType("Pictures");	
+	cancelInspectionsByTypeStatus("Pictures","Scheduled");	
 	newDate = dateAdd(null,1);
 	scheduleInspectDate("Pictures", newDate)
 }
@@ -480,7 +480,7 @@ if (inspType == "Verify Vacant") {
 	reinspectionDays = getAppSpecific("Reinspection Days");
 
 	if (inspResult == "Order Boardup") {
-		cancelInspectionsByType("Verify Vacant");		
+		cancelInspectionsByTypeStatus("Verify Vacant","Scheduled");		
 		//insert inspection and assign to inspOfficer
 		if(codeDistrict && codeDistrict.length > 0){
 			var inspOfficer = assignOfficer(codeDistrict);
