@@ -89,7 +89,7 @@ if (inspOfficer) {
 	if (inspRes.getSuccess())
 		{var inspectorObj = inspRes.getOutput();}
 }			
-scheduleInspection("Reinspection 1", 0,inspectorObj); //, inspector, null, newInspReqComments);	
+//scheduleInspection("Reinspection 1", 0,inspectorObj); //, inspector, null, newInspReqComments);	
 var currentDate = new Date();
 var reinspectionDays = 30;
 var maxEvents;
