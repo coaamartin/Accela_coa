@@ -147,7 +147,7 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				eventType = eventType + 2;
+				eventType = eventType + "2";
 				editAppSpecific(eventType, currentDate);
 			}
 		}
@@ -211,7 +211,7 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				eventType = eventType + 3;
+				eventType = eventType + "3";
 				editAppSpecific(eventType, currentDate);
 			}
 		}
@@ -272,7 +272,7 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				eventType = eventType + 4;
+				eventType = eventType + "4";
 				editAppSpecific(eventType, currentDate);
 			}	
 		}
@@ -333,7 +333,7 @@ if (checkEvents != 0 && nextEvent <= maxEvents) {
 			if (checkEvents = 1) {
 				showMessage = true;
                 comment("Create a Zoning record.");
-				eventType = eventType + 5;
+				eventType = eventType + "5";
 				editAppSpecific(eventType, currentDate);
 			}
 		}
