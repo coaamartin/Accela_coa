@@ -90,7 +90,8 @@ if (inspOfficer) {
 		{var inspectorObj = inspRes.getOutput();}
 }			
 //scheduleInspection("Reinspection 1", 0,inspectorObj); //, inspector, null, newInspReqComments);	
-var currentDate = new Date();
+//var currentDate = new Date();
+var currentDate = sysDateMMDDYYYY;
 var reinspectionDays = 30;
 var maxEvents;
 
@@ -130,18 +131,22 @@ if (AInfo["Type of Issue"] == "BANNERS")	{
 
 if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")	{
 	updateAppStatus("Christmas Tree Lots", "Script 5094");	
-	newDate = dateAdd(currentDate,reinspectionDays);
-	editTaskDueDate("Event 1", newDate);	
+	//newDate = dateAdd(currentDate,reinspectionDays);
+	newDate = dateFormatted('01', '15', sysDate.getYear()+1, "");	
 	scheduleInspectDate("Reinspection 1", newDate);
+	
+	activateTask("Event 1");  	
+	editTaskDueDate("Event 1", newDate);	
+	
     editAppSpecific("Christmas Tree Lot App Date", currentDate);	
 	editAppSpecific("Permit Application Event", "Activities");		
-	activateTask("Event 1");   		
-	var sysDate = aa.date.getCurrentDate();
-	renewalDate = dateFormatted('11', '20', sysDate.getYear(), "");
+ 		
+	//var sysDate = aa.date.getCurrentDate();
+	//renewalDate = dateFormatted('11', '20', sysDate.getYear(), "");
 	//if (sysDate > renewalDate) {
 	//	renewalDate = dateFormatted('2', '1', sysDate.getYear()+1, "");
 	//}	
-	editTaskDueDate("Event 1", renewalDate);	
+	//editTaskDueDate("Event 1", renewalDate);	
 }
 
 if (AInfo["Type of Issue"] == "GARAGE SALES")	{
