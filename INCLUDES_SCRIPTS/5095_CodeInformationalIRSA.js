@@ -117,7 +117,8 @@ if (inspType == "Reinspection 1") {
 	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 	{	
 		maxEvents = "Reinspection 1";
-		updateAppStatus("Closed", "Script 5095");	
+		updateAppStatus("Closed", "Script 5095");
+		closeAllTasks(capId, "");		
 	}		
 	if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
 	{	
