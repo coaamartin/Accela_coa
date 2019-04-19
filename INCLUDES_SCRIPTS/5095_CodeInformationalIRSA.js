@@ -107,16 +107,19 @@ if (inspType == "Reinspection 1") {
 	if (AInfo["Type of Issue"] == "INFLATABLES")
 	{	
 		maxEvents = "Reinspection 1";
+		reinspectionDays = 3;	
 	}
 	if (AInfo["Type of Issue"] == "BANNERS")
 	{	
 		maxEvents = "Reinspection 4";
 		eventType = "Banner Event ";	
+		reinspectionDays = 16;	
 	}	
 	if (AInfo["Type of Issue"] == "GARAGE SALES")
 	{	
 		maxEvents = "Reinspection 4";
-		eventType = "Garage Sale Event ";		
+		eventType = "Garage Sale Event ";	
+		reinspectionDays = 3;		
 	}	
 	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 	{	
@@ -168,16 +171,19 @@ if (inspType == "Reinspection 2") {
 	if (AInfo["Type of Issue"] == "INFLATABLES")
 	{	
 		maxEvents = "Reinspection 1";
+		reinspectionDays = 3;	
 	}
 	if (AInfo["Type of Issue"] == "BANNERS")
 	{	
 		maxEvents = "Reinspection 4";
 		eventType = "Banner Event ";	
+		reinspectionDays = 16;	
 	}	
 	if (AInfo["Type of Issue"] == "GARAGE SALES")
 	{	
 		maxEvents = "Reinspection 4";
-		eventType = "Garage Sale Event ";		
+		eventType = "Garage Sale Event ";	
+		reinspectionDays = 3;		
 	}	
 	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 	{	
@@ -228,16 +234,19 @@ if (inspType == "Reinspection 3") {
 	if (AInfo["Type of Issue"] == "INFLATABLES")
 	{	
 		maxEvents = "Reinspection 1";
+		reinspectionDays = 3;	
 	}
 	if (AInfo["Type of Issue"] == "BANNERS")
 	{	
 		maxEvents = "Reinspection 4";
 		eventType = "Banner Event ";	
+		reinspectionDays = 16;	
 	}	
 	if (AInfo["Type of Issue"] == "GARAGE SALES")
 	{	
 		maxEvents = "Reinspection 4";
-		eventType = "Garage Sale Event ";		
+		eventType = "Garage Sale Event ";	
+		reinspectionDays = 3;		
 	}	
 	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 	{	
@@ -288,16 +297,19 @@ if (inspType == "Reinspection 4") {
 	if (AInfo["Type of Issue"] == "INFLATABLES")
 	{	
 		maxEvents = "Reinspection 1";
+		reinspectionDays = 3;	
 	}
 	if (AInfo["Type of Issue"] == "BANNERS")
 	{	
 		maxEvents = "Reinspection 4";
 		eventType = "Banner Event ";	
+		reinspectionDays = 16;	
 	}	
 	if (AInfo["Type of Issue"] == "GARAGE SALES")
 	{	
 		maxEvents = "Reinspection 4";
-		eventType = "Garage Sale Event ";		
+		eventType = "Garage Sale Event ";	
+		reinspectionDays = 3;		
 	}	
 	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 	{	
@@ -348,16 +360,19 @@ if (inspType == "Reinspection 5") {
 	if (AInfo["Type of Issue"] == "INFLATABLES")
 	{	
 		maxEvents = "Reinspection 1";
+		reinspectionDays = 3;	
 	}
 	if (AInfo["Type of Issue"] == "BANNERS")
 	{	
 		maxEvents = "Reinspection 4";
 		eventType = "Banner Event ";	
+		reinspectionDays = 16;	
 	}	
 	if (AInfo["Type of Issue"] == "GARAGE SALES")
 	{	
 		maxEvents = "Reinspection 4";
-		eventType = "Garage Sale Event ";		
+		eventType = "Garage Sale Event ";	
+		reinspectionDays = 3;		
 	}	
 	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
 	{	
