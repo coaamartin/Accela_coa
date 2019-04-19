@@ -45,24 +45,16 @@ try{
 //	logDebug("refuser =" + refUser);
 //	var user = lookup("CODE_OFFICER_AREA#", refUser);
 //	logDebug("refuser =" + user);
-	if (inspectorObj != null && inspectorObj != "")
-	{
-		logDebug("inside if =" + inspectorObj);
-		//scheduleInspection("Reinspection 1",0, user);
-		//scheduleInspection("Pictures",0, user);	
-		assignCap(inspectorObj);
-		assignTask("Issue Classification", inspectorObj);
-		//closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
-		//activateTask("Review Application");
-		//assignTask("Inspection", user);
-	}
-	else{
-		comment("Inspector not found via GIS.  Task assigned to Admin.");	
-		assignCap(staffAdmin);
-		assignTask("Issue Classification", staffAdmin);		
-		//comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
-		//scheduleInspection("Reinspection 1",0);
-	}
+if (inspectorObj != null && inspectorObj != "")
+{
+	logDebug("inside if =" + inspectorObj);
+	//scheduleInspection("Reinspection 1",0, user);
+	//scheduleInspection("Pictures",0, user);	
+	assignCap(inspectorObj);
+	assignTask("Issue Classification", inspectorObj);
+	//closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
+	//activateTask("Review Application");
+	//assignTask("Inspection", user);
 }
 else{
 	comment("Inspector not found via GIS.  Task assigned to Admin.");	
@@ -71,6 +63,7 @@ else{
 	//comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
 	//scheduleInspection("Reinspection 1",0);
 }
+
 
 logDebug("---------------------> At end of 5096 CTRCA");
 aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
