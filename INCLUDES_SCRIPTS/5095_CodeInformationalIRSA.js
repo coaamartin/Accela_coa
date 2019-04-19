@@ -68,12 +68,16 @@ var inspOfficer = lookup("CODE_OFFICER_AREA#", codeDistrict);
 		return inspOfficer;
 	}
 }
-
+	logDebug("Ready to compute a code officer: ");
 try{
+		logDebug("inside try ");
 	var codeDistrict = new Array;
 	codeDistrict = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","CODE_NUMBER")
+			logDebug("codedistrict is: " + codeDistrict);
 	if(codeDistrict && codeDistrict.length > 0){
+		logDebug("inside try ");
 	var inspOfficer = assignOfficer(codeDistrict);
+				logDebug("assigned officer is: " + inspOfficer);
 	}
 	if (inspOfficer) {
 		var inspRes = aa.person.getUser(inspOfficer);
