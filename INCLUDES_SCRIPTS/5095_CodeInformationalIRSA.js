@@ -27,7 +27,7 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-var currentDate = new Date();
+var currentDate = sysDateMMDDYYYY;
 
 function cancelInspections() {
 	logDebug("---------------------> In the cancelInspections function");		
