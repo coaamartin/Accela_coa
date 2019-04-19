@@ -56,6 +56,14 @@ var inspOfficer = lookup("CODE_OFFICER_AREA#", codeDistrict);
 try{
 	var codeDistrict = new Array;
 	codeDistrict = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","CODE_NUMBER")
+	if(codeDistrict && codeDistrict.length > 0){
+	var inspOfficer = assignOfficer(codeDistrict);
+	}
+	if (inspOfficer) {
+		var inspRes = aa.person.getUser(inspOfficer);
+		if (inspRes.getSuccess())
+		{var inspectorObj = inspRes.getOutput();}
+	}				
 } catch (err) {
 	logDebug("Failed to retrieve code area for code officer assignment: " + err.stack);
 };

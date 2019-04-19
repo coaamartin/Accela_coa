@@ -72,8 +72,8 @@ var inspOfficer = lookup("CODE_OFFICER_AREA#", codeDistrict);
 try{
 	var codeDistrict = new Array;
 	codeDistrict = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","CODE_NUMBER")
-	    if(codeDistrict && codeDistrict.length > 0){
-		var inspOfficer = assignOfficer(codeDistrict);
+	if(codeDistrict && codeDistrict.length > 0){
+	var inspOfficer = assignOfficer(codeDistrict);
 	}
 	if (inspOfficer) {
 		var inspRes = aa.person.getUser(inspOfficer);
