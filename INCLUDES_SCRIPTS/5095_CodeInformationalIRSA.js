@@ -142,7 +142,7 @@ if (inspType == "Reinspection 1") {
 	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
 	nextEvent = "Reinspection 2";
 
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "GARAGE SALES" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
 		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
@@ -202,7 +202,7 @@ if (inspType == "Reinspection 2") {
 	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
 	nextEvent = "Reinspection 3";
 
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "GARAGE SALES" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
 		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
@@ -262,7 +262,7 @@ if (inspType == "Reinspection 3") {
 	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
 	nextEvent = "Reinspection 4";
 
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "GARAGE SALES" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
 		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
@@ -322,7 +322,7 @@ if (inspType == "Reinspection 4") {
 	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
 	nextEvent = "Reinspection 5";
 
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "GARAGE SALES" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
 		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
