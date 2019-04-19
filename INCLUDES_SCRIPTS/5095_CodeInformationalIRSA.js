@@ -5,14 +5,14 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "18-000337-CIE";
+//var myCapId = "19-000097-CIE";
 //var myUserId = "AMARTIN";
-//var eventName = "ApplicationSpecificInfoUpdateAfter";
+//var eventName = "InspectionResultSubmitAfter";
 //var wfTask = "Foreclosure Information";
 //var wfStatus = "NED/REO Recorded";
 //var wfComment = "";
-//var inspType = "Miscellaneous"
-//var inspResult = "Complete"
+//var inspType = "Reinspection 1"
+//var inspResult = "Start of Next Event"
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
 //var runEvent = true; // set to true to simulate the event and run all std choices/scripts for the record type.  
@@ -27,7 +27,6 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5094 IRSA");
 var currentDate = new Date();
 
 function cancelInspections() {
@@ -44,13 +43,13 @@ function cancelInspections() {
 		}
 	}
 }	
-function cancelInspectionsByType(inspType) {
-	logDebug("---------------------> In the cancelInspectionsByType function");		
+function cancelInspectionsByTypeStatus(inspType,inspStatus) {
+	logDebug("---------------------> In the cancelInspectionsByTypeStatus function");		
 	var inspResultObj = aa.inspection.getInspections(capId);
 	if (inspResultObj.getSuccess()) {
 		inspList = inspResultObj.getOutput();
 		for (xx in inspList) {
-			if (String(inspList[xx].getInspectionType()).equalsIgnoreCase(inspType)) {
+			if (String(inspList[xx].getInspectionType()).equalsIgnoreCase(inspType) && inspList[xx].getInspectionStatus().equals(inspStatus)) {
 			var inspId = inspList[xx].getIdNumber();
 			var res=aa.inspection.cancelInspection(capId, inspId);
 			if (res.getSuccess()){
@@ -87,373 +86,320 @@ try{
 
 if (inspType == "Pictures" && inspResult == "Reschedule") {
 	logDebug("---------------------> Inspection Pictures - Reschedule");	
-	cancelInspectionsByType("Pictures");	
+	cancelInspectionsByTypeStatus("Pictures","Scheduled");	
 	newDate = dateAdd(null,1);
 	scheduleInspectDate("Pictures", newDate)
 }
 
 if (inspType == "Reinspection 1") {
 	logDebug("---------------------> Reinspection 1");	
-//start
-var reinspectionDays = 30;
-var maxEvents = "Reinspection 1";
-if (AInfo["Type of Issue"] == "PENNANTS")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "INFLATABLES")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "BANNERS")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "GARAGE SALES")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
-{	
-	maxEvents = "Reinspection 1";
-	updateAppStatus("Closed", "Script 5095");	
-}		
-if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
-{	
-	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
-}	
-//
-var checkEvents = 0;
-var nextEvent;
-var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
-logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
-for (s in inspectionTypesAry) {
-	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
-		checkEvents = checkEvents + 1;
-		logDebug("---------------------> Reinspection Found: " + checkEvents);		
+	var reinspectionDays = 30;
+	var maxEvents = "Reinspection 1";
+	var eventType = "";
+	if (AInfo["Type of Issue"] == "PENNANTS")
+	{	
+		maxEvents = "Reinspection 1";
 	}
-}
-logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
-var foundInspection = 0;
-if (checkEvents != 0 && nextEvent <= maxEvents) {
-	scheduleInspection("Pictures", 0,inspectorObj); 
-	scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 	
-	//newDate = dateAdd(null,reinspectionDays);
-	//scheduleInspectDate("Reinspection 1", newDate)
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
-		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
-			if (checkEvents > 1) {
-				showMessage = true;
-                comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
-			}
+	if (AInfo["Type of Issue"] == "INFLATABLES")
+	{	
+		maxEvents = "Reinspection 1";
+	}
+	if (AInfo["Type of Issue"] == "BANNERS")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Banner Event ";	
+	}	
+	if (AInfo["Type of Issue"] == "GARAGE SALES")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Garage Sale Event ";		
+	}	
+	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
+	{	
+		maxEvents = "Reinspection 1";
+		updateAppStatus("Closed", "Script 5095");
+		closeAllTasks(capId, "");		
+	}		
+	if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
+	{	
+		newDate = dateAdd(null,reinspectionDays);
+	}	
+
+	var checkEvents = 0;
+	var nextEvent;
+	var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
+	logDebug("---------------------> Starting Count of Reinspections");	
+	for (s in inspectionTypesAry) {
+		if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
+			checkEvents = checkEvents + 1;
+			logDebug("---------------------> Reinspection Found: " + checkEvents);		
 		}
 	}
-}
+	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
+	nextEvent = "Reinspection 2";
 
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+			scheduleInspection("Pictures", 0,inspectorObj); 
+			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
+			eventType = eventType + "2";
+			editAppSpecific(eventType, currentDate);	
+			
+		} else {
+			showMessage = true;
+            comment("************ Create a Zoning record.  This is now a violation.");
+		}
+	}
 }
 
 if (inspType == "Reinspection 2") {
 	logDebug("---------------------> Reinspection 2");	
-//start
-var reinspectionDays = 30;
-var maxEvents = "Reinspection 1";
-if (AInfo["Type of Issue"] == "PENNANTS")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "INFLATABLES")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "BANNERS")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "GARAGE SALES")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
-{	
-	maxEvents = "Reinspection 1";
-	updateAppStatus("Closed", "Script 5095");	
-}		
-if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
-{	
-	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
-}	
-//
-var checkEvents = 0;
-var nextEvent;
-var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
-logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
-for (s in inspectionTypesAry) {
-	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
-		checkEvents = checkEvents + 1;
-		logDebug("---------------------> Reinspection Found: " + checkEvents);		
+	var reinspectionDays = 30;
+	var maxEvents = "Reinspection 1";
+	var eventType = "";
+	if (AInfo["Type of Issue"] == "PENNANTS")
+	{	
+		maxEvents = "Reinspection 1";
 	}
-}
-logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
-var foundInspection = 0;
-if (checkEvents != 0 && nextEvent <= maxEvents) {
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
-		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
-			if (checkEvents = 1) {
-				showMessage = true;
-                comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
-			}
+	if (AInfo["Type of Issue"] == "INFLATABLES")
+	{	
+		maxEvents = "Reinspection 1";
+	}
+	if (AInfo["Type of Issue"] == "BANNERS")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Banner Event ";	
+	}	
+	if (AInfo["Type of Issue"] == "GARAGE SALES")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Garage Sale Event ";		
+	}	
+	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
+	{	
+		maxEvents = "Reinspection 1";
+		updateAppStatus("Closed", "Script 5095");	
+	}		
+	if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
+	{	
+		newDate = dateAdd(null,reinspectionDays);
+	}	
+
+	var checkEvents = 0;
+	var nextEvent;
+	var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
+	logDebug("---------------------> Starting Count of Reinspections");	
+	for (s in inspectionTypesAry) {
+		if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
+			checkEvents = checkEvents + 1;
+			logDebug("---------------------> Reinspection Found: " + checkEvents);		
 		}
 	}
-}
+	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
+	nextEvent = "Reinspection 3";
 
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+			scheduleInspection("Pictures", 0,inspectorObj); 
+			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
+			eventType = eventType + "3";
+			editAppSpecific(eventType, currentDate);	
+			
+		} else {
+			showMessage = true;
+            comment("************ Create a Zoning record.  This is now a violation.");
+		}
+	}
 }
 
 if (inspType == "Reinspection 3") {
 	logDebug("---------------------> Reinspection 3");	
-//start
-var reinspectionDays = 30;
-var maxEvents = "Reinspection 1";
-if (AInfo["Type of Issue"] == "PENNANTS")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "INFLATABLES")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "BANNERS")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "GARAGE SALES")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
-{	
-	maxEvents = "Reinspection 1";
-	updateAppStatus("Closed", "Script 5095");	
-}		
-if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
-{	
-	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
-}	
-//
-var checkEvents = 0;
-var nextEvent;
-var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
-logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
-for (s in inspectionTypesAry) {
-	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
-		checkEvents = checkEvents + 1;
-		logDebug("---------------------> Reinspection Found: " + checkEvents);		
+	var reinspectionDays = 30;
+	var maxEvents = "Reinspection 1";
+	var eventType = "";
+	if (AInfo["Type of Issue"] == "PENNANTS")
+	{	
+		maxEvents = "Reinspection 1";
 	}
-}
-logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
-var foundInspection = 0;
-if (checkEvents != 0 && nextEvent <= maxEvents) {
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
-		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
-			if (checkEvents = 1) {
-				showMessage = true;
-                comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
-			}
+	if (AInfo["Type of Issue"] == "INFLATABLES")
+	{	
+		maxEvents = "Reinspection 1";
+	}
+	if (AInfo["Type of Issue"] == "BANNERS")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Banner Event ";	
+	}	
+	if (AInfo["Type of Issue"] == "GARAGE SALES")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Garage Sale Event ";		
+	}	
+	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
+	{	
+		maxEvents = "Reinspection 1";
+		updateAppStatus("Closed", "Script 5095");	
+	}		
+	if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
+	{	
+		newDate = dateAdd(null,reinspectionDays);
+	}	
+
+	var checkEvents = 0;
+	var nextEvent;
+	var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
+	logDebug("---------------------> Starting Count of Reinspections");	
+	for (s in inspectionTypesAry) {
+		if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
+			checkEvents = checkEvents + 1;
+			logDebug("---------------------> Reinspection Found: " + checkEvents);		
 		}
 	}
-}
+	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
+	nextEvent = "Reinspection 4";
 
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+			scheduleInspection("Pictures", 0,inspectorObj); 
+			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
+			eventType = eventType + "4";
+			editAppSpecific(eventType, currentDate);	
+			
+		} else {
+			showMessage = true;
+            comment("************ Create a Zoning record.  This is now a violation.");
+		}
+	}
 }
 
 if (inspType == "Reinspection 4") {
 	logDebug("---------------------> Reinspection 4");	
-//start
-var reinspectionDays = 30;
-var maxEvents = "Reinspection 1";
-if (AInfo["Type of Issue"] == "PENNANTS")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "INFLATABLES")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "BANNERS")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "GARAGE SALES")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
-{	
-	maxEvents = "Reinspection 1";
-	updateAppStatus("Closed", "Script 5095");	
-}		
-if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
-{	
-	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
-}	
-//
-var checkEvents = 0;
-var nextEvent;
-var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
-logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
-for (s in inspectionTypesAry) {
-	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
-		checkEvents = checkEvents + 1;
-		logDebug("---------------------> Reinspection Found: " + checkEvents);		
+	var reinspectionDays = 30;
+	var maxEvents = "Reinspection 1";
+	var eventType = "";
+	if (AInfo["Type of Issue"] == "PENNANTS")
+	{	
+		maxEvents = "Reinspection 1";
 	}
-}
-logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
-var foundInspection = 0;
-if (checkEvents != 0 && nextEvent <= maxEvents) {
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
-		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
-			if (checkEvents = 1) {
-				showMessage = true;
-                comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
-			}
+	if (AInfo["Type of Issue"] == "INFLATABLES")
+	{	
+		maxEvents = "Reinspection 1";
+	}
+	if (AInfo["Type of Issue"] == "BANNERS")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Banner Event ";	
+	}	
+	if (AInfo["Type of Issue"] == "GARAGE SALES")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Garage Sale Event ";		
+	}	
+	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
+	{	
+		maxEvents = "Reinspection 1";
+		updateAppStatus("Closed", "Script 5095");	
+	}		
+	if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
+	{	
+		newDate = dateAdd(null,reinspectionDays);
+	}	
+
+	var checkEvents = 0;
+	var nextEvent;
+	var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
+	logDebug("---------------------> Starting Count of Reinspections");	
+	for (s in inspectionTypesAry) {
+		if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
+			checkEvents = checkEvents + 1;
+			logDebug("---------------------> Reinspection Found: " + checkEvents);		
 		}
 	}
-}
+	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
+	nextEvent = "Reinspection 5";
 
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+			scheduleInspection("Pictures", 0,inspectorObj); 
+			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
+			eventType = eventType + "5";
+			editAppSpecific(eventType, currentDate);	
+			
+		} else {
+			showMessage = true;
+            comment("************ Create a Zoning record.  This is now a violation.");
+		}
+	}
 }
 
 if (inspType == "Reinspection 5") {
 	logDebug("---------------------> Reinspection 5");	
-
-var reinspectionDays = 30;
-var maxEvents = "Reinspection 1";
-if (AInfo["Type of Issue"] == "PENNANTS")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "INFLATABLES")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "BANNERS")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "GARAGE SALES")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
-{	
-	maxEvents = "Reinspection 1";
-	updateAppStatus("Closed", "Script 5095");	
-}		
-if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
-{	
-	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
-}	
-//
-var checkEvents = 0;
-var nextEvent;
-var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
-logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
-for (s in inspectionTypesAry) {
-	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
-		checkEvents = checkEvents + 1;
-		logDebug("---------------------> Reinspection Found: " + checkEvents);		
+	var reinspectionDays = 30;
+	var maxEvents = "Reinspection 1";
+	var eventType = "";
+	if (AInfo["Type of Issue"] == "PENNANTS")
+	{	
+		maxEvents = "Reinspection 1";
 	}
-}
-logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
-var foundInspection = 0;
-if (checkEvents != 0 && nextEvent <= maxEvents) {
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
-		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
-			if (checkEvents = 1) {
-				showMessage = true;
-                comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
-			}
+	if (AInfo["Type of Issue"] == "INFLATABLES")
+	{	
+		maxEvents = "Reinspection 1";
+	}
+	if (AInfo["Type of Issue"] == "BANNERS")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Banner Event ";	
+	}	
+	if (AInfo["Type of Issue"] == "GARAGE SALES")
+	{	
+		maxEvents = "Reinspection 4";
+		eventType = "Garage Sale Event ";		
+	}	
+	if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
+	{	
+		maxEvents = "Reinspection 1";
+		updateAppStatus("Closed", "Script 5095");	
+	}		
+	if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
+	{	
+		newDate = dateAdd(null,reinspectionDays);
+	}	
+
+	var checkEvents = 0;
+	var nextEvent;
+	var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
+	logDebug("---------------------> Starting Count of Reinspections");	
+	for (s in inspectionTypesAry) {
+		if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
+			checkEvents = checkEvents + 1;
+			logDebug("---------------------> Reinspection Found: " + checkEvents);		
 		}
 	}
-}
+	logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
+	nextEvent = "Reinspection 6";
 
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+			scheduleInspection("Pictures", 0,inspectorObj); 
+			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
+			eventType = eventType + "6";
+			editAppSpecific(eventType, currentDate);	
+			
+		} else {
+			showMessage = true;
+            comment("************ Create a Zoning record.  This is now a violation.");
+		}
+	}
 }
 
 if (inspType == "Reinspection 6") {
 	logDebug("---------------------> Reinspection 6");	
-//start
-var reinspectionDays = 30;
-var maxEvents = "Reinspection 1";
-if (AInfo["Type of Issue"] == "PENNANTS")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "INFLATABLES")
-{	
-	maxEvents = "Reinspection 1";
-}
-if (AInfo["Type of Issue"] == "BANNERS")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "GARAGE SALES")
-{	
-	maxEvents = "Reinspection 4";
-}	
-if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")
-{	
-	maxEvents = "Reinspection 1";
-	updateAppStatus("Closed", "Script 5095");	
-}		
-if (AInfo["Type of Issue"] != "CHRISTMAS TREE LOTS" && AInfo["Type of Issue"] != "PENNANTS")
-{	
-	newDate = dateAdd(null,reinspectionDays);
-	scheduleInspectDate("Reinspection 1", newDate)
-}	
-//
-var checkEvents = 0;
-var nextEvent;
-var inspectionTypesAry = [ "Reinspection 1", "Reinspection 2", "Reinspection 3","Reinspection 4", "Reinspection 5", "Reinspection 6" ];
-logDebug("---------------------> Starting Count of Reinspections");	
-var inspType = aa.inspection.getInspections(capId);
-for (s in inspectionTypesAry) {
-	if (inspType == inspectionTypesAry[s]) {	//&& inspResult == "Failed"
-		checkEvents = checkEvents + 1;
-		logDebug("---------------------> Reinspection Found: " + checkEvents);		
-	}
-}
-logDebug("---------------------> Total Reinspection Found: " + checkEvents);	
-nextEvent = "Reinspection " + checkEvents;
-var foundInspection = 0;
-if (checkEvents != 0 && nextEvent <= maxEvents) {
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
 		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
-			if (checkEvents = 1) {
-				showMessage = true;
-                comment("Create a Zoning record.");
-				editAppSpecific(nextEvent, currentDate);
-			}
+			showMessage = true;
+            comment("************ Create a Zoning record.  This is now a violation.");
 		}
 	}
-}
-
 }
 
 if (inspType == "Verify Vacant") {
@@ -461,7 +407,7 @@ if (inspType == "Verify Vacant") {
 	reinspectionDays = getAppSpecific("Reinspection Days");
 
 	if (inspResult == "Order Boardup") {
-		cancelInspectionsByType("Verify Vacant");		
+		cancelInspectionsByTypeStatus("Verify Vacant","Scheduled");		
 		//insert inspection and assign to inspOfficer
 		if(codeDistrict && codeDistrict.length > 0){
 			var inspOfficer = assignOfficer(codeDistrict);

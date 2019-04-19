@@ -1,7 +1,7 @@
-// SCRIPTNUMBER: 5094
-// SCRIPTFILENAME: 5094_CodeInformationalASA.js
-// PURPOSE: Called when Enforcement Informational record is built.
-// DATECREATED: 04/10/2019
+// SCRIPTNUMBER: 5099
+// SCRIPTFILENAME: 5099_CodeInformationalWTUA.js
+// PURPOSE: Called when Enforcement Informational record has task signoff.
+// DATECREATED: 04/18/2019
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
@@ -26,7 +26,7 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5094 ASA");	
+logDebug("---------------------> At start of 5099 ASA");	
 //I cannot get the async to work so using non-async by forcing env variable.
 //aa.env.setValue("eventType","Batch Process");
 
@@ -96,8 +96,8 @@ var maxEvents;
 
 editAppSpecific("Application Date", currentDate);	
 
-if (AInfo["Type of Issue"] == "PENNANTS")	{
-	updateAppStatus("Pennants", "Script 5094");	
+if (wfTask == "Issue Classification" && wfStatus == "Pennants") {
+	updateAppStatus("Pennants", "Script 5099");	
 	reinspectionDays = 30;
 	maxEvents = "Reinspection 1";
 	editAppSpecific("Permit Application Event", "Activities");	
@@ -117,8 +117,8 @@ if (AInfo["Type of Issue"] == "PENNANTS")	{
 	activateTask("Event 1");   		
 }
 
-if (AInfo["Type of Issue"] == "BANNERS")	{
-	updateAppStatus("Banners", "Script 5094");	
+if (wfTask == "Issue Classification" && wfStatus == "Banners") {
+	updateAppStatus("Banners", "Script 5099");	
 	scheduleInspection("Pictures", 0,inspectorObj); //, inspector, null, newInspReqComments);		
 	reinspectionDays = 16;
 	maxEvents = "Reinspection 4";
@@ -128,8 +128,8 @@ if (AInfo["Type of Issue"] == "BANNERS")	{
     editAppSpecific("Banner Event 1", currentDate);			
 }
 
-if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")	{
-	updateAppStatus("Christmas Tree Lots", "Script 5094");	
+if (wfTask == "Issue Classification" && wfStatus == "Christmas Tree Lots") {
+	updateAppStatus("Christmas Tree Lots", "Script 5099");	
 	newDate = dateFormatted('1', '15', sysDate.getYear()+1, "");	
 	scheduleInspectDate("Reinspection 1", newDate);
 	
@@ -140,8 +140,8 @@ if (AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS")	{
 	editAppSpecific("Permit Application Event", "Activities");		
 }
 
-if (AInfo["Type of Issue"] == "GARAGE SALES")	{
-	updateAppStatus("Garage Sales", "Script 5094");	
+if (wfTask == "Issue Classification" && wfStatus == "Garage Sales") {
+	updateAppStatus("Garage Sales", "Script 5099");	
 	reinspectionDays = 3;
 	maxEvents = "Reinspection 4";
 	newDate = dateAdd(currentDate,reinspectionDays);
@@ -160,8 +160,8 @@ if (AInfo["Type of Issue"] == "GARAGE SALES")	{
 	scheduleInspection("Pictures", 3,inspectorObj);		
 }
 
-if (AInfo["Type of Issue"] == "INFLATABLES")	{
-	updateAppStatus("Inflatables", "Script 5094");	
+if (wfTask == "Issue Classification" && wfStatus == "Inflatables") {
+	updateAppStatus("Inflatables", "Script 5099");	
 	reinspectionDays = 3;
 	maxEvents = "Reinspection 1";
 	newDate = dateAdd(currentDate,reinspectionDays);	
@@ -169,8 +169,8 @@ if (AInfo["Type of Issue"] == "INFLATABLES")	{
     editAppSpecific("Inflatable Event", currentDate);	
 }
 
-if (AInfo["Type of Issue"] == "MISCELLANEOUS")	{
-	updateAppStatus("Miscellaneous", "Script 5094");	
+if (wfTask == "Issue Classification" && wfStatus == "Miscellaneous") {
+	updateAppStatus("Miscellaneous", "Script 5099");	
 	//insert inspection and assign to inspOfficer
 	if(codeDistrict && codeDistrict.length > 0){
 		var inspOfficer = assignOfficer(codeDistrict);
@@ -184,7 +184,12 @@ if (AInfo["Type of Issue"] == "MISCELLANEOUS")	{
 	cancelInspectionsByType("Reinspection 1");	
 }
 
-logDebug("---------------------> 5094_CodeInformationalASA.js ended.");
+if (wfTask == "Issue Classification" && wfStatus == "Pictures Only") {
+	updateAppStatus("Pictures Only", "Script 5099");	
+	scheduleInspection("Pictures", 0,inspectorObj);	
+}
+
+logDebug("---------------------> 5099_CodeInformationalASA.js ended.");
 //Script Tester footer.  Comment this out when deploying.
 //}	
 

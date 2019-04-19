@@ -25,7 +25,12 @@ while (keys.hasMoreElements()) {
 
 //if (preExecute.length)
 //	doStandardChoiceActions(preExecute, true, 0); // run Pre-execution code
-
+if (matches(currentUserID,"AMARTIN","JWARTHAN","JMPORTER","JMAIN","DKOONTZ"))
+{
+	showDebug = true;
+} else {
+	showDebug = false;	
+}
 logGlobals(AInfo);
 
 checkForDuplicates();
