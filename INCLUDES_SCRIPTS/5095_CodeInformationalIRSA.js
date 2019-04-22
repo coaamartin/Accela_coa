@@ -496,7 +496,7 @@ if (inspType == "Notify Event" && inspResult == "Complete") {
 
 if (inspType == "Miscellaneous" && inspResult == "Complete") {
 	logDebug("---------------------> Miscellaneous - Complete");	
-	cancelInspections();	
+	cancelInspectionsByTypeStatus("Pictures", "Scheduled");	
 	closeAllTasks(capId, "");	
 	updateAppStatus("Miscellaneous", "Script 5095");	
 }
