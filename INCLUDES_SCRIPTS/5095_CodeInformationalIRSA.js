@@ -280,12 +280,16 @@ if (inspType == "Reinspection 3") {
 	nextEvent = "Reinspection 4";
 
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "GARAGE SALES" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
-		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit" || inspResult == "Removed")) {
+			if (inspResult == "Removed") {
+				cancelInspectionsByTypeStatus("Pictures","Scheduled");		
+				closeAllTasks(capId, "");				
+			} else {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
 			eventType = eventType + "4";
 			editAppSpecific(eventType, currentDate);	
-			
+			}
 		} else {
 			showMessage = true;
             comment("************ Create a Zoning record.  This is now a violation.");
@@ -343,12 +347,16 @@ if (inspType == "Reinspection 4") {
 	nextEvent = "Reinspection 5";
 
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "GARAGE SALES" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
-		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit" || inspResult == "Removed")) {
+			if (inspResult == "Removed") {
+				cancelInspectionsByTypeStatus("Pictures","Scheduled");		
+				closeAllTasks(capId, "");				
+			} else {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
 			eventType = eventType + "5";
 			editAppSpecific(eventType, currentDate);	
-			
+			}
 		} else {
 			showMessage = true;
             comment("************ Create a Zoning record.  This is now a violation.");
@@ -406,12 +414,16 @@ if (inspType == "Reinspection 5") {
 	nextEvent = "Reinspection 6";
 
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
-		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit" || inspResult == "Removed")) {
+			if (inspResult == "Removed") {
+				cancelInspectionsByTypeStatus("Pictures","Scheduled");		
+				closeAllTasks(capId, "");				
+			} else {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
 			eventType = eventType + "6";
 			editAppSpecific(eventType, currentDate);	
-			
+			}
 		} else {
 			showMessage = true;
             comment("************ Create a Zoning record.  This is now a violation.");
@@ -421,11 +433,15 @@ if (inspType == "Reinspection 5") {
 
 if (inspType == "Reinspection 6") {
 	logDebug("---------------------> Reinspection 6");	
-	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS") {
+	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS"  || inspResult == "Removed") {
 		if (inspResult == "Start of Next Event" || inspResult == "Up Without Permit") {
 			showMessage = true;
             comment("************ Create a Zoning record.  This is now a violation.");
 		}
+		if (inspResult == "Removed") {
+			cancelInspectionsByTypeStatus("Pictures","Scheduled");		
+			closeAllTasks(capId, "");				
+		}		
 	}
 }
 
