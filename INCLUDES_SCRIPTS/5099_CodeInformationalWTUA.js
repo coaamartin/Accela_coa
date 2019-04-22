@@ -174,7 +174,17 @@ if (wfTask == "Issue Classification" && wfStatus == "Inflatables") {
 	maxEvents = "Reinspection 1";
 	newDate = dateAdd(currentDate,reinspectionDays);	
 	scheduleInspectDate("Reinspection 1", newDate);
-    editAppSpecific("Inflatable Event", currentDate);	
+    editAppSpecific("Inflatable Event", "Y");	
+	//insert inspection and assign to inspOfficer
+	if(codeDistrict && codeDistrict.length > 0){
+		var inspOfficer = assignOfficer(codeDistrict);
+	}
+	if (inspOfficer) {
+		var inspRes = aa.person.getUser(inspOfficer);
+		if (inspRes.getSuccess())
+			{var inspectorObj = inspRes.getOutput();}
+		}			
+	scheduleInspection("Pictures", 3,inspectorObj);			
 }
 
 if (wfTask == "Issue Classification" && wfStatus == "Miscellaneous") {
