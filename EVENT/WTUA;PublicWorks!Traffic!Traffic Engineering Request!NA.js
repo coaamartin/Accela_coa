@@ -11,7 +11,7 @@ if (wfTask=="Application Submittal" && ((wfStatus=="Assigned") || (wfStatus=="Ac
 }
 
 //COA Script #6 added by SWAKIL
-include("6_assignedUserDraftWorkOrder");
+include("5006_assignedUserDraftWorkOrder");
 
 //script 250
 logDebug('Script 250 Starting')
