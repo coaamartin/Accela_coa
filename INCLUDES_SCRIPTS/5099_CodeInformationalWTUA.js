@@ -26,7 +26,7 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5099 ASA");	
+logDebug("---------------------> At start of 5099 WTUA");	
 //I cannot get the async to work so using non-async by forcing env variable.
 //aa.env.setValue("eventType","Batch Process");
 
@@ -223,7 +223,7 @@ if (wfTask == "Issue Classification" && wfStatus == "Pictures Only") {
 	scheduleInspection("Pictures", 0,inspectorObj);	
 }
 
-logDebug("---------------------> 5099_CodeInformationalASA.js ended.");
+logDebug("---------------------> 5099_CodeInformationalWTUA.js ended.");
 //Script Tester footer.  Comment this out when deploying.
 //}	
 
