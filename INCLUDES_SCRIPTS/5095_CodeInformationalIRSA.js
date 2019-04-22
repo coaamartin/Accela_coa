@@ -146,12 +146,16 @@ if (inspType == "Reinspection 1") {
 	nextEvent = "Reinspection 2";
 
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "GARAGE SALES" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
-		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit" || inspResult == "Removed")) {
+			if (inspResult == "Removed") {
+				cancelInspectionsByTypeStatus("Pictures","Scheduled");		
+				closeAllTasks(capId, "");				
+			} else {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
 			eventType = eventType + "2";
 			editAppSpecific(eventType, currentDate);	
-			
+			}
 		} else {
 			showMessage = true;
             comment("************ Create a Zoning record.  This is now a violation.");
@@ -209,12 +213,16 @@ if (inspType == "Reinspection 2") {
 	nextEvent = "Reinspection 3";
 
 	if (AInfo["Type of Issue"] == "BANNERS" || AInfo["Type of Issue"] == "GARAGE SALES" || AInfo["Type of Issue"] == "INFLATABLES" || AInfo["Type of Issue"] == "PENNANTS" || AInfo["Type of Issue"] == "CHRISTMAS TREE LOTS") {
-		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit")) {
+		if ((checkEvents != 0 && nextEvent <= maxEvents) && (inspResult == "Start of Next Event" || inspResult == "Up Without Permit" || inspResult == "Removed")) {
+			if (inspResult == "Removed") {
+				cancelInspectionsByTypeStatus("Pictures","Scheduled");		
+				closeAllTasks(capId, "");				
+			} else {
 			scheduleInspection("Pictures", 0,inspectorObj); 
 			scheduleInspection(nextEvent, reinspectionDays,inspectorObj); 
 			eventType = eventType + "3";
 			editAppSpecific(eventType, currentDate);	
-			
+			}
 		} else {
 			showMessage = true;
             comment("************ Create a Zoning record.  This is now a violation.");
