@@ -135,7 +135,8 @@ if (wfTask == "Issue Classification" && wfStatus == "Pennants") {
 		if (inspRes.getSuccess())
 			{var inspectorObj = inspRes.getOutput();}
 		}			
-	scheduleInspection("Notify Event", reinspectionDays,inspectorObj);		
+	scheduleInspection("Reinspection 1", reinspectionDays,inspectorObj);		
+	scheduleInspection("Notify Event", 0,inspectorObj);			
 	//Change enddate of event task
     newDate = dateAdd(currentDate,reinspectionDays-1);
 	activateTask("Event 1");   		
