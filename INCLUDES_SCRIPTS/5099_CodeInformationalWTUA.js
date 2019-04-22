@@ -63,6 +63,22 @@ function cancelInspectionsByType(inspType) {
 		}
 	}
 }
+function cancelInspectionsByTypeStatus(inspType,inspStatus) {
+	logDebug("---------------------> In the cancelInspectionsByTypeStatus function");		
+	var inspResultObj = aa.inspection.getInspections(capId);
+	if (inspResultObj.getSuccess()) {
+		inspList = inspResultObj.getOutput();
+		for (xx in inspList) {
+			if (String(inspList[xx].getInspectionType()).equalsIgnoreCase(inspType) && inspList[xx].getInspectionStatus().equals(inspStatus)) {
+			var inspId = inspList[xx].getIdNumber();
+			var res=aa.inspection.cancelInspection(capId, inspId);
+			if (res.getSuccess()){
+				aa.debug("Inspection Cancelled" , inspId);
+			}
+			}
+		}
+	}
+}
 function assignOfficer(codeDistrict) {			
 var inspOfficer = lookup("CODE_OFFICER_AREA#", codeDistrict);
 	if (!inspOfficer) {
@@ -197,8 +213,8 @@ if (wfTask == "Issue Classification" && wfStatus == "Miscellaneous") {
 		var inspRes = aa.person.getUser(inspOfficer);
 		if (inspRes.getSuccess())
 			{var inspectorObj = inspRes.getOutput();}
-		}			
-	scheduleInspection("Pictures", 0,inspectorObj);	
+		}	
+	scheduleInspection("Miscellaneous", 0,inspectorObj);	
 	cancelInspectionsByType("Reinspection 1");	
 }
 
