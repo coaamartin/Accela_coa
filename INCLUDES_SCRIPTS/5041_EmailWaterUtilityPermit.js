@@ -1,7 +1,7 @@
 /*Event   WorkflowTaskUpdateAfter   
 Criteria   wf step "Final Acceptance" = "Completed" 
 Action email the applicant, contractor and owner. 
-created by swakil
+created by swakil  
 
 07/20/2018 updated by JMAIN to include the real email template
 
