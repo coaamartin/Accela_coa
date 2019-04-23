@@ -10,10 +10,10 @@
    JMPorter - Changed order of scripts as requirements for #52 & # 70 overlap and believe 70 will catch letter discrepancy quicker
 */
 
-include("70_Inspection_Phase_Letters");      
-include("63_Inspection_Phase_Water_Meter"); 
-include("71_Certificate_Occpancy_Checked");	
-include("62_Building_Inspection_Check_Pending_Scheduled");
+include("5070_Inspection_Phase_Letters");      
+include("5063_Inspection_Phase_Water_Meter"); 
+include("5071_Certificate_Occpancy_Checked");	
+include("5062_Building_Inspection_Check_Pending_Scheduled");
 
 /*
 Title : Unapproved permit with plans (WorkflowTaskUpdateBefore) 
@@ -61,4 +61,4 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Final CO Issued")
 
 
 //COA Script #48 added by SWAKIL
-include("48_RequiredFieldsQualityCheck");
+include("5048_RequiredFieldsQualityCheck");
