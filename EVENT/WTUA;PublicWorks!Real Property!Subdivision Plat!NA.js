@@ -3,10 +3,10 @@ var $iTrc = ifTracer;
 include("5024_realpropertyApplicationAcceptanceIncomplete");
 
 //SWAKIL
-include("25_PlatEmailResubmittal");
+include("5025_PlatEmailResubmittal");
 
 //SWAKIL
-include("26_PlatFinalDocRequest");
+include("5026_PlatFinalDocRequest");
 
 
 if ($iTrc(wfTask=="Recordation" && wfStatus=="Recorded", 'wfTask=="Recordation" && wfStatus=="Recorded"')){
