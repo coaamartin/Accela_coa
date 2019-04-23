@@ -1,8 +1,8 @@
 
 
 //COA Script - Suhail
-include("36_autoCreateTempIrrigationPermit");
-include("34_emailResubmittalPlanReview");
+include("5036_autoCreateTempIrrigationPermit");
+include("5034_emailResubmittalPlanReview");
 
 /*
 Title : Add Inspection Fee (WorkflowTaskUpdateAfter)

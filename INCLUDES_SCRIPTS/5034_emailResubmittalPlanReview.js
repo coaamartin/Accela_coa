@@ -1,7 +1,7 @@
 //created by swakil
 //edited by JMAIN - altered email template 07/17/2018
 
-logDebug("Starting Script... #34");
+logDebug("Starting Script... #5034");
 
 if(wfTask=="Plan Review" && wfStatus=="Resubmittal Requested"){
 	var contacttypes = "Applicant";
