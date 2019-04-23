@@ -26,7 +26,7 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5099 WTUA");	
+logDebug("---------------------> 5099_CodeInformationalWTUA is starting.");	
 //I cannot get the async to work so using non-async by forcing env variable.
 //aa.env.setValue("eventType","Batch Process");
 

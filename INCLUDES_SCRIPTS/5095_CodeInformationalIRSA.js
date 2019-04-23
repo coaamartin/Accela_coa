@@ -27,6 +27,7 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
+logDebug("---------------------> 5095_CodeInformationalIRSA.js is starting.");
 var currentDate = sysDateMMDDYYYY;
 
 function cancelInspections() {
@@ -489,9 +490,9 @@ if (inspType == "Verify Vacant") {
 
 if (inspType == "Notify Event" && inspResult == "Complete") {
 	logDebug("---------------------> Notify Event - Complete");	
-	cancelInspections();	
-	closeAllTasks(capId, "");
-	updateAppStatus("Closed", "Script 5095");	
+	//cancelInspections();	
+	//closeAllTasks(capId, "");
+	//updateAppStatus("Closed", "Script 5095");	
 }
 
 if (inspType == "Miscellaneous" && inspResult == "Complete") {

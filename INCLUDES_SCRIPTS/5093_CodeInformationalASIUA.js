@@ -1,6 +1,6 @@
 // SCRIPTNUMBER: 5093
 // SCRIPTFILENAME: 5093_CodeInformationalASIUA.js
-// PURPOSE: Called when Enforcement Informational record has task updated.
+// PURPOSE: Called when Enforcement Informational record has ASI updated.
 // DATECREATED: 04/10/2019
 // BY: amartin
 // CHANGELOG: 
