@@ -1,6 +1,6 @@
 //created by swakil
 
-logDebug("Starting COA Script 14_SWMPFeeProcessing");
+logDebug("Starting COA Script 5014_SWMPFeeProcessing");
 
 if ( balanceDue <= 0 && !(AInfo["Paying with Bond"] == 'Yes') )
 {
