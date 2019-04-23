@@ -31,8 +31,8 @@ if($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wf:Permit Issuanc
         bldScript2_noContractorCheck();
 }
 
-//script ID: 52_Allow_Prevent_Final_CO
+//script ID: 5052_Allow_Prevent_Final_CO
 if ("Inspection Phase".equals(wfTask) && exists(wfStatus, ["Ready for CO", "Final"]))
 {
-	include("52_Allow_Prevent_Final_CO");
+	include("5052_Allow_Prevent_Final_CO");
 }
