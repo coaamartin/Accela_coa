@@ -27,8 +27,6 @@ User code generally goes inside the try block below.
 //your code here
 //End script Tester header 
 logDebug("---------------------> 5100_CodeTempUseWTUA is starting.");	
-//I cannot get the async to work so using non-async by forcing env variable.
-//aa.env.setValue("eventType","Batch Process");
 
 var currentDate = sysDateMMDDYYYY;
 
@@ -38,6 +36,16 @@ if (wfTask == "Application Close" && wfStatus == "Approved") {
 
 if (wfTask == "Application Close" && wfStatus == "Denied") {
 	updateAppStatus("Closed", "Script 5100");		
+}
+
+if (wfTask == "Final Approval" && wfStatus == "Denied") {
+	updateAppStatus("Closed", "Script 5100");	
+	closeAllTasks(capId, "");		
+}
+
+if (wfTask == "Final Approval" && wfStatus == "Approved") {
+	updateAppStatus("Permit Issued", "Script 5100");	
+	closeAllTasks(capId, "");		
 }
 
 logDebug("---------------------> 5100_CodeTempUseWTUA.js ended.");
