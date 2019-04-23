@@ -27,7 +27,7 @@ Notes:
 updateSubmittalNumber("Completeness Check", ["Complete","Accepted"], "Submittal Number");
 updateSubmittalNumber("Application Submittal", ["Complete","Accepted"], "Submittal Number");
 
-include("45_LicenseAgreementEmailResubmittal");
+include("5045_LicenseAgreementEmailResubmittal");
 
 if(wfTask == "Signatures" && wfStatus == "Pending Owner Signature"){
     pWrksScript305_updateTaskDueDate();
