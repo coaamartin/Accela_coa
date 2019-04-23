@@ -1,11 +1,11 @@
-// SCRIPTNUMBER: 20
-// SCRIPTFILENAME: 20_IrrigationPermitFeesPaid.js
+// SCRIPTNUMBER: 5020
+// SCRIPTFILENAME: 5020_IrrigationPermitFeesPaid.js
 // PURPOSE: Updated while working on Water - Irrigation Permit - Leaving functionality for now but added logDebug(s)
 // DATECREATED: 02/20/2019
 // BY: JMPorter
 // CHANGELOG: written by swakil .. edited by jmain 07/24/2018 - updated email template and param variables.
 
-logDebug("Script #20 - Irrigation Permit Fees Paid - Start");
+logDebug("Script #5020 - Irrigation Permit Fees Paid - Start");
 logDebug(capStatus + "");
 
 if ("Payment Pending".equals(capStatus) && balanceDue == 0)
@@ -34,7 +34,7 @@ if ("Payment Pending".equals(capStatus) && balanceDue == 0)
    
   updateAppStatus("Pending Inspection");
 	
-  logDebug("Script #20 - Irrigation Permit Fees Paid - End");    
+  logDebug("Script #5020 - Irrigation Permit Fees Paid - End");    
   
 }
 
