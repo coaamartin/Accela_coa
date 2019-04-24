@@ -1,9 +1,7 @@
-/* JMPorter - 11/5/2018 - Script Item #5068 - 5068_Workflow_Traffic_Review_Assign_People
+// JMPorter - 11/5/2018 - Script Item #5068 - 5068_Workflow_Traffic_Review_Assign_People
 // ​​If Info Field ‘Project Category’ has “Assembly Building”, “Business Use Building”, “Factory Use Building”, “Group E Building”, “Group U Building”, “Hotel Building”, 
 // “Institutional Use Building”, “Mercantile Use Building”, “Non-Res Addition” or “Storage Use Building” selected, then the Traffic Review workflow task is assigned to Brianna Medema 
 // instead of Lance Littleton
- 
-*/68_Workflow_Traffic_Review_Assign_People
 
 logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #5068 - 5068_Workflow_Traffic_Review_Assign_People");
 
