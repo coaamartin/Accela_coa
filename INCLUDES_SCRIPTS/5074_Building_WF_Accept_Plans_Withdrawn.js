@@ -1,9 +1,9 @@
-/* JMPorter - 10/4/2018 - Script Item #74 - 74_Building_WF_Accept_Plans_Withdrawn
+/* JMPorter - 10/4/2018 - Script Item #5074 - 5074_Building_WF_Accept_Plans_Withdrawn
 // ​	Withdrawn on Accept Plans or Accepted in House deactives active tasks
 // 	If the status of 'Withdrawn' on Accept Plans wf task or "Withdrawn" on Accepted In House wf task, then deactivate all active workflow tasks.
 */
 
-logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #74 - 74_Building_WF_Accept_Plans_Withdrawn");
+logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #5074 - 5074_Building_WF_Accept_Plans_Withdrawn");
 
 var Deactivate = false;
 
