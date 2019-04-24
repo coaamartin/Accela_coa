@@ -5,11 +5,11 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000110-CIE";
+//var myCapId = "19-000147-CTS";
 //var myUserId = "AMARTIN";
 //var eventName = "";
-//var wfTask = "Issue Classification";
-//var wfStatus = "BANNERS";
+//var wfTask = "Application Close";
+//var wfStatus = "Approved";
 //var wfComment = "";
 //var AInfo = "Type of Issue";
 
@@ -89,10 +89,10 @@ if (wfTask == "Application Close" && wfStatus == "Approved") {
 	var eventDate = AInfo["Event 1 End"];
 	newDate = dateAdd(eventDate,1);	
 	//scheduleInspectDate("Reinspection 1", newDate);	
-	scheduleInspection("Reinspection 1", newDate,inspectorObj);	
+	scheduleInspectDate("Reinspection 1", newDate,inspectorObj)	
 	
 	eventDate = AInfo["Event 1 Start"];
-	scheduleInspection("Notify Event", eventDate,inspectorObj);		
+	scheduleInspectDate("Notify Event", eventDate,inspectorObj)			
 }
 
 if (wfTask == "Application Close" && wfStatus == "Denied") {
