@@ -1,10 +1,10 @@
-/* #77 - 77-Email_Arborist_Applicant_MoreInfoNeeded
+/* #5077 - 5077-Email_Arborist_Applicant_MoreInfoNeeded
 
 10/22/2018 updated by JMPorter to include the real email template
 
 */
 
-logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #77 - 77_Email_Arborist_Applicant_MoreInfoNeeded");
+logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #5077 - 5077_Email_Arborist_Applicant_MoreInfoNeeded");
 
 if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfStatus)) 
 {
