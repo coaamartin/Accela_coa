@@ -4,7 +4,7 @@
 // are to automatically move to ‘Pending’ status in the Inspection tab. 
 */
 
-logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #76 - 76_Building_Inspection_Update ... Need to see if createInspecion still not working ");
+logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #5076 - 5076_Building_Inspection_Update ... Need to see if createInspecion still not working ");
 
 var foundRoofingInspecion = false;
 var foundEngineerInspecion = false;
