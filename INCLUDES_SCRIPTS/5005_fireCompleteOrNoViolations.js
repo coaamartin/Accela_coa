@@ -1,6 +1,9 @@
-//Script #5
-//Created by JMAIN 2018-03-06
-//testing on 18-000073-AFR
+//************************************************ >>  5005_fireCompleteOrNoViolations.js  << ****************************
+// SCRIPTNUMBER: 5005
+// SCRIPTFILENAME: 5005_fireCompleteOrNoViolations.js
+// PURPOSE: ​testing on 18-000073-AFR
+// DATECREATED: 2018-03-06
+// BY: JMAIN
 
 logDebug("Inspection Results: " + inspResult);
 logDebug(inspResult.length());

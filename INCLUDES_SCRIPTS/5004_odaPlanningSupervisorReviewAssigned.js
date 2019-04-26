@@ -1,6 +1,10 @@
-//Script 4
-//Created by SCW 2018-03-13
-//This is SCW's first - does this script even work?
+//************************************************ >>  5004_odaPlanningSupervisorReviewAssigned.js  << ****************************
+// SCRIPTNUMBER: 5004
+// SCRIPTFILENAME: 5004_odaPlanningSupervisorReviewAssigned.js
+// PURPOSE: ​This is SCW's first - does this script even work?
+// DATECREATED: 2018-03-13
+// BY: Unknown
+
 logDebug("Starting Script");
 if (wfTask == "Planning Supervisor Review" && wfStatus == "Assigned")
 {
