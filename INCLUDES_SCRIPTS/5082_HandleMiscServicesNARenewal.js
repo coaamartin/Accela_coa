@@ -41,7 +41,7 @@ logDebug("5082 inside if");
 	//Set renewal to Renewed status.
 	updateAppStatus("Renewed", "Updated by 5082_HandleMiscServicesNARenewal.js", capId);
 	//Set info field Date Last Updated so reports can use it.
-	editAppSpecifi("Date Last Updated", currentDate, capId);
+	editAppSpecific("Date Last Updated", currentDate, capId);
 	
 	//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 	//renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
