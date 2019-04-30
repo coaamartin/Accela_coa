@@ -5,13 +5,13 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "18-000337-CIE";
+//var myCapId = "19-000028-CEZ";
 //var myUserId = "AMARTIN";
 //var eventName = "";
 //var wfTask = "Issue Classification";
 //var wfStatus = "Pennants";
 //var wfComment = "";
-//var AInfo = "Type of Issue";
+//var AInfo = "Vacant?";
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
 //var runEvent = true; // set to true to simulate the event and run all std choices/scripts for the record type.  
