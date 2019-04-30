@@ -75,13 +75,21 @@ try{
 if (AInfo["Vacant?"] == "Vacant House")	{
 	logDebug("---------------------> Vacant? - Vacant House");	
 	//Create a new Vacant Master record.
-	var appMessage = "Created by Code Officer. " + currentUserID;
+
+	var adResult = aa.address.getPrimaryAddressByCapID(capId,"Y");
+	addressLine = adResult.getOutput().getAddressModel();
+	logDebug("---------------------> addressLine " + addressLine);	
+
+	var appMessage = addressLine + " | Created by Code Officer. " + currentUserID;
 	var newCap = createCap("Enforcement/incident/Vacant/Master",appMessage);
+	
 	createCapComment("Created by Code Officer.",newCap);
 	copyAddresses(capId,newCap);
 	copyContacts(capId,newCap);
 	copyOwner(capId,newCap);
 	copyParcels(capId,newCap);
+
+
 }
 		
 logDebug("---------------------> 5104_CodeZoningASIUA.js ended.");
