@@ -218,6 +218,12 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "New REO") {
 		updateAppStatus("Recorded", "Script 5085");
 	}	
 }
+if (wfTask == "Apply Delinquent Registration" && wfStatus == "Cancelled") {
+	logDebug("---------------------> Apply Delinquent Registration - Cancelled");	
+	//close all tasks and the record
+	closeAllTasks(capId, "Script 5085");
+	cancelInspections();	
+}
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "New Ownership") {
 	logDebug("---------------------> Apply Delinquent Registration - New Ownership");	
 	var capStatus = cap.getCapStatus();
