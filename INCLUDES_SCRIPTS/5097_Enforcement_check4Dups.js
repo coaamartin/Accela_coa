@@ -22,13 +22,13 @@ while (keys.hasMoreElements()) {
 /*------------------------------------------------------------------------------------------------------/
 | END Event Specific Variables
 /------------------------------------------------------------------------------------------------------*/
+showDebug = false;
 
 if (matches(currentUserID,"AMARTIN","JWARTHAN","JMPORTER","JMAIN","DKOONTZ"))
 {
 	showDebug = true;
-} else {
-	showDebug = false;	
 }
+
 logGlobals(AInfo);
 
 checkForDuplicates();
