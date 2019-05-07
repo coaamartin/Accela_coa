@@ -23,8 +23,6 @@ while (keys.hasMoreElements()) {
 | END Event Specific Variables
 /------------------------------------------------------------------------------------------------------*/
 
-//if (preExecute.length)
-//	doStandardChoiceActions(preExecute, true, 0); // run Pre-execution code
 if (matches(currentUserID,"AMARTIN","JWARTHAN","JMPORTER","JMAIN","DKOONTZ"))
 {
 	showDebug = true;
@@ -55,7 +53,6 @@ function checkForDuplicates()
 	cleanAndClose(foundDuplicate);
 }
 
-//Get addresses to be remove(It was removed from CAD).
 function getRemovedCADAddresses()
 {
 	var aQuery = "exec coa_duplicate_for_address " + AddressValidatedNumber + ",'" + ApplicationTypeLevel1 + "','" + ApplicationTypeLevel2 + "','" + ApplicationTypeLevel3 + "','" + ApplicationTypeLevel4 + "'";
