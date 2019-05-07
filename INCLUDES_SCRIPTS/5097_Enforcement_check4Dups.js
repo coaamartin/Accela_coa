@@ -35,7 +35,7 @@ checkForDuplicates();
 
 function checkForDuplicates()
 {
-	var aQuery = getRemovedCADAddresses();
+	var aQuery = getDuplicateAddresses();
     var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
     var ds = initialContext.lookup("java:/AA");
     var conn = ds.getConnection();
@@ -53,7 +53,7 @@ function checkForDuplicates()
 	cleanAndClose(foundDuplicate);
 }
 
-function getRemovedCADAddresses()
+function getDuplicateAddresses()
 {
 	var aQuery = "exec coa_duplicate_for_address " + AddressValidatedNumber + ",'" + ApplicationTypeLevel1 + "','" + ApplicationTypeLevel2 + "','" + ApplicationTypeLevel3 + "','" + ApplicationTypeLevel4 + "'";
 	return aQuery;
