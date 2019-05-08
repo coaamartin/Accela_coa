@@ -53,6 +53,7 @@ if (wfTask == "Application Submittal" && wfStatus == "Ready to Pay") {
 		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 	}		
+	activateTask("Application Submittal");   	
 }
 		
 logDebug("---------------------> 5107_PlanningAddressWTUA.js ended.");
