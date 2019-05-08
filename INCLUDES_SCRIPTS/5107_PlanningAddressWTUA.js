@@ -41,7 +41,7 @@ if (wfTask == "Application Submittal" && wfStatus == "Ready to Pay") {
 	include("261_postscript");
 	logDebug("---------------------> Starting sending of email.");		
 	//Send invoice email
-	var emailTemplate = "PLN MINOR ADDRESS FEE # 261";		
+	var emailTemplate = "PLN MINOR ADDRESS FEES # 261";		
 	var todayDate = new Date();
 	if (emailTemplate != null && emailTemplate != "") {
 		logDebug("5107 sending Invoice.  Defaulting to Applicant.");	
