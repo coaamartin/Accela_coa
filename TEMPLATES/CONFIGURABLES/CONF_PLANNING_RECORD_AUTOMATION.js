@@ -240,7 +240,7 @@
         }
       ]
     },
-    "Planning/Application/Address/NA": {
+    "Planning/Application/Address/NA-DEACTIVATED": {
       "WorkflowTaskUpdateAfter": [
         {
           "preScript": "",
