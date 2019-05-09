@@ -3,7 +3,7 @@
 // PURPOSE: Called when NA Renewal record has review task updated.  The master record then gets updated.
 // DATECREATED: 02/08/2019
 // BY: amartin
-// CHANGELOG: 
+// CHANGELOG: 4/29/2019,coa,ajm,added update of parent date last updated custom field,
 
 logDebug("At start of 5082 outside if");	 
 if (wfTask == "Review Application" && wfStatus == "Complete") {
@@ -16,6 +16,8 @@ logDebug("5082 inside if");
 	var vNewExpDate;
 	var vLicenseObj;
 
+	var currentDate = sysDateMMDDYYYY;
+	
 	// Get the parent license
 	vLicenseID = getParentLicenseCapID(capId);
 	vIDArray = String(vLicenseID).split("-");
@@ -38,6 +40,8 @@ logDebug("5082 inside if");
 	}
 	//Set renewal to Renewed status.
 	updateAppStatus("Renewed", "Updated by 5082_HandleMiscServicesNARenewal.js", capId);
+	//Set info field Date Last Updated so reports can use it.
+	editAppSpecific("Date Last Updated", currentDate, capId);
 	
 	//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 	//renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);

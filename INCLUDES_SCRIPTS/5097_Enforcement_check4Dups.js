@@ -22,22 +22,20 @@ while (keys.hasMoreElements()) {
 /*------------------------------------------------------------------------------------------------------/
 | END Event Specific Variables
 /------------------------------------------------------------------------------------------------------*/
+showDebug = false;
 
-//if (preExecute.length)
-//	doStandardChoiceActions(preExecute, true, 0); // run Pre-execution code
 if (matches(currentUserID,"AMARTIN","JWARTHAN","JMPORTER","JMAIN","DKOONTZ"))
 {
 	showDebug = true;
-} else {
-	showDebug = false;	
 }
+
 logGlobals(AInfo);
 
 checkForDuplicates();
 
 function checkForDuplicates()
 {
-	var aQuery = getRemovedCADAddresses();
+	var aQuery = getDuplicateAddresses();
     var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
     var ds = initialContext.lookup("java:/AA");
     var conn = ds.getConnection();
@@ -55,8 +53,7 @@ function checkForDuplicates()
 	cleanAndClose(foundDuplicate);
 }
 
-//Get addresses to be remove(It was removed from CAD).
-function getRemovedCADAddresses()
+function getDuplicateAddresses()
 {
 	var aQuery = "exec coa_duplicate_for_address " + AddressValidatedNumber + ",'" + ApplicationTypeLevel1 + "','" + ApplicationTypeLevel2 + "','" + ApplicationTypeLevel3 + "','" + ApplicationTypeLevel4 + "'";
 	return aQuery;

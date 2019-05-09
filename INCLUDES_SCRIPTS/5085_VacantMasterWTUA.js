@@ -180,6 +180,19 @@ if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
 	rB1ExpResult.setExpStatus("Inactive");			
 }
 
+if (wfTask == "Foreclosure Sale Result" && wfStatus == "Unregistered REO") {
+	logDebug("--------------------->Foreclosure Sale Result - Unregistered REO");	
+		if (!isTaskStatus("Send Registration","Registration Sent" )) {
+			//assign task to tburton.
+			assignTask("Send Registration","tburton");
+		} else {
+			//insert another one for tburton.
+			activateTask("Send Registration");			
+			assignTask("Send Registration","tburton");			
+		}
+		updateAppStatus("Recorded", "Script 5085");	
+}
+
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "Registering") {
 	logDebug("---------------------> Apply Delinquent Registration - Registering");	
 	var capStatus = cap.getCapStatus();
@@ -205,15 +218,21 @@ if (wfTask == "Apply Delinquent Registration" && wfStatus == "New REO") {
 		updateAppStatus("Recorded", "Script 5085");
 	}	
 }
+if (wfTask == "Apply Delinquent Registration" && wfStatus == "Cancelled") {
+	logDebug("---------------------> Apply Delinquent Registration - Cancelled");	
+	//close all tasks and the record
+	closeAllTasks(capId, "Script 5085");
+	cancelInspections();	
+}
 if (wfTask == "Apply Delinquent Registration" && wfStatus == "New Ownership") {
 	logDebug("---------------------> Apply Delinquent Registration - New Ownership");	
 	var capStatus = cap.getCapStatus();
 	if (capStatus != 'Registered and Recorded' || capStatus != 'Recorded and Expired')
 	{
 		//check for open Assess to County or Notice of Assessment
-		if (!exists("Record Reception", "Notice of Assessment")) {
-			if (!exists("Submitted", "Notice of Assessment")) {
-				if (!exists("Complete", "Assess to County")) {
+		if (!isTaskStatus("Notice of Assessment","Record Reception" )) {
+			if (!isTaskStatus("Notice of Assessment","Submitted" )) {
+				if (!isTaskStatus("Assess to County","Complete" )) {
 					//close all tasks and the record
 					closeAllTasks(capId, "Script 5085");
 					updateAppStatus("Closed", "Script 5085");	
