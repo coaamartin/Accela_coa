@@ -73,8 +73,51 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
       }
     }
      
+      SetCancel == DoesMeet;         
+   }
+   else if(appMatch("Building/Permit/Plans/NA"))
+   {  
+
+      var DoesMeet = true;
+      for (i in wfObj) 
+      {
+        fTask = wfObj[i];
+        if ("Inspection Phase".equals(fTask.getTaskDescription()))
+        {
+          if ("Ready for CO" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        }
+        
+        if ("Backflow Preventor".equals(fTask.getTaskDescription()))
+        {
+          if ("Certificate of CO" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        }
+        
+         if ("Waste Water".equals(fTask.getTaskDescription()))
+        {
+          if ("Certificate of CO" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        } 
+
+         if ("Special Inspections Check".equals(fTask.getTaskDescription()))
+        {
+          if ("Report Received" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        } 
+      }
+     
       SetCancel == DoesMeet;      
    }
+   
 }
 
 if (SetCancel)
