@@ -24,7 +24,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         fTask = wfObj[i];
         if ("Water Meter".equals(fTask.getTaskDescription()))
         {
-          if ("Ready for CO" !== fTask.getDisposition()) && ("Backflow Preventor" !== fTask.getDisposition())
+          if (("Ready for CO" !== fTask.getDisposition()) && ("Backflow Preventor" !== fTask.getDisposition()))
           {
            DoesMeet = false;    
           }
@@ -32,7 +32,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         
         if ("Backflow Preventor".equals(fTask.getTaskDescription()))
         {
-          if ("Not Required" !== fTask.getDisposition()) && ("Ready for CO" !== fTask.getDisposition())
+          if (("Not Required" !== fTask.getDisposition()) && ("Ready for CO" !== fTask.getDisposition()))
           {
            DoesMeet = false;    
           }
