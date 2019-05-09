@@ -7,19 +7,4 @@
 logDebug('Started script 5103_Building_NewBuilding_Plans_COA_Check');
 var SetCancel = true;
 
-if (wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy")
-{
-  var workflowResult = aa.workflow.getTasks(capId);
-  wfObj = workflowResult.getOutput();
-  
-  if (SetCancel)
-  {
-   
-   logDebug("Script 5103: WARNING - not all workflows have an acceptable status to allow Certificate of Occupancy");
-   comment("<B><Font Color=RED>WARNING - not all workflows have an acceptable status to allow Certificate of Occupancy</Font></B>");
-     
-   cancel = true;
-  }
-  
-}
 logDebug('Ended script 5103_Building_NewBuilding_Plans_COA_Check');
