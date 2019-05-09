@@ -7,4 +7,10 @@
 logDebug('Started script 5103_Building_NewBuilding_Plans_COA_Check');
 var SetCancel = true;
 
+if (wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy")
+{
+  var workflowResult = aa.workflow.getTasks(capId);
+  wfObj = workflowResult.getOutput();
+}
+
 logDebug('Ended script 5103_Building_NewBuilding_Plans_COA_Check');
