@@ -31,7 +31,7 @@ aa.env.setValue("eventType","Batch Process");
 
 if (wfTask == "Application Submittal" && wfStatus == "Ready to Pay") {
 	logDebug("---------------------> Application Submittal - Ready to Pay");	
-	if ((AInfo["Request Type"] == "Address") || (AInfo["Request Type"] == "Non-Address")) {
+	if ((AInfo["Request Type"] == "Custom Street Name")) {
 		var feeSeq = updateFee("PLN_M_ADD_01","PLN_ADDRESS","FINAL", 1, "N","Y");
 	}
 	if ((AInfo["Request Type"] == "Address Change")) {
