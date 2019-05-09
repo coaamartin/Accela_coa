@@ -31,12 +31,19 @@ aa.env.setValue("eventType","Batch Process");
 
 if (wfTask == "Application Submittal" && wfStatus == "Ready to Pay") {
 	logDebug("---------------------> Application Submittal - Ready to Pay");	
-	if ((AInfo["Request Type"] == "Custom Street Name")) {
-		var feeSeq = updateFee("PLN_M_ADD_01","PLN_ADDRESS","FINAL", 1, "N","Y");
-	}
-	if ((AInfo["Request Type"] == "Address Change")) {
+	//if ((AInfo["Request Type"] == "Custom Street Name")) {
+	//	var feeSeq = updateFee("PLN_M_ADD_01","PLN_ADDRESS","FINAL", 1, "N","Y");
+	//}
+	//if ((AInfo["Request Type"] == "Address Change")) {
+	//	var feeSeq = updateFee("PLN_M_ADD_02","PLN_ADDRESS","FINAL", 1, "N","Y");
+	//}	
+	if ((AInfo["Address Change"] == "Y")) {
 		var feeSeq = updateFee("PLN_M_ADD_02","PLN_ADDRESS","FINAL", 1, "N","Y");
+	}		
+	if ((AInfo["Custom Street Name"] == "Y")) {
+		var feeSeq = updateFee("PLN_M_ADD_01","PLN_ADDRESS","FINAL", 1, "N","Y");
 	}	
+	
 	logDebug("---------------------> Running 261_postscript.");	
 	include("261_postscript");
 	logDebug("---------------------> Starting sending of email.");		
