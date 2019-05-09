@@ -11,6 +11,69 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
 {
   var workflowResult = aa.workflow.getTasks(capId);
   wfObj = workflowResult.getOutput();
+  
+  if (workflowResult.getSuccess())
+  {   
+
+    if(appMatch("Building/Permit/New Building/NA"))
+    {
+       
+      var DoesMeet = true;
+      for (i in wfObj) 
+      {
+        fTask = wfObj[i];
+        if ("Water Meter".equals(fTask.getTaskDescription()))
+        {
+          if ("Ready for CO" !== fTask.getDisposition()) && ("Backflow Preventor" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        }
+        
+        if ("Backflow Preventor".equals(fTask.getTaskDescription()))
+        {
+          if ("Not Required" !== fTask.getDisposition()) && ("Ready for CO" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        }
+        
+         if ("Waste Water".equals(fTask.getTaskDescription()))
+        {
+          if ("Ready for CO" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        } 
+
+         if ("Special Inspections Check".equals(fTask.getTaskDescription()))
+        {
+          if ("Ready for CO" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        } 
+        
+        if ("FEMA Elevation Certification".equals(fTask.getTaskDescription()))
+        {
+          if ("Ready for CO" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        } 
+        
+        if ("Inspection Phase".equals(fTask.getTaskDescription()))
+        {
+          if ("Ready for CO" !== fTask.getDisposition())
+          {
+           DoesMeet = false;    
+          }
+        } 
+        
+      }
+     
+      SetCancel == DoesMeet;      
+   }
 }
 
 if (SetCancel)
