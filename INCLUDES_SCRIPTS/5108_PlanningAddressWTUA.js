@@ -1,6 +1,6 @@
-// SCRIPTNUMBER: 5107
-// SCRIPTFILENAME: 5107_PlanningAddressASA.js
-// PURPOSE: Called when Planning Address record is submitted.
+// SCRIPTNUMBER: 5108
+// SCRIPTFILENAME: 5108_PlanningAddressWTUA.js
+// PURPOSE: Called when Planning Address record has task updated.
 // DATECREATED: 05/08/2019
 // BY: amartin
 // CHANGELOG: 
@@ -25,34 +25,39 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5107 ASA");	
+logDebug("---------------------> At start of 5108 WTUA");	
 //I cannot get the async to work so using non-async by forcing env variable.
 aa.env.setValue("eventType","Batch Process");
 
-logDebug("---------------------> Application Submittal - Ready to Pay");	
-if ((AInfo["Request Type"] == "Custom Street Name")) {
-	var feeSeq = updateFee("PLN_M_ADD_01","PLN_ADDRESS","FINAL", 1, "N","Y");
+if (wfTask == "Application Submittal" && wfStatus == "Ready to Pay") {
+	logDebug("---------------------> Application Submittal - Ready to Pay");	
+	if ((AInfo["Request Type"] == "Custom Street Name")) {
+		var feeSeq = updateFee("PLN_M_ADD_01","PLN_ADDRESS","FINAL", 1, "N","Y");
+	}
+	if ((AInfo["Request Type"] == "Address Change")) {
+		var feeSeq = updateFee("PLN_M_ADD_02","PLN_ADDRESS","FINAL", 1, "N","Y");
+	}	
+	
+	logDebug("---------------------> Running 261_postscript.");	
+	include("261_postscript");
+	logDebug("---------------------> Starting sending of email.");		
+	//Send invoice email
+	var emailTemplate = "PLN MINOR ADDRESS FEES # 261";		
+	var todayDate = new Date();
+	if (emailTemplate != null && emailTemplate != "") {
+		logDebug("5108 sending Invoice.  Defaulting to Applicant.");	
+		eParams = aa.util.newHashtable();
+		eParams.put("$$ContactEmail$$", "");			
+		eParams.put("$$todayDate$$", todayDate);
+		eParams.put("$$altid$$",capId.getCustomID());
+		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+	}		
+	activateTask("Application Submittal");   	
 }
-if ((AInfo["Request Type"] == "Address Change")) {
-	var feeSeq = updateFee("PLN_M_ADD_02","PLN_ADDRESS","FINAL", 1, "N","Y");
-}		
-
-logDebug("---------------------> Starting sending of email.");		
-//Send invoice email
-var emailTemplate = "PLN MINOR ADDRESS FEES # 261";		
-var todayDate = new Date();
-//if (emailTemplate != null && emailTemplate != "") {
-//	logDebug("5107 sending Invoice.  Defaulting to Applicant.");	
-//	eParams = aa.util.newHashtable();
-//	eParams.put("$$ContactEmail$$", "");			
-//	eParams.put("$$todayDate$$", todayDate);
-//	eParams.put("$$altid$$",capId.getCustomID());
-//	eParams.put("$$capAlias$$",cap.getCapType().getAlias());
-//	logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-//	emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
-//}		 	
 		
-logDebug("---------------------> 5107_PlanningAddressASA.js ended.");
+logDebug("---------------------> 5108_PlanningAddressWTUA.js ended.");
 //Script Tester footer.  Comment this out when deploying.
 //}	
 
