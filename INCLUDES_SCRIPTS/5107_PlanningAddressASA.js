@@ -38,8 +38,8 @@ aa.env.setValue("eventType","Batch Process");
 		var feeSeq = updateFee("PLN_M_ADD_02","PLN_ADDRESS","FINAL", 1, "N","Y");
 	}		
 	
-	logDebug("---------------------> Running 261_postscript.");	
-	include("261_postscript");
+	//logDebug("---------------------> Running 261_postscript.");	
+	//include("261_postscript");
 	logDebug("---------------------> Starting sending of email.");		
 	//Send invoice email
 	var emailTemplate = "PLN MINOR ADDRESS FEES # 261";		
