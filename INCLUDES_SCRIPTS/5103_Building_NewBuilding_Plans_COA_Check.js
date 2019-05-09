@@ -71,6 +71,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         } 
         
       }
+    }
      
       SetCancel == DoesMeet;      
    }
