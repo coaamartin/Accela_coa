@@ -29,7 +29,7 @@ logDebug("---------------------> At start of 5107 ASA");
 //I cannot get the async to work so using non-async by forcing env variable.
 aa.env.setValue("eventType","Batch Process");
 
-if (wfTask == "Application Submittal" && wfStatus == "Ready to Pay") {
+//if (wfTask == "Application Submittal" && wfStatus == "Ready to Pay") {
 	logDebug("---------------------> Application Submittal - Ready to Pay");	
 	if ((AInfo["Request Type"] == "Custom Street Name")) {
 		var feeSeq = updateFee("PLN_M_ADD_01","PLN_ADDRESS","FINAL", 1, "N","Y");
@@ -54,8 +54,8 @@ if (wfTask == "Application Submittal" && wfStatus == "Ready to Pay") {
 		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 	}		
-	activateTask("Application Submittal");   	
-}
+//	activateTask("Application Submittal");   	
+//}
 		
 logDebug("---------------------> 5107_PlanningAddressASA.js ended.");
 //Script Tester footer.  Comment this out when deploying.
