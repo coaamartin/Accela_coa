@@ -31,7 +31,15 @@ if (matches(currentUserID,"AMARTIN","JWARTHAN","JMPORTER","JMAIN","DKOONTZ"))
 
 logGlobals(AInfo);
 
-checkForDuplicates();
+if (ApplicationTypeLevel1 == "Enforcement" && ApplicationTypeLevel2 == "Incident" && ApplicationTypeLevel3 == "Informational" && ApplicationTypeLevel4 = "NA") {
+	if (AInfo["Type of Issue"] == "BANNERS") {		
+		checkForDuplicates();
+	} else {
+		logDebug("Since this is not a banner event no duplicate checking is being done.");	
+	} 
+} else {
+	checkForDuplicates();
+}
 
 function checkForDuplicates()
 {
@@ -63,7 +71,7 @@ function cleanAndClose(inFlag){
 	if(inFlag == "True"){
         cancel = true;
         showMessage = true;
-        comment("Possible duplicates found.  Cancelling record creation.");	
+        comment("Possible duplicates found.  Cancelling record creation.");			
 	}
 }
 /*
