@@ -1,4 +1,5 @@
 //Last part of Script #106, Commercial and Residential are added via configurable script
+//Looking to see if this has additonal code installed on the syetem by earlier programmer
 
 if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) {
 	// script 427
