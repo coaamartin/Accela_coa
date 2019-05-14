@@ -5,7 +5,7 @@ if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus))
 	// script 427
 	var theFee = 102;
 }
-	updateFee("", "", "FINAL", theFee, "Y");
+	updateFee("LIC_020", "LIC_CONTRACTOR_GENERAL", "FINAL", theFee, "Y");
 	// end Script 427
 
 
