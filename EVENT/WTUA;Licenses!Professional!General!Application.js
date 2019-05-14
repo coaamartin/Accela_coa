@@ -6,7 +6,7 @@ if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus))
 	// script 427
 	var theFee = 102;
 }
-	updateFee("LCI_110", "LIC_PROFESSIONAL_GENERAL", "FINAL", theFee, "Y");
+	updateFee("LIC_110", "LIC_PROFESSIONAL_GENERAL", "FINAL", theFee, "Y");
 	// 
 
 
