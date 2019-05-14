@@ -36,7 +36,7 @@ if (ApplicationTypeLevel1 == "Enforcement" && ApplicationTypeLevel2 == "Incident
 		checkForDuplicates();
 	} else {
 		logDebug("Since this is not a banner event no duplicate checking is being done.");	
-	}
+	} 
 } else {
 	checkForDuplicates();
 }
