@@ -138,8 +138,8 @@ comment("Checking for County");
     if (county == null || county == "") {
 
         var gisSvcName = 'AURORACO';
-        var gisLayerName = 'PARCELS'
-        var gisAttrName = 'COUNTY'
+        var gisLayerName = 'PARCELS';
+        var gisAttrName = 'COUNTY';
 
         var PARCEL_COUNTY = getGISInfo(gisSvcName, gisLayerName, gisAttrName);
         if (PARCEL_COUNTY) {
