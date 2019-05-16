@@ -76,7 +76,7 @@ if (contact) {
 		aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
 	}
 	
-	var vEmailTemplate = "Template TBD";
+	var vEmailTemplate = "BLD CLL LICENSE ISSUANCE # 111 & 112";
 	var vEParams = aa.util.newHashtable();
 	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
