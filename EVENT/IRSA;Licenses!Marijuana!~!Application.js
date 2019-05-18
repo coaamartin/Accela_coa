@@ -27,3 +27,7 @@ passedMJInspectionAutomation();
 
 //check for extension requests on MJ inspections
 requestExtensionMJInspection(vCapType);
+
+
+//SW ID 8
+include("8_allInspectionsResulted");
