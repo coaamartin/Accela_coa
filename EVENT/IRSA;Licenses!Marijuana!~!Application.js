@@ -27,3 +27,14 @@ passedMJInspectionAutomation();
 
 //check for extension requests on MJ inspections
 requestExtensionMJInspection(vCapType);
+
+//SW ID 8
+var typeArray = ["MJ AMED Inspections",
+                "MJ Building Inspections",
+                "MJ Code Enforcement Inspections",
+                "MJ Planning Inspections",
+                "MJ Security Inspections - Police"
+                ];
+
+var statusArray = ["Passed", "Passed - Minor Violations"]             
+allInspectionsResulted(typeArray, statusArray);
