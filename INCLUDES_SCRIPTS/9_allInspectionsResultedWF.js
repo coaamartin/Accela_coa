@@ -1,18 +1,19 @@
-var typeArray = ["MJ AMED Inspections",
+if (wfTask == "License Issuance" && wfStatus == "Issued"){
+   var typeArray = ["MJ AMED Inspections",
                 "MJ Building Inspections",
                 "MJ Code Enforcement Inspections",
                 "MJ Planning Inspections",
                 "MJ Security Inspections - Police"
                 ];
 
-var statusArray = ["Passed", "Passed - Minor Violations"]             
-resulted = allInspectionsResulted(typeArray, statusArray);
-if(!resulted){
-  cancel = true;
-  showMessage = true;
-  logDebug("<h2 style='background-color:rgb(255, 0, 0);'>Inspections are not completed </h2>");
+    var statusArray = ["Passed", "Passed - Minor Violations"]             
+    resulted = allInspectionsResulted(typeArray, statusArray);
+    if(!resulted){
+      cancel = true;
+      showMessage = true;
+      logDebug("<h2 style='background-color:rgb(255, 0, 0);'>Inspections are not completed </h2>");
+    } 
 }
-
 
 function allInspectionsResulted(typeArray, statusArray) {
     logDebug("---------------------> In the allInspectionsResulted function");       
