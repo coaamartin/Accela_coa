@@ -6,9 +6,12 @@
 
 	var emailTemplate= "LIC MJ ADDITIONAL INFO # 210";
 	var applicant = getContactByType("Applicant", capId);
-	var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
-   
-   var asiValues = new Array();
+	//var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
+    var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+    acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+    var recordDeepUrl = getACARecordURL(acaURLDefault);
+
+   	var asiValues = new Array();
 	loadAppSpecific(asiValues);
       
 	if (!applicant || !applicant.getEmail()) 
@@ -47,7 +50,7 @@
 	addParameter(eParams, "$$wfStatus$$", wfStatus);
 	addParameter(eParams, "$$wfDate$$", wfDate);
 	addParameter(eParams, "$$wfComment$$", wfComment);
-	addParameter(eParams, "$$acaRecordUrl$$", acaUrl);
+	addParameter(eParams, "$$acaRecordUrl$$", recordDeepUrl);
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
    addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
