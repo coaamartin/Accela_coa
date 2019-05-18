@@ -19,6 +19,7 @@ if (appMatch("Licenses/Marijuana/*/Application")) {
 	vCapType = null;
 }
 
+/*
 //check for failed MJ inspections
 failedMJInspectionAutomation(vCapType);	
 
@@ -27,6 +28,7 @@ passedMJInspectionAutomation();
 
 //check for extension requests on MJ inspections
 requestExtensionMJInspection(vCapType);
+*/
 
 //SW ID 8
 var typeArray = ["MJ AMED Inspections",
