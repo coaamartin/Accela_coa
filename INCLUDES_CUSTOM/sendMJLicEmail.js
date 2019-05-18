@@ -24,9 +24,9 @@ function sendMJLicEmail(itemCap){
         addParameter(vEParams, "$$ApplicationName$$", appTypeAlias);
         addParameter(vEParams, "$$recordAlias$$", appTypeAlias);
         addParameter(vEParams, "$$wfComment$$", wfComment);
-        addParameter(VEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);  
-        addParameter(VEParams, "$$TradeName$$", asiValues["Trade Name"]);
-        addParameter(VEParams, "$$FullAddress$$", primaryAddress); 
+        addParameter(vEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);  
+        addParameter(vEParams, "$$TradeName$$", asiValues["Trade Name"]);
+        addParameter(vEParams, "$$FullAddress$$", primaryAddress); 
 
         var vRParams = aa.util.newHashtable();
         addParameter(vRParams, "Record_ID", itemCap.getCustomID());
