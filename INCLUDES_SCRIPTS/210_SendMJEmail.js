@@ -46,7 +46,7 @@
 	addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 	addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-	addParameter(eParams, "$$wfTask$$", wfTask);
+	addParameter(eParams, "$$wfTask$$", wfTask.toUpperCase());
 	addParameter(eParams, "$$wfStatus$$", wfStatus);
 	addParameter(eParams, "$$wfDate$$", wfDate);
 	addParameter(eParams, "$$wfComment$$", wfComment);
