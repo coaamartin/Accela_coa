@@ -7,7 +7,6 @@
 // BY: SWAKIL
 // CHANGELOG: 05/18/2019 , SWAKIL Created this file.
 
-var appStatus = getAppStatus();
-if (appStatus.equals("Waiting on Documents")) {
+if (capStatus.equals("Waiting on Documents")) {
 	updateAppStatus("Pending", "Updated by DUA", capId);
 }
