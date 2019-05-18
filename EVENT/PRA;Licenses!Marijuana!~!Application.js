@@ -32,3 +32,5 @@ if (!publicUser) {
 		logDebug("Minimum payment of $2500 has been made");
 	}
 }
+//SW - Script 13
+include("13_changeStatusAfterPaymentMJ");
