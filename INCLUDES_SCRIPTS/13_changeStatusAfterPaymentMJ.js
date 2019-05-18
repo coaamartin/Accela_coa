@@ -6,6 +6,6 @@
 // BY: SWAKIL
 // CHANGELOG: 05/18/2019 , SWAKIL Created this file. 
 
-if (balanceDue <= 0 && appStatus.equals("Payment Pending")) {
+if (balanceDue <= 0 && capStatus.equals("Payment Pending")) {
 	updateAppStatus("Pending", "Updated by PRA;Licenses!Marijuana!~!Application", capId);
 }
