@@ -56,8 +56,6 @@
    addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
    addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
    
-   $$StateLicenseNumber$$  
-
 	//send email to applicant, no report included
 	emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
    }
