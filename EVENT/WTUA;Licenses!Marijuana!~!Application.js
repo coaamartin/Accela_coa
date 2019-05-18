@@ -13,3 +13,5 @@ if ( (wfTask=="City Application Intake" || wfTask=="State Application Intake" ||
 {
 	include("210_SendMJEmail");
 }
+
+include("10_deactivateMJTasks");
