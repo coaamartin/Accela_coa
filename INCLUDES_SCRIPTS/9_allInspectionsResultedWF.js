@@ -17,6 +17,7 @@ if (wfTask == "License Issuance" && wfStatus == "Issued"){
 
     var statusArray = ["Passed", "Passed - Minor Violations"]             
     resulted = allInspectionsResulted(typeArray, statusArray);
+    logDebug(resulted)
     if(!resulted){
       cancel = true;
       showMessage = true;
