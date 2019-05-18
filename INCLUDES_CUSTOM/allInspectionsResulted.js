@@ -6,20 +6,28 @@ function allInspectionsResulted(typeArray, statusArray) {
         var processedInspTypes = [];
 
         for (xx in inspList) {
-            if(exists(inspList[xx].getInspectionType(), typeArray) && exists(inspList[xx].getInspectionStatus(), statusArray)){
-                processedInspTypes.push(inspList[xx].getInspectionType());  
+            if(exists(inspList[xx].getInspectionType(), typeArray)){
+                if(exists(inspList[xx].getInspectionStatus(), statusArray)){
+                    processedInspTypes.push(inspList[xx].getInspectionType());  
+                }else{
+                    logDebug(inspList[xx].getInspectionType() + " is statused: "+inspList[xx].getInspectionStatus());
+                    return false;
+                }
             }else{
-                return false;
+                logDebug("Insp not on required list: "+inspList[xx].getInspectionType()+" >>Skipping");
             }
         }
+
         for (yy in typeArray){
             if (!exists(typeArray[yy], processedInspTypes)){
-               return false; 
+                logDebug(typeArray[yy] + " is not in the inspection List");
+                return false; 
             }
         }
        return true;
     }else{
         return false;
+        
     }
     return false;
 }
