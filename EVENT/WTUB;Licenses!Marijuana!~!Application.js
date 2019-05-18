@@ -13,3 +13,7 @@ Sample Call:
 */
 
 checkInspectionsAndPreventLicenseIssuance("License Issuance", [ "Issued" ]);
+
+
+//SW ID 8
+include("9_allInspectionsResultedWF");
