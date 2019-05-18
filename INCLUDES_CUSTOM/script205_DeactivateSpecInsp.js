@@ -1,11 +1,10 @@
-﻿//script205_DeactivateSpecInsp
+﻿
+//script205_DeactivateSpecInsp
 //Record Types:	Building/*/*/*
 //Event: WTUA - WorkflowTaskUpdateAfter
 //Desc: If wfTask = “Permit Issuance” and wfStatus = “Issued” and the custom field “Special Inspection” is equal to “No”, 
 //			then deactivate the workflow task “Special Inspection Checklist”
 //Created By: Silver Lining Solutions
-
-
 function script205_DeactivateSpecInsp() {
 	
 	logDebug("script205_DeactivateSpecInsp started.");
@@ -26,4 +25,3 @@ function script205_DeactivateSpecInsp() {
 ///TEST JMPorter to see if update through GITHUB
 
 }
-
