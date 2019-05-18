@@ -30,7 +30,7 @@ for (i in inspectionTypesAry) {
 	if (vInspType != null && (vInspType == "MJ AMED Inspections" || vInspType == "MJ Security Inspections - Police")) {
 		vInspector = "DALLEN";
 	} else {
-		vInspector = "SLCLARK";
+		vInspector = "KKREIMEY";
 	}
 	
 	//create inspection
