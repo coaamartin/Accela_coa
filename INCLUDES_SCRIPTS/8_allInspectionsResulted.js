@@ -6,7 +6,7 @@ var typeArray = ["MJ AMED Inspections",
                 ];
 
 var statusArray = ["Passed", "Passed - Minor Violations"]             
-allInspectionsResulted(typeArray, statusArray);
+resulted = allInspectionsResulted(typeArray, statusArray);
 if(resulted){
     closeTask("Inspection Phase", "Complete", "Set via script", "Set via Script");
 }
