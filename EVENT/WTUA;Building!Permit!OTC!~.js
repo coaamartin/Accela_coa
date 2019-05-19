@@ -21,6 +21,13 @@ var reportTemplate = "Building Permit";
 var reportParams = aa.util.newHashtable();
 addParameter(reportParams, "RecordID", capIDString);
 
+var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+var recordURL = getACARecordURL(acaURLDefault);
+    
+var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+var reportFile = [];
+
 var eParams = aa.util.newHashtable();
 addParameter(eParams, "$$altID$$", capIDString);
 addParameter(eParams, "$$ContactFullName$$", applicant.getFullName());
