@@ -55,17 +55,13 @@ function cancelInspections(theCapID) {
 	var inspResultObj = aa.inspection.getInspections(theCapID);
 	if (inspResultObj.getSuccess()) {
 		logDebug("---------------------> Possibly found some inspections.");
-		try {
-			inspList = inspResultObj.getOutput();
-			for (xx in inspList) {
-				var inspId = inspList[xx].getIdNumber();
-				var res=aa.inspection.cancelInspection(theCapID, inspId);
-				if (res.getSuccess()){
-					aa.debug("Inspection Cancelled" , inspId);
-				}
+		inspList = inspResultObj.getOutput();
+		for (xx in inspList) {
+			var inspId = inspList[xx].getIdNumber();
+			var res=aa.inspection.cancelInspection(theCapID, inspId);
+			if (res.getSuccess()){
+				aa.debug("Inspection Cancelled" , inspId);
 			}
-		} catch(err) {
-			logDebug("---------------------> Errror retrieving inspections - probably due to none existing.");		
 		}
 	}
 }	
@@ -108,8 +104,12 @@ function UpdateEnfVacParent() {
 						closeAllTasks(parentCapId, "Script 5086");
 						updateAppStatus("Closed", "Script 5086",parentCapId);	
 						var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
-						rB1ExpResult.setExpStatus("Inactive");		
-						cancelInspections(parentCapId);							
+						rB1ExpResult.setExpStatus("Inactive");	
+						try {
+						cancelInspections(parentCapId);	
+						} catch(err) {
+							logDebug("No inspections to cancel.");
+						}
 					}
                 }
             }

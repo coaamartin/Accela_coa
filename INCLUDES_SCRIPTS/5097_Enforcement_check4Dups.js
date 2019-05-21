@@ -63,7 +63,7 @@ function cleanAndClose(inFlag){
 	if(inFlag == "True"){
         cancel = true;
         showMessage = true;
-        comment("Possible duplicates found.  Cancelling record creation.");			
+        comment("Possible duplicates found.  Cancelling record creation.");
 	}
 }
 /*
