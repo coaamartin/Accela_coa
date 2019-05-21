@@ -106,6 +106,7 @@ function UpdateEnfVacParent() {
 						cancelInspections(parentCapId);				
 						logDebug("Setting parent expiration status to inactive.");	
 						var rB1ExpResult = aa.expiration.getLicensesByCapID(parentCapId).getOutput();
+												logDebug("the value is " + rB1ExpResult);	
 						rB1ExpResult.setExpStatus("Inactive");		
 					}
                 }
