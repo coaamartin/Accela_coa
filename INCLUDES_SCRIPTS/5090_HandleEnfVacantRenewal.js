@@ -101,13 +101,14 @@ function UpdateEnfVacParent() {
 					//closeTask("Review Application", "Complete", "Closed by Script 5090");
 					if (ifTracer(AInfo["Unregister"] == "Yes")){
 						logDebug("Within code block to check date");
-						closeAllTasks(parentCapId, "Script 5086");
-						updateAppStatus("Closed", "Script 5086",parentCapId);	
+						closeAllTasks(parentCapId, "Script 5090");
+						updateAppStatus("Closed", "Script 5090",parentCapId);	
 						cancelInspections(parentCapId);				
 						logDebug("Setting parent expiration status to inactive.");	
 						var rB1ExpResult = aa.expiration.getLicensesByCapID(parentCapId).getOutput();
 												logDebug("the value is " + rB1ExpResult);	
 						rB1ExpResult.setExpStatus("Inactive");		
+						vLicenseObj.setStatus("Inactive");
 					}
                 }
             }
