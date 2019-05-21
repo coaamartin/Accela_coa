@@ -10,7 +10,8 @@
 include("5063_Inspection_Phase_Water_Meter");   
 
 include("5071_Certificate_Occpancy_Checked");	
-include("5062_Building_Inspection_Check_Pending_Scheduled");		
+include("5062_Building_Inspection_Check_Pending_Scheduled");	
+include("5103_Building_NewBuilding_Plans_COA_Check");	
 
 /*
 Title : Unapproved permit with plans (WorkflowTaskUpdateBefore) 

@@ -10,6 +10,7 @@
    JMPorter - Changed order of scripts as requirements for #52 & # 70 overlap and believe 70 will catch letter discrepancy quicker
 */
 
+include("5103_Building_NewBuilding_Plans_COA_Check");
 include("5070_Inspection_Phase_Letters");      
 include("5063_Inspection_Phase_Water_Meter"); 
 include("5071_Certificate_Occpancy_Checked");	
