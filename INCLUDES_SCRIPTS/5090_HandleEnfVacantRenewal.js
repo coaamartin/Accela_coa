@@ -105,6 +105,7 @@ function UpdateEnfVacParent() {
 						updateAppStatus("Closed", "Script 5086",parentCapId);	
 						var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
 						rB1ExpResult.setExpStatus("Inactive");	
+						logDebug("Attempting to cancel any inspections.");
 						try {
 						cancelInspections(parentCapId);	
 						} catch(err) {
