@@ -31,6 +31,8 @@ if (matches(currentUserID,"AMARTIN","JWARTHAN","JMPORTER","JMAIN","DKOONTZ"))
 
 logGlobals(AInfo);
 
+checkForDuplicates();
+
 function checkForDuplicates()
 {
 	var aQuery = getDuplicateAddresses();

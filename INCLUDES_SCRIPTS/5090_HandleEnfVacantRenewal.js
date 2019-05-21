@@ -69,6 +69,7 @@ function cancelInspections(theCapID) {
 		}
 	}
 }	
+
 function UpdateEnfVacParent() {
 	logDebug("5090_HandleEnfVacantRenewal.js started.");
 	try{
