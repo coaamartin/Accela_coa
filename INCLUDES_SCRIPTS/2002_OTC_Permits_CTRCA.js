@@ -83,7 +83,7 @@ editAppSpecific("Permit Issued Date",dateAdd(null,0));
 editAppSpecific("Permit Expiration Date",dateAdd(null,180));
 
 
-script16_FillApplicationNameWhenEmpty();
+//script16_FillApplicationNameWhenEmpty();  Removed as this was requested 5/21/19 to be removed
 
 
 closeTask("Permit Issuance","Issued","Issued on Payment in ACA"); 
