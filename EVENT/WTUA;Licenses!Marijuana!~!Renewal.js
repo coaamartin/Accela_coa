@@ -1,6 +1,6 @@
-//SWAKIL
-include("16_cancelScheduledInpsections");
-//SWAKIL
-include("10_deactivateMJTasks");
+//SW Script 436
+include("436_cancelScheduledInpsections");
+//SW Script 432
+include("432_deactivateMJTasks");
 
-include("10_closeLicenseMJ");
+include("432_closeLicenseMJ");

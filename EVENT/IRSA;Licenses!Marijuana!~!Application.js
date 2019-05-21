@@ -29,5 +29,5 @@ passedMJInspectionAutomation();
 requestExtensionMJInspection(vCapType);
 
 
-//SW ID 8
-include("8_allInspectionsResulted");
+//SW ID 430
+include("430_allInspectionsResulted");

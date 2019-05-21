@@ -1,5 +1,5 @@
-// SCRIPTNUMBER: 10
-// SCRIPTFILENAME: 10_deactivateMJTasks.js
+// SCRIPTNUMBER: 432
+// SCRIPTFILENAME: 432_deactivateMJTasks.js
 // PURPOSE: (Licenses/Marijuana//Application)  If the wfTask Status "Denied" or "Withdrawn" are selected and saved
 //          - Close ALL active workflow tasks.
 // DATECREATED: 05/18/2019

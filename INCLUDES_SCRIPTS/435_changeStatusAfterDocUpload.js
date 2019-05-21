@@ -1,5 +1,5 @@
-// SCRIPTNUMBER: 14
-// SCRIPTFILENAME: 14_changeStatusAfterDocUpload.js
+// SCRIPTNUMBER: 435
+// SCRIPTFILENAME: 435_changeStatusAfterDocUpload.js
 // PURPOSE: When either the MJ Application (Licenses/Marijuana/*/Application) or
 // MJ Renewal (Licenses/Marijuana/*/Renewal) is in the record status "Waiting on Documents" 
 // then update the record status to "Pending" when documents are uploaded to the record via AA or ACA

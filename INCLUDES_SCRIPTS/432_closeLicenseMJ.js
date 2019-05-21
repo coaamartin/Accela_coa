@@ -1,5 +1,5 @@
-// SCRIPTNUMBER: 10
-// SCRIPTFILENAME: 10_closeLicenseMJ.js
+// SCRIPTNUMBER: 432
+// SCRIPTFILENAME: 432_closeLicenseMJ.js
 // PURPOSE: (Licenses/Marijuana//Renewal)  If the wfTask Status "Denied" or "Withdrawn" are selected and 
 // 			saved - Associated License record status should be updated to "Closed"
 //          

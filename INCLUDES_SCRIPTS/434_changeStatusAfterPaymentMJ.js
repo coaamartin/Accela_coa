@@ -1,5 +1,5 @@
-// SCRIPTNUMBER: 13
-// SCRIPTFILENAME: 13_changeStatusAfterPaymentMJ.js
+// SCRIPTNUMBER: 434
+// SCRIPTFILENAME: 434_changeStatusAfterPaymentMJ.js
 // PURPOSE: When payment is made via AA or ACA and the record status of a Marijuana application is
 //              "Payment Pending" and the Fee Balance Due is less than or equal to 0, then update the record status to "Pending"
 // DATECREATED: 05/18/2019

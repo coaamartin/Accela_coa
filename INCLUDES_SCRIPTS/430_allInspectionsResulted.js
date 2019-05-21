@@ -1,5 +1,5 @@
-// SCRIPTNUMBER: 8
-// SCRIPTFILENAME: 8_allInspectionsResultedWF.js
+// SCRIPTNUMBER: 430
+// SCRIPTFILENAME: 430_allInspectionsResultedWF.js
 // PURPOSE: Once all 5 application inspection types have been been resulted "Passed" or "Passed - Minor Violations", 
 //              on a Licenses/Marijuana/*/Application, updates Workflow Task "Inspection Phase" with the Task Status "Complete"
 // DATECREATED: 05/17/2019

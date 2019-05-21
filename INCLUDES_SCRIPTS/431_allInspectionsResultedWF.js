@@ -1,5 +1,5 @@
-// SCRIPTNUMBER: 9
-// SCRIPTFILENAME: 9_allInspectionsResultedWF.js
+// SCRIPTNUMBER: 431
+// SCRIPTFILENAME: 431_allInspectionsResultedWF.js
 // PURPOSE: Prevent wfTask "License Issuance" from being statused "Issued" if:
 //              inspection types on an MJ Application has not yet been resulted "Passed" or "Passed - Minor Violations".
 //              there is a balance greater than 0 on any FEE ITEM in the "New" or "Invoiced" status

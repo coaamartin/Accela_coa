@@ -1,5 +1,5 @@
-// SCRIPTNUMBER: 16
-// SCRIPTFILENAME: 16_cancelScheduledInpsections.js
+// SCRIPTNUMBER: 436
+// SCRIPTFILENAME: 436_cancelScheduledInpsections.js
 // PURPOSE: If license becomes inactive with any of the below WF status's then cancel all scheduled inpsections
 // DATECREATED: 05/18/2019
 // BY: SWAKIL

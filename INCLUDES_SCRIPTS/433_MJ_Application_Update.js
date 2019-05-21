@@ -1,5 +1,5 @@
-// SCRIPTNUMBER: 11
-// SCRIPTFILENAME: 11_MJ_Application_Update.js
+// SCRIPTNUMBER: 433
+// SCRIPTFILENAME: 433_MJ_Application_Update.js
 // PURPOSE: When wfTask "Certificate of Occupancy" is statused "Final CO Issued" on a building permit (Building/New Builiding/Permit/NA), 
 // 		update the child Marijuana Application (Licenses/Marijuana/*/Application) wfTask "Certificate of Occupancy" with the wfTask Status "Complete"
 // 		Schedule all 5 "Pending" inspections
