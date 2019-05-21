@@ -104,8 +104,8 @@ function UpdateEnfVacParent() {
 						closeAllTasks(parentCapId, "Script 5086");
 						updateAppStatus("Closed", "Script 5086",parentCapId);	
 						cancelInspections(parentCapId);				
-						logDebug("right here");	
-						var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+						logDebug("Setting parent expiration status to inactive.");	
+						var rB1ExpResult = aa.expiration.getLicensesByCapID(parentCapId).getOutput();
 						rB1ExpResult.setExpStatus("Inactive");		
 					}
                 }
