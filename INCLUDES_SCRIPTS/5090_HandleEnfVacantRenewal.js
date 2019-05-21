@@ -64,7 +64,7 @@ function cancelInspections(theCapID) {
 					aa.debug("Inspection Cancelled" , inspId);
 				}
 			}
-		} catch {
+		} catch(err) {
 			logDebug("---------------------> Errror retrieving inspections - probably due to none existing.");		
 		}
 	}
