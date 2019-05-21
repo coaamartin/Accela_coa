@@ -57,13 +57,11 @@ function cancelInspections(theCapID) {
 		logDebug("---------------------> Possibly found some inspections.");
 		try {
 			inspList = inspResultObj.getOutput();
-			if (inspList != null) {
-				for (xx in inspList) {
-					var inspId = inspList[xx].getIdNumber();
-					var res=aa.inspection.cancelInspection(theCapID, inspId);
-					if (res.getSuccess()){
-						aa.debug("Inspection Cancelled" , inspId);
-					}
+			for (xx in inspList) {
+				var inspId = inspList[xx].getIdNumber();
+				var res=aa.inspection.cancelInspection(theCapID, inspId);
+				if (res.getSuccess()){
+					aa.debug("Inspection Cancelled" , inspId);
 				}
 			}
 		} catch(err) {
@@ -104,15 +102,14 @@ function UpdateEnfVacParent() {
                     copyParcels(capId, parentCapId);
                     editAppName(childCapScriptModel.specialText, parentCapId);
 					//closeTask("Review Application", "Complete", "Closed by Script 5090");
-					if (ifTracer(AInfo["Unregister"] == "Yes"))
-						{
-							logDebug("Within code block to check date");
-							closeAllTasks(parentCapId, "Script 5086");
-							updateAppStatus("Closed", "Script 5086",parentCapId);	
-							cancelInspections(parentCapId);
-							var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
-							rB1ExpResult.setExpStatus("Inactive");					
-						}
+					if (ifTracer(AInfo["Unregister"] == "Yes")){
+						logDebug("Within code block to check date");
+						closeAllTasks(parentCapId, "Script 5086");
+						updateAppStatus("Closed", "Script 5086",parentCapId);	
+						var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+						rB1ExpResult.setExpStatus("Inactive");		
+						cancelInspections(parentCapId);							
+					}
                 }
             }
  		//}
