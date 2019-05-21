@@ -54,13 +54,18 @@ function cancelInspections(theCapID) {
 	logDebug("---------------------> In the cancelInspections function");		
 	var inspResultObj = aa.inspection.getInspections(theCapID);
 	if (inspResultObj.getSuccess()) {
-		inspList = inspResultObj.getOutput();
-		for (xx in inspList) {
-			var inspId = inspList[xx].getIdNumber();
-			var res=aa.inspection.cancelInspection(theCapID, inspId);
-			if (res.getSuccess()){
-				aa.debug("Inspection Cancelled" , inspId);
+		logDebug("---------------------> Possibly found some inspections.");
+		try {
+			inspList = inspResultObj.getOutput();
+			for (xx in inspList) {
+				var inspId = inspList[xx].getIdNumber();
+				var res=aa.inspection.cancelInspection(theCapID, inspId);
+				if (res.getSuccess()){
+					aa.debug("Inspection Cancelled" , inspId);
+				}
 			}
+		} catch {
+			logDebug("---------------------> Errror retrieving inspections - probably due to none existing.");		
 		}
 	}
 }	
