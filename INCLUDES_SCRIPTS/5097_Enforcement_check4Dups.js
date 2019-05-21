@@ -31,6 +31,8 @@ if (matches(currentUserID,"AMARTIN","JWARTHAN","JMPORTER","JMAIN","DKOONTZ"))
 
 logGlobals(AInfo);
 
+checkForDuplicates();
+
 function checkForDuplicates()
 {
 	var aQuery = getDuplicateAddresses();
@@ -61,7 +63,7 @@ function cleanAndClose(inFlag){
 	if(inFlag == "True"){
         cancel = true;
         showMessage = true;
-        comment("Possible duplicates found.  Cancelling record creation.");			
+        comment("Possible duplicates found.  Cancelling record creation.");
 	}
 }
 /*
