@@ -64,7 +64,7 @@ function cancelInspections(theCapID) {
 					aa.debug("Inspection Cancelled" , inspId);
 				}
 			}
-		} catch(err) {
+		} catch(NullPointerException e) {
 			logDebug("---------------------> Errror retrieving inspections - probably due to none existing.");		
 		}
 	}
