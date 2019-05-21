@@ -58,6 +58,7 @@ function cancelInspections(theCapID) {
 		try {
 			inspList = inspResultObj.getOutput();
 			for (xx in inspList) {
+				logDebug("---------------------> Inside for loop.");
 				var inspId = inspList[xx].getIdNumber();
 				var res=aa.inspection.cancelInspection(theCapID, inspId);
 				if (res.getSuccess()){
