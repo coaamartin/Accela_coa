@@ -13,6 +13,13 @@ logDebug("---------------------> addressLine " + addressLine);
 
 editAppName(addressLine,capId);
 
+logDebug("---------------------> Setting record expiration info. ");	
+var vExpDate = new Date();
+var vNewExpDate = new Date(vExpDate.getFullYear() + 0, vExpDate.getMonth(), vExpDate.getDate());
+var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+rB1ExpResult.setExpStatus("About to Expire");
+aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
 
 logDebug("---------------------> At end of 5106 CTRCA");
 aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);

@@ -68,16 +68,16 @@ try{
 	logDebug("Failed to retrieve code area for code officer assignment: " + err.stack);
 };
 
-if (wfTask == "Foreclosure Information") {
-    //update Renewal status and date
-	logDebug("---------------------> Started setting renewal date and status ");		
-        var vExpDate = new Date();
-        var vNewExpDate = new Date(vExpDate.getFullYear() + 0, vExpDate.getMonth(), vExpDate.getDate());
-        var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
-        rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
-        rB1ExpResult.setExpStatus("About to Expire");
-        aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
-}
+//if (wfTask == "Foreclosure Information") {
+//    //update Renewal status and date
+//	logDebug("---------------------> Started setting renewal date and status ");		
+//        var vExpDate = new Date();
+//        var vNewExpDate = new Date(vExpDate.getFullYear() + 0, vExpDate.getMonth(), vExpDate.getDate());
+//        var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+//        rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+//        rB1ExpResult.setExpStatus("About to Expire");
+//        aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
+//}
 if (wfTask == "Foreclosure Information" && wfStatus == "NED/REO Recorded") {
 	logDebug("---------------------> Foreclosure Information - NED/REO Recorded");	
 	if ((AInfo["Dwelling Units"] == "5+ MF")) {
