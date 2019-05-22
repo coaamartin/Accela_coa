@@ -68,8 +68,8 @@ try{
 	logDebug("Failed to retrieve code area for code officer assignment: " + err.stack);
 };
 
-//if (wfTask == "Foreclosure Information") {
-//    //update Renewal status and date
+if (wfTask == "Foreclosure Information") {
+    //update Renewal status and date
 	logDebug("---------------------> Started setting renewal date and status ");		
         var vExpDate = new Date();
         var vNewExpDate = new Date(vExpDate.getFullYear() + 0, vExpDate.getMonth(), vExpDate.getDate());
