@@ -34,14 +34,6 @@ logDebug("---------------------> addressLine " + addressLine);
 
 editAppName(addressLine);
 
-logDebug("---------------------> Setting record expiration info. ");	
-var vExpDate = new Date();
-var vNewExpDate = new Date(vExpDate.getFullYear() + 0, vExpDate.getMonth(), vExpDate.getDate());
-//var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
-//rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
-//rB1ExpResult.setExpStatus("About to Expire");
-//aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
-licEditExpInfo("About to Expire",vNewExpDate)	
 logDebug("---------------------> 5105_VacantMasterASA.js ended.");
 //Script Tester footer.  Comment this out when deploying.
 //}	
