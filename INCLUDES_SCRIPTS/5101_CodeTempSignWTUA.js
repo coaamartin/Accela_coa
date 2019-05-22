@@ -28,6 +28,9 @@ User code generally goes inside the try block below.
 //End script Tester header 
 logDebug("---------------------> 5101_CodeTempSignWTUA is starting.");	
 
+//I cannot get the async to work so using non-async by forcing env variable.
+aa.env.setValue("eventType","Batch Process");
+
 var currentDate = sysDateMMDDYYYY;
 function cancelInspections() {
 	logDebug("---------------------> In the cancelInspections function");		
@@ -84,6 +87,25 @@ try{
 	logDebug("Failed to retrieve code area for code officer assignment: " + err.stack);
 };
 
+if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
+	updateAppStatus("PAYMENT PENDING", "Script 5101");	
+	updateFee("ENF_TS", "ENF_TS1", "FINAL", 1, "N");	
+
+	//Send a GENERIC INVOICE
+	var emailTemplate = "GENERIC INVOICE";		
+	var todayDate = new Date();
+	if (emailTemplate != null && emailTemplate != "") {
+		logDebug("5101 sending generic invoice.  Defaulting to contact Applicant.");	
+		eParams = aa.util.newHashtable();
+		eParams.put("$$ContactEmail$$", "");			
+		eParams.put("$$todayDate$$", todayDate);
+		eParams.put("$$altid$$",capId.getCustomID());
+		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+	}		
+}
+
 if (wfTask == "Application Close" && wfStatus == "Approved") {
 	updateAppStatus("Ground Signs", "Script 5101");	
 	var eventDate = AInfo["Event 1 End"];
@@ -92,7 +114,7 @@ if (wfTask == "Application Close" && wfStatus == "Approved") {
 	scheduleInspectDate("Reinspection 1", newDate,inspectorObj)	
 	
 	eventDate = AInfo["Event 1 Start"];
-	scheduleInspectDate("Notify Event", eventDate,inspectorObj)			
+	scheduleInspectDate("Notify Event", eventDate,inspectorObj)				
 }
 
 if (wfTask == "Application Close" && wfStatus == "Denied") {

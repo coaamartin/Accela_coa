@@ -28,24 +28,48 @@ User code generally goes inside the try block below.
 //End script Tester header 
 logDebug("---------------------> 5100_CodeTempUseWTUA is starting.");	
 
+//I cannot get the async to work so using non-async by forcing env variable.
+aa.env.setValue("eventType","Batch Process");
+
 var currentDate = sysDateMMDDYYYY;
 
 if (wfTask == "Application Close" && wfStatus == "Approved") {
-	updateAppStatus("Permit Issued", "Script 5100");		
+	updateAppStatus("Permit Issued", "Script 5100");	
+	//Need to email out a permit.
 }
 
 if (wfTask == "Application Close" && wfStatus == "Denied") {
 	updateAppStatus("Closed", "Script 5100");		
 }
 
-if (wfTask == "Final Approval" && wfStatus == "Denied") {
+if (wfTask == "Final Approval2" && wfStatus == "Denied") {
 	updateAppStatus("Closed", "Script 5100");	
 	closeAllTasks(capId, "");		
 }
 
-if (wfTask == "Final Approval" && wfStatus == "Approved") {
-	updateAppStatus("Permit Issued", "Script 5100");	
-	closeAllTasks(capId, "");		
+if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
+	updateAppStatus("PAYMENT PENDING", "Script 5100");	
+	closeAllTasks(capId, "");	
+	if (AInfo["Tax ID for nonprofit"] != "" || AInfo["Waive Fee"] == "Yes") {	
+		logDebug("--------------> Fee is waived.");	
+	} else {
+		logDebug("--------------> Charging permit fee.");	
+		updateFee("ENF_TU", "ENF_TU1", "FINAL", 1, "N");	
+
+		//Send a ENF GENERIC INVOICE
+		var emailTemplate = "GENERIC INVOICE";		
+		var todayDate = new Date();
+		if (emailTemplate != null && emailTemplate != "") {
+			logDebug("5100 sending generic invoice.  Defaulting to contact Applicant.");	
+			eParams = aa.util.newHashtable();
+			eParams.put("$$ContactEmail$$", "");			
+			eParams.put("$$todayDate$$", todayDate);
+			eParams.put("$$altid$$",capId.getCustomID());
+			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+			logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+			emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+		}		
+	}
 }
 
 logDebug("---------------------> 5100_CodeTempUseWTUA.js ended.");
