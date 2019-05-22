@@ -50,7 +50,7 @@ if (wfTask == "Final Approval2" && wfStatus == "Denied") {
 if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 	updateAppStatus("PAYMENT PENDING", "Script 5100");	
 	closeAllTasks(capId, "");	
-	if (AInfo["Tax ID for nonprofit"] != "" || AInfo["Waive Fee"] == "Yes") {	
+	if ((AInfo["Tax ID for nonprofit"] != "" && AInfo["Tax ID for nonprofit"] != null) || AInfo["Waive Fee"] == "Yes") {	
 		logDebug("--------------> Fee is waived.");	
 	} else {
 		logDebug("--------------> Charging permit fee.");	

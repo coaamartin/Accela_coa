@@ -114,7 +114,8 @@ if (wfTask == "Application Close" && wfStatus == "Approved") {
 	scheduleInspectDate("Reinspection 1", newDate,inspectorObj)	
 	
 	eventDate = AInfo["Event 1 Start"];
-	scheduleInspectDate("Notify Event", eventDate,inspectorObj)				
+	scheduleInspectDate("Notify Event", eventDate,inspectorObj)		
+	//Need to email out the permit.
 }
 
 if (wfTask == "Application Close" && wfStatus == "Denied") {
