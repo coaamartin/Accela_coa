@@ -1,5 +1,5 @@
 // SCRIPTNUMBER: 5109
-// SCRIPTFILENAME: 5109_TempSignASA.js
+// SCRIPTFILENAME: 5109_CodeTempSignASA.js
 // PURPOSE: Called when a Temporary Sign Permit record is built.
 // DATECREATED: 05/23/2019
 // BY: amartin
