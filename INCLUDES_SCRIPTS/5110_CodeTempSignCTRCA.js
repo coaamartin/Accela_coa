@@ -35,5 +35,20 @@ if (emailTemplate != null && emailTemplate != "") {
 	emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 }
 
+//Use these groups when in production: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
+var emailTemplate = "TEMP SIGN SUBMIT REVIEWERS";		
+if (emailTemplate != null && emailTemplate != "") {
+	logDebug("5101 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");	
+	eParams = aa.util.newHashtable();
+	eParams.put("$$ContactEmail$$", "");			
+	eParams.put("$$todayDate$$", todayDate);
+	eParams.put("$$altid$$",capId.getCustomID());
+	eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+	eParams.put("$$signType$$",signType);	
+	eParams.put("$$signAddress$$",signAddress);			
+	logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+	emailContacts("Applicant,jwarthan@auroragov.org;gsnogren@auroragov.org", emailTemplate, eParams, null, null, "Y");
+}
+
 logDebug("---------------------> At end of 5110 CTRCA");
 aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
