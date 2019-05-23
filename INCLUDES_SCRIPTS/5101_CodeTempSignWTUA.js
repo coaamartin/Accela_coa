@@ -87,9 +87,31 @@ try{
 	logDebug("Failed to retrieve code area for code officer assignment: " + err.stack);
 };
 
+if (wfTask == "Final Approval 1") {
+	//updateAppStatus("PAYMENT PENDING", "Script 5101");	
+
+	//Send email
+	var emailTemplate = "TEMP SIGN DEPT APPL";		
+	var todayDate = new Date();
+	var signType = AInfo["Type of Sign"];
+	var signAddress = AInfo["Address where proposed sign will be displayed"];
+	if (emailTemplate != null && emailTemplate != "") {
+		logDebug("5101 sending TEMP SIGN DEPT APPL.  Defaulting to contact Applicant.");	
+		eParams = aa.util.newHashtable();
+		eParams.put("$$ContactEmail$$", "");			
+		eParams.put("$$todayDate$$", todayDate);
+		eParams.put("$$altid$$",capId.getCustomID());
+		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+		eParams.put("$$signType$$",signType);	
+		eParams.put("$$signAddress$$",signAddress);			
+		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+	}		
+}
+
 if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 	updateAppStatus("PAYMENT PENDING", "Script 5101");	
-	updateFee("ENF_TS", "ENF_TS1", "FINAL", 1, "N");	
+	updateFee("ENF_TS", "ENF_TS1", "FINAL", 1, "Y");	
 
 	//Send a GENERIC INVOICE
 	var emailTemplate = "GENERIC INVOICE";		
