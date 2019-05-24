@@ -158,6 +158,14 @@ if (wfTask == "Final Approval 2" && wfStatus == "Suspended") {
 	var emailTemplate = "TEMP SIGN FINAL APPL";		
 	var todayDate = new Date();
 	var signType = AInfo["Type of Sign"];
+	var myArray = new Array();
+	var i = 0;
+	myArray = getTaskStatusForEmail("ENF_TEMP_SIGN");
+	while(i < myArray.length) {
+		logDebug("Printing out the array values " + myArray[i]);
+		i = i + 1;
+	}
+	
 	var signAddress = AInfo["Address where proposed sign will be displayed"];
 	if (emailTemplate != null && emailTemplate != "") {
 		logDebug("5101 sending TEMP SIGN FINAL APPL.  Defaulting to contact Applicant.");	
