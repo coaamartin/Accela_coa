@@ -29,7 +29,7 @@ for (i in inspectionTypesAry) {
 	//assign inspector based on inspection type
 	if (vInspType != null && (vInspType == "MJ AMED Inspections" || vInspType == "MJ Security Inspections - Police")) {
 		vInspector = "DALLEN";
-	} else if (vInspType != null && (vInspType == "MJ Planning Inspections") {
+	} else if (vInspType != null && (vInspType == "MJ Planning Inspections")) {
 		vInspector = "KKREIMEY";
 	} else {
 		vInspector = "SLCLARK";
