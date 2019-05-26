@@ -137,11 +137,31 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 				continue;
 			}
 
+			var adResult = aa.address.getAddressByCapId(capId).getOutput(); 
+            for(x in adResult)
+            {
+                var adType = adResult[x].getAddressType(); 
+                var stNum = adResult[x].getHouseNumberStart();
+                var preDir =adResult[x].getStreetDirection();
+                var stName = adResult[x].getStreetName(); 
+                var stType = adResult[x].getStreetSuffix();
+                var city = adResult[x].getCity();
+                var state = adResult[x].getState();
+                var zip = adResult[x].getZip();
+            }
+            var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
+
+            var asiValues = new Array();
+            loadAppSpecific(asiValues); 
+
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", thisCap.getCapModel().getAltID());
 			addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
-
+			addParameter(eParams, "$$FullAddress$$", primaryAddress);
+			addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
+			addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
+			
 			emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
 			//if (!sent) {
