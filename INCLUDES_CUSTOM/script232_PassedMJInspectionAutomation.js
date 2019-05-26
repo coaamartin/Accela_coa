@@ -1,10 +1,30 @@
 
 function passedMJInspectionAutomation(vCapType) {
 	var emailTemplate = "LIC MJ COMPLIANCE #232";
-
+	var inspResultComment = inspObj.getInspection().getResultComment();
 	//check for passed application inspections and email inspection contact with report
 	if (vCapType == "Application") {
 		if (inspResult == "Passed" || inspResult == "Passed - Minor Violations") {
+			var adResult = aa.address.getAddressByCapId(capId).getOutput(); 
+            for(x in adResult)
+            {
+                var adType = adResult[x].getAddressType(); 
+                var stNum = adResult[x].getHouseNumberStart();
+                var preDir =adResult[x].getStreetDirection();
+                var stName = adResult[x].getStreetName(); 
+                var stType = adResult[x].getStreetSuffix();
+                var city = adResult[x].getCity();
+                var state = adResult[x].getState();
+                var zip = adResult[x].getZip();
+            }
+            var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
+
+            var asiValues = new Array();
+            loadAppSpecific(asiValues); 
+
+            var lastIndex = inspType.lastIndexOf(" Inspections");
+            var inspTypeSub = inspType.substring(0, lastIndex);
+
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
@@ -23,7 +43,17 @@ function passedMJInspectionAutomation(vCapType) {
 				addParameter(eParams, "$$inspType$$", inspType);
 			if (inspSchedDate)
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
-			
+			if (inspTypeSub)
+                addParameter(eParams, "$$inspTypeSub$$", inspTypeSub.toUpperCase());
+            if (inspResultComment)
+                addParameter(eParams, "$$inspResultComment$$", inspResultComment);
+            if (primaryAddress)
+                addParameter(eParams, "$$FullAddress$$", primaryAddress);
+            if (asiValues["State License Number"])
+                addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
+            if (asiValues["Trade Name"])
+                addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
+            
 			var reportTemplate = "MJ_Compliance_Corrections_Letter";
 			var reportParams = aa.util.newHashtable();
 			addParameter(reportParams, "InspActNumber", inspId);
