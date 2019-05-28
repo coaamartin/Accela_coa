@@ -139,7 +139,7 @@ if (wfTask == "Final Approval 1") {
 
 if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 	updateAppStatus("PAYMENT PENDING", "Script 5101");	
-	updateFee("ENF_TS", "ENF_TS1", "FINAL", 1, "Y");	
+	updateFee("ENF_TS1", "ENF_TS", "FINAL", 1, "Y");	
 
 	//Send a GENERIC INVOICE
 	var emailTemplate = "GENERIC INVOICE";		
