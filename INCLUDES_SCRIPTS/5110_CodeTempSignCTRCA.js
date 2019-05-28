@@ -23,7 +23,7 @@ var todayDate = new Date();
 var signType = AInfo["Type of Sign"];
 var signAddress = AInfo["Address where proposed sign will be displayed"];
 if (emailTemplate != null && emailTemplate != "") {
-	logDebug("5101 sending TEMP SIGN SUBMIT APPLICANT.  Defaulting to contact Applicant.");	
+	logDebug("5110 sending TEMP SIGN SUBMIT APPLICANT.  Defaulting to contact Applicant.");	
 	eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "");			
 	eParams.put("$$todayDate$$", todayDate);
@@ -38,7 +38,7 @@ if (emailTemplate != null && emailTemplate != "") {
 //Use these groups when in production: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
 var emailTemplate = "TEMP SIGN SUBMIT REVIEWERS";		
 if (emailTemplate != null && emailTemplate != "") {
-	logDebug("5101 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");	
+	logDebug("5110 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");	
 	eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "");			
 	eParams.put("$$todayDate$$", todayDate);
