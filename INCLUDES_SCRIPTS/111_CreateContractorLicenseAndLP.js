@@ -37,16 +37,19 @@ var contact = getContactByType(contactType, capId);
 	//vNewExpDate = new Date(vNewExpDate - 1);
 	
 	var licenseNbr;
-	var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
+   
+   if (contact)
+  	  var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
 
-	if (licensesByName.getSuccess()) {
-		licensesByName = licensesByName.getOutput();
+	  if (licensesByName.getSuccess()) {
+	  	  licensesByName = licensesByName.getOutput();
 
-		if (licensesByName != null && licensesByName.length > 0) {
-			licenseNbr = licensesByName[0].getStateLicense();
-			logDebug("Using Existing Ref LP: " + licenseNbr);
-		}
-	}
+		  if (licensesByName != null && licensesByName.length > 0) {
+			  licenseNbr = licensesByName[0].getStateLicense();
+			  logDebug("Using Existing Ref LP: " + licenseNbr);
+		   }
+	   }
+   }   
 
 	if (!licenseNbr) {
 		/*
