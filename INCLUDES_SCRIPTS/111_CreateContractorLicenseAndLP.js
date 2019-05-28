@@ -37,17 +37,22 @@ var contact = getContactByType(contactType, capId);
 	}
 	//vNewExpDate = new Date(vNewExpDate - 1);
    
-   var vEmailTemplate = "BLD CLL LICENSE ISSUANCE # 111 & 112";
+   var vEmailTemplate = "BLD CLL LICENSE ISSUANCE #111";
 	var vEParams = aa.util.newHashtable();
 	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
 	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
 	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
+   addParameter(vEParams, "$$ContactEMail$$", "jmporter@auroragov.org");
 
 	tmpCap = capId;
 	capId = createdApp;
    logDebug("emailing from #111 - JMP");
+   
 	emailContacts("All",vEmailTemplate, vEParams, null,null,"Y");
+   
+   sendNotification("noreply@aurora.gov","jmporter@auroragov.org","",vEmailTemplate,vEParams,"",tmpCap);
+   
 	capId = tmpCap;
 	
 	var licenseNbr;
