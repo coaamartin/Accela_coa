@@ -43,15 +43,12 @@ var contact = getContactByType(contactType, capId);
 	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
 	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
 	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
-   addParameter(vEParams, "$$ContactEMail$$", "jmporter@auroragov.org");
 
 	tmpCap = capId;
 	capId = createdApp;
    logDebug("emailing from #111 - JMP");
    
-	emailContacts("All",vEmailTemplate, vEParams, null,null,"Y");
-   
-   sendNotification("noreply@aurora.gov","jmporter@auroragov.org","",vEmailTemplate,vEParams,"",tmpCap);
+	emailContacts("contactType",vEmailTemplate, vEParams, null,null,"Y");
    
 	capId = tmpCap;
 	
