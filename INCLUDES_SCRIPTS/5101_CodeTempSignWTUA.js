@@ -56,6 +56,7 @@ function getWorkflowComments()
 	}
     sStmt.close();
     conn.close();
+	return foundComments;
 }
 
 function cancelInspections() {
