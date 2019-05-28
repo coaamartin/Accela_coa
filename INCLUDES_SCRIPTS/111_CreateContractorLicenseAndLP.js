@@ -48,7 +48,7 @@ var contact = getContactByType(contactType, capId);
 	capId = createdApp;
    logDebug("emailing from #111 - JMP");
    
-	emailContacts("contactType",vEmailTemplate, vEParams, null,null,"Y");
+	emailContacts(contactType,vEmailTemplate, vEParams, null,null,"Y");
    
 	capId = tmpCap;
 	
