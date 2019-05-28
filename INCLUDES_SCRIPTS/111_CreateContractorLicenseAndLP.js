@@ -1,5 +1,5 @@
 logDebug("Creating Parent License");
-var contactType = "Contractor Applicant";
+var contactType = "Applicant";
 var licenseType = "Contractor";
 var addressType = "Business";
 var appName = cap.getSpecialText();
