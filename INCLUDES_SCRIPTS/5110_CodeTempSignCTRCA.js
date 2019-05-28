@@ -23,7 +23,7 @@ var todayDate = new Date();
 var signType = AInfo["Type of Sign"];
 var signAddress = AInfo["Address where proposed sign will be displayed"];
 if (emailTemplate != null && emailTemplate != "") {
-	logDebug("5101 sending TEMP SIGN SUBMIT APPLICANT.  Defaulting to contact Applicant.");	
+	logDebug("5110 sending TEMP SIGN SUBMIT APPLICANT.  Defaulting to contact Applicant.");	
 	eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "");			
 	eParams.put("$$todayDate$$", todayDate);
@@ -35,10 +35,10 @@ if (emailTemplate != null && emailTemplate != "") {
 	emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 }
 
-//Use these groups when in production: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
+//Use these groups when in production.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
 var emailTemplate = "TEMP SIGN SUBMIT REVIEWERS";		
 if (emailTemplate != null && emailTemplate != "") {
-	logDebug("5101 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");	
+	logDebug("5110 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");	
 	eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "");			
 	eParams.put("$$todayDate$$", todayDate);
@@ -47,7 +47,7 @@ if (emailTemplate != null && emailTemplate != "") {
 	eParams.put("$$signType$$",signType);	
 	eParams.put("$$signAddress$$",signAddress);			
 	logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-	emailContacts("Applicant,jwarthan@auroragov.org;gsnogren@auroragov.org", emailTemplate, eParams, null, null, "Y");
+	emailContacts("Applicant,jwarthan@auroragov.org,gsnogren@auroragov.org", emailTemplate, eParams, null, null, "Y");
 }
 
 logDebug("---------------------> At end of 5110 CTRCA");
