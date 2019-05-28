@@ -40,18 +40,18 @@ var contact = getContactByType(contactType, capId);
    var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
 	var vEParams = aa.util.newHashtable();
    
-	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
-	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
-	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
-	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
+	//addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
+	//addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
+	//addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
+	//addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
 
-	tmpCap = capId;
-	capId = createdApp;
+	//tmpCap = capId;
+	//capId = createdApp;
    logDebug("emailing from #111 - JMP");
    
 	emailContacts(contactType,vEmailTemplate, vEParams, "", "","N", "");
    
-	capId = tmpCap;
+	//capId = tmpCap;
 	
 	var licenseNbr;
    
