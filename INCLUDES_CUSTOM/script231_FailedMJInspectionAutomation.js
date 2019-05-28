@@ -1,9 +1,8 @@
-
 function failedMJInspectionAutomation(vCapType) {
 
 	var daysToAdd;
 	var inspDate = inspObj.getInspectionDate().getMonth() + "/" + inspObj.getInspectionDate().getDayOfMonth() + "/" + inspObj.getInspectionDate().getYear();
-	var inspResultComment = inspObj.getInspectionComments();
+	var inspResultComment = inspObj.getInspection().getResultComment();
 	
 	// list MJ inspection types
 	var inspectionTypesAry = [ "MJ AMED Inspections", "MJ Building Inspections - Electrical", "MJ Building Inspections - Life Safety",
@@ -21,10 +20,30 @@ function failedMJInspectionAutomation(vCapType) {
 	//check for failed inspections, schedule new inspection, and email applicant with report
 	for (s in inspectionTypesAry) {
 		if (inspType == inspectionTypesAry[s] && inspResult == "Failed") {
+			var adResult = aa.address.getAddressByCapId(capId).getOutput(); 
+            for(x in adResult)
+            {
+                var adType = adResult[x].getAddressType(); 
+                var stNum = adResult[x].getHouseNumberStart();
+                var preDir =adResult[x].getStreetDirection();
+                var stName = adResult[x].getStreetName(); 
+                var stType = adResult[x].getStreetSuffix();
+                var city = adResult[x].getCity();
+                var state = adResult[x].getState();
+                var zip = adResult[x].getZip();
+            }
+            var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
+
+            var asiValues = new Array();
+            loadAppSpecific(asiValues); 
+
 			var vInspector = getInspectorByInspID(inspId, capId);
 			var vInspType = inspType;
 			var vInspStatus = "Scheduled";
 			
+			var lastIndex = inspType.lastIndexOf(" Inspections");
+            var inspTypeSub = inspType.substring(0, lastIndex);
+
 			//schedule new inspection daysToAdd number of days from inspection result date
 			logDebug("Days to add: " + daysToAdd);
 			var newInspSchedDate = dateAddHC3(inspDate, daysToAdd, "Y");
@@ -69,6 +88,14 @@ function failedMJInspectionAutomation(vCapType) {
 				addParameter(eParams, "$$inspSchedDate$$", inspSchedDate);
 			if (inspResultComment)
 				addParameter(eParams, "$$inspResultComment$$", inspResultComment);
+			if (inspTypeSub)
+                addParameter(eParams, "$$inspTypeSub$$", inspTypeSub.toUpperCase());
+            if (primaryAddress)
+                addParameter(eParams, "$$FullAddress$$", primaryAddress);
+            if (asiValues["State License Number"])
+                addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
+            if (asiValues["Trade Name"])
+                addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
 			
 			//send email with report attachment
 			emailContactsWithReportLinkASync("Inspection Contact", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");

@@ -128,8 +128,62 @@ if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 	}		
 }
 
+if (wfTask == "Final Approval 2" && wfStatus == "Denied") {
+	updateAppStatus("DENIED", "Script 5101");	
+
+	//Send email
+	var emailTemplate = "TEMP SIGN FINAL APPL";		
+	var todayDate = new Date();
+	var signType = AInfo["Type of Sign"];
+	var signAddress = AInfo["Address where proposed sign will be displayed"];
+	if (emailTemplate != null && emailTemplate != "") {
+		logDebug("5101 sending TEMP SIGN FINAL APPL.  Defaulting to contact Applicant.");	
+		eParams = aa.util.newHashtable();
+		eParams.put("$$ContactEmail$$", "");			
+		eParams.put("$$todayDate$$", todayDate);
+		eParams.put("$$altid$$",capId.getCustomID());
+		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+		eParams.put("$$signType$$",signType);	
+		eParams.put("$$signAddress$$",signAddress);		
+		eParams.put("$$resolution$$","DENIED");	
+		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+	}	
+}
+
+if (wfTask == "Final Approval 2" && wfStatus == "Suspended") {
+	updateAppStatus("WITHDRAWN", "Script 5101");	
+
+	//Send email
+	var emailTemplate = "TEMP SIGN FINAL APPL";		
+	var todayDate = new Date();
+	var signType = AInfo["Type of Sign"];
+	var myArray = new Array();
+	var i = 0;
+	myArray = getTaskStatusForEmail("ENF_TEMP_SIGN");
+	while(i < myArray.length) {
+		logDebug("Printing out the array values " + myArray[i]);
+		i = i + 1;
+	}
+	
+	var signAddress = AInfo["Address where proposed sign will be displayed"];
+	if (emailTemplate != null && emailTemplate != "") {
+		logDebug("5101 sending TEMP SIGN FINAL APPL.  Defaulting to contact Applicant.");	
+		eParams = aa.util.newHashtable();
+		eParams.put("$$ContactEmail$$", "");			
+		eParams.put("$$todayDate$$", todayDate);
+		eParams.put("$$altid$$",capId.getCustomID());
+		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+		eParams.put("$$signType$$",signType);	
+		eParams.put("$$signAddress$$",signAddress);		
+		eParams.put("$$resolution$$","WITHDRAWN");	
+		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+	}	
+}
+
 if (wfTask == "Application Close" && wfStatus == "Approved") {
-	updateAppStatus("Ground Signs", "Script 5101");	
+	updateAppStatus("GROUND SIGNS", "Script 5101");	
 	var eventDate = AInfo["Event 1 End"];
 	newDate = dateAdd(eventDate,1);	
 	//scheduleInspectDate("Reinspection 1", newDate);	

@@ -1,17 +1,16 @@
-// SCRIPTNUMBER: 5109
-// SCRIPTFILENAME: 5109_TempSignASA.js
-// PURPOSE: Called when a Temporary Sign Permit record is built.
-// DATECREATED: 05/23/2019
+// SCRIPTNUMBER: 5111
+// SCRIPTFILENAME: 5111_CodeTempSignPRA.js
+// PURPOSE: Called when Enforcement Vacant Master record has Payment activity.
+// DATECREATED: 02/26/2019
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000110-CIE";
+//var myCapId = "19-000190-CTS";
 //var myUserId = "AMARTIN";
-//var eventName = "";
-//var wfTask = "Issue Classification";
-//var wfStatus = "BANNERS";
+//var eventName = "ApplicationSpecificInfoUpdateAfter";
+//var wfTask = "Foreclosure Information";
+//var wfStatus = "NED/REO Recorded";
 //var wfComment = "";
-//var AInfo = "Type of Issue";
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
 //var runEvent = true; // set to true to simulate the event and run all std choices/scripts for the record type.  
@@ -26,35 +25,87 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> At start of 5109 ASA");	
+logDebug("---------------------> At start of 5111 PRA");	
 
-var adResult = aa.address.getPrimaryAddressByCapID(capId,"Y");
-addressLine = adResult.getOutput().getAddressModel();
-logDebug("---------------------> addressLine " + addressLine);	
+//if fee of a certain type, 
+	var feeResult = aa.fee.getFeeItems(capId);
+	if (feeResult.getSuccess()) {
+		var feeObjArr = feeResult.getOutput();		
+	} else {
+		logDebug("**ERROR: getting fee items: " + capContResult.getErrorMessage());
+	}
+		var feeArray = ["ENF_TS1"];
+        
+		for(j in feeArray){
+            var aFee = feeArray[j];
+            if(feeExists(aFee)) {
+				//I cannot get the async to work so using non-async by forcing env variable.
+				aa.env.setValue("eventType","Batch Process");
+				//Send email
+				var emailTemplate = "TEMP SIGN FINAL APPL";		
+				var todayDate = new Date();
+				var signType = AInfo["Type of Sign"];
+				var signAddress = AInfo["Address where proposed sign will be displayed"];
+				if (emailTemplate != null && emailTemplate != "") {
+					logDebug("5101 sending TEMP SIGN SUBMIT APPLICANT.  Defaulting to contact Applicant.");	
+					eParams = aa.util.newHashtable();
+					eParams.put("$$ContactEmail$$", "");			
+					eParams.put("$$todayDate$$", todayDate);
+					eParams.put("$$altid$$",capId.getCustomID());
+					eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+					eParams.put("$$signType$$",signType);	
+					eParams.put("$$signAddress$$",signAddress);			
+					logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+					emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+				}	
+				//in production send to tup_license@auroragov.org
+				var emailTemplate = "TEMP SIGN FINAL BUSLIC";		
+				if (emailTemplate != null && emailTemplate != "") {
+					logDebug("5101 sending TEMP SIGN SUBMIT APPLICANT.  Defaulting to contact Applicant.");	
+					eParams = aa.util.newHashtable();
+					eParams.put("$$ContactEmail$$", "");			
+					eParams.put("$$todayDate$$", todayDate);
+					eParams.put("$$altid$$",capId.getCustomID());
+					eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+					eParams.put("$$signType$$",signType);	
+					eParams.put("$$signAddress$$",signAddress);		
+					eParams.put("$$feeWaived$$","NO");							
+					logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+					emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+				}					
+			}
+        }	
+	/*
+	var vDelFee;
+	var ff = 0;
+	//loop through fee items
+	for (ff in feeObjArr) {
+        var pfResult = aa.finance.getPaymentFeeItems(capId, null);
+        if (pfResult.getSuccess()) {
+			var pfObj = pfResult.getOutput();
+			//match fee items to sequence number
+			for (ij in pfObj) {
+				if (feeObjArr[ff].getFeeSeqNbr() == pfObj[ij].getFeeSeqNbr() && pfObj[ij].getPaymentSeqNbr() == vPaymentSeqNbr) {
+					logDebug("Checking for a Delinquent	fee.");
+					//check for Delinquent fee
+					if (feeObjArr[ff].getFeeCod() == "ENF_VAC_DEL1") {
+						logDebug("Delinquent fee is present");
+						vDelFee = true;
+					} else {
+						logDebug("Local fee is present");
+						vDelFee = false;
+					}
+				}
+			}
+		}
+	}
+	if (vDelFee) {
+		logDebug("---------------------> Found Delinquent Fee - Removing it.");	
+		if(feeExists("ENF_VAC_DEL1")) removeFee("ENF_VAC_DEL1", "FINAL");	
+	}
+*/	
 
-editAppName(addressLine);
-
-//I cannot get the async to work so using non-async by forcing env variable.
-aa.env.setValue("eventType","Batch Process");
-//Send email
-var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";		
-var todayDate = new Date();
-var signType = AInfo["Type of Sign"];
-var signAddress = AInfo["Address where proposed sign will be displayed"];
-if (emailTemplate != null && emailTemplate != "") {
-	logDebug("5101 sending TEMP SIGN SUBMIT APPLICANT.  Defaulting to contact Applicant.");	
-	eParams = aa.util.newHashtable();
-	eParams.put("$$ContactEmail$$", "");			
-	eParams.put("$$todayDate$$", todayDate);
-	eParams.put("$$altid$$",capId.getCustomID());
-	eParams.put("$$capAlias$$",cap.getCapType().getAlias());
-	eParams.put("$$signType$$",signType);	
-	eParams.put("$$signAddress$$",signAddress);			
-	logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-	emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
-}
-	
-logDebug("---------------------> 5109_TempSignASA.js ended.");
+logDebug("---------------------> 5111_CodeTempSignPRA.js ended.");
 //Script Tester footer.  Comment this out when deploying.
 //}	
 
