@@ -27,6 +27,33 @@ User code generally goes inside the try block below.
 //End script Tester header 
 logDebug("---------------------> At start of 5111 PRA");	
 
+function getComments()
+{
+	var appTypeAlias = cap.getCapType().getAlias();
+	var aQuery = "exec coa_get_workflow_comments '" + appTypeAlias + "','" + capId.getID1() + "','" + capId.getID3() + "'";
+		logDebug("query is: " + aQuery);		
+	return aQuery;
+}
+
+function getWorkflowComments()
+{
+	var aQuery = getComments();
+    var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
+    var ds = initialContext.lookup("java:/AA");
+    var conn = ds.getConnection();
+    var sStmt = conn.prepareStatement(aQuery);
+    var rSet = sStmt.executeQuery();
+    var counter = 0;
+    while (rSet.next()) {
+		counter = counter + 1;
+		var foundComments = rSet.getString("Comment");
+		logDebug("Found a comment: " + foundComments);			
+	}
+    sStmt.close();
+    conn.close();
+	return foundComments;
+}
+
 //if fee of a certain type, 
 	var feeResult = aa.fee.getFeeItems(capId);
 	if (feeResult.getSuccess()) {
@@ -35,10 +62,11 @@ logDebug("---------------------> At start of 5111 PRA");
 		logDebug("**ERROR: getting fee items: " + capContResult.getErrorMessage());
 	}
 		var feeArray = ["ENF_TS1"];
-        
+        var foundComments2 = getWorkflowComments();	
 		for(j in feeArray){
             var aFee = feeArray[j];
             if(feeExists(aFee)) {
+				updateAppStatus("GROUND SIGNS", "Script 5101");			
 				//I cannot get the async to work so using non-async by forcing env variable.
 				aa.env.setValue("eventType","Batch Process");
 				//Send email
@@ -54,12 +82,15 @@ logDebug("---------------------> At start of 5111 PRA");
 					eParams.put("$$altid$$",capId.getCustomID());
 					eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 					eParams.put("$$signType$$",signType);	
-					eParams.put("$$signAddress$$",signAddress);			
+					eParams.put("$$signAddress$$",signAddress);		
+					eParams.put("$$resolution$$","APPROVED");	
+					eParams.put("$$allComments$$",foundComments2);			
 					logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 					emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 				}	
 				//in production send to tup_license@auroragov.org
 				var emailTemplate = "TEMP SIGN FINAL BUSLIC";		
+				
 				if (emailTemplate != null && emailTemplate != "") {
 					logDebug("5101 sending TEMP SIGN SUBMIT APPLICANT.  Defaulting to contact Applicant.");	
 					eParams = aa.util.newHashtable();
@@ -69,7 +100,9 @@ logDebug("---------------------> At start of 5111 PRA");
 					eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 					eParams.put("$$signType$$",signType);	
 					eParams.put("$$signAddress$$",signAddress);		
-					eParams.put("$$feeWaived$$","NO");							
+					eParams.put("$$feeWaived$$","NO");	
+					eParams.put("$$resolution$$","APPROVED");	
+					eParams.put("$$allComments$$",foundComments2);							
 					logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 					emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 				}					
