@@ -47,7 +47,7 @@ var contact = getContactByType(contactType, capId);
 	tmpCap = capId;
 	capId = createdApp;
    logDebug("emailing from #111 - JMP");
-	emailContacts("All",vEmailTemplate, vEParams, null,null);
+	emailContacts("All",vEmailTemplate, vEParams, null,null,"Y");
 	capId = tmpCap;
 	
 	var licenseNbr;
