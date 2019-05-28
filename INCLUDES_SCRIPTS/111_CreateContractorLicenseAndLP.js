@@ -22,6 +22,18 @@ copyAppSpecific(createdApp);
 var licenseNbr = null;
 var contact = getContactByType(contactType, capId);
 
+	var vEmailTemplate = "BLD CLL LICENSE ISSUANCE # 111 & 112";
+	var vEParams = aa.util.newHashtable();
+	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
+	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
+	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
+	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
+
+	tmpCap = capId;
+	capId = createdApp;
+	emailContacts("All",vEmailTemplate, vEParams, null,null);
+	capId = tmpCap;
+
 //contact required exist on child (current) record
 //if (contact) {
 	logDebug("Creating Ref LP");
@@ -79,17 +91,17 @@ var contact = getContactByType(contactType, capId);
 		aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
 	}
 	
-	var vEmailTemplate = "BLD CLL LICENSE ISSUANCE # 111 & 112";
-	var vEParams = aa.util.newHashtable();
-	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
-	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
-	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
-	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
+//	var vEmailTemplate = "BLD CLL LICENSE ISSUANCE # 111 & 112";
+//	var vEParams = aa.util.newHashtable();
+//	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
+//	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
+//	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
+//	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
 
-	tmpCap = capId;
-	capId = createdApp;
-	emailContacts("All",vEmailTemplate, vEParams, null,null);
-	capId = tmpCap;
+//	tmpCap = capId;
+//	capId = createdApp;
+//	emailContacts("All",vEmailTemplate, vEParams, null,null);
+//	capId = tmpCap;
 	
 //} else { //contact required exist on child (current) record
 //	logDebug("**WARN contact of type : " + contactType + " not found on record");
