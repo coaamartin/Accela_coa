@@ -38,7 +38,7 @@ var contact = getContactByType(contactType, capId);
 	
 	var licenseNbr;
    
-   if (contact)
+   if (contact) {
   	  var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
 
 	  if (licensesByName.getSuccess()) {
