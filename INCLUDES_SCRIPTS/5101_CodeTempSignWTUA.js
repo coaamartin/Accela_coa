@@ -35,7 +35,7 @@ var currentDate = sysDateMMDDYYYY;
 
 function getComments()
 {
-	//var appTypeAlias = cap.getCapType().getAlias();
+	var appTypeAlias = cap.getCapType().getAlias();
 	var aQuery = "exec coa_get_workflow_comments '" + appTypeAlias + "','" + capId.getID1() + "','" + capId.getID3() + "'";
 	return aQuery;
 }
