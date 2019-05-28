@@ -23,7 +23,7 @@ var licenseNbr = null;
 var contact = getContactByType(contactType, capId);
 
 //contact required exist on child (current) record
-if (contact) {
+//if (contact) {
 	logDebug("Creating Ref LP");
 	vExpDate = new Date();
 	vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
@@ -88,6 +88,6 @@ if (contact) {
 	emailContacts("All",vEmailTemplate, vEParams, null,null);
 	capId = tmpCap;
 	
-} else { //contact required exist on child (current) record
-	logDebug("**WARN contact of type : " + contactType + " not found on record");
-}
+//} else { //contact required exist on child (current) record
+//	logDebug("**WARN contact of type : " + contactType + " not found on record");
+//}
