@@ -38,11 +38,11 @@ var contact = getContactByType(contactType, capId);
    
    var vEmailTemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
 	var vEParams = aa.util.newHashtable();
-   var vEParams = aa.util.newHashtable();
-	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
-	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
-	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
-	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
+   
+	//addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
+	//addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
+	//addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
+	//addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
    
    logDebug("emailing from #64&65 - JMP");   
 	emailContacts(contactType,vEmailTemplate, vEParams, "", "","N", "");
