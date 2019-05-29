@@ -36,7 +36,7 @@ var contact = getContactByType(contactType, capId);
 	}
 	vNewExpDate = new Date(vNewExpDate - (24*60*60*1000));
    
-   var vEmailTemplate = "BLD_QPL_LICENSE_ISSUANCE_#_64-65";
+   var vEmailTemplate = "BLD QPL LICENSE ISSUANCE # 64&65"; //BLD QPL LICENSE ISSUANCE # 64&65     BLD_QPL_LICENSE_ISSUANCE_#_64-65
 	var vEParams = aa.util.newHashtable();
    
 	//addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
