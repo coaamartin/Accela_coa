@@ -5,7 +5,7 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000190-CTS";
+//var myCapId = "19-000189-CTS";
 //var myUserId = "AMARTIN";
 //var eventName = "ApplicationSpecificInfoUpdateAfter";
 //var wfTask = "Foreclosure Information";
