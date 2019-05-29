@@ -144,7 +144,7 @@ if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 	//Send a GENERIC INVOICE
 	var emailTemplate = "GENERIC INVOICE";		
 	var todayDate = new Date();
-	var goPay = "https://awebdev.aurora.city/CitizenAccess/urlrouting.ashx?type=1009&Module=" + cap.getCapModel().getModuleName() + "&capID1=" + capId.getID1() + "&capID2=" + capId.getID2() + "&capID3=" + capId.getID3() + "&agencyCode=AURORACO&HideHeader=false";
+	var goPay = "<A href= 'https://awebdev.aurora.city/CitizenAccess/urlrouting.ashx?type=1009&Module=" + cap.getCapModel().getModuleName() + "&capID1=" + capId.getID1() + "&capID2=" + capId.getID2() + "&capID3=" + capId.getID3() + "&agencyCode=AURORACO&HideHeader=false'>Click here to go to your record.</A>";
 	logDebug("goPay is." + goPay);	
 	if (emailTemplate != null && emailTemplate != "") {
 		logDebug("5101 sending generic invoice.  Defaulting to contact Applicant.");	
