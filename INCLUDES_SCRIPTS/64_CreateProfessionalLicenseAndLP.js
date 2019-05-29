@@ -39,7 +39,7 @@ var contact = getContactByType(contactType, capId);
    var vEmailTemplate = "BLD_QPL_LICENSE_ISSUANCE_#_64-65"; //BLD QPL LICENSE ISSUANCE # 64&65     BLD_QPL_LICENSE_ISSUANCE_#_64-65
 	var vEParams = aa.util.newHashtable();
    
-   var v0=expression.getValue("ASI::GENERAL INFORMATION::Qualifying Professional Type");
+   var v0=createdApp.getValue("ASI::GENERAL INFORMATION::Qualifying Professional Type");
    
 	addParameter(vEParams, "$$LicenseType$$", v0);
 	//addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
