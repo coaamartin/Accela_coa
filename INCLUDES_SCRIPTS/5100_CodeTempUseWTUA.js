@@ -40,7 +40,8 @@ function getComments()
 	return aQuery;
 }
 
-function getWorkflowComments()
+function getWorkflowComments();
+
 {
 	var aQuery = getComments();
     var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
