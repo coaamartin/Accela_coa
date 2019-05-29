@@ -35,6 +35,17 @@ var contact = getContactByType(contactType, capId);
 		vNewExpDate.setMonth(vNewExpDate.getMonth() + 1);
 	}
 	vNewExpDate = new Date(vNewExpDate - (24*60*60*1000));
+   
+   var vEmailTemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
+	var vEParams = aa.util.newHashtable();
+   var vEParams = aa.util.newHashtable();
+	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
+	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
+	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
+	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
+   
+   logDebug("emailing from #64&65 - JMP");   
+	emailContacts(contactType,vEmailTemplate, vEParams, "", "","N", "");
 
 	var licenseNbr;
 	var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
@@ -76,17 +87,17 @@ var contact = getContactByType(contactType, capId);
 		aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
 	}
 	
-	var vEmailTemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
-	var vEParams = aa.util.newHashtable();
-	addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
-	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
-	addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
-	addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
+//var vEmailTemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
+	//var vEParams = aa.util.newHashtable();
+	//addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
+	//addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
+	//addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
+	//addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
 
-	tmpCap = capId;
-	capId = createdApp;
-	emailContacts("All",vEmailTemplate, vEParams, null,null);
-	capId = tmpCap;
+	//tmpCap = capId;
+	//capId = createdApp;
+	//emailContacts("All",vEmailTemplate, vEParams, null,null);
+	//capId = tmpCap;
 //} else { //contact required exist on child (current) record
 //	logDebug("**WARN contact of type : " + contactType + " not found on record");
 //}
