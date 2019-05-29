@@ -1,5 +1,5 @@
 logDebug("Creating Parent License");
-var contactType = "Applicant";
+var contactType = "License Holder";
 var licenseType = "Qualified Professional";
 var addressType = "Business";
 var appName = cap.getSpecialText();
@@ -36,7 +36,7 @@ var contact = getContactByType(contactType, capId);
 	}
 	vNewExpDate = new Date(vNewExpDate - (24*60*60*1000));
    
-   var vEmailTemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
+   var vEmailTemplate = "BLD_QPL_LICENSE_ISSUANCE_#_64-65";
 	var vEParams = aa.util.newHashtable();
    
 	//addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
@@ -44,15 +44,19 @@ var contact = getContactByType(contactType, capId);
 	//addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
 	//addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
    
-   logDebug("emailing from #64&65 - JMP");   
+   logDebug("emailing from #64&65 - JMP"); 
+   
 	emailContacts(contactType,vEmailTemplate, vEParams, "", "","N", "");
 
 	var licenseNbr;
-	var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
+   
+   if (contact) {
+	  var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
 
-	if (licensesByName.getSuccess()) {
-		licensesByName = licensesByName.getOutput();
-
+	  if (licensesByName.getSuccess()) {
+	   	licensesByName = licensesByName.getOutput();
+      }
+     
 		if (licensesByName != null && licensesByName.length > 0) {
 			licenseNbr = licensesByName[0].getStateLicense();
 			logDebug("Using Existing Ref LP: " + licenseNbr);
