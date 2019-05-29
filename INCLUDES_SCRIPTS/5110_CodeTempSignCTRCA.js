@@ -40,7 +40,7 @@ var emailTemplate = "TEMP SIGN SUBMIT REVIEWERS";
 if (emailTemplate != null && emailTemplate != "") {
 	logDebug("5110 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");	
 	eParams = aa.util.newHashtable();
-	eParams.put("$$ContactEmail$$", "jwarthan@auroragov.org,gsnogren@auroragov.org");			
+	eParams.put("$$ContactEmail$$", "");			
 	eParams.put("$$todayDate$$", todayDate);
 	eParams.put("$$altid$$",capId.getCustomID());
 	eParams.put("$$capAlias$$",cap.getCapType().getAlias());
