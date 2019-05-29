@@ -5,7 +5,7 @@
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000190-CTS";
+//var myCapId = "19-000189-CTS";
 //var myUserId = "AMARTIN";
 //var eventName = "ApplicationSpecificInfoUpdateAfter";
 //var wfTask = "Foreclosure Information";
@@ -55,17 +55,18 @@ function getWorkflowComments()
 }
 
 //if fee of a certain type, 
-	var feeResult = aa.fee.getFeeItems(capId);
-	if (feeResult.getSuccess()) {
-		var feeObjArr = feeResult.getOutput();		
-	} else {
-		logDebug("**ERROR: getting fee items: " + capContResult.getErrorMessage());
-	}
-		var feeArray = ["ENF_TS1"];
+	applyPayments();
+	//var feeResult = aa.fee.getFeeItems(capId);
+	//if (feeResult.getSuccess()) {
+	//	var feeObjArr = feeResult.getOutput();		
+	//} else {
+	//	logDebug("**ERROR: getting fee items: " + capContResult.getErrorMessage());
+	//}
+	//	var feeArray = ["ENF_TS1"];
         var foundComments2 = getWorkflowComments();	
-		for(j in feeArray){
-            var aFee = feeArray[j];
-            if(feeExists(aFee)) {
+	//	for(j in feeArray){
+    //        var aFee = feeArray[j];
+    //        if(feeExists(aFee)) {
 				updateAppStatus("GROUND SIGNS", "Script 5101");			
 				//I cannot get the async to work so using non-async by forcing env variable.
 				aa.env.setValue("eventType","Batch Process");
@@ -106,8 +107,8 @@ function getWorkflowComments()
 					logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 					emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 				}					
-			}
-        }	
+			//}
+        //}	
 	/*
 	var vDelFee;
 	var ff = 0;
