@@ -220,7 +220,7 @@ if (wfTask == "Application Close" && wfStatus == "Approved") {
 }
 
 if (wfTask == "Application Close" && wfStatus == "Denied") {
-	updateAppStatus("Closed", "Script 5101");		
+	updateAppStatus("DENIED", "Script 5101");		
 	cancelInspections();
 }
 

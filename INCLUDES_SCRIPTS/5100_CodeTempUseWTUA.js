@@ -62,16 +62,16 @@ function getWorkflowComments()
 var foundComments2 = getWorkflowComments();	
 	
 if (wfTask == "Application Close" && wfStatus == "Approved") {
-	updateAppStatus("Permit Issued", "Script 5100");
+	updateAppStatus("PERMIT ISSUED", "Script 5100");
 	closeAllTasks(capId, "");		
 }
 
 if (wfTask == "Application Close" && wfStatus == "Denied") {
-	updateAppStatus("Closed", "Script 5100");		
+	updateAppStatus("DENIED", "Script 5100");		
 }
 
 if (wfTask == "Final Approval2" && wfStatus == "Denied") {
-	updateAppStatus("Closed", "Script 5100");	
+	updateAppStatus("DENIED", "Script 5100");	
 	closeAllTasks(capId, "");		
 }
 

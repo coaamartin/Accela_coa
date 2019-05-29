@@ -1,7 +1,7 @@
 // SCRIPTNUMBER: 5111
 // SCRIPTFILENAME: 5111_CodeTempSignPRA.js
-// PURPOSE: Called when Enforcement Vacant Master record has Payment activity.
-// DATECREATED: 02/26/2019
+// PURPOSE: Called when Enforcement Temp Sign record has Payment activity.
+// DATECREATED: 05/25/2019
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
@@ -67,7 +67,7 @@ function getWorkflowComments()
 	//	for(j in feeArray){
     //        var aFee = feeArray[j];
     //        if(feeExists(aFee)) {
-				updateAppStatus("GROUND SIGNS", "Script 5101");			
+				updateAppStatus("GROUND SIGNS", "Script 5111");			
 				//I cannot get the async to work so using non-async by forcing env variable.
 				aa.env.setValue("eventType","Batch Process");
 				//Send email
