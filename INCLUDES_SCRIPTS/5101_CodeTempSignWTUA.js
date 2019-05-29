@@ -153,7 +153,7 @@ if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 		eParams.put("$$todayDate$$", todayDate);
 		eParams.put("$$altid$$",capId.getCustomID());
 		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
-		eParams.put("$$goPay$$",goPay);		
+		//eParams.put("$$goPay$$",goPay);		
 		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 	}		
