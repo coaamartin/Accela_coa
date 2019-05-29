@@ -44,9 +44,11 @@ var contact = getContactByType(contactType, capId);
 	//addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
 	//addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
    
-   logDebug("emailing from #64&65 - JMP"); 
+   logDebug("emailing from BLD_QPL_LICENSE_ISSUANCE_#_64-65 - JMP"); 
    
 	emailContacts(contactType,vEmailTemplate, vEParams, "", "","N", "");
+   
+   logDebug("done with emailing BLD_QPL_LICENSE_ISSUANCE_#_64-65 - JMP"); 
 
 	var licenseNbr;
    
