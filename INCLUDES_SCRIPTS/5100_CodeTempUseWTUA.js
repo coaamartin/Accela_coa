@@ -40,8 +40,7 @@ function getComments()
 	return aQuery;
 }
 
-function getWorkflowComments();
-
+function getWorkflowComments()
 {
 	var aQuery = getComments();
     var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
@@ -84,7 +83,7 @@ if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 		var emailTemplate = "TEMP USE APPLICANT PERMIT";		
 		var todayDate = new Date();
 		var eventDescription = AInfo["Detailed Description"];
-		var eventTimes = AInfo["Start Date"] " to " + AInfo["End Date"];
+		var eventTimes = AInfo["Start Date"] + " to " + AInfo["End Date"];
 		if (emailTemplate != null && emailTemplate != "") {
 			logDebug("5100 TEMP USE APPLICANT PERMIT.  Defaulting to contact Applicant.");	
 			eParams = aa.util.newHashtable();

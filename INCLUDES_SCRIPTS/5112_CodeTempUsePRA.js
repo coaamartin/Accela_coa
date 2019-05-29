@@ -74,7 +74,7 @@ function getWorkflowComments()
 				var emailTemplate = "TEMP USE APPLICANT PERMIT";		
 				var todayDate = new Date();
 				var eventDescription = AInfo["Detailed Description"];
-				var eventTimes = AInfo["Start Date"] " to " + AInfo["End Date"];
+				var eventTimes = (AInfo["Start Date"] + " to " + AInfo["End Date"]);
 				if (emailTemplate != null && emailTemplate != "") {
 					logDebug("5100 TEMP USE APPLICANT PERMIT.  Defaulting to contact Applicant.");	
 					eParams = aa.util.newHashtable();
