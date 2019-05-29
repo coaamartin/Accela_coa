@@ -32,10 +32,38 @@ logDebug("---------------------> 5100_CodeTempUseWTUA is starting.");
 aa.env.setValue("eventType","Batch Process");
 
 var currentDate = sysDateMMDDYYYY;
+function getComments()
+{
+	var appTypeAlias = cap.getCapType().getAlias();
+	var aQuery = "exec coa_get_workflow_comments '" + appTypeAlias + "','" + capId.getID1() + "','" + capId.getID3() + "'";
+		logDebug("query is: " + aQuery);		
+	return aQuery;
+}
 
+function getWorkflowComments()
+{
+	var aQuery = getComments();
+    var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
+    var ds = initialContext.lookup("java:/AA");
+    var conn = ds.getConnection();
+    var sStmt = conn.prepareStatement(aQuery);
+    var rSet = sStmt.executeQuery();
+    var counter = 0;
+    while (rSet.next()) {
+		counter = counter + 1;
+		var foundComments = rSet.getString("Comment");
+		logDebug("Found a comment: " + foundComments);			
+	}
+    sStmt.close();
+    conn.close();
+	return foundComments;
+}
+
+var foundComments2 = getWorkflowComments();	
+	
 if (wfTask == "Application Close" && wfStatus == "Approved") {
-	updateAppStatus("Permit Issued", "Script 5100");	
-	//Need to email out a permit.
+	updateAppStatus("Permit Issued", "Script 5100");
+	closeAllTasks(capId, "");		
 }
 
 if (wfTask == "Application Close" && wfStatus == "Denied") {
@@ -48,13 +76,31 @@ if (wfTask == "Final Approval2" && wfStatus == "Denied") {
 }
 
 if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
-	updateAppStatus("PAYMENT PENDING", "Script 5100");	
-	closeAllTasks(capId, "");	
 	if ((AInfo["Tax ID for nonprofit"] != "" && AInfo["Tax ID for nonprofit"] != null) || AInfo["Waive Fee"] == "Yes") {	
 		logDebug("--------------> Fee is waived.");	
+		updateAppStatus("PERMIT ISSUED", "Script 5100");			
+		//Send email
+		var emailTemplate = "TEMP USE APPLICANT PERMIT";		
+		var todayDate = new Date();
+		var eventDescription = AInfo["Detailed Description"];
+		var eventTimes = AInfo["Start Date"] " to " + AInfo["End Date"];
+		if (emailTemplate != null && emailTemplate != "") {
+			logDebug("5100 TEMP USE APPLICANT PERMIT.  Defaulting to contact Applicant.");	
+			eParams = aa.util.newHashtable();
+			eParams.put("$$ContactEmail$$", "");			
+			eParams.put("$$todayDate$$", todayDate);
+			eParams.put("$$altid$$",capId.getCustomID());
+			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+			eParams.put("$$eventDescription$$",eventDescription);	
+			eParams.put("$$eventTimes$$",eventTimes);	
+			eParams.put("$$allComments$$",foundComments2);				
+			logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+			emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+		}	
 	} else {
 		logDebug("--------------> Charging permit fee.");	
-		updateFee("ENF_TU", "ENF_TU1", "FINAL", 1, "N");	
+		updateAppStatus("PAYMENT PENDING", "Script 5100");		
+		updateFee("ENF_TU1", "ENF_TU", "FINAL", 1, "N");	
 
 		//Send a ENF GENERIC INVOICE
 		var emailTemplate = "GENERIC INVOICE";		
