@@ -144,8 +144,11 @@ if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 	//Send a GENERIC INVOICE
 	var emailTemplate = "GENERIC INVOICE";		
 	var todayDate = new Date();
-	var goPay = "https://awebdev.aurora.city/CitizenAccess/urlrouting.ashx?type=1009&Module=" + cap.getCapModel().getModuleName(); + "&capID1=" + capId.getID1() + "&capID2=" + capId.getID2() + "&capID3=" + capId.getID3() + "&agencyCode=AURORACO&HideHeader=false";
-	logDebug("goPay is." + goPay);	
+    //acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
+    //acaURL = acaURL.substr(0, acaURL.toUpperCase().indexOf("/ADMIN"));           
+    //acaURL += "/urlrouting.ashx?type=1009&module=Enforcement&capId1=" + capId.getID1() + "&capId2=" + capId.getID2() + "&capId3=" + capId.getID3() + "&AgencyCode=" + aa.getServiceProviderCode();
+	
+	//var goPay = "https://awebdev.aurora.city/CitizenAccess/urlrouting.ashx?type=1009&Module=" + cap.getCapModel().getModuleName() + "&capID1=" + capId.getID1() + "&capID2=" + capId.getID2() + "&capID3=" + capId.getID3() + "&agencyCode=AURORACO&HideHeader=false";
 	if (emailTemplate != null && emailTemplate != "") {
 		logDebug("5101 sending generic invoice.  Defaulting to contact Applicant.");	
 		eParams = aa.util.newHashtable();
@@ -153,7 +156,7 @@ if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 		eParams.put("$$todayDate$$", todayDate);
 		eParams.put("$$altid$$",capId.getCustomID());
 		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
-		eParams.put("$$goPay$$",goPay);		
+		//eParams.put("$$deeplink$$",acaURL);		
 		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 	}		
