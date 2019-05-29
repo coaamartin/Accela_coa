@@ -100,7 +100,7 @@ if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
 	} else {
 		logDebug("--------------> Charging permit fee.");	
 		updateAppStatus("PAYMENT PENDING", "Script 5100");		
-		addFee("ENF_TU", "ENF_TU", "FINAL", 1, "N");	
+		addFee("ENF_TU1", "ENF_TU", "FINAL", 1, "N");	
 
 		//Send a ENF GENERIC INVOICE
 		var emailTemplate = "GENERIC INVOICE";		
