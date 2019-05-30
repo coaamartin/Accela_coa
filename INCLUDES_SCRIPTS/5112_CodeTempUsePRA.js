@@ -1,17 +1,16 @@
-// SCRIPTNUMBER: 5100
-// SCRIPTFILENAME: 5100_CodeTempUseWTUA.js
-// PURPOSE: Called when Enforcement Temp Use record has task updated. 
-// DATECREATED: 04/22/2019
+// SCRIPTNUMBER: 5112
+// SCRIPTFILENAME: 5112_CodeTempUsePRA.js
+// PURPOSE: Called when Enforcement Temp Use record has Payment activity.
+// DATECREATED: 05/29/2019
 // BY: amartin
 // CHANGELOG: 
 //Script Tester header.  Comment this out when deploying.
-//var myCapId = "19-000110-CIE";
+//var myCapId = "19-000189-CTU";
 //var myUserId = "AMARTIN";
-//var eventName = "";
-//var wfTask = "Issue Classification";
-//var wfStatus = "BANNERS";
+//var eventName = "ApplicationSpecificInfoUpdateAfter";
+//var wfTask = "Foreclosure Information";
+//var wfStatus = "NED/REO Recorded";
 //var wfComment = "";
-//var AInfo = "Type of Issue";
 
 //var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
 //var runEvent = true; // set to true to simulate the event and run all std choices/scripts for the record type.  
@@ -26,12 +25,8 @@ User code generally goes inside the try block below.
 //{
 //your code here
 //End script Tester header 
-logDebug("---------------------> 5100_CodeTempUseWTUA is starting.");	
+logDebug("---------------------> At start of 5112 PRA");	
 
-//I cannot get the async to work so using non-async by forcing env variable.
-aa.env.setValue("eventType","Batch Process");
-
-var currentDate = sysDateMMDDYYYY;
 function getComments()
 {
 	var appTypeAlias = cap.getCapType().getAlias();
@@ -59,66 +54,74 @@ function getWorkflowComments()
 	return foundComments;
 }
 
-var foundComments2 = getWorkflowComments();	
-	
-if (wfTask == "Application Close" && wfStatus == "Approved") {
-	updateAppStatus("PERMIT ISSUED", "Script 5100");
-	closeAllTasks(capId, "");		
-}
-
-if (wfTask == "Application Close" && wfStatus == "Denied") {
-	updateAppStatus("DENIED", "Script 5100");		
-}
-
-if (wfTask == "Final Approval2" && wfStatus == "Denied") {
-	updateAppStatus("DENIED", "Script 5100");	
-	closeAllTasks(capId, "");		
-}
-
-if (wfTask == "Final Approval 2" && wfStatus == "Approved") {
-	if ((AInfo["Tax ID for nonprofit"] != "" && AInfo["Tax ID for nonprofit"] != null) || AInfo["Waive Fee"] == "Yes") {	
-		logDebug("--------------> Fee is waived.");	
-		updateAppStatus("PERMIT ISSUED", "Script 5100");			
-		//Send email
-		var emailTemplate = "TEMP USE APPLICANT PERMIT";		
-		var todayDate = new Date();
-		var eventDescription = AInfo["Detailed Description"];
-		var eventTimes = AInfo["Start Date"] + " to " + AInfo["End Date"];
-		if (emailTemplate != null && emailTemplate != "") {
-			logDebug("5100 TEMP USE APPLICANT PERMIT.  Defaulting to contact Applicant.");	
-			eParams = aa.util.newHashtable();
-			eParams.put("$$ContactEmail$$", "");			
-			eParams.put("$$todayDate$$", todayDate);
-			eParams.put("$$altid$$",capId.getCustomID());
-			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
-			eParams.put("$$eventDescription$$",eventDescription);	
-			eParams.put("$$eventTimes$$",eventTimes);	
-			eParams.put("$$allComments$$",foundComments2);				
-			logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-			emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
-		}	
-	} else {
-		logDebug("--------------> Charging permit fee.");	
-		updateAppStatus("PAYMENT PENDING", "Script 5100");		
-		addFee("ENF_TU1", "ENF_TU", "FINAL", 1, "Y");	
-
-		//Send a ENF GENERIC INVOICE
-		var emailTemplate = "GENERIC INVOICE";		
-		var todayDate = new Date();
-		if (emailTemplate != null && emailTemplate != "") {
-			logDebug("5100 sending generic invoice.  Defaulting to contact Applicant.");	
-			eParams = aa.util.newHashtable();
-			eParams.put("$$ContactEmail$$", "");			
-			eParams.put("$$todayDate$$", todayDate);
-			eParams.put("$$altid$$",capId.getCustomID());
-			eParams.put("$$capAlias$$",cap.getCapType().getAlias());
-			logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-			emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
-		}		
+//if fee of a certain type, 
+	applyPayments();
+	//var feeResult = aa.fee.getFeeItems(capId);
+	//if (feeResult.getSuccess()) {
+	//	var feeObjArr = feeResult.getOutput();		
+	//} else {
+	//	logDebug("**ERROR: getting fee items: " + capContResult.getErrorMessage());
+	//}
+	//	var feeArray = ["ENF_TS1"];
+        var foundComments2 = getWorkflowComments();	
+	//	for(j in feeArray){
+    //        var aFee = feeArray[j];
+    //        if(feeExists(aFee)) {
+				updateAppStatus("PERMIT ISSUED", "Script 5112");			
+				//I cannot get the async to work so using non-async by forcing env variable.
+				aa.env.setValue("eventType","Batch Process");
+				//Send email
+				var emailTemplate = "TEMP USE APPLICANT PERMIT";		
+				var todayDate = new Date();
+				var eventDescription = AInfo["Detailed Description"];
+				var eventTimes = (AInfo["Start Date"] + " to " + AInfo["End Date"]);
+				if (emailTemplate != null && emailTemplate != "") {
+					logDebug("5100 TEMP USE APPLICANT PERMIT.  Defaulting to contact Applicant.");	
+					eParams = aa.util.newHashtable();
+					eParams.put("$$ContactEmail$$", "");			
+					eParams.put("$$todayDate$$", todayDate);
+					eParams.put("$$altid$$",capId.getCustomID());
+					eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+					eParams.put("$$eventDescription$$",eventDescription);	
+					eParams.put("$$eventTimes$$",eventTimes);	
+					eParams.put("$$allComments$$",foundComments2);				
+					logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+					emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+				}	
+			//}
+        //}	
+	/*
+	var vDelFee;
+	var ff = 0;
+	//loop through fee items
+	for (ff in feeObjArr) {
+        var pfResult = aa.finance.getPaymentFeeItems(capId, null);
+        if (pfResult.getSuccess()) {
+			var pfObj = pfResult.getOutput();
+			//match fee items to sequence number
+			for (ij in pfObj) {
+				if (feeObjArr[ff].getFeeSeqNbr() == pfObj[ij].getFeeSeqNbr() && pfObj[ij].getPaymentSeqNbr() == vPaymentSeqNbr) {
+					logDebug("Checking for a Delinquent	fee.");
+					//check for Delinquent fee
+					if (feeObjArr[ff].getFeeCod() == "ENF_VAC_DEL1") {
+						logDebug("Delinquent fee is present");
+						vDelFee = true;
+					} else {
+						logDebug("Local fee is present");
+						vDelFee = false;
+					}
+				}
+			}
+		}
 	}
-}
+	if (vDelFee) {
+		logDebug("---------------------> Found Delinquent Fee - Removing it.");	
+		if(feeExists("ENF_VAC_DEL1")) removeFee("ENF_VAC_DEL1", "FINAL");	
+	}
+*/	
 
-logDebug("---------------------> 5100_CodeTempUseWTUA.js ended.");
+logDebug("---------------------> 5112_CodeTempUsePRA.js ended.");
+aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 //Script Tester footer.  Comment this out when deploying.
 //}	
 
