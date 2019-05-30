@@ -41,8 +41,7 @@ var contact = getContactByType(contactType, capId);
    
    var tsiValues = new Array();
 	loadTaskSpecific(tsiValues);
-   var v0LicenseType = tsiValues["Qualifying Professional Type"]
-
+   var v0LicenseType = tsiValues["Qualifying Professional Type"];
    
 	addParameter(vEParams, "$$LicenseType$$", v0LicenseType);
 	//addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
