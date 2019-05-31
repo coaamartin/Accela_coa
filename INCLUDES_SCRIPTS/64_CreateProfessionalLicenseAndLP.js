@@ -43,6 +43,7 @@ var contact = getContactByType(contactType, capId);
 	loadAppSpecific(asiValues);     
    
 	addParameter(vEParams, "$$LicenseType$$", asiValues["Qualifying Professional Type"]);
+   //Hello JMP
 	//addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
 	//addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
 	//addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
