@@ -6,7 +6,7 @@
 
 logDebug('Started script 5113_EMailReadyToPay');
 
-if(appMatch("License/Professional/General/Application"))
+if(appMatch("Licenses/Professional/General/Application"))
 {
    var contactType = "License Holder";
    var licenseType = "Qualified Professional";
@@ -21,7 +21,7 @@ if(appMatch("License/Professional/General/Application"))
 }
 
 
-if(appMatch("License/Contractor/General/Application"))
+if(appMatch("Licenses/Contractor/General/Application"))
 {   
 
    var contactType = "Applicant";
