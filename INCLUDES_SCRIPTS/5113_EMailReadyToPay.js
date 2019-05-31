@@ -6,6 +6,8 @@
 
 logDebug('Started script 5113_EMailReadyToPay');
 
+if(appMatch("License/Professional/General/Application"))
+{
    var contactType = "License Holder";
    var licenseType = "Qualified Professional";
    var addressType = "Business";
@@ -16,8 +18,21 @@ logDebug('Started script 5113_EMailReadyToPay');
    var asiValues = new Array();
    loadAppSpecific(asiValues);     
    addParameter(vEParams, "$$LicenseType$$", asiValues["Qualifying Professional Type"]);
-      
-   emailContacts(contactType,vEmailTemplate, vEParams, "", "","N", "");
+}
+
+
+if(appMatch("License/Contractor/General/Application"))
+{   
+
+   var contactType = "Applicant";
+   var licenseType = "Contractor";
+   var addressType = "Business";
    
+   var vEmailTemplate = "BLD CLL LICENSE READY TO PAY # 106"; 
+   var vEParams = aa.util.newHashtable();
+  
+}  
+   
+emailContacts(contactType,vEmailTemplate, vEParams, "", "","N", "");   
 
 logDebug('Ended script 5113_EMailReadyToPay');
