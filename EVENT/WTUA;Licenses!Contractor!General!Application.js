@@ -13,8 +13,7 @@ if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) {
 	updateFee("LIC_020", "LIC_CONTRACTOR_GENERAL", "FINAL", theFee, "N");
 	// end Script 427
    
-   Include("5113_EMailReadyToPay");
-   
+   //include("5113_EMailReadyToPay");  
    
 }
 

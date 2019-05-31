@@ -8,6 +8,9 @@ if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue
 
 if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) 
 {
+   
+   include("5113_EMailReadyToPay");
+   
 	// script 427
 	var theFee = 102;
    updateFee("LIC_110", "LIC_PROFESSIONAL_GENERAL", "FINAL", theFee, "N");
