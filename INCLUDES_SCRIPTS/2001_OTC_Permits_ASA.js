@@ -112,6 +112,9 @@ comment("Checking for County");
         if (addResult != null && addResult.length > 0) {
             addResult = addResult[0];
             county = addResult.getCounty();
+    		 comment("Address check for County = "+county);  
+
+			
         }//has address(es)
     }//get address success
 
@@ -126,6 +129,7 @@ comment("Checking for County");
                 for (p in attributes) {
                     if (attributes[p].getB1AttributeName().toUpperCase().indexOf("COUNTY") != -1) {
                         county = attributes[p].getB1AttributeValue();
+						 comment("Parcel check for County = "+county);  
                         break;
                     }
                 }//for parcel attributes
@@ -143,10 +147,12 @@ comment("Checking for County");
         var PARCEL_COUNTY = getGISInfo(gisSvcName, gisLayerName, gisAttrName);
         if (PARCEL_COUNTY) {
             county = PARCEL_COUNTY;
+			 comment("GIS CHECK for County = "+county);  
         }
     }
 
     //Arapahoe county Fee  
+	comment("County is = "+county);  
     if (county == "ARAPAHOE") {
         var feeQty = 0;
         var materialsCost = asiValues["Materials Cost"];
