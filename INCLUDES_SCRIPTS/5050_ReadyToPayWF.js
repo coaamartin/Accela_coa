@@ -15,8 +15,10 @@ Licenses/Professional/General/Renewal
 if ("License Issuance".equals(wfTask))
 {
 	var bal = getCapBalanceDue();
-    var wfStatus = wasTaskStatus("License Issuance", "Ready to Pay")
-	if (bal > 0 && wfStatus)
+   
+   //var wfStatus = wasTaskStatus("License Issuance", "Ready to Pay")
+   
+	if (((bal > 0) && (wfStatus == "Ready to Pay")) || ((bal > 0) && (wfStatus == "License Issuance")))
 	{
 		showMessage = true;
 		cancel = true;
