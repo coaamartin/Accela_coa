@@ -16,11 +16,9 @@ if ("License Issuance".equals(wfTask))
 {
 	var bal = getCapBalanceDue();
    
-   comment("Inside 5050 logic with bal = " + bal.toString);
-   
    //var wfStatus = wasTaskStatus("License Issuance", "Ready to Pay")
    
-	if (((bal > 0) && (wfStatus == "Ready to Pay")) || ((bal > 0) && (wfStatus == "License Issuance")))
+	if (((bal > 0) && (wfStatus == "Ready to Pay")))
 	{
 		showMessage = true;
 		cancel = true;
