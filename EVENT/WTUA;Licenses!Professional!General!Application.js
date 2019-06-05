@@ -1,15 +1,15 @@
 // Script 64
 // Script 106 JMP 
 
-if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) {
-   logDebug("JMP - Trying to email");
-	include("64_CreateProfessionalLicenseAndLP");
+//if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) {
+//   logDebug("JMP - Trying to email");
+//   include("64_CreateProfessionalLicenseAndLP");
 }
 
 if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) 
 {
    
-   include("5113_EMailReadyToPay");
+   //include("5113_EMailReadyToPay");
    
 	// script 427
 	var theFee = 102;
