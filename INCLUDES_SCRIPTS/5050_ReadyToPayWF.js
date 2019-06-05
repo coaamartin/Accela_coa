@@ -18,7 +18,7 @@ if ("License Issuance".equals(wfTask))
    
    //var wfStatus = wasTaskStatus("License Issuance", "Ready to Pay")
    
-	if ((bal > 0)
+	if (bal > 0)
 	{
 		showMessage = true;
 		cancel = true;
