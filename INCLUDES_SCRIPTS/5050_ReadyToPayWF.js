@@ -58,11 +58,13 @@ function getCapBalanceDue() {
     	//if (("INVOICED".equals(feesArr[i].status)) || (("NEW".equals(feesArr[i].status))))
     	//{
     		tot += (+feesArr[i].amount) - (+feesArr[i].amountPaid);
+         
+         var showit = tot.toString();
+         comment (showit);
+         
     	//}
         
     }
-    var showit = tot.toString();
-    comment (showit);
     
     return tot;
 }
