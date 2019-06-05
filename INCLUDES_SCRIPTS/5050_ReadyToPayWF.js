@@ -61,5 +61,8 @@ function getCapBalanceDue() {
     	//}
         
     }
+    
+    comment (tot.tostring);
+    
     return tot;
 }
