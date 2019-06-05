@@ -61,7 +61,7 @@ function getCapBalanceDue() {
     	//}
         
     }
-    var showit = tot.toString;
+    var showit = tot.toString();
     comment (showit);
     
     return tot;
