@@ -59,8 +59,6 @@ function getCapBalanceDue() {
     	//{
     		tot += (+feesArr[i].amount) - (+feesArr[i].amountPaid);
          
-         var showit = tot.toString();
-         comment (showit);
          
     	//}
         
