@@ -1,6 +1,6 @@
-//SWAKIL - Email
+//JMP 6/5/2019
 
-if (("License Issuance".equals(wfTask) && wfStatus == "Note")) // || ("License Issuance".equals(wfTask) && wfStatus !== "Denied") || ("License Issuance".equals(wfTask) && wfStatus !== "Additional Info Required"))
+if (("License Issuance".equals(wfTask) && wfStatus == "Note")) || ("License Issuance".equals(wfTask) && wfStatus == "Denied") || ("License Issuance".equals(wfTask) && wfStatus == "Additional Info Required"))
 {
 }
 else
