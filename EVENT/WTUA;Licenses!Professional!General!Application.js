@@ -4,7 +4,7 @@
 //if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) {
 //   logDebug("JMP - Trying to email");
 //   include("64_CreateProfessionalLicenseAndLP");
-}
+//}
 
 if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) 
 {
