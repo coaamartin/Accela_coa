@@ -30,6 +30,10 @@ if(appMatch("Licenses/Contractor/General/Application"))
    
    var vEmailTemplate = "BLD CLL LICENSE READY TO PAY # 106"; 
    var vEParams = aa.util.newHashtable();
+   
+   var asiValues = new Array();
+   loadAppSpecific(asiValues);     
+   addParameter(vEParams, "$$LicenseType$$", asiValues["Contractor Type"]);
   
 }  
    
