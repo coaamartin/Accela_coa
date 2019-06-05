@@ -166,8 +166,8 @@ comment("Checking for County");
         }
 
         if (feeQty > 0) {
-             updateFee("BLD_OTC_30", "BLD_OTC_FEES", "FINAL", feeQty, "Y");
              updateFee("BLD_OTC_31", "BLD_OTC_FEES", "FINAL", feeQty, "Y");
+             updateFee("BLD_OTC_32", "BLD_OTC_FEES", "FINAL", feeQty, "Y");
         }
     }//county = Arapahoe   
  comment("Finished Checking for County");  
@@ -189,7 +189,7 @@ comment("Building Use Tax Fee");
     }
 
     if (feeQty > 0) {
-        updateFee("BLD_OTC_32", "BLD_OTC_FEES", "FINAL", feeQty, "Y");
+        updateFee("BLD_OTC_30", "BLD_OTC_FEES", "FINAL", feeQty, "Y");
     }//END Building Use Tax Fee
 
 comment("Finished with Building Use Tax Fee");
