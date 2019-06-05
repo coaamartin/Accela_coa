@@ -6,3 +6,4 @@ else
 {
   logDebug("Ready to check to stop due to payment - Calling 5050");
   include("5050_ReadyToPayWF");
+}  
