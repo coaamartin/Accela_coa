@@ -62,7 +62,7 @@ function getCapBalanceDue() {
         
     }
     
-    comment (tot.tostring);
+    comment (tot.toString);
     
     return tot;
 }
