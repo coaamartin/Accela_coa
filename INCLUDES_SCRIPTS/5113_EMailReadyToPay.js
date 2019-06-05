@@ -37,6 +37,6 @@ if(appMatch("Licenses/Contractor/General/Application"))
   
 }  
    
-emailContacts(contactType,vEmailTemplate, vEParams, "", "","N", "");   
+emailContacts(contactType,vEmailTemplate, vEParams, null, null, "N", "");   
 
 logDebug('Ended script 5113_EMailReadyToPay');
