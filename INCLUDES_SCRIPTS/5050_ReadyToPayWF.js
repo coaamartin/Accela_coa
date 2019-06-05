@@ -15,8 +15,10 @@ Licenses/Professional/General/Renewal
 if ("License Issuance".equals(wfTask))
 {
 	var bal = getCapBalanceDue();
-    var wfStatus = wasTaskStatus("License Issuance", "Ready to Pay")
-	if (bal > 0 && wfStatus)
+   
+   //var wfStatus = wasTaskStatus("License Issuance", "Ready to Pay")
+   
+	if (bal > 0)
 	{
 		showMessage = true;
 		cancel = true;
@@ -53,10 +55,10 @@ function getCapBalanceDue() {
     var tot = 0;
     for (i in feesArr)
     {
-    	if ("INVOICED".equals(feesArr[i].status))
-    	{
+    	//if (("INVOICED".equals(feesArr[i].status)) || (("NEW".equals(feesArr[i].status))))
+    	//{
     		tot += (+feesArr[i].amount) - (+feesArr[i].amountPaid);
-    	}
+    	//}
         
     }
     return tot;
