@@ -19,7 +19,7 @@ if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) {
 
 if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus))
 {
-  if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) \
+  if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) 
   {
    
     include("5114_EMailReadyLicenseIssue");
