@@ -1,5 +1,3 @@
-include("5114_EMailReadyLicenseIssue");
-
 logDebug("Creating Parent License");
 var contactType = "Applicant";
 var licenseType = "Contractor";
@@ -21,80 +19,57 @@ if (!related.getSuccess()) {
 copyContacts(capId, createdApp);
 copyAppSpecific(createdApp);
 
-var licenseNbr = null;
 var contact = getContactByType(contactType, capId);
 
+logDebug("Creating Ref LP");
+vExpDate = new Date();
+vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
+vNewExpDate.setDate(1);
+if (vNewExpDate.getMonth() == 11) {
+   vNewExpDate.setMonth(0);
+   vNewExpDate.setFullYear(vNewExpDate.getFullYear() + 1);
+} else {
+   vNewExpDate.setMonth(vNewExpDate.getMonth() + 1);
+}
+//vNewExpDate = new Date(vNewExpDate - 1);
 
-//contact required exist on child (current) record
-//if (contact) {
-	logDebug("Creating Ref LP");
-	vExpDate = new Date();
-	vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
-	vNewExpDate.setDate(1);
-	if (vNewExpDate.getMonth() == 11) {
-		vNewExpDate.setMonth(0);
-		vNewExpDate.setFullYear(vNewExpDate.getFullYear() + 1);
-	} else {
-		vNewExpDate.setMonth(vNewExpDate.getMonth() + 1);
-	}
-	//vNewExpDate = new Date(vNewExpDate - 1);
+var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
+var vEParams = aa.util.newHashtable();
+
+var licenseNbr;
+
+if (contact) {
+  var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
+
+  if (licensesByName.getSuccess()) {
+     licensesByName = licensesByName.getOutput();
+
+     if (licensesByName != null && licensesByName.length > 0) {
+        licenseNbr = licensesByName[0].getStateLicense();
+        logDebug("Using Existing Ref LP: " + licenseNbr);
+      }
+   }  
+
+   if (!licenseNbr) {
+
+      licenseNbr = createdApp.getCustomID();
+      createRefLP4Lookup(licenseNbr, licenseType, contactType, addressType);
+      logDebug("Created Ref LP: " + createdApp.getCustomID());
+   }
    
-   var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
-	var vEParams = aa.util.newHashtable();
-   
-	//addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
-	//addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
-	//addParameter(vEParams, "$$ApplicationID$$", createdApp.getCustomID());
-	//addParameter(vEParams, "$$altID$$", createdApp.getCustomID());
+   var theRefLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, licenseNbr).getOutput();
 
-	//tmpCap = capId;
-	//capId = createdApp;
-   logDebug("emailing from #111 - JMP");
-   
-	//emailContacts_JMP(contactType,vEmailTemplate, vEParams, "", "");
-   
-	//capId = tmpCap;
-	
-	var licenseNbr;
-   
-   if (contact) {
-  	  var licensesByName = aa.licenseScript.getRefLicensesProfByName(aa.serviceProvider, contact.getFirstName(), contact.getMiddleName(), contact.getLastName());
+   if (theRefLP != null && theRefLP.length > 0) {
+      logDebug("Updating Ref LP Expiry : " + vNewExpDate);
 
-	  if (licensesByName.getSuccess()) {
-	  	  licensesByName = licensesByName.getOutput();
+      theRefLP = theRefLP[0];
+      aa.licenseScript.associateLpWithCap(createdApp, theRefLP);
+      theRefLP.setLicenseExpirationDate(aa.date.getScriptDateTime(vNewExpDate));
+      var editRefResult = aa.licenseScript.editRefLicenseProf(theRefLP);
 
-		  if (licensesByName != null && licensesByName.length > 0) {
-			  licenseNbr = licensesByName[0].getStateLicense();
-			  logDebug("Using Existing Ref LP: " + licenseNbr);
-		   }
-	   }
-   }   
-
-	if (!licenseNbr) {
-		/*
-		// no requirements on sequence number, but leave here just in case
-		if (licenseNbr == null) {
-		licenseNbr = getNextSequence(seqType, seqName, maskName);
-		}
-		 */
-
-		licenseNbr = createdApp.getCustomID();
-		createRefLP4Lookup(licenseNbr, licenseType, contactType, addressType);
-		logDebug("Created Ref LP: " + createdApp.getCustomID());
-	}
-	var theRefLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, licenseNbr).getOutput();
-
-	if (theRefLP != null && theRefLP.length > 0) {
-		logDebug("Updating Ref LP Expiry : " + vNewExpDate);
-
-		theRefLP = theRefLP[0];
-		aa.licenseScript.associateLpWithCap(createdApp, theRefLP);
-		theRefLP.setLicenseExpirationDate(aa.date.getScriptDateTime(vNewExpDate));
-		var editRefResult = aa.licenseScript.editRefLicenseProf(theRefLP);
-
-		rB1ExpResult = aa.expiration.getLicensesByCapID(createdApp).getOutput();
-		rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
-		rB1ExpResult.setExpStatus("Active");
-		aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
-	}
-	
+      rB1ExpResult = aa.expiration.getLicensesByCapID(createdApp).getOutput();
+      rB1ExpResult.setExpDate(aa.date.getScriptDateTime(vNewExpDate));
+      rB1ExpResult.setExpStatus("Active");
+      aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
+   }
+} 	

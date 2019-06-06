@@ -12,6 +12,7 @@ Sample Call:
 
 // Script 64
 if (balanceDue == 0) {
+   include("5114_EMailReadyLicenseIssue");
 	include("64_CreateProfessionalLicenseAndLP");
 	closeTask("License Issuance","Issued","Updated by PRA;Licenses!Professional!General!Application","");
 }
