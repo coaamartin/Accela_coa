@@ -17,13 +17,8 @@ if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) {
    
 }
 
-// Script 111
-//if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus)) {
-//   if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) {
-//	  include("111_CreateContractorLicenseAndLP");
-//   }
-//   else
-//   {
-//     if (balanceDue !== 0)  
-//   }
-//}
+if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus)) {
+if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) {
+  include("5114_EMailReadyLicenseIssue");
+  include("111_CreateContractorLicenseAndLP");
+}
