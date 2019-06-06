@@ -102,7 +102,7 @@ function emailContacts_JMP(sendEmailToContactTypes, emailTemplate, vEParams, rep
 	var validConTypes = getContactTypes();
 	var x = 0;
 	var vConType;
-	var vAsyncScript = "SEND_EMAIL_TO_CONTACTS_ASYNC";
+	var vAsyncScript = "SEND_EMAIL_ASYNC";
 	var envParameters = aa.util.newHashMap();
 	var vAddAdHocTask = true;
 
