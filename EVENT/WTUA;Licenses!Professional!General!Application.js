@@ -16,3 +16,11 @@ if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus))
    updateFee("LIC_110", "LIC_PROFESSIONAL_GENERAL", "FINAL", theFee, "N");
 }
 
+if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus)) {
+if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) {
+   
+   include("5114_EMailReadyLicenseIssue");
+	include("64_CreateProfessionalLicenseAndLP");   
+	closeTask("License Issuance","Issued","Updated by WTUA;Licenses!Professional!General!Application","");
+   
+}
