@@ -83,7 +83,7 @@ function addInspectionFeeAndSendEmail(workFlowTask, workflowStatusArray, asiFiel
 		addParameter(eParams, "$$wfHours$$", wfHours);
 
 		//send to applicant
-		sendEmailWithReport(applicantEmail, ownerEmail, emailTemplateName, reportName, rptParams, eParams);
+		//sendEmailWithReport(applicantEmail, ownerEmail, emailTemplateName, reportName, rptParams, eParams);
 		//send to Project Owner
 		sendEmailWithReport(pOwnerEmail, ownerEmail, emailTemplateName, reportName, rptParams, eParams);
 
