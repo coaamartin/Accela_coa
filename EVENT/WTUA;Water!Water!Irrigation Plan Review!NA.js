@@ -32,6 +32,3 @@ addInspectionFeeAndSendEmail("Application Submittal", [ "Plans Required", "Resub
 if ("Application Submittal".equals(wfTask) && "Plans Required".equals(wfStatus)) {
 	deactivateTask("Fee Processing");
 }
-
-//SWAKIL
-include()
