@@ -32,7 +32,7 @@ function addInspectionFeeAndSendEmail(workFlowTask, workflowStatusArray, asiFiel
 		// disabled see comments in script 191
 		//addFee("WAT_IPLAN_01", "WAT_IPLAN", "FINAL", feeAmt, "Y");
 
-		var ownerEmail = null, applicantEmail = null;
+		var ownerEmail = null, applicantEmail = null, pOwnerEmail = null;
 		var owners = aa.owner.getOwnerByCapId(capId);
 		if (owners.getSuccess()) {
 			owners = owners.getOutput();
@@ -55,6 +55,14 @@ function addInspectionFeeAndSendEmail(workFlowTask, workflowStatusArray, asiFiel
 			logDebug("**WARN no Applicant on record " + capId);
 		}
 
+		var pOwner = getContactByType("Project Owner", capId);
+		if (pOwner) {
+			pOwnerEmail = pOwner.getEmail();
+		} else {
+			pOwnerEmail = "";
+			logDebug("**WARN no Project Owner on record " + capId);
+		}		
+
 		if ((ownerEmail == null || ownerEmail == "") && (applicantEmail == null || applicantEmail == "")) {
 			logDebug("**WARN owner and applicant has no emails, capId=" + capId);
 			return false;
@@ -74,7 +82,10 @@ function addInspectionFeeAndSendEmail(workFlowTask, workflowStatusArray, asiFiel
 		addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
 		addParameter(eParams, "$$wfHours$$", wfHours);
 
+		//send to applicant
 		sendEmailWithReport(ownerEmail, applicantEmail, emailTemplateName, reportName, rptParams, eParams);
+		//send to Project Owner
+		sendEmailWithReport("", pOwnerEmail, emailTemplateName, reportName, rptParams, eParams);
 
 	} else {
 		return false;
