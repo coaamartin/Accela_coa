@@ -26,7 +26,8 @@ Notes:
 var rptParams = aa.util.newHashtable();
 rptParams.put("altID", cap.getCapModel().getAltID());
 
-addInspectionFeeAndSendEmail("Application Submittal", [ "Plans Required", "Resubmittal Requested" ], "Type of Project", "LIR REQUIRE IRRIGATION PLAN 191", "WorkFlowTasksOverdue", rptParams);
+addInspectionFeeAndSendEmail("Application Submittal", [ "Plans Required" ], "Type of Project", "LIR REQUIRE IRRIGATION PLAN 191", "WorkFlowTasksOverdue", rptParams);
+addInspectionFeeAndSendEmail("Plans Review", [ "Resubmittal Requested" ], "Type of Project", "LIR REQUIRE IRRIGATION PLAN 191", "WorkFlowTasksOverdue", rptParams);
 
 //script 191
 if ("Application Submittal".equals(wfTask) && "Plans Required".equals(wfStatus)) {
