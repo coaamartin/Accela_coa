@@ -6,9 +6,9 @@ comment("Homeowner as Contractor = "+AInfo['Homeowner acting as Contractor']);
 if (AInfo['Homeowner acting as Contractor'] == 'No'){    
     theLicNumber = null ; 
 	capLicenseArr = aa.licenseScript.getLicenseProf(capId).getOutput(); 
-	comment('License Array Length = '+capLicenseArr.length);
+	comment('License Array = '+capLicenseArr);
 
-	if (capLicenseArr && capLicenseArr.length > 0){ 
+	if (capLicenseArr){ 
 	    theLicNumber = capLicenseArr[0].getLicenseNbr();
 		comment('LicNumber = '+theLicNumber);
 		contractorType == getAppSpecific('Contractor Type',theLicNumber);
@@ -77,4 +77,5 @@ if (AInfo['Homeowner acting as Contractor'] == 'No'){
 		}		
 	}
 }
+		bla
 		comment("Finish 2003 - Check for Required License to pull permit if not Homeowner");
