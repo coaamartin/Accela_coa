@@ -21,7 +21,7 @@ if(appMatch("Licenses/Professional/General/Application"))
    loadAppSpecific(asiValues);     
    addParameter(vEParams, "$$LicenseType$$", asiValues["Qualifying Professional Type"]);
    
-   if (wfStatus == "Denied") addParameter(vEParams, "$$LetterReason$$", "is denied");
+   if (wfStatus == "Denied") addParameter(vEParams, "$$LetterReason$$", "it is denied");
 
    if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information is required");
   
@@ -43,7 +43,7 @@ if(appMatch("Licenses/Contractor/General/Application"))
    loadAppSpecific(asiValues);     
    addParameter(vEParams, "$$LicenseType$$", asiValues["Contractor Type"]);
    
-   if (wfStatus == "Denied") addParameter(vEParams, "$$LetterReason$$", "is denied");
+   if (wfStatus == "Denied") addParameter(vEParams, "$$LetterReason$$", "it is denied");
 
    if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information is required");   
   
