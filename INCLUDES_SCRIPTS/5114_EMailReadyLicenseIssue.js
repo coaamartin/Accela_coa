@@ -1,10 +1,10 @@
-// SCRIPTNUMBER: 5113
-// SCRIPTFILENAME: 5113_EMailReadyToPay
+// SCRIPTNUMBER: 5114
+// SCRIPTFILENAME: 5114_EMailReadyLicenseIssue
 // PURPOSE: Email for Ready to Pay
-// DATECREATED: 05/31/2019
+// DATECREATED: 06/06/2019
 // BY: JMPorter
 
-logDebug('Started script 5113_EMailReadyToPay');
+logDebug('Started script 5114_EMailReadyLicenseIssue');
 
 if(appMatch("Licenses/Professional/General/Application"))
 {
@@ -12,7 +12,7 @@ if(appMatch("Licenses/Professional/General/Application"))
    var licenseType = "Qualified Professional";
    var addressType = "Business";
 
-   var vEmailTemplate = "BLD QPL LICENSE READY TO PAY # 106"; 
+   var vEmailTemplate = "BLD_QPL_LICENSE_ISSUANCE_#_64-65"; 
    var vEParams = aa.util.newHashtable();
       
    var asiValues = new Array();
@@ -28,7 +28,7 @@ if(appMatch("Licenses/Contractor/General/Application"))
    var licenseType = "Contractor";
    var addressType = "Business";
    
-   var vEmailTemplate = "BLD CLL LICENSE READY TO PAY # 106"; 
+   var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111"; 
    var vEParams = aa.util.newHashtable();
    
    var asiValues = new Array();
@@ -39,4 +39,4 @@ if(appMatch("Licenses/Contractor/General/Application"))
    
 emailContacts(contactType,vEmailTemplate, vEParams, "", "", "N", "");   
 
-logDebug('Ended script 5113_EMailReadyToPay');
+logDebug('Ended script 5114_EMailReadyLicenseIssue');

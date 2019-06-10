@@ -1,5 +1,4 @@
-﻿
-//script205_DeactivateSpecInsp
+﻿//script205_DeactivateSpecInsp
 //Record Types:	Building/*/*/*
 //Event: WTUA - WorkflowTaskUpdateAfter
 //Desc: If wfTask = “Permit Issuance” and wfStatus = “Issued” and the custom field “Special Inspection” is equal to “No”, 

@@ -13,17 +13,28 @@ if ("License Issuance".equals(wfTask) && "Ready to Pay".equals(wfStatus)) {
 	updateFee("LIC_020", "LIC_CONTRACTOR_GENERAL", "FINAL", theFee, "N");
 	// end Script 427
    
-   include("5113_EMailReadyToPay");  
+   //include("5113_EMailReadyToPay");  
    
 }
 
-// Script 111
-if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus)) {
-   if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) {
-	  include("111_CreateContractorLicenseAndLP");
-   }
-   else
-   {
-     if (balanceDue !== 0)  
-   }
+if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus))
+{
+  if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus) && balanceDue == 0) 
+  {
+   
+    include("5114_EMailReadyLicenseIssue");
+    include("111_CreateContractorLicenseAndLP");
+    closeTask("License Issuance","Issued","Updated by WTUA;Licenses!Contractor!General!Application","");
+  }  
 }
+
+if ("License Issuance".equals(wfTask) && "Additional Info Required".equals(wfStatus)) 
+{
+	include("5115_EMailDeclineMoreInfo");
+}
+
+if ("License Issuance".equals(wfTask) && "Denied".equals(wfStatus)) 
+{
+	include("5115_EMailDeclineMoreInfo");
+}
+

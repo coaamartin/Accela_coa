@@ -1,5 +1,8 @@
 // script 191
 
-if(checkIfDocUploaded("Irrigation Plan")) {
-	activateTask("Fee Processing");
-} 
+//if(checkIfDocUploaded("Irrigation Plan")) {
+//	activateTask("Fee Processing");
+//} 
+
+//SWAKIL
+include("191_activateFeeProcessing");

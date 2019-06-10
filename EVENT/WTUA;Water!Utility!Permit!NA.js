@@ -69,3 +69,6 @@ if(wfTask == "Fee Processing" && wfStatus == "No Fees Required"){
 		createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
 	}
 }
+
+//SWAKIL - Email
+include("438_UtiltiyInspectionComplete");
