@@ -53,7 +53,7 @@ if (sendEmail)
 {   
    if (wfComment != null && typeof wfComment !== 'undefined') 
    {   
-     addParameter(eParams, "$$wfComment$$", wfComment);
+     addParameter(vEParams, "$$wfComment$$", wfComment);
       
      emailContacts(contactType,vEmailTemplate, vEParams, "", "", "N", "");  
    
