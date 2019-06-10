@@ -11,7 +11,7 @@ if (getAppSpecific('Homeowner acting as Contractor',capId) == 'Yes'){
 	    theLicNumber = capLicenseArr[0].getLicenseNbr();
 		comment('LicNumber = '+theLicNumber);
 		contractorType == getAppSpecific('Contractor Type',theLicNumber)
-	    comment('Contractor Type = '+contractor Type);
+	    comment('Contractor Type = '+contractorType);
 
 		if (contractorType != null){
 			
