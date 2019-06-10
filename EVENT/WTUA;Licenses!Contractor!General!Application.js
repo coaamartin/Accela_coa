@@ -28,12 +28,12 @@ if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus))
   }  
 }
 
-if ("Application Intake".equals(wfTask) && "Additional Info Required".equals(wfStatus)) 
+if ("License Issuance".equals(wfTask) && "Additional Info Required".equals(wfStatus)) 
 {
 	include("5115_EMailDeclineMoreInfo");
 }
 
-if ("Application Intake".equals(wfTask) && "Denied".equals(wfStatus)) 
+if ("License Issuance".equals(wfTask) && "Denied".equals(wfStatus)) 
 {
 	include("5115_EMailDeclineMoreInfo");
 }
