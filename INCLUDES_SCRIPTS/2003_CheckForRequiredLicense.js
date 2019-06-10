@@ -23,55 +23,55 @@ if (getAppSpecific('Homeowner acting as Contractor',capId) == 'Yes'){
 
 				
 			if (appMatch('*/*/*/Furnace')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 
 			if (appMatch('*/*/*/Furnace and AC')) {
-				comment('Contractor Type = '+contractor Type);         
+				comment('Contractor Type = '+contractorType);         
 				}
 
 			if (appMatch('*/*/*/Furnace AC and Water Heater')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 
 			if (appMatch('*/*/*/Egress Window')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 
 			if (appMatch('*/*/*/Gas Pipe')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 
 			if (appMatch('*/*/*/Commercial Roof')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 
 			if (appMatch('*/*/*/Residential Roof')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}	
 
 			if (appMatch('*/*/*/Residential Electrical Service')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 
 			if (appMatch('*/*/*/Siding')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
   
 			if (appMatch('*/*/*/Tankless Water Heater')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 
 			if (appMatch('*/*/*/Water Heater')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 
 			if (appMatch('*/*/*/Water Heater and AC')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 
 			if (appMatch('*/*/*/Water Heater and Furnace')) {
-				comment('Contractor Type = '+contractor Type);
+				comment('Contractor Type = '+contractorType);
 				}
 		}		
 	}
