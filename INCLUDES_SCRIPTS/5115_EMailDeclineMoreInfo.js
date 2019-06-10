@@ -21,9 +21,9 @@ if(appMatch("Licenses/Professional/General/Application"))
    loadAppSpecific(asiValues);     
    addParameter(vEParams, "$$LicenseType$$", asiValues["Qualifying Professional Type"]);
    
-   if (wfStatus == "Declined") addParameter(vEParams, "$$LetterReason$$", "is declined");
+   if (wfStatus == "Denied") addParameter(vEParams, "$$LetterReason$$", "is denied");
 
-   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information requested");
+   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information required");
   
 }
 
@@ -43,9 +43,9 @@ if(appMatch("Licenses/Contractor/General/Application"))
    loadAppSpecific(asiValues);     
    addParameter(vEParams, "$$LicenseType$$", asiValues["Contractor Type"]);
    
-   if (wfStatus == "Declined") addParameter(vEParams, "$$LetterReason$$", "is declined");
+   if (wfStatus == "Denied") addParameter(vEParams, "$$LetterReason$$", "is denied");
 
-   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information requested");   
+   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information required");   
   
 }  
 
