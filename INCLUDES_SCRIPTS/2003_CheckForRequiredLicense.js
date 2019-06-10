@@ -3,12 +3,25 @@
 comment("Start 2003 - Check for Required License to pull permit if not Homeowner");
 comment("Homeowner as Contractor = "+AInfo['Homeowner acting as Contractor']);
 
+if (AInfo['Homeowner acting as Contractor'] == 'No') {
+    if (CAENumber > 0) {
+       logDebug("LP was found in reference: " + CAENumber + " " + CAELienseType + " " + CAELienseNumber);
+       logDebug("CAE: " + describe(CAE)); // Reference LP Model
+    } else {
+       comment("LP was not found in reference: " + CAELienseType + " " + CAELienseNumber);
+       cancel = true;
+               }
+}
+
+/*
+
+
 if (AInfo['Homeowner acting as Contractor'] == 'No'){    
     theLicNumber = null ; 
-	capLicenseArr = lpArray = cap.getLicenseProfessionalList().toArray(); 
-	//capLicenseArr = aa.licenseScript.getLicenseProf(capId).getOutput(); 
+	//this works from ACA -   capLicenseArr = lpArray = cap.getLicenseProfessionalList().toArray(); 
+	capLicenseArr = aa.licenseScript.getLicenseProf(capId).getOutput(); 
 	comment('License Array = '+capLicenseArr);
-
+	
 	if (capLicenseArr){ 
 	    theLicNumber = capLicenseArr[0].getLicenseNbr();
 		comment('LicNumber = '+theLicNumber);
@@ -19,7 +32,7 @@ if (AInfo['Homeowner acting as Contractor'] == 'No'){
 			
 			if (appMatch('*/*/*/AC Only' && contractorType != 'Mechanical Systems')) {
                 showMessage = true;
-				comment('<font size=small><b>Invalid Contractor Type:</b></font><br><br>The contractor license you selected does not allow you to pull this type of permit, please contact the Building Division at 303-739-7420.<br><br>');
+				comment('<Font Color=RED><b>Invalid Contractor Type:</b></font><br><br>The contractor license you selected does not allow you to pull this type of permit, please contact the Building Division at 303-739-7420.<br><br>');
 				cancel = true;
 				}
 
@@ -78,5 +91,6 @@ if (AInfo['Homeowner acting as Contractor'] == 'No'){
 		}		
 	}
 }
-		bla
+*/
+		//bla
 		comment("Finish 2003 - Check for Required License to pull permit if not Homeowner");
