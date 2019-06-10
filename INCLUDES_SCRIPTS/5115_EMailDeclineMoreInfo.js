@@ -24,7 +24,7 @@ if(appMatch("Licenses/Professional/General/Application"))
    {
       addParameter(vEParams, "$$LetterReason$$", "is declined");
    }
-   else if (wfStatus == 'Additional Info Required') 
+   else if (wfStatus == "Additional Info Required") 
    }
      addParameter(vEParams, "$$LetterReason$$", "additional information requested");
    {
@@ -50,7 +50,7 @@ if(appMatch("Licenses/Contractor/General/Application"))
    {
       addParameter(vEParams, "$$LetterReason$$", "is declined");
    }
-   else if (wfStatus == 'Additional Info Required') 
+   else if (wfStatus == "Additional Info Required") 
    }
      addParameter(vEParams, "$$LetterReason$$", "additional information requested");
    {
