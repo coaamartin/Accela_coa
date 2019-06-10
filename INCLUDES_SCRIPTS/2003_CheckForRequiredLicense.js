@@ -3,7 +3,7 @@
 comment("Start 2003 - Check for Required License to pull permit if not Homeowner");
 comment("Cap ID String = "+capIDString);
 
-comment('Homeowner as Contractor = '+{Homeowner acting as Contractor});
+comment("Homeowner as Contractor = "+{Homeowner acting as Contractor});
 
 if ({Homeowner acting as Contractor} == 'Yes'){    
     theLicNumber = null ; 
@@ -12,7 +12,7 @@ if ({Homeowner acting as Contractor} == 'Yes'){
 	if (capLicenseArr && capLicenseArr.length > 0){ 
 	    theLicNumber = capLicenseArr[0].getLicenseNbr();
 		comment('LicNumber = '+theLicNumber);
-		contractorType == getAppSpecific('Contractor Type',theLicNumber)
+		contractorType == getAppSpecific('Contractor Type',theLicNumber);
 	    comment('Contractor Type = '+contractorType);
 
 		if (contractorType != null){
