@@ -43,24 +43,22 @@ if(appMatch("Licenses/Contractor/General/Application"))
    loadAppSpecific(asiValues);     
    addParameter(vEParams, "$$LicenseType$$", asiValues["Contractor Type"]);
    
-   if (wfStatus == "Declined") 
-   {
-      addParameter(vEParams, "$$LetterReason$$", "is declined");
-   }
-   else if (wfStatus == "Additional Info Required") 
-   }
-     addParameter(vEParams, "$$LetterReason$$", "additional information requested");
-   {
+   if (wfStatus == "Declined") addParameter(vEParams, "$$LetterReason$$", "is declined");
+
+   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information requested");   
   
 }  
 
 if (sendEmail)
 {   
-   if (wfComment != null && typeof wfComment !== 'undefined') {
+   if (wfComment != null && typeof wfComment !== 'undefined') 
+   {   
      addParameter(eParams, "$$wfComment$$", wfComment);
       
-   emailContacts(contactType,vEmailTemplate, vEParams, "", "", "N", "");  
-   logDebug('Within logic to send Email');   
-}
+     emailContacts(contactType,vEmailTemplate, vEParams, "", "", "N", "");  
+   
+     logDebug('Within logic to send Email');   
+   
+   }
 
 logDebug('Ended script 5115_EMailDeclineMoreInfo');
