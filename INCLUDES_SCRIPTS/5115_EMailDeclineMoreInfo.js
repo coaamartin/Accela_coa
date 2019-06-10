@@ -60,5 +60,6 @@ if (sendEmail)
      logDebug('Within logic to send Email');   
    
    }
+}
 
 logDebug('Ended script 5115_EMailDeclineMoreInfo');
