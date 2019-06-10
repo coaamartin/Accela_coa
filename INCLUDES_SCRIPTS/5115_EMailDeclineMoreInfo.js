@@ -20,15 +20,11 @@ if(appMatch("Licenses/Professional/General/Application"))
    var asiValues = new Array();
    loadAppSpecific(asiValues);     
    addParameter(vEParams, "$$LicenseType$$", asiValues["Qualifying Professional Type"]);
-   if (wfStatus == "Declined") 
-   {
-      addParameter(vEParams, "$$LetterReason$$", "is declined");
-   }
-   else 
-   if (wfStatus == "Additional Info Required") 
-   }
-     addParameter(vEParams, "$$LetterReason$$", "additional information requested");
-   {
+   
+   if (wfStatus == "Declined") addParameter(vEParams, "$$LetterReason$$", "is declined");
+
+   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information requested");
+  
 }
 
 
