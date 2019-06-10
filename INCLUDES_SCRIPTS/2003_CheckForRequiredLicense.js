@@ -1,6 +1,8 @@
 //Check for Required License to pull permit if not Homeowner
 
 comment("Start 2003 - Check for Required License to pull permit if not Homeowner");
+comment("Cap ID String = "+capIDString);
+
 comment('Homeowner as Contractor = '+getAppSpecific('Homeowner acting as Contractor',capIDString));
 
 if (getAppSpecific('Homeowner acting as Contractor',capIDString) == 'Yes'){    
