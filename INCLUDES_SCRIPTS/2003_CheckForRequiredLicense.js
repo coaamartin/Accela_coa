@@ -4,9 +4,13 @@ comment("Start 2003 - Check for Required License to pull permit if not Homeowner
 comment("Homeowner as Contractor = "+AInfo['Homeowner acting as Contractor']);
 
 if (AInfo['Homeowner acting as Contractor'] == 'No') {
-    comment("CAENumber = "+CAENumber);
-    comment("CAELicType = "+CAELienseType);
-	comment("CAELicNum = "+CAELienseNumber);
+    comment("CAE Number = "+CAENumber);
+    comment("CAE Lic Type = "+CAELienseType);
+	comment("CAE Lic Number = "+CAELienseNumber);
+	comment("CAE Validate Number = "+CAEValidatedNumber);
+	
+	
+	CAEValidatedNumber
 	
 	
 	
