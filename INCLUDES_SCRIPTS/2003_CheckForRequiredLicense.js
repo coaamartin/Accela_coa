@@ -5,7 +5,9 @@ comment("Homeowner as Contractor = "+AInfo['Homeowner acting as Contractor']);
 
 if (AInfo['Homeowner acting as Contractor'] == 'No') {
     comment("CAENumber = "+CAENumber);
-    comment("CAELicType = "+CAELicenseType);
+    comment("CAELicType = "+CAELienseType);
+	comment("CAELicNum = "+CAELienseNumber);
+	
 	
 	
     if (CAENumber > 0) {
