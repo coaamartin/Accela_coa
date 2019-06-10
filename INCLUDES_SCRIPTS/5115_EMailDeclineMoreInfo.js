@@ -23,7 +23,7 @@ if(appMatch("Licenses/Professional/General/Application"))
    
    if (wfStatus == "Denied") addParameter(vEParams, "$$LetterReason$$", "is denied");
 
-   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information required");
+   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information is required");
   
 }
 
@@ -45,7 +45,7 @@ if(appMatch("Licenses/Contractor/General/Application"))
    
    if (wfStatus == "Denied") addParameter(vEParams, "$$LetterReason$$", "is denied");
 
-   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information required");   
+   if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information is required");   
   
 }  
 
