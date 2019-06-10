@@ -5,7 +5,8 @@ comment("Homeowner as Contractor = "+AInfo['Homeowner acting as Contractor']);
 
 if (AInfo['Homeowner acting as Contractor'] == 'No'){    
     theLicNumber = null ; 
-	capLicenseArr = aa.licenseScript.getLicenseProf(capId).getOutput(); 
+	capLicenseArr = lpArray = cap.getLicenseProfessionalList().toArray(); 
+	//capLicenseArr = aa.licenseScript.getLicenseProf(capId).getOutput(); 
 	comment('License Array = '+capLicenseArr);
 
 	if (capLicenseArr){ 
