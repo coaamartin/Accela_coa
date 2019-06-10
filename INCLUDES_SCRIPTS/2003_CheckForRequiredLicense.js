@@ -4,6 +4,10 @@ comment("Start 2003 - Check for Required License to pull permit if not Homeowner
 comment("Homeowner as Contractor = "+AInfo['Homeowner acting as Contractor']);
 
 if (AInfo['Homeowner acting as Contractor'] == 'No') {
+    comment("CAENumber = "+CAENumber);
+    comment("CAELicType = "+CAELicenseType);
+	
+	
     if (CAENumber > 0) {
        logDebug("LP was found in reference: " + CAENumber + " " + CAELienseType + " " + CAELienseNumber);
        logDebug("CAE: " + describe(CAE)); // Reference LP Model
