@@ -1,9 +1,9 @@
 //Check for Required License to pull permit if not Homeowner
 
 comment("Start 2003 - Check for Required License to pull permit if not Homeowner");
-comment('Homeowner as Contractor = '+getAppSpecific('Homeowner acting as Contractor',capId));
+comment('Homeowner as Contractor = '+getAppSpecific('Homeowner acting as Contractor',capIdString));
 
-if (getAppSpecific('Homeowner acting as Contractor',capId) == 'Yes'){    
+if (getAppSpecific('Homeowner acting as Contractor',capIdString) == 'Yes'){    
     theLicNumber = null ; 
 	capLicenseArr = aa.licenseScript.getLicenseProf(capId).getOutput();
 
