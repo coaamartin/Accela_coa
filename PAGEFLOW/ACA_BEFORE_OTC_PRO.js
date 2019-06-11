@@ -75,7 +75,7 @@ try{
 		contractorType = getAppSpecific('Contractor Type',refLicProf);
 
 
-		if (appMatch('*/*/*/AC Only' && AInfo['Homeowner acting as Contractor'] == 'No' && contractorType != 'Mechanical Systems') {
+		if (appMatch('*/*/*/AC Only') && AInfo['Homeowner acting as Contractor'] == 'No' && contractorType != 'Mechanical Systems') {
 			showMessage = true;
 			comment('<font size=small><b>License Type Issue:</b></font><br><br>This permit type requires a Contractor with the License Type of Mechanical Systems.');
 			cancel = true;
