@@ -10,13 +10,13 @@ if (AInfo['Homeowner acting as Contractor'] == 'No') {
 	comment("CAE Validate Number = "+CAEValidatedNumber);
 	
 		
-    if (CAENumber > 0) {
-       logDebug("LP was found in reference: " + CAENumber + " " + CAELienseType + " " + CAELienseNumber);
-       logDebug("CAE: " + describe(CAE)); // Reference LP Model
-    } else {
-       comment("LP was not found in reference: " + CAELienseType + " " + CAELienseNumber);
-       cancel = true;
-               }
+ //   if (CAENumber > 0) {
+//       logDebug("LP was found in reference: " + CAENumber + " " + CAELienseType + " " + CAELienseNumber);
+//       logDebug("CAE: " + describe(CAE)); // Reference LP Model
+//    } else {
+//       comment("LP was not found in reference: " + CAELienseType + " " + CAELienseNumber);
+ //      cancel = true;
+//               }
 }
 
 
