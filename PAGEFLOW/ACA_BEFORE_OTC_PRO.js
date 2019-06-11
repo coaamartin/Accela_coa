@@ -370,5 +370,8 @@ function comment(cstr)
 	if (showMessage) logMessage(cstr);
 	}
 	
-
+function logMessage(dstr)
+	{
+	message+=dstr + br;
+	}
 
