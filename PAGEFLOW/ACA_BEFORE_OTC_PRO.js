@@ -71,7 +71,7 @@ try{
 	lpArray = cap.getLicenseProfessionalList().toArray();
 	for (eachLP in lpArray) {
 		thisLic = lpArray[eachLP];
-		refLicProf = thisLic['licenseNbr'];// 18ALI-00000-000ZV
+		refLicProf = thisLic['licenseNbr'];
 		logDebug("The ref Lic Pro is " + refLicProf); 
 	
 		
@@ -79,9 +79,16 @@ try{
 		licCapId = getLicCapResult.getOutput();
 		logDebug("Lic Cap ID is " + licCapId); 
 	
+		if (thisLic['licenseType'] == 'Contractor'){
 		contractorType = getAppSpecific('Contractor Type',licCapId);
 		logDebug("The contractor Type is " + contractorType);
+		}
 
+		if (thisLic['licenseType'] == 'Qualified Professional'){
+		contractorType = getAppSpecific('Qualifying Professional Type',licCapId);
+		logDebug("The contractor Type is " + contractorType);
+        }
+		
 		if ((appMatch('*/*/*/AC Only') || appMatch('*/*/*/Furnace AC and Water Heater') || appMatch('*/*/*/Water Heater and AC') || appMatch('*/*/*/Water Heater and Furnace') || appMatch('*/*/*/Furnace and AC') || appMatch('*/*/*/Furnace')) && AInfo['Homeowner acting as Contractor'] == 'No' && contractorType != 'Mechanical Systems') {
 			showMessage = true;
 			comment('<font size=small><b>License Type Issue:</b></font><br><br>This permit type requires a Contractor with the License Type of Mechanical Systems.');
