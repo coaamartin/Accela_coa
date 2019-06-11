@@ -71,7 +71,9 @@ try{
 	lpArray = cap.getLicenseProfessionalList().toArray();
 	for (eachLP in lpArray) {
 		thisLic = lpArray[eachLP];
-		refLicProf = getRefLicenseProf(thisLic["licenseNbr"]);
+		//refLicProf = getRefLicenseProf(thisLic['licenseNbr']);
+		refLicProf = thisLic['licenseNbr'];
+		
 		logDebug("The ref Lic Pro is " + refLicProf);
 		contractorType = getAppSpecific('Contractor Type',refLicProf);
 
