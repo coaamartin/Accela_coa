@@ -95,11 +95,11 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
            ListDidNotMake = ListDidNotMake + "Inspection Phase;";       
           }
         } 
-        
       }
+      
+      SetCancel = DoesMeet; 
     }
-     
-      SetCancel == DoesMeet;         
+        
    }
    else if(appMatch("Building/Permit/Plans/NA"))
    {  
@@ -159,7 +159,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         } 
       }
      
-      SetCancel == DoesMeet;      
+      SetCancel = DoesMeet;      
    }
    
 }
