@@ -26,10 +26,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         fTask = wfObj[i];
         if ("Water Meter".equals(fTask.getTaskDescription()))
         {
-          if (("Ready for CO" == fTask.getDisposition()) || ("Backflow Preventor" == fTask.getDisposition()))
-          {
-          }
-          else
+          if (("Ready for CO" !== fTask.getDisposition()) && ("Backflow Preventor" !== fTask.getDisposition()))
           {
            DoesMeet = true; 
            ListDidNotMake = ListDidNotMake + "Water Meter;";
@@ -38,10 +35,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         
         if ("Backflow Preventor".equals(fTask.getTaskDescription()))
         {
-          if (("Not Required" == fTask.getDisposition()) || ("Ready for CO" == fTask.getDisposition()))
-          {
-          }
-          else             
+          if (("Not Required" !== fTask.getDisposition()) && ("Ready for CO" !== fTask.getDisposition()))
           {
            DoesMeet = true; 
            ListDidNotMake = ListDidNotMake + "Backflow Preventor;";           
@@ -50,10 +44,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         
          if ("Waste Water".equals(fTask.getTaskDescription()))
         {
-          if ("Ready for CO" == fTask.getDisposition())
-          {
-          }
-          else          
+          if ("Ready for CO" !== fTask.getDisposition())
           {
            DoesMeet = true;    
            ListDidNotMake = ListDidNotMake + "Waste Water;";   
@@ -62,10 +53,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
 
          if ("Special Inspections Check".equals(fTask.getTaskDescription()))
         {
-          if ("Ready for CO" == fTask.getDisposition())
-          {
-          }
-          else                    
+          if ("Ready for CO" !== fTask.getDisposition())
           {
            DoesMeet = true;     
            ListDidNotMake = ListDidNotMake + "Special Inspections Check;";              
@@ -74,10 +62,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         
         if ("FEMA Elevation Certification".equals(fTask.getTaskDescription()))
         {
-          if ("Ready for CO" == fTask.getDisposition())
-          {
-          }
-          else                    
+          if ("Ready for CO" !== fTask.getDisposition())
           {
            DoesMeet = true;     
            ListDidNotMake = ListDidNotMake + "FEMA Elevation Certification;";          
@@ -86,10 +71,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         
         if ("Inspection Phase".equals(fTask.getTaskDescription()))
         {
-          if ("Ready for CO" == fTask.getDisposition())
-          {
-          }
-          else                    
+          if ("Ready for CO" !== fTask.getDisposition())
           {
            DoesMeet = true;  
            ListDidNotMake = ListDidNotMake + "Inspection Phase;";       
