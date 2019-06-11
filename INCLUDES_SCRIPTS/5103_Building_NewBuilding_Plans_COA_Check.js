@@ -104,7 +104,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
    else if(appMatch("Building/Permit/Plans/NA"))
    {  
       SetCancel = true;
-      var DoesMeet = true;
+      var DoesMeet = false;
       var ListDidNotMake = "";
       
       for (i in wfObj) 
@@ -117,7 +117,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else               
           {
-           DoesMeet = false;  
+           DoesMeet = true; 
            ListDidNotMake = ListDidNotMake + "Inspection Phase;";             
           }
         }
@@ -129,7 +129,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else  
           {
-           DoesMeet = false; 
+           DoesMeet = true; 
            ListDidNotMake = ListDidNotMake + "Backflow Preventor;";             
           }
         }
@@ -141,7 +141,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else               
           {
-           DoesMeet = false;   
+           DoesMeet = true;    
            ListDidNotMake = ListDidNotMake + "Waste Water;";                 
           }
         } 
@@ -153,7 +153,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else               
           {
-           DoesMeet = false;    
+           DoesMeet = true;    
            ListDidNotMake = ListDidNotMake + "Special Inspections Check;";                 
           }
         } 
