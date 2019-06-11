@@ -72,6 +72,7 @@ try{
 	for (eachLP in lpArray) {
 		thisLic = lpArray[eachLP];
 		refLicProf = getRefLicenseProf(thisLic["licenseNbr"]);
+		logDebug("The ref Lic Pro is " + refLicPro);
 		contractorType = getAppSpecific('Contractor Type',refLicProf);
 
 
