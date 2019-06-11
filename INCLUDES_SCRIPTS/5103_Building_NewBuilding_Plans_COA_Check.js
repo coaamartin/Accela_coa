@@ -5,15 +5,12 @@
 // BY: JMPorter
 
 logDebug('Started script 5103_Building_NewBuilding_Plans_COA_Check');
-var SetCancel = true;
-
-if (wfStatus !== "Final CO Issued")
-{
-  return;  
-}  
+var SetCancel = false;
 
 if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
 {
+   
+  SetCancel = true;
   var workflowResult = aa.workflow.getTasks(capId);
   wfObj = workflowResult.getOutput();
   
