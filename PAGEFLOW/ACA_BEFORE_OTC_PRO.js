@@ -73,8 +73,7 @@ try{
 		thisLic = lpArray[eachLP];
 		refLicProf = thisLic['licenseNbr'];
 		logDebug("The ref Lic Pro is " + refLicProf); 
-	
-		
+			
 		getLicCapResult = aa.cap.getCapID(refLicProf);
 		licCapId = getLicCapResult.getOutput();
 		logDebug("Lic Cap ID is " + licCapId); 
@@ -96,39 +95,37 @@ try{
 		}
 				
 
-
 //		if (appMatch('*/*/*/Egress Window')) {
 //			comment('Contractor Type = '+contractorType);
 //		}
 
-
 		if ((appMatch('*/*/*/Gas Pipe') || appMatch('*/*/*/Tankless Water Heater') || appMatch('*/*/*/Water Heater'))&& AInfo['Homeowner acting as Contractor'] == 'No' && (contractorType != 'Mechanical Systems' && contractorType != 'Plumbing')) {
 			showMessage = true;
-			comment('<font size=small><b>License Type Issue:</b></font><br><br>This permit type requires a Contractor with the License Type of Mechanical Systems or Plumbing.');
+			comment('<font size=small><b>License Type Issue:</b></font><br><br>The License Type seledted is '+contractorType+'. This permit type requires a Contractor with the License Type of Mechanical Systems or Plumbing.');
 			cancel = true;
 		}
 
 		if (appMatch('*/*/*/Commercial Roof')&& AInfo['Homeowner acting as Contractor'] == 'No' && (contractorType != 'Roofing' && contractorType != 'Commercial Building')) {
 			showMessage = true;
-			comment('<font size=small><b>License Type Issue:</b></font><br><br>This permit type requires a Contractor with the License Type of Roofing or Commercial Building.');
+			comment('<font size=small><b>License Type Issue:</b></font><br><br>The License Type seledted is '+contractorType+'. This permit type requires a Contractor with the License Type of Roofing or Commercial Building.');
 			cancel = true;
 		}
 
 		if (appMatch('*/*/*/Residential Roof')&& AInfo['Homeowner acting as Contractor'] == 'No' && (contractorType != 'Roofing' && contractorType != 'Commercial Building' && contractorType != 'Residential Building')) {
 			showMessage = true;
-			comment('<font size=small><b>License Type Issue:</b></font><br><br>This permit type requires a Contractor with the License Type of Roofing or Residential Building or Commercial Building.');
+			comment('<font size=small><b>License Type Issue:</b></font><br><br>The License Type seledted is '+contractorType+'. This permit type requires a Contractor with the License Type of Roofing or Residential Building or Commercial Building.');
 			cancel = true;
 		}	
 
 		if (appMatch('*/*/*/Residential Electrical Service')&& AInfo['Homeowner acting as Contractor'] == 'No' && contractorType != 'Electrical' ) {
 			showMessage = true;
-			comment('<font size=small><b>License Type Issue:</b></font><br><br>This permit type requires a Contractor with the License Type of Roofing or Commercial Building.');
+			comment('<font size=small><b>License Type Issue:</b></font><br><br>The License Type seledted is '+contractorType+'. This permit type requires a Contractor with the License Type of Roofing or Commercial Building.');
 			cancel = true;
 		}
 
 		if (appMatch('*/*/*/Siding')&& AInfo['Homeowner acting as Contractor'] == 'No' && (contractorType != 'Remodeling' && contractorType != 'Commercial Building' && contractorType != 'Residential Building')) {
 			showMessage = true;
-			comment('<font size=small><b>License Type Issue:</b></font><br><br>This permit type requires a Contractor with the License Type of Remodeling or Residential Building or Commercial Building.');
+			comment('<font size=small><b>License Type Issue:</b></font><br><br>The License Type seledted is '+contractorType+'. This permit type requires a Contractor with the License Type of Remodeling or Residential Building or Commercial Building.');
 			cancel = true;
 		}
  
