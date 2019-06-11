@@ -71,10 +71,15 @@ try{
 	lpArray = cap.getLicenseProfessionalList().toArray();
 	for (eachLP in lpArray) {
 		thisLic = lpArray[eachLP];
-		refLicProf = thisLic['licenseNbr'];
-		logDebug("The ref Lic Pro is " + refLicProf);
+		refLicProf = thisLic['licenseNbr'];// 18ALI-00000-000ZV
+		logDebug("The ref Lic Pro is " + refLicProf); 
 	
-		contractorType = getAppSpecific('Contractor Type',"18ALI-00000-000ZV");
+		
+		getLicCapResult = aa.cap.getCapID(refLicProf);
+		licCapId = getLicCapResult.getOutput();
+		logDebug("Lic Cap ID is " + licCapId); 
+	
+		contractorType = getAppSpecific('Contractor Type',licCapId);
 		logDebug("The contractor Type is " + contractorType);
 
 		if (appMatch('*/*/*/AC Only') && AInfo['Homeowner acting as Contractor'] == 'No' && contractorType != 'Mechanical Systems') {
