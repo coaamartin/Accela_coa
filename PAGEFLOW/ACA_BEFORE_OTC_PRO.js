@@ -364,5 +364,11 @@ function appMatch(ats) // optional capId or CapID string
 	}	
 
 
+function comment(cstr)
+	{
+	if (showDebug) logDebug(cstr);
+	if (showMessage) logMessage(cstr);
+	}
+	
 
 
