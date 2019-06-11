@@ -20,7 +20,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
     if(appMatch("Building/Permit/New Building/NA"))    
     {
       var ListDidNotMake = ""; 
-      var DoesMeet = true;
+      var DoesMeet = false;
       for (i in wfObj) 
       {
         fTask = wfObj[i];
@@ -31,7 +31,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else
           {
-           DoesMeet = false; 
+           DoesMeet = true; 
            ListDidNotMake = ListDidNotMake + "Water Meter;";
           }
         }
@@ -43,7 +43,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else             
           {
-           DoesMeet = false; 
+           DoesMeet = true; 
            ListDidNotMake = ListDidNotMake + "Backflow Preventor;";           
           }
         }
@@ -55,7 +55,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else          
           {
-           DoesMeet = false;    
+           DoesMeet = true;    
            ListDidNotMake = ListDidNotMake + "Waste Water;";   
           }
         } 
@@ -67,7 +67,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else                    
           {
-           DoesMeet = false;    
+           DoesMeet = true;     
            ListDidNotMake = ListDidNotMake + "Special Inspections Check;";              
           }
         } 
@@ -79,7 +79,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else                    
           {
-           DoesMeet = false;    
+           DoesMeet = true;     
            ListDidNotMake = ListDidNotMake + "FEMA Elevation Certification;";          
           }
         } 
@@ -91,7 +91,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           }
           else                    
           {
-           DoesMeet = false;  
+           DoesMeet = true;  
            ListDidNotMake = ListDidNotMake + "Inspection Phase;";       
           }
         } 
