@@ -18,6 +18,7 @@ if (!related.getSuccess()) {
 //copy data:
 copyContacts(capId, createdApp);
 copyAppSpecific(createdApp);
+updateAppStatus("Active", "Active via script", createdApp);
 
 var contact = getContactByType(contactType, capId);
 
