@@ -17,9 +17,9 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
   if (workflowResult.getSuccess())
   {   
 
-    if(appMatch("Building/Permit/New Building/NA"))
+    if(appMatch("Building/Permit/New Building/NA"))    
     {
-       
+      var ListDidNotMake = ""; 
       var DoesMeet = true;
       for (i in wfObj) 
       {
@@ -28,7 +28,8 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         {
           if (("Ready for CO" !== fTask.getDisposition()) && ("Backflow Preventor" !== fTask.getDisposition()))
           {
-           DoesMeet = false;    
+           DoesMeet = false; 
+           ListDidNotMake = ListDidNotMake + "Water Meter;";
           }
         }
         
@@ -36,7 +37,8 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         {
           if (("Not Required" !== fTask.getDisposition()) && ("Ready for CO" !== fTask.getDisposition()))
           {
-           DoesMeet = false;    
+           DoesMeet = false; 
+           ListDidNotMake = ListDidNotMake + "Backflow Preventor;";           
           }
         }
         
@@ -45,6 +47,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           if ("Ready for CO" !== fTask.getDisposition())
           {
            DoesMeet = false;    
+           ListDidNotMake = ListDidNotMake + "Waste Water;";   
           }
         } 
 
@@ -53,6 +56,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           if ("Ready for CO" !== fTask.getDisposition())
           {
            DoesMeet = false;    
+           ListDidNotMake = ListDidNotMake + "Special Inspections Check;";              
           }
         } 
         
@@ -61,6 +65,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           if ("Ready for CO" !== fTask.getDisposition())
           {
            DoesMeet = false;    
+           ListDidNotMake = ListDidNotMake + "FEMA Elevation Certification;";          
           }
         } 
         
@@ -68,7 +73,8 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         {
           if ("Ready for CO" !== fTask.getDisposition())
           {
-           DoesMeet = false;    
+           DoesMeet = false;  
+           ListDidNotMake = ListDidNotMake + "Inspection Phase;";       
           }
         } 
         
@@ -79,8 +85,10 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
    }
    else if(appMatch("Building/Permit/Plans/NA"))
    {  
-
+      SetCancel = true;
       var DoesMeet = true;
+      var ListDidNotMake = "";
+      
       for (i in wfObj) 
       {
         fTask = wfObj[i];
@@ -88,7 +96,8 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         {
           if ("Ready for CO" !== fTask.getDisposition())
           {
-           DoesMeet = false;    
+           DoesMeet = false;  
+           ListDidNotMake = ListDidNotMake + "Inspection Phase;";             
           }
         }
         
@@ -96,7 +105,8 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         {
           if ("Certificate of CO" !== fTask.getDisposition())
           {
-           DoesMeet = false;    
+           DoesMeet = false; 
+           ListDidNotMake = ListDidNotMake + "Backflow Preventor;";             
           }
         }
         
@@ -104,7 +114,8 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         {
           if ("Certificate of CO" !== fTask.getDisposition())
           {
-           DoesMeet = false;    
+           DoesMeet = false;   
+           ListDidNotMake = ListDidNotMake + "Waste Water;";                 
           }
         } 
 
@@ -113,6 +124,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
           if ("Report Received" !== fTask.getDisposition())
           {
            DoesMeet = false;    
+           ListDidNotMake = ListDidNotMake + "Special Inspections Check;";                 
           }
         } 
       }
@@ -127,6 +139,7 @@ if (SetCancel)
    
  logDebug("Script 5103: WARNING - not all workflows have an acceptable status to allow Certificate of Occupancy");
  comment("<B><Font Color=RED>WARNING - not all workflows have an acceptable status to allow Certificate of Occupancy</Font></B>");
+ comment(ListDidNotMake);
      
  cancel = true;
 }
