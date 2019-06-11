@@ -9,11 +9,7 @@ if (AInfo['Homeowner acting as Contractor'] == 'No') {
 	comment("CAE Lic Number = "+CAELienseNumber);
 	comment("CAE Validate Number = "+CAEValidatedNumber);
 	
-	
-	CAEValidatedNumber
-	
-	
-	
+		
     if (CAENumber > 0) {
        logDebug("LP was found in reference: " + CAENumber + " " + CAELienseType + " " + CAELienseNumber);
        logDebug("CAE: " + describe(CAE)); // Reference LP Model
