@@ -107,11 +107,11 @@ try{
 			cancel = true;
 		}
 
-//		if (appMatch('*/*/*/Residential Roof')&& AInfo['Homeowner acting as Contractor'] == 'No' && (contractorType != 'Roofing' && contractorType != 'Commercial Building' && contractorType != 'Residential Building')) {
-//			showMessage = true;
-//			comment('<font size=small><b>License Type Issue:</b></font><br><br>This permit type requires a Contractor with the License Type of Roofing or Residential Building or Commercial Building.');
-//			cancel = true;
-//		}	
+		if (appMatch('*/*/*/Residential Roof')&& AInfo['Homeowner acting as Contractor'] == 'No' && (contractorType != 'Roofing' && contractorType != 'Commercial Building' && contractorType != 'Residential Building')) {
+			showMessage = true;
+			comment('<font size=small><b>License Type Issue:</b></font><br><br>This permit type requires a Contractor with the License Type of Roofing or Residential Building or Commercial Building.');
+			cancel = true;
+		}	
 
 		if (appMatch('*/*/*/Residential Electrical Service')&& AInfo['Homeowner acting as Contractor'] == 'No' && contractorType != 'Electrical' ) {
 			showMessage = true;
