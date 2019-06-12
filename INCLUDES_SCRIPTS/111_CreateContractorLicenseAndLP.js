@@ -18,7 +18,23 @@ if (!related.getSuccess()) {
 //copy data:
 copyContacts(capId, createdApp);
 copyAppSpecific(createdApp);
+
 updateAppStatus("Active", "Active via script", createdApp);
+
+//*********************************************************************************************************************
+
+var workflowResult = aa.workflow.getTasks(createdApp;);
+
+if (workflowResult.getSuccess()) wfObj = workflowResult.getOutput();
+
+for (i in wfObj)
+{
+   fTask = wfObj[i];
+   if (ifTracer(fTask.getActiveFlag().equals("Y"), 'child is active'))
+     fTask.setStatus("Active")
+}
+    
+//**********************************************************************************************************************    
 
 var contact = getContactByType(contactType, capId);
 
