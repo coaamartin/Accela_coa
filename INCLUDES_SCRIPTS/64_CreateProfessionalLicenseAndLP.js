@@ -80,7 +80,7 @@ for (i in wfObj)
 {
    fTask = wfObj[i];
    if (ifTracer(fTask.getActiveFlag().equals("Y"), 'child is active'))
-     fTask.setStatus("Active")
+ //    fTask.setStatus("Active")
 }
     
 //**********************************************************************************************************************    
