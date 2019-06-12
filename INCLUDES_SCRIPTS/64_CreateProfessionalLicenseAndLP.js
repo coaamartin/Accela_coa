@@ -24,7 +24,7 @@ updateAppStatus("Active", "Active via script", createdApp);
 
 //*********************************************************************************************************************
 
-var workflowResult = aa.workflow.getTasks(createdApp;);
+var workflowResult = aa.workflow.getTasks(createdApp);
 
 if (workflowResult.getSuccess()) wfObj = workflowResult.getOutput();
 
