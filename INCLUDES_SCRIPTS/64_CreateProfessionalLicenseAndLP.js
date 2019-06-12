@@ -20,23 +20,6 @@ copyContacts(capId, createdApp);
 copyAppSpecific(createdApp);
 updateAppStatus("Active", "Active via script", createdApp);
 
-
-
-//*********************************************************************************************************************
-
-var workflowResult = aa.workflow.getTasks(createdApp);
-
-if (workflowResult.getSuccess()) wfObj = workflowResult.getOutput();
-
-for (i in wfObj)
-{
-   fTask = wfObj[i];
-   if (ifTracer(fTask.getActiveFlag().equals("Y"), 'child is active'))
-     fTask.setStatus("Active")
-}
-    
-//**********************************************************************************************************************    
-
 var contact = getContactByType(contactType, capId);
 
 logDebug("Creating Ref LP");
@@ -86,3 +69,18 @@ if (contact) {
       aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
    }
 }
+
+//*********************************************************************************************************************
+var newtaskid = createdApp
+var workflowResult = aa.workflow.getTasks(newtaskid);
+
+if (workflowResult.getSuccess()) wfObj = workflowResult.getOutput();
+
+for (i in wfObj)
+{
+   fTask = wfObj[i];
+   if (ifTracer(fTask.getActiveFlag().equals("Y"), 'child is active'))
+     fTask.setStatus("Active")
+}
+    
+//**********************************************************************************************************************    
