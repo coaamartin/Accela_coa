@@ -77,16 +77,9 @@ if (contact) {
 } 	
 
 //*********************************************************************************************************************
-var newtaskid = createdApp
-var workflowResult = aa.workflow.getTasks(newtaskid);
-
-if (workflowResult.getSuccess()) wfObj = workflowResult.getOutput();
-
-for (i in wfObj)
-{
-   fTask = wfObj[i];
- //  if (ifTracer(fTask.getActiveFlag().equals("Y"), 'child is active'))
-//     fTask.setStatus("Active")
-}
+var tmpCap = capId;
+    capId = createdApp;
+	 updateTask("License Status", "Active", "", "");
+	 capId = tmpCap;
     
 //**********************************************************************************************************************    
