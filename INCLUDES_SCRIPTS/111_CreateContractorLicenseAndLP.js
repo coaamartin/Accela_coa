@@ -80,6 +80,13 @@ if (contact) {
 var tmpCap = capId;
     capId = createdApp;
 	 updateTask("License Status", "Active", "", "");
+    
+var applicantContact = getContactObj(capId,"Contractor Applicant");
+
+if (applicantContact) {
+	editAppName(applicantContact.people.getBusinessName());
+	}
+    
 	 capId = tmpCap;
     
 //**********************************************************************************************************************    
