@@ -41,11 +41,12 @@ if (appTypeResult == "Planning/Application/Development Application/NA")
 
 	if (wfTask == "Application Acceptance" && (wfStatus == "Routed for Review" || wfStatus == "Routed for Tech Review"))
 	{
+		var reviewTasks = newArray();
 		loadTaskSpecific(reviewTasks);
 		for (x in reviewTasks){
 			
-			if(reviewTask[x] != "CHECKED") {
-			thisTask = reviewTask[x]; 
+			if(reviewTasks[x] != "CHECKED") {
+			thisTask = reviewTasks[x]; 
 			closeTask(thisTask,"NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
 			}
 		}
