@@ -46,7 +46,7 @@ if (appTypeResult == "Planning/Application/Development Application/NA")
 		for (x in reviewTasks){
 			logDebug(x + " = " +reviewTasks[x]);
 			if(reviewTasks[x] != "CHECKED") {
-			thisTask = reviewTasks[x]; 
+			thisTask = x; 
 			closeTask(thisTask,"NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
 			}
 		}
