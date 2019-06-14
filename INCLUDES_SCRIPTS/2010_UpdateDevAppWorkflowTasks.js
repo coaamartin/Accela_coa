@@ -41,86 +41,18 @@ if (appTypeResult == "Planning/Application/Development Application/NA")
 
 	if (wfTask == "Application Acceptance" && (wfStatus == "Routed for Review" || wfStatus == "Routed for Tech Review"))
 	{
-		if (getAppSpecific("Planning Review") != "CHECKED")
-		{
-			closeTask("Planning Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
+		loadTaskSpecific(reviewTasks);
+		for (x in reviewTasks){
+			
+			if(reviewTask[x] != "CHECKED") {
+			thisTask = reviewTask[x]; 
+			closeTask(thisTask,"NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
+			}
 		}
-		if (getAppSpecific("Building Review") != "CHECKED")
-		{
-			closeTask("Building Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Civil Review") != "CHECKED")
-		{
-			closeTask("Civil Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Fire Review") != "CHECKED")
-		{
-			closeTask("Fire Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Traffic Review") != "CHECKED")
-		{
-			closeTask("Traffic Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Landscape Review") != "CHECKED")
-		{
-			closeTask("Landscape Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Water Dept Review") != "CHECKED")
-		{
-			closeTask("Water Dept Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Parks Review") != "CHECKED")
-		{
-			closeTask("Parks Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Addressing Review") != "CHECKED")
-		{
-			closeTask("Addressing Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Life Safety Review") != "CHECKED")
-		{
-			closeTask("Life Safety Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Forestry Review") != "CHECKED")
-		{
-			closeTask("Forestry Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("City Attorney Review") != "CHECKED")
-		{
-			closeTask("City Attorney Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Public Art Review") != "CHECKED")
-		{
-			closeTask("Public Art Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("ODA Review") != "CHECKED")
-		{
-			closeTask("ODA Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Real Property Review") != "CHECKED")
-		{
-			closeTask("Real Property Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		
-		if (getAppSpecific("Historic Review") != "CHECKED")
-		{
-			closeTask("Historic Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		
-		if (getAppSpecific("Airport Review") != "CHECKED")
-		{
-			closeTask("Airport Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Neighborhood Liaison Review") != "CHECKED")
-		{
-			closeTask("Neighborhood Liaison Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
-		if (getAppSpecific("Outside Agencies Review") != "CHECKED")
-		{
-			closeTask("Outside Agencies Review","NA", "Closed via script. Review task not selected.", "Closed via script. Review task not selected.");
-		}
+
 	}
-		if (wfTask == "Reviews Consolidation" && wfStatus == "Tech Review Complete")
+	
+	if (wfTask == "Reviews Consolidation" && wfStatus == "Tech Review Complete")
 	{
 		setTask("Reviews Consolidation","N","Y");
 		activateTask("Case Closed");		
