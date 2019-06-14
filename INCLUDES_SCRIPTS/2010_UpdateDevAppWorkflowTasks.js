@@ -41,7 +41,7 @@ if (appTypeResult == "Planning/Application/Development Application/NA")
 
 	if (wfTask == "Application Acceptance" && (wfStatus == "Routed for Review" || wfStatus == "Routed for Tech Review"))
 	{
-		var reviewTasks = newArray();
+		var reviewTasks = new Array();
 		loadTaskSpecific(reviewTasks);
 		for (x in reviewTasks){
 			
