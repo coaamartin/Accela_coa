@@ -39,7 +39,7 @@ if (appTypeResult == "Planning/Application/Development Application/NA")
 		activateTask("Application Acceptance");		
 	}
 
-	if wfTask == ("Application Acceptance" && (wfStatus == "Routed for Review" || wfStatus == "Routed for Tech Review"))
+	if (wfTask == "Application Acceptance" && (wfStatus == "Routed for Review" || wfStatus == "Routed for Tech Review"))
 	{
 		if ({Planning Review} != "CHECKED")
 		{
