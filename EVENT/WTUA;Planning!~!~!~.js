@@ -12,6 +12,5 @@ Functional Area : Records
 Sample Call : updateAssignedToUser()
 
 */
-include("2010_updateDevAppWorkflowTasks");
 updateAssignedToUser();
 script59_PlanningCloseCaseComplete();
