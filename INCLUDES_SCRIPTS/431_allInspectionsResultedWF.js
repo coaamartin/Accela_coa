@@ -24,11 +24,34 @@ if (wfTask == "License Issuance" && wfStatus == "Issued"){
       logDebug("<B>Inspections are not completed </B>");
     } 
 
-    if (balanceDue > 0){
+    if (balanceDue > 0 || getAssessedFees().length > 0){
       cancel = true;
       showMessage = true;
       logDebug("<B>There is balance due.</B>");
     }
 
 
+}
+
+function getAssessedFees()
+{
+  var result = new Array();
+  var itemCap = capId;
+  if (arguments.length > 0) itemCap = arguments[1];
+
+  var feeItemsArray = aa.finance.getFeeItemByCapID(itemCap)
+  if (!feeItemsArray.getSuccess())
+  {
+    logDebug("Problem retrieving fee items from $record$ ".replace("$record$", capId.getCustomID()) + feeItemsArray.getErrorMessage());
+    return result;
+  }
+  var feeItems = feeItemsArray.getOutput();
+  for (var x in feeItems)
+  {
+    if ("NEW".equals(feeItems[x].getFeeitemStatus()))
+    {
+      result.push(feeItems[x]);
+    }
+  }
+  return result;  
 }
