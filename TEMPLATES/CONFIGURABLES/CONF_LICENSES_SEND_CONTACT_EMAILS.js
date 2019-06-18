@@ -42,7 +42,9 @@
             },
             "criteria": {
               "task": [
-                "License Issuance"
+                "License Issuance",
+                "Application Review",
+                "Renewal Review"
               ],
               "status": [
                 "Denied"
@@ -52,7 +54,8 @@
               "notificationTemplate":   "DENIAL OF LICENSE APPLICATION #248",
               "notificationReport": "",
               "notifyContactTypes": [
-                "Applicant"
+                "Applicant",
+                "Responsible Party"
               ],
               "url4ACA":  "https://awebdev.aurora.city/CitizenAccess",
               "fromEmail": "noreply@auroraco.gov",
