@@ -5,3 +5,5 @@ if(ifTracer(inspType == 'Meter Set Inspection' && inspResult == 'Pass', 'Meter S
 if(ifTracer(inspType == 'Meter Set Inspection' && inspResult == 'Fail', 'Meter Set Inspection/Fail')){
     script400_WatTapApplicationInspectionAutomation();
 }
+//SWAKIL Script 483 addReInspectionFee
+include("addReInspectionFee");
