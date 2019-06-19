@@ -167,9 +167,9 @@ function mainProcess() {
    
    var currentdate = new Date();
    var dayrange = 30;
-   var toDate = (currentdate.getMonth()+1) + "/" + currentdate.getDate() + "/" + currentdate.getFullYear());
+   var toDate = (currentdate.getMonth()+1) + "/" + currentdate.getDate() + "/" + currentdate.getFullYear();
    
-   currentdate.setDate(currentdate.getDate() - dayrange);
+   currentdate.setDate(currentdate.getDate() - dayrange); 
    var fromDate = (currentdate.getMonth()+1) + "/" + currentdate.getDate() + "/" + currentdate.getFullYear()
    
 	//var toDate = getJobParam("toDate"); // ""
