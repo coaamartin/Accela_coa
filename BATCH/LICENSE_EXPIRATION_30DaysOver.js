@@ -192,7 +192,14 @@ function mainProcess() {
 	var filterExpression = getJobParam("filterExpression"); // JavaScript used to filter records.   Evaluating to false will skip the record, for example:   getAppSpecific("FieldName").toUpperCase() == "TEST"
 	var actionExpression = getJobParam("actionExpression"); // JavaScript used to perform custom action, for example:   addStdCondition(...)
 
-
+	//Non-parameter variables
+	if (!fromDate.length) { // no "from" date, assume today + number of days to look ahead
+		fromDate = dateAdd(null, parseInt(lookAheadDays));
+	}
+	if (!toDate.length) { // no "to" date, assume today + number of look ahead days + span
+		toDate = dateAdd(null, parseInt(lookAheadDays) + parseInt(daySpan))
+   }   
+      
 	var mailFrom = lookup("ACA_EMAIL_TO_AND_FROM_SETTING", "RENEW_LICENSE_AUTO_ISSUANCE_MAILFROM");
 	var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
 	acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
