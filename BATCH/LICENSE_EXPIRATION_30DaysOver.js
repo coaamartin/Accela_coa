@@ -103,7 +103,22 @@ try {
 		logDebug("Batch job ID not found " + batchJobResult.getErrorMessage());
 	}
 	
+	var vEmailFrom = ""; //Testing Only
+	var vEmailTo = ""; //Testing Only
+	var vEmailCC = ""; //Testing Only
+	vEmailFrom = "noreply@accela.com"; //Testing Only
+	vEmailTo = "noreply@accela.com"; //Testing Only
+	vEmailCC = ""; //Testing Only
 
+	if (aa.env.getValue("FromEmail") != null && aa.env.getValue("FromEmail") != "") {
+		vEmailFrom = aa.env.getValue("FromEmail");
+	}
+	if (aa.env.getValue("ToEmail") != null && aa.env.getValue("ToEmail") != "") {
+		vEmailTo = aa.env.getValue("ToEmail");
+	}
+	if (aa.env.getValue("CCEmail") != null && aa.env.getValue("CCEmail") != "") {
+		vEmailCC = aa.env.getValue("CCEmail");
+	}
 
 	/*------------------------------------------------------------------------------------------------------/
 	| <===========Main=Loop================>
