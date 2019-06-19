@@ -166,7 +166,10 @@ function mainProcess() {
 	//var fromDate = getJobParam("fromDate"); // Hardcoded dates.   Use for testing only
    
    var currentdate = new Date();
-   var dayrange = 30;
+   var dayrange = 60;
+   var dayrange2 = 30;
+   
+   currentdate.setDate(currentdate.getDate() - dayrange2); 
    var toDate = (currentdate.getMonth()+1) + "/" + currentdate.getDate() + "/" + currentdate.getFullYear();
    
    currentdate.setDate(currentdate.getDate() - dayrange); 
