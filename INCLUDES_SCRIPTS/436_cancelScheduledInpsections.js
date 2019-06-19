@@ -5,7 +5,7 @@
 // BY: SWAKIL
 // CHANGELOG: 05/18/2019 , SWAKIL Created this file. 
 
-if ((wfTask == "License Status" && (wfStatus == "Inactive" || wfStatus == "Closed" || wfStatus == "Revoked")) ||
+if ((wfTask == "License Status" && (wfStatus == "Inactive" || wfStatus == "Closed" || wfStatus == "Revoked" || wfStatus == "Denied" || wfStatus == "Withdrawn")) ||
 	(wfTask == "License Issuance" && (wfStatus == "Denied" || wfStatus == "Withdrawn"))){
 	cancelScheduledInspections();
 }

@@ -17,6 +17,8 @@ Sample Call:
         this script will abort if subType = "Address", requested in PDF:
         ... Record Type: Planning/Application/{*}/{*} (except Planning/Application/Address/{*})
 */
+include("2010_updateDevAppWorkflowTasks");
+
 if(!appMatch(("Planning/Application/Address/*"))){
 //Script 278
     if(appMatch("Planning/Application/Conditional Use/NA"))

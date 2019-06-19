@@ -14,5 +14,6 @@ if (wfStatus == "Denied" || wfStatus == "Withdrawn"){
 
     if (vLicenseID != null) {
         updateAppStatus("Closed", "Updated by 10_closeLicenseMJ.js", vLicenseID);
+        closeTaskByCapId("License Status","Closed","","",vLicenseID);
     }
 }
