@@ -2,20 +2,26 @@
 //var $iTrc = ifTracer;
 var entitlementType = null; 
 if (typeof(ENTITLEMENTS) == Object) {
-	for (x in ENTITLEMENTS) if ((ENTITLEMENTS[x]["Entitlements"] = "Master Plan" || ENTITLEMENTS[x]["Entitlements"] = "Master Plan Amendment") && ENTITLEMENTS[x]["Status"] != "Inactive") {
-	entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug ("Entitlements List includes type = "+entitlementType);
+	for (x in ENTITLEMENTS) {
+		if ((ENTITLEMENTS[x]["Entitlements"] = "Master Plan" || ENTITLEMENTS[x]["Entitlements"] = "Master Plan Amendment") && ENTITLEMENTS[x]["Status"] != "Inactive") {
+		entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug ("Entitlements List includes type = "+entitlementType);
+		}
 	}
 }
 
 if (entitlementType != "Master Plan" && entitlementType != "Master Plan Amendment" && typeof(ENTITLEMENTS) == Object) {
-	for (x in ENTITLEMENTS) if (matches(ENTITLEMENTS[x]["Entitlements"],"Site Plan - Preliminary Plat","Site Plan - Major") && ENTITLEMENTS[x]["Status"] != "Inactive") {
-	entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug ("Entitlements List includes type = "+entitlementType); 
+	for (x in ENTITLEMENTS) {
+		if (matches(ENTITLEMENTS[x]["Entitlements"],"Site Plan - Preliminary Plat","Site Plan - Major") && ENTITLEMENTS[x]["Status"] != "Inactive") {
+		entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug ("Entitlements List includes type = "+entitlementType); 
+		}
 	}
 } 
 
 if (!matches(entitlementType,"Master Plan","Master Plan Amendment","Site Plan - Preliminary Plat","Site Plan - Major") && typeof(ENTITLEMENTS) == Object) {
-	for (x in ENTITLEMENTS) if (matches(ENTITLEMENTS[x]["Entitlements"],"Conditional Use","Rezoning","Site Plan - Amendment","Site Plan - Minor") && ENTITLEMENTS[x]["Status"] != "Inactive") {
-	entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug ("Entitlements List includes type = "+entitlementType); 
+	for (x in ENTITLEMENTS) {
+		if (matches(ENTITLEMENTS[x]["Entitlements"],"Conditional Use","Rezoning","Site Plan - Amendment","Site Plan - Minor") && ENTITLEMENTS[x]["Status"] != "Inactive") {
+		entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug ("Entitlements List includes type = "+entitlementType); 
+		}
 	}
 } 
 
@@ -45,9 +51,9 @@ Created By: Silver Lining Solutions
 //    if(countOfTaskStatus("Review Distribution", "In Review") > 1) script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule()
 //}
 
-//if (matches(entitlementType,"Conditional Use","Rezoning","Site Plan - Amendment","Site Plan - Minor") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
-//    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1) script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule()
-//}
+if (matches(entitlementType,"Conditional Use","Rezoning","Site Plan - Amendment","Site Plan - Minor") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
+    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1) script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule()
+}
 
 /*
 Script 274
@@ -62,9 +68,9 @@ Created By: Silver Lining Solutions
 //}
 
 
-//if (matches(entitlementType,"Site Plan - Preliminary Plat","Site Plan - Major") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
-//    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1)script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2()
-//}
+if (matches(entitlementType,"Site Plan - Preliminary Plat","Site Plan - Major") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
+    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1)script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2()
+}
 
 
 /*
@@ -78,10 +84,9 @@ Created By: Silver Lining Solutions
 //    if(countOfTaskStatus("Review Distribution", "In Review") > 1) script275_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule();
 //}
 
-//if (matches(entitlementType,"Master Plan","Master Plan Amendment") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
-//    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1) script275_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule();
-//}
-
+if (matches(entitlementType,"Master Plan","Master Plan Amendment") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
+    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1) script275_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule();
+}
 
 
 /*
