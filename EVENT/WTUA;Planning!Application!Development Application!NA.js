@@ -45,7 +45,7 @@ Created By: Silver Lining Solutions
 //    if(countOfTaskStatus("Review Distribution", "In Review") > 1) script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule()
 //}
 
-if (matches(entitlementType,"Conditional Use","Rezoning","Site Plan - Amendment","Site Plan - Minor"); && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
+if (matches(entitlementType,"Conditional Use","Rezoning","Site Plan - Amendment","Site Plan - Minor") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
     if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1) script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule()
 }
 
