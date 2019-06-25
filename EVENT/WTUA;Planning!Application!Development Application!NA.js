@@ -1,23 +1,31 @@
 
  
 if (wfTask == "Application Acceptance" && wfStatus == "Routed for Review") {
-	var entitlementType = null;
+	var entitlementType = null; 
+	logDebug("entitlementType initialized as = "+entitlementType);
+	logDebug("Starting search for Entitlements.");
 	
-	if (typeof(ENTITLEMENTS) == Object) {
+	if (typeof(ENTITLEMENTS) == "object") {
+		logDebug("Found Entitlements list. Looking at specific entitlements in list.");
 		for (x in ENTITLEMENTS) if ((ENTITLEMENTS[x]["Entitlements"] == "Master Plan" || ENTITLEMENTS[x]["Entitlements"] == "Master Plan Amendment") && ENTITLEMENTS[x]["Status"] != "Inactive") {
-		entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug("Entitlements List includes type = "+entitlementType);
+		entitlementType = ENTITLEMENTS[x]["Entitlements"]; 
+		logDebug("Entitlements List includes type = "+entitlementType);
 		}
 	}
 
-	if (entitlementType != "Master Plan" && entitlementType != "Master Plan Amendment" && typeof(ENTITLEMENTS) == Object) {
+	if (entitlementType != "Master Plan" && entitlementType != "Master Plan Amendment" && typeof(ENTITLEMENTS) == "object") {
+		logDebug("Not a Master Plan or Master Plan Amendment.");
 		for (x in ENTITLEMENTS) if (matches(ENTITLEMENTS[x]["Entitlements"],"Site Plan - Preliminary Plat","Site Plan - Major") && ENTITLEMENTS[x]["Status"] != "Inactive") {
-		entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug("Entitlements List includes type = "+entitlementType); 
+		entitlementType = ENTITLEMENTS[x]["Entitlements"]; 
+		logDebug("Entitlements List includes type = "+entitlementType); 
 		}
 	}
 
-	if (!matches(entitlementType,"Master Plan","Master Plan Amendment","Site Plan - Preliminary Plat","Site Plan - Major") && typeof(ENTITLEMENTS) == Object) {
+	if (!matches(entitlementType,"Master Plan","Master Plan Amendment","Site Plan - Preliminary Plat","Site Plan - Major") && typeof(ENTITLEMENTS) == "object") {
+		logDebug("Entitlements do not include Master Plan, Master Plan Amendment, Site Plan - Preliminary Plat, or Site Plan - Major");
 		for (x in ENTITLEMENTS) if (matches(ENTITLEMENTS[x]["Entitlements"],"Conditional Use","Rezoning","Site Plan - Amendment","Site Plan - Minor") && ENTITLEMENTS[x]["Status"] != "Inactive") {
-		entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug("Entitlements List includes type = "+entitlementType); 
+		entitlementType = ENTITLEMENTS[x]["Entitlements"]; 
+		logDebug("Entitlements List includes type = "+entitlementType); 
 		}
 	}
 } 
