@@ -46,7 +46,7 @@ Created By: Silver Lining Solutions
 //}
 
 //if (matches(entitlementType,"Conditional Use","Rezoning","Site Plan - Amendment","Site Plan - Minor") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
-    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1) script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule()
+//    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1) script273_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule()
 //}
 
 /*
@@ -63,7 +63,7 @@ Created By: Silver Lining Solutions
 
 
 //if (matches(entitlementType,"Site Plan - Preliminary Plat","Site Plan - Major") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
-    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1)script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2()
+//    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1)script274_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule2()
 //}
 
 
@@ -79,7 +79,7 @@ Created By: Silver Lining Solutions
 //}
 
 //if (matches(entitlementType,"Master Plan","Master Plan Amendment") && (wfTask == "Application Acceptance" && wfStatus == "Routed for Review")) {
-    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1) script275_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule();
+//    if(countOfTaskStatus("Application Acceptance", "Routed for Review") > 1) script275_WTUA_CalcReviewDueDatesAndPotentialPCHearingSchedule();
 //}
 
 
