@@ -19,11 +19,17 @@ Sample Call:
 */
 include("2010_updateDevAppWorkflowTasks");
 
-if(!appMatch(("Planning/Application/Address/*"))){
+//edited "if" criteria in the following to retrofit for new Planning Development Application as task name is different for that record type
+if(!appMatch(("Planning/Application/Address/*")) && !appMatch("Planning/Application/Development Application/NA")){
 //Script 278
     if(appMatch("Planning/Application/Conditional Use/NA"))
         sendHearingScheduledEmailAndUpdateASI("Hearing Scheduled", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
     else sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
+}
+
+// Added the following because workflow task name is different for Planning Development Application Record
+if(appMatch("Planning/Application/Development Application/NA")){
+	sendHearingScheduledEmailAndUpdateASI("PZC Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
 }
 // Workflow Task name is different for Rezoning so putting in the Event for WTUA:"Planning/Application/Rezoning/NA
 //  sendHearingScheduledEmailAndUpdateASI("Hearing Scheduling", [ "Scheduled" ], "Planning Commission", "Planning Commission Hearing Date", "PLN PUBLIC HEARING EMAIL # 278");
@@ -44,7 +50,7 @@ Functional Area : Workflow , Records
 */
 
 createRecordAndCopyInfo([ "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA", "Planning/Application/Site Plan/Major",
-        "Planning/Application/Site Plan/Minor" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Traffic Impact Study Required?",
+        "Planning/Application/Site Plan/Minor","Planning/Application/Development Application/NA" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Traffic Impact Study Required?",
         "PublicWorks/Traffic/Traffic Impact/NA");
  
 
@@ -65,7 +71,7 @@ Notes:
     - child record type is "Water/Utility/Master Utility/Study" (Study not NA)
 */
 // Script 244
-autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Received", "Resubmittal Requested",  "Complete", "Note"], "Is a Master Utility Plan Required", "Water Dept Review",
+autoCreateMasterUtilStudyApplication("Water Dept Review", [ "Comments Not Received", "Resubmittal Requested",  "Complete", "Note", "Approved"], "Is a Master Utility Plan Required", "Water Dept Review",
         "Water/Utility/Master Utility/Study");
         
 
