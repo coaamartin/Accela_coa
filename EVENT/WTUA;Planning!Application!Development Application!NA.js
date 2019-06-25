@@ -7,13 +7,13 @@ if (typeof(ENTITLEMENTS) == Object) {
 	}
 }
 
-if entitlementType != "Master Plan" && entitlementType != "Master Plan Amendment" && typeof(ENTITLEMENTS) == Object {
+if (entitlementType != "Master Plan" && entitlementType != "Master Plan Amendment" && typeof(ENTITLEMENTS) == Object) {
 	for (x in ENTITLEMENTS) if (matches(ENTITLEMENTS[x]["Entitlements"],"Site Plan - Preliminary Plat","Site Plan - Major") && ENTITLEMENTS[x]["Status"] != "Inactive") {
 	entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug ("Entitlements List includes type = "+entitlementType); 
 	}
 } 
 
-if !matches(entitlementType,"Master Plan","Master Plan Amendment","Site Plan - Preliminary Plat","Site Plan - Major") && typeof(ENTITLEMENTS) == Object {
+if (!matches(entitlementType,"Master Plan","Master Plan Amendment","Site Plan - Preliminary Plat","Site Plan - Major") && typeof(ENTITLEMENTS) == Object) {
 	for (x in ENTITLEMENTS) if (matches(ENTITLEMENTS[x]["Entitlements"],"Conditional Use","Rezoning","Site Plan - Amendment","Site Plan - Minor") && ENTITLEMENTS[x]["Status"] != "Inactive") {
 	entitlementType = ENTITLEMENTS[x]["Entitlements"]; logDebug ("Entitlements List includes type = "+entitlementType); 
 	}
