@@ -1,6 +1,6 @@
 
  
-if {wftask == "Application Acceptance" && wfStatus == "Routed for Review") {
+if (wftask == "Application Acceptance" && wfStatus == "Routed for Review") {
 	var entitlementType = null;
 	
 	if (typeof(ENTITLEMENTS) == Object) {
