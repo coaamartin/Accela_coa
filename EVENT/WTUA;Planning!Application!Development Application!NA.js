@@ -95,6 +95,7 @@ Desc:           see Script Tracker for script 277
 
 Created By: Silver Lining Solutions
 */
+/*
 logDebug("START of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
 if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStatus == "Ready for PC"))
 {
@@ -162,3 +163,4 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
         { logDebug("Sent Notification"); }  
 }
 logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
+*/
