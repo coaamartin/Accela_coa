@@ -1,5 +1,5 @@
 
-var $iTrc = ifTracer;
+//var $iTrc = ifTracer;
 var entitlementType = null; 
 if (typeof(ENTITLEMENTS) == Object) {
 	for (x in ENTITLEMENTS) if ((ENTITLEMENTS[x]["Entitlements"] = "Master Plan" || ENTITLEMENTS[x]["Entitlements"] = "Master Plan Amendment") && ENTITLEMENTS[x]["Status"] != "Inactive") {
