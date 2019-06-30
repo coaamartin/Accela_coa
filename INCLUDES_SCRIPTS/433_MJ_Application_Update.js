@@ -12,18 +12,20 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Final CO Issued"){
 	if (cRecords && cRecords.length > 0)
 	{
 	    var wPermit = cRecords[0];
+	    
+	    scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspections", 0, " ", " ", "Scheduled by Script 226", wPermit);	
+	    scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections", 0, " ", " ", "Scheduled by Script 226", wPermit);
+	    scheduleInspectionWithCapIdBusinessDays("MJ Code Enforcement Inspections", 0, " ", " ", "Scheduled by Script 226", wPermit);
+	    scheduleInspectionWithCapIdBusinessDays("MJ Planning Inspections", 0, " ", " ", "Scheduled by Script 226", wPermit);
+	    scheduleInspectionWithCapIdBusinessDays("MJ Security Inspections - Police", 0, " ", " ", "Scheduled by Script 226", wPermit);
+
 	    //save capId
 	    var tempCapId = capId;
 	    capId = wPermit;
-	    createPendingInspection("LIC_MJ_RST", "MJ AMED Inspections");
-	    createPendingInspection("LIC_MJ_RST", "MJ Building Inspections");
-	    createPendingInspection("LIC_MJ_RST", "MJ Code Enforcement Inspections");
-	    createPendingInspection("LIC_MJ_RST", "MJ Planning Inspections");
-	    createPendingInspection("LIC_MJ_RST", "MJ Security Inspections - Police");
 	    closeTask("Certificate of Occupancy","Complete","Updated by script COA #11","Updated by script COA #11");
 	    //restore capId
 	    capId = tempCapId;
-	   
+		   
 	}
 	else
 	{
