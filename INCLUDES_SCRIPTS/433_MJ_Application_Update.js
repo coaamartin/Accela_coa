@@ -12,16 +12,10 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Final CO Issued"){
 	if (cRecords && cRecords.length > 0)
 	{
 	    var wPermit = cRecords[0];
-	    
-	    scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspections", 0, " ", " ", "Scheduled by Script 226", wPermit);	
-	    scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections", 0, " ", " ", "Scheduled by Script 226", wPermit);
-	    scheduleInspectionWithCapIdBusinessDays("MJ Code Enforcement Inspections", 0, " ", " ", "Scheduled by Script 226", wPermit);
-	    scheduleInspectionWithCapIdBusinessDays("MJ Planning Inspections", 0, " ", " ", "Scheduled by Script 226", wPermit);
-	    scheduleInspectionWithCapIdBusinessDays("MJ Security Inspections - Police", 0, " ", " ", "Scheduled by Script 226", wPermit);
-
 	    //save capId
 	    var tempCapId = capId;
 	    capId = wPermit;
+	    updatePendingToScheduledInspections(capId);
 	    closeTask("Certificate of Occupancy","Complete","Updated by script COA #11","Updated by script COA #11");
 	    //restore capId
 	    capId = tempCapId;
@@ -31,4 +25,24 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Final CO Issued"){
 	{
 	    logDebug("Problem locating child permit for record " + capId.getCustomID());
 	}
+}
+
+function updatePendingToScheduledInspections(capId) {
+    var insps = aa.inspection.getInspections(capId).getOutput();
+    for (var i in insps){
+        var thisInsp = insps[i];
+        var inspStatus = thisInsp.getInspectionStatus();
+        var inspectorObj = null;
+
+        if ("Pending".equals(inspStatus))
+        {
+            thisInsp.setInspectionStatus("Scheduled");
+            thisInsp.setScheduledDate(aa.date.parseDate(dateAdd(null, 0)));       
+            thisInsp.setInspector(inspectorObj);       
+            
+            aa.inspection.editInspection(thisInsp);
+
+            logDebug("Updating Status of Inspections")
+        }
+    }
 }
