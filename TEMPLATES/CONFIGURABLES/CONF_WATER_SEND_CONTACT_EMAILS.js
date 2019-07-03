@@ -241,38 +241,6 @@
                 "preScript": "",
                 "postScript": "",
                 "metadata": {
-                    "description": "To validate record based on JSON rules",
-                    "operators": {
-
-                    }
-                },
-                "criteria": {
-                    "task": [
-                        "Fee Processing"
-                    ],
-                    "status": [
-                        "Invoiced"
-                    ]
-                },
-                "action": {
-                    "notificationTemplate": "WAT_IRRIGATION PLAN REVIEW INVOICED #193",
-                    "notificationReport": "",
-                    "notifyContactTypes": [
-                        "Applicant"
-                    ],
-                    "url4ACA": "",
-                    "fromEmail": "noreply@auroraco.gov",
-                    "additionalEmailsTo": [
-
-                    ],
-                    "createFromParent": "",
-                    "reportingInfoStandards": ""
-                }
-            },
-            {
-                "preScript": "",
-                "postScript": "",
-                "metadata": {
                     "description": "Spec 411",
                     "operators": {
 
