@@ -32,10 +32,10 @@ function autoCreateTempSWMPApplication(wfTaskName, workflowStatusArray, asiField
 	    loadTaskSpecific(thisTSIArr);
 		var tsiValue = thisTSIArr[asiFieldName]
 
-        /*
+        
         if (tsiValue == null || !tsiValue.equalsIgnoreCase("yes")) {
             return false;
-        }*/
+        }
 
         var cTypeArray = appTypeStr.split("/");
         var ctm = aa.proxyInvoker.newInstance("com.accela.aa.aamain.cap.CapTypeModel").getOutput();
