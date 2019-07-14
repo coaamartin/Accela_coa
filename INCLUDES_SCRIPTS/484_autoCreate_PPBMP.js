@@ -1,4 +1,4 @@
-logDebug("3002_autoCreate_PPBMP");
+logDebug("484_autoCreate_PPBMP");
 if ("Plans Coordination".equals(wfTask) && "Approved".equals(wfStatus))
 {
 	if ("No".equals(AInfo["Storm Water Permit Required"]) && PONDTYPES && PONDTYPES.length > 0)
