@@ -74,3 +74,6 @@ Notes:
 // script 18
 // EK updated this script to include Application Submittal and Accepted
 updateSubmittalNumber("Completeness Check", ["Complete","Accepted"], "Submittal Number");
+
+//SWAKIL
+include("3002_autoCreate_PPBMP");
