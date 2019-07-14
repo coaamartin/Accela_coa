@@ -36,7 +36,7 @@ if (acres >= 1.0 && acres < 5.0)
 }
 if (acres > 5.0)
 {
-	thefee = 2500.00;
+	thefee = 2250.00;
 }
 
 var feecode = "WAT_SWMP_24";
