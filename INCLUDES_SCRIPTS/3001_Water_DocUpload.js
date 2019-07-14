@@ -18,6 +18,6 @@ else if (appMatch("Water/Water/PPBMP/NA"))
 {
 	if (isTaskActive("Annual Report") && "Active".equals(capStatus))
 	{
-		updateAppStatus("Annual Report Received", "Updated via script");
+		updateTask("Annual Report", "Annual Report Received", "Updated via Script", null);
 	}
 }
