@@ -1,7 +1,7 @@
 logDebug("3002_autoCreate_PPBMP");
 if ("Plans Coordination".equals(wfTask) && "Approved".equals(wfStatus))
 {
-	if ("No".equals(AInfo["Storm Water Permit Required"] && PONDTYPES && PONDTYPES.length > 0))
+	if ("No".equals(AInfo["Storm Water Permit Required"]) && PONDTYPES && PONDTYPES.length > 0)
 	{
 		for (var row in PONDTYPES)
 		{
@@ -9,7 +9,7 @@ if ("Plans Coordination".equals(wfTask) && "Approved".equals(wfStatus))
 			//update child status
 			updateAppStatus("Inactive", "Created via script", child);
 			//relate
-			addChild(child.getCustomID());
+			addChild(child.getCustomID() + "");
 			//update app name
 			editAppName(PONDTYPES["Pond Type"] + " - " + PONDTYPES["Pond Number"], child);
 			//copy APO
