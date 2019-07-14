@@ -11,7 +11,7 @@ if ("Plans Coordination".equals(wfTask) && "Approved".equals(wfStatus))
 			//relate
 			addChild(child.getCustomID() + "");
 			//update app name
-			editAppName(PONDTYPES["Pond Type"] + " - " + PONDTYPES["Pond Number"], child);
+			editAppName(PONDTYPES[row]["Pond Type"] + " - " + PONDTYPES[row]["Pond Number"], child);
 			//copy APO
 			copyAddresses(capId, child);
 			copyParcels(capId, child);
