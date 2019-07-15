@@ -1,5 +1,5 @@
 // Renewal script
-if (balanceDue == 0) {
+/*if (balanceDue == 0) {
 
 	closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Professional!General!Renewal", "");
 
@@ -38,3 +38,4 @@ if (balanceDue == 0) {
 
 	}
 }
+*/
