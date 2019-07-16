@@ -1,4 +1,6 @@
-// Renewal script
+aa.cap.updateAccessByACA(capId, "Y");
+
+// Renewal script - Moved to WTUA:Licenses/Marijuana/*/Renewal
 /*if (balanceDue == 0) {
 
 	closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Professional!General!Renewal", "");
