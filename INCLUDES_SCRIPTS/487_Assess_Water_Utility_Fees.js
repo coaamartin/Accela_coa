@@ -4,29 +4,29 @@ if (publicUser)
 {
 	if ("Fire Line Repair".equals(tService))
 	{
-		addFee("WAT_US_03", "WAT_US", 'FINAL', 1, 'Y');
+		updateFee("WAT_US_03", "WAT_US", "FINAL", 1, "Y", "N");
 	}
 	else if ("Sewer Repair".equals(tService))
 	{
-		addFee("WAT_US_02", "WAT_US", 'FINAL', 1, 'Y');
+		updateFee("WAT_US_02", "WAT_US", "FINAL", 1, "Y", "N");
 	}
 	else if ("Water Repair".equals(tService))
 	{
-		addFee("WAT_US_01", "WAT_US", 'FINAL', 1, 'Y');
+		updateFee("WAT_US_01", "WAT_US", "FINAL", 1, "Y", "N");
 	}
 }
 else if (!"undefined".equals(typeof(wfTask)) && "Inspection".equals(wfTask) && "Ready to Pay".equals(wfStatus))
 {
 	if ("Fire Line Repair".equals(tService))
 	{
-		addFee("WAT_US_03", "WAT_US", 'FINAL', 1, 'Y');
+		updateFee("WAT_US_03", "WAT_US", "FINAL", 1, "Y", "N");
 	}
 	else if ("Sewer Repair".equals(tService))
 	{
-		addFee("WAT_US_02", "WAT_US", 'FINAL', 1, 'Y');
+		updateFee("WAT_US_02", "WAT_US", "FINAL", 1, "Y", "N");
 	}
 	else if ("Water Repair".equals(tService))
 	{
-		addFee("WAT_US_01", "WAT_US", 'FINAL', 1, 'Y');
+		updateFee("WAT_US_01", "WAT_US", "FINAL", 1, "Y", "N");
 	}
 }
