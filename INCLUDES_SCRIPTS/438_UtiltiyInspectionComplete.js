@@ -1,4 +1,4 @@
-/*Event   WorkflowTaskUpdateAfter   
+	/*Event   WorkflowTaskUpdateAfter   
 Criteria   wf step "Utility Inspection" = "Completed" 
 Action email the Developer and LP. 
 created by swakil  
@@ -10,7 +10,7 @@ if ("Utility Inspection".equals(wfTask) && "Completed".equals(wfStatus))
 		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));  
 		var recURL = acaSite + getACAUrl();
 		var appTypeAlias = cap.getCapType().getAlias();
-		var emailTemplate = "WAT_WUP_FINAL ACCEPT COMPLETE"; //NEEDS TO BE UPDATED
+		var emailTemplate = "WAT_UTILITY_INSPECTIONS_COMPLETE";
 		var eParams = aa.util.newHashtable();
 		eParams.put("$$altid$$", capId.getCustomID());
 		eParams.put("$$todayDate$$", wfDate);
