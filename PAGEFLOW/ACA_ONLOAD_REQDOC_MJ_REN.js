@@ -11,7 +11,7 @@ try
    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
    eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
    eval(getScriptText("COMMON_ACA_PAGEFLOW_FUNCTIONS"));
-   var parent = getRenewalCapByParentCapIDForReview(capId);
+   var parent = getParentCapID4Renewal(capId);
    var tOwner = getAppSpecific("Type of Ownership", parent) || "";
 
    //remove all documents first
