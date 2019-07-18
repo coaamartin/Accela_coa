@@ -21,7 +21,7 @@ if( publicUser
  {  
 	activateTask("Completeness Check");
 	editTaskDueDate("Completeness Check",dateAdd(null, 0));
-	updateAppStatus("Submitted","");
 }
+updateAppStatus("Submitted","");
 logDebug ("script22 () end")
 
