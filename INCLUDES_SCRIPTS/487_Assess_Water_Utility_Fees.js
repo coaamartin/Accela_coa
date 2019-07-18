@@ -2,6 +2,7 @@ logDebug("487_Assess_Water_Utility_Fees");
 var tService = AInfo["Type of Service"];
 if (publicUser)
 {
+	removeAllFees(capId);
 	if ("Fire Line Repair".equals(tService))
 	{
 		updateFee("WAT_US_03", "WAT_US", "FINAL", 1, "Y", "N");
