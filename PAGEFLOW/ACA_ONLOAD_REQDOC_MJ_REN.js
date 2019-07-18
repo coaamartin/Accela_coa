@@ -8,11 +8,12 @@ try
    var SCRIPT_VERSION = 3.0
    var cap = aa.env.getValue("CapModel");
    var capId = cap.getCapID();   
+   var useAppSpecificGroupName = false;
    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
    eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
    eval(getScriptText("COMMON_ACA_PAGEFLOW_FUNCTIONS"));
    var parent = getParentCapID4Renewal(capId);
-   var tOwner = getAppSpecific("Type of Ownership", parent) || "";
+   var tOwner = getAppSpecific_local("Type of Ownership", parent) || "";
 
    //remove all documents first
    removeAllRequiredDocumentCapCondition();               
@@ -25,7 +26,6 @@ try
    addRequiredDocument("Local - Funding and Tax Documents");
    addRequiredDocument("Local - Security Plan");
    addRequiredDocument("Local - Odor Management Plan");
-
 	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner))
 	{
 		addRequiredDocument("Local - Bylaws");
@@ -34,6 +34,7 @@ try
 	{
 		addRequiredDocument("Local - Operating Agreement");
 	}   
+   aa.env.setValue("ErrorMessage", tOwner);
 }
 catch (err) 
 {
@@ -55,3 +56,40 @@ function getScriptText(vScriptName) {
       return "";
    }
 }
+
+function getAppSpecific_local(itemName)  // optional: itemCap
+{
+   var updated = false;
+   var i=0;
+   var itemCap = capId;
+   if (arguments.length == 2) itemCap = arguments[1]; // use cap ID specified in args
+      
+   if (useAppSpecificGroupName)
+   {
+      if (itemName.indexOf(".") < 0)
+         { logDebug("**WARNING: editAppSpecific requires group name prefix when useAppSpecificGroupName is true") ; return false }
+      
+      
+      var itemGroup = itemName.substr(0,itemName.indexOf("."));
+      var itemName = itemName.substr(itemName.indexOf(".")+1);
+   }
+   
+    var appSpecInfoResult = aa.appSpecificInfo.getByCapID(itemCap);
+   if (appSpecInfoResult.getSuccess())
+   {
+      var appspecObj = appSpecInfoResult.getOutput();
+      
+      if (itemName != "")
+      {
+         for (i in appspecObj)
+            if( appspecObj[i].getCheckboxDesc() == itemName && (!useAppSpecificGroupName || appspecObj[i].getCheckboxType() == itemGroup) )
+            {
+               return appspecObj[i].getChecklistComment();
+               break;
+            }
+      } // item name blank
+   } 
+   else
+      { logDebug( "**ERROR: getting app specific info for Cap : " + appSpecInfoResult.getErrorMessage()) }
+}
+
