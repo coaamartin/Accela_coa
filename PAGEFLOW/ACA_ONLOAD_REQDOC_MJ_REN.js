@@ -34,7 +34,6 @@ try
 	{
 		addRequiredDocument("Local - Operating Agreement");
 	}   
-   aa.env.setValue("ErrorMessage", tOwner);
 }
 catch (err) 
 {
