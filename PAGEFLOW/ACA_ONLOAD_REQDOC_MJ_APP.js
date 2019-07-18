@@ -16,9 +16,33 @@ try
 
    //remove all documents first
    removeAllRequiredDocumentCapCondition();
+               
+   addRequiredDocument("Local - Affirmation and Consent Form");
+   addRequiredDocument("Local - Applicant Request to Release Information Form");
+   addRequiredDocument("Local - Deed or Lease");
+   addRequiredDocument("Local - Certificate of Good Standing from the Sec. of State");
+   addRequiredDocument("Local - Diagram of Licensed Premises");
+   addRequiredDocument("Local - Employee Certifications");
+   addRequiredDocument("Local - Funding and Tax Documents");
+   addRequiredDocument("Local - Investigation Authorization and Release Form");
+   addRequiredDocument("Local - Floor Plan");
+   addRequiredDocument("Local - Odor Mitigation Plan");
+   addRequiredDocument("Local - Security Plan");
+   addRequiredDocument("Local - Site Plan");
+   addRequiredDocument("Local - State Associated Key License Application Form");
+   addRequiredDocument("Local - Written Consent from Landlord Allowing MJ Ops");
 
-   addRequiredDocument("General Application (DS-3032)");
-   addRequiredDocument("Building Construction Plans");
+   var tOwner = getAppSpecific("Type of Ownership");
+
+	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner))
+	{
+		addRequiredDocument("Local - Articles of Incorporation");
+		addRequiredDocument("Local - Bylaws");
+	}
+	else if ("Individual".equals(tOwner) || "Sole Proprietor".equals(tOwner))
+	{
+		addRequiredDocument("Local - Operating Agreement");
+	}   
 }
 catch (err) 
 {
