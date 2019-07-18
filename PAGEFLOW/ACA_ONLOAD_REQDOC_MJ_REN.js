@@ -11,8 +11,8 @@ try
    eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
    eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
    eval(getScriptText("COMMON_ACA_PAGEFLOW_FUNCTIONS"));
-   var applicantType = null;
-   var contactArray = cap.getContactsGroup().toArray();
+   var parent = getParentCapID4Renewal();
+   var tOwner = getAppSpecific("Type of Ownership", parent) || "";
 
    //remove all documents first
    removeAllRequiredDocumentCapCondition();               
@@ -25,9 +25,6 @@ try
    addRequiredDocument("Local - Funding and Tax Documents");
    addRequiredDocument("Local - Security Plan");
    addRequiredDocument("Local - Odor Management Plan");
-
-
-   var tOwner = getAppSpecific("Type of Ownership");
 
 	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner))
 	{
