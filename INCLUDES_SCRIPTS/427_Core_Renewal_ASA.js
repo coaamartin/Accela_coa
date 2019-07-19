@@ -7,9 +7,9 @@ var vGoodToRenew;
 var vOrgCapId;
 
 //Setup/Check renewal
-//vGoodToRenew = prepareRenewal();
-//if (parentCapId != null && vGoodToRenew) {
-if (parentCapId != null) {		
+vGoodToRenew = prepareRenewal();
+if (parentCapId != null && vGoodToRenew) {
+		
 	//Copy Parcels from license to renewal
 	copyParcels(parentCapId,capId);
 	
