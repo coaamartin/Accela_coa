@@ -15,7 +15,7 @@ editAppName(addressLine,capId);
 
 logDebug("---------------------> Setting record expiration info. ");	
 var vExpDate = new Date();
-var vNewExpDate = new Date(vExpDate.getFullYear() + 0, vExpDate.getMonth(), vExpDate.getDate());
+var vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
 logDebug("---------------------> vNewExpDate= " + vNewExpDate);	
 var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
 logDebug("---------------------> rB1ExpResult= " + rB1ExpResult);	
