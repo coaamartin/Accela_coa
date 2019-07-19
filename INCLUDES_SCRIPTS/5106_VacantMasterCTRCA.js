@@ -25,7 +25,7 @@ rB1ExpResult.setExpStatus("About to Expire");
 aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
 } catch (err) {
 	logDebug("---------------------> There was an error setting expiration dates for: 5106 CTRCA");
-	aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+	//aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 }
 logDebug("---------------------> At end of 5106 CTRCA");
-aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+//aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
