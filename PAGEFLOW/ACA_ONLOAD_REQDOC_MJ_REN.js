@@ -26,9 +26,10 @@ try
    addRequiredDocument("Local - Funding and Tax Documents");
    addRequiredDocument("Local - Security Plan");
    addRequiredDocument("Local - Odor Management Plan");
-	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner))
+	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner) || "Partnership".equals(tOwner))
 	{
-		addRequiredDocument("Local - Bylaws");
+      addRequiredDocument("Local - Articles of Incorporation");
+      addRequiredDocument("Local - Bylaws");
 	}
 	else if ("Individual".equals(tOwner) || "Sole Proprietor".equals(tOwner))
 	{

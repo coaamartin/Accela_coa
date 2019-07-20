@@ -34,7 +34,7 @@ try
 
    var tOwner = getAppSpecific("Type of Ownership");
 
-	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner))
+	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner) || "Partnership".equals(tOwner))
 	{
 		addRequiredDocument("Local - Articles of Incorporation");
 		addRequiredDocument("Local - Bylaws");
