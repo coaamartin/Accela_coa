@@ -5,5 +5,5 @@ if ("Waiting on Documents".equals(capStatus) && isTaskStatus("Plan Review","Resu
 } else if ("Waiting on Documents".equals(capStatus) && isTaskStatus("Application Submittal","Plans Required"))
 {
 	activateTask("Fee Processing");
-	updateAppStatus("In Review", "Set via script");
+	updateAppStatus("Submitted", "Set via script");
 }
