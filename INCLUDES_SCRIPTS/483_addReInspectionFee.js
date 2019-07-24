@@ -7,6 +7,7 @@ inspCount = inspectionStatusCheck(typeArray, statusArray);
 if(inspCount >=3){
 	var thisFeeAmt = 138.00;
 	addFee("WAT_IP_03","WAT_IP","FINAL",thisFeeAmt,"Y");
+    updateAppStatus("Payment Pending", "Updated via script");
 }
 
 function inspectionStatusCheck(typeArray, statusArray) {
