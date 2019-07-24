@@ -31,6 +31,9 @@ if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Pr
 	}
     
 	//END Script 83
+
+	//SWAKIL
+	include("490_Email_Tap_Invoice");
 }
 
 //COA Script - Suhail
@@ -39,3 +42,9 @@ include("5031_1_EmailWithFee");
 
 //COA Script - JMAIN 
 include("5033_WaterTapApplicationFee");
+
+//SWAKIL
+if ("Water Meter Set".equals(wfTask) && "Complete".equals(wfStatus))
+{
+	include("491_Email_Water_Meter_Pass");
+}
