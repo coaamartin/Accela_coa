@@ -44,7 +44,7 @@ include("5031_1_EmailWithFee");
 include("5033_WaterTapApplicationFee");
 
 //SWAKIL
-if ("Water Meter Set".equals(wfTask) && "Complete".equals(wfStatus))
+if ("Water Meter Set".equals(wfTask) && "Completed".equals(wfStatus))
 {
 	include("491_Email_Water_Meter_Pass");
 }
