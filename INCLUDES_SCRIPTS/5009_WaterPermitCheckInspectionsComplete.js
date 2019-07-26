@@ -16,7 +16,7 @@ var inspnComplete = inspectionComplete("Initial Acceptance");
 if(inspnsComplete && inspnComplete)
 {
 	closeTask("Utility Inspection", "Completed", "EMSE ID 9", "EMSE ID 9");
-	activateTask("Request Materials Testing", "EMSE ID 9", "EMSE ID 9");  
+	activateTask("Verify Materials Testing", "EMSE ID 9", "EMSE ID 9");  
 	sendEmailToApplicant();
 }
 

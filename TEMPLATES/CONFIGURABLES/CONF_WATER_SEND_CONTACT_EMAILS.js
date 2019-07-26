@@ -112,7 +112,7 @@
                 },
                 "criteria": {
                     "task": [
-                        "Verify Testing Received"
+                        "Verify Materials Testing"
                     ],
                     "status": [
                         "Incomplete"
