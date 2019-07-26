@@ -1,5 +1,5 @@
 var docs = getDocumentList();
-if ("Corporation".equals(AInfo["Type of Ownership"] || "LLC".equals(AInfo["Type of Ownership"]) || "Partnership".equals(AInfo["Type of Ownership"])))
+if ("Corporation".equals(AInfo["Type of Ownership"]) || "LLC".equals(AInfo["Type of Ownership"]) || "Partnership".equals(AInfo["Type of Ownership"]))
 {
 	var allGood = false;
 	var requiredDocs = new Array();
