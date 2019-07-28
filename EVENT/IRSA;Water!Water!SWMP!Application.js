@@ -8,3 +8,5 @@ Action  Schedule a Routine Inspection in child SWMP Permit record (SWMP Permit I
 to the same Inspector who did this status and set the record status to closed
 */
 include("5012_SWMPPermitScheduleRoutine");
+//SWAKIL Script ID 493
+include("493_Add_SWMP_Inspection_Fee");
