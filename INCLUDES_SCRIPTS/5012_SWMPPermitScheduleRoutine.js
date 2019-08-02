@@ -43,9 +43,7 @@ else if ("ECKO and Initial Inspection".equals(inspType) && "Failed".equals(inspR
     var failedStatusArray = ["Violation", "Needs", "Yes/Violation"];
     var newInspId = createPendingInspectionReturnId("WAT_SW_APP", "ECKO and Initial Inspection");
     copyGuideSheetItemsByGuideSheetStatus(inspId, newInspId, failedStatusArray);
-
 }
-
 function copyGuideSheetItemsByGuideSheetStatus(fromInspId, toInspId, statusArray)
 {
     try 

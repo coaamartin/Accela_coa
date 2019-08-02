@@ -70,5 +70,10 @@ if(wfTask == "Fee Processing" && wfStatus == "No Fees Required"){
 	}
 }
 
+if(wfTask == "Verify Materials Testing" && wfStatus == "Incomplete"){
+	deactivateTask("Verify Materials Testing");
+}
+
+
 //SWAKIL - Email
 include("438_UtiltiyInspectionComplete");

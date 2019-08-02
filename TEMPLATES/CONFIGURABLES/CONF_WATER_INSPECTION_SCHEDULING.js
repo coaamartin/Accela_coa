@@ -12,7 +12,7 @@
         },
         "criteria": {
           "task": [
-            "Verify Testing Approved"
+            "Verify Materials Testing"
           ],
           "status": [
             "Approved"
