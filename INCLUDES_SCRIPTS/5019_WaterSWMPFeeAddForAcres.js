@@ -42,9 +42,13 @@ if (acres > 5.0)
 var feecode = "WAT_SWMP_24";
 var feeschedule = "WAT_SWMP_APP";
 
+removeAllFees(capId);
+
 //asses the fee
 logDebug("Adding custom fee - WAT_SWMP_24 WAT_SWMP_APP $" + thefee);
-feeseqnum = addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+
+//feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
 
 //var feeseqnum = addCustomFee(feecode,feeschedule,"fee for SWMP application","FINAL",thefee,"0052042905");
 logDebug("FeeSeqNum is: " + feeseqnum);
