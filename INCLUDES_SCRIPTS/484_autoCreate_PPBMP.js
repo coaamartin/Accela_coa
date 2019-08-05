@@ -6,6 +6,8 @@ if ("Plans Coordination".equals(wfTask) && "Approved".equals(wfStatus))
 		var cusIDList = [];
 		for (var row in PONDTYPES)
 		{
+			if (!isBlank(PONDTYPES[row]["PPBMP ID"])) continue;
+
 			var appMessage = PONDTYPES[row]["Pond Type"] + " - " + PONDTYPES[row]["Pond Number"];
 			var child = createCap("Water/Water/PPBMP/NA", appMessage);
 			//update child status
