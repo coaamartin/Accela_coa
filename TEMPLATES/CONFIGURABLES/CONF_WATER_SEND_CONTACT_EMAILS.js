@@ -119,7 +119,7 @@
                     ]
                 },
                 "action": {
-                    "notificationTemplate": "TEST_FOR_SCRIPTS",
+                    "notificationTemplate": "WAT_UTL_MATERIAL_TEST_INCOMPLETE",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "ALL"
