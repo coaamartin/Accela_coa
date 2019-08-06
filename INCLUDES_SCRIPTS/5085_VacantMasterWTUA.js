@@ -333,10 +333,12 @@ if (wfTask == "Notice of Assessment" && wfStatus == "Record Reception") {
 	//activateTask("Assess to County ");
 	editTaskDueDate("Assess to County", dueDate);
 }
-//if (wfTask == "Notice of Assessment" && wfStatus == "Submitted") {
-//	logDebug("---------------------> Notice of Assessment - Submitted");	
-//	updateTask("Notice of Assessment","Submitted","Updated by script COA #5085","Updated by script COA #5085");
-//}
+
+if (wfTask == "Notice of Assessment" && wfStatus == "Submitted") {
+	logDebug("---------------------> Notice of Assessment - Submitted");	
+    newDatePlus1 = dateAdd(null,1);
+	editTaskDueDate("Notice of Assessment", newDatePlus1);	
+}
 
 if (wfTask == "Record Release of Assessment" && wfStatus == "Not Recorded") {
 	logDebug("---------------------> Record Release of Assessment - Not Recorded");	
