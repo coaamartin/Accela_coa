@@ -152,7 +152,10 @@ if (wfTask == "Send Registration" && wfStatus == "Registration Sent") {
 		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 		emailContacts("Property Manager", emailTemplate, eParams, null, null, "Y");
-	}	
+	}
+    newDatePlus30 = dateAdd(null,30);
+	//activateTask("Apply Delinquent Registration");
+	editTaskDueDate("Apply Delinquent Registration", newDatePlus30);	
 }
 
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
@@ -171,8 +174,17 @@ if (wfTask == "Foreclosure Sale Result" && wfStatus == "Withdrawn") {
 	//scheduleInspection("Check Ownership", 3,inspectorObj); //, inspector, null, newInspReqComments);	
 }
 
-if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
-	logDebug("---------------------> Foreclosure Sale Result - Non-Bank Owner");	
+//if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
+//	logDebug("---------------------> Foreclosure Sale Result - Non-Bank Owner");	
+//	closeAllTasks(capId, "Closed Via Script 5085");	
+//    updateAppStatus("Closed", "Closed Via Script 5085");
+//	cancelInspections();	
+//	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
+//	rB1ExpResult.setExpStatus("Inactive");			
+//}
+
+if (wfTask == "Foreclosure Sale Result" && wfStatus == "New Ownership") {
+	logDebug("---------------------> Foreclosure Sale Result - New Ownership");	
 	closeAllTasks(capId, "Closed Via Script 5085");	
     updateAppStatus("Closed", "Closed Via Script 5085");
 	cancelInspections();	
@@ -183,12 +195,12 @@ if (wfTask == "Foreclosure Sale Result" && wfStatus == "Non-Bank Owner") {
 if (wfTask == "Foreclosure Sale Result" && wfStatus == "Unregistered REO") {
 	logDebug("--------------------->Foreclosure Sale Result - Unregistered REO");	
 		if (!isTaskStatus("Send Registration","Registration Sent" )) {
-			//assign task to tburton.
-			assignTask("Send Registration","tburton");
+			//assign task to rtorres.
+			assignTask("Send Registration","rtorres");
 		} else {
-			//insert another one for tburton.
+			//insert another one for rtorres.
 			activateTask("Send Registration");			
-			assignTask("Send Registration","tburton");			
+			assignTask("Send Registration","rtorres");			
 		}
 		updateAppStatus("Recorded", "Script 5085");	
 }
