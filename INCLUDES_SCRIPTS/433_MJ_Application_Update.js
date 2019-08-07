@@ -15,18 +15,34 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Final CO Issued"){
 	    //save capId
 	    var tempCapId = capId;
 	    capId = wPermit;
-	    createPendingInspection("LIC_MJ_RST", "MJ AMED Inspections");
-	    createPendingInspection("LIC_MJ_RST", "MJ Building Inspections");
-	    createPendingInspection("LIC_MJ_RST", "MJ Code Enforcement Inspections");
-	    createPendingInspection("LIC_MJ_RST", "MJ Planning Inspections");
-	    createPendingInspection("LIC_MJ_RST", "MJ Security Inspections - Police");
+	    updatePendingToScheduledInspections(capId);
 	    closeTask("Certificate of Occupancy","Complete","Updated by script COA #11","Updated by script COA #11");
 	    //restore capId
 	    capId = tempCapId;
-	   
+		   
 	}
 	else
 	{
 	    logDebug("Problem locating child permit for record " + capId.getCustomID());
 	}
+}
+
+function updatePendingToScheduledInspections(capId) {
+    var insps = aa.inspection.getInspections(capId).getOutput();
+    for (var i in insps){
+        var thisInsp = insps[i];
+        var inspStatus = thisInsp.getInspectionStatus();
+        var inspectorObj = null;
+
+        if ("Pending".equals(inspStatus))
+        {
+            thisInsp.setInspectionStatus("Scheduled");
+            thisInsp.setScheduledDate(aa.date.parseDate(dateAdd(null, 0)));       
+            thisInsp.setInspector(inspectorObj);       
+            
+            aa.inspection.editInspection(thisInsp);
+
+            logDebug("Updating Status of Inspections")
+        }
+    }
 }

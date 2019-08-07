@@ -20,7 +20,9 @@ if (appMatch("Licenses/Marijuana/*/Application")) {
 }
 
 //check for failed MJ inspections
-failedMJInspectionAutomation(vCapType);	
+//SW Commented - Since the same function is getting
+// triggered via IRSA;Licenses!Marijuana!~!~.js
+//failedMJInspectionAutomation(vCapType);	
 
 //check for passed MJ inspections
 passedMJInspectionAutomation();

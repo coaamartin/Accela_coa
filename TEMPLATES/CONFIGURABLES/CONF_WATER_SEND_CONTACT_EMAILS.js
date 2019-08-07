@@ -112,14 +112,14 @@
                 },
                 "criteria": {
                     "task": [
-                        "Verify Testing Received"
+                        "Verify Materials Testing"
                     ],
                     "status": [
                         "Incomplete"
                     ]
                 },
                 "action": {
-                    "notificationTemplate": "TEST_FOR_SCRIPTS",
+                    "notificationTemplate": "WAT_UTL_MATERIAL_TEST_INCOMPLETE",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "ALL"
@@ -224,38 +224,6 @@
                 },
                 "action": {
                     "notificationTemplate": "LIR REQUIRE IRRIGATION PLAN 191",
-                    "notificationReport": "",
-                    "notifyContactTypes": [
-                        "Applicant"
-                    ],
-                    "url4ACA": "",
-                    "fromEmail": "noreply@auroraco.gov",
-                    "additionalEmailsTo": [
-
-                    ],
-                    "createFromParent": "",
-                    "reportingInfoStandards": ""
-                }
-            },
-            {
-                "preScript": "",
-                "postScript": "",
-                "metadata": {
-                    "description": "To validate record based on JSON rules",
-                    "operators": {
-
-                    }
-                },
-                "criteria": {
-                    "task": [
-                        "Fee Processing"
-                    ],
-                    "status": [
-                        "Invoiced"
-                    ]
-                },
-                "action": {
-                    "notificationTemplate": "WAT_IRRIGATION PLAN REVIEW INVOICED #193",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "Applicant"

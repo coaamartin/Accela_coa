@@ -11,6 +11,13 @@ Functional Area : Records
 
 Sample Call : checkSpecialInspections()
 /------------------------------------------------------------------------------------------------------*/
+//8-2-19 Keith Changed this
+//checkSpecialInspections();
 
-checkSpecialInspections();
+//to this
+
+if (wfTask == "Certificate of Occupancy"  && wfStatus == "Final CO Issued")
+    {
+	checkSpecialInspections();
+    }
 

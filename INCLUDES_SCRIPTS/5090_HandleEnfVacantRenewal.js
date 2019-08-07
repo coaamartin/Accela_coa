@@ -40,11 +40,11 @@ logDebug("5090 Review Application - Complete");
 	updateAppStatus("Renewed", "Updated by 5090_HandleEnfVacantRenewal.js", capId);
 	
 	//Set renewal to complete, used to prevent more than one renewal record for the same cycle
-	//renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
-	//if (renewalCapProject != null) {
-	//	renewalCapProject.setStatus("Renewed");
-	//	aa.cap.updateProject(renewalCapProject);
-	//}
+	renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
+	if (renewalCapProject != null) {
+		renewalCapProject.setStatus("Complete");
+		aa.cap.updateProject(renewalCapProject);
+	}
 	
 	// send the email
 	//script84_SendRenewalEmailWhenPermitIssuedComplete();
