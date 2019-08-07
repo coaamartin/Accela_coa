@@ -80,7 +80,7 @@ if (wfTask == "Foreclosure Information") {
 }
 if (wfTask == "Foreclosure Information" && wfStatus == "NED/REO Recorded") {
 	logDebug("---------------------> Foreclosure Information - NED/REO Recorded");	
-	if ((AInfo["Dwelling Units"] == "5+ MF")) {
+	if ((AInfo["Dwelling Units"] != "5+ MF")) {
 		//insert inspection and assign to inspOfficer
 	    if(codeDistrict && codeDistrict.length > 0){
 			var inspOfficer = assignOfficer(codeDistrict);
