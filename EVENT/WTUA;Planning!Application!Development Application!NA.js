@@ -188,9 +188,19 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
 
 // updated this version of script to check for specfic value for tsi field
 
-    if ("Civil Review.Is a Master Utility Plan Required" != "Yes"){
-		isDrainageReqTSI = false;
+// updated this version of script to check for specfic value for tsi field
+
+    var tsiFieldValue = null;
+    for (t in thisTSIArr) {
+        if (String(t).indexOf("Civil Review.Is a Master Utility Plan Required") != -1) {
+            tsiFieldValue = thisTSIArr[t];
+            break;
+        }
     }
+    if (tsiFieldValue == null || !tsiFieldValue.equalsIgnoreCase("yes")) {
+        return false;
+    }
+//
 //
 
     var appNamed = cap.getSpecialText() + "";
