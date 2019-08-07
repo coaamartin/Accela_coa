@@ -191,7 +191,7 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
     var tsiFieldValue = null;
     for (t in thisTSIArr) {
         if (String(t).indexOf(Civil Review.Is a Master Utility Plan Required) != -1) {
-            tsiFieldValue = thisTSIArray[t];
+            tsiFieldValue = thisTSIArr[t];
             break;
         }
     }
