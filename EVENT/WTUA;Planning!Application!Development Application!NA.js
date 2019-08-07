@@ -193,12 +193,12 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
     var tsiFieldValue = null;
     for (t in thisTSIArr) {
         if (String(t).indexOf("Civil Review.Is a Master Utility Plan Required") != -1) {
-            tsiFieldValue = thisTSIArr[t];
+            tsiFieldValue = thisTSIArr[t]; logDebug("tsiFieldValue = " + tsiFieldValue);
             break;
         }
     }
     if (tsiFieldValue == null || !tsiFieldValue.equalsIgnoreCase("yes")) {
-        return false;
+        isDrainageReqTSI = false;
     }
 //
 //
