@@ -173,3 +173,57 @@ if (wfTask == "Review Consolidation" && (wfStatus == "Review Complete" || wfStat
         { logDebug("Sent Notification"); }  
 }
 logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
+
+
+/* Script 419 created by SLS, edited by CP */
+logDebug("script419 WTUACreatePublicWorksDrainageRecord START."); 
+if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' || wfStatus == 'Resubmittal Requested' || wfStatus == 'Comments Not Received')) {
+
+// >>>>>>>>>>>> for now set the TSI value to true to create 
+// >>>>>>>>>>>> the record until City can decide on config change
+
+    var isDrainageReqTSI = true;
+    var thisTSIArr = [];
+    loadTaskSpecific(thisTSIArr);
+
+// updated this version of script to check for specfic value for tsi field
+
+    var tsiFieldValue = null;
+    for (t in thisTSIArr) {
+        if (String(t).indexOf(Civil Review.Is a Master Utility Plan Required) != -1) {
+            tsiFieldValue = thisTSIArray[t];
+            break;
+        }
+    }
+    if (tsiFieldValue == null || !tsiFieldValue.equalsIgnoreCase("yes")) {
+        return false;
+    }
+//
+
+    var appNamed = cap.getSpecialText() + "";
+    var alreadyDrainageChildWithSameName = false;
+    var childArr = getChildren("PublicWorks/Drainage/NA/NA",capId);
+    for (aChild in childArr) {
+        var aChildCap = aa.cap.getCap(childArr[aChild]).getOutput();
+        var childAppNameStr = aChildCap.getSpecialText();
+        if ( childAppNameStr == appNamed ) {
+            alreadyDrainageChildWithSameName = true;
+        }
+    }
+    if ((!alreadyDrainageChildWithSameName) && isDrainageReqTSI) {
+        var newChildrec = createChild('PublicWorks','Drainage','NA','NA',appNamed);
+        if (!newChildrec) { 
+            logDebug("script419: unable to create child record");
+        }
+        else {
+            logDebug("script419: Child Record Created="+newChildrec);
+        }
+    }
+    else {
+        logDebug("script419: Drainage TSI is false or already child created!");
+        logDebug("script419: alreadyDrainageChildWithSameName= "+alreadyDrainageChildWithSameName);
+        logDebug("script419: isDrainageReqTSI+ "+isDrainageReqTSI);             
+    }
+}
+logDebug("script419 WTUACreatePublicWorksDrainageRecord end.");
+/* END script 419 */
