@@ -192,8 +192,8 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
 // CP Edits
 	for (x in thisTSIArr) {
 		logDebug(x + " = " +thisTSIArr[x]);
+		logDebug("Drainage Study? = " + thisTSIArr["Civil Review.Is a Drainaage Study Required?"]);
 	}
-
 //
 
     var appNamed = cap.getSpecialText() + "";
