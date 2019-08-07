@@ -176,6 +176,7 @@ logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
 
 
 /* Script 419 created by SLS, edited by CP */
+if(matches(currentUserID,"CPROBASC") ^ showDebug = 3;)
 logDebug("script419 WTUACreatePublicWorksDrainageRecord START."); 
 if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' || wfStatus == 'Resubmittal Requested' || wfStatus == 'Comments Not Received')) {
 
@@ -185,6 +186,13 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
     var isDrainageReqTSI = true;
     var thisTSIArr = [];
     loadTaskSpecific(thisTSIArr);
+	
+// CP Edits
+	for (x in thisTSIArr) {
+		logDebug(x + " = " +thisTSIArr[x]);
+	}
+
+//
 
     var appNamed = cap.getSpecialText() + "";
     var alreadyDrainageChildWithSameName = false;
