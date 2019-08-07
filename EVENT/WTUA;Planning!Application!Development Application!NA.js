@@ -187,20 +187,11 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
     loadTaskSpecific(thisTSIArr);
 
 // updated this version of script to check for specfic value for tsi field
+	
+	if ({Is a Drainage Stury Required?}) != "Yes") {
+		isDrainageReqTSI = false; 
+	}
 
-// updated this version of script to check for specfic value for tsi field
-
-    var tsiFieldValue = null;
-    for (t in thisTSIArr) {
-        if (String(t).indexOf("Civil Review.Is a Drainage Study Required?") != -1) {
-            tsiFieldValue = thisTSIArr[t]; logDebug("tsiFieldValue = " + tsiFieldValue);
-            break;
-        }
-    }
-    if (tsiFieldValue == null || !tsiFieldValue.equalsIgnoreCase("yes")) {
-        isDrainageReqTSI = false;
-    }
-//
 //
 
     var appNamed = cap.getSpecialText() + "";
