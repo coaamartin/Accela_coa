@@ -192,7 +192,7 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
 
     var tsiFieldValue = null;
     for (t in thisTSIArr) {
-        if (String(t).indexOf("Civil Review.Is a Master Utility Plan Required") != -1) {
+        if (String(t).indexOf("Civil Review.Is Drainage Study Required?") != -1) {
             tsiFieldValue = thisTSIArr[t]; logDebug("tsiFieldValue = " + tsiFieldValue);
             break;
         }
