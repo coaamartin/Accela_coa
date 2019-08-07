@@ -188,7 +188,7 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
 
 // updated this version of script to check for specfic value for tsi field
 	
-	if (thisTSIArr["Is a Drainage Study Required?"]) != "Yes") {
+	if (thisTSIArr["Is a Drainage Study Required?"]) != "Yes" {
 		isDrainageReqTSI = false; 
 	}
 
