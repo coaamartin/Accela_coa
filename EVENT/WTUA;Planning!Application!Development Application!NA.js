@@ -186,6 +186,7 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
     var thisTSIArr = [];
     loadTaskSpecific(thisTSIArr);
 	var drainageReq = thisTSIArr["ADDITIONAL INFORMATION.Is a Drainage Study Required?"];
+	logDebug("Is a Drainage Study Required "+drainageReq);
 
 // updated this version of script to check for specfic value for tsi field
 	
