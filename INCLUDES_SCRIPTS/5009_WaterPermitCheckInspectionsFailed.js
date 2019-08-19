@@ -1,6 +1,6 @@
 if ("Failed".equals(inspResult)){
 	var contact = "Applicant";
-	var template = "PPBMP INSPECTION # 102";
+	var template = "WAT_UTILITY_PERMIT_FAILED_INSP";
 	var emailParams = aa.util.newHashtable();
 	addParameter(emailParams, "$$altID$$", cap.getCapModel().getAltID());
 	addParameter(emailParams, "$$recordAlias$$", cap.getCapModel().getCapType().getAlias());
