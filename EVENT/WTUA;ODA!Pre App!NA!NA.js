@@ -28,3 +28,8 @@ if(ifTracer(wfTask == "Pre App Meeting Request" && wfStatus == "Scheduled", 'wf:
     //Script 221
     activateTask("Pre Application Meeting");
 }
+
+f(ifTracer(wfTask == "Pre App Meeting Request" && wfStatus == "Email Sent to PM's", 'wf:Pre App Meeting PM notificatin')){
+    //Script 226
+    include("226_ODAPreAppPMEmail");
+}
