@@ -3,15 +3,19 @@ if ("Plans Coordination".equals(wfTask) && "Approved".equals(wfStatus))
 {
 	if ("No".equals(AInfo["Storm Water Permit Required"]) && PONDTYPES && PONDTYPES.length > 0)
 	{
+		var cusIDList = [];
 		for (var row in PONDTYPES)
 		{
-			var child = createCap("Water/Water/PPBMP/NA", "");
+			if (!isBlank(PONDTYPES[row]["PPBMP ID"])) continue;
+
+			var appMessage = PONDTYPES[row]["Pond Type"] + " - " + PONDTYPES[row]["Pond Number"];
+			var child = createCap("Water/Water/PPBMP/NA", appMessage);
 			//update child status
 			updateAppStatus("Inactive", "Created via script", child);
 			//relate
 			addChild(child.getCustomID() + "");
 			//update app name
-			editAppName(PONDTYPES[row]["Pond Type"] + " - " + PONDTYPES[row]["Pond Number"], child);
+			//editAppName(PONDTYPES[row]["Pond Type"] + " - " + PONDTYPES[row]["Pond Number"], child);
 			//copy APO
 			copyAddresses(capId, child);
 			copyParcels(capId, child);
@@ -23,7 +27,13 @@ if ("Plans Coordination".equals(wfTask) && "Approved".equals(wfStatus))
 			//update custom field of child
 			editAppSpecific("Pond Type", PONDTYPES[row]["Pond Type"], child);
 			//editAppSpecific("Asset Number", PONDTYPES[row]["Asset Number"], child);
+			PONDTYPES[row]["PPBMP ID"] = child.getCustomID()+"";
+
 		}
+		removeASITable("POND TYPES");
+    	addASITable("POND TYPES", PONDTYPES);   
+
+
 		var emailTemplate = "WAT_PPBMP_NEW_INACTIVE",
 		contactTypes = 'Applicant',
 		emailparams = aa.util.newHashtable();

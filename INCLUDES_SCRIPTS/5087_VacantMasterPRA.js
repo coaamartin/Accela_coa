@@ -44,6 +44,10 @@ logDebug("---------------------> At start of 5087 PRA");
             var aFee = feeArray[j];
             if(feeExists(aFee)) removeFee(aFee, "FINAL");
         }	
+	closeTask("Foreclosure Sale Result","Closed","Updated by script COA #5087");		
+	closeTask("Apply Delinquent Registration","Updated by script COA #5087");	
+	closeTask("Property Beneficiary Billed","Closed","Updated by script COA #5087");	
+	
 	/*
 	var vDelFee;
 	var ff = 0;

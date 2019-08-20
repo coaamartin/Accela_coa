@@ -18,9 +18,11 @@ Notes:
 
 // written by SWAKIL
 include("5009_WaterPermitCheckInspectionsComplete");
-
+include("5009_WaterPermitCheckInspectionsFailed");
 //Based on report fill report parameters here
 var rptParams = aa.util.newHashtable();
 rptParams.put("altID", cap.getCapModel().getAltID());
 
 checkInspectionsResultAndSendEmail("PPBMP INSPECTION # 102", "REPORT_NAME", rptParams, "Date of next Inspection");
+
+

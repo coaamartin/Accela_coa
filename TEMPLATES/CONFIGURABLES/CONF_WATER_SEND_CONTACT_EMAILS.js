@@ -96,6 +96,38 @@
                     "createFromParent": "",
                     "reportingInfoStandards": ""
                 }
+            },
+            {
+                "preScript": "",
+                "postScript": "",
+                "metadata": {
+                    "description": "Script #241",
+                    "operators": {
+
+                    }
+                },
+                "criteria": {
+                    "task": [
+                        "Plans Coordination"
+                    ],
+                    "status": [
+                        "Approved"
+                    ]
+                },
+                "action": {
+                    "notificationTemplate": "MUS APPROVAL EMAIL",
+                    "notificationReport": "",
+                    "notifyContactTypes": [
+                        "Applicant"
+                    ],
+                    "url4ACA": "",
+                    "fromEmail": "noreply@auroraco.gov",
+                    "additionalEmailsTo": [
+
+                    ],
+                    "createFromParent": "",
+                    "reportingInfoStandards": ""
+                }
             }
         ]
     },
@@ -119,7 +151,7 @@
                     ]
                 },
                 "action": {
-                    "notificationTemplate": "TEST_FOR_SCRIPTS",
+                    "notificationTemplate": "WAT_UTL_MATERIAL_TEST_INCOMPLETE",
                     "notificationReport": "",
                     "notifyContactTypes": [
                         "ALL"
