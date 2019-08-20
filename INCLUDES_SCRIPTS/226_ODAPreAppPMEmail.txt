@@ -1,6 +1,6 @@
-//function 226_ODAPreAppPMEmail() {
+
     logDebug("226_ODAPreAppPMEmail started.");
-    try{        
+    
         var iName = iNameResult.getOutput();
         var email=iName.getEmail();
         var emlTo=email;*/
@@ -17,11 +17,6 @@
         var sendResult = sendNotification("noreply@auroragov.org",resParEmail,ccEmails,emailTemplate,emailParams,reportFile,capID4Email);
         if (!sendResult) { logDebug("script226: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
         else { logDebug("script226: Sent email notification that to ODA PM")}
-      }
-    catch(err){
-        showMessage = true;
-        comment("Error on custom function 226_ODAPreAppPMEmail(). Please contact administrator. Err: " + err);
-        logDebug("Error on custom function 226_ODAPreAppPMEmail(). Please contact administrator. Err: " + err);
-    }
+       
     logDebug("226_ODAPreAppPMEmail ended.");
-//};//END 226_ODAPreAppPMEmail
+
