@@ -56,9 +56,9 @@ function inspectionComplete(type)
 		{
 			for (xx in n)
 			{
-				inspType = n[xx].getInspectionType();
-				inspStatus = n[xx].getInspectionStatus().toUpperCase();
-				if ( inspType.equals(type) && inspStatus.equals("COMPLETE"))  
+				var inspT = n[xx].getInspectionType();
+				var inspS = n[xx].getInspectionStatus().toUpperCase();
+				if ( inspT.equals(type) && inspS.equals("COMPLETE"))  
 				{
 				  logDebug("Initial Acceptance returns true...");
 				  return true;
