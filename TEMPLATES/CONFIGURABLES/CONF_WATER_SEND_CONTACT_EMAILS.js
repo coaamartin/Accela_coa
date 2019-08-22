@@ -196,39 +196,7 @@
                     "createFromParent": "",
                     "reportingInfoStandards": ""
                 }
-            },
-            {
-                "preScript": "",
-                "postScript": "",
-                "metadata": {
-                    "description": "To validate record based on JSON rules",
-                    "operators": {
-
-                    }
-                },
-                "criteria": {
-                    "task": [
-                        "Verify Materials Testing"
-                    ],
-                    "status": [
-                        "Approved"
-                    ]
-                },
-                "action": {
-                    "notificationTemplate": "JD_TEST_TEMPLATE",
-                    "notificationReport": "",
-                    "notifyContactTypes": [
-                        "Applicant"
-                    ],
-                    "url4ACA": "",
-                    "fromEmail": "noreply@auroraco.gov",
-                    "additionalEmailsTo": [
-
-                    ],
-                    "createFromParent": "",
-                    "reportingInfoStandards": ""
-                }
-            }            
+            }
         ]
     },
     "Water/Water/Lawn Irrigation/Permit": {
