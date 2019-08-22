@@ -77,3 +77,6 @@ if(wfTask == "Verify Materials Testing" && wfStatus == "Incomplete"){
 
 //SWAKIL - Email
 include("438_UtiltiyInspectionComplete");
+
+//SWAKIL - Email when VMT is Approved
+include("494_EmailWaterUtilityPermitVMT");
