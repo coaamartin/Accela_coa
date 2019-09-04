@@ -50,8 +50,25 @@ Functional Area : Workflow , Records
 */
 
 createRecordAndCopyInfo([ "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA", "Planning/Application/Site Plan/Major",
-        "Planning/Application/Site Plan/Minor","Planning/Application/Development Application/NA" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Traffic Impact Study Required?",
+        "Planning/Application/Site Plan/Minor","Planning/Application/Development Application/NA" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Traffic Impact Letter required?",
         "PublicWorks/Traffic/Traffic Impact/NA");
+		
+createRecordAndCopyInfo([ "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA", "Planning/Application/Site Plan/Major",
+        "Planning/Application/Site Plan/Minor","Planning/Application/Development Application/NA" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Traffic Impact Study (Medium) required?",
+        "PublicWorks/Traffic/Traffic Impact/NA");
+		
+createRecordAndCopyInfo([ "Planning/Application/Master Plan/NA", "Planning/Application/Preliminary Plat/NA", "Planning/Application/Site Plan/Major",
+        "Planning/Application/Site Plan/Minor","Planning/Application/Development Application/NA" ], "Traffic Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Traffic Impact Study (Regional) required?",
+        "PublicWorks/Traffic/Traffic Impact/NA");
+		
+createRecordAndCopyInfo(["Planning/Application/Development Application/NA" ], "Civil Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Preliminary Drainage Letter required?",
+        "PublicWorks/Drainage/NA/NA");
+		
+createRecordAndCopyInfo(["Planning/Application/Development Application/NA" ], "Civil Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Preliminary Drainage Report required?",
+        "PublicWorks/Drainage/NA/NA");
+		
+createRecordAndCopyInfo(["Planning/Application/Development Application/NA" ], "Civil Review", [ "Comments Not Received", "Resubmittal Requested", "Note" ], "Is a Master Drainage Report required?",
+        "PublicWorks/Drainage/NA/NA");
  
 
 /*

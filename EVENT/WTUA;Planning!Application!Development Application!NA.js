@@ -176,7 +176,7 @@ logDebug("END of script277_WTUA_Assign Case Manager to Hearing Scheduled.");
 
 
 /* Script 419 created by SLS, edited by CP */
-if(matches(currentUserID,"CPROBASC")) {
+/*if(matches(currentUserID,"CPROBASC")) {
 	showDebug = 3;
 }
 logDebug("script419 WTUACreatePublicWorksDrainageRecord START."); 
@@ -222,4 +222,7 @@ if (wfTask == 'Civil Review' && ( wfStatus == 'Note' || wfStatus == 'Complete' |
     }
 }
 logDebug("script419 WTUACreatePublicWorksDrainageRecord end.");
+*/
 /* END script 419 */
+
+
