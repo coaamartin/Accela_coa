@@ -54,20 +54,20 @@ if (appMatch(appType[i])) {
                 }
 				
 				//If Application Type is Traffic Impact, populate "Development Name" ASI field
-				if (appMatch("PublicWorks/Traffic/Traffic Impact/NA",newId) {
+				if (appMatch("PublicWorks/Traffic/Traffic Impact/NA",newId)) {
 				    editAppSpecific("Development Name", appName,newId);
 				}
 				//If Application Type is Drainage, populate "Review Type" ASI field
-				if (appMatch("PublicWorks/Drainage/NA/NA",newId) {
+				if (appMatch("PublicWorks/Drainage/NA/NA",newId)) {
 					var revType = null;
 					if (tsiName == "Is a Preliminary Drainage Letter required?"){
-						var revType = "Preliminary Drainage Letter"
+						var revType = "Preliminary Drainage Letter";
 					}
 					if (tsiName == "Is a Preliminary Drainage Report required?"){
-						var revType = "Preliminary Drainage Report"
+						var revType = "Preliminary Drainage Report";
 					}
 					if (tsiName == "Is a Master Drainage Report required?"){
-						var revType = "Master Drainage Report"
+						var revType = "Master Drainage Report";
 					}
 				
 					if (revType != null) {
