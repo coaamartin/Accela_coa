@@ -27,10 +27,14 @@ for (i in inspectionTypesAry) {
 	vInspType = inspectionTypesAry[i];
 	
 	//assign inspector based on inspection type
-	if (vInspType != null && (vInspType == "MJ AMED Inspections" || vInspType == "MJ Security Inspections - Police")) {
+	if (vInspType != null && (vInspType == "MJ AMED Inspections")) {
 		vInspector = "DALLEN";
 	} else if (vInspType != null && (vInspType == "MJ Planning Inspections")) {
 		vInspector = "KKREIMEY";
+	} else if (vInspType != null && (vInspType == "MJ Code Enforcement Inspections")) {
+		vInspector = "JJKING";
+	} else if (vInspType != null && (vInspType == "MJ Security Inspections - Police")) {
+		vInspector = "STONE";
 	} else {
 		vInspector = "SLCLARK";
 	}
