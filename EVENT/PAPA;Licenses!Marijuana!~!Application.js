@@ -1,6 +1,10 @@
 //PAPA PaymentAPplyAfter
 //sendEmailReceipt_MJApplication_PAPA();
-aa.print("invoiceSeqArr " + invoiceSeqArr[0].getClass());
-aa.print("feeSeqArr " + feeSeqArr[0].getClass());
-aa.print("appliedAmountArr " + appliedAmountArr[0].getClass());
-aa.print("invoiceSeqArr " + feeSeqNbrArr[0].getClass());
+for (var i in invoiceSeqArr)
+	aa.print("invoiceSeqArr " + invoiceSeqArr[i]);
+for (var f in feeSeqArr)
+	aa.print("feeSeqArr " + feeSeqArr[f]);
+for (var a in appliedAmountArr)
+	aa.print("appliedAmountArr " + appliedAmountArr[a]);
+for (var ff in feeSeqNbrArr)
+	aa.print("feeSeqNbrArr " + feeSeqNbrArr[ff]);
