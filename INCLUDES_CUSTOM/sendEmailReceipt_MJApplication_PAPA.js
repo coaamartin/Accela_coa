@@ -67,7 +67,7 @@ function sendEmailReceipt_MJApplication_PAPA(){
 		var appName = cap.getSpecialText();
 		
 		addParameter(eParams, "$$date$$", sysDateMMDDYYYY);
-		addParameter(eParams, "$$amountPaid$$", PaymentTotalPaidAmount);
+		addParameter(eParams, "$$amountPaid$$", "");
 		addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
 		addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
