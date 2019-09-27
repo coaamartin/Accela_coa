@@ -43,21 +43,19 @@ if (publicUser)
 		var documentModel = null;
 		var conditionNumber = 0;
 		logDebug("documentModels.length = " + documentModels.length);
-
-		if(conditionNumber != null && conditionNumber != 0)
+		for(i = 0; i<documentModels.length;i++)
 		{
-			for(i = 0; i<documentModels.length;i++)
+			documentModel = documentModels[i];
+			conditionNumber = documentModel.getConditionNumber();
+			logDebug(" i = " + i);
+			logDebug("Condition Number = " + conditionNumber);
+			if(conditionNumber != null && conditionNumber != 0)
 			{
-				documentModel = documentModels[i];
-				conditionNumber = documentModel.getConditionNumber();
-				logDebug(" i = " + i);
-				logDebug("Condition Number = " + conditionNumber);				
 				var capConditions = getCAPConditions("Required Document");
 				for (var c in capConditions)
 				{
-
 					var capCondition = capConditions[c].object;
-					if (!capCondition.getReferenceConditionNumber() == conditionNumber)
+					if (capCondition.getReferenceConditionNumber() != conditionNumber)
 						continue;
 					if (capCondition == null) { logDebug("capCondition is null"); continue; }
 					
@@ -81,7 +79,6 @@ if (publicUser)
 					{
 						logDebug("Update document model failed - " + documentModel.getDocName());
 					}
-					break;
 				}
 			}
 		}
