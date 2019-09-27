@@ -62,7 +62,7 @@ if (publicUser)
 					if (capType)
 						docGroup = capType.getDocCode();
 					documentModel.setDocCategory(conditionName);
-					//documentModel.setDocGroup(docGroup);
+					documentModel.setDocGroup(docGroup);
 					
 					//documentModel.setDocDepartment('SANDIEGO/DSD/NA/NA/NA/NA/SUPIT');
 					logDebug("Condition Name - " + conditionName);
