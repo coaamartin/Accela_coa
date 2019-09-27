@@ -34,5 +34,58 @@ function doConfigurableScriptActions(){
 		}
 	}
 }
-
-
+// for conditional document
+if (publicUser)
+{
+	try
+	{	
+		var documentModels = documentModelArray.toArray();
+		var documentModel = null;
+		var conditionNumber = 0;
+		logDebug("documentModels.length = " + documentModels.length);
+		for(i = 0; i<documentModels.length;i++)
+		{
+			documentModel = documentModels[i];
+			conditionNumber = documentModel.getConditionNumber();
+			logDebug(" i = " + i);
+			logDebug("Condition Number = " + conditionNumber);
+			if(conditionNumber != null && conditionNumber != 0)
+			{
+				var capConditionResult = aa.capCondition.getCapCondition(capId, conditionNumber);
+				if(capConditionResult.getSuccess())
+				{
+					var capCondition = capConditionResult.getOutput();
+					var conditionGroup = capCondition.getConditionGroup();
+					var conditionName = capCondition.getConditionDescription();
+					var docGroup = "";
+					var capType = aa.cap.getCapTypeModelByCapID(capId).getOutput();				
+					if (capType)
+						docGroup = capType.getDocCode();
+					documentModel.setDocCategory(conditionName);
+					//documentModel.setDocGroup(docGroup);
+					
+					//documentModel.setDocDepartment('SANDIEGO/DSD/NA/NA/NA/NA/SUPIT');
+					logDebug("Condition Name - " + conditionName);
+					logDebug("Condition Group - " + conditionGroup);
+					var updateDocumentResult = aa.document.updateDocument(documentModel);
+					if(updateDocumentResult.getSuccess())
+					{
+						logDebug("Update document model successfully - " + documentModel.getDocName());
+					}
+					else
+					{
+						logDebug("Update document model failed - " + documentModel.getDocName());
+					}
+				}
+				else
+				{
+					logDebug("No condition number - " + documentModel.getDocName());
+				}
+			}
+		}
+	}
+	catch(e)
+	{
+		logDebug("PROBLEM in DUA:DSD/*/*/*: " + e.message);
+	}
+}
