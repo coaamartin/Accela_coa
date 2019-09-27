@@ -43,18 +43,24 @@ if (publicUser)
 		var documentModel = null;
 		var conditionNumber = 0;
 		logDebug("documentModels.length = " + documentModels.length);
-		for(i = 0; i<documentModels.length;i++)
+
+		if(conditionNumber != null && conditionNumber != 0)
 		{
-			documentModel = documentModels[i];
-			conditionNumber = documentModel.getConditionNumber();
-			logDebug(" i = " + i);
-			logDebug("Condition Number = " + conditionNumber);
-			if(conditionNumber != null && conditionNumber != 0)
+			for(i = 0; i<documentModels.length;i++)
 			{
-				var capConditionResult = aa.capCondition.getCapCondition(capId, conditionNumber);
-				if(capConditionResult.getSuccess())
+				documentModel = documentModels[i];
+				conditionNumber = documentModel.getConditionNumber();
+				logDebug(" i = " + i);
+				logDebug("Condition Number = " + conditionNumber);				
+				var capConditions = getCAPConditions("Required Document");
+				for (var c in capConditions)
 				{
-					var capCondition = capConditionResult.getOutput();
+
+					var capCondition = capConditions[c].object;
+					if (!capCondition.getReferenceConditionNumber() == conditionNumber)
+						continue;
+					if (capCondition == null) { logDebug("capCondition is null"); continue; }
+					
 					var conditionGroup = capCondition.getConditionGroup();
 					var conditionName = capCondition.getConditionDescription();
 					var docGroup = "";
@@ -64,7 +70,6 @@ if (publicUser)
 					documentModel.setDocCategory(conditionName);
 					documentModel.setDocGroup(docGroup);
 					
-					//documentModel.setDocDepartment('SANDIEGO/DSD/NA/NA/NA/NA/SUPIT');
 					logDebug("Condition Name - " + conditionName);
 					logDebug("Condition Group - " + conditionGroup);
 					var updateDocumentResult = aa.document.updateDocument(documentModel);
@@ -76,16 +81,16 @@ if (publicUser)
 					{
 						logDebug("Update document model failed - " + documentModel.getDocName());
 					}
-				}
-				else
-				{
-					logDebug("No condition number - " + documentModel.getDocName());
+					break;
 				}
 			}
 		}
 	}
 	catch(e)
 	{
-		logDebug("PROBLEM in DUA:DSD/*/*/*: " + e.message);
+		logDebug("PROBLEM in DUA:*/*/*/*: " + e.message + " on line: " + e.lineNumber + ", stack: " + e.stack);		
+	}
+	finally
+	{
 	}
 }
