@@ -31,6 +31,36 @@ try
    addRequiredDocument("Local - Site Plan");
    addRequiredDocument("Local - State Associated Key License Application Form");
    addRequiredDocument("Local - Written Consent from Landlord Allowing MJ Ops");
+      
+
+   if (appMatch("Licenses/Marijuana/Retail Cultivation/Application"))
+   {
+      addRequiredDocument("Local - Mold Prevention Methods");
+      addRequiredDocument("Local - Standard Operating Procedures");
+      addRequiredDocument("Local - Copies of CO Key Badges for each owner");      
+   }
+   else if (appMatch("Licenses/Marijuana/Retail Transporter/Application"))
+   {
+      addRequiredDocument("Local - Standard Operating Procedures");
+      addRequiredDocument("Local - Copies of CO Key Badges for each owner");
+   }
+   else if (appMatch("Licenses/Marijuana/Testing Facility/Application"))
+   {
+      addRequiredDocument("Local - Standard Operating Procedures");
+      addRequiredDocument("Local - Copies of CO Key Badges for each owner");
+   }
+   else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application"))
+   {
+      addRequiredDocument("Local - Mold Prevention Methods");
+      addRequiredDocument("Local - Standard Operating Procedures");
+      addRequiredDocument("Local - Copies of CO Key Badges for each owner");
+   }
+   else if (appMatch("Licenses/Marijuana/Retail Store/Application"))
+   {
+      addRequiredDocument("Local - Copies of CO Key Badges for each owner");
+      addRequiredDocument("Local - Proof of $400,000 in Liquid Assets");
+      addRequiredDocument("Local - Statement Regarding Underage Entrance");
+   }
 
    var tOwner = getAppSpecific("Type of Ownership");
 
