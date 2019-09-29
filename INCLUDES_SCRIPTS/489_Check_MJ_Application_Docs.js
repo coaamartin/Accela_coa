@@ -1,5 +1,5 @@
 var docs = getDocumentList();
-if ("Corporation".equals(AInfo["Type of Ownership"]) || "LLC".equals(AInfo["Type of Ownership"]) || "Partnership".equals(AInfo["Type of Ownership"]))
+if ("Corporation".equals(AInfo["Type of Ownership"]) || "LLC".equals(AInfo["Type of Ownership"]))
 {
 	var allGood = false;
 	var requiredDocs = new Array();
@@ -14,7 +14,7 @@ if ("Corporation".equals(AInfo["Type of Ownership"]) || "LLC".equals(AInfo["Type
 		comment("Document types Local - Articles of Incorporation and Local - Bylaws are required for this Type of Ownership");
 	}
 }
-else if ("Individual".equals(AInfo["Type of Ownership"]) || "Sole Proprietor".equals(AInfo["Type of Ownership"]))
+else if ("Individual".equals(AInfo["Type of Ownership"]) || "Sole Proprietor".equals(AInfo["Type of Ownership"]) || "Partnership".equals(AInfo["Type of Ownership"]))
 {
 	var allGood = false;
 	for (var d in docs)
