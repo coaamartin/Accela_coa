@@ -64,12 +64,12 @@ try
 
    var tOwner = getAppSpecific("Type of Ownership");
 
-	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner) || "Partnership".equals(tOwner))
+	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner))
 	{
 		addRequiredDocument("Local - Articles of Incorporation");
 		addRequiredDocument("Local - Bylaws");
 	}
-	else if ("Individual".equals(tOwner) || "Sole Proprietor".equals(tOwner))
+	else if ("Individual".equals(tOwner) || "Sole Proprietor".equals(tOwner) || "Partnership".equals(tOwner))
 	{
 		addRequiredDocument("Local - Operating Agreement");
 	}   
