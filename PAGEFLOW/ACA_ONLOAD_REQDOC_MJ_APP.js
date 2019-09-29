@@ -33,29 +33,29 @@ try
    addRequiredDocument("Local - Written Consent from Landlord Allowing MJ Ops");
       
 
-   if (appMatch("Licenses/Marijuana/Retail Cultivation/Application"))
+   if (appMatch("Licenses/Marijuana/Retail Cultivation/Application", capId))
    {
       addRequiredDocument("Local - Mold Prevention Methods");
       addRequiredDocument("Local - Standard Operating Procedures");
       addRequiredDocument("Local - Copies of CO Key Badges for each owner");      
    }
-   else if (appMatch("Licenses/Marijuana/Retail Transporter/Application"))
+   else if (appMatch("Licenses/Marijuana/Retail Transporter/Application", capId))
    {
       addRequiredDocument("Local - Standard Operating Procedures");
       addRequiredDocument("Local - Copies of CO Key Badges for each owner");
    }
-   else if (appMatch("Licenses/Marijuana/Testing Facility/Application"))
+   else if (appMatch("Licenses/Marijuana/Testing Facility/Application", capId))
    {
       addRequiredDocument("Local - Standard Operating Procedures");
       addRequiredDocument("Local - Copies of CO Key Badges for each owner");
    }
-   else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application"))
+   else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application", capId))
    {
       addRequiredDocument("Local - Mold Prevention Methods");
       addRequiredDocument("Local - Standard Operating Procedures");
       addRequiredDocument("Local - Copies of CO Key Badges for each owner");
    }
-   else if (appMatch("Licenses/Marijuana/Retail Store/Application"))
+   else if (appMatch("Licenses/Marijuana/Retail Store/Application", capId))
    {
       addRequiredDocument("Local - Copies of CO Key Badges for each owner");
       addRequiredDocument("Local - Proof of $400,000 in Liquid Assets");
