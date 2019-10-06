@@ -22,7 +22,6 @@ try
    addRequiredDocument("Local - Deed or Lease");
    addRequiredDocument("Local - Certificate of Good Standing from the Sec. of State");
    addRequiredDocument("Local - Diagram of Licensed Premises");
-   addRequiredDocument("Local - Employee Certifications");
    addRequiredDocument("Local - Funding and Tax Documents");
    addRequiredDocument("Local - Investigation Authorization and Release Form");
    addRequiredDocument("Local - Floor Plan");
