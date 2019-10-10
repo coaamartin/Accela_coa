@@ -20,7 +20,7 @@ try
    addRequiredDocument("Local - Affirmation and Consent Form");
    addRequiredDocument("Local - Applicant Request to Release Information Form");
    addRequiredDocument("Local - Deed or Lease");
-   addRequiredDocument("Local - Certificate of Good Standing from the Sec. of State");
+   addRequiredDocument("Local - Certifwicate of Good Standing from the Sec. of State");
    addRequiredDocument("Local - Diagram of Licensed Premises");
    addRequiredDocument("Local - Funding and Tax Documents");
    addRequiredDocument("Local - Investigation Authorization and Release Form");
@@ -28,37 +28,26 @@ try
    addRequiredDocument("Local - Odor Mitigation Plan");
    addRequiredDocument("Local - Security Plan");
    addRequiredDocument("Local - Site Plan");
-   addRequiredDocument("Local - State Associated Key License Application Form");
    addRequiredDocument("Local - Written Consent from Landlord Allowing MJ Ops");
-      
+   addRequiredDocument("Local - Copies of CO Badges for each owner");
 
-   if (appMatch("Licenses/Marijuana/Retail Cultivation/Application", capId))
+   if (!appMatch("Licenses/Marijuana/Retail Store/Application", capId))
+   {
+      addRequiredDocument("Local - State Associated Key License Application Form");
+      addRequiredDocument("Local - Miscellaneous");
+   }
+
+   if (appMatch("Licenses/Marijuana/Retail Cultivation/Application", capId)|| appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application", capId))
    {
       addRequiredDocument("Local - Mold Prevention Methods");
       addRequiredDocument("Local - Standard Operating Procedures");
-      addRequiredDocument("Local - Copies of CO Key Badges for each owner");      
-   }
-   else if (appMatch("Licenses/Marijuana/Retail Transporter/Application", capId))
-   {
-      addRequiredDocument("Local - Standard Operating Procedures");
-      addRequiredDocument("Local - Copies of CO Key Badges for each owner");
-   }
-   else if (appMatch("Licenses/Marijuana/Testing Facility/Application", capId))
-   {
-      addRequiredDocument("Local - Standard Operating Procedures");
-      addRequiredDocument("Local - Copies of CO Key Badges for each owner");
-   }
-   else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application", capId))
-   {
-      addRequiredDocument("Local - Mold Prevention Methods");
-      addRequiredDocument("Local - Standard Operating Procedures");
-      addRequiredDocument("Local - Copies of CO Key Badges for each owner");
    }
    else if (appMatch("Licenses/Marijuana/Retail Store/Application", capId))
    {
-      addRequiredDocument("Local - Copies of CO Key Badges for each owner");
       addRequiredDocument("Local - Proof of $400,000 in Liquid Assets");
-      addRequiredDocument("Local - Statement Regarding Underage Entrance");
+      addRequiredDocument("Local - Business Plan");
+      addRequiredDocument("Local - Proof of Experience");
+      addRequiredDocument("Local - Operating Plan");
    }
 
    var tOwner = getAppSpecific("Type of Ownership");
