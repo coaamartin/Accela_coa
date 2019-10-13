@@ -19,7 +19,7 @@ if (!inspectionExist.getSuccess()) {
 }   
 
 if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection")
-	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail") )
+	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served"))
 {
 	logDebug("Script 15 - criteria met");
 	
