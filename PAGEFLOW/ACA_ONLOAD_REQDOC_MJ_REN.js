@@ -25,13 +25,14 @@ try
    addRequiredDocument("Local - Floor Plan");
    addRequiredDocument("Local - Funding and Tax Documents");
    addRequiredDocument("Local - Security Plan");
-   addRequiredDocument("Local - Odor Management Plan");
-	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner) || "Partnership".equals(tOwner))
+   addRequiredDocument("Local - Odor Mitigation Plan");
+   addRequiredDocument("State - Business License Renewal Application");
+	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner))
 	{
       addRequiredDocument("Local - Articles of Incorporation");
       addRequiredDocument("Local - Bylaws");
 	}
-	else if ("Individual".equals(tOwner) || "Sole Proprietor".equals(tOwner))
+	else if ("Individual".equals(tOwner) || "Sole Proprietor".equals(tOwner) || "Partnership".equals(tOwner))
 	{
 		addRequiredDocument("Local - Operating Agreement");
 	}   

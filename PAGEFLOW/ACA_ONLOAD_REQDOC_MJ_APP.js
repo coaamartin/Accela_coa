@@ -34,7 +34,6 @@ try
    if (!appMatch("Licenses/Marijuana/Retail Store/Application", capId))
    {
       addRequiredDocument("Local - State Associated Key License Application Form");
-      addRequiredDocument("Local - Miscellaneous");
    }
 
    if (appMatch("Licenses/Marijuana/Retail Cultivation/Application", capId)|| appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application", capId))
