@@ -1,4 +1,3 @@
-var Adrian = "Adrian"
 var ENVIRON = "DEV";
 var EMAILREPLIES = "noreply@auroragov.org";
 var SENDEMAILS = true;
