@@ -28,4 +28,4 @@ function script204_ASAActivateActivateWaterMeterTask() {
 		logDebug("script204: Error on custom function script204_ASAActivateActivateWaterMeterTask(). Please contact administrator. Err: " + err);
 	}
 	logDebug("script204_ASAActivateActivateWaterMeterTask() ended.");
-};//END script204_ASAActivateActivateWaterMeterTask();
+}//END script204_ASAActivateActivateWaterMeterTask();
