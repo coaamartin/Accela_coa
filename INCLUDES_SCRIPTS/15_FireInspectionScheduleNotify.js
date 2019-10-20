@@ -54,7 +54,7 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 	else if((inspResult == "Fail" || inspResult == "Violations Found") && (numFailInsp == 2 || numFailInsp == 3) )
 	{	//schedule 14 days out
 		daysAhead = 14;	}
-	else if(numFailInsp >= 4 )
+	else if(numFailInsp >= 4 || inspResult == "Stop Use")
 	{	//schedule 1 days out
 		daysAhead = 1;	}
 	showDebug = true
