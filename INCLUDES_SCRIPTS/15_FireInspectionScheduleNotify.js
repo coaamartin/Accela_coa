@@ -51,9 +51,13 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 	else if(inspResult == "Order Notice")
 	{	//schedule 3 days out
 		daysAhead = 3;	}
-	else if((inspResult == "Fail" || inspResult == "Violations Found") && (numFailInsp == 2 || numFailInsp == 3) )
+	else if((inspResult == "Fail" || inspResult == "Violations Found") && numFailInsp == 2)
 	{	//schedule 14 days out
 		daysAhead = 14;	}
+	else if (numFailInsp == 3 && inspResult == "Violations Found")
+	{
+		daysAhead = 7;
+	}
 	else if(numFailInsp >= 4 || inspResult == "Stop Use")
 	{	//schedule 1 days out
 		daysAhead = 1;	}
