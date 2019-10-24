@@ -1,8 +1,9 @@
 if (balanceDue > 0)
 {
-  //email the applicant
-  var contacts = "Individual";
-  var emailtemplate = "JD_TEST_TEMPLATE";
-
-  emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
+	var vAsyncScript = "SEND_FIRE_INVOICE_ASYNC";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("invNbr", InvoiceNbrArray[0] + "");
+	aa.runAsyncScript(vAsyncScript, envParameters)
 }
