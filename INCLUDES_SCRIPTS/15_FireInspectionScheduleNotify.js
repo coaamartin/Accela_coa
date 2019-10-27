@@ -122,14 +122,36 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 }
 
 // notify all contacts and attach to record communications
-
-pEParams = aa.util.newHashtable();
-addParameter(pEParams, "$$FullAddress$$", getCapFullAddress());
-pRParams = aa.util.newHashtable();
-addParameter(pRParams, "FolderRSN", capIDString);
-//Script 15 is the single exception to the report rule -- attaching to email rather than sending link
-//emailContactsWithReportLinkASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
-emailContactsWithReportAttachASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
+if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspResult))
+{
+	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("reportName", "Fire_Primary_Inspection");
+	envParameters.put("InspActNumber", inspId);
+	aa.runAsyncScript(vAsyncScript, envParameters);	
+}
+else if ("FD Follow-up".equals(inspType))
+{
+	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("reportName", "Fire_Follow_Up_Inspection");
+	envParameters.put("InspActNumber", inspId);
+	aa.runAsyncScript(vAsyncScript, envParameters);	
+}
+else if ("Order Notice".equals(inspResult))
+{
+	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("reportName", "Fire Order Notice");
+	envParameters.put("InspActNumber", inspId);
+	aa.runAsyncScript(vAsyncScript, envParameters);	
+}
 
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
 {
