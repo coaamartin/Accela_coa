@@ -30,7 +30,7 @@ try
 }
 catch(e)
 {
-	email("ishac7@gmail.com", "aurora@gov.org", "Error", e.message);
+	email("debug@gmail.com", "aurora@gov.org", "Error", e.message);
 }
 
  function getPeople(capId)
