@@ -18,22 +18,23 @@ if (!inspectionExist.getSuccess()) {
    
 }   
 
-if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection")
-	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served"))
+if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection" || inspType == "FD Operational Permit" || inspType == "FD TUP" || inspType == "FD Initial Requested Inspection")
+	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served" || "Parking Citation Issued" || "Pre-citation Issued"))
 {
 	logDebug("Script 15 - criteria met");
 	
 	//determine follow up inspection based on this inspection
 	if (inspType == "FD Complaint Inspection")
 		{newInspType = "FD Complaint Follow-Up Inspection";}
-	if (inspType == "FD Primary Inspection")
+	else if (inspType == "FD Primary Inspection")
 		{newInspType = "FD Follow-up";}
-	if (inspType == "FD Initial Unscheduled Inspection")
+	else if (inspType == "FD Initial Unscheduled Inspection")
 		{newInspType = "FD Follow-up";}
-	if (inspType == "FD Follow-up")
+	else if (inspType == "FD Follow-up")
 		{newInspType = "FD Follow-up";}
-	if (inspType == "FD Complaint Follow-Up Inspection")
+	else if (inspType == "FD Complaint Follow-Up Inspection")
 		{newInspType = "FD Complaint Follow-Up Inspection";}
+	else {newInspType = "FD Follow-up";}
 		
 	//assign inspector based on inspector assigned to the record
 	var inspector = null;
@@ -58,7 +59,7 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 	{
 		daysAhead = 7;
 	}
-	else if(numFailInsp >= 4 || inspResult == "Stop Use")
+	else if(numFailInsp >= 4 || matches(inspResult, "Stop Use", "Pre-citation Issued", "Summons Served", "Parking Citation Issued"))
 	{	//schedule 1 days out
 		daysAhead = 1;	}
 	showDebug = true
