@@ -123,6 +123,7 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 }
 
 // notify all contacts and attach to record communications
+/*
 if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspResult))
 {
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
@@ -153,7 +154,7 @@ else if ("Order Notice".equals(inspResult))
 	envParameters.put("InspActNumber", inspId);
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
-
+*/
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
 {
 	//close out
