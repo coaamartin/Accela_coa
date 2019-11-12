@@ -31,7 +31,7 @@ try
 	}
 	else if ("Fire Order Notice".equals(reportName))
 	{
-
+		rParams.put("RecordID", capId.getCustomID());
 	}
 
 	var emailtemplate = "FIRE INSPECTION RESULTS #15";

@@ -123,7 +123,6 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 }
 
 // notify all contacts and attach to record communications
-/*
 if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspResult))
 {
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
@@ -134,16 +133,6 @@ if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspRe
 	envParameters.put("InspActNumber", inspId);
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
-else if ("FD Follow-up".equals(inspType))
-{
-	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
-	var envParameters = aa.util.newHashMap();
-	envParameters.put("capId", capId);
-	envParameters.put("cap", cap);
-	envParameters.put("reportName", "Fire_Follow_Up_Inspection");
-	envParameters.put("InspActNumber", inspId);
-	aa.runAsyncScript(vAsyncScript, envParameters);	
-}
 else if ("Order Notice".equals(inspResult))
 {
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
@@ -151,6 +140,17 @@ else if ("Order Notice".equals(inspResult))
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
 	envParameters.put("reportName", "Fire Order Notice");
+	envParameters.put("InspActNumber", inspId);
+	aa.runAsyncScript(vAsyncScript, envParameters);	
+}
+/*
+else if ("FD Follow-up".equals(inspType))
+{
+	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("reportName", "Fire_Follow_Up_Inspection");
 	envParameters.put("InspActNumber", inspId);
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
