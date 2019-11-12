@@ -9,7 +9,7 @@ if ("Complete".equals(inspResult))
 		{
 			cancel = true;
 			showMessage = true;
-			comment("Cannot Complete this inspection with open vilaitons.");
+			comment("Cannot Complete this inspection with open violations.");
 		}
 	}
 }
