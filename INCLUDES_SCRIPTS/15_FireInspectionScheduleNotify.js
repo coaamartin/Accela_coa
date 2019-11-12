@@ -143,8 +143,8 @@ else if ("Order Notice".equals(inspResult))
 	envParameters.put("InspActNumber", inspId);
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
-/*
-else if ("FD Follow-up".equals(inspType))
+
+else if ("FD Follow-up".equals(inspType) && "Violations Found".equals(inspResult))
 {
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	var envParameters = aa.util.newHashMap();
@@ -154,7 +154,6 @@ else if ("FD Follow-up".equals(inspType))
 	envParameters.put("InspActNumber", inspId);
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
-*/
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
 {
 	//close out
