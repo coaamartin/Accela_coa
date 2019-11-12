@@ -19,7 +19,7 @@ if (!inspectionExist.getSuccess()) {
 }   
 
 if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection" || inspType == "FD Operational Permit" || inspType == "FD TUP" || inspType == "FD Initial Requested Inspection")
-	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served" || "Parking Citation Issued" || "Pre-citation Issued"))
+	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served" || inspResult == "Parking Citation Issued" || inspResult == "Pre-citation Issued"))
 {
 	logDebug("Script 15 - criteria met");
 	
