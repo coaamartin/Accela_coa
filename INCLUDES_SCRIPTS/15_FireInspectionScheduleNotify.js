@@ -76,7 +76,7 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 	//var targetDate = new Date(targetDateString);
 	//var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
 
-	scheduleInspection(newInspType,daysAhead,inspector);
+	scheduleInspection(newInspType,daysAhead,inspector, 0, "Scheduled due to previous inspection result: " + inspResult);
 	//scheduleInspectDate(newInspType,schedDate,inspector);
 	//copy checklist to new inspection
 	var newInspId = getScheduledInspId(newInspType);
