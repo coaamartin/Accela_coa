@@ -94,25 +94,28 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 			var t = gsi[gs];
 			t.loadInfoTables();
 			if (t.validTables) {
-				var g = (t.infoTables["FIRE VIOLATIONS"] ? t.infoTables["FIRE VIOLATIONS"] : []);
-				for (var fvi in g) {
-					var fvit = g[fvi];
-					if ("Non Compliance".equals(fvit["Violation Status"])) {
-						var thisViolation = [{
-								colName: "Sort Order",
-								colValue: String(fvit["Sort Order"])
-							}, {
-								colName: "Violation",
-								colValue: String(fvit["Violation"])
-							}, {
-								colName: "Comment",
-								colValue: String(fvit["Comment"])
-							}, {
-								colName: "Violation Status",
-								colValue: String(fvit["Violation Status"])
-							}
-						];
-						addAsiTableRow("FIRE VIOLATIONS", thisViolation);
+				for (var tb in t.infoTables)
+				{					
+					var g = (t.infoTables[tb] ? t.infoTables[tb] : []);
+					for (var fvi in g) {
+						var fvit = g[fvi];
+						if ("Non Compliance".equals(fvit["Violation Status"])) {
+							var thisViolation = [{
+									colName: "Sort Order",
+									colValue: fvit["Sort Order"] || ""
+								}, {
+									colName: "Violation",
+									colValue: fvit["Violation"] || ""
+								}, {
+									colName: "Comment",
+									colValue: fvit["Comment"] || ""
+								}, {
+									colName: "Violation Status",
+									colValue: fvit["Violation Status"] || ""
+								}
+							];
+							addAsiTableRow(tb, thisViolation);
+						}
 					}
 				}
 			}
