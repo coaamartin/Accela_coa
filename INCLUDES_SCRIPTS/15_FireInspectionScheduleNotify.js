@@ -142,7 +142,7 @@ else if ("Order Notice".equals(inspResult))
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
-	envParameters.put("reportName", "Fire Order Notice");
+	envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("InspActNumber", inspId);
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }

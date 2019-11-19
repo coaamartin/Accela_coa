@@ -6,11 +6,8 @@ try
 	var reportName = aa.env.getValue("reportName");
 	var inspId = aa.env.getValue("InspActNumber");
 
-	var contacts = "Individual";
-	var iContact = getContactByType("Individual", capId);
-	var fName = iContact.getFirstName();
-	var lName = iContact.getLastName();
-	var emailTo = iContact.getEmail();
+
+	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -18,8 +15,6 @@ try
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
-	tParams.put("$$FirstName$$", fName);
-	tParams.put("$$LastName$$", lName);
 	var rParams = aa.util.newHashtable();
 	if ("Fire_Primary_Inspection".equals(reportName))
 	{		
@@ -42,7 +37,19 @@ catch(e)
 {
 	email("debug@gmail.com", "aurora@gov.org", "Error", e.message);
 }
-
+function getEmailString()
+{
+	var emailString = "";
+	var contactArray = getPeople(capId);
+	for (var c in contactArray)
+	{
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().getEmail().length() > 0)
+		{
+			emailString += contactArray[c].getPeople().getEmail() + ",";
+		}
+	}
+	return emailString;
+}
  function getPeople(capId)
 {
 	capPeopleArr = null;
