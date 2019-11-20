@@ -27,7 +27,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
         logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
       } else 
       {
-        applicantEmail = recordApplicant.getEmail();
+        applicantEmail = recordApplicant.getEmail(); logDebug("Applicant Email = " + applicantEmail);
       }
       
       var eParams = aa.util.newHashtable();
@@ -44,6 +44,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
          
          //emailContacts(contacts, emailtemplate, eParams, "", "", "N", "");
 
+		 aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", applicantEmail, "", emailtemplate, eParams, capId4Email, null);
          logDebug("Email Sent: " + aa.document.sendEmailAndSaveAsDocument("noreply@aurora.gov", applicantEmail, "", emailtemplate, eParams, capId4Email, null).getSuccess());
       }
    }
