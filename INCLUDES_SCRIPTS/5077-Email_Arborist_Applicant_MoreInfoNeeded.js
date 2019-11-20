@@ -16,7 +16,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       //Get the capId type needed for the email function
 		var capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
       var altId = capId.getCustomID();
-      var recordApplicant = getContactByType("Applicant", capId);
+      var recordApplicant = getContactByType("Arborist Applicant", capId);
       var applicantEmail = null;
       
       var cap = aa.cap.getCap(capId).getOutput();
