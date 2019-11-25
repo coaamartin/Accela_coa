@@ -16,7 +16,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       //Get the capId type needed for the email function
 		var capId4Email = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
       var altId = capId.getCustomID();
-      var recordApplicant = getContactByType("Applicant", capId);
+      var recordApplicant = getContactByType("Arborist Applicant", capId);
       var applicantEmail = null;
       
       var cap = aa.cap.getCap(capId).getOutput();
@@ -27,7 +27,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
         logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
       } else 
       {
-        applicantEmail = recordApplicant.getEmail();
+        applicantEmail = recordApplicant.getEmail(); logDebug("Applicant Email = " + applicantEmail);
       }
       
       var eParams = aa.util.newHashtable();
@@ -35,7 +35,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       
       if(applicantEmail)
       {      
-         //addParameter(eParams, "$$wfComment$$", wfComment);   //Not included in update template 
+         addParameter(eParams, "$$wfComment$$", wfComment);   //Not included in update template 
          addParameter(eParams, "$$altid$$", altId);
          addParameter(eParams, "$$todayDate$$", dateAdd(null, 0));
          addParameter(eParams, "$$capAlias$$", capName);
