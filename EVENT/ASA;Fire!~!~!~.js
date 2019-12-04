@@ -2,4 +2,4 @@
 
 // script16_FillApplicationNameWhenEmpty();
 var newBuisnessName= getAppSpecific("Buisness Name");
-editAppName(newBuisnessName("Buisness Name"));
+editAppName(newBuisnessName);
