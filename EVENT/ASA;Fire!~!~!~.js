@@ -3,5 +3,5 @@
 // script16_FillApplicationNameWhenEmpty();
 var newBuisnessName= getAppSpecific("Buisness Name");
 editAppName(newBuisnessName); 
-logdebug(newBuisnessName);
-logdebug(getAppSpecific);
+logDebug(newBuisnessName);
+logDebug(getAppSpecific);
