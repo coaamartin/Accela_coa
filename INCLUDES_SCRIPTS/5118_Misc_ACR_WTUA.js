@@ -8,8 +8,8 @@
 var myCapId = "19-000039-ACR";
 var myUserId = "AMARTIN";
 var eventName = "";
-var wfTask = "Submit Change Request";
-var wfStatus = "Complete";
+var wfTask = "IT Review";
+var wfStatus = "Approved";
 var wfComment = "";
 
 var useProductScript = true;  // set to true to use the "productized" master scripts (events->master scripts), false to use scripts from (events->scripts)
@@ -54,6 +54,25 @@ if (wfTask == "Submit Change Request" && wfStatus == "Complete") {
 //			}			
 //		scheduleInspection("Vacant Property Pictures", 1,inspectorObj); //, inspector, null, newInspReqComments);	
 //	}
+}
+if (wfTask == "IT Review" && (wfStatus == "Approved" || wfStatus == "Approved with Conditions")) {
+	logDebug("---------------------> IT Review - Approved or with Conditions");	
+//		updateAppStatus("Withdrawn", "Script 5118");	
+	var reqDeptManager = AInfo["Requesting Department Manager"];
+	logDebug('Attempting to send email: ' + reqDeptManager);
+		//Send a notification email YOU HAVE A CHANGE REQUEST
+	var emailTemplate = "ENF VAC REGISTRATION LETTER";		
+	var todayDate = new Date();
+	if (emailTemplate != null && emailTemplate != "") {
+		logDebug("5118 sending Check Change Request letter.");	
+		eParams = aa.util.newHashtable();
+		eParams.put("$$ContactEmail$$", "");			
+		eParams.put("$$todayDate$$", todayDate);
+		eParams.put("$$altid$$",capId.getCustomID());
+		eParams.put("$$capAlias$$",cap.getCapType().getAlias());
+		logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+		emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+		}
 }
 if (wfTask == "Foreclosure Information" && wfStatus == "Registration Only") {
 	logDebug("---------------------> Foreclosure Information - Registration Only");	
