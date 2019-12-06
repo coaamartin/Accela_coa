@@ -18,22 +18,23 @@ if (!inspectionExist.getSuccess()) {
    
 }   
 
-if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection")
-	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served"))
+if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection" || inspType == "FD Operational Permit" || inspType == "FD TUP" || inspType == "FD Initial Requested Inspection")
+	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served" || inspResult == "Parking Citation Issued" || inspResult == "Pre-citation Issued"))
 {
 	logDebug("Script 15 - criteria met");
 	
 	//determine follow up inspection based on this inspection
 	if (inspType == "FD Complaint Inspection")
 		{newInspType = "FD Complaint Follow-Up Inspection";}
-	if (inspType == "FD Primary Inspection")
-		{newInspType = "FD Follow-Up";}
-	if (inspType == "FD Initial Unscheduled Inspection")
-		{newInspType = "FD Follow-Up";}
-	if (inspType == "FD Follow-Up")
-		{newInspType = "FD Follow-Up";}
-	if (inspType == "FD Complaint Follow-Up Inspection")
+	else if (inspType == "FD Primary Inspection")
+		{newInspType = "FD Follow-up";}
+	else if (inspType == "FD Initial Unscheduled Inspection")
+		{newInspType = "FD Follow-up";}
+	else if (inspType == "FD Follow-up")
+		{newInspType = "FD Follow-up";}
+	else if (inspType == "FD Complaint Follow-Up Inspection")
 		{newInspType = "FD Complaint Follow-Up Inspection";}
+	else {newInspType = "FD Follow-up";}
 		
 	//assign inspector based on inspector assigned to the record
 	var inspector = null;
@@ -51,10 +52,14 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 	else if(inspResult == "Order Notice")
 	{	//schedule 3 days out
 		daysAhead = 3;	}
-	else if((inspResult == "Fail" || inspResult == "Violations Found") && (numFailInsp == 2 || numFailInsp == 3) )
+	else if((inspResult == "Fail" || inspResult == "Violations Found") && numFailInsp == 2)
 	{	//schedule 14 days out
 		daysAhead = 14;	}
-	else if(numFailInsp >= 4 )
+	else if (numFailInsp == 3 && inspResult == "Violations Found")
+	{
+		daysAhead = 7;
+	}
+	else if(numFailInsp >= 4 || matches(inspResult, "Stop Use", "Pre-citation Issued", "Summons Served", "Parking Citation Issued"))
 	{	//schedule 1 days out
 		daysAhead = 1;	}
 	showDebug = true
@@ -71,7 +76,7 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 	//var targetDate = new Date(targetDateString);
 	//var daysOut = Math.round(Math.abs((targetDate.getTime() - dToday.getTime())/(oneDay)));
 
-	scheduleInspection(newInspType,daysAhead,inspector);
+	scheduleInspection(newInspType,daysAhead,inspector, 0, "Scheduled due to previous inspection result: " + inspResult);
 	//scheduleInspectDate(newInspType,schedDate,inspector);
 	//copy checklist to new inspection
 	var newInspId = getScheduledInspId(newInspType);
@@ -89,25 +94,28 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 			var t = gsi[gs];
 			t.loadInfoTables();
 			if (t.validTables) {
-				var g = (t.infoTables["FIRE VIOLATIONS"] ? t.infoTables["FIRE VIOLATIONS"] : []);
-				for (var fvi in g) {
-					var fvit = g[fvi];
-					if ("Non Compliance".equals(fvit["Violation Status"])) {
-						var thisViolation = [{
-								colName: "Sort Order",
-								colValue: String(fvit["Sort Order"])
-							}, {
-								colName: "Violation",
-								colValue: String(fvit["Violation"])
-							}, {
-								colName: "Comment",
-								colValue: String(fvit["Comment"])
-							}, {
-								colName: "Violation Status",
-								colValue: String(fvit["Violation Status"])
-							}
-						];
-						addAsiTableRow("FIRE VIOLATIONS", thisViolation);
+				for (var tb in t.infoTables)
+				{					
+					var g = (t.infoTables[tb] ? t.infoTables[tb] : []);
+					for (var fvi in g) {
+						var fvit = g[fvi];
+						if ("Non Compliance".equals(fvit["Violation Status"])) {
+							var thisViolation = [{
+									colName: "Sort Order",
+									colValue: fvit["Sort Order"] || ""
+								}, {
+									colName: "Violation",
+									colValue: fvit["Violation"] || ""
+								}, {
+									colName: "Comment",
+									colValue: fvit["Comment"] || ""
+								}, {
+									colName: "Violation Status",
+									colValue: fvit["Violation Status"] || ""
+								}
+							];
+							addAsiTableRow(tb, thisViolation);
+						}
 					}
 				}
 			}
@@ -118,15 +126,37 @@ if ((inspType == "FD Follow-Up" || inspType == "FD Complaint Inspection" || insp
 }
 
 // notify all contacts and attach to record communications
+if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspResult))
+{
+	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("reportName", "Fire_Primary_Inspection");
+	envParameters.put("InspActNumber", inspId);
+	aa.runAsyncScript(vAsyncScript, envParameters);	
+}
+else if ("Order Notice".equals(inspResult))
+{
+	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("reportName", "Fire_Primary_Inspection");
+	envParameters.put("InspActNumber", inspId);
+	aa.runAsyncScript(vAsyncScript, envParameters);	
+}
 
-pEParams = aa.util.newHashtable();
-addParameter(pEParams, "$$FullAddress$$", getCapFullAddress());
-pRParams = aa.util.newHashtable();
-addParameter(pRParams, "FolderRSN", capIDString);
-//Script 15 is the single exception to the report rule -- attaching to email rather than sending link
-//emailContactsWithReportLinkASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
-emailContactsWithReportAttachASync("All","FIRE INSPECTION RESULTS #15", pEParams, "Fire_Primary_Inspection", pRParams);
-
+else if ("FD Follow-up".equals(inspType) && "Violations Found".equals(inspResult))
+{
+	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("reportName", "Fire_Follow_Up_Inspection");
+	envParameters.put("InspActNumber", inspId);
+	aa.runAsyncScript(vAsyncScript, envParameters);	
+}
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
 {
 	//close out
