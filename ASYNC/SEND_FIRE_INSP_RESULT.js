@@ -45,11 +45,13 @@ function getEmailString()
 	{
 		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().getEmail().length() > 0)
 		{
-			emailString += contactArray[c].getPeople().getEmail() + ",";
+			emailString += contactArray[c].getPeople().getEmail() + ";";
 		}
 	}
+	logDebug(emailString);
 	return emailString;
 }
+logDebug("Starting function getPeople")
  function getPeople(capId)
 {
 	capPeopleArr = null;
