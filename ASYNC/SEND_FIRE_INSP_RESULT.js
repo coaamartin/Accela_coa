@@ -31,7 +31,12 @@ try
 
 	var emailtemplate = "FIRE INSPECTION RESULTS #15";
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode()); logDebug("Report File = "+report);
-	sendNotification("norepoly@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+	if (report) {
+		sendNotification("norepoly@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+	}
+	else {
+		sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, "");
+	}
 }
 catch(e)
 {
