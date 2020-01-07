@@ -26,7 +26,7 @@ try
 	var emailtemplate = "FIRE INVOICED FEES";
 
 	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
-	sendNotification("norepoly@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
 {
