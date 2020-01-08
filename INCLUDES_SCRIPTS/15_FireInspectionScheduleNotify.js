@@ -88,39 +88,39 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 	removeASITable("Fire Violations");
 
 	//insert a row for each item on the checklist that was in violation
-	var gsi = getGuideSheetObjects(inspId);
-	if (gsi) {
-		for (var gs in gsi) {
-			var t = gsi[gs];
-			t.loadInfoTables();
-			if (t.validTables) {
-				for (var tb in t.infoTables)
-				{					
-					var g = (t.infoTables[tb] ? t.infoTables[tb] : []);
-					for (var fvi in g) {
-						var fvit = g[fvi];
-						if ("Non Compliance".equals(fvit["Violation Status"])) {
-							var thisViolation = [{
-									colName: "Sort Order",
-									colValue: fvit["Sort Order"] || ""
-								}, {
-									colName: "Violation",
-									colValue: fvit["Violation"] || ""
-								}, {
-									colName: "Comment",
-									colValue: fvit["Comment"] || ""
-								}, {
-									colName: "Violation Status",
-									colValue: fvit["Violation Status"] || ""
-								}
-							];
-							addAsiTableRow(tb, thisViolation);
-						}
-					}
-				}
-			}
-		}
-	}
+	// var gsi = getGuideSheetObjects(inspId);
+	// if (gsi) {
+	// 	for (var gs in gsi) {
+	// 		var t = gsi[gs];
+	// 		t.loadInfoTables();
+	// 		if (t.validTables) {
+	// 			for (var tb in t.infoTables)
+	// 			{					
+	// 				var g = (t.infoTables[tb] ? t.infoTables[tb] : []);
+	// 				for (var fvi in g) {
+	// 					var fvit = g[fvi];
+	// 					if ("Non Compliance".equals(fvit["Violation Status"])) {
+	// 						var thisViolation = [{
+	// 								colName: "Sort Order",
+	// 								colValue: fvit["Sort Order"] || ""
+	// 							}, {
+	// 								colName: "Violation",
+	// 								colValue: fvit["Violation"] || ""
+	// 							}, {
+	// 								colName: "Comment",
+	// 								colValue: fvit["Comment"] || ""
+	// 							}, {
+	// 								colName: "Violation Status",
+	// 								colValue: fvit["Violation Status"] || ""
+	// 							}
+	// 						];
+	// 						addAsiTableRow(tb, thisViolation);
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// }
 
 
 }
