@@ -12,7 +12,7 @@ if (balanceDue > 0)
 	// var lName = iContact.getLastName();
 	// var emailTo = iContact.getEmail();
 	logDebug("CapID info: " + capId)
-	logDebug("User Last name: " + fName)
-	logDebug("User First name: " + lName)
-	logDebug("User email: " + emailTo)
+	// logDebug("User Last name: " + fName)
+	// logDebug("User First name: " + lName)
+	// logDebug("User email: " + emailTo)
 }
