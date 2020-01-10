@@ -6,4 +6,10 @@ if (balanceDue > 0)
 	envParameters.put("cap", cap);
 	envParameters.put("invNbr", InvoiceNbrArray[0] + "");
 	aa.runAsyncScript(vAsyncScript, envParameters)
+	var fName = iContact.getFirstName();
+	var lName = iContact.getLastName();
+	var emailTo = iContact.getEmail();
+	logDebug("User Last name: " + fName)
+	logDebug("User First name: " + lName)
+	logDebug("User email: " + emailTo)
 }
