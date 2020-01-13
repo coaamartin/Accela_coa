@@ -126,6 +126,8 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 }
 
 // notify all contacts and attach to record communications
+logDebug("InspType: " + inspType);
+logDebug("Starting notification to all contacts")
 if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspResult))
 {
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
@@ -135,6 +137,7 @@ if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspRe
 	envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("InspActNumber", inspId);
 	aa.runAsyncScript(vAsyncScript, envParameters);	
+	logDebug("Sending Fire Primary Inspection");
 }
 else if ("Order Notice".equals(inspResult))
 {
@@ -146,6 +149,7 @@ else if ("Order Notice".equals(inspResult))
 	envParameters.put("reportName", "Fire Order Notice");
 	envParameters.put("InspActNumber", inspId);
 	aa.runAsyncScript(vAsyncScript, envParameters);	
+	logDebug("Sending Fire Order Notice");
 }
 
 else if ("FD Follow-up".equals(inspType) && "Violations Found".equals(inspResult))
@@ -158,6 +162,7 @@ else if ("FD Follow-up".equals(inspType) && "Violations Found".equals(inspResult
 	envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("InspActNumber", inspId);
 	aa.runAsyncScript(vAsyncScript, envParameters);	
+	logDebug("Sending Fire Follow_up");
 }
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
 {
