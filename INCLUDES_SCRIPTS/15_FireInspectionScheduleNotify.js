@@ -137,6 +137,7 @@ if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspRe
 	envParameters.put("cap", cap);
 	envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("InspActNumber", inspId);
+	logDebug("Parameter that is being passed: " + inspId);
 	logDebug("Sending Fire Primary Inspection for Inspection type: " + inspType);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
@@ -150,6 +151,7 @@ else if ("Order Notice".equals(inspType))
 	//envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("reportName", "Fire Order Notice");
 	envParameters.put("InspActNumber", inspId);
+	logDebug("Parameter that is being passed: " + inspId);
 	logDebug("Sending Fire Order Notice for Inspection type: " + inspType);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
@@ -162,6 +164,7 @@ else if ("FD Complaint Inspection".equals(inspType) && "Violations Found".equals
 	envParameters.put("cap", cap);
 	envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("InspActNumber", inspId);
+	logDebug("Parameter that is being passed: " + inspId);
 	logDebug("Sending Fire_Primary_Inspection for Inspection type: " + inspType);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
@@ -174,6 +177,7 @@ else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Violations Fou
 	envParameters.put("cap", cap);
 	envParameters.put("reportName", "Fire_Follow_Up_Inspection");
 	envParameters.put("InspActNumber", inspId);
+	logDebug("Parameter that is being passed: " + inspId);
 	logDebug("Sending Fire_Follow_Up_Inspection for Inspection type: " + inspType);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
@@ -187,6 +191,7 @@ else if ("FD Follow-up".equals(inspType) && "Violations Found".equals(inspResult
 	//envParameters.put("reportName", "Fire_Follow_Up_Inspection");
 	envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("InspActNumber", inspId);	
+	logDebug("Parameter that is being passed: " + inspId);
 	logDebug("Sending Fire Follow_up");
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
