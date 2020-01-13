@@ -130,6 +130,7 @@ logDebug("InspType: " + inspType);
 logDebug("Starting notification to all contacts")
 if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspResult))
 {
+	logDebug("Kicking off SEND_FIRE_INSP_RESULT")
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);

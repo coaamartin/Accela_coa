@@ -2,6 +2,7 @@
 //email the applicant
 try
 {
+	logDebug("Starting SEND_FIRE_INVOICE_ASYNC");
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var invNbr = aa.env.getValue("invNbr");

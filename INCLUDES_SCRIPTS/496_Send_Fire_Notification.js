@@ -1,5 +1,6 @@
 if (balanceDue > 0)
 {
+	logDebug("Starting 496_Fire_Notifications script");
 	var vAsyncScript = "SEND_FIRE_INVOICE_ASYNC";
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
@@ -11,8 +12,9 @@ if (balanceDue > 0)
 	// var fName = iContact.getFirstName();
 	// var lName = iContact.getLastName();
 	// var emailTo = iContact.getEmail();
-	logDebug("CapID info: " + capId)
-	// logDebug("User Last name: " + fName)
-	// logDebug("User First name: " + lName)
-	// logDebug("User email: " + emailTo)
+	logDebug("CapID info: " + capId);
+	// logDebug("User Last name: " + fName);
+	// logDebug("User First name: " + lName);
+	// logDebug("User email: " + emailTo);
+	logDebug("End of 496_Fire_Notifications script");
 }
