@@ -152,6 +152,17 @@ else if ("Order Notice".equals(inspResult))
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 	logDebug("Sending Fire Order Notice");
 }
+else if ("FD Complaint Inspection".equals(inspResult))
+{
+	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("reportName", "Fire_Primary_Inspection");
+	envParameters.put("InspActNumber", inspId);
+	aa.runAsyncScript(vAsyncScript, envParameters);	
+	logDebug("Sending Fire Complaint Notice");
+}
 
 else if ("FD Follow-up".equals(inspType) && "Violations Found".equals(inspResult))
 {
