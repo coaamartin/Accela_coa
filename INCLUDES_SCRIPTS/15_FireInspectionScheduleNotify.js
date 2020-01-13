@@ -178,7 +178,7 @@ else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Violations Fou
 	envParameters.put("reportName", "Fire_Follow_Up_Inspection");
 	envParameters.put("InspActNumber", inspId);
 	//envParameters.put("RecordId", recId);
-	logDebug("Parameter that is being passed: " + recId);
+	logDebug("Parameter that is being passed: " + inspId);
 	logDebug("Sending Fire_Follow_Up_Inspection for Inspection type: " + inspType);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
