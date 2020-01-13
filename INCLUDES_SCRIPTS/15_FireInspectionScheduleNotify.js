@@ -140,7 +140,7 @@ if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspRe
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 	logDebug("Sending Fire Primary Inspection");
 }
-else if ("Order Notice".equals(inspResult))
+else if ("Order Notice".equals(inspTyp))
 {
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	var envParameters = aa.util.newHashMap();
@@ -152,7 +152,7 @@ else if ("Order Notice".equals(inspResult))
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 	logDebug("Sending Fire Order Notice");
 }
-else if ("FD Complaint Inspection".equals(inspResult))
+else if ("FD Complaint Inspection".equals(inspTyp) && "Violations Found".equals(inspResult))
 {
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	var envParameters = aa.util.newHashMap();
