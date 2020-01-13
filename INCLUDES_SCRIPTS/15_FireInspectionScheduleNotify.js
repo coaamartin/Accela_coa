@@ -132,57 +132,53 @@ logDebug("Starting notification to all contacts")
 if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspResult))
 {
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
-	//var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
 	envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("InspActNumber", inspId);
-	aa.runAsyncScript(vAsyncScript, envParameters);	
 	logDebug("Sending Fire Primary Inspection for Inspection type: " + inspType);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
 else if ("Order Notice".equals(inspType))
 {
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
-	//var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
 	//envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("reportName", "Fire Order Notice");
 	envParameters.put("InspActNumber", inspId);
-	aa.runAsyncScript(vAsyncScript, envParameters);	
 	logDebug("Sending Fire Order Notice for Inspection type: " + inspType);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
 else if ("FD Complaint Inspection".equals(inspType) && "Violations Found".equals(inspResult))
 {
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
-	//var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
 	envParameters.put("reportName", "Fire_Primary_Inspection");
 	envParameters.put("InspActNumber", inspId);
-	aa.runAsyncScript(vAsyncScript, envParameters);	
 	logDebug("Sending Fire_Primary_Inspection for Inspection type: " + inspType);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
 
 else if ("FD Follow-up".equals(inspType) && "Violations Found".equals(inspResult))
 {
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
-	//var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
 	//envParameters.put("reportName", "Fire_Follow_Up_Inspection");
 	envParameters.put("reportName", "Fire_Primary_Inspection");
-	envParameters.put("InspActNumber", inspId);
-	aa.runAsyncScript(vAsyncScript, envParameters);	
+	envParameters.put("InspActNumber", inspId);	
 	logDebug("Sending Fire Follow_up");
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
 if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
 {
