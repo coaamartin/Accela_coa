@@ -198,8 +198,8 @@ else if ("FD Follow-up".equals(inspType) && "Violations Found".equals(inspResult
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
-	//envParameters.put("reportName", "Fire_Follow_Up_Inspection");
-	envParameters.put("reportName", "Fire_Primary_Inspection");
+	envParameters.put("reportName", "Fire_Follow_Up_Inspection");
+	//envParameters.put("reportName", "Fire_Primary_Inspection");
 	//envParameters.put("InspActNumber", inspId);
 	envParameters.put("altID", altId);
 	logDebug("Parameter that is being passed: " + altId);
