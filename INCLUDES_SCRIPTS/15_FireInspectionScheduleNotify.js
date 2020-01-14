@@ -177,9 +177,9 @@ else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Violations Fou
 	envParameters.put("cap", cap);
 	envParameters.put("reportName", "Fire_Follow_Up_Inspection");
 	envParameters.put("InspActNumber", inspId);
-	envParameters.put("altId", ALTID);
+	envParameters.put("altId", altid);
 	logDebug("Parameter that is being passed: " + inspId + " & "+ envParameters);
-	logDebug("Sending Fire_Follow_Up_Inspection for Inspection type: " + ALTID);
+	logDebug("Sending Fire_Follow_Up_Inspection for Inspection type: " + altid);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
