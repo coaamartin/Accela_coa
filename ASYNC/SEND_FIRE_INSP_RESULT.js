@@ -21,7 +21,7 @@ try
 	if ("Fire_Primary_Inspection".equals(reportName))
 	{		
 		//rParams.put("InspActNumber", inspId);
-		rParams.put("RecordID", altId);
+		rParams.put("RecordId", altId);
 	}
 	else if ("Fire_Follow_Up_Inspection".equals(reportName))
 	{
