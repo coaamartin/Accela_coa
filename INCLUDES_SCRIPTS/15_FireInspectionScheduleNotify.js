@@ -128,7 +128,7 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 // notify all contacts and attach to record communications
 logDebug("InspType: " + inspType);
 logDebug("Starting notification to all contacts")
-
+altId = capId.getCustomID();
 if ("FD Primary Inspection".equals(inspType) && "Violations Found".equals(inspResult))
 {
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
@@ -177,9 +177,9 @@ else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Violations Fou
 	envParameters.put("cap", cap);
 	envParameters.put("reportName", "Fire_Follow_Up_Inspection");
 	envParameters.put("InspActNumber", inspId);
-	envParameters.put("altId", altid);
-	logDebug("Parameter that is being passed: " + inspId + " & "+ envParameters);
-	logDebug("Sending Fire_Follow_Up_Inspection for Inspection type: " + altid);
+	envParameters.put("altID", altId);
+	logDebug("Parameter that is being passed: " + inspId + " & "+ altId);
+	logDebug("Sending Fire_Follow_Up_Inspection for Inspection type: " + envParameters);
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
