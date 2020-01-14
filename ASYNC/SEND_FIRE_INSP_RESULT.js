@@ -1,10 +1,12 @@
 //SEND_FIRE_INSP_RESULT
+logDebug("***** Starting SEND_FIRE_INSP_RESULT from script *****")
 try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var reportName = aa.env.getValue("reportName");
-	var inspId = aa.env.getValue("InspActNumber");
+	var altId = aa.env.getValue("altID")
+	//var inspId = aa.env.getValue("InspActNumber");
 
 
 	var emailTo = getEmailString(); 
@@ -18,15 +20,18 @@ try
 	var rParams = aa.util.newHashtable();
 	if ("Fire_Primary_Inspection".equals(reportName))
 	{		
-		rParams.put("InspActNumber", inspId);
+		//rParams.put("InspActNumber", inspId);
+		rParams.put("RecordID", altId);
 	}
 	else if ("Fire_Follow_Up_Inspection".equals(reportName))
 	{
-		rParams.put("InspActNumber", inspId);
+		//rParams.put("InspActNumber", inspId);
+		rParams.put("RecordID", altId);
 	}
 	else if ("Fire Order Notice".equals(reportName))
 	{
-		rParams.put("RecordID", capId.getCustomID());
+		//rParams.put("RecordID", capId.getCustomID());
+		rParams.put("RecordID", altId);
 	}
 
 	var emailtemplate = "FIRE INSPECTION RESULTS #15";
