@@ -171,6 +171,8 @@ else if ("FD Complaint Inspection".equals(inspType) && "Violations Found".equals
 }
 else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Violations Found".equals(inspResult))
 {
+	altId = capId.getCustomID();
+	logDebug("Record ID: " + altId);
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
