@@ -6,6 +6,7 @@ if (balanceDue > 0)
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
 	envParameters.put("invNbr", InvoiceNbrArray[0] + "");
+	envParameters.put("AGENCYID", aa.getServiceProviderCode());
 	aa.runAsyncScript(vAsyncScript, envParameters)
 	var capId = aa.env.getValue("capId");
 	//var iContact = getContactByType("Individual", capId);
@@ -14,5 +15,6 @@ if (balanceDue > 0)
 	//var emailTo = iContact.getEmail();
 	logDebug("CapID info: " + envParameters);
 	logDebug("End of 496_Fire_Notifications script");
+	logDebug("END_FIRE_INVOICE_ASYNC kicks off from here");
 }
 
