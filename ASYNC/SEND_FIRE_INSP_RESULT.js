@@ -1,5 +1,5 @@
 //SEND_FIRE_INSP_RESULT
-logDebug("***** Starting SEND_FIRE_INSP_RESULT from script *****")
+logDebug("***** Starting SEND_FIRE_INSP_RESULT from script *****");
 try
 {
 	var capId = aa.env.getValue("capId");

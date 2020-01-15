@@ -1,5 +1,6 @@
 //SEND_FIRE_INVOICE_ASYNC
 //email the applicant
+logDebug("***** Starting SEND_FIRE_INVOICE_ASYNC *****");
 try
 {
 	logDebug("Starting SEND_FIRE_INVOICE_ASYNC");
