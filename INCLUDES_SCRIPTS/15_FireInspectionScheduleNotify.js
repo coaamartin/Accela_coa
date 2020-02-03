@@ -351,7 +351,7 @@ else if ("FD Complaint Inspection".equals(inspType) && "Order Notice".equals(ins
 // Need to list all 7 inspection types and have them send communication to the contact on the record.
 
 // FD Primary Inspection
-else if ("FD Primary Inspection".equals(inspType) && "Complete".equals || "No Violations Found".equal (inspResult))
+else if ("FD Primary Inspection".equals(inspType) && "Complete".equals(inspResult) || "No Violations Found".equals(inspResult))
 {
 	altId = capId.getCustomID();
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
@@ -371,7 +371,7 @@ else if ("FD Primary Inspection".equals(inspType) && "Complete".equals || "No Vi
 	closeCap(currentUserID);
 }
 // FD follow-up
-else if ("FD Follow-up".equals(inspType) && "Complete".equals || "No Violations Found".equal (inspResult))
+else if ("FD Follow-up".equals(inspType) && "Complete".equals(inspResult) || "No Violations Found".equals(inspResult))
 {
 	altId = capId.getCustomID();
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
@@ -391,7 +391,7 @@ else if ("FD Follow-up".equals(inspType) && "Complete".equals || "No Violations 
 	closeCap(currentUserID);
 }
 // FD Complaint Inspection
-else if ("FD Complaint Inspection".equals(inspType) && "Complete".equals || "No Violations Found".equal (inspResult))
+else if ("FD Complaint Inspection".equals(inspType) && "Complete".equals(inspResult) || "No Violations Found".equals(inspResult))
 {
 	altId = capId.getCustomID();
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
@@ -411,7 +411,7 @@ else if ("FD Complaint Inspection".equals(inspType) && "Complete".equals || "No 
 	closeCap(currentUserID);
 }
 // FD Initial Requested Inspection
-else if ("FD Initial Requested Inspection".equals(inspType) && "Complete".equals || "No Violations Found".equal (inspResult))
+else if ("FD Initial Requested Inspection".equals(inspType) && "Complete".equals(inspResult) || "No Violations Found".equals(inspResult))
 {
 	altId = capId.getCustomID();
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
@@ -431,7 +431,7 @@ else if ("FD Initial Requested Inspection".equals(inspType) && "Complete".equals
 	closeCap(currentUserID);
 }
 // FD Operational Permit
-else if ("FD Operational Permit".equals(inspType) && "Complete".equals || "No Violations Found".equal (inspResult))
+else if ("FD Operational Permit".equals(inspType) && "Complete".equals(inspResult) || "No Violations Found".equals(inspResult))
 {
 	altId = capId.getCustomID();
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
@@ -451,7 +451,7 @@ else if ("FD Operational Permit".equals(inspType) && "Complete".equals || "No Vi
 	closeCap(currentUserID);
 }
 // FD TUP
-else if ("FD TUP".equals(inspType) && "Complete".equals || "No Violations Found".equal (inspResult))
+else if ("FD TUP".equals(inspType) && "Complete".equals(inspResult) || "No Violations Found".equals(inspResult))
 {
 	altId = capId.getCustomID();
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
@@ -471,7 +471,7 @@ else if ("FD TUP".equals(inspType) && "Complete".equals || "No Violations Found"
 	closeCap(currentUserID);
 }
 // FD Complaint Follow-Up Inspection
-else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Complete".equals || "No Violations Found".equal (inspResult))
+else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Complete".equals(inspResult) || "No Violations Found".equals(inspResult))
 {
 	altId = capId.getCustomID();
 	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
@@ -491,12 +491,12 @@ else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Complete".equa
 	closeCap(currentUserID);
 }
 
-if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
-{
-	//close out
-	editAppSpecific("Number of Failed Inspections", 0);
-	closeTask("Inspection","Compliance/Complete","closed by script 15","closed by script 15");
-	updateAppStatus("Complete","updated by script 15");
-	closeCap(currentUserID);
-}
+// if (inspResult == "Complete" || inspResult == "No Violations Found" || inspResult == "Cancelled")
+// {
+// 	//close out
+// 	editAppSpecific("Number of Failed Inspections", 0);
+// 	closeTask("Inspection","Compliance/Complete","closed by script 15","closed by script 15");
+// 	updateAppStatus("Complete","updated by script 15");
+// 	closeCap(currentUserID);
+// }
 logDebug("Script 15 - End");
