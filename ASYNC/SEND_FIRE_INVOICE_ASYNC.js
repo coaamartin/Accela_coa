@@ -4,8 +4,6 @@ try
 	logDebug("***** Starting SEND_FIRE_INVOICE_ASYNC from script *****");
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
-	//var reportName = "Invoice Report";
-	//var altId = aa.env.getValue("altID")
 	var invNbr = aa.env.getValue("INVOICEID");
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -18,11 +16,11 @@ try
 	tParams.put("$$FirstName$$", fName);
 	tParams.put("$$LastName$$", lName);
 	var rParams = aa.util.newHashtable();
-	rParams.put("AGENCYID", aa.getServiceProviderCode());
+	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "FIRE INVOICED FEES";
 	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
-	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, report);
+	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
 {
