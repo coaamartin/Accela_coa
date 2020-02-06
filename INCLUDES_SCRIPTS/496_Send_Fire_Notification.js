@@ -4,7 +4,7 @@ if (balanceDue > 0)
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
-	envParameters.put("INVOICEID", InvoiceNbrArray[0] + "");I
+	envParameters.put("INVOICEID", InvoiceNbrArray[0] + "");
 	envParameters.put("AGENCYID", "AURORACO");
 	var vAsyncScript = "SEND_FIRE_INVOICE_ASYNC";
 	aa.runAsyncScript(vAsyncScript, envParameters)
