@@ -514,6 +514,4 @@ else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Complete".equa
 // 	updateAppStatus("Complete","updated by script 15");
 // 	closeCap(currentUserID);
 // }
-var invNbr = aa.env.getValue("INVOICEID");
-logDebug("Invoice ID = " + invNbr);
 logDebug("Script 15 - End");
