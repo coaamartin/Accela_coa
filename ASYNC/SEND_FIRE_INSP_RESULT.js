@@ -61,7 +61,7 @@ function getEmailString()
 		// 	}
 		// }
 		//Commented out on 2/6/2020 to update the type of contacts get an email
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType() == "Inspection Contact")
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact")
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
 		}
