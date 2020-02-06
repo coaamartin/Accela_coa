@@ -272,6 +272,21 @@ else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Order Notice".
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
+else if ("FD Complaint".equals(inspType) && "Order Notice".equals(inspResult))
+{
+	altId = capId.getCustomID();
+	logDebug("Record ID: " + altId);
+	logDebug("Kicking off SEND_FIRE_INSP_RESULT");
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("reportName", "Fire Order Notice");
+	envParameters.put("altID", altId);
+	logDebug("Parameter that is being passed: " + altId);
+	logDebug("Sending Fire_Follow_Up_Inspection for Inspection type: " + inspType);
+	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
+	aa.runAsyncScript(vAsyncScript, envParameters);	
+}
 else if ("FD Follow-up".equals(inspType) && "Order Notice".equals(inspResult))
 {
 	altId = capId.getCustomID();
