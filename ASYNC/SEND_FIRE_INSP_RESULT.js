@@ -50,17 +50,6 @@ function getEmailString()
 	//need to add inspection contact below to this logic 
 	for (var c in contactArray)
 	{
-		//logic to pull just inspection contacts
-		// if(contactArray[c]["contactType"] == "Inspection Contact"){
-		// 	thisContact = contactArray[c];
-		// 	if (thisContact["email"] != null)
-		// 	{
-		// 		emailString += contactArray[c].getPeople().getEmail() + ";";
-	
-	
-		// 	}
-		// }
-		//Commented out on 2/6/2020 to update the type of contacts get an email
 		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact")
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
