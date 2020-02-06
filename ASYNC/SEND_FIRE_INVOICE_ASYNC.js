@@ -1,17 +1,12 @@
 //SEND_FIRE_INVOICE_ASYNC
-//email the applicant
-//SEND_FIRE_INSP_RESULT
-logDebug("***** Starting SEND_FIRE_INSP_RESULT from script *****");
 try
 {
+	logDebug("***** Starting SEND_FIRE_INVOICE_ASYNC from script *****");
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
-	var reportName = "Invoice Report";
+	//var reportName = "Invoice Report";
 	//var altId = aa.env.getValue("altID")
 	var invNbr = aa.env.getValue("INVOICEID");
-	//var inspId = aa.env.getValue("InspActNumber");
-
-
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
@@ -20,12 +15,14 @@ try
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
+	tParams.put("$$FirstName$$", fName);
+	tParams.put("$$LastName$$", lName);
 	var rParams = aa.util.newHashtable();
 	rParams.put("AGENCYID", aa.getServiceProviderCode());
 	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "FIRE INVOICED FEES";
-	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
-	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
+	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, report);
 }
 catch(e)
 {
