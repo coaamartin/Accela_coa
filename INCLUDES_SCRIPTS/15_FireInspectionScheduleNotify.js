@@ -272,7 +272,7 @@ else if ("FD Complaint Follow-Up Inspection".equals(inspType) && "Order Notice".
 	var vAsyncScript = "SEND_FIRE_INSP_RESULT";
 	aa.runAsyncScript(vAsyncScript, envParameters);	
 }
-else if ("FD Complaint".equals(inspType) && "Order Notice".equals(inspResult))
+else if ("FD Complaint Inspection".equals(inspType) && "Order Notice".equals(inspResult))
 {
 	altId = capId.getCustomID();
 	logDebug("Record ID: " + altId);
