@@ -21,6 +21,8 @@ try
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
+	rParams.put("AGENCYID", aa.getServiceProviderCode());
+	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "FIRE INVOICED FEES";
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
