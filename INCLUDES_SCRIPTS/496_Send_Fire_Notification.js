@@ -18,7 +18,7 @@ if (balanceDue > 0)
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var invNbr = aa.env.getValue("INVOICEID");
-	var emailTo = getEmailString(); 
+	//var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -35,7 +35,7 @@ if (balanceDue > 0)
 	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
 	logDebug("1" + capId);
 	logDebug("2" + invNbr);
-	logDebug("3" + emailTo);
+	//logDebug("3" + emailTo);
 	logDebug("4" + tParams);
 	logDebug("5" + rParams);
 	logDebug("6" + emailtemplate);
