@@ -7,7 +7,8 @@ try
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var reportName = aa.env.getValue("reportName");
-	var altId = aa.env.getValue("altID")
+	//var altId = aa.env.getValue("altID")
+	var invNbr = aa.env.getValue("INVOICEID");
 	//var inspId = aa.env.getValue("InspActNumber");
 
 
@@ -20,7 +21,7 @@ try
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
-	var emailtemplate = "FIRE INVOICED FEES";
+	var emailtemplate = "Invoice Report";
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 }
