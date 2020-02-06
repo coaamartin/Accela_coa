@@ -1,7 +1,7 @@
 if (balanceDue > 0)
 {
 	logDebug("Starting 496_Fire_Notifications script");
-	var invNbr = aa.env.getValue("invNbr");
+	var invNbr = aa.env.getValue("INVOICEID");
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
