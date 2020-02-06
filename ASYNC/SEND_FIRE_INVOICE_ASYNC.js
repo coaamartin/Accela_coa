@@ -4,7 +4,8 @@ try
 	logDebug("***** Starting SEND_FIRE_INVOICE_ASYNC from script *****");
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
-	var invNbr = aa.env.getValue("INVOICEID");
+	//var invNbr = aa.env.getValue("INVOICEID");
+	var invNbr = "2557";
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
