@@ -5,8 +5,6 @@ try
 	var cap = aa.env.getValue("cap");
 	var invNbr = aa.env.getValue("INVOICEID");
 	var emailTo = getEmailString(); 
-	var fName = iContact.getFirstName();
-	var lName = iContact.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -14,8 +12,6 @@ try
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
-	tParams.put("$$FirstName$$", fName);
-	tParams.put("$$LastName$$", lName);
 	var rParams = aa.util.newHashtable();
 	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);

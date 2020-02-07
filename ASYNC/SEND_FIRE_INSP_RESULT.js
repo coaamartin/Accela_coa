@@ -6,9 +6,6 @@ try
 	var cap = aa.env.getValue("cap");
 	var reportName = aa.env.getValue("reportName");
 	var altId = aa.env.getValue("altID")
-	//var inspId = aa.env.getValue("InspActNumber");
-
-
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
