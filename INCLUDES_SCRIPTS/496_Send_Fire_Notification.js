@@ -16,6 +16,7 @@ if (balanceDue > 0)
 	//var errorLog = [];
 	//logDebug("Errors from Send_fire_Invoice_Async =" + errorLog);
 	var capAlias = cap.getCapModel().getAppTypeAlias();
+	var iContact = getContactByType("Inspection Contact", capId);
 	var fName = iContact.getFirstName();
 	var lName = iContact.getLastName();
 	var today = new Date();
@@ -33,7 +34,24 @@ if (balanceDue > 0)
 	logDebug("Template Parameters: " + tParams);
 	logDebug("Rparams" + rParams);
 	logDebug("Report info: " + report);
+	function getContactByType(conType,capId) {
 
+		var contactArray = getPeople(capId);
 	
+	
+	
+		for(thisContact in contactArray) {
+	
+			if((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase())
+	
+				return contactArray[thisContact].getPeople();
+	
+		}
+	
+	
+	
+		return false;
+	
+	}
 }
 
