@@ -20,7 +20,7 @@ try
 	tParams.put("$$FirstName$$", fName);
 	tParams.put("$$LastName$$", lName);
 	var rParams = aa.util.newHashtable();
-	rParams.put("AGENCYID", aa.getServiceProviderCode());
+	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "FIRE INVOICED FEES";
 
