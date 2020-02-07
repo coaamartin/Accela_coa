@@ -1,5 +1,4 @@
-if (balanceDue > 0)
-{
+if (balanceDue > 0) {
 	logDebug("Starting 496_Fire_Notifications script");
 	var InvoiceNbr = InvoiceNbrArray[0] + "";
 	var envParameters = aa.util.newHashMap();
@@ -10,15 +9,15 @@ if (balanceDue > 0)
 	var vAsyncScript = "SEND_FIRE_INVOICE_ASYNC";
 	aa.runAsyncScript(vAsyncScript, envParameters)
 	logDebug("CapID info: " + envParameters);
-	logDebug ("Invoice NBR: " + InvoiceNbr);
+	logDebug("Invoice NBR: " + InvoiceNbr);
 	logDebug("End of 496_Fire_Notifications script");
 	logDebug("**END** FIRE_INVOICE_ASYNC kicks off from here");
 	//var errorLog = [];
 	//logDebug("Errors from Send_fire_Invoice_Async =" + errorLog);
 	var capAlias = cap.getCapModel().getAppTypeAlias();
-	var iContact = getContactByType("Inspection Contact", capId);
-	var fName = iContact.getFirstName();
-	var lName = iContact.getLastName();
+	//var iContact = getContactByType("", capId);
+	var fName = "Ray";
+	var lName = "Province";
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
@@ -34,24 +33,6 @@ if (balanceDue > 0)
 	logDebug("Template Parameters: " + tParams);
 	logDebug("Rparams" + rParams);
 	logDebug("Report info: " + report);
-	function getContactByType(conType,capId) {
 
-		var contactArray = getPeople(capId);
-	
-	
-	
-		for(thisContact in contactArray) {
-	
-			if((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase())
-	
-				return contactArray[thisContact].getPeople();
-	
-		}
-	
-	
-	
-		return false;
-	
-	}
+
 }
-
