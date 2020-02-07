@@ -13,5 +13,7 @@ if (balanceDue > 0)
 	logDebug ("Invoice NBR: " + InvoiceNbr);
 	logDebug("End of 496_Fire_Notifications script");
 	logDebug("**END** FIRE_INVOICE_ASYNC kicks off from here");
+	var errorLog = [];
+	logDebug("Errors from Send_fire_Invoice_Async =" + errorLog);
 }
 
