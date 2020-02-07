@@ -16,6 +16,8 @@ if (balanceDue > 0)
 	//var errorLog = [];
 	//logDebug("Errors from Send_fire_Invoice_Async =" + errorLog);
 	var capAlias = cap.getCapModel().getAppTypeAlias();
+	var fName = iContact.getFirstName();
+	var lName = iContact.getLastName();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
