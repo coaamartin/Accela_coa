@@ -17,18 +17,16 @@ try
 	var rParams = aa.util.newHashtable();
 	if ("Fire_Primary_Inspection".equals(reportName))
 	{		
-		//rParams.put("InspActNumber", inspId);
 		rParams.put("RecordId", altId);
 	}
 	else if ("Fire_Follow_Up_Inspection".equals(reportName))
 	{
-		//rParams.put("InspActNumber", inspId);
 		rParams.put("RecordID", altId);
 	}
 	else if ("Fire Order Notice".equals(reportName))
 	{
 		rParams.put("RecordID", capId.getCustomID());
-		//rParams.put("RecordID", altId);
+		
 	}
 
 	var emailtemplate = "FIRE INSPECTION RESULTS #15";

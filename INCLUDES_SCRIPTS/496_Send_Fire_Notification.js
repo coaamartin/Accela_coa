@@ -12,27 +12,21 @@ if (balanceDue > 0) {
 	logDebug("Invoice NBR: " + InvoiceNbr);
 	logDebug("End of 496_Fire_Notifications script");
 	logDebug("**END** FIRE_INVOICE_ASYNC kicks off from here");
-	//var errorLog = [];
-	//logDebug("Errors from Send_fire_Invoice_Async =" + errorLog);
-	var capAlias = cap.getCapModel().getAppTypeAlias();
-	//var iContact = getContactByType("", capId);
-	var fName = "Ray";
-	var lName = "Province";
-	var today = new Date();
-	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-	var tParams = aa.util.newHashtable();
-	tParams.put("$$todayDate$$", thisDate);
-	tParams.put("$$altID$$", capId.getCustomID());
-	tParams.put("$$capAlias$$", capAlias);
-	tParams.put("$$FirstName$$", fName);
-	tParams.put("$$LastName$$", lName);
-	var rParams = aa.util.newHashtable();
-	rParams.put("AGENCYID", "AURORACO");
-	rParams.put("INVOICEID", InvoiceNbr);
-	//var report = generateReportFile("Fire Invoice Report", rParams, aa.getServiceProviderCode());
-	logDebug("Template Parameters: " + tParams);
-	logDebug("Rparams" + rParams);
-	//logDebug("Report info: " + report);
-
-
+	//Below was for testing purpose wanted to ensure all parameters where being passed.
+	// var capAlias = cap.getCapModel().getAppTypeAlias();
+	// var fName = "Ray";
+	// var lName = "Province";
+	// var today = new Date();
+	// var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+	// var tParams = aa.util.newHashtable();
+	// tParams.put("$$todayDate$$", thisDate);
+	// tParams.put("$$altID$$", capId.getCustomID());
+	// tParams.put("$$capAlias$$", capAlias);
+	// tParams.put("$$FirstName$$", fName);
+	// tParams.put("$$LastName$$", lName);
+	// var rParams = aa.util.newHashtable();
+	// rParams.put("AGENCYID", "AURORACO");
+	// rParams.put("INVOICEID", InvoiceNbr);
+	// logDebug("Template Parameters: " + tParams);
+	// logDebug("Rparams" + rParams);
 }
