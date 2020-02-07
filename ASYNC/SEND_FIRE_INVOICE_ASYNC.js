@@ -4,8 +4,9 @@ try
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var invNbr = aa.env.getValue("INVOICEID");
-	//var invNbr = "2557";
 	var emailTo = getEmailString(); 
+	var fName = iContact.getFirstName();
+	var lName = iContact.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
