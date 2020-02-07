@@ -29,10 +29,10 @@ if (balanceDue > 0) {
 	var rParams = aa.util.newHashtable();
 	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", InvoiceNbr);
-	var report = generateReportFile("Fire Invoice Report", rParams, aa.getServiceProviderCode());
+	//var report = generateReportFile("Fire Invoice Report", rParams, aa.getServiceProviderCode());
 	logDebug("Template Parameters: " + tParams);
 	logDebug("Rparams" + rParams);
-	logDebug("Report info: " + report);
+	//logDebug("Report info: " + report);
 
 
 }
