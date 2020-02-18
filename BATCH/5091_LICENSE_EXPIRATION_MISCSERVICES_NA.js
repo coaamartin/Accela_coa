@@ -266,8 +266,11 @@ function mainProcess() {
 		b1Exp = myExp[thisExp]; //b1expiration record
 		//Remember that months in Javascript start at 0 for January.  So, on current month, go back X days to get into position to get the previous month.
 		var datepart1 = new Date(dateAdd(null, -17));
-		var expMonth = datepart1.getMonth();	
+		logDebug("Date Part1: " + datepart1);
+		var expMonth = datepart1.getMonth();
+		logDebug("Exp Month: " + expMonth);	
 		var b1Status = b1Exp.getExpStatus();
+		logDebug("B1Status: " + b1Status);
 		var renewalCapId = null;
 
 		capId = aa.cap.getCapID(b1Exp.getCapID().getID1(), b1Exp.getCapID().getID2(), b1Exp.getCapID().getID3()).getOutput();

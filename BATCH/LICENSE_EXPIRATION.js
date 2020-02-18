@@ -166,16 +166,16 @@ function mainProcess() {
 	
 	//Adding in possible missing login for dates.
 	/*-------------------Below Here-------------------*/
-	var currentdate = new Date();
-   var dayrange = 60;
-   var dayrange2 = 30;
+// 	var currentdate = new Date();
+//    var dayrange = 60;
+//    var dayrange2 = 30;
    
-   currentdate.setDate(currentdate.getDate() - dayrange2); 
-   var toDate = (currentdate.getMonth()+1) + "/" + currentdate.getDate() + "/" + currentdate.getFullYear();
+//    currentdate.setDate(currentdate.getDate() - dayrange2); 
+//    var toDate = (currentdate.getMonth()+1) + "/" + currentdate.getDate() + "/" + currentdate.getFullYear();
    
-   currentdate.setDate(currentdate.getDate() - dayrange); 
-   var fromDate = (currentdate.getMonth()+1) + "/" + currentdate.getDate() + "/" + currentdate.getFullYear()
-	/*-------------------Above Here-------------------*/
+//    currentdate.setDate(currentdate.getDate() - dayrange); 
+//    var fromDate = (currentdate.getMonth()+1) + "/" + currentdate.getDate() + "/" + currentdate.getFullYear()
+// 	/*-------------------Above Here-------------------*/
 
 	var fromDate = getJobParam("fromDate"); // Hardcoded dates.   Use for testing only
 	var toDate = getJobParam("toDate"); // ""
