@@ -167,7 +167,8 @@ function mainProcess() {
 	var paramStdChoice = aa.env.getValue("paramStdChoice");	// use this standard choice for parameters instead of batch jobs
 	var fromDate = getJobParam("fromDate"); // Hardcoded dates.   Use for testing only
 	var toDate = getJobParam("toDate"); // ""
-	var ama = getJobParam("appMatchArray");
+	//var ama = getJobParam("appMatchArray");
+	var ama = "Associations/Neighborhood/Association/Master"
 	var appMatchArray = ( ama != "" ? ama.split(",") : null); // Comma separated appmatches, overrides separate values
 	var lookAheadDays = getJobParam("lookAheadDays"); // Number of days from today
 	var daySpan = getJobParam("daySpan"); // Days to search (6 if run weekly, 0 if daily, etc.)
@@ -204,22 +205,15 @@ function mainProcess() {
 	var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
 	acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
 
-	// if (!appMatchArray) {
-	// 	appGroup = appGroup == "" ? "*" : appGroup;
-	// 	appTypeType = appTypeType == "" ? "*" : appTypeType;
-	// 	appSubtype = appSubtype == "" ? "*" : appSubtype;
-	// 	appCategory = appCategory == "" ? "*" : appCategory;
-	// 	var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategory;
-	// 	appMatchArray = [appType];
-	// }
 	if (!appMatchArray) {
-		appGroup = "Associations";
+		appGroup = appGroup == "" ? "*" : appGroup;
 		appTypeType = appTypeType == "" ? "*" : appTypeType;
 		appSubtype = appSubtype == "" ? "*" : appSubtype;
 		appCategory = appCategory == "" ? "*" : appCategory;
 		var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategory;
 		appMatchArray = [appType];
 	}
+	
 
 	for (var ama in appMatchArray) {
 		logDebug("Searching for Record Type: " + appMatchArray[ama]);
