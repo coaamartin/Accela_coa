@@ -181,7 +181,8 @@ function mainProcess() {
 	var toDate = getJobParam("toDate"); // ""
 	var dFromDate = aa.date.parseDate(fromDate); //
 	var dToDate = aa.date.parseDate(toDate); //
-	var ama = getJobParam("appMatchArray");
+	//var ama = getJobParam("appMatchArray");
+	var ama = "Associations/Neighborhood/Association/Master"
 	var appMatchArray = ( ama != "" ? ama.split(",") : null); // Comma separated appmatches, overrides separate values
 	var lookAheadDays = getJobParam("lookAheadDays"); // Number of days from today
 	var daySpan = getJobParam("daySpan"); // Days to search (6 if run weekly, 0 if daily, etc.)
