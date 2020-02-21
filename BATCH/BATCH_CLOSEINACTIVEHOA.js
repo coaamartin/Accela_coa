@@ -119,7 +119,8 @@ function mainProcess() {
 	/------------------------------------------------------------------------------------------------------*/
 	var paramStdChoice = aa.env.getValue("paramStdChoice");	// use this standard choice for parameters instead of batchjob params
 	var daysInactive = getJobParam("daysInactive");
-	var appTypeToLookFor = getJobParam("appTypeToLookFor");
+	//var appTypeToLookFor = getJobParam("appTypeToLookFor");
+	var appTypeToLookFor = "Associations/Neighborhood/Association/Master"
 	var appTypeArrayToLookFor = ( appTypeToLookFor != "" ? appTypeToLookFor.split("/") : null); 
 	var appStatusToLookFor = getJobParam("statusToLookFor");
 	var appStatusToLookForArray = ( appStatusToLookFor != "" ? appStatusToLookFor.split(",") : null); 
