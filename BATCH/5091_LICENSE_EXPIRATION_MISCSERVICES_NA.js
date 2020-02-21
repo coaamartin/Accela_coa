@@ -204,8 +204,16 @@ function mainProcess() {
 	var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
 	acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
 
+	// if (!appMatchArray) {
+	// 	appGroup = appGroup == "" ? "*" : appGroup;
+	// 	appTypeType = appTypeType == "" ? "*" : appTypeType;
+	// 	appSubtype = appSubtype == "" ? "*" : appSubtype;
+	// 	appCategory = appCategory == "" ? "*" : appCategory;
+	// 	var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategory;
+	// 	appMatchArray = [appType];
+	// }
 	if (!appMatchArray) {
-		appGroup = appGroup == "" ? "*" : appGroup;
+		appGroup = "Associations";
 		appTypeType = appTypeType == "" ? "*" : appTypeType;
 		appSubtype = appSubtype == "" ? "*" : appSubtype;
 		appCategory = appCategory == "" ? "*" : appCategory;
