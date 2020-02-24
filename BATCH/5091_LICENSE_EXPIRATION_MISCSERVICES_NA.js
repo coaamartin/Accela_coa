@@ -168,7 +168,6 @@ function mainProcess() {
 	var fromDate = getJobParam("fromDate"); // Hardcoded dates.   Use for testing only
 	var toDate = getJobParam("toDate"); // ""
 	var ama = getJobParam("appMatchArray");
-	//var ama = "Associations/Neighborhood/Association/Master"
 	var appMatchArray = ( ama != "" ? ama.split(",") : null); // Comma separated appmatches, overrides separate values
 	var lookAheadDays = getJobParam("lookAheadDays"); // Number of days from today
 	var daySpan = getJobParam("daySpan"); // Days to search (6 if run weekly, 0 if daily, etc.)
