@@ -5,7 +5,7 @@
 // CHANGELOG: 
 
 
-if (wfTask == "Email GIS" && wfStatus == "Email Sent") {
+if (wfTask == "Review Application" && wfStatus == "Complete") {
 	var rB1ExpResult = aa.expiration.getLicensesByCapID(capId).getOutput();
 	rB1ExpResult.setExpStatus("Active");	
 	aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());	
