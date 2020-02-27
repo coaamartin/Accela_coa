@@ -17,7 +17,7 @@ var sysDate = aa.date.getCurrentDate();
 var currentUserID = aa.env.getValue("CurrentUserID"); // Current User
 var systemUserObj = null; // Current User Object
 
-var cadDatabase = "[dbo.sp_st]";
+//var cadDatabase = "[dbo.sp_st]";
 var accelaDatabase = "[ACPTest_Accela]";
 
 
@@ -262,7 +262,7 @@ function buildGetMatchingAddressesQuery()
 	matchingAddresses +=" L3A.l1_address_nbr";
 	
 	//matchingAddresses +=" FROM [CADTest].[dbo].[sp_st] ST";
-	matchingAddresses +=" FROM " + cadDatabase + ".[dbo].[sp_st] ST";
+	matchingAddresses +=" FROM [dbo].[sp_st] ST";
 	//matchingAddresses +=" FROM " + accelaDatabase + "[dbo].[L3ADDRES] L3A";
 
 	//matchingAddresses +=" left join [Accela].[dbo].[L3ADDRES] L3A";
