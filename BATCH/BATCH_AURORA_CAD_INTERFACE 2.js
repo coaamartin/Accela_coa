@@ -17,7 +17,7 @@ var sysDate = aa.date.getCurrentDate();
 var currentUserID = aa.env.getValue("CurrentUserID"); // Current User
 var systemUserObj = null; // Current User Object
 
-var cadDatabase = "[CADTRAININGCAD.E911.COA].[cadtrain]";
+var cadDatabase = "[dbo.sp_st]";
 var accelaDatabase = "[ACPTest_Accela]";
 
 
