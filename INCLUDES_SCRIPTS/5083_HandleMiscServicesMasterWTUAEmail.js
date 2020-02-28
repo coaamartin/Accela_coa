@@ -16,10 +16,14 @@ if (wfTask == "Review Application" && wfStatus == "Complete") {
 if (wfTask == "Email GIS" && wfStatus == "Email Sent") {
 	var files = new Array();
 	var emailTemplate = "MISC NA MASTER GIS REFERRAL_INT";		
-	var emailAddress = "suhail.wakil@sbztechnology.com";
+	var emailAddress = = lookup("Neighborhood Association Master GIS", "EMAIL_ADDR");
 		
 	var eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "suhail.wakil@sbztechnology.com");	
+	eParams.put("$$gis1$$", AInfo["What is the south boundary street?"]);	
+	eParams.put("$$gis2$$", AInfo["What is the north boundary street?"]);	
+	eParams.put("$$gis3$$", AInfo["What is the east boundary?"]);	
+	eParams.put("$$gis4$$", AInfo["What is the west boundary?"]);	
 
 	var sent = aa.document.sendEmailByTemplateName("", emailAddress, "", emailTemplate, eParams, files);
 	if (!sent.getSuccess())
