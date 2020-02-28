@@ -16,7 +16,7 @@ if (wfTask == "Review Application" && wfStatus == "Complete") {
 if (wfTask == "Email GIS" && wfStatus == "Email Sent") {
 	var files = new Array();
 	var emailTemplate = "MISC NA MASTER GIS REFERRAL_INT";		
-	var emailAddress = = lookup("Neighborhood Association Master GIS", "EMAIL_ADDR");
+	var emailAddress = lookup("Neighborhood Association Master GIS", "EMAIL_ADDR");
 		
 	var eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "suhail.wakil@sbztechnology.com");	
