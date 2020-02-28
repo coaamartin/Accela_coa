@@ -20,10 +20,10 @@ if (wfTask == "Email GIS" && wfStatus == "Email Sent") {
 		
 	var eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "suhail.wakil@sbztechnology.com");	
-	eParams.put("$$gis1$$", AInfo["What is the south boundary street?"]);	
-	eParams.put("$$gis2$$", AInfo["What is the north boundary street?"]);	
-	eParams.put("$$gis3$$", AInfo["What is the east boundary?"]);	
-	eParams.put("$$gis4$$", AInfo["What is the west boundary?"]);	
+	eParams.put("$$gis1$$", AInfo["North Boundary"]);	
+	eParams.put("$$gis3$$", AInfo["East Boundary"]);	
+	eParams.put("$$gis2$$", AInfo["South Boundary"]);	
+	eParams.put("$$gis4$$", AInfo["West Boundary"]);	
 
 	var sent = aa.document.sendEmailByTemplateName("", emailAddress, "", emailTemplate, eParams, files);
 	if (!sent.getSuccess())
