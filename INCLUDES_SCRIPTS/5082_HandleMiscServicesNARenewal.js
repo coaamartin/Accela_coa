@@ -4,6 +4,7 @@
 // DATECREATED: 02/08/2019
 // BY: amartin
 // CHANGELOG: 4/29/2019,coa,ajm,added update of parent date last updated custom field,
+// CHANGELOG: 3/5/2020, COA,RLP,moved it to Associations from MISCSERVICES
 
 logDebug("At start of 5082 outside if");	 
 if (wfTask == "Review Application" && wfStatus == "Complete") {
@@ -71,7 +72,7 @@ function UpdateMiscNARParent() {
                 childCapScriptModel = aa.cap.getCap(capId).getOutput();
                 parentCapScriptModel = aa.cap.getCap(parentCapId).getOutput();
                 parentCapTypeString = parentCapScriptModel.getCapType().toString();
-                if(ifTracer(parentCapTypeString == 'MiscServices/Neighborhood/Association/Master', 'parent = MiscServices/Neighborhood/Association/Master')) {
+                if(ifTracer(parentCapTypeString == 'Associations/Neighborhood/Association/Master', 'parent = Associations/Neighborhood/Association/Master')) {
                     // copy data from renewal to parent application
 					// First, remove existing contacts to prevent doubling them up.
 					logDebug("***** Removing Master record contacts *****");
