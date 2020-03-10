@@ -25,6 +25,8 @@ if (wfTask == "Email GIS" && wfStatus == "Email Sent") {
 	eParams.put("$$gis3$$", AInfo["East Boundary"]);	
 	eParams.put("$$gis2$$", AInfo["South Boundary"]);	
 	eParams.put("$$gis4$$", AInfo["West Boundary"]);	
+  eParams.put("$$HOANAME$$", AInfo["Name of HOA"]);
+  eParams.put("$$HOANUMBER$$", AInfo["Neighborhood Group Number"]);
 
 	sendNotification("", emailAddress, "", emailTemplate, eParams, null);
 
