@@ -191,6 +191,7 @@ if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Estimate Fee", 'wf:Fee Pr
     pubWrksScript183_assessFees();
 }
 
+/*
 if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Processing/Ready to Pay')){
     //Script 183 Invoice fees if they exists
     var fees2Inv = ["PW_PIP_13","PW_PIP_15","PW_PIP_16","PW_PIP_14","PW_PIP_23","PW_PIP_31 ","PW_PIP_32","PW_PIP_03","PW_PIP_34","PW_PIP_17","PW_PIP_05","PW_PIP_37","PW_PIP_20","PW_PIP_22","PW_PIP_04","PW_PIP_11","PW_PIP_19","PW_PIP_18","PW_PIP_12","PW_PIP_02","PW_PIP_10","PW_PIP_01","PW_PIP_07","PW_PIP_21","PW_PIP_09","PW_PIP_08","PW_PIP_24","PW_PIP_06"];
@@ -202,3 +203,4 @@ if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Pr
 	
 	//invoiceNewFeesOneInvoice(capId);
 }
+*/
