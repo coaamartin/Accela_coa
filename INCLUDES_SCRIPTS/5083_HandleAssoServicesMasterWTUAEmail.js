@@ -14,7 +14,7 @@ if (wfTask == "Review Application" && wfStatus == "Complete") {
 }
 */
 
-if (wfTask == "Email GIS" && wfStatus == "Email Sent") {
+if (wfTask == "Email GIS" && wfStatus == "Send Email") {
 	var files = new Array();
 	var emailTemplate = "MISC NA MASTER GIS REFERRAL_INT";		
 	var emailAddress = lookup("Neighborhood Association Master GIS", "EMAIL_ADDR");
