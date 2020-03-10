@@ -1,4 +1,4 @@
-function resubmittalRequestedEmailNotification(workFlowTask, workflowStatusArray, emailTemplate) {
+function withdrawnEmailNotification(workFlowTask, workflowStatusArray, emailTemplate) {
 
 	if (workFlowTask == null || wfTask == workFlowTask) {
 

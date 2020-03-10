@@ -40,6 +40,42 @@ Notes:
 */
 
 resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "PI RESUBMITTAL REQUESTED # 382");
+/*
+Title : withdrawnEmailNotification email notification (WorkflowTaskUpdateAfter) 
+
+Purpose : When any workflow task is updated with the status "Withdrawn" then send an email to all contacts on record
+with workflow comments included in the email template.
+ 
+Functional Area : Records
+
+Sample Call:
+    withdrawnEmailNotification(null, [ "Withdrawn" ], "PI WITHDRAWN");
+    
+Notes:
+    Supported Email Parameters:
+    $$altID$$, $$recordAlias$$, $$recordStatus$$, $$balance$$, $$wfTask$$, $$wfStatus$$, $$wfDate$$, $$wfComment$$, $$wfStaffUserID$$, $$wfHours$$
+    
+*/
+
+withdrawnEmailNotification(null, [ "Withdrawn" ], "PI WITHDRAWN");
+/*
+Title : Ready to Pay email notification (WorkflowTaskUpdateAfter) 
+
+Purpose : When any workflow task is updated with the status "Ready to Pay" then send an email to all contacts on record
+with workflow comments included in the email template.
+ 
+Functional Area : Records
+
+Sample Call:
+    readyToPayRequestedEmailNotification(null, [ "Ready to Pay" ], "PI READY TO PAY");
+    
+Notes:
+    Supported Email Parameters:
+    $$altID$$, $$recordAlias$$, $$recordStatus$$, $$balance$$, $$wfTask$$, $$wfStatus$$, $$wfDate$$, $$wfComment$$, $$wfStaffUserID$$, $$wfHours$$
+    
+*/
+
+readyToPayRequestedEmailNotification(null, [ "Ready to Pay" ], "PI READY TO PAY");
 
 //*********************************************************************************************************
 //script 183        Assess Public Improvement Fees
