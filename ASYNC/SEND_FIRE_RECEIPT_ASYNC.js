@@ -1,9 +1,12 @@
 logDebug("***** Starting SEND_FIRE_RECEIPT_ASYNC *****");
+message = "";
 try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var invNbr = aa.env.getValue("INVOICEID");
+	message = invNbr;
+	var amount = aa.env.getValue("amount");
 	var contactsEmailToArray = getContactsEmailString();
 	var emailTo = "";
 	for (var e in contactsEmailToArray) emailTo += contactsEmailToArray[e] + ",";
@@ -14,15 +17,16 @@ try
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
+	tParams.put("$$amount$$", amount);
 	var rParams = aa.util.newHashtable();
-	rParams.put("INVOICEID", invNbr);
+	rParams.put("INVOICEID", String(invNbr));
 	var emailtemplate = "FIRE_PAYMENT_CONFIRM";
 	var report = generateReportFile("Receipt Report", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
 {
-	email("debug@gmail.com", "aurora@gov.org", "Error", e.message);
+	email("debug@gmail.com", "aurora@gov.org", "Error", e.message + " invNbr: " + invNbr);
 }
 
 function getContactsEmailString(contactTypeArray)
