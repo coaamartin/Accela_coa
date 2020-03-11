@@ -75,7 +75,7 @@ Notes:
     
 */
 
-readyToPayRequestedEmailNotification(null, [ "Ready to Pay" ], "PI READY TO PAY");
+readyToPayRequestedEmailNotification(null, [ "Ready to Pay" ], "PW READY TO PAY #123");
 
 //*********************************************************************************************************
 //script 183        Assess Public Improvement Fees

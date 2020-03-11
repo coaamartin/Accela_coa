@@ -56,16 +56,12 @@ var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),ca
 var reportFile = [];
 		var eParams = aa.util.newHashtable();
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
+		addParameter(eParams, "$$capAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-		addParameter(eParams, "$$balance$$", feeBalance(""));
-		addParameter(eParams, "$$wfTask$$", wfTask);
-		addParameter(eParams, "$$wfStatus$$", wfStatus);
-		addParameter(eParams, "$$wfDate$$", wfDate);
+		addParameter(eParams, "$$todayDate$$", wfDate);
 		addParameter(eParams, "$$wfComment$$", wfComment);
-		addParameter(eParams, "$$wfStaffUserID$$", wfStaffUserID);
-		addParameter(eParams, "$$wfHours$$", wfHours);
-		addParameter(eParams, "$$recordDeepUrl$$", recordDeepUrl);
+		addParameter(eParams, "$$$$acaRecordUrl$$$$", recordDeepUrl);
 		/*for (t in toEmails) {
 			aa.document.sendEmailByTemplateName("", toEmails[t], "", emailTemplate, eParams, null);
 		}*/
