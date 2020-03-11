@@ -76,6 +76,24 @@ Notes:
 */
 
 readyToPayRequestedEmailNotification(null, [ "Ready to Pay" ], "PW READY TO PAY #123");
+/*
+Title : Permit Issued email notification (WorkflowTaskUpdateAfter) 
+
+Purpose : When any workflow task is updated with the status "Issued" then send an email to all contacts on record
+with workflow comments included in the email template.
+ 
+Functional Area : Records
+
+Sample Call:
+   issuedPIEmailNotification(null, [ "Issued" ], "PI ISSUED");
+    
+Notes:
+    Supported Email Parameters:
+    $$altID$$, $$recordAlias$$, $$recordStatus$$, $$balance$$, $$wfTask$$, $$wfStatus$$, $$wfDate$$, $$wfComment$$, $$wfStaffUserID$$, $$wfHours$$
+    
+*/
+
+issuedPIEmailNotification(null, [ "Issued" ], "PI ISSUED");
 
 //*********************************************************************************************************
 //script 183        Assess Public Improvement Fees
