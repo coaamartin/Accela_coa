@@ -81,7 +81,7 @@ if (contact) {
 	addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate,0));
 	addParameter(vEParams, "$$ApplicationID$$", licenseNbr);
 	addParameter(vEParams, "$$altID$$", licenseNbr);
-	addParameter(vEparams,"$$acaURL$$",acaSite);
+	addParameter(vEParams,"$$acaURL$$",acaSite);
 
 	tmpCap = capId;
 	capId = createdApp;
