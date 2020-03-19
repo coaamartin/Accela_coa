@@ -54,6 +54,16 @@ logDebug("5082 inside if");
 	// send the email
 	//script84_SendRenewalEmailWhenPermitIssuedComplete();
 	UpdateMiscNARParent();	
+
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	envParameters.put("INVOICEID", InvoiceNbr);
+	envParameters.put("AGENCYID", "AURORACO");
+	var vAsyncScript = "SEND_HOA_RENEW_EMAIL";
+	aa.runAsyncScript(vAsyncScript, envParameters)
+	logDebug("CapID info: " + envParameters);
+	logDebug("End of email renewal in 5082_HandleMiscServicesNARenewal");
 }
 
 function UpdateMiscNARParent() {
