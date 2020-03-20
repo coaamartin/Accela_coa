@@ -54,7 +54,10 @@ logDebug("5082 inside if");
 	// send the email
 	//script84_SendRenewalEmailWhenPermitIssuedComplete();
 	UpdateMiscNARParent();	
+	sendEmailForRenew();
+}
 
+function sendEmailForRenew() {
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
