@@ -4,7 +4,6 @@ try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
-	var reportName = aa.env.getValue("reportName");
 	var altId = aa.env.getValue("altID")
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -16,8 +15,7 @@ try
 	tParams.put("$$capAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
 	var emailtemplate = "HOA RENEWAL CONFIRMATION LETTER";
-	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
-	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+    sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams);
 }
 catch(e)
 {
@@ -28,17 +26,14 @@ function getEmailString()
 	var emailString = "";
 	var contactArray = getPeople(capId);
 
-	//need to add logic to send to all contacts on HOA
+	//need to add inspection contact below to this logic 
 	for (var c in contactArray)
-	{
-		if (!(contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().getEmail().length() > 0))
+	if (!(contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().getEmail().length() > 0))
 			continue;
 		if (getAll || exists(contactArray[c].getPeople().getContactType(), contactTypeArray))
 		{
 			result.push(contactArray[c].getPeople().getEmail());
 		}
-	}
-	return result;
 	logDebug(emailString);
 	return emailString;
 }
