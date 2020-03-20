@@ -58,7 +58,6 @@ logDebug("5082 inside if");
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
-	envParameters.put("INVOICEID", InvoiceNbr);
 	envParameters.put("AGENCYID", "AURORACO");
 	var vAsyncScript = "SEND_HOA_RENEW_EMAIL";
 	aa.runAsyncScript(vAsyncScript, envParameters)
