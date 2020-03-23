@@ -5,7 +5,7 @@ try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
-	message = invNbr;
+	message = "Starting email";
 	var amount = aa.env.getValue("amount");
 	var contactsEmailToArray = getContactsEmailString();
 	var emailTo = "";
