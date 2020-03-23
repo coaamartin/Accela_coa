@@ -149,55 +149,55 @@ function email(pToEmail, pFromEmail, pSubject, pText)
 // 		return false; 
 // 	}
 // }
-//  function sendNotification(emailFrom,emailTo,emailCC,templateName,params)
+ function sendNotification(emailFrom,emailTo,emailCC,templateName,params)
 
-// {
+{
 
-// 	var itemCap = capId;
+	var itemCap = capId;
 
-// 	if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
-
-
-
-// 	var id1 = itemCap.ID1;
-
-//  	var id2 = itemCap.ID2;
-
-//  	var id3 = itemCap.ID3;
+	if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
 
 
 
-// 	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
+	var id1 = itemCap.ID1;
+
+ 	var id2 = itemCap.ID2;
+
+ 	var id3 = itemCap.ID3;
+
+
+
+	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
 
 
 
 
 
-// 	//var result = null;
+	//var result = null;
 
-// 	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel);
+	//result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel);
 
-// 	if(result.getSuccess())
+	// if(result.getSuccess())
 
-// 	{
+	// {
 
-// 		logDebug("Sent email successfully!");
+	// 	logDebug("Sent email successfully!");
 
-// 		return true;
+	// 	return true;
 
-// 	}
+	// }
 
-// 	else
+	// else
 
-// 	{
+	// {
 
-// 		logDebug("Failed to send mail. - " + result.getErrorType());
+	// 	logDebug("Failed to send mail. - " + result.getErrorType());
 
-// 		return false;
+	// 	return false;
 
-// 	}
+	// }
 
-// }
+}
  function convertContactAddressModelArr(contactAddressScriptModelArr)
 
 {
