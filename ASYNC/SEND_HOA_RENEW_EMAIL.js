@@ -1,5 +1,6 @@
 //SEND_HOA_RENEW_EMAIL
 logDebug("***** Starting SEND_HOA_RENEW_EMAIL from script *****");
+
 function sendNotification(emailFrom,emailTo,emailCC, "HOA RENEWAL CONFIRMATION LETTER", params,reportFile)
 {
   var itemCap = capId;
@@ -24,6 +25,7 @@ function sendNotification(emailFrom,emailTo,emailCC, "HOA RENEWAL CONFIRMATION L
     return false;
   }
 }
+sendNotification();
 
 
 
