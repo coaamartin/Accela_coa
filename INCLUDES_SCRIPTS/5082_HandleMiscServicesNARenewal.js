@@ -139,10 +139,10 @@ function sendEmailForRenew() {
 	// 		capPeopleArr = null;	
 	// 	}
 		//return capPeopleArr;
-	}
-	function logDebug(str){aa.print(str);}
-	function logMessage(str){aa.print(str);}
-	function email(pToEmail, pFromEmail, pSubject, pText) 
+	
+		function logDebug(str){aa.print(str);}
+		function logMessage(str){aa.print(str);}
+		function email(pToEmail, pFromEmail, pSubject, pText) 
 		{
 		//Sends email to specified address
 		//06SSP-00221
@@ -153,7 +153,7 @@ function sendEmailForRenew() {
 		}
 	
 	
-	 function sendNotification(emailFrom,emailTo,emailCC,templateName,params)
+	 	function sendNotification(emailFrom,emailTo,emailCC,templateName,params)
 	
 	{
 	
@@ -227,7 +227,6 @@ function sendEmailForRenew() {
 		return contactAddressModelArr;
 	
 	}
-	
 }
 
 function UpdateMiscNARParent() {
