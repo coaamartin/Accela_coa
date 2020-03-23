@@ -53,8 +53,9 @@ logDebug("5082 inside if");
 	
 	// send the email
 	//script84_SendRenewalEmailWhenPermitIssuedComplete();
-	UpdateMiscNARParent();	
 	sendEmailForRenew();
+	UpdateMiscNARParent();	
+	
 }
 
 function sendEmailForRenew() {
