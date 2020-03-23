@@ -59,14 +59,43 @@ logDebug("5082 inside if");
 }
 
 function sendEmailForRenew() {
-	var envParameters = aa.util.newHashMap();
-	envParameters.put("capId", capId);
-	envParameters.put("cap", cap);
-	envParameters.put("AGENCYID", "AURORACO");
-	var vAsyncScript = "SEND_HOA_RENEW_EMAIL";
-	aa.runAsyncScript(vAsyncScript, envParameters)
-	logDebug("CapID info: " + envParameters);
-	logDebug("End of email renewal in 5082_HandleMiscServicesNARenewal");
+	// var envParameters = aa.util.newHashMap();
+	// envParameters.put("capId", capId);
+	// envParameters.put("cap", cap);
+	// envParameters.put("AGENCYID", "AURORACO");
+	// var vAsyncScript = "SEND_HOA_RENEW_EMAIL";
+	// aa.runAsyncScript(vAsyncScript, envParameters)
+	// logDebug("CapID info: " + envParameters);
+	// logDebug("End of email renewal in 5082_HandleMiscServicesNARenewal");
+
+	logDebug("sendEmailForRenew() started.");
+    try{
+        // if wfTask == "Review Application" && wfStatus == "Complete"
+        var emailTo = getContactEmailAddress("Applicant", capId);
+		if(emailTo){
+            var applicantObj = getContactObjsByCap(capId, "Applicant");
+            var applicantFullNam = getContactName(applicantObj[0]);
+            var emailTemplate = "HOA RENEWAL CONFIRMATION LETTER";
+            var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+            acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+            var recordURL = getACARecordURL(acaURLDefault);
+            var capID4Email = aa.cap.createCapIDScriptModel(capId.getID1(),capId.getID2(),capId.getID3());
+            var emailParams = aa.util.newHashtable();
+            emailParams.put("$$altID$$", capIDString);
+            emailParams.put("$$ContactFullName$$", applicantFullNam);
+            emailParams.put("$$acaRecordUrl$$", recordURL);
+            
+            var sendResult = sendNotification("noreply@aurora.gov",emailTo,"",emailTemplate,emailParams,capID4Email);
+            if (!sendResult) { logDebug("UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
+		}
+    }
+    catch(err){
+        showMessage = true;
+        comment("Error on custom function script84_SendRenewalEmailWhenPermitIssuedComplete(). Please contact administrator. Err: " + err);
+        logDebug("Error on custom function script84_SendRenewalEmailWhenPermitIssuedComplete(). Please contact administrator. Err: " + err);
+    }
+    logDebug("sendEmailForRenwe() ended.");
+};//END script84_SendRenewalEmailWhenPermitIssuedComplete();
 }
 
 function UpdateMiscNARParent() {
