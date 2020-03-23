@@ -24,6 +24,9 @@ catch(e)
 function getEmailString()
 {
 	var emailString = "";
+	var getAll = (contactTypeArray.length == 0)
+	if (arguments.length > 1)
+		itemCap = arguments[1];
 	var contactArray = getPeople(capId);
 
 	//need to add inspection contact below to this logic 
@@ -38,7 +41,7 @@ function getEmailString()
 	return emailString;
 }
 logDebug("Starting function getPeople")
- function getPeople(capId)
+function getPeople(capId)
 {
 	capPeopleArr = null;
 	var s_result = aa.people.getCapContactByCapID(capId);

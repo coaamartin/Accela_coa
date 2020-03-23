@@ -53,8 +53,7 @@ logDebug("5082 inside if");
 	
 	// send the email
 	//script84_SendRenewalEmailWhenPermitIssuedComplete();
-	UpdateMiscNARParent();	
-	
+	UpdateMiscNARParent();		
 }
 
 function UpdateMiscNARParent() {
@@ -92,7 +91,6 @@ function UpdateMiscNARParent() {
 					//closeTask("Review Application", "Complete", "Closed by Script 5082");
                 }
             }
- 		//}
 	}
 	catch(err){
 		showMessage = true;
