@@ -111,45 +111,45 @@ function email(pToEmail, pFromEmail, pSubject, pText)
 	}
 
 
-function generateReportFile(aaReportName,parameters,rModule) 
-{
-	var reportName = aaReportName;
+// function generateReportFile(aaReportName,parameters,rModule) 
+// {
+// 	var reportName = aaReportName;
 
-	report = aa.reportManager.getReportInfoModelByName(reportName);
-	report = report.getOutput();
+// 	report = aa.reportManager.getReportInfoModelByName(reportName);
+// 	report = report.getOutput();
 
 
-	report.setModule(rModule);
-	report.setCapId(capId);
-	report.setReportParameters(parameters);
-	//Added
-	vAltId = capId.getCustomID();
-	report.getEDMSEntityIdModel().setAltId(vAltId);
-	var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
-	aa.print("---"+permit.getOutput().booleanValue());
-	if(permit.getOutput().booleanValue()) 
-	{
-		var reportResult = aa.reportManager.getReportResult(report);
+// 	report.setModule(rModule);
+// 	report.setCapId(capId);
+// 	report.setReportParameters(parameters);
+// 	//Added
+// 	vAltId = capId.getCustomID();
+// 	report.getEDMSEntityIdModel().setAltId(vAltId);
+// 	var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
+// 	aa.print("---"+permit.getOutput().booleanValue());
+// 	if(permit.getOutput().booleanValue()) 
+// 	{
+// 		var reportResult = aa.reportManager.getReportResult(report);
 
-		if(reportResult) 
-		{
-			reportResult = reportResult.getOutput();
-			var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-			logMessage("Report Result: "+ reportResult);
-			reportFile = reportFile.getOutput();
-			return reportFile
-		} else 
-		{
-			logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
-			return false;
-		}
-	} else 
-	{
-		logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
-		return false; 
-	}
-}
- function sendNotification(emailFrom,emailTo,emailCC,templateName,params,reportFile)
+// 		if(reportResult) 
+// 		{
+// 			reportResult = reportResult.getOutput();
+// 			var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+// 			logMessage("Report Result: "+ reportResult);
+// 			reportFile = reportFile.getOutput();
+// 			return reportFile
+// 		} else 
+// 		{
+// 			logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
+// 			return false;
+// 		}
+// 	} else 
+// 	{
+// 		logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
+// 		return false; 
+// 	}
+// }
+ function sendNotification(emailFrom,emailTo,emailCC,templateName,params)
 
 {
 
@@ -173,53 +173,53 @@ function generateReportFile(aaReportName,parameters,rModule)
 
 
 
-	var result = null;
+	// var result = null;
 
-	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
+	// result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel);
 
-	if(result.getSuccess())
+	// if(result.getSuccess())
 
-	{
+	// {
 
-		logDebug("Sent email successfully!");
+	// 	logDebug("Sent email successfully!");
 
-		return true;
+	// 	return true;
 
-	}
+	// }
 
-	else
+	// else
 
-	{
+	// {
 
-		logDebug("Failed to send mail. - " + result.getErrorType());
+	// 	logDebug("Failed to send mail. - " + result.getErrorType());
 
-		return false;
+	// 	return false;
 
-	}
-
-}
- function convertContactAddressModelArr(contactAddressScriptModelArr)
-
-{
-
-	var contactAddressModelArr = null;
-
-	if(contactAddressScriptModelArr != null && contactAddressScriptModelArr.length > 0)
-
-	{
-
-		contactAddressModelArr = aa.util.newArrayList();
-
-		for(loopk in contactAddressScriptModelArr)
-
-		{
-
-			contactAddressModelArr.add(contactAddressScriptModelArr[loopk].getContactAddressModel());
-
-		}
-
-	}	
-
-	return contactAddressModelArr;
+	// }
 
 }
+//  function convertContactAddressModelArr(contactAddressScriptModelArr)
+
+// {
+
+// 	var contactAddressModelArr = null;
+
+// 	if(contactAddressScriptModelArr != null && contactAddressScriptModelArr.length > 0)
+
+// 	{
+
+// 		contactAddressModelArr = aa.util.newArrayList();
+
+// 		for(loopk in contactAddressScriptModelArr)
+
+// 		{
+
+// 			contactAddressModelArr.add(contactAddressScriptModelArr[loopk].getContactAddressModel());
+
+// 		}
+
+// 	}	
+
+// 	return contactAddressModelArr;
+
+// }
