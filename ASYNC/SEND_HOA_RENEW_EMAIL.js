@@ -182,7 +182,7 @@ function email(pToEmail, pFromEmail, pSubject, pText)
 
 	var result = null;
 
-	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
+	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel);
 
 	if(result.getSuccess())
 
