@@ -138,7 +138,7 @@ function sendEmailForRenew() {
 	// 		aa.print("ERROR: Failed to People: " + s_result.getErrorMessage());
 	// 		capPeopleArr = null;	
 	// 	}
-		return capPeopleArr;
+		//return capPeopleArr;
 	}
 	function logDebug(str){aa.print(str);}
 	function logMessage(str){aa.print(str);}
