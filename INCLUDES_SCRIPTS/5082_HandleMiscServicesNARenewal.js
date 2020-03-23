@@ -95,7 +95,6 @@ function sendEmailForRenew() {
         logDebug("Error on custom function script84_SendRenewalEmailWhenPermitIssuedComplete(). Please contact administrator. Err: " + err);
     }
     logDebug("sendEmailForRenwe() ended.");
-};//END script84_SendRenewalEmailWhenPermitIssuedComplete();
 }
 
 function UpdateMiscNARParent() {
