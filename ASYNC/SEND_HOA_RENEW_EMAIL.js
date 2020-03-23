@@ -21,7 +21,7 @@ catch(e)
 {
 	email("rprovinc@auroragov.org", "aurora@gov.org", "Error", e.message);
 }
-function getEmailString()
+function getEmailString(contactTypeArray)
 {
 	var emailString = "";
 	if (!contactTypeArray)
