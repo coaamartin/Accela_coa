@@ -198,28 +198,28 @@ function email(pToEmail, pFromEmail, pSubject, pText)
 	// }
 
 }
-//  function convertContactAddressModelArr(contactAddressScriptModelArr)
+ function convertContactAddressModelArr(contactAddressScriptModelArr)
 
-// {
+{
 
-// 	var contactAddressModelArr = null;
+	var contactAddressModelArr = null;
 
-// 	if(contactAddressScriptModelArr != null && contactAddressScriptModelArr.length > 0)
+	if(contactAddressScriptModelArr != null && contactAddressScriptModelArr.length > 0)
 
-// 	{
+	{
 
-// 		contactAddressModelArr = aa.util.newArrayList();
+		contactAddressModelArr = aa.util.newArrayList();
 
-// 		for(loopk in contactAddressScriptModelArr)
+		for(loopk in contactAddressScriptModelArr)
 
-// 		{
+		{
 
-// 			contactAddressModelArr.add(contactAddressScriptModelArr[loopk].getContactAddressModel());
+			contactAddressModelArr.add(contactAddressScriptModelArr[loopk].getContactAddressModel());
 
-// 		}
+		}
 
-// 	}	
+	}	
 
-// 	return contactAddressModelArr;
+	return contactAddressModelArr;
 
-// }
+}
