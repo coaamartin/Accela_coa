@@ -24,6 +24,7 @@ catch(e)
 function getEmailString(contactTypeArray)
 {
 	var emailString = "";
+	var result = new Array();
 	if (!contactTypeArray)
 		contactTypeArray = new Array();
 	var getAll = (contactTypeArray.length == 0)
