@@ -7,14 +7,14 @@ try
 	//var altId = aa.env.getValue("altID")
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
-	var capName = cap.getSpecialText("Name of HOA");
+	//var capName = cap.getSpecialText("Name of HOA");
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	//tParams.put("$$capAlias$$", capAlias);
-	tParams.put("$$HOANAME$$", AInfo["Name of HOA"]);
+	//tParams.put("$$HOANAME$$", AInfo["Name of HOA"]);
 	var rParams = aa.util.newHashtable();
 	var emailtemplate = "HOA RENEWAL CONFIRMATION LETTER";
     sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams);
