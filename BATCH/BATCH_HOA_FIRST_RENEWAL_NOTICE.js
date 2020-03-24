@@ -229,7 +229,8 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 		var emailParams = aa.util.newHashtable();
 		var expDateString = dateAdd(null, 30);		
 		addParameter(emailParams, "$$altID$$", altId);
-        addParameter(emailParams, "$$ContactFullName$$", "Dear HOA Representative");		
+		addParameter(emailParams, "$$ContactFullName$$", "Dear HOA Representative");
+		addParameter(emailParams, "$$capName$$", capName);		
 		aa.print("the alias is: " + altId);
 		var reportFile = [];
 		var capID4Email = aa.cap.createCapIDScriptModel(recordCapId.getID1(),recordCapId.getID2(),recordCapId.getID3());	

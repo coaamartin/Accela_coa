@@ -12,7 +12,8 @@ try
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
-	tParams.put("$$capAlias$$", capAlias);
+	//tParams.put("$$capAlias$$", capAlias);
+	tParams.put("$$HOANAME$$", AInfo["Name of HOA"]);
 	var rParams = aa.util.newHashtable();
 	var emailtemplate = "HOA RENEWAL CONFIRMATION LETTER";
     sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams);
@@ -110,45 +111,6 @@ function email(pToEmail, pFromEmail, pSubject, pText)
 	return true;
 	}
 
-
-// function generateReportFile(aaReportName,parameters,rModule) 
-// {
-// 	var reportName = aaReportName;
-
-// 	report = aa.reportManager.getReportInfoModelByName(reportName);
-// 	report = report.getOutput();
-
-
-// 	report.setModule(rModule);
-// 	report.setCapId(capId);
-// 	report.setReportParameters(parameters);
-// 	//Added
-// 	vAltId = capId.getCustomID();
-// 	report.getEDMSEntityIdModel().setAltId(vAltId);
-// 	var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
-// 	aa.print("---"+permit.getOutput().booleanValue());
-// 	if(permit.getOutput().booleanValue()) 
-// 	{
-// 		var reportResult = aa.reportManager.getReportResult(report);
-
-// 		if(reportResult) 
-// 		{
-// 			reportResult = reportResult.getOutput();
-// 			var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-// 			logMessage("Report Result: "+ reportResult);
-// 			reportFile = reportFile.getOutput();
-// 			return reportFile
-// 		} else 
-// 		{
-// 			logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
-// 			return false;
-// 		}
-// 	} else 
-// 	{
-// 		logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
-// 		return false; 
-// 	}
-// }
  function sendNotification(emailFrom,emailTo,emailCC,templateName,params)
 
 {
@@ -169,33 +131,6 @@ function email(pToEmail, pFromEmail, pSubject, pText)
 
 	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
 
-
-
-
-
-	//var result = null;
-
-	//result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel);
-
-	// if(result.getSuccess())
-
-	// {
-
-	// 	logDebug("Sent email successfully!");
-
-	// 	return true;
-
-	// }
-
-	// else
-
-	// {
-
-	// 	logDebug("Failed to send mail. - " + result.getErrorType());
-
-	// 	return false;
-
-	// }
 
 }
  function convertContactAddressModelArr(contactAddressScriptModelArr)
