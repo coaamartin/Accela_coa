@@ -5,16 +5,14 @@ try
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	//var emailTo = getEmailString(); 
-	var emailTo = "rprovinc@auroragov.org"
-	var capAlias = cap.getCapModel().getAppTypeAlias();
-	//var capName = aa.env.getValue("capName");
+	var emailTo = "rprovinc@auroragov.org";
+	//var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
 	//tParams.put("$$altID$$", capId.getCustomID());
 	//tParams.put("$$capAlias$$", capAlias);
-	//tParams.put("$$capName$$", capName);
 	var rParams = aa.util.newHashtable();
 	var emailtemplate = "HOA RENEWAL CONFIRMATION LETTER";
     sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams);
