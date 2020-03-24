@@ -7,7 +7,7 @@ try
 	//var emailTo = getEmailString(); 
 	var emailTo = "rprovinc@auroragov.org"
 	var capAlias = cap.getCapModel().getAppTypeAlias();
-	var capName = aa.env.getValue("capName");
+	//var capName = aa.env.getValue("capName");
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
