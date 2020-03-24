@@ -399,6 +399,7 @@ function mainProcess() {
 			eParams = aa.util.newHashtable();
 			eParams.put("$$expirationDate$$", b1ExpDate);
 			eParams.put("$$altID$$",capId.getCustomID());
+			eParams.put("$$capName$$",capName);
 			eParams.put("$$acaRecordUrl$$",getACARecordURL(""));
 			if (reportName != null && reportName != "") {
 				var rParams = aa.util.newHashtable();
