@@ -4,7 +4,7 @@ try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
-	var altId = aa.env.getValue("altID")
+	//var altId = aa.env.getValue("altID")
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var capName = cap.getSpecialText("Name of HOA");
