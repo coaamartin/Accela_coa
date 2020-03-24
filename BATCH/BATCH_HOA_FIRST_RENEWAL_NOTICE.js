@@ -207,6 +207,7 @@ function notifyApplicantOrAddToSet(recordCapId, recordCap) {
 	var cap = aa.cap.getCap(recordCapId).getOutput();
 	var appTypeAlias = cap.getCapType().getAlias();
 	var capStatus = cap.getCapStatus();
+	var capName = cap.getSpecialText();
 	//var EMAIL_TEMPLATE = aa.env.getValue("EMAIL_TEMPLATE");
 	//aa.print(EMAIL_TEMPLATE);
 	var EMAIL_TEMPLATE = "BLD LIC EXPIRED # 97";

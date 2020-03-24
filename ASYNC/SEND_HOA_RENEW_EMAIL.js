@@ -7,6 +7,7 @@ try
 	var altId = aa.env.getValue("altID")
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
+	var capName = cap.getSpecialText("Name of HOA");
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
