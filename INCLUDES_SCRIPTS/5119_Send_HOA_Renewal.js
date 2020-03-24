@@ -13,7 +13,7 @@ logDebug("Script 5119_Send_HOA_Renewal.js")
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
 	envParameters.put("cap", cap);
-	envParameters.put("capName", capName);
+	//envParameters.put("capName", capName);
 	//envParameters.put("$$HOANAME$$", AInfo["Name of HOA"]);
 	envParameters.put("AGENCYID", "AURORACO");
 	var vAsyncScript = "SEND_HOA_RENEW_EMAIL";
