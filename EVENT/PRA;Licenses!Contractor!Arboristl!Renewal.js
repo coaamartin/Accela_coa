@@ -12,10 +12,11 @@ new Expiration date (12/31 of current year)
 
 if (balanceDue == 0) {
 
-	closeTask("Renewal Intake", "Fees Paid", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
-
-	closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
-
+	//closeTask("Renewal Intake", "Fees Paid", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
+	if (wfTask == "License Issuance") { 
+		closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
+	}
+		
 	// Begin script to complete the renewal and send notifications
 	var vLicenseID;
 	var vIDArray;
