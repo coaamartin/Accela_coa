@@ -1,4 +1,18 @@
 //SEND_HOA_RENEW_EMAIL
+function getScriptText(vScriptName){
+    vScriptName = vScriptName.toUpperCase();
+    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+    var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+    return emseScript.getScriptText() + "";          
+}
+
+var SCRIPT_VERSION = 3.0
+aa.env.setValue("CurrentUserID", "ADMIN");
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getScriptText("INCLUDES_CUSTOM"));
+
+
 logDebug("***** Starting SEND_HOA_RENEW_EMAIL from script *****");
 try
 {
