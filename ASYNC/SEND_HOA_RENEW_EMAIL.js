@@ -18,6 +18,7 @@ try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
+	var hoaName = aa.env.getValue("HOANAME");
 	var emailTo = getEmailString(); 
 	//var emailTo = "rprovinc@auroragov.org";
 	//var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -25,7 +26,7 @@ try
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
-	tParams.put("$$HOANAME$$", AInfo["Name of HOA"]);
+	tParams.put("$$HOANAME$$", hoaName);
 	//tParams.put("$$altID$$", capId.getCustomID());
 	//tParams.put("$$capAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
