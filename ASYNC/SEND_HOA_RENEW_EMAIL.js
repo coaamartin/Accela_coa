@@ -19,14 +19,13 @@ try
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var emailTo = getEmailString(); 
-	var hoaName = AInfo["Name of HOA"];
 	//var emailTo = "rprovinc@auroragov.org";
 	//var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
-	tParams.put("$$HOANAME$$", hoaName);
+	tParams.put("$$HOANAME$$", AInfo["Name of HOA"]);
 	//tParams.put("$$altID$$", capId.getCustomID());
 	//tParams.put("$$capAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
