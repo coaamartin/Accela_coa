@@ -397,9 +397,11 @@ function mainProcess() {
 		//generate email notices
 		if (emailTemplate != null && emailTemplate != "" && sendEmailToContactTypes && sendEmailToContactTypes != "") {
 			eParams = aa.util.newHashtable();
+			var hoaName = AInfo["Name of HOA"];
 			eParams.put("$$expirationDate$$", b1ExpDate);
 			eParams.put("$$altID$$",capId.getCustomID());
 			eParams.put("$$capName$$",capName);
+			eParams.put("$$HOANAME$$",hoaName);
 			eParams.put("$$acaRecordUrl$$",getACARecordURL(""));
 			if (reportName != null && reportName != "") {
 				var rParams = aa.util.newHashtable();
