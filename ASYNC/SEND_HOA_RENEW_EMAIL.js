@@ -18,8 +18,8 @@ try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
-	//var emailTo = getEmailString(); 
-	var emailTo = "rprovinc@auroragov.org";
+	var emailTo = getEmailString(); 
+	//var emailTo = "rprovinc@auroragov.org";
 	//var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
