@@ -18,6 +18,29 @@ logDebug("Script 5119_Send_HOA_Renewal.js")
 	aa.runAsyncScript(vAsyncScript, envParameters)
 	logDebug("CapID info: " + envParameters);
 	logDebug("End of Script 5119_Send_HOA_Renewal.js");
-	
+	getEmailString();
+	logDebug("Email string: " + getEmailString);
 }
 
+
+function getEmailString(contactTypeArray)
+{
+	var emailString = "";
+	var result = new Array();
+	if (!contactTypeArray)
+		contactTypeArray = new Array();
+	var getAll = (contactTypeArray.length == 0)
+	if (arguments.length > 1)
+		itemCap = arguments[1];
+	var contactArray = getPeople(capId);
+ 
+	for (var c in contactArray)
+	if (!(contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().getEmail().length() > 0))
+			continue;
+		if (getAll || exists(contactArray[c].getPeople().getContactType(), contactTypeArray))
+		{
+			result.push(contactArray[c].getPeople().getEmail());
+		}
+	logDebug(emailString);
+	return emailString;
+}

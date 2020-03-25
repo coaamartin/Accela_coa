@@ -46,8 +46,7 @@ function getEmailString(contactTypeArray)
 	if (arguments.length > 1)
 		itemCap = arguments[1];
 	var contactArray = getPeople(capId);
-
-	//need to add inspection contact below to this logic 
+ 
 	for (var c in contactArray)
 	if (!(contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().getEmail().length() > 0))
 			continue;
