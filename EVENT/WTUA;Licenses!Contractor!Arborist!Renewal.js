@@ -9,7 +9,7 @@ if ("Licensing Review".equals(wfTask) && "Additional Info Needed".equals(wfStatu
 	include("5077-Email_Arborist_Applicant_MoreInfoNeeded");
 }
 
-if (wfTask == "Licensing Review" && wfStatus == "Approved for Renewal" && balanceDue == 0) {
+if (wfTask == "Licensing Review" && wfStatus == "Approved For Renewal" && balanceDue == 0) {
 	
 	closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
 		// Begin script to complete the renewal and send notifications

@@ -21,6 +21,8 @@ if (("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSt
       
       var cap = aa.cap.getCap(capId).getOutput();
       var capName = cap.getSpecialText();
+	  logDebug("Record Applicant = "+recordApplicant);
+	  logDebug("Applicant email = " + recordApplicant.getEmail());
       
       if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") 
       {
