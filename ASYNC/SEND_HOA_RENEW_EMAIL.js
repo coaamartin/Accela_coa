@@ -15,7 +15,8 @@ try
 	//tParams.put("$$capAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
 	var emailtemplate = "HOA RENEWAL CONFIRMATION LETTER";
-    sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams);
+    //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams);
+    sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, null);
 }
 catch(e)
 {
