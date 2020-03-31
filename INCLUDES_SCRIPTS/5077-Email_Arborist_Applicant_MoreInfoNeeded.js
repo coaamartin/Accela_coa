@@ -6,7 +6,7 @@
 
 logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #5077 - 5077_Email_Arborist_Applicant_MoreInfoNeeded");
 
-if (("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfStatus)) || ("Licensing Review".equals(wfTask) && "Additional Info Needed".equals(wfStatus))) 
+if (("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfStatus)) || ("Licensing Review".equals(wfTask) && "Additional Info Needed".equals(wfStatus))|| ("Renewal Review".equals(wfTask) && "Additional Info Needed".equals(wfStatus))) 
 {
    if (wfComment != null && typeof wfComment !== 'undefined') 
       
