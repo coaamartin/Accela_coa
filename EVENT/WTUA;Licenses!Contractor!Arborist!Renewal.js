@@ -1,17 +1,17 @@
 // Script #77 
 // JMPorter - Created 10/22/2018
 
-if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfStatus)) {
+//if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfStatus)) {
+//	include("5077-Email_Arborist_Applicant_MoreInfoNeeded");
+//}
+
+if ("Renewal Review".equals(wfTask) && "Additional Info Needed".equals(wfStatus)) {
 	include("5077-Email_Arborist_Applicant_MoreInfoNeeded");
 }
 
-if ("Licensing Review".equals(wfTask) && "Additional Info Needed".equals(wfStatus)) {
-	include("5077-Email_Arborist_Applicant_MoreInfoNeeded");
-}
-
-if (wfTask == "Licensing Review" && wfStatus == "Approved For Renewal" && balanceDue == 0) {
+if (wfTask == "Renewal Review" && wfStatus == "Approved For Renewal" && balanceDue == 0) {
 	
-	closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
+	closeTask("License Renewal", "Renewed", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
 		// Begin script to complete the renewal and send notifications
 	var vLicenseID;
 	var vIDArray;
