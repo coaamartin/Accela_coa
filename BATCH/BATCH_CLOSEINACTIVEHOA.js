@@ -125,7 +125,7 @@ function mainProcess() {
 	var appStatusToLookFor = getJobParam("statusToLookFor");
 	var appStatusToLookForArray = ( appStatusToLookFor != "" ? appStatusToLookFor.split(",") : null); 
 	var newAppStatus = getJobParam("newAppStatus"); //   update the CAP to this status
-	var emailTemplate = getJobParam("emailTemplate"); // email Template
+	//var emailTemplate = getJobParam("emailTemplate"); // email Template
 	var emailSendTo = getJobParam("emailSendTo");
 	var emailTitle = getJobParam("emailTitle")
 	var emailBodyMsg="";
@@ -182,9 +182,10 @@ function mainProcess() {
 		}
 
 		//generate email notices
-		if (emailTemplate != null && emailTemplate != "" && emailSendTo && emailSendTo != "" && capCount>0) {
+		//if (emailTemplate != null && emailTemplate != "" && emailSendTo && emailSendTo != "" && capCount>0) {
+		if (emailSendTo && emailSendTo != "" && capCount>0) {
 			logDebug("=================================================");
-			logDebug('Attempting to send email: ' + emailTemplate );
+			//logDebug('Attempting to send email: ' + emailTemplate );
 				aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
 		}
 
