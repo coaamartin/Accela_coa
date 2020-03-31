@@ -27,7 +27,7 @@ try
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$HOANAME$$", hoaName);
-	//tParams.put("$$altID$$", capId.getCustomID());
+	tParams.put("$$altID$$", capId.getCustomID());
 	//tParams.put("$$capAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
 	var emailtemplate = "HOA RENEWAL CONFIRMATION LETTER";
