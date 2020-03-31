@@ -211,7 +211,7 @@ function mainProcess() {
 	var reportType = getJobParam("reportType");
 	var filterExpression = getJobParam("filterExpression"); // JavaScript used to filter records.   Evaluating to false will skip the record, for example:   getAppSpecific("FieldName").toUpperCase() == "TEST"
 	var actionExpression = getJobParam("actionExpression"); // JavaScript used to perform custom action, for example:   addStdCondition(...)
-	var hoaName = getJobParam("Name of HOA");
+	//var hoaName = getJobParam("Name of HOA");
 
 	//Non-parameter variables
 	if (!fromDate.length) { // no "from" date, assume today + number of days to look ahead
@@ -396,11 +396,13 @@ function mainProcess() {
 
 		//generate email notices
 		if (emailTemplate != null && emailTemplate != "" && sendEmailToContactTypes && sendEmailToContactTypes != "") {
+			var hoaName = getAppSpecific("Name of HOA", capId) || "";
+
 			eParams = aa.util.newHashtable();
 			eParams.put("$$expirationDate$$", b1ExpDate);
 			eParams.put("$$altID$$",capId.getCustomID());
 			//eParams.put("$$capName$$",capName);
-			//eParams.put("$$HOANAME$$",);
+			eParams.put("$$HOANAME$$", hoaName);
 			eParams.put("$$acaRecordUrl$$",getACARecordURL(""));
 			if (reportName != null && reportName != "") {
 				var rParams = aa.util.newHashtable();
