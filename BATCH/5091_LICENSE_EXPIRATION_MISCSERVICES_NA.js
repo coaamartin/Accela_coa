@@ -434,13 +434,14 @@ function mainProcess() {
 				}
 			}
 		}
-
+		var hoaName = getAppSpecific("Name of HOA", capId) || "";
 		//generate email notices
 		if (emailTemplate != null && emailTemplate != "" && sendEmailToContactTypes && sendEmailToContactTypes != "") {
 			eParams = aa.util.newHashtable();
 			eParams.put("$$expirationDate$$", expMonth);
 			eParams.put("$$altID$$",capId.getCustomID());
 			eParams.put("$$acaRecordUrl$$",getACARecordURL(""));
+			eParams.put("$$HOANAME$$", hoaName);
 			if (reportName != null && reportName != "") {
 				var rParams = aa.util.newHashtable();
 				addParameter(rParams, "prmRecordID", altId);
