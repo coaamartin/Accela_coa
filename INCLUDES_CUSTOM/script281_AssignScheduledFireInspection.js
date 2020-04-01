@@ -16,75 +16,101 @@ function script281_AssignScheduledFireInspection(){
     {
         // first get the user that has been assigned to the Record
         // if there is no user this may need to be an error
-        var userID = getAssignedStaff();
-        var userDept = getAssignedDept();
-        if (userID == null){
-            if(userDept == null)
-                throw "Record not Assigned to User. Please enter on the Record tab";
-            else{
-                switch(userDept + ""){
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS1":
-                        userID = "FIRE STATION 01";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS2":
-                        userID = "FIRE STATION 02";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS3":
-                        userID = "FIRE STATION 03";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS4":
-                        userID = "FIRE STATION 04";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS5":
-                        userID = "FIRE STATION 05";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS6":
-                        userID = "FIRE STATION 06";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS7":
-                        userID = "FIRE STATION 07";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS8":
-                        userID = "FIRE STATION 08";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS9":
-                        userID = "FIRE STATION 09";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS10":
-                        userID = "FIRE STATION 10";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS11":
-                        userID = "FIRE STATION 11";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS12":
-                        userID = "FIRE STATION 12";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS13":
-                        userID = "FIRE STATION 13";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS14":
-                        userID = "FIRE STATION 14";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS15":
-                        userID = "FIRE STATION 15";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS16":
-                        userID = "FIRE STATION 16";
-                        break;
-                    case "AURORACO/FIRE/NA/NA/NA/NA/FS17":
-                        userID = "FIRE STATION 17";
-                        break;
-                    default:
-                        break;
-                }
+        //var userID = getAssignedStaff();
+        //var userDept = getAssignedDept();
+        
+        var fireStation = getRefAddressAttributeValue("FIRESTATION")
+        
+        if(fireStation == null)
+            throw "Record Address not Assigned to FIRE STATION.";
+        else{
+            switch(fireStation + ""){
+                case "1":
+                    userID = "FIRE STATION 01";
+                    break;
+                case "2":
+                    userID = "FIRE STATION 02";
+                    break;
+                case "3":
+                    userID = "FIRE STATION 03";
+                    break;
+                case "4":
+                    userID = "FIRE STATION 04";
+                    break;
+                case "5":
+                    userID = "FIRE STATION 05";
+                    break;
+                case "6":
+                    userID = "FIRE STATION 06";
+                    break;
+                case "7":
+                    userID = "FIRE STATION 07";
+                    break;
+                case "8":
+                    userID = "FIRE STATION 08";
+                    break;
+                case "9":
+                    userID = "FIRE STATION 09";
+                    break;
+                case "10":
+                    userID = "FIRE STATION 10";
+                    break;
+                case "11":
+                    userID = "FIRE STATION 11";
+                    break;
+                case "12":
+                    userID = "FIRE STATION 12";
+                    break;
+                case "13":
+                    userID = "FIRE STATION 13";
+                    break;
+                case "14":
+                    userID = "FIRE STATION 14";
+                    break;
+                case "15":
+                    userID = "FIRE STATION 15";
+                    break;
+                case "16":
+                    userID = "FIRE STATION 16";
+                    break;
+                case "17":
+                    userID = "FIRE STATION 17";
+                    break;
+                default:
+                    break;
             }
         }
         
-        if(userID != null)
-            assignInspection(inspId,userID);
+        
+        //if(userID != null)
+        //    assignInspection(inspId,userID);
     }
     catch(err){
         logDebug("Error on script281_AssignScheduledFireInspection(). Please contact administrator. Err: " + err);
     }
     logDebug("script281_AssignScheduledFireInspection() ended.");
 };//END script281_AssignScheduledFireInspection
+
+
+function getRefAddressAttributeValue(attrName){
+    var capAddResult = aa.address.getAddressByCapId(capId);
+    if (capAddResult.getSuccess())
+    {
+        var Adds = capAddResult.getOutput();
+        for (zz in Adds)
+        {
+            var fcapAddressObj = Adds[zz];
+            var addRefId = fcapAddressObj.getRefAddressId();
+            var searchResult = aa.address.getRefAddressByPK(addRefId).getOutput();
+    ​
+            var addressAttr = searchResult.getRefAddressModel().getAttributes();
+            addressAttrObj = addressAttr.toArray();
+            for (z in addressAttrObj){
+                if(addressAttrObj[z].getName().equals(attrName)){
+                    return addressAttrObj[z].getValue()
+                }
+            }
+        }
+    }
+    return false;
+}
