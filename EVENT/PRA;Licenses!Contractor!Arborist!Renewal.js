@@ -10,7 +10,7 @@ new Expiration date (12/31 of current year)
 
  */
 
-if (balanceDue <= 0) && isTaskActive("License Renewal") {
+if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 
 	//closeTask("Renewal Intake", "Fees Paid", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
 	closeTask("License Renewal", "Renewed", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", "");
