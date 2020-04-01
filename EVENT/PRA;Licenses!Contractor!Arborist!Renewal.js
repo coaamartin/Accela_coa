@@ -9,13 +9,12 @@ update the License record with a Status of Issued and
 new Expiration date (12/31 of current year)
 
  */
-/*
-if (balanceDue <= 0) {
+
+if (balanceDue <= 0) && isTaskActive("License Renewal") {
 
 	//closeTask("Renewal Intake", "Fees Paid", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
-	if (wfTask == "License Renewal") { 
-		closeTask("License Renewal", "Renewed", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", "");
-	}
+	closeTask("License Renewal", "Renewed", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", "");
+
 		
 	// Begin script to complete the renewal and send notifications
 	var vLicenseID;
@@ -63,4 +62,3 @@ if (balanceDue <= 0) {
 
 	}
 }
-*/
