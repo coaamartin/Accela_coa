@@ -44,11 +44,11 @@ if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 		// set parent record status to Issued
 		updateAppStatus("Active", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", vLicenseID);
 		// update parent record custom data
-		//copyAppSpecific(vLicenseID);
+		copyAppSpecific(vLicenseID);
 		
 		// Update the reference license professional
-		var licenseNbr = vLicenseID.getcustomID();
-		logDebug("Updating license professional record #"+licenseNbr);
+		//var licenseNbr = vLicenseID.getcustomID();
+		//logDebug("Updating license professional record #"+licenseNbr);
 		//var theRefLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, licenseNbr).getOutput();
 		
 		//if (theRefLP != null && theRefLP.length > 0) {
