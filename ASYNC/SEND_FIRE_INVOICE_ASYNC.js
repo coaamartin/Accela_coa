@@ -5,8 +5,8 @@ try
 	var cap = aa.env.getValue("cap");
 	var invNbr = aa.env.getValue("INVOICEID");
 	var emailTo = getEmailString(); 
-	var firstName = getPeople(capId).getFirstName();
-	var lastName = getPeople(capId).getLastName();
+	var firstName = aa.env.getValue("FirstName");
+	var lastName = aa.env.getValue("LastName");
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();

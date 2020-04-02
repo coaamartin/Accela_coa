@@ -6,6 +6,8 @@ if (balanceDue > 0) {
 	envParameters.put("cap", cap);
 	envParameters.put("INVOICEID", InvoiceNbr);
 	envParameters.put("AGENCYID", "AURORACO");
+	envParameters.put("FirstName", getPeople().getFirstName());
+	envParameters.put("LastName", getPeople().getLastName());
 	var vAsyncScript = "SEND_FIRE_INVOICE_ASYNC";
 	aa.runAsyncScript(vAsyncScript, envParameters)
 	logDebug("CapID info: " + envParameters);
