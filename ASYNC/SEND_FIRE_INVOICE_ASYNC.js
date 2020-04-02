@@ -12,6 +12,8 @@ try
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
+	tParams.put("$$FirstName$$", recordApplicant.getFirstName());
+	tParams.put("$$LastName$$", recordApplicant.getLastName());
 	var rParams = aa.util.newHashtable();
 	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
