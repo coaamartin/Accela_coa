@@ -22,8 +22,8 @@ try
 	var report = generateReportFile("Fire Invoice Report", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 
-	var aContact = getContactByType("Inspection Contact", capId);
-	var fullName = aContact;
+	// var aContact = getContactByType("Inspection Contact", capId);
+	// var fullName = aContact;
 	// 	var fName = "";
 	// 	var lName = "";
 	// 	if (aContact) {fName = aContact.getFirstName(); lName = aContact.getLastName();}
