@@ -56,9 +56,9 @@ if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 
 		//theRefLP = theRefLP[0];
 		//theRefLP.setLicenseExpirationDate(dateAdd(vNewExpDate, 0));
-		var editRefResult = aa.licenseScript.editRefLicenseProf(theRefLP);
+		//var editRefResult = aa.licenseScript.editRefLicenseProf(theRefLP);
 
-		}
+		//}
 
 		//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 		renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
