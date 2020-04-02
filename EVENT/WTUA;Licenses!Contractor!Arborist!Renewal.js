@@ -39,7 +39,9 @@ if ("Renewal Review".equals(wfTask) && "Approved for Renewal".equals(wfStatus) &
 		// Set license record expiration to active
 		vLicenseObj.setStatus("Active");
 		// set parent record status to Issued
-		updateAppStatus("Issued", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", vLicenseID);
+		updateAppStatus("Issued", "Updated by WTUA;Licenses!Contractor!Arborist!Renewal", vLicenseID);
+		//update Parent license record custom data
+		copyAppSpecific(vLicenseID);
 
 		//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 		renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
@@ -49,13 +51,15 @@ if ("Renewal Review".equals(wfTask) && "Approved for Renewal".equals(wfStatus) &
 		}
 
 		var vEmailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
+		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", "Arborist Contractor License");
 		addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
 		addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());
+		addParameter(vEParams,"$$acaURL$$",acaSite);
 
-		emailContacts("All", vEmailTemplate, vEParams, null, null);
+		emailContacts("All", vEmailTemplate, vEParams,"","");
 
 	}
 }

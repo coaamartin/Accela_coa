@@ -34,6 +34,7 @@ function getEmailString()
 		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact")
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
+
 		}
 	}
 	logDebug(emailString);
