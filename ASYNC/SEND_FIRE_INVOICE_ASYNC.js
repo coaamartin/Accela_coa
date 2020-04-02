@@ -12,9 +12,9 @@ try
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
-	tParams.put("$$FullName$$", fullName);
-	//tParams.put("$$FirstName$$", recordApplicant.getFirstName());
-	//tParams.put("$$LastName$$", recordApplicant.getLastName());
+	//tParams.put("$$FullName$$", fullName);
+	tParams.put("$$FirstName$$", getPeople().geFirstName());
+	tParams.put("$$LastName$$", getPeople().getLastName());
 	var rParams = aa.util.newHashtable();
 	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
@@ -37,7 +37,7 @@ function getEmailString()
 		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact")
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
-			fullName += contactArray[c].getPeople() + ";";
+			//fullName += contactArray[c].getPeople() + ";";
 		}
 	}
 	logDebug(emailString);
