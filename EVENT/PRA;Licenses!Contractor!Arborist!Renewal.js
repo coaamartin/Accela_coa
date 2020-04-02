@@ -62,7 +62,7 @@ if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 		addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());
 		addParameter(vEParams,"$$acaURL$$",acaSite);
 
-		emailContacts("All", vEmailTemplate, vEParams, null, null);
+		emailContacts("All", vEmailTemplate, vEParams,"","");
 
 	}
 }
