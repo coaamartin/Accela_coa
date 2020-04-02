@@ -26,52 +26,52 @@ function script281_AssignScheduledFireInspection(){
         else{
             switch(fireStation + ""){
                 case "1":
-                    userID = "FIRE STATION 01";
+                    userID = "NMENDOZA";
                     break;
                 case "2":
-                    userID = "FIRE STATION 02";
+                    userID = "GTAETS";
                     break;
                 case "3":
-                    userID = "FIRE STATION 03";
+                    userID = "NMENDOZA";
                     break;
                 case "4":
-                    userID = "FIRE STATION 04";
+                    userID = "HVINDUSK";
                     break;
                 case "5":
-                    userID = "FIRE STATION 05";
+                    userID = "JMGONZAL";
                     break;
                 case "6":
-                    userID = "FIRE STATION 06";
+                    userID = "EKIRCHER";
                     break;
                 case "7":
-                    userID = "FIRE STATION 07";
+                    userID = "EKIRCHER";
                     break;
                 case "8":
-                    userID = "FIRE STATION 08";
+                    userID = "GTAETS";
                     break;
                 case "9":
-                    userID = "FIRE STATION 09";
+                    userID = "EKIRCHER";
                     break;
                 case "10":
-                    userID = "FIRE STATION 10";
+                    userID = "RLANHAM";
                     break;
                 case "11":
-                    userID = "FIRE STATION 11";
+                    userID = "HVINDUSK";
                     break;
                 case "12":
-                    userID = "FIRE STATION 12";
+                    userID = "JMGONZAL";
                     break;
                 case "13":
-                    userID = "FIRE STATION 13";
+                    userID = "RLANHAM";
                     break;
                 case "14":
-                    userID = "FIRE STATION 14";
+                    userID = "RLANHAM";
                     break;
                 case "15":
-                    userID = "FIRE STATION 15";
+                    userID = "JMGONZAL";
                     break;
                 case "16":
-                    userID = "FIRE STATION 16";
+                    userID = "NMENDOZA";
                     break;
                 case "17":
                     userID = "FIRE STATION 17";
