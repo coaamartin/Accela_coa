@@ -40,6 +40,8 @@ if ("Renewal Review".equals(wfTask) && "Approved for Renewal".equals(wfStatus) &
 		vLicenseObj.setStatus("Active");
 		// set parent record status to Issued
 		updateAppStatus("Issued", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", vLicenseID);
+		//update Parent license record custom data
+		copyAppSpecific(vLicenseID);
 
 		//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 		renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);

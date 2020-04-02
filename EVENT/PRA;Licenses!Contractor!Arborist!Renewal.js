@@ -42,9 +42,10 @@ if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 		// Set license record expiration to active
 		vLicenseObj.setStatus("Active");
 		// set parent record status to Issued
-		updateAppStatus("Active", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", vLicenseID);
-		// update parent record custom data
+		updateAppStatus("Issued", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", vLicenseID);
+		// update parent license record custom data
 		copyAppSpecific(vLicenseID);
+		
 		//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 		renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
 		if (renewalCapProject != null) {
