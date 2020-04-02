@@ -59,6 +59,7 @@ if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 		addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
 		addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());
+		addParameter(vEParams,"$$acaURL$$",acaSite);
 
 		emailContacts("All", vEmailTemplate, vEParams, null, null);
 
