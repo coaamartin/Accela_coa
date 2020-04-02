@@ -12,21 +12,12 @@ try
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
-	tParams.put("$$FullName$$", fullName);
-	//tParams.put("$$FirstName$$", fName);
-	//tParams.put("$$LastName$$", lName);
 	var rParams = aa.util.newHashtable();
 	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "FIRE INVOICED FEES";
 	var report = generateReportFile("Fire Invoice Report", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
-
-	// var aContact = getContactByType("Inspection Contact", capId);
-	// var fullName = aContact;
-	// 	var fName = "";
-	// 	var lName = "";
-	// 	if (aContact) {fName = aContact.getFirstName(); lName = aContact.getLastName();}
 }
 catch(e)
 {
@@ -43,8 +34,6 @@ function getEmailString()
 		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact")
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
-			// fName += contactArray[c].getPeople().getFirstName() + ";";
-			// lName += contactArray[c].getPeople().getLastName() + ";";
 
 		}
 	}
