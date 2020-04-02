@@ -47,7 +47,7 @@ if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 		//copyAppSpecific(vLicenseID);
 		
 		// Update the reference license professional
-		var licenseNbr = vLicenseID.getcustomID()
+		var licenseNbr = vLicenseID.getcustomID();
 		logDebug("Updating license professional record #"+licenseNbr);
 		//var theRefLP = aa.licenseScript.getRefLicensesProfByLicNbr(aa.serviceProvider, licenseNbr).getOutput();
 		
