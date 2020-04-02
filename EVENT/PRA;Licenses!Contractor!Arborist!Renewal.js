@@ -54,6 +54,7 @@ if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 		}
 
 		var vEmailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
+		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", "Arborist Contractor License");
 		addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
