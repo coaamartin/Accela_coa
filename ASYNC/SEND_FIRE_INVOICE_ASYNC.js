@@ -5,8 +5,6 @@ try
 	var cap = aa.env.getValue("cap");
 	var invNbr = aa.env.getValue("INVOICEID");
 	var emailTo = getEmailString(); 
-	//var firstName = aa.env.getValue("FirstName");
-	//var lastName = aa.env.getValue("LastName");
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -15,14 +13,19 @@ try
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
 	//tParams.put("$$FullName$$", fullName);
-	//tParams.put("$$FirstName$$", firstName);
-	//tParams.put("$$LastName$$", lastName);
+	tParams.put("$$FirstName$$", fName);
+	tParams.put("$$LastName$$", lName);
 	var rParams = aa.util.newHashtable();
 	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "FIRE INVOICED FEES";
 	var report = generateReportFile("Fire Invoice Report", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+
+	var aContact = getContactByType("Inspection Contact", capId);
+		var fName = "";
+		var lName = "";
+		if (aContact) {fName = aContact.getFirstName(); lName = aContact.getLastName();}
 }
 catch(e)
 {
