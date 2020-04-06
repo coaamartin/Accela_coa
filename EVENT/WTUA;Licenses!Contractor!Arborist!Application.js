@@ -11,7 +11,7 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
 
 //added @ go live to ensure fees get invoiced
 
-if (("Application Intake".equals(wfTask) && ("Accepted".equals(wfStatus) || "Accepted No Test".equals(wfStatus))
+if (("Application Intake".equals(wfTask) && ("Accepted".equals(wfStatus) || "Accepted No Test".equals(wfStatus))))
 {
 	invoiceFee("LIC_CONT_A01","FINAL");
 }
