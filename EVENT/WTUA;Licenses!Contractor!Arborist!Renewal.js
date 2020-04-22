@@ -41,7 +41,7 @@ if ("Renewal Review".equals(wfTask) && "Approved for Renewal".equals(wfStatus) &
 		// set parent record status to Issued
 		updateAppStatus("Issued", "Updated by WTUA;Licenses!Contractor!Arborist!Renewal", vLicenseID);
 		// set workflow task status to "Active" on parent record
-		updateTask("License Status","Active","updated via renewal process","updated via renewal process",null,vLicenseID);
+		updateTask("License Status","Active","Updated by WTUA;Licenses!Contractor!Arborist!Renewal","",null,vLicenseID);
 		//update Parent license record custom data
 		copyAppSpecific(vLicenseID);
 
