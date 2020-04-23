@@ -44,7 +44,7 @@ if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 		// set parent record status to Issued
 		updateAppStatus("Issued", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", vLicenseID);
 		// set workflow task status to "Active" on parent record
-		updateTask("License Status","Active","Updated by PRA;Licenses!Contractor!Arborist!Renewal","",null,vLicenseID);
+		updateTask("License Status","Active","Updated by PRA;Licenses!Contractor!Arborist!Renewal","","LIC_ARB_LIC",vLicenseID);
 		// update parent license record custom data
 		copyAppSpecific(vLicenseID);
 		
