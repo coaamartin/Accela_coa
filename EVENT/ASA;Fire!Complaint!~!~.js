@@ -40,9 +40,9 @@ if (x && x.length > 0) {
 	}
 }
 else{
-	var refUser = x[0]["FIRSTDUE"];
-	var user = lookup("FIRE STATION", refUser);
-	comment("Lets see if this works... refUser = " + refUser + "and user = " + user );
+	var currUserId = aa.env.getValue("CurrentUserID");
+	var user = currUserId;
+	comment("Lets see if this works... user = " + user );
 	comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
 	assignTask("Assign Complaint", user);
 	closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
