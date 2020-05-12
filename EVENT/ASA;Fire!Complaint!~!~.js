@@ -44,8 +44,12 @@ else{
 	var user = currUserId;
 	comment("Lets see if this works... user = " + user );
 	comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
+	scheduleInspection("FD Complaint Inspection",0, user);
+	assignCap(user);
 	assignTask("Assign Complaint", user);
 	closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
+	activateTask("Inspection");
+	assignTask("Inspection", user);
 	scheduleInspection("FD Complaint Inspection",0);
 }
 
