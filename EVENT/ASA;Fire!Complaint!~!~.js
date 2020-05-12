@@ -50,7 +50,6 @@ else{
 	closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
 	activateTask("Inspection");
 	assignTask("Inspection", user);
-	scheduleInspection("FD Complaint Inspection",0);
 }
 
 logDebug("Script 186 END");
