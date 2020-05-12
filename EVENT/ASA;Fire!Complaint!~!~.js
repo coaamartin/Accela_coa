@@ -22,9 +22,9 @@ logDebug("x =" + x);
 if (x && x.length > 0) {
 	logDebug(x[0]["FIRSTDUE"]);
 	var refUser = x[0]["FIRSTDUE"];
-	logDebug("refUser =" + refUser);
+	comment("refUser =" + refUser);
 	var user = lookup("FIRE STATION", refUser);
-	logDebug("user = " + user);
+	comment("user = " + user);
 	if (user != null && user != "")
 	{
 		scheduleInspection("FD Complaint Inspection",0, user);
