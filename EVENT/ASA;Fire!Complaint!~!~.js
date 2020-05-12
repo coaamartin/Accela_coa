@@ -22,7 +22,9 @@ logDebug("x =" + x);
 if (x && x.length > 0) {
 	logDebug(x[0]["FIRSTDUE"]);
 	var refUser = x[0]["FIRSTDUE"];
+	logDebug("refUser =" + refUser);
 	var user = lookup("FIRE STATION", refUser);
+	logDebug("user = " + user);
 	if (user != null && user != "")
 	{
 		scheduleInspection("FD Complaint Inspection",0, user);
@@ -39,7 +41,7 @@ if (x && x.length > 0) {
 }
 else{
 	comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
-   closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
+    closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
 	scheduleInspection("FD Complaint Inspection",0);
 }
 
