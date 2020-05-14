@@ -119,21 +119,14 @@ function mainProcess() {
 	| BATCH PARAMETERS
     /------------------------------------------------------------------------------------------------------*/
     var paramStdChoice = aa.env.getValue("paramStdChoice");	// use this standard choice for parameters instead of batchjob params
-    var daysInactive = getJobParam("daysInactive");//this will be used to determine how often to run the report...will change var name
+    var dateRange = getJobParam("daysInactive");//this will be used to determine how often to run the report...will change var name
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var emailSendTo = getJobParam("emailSendTo");
 	var emailTitle = getJobParam("emailTitle");
 	var emailBodyMsg="";
-	var tParams = aa.util.newHashtable();
-	tParams.put("$$todayDate$$", thisDate);
-	//tParams.put("$$HOANAME$$", hoaName);
-	tParams.put("$$altID$$", capId.getCustomID());
-	//tParams.put("$$capAlias$$", capAlias);
-	var rParams = aa.util.newHashtable();
-	var emailtemplate = "Need to get the email template";
-    //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams);
-    sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, null);
+    //var reportName = getJobParam("reportName");
+    //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams,null);
     logDebug("Processing Batch_report_test.js. ")
     /*----------------------------------------------------------------------------------------------------/
 	| Email Header
@@ -186,4 +179,5 @@ function getScriptText(vScriptName) {
 		return emseScript.getScriptText() + "";
 	} catch (err) {
 		return "";
-	}
+    }
+}
