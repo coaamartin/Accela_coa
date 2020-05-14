@@ -52,6 +52,37 @@ eval(getScriptText("INCLUDES_BATCH"));
 eval(getMasterScriptText("INCLUDES_CUSTOM"));
 
 /*------------------------------------------------------------------------------------------------------/
+| <===========internal functions - do not modify ================>
+/-----------------------------------------------------------------------------------------------------*/
+function getMasterScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
+}
+
+function getScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+    }
+}
+
+/*------------------------------------------------------------------------------------------------------/
 | CORE EXPIRATION BATCH FUNCTIONALITY
 /------------------------------------------------------------------------------------------------------*/
 try {
@@ -120,8 +151,9 @@ function mainProcess() {
     /------------------------------------------------------------------------------------------------------*/
     var paramStdChoice = aa.env.getValue("paramStdChoice");	// use this standard choice for parameters instead of batchjob params
     var dateRange = getJobParam("dateRange");//this will be used to determine how often to run the report...will change var name
-    var today = new Date();
-    var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    //var today = new Date();
+    //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    //--mm/dd/yyyy configuration for reporting
     var emailSendTo = getJobParam("emailSendTo");
 	var emailTitle = getJobParam("emailTitle");
 	var emailBodyMsg="";
@@ -148,42 +180,15 @@ function mainProcess() {
                 logDebug("Email to: "+ emailSendTo);
                 logDebug("Email Title: " + emailTitle);
                 logDebug("Email Body: " + emailBodyMsg);
+                return true;
         }
         else {
             logDebug("Logic is not working Ray");
+            return false;
         }
 
 		logDebug("=================================================");
 		logDebug("Finished sending email" );
 }
 
-/*------------------------------------------------------------------------------------------------------/
-| <===========internal functions - do not modify ================>
-/-----------------------------------------------------------------------------------------------------*/
-function getMasterScriptText(vScriptName) {
-	var servProvCode = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		servProvCode = arguments[1]; // use different serv prov code
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-	}
-}
 
-function getScriptText(vScriptName) {
-	var servProvCode = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		servProvCode = arguments[1]; // use different serv prov code
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-    }
-}
