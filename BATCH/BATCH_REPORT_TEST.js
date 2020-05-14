@@ -141,11 +141,17 @@ function mainProcess() {
 	| End Email Header
 	/------------------------------------------------------------------------------------------------------*/
     	//generate email notices
-		if (emailSendTo && emailSendTo != "") {
+		if (emailSendTo != null) {
 			logDebug("=================================================");
 			//logDebug('Attempting to send email: ' +  );
-				aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
-		}
+                aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
+                logDebug("Email to: "+ emailSendTo);
+                logDebug("Email Title: " + emailTitle);
+                logDebug("Email Body: " + emailBodyMsg);
+        }
+        else {
+            logDebug("Logic is not working Ray");
+        }
 
 		logDebug("=================================================");
 		logDebug("Finished sending email" );
