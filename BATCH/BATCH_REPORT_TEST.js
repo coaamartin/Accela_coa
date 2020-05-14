@@ -143,7 +143,7 @@ function mainProcess() {
     	//generate email notices
 		if (emailSendTo && emailSendTo != "") {
 			logDebug("=================================================");
-			logDebug('Attempting to send email: ' + emailTemplate );
+			//logDebug('Attempting to send email: ' +  );
 				aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
 		}
 
