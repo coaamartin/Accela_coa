@@ -119,7 +119,7 @@ function mainProcess() {
 	| BATCH PARAMETERS
     /------------------------------------------------------------------------------------------------------*/
     var paramStdChoice = aa.env.getValue("paramStdChoice");	// use this standard choice for parameters instead of batchjob params
-    var dateRange = getJobParam("daysInactive");//this will be used to determine how often to run the report...will change var name
+    var dateRange = getJobParam("dateRange");//this will be used to determine how often to run the report...will change var name
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var emailSendTo = getJobParam("emailSendTo");
