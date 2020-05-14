@@ -125,7 +125,7 @@ function mainProcess() {
     var emailSendTo = getJobParam("emailSendTo");
 	var emailTitle = getJobParam("emailTitle");
 	var emailBodyMsg="";
-    //var reportName = getJobParam("reportName");
+    var reportName = getJobParam("reportName");
     //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams,null);
     logDebug("Processing Batch_report_test.js. ")
     /*----------------------------------------------------------------------------------------------------/
@@ -133,7 +133,7 @@ function mainProcess() {
 	/------------------------------------------------------------------------------------------------------*/
 	emailBodyMsg+="Hello,"+br;
 	emailBodyMsg+=br;
-	emailBodyMsg+="Please see attached report." + br;
+	emailBodyMsg+="Please see attached" + reportName + " " + br;
     emailBodyMsg+=br;
     emailBodyMsg+="Thank you and have a great day," + br;
 	emailBodyMsg+=br;
