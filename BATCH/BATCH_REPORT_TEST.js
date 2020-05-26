@@ -181,17 +181,17 @@ function mainProcess() {
 		if (emailSendTo != null) {
 			logDebug("=================================================");
 		
-				//aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
+				aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
 				//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
-				emailContacts(emailSendTo, emailTemplate, "", reportName, "", "Y");
+				//emailContacts(emailSendTo, emailTemplate, "", reportName, "", "Y");
                 logDebug("Email to: "+ emailSendTo);
                 logDebug("Email Title: " + emailTitle);
                 logDebug("Email Body: " + emailBodyMsg);
-                return true;
+                
         }
         else {
             logDebug("Logic is not working Ray");
-            return false;
+    
         }
 
 		logDebug("=================================================");
