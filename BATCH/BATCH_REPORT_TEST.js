@@ -153,7 +153,7 @@ function mainProcess() {
 	//generate email notices
 
 	logDebug("=================================================");
-	aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
+	aa.sendMail("noreply@aurora.gov", emailSendTo, "", emailTitle, emailBodyMsg);
 	//sendNotification("noreply@aurora.gov", emailSendTo, "", emailtemplate, tParams, [report]);
 	//sendNotification("noreply@aurora.gov", emailSendTo, "", emailTemplate, "", "");
 	//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
