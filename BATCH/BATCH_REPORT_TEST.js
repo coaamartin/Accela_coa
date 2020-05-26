@@ -84,20 +84,20 @@ try {
 	}
 
 
-/*------------------------------------------------------------------------------------------------------/
-| <===========Main=Loop================>
-/-----------------------------------------------------------------------------------------------------*/
+	/*------------------------------------------------------------------------------------------------------/
+	| <===========Main=Loop================>
+	/-----------------------------------------------------------------------------------------------------*/
 	logDebug("Start of Job");
 
 	mainProcess();
 
 	logDebug("End of Job: Elapsed Time : " + elapsed() + " Seconds");
-	
-/*------------------------------------------------------------------------------------------------------/
-| <===========END=Main=Loop================>
-/-----------------------------------------------------------------------------------------------------*/	
+
+	/*------------------------------------------------------------------------------------------------------/
+	| <===========END=Main=Loop================>
+	/-----------------------------------------------------------------------------------------------------*/
 } catch (err) {
-	handleError(err,"Batch Job:" + batchJobName + " Job ID:" + batchJobID);
+	handleError(err, "Batch Job:" + batchJobName + " Job ID:" + batchJobID);
 }
 
 /*------------------------------------------------------------------------------------------------------/
@@ -119,58 +119,50 @@ if (debug.indexOf("**ERROR") > 0) {
 /*------------------------------------------------------------------------------------------------------/
 | FUNCTIONS (mainProcess is the core function for processing expiration records)
 /------------------------------------------------------------------------------------------------------*/
-function mainProcess() {  
-    /*----------------------------------------------------------------------------------------------------/
+function mainProcess() {
+	/*----------------------------------------------------------------------------------------------------/
 	| BATCH PARAMETERS
     /------------------------------------------------------------------------------------------------------*/
-    var paramStdChoice = aa.env.getValue("paramStdChoice");	// use this standard choice for parameters instead of batchjob params
-    //var dateRange = getJobParam("dateRange");//this will be used to determine how often to run the report...will change var name
-    //var today = new Date();
-    //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-    //--mm/dd/yyyy configuration for reporting
-    var emailSendTo = getJobParam("emailSendTo");// email to: 
-	var emailTitle = getJobParam("emailTitle");// email Title
+	var paramStdChoice = aa.env.getValue("paramStdChoice"); // use this standard choice for parameters instead of batchjob params
+	//var dateRange = getJobParam("dateRange");//this will be used to determine how often to run the report...will change var name
+	//var today = new Date();
+	//var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+	//--mm/dd/yyyy configuration for reporting
+	var emailSendTo = getJobParam("emailSendTo"); // email to: 
+	var emailTitle = getJobParam("emailTitle"); // email Title
 	//var emailTemplate = "Report_Test_Email"; // email Template
-	var emailBodyMsg="";
+	var emailBodyMsg = "";
 	var reportName = getJobParam("reportName");
 	//var capCount= 0;
 	//var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	//var expMonth = datepart1.getMonth();
-    //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams,null);
-    logDebug("Processing Batch_report_test.js. ")
-    /*----------------------------------------------------------------------------------------------------/
+	//sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams,null);
+	logDebug("Processing Batch_report_test.js. ")
+	/*----------------------------------------------------------------------------------------------------/
 	| Email Header
 	/------------------------------------------------------------------------------------------------------*/
-	emailBodyMsg+="Hello,"+br;
-	emailBodyMsg+=br;
-	emailBodyMsg+="Please see attached " + reportName + " " + br;
-    emailBodyMsg+=br;
-    emailBodyMsg+="Thank you and have a great day," + br;
-	emailBodyMsg+=br;
+	emailBodyMsg += "Hello," + br;
+	emailBodyMsg += br;
+	emailBodyMsg += "Please see attached " + reportName + " " + br;
+	emailBodyMsg += br;
+	emailBodyMsg += "Thank you and have a great day," + br;
+	emailBodyMsg += br;
 	/*----------------------------------------------------------------------------------------------------/
 	| End Email Header
 	/------------------------------------------------------------------------------------------------------*/
-    	//generate email notices
-		if (emailSendTo != "") {
-			logDebug("=================================================");
-				
-				aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
-				//sendNotification("noreply@aurora.gov", emailSendTo, "", emailtemplate, tParams, [report]);
-				//sendNotification("noreply@aurora.gov", emailSendTo, "", emailTemplate, "", "");
-				//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
-				//emailContacts(emailSendTo, emailTemplate, "", reportName, "", "Y");
-                logDebug("Email to: "+ emailSendTo);
-                logDebug("Email Title: " + emailTitle);
-                logDebug("Email Body: " + emailBodyMsg);
-                
-        }
-        else {
-            logDebug("Logic is not working Ray");
-    
-        }
+	//generate email notices
 
-		logDebug("=================================================");
-		logDebug("Finished sending email" );
+	logDebug("=================================================");
+	aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
+	//sendNotification("noreply@aurora.gov", emailSendTo, "", emailtemplate, tParams, [report]);
+	//sendNotification("noreply@aurora.gov", emailSendTo, "", emailTemplate, "", "");
+	//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
+	//emailContacts(emailSendTo, emailTemplate, "", reportName, "", "Y");
+	logDebug("Email to: " + emailSendTo);
+	logDebug("Email Title: " + emailTitle);
+	logDebug("Email Body: " + emailBodyMsg);
+	logDebug("=================================================");
+	logDebug("Finished sending email");
 }
 
 
@@ -202,7 +194,7 @@ function getScriptText(vScriptName) {
 		return emseScript.getScriptText() + "";
 	} catch (err) {
 		return "";
-    }
+	}
 }
 // function sendNotification(emailFrom,emailSendTo,emailCC,emailTemplate,params,reportFile)
 
@@ -253,4 +245,3 @@ function getScriptText(vScriptName) {
 // 	}
 
 // }
-
