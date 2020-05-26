@@ -1,3 +1,4 @@
+if (balanceDue > 0) {
 	logDebug("Starting 496_Fire_Notifications script");
 	var InvoiceNbr = InvoiceNbrArray[0] + "";
 	var envParameters = aa.util.newHashMap();
@@ -28,3 +29,4 @@
 	// rParams.put("INVOICEID", InvoiceNbr);
 	// logDebug("Template Parameters: " + tParams);
 	// logDebug("Rparams" + rParams);
+}
