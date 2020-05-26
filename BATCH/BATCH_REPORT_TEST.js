@@ -54,36 +54,7 @@ eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 //eval(getScriptText("INCLUDES_CUSTOM", null, true));
 eval(getMasterScriptText("INCLUDES_CUSTOM"));
 
-/*------------------------------------------------------------------------------------------------------/
-| <===========internal functions - do not modify ================>
-/-----------------------------------------------------------------------------------------------------*/
-function getMasterScriptText(vScriptName) {
-	var servProvCode = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		servProvCode = arguments[1]; // use different serv prov code
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-	}
-}
 
-function getScriptText(vScriptName) {
-	var servProvCode = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		servProvCode = arguments[1]; // use different serv prov code
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-    }
-}
 
 /*------------------------------------------------------------------------------------------------------/
 | CORE EXPIRATION BATCH FUNCTIONALITY
@@ -159,9 +130,10 @@ function mainProcess() {
     //--mm/dd/yyyy configuration for reporting
     var emailSendTo = getJobParam("emailSendTo");// email to: 
 	var emailTitle = getJobParam("emailTitle");// email Title
-	var emailTemplate = "Report_Test_Email"; // email Template
+	//var emailTemplate = "Report_Test_Email"; // email Template
 	var emailBodyMsg="";
 	var reportName = getJobParam("reportName");
+	//var capCount= 0;
 	//var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	//var expMonth = datepart1.getMonth();
     //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams,null);
@@ -179,12 +151,12 @@ function mainProcess() {
 	| End Email Header
 	/------------------------------------------------------------------------------------------------------*/
     	//generate email notices
-		if (emailSendTo != null) {
+		if (emailSendTo != "") {
 			logDebug("=================================================");
 				
-				//aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
+				aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
 				//sendNotification("noreply@aurora.gov", emailSendTo, "", emailtemplate, tParams, [report]);
-				sendNotification("noreply@aurora.gov", emailSendTo, "", emailTemplate, "", "");
+				//sendNotification("noreply@aurora.gov", emailSendTo, "", emailTemplate, "", "");
 				//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
 				//emailContacts(emailSendTo, emailTemplate, "", reportName, "", "Y");
                 logDebug("Email to: "+ emailSendTo);
@@ -200,53 +172,85 @@ function mainProcess() {
 		logDebug("=================================================");
 		logDebug("Finished sending email" );
 }
-function sendNotification(emailFrom,emailSendTo,emailCC,emailTemplate,params,reportFile)
-
-{
-
-	var itemCap = capId;
-
-	if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
 
 
-
-	var id1 = itemCap.ID1;
-
- 	var id2 = itemCap.ID2;
-
- 	var id3 = itemCap.ID3;
-
-
-
-	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
-
-
-
-
-
-	var result = null;
-
-	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailSendTo, emailCC, emailTemplate, params, capIDScriptModel, reportFile);
-
-	if(result.getSuccess())
-
-	{
-
-		logDebug("Sent email successfully!");
-
-		return true;
-
+/*------------------------------------------------------------------------------------------------------/
+| <===========internal functions - do not modify ================>
+/-----------------------------------------------------------------------------------------------------*/
+function getMasterScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
 	}
-
-	else
-
-	{
-
-		logDebug("Failed to send mail. - " + result.getErrorType());
-
-		return false;
-
-	}
-
 }
+
+function getScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+    }
+}
+// function sendNotification(emailFrom,emailSendTo,emailCC,emailTemplate,params,reportFile)
+
+// {
+
+// 	var itemCap = capId;
+
+// 	if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
+
+
+
+// 	var id1 = itemCap.ID1;
+
+//  	var id2 = itemCap.ID2;
+
+//  	var id3 = itemCap.ID3;
+
+
+
+// 	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
+
+
+
+
+
+// 	var result = null;
+
+// 	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailSendTo, emailCC, emailTemplate, params, capIDScriptModel, reportFile);
+
+// 	if(result.getSuccess())
+
+// 	{
+
+// 		logDebug("Sent email successfully!");
+
+// 		return true;
+
+// 	}
+
+// 	else
+
+// 	{
+
+// 		logDebug("Failed to send mail. - " + result.getErrorType());
+
+// 		return false;
+
+// 	}
+
+// }
 
