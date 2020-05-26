@@ -161,7 +161,7 @@ function mainProcess() {
 	var emailTitle = getJobParam("emailTitle");
 	var emailTemplate = getJobParam("emailTemplate"); // email Template
 	var emailBodyMsg="";
-	//var reportName = getJobParam("reportName");
+	var reportName = getJobParam("reportName");
 	//var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	//var expMonth = datepart1.getMonth();
     //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams,null);
