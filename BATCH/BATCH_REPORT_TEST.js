@@ -159,9 +159,10 @@ function mainProcess() {
     //--mm/dd/yyyy configuration for reporting
     var emailSendTo = getJobParam("emailSendTo");
 	var emailTitle = getJobParam("emailTitle");
-	//var emailTemplate = getJobParam("emailTemplate"); // email Template
+	var emailTemplate = getJobParam("emailTemplate"); // email Template
 	var emailBodyMsg="";
-	var reportName = getJobParam("reportName");
+	//var reportName = getJobParam("reportName");
+	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	//var expMonth = datepart1.getMonth();
     //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams,null);
     logDebug("Processing Batch_report_test.js. ")
@@ -181,7 +182,9 @@ function mainProcess() {
 		if (emailSendTo != null) {
 			logDebug("=================================================");
 		
-				aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
+				//aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
+				//sendNotification("noreply@aurora.gov", emailSendTo, "", emailtemplate, tParams, [report]);
+				sendNotification("noreply@aurora.gov", emailSendTo, "", emailtemplate, "", "");
 				//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
 				//emailContacts(emailSendTo, emailTemplate, "", reportName, "", "Y");
                 logDebug("Email to: "+ emailSendTo);
