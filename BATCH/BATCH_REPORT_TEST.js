@@ -157,9 +157,9 @@ function mainProcess() {
     //var today = new Date();
     //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     //--mm/dd/yyyy configuration for reporting
-    var emailSendTo = getJobParam("emailSendTo");
-	var emailTitle = getJobParam("emailTitle");
-	var emailTemplate = getJobParam("emailTemplate"); // email Template
+    var emailSendTo = getJobParam("emailSendTo");// email to: 
+	var emailTitle = getJobParam("emailTitle");// email Title
+	var emailTemplate = "Report_Test_Email"; // email Template
 	var emailBodyMsg="";
 	var reportName = getJobParam("reportName");
 	//var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
