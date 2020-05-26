@@ -180,15 +180,10 @@ function mainProcess() {
     	//generate email notices
 		if (emailSendTo != null) {
 			logDebug("=================================================");
-			eParams = aa.util.newHashtable();
-			//eParams.put("$$expirationDate$$", expMonth);
-			eParams.put("$$altID$$",capId.getCustomID());
-			// eParams.put("$$acaRecordUrl$$",getACARecordURL(""));
-			// eParams.put("$$HOANAME$$", hoaName);
 		
 				//aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
 				//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
-				emailContacts(emailSendTo, emailTemplate, eParams, reportName, "", "Y");
+				emailContacts(emailSendTo, emailTemplate, "", reportName, "", "Y");
                 logDebug("Email to: "+ emailSendTo);
                 logDebug("Email Title: " + emailTitle);
                 logDebug("Email Body: " + emailBodyMsg);
