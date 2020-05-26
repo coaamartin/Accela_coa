@@ -1,4 +1,4 @@
-sendEmail() {
+try {
     logDebug("Starting BATCH_REPORT_TESTv2");
     var emailSendTo = getJobParam("emailSendTo"); // email to: 
     var emailTitle = getJobParam("emailTitle"); // email Title
