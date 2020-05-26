@@ -159,7 +159,7 @@ function mainProcess() {
     //--mm/dd/yyyy configuration for reporting
     var emailSendTo = getJobParam("emailSendTo");
 	var emailTitle = getJobParam("emailTitle");
-	var emailTemplate = getJobParam("emailTemplate"); // email Template
+	//var emailTemplate = getJobParam("emailTemplate"); // email Template
 	var emailBodyMsg="";
 	var reportName = getJobParam("reportName");
 	//var expMonth = datepart1.getMonth();
