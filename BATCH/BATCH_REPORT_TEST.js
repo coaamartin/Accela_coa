@@ -57,19 +57,19 @@ eval(getMasterScriptText("INCLUDES_CUSTOM"));
 /*------------------------------------------------------------------------------------------------------/
 | <===========internal functions - do not modify ================>
 /-----------------------------------------------------------------------------------------------------*/
-// function getMasterScriptText(vScriptName) {
-// 	var servProvCode = aa.getServiceProviderCode();
-// 	if (arguments.length > 1)
-// 		servProvCode = arguments[1]; // use different serv prov code
-// 	vScriptName = vScriptName.toUpperCase();
-// 	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-// 	try {
-// 		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-// 		return emseScript.getScriptText() + "";
-// 	} catch (err) {
-// 		return "";
-// 	}
-// }
+function getMasterScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
+}
 
 function getScriptText(vScriptName) {
 	var servProvCode = aa.getServiceProviderCode();
