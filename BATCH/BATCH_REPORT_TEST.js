@@ -158,6 +158,7 @@ function mainProcess() {
     //--mm/dd/yyyy configuration for reporting
     var emailSendTo = getJobParam("emailSendTo");
 	var emailTitle = getJobParam("emailTitle");
+	var emailTemplate = getJobParam("emailTemplate"); // email Template
 	var emailBodyMsg="";
     var reportName = getJobParam("reportName");
     //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams,null);
@@ -178,7 +179,9 @@ function mainProcess() {
 		if (emailSendTo != null) {
 			logDebug("=================================================");
 			//logDebug('Attempting to send email: ' +  );
-                aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
+				//aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
+				//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
+				emailContacts(emailSendTo, emailTemplate, "", reportName, "", "Y");
                 logDebug("Email to: "+ emailSendTo);
                 logDebug("Email Title: " + emailTitle);
                 logDebug("Email Body: " + emailBodyMsg);
