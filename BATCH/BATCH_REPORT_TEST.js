@@ -152,7 +152,7 @@ function mainProcess() {
 	| BATCH PARAMETERS
     /------------------------------------------------------------------------------------------------------*/
     var paramStdChoice = aa.env.getValue("paramStdChoice");	// use this standard choice for parameters instead of batchjob params
-    var dateRange = getJobParam("dateRange");//this will be used to determine how often to run the report...will change var name
+    //var dateRange = getJobParam("dateRange");//this will be used to determine how often to run the report...will change var name
     //var today = new Date();
     //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     //--mm/dd/yyyy configuration for reporting
@@ -160,7 +160,8 @@ function mainProcess() {
 	var emailTitle = getJobParam("emailTitle");
 	var emailTemplate = getJobParam("emailTemplate"); // email Template
 	var emailBodyMsg="";
-    var reportName = getJobParam("reportName");
+	var reportName = getJobParam("reportName");
+	//var expMonth = datepart1.getMonth();
     //sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams,null);
     logDebug("Processing Batch_report_test.js. ")
     /*----------------------------------------------------------------------------------------------------/
@@ -168,7 +169,7 @@ function mainProcess() {
 	/------------------------------------------------------------------------------------------------------*/
 	emailBodyMsg+="Hello,"+br;
 	emailBodyMsg+=br;
-	emailBodyMsg+="Please see attached" + reportName + " " + br;
+	emailBodyMsg+="Please see attached " + reportName + " " + br;
     emailBodyMsg+=br;
     emailBodyMsg+="Thank you and have a great day," + br;
 	emailBodyMsg+=br;
@@ -178,10 +179,15 @@ function mainProcess() {
     	//generate email notices
 		if (emailSendTo != null) {
 			logDebug("=================================================");
-			//logDebug('Attempting to send email: ' +  );
+			eParams = aa.util.newHashtable();
+			//eParams.put("$$expirationDate$$", expMonth);
+			eParams.put("$$altID$$",capId.getCustomID());
+			// eParams.put("$$acaRecordUrl$$",getACARecordURL(""));
+			// eParams.put("$$HOANAME$$", hoaName);
+		
 				//aa.sendMail("noreply@accela.com", emailSendTo, "", emailTitle, emailBodyMsg);
 				//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
-				emailContacts(emailSendTo, emailTemplate, "", reportName, "", "Y");
+				emailContacts(emailSendTo, emailTemplate, eParams, reportName, "", "Y");
                 logDebug("Email to: "+ emailSendTo);
                 logDebug("Email Title: " + emailTitle);
                 logDebug("Email Body: " + emailBodyMsg);
