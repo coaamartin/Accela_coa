@@ -128,7 +128,7 @@ function mainProcess() {
 	//var today = new Date();
 	//var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	//--mm/dd/yyyy configuration for reporting
-	var emailSendTo = getJobParam("emailSendTo"); // email to: 
+	var emailTo = getJobParam("emailSendTo"); // email to: 
 	var emailTitle = getJobParam("emailTitle"); // email Title
 	//var emailTemplate = "Report_Test_Email"; // email Template
 	var emailBodyMsg = "";
@@ -153,7 +153,7 @@ function mainProcess() {
 	//generate email notices
 
 	logDebug("=================================================");
-	aa.sendMail("noreply@aurora.gov", emailSendTo, "", emailTitle, emailBodyMsg);
+	aa.sendMail("noreply@aurora.gov", emailTo, "", emailTitle, emailBodyMsg);
 	//sendNotification("noreply@aurora.gov", emailSendTo, "", emailtemplate, tParams, [report]);
 	//sendNotification("noreply@aurora.gov", emailSendTo, "", emailTemplate, "", "");
 	//emailContacts(emailSendTo, emailTemplate, eParams, reportName, rParams, "Y");
