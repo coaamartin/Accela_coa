@@ -1,12 +1,22 @@
 //Get environmental variables pass into the script
-var sendEmailToAddresses = getJobParam("emailSendTo");
+// var sendEmailToAddresses = aa.env.getJobParam("emailSendTo");
+// var emailTemplate = "Report_Test_Email";
+// var vEParams = aa.env.getValue("vEParams");
+// var reportTemplate = getJobParam("reportName");
+// var vRParams = aa.env.getValue("vRParams");
+// var vChangeReportName = aa.env.getValue("vChangeReportName");
+// var capId = aa.env.getValue("CapId");
+// var adHocTaskContactsList = aa.env.getValue("adHocTaskContactsList");
+
+//Testing script without getJobParam
+var sendEmailToAddresses = "rprovinc@auroragov.org";
 var emailTemplate = "Report_Test_Email";
-var vEParams = aa.env.getValue("vEParams");
-var reportTemplate = getJobParam("reportName");
-var vRParams = aa.env.getValue("vRParams");
-var vChangeReportName = aa.env.getValue("vChangeReportName");
-var capId = aa.env.getValue("CapId");
-var adHocTaskContactsList = aa.env.getValue("adHocTaskContactsList");
+//var vEParams = aa.env.getValue("vEParams");
+//var reportTemplate = getJobParam("reportName");
+//var vRParams = aa.env.getValue("vRParams");
+//var vChangeReportName = aa.env.getValue("vChangeReportName");
+//ar capId = aa.env.getValue("CapId");
+//var adHocTaskContactsList = aa.env.getValue("adHocTaskContactsList");
 
 //Constant variables used in the script
 var CONST_ADHOC_PROCESS = "ADHOC_WORKFLOW";
