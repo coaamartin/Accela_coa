@@ -22,34 +22,96 @@ var emailTemplate = "Report_Test_Email";
 var CONST_ADHOC_PROCESS = "ADHOC_WORKFLOW";
 var CONST_ADHOC_TASK = "Manual Notification";
 
-try {
-	//Start modification to support batch script, if not batch then grab globals, if batch do not.
-	if (aa.env.getValue("eventType") != "Batch Process") {
-		// Begin Code needed to call master script functions ---------------------------------------------------
-		function getScriptText(vScriptName, servProvCode, useProductScripts) {
-			if (!servProvCode)
-				servProvCode = aa.getServiceProviderCode();
-			vScriptName = vScriptName.toUpperCase();
-			var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-			try {
-				if (useProductScripts) {
-					var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-				} else {
-					var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
-				}
-				return emseScript.getScriptText() + "";
-			} catch (err) {
-				return "";
-			}
-		}
-		var SCRIPT_VERSION = 3.0;
-		aa.env.setValue("CurrentUserID", "ADMIN");
-		eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, true));
-		eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
-		eval(getScriptText("INCLUDES_CUSTOM", null, true));
-	}
-	//End Code needed to call master script functions -----------------------------------------------------
 
+
+/*------------------------------------------------------------------------------------------------------/
+| INCLUDE SCRIPTS (Core functions, batch includes, custom functions)
+/------------------------------------------------------------------------------------------------------*/
+SCRIPT_VERSION = 3.0;
+var useSA = false;
+var SA = null;
+var SAScript = null;
+var bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_FOR_EMSE");
+if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
+	useSA = true;
+	SA = bzr.getOutput().getDescription();
+	bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_INCLUDE_SCRIPT");
+	if (bzr.getSuccess()) {
+		SAScript = bzr.getOutput().getDescription();
+	}
+}
+
+if (SA) {
+	eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS", SA));
+	eval(getMasterScriptText(SAScript, SA));
+} else {
+	eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+}
+
+eval(getScriptText("INCLUDES_BATCH"));
+//eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+//eval(getScriptText("INCLUDES_CUSTOM", null, true));
+eval(getMasterScriptText("INCLUDES_CUSTOM"));
+
+
+
+/*------------------------------------------------------------------------------------------------------/
+| CORE EXPIRATION BATCH FUNCTIONALITY
+/------------------------------------------------------------------------------------------------------*/
+try {
+	showMessage = false;
+	showDebug = true;
+	if (String(aa.env.getValue("showDebug")).length > 0) {
+		showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
+	}
+
+	sysDate = aa.date.getCurrentDate();
+	var startDate = new Date();
+	var startTime = startDate.getTime(); // Start timer
+	var systemUserObj = aa.person.getUser("ADMIN").getOutput();
+
+	sysDateMMDDYYYY = dateFormatted(sysDate.getMonth(), sysDate.getDayOfMonth(), sysDate.getYear(), "");
+	batchJobResult = aa.batchJob.getJobID();
+	batchJobName = "" + aa.env.getValue("BatchJobName");
+	batchJobID = 0;
+
+	if (batchJobResult.getSuccess()) {
+		batchJobID = batchJobResult.getOutput();
+		logDebug("Batch Job " + batchJobName + " Job ID is " + batchJobID);
+	} else {
+		logDebug("Batch job ID not found " + batchJobResult.getErrorMessage());
+	}
+/*------------------------------------------------------------------------------------------------------/
+| <===========internal functions - do not modify ================>
+/-----------------------------------------------------------------------------------------------------*/
+function getMasterScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
+}
+
+function getScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
+}
 	logDebug("1) Here in SEND_EMAIL_ASYNC. Event Type: " + aa.env.getValue("eventType"));
 	logDebug("2) sendEmailToAddresses: " + sendEmailToAddresses);
 	logDebug("3) emailTemplate: " + emailTemplate);
