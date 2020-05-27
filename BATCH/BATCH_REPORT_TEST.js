@@ -117,7 +117,7 @@ if (debug.indexOf("**ERROR") > 0) {
 }
 
 /*------------------------------------------------------------------------------------------------------/
-| FUNCTIONS (mainProcess is the core function for processing expiration records)
+| FUNCTIONS (mainProcess is the core function for sending emails)
 /------------------------------------------------------------------------------------------------------*/
 function mainProcess() {
 	/*----------------------------------------------------------------------------------------------------/
