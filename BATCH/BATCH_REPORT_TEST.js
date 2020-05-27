@@ -1,11 +1,11 @@
 /*------------------------------------------------------------------------------------------------------/
 | TEST PARAMETERS (Uncomment to use in the script tester)
 /------------------------------------------------------------------------------------------------------*/
-//aa.env.setValue("paramStdChoice","BATCH_CloseInactiveHOA");
+//aa.env.setValue("paramStdChoice","BATCH_REPORT_TEST");
 //aa.env.setValue("eventType","Batch Process");
-//aa.env.setValue("BatchJobName","BATCH_CloseInactiveHOA");
+//aa.env.setValue("BatchJobName","BATCH_REPORT_TEST");
 /*------------------------------------------------------------------------------------------------------/
-| Program: BATCH_CloseInactiveHOA  
+| Program: BATCH_REPORT_TEST 
 | Trigger: Batch
 | Client: COA
 |
@@ -153,8 +153,7 @@ function mainProcess() {
 	//generate email notices
 
 	logDebug("=================================================");
-	//aa.sendMail("noreply@aurora.gov", emailTo, "", emailTitle, emailBodyMsg);
-	aa.sendMail("noreply@aurora.gov", "rprovinc@auroragov.org", "", "emailTitle", "emailBodyMsg");
+	aa.sendMail("noreply@aurora.gov", emailTo, "", emailTitle, emailBodyMsg);
 	logDebug("Message sent: "+ aa.sendMail); 
 	//sendNotification("noreply@aurora.gov", emailSendTo, "", emailtemplate, tParams, [report]);
 	//sendNotification("noreply@aurora.gov", emailSendTo, "", emailTemplate, "", "");
