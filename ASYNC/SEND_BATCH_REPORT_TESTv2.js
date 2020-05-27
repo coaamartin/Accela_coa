@@ -53,35 +53,6 @@ eval(getScriptText("INCLUDES_BATCH"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 //eval(getScriptText("INCLUDES_CUSTOM", null, true));
 eval(getMasterScriptText("INCLUDES_CUSTOM"));
-
-
-
-/*------------------------------------------------------------------------------------------------------/
-| CORE EXPIRATION BATCH FUNCTIONALITY
-/------------------------------------------------------------------------------------------------------*/
-try {
-	showMessage = false;
-	showDebug = true;
-	if (String(aa.env.getValue("showDebug")).length > 0) {
-		showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
-	}
-
-	sysDate = aa.date.getCurrentDate();
-	var startDate = new Date();
-	var startTime = startDate.getTime(); // Start timer
-	var systemUserObj = aa.person.getUser("ADMIN").getOutput();
-
-	sysDateMMDDYYYY = dateFormatted(sysDate.getMonth(), sysDate.getDayOfMonth(), sysDate.getYear(), "");
-	batchJobResult = aa.batchJob.getJobID();
-	batchJobName = "" + aa.env.getValue("BatchJobName");
-	batchJobID = 0;
-
-	if (batchJobResult.getSuccess()) {
-		batchJobID = batchJobResult.getOutput();
-		logDebug("Batch Job " + batchJobName + " Job ID is " + batchJobID);
-	} else {
-		logDebug("Batch job ID not found " + batchJobResult.getErrorMessage());
-	}
 /*------------------------------------------------------------------------------------------------------/
 | <===========internal functions - do not modify ================>
 /-----------------------------------------------------------------------------------------------------*/
@@ -112,6 +83,35 @@ function getScriptText(vScriptName) {
 		return "";
 	}
 }
+
+
+/*------------------------------------------------------------------------------------------------------/
+| CORE EXPIRATION BATCH FUNCTIONALITY
+/------------------------------------------------------------------------------------------------------*/
+try {
+	showMessage = false;
+	showDebug = true;
+	if (String(aa.env.getValue("showDebug")).length > 0) {
+		showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
+	}
+
+	sysDate = aa.date.getCurrentDate();
+	var startDate = new Date();
+	var startTime = startDate.getTime(); // Start timer
+	var systemUserObj = aa.person.getUser("ADMIN").getOutput();
+
+	sysDateMMDDYYYY = dateFormatted(sysDate.getMonth(), sysDate.getDayOfMonth(), sysDate.getYear(), "");
+	batchJobResult = aa.batchJob.getJobID();
+	batchJobName = "" + aa.env.getValue("BatchJobName");
+	batchJobID = 0;
+
+	if (batchJobResult.getSuccess()) {
+		batchJobID = batchJobResult.getOutput();
+		logDebug("Batch Job " + batchJobName + " Job ID is " + batchJobID);
+	} else {
+		logDebug("Batch job ID not found " + batchJobResult.getErrorMessage());
+	}
+
 	logDebug("1) Here in SEND_EMAIL_ASYNC. Event Type: " + aa.env.getValue("eventType"));
 	logDebug("2) sendEmailToAddresses: " + sendEmailToAddresses);
 	logDebug("3) emailTemplate: " + emailTemplate);
