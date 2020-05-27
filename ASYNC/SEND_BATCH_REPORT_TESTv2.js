@@ -89,7 +89,7 @@ function getScriptText(vScriptName) {
 | CORE EXPIRATION BATCH FUNCTIONALITY
 /------------------------------------------------------------------------------------------------------*/
 try {
-	showMessage = false;
+	showMessage = true;
 	showDebug = true;
 	if (String(aa.env.getValue("showDebug")).length > 0) {
 		showDebug = aa.env.getValue("showDebug").substring(0, 1).toUpperCase().equals("Y");
