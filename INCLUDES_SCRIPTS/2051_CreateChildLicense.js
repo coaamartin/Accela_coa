@@ -6,6 +6,10 @@
 // BY: Alex Charlton TruePointSolutions
 
 // create child license
+if(matches(currentUserID,"ACHARLTON")){
+showDebug =3;
+}
+
 try {
 	newChildID = null;
 	// Replaced
@@ -49,7 +53,7 @@ try {
 
 	if (newChildID){
 		newChildIdString = newChildID.getCustomID();
-		editIdString = capIDString.substr(0,10)+'L'; 
+		editIdString = capIDString.substr(0,9)+'L'; 
 		aa.cap.updateCapAltID(newChildID,editIdString); 
 	}
 }
