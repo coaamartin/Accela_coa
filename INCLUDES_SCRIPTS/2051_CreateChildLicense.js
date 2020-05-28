@@ -6,7 +6,7 @@
 // BY: Alex Charlton TruePointSolutions
 
 // create child license
-if(matches(currentUserID,"ACHARLTON")){
+if(matches(currentUserID,"ACHARLTO")){
 showDebug =3;
 }
 
