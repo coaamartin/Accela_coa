@@ -1,3 +1,4 @@
+/*
 function createChildLic(grp, typ, stype, cat, desc)
 //
 // creates the new application and returns the capID object
@@ -102,4 +103,4 @@ function createChildLic(grp, typ, stype, cat, desc)
 
         logDebug("A JavaScript Error occurred: " + err.message + " Line " + err.lineNumber);
     }
-}
+}*/ 
