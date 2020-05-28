@@ -102,7 +102,6 @@ function getRefAddressAttributeValue(attrName){
             var fcapAddressObj = Adds[zz];
             var addRefId = fcapAddressObj.getRefAddressId();
             var searchResult = aa.address.getRefAddressByPK(addRefId).getOutput();
-    ​
             var addressAttr = searchResult.getRefAddressModel().getAttributes();
             addressAttrObj = addressAttr.toArray();
             for (z in addressAttrObj){
