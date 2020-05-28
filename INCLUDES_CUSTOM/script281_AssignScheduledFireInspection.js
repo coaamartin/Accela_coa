@@ -89,7 +89,7 @@ function script281_AssignScheduledFireInspection(){
         logDebug("Error on script281_AssignScheduledFireInspection(). Please contact administrator. Err: " + err);
     }
     logDebug("script281_AssignScheduledFireInspection() ended.");
-};//END script281_AssignScheduledFireInspection
+};
 
 
 function getRefAddressAttributeValue(attrName){
@@ -113,3 +113,4 @@ function getRefAddressAttributeValue(attrName){
     }
     return false;
 }
+//END script281_AssignScheduledFireInspection
