@@ -129,9 +129,13 @@ function mainProcess() {
 	var emailTitle = getJobParam("emailTitle"); // email Title
 	//var emailTemplate = "Report_Test_Email"; // email Template
 	var emailBodyMsg = "";
-	var reportName = getJobParam("reportName");
 	//var capCount= 0;
-	//var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
+	// Report parameters need to be setup below
+	var reportName = getJobParam("reportName");
+	var rParams = aa.util.newHashtable();
+	rParams.put("fromDate", "01/01/2019");
+	rParams.put("toDate", "12/31/2020");
+	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	//var expMonth = datepart1.getMonth();
 	logDebug("Processing Batch_report_test.js. ")
 	/*----------------------------------------------------------------------------------------------------/
@@ -149,7 +153,9 @@ function mainProcess() {
 	//generate email notices
 
 	logDebug("=================================================");
+	//Send email function
 	aa.sendMail("noreply@aurora.gov", emailTo, "", emailTitle, emailBodyMsg);
+	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 	logDebug("Email to: " + emailTo);
 	logDebug("Email Title: " + emailTitle);
 	logDebug("Email Body: " + emailBodyMsg);
@@ -187,4 +193,119 @@ function getScriptText(vScriptName) {
 	} catch (err) {
 		return "";
 	}
+}
+
+//Generate the report file to send
+function generateReportFile(aaReportName,parameters,rModule) 
+{
+	var reportName = aaReportName;
+
+	report = aa.reportManager.getReportInfoModelByName(reportName);
+	report = report.getOutput();
+
+
+	report.setModule(rModule);
+	report.setCapId(capId);
+	report.setReportParameters(parameters);
+	//Added
+	vAltId = capId.getCustomID();
+	report.getEDMSEntityIdModel().setAltId(vAltId);
+	var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
+	aa.print("---"+permit.getOutput().booleanValue());
+	if(permit.getOutput().booleanValue()) 
+	{
+		var reportResult = aa.reportManager.getReportResult(report);
+
+		if(reportResult) 
+		{
+			reportResult = reportResult.getOutput();
+			var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+			logMessage("Report Result: "+ reportResult);
+			reportFile = reportFile.getOutput();
+			return reportFile
+		} else 
+		{
+			logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
+			return false;
+		}
+	} else 
+	{
+		logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
+		return false; 
+	}
+}
+
+function sendNotification(emailFrom,emailTo,emailCC,templateName,params,reportFile)
+
+{
+
+	var itemCap = capId;
+
+	if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
+
+
+
+	var id1 = itemCap.ID1;
+
+ 	var id2 = itemCap.ID2;
+
+ 	var id3 = itemCap.ID3;
+
+
+
+	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
+
+
+
+
+
+	var result = null;
+
+	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
+
+	if(result.getSuccess())
+
+	{
+
+		logDebug("Sent email successfully!");
+
+		return true;
+
+	}
+
+	else
+
+	{
+
+		logDebug("Failed to send mail. - " + result.getErrorType());
+
+		return false;
+
+	}
+
+}
+ function convertContactAddressModelArr(contactAddressScriptModelArr)
+
+{
+
+	var contactAddressModelArr = null;
+
+	if(contactAddressScriptModelArr != null && contactAddressScriptModelArr.length > 0)
+
+	{
+
+		contactAddressModelArr = aa.util.newArrayList();
+
+		for(loopk in contactAddressScriptModelArr)
+
+		{
+
+			contactAddressModelArr.add(contactAddressScriptModelArr[loopk].getContactAddressModel());
+
+		}
+
+	}	
+
+	return contactAddressModelArr;
+
 }
