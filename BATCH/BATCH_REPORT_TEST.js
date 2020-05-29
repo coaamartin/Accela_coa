@@ -121,7 +121,13 @@ function mainProcess() {
 	| BATCH PARAMETERS
     /------------------------------------------------------------------------------------------------------*/
 	var paramStdChoice = aa.env.getValue("paramStdChoice"); // use this standard choice for parameters instead of batchjob params
-	batchJobID = batchJobResult.getOutput();
+	batchJobID = 0;
+	if (batchJobResult.getSuccess()) {
+		batchJobID = batchJobResult.getOutput();
+		logDebug("Batch Job " + batchJobName + " Job ID is " + batchJobID);
+	} else {
+		logDebug("Batch job ID not found " + batchJobResult.getErrorMessage());
+	}
 	//var dateRange = getJobParam("dateRange");//this will be used to determine how often to run the report...will change var name
 	//var today = new Date();
 	//var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
