@@ -131,15 +131,15 @@ function mainProcess() {
 	var emailBodyMsg = "";
 	//var capCount= 0;
 	// Report parameters need to be setup below
-	var reportName = getJobParam("reportName");
+	var reportName = "Fire Inspections Performance";
 	var rParams = aa.util.newHashtable();
-	rParams.put("fromDate", "01/01/2019");
-	rParams.put("toDate", "12/31/2020");
+	rParams.put("FromDate", "01/01/2019");
+	rParams.put("ToDate", "12/31/2020");
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	//var expMonth = datepart1.getMonth();
 	logDebug("Processing Batch_report_test.js. ")
 	/*----------------------------------------------------------------------------------------------------/
-	| Email Header
+	| Email Body
 	/------------------------------------------------------------------------------------------------------*/
 	emailBodyMsg += "Hello," + br;
 	emailBodyMsg += br;
@@ -148,13 +148,13 @@ function mainProcess() {
 	emailBodyMsg += "Thank you and have a great day," + br;
 	emailBodyMsg += br;
 	/*----------------------------------------------------------------------------------------------------/
-	| End Email Header
+	| End Email Body
 	/------------------------------------------------------------------------------------------------------*/
 	//generate email notices
 
 	logDebug("=================================================");
 	//Send email function
-	aa.sendMail("noreply@aurora.gov", emailTo, "", emailTitle, emailBodyMsg);
+	//aa.sendMail("noreply@aurora.gov", emailTo, "", emailTitle, emailBodyMsg);
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 	logDebug("Email to: " + emailTo);
 	logDebug("Email Title: " + emailTitle);
