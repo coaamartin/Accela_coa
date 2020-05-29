@@ -164,8 +164,9 @@ function mainProcess() {
 	var rParams = aa.util.newHashtable();
 	rParams.put("FromDate", "5/1/2020");
 	rParams.put("ToDate", "5/31/2020");
-	//var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
-	var report = generateReportFile(reportName, rParams, "AURORACO");
+	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
+	logDebug("Report settings: " + report);
+	//var report = generateReportFile(reportName, rParams, "AURORACO");
 	//var expMonth = datepart1.getMonth();
 	logDebug("Processing Batch_report_test.js. ")
 	/*----------------------------------------------------------------------------------------------------/
