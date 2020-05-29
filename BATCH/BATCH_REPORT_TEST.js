@@ -127,7 +127,7 @@ function mainProcess() {
 	//--mm/dd/yyyy configuration for reporting
 	var emailTo = getJobParam("emailSendTo"); // email to: 
 	var emailTitle = getJobParam("emailTitle"); // email Title
-	var emailTemplate = "Report_Test_Email"; // email Template
+	var emailtemplate = "Report_Test_Email"; // email Template
 	var emailBodyMsg = "";
 	//var capCount= 0;
 	// Report parameters need to be setup below
