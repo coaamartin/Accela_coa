@@ -210,7 +210,7 @@ function mainProcess() {
 
 	{
 
-		var itemCap = capId;
+		var itemCap = batchJobID;
 
 		if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
 
