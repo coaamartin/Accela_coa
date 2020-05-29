@@ -155,7 +155,8 @@ function mainProcess() {
 	logDebug("=================================================");
 	//Send email function
 	//aa.sendMail("noreply@aurora.gov", emailTo, "", emailTitle, emailBodyMsg);
-	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+	//sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, "", [report]);
 	logDebug("Email to: " + emailTo);
 	logDebug("Email Title: " + emailTitle);
 	logDebug("Email Body: " + emailBodyMsg);
