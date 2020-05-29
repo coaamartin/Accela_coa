@@ -226,10 +226,6 @@ function mainProcess() {
 
 		var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
 
-
-
-
-
 		var result = null;
 
 		result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
