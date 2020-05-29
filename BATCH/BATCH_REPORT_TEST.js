@@ -206,49 +206,48 @@ function mainProcess() {
 		return true;
 	}
 
-	function sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile)
+	// function sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile)
+	// {
 
-	{
+	// 	var itemCap = batchJobID;
 
-		var itemCap = batchJobID;
-
-		if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
-
-
-
-		var id1 = itemCap.ID1;
-
-		var id2 = itemCap.ID2;
-
-		var id3 = itemCap.ID3;
+	// 	if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
 
 
 
-		var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
+	// 	var id1 = itemCap.ID1;
 
-		var result = null;
+	// 	var id2 = itemCap.ID2;
 
-		result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
+	// 	var id3 = itemCap.ID3;
 
-		if (result.getSuccess())
 
-		{
 
-			logDebug("Sent email successfully!");
+	// 	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
 
-			return true;
+	// 	var result = null;
 
-		} else
+	// 	result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
 
-		{
+	// 	if (result.getSuccess())
 
-			logDebug("Failed to send mail. - " + result.getErrorType());
+	// 	{
 
-			return false;
+	// 		logDebug("Sent email successfully!");
 
-		}
+	// 		return true;
 
-	}
+	// 	} else
+
+	// 	{
+
+	// 		logDebug("Failed to send mail. - " + result.getErrorType());
+
+	// 		return false;
+
+	// 	}
+
+	// }
 
 	function convertContactAddressModelArr(contactAddressScriptModelArr)
 
