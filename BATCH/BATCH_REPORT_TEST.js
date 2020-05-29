@@ -232,7 +232,7 @@ function mainProcess() {
 
 		var result = null;
 
-		result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
+		result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
 
 		if (result.getSuccess())
 
