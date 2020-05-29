@@ -163,118 +163,6 @@ function mainProcess() {
 	logDebug("=================================================");
 	logDebug("Finished sending email");
 
-	function generateReportFile(aaReportName, parameters, rModule) {
-		var reportName = aaReportName;
-
-		report = aa.reportManager.getReportInfoModelByName(reportName);
-		report = report.getOutput();
-
-
-		report.setModule(rModule);
-		//report.setCapId(capId);
-		report.setReportParameters(parameters);
-		//Added
-		//vAltId = capId.getCustomID();
-		//report.getEDMSEntityIdModel().setAltId(vAltId);
-		var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
-		aa.print("---" + permit.getOutput().booleanValue());
-		if (permit.getOutput().booleanValue()) {
-			var reportResult = aa.reportManager.getReportResult(report);
-
-			if (reportResult) {
-				reportResult = reportResult.getOutput();
-				var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-				logMessage("Report Result: " + reportResult);
-				reportFile = reportFile.getOutput();
-				return reportFile
-			} else {
-				logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
-				return false;
-			}
-		} else {
-			logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
-			return false;
-		}
-	}
-
-	function email(pToEmail, pFromEmail, pSubject, pText) {
-		//Sends email to specified address
-		//06SSP-00221
-		//
-		aa.sendMail(pFromEmail, pToEmail, "", pSubject, pText);
-		logDebug("Email sent to " + pToEmail);
-		return true;
-	}
-
-	function sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile)
-	{
-
-		var itemCap = batchJobID;
-
-		if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
-
-
-
-		var id1 = itemCap.ID1;
-
-		var id2 = itemCap.ID2;
-
-		var id3 = itemCap.ID3;
-
-
-
-		var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
-
-		// var result = null;
-
-		// result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
-
-		// if (result.getSuccess())
-
-		// {
-
-		// 	logDebug("Sent email successfully!");
-
-		// 	return true;
-
-		// } else
-
-		// {
-
-		// 	logDebug("Failed to send mail. - " + result.getErrorType());
-
-		// 	return false;
-
-		// }
-
-	}
-
-	function convertContactAddressModelArr(contactAddressScriptModelArr)
-
-	{
-
-		var contactAddressModelArr = null;
-
-		if (contactAddressScriptModelArr != null && contactAddressScriptModelArr.length > 0)
-
-		{
-
-			contactAddressModelArr = aa.util.newArrayList();
-
-			for (loopk in contactAddressScriptModelArr)
-
-			{
-
-				contactAddressModelArr.add(contactAddressScriptModelArr[loopk].getContactAddressModel());
-
-			}
-
-		}
-
-		return contactAddressModelArr;
-
-	}
-
 }
 
 
@@ -307,4 +195,117 @@ function getScriptText(vScriptName) {
 	} catch (err) {
 		return "";
 	}
+}
+
+function generateReportFile(aaReportName, parameters, rModule) {
+	var reportName = aaReportName;
+
+	report = aa.reportManager.getReportInfoModelByName(reportName);
+	report = report.getOutput();
+
+
+	report.setModule(rModule);
+	//report.setCapId(capId);
+	report.setReportParameters(parameters);
+	//Added
+	//vAltId = capId.getCustomID();
+	//report.getEDMSEntityIdModel().setAltId(vAltId);
+	var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
+	aa.print("---" + permit.getOutput().booleanValue());
+	if (permit.getOutput().booleanValue()) {
+		var reportResult = aa.reportManager.getReportResult(report);
+
+		if (reportResult) {
+			reportResult = reportResult.getOutput();
+			var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+			logMessage("Report Result: " + reportResult);
+			reportFile = reportFile.getOutput();
+			return reportFile
+		} else {
+			logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
+			return false;
+		}
+	} else {
+		logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
+		return false;
+	}
+}
+
+
+function email(pToEmail, pFromEmail, pSubject, pText) {
+	//Sends email to specified address
+	//06SSP-00221
+	//
+	aa.sendMail(pFromEmail, pToEmail, "", pSubject, pText);
+	logDebug("Email sent to " + pToEmail);
+	return true;
+}
+
+function sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile)
+{
+
+	var itemCap = batchJobID;
+
+	if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
+
+
+
+	var id1 = itemCap.ID1;
+
+	var id2 = itemCap.ID2;
+
+	var id3 = itemCap.ID3;
+
+
+
+	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
+
+	// var result = null;
+
+	// result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
+
+	// if (result.getSuccess())
+
+	// {
+
+	// 	logDebug("Sent email successfully!");
+
+	// 	return true;
+
+	// } else
+
+	// {
+
+	// 	logDebug("Failed to send mail. - " + result.getErrorType());
+
+	// 	return false;
+
+	// }
+
+}
+
+function convertContactAddressModelArr(contactAddressScriptModelArr)
+
+{
+
+	var contactAddressModelArr = null;
+
+	if (contactAddressScriptModelArr != null && contactAddressScriptModelArr.length > 0)
+
+	{
+
+		contactAddressModelArr = aa.util.newArrayList();
+
+		for (loopk in contactAddressScriptModelArr)
+
+		{
+
+			contactAddressModelArr.add(contactAddressScriptModelArr[loopk].getContactAddressModel());
+
+		}
+
+	}
+
+	return contactAddressModelArr;
+
 }
