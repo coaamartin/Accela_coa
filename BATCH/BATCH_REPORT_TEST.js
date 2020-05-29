@@ -162,9 +162,10 @@ function mainProcess() {
 	// Report parameters need to be setup below
 	var reportName = "Fire Inspections Performance";
 	var rParams = aa.util.newHashtable();
-	rParams.put("FromDate", "01/01/2019");
-	rParams.put("ToDate", "12/31/2020");
-	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
+	rParams.put("FromDate", "5/1/2020");
+	rParams.put("ToDate", "5/31/2020");
+	//var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
+	var report = generateReportFile(reportName, rParams, "AURORACO");
 	//var expMonth = datepart1.getMonth();
 	logDebug("Processing Batch_report_test.js. ")
 	/*----------------------------------------------------------------------------------------------------/
