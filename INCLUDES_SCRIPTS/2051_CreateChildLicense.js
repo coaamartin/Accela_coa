@@ -53,7 +53,7 @@ try {
 
 	if (newChildID){
 		newChildIdString = newChildID.getCustomID();
-		editIdString = capIDString.substr(0,9)+'L'; 
+		editIdString = capIDString.substr(0,10)+'L'; 
 		aa.cap.updateCapAltID(newChildID,editIdString); 
 	}
 }
