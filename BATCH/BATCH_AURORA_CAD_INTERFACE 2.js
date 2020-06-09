@@ -301,7 +301,7 @@ function getRemovedCADAddresses()
 	cadQuery += " AND L3AC.REC_STATUS ='A'";
 	
 	//cadQuery += " LEFT JOIN [CADTest].[dbo].[sp_st] ST";
-	cadQuery += " LEFT JOIN " + cadDatabase + ".[dbo].[sp_st] ST";
+	//cadQuery += " LEFT JOIN " + cadDatabase + ".[dbo].[sp_st] ST";
 	
 	//cadQuery += " ON L3A.l1_hse_nbr_start = ST.st_num";
 	  cadQuery += " ON L3A.l1_hse_nbr_start = "
