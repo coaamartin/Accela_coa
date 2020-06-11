@@ -21,7 +21,7 @@ logDebug("Script 5120_HOAReferenceFile.js")
         var insertStatement = "test";
 
 
-        
+
 	// envParameters.put("capId", capId);
 	// envParameters.put("cap", cap);
 	// envParameters.put("AGENCYID", "AURORACO");
@@ -30,6 +30,6 @@ logDebug("Script 5120_HOAReferenceFile.js")
 	// aa.runAsyncScript(vAsyncScript, envParameters)
 	logDebug("CapID info: " + envParameters);
 	logDebug("Name of HOA: " + hoaName);
-	logDebug("End of Script 5119_Send_HOA_Renewal.js");
+	logDebug("End of Script 5120_HOAReferenceFile.js");
 
 }
