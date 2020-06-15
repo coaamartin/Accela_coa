@@ -19,7 +19,8 @@ function script281_AssignScheduledFireInspection(){
         //var userID = getAssignedStaff();
         //var userDept = getAssignedDept();
         
-        var fireStation = getRefAddressAttributeValue("FIRESTATION")
+        //var fireStation = getRefAddressAttributeValue("FIRESTATION")
+        var fireStation = getRefAddressAttributeValue("FIRE Inspectors")
         
         if(fireStation == null)
             throw "Record Address not Assigned to FIRE STATION.";
