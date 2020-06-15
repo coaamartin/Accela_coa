@@ -1,9 +1,17 @@
 //SEND_BATCH_REPORT_TESTv2.js
-function getScriptText(vScriptName){
-    vScriptName = vScriptName.toUpperCase();
-    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-    var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-    return emseScript.getScriptText() + "";          
+function getScriptText(e) {
+	var t = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		t = arguments[1];
+	e = e.toUpperCase();
+	var n = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness")
+			.getOutput();
+	try {
+		var r = n.getScriptByPK(t, e, "ADMIN");
+		return r.getScriptText() + ""
+	} catch (i) {
+		return ""
+	}
 }
 
 var SCRIPT_VERSION = 3.0
