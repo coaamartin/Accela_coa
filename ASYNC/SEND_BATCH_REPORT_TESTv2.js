@@ -24,10 +24,10 @@ wait(10000);
 var capId = aa.env.getValue("CapId");
 
 var module = "Common";
-var repName = "Invoice Report";
+var repName = "Fire Inspections Performance";
 
 reportParameters = aa.util.newHashMap(); 
-reportParameters.put("RecordID", capId.getCustomID());
+reportParameters.put("Test", "");
 report = null;  
 report = generateReportFile(repName,reportParameters,module);
 
