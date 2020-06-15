@@ -43,8 +43,8 @@ function generateReportFile(aaReportName,parameters,rModule)
   report.setCapId(capId);
   report.setReportParameters(parameters);
   //Added
-  vAltId = capId.getCustomID();
-  report.getEDMSEntityIdModel().setAltId(vAltId);
+  //vAltId = capId.getCustomID();
+  //report.getEDMSEntityIdModel().setAltId(vAltId);
   var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
   aa.print("---"+permit.getOutput().booleanValue());
   if(permit.getOutput().booleanValue()) 
