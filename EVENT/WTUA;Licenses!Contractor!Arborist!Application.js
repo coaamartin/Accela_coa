@@ -1,6 +1,14 @@
 // Script 146
 if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus)) {
 	include("146_CreateArboristLicenseAndLP");
+
+	var pCapId = getParent();
+	if (pCapId) {
+		var vAsyncScript = "RUN_ARBORIST_LICENSE_REPORT";
+		var envParameters = aa.util.newHashMap();
+		envParameters.put("CapId", pCapId);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+	}
 }
 
 //JMPorter Added 10/22/18 per Script #77 request
