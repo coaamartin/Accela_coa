@@ -68,7 +68,7 @@ if (contact) {
 		rB1ExpResult.setExpStatus("Active");
 		aa.expiration.editB1Expiration(rB1ExpResult.getB1Expiration());
 	}
-	
+	var module = "Licensing";
 	var vEmailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
     var reportName = "Arborist License";
     var LicenseType = "Licenses/Contractor/Arborist/License";
@@ -86,8 +86,49 @@ if (contact) {
 	tmpCap = capId;
 	capId = createdApp;
 	emailContacts("All",vEmailTemplate, vEParams, reportName,rptParams);
+	report = generateReportFile(reportName,rptParams,module);
 	capId = tmpCap;
+
 	
 } else { //contact required exist on child (current) record
 	logDebug("**WARN contact of type : " + contactType + " not found on record");
+}
+
+function generateReportFile(aaReportName,parameters,rModule) 
+{
+  var reportName = aaReportName;
+
+  report = aa.reportManager.getReportInfoModelByName(reportName);
+  report = report.getOutput();
+
+
+  report.setModule(rModule);
+  report.setCapId(capId);
+  report.setReportParameters(parameters);
+  //Added
+  vAltId = capId.getCustomID();
+  report.getEDMSEntityIdModel().setAltId(vAltId);
+  var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
+  aa.print("---"+permit.getOutput().booleanValue());
+  if(permit.getOutput().booleanValue()) 
+  {
+    var reportResult = aa.reportManager.getReportResult(report);
+
+    if(reportResult) 
+    {
+      reportResult = reportResult.getOutput();
+      var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+      logMessage("Report Result: "+ reportResult);
+      reportFile = reportFile.getOutput();
+      return reportFile
+    } else 
+    {
+      logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
+      return false;
+    }
+  } else 
+  {
+    logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
+    return false; 
+  }
 }
