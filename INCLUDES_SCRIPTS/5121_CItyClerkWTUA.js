@@ -11,7 +11,12 @@
 //Created By: Rprovinc
 //******************************************************************************
 
-if (wfTask == "Review Application" && wfStatus == "Complete") {
+
+//var envParameters = aa.util.newHashMap();
+//var nonProfit = AInfo["Non Profit"];
+var vASIValue = getAppSpecific("Non Profit");
+var nonProfit = vASIValue;
+if (nonProfit = "No") {
     logDebug("Starting to invoice fee on record.");	 
     var feecode = "CC_CIE";
     var feeschedule = "CC_CIE";
@@ -19,5 +24,4 @@ if (wfTask == "Review Application" && wfStatus == "Complete") {
     //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
     updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
     logDebug("End of Script 5121_CityClerkWTUA.js");
-    
     }
