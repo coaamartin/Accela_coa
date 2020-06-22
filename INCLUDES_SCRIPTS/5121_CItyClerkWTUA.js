@@ -20,7 +20,7 @@ if (nonProfit = "No") {
     logDebug("Starting to invoice fee on record.");	 
     var feecode = "CC_CIE";
     var feeschedule = "CC_CIE";
-    var thefee = "62";
+    var thefee = "1";
     //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
     updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
     logDebug("End of Script 5121_CityClerkWTUA.js");
