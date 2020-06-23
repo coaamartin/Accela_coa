@@ -11,34 +11,14 @@
 //Created By: Rprovinc
 //******************************************************************************
 
-//var envParameters = aa.util.newHashMap();
-//var nonProfit = AInfo["Non Profit"];
 var vASIValue = getAppSpecific("Non Profit");
 var appTypeString = getAppSpecific("Application Type");
-var appTypeAlias = getAppSpecific("appTypeAlias")
-var appTypeString2 = getAppSpecific("Record Type")
 var nonProfit = vASIValue;
-// var envParameters = aa.util.newHashMap();
-// envParameters.put("capId", capId);
-// envParameters.put("cap", cap);
-// envParameters.put("appTypeString", appTypeString);
-// envParameters.put("appTypeAlias", appTypeAlias);
-// logDebug("CapID: " + capId);
-// logDebug("Cap: " + cap);
 logDebug("appType: " + appTypeString);
-logDebug("AppTypeAlias: " + appTypeAlias);
-logDebug("Record Type: " + appTypeString2);
 logDebug("AppTypeAlias: test");
+
 if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/DonationBins/NA")) {
-    // var vASIValue = getAppSpecific("Non Profit");
-    // var nonProfit = vASIValue;
-    // var envParameters = aa.util.newHashMap();
-    // envParameters.put("capId", capId);
-    // envParameters.put("cap", cap);
-    // envParameters.put("appType", appTypeString);
-    // logDebug("CapID: " + capId);
-    // logDebug("Cap: " + cap);
-    logDebug("appType" + appTypeString);
+    logDebug("appType: " + appTypeString);
     logDebug("Starting to invoice fee on record.");
     var feecode = "CC_DB";
     var feeschedule = "CC_DB";
@@ -50,14 +30,6 @@ if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/DonationBins/NA")
 
 //Temp Use code
 else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempUse/NA")) {
-    // var vASIValue = getAppSpecific("Non Profit");
-    // var nonProfit = vASIValue;
-    // var envParameters = aa.util.newHashMap();
-    // envParameters.put("capId", capId);
-    // envParameters.put("cap", cap);
-    // envParameters.put("appType", appTypeString);
-    // logDebug("CapID: " + capId);
-    // logDebug("Cap: " + cap);
     logDebug("appType" + appTypeString);
     logDebug("Starting to invoice fee on record.");
     var feecode = "CC_TU";
@@ -70,14 +42,6 @@ else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempUse/NA")
 
 //Temp Sign code
 else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempSign/NA")) {
-    // var vASIValue = getAppSpecific("Non Profit");
-    // var nonProfit = vASIValue;
-    // var envParameters = aa.util.newHashMap();
-    // envParameters.put("capId", capId);
-    // envParameters.put("cap", cap);
-    // envParameters.put("appType", appTypeString);
-    // logDebug("CapID: " + capId);
-    // logDebug("Cap: " + cap);
     logDebug("appType" + appTypeString);
     logDebug("Starting to invoice fee on record.");
     var feecode = "CC_TS";
