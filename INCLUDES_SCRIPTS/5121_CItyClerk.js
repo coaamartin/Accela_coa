@@ -15,14 +15,15 @@
 //var envParameters = aa.util.newHashMap();
 //var nonProfit = AInfo["Non Profit"];
 var vASIValue = getAppSpecific("Non Profit");
-var appTypeString = getAppSpecific(appTypeString);
+var appTypeString = getAppSpecific("Record Type");
 var nonProfit = vASIValue;
 var envParameters = aa.util.newHashMap();
 envParameters.put("capId", capId);
 envParameters.put("cap", cap);
 envParameters.put("appType", appTypeString);
-
-
+logDebug("CapID: " + capId);
+logDebug("Cap: " + cap);
+logDebug("appType", appTypeString);
 
 if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/DonationBins/NA")) {
     var vASIValue = getAppSpecific("Non Profit");
