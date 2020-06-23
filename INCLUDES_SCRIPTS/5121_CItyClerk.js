@@ -26,8 +26,11 @@ if (nonProfit = "No") {
     var envParameters = aa.util.newHashMap();
 	envParameters.put("capId", capId);
     envParameters.put("cap", cap);
-    logDebug("Starting to invoice fee on record.");	 
+    envParameters.put("appType", appTypeString);
     logDebug("CapID: " + capId);
+    logDebug("Cap: " + cap);
+    logDebug("appType", appTypeString);
+    logDebug("Starting to invoice fee on record.");	
     var feecode = "CC_CIE";
     var feeschedule = "CC_CIE";
     var thefee = "1";
