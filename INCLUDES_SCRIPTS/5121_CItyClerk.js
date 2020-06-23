@@ -11,20 +11,21 @@
 //Created By: Rprovinc
 //******************************************************************************
 
-
 //var envParameters = aa.util.newHashMap();
 //var nonProfit = AInfo["Non Profit"];
 var vASIValue = getAppSpecific("Non Profit");
-var appTypeString = getAppSpecific("Record Type");
+var appTypeString = getAppSpecific("appTypeString");
+var appTypeAlias = getAppSpecific("appTypeAlias")
 var nonProfit = vASIValue;
 var envParameters = aa.util.newHashMap();
 envParameters.put("capId", capId);
 envParameters.put("cap", cap);
-envParameters.put("appType", appTypeString);
+envParameters.put("appTypeString", appTypeString);
 logDebug("CapID: " + capId);
 logDebug("Cap: " + cap);
-logDebug("appType", appTypeString);
-
+logDebug("appType: " + appTypeString);
+logDebug("AppTypeAlias: " + appTypeAlias);
+logDebug("AppTypeAlias: test");
 if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/DonationBins/NA")) {
     var vASIValue = getAppSpecific("Non Profit");
     var nonProfit = vASIValue;
