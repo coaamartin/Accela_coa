@@ -11,7 +11,7 @@
 //Created By: Rprovinc
 //******************************************************************************
 
-var vASIValue = getAppSpecific("Non Profit");
+var vASIValue = getAppSpecific("Non-Profit");
 //var appTypeString = getAppSpecific("Application Type");
 //var appType = getAppSpecific(appType);
 var nonProfit = vASIValue;
