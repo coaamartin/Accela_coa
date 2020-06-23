@@ -14,40 +14,42 @@
 var vASIValue = getAppSpecific("Non Profit");
 var appTypeString = getAppSpecific("Application Type");
 var nonProfit = vASIValue;
-logDebug("appType: " + appTypeString);
-logDebug("AppTypeAlias: test");
+logDebug("appType: " + appTypeString);//undefinded here...
 
-if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/DonationBins/NA")) {
-    logDebug("appType: " + appTypeString);
-    logDebug("Starting to invoice fee on record.");
-    var feecode = "CC_DB";
-    var feeschedule = "CC_DB";
-    var thefee = "1";
-    //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-    logDebug("End of Script 5121_CityClerk.js");
-}
+if (nonProfit = "No") {
+    logDebug("appType before next step in code: " + appTypeString);
+    
+    if (appTypeString = "CityClerk/Incident/DonationBins/NA") {
+        logDebug("appType: " + appTypeString);
+        logDebug("Starting to invoice fee on record.");
+        var feecode = "CC_DB";
+        var feeschedule = "CC_DB";
+        var thefee = "1";
+        //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+        updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+        logDebug("End of Script 5121_CityClerk.js");
+    }
+    //Temp Use code
+    else if (appTypeString = "CityClerk/Incident/TempUse/NA") {
+        logDebug("appType" + appTypeString);
+        logDebug("Starting to invoice fee on record.");
+        var feecode = "CC_TU";
+        var feeschedule = "CC_TU";
+        var thefee = "1";
+        //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+        updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+        logDebug("End of Script 5121_CityClerk.js");
+    }
 
-//Temp Use code
-else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempUse/NA")) {
-    logDebug("appType" + appTypeString);
-    logDebug("Starting to invoice fee on record.");
-    var feecode = "CC_TU";
-    var feeschedule = "CC_TU";
-    var thefee = "1";
-    //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-    logDebug("End of Script 5121_CityClerk.js");
-}
-
-//Temp Sign code
-else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempSign/NA")) {
-    logDebug("appType" + appTypeString);
-    logDebug("Starting to invoice fee on record.");
-    var feecode = "CC_TS";
-    var feeschedule = "CC_TS";
-    var thefee = "1";
-    //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-    logDebug("End of Script 5121_CityClerk.js");
+    //Temp Sign code
+    else if (appTypeString = "CityClerk/Incident/TempSign/NA") {
+        logDebug("appType" + appTypeString);
+        logDebug("Starting to invoice fee on record.");
+        var feecode = "CC_TS";
+        var feeschedule = "CC_TS";
+        var thefee = "1";
+        //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+        updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+        logDebug("End of Script 5121_CityClerk.js");
+    }
 }
