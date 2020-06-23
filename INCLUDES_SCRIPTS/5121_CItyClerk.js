@@ -16,71 +16,74 @@
 var vASIValue = getAppSpecific("Non Profit");
 var appTypeString = getAppSpecific("Application Type");
 var appTypeAlias = getAppSpecific("appTypeAlias")
+var appTypeString2 = getAppSpecific("Record Type")
 var nonProfit = vASIValue;
-var envParameters = aa.util.newHashMap();
-envParameters.put("capId", capId);
-envParameters.put("cap", cap);
-envParameters.put("appTypeString", appTypeString);
-logDebug("CapID: " + capId);
-logDebug("Cap: " + cap);
+// var envParameters = aa.util.newHashMap();
+// envParameters.put("capId", capId);
+// envParameters.put("cap", cap);
+// envParameters.put("appTypeString", appTypeString);
+// envParameters.put("appTypeAlias", appTypeAlias);
+// logDebug("CapID: " + capId);
+// logDebug("Cap: " + cap);
 logDebug("appType: " + appTypeString);
 logDebug("AppTypeAlias: " + appTypeAlias);
+logDebug("Record Type: " + appTypeString2);
 logDebug("AppTypeAlias: test");
 if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/DonationBins/NA")) {
     // var vASIValue = getAppSpecific("Non Profit");
     // var nonProfit = vASIValue;
-    var envParameters = aa.util.newHashMap();
-    envParameters.put("capId", capId);
-    envParameters.put("cap", cap);
-    envParameters.put("appType", appTypeString);
-    logDebug("CapID: " + capId);
-    logDebug("Cap: " + cap);
-    logDebug("appType", appTypeString);
+    // var envParameters = aa.util.newHashMap();
+    // envParameters.put("capId", capId);
+    // envParameters.put("cap", cap);
+    // envParameters.put("appType", appTypeString);
+    // logDebug("CapID: " + capId);
+    // logDebug("Cap: " + cap);
+    logDebug("appType" + appTypeString);
     logDebug("Starting to invoice fee on record.");
     var feecode = "CC_DB";
     var feeschedule = "CC_DB";
     var thefee = "1";
     //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
     updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-    logDebug("End of Script 5121_CityClerkWTUA.js");
+    logDebug("End of Script 5121_CityClerk.js");
 }
 
 //Temp Use code
 else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempUse/NA")) {
     // var vASIValue = getAppSpecific("Non Profit");
     // var nonProfit = vASIValue;
-    var envParameters = aa.util.newHashMap();
-    envParameters.put("capId", capId);
-    envParameters.put("cap", cap);
-    envParameters.put("appType", appTypeString);
-    logDebug("CapID: " + capId);
-    logDebug("Cap: " + cap);
-    logDebug("appType", appTypeString);
+    // var envParameters = aa.util.newHashMap();
+    // envParameters.put("capId", capId);
+    // envParameters.put("cap", cap);
+    // envParameters.put("appType", appTypeString);
+    // logDebug("CapID: " + capId);
+    // logDebug("Cap: " + cap);
+    logDebug("appType" + appTypeString);
     logDebug("Starting to invoice fee on record.");
-    var feecode = "CC_DB";
-    var feeschedule = "CC_DB";
+    var feecode = "CC_TU";
+    var feeschedule = "CC_TU";
     var thefee = "1";
     //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
     updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-    logDebug("End of Script 5121_CityClerkWTUA.js");
+    logDebug("End of Script 5121_CityClerk.js");
 }
 
 //Temp Sign code
 else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempSign/NA")) {
     // var vASIValue = getAppSpecific("Non Profit");
     // var nonProfit = vASIValue;
-    var envParameters = aa.util.newHashMap();
-    envParameters.put("capId", capId);
-    envParameters.put("cap", cap);
-    envParameters.put("appType", appTypeString);
-    logDebug("CapID: " + capId);
-    logDebug("Cap: " + cap);
-    logDebug("appType", appTypeString);
+    // var envParameters = aa.util.newHashMap();
+    // envParameters.put("capId", capId);
+    // envParameters.put("cap", cap);
+    // envParameters.put("appType", appTypeString);
+    // logDebug("CapID: " + capId);
+    // logDebug("Cap: " + cap);
+    logDebug("appType" + appTypeString);
     logDebug("Starting to invoice fee on record.");
-    var feecode = "CC_DB";
-    var feeschedule = "CC_DB";
+    var feecode = "CC_TS";
+    var feeschedule = "CC_TS";
     var thefee = "1";
     //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
     updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-    logDebug("End of Script 5121_CityClerkWTUA.js");
+    logDebug("End of Script 5121_CityClerk.js");
 }
