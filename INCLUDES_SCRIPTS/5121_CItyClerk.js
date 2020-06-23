@@ -13,15 +13,13 @@
 
 var vASIValue = getAppSpecific("Non Profit");
 //var appTypeString = getAppSpecific("Application Type");
-var appType = getAppSpecific(appType);
+//var appType = getAppSpecific(appType);
 var nonProfit = vASIValue;
-logDebug("AppType: " + appType);
-logDebug("appType: " + appTypeString);//undefinded here...
-
-        appTypeResult = cap.getCapType(); //create CapTypeModel object
-		appTypeString = appTypeResult.toString();
-		appTypeArray = appTypeString.split("/");
-
+appTypeResult = cap.getCapType(); //create CapTypeModel object
+appTypeString = appTypeResult.toString();
+appTypeArray = appTypeString.split("/");
+logDebug("Non Profit: " + nonProfit);
+logDebug("appType: " + appTypeString);
 if ("No".equals(nonProfit)) {
     logDebug("appType before next step in code: " + appTypeArray);
 
