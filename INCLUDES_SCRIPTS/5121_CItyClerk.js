@@ -12,15 +12,21 @@
 //******************************************************************************
 
 var vASIValue = getAppSpecific("Non Profit");
-var appTypeString = getAppSpecific("Application Type");
+//var appTypeString = getAppSpecific("Application Type");
+var appType = getAppSpecific(appType);
 var nonProfit = vASIValue;
+logDebug("AppType: " + appType);
 logDebug("appType: " + appTypeString);//undefinded here...
 
-if (nonProfit = "No") {
-    logDebug("appType before next step in code: " + appTypeString);
-    
-    if (appTypeString = "CityClerk/Incident/DonationBins/NA") {
-        logDebug("appType: " + appTypeString);
+        appTypeResult = cap.getCapType(); //create CapTypeModel object
+		appTypeString = appTypeResult.toString();
+		appTypeArray = appTypeString.split("/");
+
+if ("No".equals(nonProfit)) {
+    logDebug("appType before next step in code: " + appTypeArray);
+
+    if ("CityClerk/Incident/DonationBins/NA".equals(appTypeArray)) {
+        logDebug("appType: " + appTypeArray);
         logDebug("Starting to invoice fee on record.");
         var feecode = "CC_DB";
         var feeschedule = "CC_DB";
@@ -30,8 +36,8 @@ if (nonProfit = "No") {
         logDebug("End of Script 5121_CityClerk.js");
     }
     //Temp Use code
-    else if (appTypeString = "CityClerk/Incident/TempUse/NA") {
-        logDebug("appType" + appTypeString);
+    else if ("CityClerk/Incident/TempUse/NA".equals(appTypeArray)) {
+        logDebug("appType" + appTypeArray);
         logDebug("Starting to invoice fee on record.");
         var feecode = "CC_TU";
         var feeschedule = "CC_TU";
@@ -42,8 +48,8 @@ if (nonProfit = "No") {
     }
 
     //Temp Sign code
-    else if (appTypeString = "CityClerk/Incident/TempSign/NA") {
-        logDebug("appType" + appTypeString);
+    else if ("CityClerk/Incident/TempSign/NA".equals(appTypeArray)) {
+        logDebug("appType" + appTypeArray);
         logDebug("Starting to invoice fee on record.");
         var feecode = "CC_TS";
         var feeschedule = "CC_TS";
