@@ -17,24 +17,79 @@
 var vASIValue = getAppSpecific("Non Profit");
 var nonProfit = vASIValue;
 var envParameters = aa.util.newHashMap();
-	envParameters.put("capId", capId);
-    envParameters.put("cap", cap);
-    
-if (nonProfit = "No") {
+envParameters.put("capId", capId);
+envParameters.put("cap", cap);
+envParameters.put("appType", appTypeString);
+
+var appGroup = getJobParam("appGroup"); //   app Group to process {Licenses}
+var appTypeType = getJobParam("appTypeType"); //   app type to process {Rental License}
+var appSubtype = getJobParam("appSubtype"); //   app subtype to process {NA}
+var appCategory = getJobParam("appCategory");
+if (!appMatchArray) {
+    appGroup = appGroup == "" ? "*" : appGroup;
+    appTypeType = appTypeType == "" ? "*" : appTypeType;
+    appSubtype = appSubtype == "" ? "*" : appSubtype;
+    appCategory = appCategory == "" ? "*" : appCategory;
+    var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategory;
+    appMatchArray = [appType];
+}
+
+
+if ((nonProfit = "No") && (appMatchArray = "CityClerk/Incident/DonationBins/NA")) {
     var vASIValue = getAppSpecific("Non Profit");
     var nonProfit = vASIValue;
     var envParameters = aa.util.newHashMap();
-	envParameters.put("capId", capId);
+    envParameters.put("capId", capId);
     envParameters.put("cap", cap);
-    envParameters.put("appType", appTypeString);
+    envParameters.put("appType", appMatchArray);
     logDebug("CapID: " + capId);
     logDebug("Cap: " + cap);
-    logDebug("appType", appTypeString);
-    logDebug("Starting to invoice fee on record.");	
-    var feecode = "CC_CIE";
-    var feeschedule = "CC_CIE";
+    logDebug("appType", appMatchArray);
+    logDebug("Starting to invoice fee on record.");
+    var feecode = "CC_DB";
+    var feeschedule = "CC_DB";
     var thefee = "1";
     //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
     updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
     logDebug("End of Script 5121_CityClerkWTUA.js");
-    }
+}
+
+//Temp Use code
+else if ((nonProfit = "No") && (appMatchArray = "CityClerk/Incident/TempUse/NA")) {
+    var vASIValue = getAppSpecific("Non Profit");
+    var nonProfit = vASIValue;
+    var envParameters = aa.util.newHashMap();
+    envParameters.put("capId", capId);
+    envParameters.put("cap", cap);
+    envParameters.put("appType", appMatchArray);
+    logDebug("CapID: " + capId);
+    logDebug("Cap: " + cap);
+    logDebug("appType", appMatchArray);
+    logDebug("Starting to invoice fee on record.");
+    var feecode = "CC_DB";
+    var feeschedule = "CC_DB";
+    var thefee = "1";
+    //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+    logDebug("End of Script 5121_CityClerkWTUA.js");
+}
+
+//Temp Sign code
+else if ((nonProfit = "No") && (appMatchArray = "CityClerk/Incident/TempSign/NA")) {
+    var vASIValue = getAppSpecific("Non Profit");
+    var nonProfit = vASIValue;
+    var envParameters = aa.util.newHashMap();
+    envParameters.put("capId", capId);
+    envParameters.put("cap", cap);
+    envParameters.put("appType", appMatchArray);
+    logDebug("CapID: " + capId);
+    logDebug("Cap: " + cap);
+    logDebug("appType", appMatchArray);
+    logDebug("Starting to invoice fee on record.");
+    var feecode = "CC_DB";
+    var feeschedule = "CC_DB";
+    var thefee = "1";
+    //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+    logDebug("End of Script 5121_CityClerkWTUA.js");
+}
