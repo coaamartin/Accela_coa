@@ -23,7 +23,7 @@ appTypeArray = appTypeString.split("/");
 logDebug("Non-Profit: " + vASIValue);
 logDebug("appType: " + appTypeString);
 if ("No".equals(vASIValue)) {
-
+    //Donation Bins code
     if ("CityClerk/Incident/DonationBins/NA".equals(appTypeString)) {
         logDebug("Starting to invoice fee on record.");
         var feecode = "CC_DB";
