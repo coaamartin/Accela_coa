@@ -14,7 +14,7 @@
 //var envParameters = aa.util.newHashMap();
 //var nonProfit = AInfo["Non Profit"];
 var vASIValue = getAppSpecific("Non Profit");
-var appTypeString = getAppSpecific("appTypeString");
+var appTypeString = getAppSpecific("Application Type");
 var appTypeAlias = getAppSpecific("appTypeAlias")
 var nonProfit = vASIValue;
 var envParameters = aa.util.newHashMap();
@@ -27,8 +27,8 @@ logDebug("appType: " + appTypeString);
 logDebug("AppTypeAlias: " + appTypeAlias);
 logDebug("AppTypeAlias: test");
 if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/DonationBins/NA")) {
-    var vASIValue = getAppSpecific("Non Profit");
-    var nonProfit = vASIValue;
+    // var vASIValue = getAppSpecific("Non Profit");
+    // var nonProfit = vASIValue;
     var envParameters = aa.util.newHashMap();
     envParameters.put("capId", capId);
     envParameters.put("cap", cap);
@@ -47,8 +47,8 @@ if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/DonationBins/NA")
 
 //Temp Use code
 else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempUse/NA")) {
-    var vASIValue = getAppSpecific("Non Profit");
-    var nonProfit = vASIValue;
+    // var vASIValue = getAppSpecific("Non Profit");
+    // var nonProfit = vASIValue;
     var envParameters = aa.util.newHashMap();
     envParameters.put("capId", capId);
     envParameters.put("cap", cap);
@@ -67,8 +67,8 @@ else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempUse/NA")
 
 //Temp Sign code
 else if ((nonProfit = "No") && (appTypeString = "CityClerk/Incident/TempSign/NA")) {
-    var vASIValue = getAppSpecific("Non Profit");
-    var nonProfit = vASIValue;
+    // var vASIValue = getAppSpecific("Non Profit");
+    // var nonProfit = vASIValue;
     var envParameters = aa.util.newHashMap();
     envParameters.put("capId", capId);
     envParameters.put("cap", cap);
