@@ -16,8 +16,13 @@
 //var nonProfit = AInfo["Non Profit"];
 var vASIValue = getAppSpecific("Non Profit");
 var nonProfit = vASIValue;
+var envParameters = aa.util.newHashMap();
+	envParameters.put("capId", capId);
+    envParameters.put("cap", cap);
+    
 if (nonProfit = "No") {
     logDebug("Starting to invoice fee on record.");	 
+    logDebug("CapID: " + capId);
     var feecode = "CC_CIE";
     var feeschedule = "CC_CIE";
     var thefee = "1";
