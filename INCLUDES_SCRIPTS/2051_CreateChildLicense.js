@@ -26,7 +26,8 @@ try {
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
 			numberOfMonths = 12;
-			tmpNewDate = AInfo['State License Expiration Date'];	
+			tmpNewDate = AInfo['State License Expiration Date'];
+			logDebug("Tmp Date from ASI = "+tmpNewDate);
 		} else if (exists(appTypeArray[2],["Class 1"])){
 			var licType = AInfo['Type of License'];
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
@@ -89,7 +90,7 @@ try {
 	}
 
 	// set the expiratipon date
-//	comment("TMP NEW Date after checks = "+tmpNewDate);
+	comment("TMP NEW Date after checks = "+tmpNewDate);
 
 	thisLic = new licenseObject(capIDString,capId) ; thisLic.setStatus("Active");  thisLic.setExpiration(dateAdd(tmpNewDate,0));
 //	editAppSpecific("Defunct Date", dateAdd(tmpNewDate, defunctDays));
@@ -103,4 +104,5 @@ try {
 }
 } catch (err) {
 	logDebug("A JavaScript Error occured: " + err.message + " In Line " + err.lineNumber);
+	logDebug("Stack: " + err.stack);
 }
