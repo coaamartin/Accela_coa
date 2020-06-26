@@ -13,6 +13,9 @@ showDebug =3;
 try {
 	newChildID = null;
 	// Replaced
+numberOfMonths = 12;
+tmpNewDate = dateAddMonths(null, numberOfMonths);
+
 	if (wfStatus == 'Issue License'){
 		if (exists(appTypeArray[2],["General"],["Class 2"],["Common Consumption"])) {
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
