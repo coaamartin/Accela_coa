@@ -89,7 +89,7 @@ try {
 	}
 
 	// set the expiratipon date
-	comment("TMP NEW Date after checks = "+tmpNewDate);
+//	comment("TMP NEW Date after checks = "+tmpNewDate);
 
 	thisLic = new licenseObject(capIDString,capId) ; thisLic.setStatus("Active");  thisLic.setExpiration(dateAdd(tmpNewDate,0));
 //	editAppSpecific("Defunct Date", dateAdd(tmpNewDate, defunctDays));
