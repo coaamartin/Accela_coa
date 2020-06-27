@@ -17,14 +17,14 @@ numberOfMonths = 12;
 tmpNewDate = dateAddMonths(null, numberOfMonths);
 
 	if (wfStatus == 'Issue License'){
-		if (exists(appTypeArray[2],["General"],["Class 2"],["Common Consumption"])) {
+		if (exists(appTypeArray[2],["General","Class 2","Common Consumption"])) {
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
 			numberOfMonths = 12;
 			tmpNewDate = dateAddMonths(null, numberOfMonths);
 			comment("TMP NEW Date Default = "+tmpNewDate);
-		} else if (exists(appTypeArray[2],["Cabaret"],["Tasting License"],["Tasting Permit"]))  {
+		} else if (exists(appTypeArray[2],["Cabaret","Tasting License","Tasting Permit"]))  {
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
