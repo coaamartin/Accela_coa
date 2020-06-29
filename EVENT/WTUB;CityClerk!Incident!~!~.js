@@ -14,49 +14,7 @@ logDebug("Starting WTUA;CityClerk!Incident!~!~.js");
 
 if (wfTask == "Planning Director Approval" && wfStatus == "Approved") {
 
-    var vASIValue = getAppSpecific("Non-Profit");
-    //var appTypeString = getAppSpecific("Application Type");
-    //var appType = getAppSpecific(appType);
-    // var nonProfit = "";
-    // var nonProfit = vASIValue;
-    appTypeResult = cap.getCapType(); //create CapTypeModel object
-    appTypeString = appTypeResult.toString();
-    appTypeArray = appTypeString.split("/");
-    // logDebug("Non Profit: " + nonProfit);
-    logDebug("Non-Profit: " + vASIValue);
-    logDebug("appType: " + appTypeString);
-    if ("No".equals(vASIValue)) {
-        if ("CityClerk/Incident/DonationBins/NA".equals(appTypeString)) {
-            //Donation Bins code
-            logDebug("Starting to invoice fee on record.");
-            var feecode = "CC_DB";
-            var feeschedule = "CC_DB";
-            var thefee = "1";
-            //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-            updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-            logDebug("End of Script 5121_CityClerk.js");
-        }
-        //Temp Use code
-        else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
-            logDebug("Starting to invoice fee on record.");
-            var feecode = "CC_TU";
-            var feeschedule = "CC_TU";
-            var thefee = "1";
-            //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-            updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-            logDebug("End of Script 5121_CityClerk.js");
-        }
-
-        //Temp Sign code
-        else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
-            logDebug("Starting to invoice fee on record.");
-            var feecode = "CC_TS";
-            var feeschedule = "CC_TS";
-            var thefee = "1";
-            //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-            updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-            logDebug("End of Script 5121_CityClerk.js");
-        }
-    }
-
+	// Script 5121_CityClerk
+    include("5121_CityClerk");
+	
 }

@@ -25,6 +25,12 @@ if (wfTask == "Planning Director Approval" && wfStatus == "Approved") {
     // logDebug("Non Profit: " + nonProfit);
     logDebug("Non-Profit: " + vASIValue);
     logDebug("appType: " + appTypeString);
+    updateCityClerkFee();
+}
+
+updateCityClerkFee(){
+    logDebug("Starting updateCityClerkFee");
+    logDebug("ASIValue: " + vASIValue);
     if ("No".equals(vASIValue)) {
         if ("CityClerk/Incident/DonationBins/NA".equals(appTypeString)) {
             //Donation Bins code
@@ -58,5 +64,7 @@ if (wfTask == "Planning Director Approval" && wfStatus == "Approved") {
             logDebug("End of Script 5121_CityClerk.js");
         }
     }
-
+    else ("Yes".equals(vASIValue)){
+        logDebug("Tax exempt no fee added. Tax expemt = " + vASIValue);
+    }
 }
