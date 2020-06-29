@@ -202,15 +202,15 @@ function mainProcess() {
 		report = report.getOutput();
 		return report
 
-		report.setModule(rModule);
+		//report.setModule(rModule);
 		//report.setCapId(capId);
-		report.setReportParameters(parameters);
+		//report.setReportParameters(parameters);
 		//Added
 		//vAltId = capId.getCustomID();
 		//report.getEDMSEntityIdModel().setAltId(vAltId);
-		var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
-		aa.print("---" + permit.getOutput().booleanValue());
-		if (permit.getOutput().booleanValue()) {
+		//var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
+		//aa.print("---" + permit.getOutput().booleanValue());
+		//if (permit.getOutput().booleanValue()) {
 			var reportResult = aa.reportManager.getReportResult(report);
 
 		// 	if (reportResult) {
