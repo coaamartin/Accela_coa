@@ -249,7 +249,7 @@ function mainProcess() {
 
 		var result = null;
 
-		result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, report);
+		result = sendNotification(emailFrom, emailTo, emailCC, templateName, params, report);
 
 		if (result.getSuccess())
 
