@@ -215,9 +215,9 @@ function mainProcess() {
 
 			if (reportResult) {
 				reportResult = reportResult.getOutput();
-				var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+				//var reportFile = aa.reportManager.storeReportToDisk(reportResult);
 				logMessage("Report Result: " + reportResult);
-				reportFile = reportFile.getOutput();
+				var reportFile = reportFile.getOutput();
 				return reportFile
 			} else {
 				logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
