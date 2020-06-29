@@ -22,6 +22,10 @@ appTypeArray = appTypeString.split("/");
 // logDebug("Non Profit: " + nonProfit);
 logDebug("Non-Profit: " + vASIValue);
 logDebug("appType: " + appTypeString);
+
+updateCityClerkFee();
+
+function updateCityClerkFee() {
 if (("No".equals(vASIValue)) && ("CityClerk/Incident/DonationBins/NA".equals(appTypeString))) {
     //Donation Bins code
         logDebug("Starting to invoice fee on record.");
@@ -53,3 +57,4 @@ if (("No".equals(vASIValue)) && ("CityClerk/Incident/DonationBins/NA".equals(app
         updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
         logDebug("End of Script 5121_CityClerk.js");
     }
+};
