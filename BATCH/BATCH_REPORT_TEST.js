@@ -247,27 +247,27 @@ function mainProcess() {
 
 		var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
 
-		// var result = null;
+		var result = null;
 
-		// result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
+		result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, report);
 
-		// if (result.getSuccess())
+		if (result.getSuccess())
 
-		// {
+		{
 
-		// 	logDebug("Sent email successfully!");
+			logDebug("Sent email successfully!");
 
-		// 	return true;
+			return true;
 
-		// } else
+		} else
 
-		// {
+		{
 
-		// 	logDebug("Failed to send mail. - " + result.getErrorType());
+			logDebug("Failed to send mail. - " + result.getErrorType());
 
-		// 	return false;
+			return false;
 
-		// }
+		}
 
 	}
 }
