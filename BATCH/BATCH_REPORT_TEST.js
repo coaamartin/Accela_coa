@@ -200,7 +200,7 @@ function mainProcess() {
 
 		report = aa.reportManager.getReportInfoModelByName(reportName);
 		report = report.getOutput();
-
+		return report
 
 		report.setModule(rModule);
 		//report.setCapId(capId);
@@ -229,7 +229,7 @@ function mainProcess() {
 		// }
 	}
 
-	function sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile) {
+	function sendNotification(emailFrom, emailTo, emailCC, templateName, params, report) {
 
 		var itemCap = batchJobID;
 
