@@ -26,9 +26,9 @@ if (wfTask == "Planning Director Approval" && wfStatus == "Approved") {
     logDebug("Non-Profit: " + vASIValue);
     logDebug("appType: " + appTypeString);
     updateCityClerkFee();
-}
+};
 
-updateCityClerkFee(){
+function updateCityClerkFee() {
     logDebug("Starting updateCityClerkFee");
     logDebug("ASIValue: " + vASIValue);
     if ("No".equals(vASIValue)) {
@@ -63,8 +63,5 @@ updateCityClerkFee(){
             updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
             logDebug("End of Script 5121_CityClerk.js");
         }
-    }
-    else ("Yes".equals(vASIValue)){
-        logDebug("Tax exempt no fee added. Tax expemt = " + vASIValue);
-    }
-}
+    };
+};
