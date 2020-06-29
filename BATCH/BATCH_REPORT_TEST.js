@@ -201,9 +201,9 @@ function mainProcess() {
 		report = aa.reportManager.getReportInfoModelByName(reportName);
 		report = report.getOutput();
 		//return report
-
+		logDebug("Report getOutput: " + report);
 		report.setModule(rModule);
-		report.setCapId(capId);
+		//report.setCapId(capId);
 		report.setReportParameters(parameters);
 		//Added
 		//vAltId = capId.getCustomID();
