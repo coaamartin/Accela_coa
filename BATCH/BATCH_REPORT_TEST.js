@@ -160,7 +160,8 @@ function mainProcess() {
 	var emailBodyMsg = "";
 	//var capCount= 0;
 	// Report parameters need to be setup below
-	var reportName = "Fire Inspections Performance";
+	var reportName = getJobParam("reportName");
+	//var reportName = "Fire Inspections Performance";
 	var rParams = aa.util.newHashtable();
 	rParams.put("FromDate", "5/1/2020");
 	rParams.put("ToDate", "5/31/2020");

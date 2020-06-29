@@ -1,79 +1,30 @@
-//SEND_BATCH_REPORT_TESTv2.js
-function getScriptText(e) {
-	var t = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		t = arguments[1];
-	e = e.toUpperCase();
-	var n = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness")
-			.getOutput();
-	try {
-		var r = n.getScriptByPK(t, e, "ADMIN");
-		return r.getScriptText() + ""
-	} catch (i) {
-		return ""
-	}
-}
-
-var SCRIPT_VERSION = 3.0
-aa.env.setValue("CurrentUserID", "ADMIN");
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
-
-wait(10000);
-var capId = aa.env.getValue("CapId");
-
-var module = "Common";
-var repName = "Fire Inspections Performance";
-
-reportParameters = aa.util.newHashMap(); 
-reportParameters.put("Test", "");
-report = null;  
-report = generateReportFile(repName,reportParameters,module);
-
-function generateReportFile(aaReportName,parameters,rModule) 
-{
-  var reportName = aaReportName;
-
-  report = aa.reportManager.getReportInfoModelByName(reportName);
-  report = report.getOutput();
-
-
-  report.setModule(rModule);
-  report.setCapId(capId);
-  report.setReportParameters(parameters);
-  //Added
-  //vAltId = capId.getCustomID();
-  //report.getEDMSEntityIdModel().setAltId(vAltId);
-  var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
-  aa.print("---"+permit.getOutput().booleanValue());
-  if(permit.getOutput().booleanValue()) 
-  {
-    var reportResult = aa.reportManager.getReportResult(report);
-
-    if(reportResult) 
-    {
-      reportResult = reportResult.getOutput();
-      var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-      logMessage("Report Result: "+ reportResult);
-      reportFile = reportFile.getOutput();
-      return reportFile
-    } else 
-    {
-      logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
-      return false;
-    }
-  } else 
-  {
-    logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
-    return false; 
-  }
-}
-function wait(ms){
-   var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
-}
-
+	logDebug("Starting SEND_BATCH_REPORT_TESTs script");
+	//var InvoiceNbr = InvoiceNbrArray[0] + "";
+	//var envParameters = aa.util.newHashMap();
+	//envParameters.put("capId", capId);
+	//envParameters.put("cap", cap);
+	//envParameters.put("INVOICEID", InvoiceNbr);
+	envParameters.put("AGENCYID", "AURORACO");
+	var vAsyncScript = "SEND_BATCH_REPORT_TEST";
+	aa.runAsyncScript(vAsyncScript, envParameters);
+	logDebug("CapID info: " + envParameters);
+	//logDebug("Invoice NBR: " + InvoiceNbr);
+	logDebug("End of SEND_BATCH_REPORT_TEST script");
+	logDebug("**END** FSEND_BATCH_REPORT_TEST kicks off from here");
+	//Below was for testing purpose wanted to ensure all parameters where being passed.
+	// var capAlias = cap.getCapModel().getAppTypeAlias();
+	// var fName = "Ray";
+	// var lName = "Province";
+	// var today = new Date();
+	// var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+	// var tParams = aa.util.newHashtable();
+	// tParams.put("$$todayDate$$", thisDate);
+	// tParams.put("$$altID$$", capId.getCustomID());
+	// tParams.put("$$capAlias$$", capAlias);
+	// tParams.put("$$FirstName$$", fName);
+	// tParams.put("$$LastName$$", lName);
+	// var rParams = aa.util.newHashtable();
+	// rParams.put("AGENCYID", "AURORACO");
+	// rParams.put("INVOICEID", InvoiceNbr);
+	// logDebug("Template Parameters: " + tParams);
+	// logDebug("Rparams" + rParams);
