@@ -200,36 +200,37 @@ function mainProcess() {
 
 		report = aa.reportManager.getReportInfoModelByName(reportName);
 		report = report.getOutput();
-		return report
+		//return report
 
-		//report.setModule(rModule);
-		//report.setCapId(capId);
-		//report.setReportParameters(parameters);
-		//Added
+		report.setModule(rModule);
+		report.setCapId(capId);
+		report.setReportParameters(parameters);
+		Added
 		//vAltId = capId.getCustomID();
-		//report.getEDMSEntityIdModel().setAltId(vAltId);
-		//var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
-		//aa.print("---" + permit.getOutput().booleanValue());
-		//if (permit.getOutput().booleanValue()) {
-		//var reportResult = aa.reportManager.getReportResult(report);
+		vAltId = batchJobID;
+		report.getEDMSEntityIdModel().setAltId(vAltId);
+		var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
+		aa.print("---" + permit.getOutput().booleanValue());
+		if (permit.getOutput().booleanValue()) {
+		var reportResult = aa.reportManager.getReportResult(report);
 
-		// 	if (reportResult) {
-		// 		reportResult = reportResult.getOutput();
-		// 		//var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-		// 		logMessage("Report Result: " + reportResult);
-		// 		var reportFile = reportFile.getOutput();
-		// 		return reportFile
-		// 	} else {
-		// 		logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
-		// 		return false;
-		// 	}
-		// } else {
-		// 	logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
-		// 	return false;
-		// }
+			if (reportResult) {
+				reportResult = reportResult.getOutput();
+				var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+				logMessage("Report Result: " + reportResult);
+				var reportFile = reportFile.getOutput();
+				return reportFile
+			} else {
+				logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
+				return false;
+			}
+		} else {
+			logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
+			return false;
+		}
 	}
 
-	function sendNotification(emailFrom, emailTo, emailCC, templateName, params, report) {
+	function sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile) {
 
 		var itemCap = batchJobID;
 
@@ -249,7 +250,7 @@ function mainProcess() {
 
 		var result = null;
 
-		result = sendNotification(emailFrom, emailTo, emailCC, templateName, params, report);
+	result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
 
 		if (result.getSuccess())
 
