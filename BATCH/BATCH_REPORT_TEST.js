@@ -211,7 +211,7 @@ function mainProcess() {
 		//var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
 		//aa.print("---" + permit.getOutput().booleanValue());
 		//if (permit.getOutput().booleanValue()) {
-			var reportResult = aa.reportManager.getReportResult(report);
+		//var reportResult = aa.reportManager.getReportResult(report);
 
 		// 	if (reportResult) {
 		// 		reportResult = reportResult.getOutput();
