@@ -205,7 +205,7 @@ function mainProcess() {
 		report.setModule(rModule);
 		report.setCapId(capId);
 		report.setReportParameters(parameters);
-		Added
+		//Added
 		//vAltId = capId.getCustomID();
 		vAltId = batchJobID;
 		report.getEDMSEntityIdModel().setAltId(vAltId);
