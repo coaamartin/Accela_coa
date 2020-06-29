@@ -251,25 +251,25 @@ function mainProcess() {
 
 		var result = null;
 
-	result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
+	// result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
 
-		if (result.getSuccess())
+	// 	if (result.getSuccess())
 
-		{
+	// 	{
 
-			logDebug("Sent email successfully!");
+	// 		logDebug("Sent email successfully!");
 
-			return true;
+	// 		return true;
 
-		} else
+	// 	} else
 
-		{
+	// 	{
 
-			logDebug("Failed to send mail. - " + result.getErrorType());
+	// 		logDebug("Failed to send mail. - " + result.getErrorType());
 
-			return false;
+	// 		return false;
 
-		}
+	// 	}
 
 	}
 }
