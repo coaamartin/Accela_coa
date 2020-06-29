@@ -63,5 +63,10 @@ if ("Renewal Review".equals(wfTask) && "Approved for Renewal".equals(wfStatus) &
 
 		emailContacts("All", vEmailTemplate, vEParams,"","");
 
+		var vAsyncScript = "RUN_ARBORIST_LICENSE_REPORT";
+		var envParameters = aa.util.newHashMap();
+		envParameters.put("CapId", vLicenseID);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+
 	}
 }

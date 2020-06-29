@@ -66,5 +66,11 @@ if ((balanceDue <= 0) && isTaskActive("License Renewal")) {
 
 		emailContacts("All", vEmailTemplate, vEParams,"","");
 
+
+		var vAsyncScript = "RUN_ARBORIST_LICENSE_REPORT";
+		var envParameters = aa.util.newHashMap();
+		envParameters.put("CapId", vLicenseID);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+		
 	}
 }
