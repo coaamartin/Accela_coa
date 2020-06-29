@@ -26,7 +26,7 @@ if (wfTask == "Planning Director Approval" && wfStatus == "Approved") {
     logDebug("Non-Profit: " + vASIValue);
     logDebug("appType: " + appTypeString);
     if ("No".equals(vASIValue)) {
-    updateCityClerkFee();
+    updateCityClerkFee(vASIValue, appTypeString);
     }
 };
 
