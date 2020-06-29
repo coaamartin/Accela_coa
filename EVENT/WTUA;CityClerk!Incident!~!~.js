@@ -11,4 +11,10 @@
 //Created By: Rprovinc
 //******************************************************************************
 logDebug("Starting WTUA;CityClerk!Incident!~!~.js");
-include("5121_CityClerk");
+
+if (wfTask == "Planning Director Approval" && wfStatus == "Approved") {
+
+	// Script 5121_CityClerk
+    include("5121_CityClerk");
+	
+}
