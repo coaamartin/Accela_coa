@@ -150,126 +150,71 @@ function mainProcess() {
 	| BATCH PARAMETERS
     /------------------------------------------------------------------------------------------------------*/
 	var paramStdChoice = aa.env.getValue("paramStdChoice"); // use this standard choice for parameters instead of batchjob params
-	//var dateRange = getJobParam("dateRange");//this will be used to determine how often to run the report...will change var name
-	//var today = new Date();
-	//var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-	//--mm/dd/yyyy configuration for reporting
+	//aa.env.setValue("paramStdChoice", "BATCH_REPORT_TEST") //TESTING
 	var emailTo = getJobParam("emailSendTo"); // email to: 
 	var emailTitle = getJobParam("emailTitle"); // email Title
-	var emailtemplate = "Report_Test_Email"; // email Template
+	var emailtemplate = getJobParam("emailTemplate");	 // email Template
 	var emailBodyMsg = "";
-	//var capCount= 0;
-	// Report parameters need to be setup below
 	var reportName = getJobParam("reportName");
-	//var reportName = "Fire Inspections Performance";
 	var rParams = aa.util.newHashtable();
 	rParams.put("FromDate", "5/1/2020");
 	rParams.put("ToDate", "5/31/2020");
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
-	logDebug("Report settings: " + report);
-	//var report = generateReportFile(reportName, rParams, "AURORACO");
-	//var expMonth = datepart1.getMonth();
-	logDebug("Processing Batch_report_test.js. ")
-	/*----------------------------------------------------------------------------------------------------/
-	| Email Body
-	/------------------------------------------------------------------------------------------------------*/
-	emailBodyMsg += "Hello," + br;
-	emailBodyMsg += br;
-	emailBodyMsg += "Please see attached " + reportName + " " + br;
-	emailBodyMsg += br;
-	emailBodyMsg += "Thank you and have a great day," + br;
-	emailBodyMsg += br;
-	/*----------------------------------------------------------------------------------------------------/
-	| End Email Body
-	/------------------------------------------------------------------------------------------------------*/
-	//generate email notices
 
-	logDebug("=================================================");
-	//Send email function
-	//aa.sendMail("noreply@aurora.gov", emailTo, "", emailTitle, emailBodyMsg);
-	//sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
-	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, "", [report]);
-	logDebug("Email to: " + emailTo);
-	logDebug("Email Title: " + emailTitle);
-	logDebug("Email Body: " + emailBodyMsg);
-	logDebug("=================================================");
-	logDebug("Finished sending email");
+	var tParams = aa.util.newHashtable();
+	sendMail("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 
-	function generateReportFile(aaReportName, parameters, rModule) {
-		var reportName = aaReportName;
+}
 
-		report = aa.reportManager.getReportInfoModelByName(reportName);
-		report = report.getOutput();
-		//return report
-		logDebug("Report getOutput: " + report);
-		report.setModule(rModule);
-		//report.setCapId(capId);
-		report.setReportParameters(parameters);
-		//Added
-		//vAltId = capId.getCustomID();
-		vAltId = batchJobID;
-		report.getEDMSEntityIdModel().setAltId(vAltId);
-		var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
-		aa.print("---" + permit.getOutput().booleanValue());
-		if (permit.getOutput().booleanValue()) {
-		var reportResult = aa.reportManager.getReportResult(report);
+function generateReportFile(aaReportName,parameters,rModule) 
+{
+  var reportName = aaReportName;
 
-			if (reportResult) {
-				reportResult = reportResult.getOutput();
-				logDebug("IF report result getOutput: " + reportResult);
-				//var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-				logMessage("Report Result: " + reportResult);
-				var reportFile = reportResult;
-				return reportFile
-			} else {
-				logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
-				return false;
-			}
-		} else {
-			logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
-			return false;
-		}
-	}
-
-	function sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile) {
-
-		var itemCap = batchJobID;
-
-		if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
+  report = aa.reportManager.getReportInfoModelByName(reportName);
+  report = report.getOutput();
 
 
+  report.setModule(rModule);
+  report.setCapId(capId);
+  report.setReportParameters(parameters);
+  //Added
+  //vAltId = capId.getCustomID();
+  //report.getEDMSEntityIdModel().setAltId(vAltId);
+  var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
+  aa.print("---"+permit.getOutput().booleanValue());
+  if(permit.getOutput().booleanValue()) 
+  {
+    var reportResult = aa.reportManager.getReportResult(report);
 
-		var id1 = itemCap.ID1;
+    if(reportResult) 
+    {
+      reportResult = reportResult.getOutput();
+      var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+      logMessage("Report Result: "+ reportResult);
+      reportFile = reportFile.getOutput();
+      return reportFile
+    } else 
+    {
+      logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
+      return false;
+    }
+  } else 
+  {
+    logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
+    return false; 
+  }
+}
 
-		var id2 = itemCap.ID2;
-
-		var id3 = itemCap.ID3;
-
-
-
-		var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
-
-		var result = null;
-
-	// result = aa.sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile);
-
-	// 	if (result.getSuccess())
-
-	// 	{
-
-	// 		logDebug("Sent email successfully!");
-
-	// 		return true;
-
-	// 	} else
-
-	// 	{
-
-	// 		logDebug("Failed to send mail. - " + result.getErrorType());
-
-	// 		return false;
-
-	// 	}
-
-	}
+function sendMail(from, to, cc, templateName, params, fileNames)
+{
+    // var fileNames = [];
+    var result = aa.document.sendEmailByTemplateName(from, to, cc, templateName, params, fileNames);
+    if(result.getSuccess())
+    {
+        aa.print("Send mail success.");
+    }
+    else
+    {
+        aa.print("Send mail fail.");
+    }
 }
