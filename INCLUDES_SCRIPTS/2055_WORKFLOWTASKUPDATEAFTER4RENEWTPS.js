@@ -1,3 +1,7 @@
+if (currentUserID == "ACHARLTO"){
+showDebug = 3;
+}
+comment("Beginning WTUA4RENEWTPS");
 //Set CAPID (CAP id)  for test.
 //Unit Test Parameters --> begin
 //aa.env.setValue("PermitId1", "07WEN");
@@ -1833,4 +1837,6 @@ function getPartialCapID(capid)
 		return null;
 	}
 }
+comment("Ending WTUA4RENEWTPS");
+
 // ---------------------------------------------------------------------------------------------------
