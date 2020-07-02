@@ -202,14 +202,14 @@ function isWorkflowApproveForReview(capID, wfTask, stepNum, processID, taskStatu
 		}
 		//2. Check to see if the agency user approve renewal application .
 		if (taskItemScriptModel.getTaskDescription().equals(wfTask)
-			&& ("Application Review".equals(wfTask) || "License Review".equals(wfTask) || "Final Review".equals(wfTask)|| "Clerk Final Review".equals(wfTask) || "Renewal Issuance".equals(wfTask))
+			&& ("Application Review".equals(wfTask) || "City License Issued".equals(wfTask) || "License Review".equals(wfTask) || "Final Review".equals(wfTask)|| "Clerk Final Review".equals(wfTask) || "Renewal Issuance".equals(wfTask))
 			&& ("Issue License".equals(taskStatus) || "Renewed".equals(taskStatus)))
 		{
 			return true;
 		}	
 		else
 		{
-			aa.print("Issuing license (" + wfTask +") don't have been approved");
+			aa.print("Issuing license (" + wfTask +") task isn't listed in line 205");
 		}
 	}  
     else 
