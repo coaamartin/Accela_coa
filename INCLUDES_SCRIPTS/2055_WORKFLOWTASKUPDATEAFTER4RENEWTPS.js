@@ -64,12 +64,14 @@ if (isWorkflowApproveForReview(capID,
 	var partialCapID = getPartialCapID(capID);
 
 	if (parentLicenseCAPID != null)
+		logDebug("parentlicenseCAPID = "+parentLicenseCAPID);
 	{
 		// 3. Check to see if license is ready for renew.
 		//if (isReadyRenew(parentLicenseCAPID))
 		//{
 			//3.1 Get projectScriptModel of renewal CAP.	
 			renewalCapProject = getRenewalCapByParentCapIDForReview(parentLicenseCAPID);
+			logDebug("renewalCapProject = "+renewalCapProject);
 			if (renewalCapProject != null)
 			{
 				//4. Set B1PERMIT.B1_ACCESS_BY_ACA to "N" for partial CAP to not allow that it is searched by ACA user.
