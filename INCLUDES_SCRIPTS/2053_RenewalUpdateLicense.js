@@ -18,7 +18,7 @@
 
 		
 	lic = new licenseObject(capIDString, parentLicenseCAPID);comment("Get License Object");
-	lic.setStatus('Active'); comment("Set Lic Exp Status to Active");
+/*	lic.setStatus('Active'); comment("Set Lic Exp Status to Active");
 
         b1ExpResult = aa.expiration.getLicensesByCapID(parentLicenseCAPID);
         this.b1Exp = b1ExpResult.getOutput();
@@ -35,11 +35,11 @@
 
              lic.setExpiration(newExpDate);
 
-             }
+             }*/
 
 
 
 	capId = saveId;
     logDebug('Running WTUA4Renewal');
-	aa.runScript("WORKFLOWTASKUPDATEAFTER4RENEW");
+	include("2055_WORKFLOWTASKUPDATEAFTER4RENEWTPS");
 	logDebug('Messages in WTUA4Renewal:<br>' + aa.env.getValue('ScriptReturnMessage'));
