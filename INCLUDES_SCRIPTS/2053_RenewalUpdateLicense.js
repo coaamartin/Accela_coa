@@ -18,7 +18,7 @@
 
 		
 	lic = new licenseObject(capIDString, parentLicenseCAPID);comment("Get License Object");
-	/*lic.setStatus('Active'); comment("Set Lic Exp Status to Active");
+	lic.setStatus('Active'); comment("Set Lic Exp Status to Active");
 
         b1ExpResult = aa.expiration.getLicensesByCapID(parentLicenseCAPID);
         this.b1Exp = b1ExpResult.getOutput();
@@ -35,7 +35,7 @@
 
              lic.setExpiration(newExpDate);
 
-             }*/
+             }
 
 
 
