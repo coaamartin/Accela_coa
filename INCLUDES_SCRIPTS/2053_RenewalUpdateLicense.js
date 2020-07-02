@@ -28,7 +28,7 @@
              comment("This Lic Expires on " + this.b1ExpDate);
 
 	     //default to 12 months from today
-             numberOfMonths = 0; // 0 months because the EXP Code bumps it up 12 months
+             numberOfMonths = 12; // 0 months because the EXP Code bumps it up 12 months
 
              newExpDate = this.b1ExpDate;
 	     comment("newExpDate = "+newExpDate);
