@@ -18,7 +18,7 @@ logDebug("appType: " + appTypeString);
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     //Donation Bins code
     logDebug("Starting to send notifications");
-    var contactType = "rprovinc@auroragov.org";
+    var emailTo = "rprovinc@auroragov.org";
     //var licenseType = "Contractor";
     //var addressType = "Business";
     var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
@@ -28,7 +28,8 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     //addParameter(vEParams, "", asiValues["Contractor Type"]);
     //Send email to all individuals that need to sign off on Donation Bins
     //emailContacts(contactType, vEmailTemplate, vEParams, "", "", "N", "");
-    emailContacts(contactType, vEmailTemplate, "", "", "", "N", "");
+    //sendNotification(contactType, vEmailTemplate, "", "", "", "N", "");
+    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, null, null);
     logDebug("End of Script 5122_CityClerk_notifications.js");
 }
 
