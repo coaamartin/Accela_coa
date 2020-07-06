@@ -13,25 +13,53 @@
 appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
-// logDebug("Non Profit: " + nonProfit);
-logDebug("Non-Profit: " + vASIValue);
 logDebug("appType: " + appTypeString);
-    if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
-        //Donation Bins code
-        logDebug("Starting to send notifications");
-        //Send email to all individuals that need to sign off on Donation Bins
-        logDebug("End of Script 5122_CityClerk_notifications.js");
-    }
-    //Temp Use code
-    else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
-        logDebug("Starting to send notifications");
-        //Send email to all individuals that need to sign off on TempUse
-        logDebug("End of Script 5122_CityClerk_notifications.js");
-    }
 
-    //Temp Sign code
-    else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
-        logDebug("Starting to send notifications");
-        //Send email to all individuals that need to sign off on TempSign
-        logDebug("End of Script 5122_CityClerk_notifications.js");
-    }
+if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+    //Donation Bins code
+    logDebug("Starting to send notifications");
+    var contactType = "rprovinc@auroragov.org";
+    //var licenseType = "Contractor";
+    //var addressType = "Business";
+    var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
+    //var vEParams = aa.util.newHashtable();
+    //var asiValues = new Array();
+    //loadAppSpecific(asiValues);
+    //addParameter(vEParams, "", asiValues["Contractor Type"]);
+    //Send email to all individuals that need to sign off on Donation Bins
+    //emailContacts(contactType, vEmailTemplate, vEParams, "", "", "N", "");
+    emailContacts(contactType, vEmailTemplate, "", "", "", "N", "");
+    logDebug("End of Script 5122_CityClerk_notifications.js");
+}
+
+//Temp Use code
+else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
+    logDebug("Starting to send notifications");
+    var contactType = "Applicant";
+    //var licenseType = "Contractor";
+    var addressType = "Business";
+    var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
+    var vEParams = aa.util.newHashtable();
+    var asiValues = new Array();
+    loadAppSpecific(asiValues);
+    addParameter(vEParams, "", asiValues["Contractor Type"]);
+    //Send email to all individuals that need to sign off on TempUse
+    emailContacts(contactType, vEmailTemplate, vEParams, "", "", "N", "");
+    logDebug("End of Script 5122_CityClerk_notifications.js");
+}
+
+//Temp Sign code
+else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
+    logDebug("Starting to send notifications");
+    var contactType = "Applicant";
+    //var licenseType = "Contractor";
+    var addressType = "Business";
+    var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
+    var vEParams = aa.util.newHashtable();
+    var asiValues = new Array();
+    loadAppSpecific(asiValues);
+    addParameter(vEParams, "", asiValues["Contractor Type"]);
+    //Send email to all individuals that need to sign off on TempSign
+    emailContacts(contactType, vEmailTemplate, vEParams, "", "", "N", "");
+    logDebug("End of Script 5122_CityClerk_notifications.js");
+}
