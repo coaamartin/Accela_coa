@@ -15,52 +15,57 @@ appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
 
+
+ //Donation Bins code
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
-    //Donation Bins code
     logDebug("Starting to send notifications");
-    var emailTo = "rprovinc@auroragov.org";
-    //var licenseType = "Contractor";
-    //var addressType = "Business";
-    var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
-    //var vEParams = aa.util.newHashtable();
-    //var asiValues = new Array();
-    //loadAppSpecific(asiValues);
-    //addParameter(vEParams, "", asiValues["Contractor Type"]);
-    //Send email to all individuals that need to sign off on Donation Bins
-    //emailContacts(contactType, vEmailTemplate, vEParams, "", "", "N", "");
-    //sendNotification(contactType, vEmailTemplate, "", "", "", "N", "");
-    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, null, null);
+    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;jjking@auroragov.org";
+    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var vEmailTemplate = "CC Ready for Review";
+    var today = new Date();
+	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var tParams = aa.util.newHashtable();
+    tParams.put("$$todayDate$$", thisDate);
+    tParams.put("$$Record ID$$", capId.getCustomID());
+    tParams.put("$$Record Type$$", "Donation Bin");
+    logDebug("EmailTo: " +emailTo);
+    logDebug("Table Parameters: " + tParams);
+    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5122_CityClerk_notifications.js");
 }
 
 //Temp Use code
 else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var contactType = "Applicant";
-    //var licenseType = "Contractor";
-    var addressType = "Business";
-    var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
-    var vEParams = aa.util.newHashtable();
-    var asiValues = new Array();
-    loadAppSpecific(asiValues);
-    addParameter(vEParams, "", asiValues["Contractor Type"]);
-    //Send email to all individuals that need to sign off on TempUse
-    emailContacts(contactType, vEmailTemplate, vEParams, "", "", "N", "");
+    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;JNAPPER@auroragov.org";
+    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var vEmailTemplate = "CC Ready for Review";
+    var today = new Date();
+	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var tParams = aa.util.newHashtable();
+    tParams.put("$$todayDate$$", thisDate);
+    tParams.put("$$Record ID$$", capId.getCustomID());
+    tParams.put("$$Record Type$$", "Temp Use");
+    logDebug("EmailTo: " +emailTo);
+    logDebug("Table Parameters: " + tParams);
+    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5122_CityClerk_notifications.js");
 }
 
 //Temp Sign code
 else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var contactType = "Applicant";
-    //var licenseType = "Contractor";
-    var addressType = "Business";
-    var vEmailTemplate = "BLD_CLL_LICENSE_ISSUANCE_#111";
-    var vEParams = aa.util.newHashtable();
-    var asiValues = new Array();
-    loadAppSpecific(asiValues);
-    addParameter(vEParams, "", asiValues["Contractor Type"]);
-    //Send email to all individuals that need to sign off on TempSign
-    emailContacts(contactType, vEmailTemplate, vEParams, "", "", "N", "");
+    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;jjking@auroragov.org";
+    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var vEmailTemplate = "CC Ready for Review";
+    var today = new Date();
+	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var tParams = aa.util.newHashtable();
+    tParams.put("$$todayDate$$", thisDate);
+    tParams.put("$$Record ID$$", capId.getCustomID());
+    tParams.put("$$Record Type$$", "Temp Sign");
+    logDebug("EmailTo: " +emailTo);
+    logDebug("Table Parameters: " + tParams);
+    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5122_CityClerk_notifications.js");
 }
