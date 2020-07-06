@@ -1,7 +1,7 @@
 if(matches(currentUserID,"ACHARLTO")){
 showDebug =3;
 }
-
+logDebug("Executing 2054 Create License Renewal Script");
 if (appMatch('Licenses/*/*/Renewal')) {
 		parentLicenseCAPID = getParentCapIDForReview(capId);
 		comment('ParentLic CAPID = ' + parentLicenseCAPID);
