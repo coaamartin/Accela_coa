@@ -21,6 +21,9 @@ Notes:
 
 activateAndAssignWfTask([ "Assign Complaint", "Assign Inspection" ], [ "Complete" ], "Inspection");
 
+//SWAKIL 07.06.2020
+include("500_CaptainNotification");
+
 /**ACCELA CIVIC PLATFORM TO CRM SCRIPTING LOGIC 
  * Workflow automation for all FIRE Records 
  * @namespace WTUA:FIRE///
