@@ -1,7 +1,7 @@
-if(matches(currentUserID,"ACHARLTON")){
+if(matches(currentUserID,"ACHARLTO")){
 showDebug =3;
 }
-//Liquor License
+
 if (appMatch('Licenses/*/*/Renewal')) {
 		parentLicenseCAPID = getParentCapIDForReview(capId);
 		comment('ParentLic CAPID = ' + parentLicenseCAPID);
