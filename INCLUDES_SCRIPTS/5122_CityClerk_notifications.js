@@ -56,7 +56,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     var tParams = aa.util.newHashtable();
     tParams.put("$$todayDate$$", thisDate);
     tParams.put("$$altid$$", capId.getCustomID());
-    tParams.put("$$Record Type$$", "Temp Use");
+    tParams.put("$$Record Type$$", "Temp Use Permit");
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
@@ -81,7 +81,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     var tParams = aa.util.newHashtable();
     tParams.put("$$todayDate$$", thisDate);
     tParams.put("$$altid$$", capId.getCustomID());
-    tParams.put("$$Record Type$$", "Temp Sign");
+    tParams.put("$$Record Type$$", "Temp Sign Permit");
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
