@@ -90,7 +90,3 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5122_CityClerk_notifications.js");
 }
-
-function emailCustomer() {
-    sendNotification()
-}
