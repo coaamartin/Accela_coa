@@ -17,3 +17,8 @@ if (wfTask == "Planning Director Approval" && wfStatus == "Approved") {
     include("5121_CityClerk");
 	
 }
+//Need logic below that will send communication out to citizen if more info is needed to proceed
+if (wfStatus == "Additional Information Required") {
+
+    include("5123_CityClerk_AddInfoEmail");
+}

@@ -9,6 +9,7 @@
 //Desc:			Going to update the fee when ever a CityClerk record is open and Non-Profit is set to No.
 //
 //Created By: Rprovinc
+
 //******************************************************************************
 
 var vASIValue = getAppSpecific("Non-Profit");
