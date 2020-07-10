@@ -20,7 +20,7 @@ logDebug("appType: " + appTypeString);
  //Donation Bins code
  if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var vEmailTemplate = "CC ADDITIONAL INFO REQUIRED";
+    var vEmailTemplate = "CC PERMIT ISSUANCE";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
@@ -46,7 +46,7 @@ logDebug("appType: " + appTypeString);
  //Temp Use code
  if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var vEmailTemplate = "CC ADDITIONAL INFO REQUIRED";
+    var vEmailTemplate = "CC PERMIT ISSUANCE";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
@@ -72,7 +72,7 @@ logDebug("appType: " + appTypeString);
  //Temp Sign code
  if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var vEmailTemplate = "CC ADDITIONAL INFO REQUIRED";
+    var vEmailTemplate = "CC PERMIT ISSUANCE";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();

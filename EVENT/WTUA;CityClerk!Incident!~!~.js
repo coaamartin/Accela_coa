@@ -22,3 +22,10 @@ if (wfStatus == "Additional Information Required") {
 
     include("5123_CityClerk_AddInfoEmail");
 }
+
+if (wfTask == "City Manager's Office Approval" && wfStatus == "Approved") {
+
+	// Script 5121_CityClerk
+    include("5124_CityClerk_Approval");
+	
+}
