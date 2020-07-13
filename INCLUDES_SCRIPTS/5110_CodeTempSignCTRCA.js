@@ -51,4 +51,4 @@ if (emailTemplate != null && emailTemplate != "") {
 }
 
 logDebug("---------------------> At end of 5110 CTRCA");
-aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
