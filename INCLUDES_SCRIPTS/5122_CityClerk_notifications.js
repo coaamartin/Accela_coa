@@ -27,7 +27,10 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var today = new Date();
-	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var altId = capId.getCustomID();
+    logDebug("Testing to see if I get a temp record id before a new if statement. This is before. Altid: " + altId);
+    if (recordApplicant != null ){
     var tParams = aa.util.newHashtable();
     tParams.put("$$todayDate$$", thisDate);
     tParams.put("$$altid$$", capId.getCustomID());
@@ -36,9 +39,11 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
     logDebug("EmailTo: " + emailTo);
+    logDebug("during if statement. AltId show below in tparams");
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5122_CityClerk_notifications.js");
+    }
 }
 
 //Temp Use code
