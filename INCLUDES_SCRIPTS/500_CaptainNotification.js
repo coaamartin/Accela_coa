@@ -22,12 +22,13 @@ if ("Battalion Chief Review".equals(wfTask) && "Denied".equals(wfStatus))
             var template = "STATION_CAPTAIN_NOTIFICATION";
             var eparams = aa.util.newHashtable();
             eparams.put("$$capid$$", capId.getCustomID());
-            eparams.put("$$comments$$", wfComment); 
+            if (wfComment)
+                eparams.put("$$comments$$", wfComment);
             sendNotification("", approvalUserEmail, "", template, eparams, null);
         }
     }
 }
-​
+
 function getTaskHistory(tName)
 {
     try
@@ -53,5 +54,5 @@ function getTaskHistory(tName)
     {
         logDebug("Problem in function " + arguments.callee.name + " on line " + e.lineNumber + ": " + e.message);
     }
-​
+
 }
