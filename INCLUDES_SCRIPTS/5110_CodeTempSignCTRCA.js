@@ -40,6 +40,9 @@ if (emailTemplate != null && emailTemplate != "") {
 else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
 //Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
 var emailTemplate = "TEMP SIGN SUBMIT REVIEWERS";		
+var todayDate = new Date();
+var signType = AInfo["Type of Sign"];
+var signAddress = AInfo["Address where proposed sign will be displayed"];		
 if (emailTemplate != null && emailTemplate != "") {
 	logDebug("5110 sending TEMP USE SUBMIT REVIEWERS.  Sending to several email groups.");	
 	eParams = aa.util.newHashtable();
@@ -56,7 +59,10 @@ if (emailTemplate != null && emailTemplate != "") {
 
 else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
 	//Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
-var emailTemplate = "TEMP SIGN SUBMIT REVIEWERS";		
+	var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";		
+	var todayDate = new Date();
+	var signType = AInfo["Type of Sign"];
+	var signAddress = AInfo["Address where proposed sign will be displayed"];	
 if (emailTemplate != null && emailTemplate != "") {
 	logDebug("5110 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");	
 	eParams = aa.util.newHashtable();
