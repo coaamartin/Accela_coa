@@ -140,7 +140,7 @@ function getWorkflowComments()
 */	
 
 logDebug("---------------------> 5111_CodeTempSignPRA.js ended.");
-aa.sendMail("amartin@auroragov.org", "amartin@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 //Script Tester footer.  Comment this out when deploying.
 //}	
 
