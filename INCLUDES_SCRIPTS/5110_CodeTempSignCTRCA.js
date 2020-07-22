@@ -25,7 +25,7 @@ var signAddress = AInfo["Address where proposed sign will be displayed"];
 if (emailTemplate != null && emailTemplate != "") {
 	logDebug("5110 sending TEMP SIGN SUBMIT APPLICANT.  Defaulting to contact Applicant.");	
 	eParams = aa.util.newHashtable();
-	eParams.put("$$ContactEmail$$", "");			
+	eParams.put("$$ContactEmail$$", "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org");			
 	eParams.put("$$todayDate$$", todayDate);
 	eParams.put("$$altid$$",capId.getCustomID());
 	eParams.put("$$capAlias$$",cap.getCapType().getAlias());
@@ -40,7 +40,7 @@ var emailTemplate = "TEMP SIGN SUBMIT REVIEWERS";
 if (emailTemplate != null && emailTemplate != "") {
 	logDebug("5110 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");	
 	eParams = aa.util.newHashtable();
-	eParams.put("$$ContactEmail$$", "");			
+	eParams.put("$$ContactEmail$$", "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org");			
 	eParams.put("$$todayDate$$", todayDate);
 	eParams.put("$$altid$$",capId.getCustomID());
 	eParams.put("$$capAlias$$",cap.getCapType().getAlias());
