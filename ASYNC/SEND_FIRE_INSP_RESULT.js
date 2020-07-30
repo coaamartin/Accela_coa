@@ -35,7 +35,7 @@ try
 }
 catch(e)
 {
-	email("debug@gmail.com", "aurora@gov.org", "Error", e.message);
+	email("debug@gmail.com", "rprovinc@auroragov.org", "Error", e.message);
 }
 function getEmailString()
 {
