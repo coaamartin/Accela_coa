@@ -17,7 +17,7 @@ try
 	var rParams = aa.util.newHashtable();
 	if ("Fire_Primary_Inspection".equals(reportName))
 	{		
-		rParams.put("RecordId", altId);
+		rParams.put("recordid", altId);
 	}
 	else if ("Fire_Follow_Up_Inspection".equals(reportName))
 	{
