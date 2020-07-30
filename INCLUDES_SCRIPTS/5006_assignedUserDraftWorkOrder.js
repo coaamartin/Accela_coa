@@ -1,5 +1,5 @@
 //SWAKIL
-if ("Traffic Investigation".equals(wfTask) && "Draft Work Order".equals(wfStatus))
+if ("Traffic Investigation".equals(wfTask) && "Work Order Drafted".equals(wfStatus))
 {	
 	assignTask("Draft Work Order", currentUserID);
 }
