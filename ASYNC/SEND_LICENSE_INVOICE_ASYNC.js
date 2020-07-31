@@ -28,10 +28,10 @@ function getEmailString()
 	var emailString = "";
 	var contactArray = getPeople(capId);
 
-	//need to add inspection contact below to this logic 
+	//Looking for the contact type "Applicant" 
 	for (var c in contactArray)
 	{
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact")
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Applicant")
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
 
