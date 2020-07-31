@@ -4,7 +4,6 @@ var pEmailTemplate = 'LIC FEES INVOICED'
 var pEParams = aa.util.newHashMap();
 pEParams.put("capId", capId);
 pEParams.put("cap", cap);
-pEParams.put("INVOICEID", InvoiceNbr);
 pEParams.put("AGENCYID", "AURORACO");
 //var vAsyncScript = "SEND_LICENSE_INVOICE_ASYNC";
 //aa.runAsyncScript(vAsyncScript, pEParams);
