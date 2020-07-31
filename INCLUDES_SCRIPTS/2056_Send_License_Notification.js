@@ -9,7 +9,6 @@ pEParams.put("AGENCYID", "AURORACO");
 //aa.runAsyncScript(vAsyncScript, pEParams);
 emailContactsWithReportLinkASync('Primary', pEmailTemplate, pEParams)
 logDebug("CapID info: " + pEParams);
-logDebug("Invoice NBR: " + InvoiceNbr);
 logDebug("End of 2056_License_Notification script");
 logDebug("**END** SEND_License_INVOICE_ASYNC kicks off from here");
 }
