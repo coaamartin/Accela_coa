@@ -25,7 +25,7 @@ if (wfStatus == "Additional Information Required") {
 
 if (wfTask == "City Manager's Office Approval" && wfStatus == "Approved") {
 
-	// Script 5121_CityClerk
+	// Script 5124_CityClerk
     include("5124_CityClerk_Approval");
 	
 }
