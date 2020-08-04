@@ -49,9 +49,9 @@ function getNeighborhoodNumber(){
         var sql = "SELECT MAX(VALUE_TO_NUM) " +
                   " FROM BCHCKBOX " +
                   " WHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number'"
-        logdebug("The highest neighborhood number is: " + sql);
+        logDebug("The highest neighborhood number is: " + sql);
         var hoaNumber = sql++;
-        logdebug("New HOA number is: "+ hoaNumber);
+        logDebug("New HOA number is: "+ hoaNumber);
 
     }
     finally {
