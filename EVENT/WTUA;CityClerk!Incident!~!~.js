@@ -29,3 +29,11 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Approved") {
     include("5124_CityClerk_Approval");
 	
 }
+
+
+if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
+
+	// Script 5125_CityClerk_Denial
+    //include("5125_CityClerk_Denial");
+
+}
