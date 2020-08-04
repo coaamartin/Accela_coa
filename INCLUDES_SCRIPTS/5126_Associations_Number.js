@@ -46,6 +46,7 @@ function getNeighborhoodNumber(){
     try {
 
         //Associations/Neighborhood/Association
+        logDebug("Starting SQL script");
         var sql = "SELECT MAX(VALUE_TO_NUM) " +
                   " FROM BCHCKBOX " +
                   " WHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number'"
@@ -55,7 +56,7 @@ function getNeighborhoodNumber(){
         var ds = initialContext.lookup("java:/AA");
         var conn = ds.getConnection();
         var sStmt = conn.prepareStatement(sql);
-
+        logDebug("SQL results: " + sql);
         //only execute select statements
 		if (sql.toUpperCase().indexOf("SELECT") == 0) {
 			sStmt.executeQuery();
