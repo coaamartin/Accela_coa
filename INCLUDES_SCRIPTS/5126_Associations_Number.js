@@ -75,8 +75,8 @@ function getNeighborhoodNumber(){
 			logDebug(err.message)
 			
 	}
-        logDebug("The highest neighborhood number is: " + sql);
-        var hoaNumber = sql++;
+        logDebug("The highest neighborhood number is: " + array);
+        var hoaNumber = array++;
         logDebug("New HOA number is: "+ hoaNumber);
 
 }
