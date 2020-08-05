@@ -14,7 +14,8 @@ appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
-
+var emailTo = recordApplicant.getEmail();
+logDebug("Email to: " + emailTo);
 
 //Donation Bins code
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
@@ -24,7 +25,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo = recordApplicant.getEmail();
+    var emailTo1 = emailTo;
     var wfcomment = wfcomment;
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -36,9 +37,9 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
     tParams.put("$$wfComment$$", wfComment);
-    logDebug("EmailTo: " + emailTo);
+    logDebug("EmailTo: " + emailTo1);
     logDebug("Table Parameters: " + tParams);
-    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+    sendNotification("noreply@auroraco.gov", emailTo1, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
 } else if (recordApplicant == null) {
     logDebug("Email could not be sent as there is no Applicant email address.")
@@ -52,7 +53,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo = recordApplicant.getEmail();
+    var emailTo1 = emailTo;
     var wfcomment = wfcomment;
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -64,9 +65,9 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
     tParams.put("$$wfComment$$", wfComment);
-    logDebug("EmailTo: " + emailTo);
+    logDebug("EmailTo: " + emailTo1);
     logDebug("Table Parameters: " + tParams);
-    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+    sendNotification("noreply@auroraco.gov", emailTo1, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
 } else if (recordApplicant == null) {
     logDebug("Email could not be sent as there is no Applicant email address.")
@@ -80,7 +81,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo = recordApplicant.getEmail();
+    var emailTo1 = emailTo;
     var wfcomment = wfcomment;
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -92,9 +93,9 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
     tParams.put("$$wfComment$$", wfComment);
-    logDebug("EmailTo: " + emailTo);
+    logDebug("EmailTo: " + emailTo1);
     logDebug("Table Parameters: " + tParams);
-    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+    sendNotification("noreply@auroraco.gov", emailTo1, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
 } else if (recordApplicant == null) {
     logDebug("Email could not be sent as there is no Applicant email address.")
