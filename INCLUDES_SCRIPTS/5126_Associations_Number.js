@@ -51,19 +51,19 @@ function getNeighborhoodNumber(){
                   " FROM BCHCKBOX " +
                   " WHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number'"
 
-        var array = sql;
+        var array = [];
         var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
         var ds = initialContext.lookup("java:/AA");
         var conn = ds.getConnection();
         var sStmt = conn.prepareStatement(sql);
-        logDebug("SQL results: " + sql);
+        logDebug("SQL results: " + array);
         //only execute select statements
 		if (sql.toUpperCase().indexOf("SELECT") == 0) {
 			sStmt.executeQuery();
 			results = sStmt.getResultSet()
-			// while (results.next()){
-			// 		array.push( results.getString("VALUE_TO_NUM"));
-			// 	}
+			while (results.next()){
+					array.push( results.getString("VALUE_TO_NUM"));
+				}
 		sStmt.close();
 		conn.close();
 		if(array==null || array==undefined || array==""){
