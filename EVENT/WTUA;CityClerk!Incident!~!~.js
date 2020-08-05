@@ -33,7 +33,7 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Approved") {
 
 if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 
-	// Script 5125_CityClerk_Denial
-    //include("5125_CityClerk_Denial");
+	//Script 5125_CityClerk_Denial
+    include("5125_CityClerk_Denial");
 
 }

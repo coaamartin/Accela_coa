@@ -20,8 +20,8 @@ logDebug("appType: " + appTypeString);
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;jjking@auroragov.org";
-    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
-    //var vEmailTemplate = "CC READY FOR REVIEW";
+    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var vEmailTemplate = "CC DENIAL";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
@@ -29,7 +29,6 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var altId = capId.getCustomID();
-    logDebug("Testing to see if I get a temp record id before a new if statement. This is before. Altid: " + altId);
     if (recordApplicant != null) {
         var tParams = aa.util.newHashtable();
         tParams.put("$$todayDate$$", thisDate);
@@ -41,7 +40,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
         logDebug("EmailTo: " + emailTo);
         logDebug("Table Parameters: " + tParams);
         sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
-        //logDebug("End of Script 5122_CityClerk_notifications.js");
+        logDebug("End of Script 5125_CityClerk_denial.js");
     }
     else if (recordApplicant == null) {
         //logDebug("Email could not be sent as there is no Applicant email address.")
@@ -53,7 +52,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;JNAPPER@auroragov.org";
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
-    var vEmailTemplate = "CC READY FOR REVIEW";
+    var vEmailTemplate = "CC DENIAL";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
@@ -61,7 +60,6 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var altId = capId.getCustomID();
-    logDebug("Testing to see if I get a temp record id before a new if statement. This is before. Altid: " + altId);
     if (recordApplicant != null) {
         var tParams = aa.util.newHashtable();
         tParams.put("$$todayDate$$", thisDate);
@@ -73,7 +71,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
         logDebug("EmailTo: " + emailTo);
         logDebug("Table Parameters: " + tParams);
         sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
-        logDebug("End of Script 5122_CityClerk_notifications.js");
+        logDebug("End of Script 5125_CityClerk_denial.js");
     }
     else if (recordApplicant == null) {
         logDebug("Email could not be sent as there is no Applicant email address.")
@@ -85,7 +83,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;jjking@auroragov.org";
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
-    var vEmailTemplate = "CC READY FOR REVIEW";
+    var vEmailTemplate = "CC DENIAL";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
@@ -93,7 +91,6 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var altId = capId.getCustomID();
-    logDebug("Testing to see if I get a temp record id before a new if statement. This is before. Altid: " + altId);
     if (recordApplicant != null) {
         var tParams = aa.util.newHashtable();
         tParams.put("$$todayDate$$", thisDate);
@@ -105,7 +102,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
         logDebug("EmailTo: " + emailTo);
         logDebug("Table Parameters: " + tParams);
         sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
-        logDebug("End of Script 5122_CityClerk_notifications.js");
+        logDebug("End of Script 5125_CityClerk_denial.js");
     }
     else if (recordApplicant == null) {
         logDebug("Email could not be sent as there is no Applicant email address.")
