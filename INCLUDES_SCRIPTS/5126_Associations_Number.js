@@ -48,7 +48,7 @@ function getNeighborhoodNumber(){
         //Associations/Neighborhood/Association
         logDebug("Starting SQL script");
         //SELECT cast (MAX(cast(b1_checklist_comment as int))as varchar (20))FROM BCHCKBOXWHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number';
-        var sql = "cast (MAX(cast(b1_checklist_comment as int))as varchar (20)) " +
+        var sql = "SELECT cast (MAX(cast(b1_checklist_comment as int))as varchar (20)) " +
                   " FROM BCHCKBOX " +
                   " WHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number'"
 
