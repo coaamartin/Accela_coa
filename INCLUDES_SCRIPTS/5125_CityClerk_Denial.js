@@ -25,9 +25,9 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var emailTo = recordApplicant.getEmail();
-    var wfcomment = wfcomment; 
+    var wfcomment = wfcomment;
     var today = new Date();
-	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var tParams = aa.util.newHashtable();
     tParams.put("$$todayDate$$", thisDate);
     tParams.put("$$altid$$", capId.getCustomID());
@@ -40,10 +40,8 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
-    }
-    else if (recordApplicant == null) {
-        //logDebug("Email could not be sent as there is no Applicant email address.")
-    }
+} else if (recordApplicant == null) {
+    //logDebug("Email could not be sent as there is no Applicant email address.")
 }
 
 //Temp Use code
@@ -55,9 +53,9 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var emailTo = recordApplicant.getEmail();
-    var wfcomment = wfcomment; 
+    var wfcomment = wfcomment;
     var today = new Date();
-	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var tParams = aa.util.newHashtable();
     tParams.put("$$todayDate$$", thisDate);
     tParams.put("$$altid$$", capId.getCustomID());
@@ -70,10 +68,8 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
-    }
-    else if (recordApplicant == null) {
-        logDebug("Email could not be sent as there is no Applicant email address.")
-    }
+} else if (recordApplicant == null) {
+    logDebug("Email could not be sent as there is no Applicant email address.")
 }
 
 //Temp Sign code
@@ -85,9 +81,9 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var emailTo = recordApplicant.getEmail();
-    var wfcomment = wfcomment; 
+    var wfcomment = wfcomment;
     var today = new Date();
-	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var tParams = aa.util.newHashtable();
     tParams.put("$$todayDate$$", thisDate);
     tParams.put("$$altid$$", capId.getCustomID());
@@ -100,8 +96,6 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
-    }
-    else if (recordApplicant == null) {
-        logDebug("Email could not be sent as there is no Applicant email address.")
-    }
+} else if (recordApplicant == null) {
+    logDebug("Email could not be sent as there is no Applicant email address.")
 }
