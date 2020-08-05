@@ -1,6 +1,6 @@
 //Written by rprovinc   
 //
-//include("5124_CityClerk_denial.js");
+//include("5125_CityClerk_denial.js");
 
 //*****************************************************************************
 //Script ASA;CityClerk!~!~!~.js
@@ -41,7 +41,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
 } else if (recordApplicant == null) {
-    //logDebug("Email could not be sent as there is no Applicant email address.")
+    logDebug("Email could not be sent as there is no Applicant email address.")
 }
 
 //Temp Use code
