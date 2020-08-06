@@ -5,3 +5,7 @@ if (wfStatus == 'About to Expire') {
 if ((wfStatus == 'Fees Invoiced') && (appMatch('Licenses/Liquor/*/*') || appMatch('Licenses/Supplemental/*/*'))) {
 	include("2056_Send_License_Notification");
 }
+
+if (wfTask == 'Application Received' && wfStatus == 'Completed'){
+	include("2057_LicenseFees");
+}
