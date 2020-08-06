@@ -48,7 +48,7 @@ function getNeighborhoodNumber(){
         //Associations/Neighborhood/Association
         logDebug("Starting SQL script");
         //SELECT cast (MAX(cast(b1_checklist_comment as int))as varchar (20))FROM BCHCKBOXWHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number';
-        var sql = "SELECT convert (varchar (20), MAX(convert(int, b1_checklist_comment))) " +
+        var sql = "SELECT convert (varchar (20), MAX(convert(int, b1_checklist_comment))) as group_number " +
                   " FROM BCHCKBOX " +
                   " WHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number'"
 
@@ -64,7 +64,7 @@ function getNeighborhoodNumber(){
 			sStmt.executeQuery();
 			results = sStmt.getResultSet()
 			while (results.next()){
-					array.push( results.getString(""));
+					array.push( results.getString("group_number"));
 				}
 		sStmt.close();
 		conn.close();
