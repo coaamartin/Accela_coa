@@ -21,12 +21,12 @@ if (appMatch('Licenses/Supplemental/*/*')){
 		}
 		
 	if (AInfo['Type of License'] == 'Door Badge'){
-		updateFee('CL1010', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL105', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Door Sellers License'){
-		updateFee('CL1008', 'L_CLASS1', 'FINAL', 1, 'Y');
-		updateFee('CL1009', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1003', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1004', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 		
 //	if (AInfo['Type of License'] == 'Manufactured Home Park License'){
@@ -35,13 +35,13 @@ if (appMatch('Licenses/Supplemental/*/*')){
 //		}
 
 	if (AInfo['Type of License'] == 'Stable License'){
-		updateFee('CL1013', 'L_CLASS1', 'FINAL', 1, 'Y');
-		updateFee('CL1014', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1006', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1007', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 		
 	if (AInfo['Type of License'] == 'Trash Haulers License'){
-		updateFee('CL1018', 'L_CLASS1', 'FINAL', 1, 'Y');
-		updateFee('CL1019', 'L_CLASS1', 'FINAL', unit, 'Y');
+		updateFee('CL1008', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1009', 'L_CLASS1', 'FINAL', unit, 'Y');
 		}
 //End of Class 1 Fees
 /*
