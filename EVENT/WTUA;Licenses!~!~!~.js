@@ -6,6 +6,6 @@ if ((wfStatus == 'Fees Invoiced') && (appMatch('Licenses/Liquor/*/*') || appMatc
 	include("2056_Send_License_Notification");
 }
 
-if (wfTask == 'Application Received' && wfStatus == 'Completed'){
+if (wfTask == 'Application Received' && wfStatus == 'Complete'){
 	include("2057_LicenseFees");
 }
