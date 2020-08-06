@@ -57,14 +57,14 @@ function getNeighborhoodNumber(){
         var ds = initialContext.lookup("java:/AA");
         var conn = ds.getConnection();
         var sStmt = conn.prepareStatement(sql);
-        logDebug("SQL statement that is built: " + sStmt);
+        logDebug("SQL statement that is built: " + sql);
         logDebug("SQL results: " + array);
         //only execute select statements
 		if (sql.toUpperCase().indexOf("SELECT") == 0) {
 			sStmt.executeQuery();
 			results = sStmt.getResultSet()
 			while (results.next()){
-					array.push( results.getString("b1_checklist_comment"));
+					array.push( results.getString(""));
 				}
 		sStmt.close();
 		conn.close();
