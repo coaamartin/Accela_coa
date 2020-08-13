@@ -13,33 +13,30 @@
 appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
-logDebug("appType: " + appTypeString);
-var emailTo = recordApplicant.getEmail();
-logDebug("Email to: " + emailTo);
+logDebug("Check to see what type of record it running and then update app status, task status and send email of permit approval.")
+
 
 //Donation Bins code
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+    logDebug("Starting DB approval email and updating statues");
     include("5124_CityClerk_Approval");
     updateAppStatus("Approved","Status updated via script 5127_CityClerk_PRA.js");
-    //updateTask("Final Step", "Approved", "Updated via script 5127_CityClerk_PRA.js");				
-} else if (recordApplicant == null) {
-    logDebug("Email could not be sent as there is no Applicant email address.")
-}
+    updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");				
+} 
 
 //Temp Use code
 else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
+    logDebug("Starting TU approval email and updating statues");
     include("5124_CityClerk_Approval");
     updateAppStatus("Approved","Status updated via script");
-    //updateTask("Final Step", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
-} else if (recordApplicant == null) {
-    logDebug("Email could not be sent as there is no Applicant email address.")
+    updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
 }
 
 //Temp Sign code
 else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
+    logDebug("Starting TS approval email and updating statues");
     include("5124_CityClerk_Approval");
     updateAppStatus("Approved","Status updated via script");
-    //updateTask("Final Step", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
-} else if (recordApplicant == null) {
-    logDebug("Email could not be sent as there is no Applicant email address.")
+    updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
 }
+logDebug("End of 5127_CityClerk_PRA script"); 
