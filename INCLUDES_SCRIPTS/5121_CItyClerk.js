@@ -31,6 +31,27 @@ logDebug("appType: " + appTypeString);
         var thefee = "1";
         //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
         updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+
+        //Send Notification
+        logDebug("Starting to send notifications for fee processing");
+        //var vEmailTemplate = "CC Fee Pay";
+        var capAlias = cap.getCapModel().getAppTypeAlias();
+        var recordApplicant = getContactByType("Applicant", capId);
+        var firstName = recordApplicant.getFirstName();
+        var lastName = recordApplicant.getLastName();
+        var emailTo = recordApplicant.getEmail();
+        var today = new Date();
+        var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+        var tParams = aa.util.newHashtable();
+        tParams.put("$$todayDate$$", thisDate);
+        tParams.put("$$altid$$", capId.getCustomID());
+        tParams.put("$$Record Type$$", "Donation Bin Request");
+        tParams.put("$$capAlias$$", capAlias);
+        tParams.put("$$FirstName$$", firstName);
+        tParams.put("$$LastName$$", lastName);
+        logDebug("EmailTo: " + emailTo);
+        logDebug("Table Parameters: " + tParams);
+        sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
         logDebug("End of Script 5121_CityClerk.js");
     }
     //Temp Use code
@@ -41,6 +62,27 @@ logDebug("appType: " + appTypeString);
         var thefee = "1";
         //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
         updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+
+        //Send Notification for fee processing
+        logDebug("Starting to send notifications for fee processing");
+        //var vEmailTemplate = "CC Fee Pay";
+        var capAlias = cap.getCapModel().getAppTypeAlias();
+        var recordApplicant = getContactByType("Applicant", capId);
+        var firstName = recordApplicant.getFirstName();
+        var lastName = recordApplicant.getLastName();
+        var emailTo = recordApplicant.getEmail();
+        var today = new Date();
+        var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+        var tParams = aa.util.newHashtable();
+        tParams.put("$$todayDate$$", thisDate);
+        tParams.put("$$altid$$", capId.getCustomID());
+        tParams.put("$$Record Type$$", "Temp Use Permit");
+        tParams.put("$$capAlias$$", capAlias);
+        tParams.put("$$FirstName$$", firstName);
+        tParams.put("$$LastName$$", lastName);
+        logDebug("EmailTo: " + emailTo);
+        logDebug("Table Parameters: " + tParams);
+        sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
         logDebug("End of Script 5121_CityClerk.js");
     }
 
@@ -52,5 +94,26 @@ logDebug("appType: " + appTypeString);
         var thefee = "1";
         //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
         updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+
+        //Send Notification for fee processing
+        logDebug("Starting to send notifications for fee processing");
+        //var vEmailTemplate = "CC Fee Pay";
+        var capAlias = cap.getCapModel().getAppTypeAlias();
+        var recordApplicant = getContactByType("Applicant", capId);
+        var firstName = recordApplicant.getFirstName();
+        var lastName = recordApplicant.getLastName();
+        var emailTo = recordApplicant.getEmail();
+        var today = new Date();
+        var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+        var tParams = aa.util.newHashtable();
+        tParams.put("$$todayDate$$", thisDate);
+        tParams.put("$$altid$$", capId.getCustomID());
+        tParams.put("$$Record Type$$", "Temp Sign Permit");
+        tParams.put("$$capAlias$$", capAlias);
+        tParams.put("$$FirstName$$", firstName);
+        tParams.put("$$LastName$$", lastName);
+        logDebug("EmailTo: " + emailTo);
+        logDebug("Table Parameters: " + tParams);
+        sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
         logDebug("End of Script 5121_CityClerk.js");
     }

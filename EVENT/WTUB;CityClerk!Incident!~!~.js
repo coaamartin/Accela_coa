@@ -11,11 +11,11 @@
 //Created By: Rprovinc
 //******************************************************************************
 
-if(ifTracer(wfTask == "City Manager's Office Approval" && wfStatus == "Approved")){
-    //Script to verify that the payment has been processed
-    if(balanceDue > 0){
-        cancel = true;
-        showMessage = true;
-        comment("All fees need to be paid before issuing application");
-    }
-}
+// if(ifTracer(wfTask == "City Manager's Office Approval" && wfStatus == "Approved")){
+//     //Script to verify that the payment has been processed
+//     if(balanceDue > 0){
+//         cancel = true;
+//         showMessage = true;
+//         comment("All fees need to be paid before issuing application");
+//     }
+// }

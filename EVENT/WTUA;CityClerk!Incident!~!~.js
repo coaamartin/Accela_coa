@@ -11,12 +11,12 @@
 //Created By: Rprovinc
 //******************************************************************************
 logDebug("Starting WTUA;CityClerk!Incident!~!~.js");
-if (wfTask == "Planning Director Approval" && wfStatus == "Approved") {
+// if (wfTask == "Planning Director Approval" && wfStatus == "Approved") {
 
-	// Script 5121_CityClerk
-    include("5121_CityClerk");
+// 	// Script 5121_CityClerk
+//     //include("5121_CityClerk");
 	
-}
+// }
 //Need logic below that will send communication out to citizen if more info is needed to proceed
 if (wfStatus == "Additional Information Required") {
 
@@ -26,7 +26,8 @@ if (wfStatus == "Additional Information Required") {
 if (wfTask == "City Manager's Office Approval" && wfStatus == "Approved") {
 
 	// Script 5124_CityClerk
-    include("5124_CityClerk_Approval");
+    //include("5124_CityClerk_Approval");
+    include("5121_CityClerk");
 	
 }
 
