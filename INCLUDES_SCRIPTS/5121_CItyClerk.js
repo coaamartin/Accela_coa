@@ -34,7 +34,7 @@ logDebug("appType: " + appTypeString);
 
         //Send Notification
         logDebug("Starting to send notifications for fee processing");
-        //var vEmailTemplate = "CC Fee Pay";
+        var vEmailTemplate = "CC_FEE_ PAY";
         var capAlias = cap.getCapModel().getAppTypeAlias();
         var recordApplicant = getContactByType("Applicant", capId);
         var firstName = recordApplicant.getFirstName();
@@ -65,7 +65,7 @@ logDebug("appType: " + appTypeString);
 
         //Send Notification for fee processing
         logDebug("Starting to send notifications for fee processing");
-        //var vEmailTemplate = "CC Fee Pay";
+        var vEmailTemplate = "CC_FEE_ PAY";
         var capAlias = cap.getCapModel().getAppTypeAlias();
         var recordApplicant = getContactByType("Applicant", capId);
         var firstName = recordApplicant.getFirstName();
@@ -97,7 +97,7 @@ logDebug("appType: " + appTypeString);
 
         //Send Notification for fee processing
         logDebug("Starting to send notifications for fee processing");
-        //var vEmailTemplate = "CC Fee Pay";
+        var vEmailTemplate = "CC_FEE_ PAY";
         var capAlias = cap.getCapModel().getAppTypeAlias();
         var recordApplicant = getContactByType("Applicant", capId);
         var firstName = recordApplicant.getFirstName();
