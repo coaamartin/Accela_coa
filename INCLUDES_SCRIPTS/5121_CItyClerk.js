@@ -34,24 +34,25 @@ logDebug("appType: " + appTypeString);
 
         //Send Notification
         logDebug("Starting to send notifications for fee processing");
-        var vEmailTemplate = "CC_FEE_ PAY";
+        var emailTemplate = "CC_FEE_PAY";
         var capAlias = cap.getCapModel().getAppTypeAlias();
         var recordApplicant = getContactByType("Applicant", capId);
         var firstName = recordApplicant.getFirstName();
         var lastName = recordApplicant.getLastName();
         var emailTo = recordApplicant.getEmail();
+        var altId = capId.getCustomID();
         var today = new Date();
         var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
         var tParams = aa.util.newHashtable();
         tParams.put("$$todayDate$$", thisDate);
-        tParams.put("$$altid$$", capId.getCustomID());
+        tParams.put("$$altid$$", altId);
         tParams.put("$$Record Type$$", "Donation Bin Request");
         tParams.put("$$capAlias$$", capAlias);
         tParams.put("$$FirstName$$", firstName);
         tParams.put("$$LastName$$", lastName);
         logDebug("EmailTo: " + emailTo);
         logDebug("Table Parameters: " + tParams);
-        sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
+        sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
         logDebug("End of Script 5121_CityClerk.js");
     }
     //Temp Use code
@@ -65,8 +66,9 @@ logDebug("appType: " + appTypeString);
 
         //Send Notification for fee processing
         logDebug("Starting to send notifications for fee processing");
-        var vEmailTemplate = "CC_FEE_ PAY";
+        var emailTemplate = "CC_FEE_PAY";
         var capAlias = cap.getCapModel().getAppTypeAlias();
+        var altId = capId.getCustomID();
         var recordApplicant = getContactByType("Applicant", capId);
         var firstName = recordApplicant.getFirstName();
         var lastName = recordApplicant.getLastName();
@@ -75,14 +77,14 @@ logDebug("appType: " + appTypeString);
         var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
         var tParams = aa.util.newHashtable();
         tParams.put("$$todayDate$$", thisDate);
-        tParams.put("$$altid$$", capId.getCustomID());
+        tParams.put("$$altid$$", altId);
         tParams.put("$$Record Type$$", "Temp Use Permit");
         tParams.put("$$capAlias$$", capAlias);
         tParams.put("$$FirstName$$", firstName);
         tParams.put("$$LastName$$", lastName);
         logDebug("EmailTo: " + emailTo);
         logDebug("Table Parameters: " + tParams);
-        sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
+        sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
         logDebug("End of Script 5121_CityClerk.js");
     }
 
@@ -97,23 +99,24 @@ logDebug("appType: " + appTypeString);
 
         //Send Notification for fee processing
         logDebug("Starting to send notifications for fee processing");
-        var vEmailTemplate = "CC_FEE_ PAY";
+        var emailTemplate = "CC_FEE_PAY";
         var capAlias = cap.getCapModel().getAppTypeAlias();
         var recordApplicant = getContactByType("Applicant", capId);
         var firstName = recordApplicant.getFirstName();
         var lastName = recordApplicant.getLastName();
         var emailTo = recordApplicant.getEmail();
+        var altId = capId.getCustomID();
         var today = new Date();
         var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
         var tParams = aa.util.newHashtable();
         tParams.put("$$todayDate$$", thisDate);
-        tParams.put("$$altid$$", capId.getCustomID());
+        tParams.put("$$altid$$", altId);
         tParams.put("$$Record Type$$", "Temp Sign Permit");
         tParams.put("$$capAlias$$", capAlias);
         tParams.put("$$FirstName$$", firstName);
         tParams.put("$$LastName$$", lastName);
         logDebug("EmailTo: " + emailTo);
         logDebug("Table Parameters: " + tParams);
-        sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
+        sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
         logDebug("End of Script 5121_CityClerk.js");
     }
