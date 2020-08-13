@@ -5,7 +5,7 @@
 //*****************************************************************************
 //Script WTUA;CityClerk!Incident!~!~.js
 //Record Types:	CityClerk\Incident\*\* 
-//Event: 		WTUA
+//Event: 		PRA
 //Desc:			Going to send email communication to ciziten when permit is approved.
 //
 //Created By: Rprovinc

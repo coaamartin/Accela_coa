@@ -13,10 +13,10 @@
 
 logDebug("Starting PRA;CityClerk!Incident!~!~.js ");
 logDebug("Checking to see if City Manager's Office Approval status = Approved");
-if(ifTracer(wfTask == "City Manager's Office Approval" && wfStatus == "Approved")){
+if(wfTask == "City Manager's Office Approval" && wfStatus == "Approved"){
     //Script to verify that the payment has been processed
     logDebug("Checking balance")
-    if(balanceDue == 0){
+    if(balanceDue === 0){
         logDebug("Starting 5127_CityClerk_PRA.js");
         include("5127_CityClerk_PRA.js");
         logDebug("End of 5127_CityClerk_PRA.js");
