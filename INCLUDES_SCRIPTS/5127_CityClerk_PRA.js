@@ -13,13 +13,14 @@
 appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
-logDebug("Check to see what type of record it running and then update app status, task status and send email of permit approval.")
+logDebug("Check to see what type of record it running and then update app status, task status and send email of permit approval.");
 
 
 //Donation Bins code
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting DB approval email and updating statues");
     include("5124_CityClerk_Approval");
+    activateTask("Application Close");
     updateAppStatus("Approved","Status updated via script 5127_CityClerk_PRA.js");
     updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");				
 } 
@@ -28,7 +29,8 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
 else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting TU approval email and updating statues");
     include("5124_CityClerk_Approval");
-    updateAppStatus("Approved","Status updated via script");
+    activateTask("Application Close");
+    updateAppStatus("Approved","Status updated via script 5127_CityClerk_PRA.js");
     updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
 }
 
@@ -36,7 +38,8 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
 else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     logDebug("Starting TS approval email and updating statues");
     include("5124_CityClerk_Approval");
-    updateAppStatus("Approved","Status updated via script");
+    activateTask("Application Close");
+    updateAppStatus("Approved","Status updated via script 5127_CityClerk_PRA.js");
     updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
 }
 logDebug("End of 5127_CityClerk_PRA script"); 
