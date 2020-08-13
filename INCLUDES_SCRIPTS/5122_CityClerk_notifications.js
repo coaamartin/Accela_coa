@@ -40,7 +40,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
         tParams.put("$$LastName$$", lastName);
         logDebug("EmailTo: " + emailTo);
         logDebug("Table Parameters: " + tParams);
-        sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+        sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
         logDebug("End of Script 5122_CityClerk_notifications.js");
     }
     else if (recordApplicant == null) {
@@ -72,7 +72,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
         tParams.put("$$LastName$$", lastName);
         logDebug("EmailTo: " + emailTo);
         logDebug("Table Parameters: " + tParams);
-        sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+        sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
         logDebug("End of Script 5122_CityClerk_notifications.js");
     }
     else if (recordApplicant == null) {
@@ -104,7 +104,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
         tParams.put("$$LastName$$", lastName);
         logDebug("EmailTo: " + emailTo);
         logDebug("Table Parameters: " + tParams);
-        sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+        sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
         logDebug("End of Script 5122_CityClerk_notifications.js");
     }
     else if (recordApplicant == null) {
