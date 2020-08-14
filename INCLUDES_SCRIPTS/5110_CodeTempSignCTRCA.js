@@ -37,7 +37,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
         //eParams.put("$$signType$$",signType);	
         eParams.put("$$signAddress$$", signAddress);
         logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-        sendNotification("noreply@auroraco.gov", emailTo1, "", EmailTemplate, tParams, null);
+        sendNotification("noreply@auroraco.gov", emailTo1, "", EmailTemplate, eParams, null);
     }
     logDebug("Starting to send notifications");
     //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;jjking@auroragov.org";
@@ -87,7 +87,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
         eParams.put("$$signType$$", signType);
         eParams.put("$$signAddress$$", signAddress);
         logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-        sendNotification("noreply@auroraco.gov", emailTo1, "", EmailTemplate, tParams, null);
+        sendNotification("noreply@auroraco.gov", emailTo1, "", EmailTemplate, eParams, null);
     }
     logDebug("Starting to send notifications");
     //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;JNAPPER@auroragov.org";
@@ -137,7 +137,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
         //eParams.put("$$signType$$",signType);	
         eParams.put("$$signAddress$$", signAddress);
         logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
-        sendNotification("noreply@auroraco.gov", emailTo1, "", EmailTemplate, tParams, null);
+        sendNotification("noreply@auroraco.gov", emailTo1, "", EmailTemplate, eParams, null);
     }
     logDebug("Starting to send notifications");
     //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;jjking@auroragov.org";
