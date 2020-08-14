@@ -43,6 +43,7 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 //Each workflow has different steps. Going to need to call each record type seperatly. 
 
 //Below is the logic for donation bin
+logDebug("Starting to kick off the planning director email");
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     if ((wfTask == "Housing and Community Services" && wfStatus != "") && (wfTask == "City Managers Office" && wfStatus != "") && (wfTask == "Zoning" && wfStatus != "") &&
         (wfTask == "Risk Mgmt" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "")) {
@@ -73,3 +74,4 @@ if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
         logDebug("Finished sending notification to the Planning Director");
     }
 }
+logDebug("End of WTUA;CityClerk");
