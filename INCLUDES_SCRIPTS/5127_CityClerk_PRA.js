@@ -21,7 +21,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting DB approval email and updating statues");
     include("5124_CityClerk_Approval");
     activateTask("Application Close");
-    updateAppStatus("Approved","Status updated via script 5127_CityClerk_PRA.js");
+    updateAppStatus("PERMIT ISSUED","Status updated via script 5127_CityClerk_PRA.js");
     updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");				
 } 
 
@@ -30,7 +30,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting TU approval email and updating statues");
     include("5124_CityClerk_Approval");
     activateTask("Application Close");
-    updateAppStatus("Approved","Status updated via script 5127_CityClerk_PRA.js");
+    updateAppStatus("PERMIT ISSUED","Status updated via script 5127_CityClerk_PRA.js");
     updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
 }
 
@@ -39,7 +39,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     logDebug("Starting TS approval email and updating statues");
     include("5124_CityClerk_Approval");
     activateTask("Application Close");
-    updateAppStatus("Approved","Status updated via script 5127_CityClerk_PRA.js");
+    updateAppStatus("PERMIT ISSUED","Status updated via script 5127_CityClerk_PRA.js");
     updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
 }
 logDebug("End of 5127_CityClerk_PRA script"); 

@@ -19,3 +19,9 @@
 //         comment("All fees need to be paid before issuing application");
 //     }
 // }
+
+if(wfTask == "Planning Director Approval") {
+    logDebug("Starting to send notification to the Planning Director");
+    include("5122_CityClerk_Notifications");
+    logDebug("Finished sending notification to the Planning Director");
+}
