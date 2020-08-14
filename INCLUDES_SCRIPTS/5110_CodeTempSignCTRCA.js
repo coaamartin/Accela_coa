@@ -72,7 +72,7 @@ logDebug("Starting to send notifications");
 //Temp Use
 else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
 //Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
-var emailTemplate = "TEMP SIGN SUBMIT REVIEWERS";		
+var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";		
 var todayDate = new Date();
 var signType = AInfo["Type of Sign"];
 var signAddress = AInfo["Address where proposed sign will be displayed"];		
