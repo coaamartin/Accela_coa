@@ -25,9 +25,8 @@ logDebug("appType: " + appTypeString);
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo = recordApplicant.getEmail();
-    var appDate = "Test";
-    //var wfcomment = wfcomment; 
+    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var appDate = "Test"; 
     var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var tParams = aa.util.newHashtable();
@@ -37,11 +36,10 @@ logDebug("appType: " + appTypeString);
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
-    //tParams.put("$$wfComment$$", wfComment);
     logDebug("EmailTo: " + emailTo);
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
-    logDebug("End of Script 5124_CityClerk_Approval.js");
+    logDebug("End of Script 5128_CityClerk_CityManager_email.js");
 }
 
  //Temp Use code
@@ -52,9 +50,8 @@ logDebug("appType: " + appTypeString);
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo = recordApplicant.getEmail();
-    var appDate = "Test";
-    //var wfcomment = wfcomment; 
+    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var appDate = "Test"; 
     var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var tParams = aa.util.newHashtable();
@@ -64,11 +61,10 @@ logDebug("appType: " + appTypeString);
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
-    //tParams.put("$$wfComment$$", wfComment);
     logDebug("EmailTo: " + emailTo);
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
-    logDebug("End of Script 5124_CityClerk_Approval.js");
+    logDebug("End of Script 5128_CityClerk_CityManager_email.js");
 }
 
  //Temp Sign code
@@ -79,9 +75,8 @@ logDebug("appType: " + appTypeString);
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo = recordApplicant.getEmail();
+    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var appDate = "Test";
-    //var wfcomment = wfcomment; 
     var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var tParams = aa.util.newHashtable();
@@ -91,9 +86,8 @@ logDebug("appType: " + appTypeString);
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
-    //tParams.put("$$wfComment$$", wfComment);
     logDebug("EmailTo: " + emailTo);
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
-    logDebug("End of Script 5124_CityClerk_Approval.js");
+    logDebug("End of Script 5128_CityClerk_CityManager_email.js");
 }

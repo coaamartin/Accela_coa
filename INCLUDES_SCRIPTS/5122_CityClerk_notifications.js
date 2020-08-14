@@ -19,11 +19,9 @@ logDebug("appType: " + appTypeString);
 //Donation Bins code
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;jjking@auroragov.org";
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
-    //var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var today = new Date();
@@ -35,7 +33,6 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
         var tParams = aa.util.newHashtable();
         tParams.put("$$todayDate$$", thisDate);
         tParams.put("$$altid$$", altId);
-        tParams.put("$$Record Type$$", "Donation Bin");
         tParams.put("$$capAlias$$", capAlias);
         tParams.put("$$FirstName$$", firstName);
         tParams.put("$$LastName$$", lastName);
@@ -53,11 +50,9 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
 //Temp Use code
 else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;JNAPPER@auroragov.org";
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
-    //var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var today = new Date();
@@ -69,7 +64,6 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
         var tParams = aa.util.newHashtable();
         tParams.put("$$todayDate$$", thisDate);
         tParams.put("$$altid$$", altId);
-        tParams.put("$$Record Type$$", "Temp Use Permit");
         tParams.put("$$capAlias$$", capAlias);
         tParams.put("$$FirstName$$", firstName);
         tParams.put("$$LastName$$", lastName);
@@ -87,11 +81,9 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
 //Temp Sign code
 else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;jjking@auroragov.org";
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
-    //var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var today = new Date();
@@ -103,7 +95,6 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
         var tParams = aa.util.newHashtable();
         tParams.put("$$todayDate$$", thisDate);
         tParams.put("$$altid$$", altId);
-        tParams.put("$$Record Type$$", "Temp Sign Permit");
         tParams.put("$$capAlias$$", capAlias);
         tParams.put("$$FirstName$$", firstName);
         tParams.put("$$LastName$$", lastName);
