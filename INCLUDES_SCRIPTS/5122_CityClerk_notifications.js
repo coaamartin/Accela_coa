@@ -23,7 +23,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
-    var recordApplicant = getContactByType("Applicant", capId);
+    //var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var today = new Date();
@@ -57,7 +57,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
-    var recordApplicant = getContactByType("Applicant", capId);
+    //var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var today = new Date();
@@ -91,7 +91,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
-    var recordApplicant = getContactByType("Applicant", capId);
+    //var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
     var today = new Date();
