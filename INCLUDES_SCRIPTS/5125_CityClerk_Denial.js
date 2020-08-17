@@ -39,7 +39,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     tParams.put("$$wfComment$$", wfComment);
     logDebug("EmailTo: " + emailTo1);
     logDebug("Table Parameters: " + tParams);
-    sendNotification("noreply@auroraco.gov", emailTo1, "", vEmailTemplate, tParams, null);
+    sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
 } else if (recordApplicant == null) {
     logDebug("Email could not be sent as there is no Applicant email address.")
@@ -67,7 +67,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     tParams.put("$$wfComment$$", wfComment);
     logDebug("EmailTo: " + emailTo1);
     logDebug("Table Parameters: " + tParams);
-    sendNotification("noreply@auroraco.gov", emailTo1, "", vEmailTemplate, tParams, null);
+    sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
 } else if (recordApplicant == null) {
     logDebug("Email could not be sent as there is no Applicant email address.")
@@ -95,7 +95,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     tParams.put("$$wfComment$$", wfComment);
     logDebug("EmailTo: " + emailTo1);
     logDebug("Table Parameters: " + tParams);
-    sendNotification("noreply@auroraco.gov", emailTo1, "", vEmailTemplate, tParams, null);
+    sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5125-Denial")
 } else if (recordApplicant == null) {
     logDebug("Email could not be sent as there is no Applicant email address.")
