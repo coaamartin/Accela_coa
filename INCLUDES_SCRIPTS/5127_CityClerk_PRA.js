@@ -39,13 +39,6 @@ User code generally goes inside the try block below.
 /* your code here
 End script Tester header */
 
-
-// appTypeResult = cap.getCapType(); //create CapTypeModel object
-// appTypeString = appTypeResult.toString();
-// appTypeArray = appTypeString.split("/");
-//logDebug("Check to see what type of record it running and then update app status, task status and send email of permit approval.");
-
-
 //Donation Bins code
 if ("Application Close".equals(wfTask)) {
     logDebug("Current balance: " + balanceDue);
@@ -55,56 +48,12 @@ if ("Application Close".equals(wfTask)) {
     updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");
     include("5124_CityClerk_Approval");
 
-}	
- 			
-
-// //Temp Use code
-// else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
-//     logDebug("Starting TU approval email and updating statues");
-//     include("5124_CityClerk_Approval");
-//     activateTask("Application Close");
-//     updateAppStatus("PERMIT ISSUED","Status updated via script 5127_CityClerk_PRA.js");
-//     updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
-// }
-
-// //Temp Sign code
-// else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
-//     logDebug("Starting TS approval email and updating statues");
-//     include("5124_CityClerk_Approval");
-//     activateTask("Application Close");
-//     updateAppStatus("PERMIT ISSUED","Status updated via script 5127_CityClerk_PRA.js");
-//     updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");	
-// }
-
-// function getCapBalanceDue() {
-//     //Optional capId
-//     itemCap = capId;
-//     if (arguments.length == 1)
-//         itemCap = arguments[0];
-
-//     var feesArr = loadFees();
-//     if (!feesArr)
-//         return 0;
-
-//     var tot = 0;
-//     for (i in feesArr)
-//     {
-//     	//if (("INVOICED".equals(feesArr[i].status)) || (("NEW".equals(feesArr[i].status))))
-//     	//{
-//     		tot += (+feesArr[i].amount) - (+feesArr[i].amountPaid);
-         
-         
-//     	//}
-        
-//     }
-    
-//     return tot;
-// }
+}
 logDebug("End of 5127_CityClerk_PRA script"); 
 logDebug("---------------------> 5127_CityClerk_PRA.js ended.");
-aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+// aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 //Script Tester footer.  Comment this out when deploying.
-}	
+//}	
 
 // catch (err) 
 // {
