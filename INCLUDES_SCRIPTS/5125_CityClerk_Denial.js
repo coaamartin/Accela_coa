@@ -14,7 +14,7 @@ appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
-var emailTo = recordApplicant.getEmail();
+//var emailTo = recordApplicant.getEmail();
 logDebug("Email to: " + emailTo);
 
 //Donation Bins code
@@ -25,7 +25,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo1 = emailTo;
+    var emailTo1 = recordApplicant.getEmail();
     var wfcomment = wfcomment;
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -53,7 +53,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo1 = emailTo;
+    var emailTo1 = recordApplicant.getEmail();
     var wfcomment = wfcomment;
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -81,7 +81,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo1 = emailTo;
+    var emailTo1 = recordApplicant.getEmail();
     var wfcomment = wfcomment;
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
