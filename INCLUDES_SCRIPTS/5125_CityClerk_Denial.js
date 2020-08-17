@@ -15,7 +15,7 @@ appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
 //var emailTo = recordApplicant.getEmail();
-logDebug("Email to: " + emailTo);
+//logDebug("Email to: " + emailTo);
 
 //Donation Bins code
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
