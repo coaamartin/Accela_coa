@@ -44,17 +44,17 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 
 //Below is the logic for donation bin
 logDebug("Starting to kick off the planning director email");
-if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+// if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     if ((wfTask == "Housing and Community Services" && wfStatus != "") && (wfTask == "City Managers Office" && wfStatus != "") && (wfTask == "Zoning" && wfStatus != "") &&
         (wfTask == "Risk Mgmt" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
         logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
     }
-}
+// }
 
 //Below is the logic for Temp Use
-if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
+// if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     if ((wfTask == "Housing and Community Services" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "PROS" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && 
         (wfTask == "Zoning" && wfStatus != "") && (wfTask == "Library" && wfStatus != "") && (wfTask == "Water" && wfStatus != "") && (wfTask == "Communications" && wfStatus != "") && 
         (wfTask == "Police Patrol" && wfStatus != "") && (wfTask == "Police Traffic" && wfStatus != "") && (wfTask == "Fire" && wfStatus != "") && (wfTask == "Licensing" && wfStatus != "") && 
@@ -63,15 +63,15 @@ if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
     }
-}
+// }
 
 //Below is the logic for Temp Sign
-if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
+// if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     if ((wfTask == "Housing and Community Services" && wfStatus != "") && (wfTask == "City Managers Office" && wfStatus != "") && (wfTask == "Zoning" && wfStatus != "") &&
         (wfTask == "Risk Mgmt" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
         logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
     }
-}
+// }
 logDebug("End of WTUA;CityClerk");
