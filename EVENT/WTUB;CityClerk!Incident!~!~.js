@@ -11,6 +11,14 @@
 //Created By: Rprovinc
 //******************************************************************************
 
+if (wfTask == "Planning Director" && wfStatus == "In Progress") {
+    // && (wfTask == "City Managers Office" && wfStatus != "") && (wfTask == "Zoning" && wfStatus != "") &&
+    //     (wfTask == "Risk Mgmt" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
+        logDebug("Starting to send notification to the Planning Director");
+        include("5122_CityClerk_Notifications");
+        logDebug("Finished sending notification to the Planning Director");
+    }
+
 // if(ifTracer(wfTask == "City Manager's Office Approval" && wfStatus == "Approved")){
 //     //Script to verify that the payment has been processed
 //     if(balanceDue > 0){
