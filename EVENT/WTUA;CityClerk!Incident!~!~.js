@@ -81,10 +81,10 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
 //Below is the logic for Temp Use
 if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
-    if ((wfTask == "Housing and Community Services" && wfStatus != null) && (wfTask == "Finance" && wfStatus != null) && (wfTask == "PROS" && wfStatus != null) && (wfTask == "Pw Traffic" && wfStatus != null) && 
-        (wfTask == "Zoning" && wfStatus != null) && (wfTask == "Library" && wfStatus != null) && (wfTask == "Water" && wfStatus != null) && (wfTask == "Communications" && wfStatus != null) && 
-        (wfTask == "Police Patrol" && wfStatus != null) && (wfTask == "Police Traffic" && wfStatus != null) && (wfTask == "Fire" && wfStatus != null) && (wfTask == "Licensing" && wfStatus != null) && 
-        (wfTask == "Building" && wfStatus != null) && (wfTask == "Risk" && wfStatus != null) && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
+    if ((wfTask == "Housing and Community Services" && wfStatus == "Approved") && (wfTask == "Finance" && wfStatus == "Approved") && (wfTask == "PROS" && wfStatus == "Approved") && (wfTask == "Pw Traffic" && wfStatus == "Approved") && 
+        (wfTask == "Zoning" && wfStatus == "Approved") && (wfTask == "Library" && wfStatus == "Approved") && (wfTask == "Water" && wfStatus == "Approved") && (wfTask == "Communications" && wfStatus == "Approved") && 
+        (wfTask == "Police Patrol" && wfStatus == "Approved") && (wfTask == "Police Traffic" && wfStatus == "Approved") && (wfTask == "Fire" && wfStatus == "Approved") && (wfTask == "Licensing" && wfStatus == "Approved") && 
+        (wfTask == "Building" && wfStatus == "Approved") && (wfTask == "Risk" && wfStatus == "Approved") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
         logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
