@@ -132,112 +132,112 @@ if (appMatch('Licenses/Liquor/*/Renewal')){
 	var unit = AInfo['Unit'];
 	logDebug('Unit value is '+unit);
 	if (AInfo['Type of License'] == 'Arts'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 275, 'Y');
-		updateFee('LL0006', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 275, 'Y');
+		updateFee('LL006', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Bed and Breakfast'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 275, 'Y');
-		updateFee('LL0007', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 275, 'Y');
+		updateFee('LL007', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 	
 	if (AInfo['Type of License'] == 'Beer and Wine'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 450, 'Y');
-		updateFee('LL0008', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 450, 'Y');
+		updateFee('LL008', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Brew Pub'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 650, 'Y');
-		updateFee('LL0009', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 650, 'Y');
+		updateFee('LL009', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Club'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 275, 'Y');
-		updateFee('LL0011', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 275, 'Y');
+		updateFee('LL011', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Distillery Pub'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 650, 'Y');
-		updateFee('LL0012', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 650, 'Y');
+		updateFee('LL012', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Fermented Malt Beverage Off Premises'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 275, 'Y');
-		updateFee('LL0022', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 275, 'Y');
+		updateFee('LL022', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Fermented Malt Beverage On Premises'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 500, 'Y');
-		updateFee('LL0021', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 500, 'Y');
+		updateFee('LL021', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Hotel and Restaurant'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 650, 'Y');
-		updateFee('LL0013', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 650, 'Y');
+		updateFee('LL013', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Hotel and Restaurant with Optional Premise'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 650, 'Y');
-		updateFee('LL0013', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 650, 'Y');
+		updateFee('LL013', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Liquor Licensed Drugstore'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 400, 'Y');
-		updateFee('LL0014', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 400, 'Y');
+		updateFee('LL014', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Lodging and Entertainment'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 750, 'Y');
-		updateFee('LL0015', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 750, 'Y');
+		updateFee('LL015', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Racetrack Liquor'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 650, 'Y');
-		updateFee('LL0016', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 650, 'Y');
+		updateFee('LL016', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Retail Liquor Store'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 400, 'Y');
-		updateFee('LL0018', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 400, 'Y');
+		updateFee('LL018', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Tavern Liquor'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 650, 'Y');
-		updateFee('LL0019', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 650, 'Y');
+		updateFee('LL019', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Vintners Restaurant Liquor'){
-		updateFee('LL0002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL0005', 'L_LIQUOR', 'FINAL', 650, 'Y');
-		updateFee('LL0020', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 650, 'Y');
+		updateFee('LL020', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 }
 	//End of Liquor Renewal Fees
 
 	// Start of Common Consumption Fees
 if (appMatch('Licenses/Common Consumption/*/Renewal')){
-		updateFee('LL0029', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL029', 'L_LIQUOR', 'FINAL', 1, 'Y');
 }
 	// End of Common Consumption Fees
 
 // Start of Cabaret Fees
 if (appMatch('Licenses/Cabaret/*/Renewal')){
-		updateFee('LL0024', 'L_LIQUOR', 'FINAL', 1, 'Y');
-		updateFee('LL0025', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL024', 'L_LIQUOR', 'FINAL', 1, 'Y');
+		updateFee('LL025', 'L_LIQUOR', 'FINAL', 1, 'Y');
 }
 // End of Cabaret Fees
