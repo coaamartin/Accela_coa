@@ -11,9 +11,7 @@
 //Created By: Rprovinc
 //******************************************************************************
 
-if (wfTask == "Planning Director" && wfStatus == "In Progress") {
-    // && (wfTask == "City Managers Office" && wfStatus != "") && (wfTask == "Zoning" && wfStatus != "") &&
-    //     (wfTask == "Risk Mgmt" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
+if (wfTask == "Planning Director Approval" && wfStatus == "In Progress") {
         logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
