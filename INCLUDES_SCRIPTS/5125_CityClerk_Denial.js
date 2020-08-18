@@ -14,8 +14,15 @@ appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
-//var emailTo = recordApplicant.getEmail();
-//logDebug("Email to: " + emailTo);
+var recordApplicant = getContactByType("Applicant", capId);
+	var applicantEmail = null;
+	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+	} else {
+		applicantEmail = recordApplicant.getEmail();
+	}
+var emailTo = applicantEmail;
+logDebug("Email to: " + emailTo);
 
 //Donation Bins code
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
@@ -25,7 +32,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo1 = recordApplicant.getEmail();
+    var emailTo1 = emailTo;
     var wfcomment = wfcomment;
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -53,7 +60,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo1 = recordApplicant.getEmail();
+    var emailTo1 = emailTo;
     var wfcomment = wfcomment;
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -81,7 +88,7 @@ else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
-    var emailTo1 = recordApplicant.getEmail();
+    var emailTo1 = emailTo;
     var wfcomment = wfcomment;
     var today = new Date();
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
