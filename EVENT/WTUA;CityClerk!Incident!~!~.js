@@ -72,9 +72,11 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
     if ((wfTask == "Housing and Community Services" || wfTask == "City Managers Office" || wfTask == "Zoning" || wfTask == "Risk Mgmt" || wfTask == "Pw Traffic" 
     ||wfTask == "Finance") && wfStatus == "Approved") {
-        logDebug("Starting to send notification to the Planning Director");
-        include("5122_CityClerk_Notifications");
-        logDebug("Finished sending notification to the Planning Director");
+        if (wfTask == "City Manager's Office Approval" && wfStatus == ""){
+            logDebug("Starting to send notification to the Planning Director");
+            include("5122_CityClerk_Notifications");
+            logDebug("Finished sending notification to the Planning Director");
+        }
     }
  }
 
@@ -85,9 +87,11 @@ if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
         wfTask == "Zoning" || wfTask == "Library" || wfTask == "Water" || wfTask == "Communications" ||
         wfTask == "Police Patrol" || wfTask == "Police Traffic" || wfTask == "Fire" || wfTask == "Licensing" ||
         wfTask == "Building" || wfTask == "Risk") && wfStatus == "Approved") {
-        logDebug("Starting to send notification to the Planning Director");
-        include("5122_CityClerk_Notifications");
-        logDebug("Finished sending notification to the Planning Director");
+            if (wfTask == "City Manager's Office Approval" && wfStatus == ""){
+                logDebug("Starting to send notification to the Planning Director");
+                include("5122_CityClerk_Notifications");
+                logDebug("Finished sending notification to the Planning Director");
+            }
     }
  }
 
