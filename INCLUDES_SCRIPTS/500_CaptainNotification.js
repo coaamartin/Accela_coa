@@ -1,5 +1,12 @@
+if ("Station Captain Review".equals(wfTask) && "Denied".equals(wfStatus)){
+    var inspector = getInspector("Fire Preplan");
+    scheduleInspection("Fire Preplan",0,inspector, 0, "Scheduled due to previous task: " + wfTask + " status of: "+wfStatus);
+}
+
 if ("Battalion Chief Review".equals(wfTask) && "Denied".equals(wfStatus))
 {
+    var inspector = getInspector("Fire Preplan");
+    scheduleInspection("Fire Preplan",0,inspector, 0, "Scheduled due to previous task: " + wfTask + " status of: "+wfStatus);
     var taskHistoryArray = getTaskHistory("Station Review");
     var approvalUser = null;
     for (var x in taskHistoryArray)
