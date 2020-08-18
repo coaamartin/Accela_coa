@@ -1,12 +1,8 @@
-//Written by rprovinc   
-//
-//include("5121_CityClerk.js");
-
 //*****************************************************************************
 //Script WTUA;CityClerk!Incident!~!~.js
 //Record Types:	CityClerk\Incident\*\* 
-//Event: 		ASA
-//Desc:			Going to update the fee when ever a CityClerk record is open and Non-Profit is set to No.
+//Event: 		WTUA
+//Desc:			
 //
 //Created By: Rprovinc
 //******************************************************************************
@@ -72,9 +68,8 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 //Each workflow has different steps. Going to need to call each record type seperatly. 
 
 //Below is the logic for donation bin
-
 // if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
-    if (wfTask == "Planning Director Approval") {
+    if (ifTracer(wfTask == "Planning Director Approval" && wfStatus == "In Progress", "wfTask == Planning Director Approval && wfStatus == In Progress")) {
     // && (wfTask == "City Managers Office" && wfStatus != "") && (wfTask == "Zoning" && wfStatus != "") &&
     //     (wfTask == "Risk Mgmt" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
         logDebug("Starting to send notification to the Planning Director");

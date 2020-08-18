@@ -11,8 +11,8 @@
 //Created By: Rprovinc
 //******************************************************************************
 
-if (wfTask == "Planning Director Approval" && wfStatus == "In Progress") {
-        logDebug("Starting to send notification to the Planning Director");
-        include("5122_CityClerk_Notifications");
-        logDebug("Finished sending notification to the Planning Director");
-    }
+// if (wfTask == "Planning Director Approval" && wfStatus == "In Progress") {
+//         logDebug("Starting to send notification to the Planning Director");
+//         include("5122_CityClerk_Notifications");
+//         logDebug("Finished sending notification to the Planning Director");
+//     }
