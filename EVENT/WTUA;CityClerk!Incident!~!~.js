@@ -96,10 +96,12 @@ if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
     if ((wfTask == "Housing and Community Services" || wfTask == "City Managers Office" || wfTask == "Zoning" || wfTask == "Risk Mgmt" || 
     wfTask == "Pw Traffic" || wfTask == "Finance") && wfStatus == "Approved") {
+        if (wfTask == "City Manager's Office Approval" && wfStatus == ""){
         logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
     }
+}
 }
 logDebug("End of WTUA;CityClerk");
 
