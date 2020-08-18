@@ -70,8 +70,8 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 //Below is the logic for donation bin
 if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
-    if ((wfTask == "Housing and Community Services" && wfStatus != null) && (wfTask == "City Managers Office" && wfStatus != null) && (wfTask == "Zoning" && wfStatus != null) &&
-    (wfTask == "Risk Mgmt" && wfStatus != null) && (wfTask == "Pw Traffic" && wfStatus != null) && (wfTask == "Finance" && wfStatus != null) && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
+    if ((wfTask == "Housing and Community Services" || wfTask == "City Managers Office" || wfTask == "Zoning" || wfTask == "Risk Mgmt" || wfTask == "Pw Traffic" 
+    ||wfTask == "Finance") && wfStatus == "Approved") {
         logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
@@ -82,7 +82,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
 if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
     if ((wfTask == "Housing and Community Services" || wfTask == "Finance" || wfTask == "PROS" || wfTask == "Pw Traffic" || 
-    wfTask == "Zoning" || wfTask == "Library" || wfTask == "Water" || wfTask == "Communications" ||
+        wfTask == "Zoning" || wfTask == "Library" || wfTask == "Water" || wfTask == "Communications" ||
         wfTask == "Police Patrol" || wfTask == "Police Traffic" || wfTask == "Fire" || wfTask == "Licensing" ||
         wfTask == "Building" || wfTask == "Risk") && wfStatus == "Approved") {
         logDebug("Starting to send notification to the Planning Director");
@@ -94,8 +94,8 @@ if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
 // //Below is the logic for Temp Sign
 if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
-    if ((wfTask == "Housing and Community Services" && wfStatus != null) && (wfTask == "City Managers Office" && wfStatus != null) && (wfTask == "Zoning" && wfStatus != null) &&
-        (wfTask == "Risk Mgmt" && wfStatus != null) && (wfTask == "Pw Traffic" && wfStatus != null) && (wfTask == "Finance" && wfStatus != null) && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
+    if ((wfTask == "Housing and Community Services" || wfTask == "City Managers Office" || wfTask == "Zoning" || wfTask == "Risk Mgmt" || 
+    wfTask == "Pw Traffic" || wfTask == "Finance") && wfStatus == "Approved") {
         logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
