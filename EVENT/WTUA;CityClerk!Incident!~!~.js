@@ -81,10 +81,10 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
 //Below is the logic for Temp Use
 if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
-    if ((wfTask == "Housing and Community Services" && wfStatus == "Approved") && (wfTask == "Finance" && wfStatus == "Approved") && (wfTask == "PROS" && wfStatus == "Approved") && (wfTask == "Pw Traffic" && wfStatus == "Approved") && 
-        (wfTask == "Zoning" && wfStatus == "Approved") && (wfTask == "Library" && wfStatus == "Approved") && (wfTask == "Water" && wfStatus == "Approved") && (wfTask == "Communications" && wfStatus == "Approved") && 
-        (wfTask == "Police Patrol" && wfStatus == "Approved") && (wfTask == "Police Traffic" && wfStatus == "Approved") && (wfTask == "Fire" && wfStatus == "Approved") && (wfTask == "Licensing" && wfStatus == "Approved") && 
-        (wfTask == "Building" && wfStatus == "Approved") && (wfTask == "Risk" && wfStatus == "Approved") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
+    if ((wfTask == "Housing and Community Services" || wfTask == "Finance" || wfTask == "PROS" || wfTask == "Pw Traffic" || 
+    wfTask == "Zoning" || wfTask == "Library" || wfTask == "Water" || wfTask == "Communications" ||
+        wfTask == "Police Patrol" || wfTask == "Police Traffic" || wfTask == "Fire" || wfTask == "Licensing" ||
+        wfTask == "Building" || wfTask == "Risk") && wfStatus == "Approved") {
         logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
