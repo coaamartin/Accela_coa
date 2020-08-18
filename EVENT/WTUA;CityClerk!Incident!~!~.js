@@ -68,37 +68,39 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 //Each workflow has different steps. Going to need to call each record type seperatly. 
 
 //Below is the logic for donation bin
-// if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
-    if (ifTracer(wfTask == "Planning Director Approval", "wfTask == Planning Director Approval")) {
-    // && (wfTask == "City Managers Office" && wfStatus != "") && (wfTask == "Zoning" && wfStatus != "") &&
-    //     (wfTask == "Risk Mgmt" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
+if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+    logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
+    if ((wfTask == "Housing and Community Services" && wfStatus != null) && (wfTask == "City Managers Office" && wfStatus != null) && (wfTask == "Zoning" && wfStatus != null) &&
+    (wfTask == "Risk Mgmt" && wfStatus != null) && (wfTask == "Pw Traffic" && wfStatus != null) && (wfTask == "Finance" && wfStatus != null) && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
         logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the Planning Director");
     }
-// }
+ }
 
 //Below is the logic for Temp Use
-// if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
-//     if ((wfTask == "Housing and Community Services" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "PROS" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && 
-//         (wfTask == "Zoning" && wfStatus != "") && (wfTask == "Library" && wfStatus != "") && (wfTask == "Water" && wfStatus != "") && (wfTask == "Communications" && wfStatus != "") && 
-//         (wfTask == "Police Patrol" && wfStatus != "") && (wfTask == "Police Traffic" && wfStatus != "") && (wfTask == "Fire" && wfStatus != "") && (wfTask == "Licensing" && wfStatus != "") && 
-//         (wfTask == "Building" && wfStatus != "") && (wfTask == "Risk" && wfStatus != "") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
-//         logDebug("Starting to send notification to the Planning Director");
-//         include("5122_CityClerk_Notifications");
-//         logDebug("Finished sending notification to the Planning Director");
-//     }
-// // }
+if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
+    logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
+    if ((wfTask == "Housing and Community Services" && wfStatus != null) && (wfTask == "Finance" && wfStatus != null) && (wfTask == "PROS" && wfStatus != null) && (wfTask == "Pw Traffic" && wfStatus != null) && 
+        (wfTask == "Zoning" && wfStatus != null) && (wfTask == "Library" && wfStatus != null) && (wfTask == "Water" && wfStatus != null) && (wfTask == "Communications" && wfStatus != null) && 
+        (wfTask == "Police Patrol" && wfStatus != null) && (wfTask == "Police Traffic" && wfStatus != null) && (wfTask == "Fire" && wfStatus != null) && (wfTask == "Licensing" && wfStatus != null) && 
+        (wfTask == "Building" && wfStatus != null) && (wfTask == "Risk" && wfStatus != null) && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
+        logDebug("Starting to send notification to the Planning Director");
+        include("5122_CityClerk_Notifications");
+        logDebug("Finished sending notification to the Planning Director");
+    }
+ }
 
 // //Below is the logic for Temp Sign
-// // if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
-//     if ((wfTask == "Housing and Community Services" && wfStatus != "") && (wfTask == "City Managers Office" && wfStatus != "") && (wfTask == "Zoning" && wfStatus != "") &&
-//         (wfTask == "Risk Mgmt" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
-//         logDebug("Starting to send notification to the Planning Director");
-//         include("5122_CityClerk_Notifications");
-//         logDebug("Finished sending notification to the Planning Director");
-//     }
-// }
+if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
+    logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
+    if ((wfTask == "Housing and Community Services" && wfStatus != null) && (wfTask == "City Managers Office" && wfStatus != null) && (wfTask == "Zoning" && wfStatus != null) &&
+        (wfTask == "Risk Mgmt" && wfStatus != null) && (wfTask == "Pw Traffic" && wfStatus != null) && (wfTask == "Finance" && wfStatus != null) && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
+        logDebug("Starting to send notification to the Planning Director");
+        include("5122_CityClerk_Notifications");
+        logDebug("Finished sending notification to the Planning Director");
+    }
+}
 logDebug("End of WTUA;CityClerk");
 
 // aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
