@@ -3,4 +3,7 @@
 // script16_FillApplicationNameWhenEmpty();
 var newBusinessName= getAppSpecific("Business Name");
 logDebug("Updating Application Name field with Business Name of: " + newBusinessName);
-editAppName(newBusinessName); 
+if(newBusinessName) editAppName(newBusinessName); 
+
+//SWAKIL 07.28.2020
+include("501_AutoSchedulePrePlanInsp");
