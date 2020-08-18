@@ -28,7 +28,7 @@ if ("Battalion Chief Review".equals(wfTask) && "Denied".equals(wfStatus))
         {
             var template = "STATION_CAPTAIN_NOTIFICATION";
             var eparams = aa.util.newHashtable();
-            eparams.put("$$capid$$", capId.getCustomID());
+            eparams.put("$$capid$$", capId.getCustomID() + "");
             if (wfComment)
                 eparams.put("$$comments$$", wfComment);
             sendNotification("", approvalUserEmail, "", template, eparams, null);
