@@ -74,7 +74,7 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 //Below is the logic for donation bin
 
 // if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
-    if (wfTask == "Planning Director" && wfStatus == "In Progress") {
+    if (wfTask == "Planning Director Approval" && wfStatus == "In Progress") {
     // && (wfTask == "City Managers Office" && wfStatus != "") && (wfTask == "Zoning" && wfStatus != "") &&
     //     (wfTask == "Risk Mgmt" && wfStatus != "") && (wfTask == "Pw Traffic" && wfStatus != "") && (wfTask == "Finance" && wfStatus != "") && (wfTask == "City Manager's Office Approval" && wfStatus == "")) {
         logDebug("Starting to send notification to the Planning Director");
