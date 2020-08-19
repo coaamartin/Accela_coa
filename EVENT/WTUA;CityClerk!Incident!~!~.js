@@ -61,7 +61,8 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 
     //Script 5125_CityClerk_Denial
     include("5125_CityClerk_Denial");
-
+    updateAppStatus("DENIED", "Script 5125_CityClerk_Denial");	
+    closeAllTasks(capId, "");	
 }
 
 //Below is going to be logic for an email to be sent to the Planning Director after all other WFtasks have been statused with anything or to not empty status.
