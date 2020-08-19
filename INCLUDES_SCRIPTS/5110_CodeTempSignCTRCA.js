@@ -24,6 +24,7 @@ aa.env.setValue("eventType","Batch Process");
 if("CityClerk/Incident/DonationBin/NA".equals(appTypeString)){
 var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";		
 var todayDate = new Date();
+var altId = capId.getCustomID();
 //var signType = AInfo["Type of Sign"];
 var signAddress = AInfo["Address where proposed sign will be displayed"];
 if (emailTemplate != null && emailTemplate != "") {
@@ -31,11 +32,11 @@ if (emailTemplate != null && emailTemplate != "") {
 	eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org");			
 	eParams.put("$$todayDate$$", todayDate);
-	eParams.put("$$altid$$",capId.getCustomID());
+	eParams.put("$$altid$$", altId);
 	eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 	//eParams.put("$$signType$$",signType);	
 	eParams.put("$$signAddress$$",signAddress);			
-	logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+	logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
 	emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 }
 logDebug("Starting to send notifications");
@@ -74,6 +75,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
 //Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
 var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";		
 var todayDate = new Date();
+var altId = capId.getCustomID();
 var signType = AInfo["Type of Sign"];
 var signAddress = AInfo["Address where proposed sign will be displayed"];		
 if (emailTemplate != null && emailTemplate != "") {
@@ -81,11 +83,11 @@ if (emailTemplate != null && emailTemplate != "") {
 	eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org");			
 	eParams.put("$$todayDate$$", todayDate);
-	eParams.put("$$altid$$",capId.getCustomID());
-	eParams.put("$$capAlias$$",cap.getCapType().getAlias());
-	eParams.put("$$signType$$",signType);	
+	eParams.put("$$altid$$", altId);
+	eParams.put("$$capAlias$$", cap.getCapType().getAlias());
+	eParams.put("$$signType$$", signType);	
 	eParams.put("$$signAddress$$",signAddress);			
-	logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+	logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
 	emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 }
 logDebug("Starting to send notifications");
@@ -123,7 +125,8 @@ logDebug("Starting to send notifications");
 else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
 	//Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
 	var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";		
-	var todayDate = new Date();
+    var todayDate = new Date();
+    var altId = capId.getCustomID();
 	//var signType = AInfo["Type of Sign"];
 	var signAddress = AInfo["Address where proposed sign will be displayed"];	
 if (emailTemplate != null && emailTemplate != "") {
@@ -131,11 +134,11 @@ if (emailTemplate != null && emailTemplate != "") {
 	eParams = aa.util.newHashtable();
 	eParams.put("$$ContactEmail$$", "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org");			
 	eParams.put("$$todayDate$$", todayDate);
-	eParams.put("$$altid$$",capId.getCustomID());
+	eParams.put("$$altid$$", altId);
 	eParams.put("$$capAlias$$",cap.getCapType().getAlias());
 	//eParams.put("$$signType$$",signType);	
 	eParams.put("$$signAddress$$",signAddress);			
-	logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
+	logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
 	emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
 }
 logDebug("Starting to send notifications");
