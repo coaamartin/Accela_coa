@@ -6,7 +6,8 @@ logDebug("Starting DB approval email and updating statues");
 //Check balance and update task
 if (balanceDue == 0){
 updateAppStatus("Approved","Status updated via script 5127_CityClerk_PRA.js");
-updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");
+updateTask("Application Close ", "Approved", "Updated via script 5127_CityClerk_PRA.js");
+closeAllTasks(capId, "");
 include("5124_CityClerk_Approval");
 logDebug("End of 5127_CityClerk_PRA script"); 
 logDebug("---------------------> 5127_CityClerk_PRA.js ended.");
