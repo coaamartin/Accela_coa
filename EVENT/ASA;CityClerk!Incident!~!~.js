@@ -6,7 +6,7 @@ var altId2 = capId.getCustomID();
 logDebug("altId: " + altId);
 logDebug("altId2: " + altId2);
 
-if (capID.equals("%TMP%")) {
+if (altId == "*tmp*") {
 logDebug("Going to have the CTRCA event trigger.");
 }
 else {
