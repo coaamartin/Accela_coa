@@ -9,5 +9,5 @@ if (ifTracer(altId2.equals("*TMP*"))) {
      logDebug("Going to have the CTRCA event trigger.");
 } else {
     logDebug("Going to have 5110 script tirgger.")
-   //include("5110_CodeTempSignCTRCA");
+    include("5110_CodeTempSignCTRCA");
 }
