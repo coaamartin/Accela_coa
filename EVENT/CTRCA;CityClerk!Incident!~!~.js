@@ -1,2 +1,2 @@
 logDebug("CTRCA:CityClerk/Incident/NA/NA");
-// include("5110_CodeTempSignCTRCA");
+include("5110_CodeTempSignCTRCA");
