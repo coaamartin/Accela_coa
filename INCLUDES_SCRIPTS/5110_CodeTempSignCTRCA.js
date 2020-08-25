@@ -25,11 +25,11 @@ function checkACARun() {
     var altId2 = capId.getCustomID();
     logDebug("altId: " + altId);
     logDebug("altId2: " + altId2);
-    var tempCheck = altId.includes("TMP");
-    var tempCheck2 = altId2.includes("TMP");
+    var tempCheck = altId.indexOf("TMP");
+    var tempCheck2 = altId2.indexOf("TMP");
     logDebug("TempCheck: " + tempCheck);
     logDebug("TempCheck: " + tempCheck2);
-    if (tempCheck === true) {
+    if (tempCheck > 1) {
         logDebug("Temp check came back with: " + tempCheck);
         logDebug("altId: " + altId);
         logDebug("altId2: " + altId2);
