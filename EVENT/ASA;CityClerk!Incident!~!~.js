@@ -76,8 +76,8 @@ var altId = capId;
 var altId2 = capId.getCustomID();
 logDebug("altId: " + altId);
 logDebug("altId2: " + altId2);
-var tempCheck = altId.substr(2, 3);
-var tempCheck2 = altId2.substr(2, 3);
+var tempCheck = altId.toString().substr(2, 3);
+var tempCheck2 = altId2.toString().substr(2, 3);
 logDebug("TempCheck: " + tempCheck);
 logDebug("TempCheck: " + tempCheck2);
 if (tempCheck === "TMP"){
