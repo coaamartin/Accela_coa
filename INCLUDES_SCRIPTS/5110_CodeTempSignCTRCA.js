@@ -31,7 +31,7 @@ function checkACARun() {
     var tempCheck2 = altIdString2.indexOf("TMP");
     logDebug("TempCheck: " + tempCheck);
     logDebug("TempCheck: " + tempCheck2);
-    if (tempCheck > 1) {
+    if (tempCheck2 > 1) {
         logDebug("Temp check came back with: " + tempCheck);
         logDebug("altId: " + altId);
         logDebug("altId2: " + altId2);
