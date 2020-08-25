@@ -1,12 +1,17 @@
 logDebug("ASA:CityClerk/Incident/NA/NA");
 include("5110_CodeTempSignCTRCA");
+checkACARun();
+
+function checkACARun() {
 var altId = capId;
 var altId2 = capId.getCustomID();
-var tempCheck = altId.indexOf("TMP");
+var tempCheck = altId.substring(2, 5);
 logDebug("TempCheck: " + tempCheck);
-if (tempCheck.equals(1)){
+
+
+if (tempCheck === "TMP"){
     logDebug("Temp check came back with: " + tempCheck);
-    bug("altId: " + altId);
+    logDebug("altId: " + altId);
     logDebug("altId2: " + altId2);
 } else {
     logDebug("Going to have 5110 script tirgger.")
@@ -22,3 +27,4 @@ if (tempCheck.equals(1)){
 // } else {
 //     
 // }
+}
