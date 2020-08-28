@@ -7,7 +7,7 @@
 
 
 if (appMatch('Licenses/Supplemental/*/*')){
-	var unit = AInfo['Unit'];
+	var unit = AInfo['Number of Units'];
 	logDebug('Unit value is '+unit);
 	//Start of Class 1 Fees
 	if (AInfo['Type of License'] == 'Amusement Device Distributor'){
