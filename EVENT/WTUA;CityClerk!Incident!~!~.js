@@ -69,16 +69,28 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 //Each workflow has different steps. Going to need to call each record type seperatly. 
 
 //Below is the logic for donation bin
-if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
-    logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
-    if ((wfTask == "Housing and Community Services" || wfTask == "City Managers Office" || wfTask == "Zoning" || wfTask == "Risk Mgmt" || wfTask == "Pw Traffic" ||
-            wfTask == "Finance") && wfStatus == "Approved") {
-        logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
-        logDebug("Starting to send notification to the Planning Director");
-        include("5122_CityClerk_Notifications");
-        logDebug("Finished sending notification to the Planning Director");
-    }
-}
+// if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+//     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
+//     if ((wfTask == "Housing and Community Services" || wfTask == "City Managers Office" || wfTask == "Zoning" || wfTask == "Risk Mgmt" || wfTask == "Pw Traffic" ||
+//             wfTask == "Finance") && wfStatus == "Approved") {
+//         logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
+//         logDebug("Starting to send notification to the Planning Director");
+//         include("5122_CityClerk_Notifications");
+//         logDebug("Finished sending notification to the Planning Director");
+                
+//     }
+//     }
+
+    if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+        logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
+        if (isTaskActive("Planning Director Approval")) {
+            logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
+            logDebug("Starting to send notification to the Planning Director");
+            include("5122_CityClerk_Notifications");
+            logDebug("Finished sending notification to the Planning Director");
+                    
+        }
+        }
 
 //Below is the logic for Temp Use
 if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
