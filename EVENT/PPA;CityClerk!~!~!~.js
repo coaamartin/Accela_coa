@@ -32,7 +32,7 @@ logDebug("Eparams for async envent" + vEParams);
 //emailContacts("All", vEmailTemplate, vEParams, "", "");
 var vAsyncScript = "RUN_ARBORIST_LICENSE_REPORT";
 var envParameters = aa.util.newHashMap();
-envParameters.put("CapId", vLicenseID);
+envParameters.put("CapId", altID);
 aa.runAsyncScript(vAsyncScript, envParameters);
 }
 logDebug("End of PPA;CityClerk!Incident!~!~.js ");
