@@ -19,6 +19,9 @@ logDebug("Starting to kick off ASYNC event to attach cert to record");
 var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
 var vEParams = aa.util.newHashtable();
 var altID = capId.getCustomID();
+vExpDate = new Date();
+// All licenses expire on 12/31, if after march assume next year
+	vNewExpDate = new Date(vExpDate.getFullYear() + (vExpDate.getMonth > 2 ? 1 : 0), 11, 31);
 addParameter(vEParams, "$$LicenseType$$", "Arborist Contractor License");
 addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
 //addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
