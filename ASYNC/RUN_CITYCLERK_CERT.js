@@ -1,4 +1,4 @@
-//RUN_ARBORIST_LICENSE_REPORT
+//RUN_ACITYCLERK_CERT.js
 function getScriptText(vScriptName){
     vScriptName = vScriptName.toUpperCase();
     var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();

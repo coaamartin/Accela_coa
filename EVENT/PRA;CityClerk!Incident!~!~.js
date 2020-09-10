@@ -38,7 +38,7 @@ if (balanceDue == 0) {
     addParameter(vEParams, "$$ApplicationID$$", altID);
     addParameter(vEParams, "$$altID$$", altID);
     addParameter(vEParams, "$$acaURL$$", acaSite);
-    logDebug("Eparams for async envent"):
+    logDebug("Eparams for async envent");
     //emailContacts("All", vEmailTemplate, vEParams, "", "");
     var vAsyncScript = "RUN_ARBORIST_LICENSE_REPORT";
     var envParameters = aa.util.newHashMap();
