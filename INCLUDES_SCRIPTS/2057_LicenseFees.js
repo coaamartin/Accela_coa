@@ -12,12 +12,11 @@ if (appMatch('Licenses/Supplemental/*/*')){
 	//Start of Class 1 Fees
 	if (AInfo['Type of License'] == 'Amusement Device Distributor'){
 		updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
-        updateFee('CL1021', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 
 	if (AInfo['Type of License'] == 'Coin Amusement Device'){
 		updateFee('CL1002', 'L_CLASS1', 'FINAL', unit, 'Y');
-        updateFee('CL1021', 'L_CLASS1', 'FINAL', 1, 'Y');
+        updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 		
 	if (AInfo['Type of License'] == 'Door Badge'){
