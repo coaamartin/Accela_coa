@@ -103,15 +103,18 @@ function doSQL(sql) {
 		rSet.close();
 		sStmt.close();
 		conn.close();
-		return array;
+        return array;
+        logDebug("The highest neighborhood number is: " + array);
+        var hoaNumber = array++;
+        logDebug("New HOA number is: " + hoaNumber);
 		}
 		} catch (err) {
 		aa.print(err.message);
 	}
 }
-logDebug("The highest neighborhood number is: " + array);
-var hoaNumber = array++;
-logDebug("New HOA number is: " + hoaNumber);
+// logDebug("The highest neighborhood number is: " + array);
+// var hoaNumber = array++;
+// logDebug("New HOA number is: " + hoaNumber);
 
 //getNeighborhoodNumber();
 
