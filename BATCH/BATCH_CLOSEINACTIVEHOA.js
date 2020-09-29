@@ -306,6 +306,7 @@ var sql = "SELECT DISTINCT B.B1_ALT_ID " +
 			while (results.next()){
 					array.push( results.getString("B1_ALT_ID"));
 				}
+		rSet.close();
 		sStmt.close();
 		conn.close();
 		if(array==null || array==undefined || array==""){

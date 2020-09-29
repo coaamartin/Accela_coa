@@ -134,7 +134,8 @@ try {
 			 }
 			 //LogBatchDebug("DEBUG","--------------------------------------------------------------------------------------------------------",false)			
 			
-        }
+		}
+		rSet.close();
         sStmt.close();
         conn.close();
 	
@@ -232,7 +233,8 @@ function deleteCadRows()
 
 			aa.print("refAddrID: " + refAddrID);
 			
-        }
+		}
+		rSet.close();
         sStmt.close();
         conn.close();
 	
