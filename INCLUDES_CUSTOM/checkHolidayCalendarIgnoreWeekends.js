@@ -24,6 +24,8 @@ function checkHolidayCalendarIgnoreWeekends(date){
 		calArr.push(rSet.getString("CALENDAR_ID"));
 	}
 	sStmt.close();
+	rSet.close();
+	conn.close();
 	for (var c in calArr){
 		var cal = aa.calendar.getCalendar(calArr[c]).getOutput();
 		var events = aa.calendar.getEventSeriesByCalendarID(calArr[c], date.getYear()+1900, date.getMonth()+1).getOutput();
@@ -41,8 +43,5 @@ function checkHolidayCalendarIgnoreWeekends(date){
 	}
 	return holiday;
 	}
-	catch(r){aa.print(r);}
-	rSet.close();
-	conn.close();
-	
+	catch(r){aa.print(r);}	
 }
