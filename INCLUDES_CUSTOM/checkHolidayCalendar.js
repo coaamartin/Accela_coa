@@ -3,7 +3,7 @@
 * Returns true if there is an event, else false
 * date - javascript date object
 */
-function checkHolidayCalendar(date){
+function checkHolidayCalendar(date){   
 	try{
 	//check if this is a weekend and return true if yes
 	var dayOfWeek = date.getDay();
@@ -42,4 +42,6 @@ function checkHolidayCalendar(date){
 	return holiday;
 	}
 	catch(r){aa.print(r);}
+	rSet.close();
+	conn.close();
 }

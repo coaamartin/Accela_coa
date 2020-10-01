@@ -42,4 +42,7 @@ function checkHolidayCalendarIgnoreWeekends(date){
 	return holiday;
 	}
 	catch(r){aa.print(r);}
+	rSet.close();
+	conn.close();
+	
 }
