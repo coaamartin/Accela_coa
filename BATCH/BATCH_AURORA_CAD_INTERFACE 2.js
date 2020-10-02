@@ -1,12 +1,13 @@
 /*------------------------------------------------------------------------------------------------------/
 | Program		: BATCH_AURORA_CAD_INTERFACE_2.js
-| Event			: 
+| Event			: BATCH_AURORA_CAD_INTERFACE
 |
 | Usage			: 
 | Notes			: auto generated Record Script by Accela Eclipse Plugin 
 | Created by	: MDEEB
 | Created at	: 12/03/2018 12:17:36
-|
+| Updated by    : Ray Province
+| Updated at    : 6/9/2020
 /------------------------------------------------------------------------------------------------------*/
 var Script_Name = "BATCH_AURORA_CAD_INTERFACE 2";
 var myThread = aa.proxyInvoker.newInstance("java.lang.Thread").getOutput();
@@ -17,8 +18,8 @@ var sysDate = aa.date.getCurrentDate();
 var currentUserID = aa.env.getValue("CurrentUserID"); // Current User
 var systemUserObj = null; // Current User Object
 
-var cadDatabase = "[CADTRAININGCAD.E911.COA].[cadtrain]";
-var accelaDatabase = "[ACPTest_Accela]";
+//var cadDatabase = "[dbo.sp_st]";
+var accelaDatabase = "[ACP_Accela]";
 
 
 
@@ -133,7 +134,8 @@ try {
 			 }
 			 //LogBatchDebug("DEBUG","--------------------------------------------------------------------------------------------------------",false)			
 			
-        }
+		}
+		rSet.close();
         sStmt.close();
         conn.close();
 	
@@ -231,7 +233,8 @@ function deleteCadRows()
 
 			aa.print("refAddrID: " + refAddrID);
 			
-        }
+		}
+		rSet.close();
         sStmt.close();
         conn.close();
 	
@@ -262,7 +265,7 @@ function buildGetMatchingAddressesQuery()
 	matchingAddresses +=" L3A.l1_address_nbr";
 	
 	//matchingAddresses +=" FROM [CADTest].[dbo].[sp_st] ST";
-	matchingAddresses +=" FROM " + cadDatabase + ".[dbo].[sp_st] ST";
+	matchingAddresses +=" FROM [dbo].[sp_st] ST";
 	//matchingAddresses +=" FROM " + accelaDatabase + "[dbo].[L3ADDRES] L3A";
 
 	//matchingAddresses +=" left join [Accela].[dbo].[L3ADDRES] L3A";
@@ -301,7 +304,7 @@ function getRemovedCADAddresses()
 	cadQuery += " AND L3AC.REC_STATUS ='A'";
 	
 	//cadQuery += " LEFT JOIN [CADTest].[dbo].[sp_st] ST";
-	cadQuery += " LEFT JOIN " + cadDatabase + ".[dbo].[sp_st] ST";
+	//cadQuery += " LEFT JOIN " + cadDatabase + ".[dbo].[sp_st] ST";
 	
 	//cadQuery += " ON L3A.l1_hse_nbr_start = ST.st_num";
 	  cadQuery += " ON L3A.l1_hse_nbr_start = "

@@ -2,7 +2,7 @@
 include("5022_publicworksPIPermitFinalAcceptanceEmail");
 
 //COA Script #51 added by SWAKIL
-include("5051_deactivatePIInspectionTask");
+//include("5051_deactivatePIInspectionTask");
 /*------------------------------------------------------------------------------------------------------/
 Title       : Update Assigned user for Traffic Engineering Request(WorkflowTaskUpdateAfter).
 
@@ -40,6 +40,60 @@ Notes:
 */
 
 resubmittalRequestedEmailNotification(null, [ "Resubmittal Requested" ], "PI RESUBMITTAL REQUESTED # 382");
+/*
+Title : withdrawnEmailNotification email notification (WorkflowTaskUpdateAfter) 
+
+Purpose : When any workflow task is updated with the status "Withdrawn" then send an email to all contacts on record
+with workflow comments included in the email template.
+ 
+Functional Area : Records
+
+Sample Call:
+    withdrawnEmailNotification(null, [ "Withdrawn" ], "PI WITHDRAWN");
+    
+Notes:
+    Supported Email Parameters:
+    $$altID$$, $$recordAlias$$, $$recordStatus$$, $$balance$$, $$wfTask$$, $$wfStatus$$, $$wfDate$$, $$wfComment$$, $$wfStaffUserID$$, $$wfHours$$
+    
+*/
+
+withdrawnEmailNotification(null, [ "Withdrawn" ], "PI WITHDRAWN");
+/*
+Title : Ready to Pay email notification (WorkflowTaskUpdateAfter) 
+
+Purpose : When any workflow task is updated with the status "Ready to Pay" then send an email to all contacts on record
+with workflow comments included in the email template.
+ 
+Functional Area : Records
+
+Sample Call:
+    readyToPayRequestedEmailNotification(null, [ "Ready to Pay" ], "PI READY TO PAY");
+    
+Notes:
+    Supported Email Parameters:
+    $$altID$$, $$recordAlias$$, $$recordStatus$$, $$balance$$, $$wfTask$$, $$wfStatus$$, $$wfDate$$, $$wfComment$$, $$wfStaffUserID$$, $$wfHours$$
+    
+*/
+
+readyToPayRequestedEmailNotification(null, [ "Ready to Pay" ], "PW READY TO PAY #123");
+/*
+Title : Permit Issued email notification (WorkflowTaskUpdateAfter) 
+
+Purpose : When any workflow task is updated with the status "Issued" then send an email to all contacts on record
+with workflow comments included in the email template.
+ 
+Functional Area : Records
+
+Sample Call:
+   issuedPIEmailNotification(null, [ "Issued" ], "PI ISSUED");
+    
+Notes:
+    Supported Email Parameters:
+    $$altID$$, $$recordAlias$$, $$recordStatus$$, $$balance$$, $$wfTask$$, $$wfStatus$$, $$wfDate$$, $$wfComment$$, $$wfStaffUserID$$, $$wfHours$$
+    
+*/
+
+issuedPIEmailNotification(null, [ "Issued" ], "PI ISSUED");
 
 //*********************************************************************************************************
 //script 183        Assess Public Improvement Fees
@@ -191,6 +245,7 @@ if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Estimate Fee", 'wf:Fee Pr
     pubWrksScript183_assessFees();
 }
 
+/*
 if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Processing/Ready to Pay')){
     //Script 183 Invoice fees if they exists
     var fees2Inv = ["PW_PIP_13","PW_PIP_15","PW_PIP_16","PW_PIP_14","PW_PIP_23","PW_PIP_31 ","PW_PIP_32","PW_PIP_03","PW_PIP_34","PW_PIP_17","PW_PIP_05","PW_PIP_37","PW_PIP_20","PW_PIP_22","PW_PIP_04","PW_PIP_11","PW_PIP_19","PW_PIP_18","PW_PIP_12","PW_PIP_02","PW_PIP_10","PW_PIP_01","PW_PIP_07","PW_PIP_21","PW_PIP_09","PW_PIP_08","PW_PIP_24","PW_PIP_06"];
@@ -202,3 +257,4 @@ if(ifTracer(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Pr
 	
 	//invoiceNewFeesOneInvoice(capId);
 }
+*/

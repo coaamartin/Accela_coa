@@ -6,7 +6,7 @@
 
 logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #5077 - 5077_Email_Arborist_Applicant_MoreInfoNeeded");
 
-if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfStatus)) 
+if (("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfStatus)) || ("Licensing Review".equals(wfTask) && "Additional Info Needed".equals(wfStatus))|| ("Renewal Review".equals(wfTask) && "Additional Info Needed".equals(wfStatus))) 
 {
    if (wfComment != null && typeof wfComment !== 'undefined') 
       
@@ -21,6 +21,8 @@ if ("Application Intake".equals(wfTask) && "Additional Info Needed".equals(wfSta
       
       var cap = aa.cap.getCap(capId).getOutput();
       var capName = cap.getSpecialText();
+	  logDebug("Record Applicant = "+recordApplicant);
+	  logDebug("Applicant email = " + recordApplicant.getEmail());
       
       if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") 
       {

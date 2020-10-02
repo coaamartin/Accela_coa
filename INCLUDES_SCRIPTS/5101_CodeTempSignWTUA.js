@@ -56,7 +56,8 @@ function getWorkflowComments()
 		logDebug("Found a comment: " + foundComments);			
 	}
     sStmt.close();
-    conn.close();
+	conn.close();
+	rSet.close();
 	return foundComments;
 }
 

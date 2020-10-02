@@ -54,6 +54,11 @@ function passedMJInspectionAutomation(vCapType) {
             if (asiValues["Trade Name"])
                 addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
             
+            //Get ACA Url
+            acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
+            acaURL = acaURL.substr(0, acaURL.toUpperCase().indexOf("/ADMIN"));
+	        addParameter(eParams, "$$acaDocDownloadUrl$$", acaURL);
+	           
 			var reportTemplate = "MJ_Compliance_Corrections_Letter";
 			var reportParams = aa.util.newHashtable();
 			addParameter(reportParams, "InspActNumber", inspId);

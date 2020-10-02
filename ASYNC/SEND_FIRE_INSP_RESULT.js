@@ -1,12 +1,11 @@
 //SEND_FIRE_INSP_RESULT
+logDebug("***** Starting SEND_FIRE_INSP_RESULT from script *****");
 try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var reportName = aa.env.getValue("reportName");
-	var inspId = aa.env.getValue("InspActNumber");
-
-
+	var altId = aa.env.getValue("altID")
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
@@ -18,38 +17,43 @@ try
 	var rParams = aa.util.newHashtable();
 	if ("Fire_Primary_Inspection".equals(reportName))
 	{		
-		rParams.put("InspActNumber", inspId);
+		rParams.put("recordid", altId);
 	}
 	else if ("Fire_Follow_Up_Inspection".equals(reportName))
 	{
-		rParams.put("InspActNumber", inspId);
+		rParams.put("RecordID", altId);
 	}
 	else if ("Fire Order Notice".equals(reportName))
 	{
 		rParams.put("RecordID", capId.getCustomID());
+		
 	}
 
 	var emailtemplate = "FIRE INSPECTION RESULTS #15";
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
-	sendNotification("norepoly@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
 {
-	email("debug@gmail.com", "aurora@gov.org", "Error", e.message);
+	email("debug@gmail.com", "rprovinc@auroragov.org", "Error", e.message);
 }
 function getEmailString()
 {
 	var emailString = "";
 	var contactArray = getPeople(capId);
+
+	//need to add inspection contact below to this logic 
 	for (var c in contactArray)
 	{
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().getEmail().length() > 0)
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact")
 		{
-			emailString += contactArray[c].getPeople().getEmail() + ",";
+			emailString += contactArray[c].getPeople().getEmail() + ";";
 		}
 	}
+	logDebug(emailString);
 	return emailString;
 }
+logDebug("Starting function getPeople")
  function getPeople(capId)
 {
 	capPeopleArr = null;
@@ -229,6 +233,3 @@ function generateReportFile(aaReportName,parameters,rModule)
 	return contactAddressModelArr;
 
 }
-
-
-

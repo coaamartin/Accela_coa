@@ -49,6 +49,7 @@ function checkForDuplicates()
 	}
     sStmt.close();
     conn.close();
+    rSet.close();
 	//logDebug("Done with this:" + counter);
 	cleanAndClose(foundDuplicate);
 }

@@ -24,8 +24,15 @@ function resubmittalRequestedEmailNotification(workFlowTask, workflowStatusArray
 		var toEmails = new Array();
 		for (c in contacts) {
 			if (contacts[c]["email"] && contacts[c]["email"] != null && contacts[c]["email"] != "") {
-				toEmails.push(contacts[c]["email"]);
+				if (matches(contacts[c]["contactType"], "Applicant", "Developer"))
+					toEmails.push(contacts[c]["email"]);
 			}
+		}
+		var lps = getLicenseProfessional(capId);
+		for (var lp in lps)
+		{
+			if (!isBlank(lps[lp].getEmail()))
+				toEmails.push(lps[lp].getEmail());
 		}
 
 		if (toEmails.length == 0) {

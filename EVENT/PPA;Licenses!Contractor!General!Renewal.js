@@ -1,20 +1,22 @@
 /*
-Script xx
-JHS 8/12/2018
+Script 98
+JHS 6/10/2018
 
 update the workflow task "Renewal Intake" with a
 status of "Fees Paid" and update the workflow task
 "Licensing Issuance" with a status of "Renewed" and
 update the License record with a Status of Issued and
-new Expiration date (12/31 of current year)
+new Expiration date (1 year from the
+renewal approval date and set to the first day of the
+next month.
 
  */
 
 if (balanceDue == 0) {
 
-	closeTask("Renewal Intake", "Fees Paid", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
+	closeTask("Renewal Intake", "Fees Paid", "Updated by PRA;Licenses!Contractor!General!Renewal", "");
 
-	closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Arborist!General!Renewal", "");
+	closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Contractor!General!Renewal", "");
 
 	// Begin script to complete the renewal and send notifications
 	var vLicenseID;
@@ -32,9 +34,17 @@ if (balanceDue == 0) {
 	if (vLicenseID != null) {
 		// Get current expiration date.
 		vLicenseObj = new licenseObject(null, vLicenseID);
+		vExpDate = vLicenseObj.b1ExpDate;
 		vExpDate = new Date();
-		// All licenses expire on 12/31, if after march assume next year
-		vNewExpDate = new Date(vExpDate.getFullYear() + (vExpDate.getMonth > 2 ? 1 : 0), 11, 31);
+		// Extend license expiration by 1 year, first day of next month.
+		vNewExpDate = new Date(vExpDate.getFullYear() + 1, vExpDate.getMonth(), vExpDate.getDate());
+		vNewExpDate.setDate(1);
+		if (vNewExpDate.getMonth() == 11) {
+			vNewExpDate.setMonth(0);
+			vNewExpDate.setFullYear(vNewExpDate.getFullYear() + 1);
+		} else {
+			vNewExpDate.setMonth(vNewExpDate.getMonth() + 1);
+		}
 
 		// Update license expiration date
 		logDebug("Updating Expiration Date to: " + vNewExpDate);
@@ -42,7 +52,7 @@ if (balanceDue == 0) {
 		// Set license record expiration to active
 		vLicenseObj.setStatus("Active");
 		// set parent record status to Issued
-		updateAppStatus("Issued", "Updated by PRA;Licenses!Contractor!Arborist!Renewal", vLicenseID);
+		updateAppStatus("Issued", "Updated by PRA;Licenses!Contractor!General!Renewal", vLicenseID);
 
 		//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 		renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
@@ -51,9 +61,9 @@ if (balanceDue == 0) {
 			aa.cap.updateProject(renewalCapProject);
 		}
 
-		var vEmailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
+		var vEmailTemplate = "TBD LICENSE RENEWAL EMAIL";
 		var vEParams = aa.util.newHashtable();
-		addParameter(vEParams, "$$LicenseType$$", "Arborist Contractor License");
+		addParameter(vEParams, "$$LicenseType$$", "Contractor License");
 		addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
 		addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());

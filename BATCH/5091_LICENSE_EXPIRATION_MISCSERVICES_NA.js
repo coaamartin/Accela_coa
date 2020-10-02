@@ -212,6 +212,7 @@ function mainProcess() {
 		var appType = appGroup + "/" + appTypeType + "/" + appSubtype + "/" + appCategory;
 		appMatchArray = [appType];
 	}
+	
 
 	for (var ama in appMatchArray) {
 		logDebug("Searching for Record Type: " + appMatchArray[ama]);
@@ -266,8 +267,11 @@ function mainProcess() {
 		b1Exp = myExp[thisExp]; //b1expiration record
 		//Remember that months in Javascript start at 0 for January.  So, on current month, go back X days to get into position to get the previous month.
 		var datepart1 = new Date(dateAdd(null, -17));
-		var expMonth = datepart1.getMonth();	
+		logDebug("Date Part1: " + datepart1);
+		var expMonth = datepart1.getMonth();
+		logDebug("Exp Month: " + expMonth);	
 		var b1Status = b1Exp.getExpStatus();
+		logDebug("B1Status: " + b1Status);
 		var renewalCapId = null;
 
 		capId = aa.cap.getCapID(b1Exp.getCapID().getID1(), b1Exp.getCapID().getID2(), b1Exp.getCapID().getID3()).getOutput();
@@ -430,13 +434,14 @@ function mainProcess() {
 				}
 			}
 		}
-
+		var hoaName = getAppSpecific("Name of HOA", capId) || "";
 		//generate email notices
 		if (emailTemplate != null && emailTemplate != "" && sendEmailToContactTypes && sendEmailToContactTypes != "") {
 			eParams = aa.util.newHashtable();
 			eParams.put("$$expirationDate$$", expMonth);
 			eParams.put("$$altID$$",capId.getCustomID());
 			eParams.put("$$acaRecordUrl$$",getACARecordURL(""));
+			eParams.put("$$HOANAME$$", hoaName);
 			if (reportName != null && reportName != "") {
 				var rParams = aa.util.newHashtable();
 				addParameter(rParams, "prmRecordID", altId);

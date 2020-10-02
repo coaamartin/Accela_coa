@@ -3,7 +3,7 @@
 * Returns true if there is an event, else false
 * date - javascript date object
 */
-function checkHolidayCalendar(date){
+function checkHolidayCalendar(date){   
 	try{
 	//check if this is a weekend and return true if yes
 	var dayOfWeek = date.getDay();
@@ -24,6 +24,8 @@ function checkHolidayCalendar(date){
 		calArr.push(rSet.getString("CALENDAR_ID"));
 	}
 	sStmt.close();
+	rSet.close();
+	conn.close();
 	for (var c in calArr){
 		var cal = aa.calendar.getCalendar(calArr[c]).getOutput();
 		var events = aa.calendar.getEventSeriesByCalendarID(calArr[c], date.getYear()+1900, date.getMonth()+1).getOutput();
@@ -42,4 +44,5 @@ function checkHolidayCalendar(date){
 	return holiday;
 	}
 	catch(r){aa.print(r);}
+	
 }

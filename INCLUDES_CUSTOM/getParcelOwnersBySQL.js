@@ -56,6 +56,6 @@ function getParcelOwnersBySQL(vParcelNbr) {
 	}
 	sStmt.close();
 	conn.close();
-	
+	rSet.close();
 	return ownArr;
 }

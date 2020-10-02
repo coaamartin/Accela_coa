@@ -22,7 +22,9 @@ logDebug("x =" + x);
 if (x && x.length > 0) {
 	logDebug(x[0]["FIRSTDUE"]);
 	var refUser = x[0]["FIRSTDUE"];
+	comment("refUser =" + refUser);
 	var user = lookup("FIRE STATION", refUser);
+	comment("user = " + user);
 	if (user != null && user != "")
 	{
 		scheduleInspection("FD Complaint Inspection",0, user);
@@ -38,9 +40,16 @@ if (x && x.length > 0) {
 	}
 }
 else{
+	var currUserId = aa.env.getValue("CurrentUserID");
+	var user = currUserId;
+	comment("Lets see if this works... user = " + user );
 	comment("Inspector not found via GIS.  Inspection scheduled but not assigned to Inspector.");
-   closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
-	scheduleInspection("FD Complaint Inspection",0);
+	scheduleInspection("FD Complaint Inspection",0, user);
+	assignCap(user);
+	assignTask("Assign Complaint", user);
+	closeTask("Assign Complaint", "Complete", "Completed by Script 187", "");
+	activateTask("Inspection");
+	assignTask("Inspection", user);
 }
 
 logDebug("Script 186 END");

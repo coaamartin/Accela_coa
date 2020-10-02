@@ -1,16 +1,10 @@
-//SEND_FIRE_INVOICE_ASYNC
-//email the applicant
+logDebug("***** Starting SEND_FIRE_INVOICE_ASYNC *****");
 try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
-	var invNbr = aa.env.getValue("invNbr");
-
-	var contacts = "Individual";
-	var iContact = getContactByType("Individual", capId);
-	var fName = iContact.getFirstName();
-	var lName = iContact.getLastName();
-	var emailTo = iContact.getEmail();
+	var invNbr = aa.env.getValue("INVOICEID");
+	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -18,21 +12,35 @@ try
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
-	tParams.put("$$FirstName$$", fName);
-	tParams.put("$$LastName$$", lName);
 	var rParams = aa.util.newHashtable();
-	rParams.put("AGENCYID", aa.getServiceProviderCode());
+	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "FIRE INVOICED FEES";
-
-	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
-	sendNotification("norepoly@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+	var report = generateReportFile("Fire Invoice Report", rParams, aa.getServiceProviderCode());
+	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
 {
 	email("debug@gmail.com", "aurora@gov.org", "Error", e.message);
 }
+function getEmailString()
+{
+	var emailString = "";
+	var contactArray = getPeople(capId);
 
+	//need to add inspection contact below to this logic 
+	for (var c in contactArray)
+	{
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact")
+		{
+			emailString += contactArray[c].getPeople().getEmail() + ";";
+
+		}
+	}
+	logDebug(emailString);
+	return emailString;
+}
+logDebug("Starting function getPeople")
  function getPeople(capId)
 {
 	capPeopleArr = null;
@@ -212,6 +220,3 @@ function generateReportFile(aaReportName,parameters,rModule)
 	return contactAddressModelArr;
 
 }
-
-
-

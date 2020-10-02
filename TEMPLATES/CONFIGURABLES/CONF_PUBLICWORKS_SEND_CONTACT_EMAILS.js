@@ -236,37 +236,6 @@
           "createFromParent": "",
           "reportingInfoStandards": ""
         }
-      },
-      {
-        "preScript": "",
-        "postScript": "",
-        "metadata": {
-          "description": "Script 383",
-          "operators": {}
-        },
-        "criteria": {
-          "task": [
-            "Fee Processing"
-          ],
-          "status": [
-            "Ready to Pay"
-          ]
-        },
-        "action": {
-          "notificationTemplate": "PW READY TO PAY #123",
-          "notificationReport": "",
-          "notifyContactTypes": [
-            "Contractor(s)",
-			"Project Owner",
-			"Applicant"
-          ],
-		  "notifyLPTypes":["Contractor"],
-          "url4ACA": "",
-          "fromEmail": "noreply@auroraco.gov",
-          "additionalEmailsTo": [],
-          "createFromParent": "",
-          "reportingInfoStandards": ""
-        }
       }
     ]
   },

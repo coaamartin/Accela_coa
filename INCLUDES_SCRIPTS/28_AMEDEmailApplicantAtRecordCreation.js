@@ -26,6 +26,10 @@ emailContacts(allowedcontacttypes, emailtemplate, emailparams, "", "", "N", "");
 logDebug("Did it work?");
 */
 
+if (appMatch("Licenses/Marijuana/Pre Application Meeting/NA")) {
+	//Need to Email
+} else {
+
 	var emailTemplate= "MJ APPLICATION SUBMITTAL";
 	var applicant = getContactByType("Applicant", capId);
 	//var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
@@ -81,3 +85,4 @@ logDebug("Did it work?");
 	//send email to applicant, no report included
 	emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
    }
+}
