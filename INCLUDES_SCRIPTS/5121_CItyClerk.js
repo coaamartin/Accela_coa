@@ -23,7 +23,7 @@ appTypeArray = appTypeString.split("/");
 // logDebug("Non Profit: " + nonProfit);
 logDebug("Non-Profit: " + vASIValue);
 logDebug("appType: " + appTypeString);
-    if ("No".equals(vASIValue) && "CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+    if ("No".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appTypeString)) {
         //Donation Bins code
         logDebug("Starting to invoice fee on record.");
         var feecode = "CC_DB";
@@ -56,7 +56,7 @@ logDebug("appType: " + appTypeString);
         logDebug("End of Script 5121_CityClerk.js");
     }
     //Temp Use code
-    else if ("No".equals(vASIValue) && "CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
+    else if ("No".equals(vASIValue) && "Building/Permit/TempUse/NA".equals(appTypeString)) {
         logDebug("Starting to invoice fee on record.");
         var feecode = "CC_TU";
         var feeschedule = "CC_TU";
@@ -89,7 +89,7 @@ logDebug("appType: " + appTypeString);
     }
 
     //Temp Sign code
-    else if ("No".equals(vASIValue) && "CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
+    else if ("No".equals(vASIValue) && "Building/Permit/TempSign/NA".equals(appTypeString)) {
         logDebug("Starting to invoice fee on record.");
         var feecode = "CC_TS";
         var feeschedule = "CC_TS";
