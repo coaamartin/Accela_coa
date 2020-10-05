@@ -81,7 +81,7 @@ else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
 }
 
 //Temp Sign code
-else if ("Building/Permit/TempSign/NA".equals(appTypeString)) {
+else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "CC DENIAL";
     var capAlias = cap.getCapModel().getAppTypeAlias();

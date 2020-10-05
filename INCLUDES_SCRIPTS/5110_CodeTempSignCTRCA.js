@@ -138,7 +138,7 @@ function checkACARun() {
 
 
         //Temp Sign
-        else if ("Building/Permit/TempSign/NA".equals(appTypeString)) {
+        else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
             //Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
             // var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
             // var todayDate = new Date();

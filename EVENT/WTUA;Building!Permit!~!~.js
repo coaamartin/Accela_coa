@@ -190,7 +190,7 @@ if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
 
 
 // //Below is the logic for Temp Sign
-if ("Building/Permit/TempSign/NA".equals(appTypeString)) {
+if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
     if (isTaskActive("Planning Director Approval")) {
         logDebug("All workflow steps have been approved. Ready to send Planning Director email.");

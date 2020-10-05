@@ -79,7 +79,7 @@ else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
 }
 
 //Temp Sign code
-else if ("Building/Permit/TempSign/NA".equals(appTypeString)) {
+else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";

@@ -70,7 +70,7 @@ logDebug("appType: " + appTypeString);
 }
 
  //Temp Sign code
- if ("Building/Permit/TempSign/NA".equals(appTypeString)) {
+ if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "CC ADDITIONAL INFO REQUIRED";
     var capAlias = cap.getCapModel().getAppTypeAlias();
