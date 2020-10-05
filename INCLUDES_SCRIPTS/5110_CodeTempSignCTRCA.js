@@ -80,7 +80,7 @@ function checkACARun() {
                 logDebug("EmailTo: " + emailTo);
                 logDebug("Table Parameters: " + tParams);
                 sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
-                logDebug("End of Script 5122_CityClerk_notifications.js");
+                logDebug("End of Script 5110_CityClerk_notifications.js");
             } else if (recordApplicant == null) {
                 logDebug("Email could not be sent as there is no Applicant email address.")
             }
@@ -130,7 +130,7 @@ function checkACARun() {
                 logDebug("EmailTo: " + emailTo);
                 logDebug("Table Parameters: " + tParams);
                 sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
-                logDebug("End of Script 5122_CityClerk_notifications.js");
+                logDebug("End of Script 5110_CityClerk_notifications.js");
             } else if (recordApplicant == null) {
                 logDebug("Email could not be sent as there is no Applicant email address.")
             }
@@ -180,7 +180,7 @@ function checkACARun() {
                 logDebug("EmailTo: " + emailTo);
                 logDebug("Table Parameters: " + tParams);
                 sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
-                logDebug("End of Script 5122_CityClerk_notifications.js");
+                logDebug("End of Script 5110_CityClerk_notifications.js");
             } else if (recordApplicant == null) {
                 logDebug("Email could not be sent as there is no Applicant email address.")
             }
