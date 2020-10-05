@@ -25,7 +25,7 @@ var emailTo = applicantEmail;
 logDebug("Email to: " + emailTo);
 
 //Donation Bins code
-if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "CC DENIAL";
     var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -53,7 +53,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
 }
 
 //Temp Use code
-else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
+else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "CC DENIAL";
     var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -81,7 +81,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
 }
 
 //Temp Sign code
-else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
+else if ("Building/Permit/TempSign/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "CC DENIAL";
     var capAlias = cap.getCapModel().getAppTypeAlias();

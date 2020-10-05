@@ -18,7 +18,7 @@ logDebug("appType: " + appTypeString);
 
 
  //Donation Bins code
- if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "CC PERMIT ISSUANCE";
     var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -44,7 +44,7 @@ logDebug("appType: " + appTypeString);
 }
 
  //Temp Use code
- if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
+ if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "CC PERMIT ISSUANCE";
     var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -70,7 +70,7 @@ logDebug("appType: " + appTypeString);
 }
 
  //Temp Sign code
- if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
+ if ("Building/Permit/TempSign/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "CC PERMIT ISSUANCE";
     var capAlias = cap.getCapModel().getAppTypeAlias();

@@ -26,7 +26,7 @@ var emailTo = applicantEmail;
 logDebug("Email to: " + emailTo);
 
 //Donation Bins code
-if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
@@ -53,7 +53,7 @@ if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
 
 
 //Temp Use code
-else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
+else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
@@ -79,7 +79,7 @@ else if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
 }
 
 //Temp Sign code
-else if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
+else if ("Building/Permit/TempSign/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
