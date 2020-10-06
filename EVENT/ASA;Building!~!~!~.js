@@ -5,8 +5,8 @@ logDebug("Adding Fee");
 //updated 8/2/19 Keith - Per Darcy stop With Plans from getting the Base Fee.
 
 //if(!appMatch("Building/Permit/New Building/NA") && !appMatch("Building/Permit/OTC/*"))
-if(!appMatch("Building/Permit/New Building/NA") && !appMatch("Building/Permit/OTC/*") && !appMatch("Building/Permit/Master/*")&& !appMatch("Building/Permit/New Building/Amendment")&& !appMatch("Building/Permit/Plans/NA"))
-    addFee("BLD_PNP_06","BLD_PNP","FINAL",1,"Y");
+//if(!appMatch("Building/Permit/New Building/NA") && !appMatch("Building/Permit/OTC/*") && !appMatch("Building/Permit/Master/*")&& !appMatch("Building/Permit/New Building/Amendment")&& !appMatch("Building/Permit/Plans/NA"))
+    //addFee("BLD_PNP_06","BLD_PNP","FINAL",1,"Y");
 
 // 5/29/19 Keith - Why are we setting Debug to false here?? I should only be done in one place in the EMSE globals!
 //if (matches(currentUserID,"ADMIN")) {
