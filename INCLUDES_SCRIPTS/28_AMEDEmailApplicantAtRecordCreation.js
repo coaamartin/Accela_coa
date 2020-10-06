@@ -26,28 +26,13 @@ emailContacts(allowedcontacttypes, emailtemplate, emailparams, "", "", "N", "");
 logDebug("Did it work?");
 */
 
-if (appMatch("Licenses/Marijuana/Pre Application Meeting/NA")) {
-	//Need to Email
-} else {
-
-	var emailTemplate= "MJ APPLICATION SUBMITTAL";
-	var applicant = getContactByType("Applicant", capId);
-	//var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
-    var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+var emailTemplate= "MJ APPLICATION SUBMITTAL";
+	var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
     acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
     var recordDeepUrl = getACARecordURL(acaURLDefault);
-
    	var asiValues = new Array();
 	loadAppSpecific(asiValues);
-      
-	if (!applicant || !applicant.getEmail()) 
-   {
-     logDebug("**WARN SCRIPT#210 - no applicant found or no email capId =" + capId);
-   }
-   
-   else
-      
-   {
+  
 	var files = new Array();
 	
 	// use the correct parameters related to the email template provided + wfComment
@@ -66,23 +51,24 @@ if (appMatch("Licenses/Marijuana/Pre Application Meeting/NA")) {
 	
 	var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
 	var appName = cap.getSpecialText();
-	
+	var today = new Date();
+	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear(); 
 	var eParams = aa.util.newHashtable();
-   
+	addParameter(eParams, "$$todayDate$$",thisDate );
 	addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
+	addParameter(eParams, "$$capAlias$$", cap.getCapType().getAlias());
 	addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 	addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-	//addParameter(eParams, "$$wfTask$$", wfTask.toUpperCase());
-	//addParameter(eParams, "$$wfStatus$$", wfStatus);
-	//addParameter(eParams, "$$wfDate$$", wfDate);
-	//addParameter(eParams, "$$wfComment$$", wfComment);
 	addParameter(eParams, "$$acaRecordUrl$$", recordDeepUrl);
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
    addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
    addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
-   
+   var emailTo = getAllContactsEmails();
+   logDebug("email to: " + emailTo);
+   logDebug(eParams)
+   if(emailTo.length>0){
 	//send email to applicant, no report included
-	emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
+	//emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
+	sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, eParams, null);
    }
-}
