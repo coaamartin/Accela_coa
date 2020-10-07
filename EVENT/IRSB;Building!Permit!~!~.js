@@ -40,7 +40,8 @@ Sample Call : checkIfPassedInspections(inspType)
 
 
 //Keith changed the line below on 2-27-19
+//Raymond changed the line below on 10/7/2020 to include temp use/sign and don bins
 //if(!appMatch("Building/Permit/No Plans/NA")) {
-if (!appMatch("Building/Permit/No Plans/NA") && !appMatch("Building/Permit/OTC/*")) {
+if (!appMatch("Building/Permit/No Plans/NA") && !appMatch("Building/Permit/OTC/*") && !appMatch("Building/Permit/DonationBin/*") && !appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempUse/*")) {
 	checkIfPassedInspections(inspType)
 }
