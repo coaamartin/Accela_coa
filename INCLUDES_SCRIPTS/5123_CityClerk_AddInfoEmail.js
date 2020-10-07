@@ -39,7 +39,7 @@ logDebug("appType: " + appTypeString);
     tParams.put("$$wfComment$$", wfComment);
     logDebug("EmailTo: " + emailTo);
     logDebug("Table Parameters: " + tParams);
-    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+    sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5123_CityClerk_AddInfoEmail.js");
 }
 
@@ -65,7 +65,7 @@ logDebug("appType: " + appTypeString);
     tParams.put("$$wfComment$$", wfComment);
     logDebug("EmailTo: " + emailTo);
     logDebug("Table Parameters: " + tParams);
-    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+    sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5123_CityClerk_AddInfoEmail.js");
 }
 
@@ -91,6 +91,6 @@ logDebug("appType: " + appTypeString);
     tParams.put("$$wfComment$$", wfComment);
     logDebug("EmailTo: " + emailTo);
     logDebug("Table Parameters: " + tParams);
-    sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+    sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5123_CityClerk_AddInfoEmail.js");
 }
