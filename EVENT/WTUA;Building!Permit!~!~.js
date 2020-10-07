@@ -141,7 +141,7 @@ if (wfTask == "Final Approval" && wfStatus == "Approved") {
 }
 
 
-if (wfTask == "CFinal Approval" && wfStatus == "Denied") {
+if (wfTask == "Final Approval" && wfStatus == "Denied") {
 
     //Script 5125_CityClerk_Denial
     include("5125_CityClerk_Denial");
