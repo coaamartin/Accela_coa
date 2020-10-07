@@ -79,7 +79,7 @@ function checkACARun() {
                 tParams.put("$$LastName$$", lastName);
                 logDebug("EmailTo: " + emailTo);
                 logDebug("Table Parameters: " + tParams);
-                sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+                sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
                 logDebug("End of Script 5110_CityClerk_notifications.js");
             } else if (recordApplicant == null) {
                 logDebug("Email could not be sent as there is no Applicant email address.")
@@ -129,7 +129,7 @@ function checkACARun() {
                 tParams.put("$$LastName$$", lastName);
                 logDebug("EmailTo: " + emailTo);
                 logDebug("Table Parameters: " + tParams);
-                sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+                sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
                 logDebug("End of Script 5110_CityClerk_notifications.js");
             } else if (recordApplicant == null) {
                 logDebug("Email could not be sent as there is no Applicant email address.")
@@ -179,7 +179,7 @@ function checkACARun() {
                 tParams.put("$$LastName$$", lastName);
                 logDebug("EmailTo: " + emailTo);
                 logDebug("Table Parameters: " + tParams);
-                sendNotification("noreply@auroraco.gov", emailTo, "", vEmailTemplate, tParams, null);
+                sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
                 logDebug("End of Script 5110_CityClerk_notifications.js");
             } else if (recordApplicant == null) {
                 logDebug("Email could not be sent as there is no Applicant email address.")
@@ -191,4 +191,4 @@ function checkACARun() {
 
 
 logDebug("---------------------> At end of 5110 CTRCA");
-aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+//aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
