@@ -17,9 +17,9 @@ if(!appMatch("Building/Permit/New Building/NA") && !appMatch("Building/Permit/OT
 //}
 
 include("EMSE:SETCONTACTRELATIONSHIPTOCONTACTTYPE");
-if (matches(currentUserID,"PUBLICUSER122")) {
-include("TESTDRIVE_ASA");
-}
+// if (matches(currentUserID,"PUBLICUSER122")) {
+// include("TESTDRIVE_ASA");
+// }
 editAppSpecific("Application Expiration Date",dateAdd(fileDate,180));
 
 //script16_FillApplicationNameWhenEmpty();
