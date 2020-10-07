@@ -1,6 +1,7 @@
 /*
 * Script 260
 */
+logDebug("Starting IRSA;Building!Permit!~!~.js");
 if (matchARecordType([
     "Building/Permit/New Building/NA",
     "Building/Permit/Plans/NA",
@@ -13,4 +14,5 @@ if (matchARecordType([
 	
 	script380_PermitExpirationDateWithTodaysDate180();
 }
+logDebug("End of IRSA;Building!Permit!~!~.js");
 
