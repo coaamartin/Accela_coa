@@ -4,7 +4,7 @@ that fees are owed and they can click the link to go online to login to their ac
 
 Written by JMAIN
 */
-
+logDebug("Kicking off 5043_BuildingEmailInvoicedFees.js");
 if (balanceDue > 0)
 {
   //email the applicant
@@ -15,3 +15,4 @@ if (balanceDue > 0)
   emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
   coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
 }
+logDebug("End off 5043_BuildingEmailInvoicedFees.js");
