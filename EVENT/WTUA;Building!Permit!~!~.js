@@ -1,24 +1,24 @@
 //WTUA:Building/Permit/*/*
 
 //Call all customs for wf:Permit Issuance/Issued
-if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
-	script208_UpdatePermitFields();
-	//script206_DeactivateFEMA(); //Commented out since it is being done in WTUA:Building/*/*/*
+if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
+    script208_UpdatePermitFields();
+    //script206_DeactivateFEMA(); //Commented out since it is being done in WTUA:Building/*/*/*
 }
 
 //Call all customs for wf:Accepted/Accept Plans
-if(wfTask == "Accepted" && wfStatus == "Accept Plans"){
-	updateExpirationDateAsi();
+if (wfTask == "Accepted" && wfStatus == "Accept Plans") {
+    updateExpirationDateAsi();
 }
 
 //Call all customs for wfStatus of Resubmittal Requested
-if(wfStatus == "Resubmittal Requested"){
-	updateExpirationDateAsi();
+if (wfStatus == "Resubmittal Requested") {
+    updateExpirationDateAsi();
 }
 
 
-if(wfTask =="Inspection Phase"  && wfStatus == "Temporary CO Issued"){
-	/*------------------------------------------------------------------------------------------------------/
+if (wfTask == "Inspection Phase" && wfStatus == "Temporary CO Issued") {
+    /*------------------------------------------------------------------------------------------------------/
       Title 		: Building Certificate of Occupancy does Complete on License WF(WorkflowTaskUpdateAfter).
       
       Purpose		:If the workflow task "Inspection Phase" has a status of "Temporary CO Issued" or "Ready for CO" then use the address on
@@ -34,29 +34,29 @@ if(wfTask =="Inspection Phase"  && wfStatus == "Temporary CO Issued"){
       Notes		: Provided Record type "MJ License Application" , is not available ,replaced with a Sample Record Type "Licenses/Marijuana/Retail Store/License"
       	          ,to be replaced with the correct record type
       ------------------------------------------------------------------------------------------------------*/
-	closeWfTaskCertificateOfOccupancy();
+    closeWfTaskCertificateOfOccupancy();
 }
 
 var vCoOASI = getAppSpecific("Certificate of Occupancy");
 
-if(wfTask =="Inspection Phase"  && wfStatus=="Ready for CO" && vCoOASI == "CHECKED"){
-	activateTask("Certificate Of Occupancy");
+if (wfTask == "Inspection Phase" && wfStatus == "Ready for CO" && vCoOASI == "CHECKED") {
+    activateTask("Certificate Of Occupancy");
 } else {
-	deactCoOIfNotChecked();
+    deactCoOIfNotChecked();
 }
 
-if(wfTask =="Inspection Phase"  && wfStatus=="Final"){
-	deactCoOIfNotChecked();
-	
-   if ((allTasksComplete("BLD_NEWCON") == false) || (allTasksComplete("BLD_MASTER") == false)){
-					updateAppStatus("Issued","Status updated via script");				
-			}
+if (wfTask == "Inspection Phase" && wfStatus == "Final") {
+    deactCoOIfNotChecked();
+
+    if ((allTasksComplete("BLD_NEWCON") == false) || (allTasksComplete("BLD_MASTER") == false)) {
+        updateAppStatus("Issued", "Status updated via script");
+    }
 
 }
 
-if(wfTask == "Backflow Preventor" && wfStatus == "Final"){
-	deactCoOIfNotChecked();
-	include("5040_backFlowPreventerEmail");
+if (wfTask == "Backflow Preventor" && wfStatus == "Final") {
+    deactCoOIfNotChecked();
+    include("5040_backFlowPreventerEmail");
 }
 
 /*
@@ -120,19 +120,19 @@ User code generally goes inside the try block below.
 End script Tester header */
 
 logDebug("Starting WTUA;Building!Permit!~!~.js");
-if (wfTask == "Planning Director Approval" && wfStatus != "") {
+// if (wfTask == "Planning Director Approval" && wfStatus != "") {
 
-    // Script 5121_CityClerk
-    include("5128_CityClerk_CityManager_email");
+//     // Script 5121_CityClerk
+//     include("5128_CityClerk_CityManager_email");
 
-}
+// }
 //Need logic below that will send communication out to citizen if more info is needed to proceed
 if (wfStatus == "Additional Information Required") {
 
     include("5123_CityClerk_AddInfoEmail");
 }
 
-if (wfTask == "City Manager's Office Approval" && wfStatus == "Approved") {
+if (wfTask == "Final Approval" && wfStatus == "Approved") {
 
     // Script 5124_CityClerk
     //include("5124_CityClerk_Approval");
@@ -141,7 +141,7 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Approved") {
 }
 
 
-if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
+if (wfTask == "CFinal Approval" && wfStatus == "Denied") {
 
     //Script 5125_CityClerk_Denial
     include("5125_CityClerk_Denial");
@@ -160,46 +160,46 @@ if (wfTask == "City Manager's Office Approval" && wfStatus == "Denied") {
 //         logDebug("Starting to send notification to the Planning Director");
 //         include("5122_CityClerk_Notifications");
 //         logDebug("Finished sending notification to the Planning Director");
-                
+
 //     }
 //     }
 
 //Below is the logic for donation bin
-    if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
-        logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
-        if (isTaskActive("Planning Director Approval")) {
-            logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
-            logDebug("Starting to send notification to the Planning Director");
-            include("5122_CityClerk_Notifications");
-            logDebug("Finished sending notification to the Planning Director");
-                    
-        }
-        }
+if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
+    logDebug("Looking at wf tasks and status to see if Final approval email can send.");
+    if (isTaskActive("Final Approval")) {
+        logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
+        logDebug("Starting to send notification to fianl approval staff");
+        include("5122_CityClerk_Notifications");
+        logDebug("Finished sending notification to the final approvers");
+
+    }
+}
 
 //Below is the logic for Temp Use
 if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
-    logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
-    if (isTaskActive("Planning Director Approval")) {
-        logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
-        logDebug("Starting to send notification to the Planning Director");
+    logDebug("Looking at wf tasks and status to see if Final approval email can send.");
+    if (isTaskActive("Final Approval")) {
+        logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
+        logDebug("Starting to send notification to fianl approval staff");
         include("5122_CityClerk_Notifications");
-        logDebug("Finished sending notification to the Planning Director");
-                
+        logDebug("Finished sending notification to the final approvers");
+
     }
-    }
+}
 
 
 // //Below is the logic for Temp Sign
 if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
-    logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
-    if (isTaskActive("Planning Director Approval")) {
-        logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
-        logDebug("Starting to send notification to the Planning Director");
+    logDebug("Looking at wf tasks and status to see if Final approval email can send.");
+    if (isTaskActive("Final Approval")) {
+        logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
+        logDebug("Starting to send notification to fianl approval staff");
         include("5122_CityClerk_Notifications");
-        logDebug("Finished sending notification to the Planning Director");
-                
+        logDebug("Finished sending notification to the final approvers");
+
     }
-    }
+}
 logDebug("End of WTUA;Building");
 
 // aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
