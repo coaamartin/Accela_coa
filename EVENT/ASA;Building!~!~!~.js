@@ -16,7 +16,7 @@ if(!appMatch("Building/Permit/New Building/NA") && !appMatch("Building/Permit/OT
 //showMessage= false;
 //}
 
-include("EMSE:SETCONTACTRELATIONSHIPTOCONTACTTYPE");
+//include("EMSE:SETCONTACTRELATIONSHIPTOCONTACTTYPE");
 // if (matches(currentUserID,"PUBLICUSER122")) {
 // include("TESTDRIVE_ASA");
 // }
