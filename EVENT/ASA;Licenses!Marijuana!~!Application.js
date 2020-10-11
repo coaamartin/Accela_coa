@@ -6,7 +6,7 @@ include("28_AMEDEmailApplicantAtRecordCreation");
 include("246_AssessStateMJFee");
 
 //schedule pending inspections
-include("404_AppAutomationMJ");
+//include("404_AppAutomationMJ");
 
 //SWAKIL
 //required docs conditions
