@@ -22,3 +22,6 @@ if ("City Application Intake".equals(wfTask) && "Complete".equals(wfStatus))
 {
 	//include("489_Check_MJ_Application_Docs");
 }
+
+//SW ID 503
+include("503_CityStateFees");
