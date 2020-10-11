@@ -20,7 +20,7 @@ include("431_allInspectionsResultedWF");
 //SWAKIL ID 489
 if ("City Application Intake".equals(wfTask) && "Complete".equals(wfStatus))
 {
-	//include("489_Check_MJ_Application_Docs");
+	include("489_Check_MJ_Application_Docs");
 }
 
 //SW ID 503
