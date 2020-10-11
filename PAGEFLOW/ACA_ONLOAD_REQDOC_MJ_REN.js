@@ -68,7 +68,7 @@ function getAppSpecific_local(itemName)  // optional: itemCap
    if (useAppSpecificGroupName)
    {
       if (itemName.indexOf(".") < 0)
-         { logDebug("**WARNING: editAppSpecific requires group name prefix when useAppSpecificGroupName is true") ; return false }
+         { logDebug("**WARNING: editAppSpecific requires group name prefix when useAppSpecificGroupName is true.") ; return false }
       
       
       var itemGroup = itemName.substr(0,itemName.indexOf("."));
