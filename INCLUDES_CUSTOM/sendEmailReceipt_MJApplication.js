@@ -48,10 +48,13 @@ function sendEmailReceipt_MJApplication(){
 				if (feeObjArr[ff].getFeeSeqNbr() == pfObj[ij].getFeeSeqNbr() && pfObj[ij].getPaymentSeqNbr() == vPaymentSeqNbr) {
 					logDebug("Debug Point 3");
 					//check for state and local fees
-					if (feeObjArr[ff].getFeeCod() == "LIC_MJRC_01" || feeObjArr[ff].getFeeCod() == "LIC_MJRPM_01" || feeObjArr[ff].getFeeCod() == "LIC_MJST_05" || feeObjArr[ff].getFeeCod() == "LIC_MJTST_01" || feeObjArr[ff].getFeeCod() == "LIC_MJTR_01" || feeObjArr[ff].getFeeCod() == "LIC_MJ_01") {
+					if (feeObjArr[ff].getFeeCod() == "LIC_MJRC_01" || feeObjArr[ff].getFeeCod() == "LIC_MJRPM_01" || feeObjArr[ff].getFeeCod() == "LIC_MJST_05" || 
+						feeObjArr[ff].getFeeCod() == "LIC_MJTST_01" || feeObjArr[ff].getFeeCod() == "LIC_MJTR_01" || feeObjArr[ff].getFeeCod() == "LIC_MJ_01") {
 						logDebug("State fee is present");
 						vStateFee = true;
-					} else {
+					} 
+					if (feeObjArr[ff].getFeeCod() != "LIC_MJRC_01" && feeObjArr[ff].getFeeCod() != "LIC_MJRPM_01" && feeObjArr[ff].getFeeCod() != "LIC_MJST_05" || 
+						feeObjArr[ff].getFeeCod() != "LIC_MJTST_01" && feeObjArr[ff].getFeeCod() != "LIC_MJTR_01" && feeObjArr[ff].getFeeCod() != "LIC_MJ_01") {
 						logDebug("Local fee is present");
 						vLocalFee = true;
 					}
