@@ -1,5 +1,4 @@
 
-
 /*-----------------------------------------------------------------------------------------------------/
 | Event			: WorkflowTaskUpdateAfter
 | Usage			: Additional Info Required Email for Licenses MJ Applications
@@ -18,3 +17,6 @@ include("432_deactivateMJTasks");
 
 // SW Script 433
 include("433_MJ_Application_Update");
+
+//schedule pending inspections
+include("404_AppAutomationMJ");
