@@ -89,22 +89,25 @@ function doSQL(sql) {
 		var sStmt = conn.prepareStatement(sql);
 
 		if (sql.toUpperCase().indexOf("SELECT") == 0) {
-			var rSet = sStmt.executeQuery();
-			logDebug("SSTMT: " + rSet); 
-			while (rSet) {
-			var obj = {};
-			var md = rSet.getMetaData();
-			logDebug("MD value: " + md);
-			var columns = md.getColumnCount();
-			logDebug("Columns: "+ columns);
-			for (i = 1; i <= columns; i++) {
-				obj[md.getColumnName(i)] = String(rSet.getString(md.getColumnName(i)));
-			}
-			obj = rSet.getRow();
-			array.push(obj);
-			logDebug("Array: " + array);
-			return array;
-			}
+			sStmt.executeQuery();
+			results = sStmt.getResultSet()
+			logDebug("Results: " + results);
+			// var rSet = sStmt.executeQuery();
+			// logDebug("SSTMT: " + rSet); 
+			// while (rSet) {
+			// var obj = {};
+			// var md = rSet.getMetaData();
+			// logDebug("MD value: " + md);
+			// var columns = md.getColumnCount();
+			// logDebug("Columns: "+ columns);
+			// for (i = 1; i <= columns; i++) {
+			// 	obj[md.getColumnName(i)] = String(rSet.getString(md.getColumnName(i)));
+			// }
+			// obj = rSet.getRow();
+			// array.push(obj);
+			// logDebug("Array: " + array);
+			// return array;
+			// }
 			// rSet.close();
 			// sStmt.close();
 			// conn.close();
