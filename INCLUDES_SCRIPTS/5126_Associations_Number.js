@@ -91,24 +91,26 @@ function doSQL(sql) {
 		if (sql.toUpperCase().indexOf("SELECT") == 0) {
 			var rSet = sStmt.executeQuery();
 			logDebug("SSTMT: " + rSet);
-			while (rSet.next()) {
-				var obj = {};
-				var md = rSet.getMetaData();
-				var columns = md.getColumnCount();
-				for (i = 1; i <= columns; i++) {
-					obj[md.getColumnName(i)] = String(rSet.getString(md.getColumnName(i)));
-				}
-				obj.count = rSet.getRow();
-				array.push(obj);
-				return array;
-			}
+			var hoaNumber: rSet++;
+			logDebug("New HOA number: " + hoaNumber);
+			// while (rSet.next()) {
+			// 	var obj = {};
+			// 	var md = rSet.getMetaData();
+			// 	var columns = md.getColumnCount();
+			// 	for (i = 1; i <= columns; i++) {
+			// 		obj[md.getColumnName(i)] = String(rSet.getString(md.getColumnName(i)));
+			// 	}
+			// 	obj.count = rSet.getRow();
+			// 	array.push(obj);
+			// 	return array;
+			// }
 		rSet.close();
 		sStmt.close();
 		conn.close();
        
-        logDebug("The highest neighborhood number is: " + array);
-        var hoaNumber = array++;
-        logDebug("New HOA number is: " + hoaNumber);
+        //logDebug("The highest neighborhood number is: " + array);
+        //var hoaNumber = array++;
+        //logDebug("New HOA number is: " + hoaNumber);
 		}
 		} catch (err) {
 		aa.print(err.message);
