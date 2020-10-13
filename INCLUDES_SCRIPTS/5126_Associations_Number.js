@@ -95,7 +95,7 @@ function doSQL(sql) {
 			while (results.next()){
 				array.push( results.getString("group_number"));
 			}
-			rSet.close();
+			//rSet.close();
 		sStmt.close();
 		conn.close();
 		if(array==null || array==undefined || array==""){
