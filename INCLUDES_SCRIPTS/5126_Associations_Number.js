@@ -107,6 +107,9 @@ function doSQL(sql) {
 	} catch (err) {
 		aa.print(err.message);
 	}
+	hoaNumber = array++;
+	logDebug ("HOA number is: " + hoaNumber);
+	//new sql function would kick off to update the value on the record.
 }
 
 		// var rSet = sStmt.executeQuery();
