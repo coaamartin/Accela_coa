@@ -35,31 +35,31 @@ if (SA) {
 eval(getMasterScriptText("INCLUDES_CUSTOM"));
 
 function getMasterScriptText(vScriptName) {
-    var servProvCode = aa.getServiceProviderCode();
-    if (arguments.length > 1)
-        servProvCode = arguments[1]; // use different serv prov code
-    vScriptName = vScriptName.toUpperCase();
-    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-    try {
-        var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-        return emseScript.getScriptText() + "";
-    } catch (err) {
-        return "";
-    }
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
 }
 
 function getScriptText(vScriptName) {
-    var servProvCode = aa.getServiceProviderCode();
-    if (arguments.length > 1)
-        servProvCode = arguments[1]; // use different serv prov code
-    vScriptName = vScriptName.toUpperCase();
-    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-    try {
-        var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
-        return emseScript.getScriptText() + "";
-    } catch (err) {
-        return "";
-    }
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
 }
 
 logDebug("Started to run script 5126");
@@ -71,8 +71,8 @@ logDebug("Started to run script 5126");
 logDebug("Starting SQL script");
 //SELECT cast (MAX(cast(b1_checklist_comment as int))as varchar (20))FROM BCHCKBOXWHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number';
 var sql = "SELECT convert (varchar (20), MAX(convert(int, b1_checklist_comment))) as group_number " +
-    " FROM BCHCKBOX " +
-    " WHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number'"
+	" FROM BCHCKBOX " +
+	" WHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number'"
 logDebug("This is the sql statement: " + sql);
 var msg = "";
 var condArray = doSQL(sql);
@@ -89,35 +89,36 @@ function doSQL(sql) {
 		var sStmt = conn.prepareStatement(sql);
 
 		if (sql.toUpperCase().indexOf("SELECT") == 0) {
-			var rSet = sStmt.executeQuery();
+			var rSet = sStmt.executeQuery(sql);
 			logDebug("SSTMT: " + rSet);
+			//var result = 
 			//var hoaNumber = rSet++;
 			//logDebug("New HOA number: " + hoaNumber);
 			// while (rSet.next()) {
-				var obj = {};
-				var md = rSet.getMetaData();
-				var columns = md.getColumnCount();
-				for (i = 1; i <= columns; i++) {
-					obj[md.getColumnName(i)] = String(rSet.getString(md.getColumnName(i)));
-				}
-				obj.count = rSet.getRow();
-				array.push(obj);
-				return array;
+			// var obj = {};
+			// var md = rSet.getMetaData();
+			// var columns = md.getColumnCount();
+			// for (i = 1; i <= columns; i++) {
+			// 	obj[md.getColumnName(i)] = String(rSet.getString(md.getColumnName(i)));
 			// }
-		// rSet.close();
-		// sStmt.close();
-		// conn.close();
-        // logDebug("The highest neighborhood number is: " + array);
-        // var hoaNumber = array++;
-        // logDebug("New HOA number is: " + hoaNumber);
+			// obj.count = rSet.getRow();
+			// array.push(obj);
+			// return array;
+			// }
+			// rSet.close();
+			// sStmt.close();
+			// conn.close();
+			// logDebug("The highest neighborhood number is: " + array);
+			// var hoaNumber = array++;
+			// logDebug("New HOA number is: " + hoaNumber);
 		}
 		rSet.close();
 		sStmt.close();
 		conn.close();
 		logDebug("The highest neighborhood number is: " + array);
-        var hoaNumber = array++;
-        logDebug("New HOA number is: " + hoaNumber);
-		} catch (err) {
+		var hoaNumber = array++;
+		logDebug("New HOA number is: " + hoaNumber);
+	} catch (err) {
 		aa.print(err.message);
 	}
 }
@@ -161,12 +162,12 @@ function doSQL(sql) {
 // 		}
 // 		} catch (err) {
 // 			logDebug("This is the error: " + err.message);
-			
+
 // 	}
 //         logDebug("The highest neighborhood number is: " + array);
 //         var hoaNumber = array++;
 //         logDebug("New HOA number is: "+ hoaNumber);
 
 // }
-       //push the new hoaNumber into the Neighborhood Group Number
-       //This is a cutom field
+//push the new hoaNumber into the Neighborhood Group Number
+//This is a cutom field
