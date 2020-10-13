@@ -90,6 +90,7 @@ function doSQL(sql) {
 
 		if (sql.toUpperCase().indexOf("SELECT") == 0) {
 			var rSet = sStmt.executeQuery();
+			logDebug("SSTMT: " + rSet);
 			while (rSet.next()) {
 				var obj = {};
 				var md = rSet.getMetaData();
