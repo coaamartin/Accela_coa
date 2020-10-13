@@ -99,11 +99,12 @@ function doSQL(sql) {
 				}
 				obj.count = rSet.getRow();
 				array.push(obj);
+				return array;
 			}
 		rSet.close();
 		sStmt.close();
 		conn.close();
-        return array;
+       
         logDebug("The highest neighborhood number is: " + array);
         var hoaNumber = array++;
         logDebug("New HOA number is: " + hoaNumber);
