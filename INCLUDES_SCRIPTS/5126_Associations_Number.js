@@ -102,6 +102,8 @@ function doSQL(sql) {
 			return "";
 		}
 		logDebug("Array: " + array);
+		hoaNumber = array++;
+		logDebug ("HOA number is: " + hoaNumber);
 		return array;
 		}
 	} catch (err) {
