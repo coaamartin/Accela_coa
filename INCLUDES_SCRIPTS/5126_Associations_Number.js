@@ -91,7 +91,7 @@ function doSQL(sql) {
 		if (sql.toUpperCase().indexOf("SELECT") == 0) {
 			var rSet = sStmt.executeQuery();
 			logDebug("SSTMT: " + rSet);
-			var hoaNumber: rSet++;
+			var hoaNumber = rSet++;
 			logDebug("New HOA number: " + hoaNumber);
 			// while (rSet.next()) {
 			// 	var obj = {};
