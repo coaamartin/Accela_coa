@@ -92,7 +92,23 @@ function doSQL(sql) {
 			sStmt.executeQuery();
 			results = sStmt.getResultSet()
 			logDebug("Results: " + results);
-			// var rSet = sStmt.executeQuery();
+			while (results.next()){
+				array.push( results.getString("group_number"));
+			}
+			rSet.close();
+		sStmt.close();
+		conn.close();
+		if(array==null || array==undefined || array==""){
+			return "";
+		}
+		return array;
+		}
+	} catch (err) {
+		aa.print(err.message);
+	}
+}
+
+		// var rSet = sStmt.executeQuery();
 			// logDebug("SSTMT: " + rSet); 
 			// while (rSet) {
 			// var obj = {};
@@ -114,17 +130,7 @@ function doSQL(sql) {
 			// logDebug("The highest neighborhood number is: " + array);
 			// var hoaNumber = array++;
 			// logDebug("New HOA number is: " + hoaNumber);
-		}
-		rSet.close();
-		sStmt.close();
-		conn.close();
-		logDebug("The highest neighborhood number is: " + array);
-		var hoaNumber = array++;
-		logDebug("New HOA number is: " + hoaNumber);
-	} catch (err) {
-		aa.print(err.message);
-	}
-}
+
 // logDebug("The highest neighborhood number is: " + array);
 // var hoaNumber = array++;
 // logDebug("New HOA number is: " + hoaNumber);
