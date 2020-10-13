@@ -102,7 +102,7 @@ function doSQL(sql) {
 			return "";
 		}
 		logDebug("Array: " + array);
-		hoaNumber = array + 1;
+		hoaNumber = ++array;
 		// for (var i = 0; i < hoaNumber.length; i++){
 		// 	hoaNumber[i] + 1;
 		// }
