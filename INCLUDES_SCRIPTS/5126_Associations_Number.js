@@ -101,6 +101,7 @@ function doSQL(sql) {
 		if(array==null || array==undefined || array==""){
 			return "";
 		}
+		logDebug("Array: " + array);
 		return array;
 		}
 	} catch (err) {
