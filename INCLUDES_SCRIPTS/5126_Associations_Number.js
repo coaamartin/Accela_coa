@@ -73,14 +73,14 @@ logDebug("Starting SQL script");
 var sql = "SELECT convert (varchar (20), MAX(convert(int, b1_checklist_comment))) as group_number " +
     " FROM BCHCKBOX " +
     " WHERE B1_CHECKBOX_DESC like 'Neighborhood Group Number'"
-
+logDebug("This is the sql statement: " + sql);
 var msg = "";
 var condArray = doSQL(sql);
 
 aa.print(msg);
 
 function doSQL(sql) {
-
+	logDebug("Starting to kick off the doSQL function.")
 	try {
 		var array = [];
 		var initialContext = aa.proxyInvoker.newInstance("javax.naming.InitialContext", null).getOutput();
