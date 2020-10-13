@@ -100,7 +100,7 @@ function doSQL(sql) {
 			for (i = 1; i <= columns; i++) {
 				obj[md.getColumnName(i)] = String(rSet.getString(md.getColumnName(i)));
 			}
-			//obj.count = rSet.getRow();
+			obj = rSet.getRow();
 			array.push(obj);
 			logDebug("Array: " + array);
 			return array;
