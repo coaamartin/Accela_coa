@@ -102,6 +102,7 @@ function doSQL(sql) {
 			}
 			//obj.count = rSet.getRow();
 			array.push(obj);
+			logDebug("Array: " + array);
 			return array;
 			}
 			// rSet.close();
