@@ -94,7 +94,9 @@ function doSQL(sql) {
 			while (rSet) {
 			var obj = {};
 			var md = rSet.getMetaData();
+			logDebug("MD value: " + md);
 			var columns = md.getColumnCount();
+			logDebug("Columns: "+ columns);
 			for (i = 1; i <= columns; i++) {
 				obj[md.getColumnName(i)] = String(rSet.getString(md.getColumnName(i)));
 			}
