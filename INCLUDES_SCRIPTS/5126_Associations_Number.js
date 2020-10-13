@@ -102,10 +102,10 @@ function doSQL(sql) {
 			return "";
 		}
 		logDebug("Array: " + array);
-		hoaNumber = array;
-		for (var i = 0; i < hoaNumber.length; i++){
-			hoaNumber[i] += 1;
-		}
+		hoaNumber = array + 1;
+		// for (var i = 0; i < hoaNumber.length; i++){
+		// 	hoaNumber[i] + 1;
+		// }
 		logDebug ("HOA number is: " + hoaNumber);
 		return array;
 		}
