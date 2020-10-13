@@ -106,7 +106,7 @@ function doSQL(sql) {
 		hoaNumber = ++array;
 		logDebug ("HOA number is: " + hoaNumber);
 		//new sql function would kick off to update the value on the record.
-		editAppSpecific("Neighborhood Group Number  ",hoaNumber);
+		editAppSpecific("Neighborhood Group Number",hoaNumber);
 		return array;
 		}
 	} catch (err) {
