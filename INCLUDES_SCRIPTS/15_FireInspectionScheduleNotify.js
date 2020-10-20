@@ -19,7 +19,7 @@ if (!inspectionExist.getSuccess()) {
 }   
 
 if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection" || inspType == "FD Operational Permit" || inspType == "FD TUP" || inspType == "FD Initial Requested Inspection")
-	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served" || inspResult == "Parking Citation Issued" || inspResult == "Pre-citation Issued"|| inspResult == "Postponed"))
+	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served" || inspResult == "Parking Citation Issued" || inspResult == "Pre-citation Issued" || inspResult == "Postponed" || inspResult == "Rollover"))
 {
 	logDebug("Script 15 - criteria met");
 	
@@ -56,8 +56,12 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 	{	//schedule 14 days out
 		daysAhead = 14;	}
 	else if(inspResult == "Postponed") 
-	{  //schedule 
+	{  //schedule 3 months out or 90 days 
 		daysAhead = 90;
+	}
+	else if(inspResult == "Rollover") 
+	{  //schedule out 1 year = 365
+		daysAhead = 365;
 	}
 	else if (numFailInsp == 3 && inspResult == "Violations Found")
 	{
