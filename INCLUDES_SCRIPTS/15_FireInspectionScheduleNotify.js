@@ -55,6 +55,10 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 	else if((inspResult == "Fail" || inspResult == "Violations Found") && numFailInsp == 2)
 	{	//schedule 14 days out
 		daysAhead = 14;	}
+	else if(inspResult == "Postponed") 
+	{  //schedule 
+		daysAhead = 90;
+	}
 	else if (numFailInsp == 3 && inspResult == "Violations Found")
 	{
 		daysAhead = 7;
