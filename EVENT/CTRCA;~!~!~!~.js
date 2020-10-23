@@ -20,13 +20,9 @@ try{
 	    var phoneNumber = "";
 	    var module = appTypeArray[0];
 	    if(module == "Building"){
-	     if (appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse/*")
-		 && appMatch("Building/Permit/DonationBin/*")){
 			 phoneNumber = "303-739-7420"
 			 appTypeFirstLevel = "Permit Center"
 			 addParameter(params, "$$appTypeFirstLevel$$", appTypeFirstLevel);
-		 }
-	    phoneNumber = "303-739-7000"
 	    
 	    }
 	    if(module == "Planning"){
