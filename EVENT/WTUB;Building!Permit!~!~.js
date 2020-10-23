@@ -26,17 +26,17 @@ if(appMatch("Building/Permit/New Building/NA") || appMatch("Building/Permit/Plan
 //}
 
 
-if($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wf:Permit Issuance/Issued')){
-    if (appMatch("Building/Permit/New Building/NA")) {
-        bldScript2_noContractorCheck();
-    } else if (appMatch("Building/Permit/Plans/NA")) {
-        bldScript2_noContractorCheck();
-    } else if(appMatch("Building/Permit/No Plans/NA")) {
-        bldScript2_noContractorCheck();
-    } else if(appMatch("Building/Permit/OTC/*")){
-        bldScript2_noContractorCheck();
-    }
-}
+// if($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wf:Permit Issuance/Issued')){
+//     if (appMatch("Building/Permit/New Building/NA")) {
+//         bldScript2_noContractorCheck();
+//     } else if (appMatch("Building/Permit/Plans/NA")) {
+//         bldScript2_noContractorCheck();
+//     } else if(appMatch("Building/Permit/No Plans/NA")) {
+//         bldScript2_noContractorCheck();
+//     } else if(appMatch("Building/Permit/OTC/*")){
+//         bldScript2_noContractorCheck();
+//     }
+// }
 
 //script ID: 5052_Allow_Prevent_Final_CO
 if ("Inspection Phase".equals(wfTask) && exists(wfStatus, ["Ready for CO", "Final"]))
