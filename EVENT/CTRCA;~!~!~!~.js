@@ -8,13 +8,13 @@ try{
 		addParcelDistrict(null,codeDistrict[0]["CODE_NUMBER"]);
 	}
 	
-	if(publicUser){
+	var record = aa.cap.getCap(capId).getOutput();
+    var capType=record.getCapType();
+    capType=capType.toString();
+	var exceptionRecordTypeArray =["Licenses/Marijuana/Pre Application Meeting/NA"];
+
+    if(publicUser && !exists(capType, exceptionRecordTypeArray)){
 	    params = aa.util.newHashtable();
-	    var record = aa.cap.getCap(capId).getOutput();
-	    var capType=record.getCapType();
-	    capType=capType.toString();
-	    if("Licenses/Marijuana/Pre Application Meeting/NA".equals(capType)) throw new Error('Script not applied for : '+capType);
-	    
 	    var appTypeArray= new Array();
 	    appTypeArray=capType.split("/");
 	    addParameter(params, "$$appTypeFirstLevel$$", appTypeArray[0]);
