@@ -11,16 +11,17 @@ try{
 	var record = aa.cap.getCap(capId).getOutput();
     var capType=record.getCapType();
     capType=capType.toString();
-	var exceptionRecordTypeArray =["Licenses/Marijuana/Pre Application Meeting/NA"];
+	var appTypeArray= new Array();
+	appTypeArray=capType.split("/");
+	var module = appTypeArray[0];
+    var category = appTypeArray[1];
+    var exceptionCategories = ["Marijuana"];
 
-    if(publicUser && !exists(capType, exceptionRecordTypeArray)){
+
+    if(publicUser && !exists(category, exceptionCategories)){
 	    params = aa.util.newHashtable();
-	    var appTypeArray= new Array();
-	    appTypeArray=capType.split("/");
 	    addParameter(params, "$$appTypeFirstLevel$$", appTypeArray[0]);
-	    
 	    var phoneNumber = "";
-	    var module = appTypeArray[0];
 	    if(module == "Building"){
 			 phoneNumber = "303-739-7420"
 			 appTypeFirstLevel = "Permit Center"
