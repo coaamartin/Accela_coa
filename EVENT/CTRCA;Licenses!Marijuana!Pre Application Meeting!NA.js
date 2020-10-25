@@ -1,4 +1,4 @@
-//ASA:Licenses/Marijuana/Pre Application Meeting/NA
+//CTRCA:LICENSES/MARIJUANA/PRE APPLICATION MEETING/NA
 //send email 
 //******************************************************************************
 appTypeResult = cap.getCapType(); //create CapTypeModel object
@@ -7,8 +7,8 @@ appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
 
 
-//AA only
-if(!publicUser){
+//ACA only
+if(publicUser){
 	
 	var emailTemplate = "LIC_MJ_PRELICENSEMEETING";
 	var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -18,8 +18,8 @@ if(!publicUser){
 	//var emailTo = getContactByType("Applicant", capId);
 	var emailTo = getAllContactsEmails()
 	var scheduledDate = AInfo["Meeting Date"];
-	var scheduledTime = AInfo["Meeting Time"];
-	editTaskSpecific("Pre Licensing Meeting","Original Scheduled Date",scheduledDate) 	
+	var scheduledTime = AInfo["Meeting Time"]; 	
+	editTaskSpecific("Pre Licensing Meeting","Original Scheduled Date",scheduledDate)
 	editTaskSpecific("Pre Licensing Meeting","Original Scheduled Time",scheduledTime) 
 	
 	var today = new Date();
@@ -61,6 +61,5 @@ if(!publicUser){
 	//dusty allen
 	var userObj = aa.person.getUser("Dusty",null,"Allen").getOutput();
     assignTask("Pre Licensing Meeting",userObj.getUserID());
-	
 }
 
