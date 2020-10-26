@@ -88,7 +88,7 @@ if (balanceDue == 0) {
         report = generateReportFile(reportName, rParams, 'Building');
         //sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
     }
-    function generateReportFile(aaReportName,parameters,rModule) 
+function generateReportFile(aaReportName,parameters,rModule) 
 {
   var reportName = aaReportName;
 

@@ -47,9 +47,8 @@ logDebug("Starting to kick off event to attach cert to record");
         logDebug("Rparams for envent" + rParams);
         report = generateReportFile(reportName, rParams, 'Building');
         //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
-    }
-}
-function generateReportFile(aaReportName,parameters,rModule) 
+	}
+	function generateReportFile(aaReportName,parameters,rModule) 
 {
   var reportName = aaReportName;
 
@@ -94,4 +93,6 @@ function wait(ms){
      end = new Date().getTime();
   }
 }
+}
+
 logDebug("End of PPA;CityClerk!Incident!~!~.js ");
