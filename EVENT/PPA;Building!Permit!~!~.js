@@ -24,7 +24,7 @@ logDebug("Starting to kick off event to attach cert to record");
         rParams.put("RecordID", altID);
         logDebug("Rparams for envent" + rParams);
         report = generateReportFile(reportName, rParams, 'Building');
-        sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
+        //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
     }
     if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
         logDebug("Temp Sign app type. Starting to run report.");
@@ -35,7 +35,7 @@ logDebug("Starting to kick off event to attach cert to record");
         rParams.put("RecordID", altID);
         logDebug("Rparams for envent" + rParams);
         report = generateReportFile(reportName, rParams, 'Building');
-        sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
+        //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
     }
     if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
         logDebug("Donation Bin app type. Starting to run report.");
@@ -46,7 +46,7 @@ logDebug("Starting to kick off event to attach cert to record");
         rParams.put("RecordID", altID);
         logDebug("Rparams for envent" + rParams);
         report = generateReportFile(reportName, rParams, 'Building');
-        sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
+        //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
     }
 }
 function generateReportFile(aaReportName,parameters,rModule) 
@@ -93,6 +93,5 @@ function wait(ms){
    while(end < start + ms) {
      end = new Date().getTime();
   }
-}
 }
 logDebug("End of PPA;CityClerk!Incident!~!~.js ");
