@@ -14,25 +14,39 @@ logDebug("End of 5127_CityClerk_PRA script");
 logDebug("---------------------> 5127_CityClerk_PRA.js ended.");
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 //Start to generate the Certificate. This will attach to the record when ran.
-logDebug("Starting to kick off ASYNC event to attach cert to record");
-//var vEmailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
-var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-var vEParams = aa.util.newHashtable();
-var altID = capId.getCustomID();
-vExpDate = new Date();
-// All licenses expire on 12/31, if after march assume next year
-	vNewExpDate = new Date(vExpDate.getFullYear() + (vExpDate.getMonth > 2 ? 1 : 0), 11, 31);
-addParameter(vEParams, "$$LicenseType$$", "Arborist Contractor License");
-addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
-//addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
-addParameter(vEParams, "$$ApplicationID$$", altID);
-addParameter(vEParams, "$$altID$$", altID);
-addParameter(vEParams, "$$acaURL$$", acaSite);
-logDebug("Eparams for async envent" + vEParams);
-//emailContacts("All", vEmailTemplate, vEParams, "", "");
-var vAsyncScript = "RUN_ARBORIST_LICENSE_REPORT";
-var envParameters = aa.util.newHashMap();
-envParameters.put("CapId", altID);
-aa.runAsyncScript(vAsyncScript, envParameters);
+logDebug("Starting to kick off event to attach cert to record");
+    if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
+        logDebug("Donation Bin app type. Starting to run report.");
+        var reportName = "Don_Bin_Permit_script";
+        var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+        var altID = capId.getCustomID();
+        var rParams = aa.util.newHashtable();
+        rParams.put("RecordID", altID);
+        logDebug("Rparams for envent" + rParams);
+        var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
+        //sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
+    }
+    if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
+        logDebug("Temp Sign app type. Starting to run report.");
+        var reportName = "Temp_Sign_Permit_script";
+        var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+        var altID = capId.getCustomID();
+        var rParams = aa.util.newHashtable();
+        rParams.put("RecordID", altID);
+        logDebug("Rparams for envent" + rParams);
+        var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
+        //sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
+    }
+    if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
+        logDebug("Donation Bin app type. Starting to run report.");
+        var reportName = "Temp_Use_Permit_script";
+        var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+        var altID = capId.getCustomID();
+        var rParams = aa.util.newHashtable();
+        rParams.put("RecordID", altID);
+        logDebug("Rparams for envent" + rParams);
+        var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
+        //sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
+    }
 }
 logDebug("End of PPA;CityClerk!Incident!~!~.js ");
