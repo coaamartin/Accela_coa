@@ -89,7 +89,7 @@ logDebug("appType: " + appTypeString);
     }
 
     //Temp Sign code
-    else if ("No".equals(vASIValue) && "Building/Permit/TempSign/NA".equals(appTypeString)) {
+    else if ("No".equals(vASIValue) && "Building/Permit/TempSigns/NA".equals(appTypeString)) {
         logDebug("Starting to invoice fee on record.");
         var feecode = "CC_TS";
         var feeschedule = "CC_TS";
