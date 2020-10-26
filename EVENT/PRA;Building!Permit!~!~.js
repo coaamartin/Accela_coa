@@ -14,10 +14,12 @@ Notes:
 	- in specs: records with 2nd level='Permits', correct name is 'Permit'
 	- for record "Building/Permit/Plans/NA" Task name is 'Special Inspection Check' not 'Special Inspection'
 */
-
+if(!appMatch("Building/Permit/TempSigns/*")&& !appMatch("Building/Permit/TempUse/*")
+&& !appMatch("Building/Permit/DonationBin/*"))
+{
 autoCloseWorkflow();
 script381_UpdatCustomFieldPermitExpirationDates();
-
+}
 
 
 //Written by rprovinc   
