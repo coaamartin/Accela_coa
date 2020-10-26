@@ -22,7 +22,8 @@ logDebug("Starting to kick off event to attach cert to record");
         var altID = capId.getCustomID();
         var rParams = aa.util.newHashtable();
         rParams.put("RecordID", altID);
-        logDebug("Rparams for envent" + rParams);
+		logDebug("Rparams for envent" + rParams);
+		var report = null;
         report = generateReportFile(reportName, rParams, 'Building');
         //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
     }
@@ -33,7 +34,8 @@ logDebug("Starting to kick off event to attach cert to record");
         var altID = capId.getCustomID();
         var rParams = aa.util.newHashtable();
         rParams.put("RecordID", altID);
-        logDebug("Rparams for envent" + rParams);
+		logDebug("Rparams for envent" + rParams);
+		var report = null;
         report = generateReportFile(reportName, rParams, 'Building');
         //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
     }
@@ -44,7 +46,8 @@ logDebug("Starting to kick off event to attach cert to record");
         var altID = capId.getCustomID();
         var rParams = aa.util.newHashtable();
         rParams.put("RecordID", altID);
-        logDebug("Rparams for envent" + rParams);
+		logDebug("Rparams for envent" + rParams);
+		var report = null;
         report = generateReportFile(reportName, rParams, 'Building');
         //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
 	}
