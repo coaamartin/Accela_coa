@@ -48,7 +48,7 @@ if (balanceDue == 0) {
     include("5124_CityClerk_Approval");
     logDebug("End of 5127_CityClerk_PRA script");
     logDebug("---------------------> 5127_CityClerk_PRA.js ended.");
-    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+    //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     //Start to generate the Certificate. This will attach to the record when ran.
     logDebug("Starting to kick off event to attach cert to record");
     logDebug("Starting to kick off event to attach cert to record");
