@@ -1,90 +1,98 @@
-//RUN_Permits_CERT.js
+//RUN_PERMIT_CERT
+function getScriptText(vScriptName) {
+  vScriptName = vScriptName.toUpperCase();
+  var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+  var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
+  return emseScript.getScriptText() + "";
+}
 
-v//Start to generate the Certificate. This will attach to the record when ran.
+var SCRIPT_VERSION = 3.0
+aa.env.setValue("CurrentUserID", "ADMIN");
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
+
+wait(10000);
+var capId = aa.env.getValue("CapId");
+
+var module = "Building";
+//var repName = "Arborist License";
+
+//Start to generate the Certificate. This will attach to the record when ran.
 logDebug("Starting to kick off event to attach cert to record");
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
-    logDebug("Donation Bin app type. Starting to run report.");
-    var reportName = "Don_Bin_Permit_script";
-    var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-    var altID = capId.getCustomID();
-    var rParams = aa.util.newHashtable();
-    rParams.put("RecordID", altID);
-    logDebug("Rparams for envent" + rParams);
-    report = generateReportFile(reportName, rParams, 'Building');
-    //sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
-
-    // Don_Bin_Permit_script
+  logDebug("Donation Bin app type. Starting to run report.");
+  var repName = "Don_Bin_Permit_script";
+  var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+  //var altID = capId.getCustomID();
+  reportParameters = aa.util.newHashMap();
+  reportParameters.put("RecordID", capId.getCustomID());
+  logDebug("Rparams for envent" + reportParameters);
+  report = null;
+  report = generateReportFile(repName, reportParameters, module);
+  //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
 }
 if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
-    logDebug("Temp Sign app type. Starting to run report.");
-    var reportName = "Temp_Sign_Permit_script";
-    var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-    var altID = capId.getCustomID();
-    var rParams = aa.util.newHashtable();
-    rParams.put("RecordID", altID);
-    logDebug("Rparams for envent" + rParams);
-    report = generateReportFile(reportName, rParams, 'Building');
-    //sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
-
-    // Don_Bin_Permit_script
+  logDebug("Temp Sign app type. Starting to run report.");
+  var repName = "Don_Bin_Permit_script";
+  var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+  //var altID = capId.getCustomID();
+  reportParameters = aa.util.newHashMap();
+  reportParameters.put("RecordID", capId.getCustomID());
+  logDebug("Rparams for envent" + reportParameters);
+  report = null;
+  report = generateReportFile(repName, reportParameters, module);
+  //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
 }
 if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
-    logDebug("Donation Bin app type. Starting to run report.");
-    var reportName = "Temp_Use_Permit_script";
-    var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-    var altID = capId.getCustomID();
-    var rParams = aa.util.newHashtable();
-    rParams.put("RecordID", altID);
-    logDebug("Rparams for envent" + rParams);
-    report = generateReportFile(reportName, rParams, 'Building');
-    //sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
+  logDebug("Donation Bin app type. Starting to run report.");
+  var repName = "Don_Bin_Permit_script";
+  var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+  //var altID = capId.getCustomID();
+  reportParameters = aa.util.newHashMap();
+  reportParameters.put("RecordID", capId.getCustomID());
+  logDebug("Rparams for envent" + reportParameters);
+  report = null;
+  report = generateReportFile(repName, reportParameters, module);
+  //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
 }
 
+function generateReportFile(aaReportName, parameters, rModule) {
+  var reportName = aaReportName
+  report = aa.reportManager.getReportInfoModelByName(reportName);
+  report = report.getOutput();
+  report.setModule(rModule);
+  report.setCapId(capId);
+  report.setReportParameters(parameters);
+  //Added
+  vAltId = capId.getCustomID();
+  report.getEDMSEntityIdModel().setAltId(vAltId);
+  var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
+  aa.print("---" + permit.getOutput().booleanValue());
+  if (permit.getOutput().booleanValue()) {
+    var reportResult = aa.reportManager.getReportResult(report);
+
+    if (reportResult) {
+      reportResult = reportResult.getOutput();
+      var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+      logMessage("Report Result: " + reportResult);
+      reportFile = reportFile.getOutput();
+      return reportFile
+    } else {
+      logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
+      return false;
+    }
+  } else 
+  {
+    logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
+    return false;
+  }
 }
 
-function generateReportFile(aaReportName,parameters,rModule) 
-{
-var reportName = aaReportName;
-
-report = aa.reportManager.getReportInfoModelByName(reportName);
-report = report.getOutput();
-
-
-report.setModule(rModule);
-report.setCapId(capId);
-report.setReportParameters(parameters);
-//Added
-vAltId = capId.getCustomID();
-report.getEDMSEntityIdModel().setAltId(vAltId);
-var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
-aa.print("---"+permit.getOutput().booleanValue());
-if(permit.getOutput().booleanValue()) 
-{
-var reportResult = aa.reportManager.getReportResult(report);
-
-if(reportResult) 
-{
-  reportResult = reportResult.getOutput();
-  var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-  logMessage("Report Result: "+ reportResult);
-  reportFile = reportFile.getOutput();
-  return reportFile
-} else 
-{
-  logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
-  return false;
+function wait(ms) {
+  var start = new Date().getTime();
+  var end = start;
+  while (end < start + ms) {
+    end = new Date().getTime();
+  }
 }
-} else 
-{
-logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
-return false; 
-}
-}
-function wait(ms){
-var start = new Date().getTime();
-var end = start;
-while(end < start + ms) {
- end = new Date().getTime();
-}
-}
-
