@@ -88,7 +88,7 @@ function generateReportFile(aaReportName, parameters, rModule) {
     return false;
   }
 }
-
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 function wait(ms) {
   var start = new Date().getTime();
   var end = start;
