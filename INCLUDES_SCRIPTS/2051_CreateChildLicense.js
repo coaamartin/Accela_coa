@@ -60,7 +60,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 			numberOfMonths = 12;
 			tmpNewDate = dateAddMonths(null, numberOfMonths);
 			}
-		} else if (exists(appTypeArray[2],["Temporary Permit"])){
+		} else if (exists(appTypeArray[2],["Seasonal Licenses"])){
 			var licType = AInfo['Type of License'];
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
