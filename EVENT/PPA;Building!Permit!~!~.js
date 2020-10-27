@@ -15,76 +15,82 @@ if (balanceDue == 0) {
 	aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 	//Start to generate the Certificate. This will attach to the record when ran.
 	logDebug("Starting to kick off event to attach cert to record");
-	if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
-		logDebug("Donation Bin app type. Starting to run report.");
-		var reportName = "Don_Bin_Permit_script";
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		var altID = capId.getCustomID();
-		var rParams = aa.util.newHashtable();
-		rParams.put("RecordID", altID);
-		logDebug("Rparams for envent" + rParams);
-		var report = null;
-		report = generateReportFile(reportName, rParams, 'Building');
-		//sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
-	}
-	if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
-		logDebug("Temp Sign app type. Starting to run report.");
-		var reportName = "Temp_Sign_Permit_script";
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		var altID = capId.getCustomID();
-		var rParams = aa.util.newHashtable();
-		rParams.put("RecordID", altID);
-		logDebug("Rparams for envent" + rParams);
-		var report = null;
-		report = generateReportFile(reportName, rParams, 'Building');
-		//sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
-	}
-	if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
-		logDebug("Donation Bin app type. Starting to run report.");
-		var reportName = "Temp_Use_Permit_script";
-		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-		var altID = capId.getCustomID();
-		var rParams = aa.util.newHashtable();
-		rParams.put("RecordID", altID);
-		logDebug("Rparams for envent" + rParams);
-		var report = null;
-		report = generateReportFile(reportName, rParams, 'Building');
-		//sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
-	}
+	CapId = capId;
+	var vAsyncScript = "RUN_PERMITS_CERT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("CapId", CapId);
+	logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
+	aa.runAsyncScript(vAsyncScript, envParameters);
+// 	if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
+// 		logDebug("Donation Bin app type. Starting to run report.");
+// 		var reportName = "Don_Bin_Permit_script";
+// 		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+// 		var altID = capId.getCustomID();
+// 		var rParams = aa.util.newHashtable();
+// 		rParams.put("RecordID", altID);
+// 		logDebug("Rparams for envent" + rParams);
+// 		var report = null;
+// 		report = generateReportFile(reportName, rParams, 'Building');
+// 		//sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
+// 	}
+// 	if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
+// 		logDebug("Temp Sign app type. Starting to run report.");
+// 		var reportName = "Temp_Sign_Permit_script";
+// 		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+// 		var altID = capId.getCustomID();
+// 		var rParams = aa.util.newHashtable();
+// 		rParams.put("RecordID", altID);
+// 		logDebug("Rparams for envent" + rParams);
+// 		var report = null;
+// 		report = generateReportFile(reportName, rParams, 'Building');
+// 		//sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
+// 	}
+// 	if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
+// 		logDebug("Donation Bin app type. Starting to run report.");
+// 		var reportName = "Temp_Use_Permit_script";
+// 		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+// 		var altID = capId.getCustomID();
+// 		var rParams = aa.util.newHashtable();
+// 		rParams.put("RecordID", altID);
+// 		logDebug("Rparams for envent" + rParams);
+// 		var report = null;
+// 		report = generateReportFile(reportName, rParams, 'Building');
+// 		//sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
+// 	}
 
-}
+// }
 
-function generateReportFile(aaReportName, parameters, rModule) {
-	var reportName = aaReportName;
+// function generateReportFile(aaReportName, parameters, rModule) {
+// 	var reportName = aaReportName;
 
-	report = aa.reportManager.getReportInfoModelByName(reportName);
-	report = report.getOutput();
+// 	report = aa.reportManager.getReportInfoModelByName(reportName);
+// 	report = report.getOutput();
 
 
-	report.setModule(rModule);
-	report.setCapId(capId);
-	report.setReportParameters(parameters);
-	//Added
-	vAltId = capId.getCustomID();
-	report.getEDMSEntityIdModel().setAltId(vAltId);
-	var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
-	aa.print("---" + permit.getOutput().booleanValue());
-	if (permit.getOutput().booleanValue()) {
-		var reportResult = aa.reportManager.getReportResult(report);
+// 	report.setModule(rModule);
+// 	report.setCapId(capId);
+// 	report.setReportParameters(parameters);
+// 	//Added
+// 	vAltId = capId.getCustomID();
+// 	report.getEDMSEntityIdModel().setAltId(vAltId);
+// 	var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
+// 	aa.print("---" + permit.getOutput().booleanValue());
+// 	if (permit.getOutput().booleanValue()) {
+// 		var reportResult = aa.reportManager.getReportResult(report);
 
-		if (reportResult) {
-			reportResult = reportResult.getOutput();
-			var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-			logMessage("Report Result: " + reportResult);
-			reportFile = reportFile.getOutput();
-			return reportFile
-		} else {
-			logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
-			return false;
-		}
-	} else {
-		logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
-		return false;
-	}
+// 		if (reportResult) {
+// 			reportResult = reportResult.getOutput();
+// 			var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+// 			logMessage("Report Result: " + reportResult);
+// 			reportFile = reportFile.getOutput();
+// 			return reportFile
+// 		} else {
+// 			logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
+// 			return false;
+// 		}
+// 	} else {
+// 		logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
+// 		return false;
+// 	}
 }
 logDebug("End of PPA;CityClerk!Incident!~!~.js ");
