@@ -16,7 +16,6 @@ wait(10000);
 var capId = aa.env.getValue("CapId");
 
 var module = "Building";
-//var repName = "Arborist License";
 
 //Start to generate the Certificate. This will attach to the record when ran.
 logDebug("Starting to kick off event to attach cert to record");
@@ -24,37 +23,31 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
   logDebug("Donation Bin app type. Starting to run report.");
   var repName = "Don_Bin_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-  //var altID = capId.getCustomID();
   reportParameters = aa.util.newHashMap();
   reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
-  //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
 }
 if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
   logDebug("Temp Sign app type. Starting to run report.");
-  var repName = "Don_Bin_Permit_script";
+  var repName = "Temp_Sign_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-  //var altID = capId.getCustomID();
   reportParameters = aa.util.newHashMap();
   reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
-  //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
 }
 if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
-  logDebug("Donation Bin app type. Starting to run report.");
-  var repName = "Don_Bin_Permit_script";
+  logDebug("Temp Use app type. Starting to run report.");
+  var repName = "Temp_Use_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-  //var altID = capId.getCustomID();
   reportParameters = aa.util.newHashMap();
   reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
-  //sendNotification("noreply@auroragov.org", "noreply@auroragov.org", "", emailTemplate, tParams, null);
 }
 
 function generateReportFile(aaReportName, parameters, rModule) {
