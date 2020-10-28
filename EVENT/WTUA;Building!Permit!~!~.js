@@ -137,6 +137,7 @@ if (wfTask == "Final Approval" && wfStatus == "Approved") {
     // Script 5124_CityClerk
     //include("5124_CityClerk_Approval");
     include("5121_CityClerk");
+
 }
 
 
@@ -148,8 +149,6 @@ if (wfTask == "Final Approval" && wfStatus == "Denied") {
     closeAllTasks(capId, "");
 }
 
-var vASIValue = getAppSpecific("Non-Profit");
-logDebug("Non-Profit: " + vASIValue);
 //Below is going to be logic for an email to be sent to the Planning Director after all other WFtasks have been statused with anything or to not empty status.
 //Each workflow has different steps. Going to need to call each record type seperatly. 
 //Below is the logic for donation bin
