@@ -23,100 +23,118 @@ appTypeArray = appTypeString.split("/");
 // logDebug("Non Profit: " + nonProfit);
 logDebug("Non-Profit: " + vASIValue);
 logDebug("appType: " + appTypeString);
-    if ("No".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appTypeString)) {
-        //Donation Bins code
-        logDebug("Starting to invoice fee on record.");
-        var feecode = "CC_DB";
-        var feeschedule = "CC_DB";
-        var thefee = "1";
-        //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-        updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+if ("No".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appTypeString)) {
+    //Donation Bins code
+    logDebug("Starting to invoice fee on record.");
+    var feecode = "CC_DB";
+    var feeschedule = "CC_DB";
+    var thefee = "1";
+    //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
 
-        //Send Notification
-        logDebug("Starting to send notifications for fee processing");
-        var emailTemplate = "CC_FEE_PAY";
-        var capAlias = cap.getCapModel().getAppTypeAlias();
-        var recordApplicant = getContactByType("Applicant", capId);
-        var firstName = recordApplicant.getFirstName();
-        var lastName = recordApplicant.getLastName();
-        var emailTo = recordApplicant.getEmail();
-        var altId = capId.getCustomID();
-        var today = new Date();
-        var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-        var tParams = aa.util.newHashtable();
-        tParams.put("$$todayDate$$", thisDate);
-        tParams.put("$$altid$$", altId);
-        tParams.put("$$Record Type$$", "Donation Bin Request");
-        tParams.put("$$capAlias$$", capAlias);
-        tParams.put("$$FirstName$$", firstName);
-        tParams.put("$$LastName$$", lastName);
-        logDebug("EmailTo: " + emailTo);
-        logDebug("Table Parameters: " + tParams);
-        sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
-        logDebug("End of Script 5121_CityClerk.js");
-    }
-    //Temp Use code
-    else if ("No".equals(vASIValue) && "Building/Permit/TempUse/NA".equals(appTypeString)) {
-        logDebug("Starting to invoice fee on record.");
-        var feecode = "CC_TU";
-        var feeschedule = "CC_TU";
-        var thefee = "1";
-        //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-        updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+    //Send Notification
+    logDebug("Starting to send notifications for fee processing");
+    var emailTemplate = "CC_FEE_PAY";
+    var capAlias = cap.getCapModel().getAppTypeAlias();
+    var recordApplicant = getContactByType("Applicant", capId);
+    var firstName = recordApplicant.getFirstName();
+    var lastName = recordApplicant.getLastName();
+    var emailTo = recordApplicant.getEmail();
+    var altId = capId.getCustomID();
+    var today = new Date();
+    var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var tParams = aa.util.newHashtable();
+    tParams.put("$$todayDate$$", thisDate);
+    tParams.put("$$altid$$", altId);
+    tParams.put("$$Record Type$$", "Donation Bin Request");
+    tParams.put("$$capAlias$$", capAlias);
+    tParams.put("$$FirstName$$", firstName);
+    tParams.put("$$LastName$$", lastName);
+    logDebug("EmailTo: " + emailTo);
+    logDebug("Table Parameters: " + tParams);
+    sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
+    logDebug("End of Script 5121_CityClerk.js");
+}
+//Temp Use code
+else if ("No".equals(vASIValue) && "Building/Permit/TempUse/NA".equals(appTypeString)) {
+    logDebug("Starting to invoice fee on record.");
+    var feecode = "CC_TU";
+    var feeschedule = "CC_TU";
+    var thefee = "1";
+    //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
 
-        //Send Notification for fee processing
-        logDebug("Starting to send notifications for fee processing");
-        var emailTemplate = "CC_FEE_PAY";
-        var capAlias = cap.getCapModel().getAppTypeAlias();
-        var altId = capId.getCustomID();
-        var recordApplicant = getContactByType("Applicant", capId);
-        var firstName = recordApplicant.getFirstName();
-        var lastName = recordApplicant.getLastName();
-        var emailTo = recordApplicant.getEmail();
-        var today = new Date();
-        var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-        var tParams = aa.util.newHashtable();
-        tParams.put("$$todayDate$$", thisDate);
-        tParams.put("$$altid$$", altId);
-        tParams.put("$$Record Type$$", "Temp Use Permit");
-        tParams.put("$$capAlias$$", capAlias);
-        tParams.put("$$FirstName$$", firstName);
-        tParams.put("$$LastName$$", lastName);
-        logDebug("EmailTo: " + emailTo);
-        logDebug("Table Parameters: " + tParams);
-        sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
-        logDebug("End of Script 5121_CityClerk.js");
-    }
+    //Send Notification for fee processing
+    logDebug("Starting to send notifications for fee processing");
+    var emailTemplate = "CC_FEE_PAY";
+    var capAlias = cap.getCapModel().getAppTypeAlias();
+    var altId = capId.getCustomID();
+    var recordApplicant = getContactByType("Applicant", capId);
+    var firstName = recordApplicant.getFirstName();
+    var lastName = recordApplicant.getLastName();
+    var emailTo = recordApplicant.getEmail();
+    var today = new Date();
+    var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var tParams = aa.util.newHashtable();
+    tParams.put("$$todayDate$$", thisDate);
+    tParams.put("$$altid$$", altId);
+    tParams.put("$$Record Type$$", "Temp Use Permit");
+    tParams.put("$$capAlias$$", capAlias);
+    tParams.put("$$FirstName$$", firstName);
+    tParams.put("$$LastName$$", lastName);
+    logDebug("EmailTo: " + emailTo);
+    logDebug("Table Parameters: " + tParams);
+    sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
+    logDebug("End of Script 5121_CityClerk.js");
+}
 
-    //Temp Sign code
-    else if ("No".equals(vASIValue) && "Building/Permit/TempSigns/NA".equals(appTypeString)) {
-        logDebug("Starting to invoice fee on record.");
-        var feecode = "CC_TS";
-        var feeschedule = "CC_TS";
-        var thefee = "1";
-        //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-        updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+//Temp Sign code
+else if ("No".equals(vASIValue) && "Building/Permit/TempSigns/NA".equals(appTypeString)) {
+    logDebug("Starting to invoice fee on record.");
+    var feecode = "CC_TS";
+    var feeschedule = "CC_TS";
+    var thefee = "1";
+    //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
 
-        //Send Notification for fee processing
-        logDebug("Starting to send notifications for fee processing");
-        var emailTemplate = "CC_FEE_PAY";
-        var capAlias = cap.getCapModel().getAppTypeAlias();
-        var recordApplicant = getContactByType("Applicant", capId);
-        var firstName = recordApplicant.getFirstName();
-        var lastName = recordApplicant.getLastName();
-        var emailTo = recordApplicant.getEmail();
-        var altId = capId.getCustomID();
-        var today = new Date();
-        var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-        var tParams = aa.util.newHashtable();
-        tParams.put("$$todayDate$$", thisDate);
-        tParams.put("$$altid$$", altId);
-        tParams.put("$$Record Type$$", "Temp Sign Permit");
-        tParams.put("$$capAlias$$", capAlias);
-        tParams.put("$$FirstName$$", firstName);
-        tParams.put("$$LastName$$", lastName);
-        logDebug("EmailTo: " + emailTo);
-        logDebug("Table Parameters: " + tParams);
-        sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
-        logDebug("End of Script 5121_CityClerk.js");
-    }
+    //Send Notification for fee processing
+    logDebug("Starting to send notifications for fee processing");
+    var emailTemplate = "CC_FEE_PAY";
+    var capAlias = cap.getCapModel().getAppTypeAlias();
+    var recordApplicant = getContactByType("Applicant", capId);
+    var firstName = recordApplicant.getFirstName();
+    var lastName = recordApplicant.getLastName();
+    var emailTo = recordApplicant.getEmail();
+    var altId = capId.getCustomID();
+    var today = new Date();
+    var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var tParams = aa.util.newHashtable();
+    tParams.put("$$todayDate$$", thisDate);
+    tParams.put("$$altid$$", altId);
+    tParams.put("$$Record Type$$", "Temp Sign Permit");
+    tParams.put("$$capAlias$$", capAlias);
+    tParams.put("$$FirstName$$", firstName);
+    tParams.put("$$LastName$$", lastName);
+    logDebug("EmailTo: " + emailTo);
+    logDebug("Table Parameters: " + tParams);
+    sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
+    logDebug("End of Script 5121_CityClerk.js");
+} else if ("Yes".equals(vASIValue)) {
+    updateAppStatus("Approved", "Status updated via script 5121_CityClerk.js");
+    //updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");
+    closeTask("Application Close", "Approved", "", "");
+    closeAllTasks(capId, "");
+    include("5124_CityClerk_Approval");
+    logDebug("End of 5127_CityClerk_PRA script");
+    logDebug("---------------------> 5127_CityClerk_PRA.js ended.");
+    //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+    //Start to generate the Certificate. This will attach to the record when ran.
+    logDebug("Starting to kick off event to attach cert to record");
+    logDebug("Starting to kick off event to attach cert to record");
+    CapId = capId.getCustomID();
+    var vAsyncScript = "RUN_PERMITS_CERT";
+    var envParameters = aa.util.newHashMap();
+    envParameters.put("CapId", CapId);
+    logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
+    aa.runAsyncScript(vAsyncScript, envParameters);
+}
