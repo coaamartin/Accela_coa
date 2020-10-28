@@ -120,17 +120,22 @@ else if ("No".equals(vASIValue) && "Building/Permit/TempSigns/NA".equals(appType
     sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, tParams, null);
     logDebug("End of Script 5121_CityClerk.js");
 } else if ("Yes".equals(vASIValue)) {
-    logDebug("Starting to kick off event to attach cert to record");
-    CapId = capId.getCustomID();
-    var vAsyncScript = "RUN_PERMITS_CERT";
-    var envParameters = aa.util.newHashMap();
-    envParameters.put("CapId", CapId);
-    logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
-    aa.runAsyncScript(vAsyncScript, envParameters);
-    updateAppStatus("Approved", "Status updated via script 5121_CityClerk.js");
+    updateAppStatus("Approved", "Status updated via script 5127_CityClerk_PRA.js");
     //updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");
     closeTask("Application Close", "Approved", "", "");
     closeAllTasks(capId, "");
     include("5124_CityClerk_Approval");
+    
+    
     //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+    //Start to generate the Certificate. This will attach to the record when ran.
+    logDebug("Starting to kick off event to attach cert to record");
+	CapId = capId.getCustomID();
+	var vAsyncScript = "RUN_PERMITS_CERT";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("CapId", CapId);
+	logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
+    aa.runAsyncScript(vAsyncScript, envParameters);
+    logDebug("End of tax exempt script");
 }
+logDebug("End of script 5121-_CityClerk.js");
