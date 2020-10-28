@@ -163,7 +163,7 @@ if (wfTask == "Final Approval" && wfStatus == "Denied") {
 
 //     }
 //     }
-
+var appTypeSting = cap.getCapType().toString();
 //Below is the logic for donation bin
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("Looking at wf tasks and status to see if Final approval email can send.");
