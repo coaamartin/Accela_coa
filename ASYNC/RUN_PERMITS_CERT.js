@@ -1,59 +1,17 @@
-SCRIPT_VERSION = 3.0;
-var useSA = false;
-var SA = null;
-var SAScript = null;
-var bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_FOR_EMSE");
-if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
-	useSA = true;
-	SA = bzr.getOutput().getDescription();
-	bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_INCLUDE_SCRIPT");
-	if (bzr.getSuccess()) {
-		SAScript = bzr.getOutput().getDescription();
-	}
+function getScriptText(vScriptName){
+  vScriptName = vScriptName.toUpperCase();
+  var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+  var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+  return emseScript.getScriptText() + "";          
 }
 
-if (SA) {
-	eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS", SA));
-	eval(getMasterScriptText(SAScript, SA));
-} else {
-	eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-}
-
-eval(getScriptText("INCLUDES_BATCH"));
+var SCRIPT_VERSION = 3.0
+aa.env.setValue("CurrentUserID", "ADMIN");
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-eval(getMasterScriptText("INCLUDES_CUSTOM"));
-/*------------------------------------------------------------------------------------------------------/
-| <===========internal functions - do not modify ================>
-/-----------------------------------------------------------------------------------------------------*/
-function getMasterScriptText(vScriptName) {
-	var servProvCode = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		servProvCode = arguments[1]; // use different serv prov code
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-	}
-}
+eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 
-function getScriptText(vScriptName) {
-	var servProvCode = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		servProvCode = arguments[1]; // use different serv prov code
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-	}
-}
 wait(10000);
-try {
 var capId = aa.env.getValue("CapId");
 //var appTypeString = aa.env.getValue("AppType");
 var module = "Building";
@@ -66,32 +24,38 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
   logDebug("Donation Bin app type. Starting to run report.");
   var repName = "Don_Bin_Permit_script";
   //var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-  reportParameters = aa.util.newHashMap(); 
-  reportParameters.put("RecordID", capId.getCustomID());
-  logDebug("Rparams for envent" + reportParameters);
-  report = null;
-  report = generateReportFile(repName, reportParameters, module);
+  // reportParameters = aa.util.newHashMap(); 
+  // reportParameters.put("RecordID", capId.getCustomID());
+  // logDebug("Rparams for envent" + reportParameters);
+  // report = null;
+  // report = generateReportFile(repName, reportParameters, module);
 }
 if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
   logDebug("Temp Sign app type. Starting to run report.");
   var repName = "Temp_Sign_Permit_script";
-  var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-  reportParameters = aa.util.newHashMap();
-  reportParameters.put("RecordID", capId.getCustomID());
-  logDebug("Rparams for envent" + reportParameters);
-  report = null;
-  report = generateReportFile(repName, reportParameters, module);
+  // var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+  // reportParameters = aa.util.newHashMap();
+  // reportParameters.put("RecordID", capId.getCustomID());
+  // logDebug("Rparams for envent" + reportParameters);
+  // report = null;
+  // report = generateReportFile(repName, reportParameters, module);
 }
 if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
   logDebug("Temp Use app type. Starting to run report.");
   var repName = "Temp_Use_Permit_script";
+  //var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+  //reportParameters = aa.util.newHashMap();
+  //reportParameters.put("RecordID", capId.getCustomID());
+  //logDebug("Rparams for envent" + reportParameters);
+  //report = null;
+  //report = generateReportFile(repName, reportParameters, module);
+}
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
   reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
-}
 
 function generateReportFile(aaReportName,parameters,rModule) 
 {
@@ -139,7 +103,3 @@ function wait(ms){
   }
 }
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-}
-catch (err) {
-  aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);;
-}
