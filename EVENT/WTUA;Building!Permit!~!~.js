@@ -1,55 +1,4 @@
 //WTUA:Building/Permit/*/*
-SCRIPT_VERSION = 3.0;
-var useSA = false;
-var SA = null;
-var SAScript = null;
-var bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_FOR_EMSE");
-if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
-	useSA = true;
-	SA = bzr.getOutput().getDescription();
-	bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_INCLUDE_SCRIPT");
-	if (bzr.getSuccess()) {
-		SAScript = bzr.getOutput().getDescription();
-	}
-}
-
-if (SA) {
-	eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS", SA));
-	eval(getMasterScriptText(SAScript, SA));
-} else {
-	eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-}
-
-//eval(getScriptText("INCLUDES_BATCH"));
-eval(getMasterScriptText("INCLUDES_CUSTOM"));
-
-function getMasterScriptText(vScriptName) {
-	var servProvCode = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		servProvCode = arguments[1]; // use different serv prov code
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-	}
-}
-
-function getScriptText(vScriptName) {
-	var servProvCode = aa.getServiceProviderCode();
-	if (arguments.length > 1)
-		servProvCode = arguments[1]; // use different serv prov code
-	vScriptName = vScriptName.toUpperCase();
-	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-	try {
-		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
-		return emseScript.getScriptText() + "";
-	} catch (err) {
-		return "";
-	}
-}
 //Call all customs for wf:Permit Issuance/Issued
 if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
     script208_UpdatePermitFields();
@@ -176,28 +125,6 @@ logDebug("Starting WTUA;Building!Permit!~!~.js");
 //     include("5128_CityClerk_CityManager_email");
 
 // }
-//Need logic below that will send communication out to citizen if more info is needed to proceed
-if (wfStatus == "Additional Information Required") {
-
-    include("5123_CityClerk_AddInfoEmail");
-}
-
-if (wfTask == "Final Approval" && wfStatus == "Approved") {
-
-    // Script 5124_CityClerk
-    //include("5124_CityClerk_Approval");
-    include("5121_CityClerk");
-
-}
-
-
-if (wfTask == "Final Approval" && wfStatus == "Denied") {
-
-    //Script 5125_CityClerk_Denial
-    include("5125_CityClerk_Denial");
-    updateAppStatus("DENIED", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "");
-}
 
 //Below is going to be logic for an email to be sent to the Planning Director after all other WFtasks have been statused with anything or to not empty status.
 //Each workflow has different steps. Going to need to call each record type seperatly. 
@@ -249,6 +176,29 @@ if ("Building/Permit/TempSigns/NA".equals(appTypeString) && wfTask == "Final App
         logDebug("Finished sending notification to the final approvers");
 
     // }
+}
+
+//Need logic below that will send communication out to citizen if more info is needed to proceed
+if (wfStatus == "Additional Information Required") {
+
+    include("5123_CityClerk_AddInfoEmail");
+}
+
+if (wfTask == "Final Approval" && wfStatus == "Approved") {
+
+    // Script 5124_CityClerk
+    //include("5124_CityClerk_Approval");
+    include("5121_CityClerk");
+
+}
+
+
+if (wfTask == "Final Approval" && wfStatus == "Denied") {
+
+    //Script 5125_CityClerk_Denial
+    include("5125_CityClerk_Denial");
+    updateAppStatus("DENIED", "Script 5125_CityClerk_Denial");
+    closeAllTasks(capId, "");
 }
 logDebug("End of WTUA;Building");
 
