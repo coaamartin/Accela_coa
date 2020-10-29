@@ -1,7 +1,4 @@
 //RUN_DB_CERT
-logDebug("***** Starting RUN_DB_CERT *****");
-aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-try{
 function getScriptText(vScriptName){
   vScriptName = vScriptName.toUpperCase();
   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
@@ -14,18 +11,15 @@ aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
-
+logDebug("***** Starting RUN_DB_CERT *****");
 wait(10000);
 var capId = aa.env.getValue("CapId");
-
 var module = "Building";
 var repName = "Don_Bin_Permit_script";
-
 reportParameters = aa.util.newHashMap(); 
 reportParameters.put("RecordID", capId.getCustomID());
 report = null;  
 report = generateReportFile(repName,reportParameters,module);
-
 function generateReportFile(aaReportName,parameters,rModule) 
 {
 var reportName = aaReportName;
@@ -73,12 +67,8 @@ function wait(ms){
 }
 
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-}
-catch(e)
-{
-    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-    email("rprovinc@auroragov.org", "rprovinc@auroragov.org", "Error", e.message);
-}
+
+
 
 
 
