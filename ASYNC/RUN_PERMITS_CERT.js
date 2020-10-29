@@ -25,7 +25,7 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
   var repName = "Don_Bin_Permit_script";
   //var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
-  reportParameters.put("RecordID", altId);
+  reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
@@ -35,7 +35,7 @@ if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
   var repName = "Temp_Sign_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
-  reportParameters.put("RecordID", altId);
+  reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
@@ -45,7 +45,7 @@ if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
   var repName = "Temp_Use_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
-  reportParameters.put("RecordID", altId);
+  reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
