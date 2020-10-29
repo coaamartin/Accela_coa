@@ -19,6 +19,7 @@ if (balanceDue == 0) {
 	var vAsyncScript = "RUN_PERMITS_CERT";
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("CapId", capId);
+	envParameters.put("AppType", appType)
 	logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
 	aa.runAsyncScript(vAsyncScript, envParameters);
 }
