@@ -1,17 +1,17 @@
 //RUN_DB_CERT
-function getScriptText(vScriptName){
-  vScriptName = vScriptName.toUpperCase();
-  var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-  var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-  return emseScript.getScriptText() + "";          
-}
+// function getScriptText(vScriptName){
+//   vScriptName = vScriptName.toUpperCase();
+//   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+//   var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+//   return emseScript.getScriptText() + "";          
+// }
 
-var SCRIPT_VERSION = 3.0
-aa.env.setValue("CurrentUserID", "ADMIN");
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
-logDebug("***** Starting RUN_DB_CERT *****");
+// var SCRIPT_VERSION = 3.0
+// aa.env.setValue("CurrentUserID", "ADMIN");
+// eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+// eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+// eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
+// logDebug("***** Starting RUN_DB_CERT *****");
 wait(10000);
 var capId = aa.env.getValue("CapId");
 var module = "Building";
