@@ -22,6 +22,7 @@ reportParameters = aa.util.newHashMap();
 reportParameters.put("RecordID", capId.getCustomID());
 report = null;  
 report = generateReportFile(repName,reportParameters,module);
+
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 function generateReportFile(aaReportName,parameters,rModule) 
 {
@@ -62,7 +63,6 @@ function generateReportFile(aaReportName,parameters,rModule)
   }
 }
 
-aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 function wait(ms){
    var start = new Date().getTime();
    var end = start;
@@ -70,5 +70,3 @@ function wait(ms){
      end = new Date().getTime();
   }
 }
-
-aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
