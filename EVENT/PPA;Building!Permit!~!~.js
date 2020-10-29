@@ -95,4 +95,12 @@ if (balanceDue == 0) {
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	}
 }
+wait(10000);
+function wait(ms){
+	var start = new Date().getTime();
+	var end = start;
+	while(end < start + ms) {
+	  end = new Date().getTime();
+   }
+   }
 logDebug("End of PPA;CityClerk!Incident!~!~.js ");
