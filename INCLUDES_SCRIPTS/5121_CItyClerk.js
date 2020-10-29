@@ -120,7 +120,6 @@ else if ("No".equals(vASIValue) && "Building/Permit/TempSigns/NA".equals(appType
     logDebug("End of Script 5121_CityClerk.js");
 } else if ("Yes".equals(vASIValue)) {
     updateAppStatus("Approved", "Status updated via script 5127_CityClerk_PRA.js");
-    //updateTask("Application Close", "Approved", "Updated via script 5127_CityClerk_PRA.js");
     closeTask("Application Close", "Approved", "", "");
     closeAllTasks(capId, "");
     include("5124_CityClerk_Approval");
