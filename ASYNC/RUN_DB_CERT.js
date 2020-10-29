@@ -17,7 +17,7 @@ var capId = aa.env.getValue("CapId");
 var module = "Building";
 var repName = "Don_Bin_Permit_script";
 reportParameters = aa.util.newHashMap(); 
-reportParameters.put("RecordID", capId);
+reportParameters.put("RecordID", capId.getCustomID());
 report = null;  
 report = generateReportFile(repName,reportParameters,module);
 function generateReportFile(aaReportName,parameters,rModule) 
@@ -32,7 +32,7 @@ report.setModule(rModule);
 report.setCapId(capId);
 report.setReportParameters(parameters);
 //Added
-vAltId = capId;
+vAltId = capId.getCustomID();
 report.getEDMSEntityIdModel().setAltId(vAltId);
 var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
 aa.print("---"+permit.getOutput().booleanValue());
