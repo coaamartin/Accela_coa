@@ -53,11 +53,11 @@ if (balanceDue == 0) {
     logDebug("Starting to kick off event to attach cert to record");
     logDebug("Starting to kick off event to attach cert to record");
     var altID = capId.getCustomID();
-    //appType = cap.getCapType().toString();
+    appType = cap.getCapType().toString();
 	var vAsyncScript = "RUN_PERMITS_CERT";
     var envParameters = aa.util.newHashMap();
     envParameters.put("CapId", altID);
-    //envParameters.put("AppType", appType)
+    envParameters.put("AppType", appType)
 	logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
 	aa.runAsyncScript(vAsyncScript, envParameters);
 }
