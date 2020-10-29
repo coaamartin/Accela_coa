@@ -15,12 +15,12 @@ if (balanceDue == 0) {
 	//aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 	//Start to generate the Certificate. This will attach to the record when ran.
 	logDebug("Starting to kick off event to attach cert to record");
-	altId = capId.getCustomID();
-	appType = cap.getCapType().toString();
+	var altID = capId.getCustomID();
+	//appType = cap.getCapType().toString();
 	var vAsyncScript = "RUN_PERMITS_CERT";
 	var envParameters = aa.util.newHashMap();
 	envParameters.put("CapId", altId);
-	envParameters.put("AppType", appType)
+	// envParameters.put("AppType", appType)
 	logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
 	aa.runAsyncScript(vAsyncScript, envParameters);
 }

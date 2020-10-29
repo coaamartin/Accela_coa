@@ -1,9 +1,8 @@
-//RUN_PERMIT_CERT
-function getScriptText(vScriptName) {
+function getScriptText(vScriptName){
   vScriptName = vScriptName.toUpperCase();
   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-  var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
-  return emseScript.getScriptText() + "";
+  var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+  return emseScript.getScriptText() + "";          
 }
 
 var SCRIPT_VERSION = 3.0
@@ -13,18 +12,18 @@ eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 
 wait(10000);
-var altId = aa.env.getValue("CapId");
+var capId = aa.env.getValue("CapId");
 //var appTypeString = aa.env.getValue("AppType");
 var module = "Building";
 
 //Start to generate the Certificate. This will attach to the record when ran.
 logDebug("Starting to kick off event to attach cert to record");
-logDebug("altId = " + altId);
+//logDebug("altId = " + altId);
 //logDebug("AppType = " + appTypeString);
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
   logDebug("Donation Bin app type. Starting to run report.");
   var repName = "Don_Bin_Permit_script";
-  var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+  //var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
   reportParameters.put("RecordID", altId);
   logDebug("Rparams for envent" + reportParameters);
