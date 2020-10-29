@@ -149,6 +149,7 @@ if (wfTask == "Final Approval" && wfStatus == "Denied") {
     closeAllTasks(capId, "");
 }
 
+
 //Below is going to be logic for an email to be sent to the Planning Director after all other WFtasks have been statused with anything or to not empty status.
 //Each workflow has different steps. Going to need to call each record type seperatly. 
 //Below is the logic for donation bin
@@ -160,47 +161,47 @@ if (wfTask == "Final Approval" && wfStatus == "Denied") {
 //         logDebug("Starting to send notification to the Planning Director");
 //         include("5122_CityClerk_Notifications");
 //         logDebug("Finished sending notification to the Planning Director");
+                
+//     }
+//     }
 
-//     }
-//     }
-var appTypeSting = cap.getCapType().toString();
 //Below is the logic for donation bin
-if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
-    logDebug("Looking at wf tasks and status to see if Final approval email can send.");
-    if (isTaskActive("Final Approval")) {
-        logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
-        logDebug("Starting to send notification to fianl approval staff");
+if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+    logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
+    if (isTaskActive("Planning Director Approval")) {
+        logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
+        logDebug("Starting to send notification to the Planning Director");
         include("5122_CityClerk_Notifications");
-        logDebug("Finished sending notification to the final approvers");
-
+        logDebug("Finished sending notification to the Planning Director");
+                
     }
-}
+    }
 
 //Below is the logic for Temp Use
-if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
-    logDebug("Looking at wf tasks and status to see if Final approval email can send.");
-    if (isTaskActive("Final Approval")) {
-        logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
-        logDebug("Starting to send notification to fianl approval staff");
-        include("5122_CityClerk_Notifications");
-        logDebug("Finished sending notification to the final approvers");
-
-    }
+if ("CityClerk/Incident/TempUse/NA".equals(appTypeString)) {
+logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
+if (isTaskActive("Planning Director Approval")) {
+    logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
+    logDebug("Starting to send notification to the Planning Director");
+    include("5122_CityClerk_Notifications");
+    logDebug("Finished sending notification to the Planning Director");
+            
+}
 }
 
 
 // //Below is the logic for Temp Sign
-if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
-    logDebug("Looking at wf tasks and status to see if Final approval email can send.");
-    if (isTaskActive("Final Approval")) {
-        logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
-        logDebug("Starting to send notification to fianl approval staff");
-        include("5122_CityClerk_Notifications");
-        logDebug("Finished sending notification to the final approvers");
-
-    }
+if ("CityClerk/Incident/TempSign/NA".equals(appTypeString)) {
+logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
+if (isTaskActive("Planning Director Approval")) {
+    logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
+    logDebug("Starting to send notification to the Planning Director");
+    include("5122_CityClerk_Notifications");
+    logDebug("Finished sending notification to the Planning Director");
+            
 }
-logDebug("End of WTUA;Building");
+}
+logDebug("End of WTUA;CityClerk");
 
 // aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 // Script Tester footer.  Comment this out when deploying.
