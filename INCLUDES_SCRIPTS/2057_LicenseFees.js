@@ -10,35 +10,30 @@ if (appMatch('Licenses/Supplemental/*/*')){
 	var unit = AInfo['Number of Units'];
 	logDebug('Unit value is '+unit);
 	//Start of Class 1 Fees
-	if (AInfo['Type of License'] == 'Amusement Device Distributor'){
+	if (appMatch('Licenses/Supplemental/Amusement Device Distributor/*')){
 		updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 
-	if (AInfo['Type of License'] == 'Coin Amusement Device'){
+	if (appMatch('Licenses/Supplemental/Amusement Device/*')){
 		updateFee('CL1002', 'L_CLASS1', 'FINAL', unit, 'Y');
         updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 		
-	if (AInfo['Type of License'] == 'Door Badge'){
+	if (appMatch('Licenses/Supplemental/Door ID Badge/*')){
 		updateFee('CL105', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 
-	if (AInfo['Type of License'] == 'Door Sellers License'){
+	if (appMatch('Licenses/Supplemental/Door Seller/*')){
 		updateFee('CL1003', 'L_CLASS1', 'FINAL', 1, 'Y');
 		updateFee('CL1004', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
-		
-//	if (AInfo['Type of License'] == 'Manufactured Home Park License'){
-//		updateFee('S_2', 'L_SECURITY', 'FINAL', 1, 'Y');
-//       updateFee('S_5', 'L_SECURITY', 'FINAL', 1, 'Y');
-//		}
 
-	if (AInfo['Type of License'] == 'Stable License'){
+	if (appMatch('Licenses/Supplemental/Stable/*')){
 		updateFee('CL1006', 'L_CLASS1', 'FINAL', 1, 'Y');
 		updateFee('CL1007', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 		
-	if (AInfo['Type of License'] == 'Trash Haulers License'){
+	if (appMatch('Licenses/Supplemental/Trash Hauler/*'){
 		updateFee('CL1008', 'L_CLASS1', 'FINAL', 1, 'Y');
 		updateFee('CL1009', 'L_CLASS1', 'FINAL', unit, 'Y');
 		}
@@ -46,47 +41,34 @@ if (appMatch('Licenses/Supplemental/*/*')){
 }
 
 //Start of Class 2 Fees
-	if (AInfo['Type of License'] == 'After Hours'){
+	if (appMatch('Licenses/Supplemental/After Hours/*')){
 		updateFee('CL2001', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2002', 'L_CLASS2', 'FINAL', 1, 'Y');
 
 		}
-		
-/*	if (AInfo['Type of License'] == 'Escort Bureau'){
-		updateFee('S_1', 'L_SECURITY', 'FINAL', 1, 'Y');
-		}
-		
-	if (AInfo['Type of License'] == 'Escort Runner'){
-		updateFee('S_2', 'L_SECURITY', 'FINAL', 1, 'Y');
-        updateFee('S_5', 'L_SECURITY', 'FINAL', 1, 'Y');
-		}
-*/
-	if (AInfo['Type of License'] == 'Massage Facility'){
+
+	if (appMatch('Licenses/Supplemental/Massage Facility/*')){
 		updateFee('CL2005', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2006', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
 		
-//	if (AInfo['Type of License'] == 'Massage Solo Practitioner'){
-//		updateFee('S_2', 'L_SECURITY', 'FINAL', 1, 'Y');
-//       updateFee('S_5', 'L_SECURITY', 'FINAL', 1, 'Y');
-//		}
 
-	if (AInfo['Type of License'] == 'Pawnbroker'){
+	if (appMatch('Licenses/Supplemental/Pawnbroker/*')){
 		updateFee('CL2008', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2009', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
 		
-	if (AInfo['Type of License'] == 'Second Hand Dealer'){
+	if (appMatch('Licenses/Supplemental/Second Hand Dealer/*')){
 		updateFee('CL2012', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2013', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
 
-	if (AInfo['Type of License'] == 'Sexually Oriented Business'){
+	if (appMatch('Licenses/Supplemental/Sexually Oriented Business/*')){
 		updateFee('CL2014', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2015', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
 		
-	if (AInfo['Type of License'] == 'Teen Club'){
+	if (appMatch('Licenses/Supplemental/Teen Club/*')){
 		updateFee('CL2018', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2019', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
