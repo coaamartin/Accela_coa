@@ -14,20 +14,20 @@ eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 
 try {
   wait(10000);
-  var capId = aa.env.getValue("CapId");
+  var altId = aa.env.getValue("CapId");
   var appTypeString = aa.env.getValue("AppType");
   var module = "Building";
 
   //Start to generate the Certificate. This will attach to the record when ran.
   logDebug("Starting to kick off event to attach cert to record");
-  logDebug("CapId = " + capId);
+  logDebug("altId = " + capId);
   logDebug("AppType = " + appTypeString);
   if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("Donation Bin app type. Starting to run report.");
     var repName = "Don_Bin_Permit_script";
     var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
     reportParameters = aa.util.newHashMap();
-    reportParameters.put("RecordID", capId);
+    reportParameters.put("RecordID", altId);
     logDebug("Rparams for envent" + reportParameters);
     report = null;
     report = generateReportFile(repName, reportParameters, module);
@@ -37,7 +37,7 @@ try {
     var repName = "Temp_Sign_Permit_script";
     var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
     reportParameters = aa.util.newHashMap();
-    reportParameters.put("RecordID", capId);
+    reportParameters.put("RecordID", altId);
     logDebug("Rparams for envent" + reportParameters);
     report = null;
     report = generateReportFile(repName, reportParameters, module);
@@ -47,7 +47,7 @@ try {
     var repName = "Temp_Use_Permit_script";
     var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
     reportParameters = aa.util.newHashMap();
-    reportParameters.put("RecordID", capId);
+    reportParameters.put("RecordID", altId);
     logDebug("Rparams for envent" + reportParameters);
     report = null;
     report = generateReportFile(repName, reportParameters, module);
