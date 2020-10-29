@@ -15,7 +15,7 @@ wait(10000);
 var capId = aa.env.getValue("CapId");
 //var appTypeString = aa.env.getValue("AppType");
 var module = "Building";
-
+var repName = null;
 //Start to generate the Certificate. This will attach to the record when ran.
 logDebug("Starting to kick off event to attach cert to record");
 //logDebug("altId = " + altId);
