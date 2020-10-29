@@ -33,7 +33,7 @@ if (appMatch('Licenses/Supplemental/*/*')){
 		updateFee('CL1007', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 		
-	if (appMatch('Licenses/Supplemental/Trash Hauler/*'){
+	if (appMatch('Licenses/Supplemental/Trash Hauler/*')){
 		updateFee('CL1008', 'L_CLASS1', 'FINAL', 1, 'Y');
 		updateFee('CL1009', 'L_CLASS1', 'FINAL', unit, 'Y');
 		}
