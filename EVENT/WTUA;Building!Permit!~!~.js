@@ -1,5 +1,55 @@
 //WTUA:Building/Permit/*/*
+SCRIPT_VERSION = 3.0;
+var useSA = false;
+var SA = null;
+var SAScript = null;
+var bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_FOR_EMSE");
+if (bzr.getSuccess() && bzr.getOutput().getAuditStatus() != "I") {
+	useSA = true;
+	SA = bzr.getOutput().getDescription();
+	bzr = aa.bizDomain.getBizDomainByValue("MULTI_SERVICE_SETTINGS", "SUPER_AGENCY_INCLUDE_SCRIPT");
+	if (bzr.getSuccess()) {
+		SAScript = bzr.getOutput().getDescription();
+	}
+}
 
+if (SA) {
+	eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS", SA));
+	eval(getMasterScriptText(SAScript, SA));
+} else {
+	eval(getMasterScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+}
+
+//eval(getScriptText("INCLUDES_BATCH"));
+eval(getMasterScriptText("INCLUDES_CUSTOM"));
+
+function getMasterScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
+}
+
+function getScriptText(vScriptName) {
+	var servProvCode = aa.getServiceProviderCode();
+	if (arguments.length > 1)
+		servProvCode = arguments[1]; // use different serv prov code
+	vScriptName = vScriptName.toUpperCase();
+	var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+	try {
+		var emseScript = emseBiz.getScriptByPK(servProvCode, vScriptName, "ADMIN");
+		return emseScript.getScriptText() + "";
+	} catch (err) {
+		return "";
+	}
+}
 //Call all customs for wf:Permit Issuance/Issued
 if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
     script208_UpdatePermitFields();
@@ -165,7 +215,7 @@ if (wfTask == "Final Approval" && wfStatus == "Denied") {
 //     }
 var appTypeSting = cap.getCapType().toString();
 //Below is the logic for donation bin
-if ("Building/Permit/DonationBin/NA".equals(appTypeString) && isTaskActive(("Final Approval"))) {
+if ("Building/Permit/DonationBin/NA".equals(appTypeString) && wfTask == "Final Approval") {
     logDebug("Looking at wf tasks and status to see if Final approval email can send.");
     // if (isTaskActive("Final Approval")) {
         logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
@@ -177,7 +227,7 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString) && isTaskActive(("Fin
 }
 
 //Below is the logic for Temp Use
-if ("Building/Permit/TempUse/NA".equals(appTypeString) && isTaskActive(("Final Approval"))) {
+if ("Building/Permit/TempUse/NA".equals(appTypeString) && wfTask == "Final Approval") {
     logDebug("Looking at wf tasks and status to see if Final approval email can send.");
     // if (isTaskActive("Final Approval")) {
         logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
@@ -190,7 +240,7 @@ if ("Building/Permit/TempUse/NA".equals(appTypeString) && isTaskActive(("Final A
 
 
 // //Below is the logic for Temp Sign
-if ("Building/Permit/TempSigns/NA".equals(appTypeString) && isTaskActive(("Final Approval"))) {
+if ("Building/Permit/TempSigns/NA".equals(appTypeString) && wfTask == "Final Approval") {
     logDebug("Looking at wf tasks and status to see if Final approval email can send.");
     // if (isTaskActive("Final Approval")) {
         logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
