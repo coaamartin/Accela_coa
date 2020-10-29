@@ -165,40 +165,40 @@ if (wfTask == "Final Approval" && wfStatus == "Denied") {
 //     }
 var appTypeSting = cap.getCapType().toString();
 //Below is the logic for donation bin
-if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
+if ("Building/Permit/DonationBin/NA".equals(appTypeString) && isTaskActive(("Final Approval"))) {
     logDebug("Looking at wf tasks and status to see if Final approval email can send.");
-    if (isTaskActive("Final Approval")) {
+    // if (isTaskActive("Final Approval")) {
         logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
         logDebug("Starting to send notification to fianl approval staff");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the final approvers");
 
-    }
+    // }
 }
 
 //Below is the logic for Temp Use
-if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
+if ("Building/Permit/TempUse/NA".equals(appTypeString) && isTaskActive(("Final Approval"))) {
     logDebug("Looking at wf tasks and status to see if Final approval email can send.");
-    if (isTaskActive("Final Approval")) {
+    // if (isTaskActive("Final Approval")) {
         logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
         logDebug("Starting to send notification to fianl approval staff");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the final approvers");
 
-    }
+    // }
 }
 
 
 // //Below is the logic for Temp Sign
-if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
+if ("Building/Permit/TempSigns/NA".equals(appTypeString) && isTaskActive(("Final Approval"))) {
     logDebug("Looking at wf tasks and status to see if Final approval email can send.");
-    if (isTaskActive("Final Approval")) {
+    // if (isTaskActive("Final Approval")) {
         logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
         logDebug("Starting to send notification to fianl approval staff");
         include("5122_CityClerk_Notifications");
         logDebug("Finished sending notification to the final approvers");
 
-    }
+    // }
 }
 logDebug("End of WTUA;Building");
 
