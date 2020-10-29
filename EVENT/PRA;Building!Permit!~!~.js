@@ -59,7 +59,7 @@ if (balanceDue == 0) {
         var envParameters = aa.util.newHashMap();
         envParameters.put("CapId", altID);
         envParameters.put("AppType", appType)
-        logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
+        logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
         aa.runAsyncScript(vAsyncScript, envParameters);
     } else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
         var altID = capId.getCustomID();
@@ -68,7 +68,7 @@ if (balanceDue == 0) {
         var envParameters = aa.util.newHashMap();
         envParameters.put("CapId", altID);
         envParameters.put("AppType", appType)
-        logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
+        logDebug("Starting to kick off ASYNC event for Temp Sign. Params being passed: " + envParameters);
         aa.runAsyncScript(vAsyncScript, envParameters);
     } else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
         var altID = capId.getCustomID();
@@ -77,7 +77,7 @@ if (balanceDue == 0) {
         var envParameters = aa.util.newHashMap();
         envParameters.put("CapId", altID);
         envParameters.put("AppType", appType)
-        logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
+        logDebug("Starting to kick off ASYNC event for Temp Use. Params being passed: " + envParameters);
         aa.runAsyncScript(vAsyncScript, envParameters);
     }
 }
