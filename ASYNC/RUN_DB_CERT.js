@@ -18,7 +18,7 @@ var module = "Building";
 var repName = "Don_Bin_Permit_script";
 
 reportParameters = aa.util.newHashMap(); 
-reportParameters.put("RecordID", capId.getCustomID());
+reportParameters.put("RecordID", capId);
 report = null;  
 report = generateReportFile(repName,reportParameters,module);
 
