@@ -14,7 +14,7 @@ eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 
 wait(10000);
 var capId = aa.env.getValue("CapId");
-var appTypeString = aa.env.getValue("AppType");
+//var appTypeString = aa.env.getValue("AppType");
 var module = "Building";
 
 //Start to generate the Certificate. This will attach to the record when ran.
@@ -24,7 +24,7 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
   var repName = "Don_Bin_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
-  reportParameters.put("RecordID", capId.getCustomID());
+  reportParameters.put("RecordID", capId);
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
@@ -34,7 +34,7 @@ if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
   var repName = "Temp_Sign_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
-  reportParameters.put("RecordID", capId.getCustomID());
+  reportParameters.put("RecordID", capId);
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
@@ -44,7 +44,7 @@ if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
   var repName = "Temp_Use_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
-  reportParameters.put("RecordID", capId.getCustomID());
+  reportParameters.put("RecordID", capId);
   logDebug("Rparams for envent" + reportParameters);
   report = null;
   report = generateReportFile(repName, reportParameters, module);
@@ -81,7 +81,9 @@ function generateReportFile(aaReportName, parameters, rModule) {
     return false;
   }
 }
+
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+
 function wait(ms) {
   var start = new Date().getTime();
   var end = start;
