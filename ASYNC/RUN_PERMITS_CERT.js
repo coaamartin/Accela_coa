@@ -51,7 +51,7 @@ else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
   report = null;
   report = generateReportFile(repName, reportParameters, aa.getServiceProviderCode());
 }
-
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 
 function generateReportFile(aaReportName, parameters, rModule) {
   var reportName = aaReportName;
@@ -86,7 +86,7 @@ function generateReportFile(aaReportName, parameters, rModule) {
     return false;
   }
 }
-
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 function wait(ms) {
   var start = new Date().getTime();
   var end = start;
@@ -94,4 +94,4 @@ function wait(ms) {
     end = new Date().getTime();
   }
 }
-aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+//aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
