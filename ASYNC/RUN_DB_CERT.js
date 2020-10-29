@@ -34,7 +34,7 @@ report.setModule(rModule);
 report.setCapId(capId);
 report.setReportParameters(parameters);
 //Added
-vAltId = capId.getCustomID();
+vAltId = capId;
 report.getEDMSEntityIdModel().setAltId(vAltId);
 var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
 aa.print("---"+permit.getOutput().booleanValue());
