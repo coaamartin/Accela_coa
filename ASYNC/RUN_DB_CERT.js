@@ -1,4 +1,6 @@
 //RUN_DB_CERT
+logDebug("***** Starting RUN_DB_CERT *****");
+try{
 function getScriptText(vScriptName){
   vScriptName = vScriptName.toUpperCase();
   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
@@ -70,8 +72,11 @@ function wait(ms){
 }
 
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-
-
+}
+catch(e)
+{
+	email("rprovinc@auroragov.org", "rprovinc@auroragov.org", "Error", e.message);
+}
 
 
 
