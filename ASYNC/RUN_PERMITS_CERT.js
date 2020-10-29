@@ -11,15 +11,16 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 
-wait(10000);
+//wait(10000);
 var capId = aa.env.getValue("CapId");
 var appTypeString = aa.env.getValue("AppType");
-var module = "Permits";
+var module = aa.getServiceProviderCode();
 //var repName = null;
 //Start to generate the Certificate. This will attach to the record when ran.
 logDebug("Starting to kick off event to attach cert to record");
-//logDebug("altId = " + altId);
-//logDebug("AppType = " + appTypeString);
+logDebug("CapID:" + capId);
+logDebug("module:" + module);
+logDebug("AppType = " + appTypeString);
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
   logDebug("Donation Bin app type. Starting to run report.");
   var repName = "Don_Bin_Permit_script";
@@ -28,7 +29,7 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
   reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
-  report = generateReportFile(repName, reportParameters, module);
+  report = generateReportFile(repName, reportParameters, aa.getServiceProviderCode());
 }
 else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
   logDebug("Temp Sign app type. Starting to run report.");
@@ -38,7 +39,7 @@ else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
   reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
-  report = generateReportFile(repName, reportParameters, module);
+  report = generateReportFile(repName, reportParameters, aa.getServiceProviderCode());
 }
 else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
   logDebug("Temp Use app type. Starting to run report.");
@@ -48,7 +49,7 @@ else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
   reportParameters.put("RecordID", capId.getCustomID());
   logDebug("Rparams for envent" + reportParameters);
   report = null;
-  report = generateReportFile(repName, reportParameters, module);
+  report = generateReportFile(repName, reportParameters, aa.getServiceProviderCode());
 }
 
 
