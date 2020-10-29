@@ -12,7 +12,7 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 
-wait(10000);
+//wait(10000);
 var capId = aa.env.getValue("CapId");
 var appTypeString = aa.env.getValue("AppType");
 var module = "Building";
@@ -23,7 +23,6 @@ logDebug("CapId = " + capId);
 logDebug("AppType = " + appTypeString);
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
   logDebug("Donation Bin app type. Starting to run report.");
-  wait(10000);
   var repName = "Don_Bin_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
@@ -34,7 +33,6 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
 }
 if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
   logDebug("Temp Sign app type. Starting to run report.");
-  wait(10000);
   var repName = "Temp_Sign_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
@@ -45,7 +43,6 @@ if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
 }
 if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
   logDebug("Temp Use app type. Starting to run report.");
-  wait(10000);
   var repName = "Temp_Use_Permit_script";
   var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
   reportParameters = aa.util.newHashMap();
