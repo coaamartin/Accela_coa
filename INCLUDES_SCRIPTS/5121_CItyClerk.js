@@ -162,7 +162,7 @@ else if ("Yes".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appT
     //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     //Start to generate the Certificate. This will attach to the record when ran.
     logDebug("Starting to kick off event to attach cert to record");
-    var altID = capId.getCustomID();
+    var altID = capId;
     appType = cap.getCapType().toString();
     var vAsyncScript = "RUN_TU_CERT";
     var envParameters = aa.util.newHashMap();
