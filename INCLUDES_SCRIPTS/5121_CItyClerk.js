@@ -214,15 +214,14 @@ function generateReportFile(aaReportName, parameters, rModule) {
         logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
         return false;
     }
-
-    function wait(ms){
-        var start = new Date().getTime();
-        var end = start;
-        while(end < start + ms) {
-          end = new Date().getTime();
-       }
-       }
 }
+function wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+   }
+   }
 logDebug("End of tax exempt script");
 logDebug("End of script 5121_CityClerk.js");
 
