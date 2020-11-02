@@ -16,7 +16,6 @@ function getScriptText(vScriptName, servProvCode, useProductScripts) {
     }
 }
 
-
 var SCRIPT_VERSION = 3
 aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
@@ -27,7 +26,7 @@ aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debu
 wait(10000);
 var capId = aa.env.getValue("CapId");
 var module = aa.env.getValue("ServProvCode");
-var appType1 = aa.env.getValue("AppType");
+var appTypeString = aa.env.getValue("AppType");
 logDebug("Starting to kick off report logic");
 try{
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
