@@ -6,7 +6,7 @@ function getScriptText(vScriptName){
     return emseScript.getScriptText() + "";          
 }
 
-var SCRIPT_VERSION = 3.3
+var SCRIPT_VERSION = 3.22
 aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
