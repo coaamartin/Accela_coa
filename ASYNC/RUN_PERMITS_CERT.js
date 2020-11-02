@@ -17,16 +17,15 @@ function getScriptText(vScriptName, servProvCode, useProductScripts) {
 }
 var SCRIPT_VERSION = 3.0;
 aa.env.setValue("CurrentUserID", "ADMIN");
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, true));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
-eval(getScriptText("INCLUDES_CUSTOM"));
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 aa.print("Executing RUN_PERMITS_CERT");
 logDebug("Executing RUN_PERMITS_CERT");
-
+wait(10000);
 try {
 //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-wait(10000);
+//wait(10000);
 var capId = aa.env.getValue("CapId");
 var repName = aa.env.getValue("RepName");
 var module = aa.env.getValue("ServProvCode");
