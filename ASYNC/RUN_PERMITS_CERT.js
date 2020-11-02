@@ -35,7 +35,7 @@ logDebug("Capid: " + capId);
 logDebug("Report Name: " + repName);
 logDebug("module: " + module);
 logDebug("apptype: " + appTypeString);
-//aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 logDebug("Starting to kick off logic");
 reportParameters = aa.util.newHashMap();
 reportParameters.put("RecordID", capId);
