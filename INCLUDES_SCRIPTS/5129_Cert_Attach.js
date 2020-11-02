@@ -48,7 +48,7 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("Report Parameters: " + reportParameters);
     report = null;
     report = generateReportFile(repName, reportParameters, module);
-    //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 }
 
 

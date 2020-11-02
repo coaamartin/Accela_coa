@@ -131,6 +131,7 @@ else if ("Yes".equals(vASIValue)) {
         include("5129_Cert_Attach");
     }
     else if ("Building/Permit/TempUse/NA".equals(appTypeString)){
+        aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
         include("5129_Cert_Attach");
     }
     else if ("Building/Permit/TempSigns/NA".equals(appTypeString)){
