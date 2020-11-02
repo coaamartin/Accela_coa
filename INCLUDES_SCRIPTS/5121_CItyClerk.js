@@ -127,7 +127,15 @@ else if ("Yes".equals(vASIValue)) {
     include("5124_CityClerk_Approval");
     //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     //Start to generate the Certificate. This will attach to the record when ran.
-    include("5129_Cert_Attach");
+    if ("Building/Permit/DonationBin/NA".equals(appTypeString)){
+        include("5129_Cert_Attach");
+    }
+    else if ("Building/Permit/TempUse/NA".equals(appTypeString)){
+        include("5129_Cert_Attach");
+    }
+    else if ("Building/Permit/TempSigns/NA".equals(appTypeString)){
+        include("5129_Cert_Attach");
+    }
 } 
 // else if ("Yes".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appTypeString)) {
 //     updateAppStatus("Approved", "Status updated via script 5127_CityClerk_PRA.js");
