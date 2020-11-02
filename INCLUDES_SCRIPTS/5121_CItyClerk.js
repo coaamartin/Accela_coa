@@ -158,7 +158,8 @@ else if ("Yes".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appT
     updateAppStatus("Approved", "Status updated via script 5127_CityClerk_PRA.js");
     closeTask("Application Close", "Approved", "", "");
     closeAllTasks(capId, "");
-    //include("5124_CityClerk_Approval");
+    include("5124_CityClerk_Approval");
+    wait(10000);
     //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     //Start to generate the Certificate. This will attach to the record when ran.
     logDebug("Starting to kick off event to attach cert to record");
@@ -180,8 +181,6 @@ else if ("Yes".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appT
     report = null;
     report = generateReportFile(repName, reportParameters, module);
     aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-
-    include("5124_CityClerk_Approval");
 }
 function generateReportFile(aaReportName, parameters, rModule) {
     var reportName = aaReportName;
@@ -215,6 +214,14 @@ function generateReportFile(aaReportName, parameters, rModule) {
         logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
         return false;
     }
+
+    function wait(ms){
+        var start = new Date().getTime();
+        var end = start;
+        while(end < start + ms) {
+          end = new Date().getTime();
+       }
+       }
 }
 logDebug("End of tax exempt script");
 logDebug("End of script 5121_CityClerk.js");
