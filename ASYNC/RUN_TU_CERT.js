@@ -12,17 +12,20 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 wait(10000);
-var capId = aa.env.getValue("CapId");
+
+var capID = aa.env.getValue("CapId");
 var module = aa.env.getValue("ServProvCode");
 //var module = "Permits";
 var repName = "Temp_Use_Permit_script";
-
+logDebug("CapId: " + capID);
+logDebug("module: " + module);
+logDebug("repName: " + repName);
 reportParameters = aa.util.newHashMap(); 
-reportParameters.put("RecordID", capId);
-report = null; 
-aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message); 
+reportParameters.put("RecordID", capID);
+logDebug("Report Parameters: " + reportParameters);
+report = null;  
 report = generateReportFile(repName,reportParameters,module);
-
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 function generateReportFile(aaReportName,parameters,rModule) 
 {
 var reportName = aaReportName;
@@ -32,10 +35,10 @@ report = report.getOutput();
 
 
 report.setModule(rModule);
-report.setCapId(capId);
+report.setCapId(capID);
 report.setReportParameters(parameters);
 //Added
-vAltId = capId;
+vAltId = capID;
 report.getEDMSEntityIdModel().setAltId(vAltId);
 var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
 aa.print("---"+permit.getOutput().booleanValue());
@@ -49,7 +52,6 @@ if(permit.getOutput().booleanValue())
     var reportFile = aa.reportManager.storeReportToDisk(reportResult);
     logMessage("Report Result: "+ reportResult);
     reportFile = reportFile.getOutput();
-    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     return reportFile
   } else 
   {
