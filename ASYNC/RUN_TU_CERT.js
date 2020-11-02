@@ -19,7 +19,8 @@ var repName = "Temp_Use_Permit_script";
 
 reportParameters = aa.util.newHashMap(); 
 reportParameters.put("RecordID", capId.getCustomID());
-report = null;  
+report = null; 
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message); 
 report = generateReportFile(repName,reportParameters,module);
 
 function generateReportFile(aaReportName,parameters,rModule) 
@@ -48,6 +49,7 @@ if(permit.getOutput().booleanValue())
     var reportFile = aa.reportManager.storeReportToDisk(reportResult);
     logMessage("Report Result: "+ reportResult);
     reportFile = reportFile.getOutput();
+    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     return reportFile
   } else 
   {
