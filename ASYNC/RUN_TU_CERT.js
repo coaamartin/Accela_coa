@@ -14,7 +14,7 @@ eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 wait(10000);
 var capId = aa.env.getValue("CapId");
 
-var module = "Building";
+var module = "Permits";
 var repName = "Temp_Use_Permit_script";
 
 reportParameters = aa.util.newHashMap(); 
