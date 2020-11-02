@@ -10,6 +10,7 @@ var SCRIPT_VERSION = 3.0
 aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getScriptText("INCLUDES_CUSTOM"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 aa.print("Executing RUN_PERMITS_CERT");
 logDebug("Executing RUN_PERMITS_CERT");
@@ -46,15 +47,13 @@ function generateReportFile(aaReportName, parameters, rModule) {
     var reportName = aaReportName;
     report = aa.reportManager.getReportInfoModelByName(reportName);
     report = report.getOutput();
-
-
     report.setModule(rModule);
     report.setCapId(capId);
     report.setReportParameters(parameters);
     //Added
     vAltId = capId;
     logDebug("vAltId = " + vAltId);
-    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+    //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     report.getEDMSEntityIdModel().setAltId(vAltId);
     var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
     aa.print("---" + permit.getOutput().booleanValue());
