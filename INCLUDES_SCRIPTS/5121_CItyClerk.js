@@ -138,7 +138,7 @@ else if ("Yes".equals(vASIValue)) {
         var serProvCode = aa.getServiceProviderCode();
         var vAsyncScript = "RUN_TU_CERT";
         var envParameters = aa.util.newHashMap();
-        envParameters.put("CapId", altID);
+        envParameters.put("CapId", capID);
         envParameters.put("AppType", appType);
         envParameters.put("ServProvCode", serProvCode);
         logDebug("Starting to kick off ASYNC eventfor Temp Use. Params being passed: " + envParameters);
