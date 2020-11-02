@@ -1,15 +1,24 @@
 //RUN_PERMITS_CERT.js
-function getScriptText(vScriptName){
+function getScriptText(vScriptName, servProvCode, useProductScripts) {
+    if (!servProvCode)
+        servProvCode = aa.getServiceProviderCode();
     vScriptName = vScriptName.toUpperCase();
     var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-    var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-    return emseScript.getScriptText() + "";          
+    try {
+        if (useProductScripts) {
+            var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+        } else {
+            var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
+        }
+        return emseScript.getScriptText() + "";
+    } catch (err) {
+        return "";
+    }
 }
-
-var SCRIPT_VERSION = 3.0
+var SCRIPT_VERSION = 3.0;
 aa.env.setValue("CurrentUserID", "ADMIN");
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, true));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
 eval(getScriptText("INCLUDES_CUSTOM"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 aa.print("Executing RUN_PERMITS_CERT");
