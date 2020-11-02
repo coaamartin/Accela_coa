@@ -6,7 +6,7 @@ if (wfTask.equals("City Application Intake") && wfStatus.equals("Complete"))
     else if (appTypeArray[2] == "Retail Store")
         feeItemCode = "LIC_MJST_01";
     else if (appTypeArray[2] == "Retail Product Manufacturer")
-        feeItemCode = "LIC_MJST_01";
+        feeItemCode = "LIC_MJRPM_02";
     else if (appTypeArray[2] == "Retail Transporter")
         feeItemCode = "LIC_MJTR_02";
     else if (appTypeArray[2] == "Testing Facility")

@@ -11,7 +11,7 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Complete"){
 	if (appMatch("Licenses/Marijuana/Testing Facility/Application")) {
 		vInspGroup = "LIC_MJ_TST";
 	} else if (appMatch("Licenses/Marijuana/Retail Transporter/Application")) {
-		vInspGroup = "LIC_MJ_TRANS ";
+		vInspGroup = "LIC_MJ_TRANS";
 	} else if (appMatch("Licenses/Marijuana/Retail Store/Application")) {
 		vInspGroup = "LIC_MJ_RST";
 	} else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application")) {
@@ -36,7 +36,7 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Complete"){
 		} else if (vInspType != null && (vInspType == "MJ Security Inspections - Police")) {
 			vInspector = "STONE";
 		} else {
-			vInspector = "SLCLARK";
+			vInspector = "DALLEN";
 		}
 		
 		//create inspection

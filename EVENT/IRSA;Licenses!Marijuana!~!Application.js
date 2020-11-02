@@ -99,14 +99,14 @@ function passedMJInspectionEmailNotification(){
 		addParameter(reportParams, "InspActNumber", inspId);
 		
 		//send email with report attachment     
-        var recordApplicant = getContactByType("Applicant", capId);
-        var emailA = recordApplicant.getEmail();
-        var recordRP = getContactByType("Responsible Party", capId);
-        var emailRP = recordRP.getEmail();
-        var emails = emailA +","+emailRP;
+        //var recordApplicant = getContactByType("Applicant", capId);
+        //var emailA = recordApplicant.getEmail();
+        //var recordRP = getContactByType("Responsible Party", capId);
+        //var emailRP = recordRP.getEmail();
+        var emails = _getAllContactsEmailsNoDupEmail();
 
         var report = generateReportFile(reportTemplate, reportParams, aa.getServiceProviderCode());
-        sendNotification("noreply@aurora.gov", emails, "", emailTemplate, eParams, [report]);
+        sendNotification("noreply@aurora.gov", emails.join(";"), "", emailTemplate, eParams, [report]);
 	}
 
 }
@@ -149,4 +149,24 @@ function generateReportFile(aaReportName,parameters,rModule)
         logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
         return false; 
     }
+}
+
+function _getAllContactsEmailsNoDupEmail(){
+	var conEmailArray = [];
+	var vConObjArry = getContactObjsByCap(capId);
+	for(eachCont in vConObjArry){
+		var vConObj = vConObjArry[eachCont];
+		//Get contact email
+		if (vConObj) {
+			conEmail = vConObj.people.getEmail();
+			if (conEmail && conEmail != null && conEmail != "" ) {
+				if(!exists(conEmail,conEmailArray) && conEmail.indexOf("@") > 0){
+					conEmailArray.push(conEmail);
+				}
+				
+			}
+		}
+	}
+	return conEmailArray;
+	
 }
