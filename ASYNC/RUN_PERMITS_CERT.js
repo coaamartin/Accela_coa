@@ -21,7 +21,7 @@ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, true));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
 aa.print("Executing RUN_PERMITS_CERT");
 logDebug("Executing RUN_PERMITS_CERT");
-wait(10000);
+//wait(10000);
 try {
 //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 //wait(10000);
