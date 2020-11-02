@@ -12,17 +12,17 @@
 
 //******************************************************************************
 function getScriptText(vScriptName){
-    vScriptName = vScriptName.toUpperCase();
-    var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-    var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-    return emseScript.getScriptText() + "";          
-  }
-  
-  var SCRIPT_VERSION = 3.0
-  aa.env.setValue("CurrentUserID", "ADMIN");
-  eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-  eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-  eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
+  vScriptName = vScriptName.toUpperCase();
+  var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+  var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+  return emseScript.getScriptText() + "";          
+}
+
+var SCRIPT_VERSION = 3.0
+aa.env.setValue("CurrentUserID", "ADMIN");
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 var vASIValue = getAppSpecific("Non-Profit");
 //var appTypeString = getAppSpecific("Application Type");
 //var appType = getAppSpecific(appType);
@@ -136,11 +136,10 @@ else if ("Yes".equals(vASIValue)) {
     updateAppStatus("Approved", "Status updated via script 5127_CityClerk_PRA.js");
     closeTask("Application Close", "Approved", "", "");
     closeAllTasks(capId, "");
-    //include("5124_CityClerk_Approval");
+    include("5124_CityClerk_Approval");
     //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     //Start to generate the Certificate. This will attach to the record when ran.
     include("5129_Cert_Attach");
-    include("5124_CityClerk_Approval");
 } 
 // else if ("Yes".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appTypeString)) {
 //     updateAppStatus("Approved", "Status updated via script 5127_CityClerk_PRA.js");
