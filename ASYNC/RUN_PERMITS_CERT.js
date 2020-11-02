@@ -1,22 +1,35 @@
 //RUN_PERMITS_CERT.js
-function getScriptText(vScriptName){
+function getScriptText(vScriptName, servProvCode, useProductScripts) {
+    if (!servProvCode)
+        servProvCode = aa.getServiceProviderCode();
     vScriptName = vScriptName.toUpperCase();
     var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-    var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-    return emseScript.getScriptText() + "";          
+    try {
+        if (useProductScripts) {
+            var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
+        } else {
+            var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
+        }
+        return emseScript.getScriptText() + "";
+    } catch (err) {
+        return "";
+    }
 }
 
-var SCRIPT_VERSION = 9
+
+var SCRIPT_VERSION = 3
 aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
+aa.print("Executing RUN_PERMITS_CERT");
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 wait(10000);
 var capId = aa.env.getValue("CapId");
 var module = aa.env.getValue("ServProvCode");
 var appType1 = aa.env.getValue("AppType");
 logDebug("Starting to kick off report logic");
+try{
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)){
     var repName = "Don_Bin_Permit_script";
@@ -42,8 +55,12 @@ else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     report = generateReportFile(repName,reportParameters,module);
     aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 }
-
-
+}
+catch(err){
+	showMessage = true;
+    comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
+    logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
+}
 function generateReportFile(aaReportName,parameters,rModule) 
 {
   var reportName = aaReportName;
