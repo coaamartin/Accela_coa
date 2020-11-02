@@ -17,9 +17,8 @@ function getScriptText(vScriptName, servProvCode, useProductScripts) {
 }
 var SCRIPT_VERSION = 3.0;
 aa.env.setValue("CurrentUserID", "ADMIN");
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS", null, true));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS", null, true));
 aa.print("Executing RUN_PERMITS_CERT");
 logDebug("Executing RUN_PERMITS_CERT");
 wait(10000);
