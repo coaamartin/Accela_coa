@@ -15,7 +15,6 @@ function getScriptText(vScriptName, servProvCode, useProductScripts) {
         return "";
     }
 }
-
 var SCRIPT_VERSION = 3
 aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
@@ -23,7 +22,9 @@ eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 aa.print("Executing RUN_PERMITS_CERT");
 logDebug("Executing RUN_PERMITS_CERT");
-aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+
+try{
+//aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 wait(10000);
 var capId = aa.env.getValue("CapId");
 var repName = aa.env.getValue("RepName");
@@ -43,7 +44,10 @@ report = null;
 report = generateReportFile(repName, reportParameters, module);
 logDebug("End of Temp use async");
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-
+}
+catch(err){
+    return ""
+}
 function generateReportFile(aaReportName, parameters, rModule) {
     var reportName = aaReportName;
 
