@@ -26,90 +26,62 @@ logDebug("Executing RUN_PERMITS_CERT");
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 wait(10000);
 var capId = aa.env.getValue("CapId");
+var repName = aa.env.getValue("RepName");
 var module = aa.env.getValue("ServProvCode");
 var appTypeString = aa.env.getValue("AppType");
 logDebug("Starting to kick off report logic");
 logDebug("Capid: " + capId);
+logDebug("Report Name: " + repName);
 logDebug("module: " + module);
 logDebug("apptype: " + appTypeString);
-try{
+//aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+logDebug("Starting to kick off logic");
+reportParameters = aa.util.newHashMap();
+reportParameters.put("RecordID", capId);
+logDebug("REPORT Parameters: " + reportParameters);
+report = null;
+report = generateReportFile(repName, reportParameters, module);
+logDebug("End of Temp use async");
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-if ("Building/Permit/DonationBin/NA".equals(appTypeString)){
-    var repName = "Don_Bin_Permit_script";
-    reportParameters = aa.util.newHashMap(); 
-    reportParameters.put("RecordID", capId.getCustomID());
-    report = null;  
-    report = generateReportFile(repName,reportParameters,module);
-    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-}
-else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
-    logDebug("Starting to kick off Temp Use logic");
-    var repName = "Temp_Use_Permit_script";
-    reportParameters = aa.util.newHashMap(); 
-    reportParameters.put("RecordID", capId);
-    logDebug("REPORT Parameters: " + reportParameters);
-    report = null;  
-    report = generateReportFile(repName,reportParameters,module);
-    logDebug("End of Temp use async");
-    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-}
-else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
-    var repName = "Temp_Sign_Permit_script";
-    reportParameters = aa.util.newHashMap(); 
-    reportParameters.put("RecordID", capId.getCustomID());
-    report = null;  
-    report = generateReportFile(repName,reportParameters,module);
-    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-}
-}
-catch(err){
-	showMessage = true;
-    comment("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber);
-    logDebug("Error on custom function (). Please contact administrator. Err: " + err + ". Line: " + err.lineNumber + ". Stack: " + err.stack);
-}
-function generateReportFile(aaReportName,parameters,rModule) 
-{
-  var reportName = aaReportName;
 
-  report = aa.reportManager.getReportInfoModelByName(reportName);
-  report = report.getOutput();
+function generateReportFile(aaReportName, parameters, rModule) {
+    var reportName = aaReportName;
+
+    report = aa.reportManager.getReportInfoModelByName(reportName);
+    report = report.getOutput();
 
 
-  report.setModule(rModule);
-  report.setCapId(capId);
-  report.setReportParameters(parameters);
-  //Added
-  vAltId = capId.getCustomID();
-  report.getEDMSEntityIdModel().setAltId(vAltId);
-  var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
-  aa.print("---"+permit.getOutput().booleanValue());
-  if(permit.getOutput().booleanValue()) 
-  {
-    var reportResult = aa.reportManager.getReportResult(report);
+    report.setModule(rModule);
+    report.setCapId(capId);
+    report.setReportParameters(parameters);
+    //Added
+    vAltId = capId.getCustomID();
+    report.getEDMSEntityIdModel().setAltId(vAltId);
+    var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
+    aa.print("---" + permit.getOutput().booleanValue());
+    if (permit.getOutput().booleanValue()) {
+        var reportResult = aa.reportManager.getReportResult(report);
 
-    if(reportResult) 
-    {
-      reportResult = reportResult.getOutput();
-      var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-      logMessage("Report Result: "+ reportResult);
-      reportFile = reportFile.getOutput();
-      return reportFile
-    } else 
-    {
-      logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
-      return false;
+        if (reportResult) {
+            reportResult = reportResult.getOutput();
+            var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+            logMessage("Report Result: " + reportResult);
+            reportFile = reportFile.getOutput();
+            return reportFile
+        } else {
+            logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
+            return false;
+        }
+    } else {
+        logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
+        return false;
     }
-  } else 
-  {
-    logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
-    return false; 
-  }
 }
 
-function wait(ms){
-   var start = new Date().getTime();
-   var end = start;
-   while(end < start + ms) {
-     end = new Date().getTime();
-  }
+function wait(ms) {
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + ms) {
+        end = new Date().getTime();
+    }
 }
