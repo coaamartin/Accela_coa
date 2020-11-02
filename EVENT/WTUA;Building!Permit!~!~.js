@@ -164,7 +164,11 @@ if (wfTask == "Final Approval" && wfStatus == "Approved") {
     //include("5129_Cert_Attach");
 
 }
+if (wfTask == "Application Close" && wfStatus == "Approved") {
 
+    include("5129_Cert_Attach");
+
+}
 
 if (wfTask == "Final Approval" && wfStatus == "Denied") {
 
