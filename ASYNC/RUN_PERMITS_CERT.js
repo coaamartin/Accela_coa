@@ -43,11 +43,14 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)){
     aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 }
 else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
+    logDebug("Starting to kick off Temp Use logic");
     var repName = "Temp_Use_Permit_script";
     reportParameters = aa.util.newHashMap(); 
-    reportParameters.put("RecordID", capId.getCustomID());
+    reportParameters.put("RecordID", capId);
+    logDebug("REPORT Parameters: " + reportParameters);
     report = null;  
     report = generateReportFile(repName,reportParameters,module);
+    logDebug("End of Temp use async");
     aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 }
 else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
