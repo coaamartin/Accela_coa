@@ -11,7 +11,7 @@ aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
-wait(10000);
+//wait(10000);
 var capId = aa.env.getValue("CapId");
 
 var module = "Building";
