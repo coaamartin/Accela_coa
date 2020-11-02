@@ -18,7 +18,7 @@ var module = "Building";
 var repName = "Temp_Use_Permit_script";
 
 reportParameters = aa.util.newHashMap(); 
-reportParameters.put("RecordID", capId.getCustomID());
+reportParameters.put("RecordID", capId);
 report = null; 
 aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message); 
 report = generateReportFile(repName,reportParameters,module);
