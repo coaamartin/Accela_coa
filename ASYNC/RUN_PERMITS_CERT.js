@@ -24,7 +24,7 @@ logDebug("Executing RUN_PERMITS_CERT");
 //wait(10000);
 try {
 //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-//wait(10000);
+wait(10000);
 var capId = aa.env.getValue("CapId");
 var repName = aa.env.getValue("RepName");
 var module = aa.env.getValue("ServProvCode");
@@ -49,44 +49,48 @@ catch(err){
 }
 
 
-function generateReportFile(aaReportName, parameters, rModule) {
-    logDebug("Starting generateReportFile");
-    var reportName = aaReportName;
-    report = aa.reportManager.getReportInfoModelByName(reportName);
-    report = report.getOutput();
-    report.setModule(rModule);
-    report.setCapId(capId);
-    report.setReportParameters(parameters);
-    //Added
-    vAltId = capId;
-    logDebug("vAltId = " + vAltId);
-    //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
-    report.getEDMSEntityIdModel().setAltId(vAltId);
-    var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
-    aa.print("---" + permit.getOutput().booleanValue());
-    if (permit.getOutput().booleanValue()) {
-        var reportResult = aa.reportManager.getReportResult(report);
+function generateReportFile(aaReportName,parameters,rModule) 
+{
+  var reportName = aaReportName;
 
-        if (reportResult) {
-            reportResult = reportResult.getOutput();
-            var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-            logMessage("Report Result: " + reportResult);
-            reportFile = reportFile.getOutput();
-            return reportFile
-        } else {
-            logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
-            return false;
-        }
-    } else {
-        logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
-        return false;
+  report = aa.reportManager.getReportInfoModelByName(reportName);
+  report = report.getOutput();
+
+
+  report.setModule(rModule);
+  report.setCapId(capId);
+  report.setReportParameters(parameters);
+  //Added
+  vAltId = capId.getCustomID();
+  report.getEDMSEntityIdModel().setAltId(vAltId);
+  var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
+  aa.print("---"+permit.getOutput().booleanValue());
+  if(permit.getOutput().booleanValue()) 
+  {
+    var reportResult = aa.reportManager.getReportResult(report);
+
+    if(reportResult) 
+    {
+      reportResult = reportResult.getOutput();
+      var reportFile = aa.reportManager.storeReportToDisk(reportResult);
+      logMessage("Report Result: "+ reportResult);
+      reportFile = reportFile.getOutput();
+      return reportFile
+    } else 
+    {
+      logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
+      return false;
     }
+  } else 
+  {
+    logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
+    return false; 
+  }
 }
-
-function wait(ms) {
-    var start = new Date().getTime();
-    var end = start;
-    while (end < start + ms) {
-        end = new Date().getTime();
-    }
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
 }
