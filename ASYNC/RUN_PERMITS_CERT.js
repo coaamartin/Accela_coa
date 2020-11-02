@@ -1,21 +1,12 @@
 //RUN_PERMITS_CERT.js
-function getScriptText(vScriptName, servProvCode, useProductScripts) {
-    if (!servProvCode)
-        servProvCode = aa.getServiceProviderCode();
+function getScriptText(vScriptName){
     vScriptName = vScriptName.toUpperCase();
     var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-    try {
-        if (useProductScripts) {
-            var emseScript = emseBiz.getMasterScript(aa.getServiceProviderCode(), vScriptName);
-        } else {
-            var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(), vScriptName, "ADMIN");
-        }
-        return emseScript.getScriptText() + "";
-    } catch (err) {
-        return "";
-    }
+    var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+    return emseScript.getScriptText() + "";          
 }
-var SCRIPT_VERSION = 3
+
+var SCRIPT_VERSION = 3.0
 aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
@@ -23,7 +14,7 @@ eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 aa.print("Executing RUN_PERMITS_CERT");
 logDebug("Executing RUN_PERMITS_CERT");
 
-try{
+try {
 //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 wait(10000);
 var capId = aa.env.getValue("CapId");
@@ -51,8 +42,8 @@ catch(err){
 
 
 function generateReportFile(aaReportName, parameters, rModule) {
+    logDebug("Starting generateReportFile");
     var reportName = aaReportName;
-
     report = aa.reportManager.getReportInfoModelByName(reportName);
     report = report.getOutput();
 
@@ -61,7 +52,9 @@ function generateReportFile(aaReportName, parameters, rModule) {
     report.setCapId(capId);
     report.setReportParameters(parameters);
     //Added
-    vAltId = capId.getCustomID();
+    vAltId = capId;
+    logDebug("vAltId = " + vAltId);
+    aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     report.getEDMSEntityIdModel().setAltId(vAltId);
     var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
     aa.print("---" + permit.getOutput().booleanValue());
