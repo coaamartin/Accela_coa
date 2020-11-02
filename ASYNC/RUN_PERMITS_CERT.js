@@ -6,7 +6,7 @@ function getScriptText(vScriptName){
     return emseScript.getScriptText() + "";          
 }
 
-var SCRIPT_VERSION = 3.0
+var SCRIPT_VERSION = 3.3
 aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
@@ -14,8 +14,9 @@ eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 
 wait(10000);
 var capId = aa.env.getValue("CapId");
-var module = "Building";
-
+var module = aa.env.getValue("ServProvCode");
+var appType1 = aa.env.getValue("AppType");
+logDebug("Starting to kick off report logic");
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)){
     var repName = "Don_Bin_Permit_script";
     reportParameters = aa.util.newHashMap(); 
