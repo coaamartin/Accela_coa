@@ -11,24 +11,7 @@ function getScriptText(vScriptName){
   eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
   eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 
-  var vASIValue = getAppSpecific("Non-Profit");
-  //var appTypeString = getAppSpecific("Application Type");
-  //var appType = getAppSpecific(appType);
-  // var nonProfit = "";
-  // var nonProfit = vASIValue;
-  appTypeResult = cap.getCapType(); //create CapTypeModel object
-  appTypeString = appTypeResult.toString();
-  appTypeArray = appTypeString.split("/");
-  // logDebug("Non Profit: " + nonProfit);
-  logDebug("Non-Profit: " + vASIValue);
-  logDebug("appType: " + appTypeString);
-
-  if ("Yes".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appTypeString)) {
-    updateAppStatus("Approved", "Status updated via script 5127_CityClerk_PRA.js");
-    closeTask("Application Close", "Approved", "", "");
-    closeAllTasks(capId, "");
-    //include("5124_CityClerk_Approval");
-    //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     //Start to generate the Certificate. This will attach to the record when ran.
     logDebug("Starting to kick off event to attach cert to record");
     var altID = capId.getCustomID();
@@ -40,7 +23,7 @@ function getScriptText(vScriptName){
     logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
     aa.runAsyncScript(vAsyncScript, envParameters);
     include("5124_CityClerk_Approval");
-} else if ("Yes".equals(vASIValue) && "Building/Permit/TempSigns/NA".equals(appTypeString)) {
+} else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     updateAppStatus("Approved", "Status updated via script 5127_CityClerk_PRA.js");
     closeTask("Application Close", "Approved", "", "");
     closeAllTasks(capId, "");
@@ -57,8 +40,8 @@ function getScriptText(vScriptName){
     logDebug("Starting to kick off ASYNC eventfor TS. Params being passed: " + envParameters);
     aa.runAsyncScript(vAsyncScript, envParameters);
     include("5124_CityClerk_Approval");
-} else if ("Yes".equals(vASIValue) && "Building/Permit/TempUse/NA".equals(appTypeString)) {
-    wait(10000);
+} else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
+    //wait(10000);
     //Start to generate the Certificate. This will attach to the record when ran.
     logDebug("Starting to kick off event to attach cert to record");
     var capID = capId.getCustomID();

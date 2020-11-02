@@ -161,7 +161,7 @@ if (wfTask == "Final Approval" && wfStatus == "Approved") {
     // Script 5124_CityClerk
     //include("5124_CityClerk_Approval");
     include("5121_CityClerk");
-    include("5129_Cert_Attach");
+    //include("5129_Cert_Attach");
 
 }
 
