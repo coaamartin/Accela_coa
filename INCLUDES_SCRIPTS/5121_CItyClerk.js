@@ -129,7 +129,7 @@ else if ("Yes".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appT
     //Start to generate the Certificate. This will attach to the record when ran.
     logDebug("Starting to kick off event to attach cert to record");
     var altID = capId.getCustomID();
-    appType = cap.getCapType().toString();
+    var appType = cap.getCapType().toString();
     var vAsyncScript = "RUN_DB_CERT";
     var envParameters = aa.util.newHashMap();
     envParameters.put("CapId", altID);
@@ -146,7 +146,7 @@ else if ("Yes".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appT
     //Start to generate the Certificate. This will attach to the record when ran.
     logDebug("Starting to kick off event to attach cert to record");
     var altID = capId.getCustomID();
-    appType = cap.getCapType().toString();
+    var appType = cap.getCapType().toString();
     var vAsyncScript = "RUN_TS_CERT";
     var envParameters = aa.util.newHashMap();
     envParameters.put("CapId", altID);
@@ -163,11 +163,13 @@ else if ("Yes".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appT
     //Start to generate the Certificate. This will attach to the record when ran.
     logDebug("Starting to kick off event to attach cert to record");
     var altID = capId.getCustomID();
-    appType = cap.getCapType().toString();
+    var appType = cap.getCapType().toString();
+    var serProvCode = aa.getServiceProviderCode();
     var vAsyncScript = "RUN_TU_CERT";
     var envParameters = aa.util.newHashMap();
     envParameters.put("CapId", altID);
-    envParameters.put("AppType", appType)
+    envParameters.put("AppType", appType);
+    envParameters.put("ServProvCode", serProvCode);
     logDebug("Starting to kick off ASYNC eventfor Temp Use. Params being passed: " + envParameters);
     aa.runAsyncScript(vAsyncScript, envParameters);
     include("5124_CityClerk_Approval");
