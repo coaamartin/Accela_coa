@@ -11,14 +11,14 @@ aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
-//wait(10000);
+wait(10000);
 var capId = aa.env.getValue("CapId");
 
 var module = "Building";
 var repName = "Temp_Use_Permit_script";
 
 reportParameters = aa.util.newHashMap(); 
-reportParameters.put("RecordID", capId);
+reportParameters.put("RecordID", capId.getCustomID());
 report = null;  
 report = generateReportFile(repName,reportParameters,module);
 
