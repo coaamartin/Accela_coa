@@ -11,12 +11,13 @@ aa.env.setValue("CurrentUserID", "ADMIN");
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
 eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
 eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
-
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 wait(10000);
 var capId = aa.env.getValue("CapId");
 var module = aa.env.getValue("ServProvCode");
 var appType1 = aa.env.getValue("AppType");
 logDebug("Starting to kick off report logic");
+aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)){
     var repName = "Don_Bin_Permit_script";
     reportParameters = aa.util.newHashMap(); 
