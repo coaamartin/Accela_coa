@@ -1,5 +1,5 @@
-if (appMatch('Licenses/Liquor/*/*') || appMatch('Licenses/Supplemental/*/*')){
-	if (appMatch('Licenses/Liquor/Liquor License/*') || appMatch('Licenses/Liquor/Tasting License/*') || appMatch('Licenses/Supplemental/*/*')){
+if (appMatch('Licenses/Liquor/*/*')){
+	if (appMatch('Licenses/Liquor/Liquor License/*') || appMatch('Licenses/Liquor/Tasting License/*')){
 		updateShortNotes(AInfo['Type of License']);
 	}
 	if (appMatch('Licenses/Liquor/Liquor Permit/*')){
