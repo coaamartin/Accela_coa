@@ -1,4 +1,4 @@
-//RUN_DB_CERT
+//RUN_TU_CERT
 // function getScriptText(vScriptName){
 //   vScriptName = vScriptName.toUpperCase();
 //   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
