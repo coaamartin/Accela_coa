@@ -173,17 +173,17 @@ else if (wfTask == "Final Approval" && wfStatus == "Denied") {
     closeAllTasks(capId, "");
 }
 
-else if (wfStatus = "Void") {
-    //include("5125_CityClerk_Denial");
-    updateAppStatus("VOID", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "");
-}
+// else if (wfStatus = "Void") {
+//     //include("5125_CityClerk_Denial");
+//     updateAppStatus("VOID", "Script 5125_CityClerk_Denial");
+//     closeAllTasks(capId, "");
+// }
 
-else if (wfStatus = "Withdrawn") {
-    //include("5125_CityClerk_Denial");
-    updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "");
-}
+// else if (wfStatus = "Withdrawn") {
+//     //include("5125_CityClerk_Denial");
+//     updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
+//     closeAllTasks(capId, "");
+// }
 logDebug("End of WTUA;Building");
 
 // aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
