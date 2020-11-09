@@ -135,7 +135,7 @@ else if ("Yes".equals(vASIValue)) {
 		var vAsyncScript = "RUN_DB_CERT";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("CapId", altID);
-		envParameters.put("AppType", appType)
+		envParameters.put("AppType", appType);
 		logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	} else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
@@ -144,7 +144,7 @@ else if ("Yes".equals(vASIValue)) {
 		var vAsyncScript = "RUN_TS_CERT";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("CapId", altID);
-		envParameters.put("AppType", appType)
+		envParameters.put("AppType", appType);
 		logDebug("Starting to kick off ASYNC eventfor TS. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	} else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
@@ -153,7 +153,7 @@ else if ("Yes".equals(vASIValue)) {
 		var vAsyncScript = "RUN_TU_CERT";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("CapId", altID);
-		envParameters.put("AppType", appType)
+		envParameters.put("AppType", appType);
 		logDebug("Starting to kick off ASYNC eventfor Temp Use. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	}
