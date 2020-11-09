@@ -151,12 +151,12 @@ if (isTaskActive("Final Approval")) {
 }
 
 //Need logic below that will send communication out to citizen if more info is needed to proceed
-if (wfStatus == "Additional Information Required") {
+else if (wfStatus == "Additional Information Required") {
 
     include("5123_CityClerk_AddInfoEmail");
 }
 
-if (wfTask == "Final Approval" && wfStatus == "Approved") {
+else if (wfTask == "Final Approval" && wfStatus == "Approved") {
 
     // Script 5124_CityClerk
     //include("5124_CityClerk_Approval");
@@ -165,7 +165,7 @@ if (wfTask == "Final Approval" && wfStatus == "Approved") {
 }
 
 
-if (wfTask == "Final Approval" && wfStatus == "Denied") {
+else if (wfTask == "Final Approval" && wfStatus == "Denied") {
 
     //Script 5125_CityClerk_Denial
     include("5125_CityClerk_Denial");
@@ -173,13 +173,13 @@ if (wfTask == "Final Approval" && wfStatus == "Denied") {
     closeAllTasks(capId, "");
 }
 
-if (wfStatus = "Void") {
+else if (wfStatus = "Void") {
     //include("5125_CityClerk_Denial");
     updateAppStatus("VOID", "Script 5125_CityClerk_Denial");
     closeAllTasks(capId, "");
 }
 
-if (wfStatus = "Withdrawn") {
+else if (wfStatus = "Withdrawn") {
     //include("5125_CityClerk_Denial");
     updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
     closeAllTasks(capId, "");
