@@ -39,29 +39,32 @@ function sendEmailReceipt_MJApplication(){
 
 	var ff = 0;
 	//loop through fee items
-	for (ff in feeObjArr) {
-        var pfResult = aa.finance.getPaymentFeeItems(capId, null);
-        if (pfResult.getSuccess()) {
-			var pfObj = pfResult.getOutput();
-			//match fee items to sequence number
-			for (ij in pfObj) {
-				if (feeObjArr[ff].getFeeSeqNbr() == pfObj[ij].getFeeSeqNbr() && pfObj[ij].getPaymentSeqNbr() == vPaymentSeqNbr) {
-					logDebug("Debug Point 3");
-					//check for state and local fees
-					if (feeObjArr[ff].getFeeCod() == "LIC_MJRC_01" || feeObjArr[ff].getFeeCod() == "LIC_MJRPM_01" || feeObjArr[ff].getFeeCod() == "LIC_MJST_05" || 
-						feeObjArr[ff].getFeeCod() == "LIC_MJTST_01" || feeObjArr[ff].getFeeCod() == "LIC_MJTR_01" || feeObjArr[ff].getFeeCod() == "LIC_MJ_01") {
-						logDebug("State fee is present");
-						vStateFee = true;
-					} 
-					if (feeObjArr[ff].getFeeCod() != "LIC_MJRC_01" && feeObjArr[ff].getFeeCod() != "LIC_MJRPM_01" && feeObjArr[ff].getFeeCod() != "LIC_MJST_05" || 
-						feeObjArr[ff].getFeeCod() != "LIC_MJTST_01" && feeObjArr[ff].getFeeCod() != "LIC_MJTR_01" && feeObjArr[ff].getFeeCod() != "LIC_MJ_01") {
-						logDebug("Local fee is present");
-						vLocalFee = true;
-					}
-				}
-			}
+	var pfResult = aa.finance.getPaymentFeeItems(capId, null);
+	if (pfResult.getSuccess()) {
+        var pfObj = pfResult.getOutput();
+		//match fee items to sequence number
+		for (ij in pfObj) {
+			if (pfObj[ij].getPaymentSeqNbr() != vPaymentSeqNbr)
+				continue;
+            logDebug("Debug Point 3");
+            var thisFeeSeq = pfObj[ij].getFeeSeqNbr();
+            var thisFeeItem = aa.fee.getFeeItemByPK(capId, thisFeeSeq).getOutput();
+            var thisFeeCode = thisFeeItem.getFeeCod();
+            //check for state and local fees
+            if (thisFeeCode == "LIC_MJRC_01" || thisFeeCode == "LIC_MJRPM_01" || thisFeeCode == "LIC_MJST_05" || 
+                thisFeeCode == "LIC_MJTST_01" || thisFeeCode == "LIC_MJTR_01" || thisFeeCode == "LIC_MJ_01") {
+                logDebug("State fee is present");
+                vStateFee = true;
+            } 
+            if (thisFeeCode == "LIC_MJTR_02" || thisFeeCode == "LIC_MJTST_02" || thisFeeCode == "LIC_MJST_01" || 
+                thisFeeCode == "LIC_MJRPM_02" || thisFeeCode == "LIC_MJRC_02") {
+                logDebug("Local fee is present");
+                vLocalFee = true;
+            }
+					
+				
 		}
-	}
+    }
 	
 	if(vStateFee != null && vStateFee != "" && vStateFee == true) {
 		var emailTemplateName = "LIC MJ STATE FEE RECEIPT";

@@ -12,6 +12,23 @@ function sendEmailReceipt_MJApplication_PAPA(){
 	var vPayments;
 	var vPaymentSeqNbr = 0;
 
+	// Get all payments on the record
+	vPayments = aa.finance.getPaymentByCapID(capId, null);	
+	if (vPayments.getSuccess() == true) {
+		vPayments = vPayments.getOutput();
+		var y = 0;
+		// Loop through payments to get the latest by highest SEQ number
+		for (y in vPayments) {
+			vPayment = vPayments[y];
+			if (vPayment.getPaymentSeqNbr() > vPaymentSeqNbr) {
+				vPaymentSeqNbr = vPayment.getPaymentSeqNbr();
+			}
+		}
+		if (vPaymentSeqNbr != null && vPaymentSeqNbr != "") {
+			logDebug("The latest payment has a sequence number of " + vPaymentSeqNbr);
+		}
+	}
+
 	var feeResult = aa.fee.getFeeItems(capId);
 	if (feeResult.getSuccess()) {
 		var feeObjArr = feeResult.getOutput();
@@ -20,26 +37,34 @@ function sendEmailReceipt_MJApplication_PAPA(){
 		return false		
 	}
 
+	var ff = 0;
 	//loop through fee items
-	for (ff in feeSeqArr) {
-			//match fee items to sequence number
-			for (ij in feeObjArr) {
-				if (feeSeqArr[ff] == feeObjArr[ij].getFeeSeqNbr() && appliedAmountArr[ff] > 0) {
-					logDebug("Debug Point 3");
-					//check for state and local fees
-					if (feeObjArr[ij].getFeeCod() == "LIC_MJRC_01" || feeObjArr[ij].getFeeCod() == "LIC_MJRPM_01" || feeObjArr[ij].getFeeCod() == "LIC_MJST_05" || 
-						feeObjArr[ij].getFeeCod() == "LIC_MJTST_01" || feeObjArr[ij].getFeeCod() == "LIC_MJTR_01" || feeObjArr[ij].getFeeCod() == "LIC_MJ_01") {
-						logDebug("State fee is present");
-						vStateFee = true;
-					} 
-					if (feeObjArr[ff].getFeeCod() != "LIC_MJRC_01" && feeObjArr[ff].getFeeCod() != "LIC_MJRPM_01" && feeObjArr[ff].getFeeCod() != "LIC_MJST_05" || 
-						feeObjArr[ff].getFeeCod() != "LIC_MJTST_01" && feeObjArr[ff].getFeeCod() != "LIC_MJTR_01" && feeObjArr[ff].getFeeCod() != "LIC_MJ_01") {
-						logDebug("Local fee is present");
-						vLocalFee = true;
-					}
-				}
-			}
-	}
+	var pfResult = aa.finance.getPaymentFeeItems(capId, null);
+	if (pfResult.getSuccess()) {
+        var pfObj = pfResult.getOutput();
+		//match fee items to sequence number
+		for (ij in pfObj) {
+			if (pfObj[ij].getPaymentSeqNbr() != vPaymentSeqNbr)
+				continue;
+            logDebug("Debug Point 3");
+            var thisFeeSeq = pfObj[ij].getFeeSeqNbr();
+            var thisFeeItem = aa.fee.getFeeItemByPK(capId, thisFeeSeq).getOutput();
+            var thisFeeCode = thisFeeItem.getFeeCod();
+            //check for state and local fees
+            if (thisFeeCode == "LIC_MJRC_01" || thisFeeCode == "LIC_MJRPM_01" || thisFeeCode == "LIC_MJST_05" || 
+                thisFeeCode == "LIC_MJTST_01" || thisFeeCode == "LIC_MJTR_01" || thisFeeCode == "LIC_MJ_01") {
+                logDebug("State fee is present");
+                vStateFee = true;
+            } 
+            if (thisFeeCode == "LIC_MJTR_02" || thisFeeCode == "LIC_MJTST_02" || thisFeeCode == "LIC_MJST_01" || 
+                thisFeeCode == "LIC_MJRPM_02" || thisFeeCode == "LIC_MJRC_02") {
+                logDebug("Local fee is present");
+                vLocalFee = true;
+            }
+					
+				
+		}
+    }
 	
 	if(vStateFee != null && vStateFee != "" && vStateFee == true) {
 		var emailTemplateName = "LIC MJ STATE FEE RECEIPT";

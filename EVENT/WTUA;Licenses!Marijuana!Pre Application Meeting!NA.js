@@ -6,7 +6,7 @@ if(wfTask=="Pre Licensing Meeting" && wfStatus == "Meeting Held"){
 
 	if(childSubType){
 	childSubType = childSubType.replace('MJ ','');
-	childSubType = childSubType.replace('License','');
+	childSubType = childSubType.replace(' License','');
 	logDebug("Create temp record of: "+ childSubType)
 
 	if(childSubType=="Transporter"){
