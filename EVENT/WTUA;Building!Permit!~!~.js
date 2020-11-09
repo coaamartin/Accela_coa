@@ -183,7 +183,7 @@ else if (wfStatus == "Withdrawn") {
     //include("5125_CityClerk_Denial");
     updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
     closeAllTasks(capId, "");
-// }
+ }
 logDebug("End of WTUA;Building");
 
 // aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
@@ -195,4 +195,4 @@ logDebug("End of WTUA;Building");
 // 	logDebug("A JavaScript Error occured: " + err.message);
 // }
 // aa.env.setValue("ScriptReturnCode", "0");
-// aa.env.setValue("ScriptReturnMessage", debug)
+// aa.env.setValue("ScriptReturnMessage", debug);
