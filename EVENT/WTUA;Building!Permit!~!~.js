@@ -175,14 +175,14 @@ else if (wfTask == "Final Approval" && wfStatus == "Denied") {
 
 else if (wfStatus == "Void") {
     //include("5125_CityClerk_Denial");
-    updateAppStatus("VOID", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "");
+    updateAppStatus("Void", "Script 5125_CityClerk_Denial");
+    closeAllTasks(capId, "Void");
 }
 
 else if (wfStatus == "Withdrawn") {
     //include("5125_CityClerk_Denial");
     updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "");
+    closeAllTasks(capId, "Withdrawn");
  }
 logDebug("End of WTUA;Building");
 
