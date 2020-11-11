@@ -24,7 +24,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 			numberOfMonths = 12;
 			tmpNewDate = dateAddMonths(null, numberOfMonths);
 			comment("TMP NEW Date Default = "+tmpNewDate);
-		} else if (exists(appTypeArray[2],["Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club"])) {
+		} else if (matches(appTypeArray[2],"Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club")){//(exists(appTypeArray[2],["Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club"])) {
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
@@ -112,10 +112,11 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 		editIdString = capIDString.substr(0,10)+'L'; 
 		aa.cap.updateCapAltID(newChildID,editIdString);
 		logDebug("New CAP ID is going to be " +editIdString);
-		logDebug("New cap ID is "+newChildID.getCustomID());
 	}
 }
 } catch (err) {
 	logDebug("A JavaScript Error occured: " + err.message + " In Line " + err.lineNumber);
 	logDebug("Stack: " + err.stack);
 }
+
+logDebug("New cap ID is "+newChildID.getCustomID());
