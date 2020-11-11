@@ -112,6 +112,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 		editIdString = capIDString.substr(0,10)+'L'; 
 		aa.cap.updateCapAltID(newChildID,editIdString);
 		logDebug("New CAP ID is going to be " +editIdString);
+		logDebug("New cap ID is "+newChildID.getCustomID());
 	}
 }
 } catch (err) {
