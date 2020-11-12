@@ -24,28 +24,32 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 			numberOfMonths = 12;
 			tmpNewDate = dateAddMonths(null, numberOfMonths);
 			comment("TMP NEW Date Default = "+tmpNewDate);
-		} else if (matches(appTypeArray[2],"Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club")){//(exists(appTypeArray[2],["Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club"])) {
+		}
+		if (matches(appTypeArray[2],"Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club")){//(exists(appTypeArray[2],["Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club"])) {
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
 			numberOfMonths = 12;
 			tmpNewDate = dateAddMonths(null, numberOfMonths);
 			logDebug("TMP NEW Date Default = "+tmpNewDate);
-		} else if (exists(appTypeArray[2],["Cabaret","Tasting License","Tasting Permit"]))  {
+		}
+		if (exists(appTypeArray[2],["Cabaret","Tasting License","Tasting Permit"]))  {
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
 			numberOfMonths = 12;
 			tmpNewDate = AInfo['State License Expiration Date'];
 			logDebug("Tmp Date from ASI = "+tmpNewDate);
-		} else if (appMatch('Licenses/Liquor/Liquor License/Application')) {
+		} 
+		if (appMatch('Licenses/Liquor/Liquor License/Application')) {
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
 			numberOfMonths = 12;
 			tmpNewDate = AInfo['State License Expiration Date'];
 			logDebug("Tmp Date from ASI = "+tmpNewDate);
-		} else if (exists(appTypeArray[2],["Trash Hauler","Amusement Device Distributor"])){
+		}
+		if (exists(appTypeArray[2],["Trash Hauler","Amusement Device Distributor"])){
 			var licType = AInfo['Type of License'];
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
 			//default to 12 months from today
@@ -61,7 +65,8 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 				tmpNewDate = '12/31/'+ theYear;
 			}
 			logDebug("New Date 12/31 will be: " + tmpNewDate);
-		} else if (exists(appTypeArray[2],["Seasonal Licenses"])){
+		}
+		if (exists(appTypeArray[2],["Seasonal Licenses"])){
 			var licType = AInfo['Type of License'];
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
@@ -119,4 +124,3 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 	logDebug("Stack: " + err.stack);
 }
 
-logDebug("New cap ID is "+newChildID.getCustomID());
