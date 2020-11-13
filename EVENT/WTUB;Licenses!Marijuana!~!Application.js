@@ -18,7 +18,7 @@ Sample Call:
 //sw 495
 var feeAdded = _isFeeAdded(capId);
 //defer payment only adds fee. If fee added it must be invoiced and paid
-if(_isFeeAdded){
+if(feeAdded){
 	cancel = true;
 	showMessage=true;
 	comment("Fee exist and not invoiced. All fees must be paid prior to advancing workflow");
