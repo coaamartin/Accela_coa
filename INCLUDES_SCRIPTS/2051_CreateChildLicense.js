@@ -25,7 +25,23 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 			tmpNewDate = dateAddMonths(null, numberOfMonths);
 			comment("TMP NEW Date Default = "+tmpNewDate);
 		}
-		if (matches(appTypeArray[2],"Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club")){//(exists(appTypeArray[2],["Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club"])) {
+		if (matches(appTypeArray[2],"Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Second Hand Dealer","Sexually Oriented Business","Teen Club")){//(exists(appTypeArray[2],["Door Seller","Manufactured Home Park","Stable","Amusement Device","After Hours","Escort","Massage Facility","Massage Solo Practitioner","Pawnbroker","Second Hand Dealer","Sexually Oriented Business","Teen Club"])) {
+			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
+			//default to 12 months from today
+			comment("Checking on what the renewal date should be set to");
+			numberOfMonths = 12;
+			tmpNewDate = dateAddMonths(null, numberOfMonths);
+			logDebug("TMP NEW Date Default = "+tmpNewDate);
+		}
+		if (matches(appTypeArray[2],"Massage Solo Practitioner")){
+			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
+			//default to 12 months from today
+			comment("Checking on what the renewal date should be set to");
+			numberOfMonths = 12;
+			tmpNewDate = dateAddMonths(null, numberOfMonths);
+			logDebug("TMP NEW Date Default = "+tmpNewDate);
+		}
+		if (matches(appTypeArray[2],"Door Seller","Pawnbroker")){
 			newChildID = createChildLic(appTypeArray[0], appTypeArray[1], appTypeArray[2], 'License', capName);
 			//default to 12 months from today
 			comment("Checking on what the renewal date should be set to");
