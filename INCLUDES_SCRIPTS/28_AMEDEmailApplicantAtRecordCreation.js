@@ -1,3 +1,4 @@
+//28_AMEDEmailApplicantAtRecordCreation
 //written by JMAIN
 //Email the MJ Applicant on application submission
 
@@ -64,11 +65,36 @@ var emailTemplate= "MJ APPLICATION SUBMITTAL";
 	addParameter(eParams, "$$ApplicationName$$", appName);
    addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
    addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
-   var emailTo = getAllContactsEmails();
+   var emailTo = _getAllContactsEmailsNoDupEmail();
    logDebug("email to: " + emailTo);
    logDebug(eParams)
    if(emailTo.length>0){
 	//send email to applicant, no report included
 	//emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
-	sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, eParams, null);
+	sendNotification("noreply@auroragov.org", emailTo.join(";"), "", emailTemplate, eParams, null);
    }
+
+
+//function
+function _getAllContactsEmailsNoDupEmail(){
+	var conEmailArray = [];
+	var vConObjArry = getContactObjsByCap(capId);
+	for(eachCont in vConObjArry){
+		var vConObj = vConObjArry[eachCont];
+		//Get contact email
+		if (vConObj) {
+			var conEmail = vConObj.people.getEmail();
+			var conType = vConObj.people.getContactType();
+			if(conType!="Inspection Contact"){
+				if (conEmail && conEmail != null && conEmail != "" ) {
+					if(!exists(conEmail,conEmailArray) && conEmail.indexOf("@") > 0){
+						conEmailArray.push(conEmail);
+					}
+					
+				}
+			}
+		}
+	}
+	return conEmailArray;
+	
+}
