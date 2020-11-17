@@ -22,18 +22,18 @@ loadASITables4ACAModified();
 
 
 //1st table
-// if (typeof(REQUESTEDLICENSETYPES) == "object"){
-// 	Object.prototype.count = function(){
-// 		var count = 0;
-// 		for(var prop in this) {
-// 			if(this.hasOwnProperty(prop))
-// 				count++;
-// 		}
-// 		return count;
-// 	}
+if (typeof(REQUESTEDLICENSETYPES) == "object"){
+	Object.prototype.count = function(){
+		var count = 0;
+		for(var prop in this) {
+			if(this.hasOwnProperty(prop))
+				count++;
+		}
+		return count;
+	}
 
-// rowCount = REQUESTEDLICENSETYPES.count(); // row count
-// }
+rowCount = REQUESTEDLICENSETYPES.count(); // row count
+}
 
 
 //Make sure table is not empty
