@@ -57,111 +57,111 @@ function getScriptText(vScriptName) {
 }
 
 //Table modified to work in this script only.
-// function loadASITables4ACAModified() {
-// // Loads App Specific tables into their own array of arrays.  Creates global array objects
-// 	var gm = cap.getAppSpecificTableGroupModel()
-// 	var ta = gm.getTablesMap();
-// 	var tai = ta.values().iterator();
+function loadASITables4ACAModified() {
+// Loads App Specific tables into their own array of arrays.  Creates global array objects
+	var gm = cap.getAppSpecificTableGroupModel()
+	var ta = gm.getTablesMap();
+	var tai = ta.values().iterator();
 
-// 	while (tai.hasNext())
-// 	  {
-// 	  var tsm = tai.next();
+	while (tai.hasNext())
+	  {
+	  var tsm = tai.next();
 
-// 	  if (tsm.rowIndex.isEmpty()) continue;  // empty table exit function
+	  if (tsm.rowIndex.isEmpty()) continue;  // empty table exit function
 
-// 	  var tempObject = new Array();
-// 	  var tempArray = new Array();
-// 	  var tn = tsm.getTableName();
+	  var tempObject = new Array();
+	  var tempArray = new Array();
+	  var tn = tsm.getTableName();
 	  
-// 	  tn = String(tn).replace(/[^a-zA-Z0-9]+/g,'');  //Remove spaces, special characters from string // This table *1 - Thistable1
+	  tn = String(tn).replace(/[^a-zA-Z0-9]+/g,'');  //Remove spaces, special characters from string // This table *1 - Thistable1
 
-//   	  var tsmfldi = tsm.getTableField().iterator();
-// 	  var tsmcoli = tsm.getColumns().iterator();
+  	  var tsmfldi = tsm.getTableField().iterator();
+	  var tsmcoli = tsm.getColumns().iterator();
 	
-// 	  while (tsmfldi.hasNext())  // cycle through fields
-// 		{
-// 		if (!tsmcoli.hasNext())  // cycle through columns
-// 			{
-// 			var tsmcoli = tsm.getColumns().iterator();
-// 			tempArray.push(tempObject);  // end of record
-// 			var tempObject = new Array();  // clear the temp obj
-// 			}
-// 		var tcol = tsmcoli.next();
-// 		var tobj = tsmfldi.next(); 
-// 		var tval = ""; 
-// 		//Removed getInputValue 
-// 		tval = tobj; 
+	  while (tsmfldi.hasNext())  // cycle through fields
+		{
+		if (!tsmcoli.hasNext())  // cycle through columns
+			{
+			var tsmcoli = tsm.getColumns().iterator();
+			tempArray.push(tempObject);  // end of record
+			var tempObject = new Array();  // clear the temp obj
+			}
+		var tcol = tsmcoli.next();
+		var tobj = tsmfldi.next(); 
+		var tval = ""; 
+		//Removed getInputValue 
+		tval = tobj; 
 		
-// 		tempObject[tcol.getColumnName()] = tval;
-// 		}	//end cycle thru fields
-// 	  tempArray.push(tempObject);  // end of record and add to temp array
-// 	  var copyStr = "" + tn + " = tempArray";	//string to eval from unknown table name
-// 	  eval(copyStr);  // move to passed table name
-// 	  }
+		tempObject[tcol.getColumnName()] = tval;
+		}	//end cycle thru fields
+	  tempArray.push(tempObject);  // end of record and add to temp array
+	  var copyStr = "" + tn + " = tempArray";	//string to eval from unknown table name
+	  eval(copyStr);  // move to passed table name
+	  }
 
-// }
+}
 
-// function loadASITables4ACA() {
+function loadASITables4ACA() {
 
-//  	//
-//  	// Loads App Specific tables into their own array of arrays.  Creates global array objects
-// 	//
-// 	// Optional parameter, cap ID to load from.  If no CAP Id specified, use the capModel
-// 	//
+ 	//
+ 	// Loads App Specific tables into their own array of arrays.  Creates global array objects
+	//
+	// Optional parameter, cap ID to load from.  If no CAP Id specified, use the capModel
+	//
 
-// 	var itemCap = capId;
-// 	if (arguments.length == 1)
-// 		{
-// 		itemCap = arguments[0]; // use cap ID specified in args
-// 		var gm = aa.appSpecificTableScript.getAppSpecificTableGroupModel(itemCap).getOutput();
-// 		}
-// 	else
-// 		{
-// 		var gm = cap.getAppSpecificTableGroupModel()
-// 		}
+	var itemCap = capId;
+	if (arguments.length == 1)
+		{
+		itemCap = arguments[0]; // use cap ID specified in args
+		var gm = aa.appSpecificTableScript.getAppSpecificTableGroupModel(itemCap).getOutput();
+		}
+	else
+		{
+		var gm = cap.getAppSpecificTableGroupModel()
+		}
 
-// 	var ta = gm.getTablesMap();
+	var ta = gm.getTablesMap();
 
 
-// 	var tai = ta.values().iterator();
+	var tai = ta.values().iterator();
 
-// 	while (tai.hasNext())
-// 	  {
-// 	  var tsm = tai.next();
+	while (tai.hasNext())
+	  {
+	  var tsm = tai.next();
 
-// 	  if (tsm.rowIndex.isEmpty()) continue;  // empty table
+	  if (tsm.rowIndex.isEmpty()) continue;  // empty table
 
-// 	  var tempObject = new Array();
-// 	  var tempArray = new Array();
-// 	  var tn = tsm.getTableName();
+	  var tempObject = new Array();
+	  var tempArray = new Array();
+	  var tn = tsm.getTableName();
 
-// 	  tn = String(tn).replace(/[^a-zA-Z0-9]+/g,'');
+	  tn = String(tn).replace(/[^a-zA-Z0-9]+/g,'');
 
-// 	  if (!isNaN(tn.substring(0,1))) tn = "TBL" + tn  // prepend with TBL if it starts with a number
+	  if (!isNaN(tn.substring(0,1))) tn = "TBL" + tn  // prepend with TBL if it starts with a number
 
-//   	  var tsmfldi = tsm.getTableField().iterator();
-// 	  var tsmcoli = tsm.getColumns().iterator();
-// 	  var numrows = 1;
+  	  var tsmfldi = tsm.getTableField().iterator();
+	  var tsmcoli = tsm.getColumns().iterator();
+	  var numrows = 1;
 
-// 	  while (tsmfldi.hasNext())  // cycle through fields
-// 		{
-// 		if (!tsmcoli.hasNext())  // cycle through columns
-// 			{
+	  while (tsmfldi.hasNext())  // cycle through fields
+		{
+		if (!tsmcoli.hasNext())  // cycle through columns
+			{
 
-// 			var tsmcoli = tsm.getColumns().iterator();
-// 			tempArray.push(tempObject);  // end of record
-// 			var tempObject = new Array();  // clear the temp obj
-// 			numrows++;
-// 			}
-// 		var tcol = tsmcoli.next();
-// 		var tval = tsmfldi.next().getInputValue();
-// 		tempObject[tcol.getColumnName()] = tval;
-// 		}
-// 	  tempArray.push(tempObject);  // end of record
-// 	  var copyStr = "" + tn + " = tempArray";
-// 	  logDebug("ASI Table Array : " + tn + " (" + numrows + " Rows)");
-// 	  eval(copyStr);  // move to table name
-// 	  }
+			var tsmcoli = tsm.getColumns().iterator();
+			tempArray.push(tempObject);  // end of record
+			var tempObject = new Array();  // clear the temp obj
+			numrows++;
+			}
+		var tcol = tsmcoli.next();
+		var tval = tsmfldi.next().getInputValue();
+		tempObject[tcol.getColumnName()] = tval;
+		}
+	  tempArray.push(tempObject);  // end of record
+	  var copyStr = "" + tn + " = tempArray";
+	  logDebug("ASI Table Array : " + tn + " (" + numrows + " Rows)");
+	  eval(copyStr);  // move to table name
+	  }
 
-// 	}
+	}
 
