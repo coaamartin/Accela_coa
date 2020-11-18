@@ -22,7 +22,7 @@ loadASITables4ACAModified();
 
 
 //1st table
-if (typeof(REQUESTEDLICENSETYPES) == "object"){
+if (typeof(EVENT_DATES) == "object"){
 	Object.prototype.count = function(){
 		var count = 0;
 		for(var prop in this) {
@@ -32,7 +32,7 @@ if (typeof(REQUESTEDLICENSETYPES) == "object"){
 		return count;
 	}
 
-rowCount = REQUESTEDLICENSETYPES.count(); // row count
+rowCount = EVENT_DATES.count(); // row count
 }
 
 
