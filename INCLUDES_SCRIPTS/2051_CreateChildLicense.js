@@ -131,7 +131,10 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 		newChildIdString = newChildID.getCustomID();
 		logDebug("new child ID string = "+newChildIdString);
 		editIdString = capIDString.substr(0,10)+'L'; 
-		aa.cap.updateCapAltID(newChildID,editIdString);
+		var s_result = aa.cap.updateCapAltID(newChildID,editIdString);
+		if (!s_result.getSuccess()){
+			logDebug("Error updating CAP ID" +s_result.getErrorMessage())
+		}
 		logDebug("New CAP ID is going to be " +editIdString);
 	}
 }
