@@ -27,4 +27,4 @@ comment("Checking on what the renewal date should be set to");
 		logDebug("New Date 07/04 will be: " + tmpNewDate);
 	}
 thisLic = new licenseObject(capIDString,capId); thisLic.setStatus("Active"); thisLic.setExpiration(tmpNewDate);	
-logDebug("New expiration date for " +capID "will be set to " +tmpNewDate);
+logDebug("New expiration date for " +capID + "will be set to " +tmpNewDate);
