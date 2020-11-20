@@ -4,10 +4,14 @@
 // PURPOSE: When the Seasonal License is submitted, set its initial expiration date.
 // DATECREATED: 2020-11-20
 // BY: Alex Charlton TruePointSolutions
+if(matches(currentUserID,"ACHARLTO")){
+showDebug =3;
+}
 
+try {
 var licType = AInfo['Type of License'];
 //default to 12 months from today
-comment("Checking on what the renewal date should be set to");
+logDebug("Checking on what the renewal date should be set to");
 	if (matches(licType,"Christmas Tree Lot","Carnival/Circus (Amusement Enterprise)")) {
 		numberOfMonths = 12;
 		today = new Date(); comment('Today = ' + today);
@@ -27,4 +31,8 @@ comment("Checking on what the renewal date should be set to");
 		logDebug("New Date 07/04 will be: " + tmpNewDate);
 	}
 thisLic = new licenseObject(capIDString,capId); thisLic.setStatus("Active"); thisLic.setExpiration(tmpNewDate);	
-logDebug("New expiration date for " +capID + "will be set to " +tmpNewDate);
+logDebug("New expiration date for will be set to " +tmpNewDate);
+} catch (err) {
+	logDebug("A JavaScript Error occured: " + err.message + " In Line " + err.lineNumber);
+	logDebug("Stack: " + err.stack);
+}
