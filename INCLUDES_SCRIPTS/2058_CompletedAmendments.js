@@ -1,4 +1,4 @@
-//************************************************ >>  2052_LicenseStatus.js  << ****************************
+//************************************************ >>  2058_CompeltedAmendments.js  << ****************************
 // SCRIPTNUMBER: 2058
 // SCRIPTFILENAME: 2058_completedamendments.js
 // PURPOSE: When Amendment record has status set as "Issue License", close record and copy all record details to the parent License record.
