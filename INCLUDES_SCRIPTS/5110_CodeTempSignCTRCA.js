@@ -58,8 +58,8 @@ function checkACARun() {
             //     emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
             // }
             logDebug("Starting to send notifications");
-            //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org;jjking@auroragov.org";
-            var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+            var emailTo = "esango@auroragov.org;gtaets@auroragov.org;jjking@auroragov.org;tvaughn@auroragov.org;dosoba@auroragov.org;wbarrett@auroragov.org;dhclark@auroragov.org;rpettina@auroragov.org";
+            //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
             var vEmailTemplate = "CC READY FOR REVIEW";
             var capAlias = cap.getCapModel().getAppTypeAlias();
             var recordApplicant = getContactByType("Applicant", capId);
