@@ -28,7 +28,8 @@ logDebug("Email to: " + emailTo);
 //Donation Bins code
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var emailTo = "bcammara@auroragov.org;hlamboy@auroragov.org;gadams@auroragov.org";
+    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var firstName = recordApplicant.getFirstName();
@@ -55,7 +56,8 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
 //Temp Use code
 else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var emailTo = "ncampbel@auroragov.org;sswan@auroragov.org";
+    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var firstName = recordApplicant.getFirstName();
@@ -81,7 +83,8 @@ else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
 //Temp Sign code
 else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var emailTo = "cejohnso@auroragov.org;ddodd@auroragov.org;dshols@auroragov.org";
+    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var firstName = recordApplicant.getFirstName();
