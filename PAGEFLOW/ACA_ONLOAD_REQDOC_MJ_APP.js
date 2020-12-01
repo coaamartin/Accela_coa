@@ -20,7 +20,7 @@ try
    addRequiredDocument("Local - Affirmation and Consent Form");
    addRequiredDocument("Local - Applicant Request to Release Information Form");
    addRequiredDocument("Local - Deed or Lease");
-   addRequiredDocument("Local - Certifwicate of Good Standing from the Sec. of State");
+   addRequiredDocument("Local - Certificate of Good Standing from the Sec. of State");
    addRequiredDocument("Local - Diagram of Licensed Premises");
    addRequiredDocument("Local - Funding and Tax Documents");
    addRequiredDocument("Local - Investigation Authorization and Release Form");
