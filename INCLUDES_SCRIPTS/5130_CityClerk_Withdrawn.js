@@ -1,12 +1,12 @@
 //Written by rprovinc   
 //
-//include("5125_CityClerk_denial.js");
+//include("5130_CityClerk_Withdrawn.js");
 
 //*****************************************************************************
 //Script ASA;CityClerk!~!~!~.js
 //Record Types:	CityClerk\Incident\*\* 
 //Event: 		WTUA
-//Desc:			Sending emails to citizen letting them know that there permit was denied.
+//Desc:			Sending emails to citizen letting them know that there permit was withdrawn.
 //
 //Created By: Rprovinc
 //******************************************************************************
@@ -47,7 +47,7 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("EmailTo: " + emailTo1);
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, tParams, null);
-    logDebug("End of Script 5125-Denial")
+    logDebug("End of Script 5130-Withdrawn");
 } else if (recordApplicant == null) {
     logDebug("Email could not be sent as there is no Applicant email address.")
 }
@@ -75,7 +75,7 @@ else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
     logDebug("EmailTo: " + emailTo1);
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, tParams, null);
-    logDebug("End of Script 5125-Denial")
+    logDebug("End of Script 5130-Withdrawn");
 } else if (recordApplicant == null) {
     logDebug("Email could not be sent as there is no Applicant email address.")
 }
@@ -103,7 +103,7 @@ else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     logDebug("EmailTo: " + emailTo1);
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, tParams, null);
-    logDebug("End of Script 5125-Denial")
+    logDebug("End of Script 5130-Withdrawn");
 } else if (recordApplicant == null) {
     logDebug("Email could not be sent as there is no Applicant email address.")
 }
