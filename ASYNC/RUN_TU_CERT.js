@@ -18,7 +18,7 @@ var module = "Building";
 var repName = "Temp_Use_Permit_script";
 
 reportParameters = aa.util.newHashMap(); 
-reportParameters.put("RecordID", capId);
+reportParameters.put("RecordID", capId.getCustomID());
 report = null;  
 report = generateReportFile(repName,reportParameters,module);
 
