@@ -174,13 +174,13 @@ else if (wfTask == "Final Approval" && wfStatus == "Denied") {
 }
 
 else if (wfStatus == "Void") {
-    //include("5125_CityClerk_Denial");
+    include("5129_CityClerk_Void");
     updateAppStatus("Void", "Script 5125_CityClerk_Denial");
     closeAllTasks(capId, "Void");
 }
 
 else if (wfStatus == "Withdrawn") {
-    //include("5125_CityClerk_Denial");
+    include("5130_CityClerk_Withdrawn");
     updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
     closeAllTasks(capId, "Withdrawn");
  }
