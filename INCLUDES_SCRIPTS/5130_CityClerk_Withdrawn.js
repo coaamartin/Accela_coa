@@ -27,7 +27,7 @@ logDebug("Email to: " + emailTo);
 //Donation Bins code
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var vEmailTemplate = "CC Withdrawn";
+    var vEmailTemplate = "CC WITHDRAWN";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
@@ -55,7 +55,7 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
 //Temp Use code
 else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var vEmailTemplate = "CC Withdrawn";
+    var vEmailTemplate = "CC WITHDRAWN";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
@@ -83,7 +83,7 @@ else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
 //Temp Sign code
 else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
-    var vEmailTemplate = "CC Withdrawn";
+    var vEmailTemplate = "CC WITHDRAWN";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
     var firstName = recordApplicant.getFirstName();
