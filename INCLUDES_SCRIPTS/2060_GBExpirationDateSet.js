@@ -10,5 +10,6 @@ numberOfMonths = 24;
 tmpNewDate = dateAddMonths(null, numberOfMonths);
 
 	if (wfStatus == 'Issue License'){
+		lic = new licenseObject(capIDString);
 		thisLic.setStatus("Active");  thisLic.setExpiration(dateAdd(tmpNewDate,0));
 	}
