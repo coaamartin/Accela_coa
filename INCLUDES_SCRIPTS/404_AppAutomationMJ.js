@@ -34,7 +34,7 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Complete"){
 		} else if (vInspType != null && (vInspType == "MJ Code Enforcement Inspections")) {
 			vInspector = "JJKING";
 		} else if (vInspType != null && (vInspType == "MJ Security Inspections - Police")) {
-			vInspector = "STONE";
+			vInspector = "DALLEN";
 		} else {
 			vInspector = "DALLEN";
 		}
