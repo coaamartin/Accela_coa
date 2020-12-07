@@ -121,10 +121,10 @@ else if ("No".equals(vASIValue) && "Building/Permit/TempSigns/NA".equals(appType
 } 
 
 else if ("Yes".equals(vASIValue)) {
-    updateAppStatus("Approved", "Status updated via script 5127_CityClerk_PRA.js");
+    updateAppStatus("Approved", "Status updated via script 5121_CityClerk.js");
     closeTask("Application Close", "Approved", "", "");
     closeAllTasks(capId, "");
-    include("5124_CityClerk_Approval");
+    //include("5124_CityClerk_Approval");
     //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     //Start to generate the Certificate. This will attach to the record when ran.
     logDebug("Starting to kick off event to attach cert to record");
@@ -132,41 +132,38 @@ else if ("Yes".equals(vASIValue)) {
 	if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
-		var vAsyncScript = "RUN_DB_CERT";
+		var vAsyncScript = "SEND_EMAIL_DB_ASYNC";
 		var envParameters = aa.util.newHashMap();
-		envParameters.put("CapId", altID);
-		envParameters.put("AppType", appType);
+		envParameters.put("altID", altID);
+		envParameters.put("capId", capId);
+		envParameters.put("cap", cap);
+		//envParameters.put("AppType", appType);
 		logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	} else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
-		var vAsyncScript = "RUN_TS_CERT";
+		var vAsyncScript = "SEND_EMAIL_TS_ASYNC";
 		var envParameters = aa.util.newHashMap();
-		envParameters.put("CapId", altID);
-		envParameters.put("AppType", appType);
-		logDebug("Starting to kick off ASYNC eventfor TS. Params being passed: " + envParameters);
+		envParameters.put("altID", altID);
+		envParameters.put("capId", capId);
+		envParameters.put("cap", cap);
+		//envParameters.put("AppType", appType);
+		logDebug("Starting to kick off ASYNC event for TS. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	} else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
-		var vAsyncScript = "RUN_TU_CERT";
+		var vAsyncScript = "SEND_EMAIL_TU_ASYNC";
 		var envParameters = aa.util.newHashMap();
-		envParameters.put("CapId", altID);
-		envParameters.put("AppType", appType);
-		logDebug("Starting to kick off ASYNC eventfor Temp Use. Params being passed: " + envParameters);
+		envParameters.put("altID", altID);
+		envParameters.put("capId", capId);
+		envParameters.put("cap", cap);
+		//envParameters.put("AppType", appType);
+		logDebug("Starting to kick off ASYNC event for TU. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	}
     
     logDebug("End of tax exempt script");
 }
 logDebug("End of script 5121_CityClerk.js");
-
-// var altID = capId.getCustomID();
-    // appType = cap.getCapType().toString();
-	// var vAsyncScript = "RUN_PERMITS_CERT";
-	// var envParameters = aa.util.newHashMap();
-    // envParameters.put("CapId", altID);
-    // envParameters.put("AppType", appType)
-	// logDebug("Starting to kick off ASYNC event. Params being passed: " + envParameters);
-    // aa.runAsyncScript(vAsyncScript, envParameters);
