@@ -10,7 +10,7 @@ try
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
-    tParams.put("$$altid$$", capId.getCustomID());
+    tParams.put("$$altid$$", recordID);
     tParams.put("$$Record Type$$", "Donation Bin Request");
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
