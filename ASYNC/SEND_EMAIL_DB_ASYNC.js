@@ -17,6 +17,8 @@ try
 	var cap = aa.env.getValue("cap");
 	var recordID = aa.env.getValue("altID");
 	var emailTo = getEmailString(); 
+	var firstName = recordApplicant.getFirstName();
+    var lastName = recordApplicant.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
