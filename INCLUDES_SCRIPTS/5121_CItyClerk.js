@@ -12,14 +12,9 @@
 
 //******************************************************************************
 var vASIValue = getAppSpecific("Non-Profit");
-//var appTypeString = getAppSpecific("Application Type");
-//var appType = getAppSpecific(appType);
-// var nonProfit = "";
-// var nonProfit = vASIValue;
 appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
-// logDebug("Non Profit: " + nonProfit);
 logDebug("Non-Profit: " + vASIValue);
 logDebug("appType: " + appTypeString);
 if ("No".equals(vASIValue) && "Building/Permit/DonationBin/NA".equals(appTypeString)) {
