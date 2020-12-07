@@ -17,6 +17,7 @@ try
 	var cap = aa.env.getValue("cap");
 	var recordID = aa.env.getValue("altID");
 	var emailTo = getEmailString(); 
+	var recordApplicant = getContactByType("Applicant", capId);
 	var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
