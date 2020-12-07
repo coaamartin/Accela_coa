@@ -23,7 +23,7 @@ try
 	//rParams.put("AGENCYID", "AURORACO");
 	rParams.put("RecordID", recordID);
 	var emailtemplate = "CC PERMIT ISSUANCE";
-	var report = generateReportFile("Don_Bin_Permit_script", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Temp_Use_Permit_script", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
