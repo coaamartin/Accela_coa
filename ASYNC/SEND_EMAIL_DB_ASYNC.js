@@ -13,8 +13,8 @@ logDebug("***** Starting SEND_EMAIL_DB_ASYNC *****");
 // eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 try
 {
-	//var capId = aa.env.getValue("capId");
-	//var cap = aa.env.getValue("cap");
+	var capId = aa.env.getValue("capId");
+	var cap = aa.env.getValue("cap");
 	var recordID = aa.env.getValue("altID");
 	var emailTo = getEmailString(); 
 	var capAlias = cap.getCapModel().getAppTypeAlias();

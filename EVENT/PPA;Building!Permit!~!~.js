@@ -28,7 +28,9 @@ if (balanceDue == 0) {
 		var vAsyncScript = "SEND_EMAIL_DB_ASYNC";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("altID", altID);
-		envParameters.put("AppType", appType);
+		envParameters.put("capId", capId);
+		envParameters.put("cap", cap);
+		//envParameters.put("AppType", appType);
 		logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	} else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
