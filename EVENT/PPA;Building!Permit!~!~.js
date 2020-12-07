@@ -18,7 +18,7 @@ if (balanceDue == 0) {
 	if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
-		var vAsyncScript = "RUN_DB_CERT";
+		var vAsyncScript = "SEND_EMAIL_DB_ASYNC";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("CapId", altID);
 		envParameters.put("AppType", appType)
