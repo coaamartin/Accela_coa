@@ -38,6 +38,7 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var tParams = aa.util.newHashtable();
     tParams.put("$$todayDate$$", thisDate);
+    tParams.put("$$acaRecordUrl$$",getACARecordURL(""));
     tParams.put("$$altid$$", capId.getCustomID());
     tParams.put("$$Record Type$$", "Donation Bin");
     tParams.put("$$capAlias$$", capAlias);
@@ -66,6 +67,7 @@ else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var tParams = aa.util.newHashtable();
     tParams.put("$$todayDate$$", thisDate);
+    tParams.put("$$acaRecordUrl$$",getACARecordURL(""));
     tParams.put("$$altid$$", capId.getCustomID());
     tParams.put("$$Record Type$$", "Temp Use Permit");
     tParams.put("$$capAlias$$", capAlias);
@@ -94,6 +96,7 @@ else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
     var tParams = aa.util.newHashtable();
     tParams.put("$$todayDate$$", thisDate);
+    tParams.put("$$acaRecordUrl$$",getACARecordURL(""));
     tParams.put("$$altid$$", capId.getCustomID());
     tParams.put("$$Record Type$$", "Temp Sign Permit");
     tParams.put("$$capAlias$$", capAlias);
