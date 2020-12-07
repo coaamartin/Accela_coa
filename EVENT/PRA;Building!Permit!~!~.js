@@ -53,32 +53,38 @@ if (balanceDue == 0) {
     logDebug("Starting to kick off event to attach cert to record");
     logDebug("Starting to kick off event to attach cert to record");
     if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
-        var altID = capId.getCustomID();
-        appType = cap.getCapType().toString();
-        var vAsyncScript = "RUN_DB_CERT";
-        var envParameters = aa.util.newHashMap();
-        envParameters.put("CapId", altID);
-        envParameters.put("AppType", appType)
-        logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
-        aa.runAsyncScript(vAsyncScript, envParameters);
-    } else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
-        var altID = capId.getCustomID();
-        appType = cap.getCapType().toString();
-        var vAsyncScript = "RUN_TS_CERT";
-        var envParameters = aa.util.newHashMap();
-        envParameters.put("CapId", altID);
-        envParameters.put("AppType", appType)
-        logDebug("Starting to kick off ASYNC event for Temp Sign. Params being passed: " + envParameters);
-        aa.runAsyncScript(vAsyncScript, envParameters);
-    } else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
-        var altID = capId.getCustomID();
-        appType = cap.getCapType().toString();
-        var vAsyncScript = "RUN_TU_CERT";
-        var envParameters = aa.util.newHashMap();
-        envParameters.put("CapId", altID);
-        envParameters.put("AppType", appType)
-        logDebug("Starting to kick off ASYNC event for Temp Use. Params being passed: " + envParameters);
-        aa.runAsyncScript(vAsyncScript, envParameters);
-    }
+		var altID = capId.getCustomID();
+		appType = cap.getCapType().toString();
+		var vAsyncScript = "SEND_EMAIL_DB_ASYNC";
+		var envParameters = aa.util.newHashMap();
+		envParameters.put("altID", altID);
+		envParameters.put("capId", capId);
+		envParameters.put("cap", cap);
+		//envParameters.put("AppType", appType);
+		logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+	} else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
+		var altID = capId.getCustomID();
+		appType = cap.getCapType().toString();
+		var vAsyncScript = "SEND_EMAIL_TS_ASYNC";
+		var envParameters = aa.util.newHashMap();
+		envParameters.put("altID", altID);
+		envParameters.put("capId", capId);
+		envParameters.put("cap", cap);
+		//envParameters.put("AppType", appType);
+		logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+	} else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
+		var altID = capId.getCustomID();
+		appType = cap.getCapType().toString();
+		var vAsyncScript = "SEND_EMAIL_TU_ASYNC";
+		var envParameters = aa.util.newHashMap();
+		envParameters.put("altID", altID);
+		envParameters.put("capId", capId);
+		envParameters.put("cap", cap);
+		//envParameters.put("AppType", appType);
+		logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+	}
 }
 logDebug("End of PPA;Building!Permit!~!~.js ");
