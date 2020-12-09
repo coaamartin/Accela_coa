@@ -3,7 +3,7 @@ var capId = aa.env.getValue("capId");
 var cap = aa.env.getValue("cap");
 var altID = aa.env.getValue("altID");
 //var altID = capId.getCustomID()
-appType = cap.getCapType().toString();
+//appType = cap.getCapType().toString();
 var vAsyncScript = "SEND_EMAIL_TAXLIC_LICENSE_ASYNC";
 var envParameters = aa.util.newHashMap();
 envParameters.put("altID", altID);
