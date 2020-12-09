@@ -32,7 +32,7 @@ try
 	var rParams = aa.util.newHashtable();
 	//rParams.put("AGENCYID", "AURORACO");
 	//rParams.put("AGENCYID", recordID);
-	rParams.put("Record_id", recordID);
+	rParams.put("Record ID", recordID);
 	var emailtemplate = "LIC ISSUED EMAIL";
 	var report = generateReportFile("Licenses", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
