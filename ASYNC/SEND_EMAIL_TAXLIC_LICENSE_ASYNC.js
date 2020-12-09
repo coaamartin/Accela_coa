@@ -37,7 +37,7 @@ try
 	var emailtemplate = "LIC ISSUED EMAIL";
 	var report = generateReportFile("Licenses", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, "");
+	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, "","","");
 }
 catch(e)
 {
