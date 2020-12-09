@@ -17,7 +17,7 @@ try
 	var cap = aa.env.getValue("cap");
 	var recordID = aa.env.getValue("altID");
 	var emailTo = getEmailString(); 
-	var recordApplicant = getContactByType("Applicant", capId);
+	var recordApplicant = getContactByType("Licensee", capId);
 	var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -30,12 +30,12 @@ try
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
 	var rParams = aa.util.newHashtable();
-	rParams.put("AGENCYID", "AURORACO");
+	//rParams.put("AGENCYID", "AURORACO");
 	//rParams.put("AGENCYID", recordID);
-	//rParams.put("Record_id", recordID);
-	rParams.put("INVOICEID", "4694");
+	rParams.put("Record_id", recordID);
+	//rParams.put("INVOICEID", "4694");
 	var emailtemplate = "LIC ISSUED EMAIL";
-	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Licenses", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
