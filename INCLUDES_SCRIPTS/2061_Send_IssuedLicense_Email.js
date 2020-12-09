@@ -9,4 +9,3 @@ envParameters.put("cap", cap);
 logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
 aa.runAsyncScript(vAsyncScript, envParameters);
 logDebug("End of 2056_License_Notification script");
-}
