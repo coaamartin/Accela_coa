@@ -137,11 +137,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 		}
 		logDebug("New CAP ID is going to be " +editIdString);
 		logDebug("Starting SEND_ISSUEDLICENSE_EMAIL script");
-		var envParameters = aa.util.newHashMap();
-		envParameters.put("altID", editIdString);
-		envParameters.put("capId", newChildID);
-		envParameters.put("cap", cap);
-		include("2061_Send_IssuedLicense_Email",envParameters);
+		include("2061_Send_IssuedLicense_Email");
 	}
 }
 } catch (err) {
