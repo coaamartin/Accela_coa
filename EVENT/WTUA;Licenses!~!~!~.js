@@ -9,3 +9,6 @@ if ((wfStatus == 'Fees Invoiced') && (appMatch('Licenses/Liquor/*/*') || appMatc
 if (wfTask == 'Application Received' && wfStatus == 'Complete'){
 	include("2057_LicenseFees");
 }
+if (wfStatus == 'Active') {
+	include("2061_Send_IssuedLicense_Email");
+}
