@@ -30,8 +30,9 @@ try
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
 	var rParams = aa.util.newHashtable();
-	//rParams.put("AGENCYID", "AURORACO");
-	rParams.put("RecordID", recordID);
+	rParams.put("AGENCYID", "AURORACO");
+	//rParams.put("AGENCYID", recordID);
+	rParams.put("INVOICEID", "4694");
 	var emailtemplate = "LIC FEES INVOICED";
 	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
