@@ -136,6 +136,15 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 			logDebug("Error updating CAP ID" +s_result.getErrorMessage())
 		}
 		logDebug("New CAP ID is going to be " +editIdString);
+		logDebug("Starting SEND_ISSUEDLICENSE_EMAIL script");
+		var contacts = 'Primary';
+		var emailTemplate = 'LIC ISSUED EMAIL';
+		var reportName = 'Licenses';
+		var reportParam = editIdString
+		logDebug("REPORT PARAM is = "+editIdString);
+		emailContactsWithReportAttachASync(contacts, emailTemplate, "", "", "", "N", "")
+		//emailContactsWithReportAttachASync(contacts, emailTemplate, "", reportName, reportParam, "N", "")
+		logDebug("End of 2056_License_Notification script");
 	}
 }
 } catch (err) {
