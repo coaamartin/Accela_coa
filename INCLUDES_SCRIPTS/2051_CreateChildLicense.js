@@ -138,7 +138,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 		logDebug("New CAP ID is going to be " +editIdString);
 		logDebug("Starting SEND_ISSUEDLICENSE_EMAIL script");
 		//include("2061_Send_IssuedLicense_Email");
-		var altID = capId.getCustomID()
+		var altID = editIdString;
 		appType = cap.getCapType().toString();
 		var vAsyncScript = "SEND_EMAIL_TAXLIC_LICENSE_ASYNC";
 		var envParameters = aa.util.newHashMap();
