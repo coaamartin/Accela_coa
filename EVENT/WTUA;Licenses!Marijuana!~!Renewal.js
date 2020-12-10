@@ -42,8 +42,6 @@ if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 
 
 
-
-
 //SW Script 436
 include("436_cancelScheduledInpsectionsRenew");
 //SW Script 432
