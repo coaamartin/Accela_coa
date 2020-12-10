@@ -1,16 +1,19 @@
 logDebug("***** Starting SEND_EMAIL_TAXLIC_LICENSE_ASYNC *****");
-// function getScriptText(vScriptName){
-//   vScriptName = vScriptName.toUpperCase();
-//   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-//   var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-//   return emseScript.getScriptText() + "";          
-// }
+ function getScriptText(vScriptName){
+   vScriptName = vScriptName.toUpperCase();
+   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+   var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+   return emseScript.getScriptText() + "";          
+ }
 
-// var SCRIPT_VERSION = 3.0
-// aa.env.setValue("CurrentUserID", "ADMIN");
-// eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-// eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-// eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
+ var SCRIPT_VERSION = 3.0
+ aa.env.setValue("CurrentUserID", "ADMIN");
+ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+ eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+ eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
+if (currentUserID == "ACHARLTO"){
+showDebug = 3;
+}
 try
 {
 	var capId = aa.env.getValue("capId");
@@ -37,7 +40,7 @@ try
 	//rParams.put("INVOICEID", "4694");
 	var emailtemplate = "LIC ISSUED EMAIL";
 	var report = generateReportFile("Licenses", rParams, aa.getServiceProviderCode());
-	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 catch(e)
@@ -45,7 +48,7 @@ catch(e)
 	showMessage = true;
     comment("Error on custom async script. Please contact administrator. Err: " + e + ". Line: " + e.lineNumber);
     logDebug("Error on custom function. Please contact administrator. Err: " + e + ". Line: " + e.lineNumber + ". Stack: " + e.stack);
-	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions", "Error", e.message);
+	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
 }
 function getEmailString()
 {
