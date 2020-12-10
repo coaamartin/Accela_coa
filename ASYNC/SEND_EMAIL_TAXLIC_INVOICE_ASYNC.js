@@ -29,18 +29,18 @@ try
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
-	//lastInvoice = getLastInvoice({});
-    //invoiceNbr = lastInvoice.invNbr;
+	lastInvoice = getLastInvoice({});
+    invoiceNbr = lastInvoice.invNbr;
     var reportParams = aa.util.newHashtable();
     addParameter(reportParams, "AGENCYID", "AURORACO");
-    //addParameter(reportParams, "INVOICEID", invoiceNbr.toString());
-	//var rParams = aa.util.newHashtable();
+    addParameter(reportParams, "INVOICEID", invoiceNbr.toString());
+	var rParams = aa.util.newHashtable();
 	//rParams.put("AGENCYID", "AURORACO");
 	//rParams.put("AGENCYID", recordID);
 	//rParams.put("INVOICEID", "4694");
 	var emailtemplate = "LIC FEES INVOICED";
-	//var report = generateReportFile("Invoice Report", reportParams, aa.getServiceProviderCode());
-	var report = generateLastInvoiceReportForEmail4thisScript();
+	var report = generateReportFile("Invoice Report", reportParams, aa.getServiceProviderCode());
+	//var report = generateLastInvoiceReportForEmail4thisScript();
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)

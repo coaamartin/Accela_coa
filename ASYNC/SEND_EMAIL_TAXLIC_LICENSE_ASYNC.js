@@ -16,6 +16,7 @@ try
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var recordID = aa.env.getValue("altID");
+	logDebug("recordID is = "+recordID);
 	var emailTo = getEmailString(); 
 	var recordApplicant = getContactByType("Licensee", capId);
 	var firstName = recordApplicant.getFirstName();
@@ -37,10 +38,13 @@ try
 	var emailtemplate = "LIC ISSUED EMAIL";
 	var report = generateReportFile("Licenses", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, "","","");
+	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 catch(e)
 {
+	showMessage = true;
+    comment("Error on custom async script. Please contact administrator. Err: " + e + ". Line: " + e.lineNumber);
+    logDebug("Error on custom function. Please contact administrator. Err: " + e + ". Line: " + e.lineNumber + ". Stack: " + e.stack);
 	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions", "Error", e.message);
 }
 function getEmailString()
