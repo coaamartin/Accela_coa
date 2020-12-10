@@ -1,16 +1,16 @@
 logDebug("***** Starting SEND_EMAIL_TAXLIC_INVOICE_ASYNC *****");
-// function getScriptText(vScriptName){
-//   vScriptName = vScriptName.toUpperCase();
-//   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-//   var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-//   return emseScript.getScriptText() + "";          
-// }
+function getScriptText(vScriptName){
+   vScriptName = vScriptName.toUpperCase();
+   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+   var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+   return emseScript.getScriptText() + "";          
+ }
 
-// var SCRIPT_VERSION = 3.0
-// aa.env.setValue("CurrentUserID", "ADMIN");
-// eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-// eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-// eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
+ var SCRIPT_VERSION = 3.0
+ aa.env.setValue("CurrentUserID", "ADMIN");
+ eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+ eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+ eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 try
 {
 	var capId = aa.env.getValue("capId");
@@ -29,22 +29,26 @@ try
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
-	lastInvoice = getLastInvoice({});
-    invoiceNbr = lastInvoice.invNbr;
+	//lastInvoice = getLastInvoice({});
+    //invoiceNbr = lastInvoice.invNbr;
     var reportParams = aa.util.newHashtable();
     addParameter(reportParams, "AGENCYID", "AURORACO");
-    addParameter(reportParams, "INVOICEID", invoiceNbr.toString());
+    //addParameter(reportParams, "INVOICEID", invoiceNbr.toString());
 	//var rParams = aa.util.newHashtable();
 	//rParams.put("AGENCYID", "AURORACO");
 	//rParams.put("AGENCYID", recordID);
 	//rParams.put("INVOICEID", "4694");
 	var emailtemplate = "LIC FEES INVOICED";
-	var report = generateReportFile("Invoice Report", reportParams, aa.getServiceProviderCode());
+	//var report = generateReportFile("Invoice Report", reportParams, aa.getServiceProviderCode());
+	var report = generateLastInvoiceReportForEmail4thisScript();
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
 {
-	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions", "Error", e.message);
+	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
+	showMessage = true;
+    comment("Error on custom async script SEND_EMAIL_WITH_LAST_INVOICE_ASYNC. Please contact administrator. Err: " + e + ". Line: " + e.lineNumber);
+    logDebug("Error on custom function SEND_EMAIL_WITH_LAST_INVOICE_ASYNC. Please contact administrator. Err: " + e + ". Line: " + e.lineNumber + ". Stack: " + e.stack);
 }
 function getEmailString()
 {
@@ -242,4 +246,47 @@ function generateReportFile(aaReportName,parameters,rModule)
 
 	return contactAddressModelArr;
 
+}
+
+function generateLastInvoiceReportForEmail4thisScript() {
+    //returns the report file which can be attached to an email.
+    //returns the report file which can be attached to an email.
+    var user = currentUserID;   // Setting the User Name
+    var reportResult = aa.reportManager.getReportInfoModelByName("Invoice Report");
+    logDebug("report: " + reportResult);
+    lastInvoice = getLastInvoice({});
+    if(lastInvoice) var invoiceNbr = lastInvoice.invNbr;
+    else { logDebug("WARNING: There are no invoices to send."); return false; }
+    var reportParams = aa.util.newHashtable();
+    addParameter(reportParams, "AGENCYID", "AURORACO");
+    addParameter(reportParams, "INVOICEID", invoiceNbr.toString());
+    
+    report = reportResult.getOutput();
+    report.setModule("Licenses");
+    report.setCapId(capId.getID1() + "-" + capId.getID2() + "-" + capId.getID3());
+    report.setReportParameters(reportParams);
+    report.getEDMSEntityIdModel().setAltId(capId.getCustomID());
+
+    var permit = aa.reportManager.hasPermission("Invoice Report",user);
+    if (permit.getOutput().booleanValue()) {
+    var reportResult = aa.reportManager.getReportResult(report);
+    if(reportResult.getSuccess()) {
+        logDebug("report result = " + reportResult);
+        reportOutput = reportResult.getOutput();
+        var reportFile=aa.reportManager.storeReportToDisk(reportOutput);
+        reportFile=reportFile.getOutput();
+        var reportName = reportOutput.getName();
+        logDebug("report File = " + reportFile);
+        logDebug("report Name = " + reportName);
+        printObject(reportName);
+        return reportName;
+    }  
+    else {
+        logDebug("System failed get report: " + reportResult.getErrorType() + ":" +reportResult.getErrorMessage());
+        return false;
+    }
+    } else {
+        logDebug("You have no permission.");
+        return false;
+    }
 }
