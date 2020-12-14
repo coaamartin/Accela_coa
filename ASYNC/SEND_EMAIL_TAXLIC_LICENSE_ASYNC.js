@@ -34,10 +34,7 @@ try
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
 	var rParams = aa.util.newHashtable();
-	//rParams.put("AGENCYID", "AURORACO");
-	//rParams.put("AGENCYID", recordID);
-	rParams.put("Record_id", recordID);
-	//rParams.put("INVOICEID", "4694");
+	rParams.put("Record ID", recordID);
 	var emailtemplate = "LIC ISSUED EMAIL";
 	var report = generateReportFile("Licenses", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
@@ -45,9 +42,6 @@ try
 }
 catch(e)
 {
-	showMessage = true;
-    comment("Error on custom async script. Please contact administrator. Err: " + e + ". Line: " + e.lineNumber);
-    logDebug("Error on custom function. Please contact administrator. Err: " + e + ". Line: " + e.lineNumber + ". Stack: " + e.stack);
 	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
 }
 function getEmailString()
@@ -58,7 +52,7 @@ function getEmailString()
 	//need to add inspection contact below to this logic 
 	for (var c in contactArray)
 	{
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Applicant")
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Licensee")
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
 
