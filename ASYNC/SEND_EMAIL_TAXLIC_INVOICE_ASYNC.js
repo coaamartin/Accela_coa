@@ -1,7 +1,7 @@
 logDebug("***** Starting SEND_EMAIL_TAXLIC_INVOICE_ASYNC.JS *****");
 try
 {
-	var capId = aa.env.getValue("altID");
+	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var invNbr = aa.env.getValue("INVOICEID");
 	var emailTo = getEmailString(); 
