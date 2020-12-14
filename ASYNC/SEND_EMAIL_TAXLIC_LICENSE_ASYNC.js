@@ -23,17 +23,17 @@ try
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
 	var rParams = aa.util.newHashtable();
-	rParams.put("Record ID", recordID);
-	//rParams.put("Record_id", recordID);
+	//rParams.put("Record ID", recordID);
+	rParams.put("Record_id", recordID);
 	var emailtemplate = "LIC ISSUED EMAIL";
-	var report = generateReportFile("Licenses", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Licenses_script", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 catch(e)
 {
 	//email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
-	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", "ERROR: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug); 
+	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", "ERROR: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: ");// + debug); 
 }
 function getEmailString()
 {
