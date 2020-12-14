@@ -12,6 +12,8 @@ if (appMatch('Licenses/Supplemental/*/*')){
 	//Start of Class 1 Fees
 	if (appMatch('Licenses/Supplemental/Amusement Device Distributor/*')){
 		updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1012', 'L_CLASS1', 'FINAL', 1, 'Y');
+
 		}
 
 	if (appMatch('Licenses/Supplemental/Amusement Device/*')){
