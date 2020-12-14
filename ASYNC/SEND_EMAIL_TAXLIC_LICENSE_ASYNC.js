@@ -7,6 +7,7 @@ try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
+	var recordID = aa.env.getValue("altID");
 	logDebug("recordID is = "+recordID);
 	var emailTo = getEmailString(); 
 	var recordApplicant = getContactByType("Licensee", capId);
@@ -22,7 +23,8 @@ try
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
 	var rParams = aa.util.newHashtable();
-	rParams.put("Record ID", capId.getCustomID());
+	rParams.put("Record ID", recordID);
+	//rParams.put("Record_id", recordID);
 	var emailtemplate = "LIC ISSUED EMAIL";
 	var report = generateReportFile("Licenses", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
@@ -30,7 +32,8 @@ try
 }
 catch(e)
 {
-	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
+	//email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
+	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", "ERROR: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug); 
 }
 function getEmailString()
 {
