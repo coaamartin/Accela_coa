@@ -1,16 +1,5 @@
 logDebug("***** Starting SEND_EMAIL_TAXLIC_LICENSE_ASYNC *****");
- function getScriptText(vScriptName){
-   vScriptName = vScriptName.toUpperCase();
-   var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-   var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-   return emseScript.getScriptText() + "";          
- }
 
- var SCRIPT_VERSION = 3.0
- aa.env.setValue("CurrentUserID", "ADMIN");
- eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
- eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
- eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 if (currentUserID == "ACHARLTO"){
 showDebug = 3;
 }
@@ -18,7 +7,6 @@ try
 {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
-	var recordID = aa.env.getValue("altID");
 	logDebug("recordID is = "+recordID);
 	var emailTo = getEmailString(); 
 	var recordApplicant = getContactByType("Licensee", capId);
@@ -34,7 +22,7 @@ try
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
 	var rParams = aa.util.newHashtable();
-	rParams.put("Record ID", recordID);
+	rParams.put("Record ID", capId.getCustomID());
 	var emailtemplate = "LIC ISSUED EMAIL";
 	var report = generateReportFile("Licenses", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
