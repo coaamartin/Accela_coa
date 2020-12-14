@@ -32,8 +32,8 @@ try
 }
 catch(e)
 {
-	//email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
-	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", "ERROR: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: ");// + debug); 
+	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
+	email("acharlton@truepointsolutions.com", "noreply@auroragov.org", "Error", "ERROR: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack);// + br + "Debug: ");// + debug); 
 }
 function getEmailString()
 {
