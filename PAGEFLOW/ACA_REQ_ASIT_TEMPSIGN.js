@@ -66,13 +66,13 @@ try{
         //Scripting for Building/Permit/TempSigns/NA
         if(appTypeString == "Building/Permit/TempSigns/NA"){
 			myloadASITables4ACA();
-            var permitType = AInfo["TempSigns"];
-            if(permitType == "Private Fire Line Permit"){
-                if (typeof (TEMPSIGNS) == "object") {
-                    for(x in TEMPSIGNS){
-                        var col1 = TEMPSIGNS[x]["Event Number"];
-                        var col2 = TEMPSIGNSL[x]["Start Date"];       
-                        var col3 = TEMPSIGNS[x]["End Date"];
+            var permitType = AInfo["Temporary Sign Permit"];
+            if(permitType == "EVENT_DATES"){
+                if (typeof (EVENT_DATES) == "object") {
+                    for(x in EVENT_DATES){
+                        var col1 = EVENT_DATES[x]["Event Number"];
+                        var col2 = EVENT_DATES[x]["Start Date"];       
+                        var col3 = EVENT_DATESS[x]["End Date"];
                         
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
@@ -81,11 +81,11 @@ try{
                             cancel = false;
                         }
                         else
-                            message += "You must add at least 1 row in PRIVATE FIRE LINE MATERIAL.";
+                            message += "You must add at least 1 event date.";
                     }
                 }
                 else
-                    message += "You must add at least 1 row in PRIVATE FIRE LINE MATERIAL.";
+                    message += "You must add at least 1 event date.";
             }
         }
         //end Scripting for Water/Utility/Permit/NA
