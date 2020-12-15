@@ -67,12 +67,12 @@ try{
         if(appTypeString == "Building/Permit/TempSigns/NA"){
 			myloadASITables4ACA();
             var permitType = AInfo["Temporary Sign Permit"];
-            if(permitType == "EVENT_DATES"){
-                if (typeof (EVENT_DATES) == "object") {
-                    for(x in EVENT_DATES){
-                        var col1 = EVENT_DATES[x]["Event Number"];
-                        var col2 = EVENT_DATES[x]["Start Date"];       
-                        var col3 = EVENT_DATESS[x]["End Date"];
+            if(permitType == "EVENTS_DATES"){
+                if (typeof (EVENTS_DATES) == "object") {
+                    for(x in EVENTS_DATES){
+                        var col1 = EVENTS_DATES[x]["Event Number"];
+                        var col2 = EVENTS_DATES[x]["Start Date"];       
+                        var col3 = EVENTS_DATES[x]["End Date"];
                         
                         logDebug("col1:" + col1 + ";col1.length():" + col1.length());
                         logDebug("col2:" + col2 + ";col2.length():" + col2.length());
