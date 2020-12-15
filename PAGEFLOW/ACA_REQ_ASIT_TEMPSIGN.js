@@ -61,12 +61,12 @@ catch(err){
 /-----------------------------------------------------------------------------------------------------*/
 try{
 
-    //Do any pageflow validation scripting for custom lists here for water
-    if(appTypeArray[0] == 'Building'){
-        //Scripting for Building/Permit/TempSigns/NA
-        if(appTypeString == "Building/Permit/TempSigns/NA"){
-			myloadASITables4ACA();
-            var permitType = AInfo["Temporary Sign Permit"];
+    //Do any pageflow validation scripting for custom lists here for building
+    // if(appTypeArray[0] == 'Building'){
+    //     //Scripting for Building/Permit/TempSigns/NA
+    //     if(appTypeString == "Building/Permit/TempSigns/NA"){
+		myloadASITables4ACA();
+    //         var permitType = AInfo["Temporary Sign Permit"];
             if(permitType == "EVENTS_DATES"){
                 if (typeof (EVENTS_DATES) == "object") {
                     for(x in EVENTS_DATES){
@@ -89,10 +89,10 @@ try{
             }
         }
         //end Scripting for Water/Utility/Permit/NA
-        showMessage = cancel = message.length ? true : false;
+        //showMessage = cancel = message.length ? true : false;
         
-    }//END scriting for water module
-}
+//     }//END scriting for water module
+// }
 catch(err2){
 	showDebug = true;
 	logDebug("Error " + err2.message + " at " + err2.lineNumber + "Stack: " + err2.stack);
