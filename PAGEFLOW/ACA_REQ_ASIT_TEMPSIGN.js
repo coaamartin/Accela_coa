@@ -3,11 +3,12 @@
 // | Event   : PAGEFLOWBEFORE
 // | Author  : Raymond Province
 // /------------------------------------------------------------------------------------------------------*/
-| START User Configurable Parameters
-|
-|     Only variables in the following section may be changed.  If any other section is modified, this
-|     will no longer be considered a "Master" script and will not be supported in future releases.  If
-|     changes are made, please add notes above.
+/------------------------------------------------------------------------------------------------------*/
+// | START User Configurable Parameters
+// |
+// |     Only variables in the following section may be changed.  If any other section is modified, this
+// |     will no longer be considered a "Master" script and will not be supported in future releases.  If
+// |     changes are made, please add notes above.
 /------------------------------------------------------------------------------------------------------*/
 var showMessage = false; // Set to true to see results in popup window
 var showDebug = false; // Set to true to see debug messages in popup window
@@ -278,22 +279,6 @@ function logGlobals(globArray) {
 	for (loopGlob in globArray)
 		logDebug("{" + loopGlob + "} = " + globArray[loopGlob])
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
