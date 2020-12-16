@@ -96,10 +96,10 @@ try {
 		showMessage = cancel = message.length ? true : false;
 
 	//} //END scriting for water module
-} catch (err2) {
-	showDebug = true;
-	logDebug("Error " + err2.message + " at " + err2.lineNumber + "Stack: " + err2.stack);
-}
+// } catch (err2) {
+// 	showDebug = true;
+// 	logDebug("Error " + err2.message + " at " + err2.lineNumber + "Stack: " + err2.stack);
+// }
 displayNormalDebugVars(showDebug);
 /*------------------------------------------------------------------------------------------------------/
 | <===========END=Main=Loop================>
