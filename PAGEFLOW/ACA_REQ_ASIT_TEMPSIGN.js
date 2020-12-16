@@ -68,7 +68,7 @@ try {
 try {
 
 	//Do any pageflow validation scripting for custom lists here for building
-	if (appTypeArray[0] == 'Building') {
+	//if (appTypeArray[0] == 'Building') {
 		//Scripting for Building/Permit/TempSigns/NA
 		if (appTypeString == "Building/Permit/TempSigns/NA") {
 			myloadASITables4ACA();
@@ -95,7 +95,7 @@ try {
 		//end Scripting for Water/Utility/Permit/NA
 		showMessage = cancel = message.length ? true : false;
 
-	} //END scriting for water module
+	//} //END scriting for water module
 } catch (err2) {
 	showDebug = true;
 	logDebug("Error " + err2.message + " at " + err2.lineNumber + "Stack: " + err2.stack);
