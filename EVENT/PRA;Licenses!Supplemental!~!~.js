@@ -3,7 +3,7 @@ logDebug("Current balance: " + balanceDue);
 //Check balance and update task
 if (appMatch("Licenses/Supplemental/*/*") || appMatch("Licenses/Liquor/*/*")) {
 	if (balanceDue == 0) {
-		updateTask("Fees", "Paid", "", "");
+		closeTask("Fees", "Paid", "", "");
 	}
 }
 logDebug("Ending PRA tax and Licensing");
