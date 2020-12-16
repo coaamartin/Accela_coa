@@ -14,7 +14,7 @@ try {
     var contactArray = cap.getContactsGroup().toArray();
 
     //remove all documents first
-    //removeAllRequiredDocumentCapCondition();
+    removeAllRequiredDocumentCapCondition();
 
 
 
