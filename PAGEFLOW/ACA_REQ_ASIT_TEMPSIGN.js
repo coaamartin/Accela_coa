@@ -72,7 +72,7 @@ try {
 		//Scripting for Building/Permit/TempSigns/NA
 		if (appTypeString == "Building/Permit/TempSigns/NA") {
 			myloadASITables4ACA();
-			var permitType = AInfo["Temporary Sign Permit Type"];
+			var permitType = AInfo["Temporary Sign Permit"];
 			if (permitType == "Temporary Sign Permit") {
 				if (typeof (EVENTS_DATES) == "object") {
 					for (x in EVENTS_DATES) {
