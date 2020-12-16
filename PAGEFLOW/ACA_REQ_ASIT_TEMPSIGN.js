@@ -72,8 +72,8 @@ try {
 		//Scripting for Building/Permit/TempSigns/NA
 		if (appTypeString == "Building/Permit/TempSigns/NA") {
 			myloadASITables4ACA();
-			var permitType = AInfo["Temporary Sign Permit"];
-			if (permitType == "EVENTS_DATES") {
+			var permitType = AInfo["Temporary Sign Permit Type"];
+			if (permitType == "Temporary Sign Permit") {
 				if (typeof (EVENTS_DATES) == "object") {
 					for (x in EVENTS_DATES) {
 						var col1 = EVENTS_DATES[x]["Event Number"];
@@ -86,7 +86,7 @@ try {
 						if ((col1.length() != 0) || (col2.length() != 0) || (col3.length() != 0)) {
 							cancel = false;
 						} else
-							message += "You must add at least 1 event date." + permitType + ".";
+							message += "You must add at least 1 event date.";
 					}
 				} else
 					message += "You must add at least 1 event date.";
