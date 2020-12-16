@@ -30,7 +30,7 @@ loadASITables4ACAModified();
 
 
 //1st table
-if (typeof(EVENTS_DATES) == "object"){
+if (typeof(EventNumber) == "object"){
 	Object.prototype.count = function(){
 		var count = 0;
 		for(var prop in this) {
@@ -40,7 +40,7 @@ if (typeof(EVENTS_DATES) == "object"){
 		return count;
 	}
 
-rowCount = EVENT_DATES.count(); // row count
+rowCount = EventNumber.count(); // row count
 }
 
 
