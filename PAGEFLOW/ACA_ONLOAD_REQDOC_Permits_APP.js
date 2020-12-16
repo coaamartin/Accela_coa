@@ -16,15 +16,12 @@ try {
     //remove all documents first
     //removeAllRequiredDocumentCapCondition();
 
-    // addRequiredDocument("Owner Consent and Authorization Form");
-    // addRequiredDocument("Owner Authorization for Graffiti Removal Form");
-    // addRequiredDocument("Location of bins Map");
 
 
     if (appMatch("Building/Permit/TempSigns/NA", capId)) {
-        addRequiredDocument("Owner Consent and Authorization Form");
-        addRequiredDocument("Owner Authorization for Graffiti Removal Form");
-        addRequiredDocument("Location of bins Map");
+        // addRequiredDocument("Owner Consent and Authorization Form");
+        // addRequiredDocument("Owner Authorization for Graffiti Removal Form");
+        addRequiredDocument("Location of Sign");
     } 
     // else if (appMatch("Building/Permit/TempUse/NA", capId)) {
     //     addRequiredDocument("Owner Consent and Authorization Form");
