@@ -22,13 +22,14 @@ try
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
-	var rParams = aa.util.newHashtable();
+	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+    var rParams = aa.util.newHashtable();
 	//rParams.put("Record ID", recordID);
 	rParams.put("Record_id", recordID);
 	var emailtemplate = "LIC ISSUED EMAIL";
 	var report = generateReportFile("Licenses_script", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 catch(e)
 {
