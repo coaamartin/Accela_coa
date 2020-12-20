@@ -290,6 +290,7 @@ function mainProcess() {
 		var expDate = b1Exp.getExpDate();
 		if (expDate) {
 			var b1ExpDate = expDate.getMonth() + "/" + expDate.getDayOfMonth() + "/" + expDate.getYear();
+			var dueDate = (expDate.getMonth() -1) + "/" + expDate.getDayOfMonth() + "/" + expDate.getYear();
 		}
 		var b1Status = b1Exp.getExpStatus();
 		var renewalCapId = null;
@@ -397,9 +398,14 @@ function mainProcess() {
 		//generate email notices
 		if (emailTemplate != null && emailTemplate != "" && sendEmailToContactTypes && sendEmailToContactTypes != "") {
 			var hoaName = getAppSpecific("Name of HOA", capId) || "";
+			var tradeName = getAppSpecific("Trade Name", capId) || "";
 
 			eParams = aa.util.newHashtable();
 			eParams.put("$$expirationDate$$", b1ExpDate);
+			eParams.put("$$RenewalExpirationDate$$", b1ExpDate); //MJ LICENSE RENEWAL NOTICE #311 Using
+			eParams.put("$$RenewalDueDate$$", dueDate); //MJ LICENSE RENEWAL NOTICE #311 Using
+			eParams.put("$$TradeName$$", tradeName); //MJ LICENSE RENEWAL NOTICE #311 Using
+
 			eParams.put("$$altID$$",capId.getCustomID());
 			//eParams.put("$$capName$$",capName);
 			eParams.put("$$HOANAME$$", hoaName);
