@@ -399,12 +399,17 @@ function mainProcess() {
 		if (emailTemplate != null && emailTemplate != "" && sendEmailToContactTypes && sendEmailToContactTypes != "") {
 			var hoaName = getAppSpecific("Name of HOA", capId) || "";
 			var tradeName = getAppSpecific("Trade Name", capId) || "";
-
+			var stateLicenseNumber = getAppSpecific("State License Number", capId) || "";
+			
+			var addressLine = getAddressInALine(capId);
+			logDebug("addressLine: "+addressLine+ " tradeName "+tradeName + " stateLicenseNumber "+stateLicenseNumber)
 			eParams = aa.util.newHashtable();
 			eParams.put("$$expirationDate$$", b1ExpDate);
 			eParams.put("$$RenewalExpirationDate$$", b1ExpDate); //MJ LICENSE RENEWAL NOTICE #311 Using
 			eParams.put("$$RenewalDueDate$$", dueDate); //MJ LICENSE RENEWAL NOTICE #311 Using
 			eParams.put("$$TradeName$$", tradeName); //MJ LICENSE RENEWAL NOTICE #311 Using
+			eParams.put("$$AddressLine$$", addressLine); //MJ LICENSE RENEWAL NOTICE #311 Using
+			eParams.put("$$StateLicenseNumber$$", stateLicenseNumber); //MJ LICENSE RENEWAL NOTICE #311 Using
 
 			eParams.put("$$altID$$",capId.getCustomID());
 			//eParams.put("$$capName$$",capName);
@@ -479,4 +484,48 @@ function mainProcess() {
 	logDebug("Ignored due to CAP Status: " + capFilterStatus);
 	logDebug("Ignored due to Deactivated CAP: " + capDeactivated);
 	logDebug("Total CAPS processed: " + capCount);
+}
+
+function getAddressInALine(capId) {
+
+	var capAddrResult = aa.address.getAddressByCapId(capId);
+	var addressToUse = null;
+	var strAddress = "";
+		
+	if (capAddrResult.getSuccess()) {
+		var addresses = capAddrResult.getOutput();
+		if (addresses) {
+			for (zz in addresses) {
+  				capAddress = addresses[zz];
+				if (capAddress.getPrimaryFlag() && capAddress.getPrimaryFlag().equals("Y")) 
+					addressToUse = capAddress;
+			}
+			if (addressToUse == null)
+				addressToUse = addresses[0];
+
+			if (addressToUse) {
+			    strAddress = addressToUse.getHouseNumberStart();
+			    var addPart = addressToUse.getStreetDirection();
+			    if (addPart && addPart != "") 
+			    	strAddress += " " + addPart;
+			    var addPart = addressToUse.getStreetName();
+			    if (addPart && addPart != "") 
+			    	strAddress += " " + addPart;	
+			    var addPart = addressToUse.getStreetSuffix();
+			    if (addPart && addPart != "") 
+			    	strAddress += " " + addPart;	
+			    var addPart = addressToUse.getCity();
+			    if (addPart && addPart != "") 
+			    	strAddress += " " + addPart + ",";
+			    var addPart = addressToUse.getState();
+			    if (addPart && addPart != "") 
+			    	strAddress += " " + addPart;	
+			    var addPart = addressToUse.getZip();
+			    if (addPart && addPart != "") 
+			    	strAddress += " " + addPart;	
+				return strAddress
+			}
+		}
+	}
+	return null;
 }
