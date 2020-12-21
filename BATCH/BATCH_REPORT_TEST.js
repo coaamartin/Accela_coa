@@ -157,8 +157,8 @@ function mainProcess() {
 	var emailBodyMsg = "";
 	var reportName = getJobParam("reportName");
 	var rParams = aa.util.newHashtable();
-	rParams.put("FromDate", "5/1/2020");
-	rParams.put("ToDate", "5/31/2020");
+	//rParams.put("FromDate", "5/1/2020");
+	//rParams.put("ToDate", "5/31/2020");
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 
 	var tParams = aa.util.newHashtable();

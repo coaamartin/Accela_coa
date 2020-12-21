@@ -4,8 +4,7 @@ try
 	//var capId = aa.env.getValue("capId");
 	//var cap = aa.env.getValue("cap");
 	//var invNbr = aa.env.getValue("INVOICEID");
-	// var emailTo = getEmailString(); 
-	var emailTo = "rprovinc@auroragov.org"; 
+	var emailTo = getEmailString(); 
 	//var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -14,10 +13,10 @@ try
 	//tParams.put("$$altID$$", capId.getCustomID());
 	//tParams.put("$$capAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
-	//rParams.put("AGENCYID", "AURORACO");
+	rParams.put("AGENCYID", "AURORACO");
 	//rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "REPORT_TEST_EMAIL";
-	var report = generateReportFile("Daily Revenue User Summary", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Batch Test Report", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
