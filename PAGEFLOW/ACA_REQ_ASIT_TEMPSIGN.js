@@ -47,7 +47,7 @@ rowCount = EVENTSDATES.count(); // row count
 //Make sure table is not empty
 if (rowCount < 1){
 	cancel = true; //Stop user
-	message = "You must enter at least 1 event date." + rowCount; 
+	message = "You must enter at least 1 event date."; 
 }
 
 
