@@ -157,13 +157,13 @@ function mainProcess() {
 	var emailBodyMsg = "Daily User Summary Report";
 	var reportName = getJobParam("reportName");
 	var rParams = aa.util.newHashtable();
-	rParams.put("emailTitle", emailTitle);
-	rParams.put("emailBodyMSG", emailBodyMsg);
 	//rParams.put("FromDate", "5/1/2020");
 	//rParams.put("ToDate", "5/31/2020");
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 
 	var tParams = aa.util.newHashtable();
+	tParams.put("emailTitle", emailTitle);
+	tParams.put("emailBodyMSG", emailBodyMsg);
 	sendMail("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 
 }
