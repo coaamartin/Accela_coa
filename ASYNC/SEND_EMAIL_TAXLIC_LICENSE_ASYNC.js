@@ -24,7 +24,7 @@ try
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
-	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
     var rParams = aa.util.newHashtable();
 	//rParams.put("Record ID", recordID);
 	rParams.put("Record_id", recordID);
