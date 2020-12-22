@@ -154,9 +154,11 @@ function mainProcess() {
 	var emailTo = getJobParam("emailSendTo"); // email to: 
 	var emailTitle = getJobParam("emailTitle"); // email Title
 	var emailtemplate = getJobParam("emailTemplate");	 // email Template
-	var emailBodyMsg = "";
+	var emailBodyMsg = "Daily User Summary Report";
 	var reportName = getJobParam("reportName");
 	var rParams = aa.util.newHashtable();
+	rParams.put("emailTitle", emailTitle);
+	rParams.put("emailBodyMSG", emailBodyMsg);
 	//rParams.put("FromDate", "5/1/2020");
 	//rParams.put("ToDate", "5/31/2020");
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
