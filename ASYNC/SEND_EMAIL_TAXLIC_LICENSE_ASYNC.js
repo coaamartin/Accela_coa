@@ -1,5 +1,6 @@
 logDebug("***** Starting SEND_EMAIL_TAXLIC_LICENSE_ASYNC *****");
 
+var currentUserID = aa.env.getValue("currentUserID");
 if (currentUserID == "ACHARLTO"){
 showDebug = 3;
 }

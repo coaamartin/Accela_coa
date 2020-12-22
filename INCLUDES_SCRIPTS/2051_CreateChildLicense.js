@@ -150,6 +150,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 		aa.env.setValue("capId",newChildID);
 		aa.env.setValue("cap",cap);
 		aa.env.setValue("altID",editIdString);
+		aa.env.setValue("currentUserID",currentUserID);
 		aa.runScript(vAsyncScript);
 	}
 }
