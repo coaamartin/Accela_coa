@@ -150,7 +150,6 @@ function mainProcess() {
 	| BATCH PARAMETERS
     /------------------------------------------------------------------------------------------------------*/
 	var paramStdChoice = aa.env.getValue("paramStdChoice"); // use this standard choice for parameters instead of batchjob params
-	//aa.env.setValue("paramStdChoice", "BATCH_REPORT_TEST") //TESTING
 	var emailTo = getJobParam("emailSendTo"); // email to: 
 	var emailTitle = getJobParam("emailTitle"); // email Title
 	var emailtemplate = getJobParam("emailTemplate");	 // email Template
@@ -160,7 +159,6 @@ function mainProcess() {
 	//rParams.put("FromDate", "5/1/2020");
 	//rParams.put("ToDate", "5/31/2020");
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
-
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$emailTitle$$", emailTitle);
 	tParams.put("$$emailBodyMSG$$", emailBodyMsg);
