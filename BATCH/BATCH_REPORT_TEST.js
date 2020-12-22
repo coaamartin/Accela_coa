@@ -164,7 +164,7 @@ function mainProcess() {
 	var tParams = aa.util.newHashtable();
 	tParams.put("emailTitle", emailTitle);
 	tParams.put("emailBodyMSG", emailBodyMsg);
-	sendMail("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
+	sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 
 }
 
