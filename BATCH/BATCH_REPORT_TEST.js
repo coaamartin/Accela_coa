@@ -162,8 +162,8 @@ function mainProcess() {
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 
 	var tParams = aa.util.newHashtable();
-	tParams.put("emailTitle", emailTitle);
-	tParams.put("emailBodyMSG", emailBodyMsg);
+	tParams.put("$$emailTitle$$", emailTitle);
+	tParams.put("$$emailBodyMSG$$", emailBodyMsg);
 	sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 
 }
