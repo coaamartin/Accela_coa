@@ -145,13 +145,14 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 		envParameters.put("capId", newChildID);
 		logDebug("CAP ID is " +newChildID);
 		envParameters.put("cap", cap);
+		envParameters.put("currentUserID",currentUserID);
 		logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
-		//aa.runAsyncScript(vAsyncScript, envParameters);
-		aa.env.setValue("capId",newChildID);
-		aa.env.setValue("cap",cap);
-		aa.env.setValue("altID",editIdString);
-		aa.env.setValue("currentUserID",currentUserID);
-		aa.runScript(vAsyncScript);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+		//aa.env.setValue("capId",newChildID);
+		//aa.env.setValue("cap",cap);
+		//aa.env.setValue("altID",editIdString);
+		//aa.env.setValue("currentUserID",currentUserID);
+		//aa.runScript(vAsyncScript);
 	}
 }
 } catch (err) {
