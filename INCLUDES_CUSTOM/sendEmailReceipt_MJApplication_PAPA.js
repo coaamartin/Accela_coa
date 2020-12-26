@@ -97,7 +97,8 @@ function sendEmailReceipt_MJApplication_PAPA(){
 		addParameter(eParams, "$$date$$", sysDateMMDDYYYY);
 		addParameter(eParams, "$$amountPaid$$", "");
 		addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
-		addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
+		addParameter(eParams, "$$TradeName$$", appName);
+		//addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
@@ -138,7 +139,8 @@ function sendEmailReceipt_MJApplication_PAPA(){
 		addParameter(eParams, "$$date$$", sysDateMMDDYYYY);
 		addParameter(eParams, "$$amountPaid$$", "");
 		addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
-		addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
+		addParameter(eParams, "$$TradeName$$", appName);
+		//addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());

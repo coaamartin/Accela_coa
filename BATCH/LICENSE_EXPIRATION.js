@@ -398,7 +398,8 @@ function mainProcess() {
 		//generate email notices
 		if (emailTemplate != null && emailTemplate != "" && sendEmailToContactTypes && sendEmailToContactTypes != "") {
 			var hoaName = getAppSpecific("Name of HOA", capId) || "";
-			var tradeName = getAppSpecific("Trade Name", capId) || "";
+			var tradeName = getAppName(capId);
+			//var tradeName = getAppSpecific("Trade Name", capId) || "";
 			var stateLicenseNumber = getAppSpecific("State License Number", capId) || "";
 			
 			var addressLine = getAddressInALine(capId);

@@ -53,7 +53,8 @@
 	addParameter(eParams, "$$acaRecordUrl$$", recordDeepUrl);
 	addParameter(eParams, "$$FullAddress$$", primaryAddress);
 	addParameter(eParams, "$$ApplicationName$$", appName);
-   addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
+	addParameter(eParams, "$$TradeName$$", appName);
+   //addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
    addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
    
 	//send email to applicant, no report included

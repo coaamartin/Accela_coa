@@ -124,12 +124,16 @@ if (wfTask == "License Issuance" && wfStatus == "Issued") {
         
       var asiValues = new Array();
 	   loadAppSpecific(asiValues);                
+	   	
+	   	var tradeName = getAppName(capId);
 
 		var vEParams = aa.util.newHashtable();
 		addParameter(vEParams, "$$LicenseType$$", appTypeAlias);
 		addParameter(vEParams, "$$ExpirationDate$$", vLicenseObj.b1ExpDate);
 		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
-      addParameter(VEParams, "$$TradeName$$", asiValues["Trade Name"]);
+		addParameter(VEParams, "$$TradeName$$", tradeName);
+
+      //addParameter(VEParams, "$$TradeName$$", asiValues["Trade Name"]);
       addParameter(VEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);  
 	   addParameter(VEParams, "$$FullAddress$$", primaryAddress);      
       

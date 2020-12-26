@@ -77,7 +77,7 @@ function failedMJInspectionAutomation(vCapType) {
 			addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
 			
-			
+			var tradeName = getAppName(capId);
 			if (inspId) {
 				addParameter(eParams, "$$inspId$$", inspId);
 			}
@@ -99,8 +99,10 @@ function failedMJInspectionAutomation(vCapType) {
                 addParameter(eParams, "$$FullAddress$$", primaryAddress);
             if (asiValues["State License Number"])
                 addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
-            if (asiValues["Trade Name"])
-                addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
+            /*if (asiValues["Trade Name"])
+                addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);*/
+            if (tradeName)
+                addParameter(eParams, "$$TradeName$$", tradeName);    
 			
 			//send email with report attachment
 			emailContactsWithReportLinkASync("Inspection Contact", emailTemplateName, eParams, reportTemplate, reportParams, "N", "");

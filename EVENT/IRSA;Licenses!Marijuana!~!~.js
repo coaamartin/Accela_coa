@@ -94,7 +94,7 @@ function _failedMJInspectionAutomation(vCapType){
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-		
+		var tradeName = getAppName(capId);
 		if (inspId) {
 			addParameter(eParams, "$$inspId$$", inspId);
 		}
@@ -116,8 +116,10 @@ function _failedMJInspectionAutomation(vCapType){
 			addParameter(eParams, "$$FullAddress$$", primaryAddress);
 		if (asiValues["State License Number"])
 			addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
-		if (asiValues["Trade Name"])
-			addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
+		/*if (asiValues["Trade Name"])
+			addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);*/
+		if (tradeName)
+			addParameter(eParams, "$$TradeName$$", tradeName);
 		
 		//Get ACA Url
 		acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
@@ -168,7 +170,7 @@ function _passedMJInspectionEmailNotification(){
 		addParameter(eParams, "$$altID$$", cap.getCapModel().getAltID());
 		addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias());
 		addParameter(eParams, "$$recordStatus$$", cap.getCapStatus());
-		
+		var tradeName = getAppName(capId);
 		if (inspId) {
 			addParameter(eParams, "$$inspId$$", inspId);
 		}
@@ -190,9 +192,10 @@ function _passedMJInspectionEmailNotification(){
 			addParameter(eParams, "$$FullAddress$$", primaryAddress);
 		if (asiValues["State License Number"])
 			addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
-		if (asiValues["Trade Name"])
-			addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
-		
+		/*if (asiValues["Trade Name"])
+			addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);*/
+		if (tradeName)
+			addParameter(eParams, "$$TradeName$$", tradeName);
 		//Get ACA Url
 		acaURL = lookup("ACA_CONFIGS", "ACA_SITE");
 		acaURL = acaURL.substr(0, acaURL.toUpperCase().indexOf("/ADMIN"));

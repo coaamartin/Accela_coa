@@ -153,14 +153,15 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 
             var asiValues = new Array();
             loadAppSpecific(asiValues); 
-
+            var tradeName = getAppName(capId);
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", thisCap.getCapModel().getAltID());
 			addParameter(eParams, "$$recordAlias$$", thisCap.getCapType().getAlias());
 			addParameter(eParams, "$$recordStatus$$", thisCap.getCapStatus());
 			addParameter(eParams, "$$FullAddress$$", primaryAddress);
 			addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
-			addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
+			addParameter(eParams, "$$TradeName$$", tradeName);
+			//addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
 			
 			emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);

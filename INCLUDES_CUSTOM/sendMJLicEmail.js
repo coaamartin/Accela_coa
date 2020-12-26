@@ -20,7 +20,9 @@ function sendMJLicEmail(itemCap){
         var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
         acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
         var recordDeepUrl = getACARecordURL(acaURLDefault);
-    
+        
+        var tradeName = getAppName(capId);
+
         var vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
         var vReportTemplate = "MJ_License";
         var vEParams = aa.util.newHashtable();
@@ -28,7 +30,8 @@ function sendMJLicEmail(itemCap){
         addParameter(vEParams, "$$recordAlias$$", appTypeAlias);
         addParameter(vEParams, "$$wfComment$$", wfComment);
         addParameter(vEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);  
-        addParameter(vEParams, "$$TradeName$$", asiValues["Trade Name"]);
+        addParameter(vEParams, "$$TradeName$$", tradeName);
+        //addParameter(vEParams, "$$TradeName$$", asiValues["Trade Name"]);
         addParameter(vEParams, "$$FullAddress$$", primaryAddress); 
         addParameter(vEParams, "$$acaRecordUrl$$", recordDeepUrl);
 
