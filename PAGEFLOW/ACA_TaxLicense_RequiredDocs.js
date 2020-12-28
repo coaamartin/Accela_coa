@@ -39,10 +39,10 @@ var cancel = false;
 
 var docCategoriesRequired = null;		// Use Doc Categories by Type if null otherwise use array of required doc categories.
 var docCategoriesRequiredByType = [];	// Required doc categories
-docCategoriesRequiredByType["Licneses/Supplemental/Door ID Badge/Application"] = ["Application Forms","Background Information"];
-docCategoriesRequiredByType["Licneses/Supplemental/After Hours/Application"] = ["Application Forms","Background Information","Business Operations","Consent Forms","Financial Documentation","Legal Entity Documents","Premise Diagrams","Property Forms"];
-docCategoriesRequiredByType["Licneses/Supplemental/Massage Facility/Application"] = ["Application Forms","Background Information","Business Operations","Consent Forms","Financial Documentation","Property Forms"];
-docCategoriesRequiredByType["Licneses/Supplemental/Pawnbroker/Application"] = ["Application Forms","Background Information","Consent Forms","Financial Documentation","Legal Entity Documents","Insurance Documents","Property Forms"];
+docCategoriesRequiredByType["Licenses/Supplemental/Door ID Badge/Application"] = ["Application Forms","Background Information"];
+docCategoriesRequiredByType["Licenses/Supplemental/After Hours/Application"] = ["Application Forms","Background Information","Business Operations","Consent Forms","Financial Documentation","Legal Entity Documents","Premise Diagrams","Property Forms"];
+docCategoriesRequiredByType["Licenses/Supplemental/Massage Facility/Application"] = ["Application Forms","Background Information","Business Operations","Consent Forms","Financial Documentation","Property Forms"];
+docCategoriesRequiredByType["Licenses/Supplemental/Pawnbroker/Application"] = ["Application Forms","Background Information","Consent Forms","Financial Documentation","Legal Entity Documents","Insurance Documents","Property Forms"];
 var systemMailFrom = "noreply@accela.com";
 var adminUserEmail = "acharlton@truepointsolutions.com";
 var debugEmailTo = "";
