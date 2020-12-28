@@ -167,7 +167,7 @@ if (publicUserID) {
    }
 }
 
-if (exists(publicUserEmail, ["rschug@truepointsolutions.com"])) {
+if (exists(publicUserEmail, ["acharlton@truepointsolutions.com"])) {
 	debugEmailTo = publicUserEmail;
 	errorEmailTo = publicUserEmail;
 }
