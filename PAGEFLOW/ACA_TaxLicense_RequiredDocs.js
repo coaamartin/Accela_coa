@@ -4,8 +4,8 @@
 |
 /------------------------------------------------------------------------------------------------------*/
 if (aa.env.getValue("ScriptName") == "Test") { 	// Setup parameters for Script Test.
-	var CurrentUserID = "PUBLICUSER124450"; // Public User ID: rschug
-	var capIDString = "20TMP-000005";			// Test Temp Record from ACA.
+	var CurrentUserID = "PUBLICUSER283"; // Public User ID: rschug
+	var capIDString = "20TMP-000629";			// Test Temp Record from ACA.
 	aa.env.setValue("ScriptCode", "Test");
 	aa.env.setValue("CurrentUserID", CurrentUserID); 	// Current User
 	sca = capIDString.split("-");
@@ -32,7 +32,7 @@ if (aa.env.getValue("ScriptName") == "Test") { 	// Setup parameters for Script T
 |     changes are made, please add notes above.
 /------------------------------------------------------------------------------------------------------*/
 var showMessage = false; // Set to true to see results in popup window
-var showDebug = true; // Set to true to see debug messages in popup window
+var showDebug = false; // Set to true to see debug messages in popup window
 var useAppSpecificGroupName = false; // Use Group name when populating App Specific Info Values
 var useTaskSpecificGroupName = false; // Use Group name when populating Task Specific Info Values
 var cancel = false;
