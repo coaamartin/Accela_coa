@@ -177,6 +177,7 @@ if (exists(publicUserEmail, ["rschug@truepointsolutions.com"])) {
 /-----------------------------------------------------------------------------------------------------*/
 // page flow custom code begin
 try {
+	var showDebug = false; // Set to true to see debug messages in popup window
 	var capModel = aa.env.getValue("CapModel");
 	var cap = capModel;
 	if (cap && cap == "") cap = null;
