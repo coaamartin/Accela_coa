@@ -48,15 +48,9 @@ function sendMJLicEmail(itemCap){
 
         logDebug("Email send to: " + allEmails)
         var reportFiles = new Array();
-        
-        var tempCapId = capId;
-        capId = itemCap;
-
-        var report = _generateReportFile(vReportTemplate, vRParams, aa.getServiceProviderCode());
+        var report = _generateReportFile(vReportTemplate, vRParams, aa.getServiceProviderCode(), itemCap);
         reportFiles.push(report);
-
-        _sendNotification("noreply@auroragov.org", allEmails, "", vEmailTemplate, vEParams, reportFiles);
-        capId = tempCapId;
+        _sendNotification("noreply@auroragov.org", allEmails, "", vEmailTemplate, vEParams, reportFiles, itemCap);
 
     }
     catch(err){
@@ -102,17 +96,20 @@ function _getContactEmailNoDupEmail(vcapId, vconType){
 }
 function _generateReportFile(aaReportName,parameters,rModule) 
 {
-    var reportName = aaReportName;
+    var itemCap = capId;
+    if (arguments.length > 3)
+        itemCap = arguments[3];
 
+    var reportName = aaReportName;
     report = aa.reportManager.getReportInfoModelByName(reportName);
     report = report.getOutput();
 
 
     report.setModule(rModule);
-    report.setCapId(capId);
+    report.setCapId(itemCap);
     report.setReportParameters(parameters);
     //Added
-    vAltId = capId.getCustomID();
+    vAltId = itemCap.getCustomID();
     report.getEDMSEntityIdModel().setAltId(vAltId);
     var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
     logDebug("Report successfully ran: "+permit.getOutput().booleanValue());
@@ -154,6 +151,8 @@ function _sendNotification(emailFrom,emailTo,emailCC,templateName,params,reportF
     {
         logDebug("Failed to send mail. - " + result.getErrorType());
         var itemCap = capId;
+        if (arguments.length > 6)
+            itemCap = arguments[6];
     
         var id1 = itemCap.ID1;
         var id2 = itemCap.ID2;
