@@ -48,9 +48,15 @@ function sendMJLicEmail(itemCap){
 
         logDebug("Email send to: " + allEmails)
         var reportFiles = new Array();
+        
+        var tempCapId = capId;
+        capId = itemCap;
+
         var report = _generateReportFile(vReportTemplate, vRParams, aa.getServiceProviderCode());
         reportFiles.push(report);
+
         _sendNotification("noreply@auroragov.org", allEmails, "", vEmailTemplate, vEParams, reportFiles);
+        capId = tempCapId;
 
     }
     catch(err){
