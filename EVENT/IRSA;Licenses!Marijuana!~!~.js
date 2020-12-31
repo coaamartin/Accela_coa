@@ -134,8 +134,8 @@ function _failedMJInspectionAutomation(vCapType){
 		emails = emails.join(";");
 		logDebug("Email send to: " + emails)
 		var reportFiles = new Array();
-        //var report = _generateReportFile(reportTemplate, reportParams, aa.getServiceProviderCode());
-		//reportFiles.push(report);
+        var report = _generateReportFile(reportTemplate, reportParams, aa.getServiceProviderCode());
+		reportFiles.push(report);
         _sendNotification("noreply@auroragov.org", emails, "", emailTemplate, eParams, reportFiles);
 	}
 

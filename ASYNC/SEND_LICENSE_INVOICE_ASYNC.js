@@ -16,7 +16,7 @@ try
 	rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "LIC FEES INVOICED";
-	//var report = generateReportFile("Fire Invoice Report", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Fire Invoice Report", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, "");
 }
 catch(e)
