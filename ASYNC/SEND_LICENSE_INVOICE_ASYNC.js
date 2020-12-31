@@ -108,7 +108,7 @@ function email(pToEmail, pFromEmail, pSubject, pText)
 	}
 
 
-/*function generateReportFile(aaReportName,parameters,rModule) 
+function generateReportFile(aaReportName,parameters,rModule) 
 {
 	var reportName = aaReportName;
 
@@ -145,7 +145,7 @@ function email(pToEmail, pFromEmail, pSubject, pText)
 		logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
 		return false; 
 	}
-}*/
+}
  function sendNotification(emailFrom,emailTo,emailCC,templateName,params,reportFile)
 
 {
