@@ -1,6 +1,10 @@
 //Scripts 226, 227
 function sendMJLicEmail(itemCap){
     logDebug("sendMJLicEmail() started.");
+    var itemCap = capId;
+    if (arguments.length > 0)
+        itemCap = arguments[0];
+
     try{
         var asiValues = new Array();
         loadAppSpecific(asiValues); 
@@ -62,7 +66,6 @@ function sendMJLicEmail(itemCap){
 }//END sendMJLicEmail()
 
 
-
 function _getContactEmailNoDupEmail(vcapId, vconType){
     var thisItem = arguments[0];
     var searchConType = arguments[1];
@@ -94,12 +97,13 @@ function _getContactEmailNoDupEmail(vcapId, vconType){
     return conEmailArray;
     
 }
+
 function _generateReportFile(aaReportName,parameters,rModule) 
 {
     var itemCap = capId;
     if (arguments.length > 3)
         itemCap = arguments[3];
-
+    logDebug("_generateReportFile : "+itemCap.getCustomID());
     var reportName = aaReportName;
     report = aa.reportManager.getReportInfoModelByName(reportName);
     report = report.getOutput();
@@ -139,7 +143,13 @@ function _generateReportFile(aaReportName,parameters,rModule)
 
 function _sendNotification(emailFrom,emailTo,emailCC,templateName,params,reportFile)
 {
-    var capIDScriptModel = aa.cap.createCapIDScriptModel(capId.getID1(), capId.getID2(), capId.getID3());
+    var itemCap = capId;
+    if (arguments.length > 6)
+            itemCap = arguments[6];
+
+    logDebug("_sendNotification1 : "+itemCap.getCustomID());
+
+    var capIDScriptModel = aa.cap.createCapIDScriptModel(itemCap.getID1(), itemCap.getID2(), itemCap.getID3());
     var result = null;
     result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
     if(result.getSuccess())
@@ -149,26 +159,9 @@ function _sendNotification(emailFrom,emailTo,emailCC,templateName,params,reportF
     }
     else
     {
-        logDebug("Failed to send mail. - " + result.getErrorType());
-        var itemCap = capId;
-        if (arguments.length > 6)
-            itemCap = arguments[6];
-    
-        var id1 = itemCap.ID1;
-        var id2 = itemCap.ID2;
-        var id3 = itemCap.ID3;
-        var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
-        result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
-        if(result.getSuccess())
-        {
-            logDebug("2nd Attempt... Sent email successfully!");
-            return true;
-        }
-        else
-        {
-            logDebug("2nd Attempt Failed to send mail. - " + result.getErrorType());
+            logDebug("Sent email unsuccessfully!");
             return false;
-        }
+        
     }
 }
 
