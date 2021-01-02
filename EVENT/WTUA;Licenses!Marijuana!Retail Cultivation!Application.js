@@ -8,12 +8,7 @@ if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Is
     var newLicCapId = createLicenseCoA("Active", true, "License Status", "Active");
     
     if(newLicCapId){
-        var vAsyncScript = "SEND_MJ_LICENSE_ASYNC";
-        var envParameters = aa.util.newHashMap();
-        envParameters.put("CapId", newLicCapId);
-        aa.runAsyncScript(vAsyncScript, envParameters);
-
-        //sendMJLicEmail(newLicCapId);
+        sendMJLicEmail(newLicCapId);
         
         scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspections", 84, "DALLEN", " ", "Scheduled by Script 229", newLicCapId);
         scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Plumbing", 84, "DALLEN", " ", "Scheduled by Script 229", newLicCapId);
