@@ -28,7 +28,7 @@ if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 			newExpDate = dateAddMonths(null, expInt);
 			} 
 		vLicenseObj.setExpiration(newExpDate);
-		updateAppStatus("Issued","Updated by Script",vLicenseID);
+		updateAppStatus("Active","Updated by Script",vLicenseID);
 		
 		//Set renewal to complete, used to prevent more than one renewal record for the same cycle
 		renewalCapProject = getRenewalCapByParentCapIDForIncomplete(vLicenseID);
