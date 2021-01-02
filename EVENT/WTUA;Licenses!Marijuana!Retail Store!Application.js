@@ -11,7 +11,7 @@ if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Is
         //sendMJLicEmail(newLicCapId);
         var vAsyncScript = "SEND_MJ_LICENSE_ASYNC";
         var envParameters = aa.util.newHashMap();
-        envParameters.put("CapId", newLicCapId);
+        envParameters.put("CapId", newLicCapId.getCustomID());
         aa.runAsyncScript(vAsyncScript, envParameters);
 
         scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspections", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
