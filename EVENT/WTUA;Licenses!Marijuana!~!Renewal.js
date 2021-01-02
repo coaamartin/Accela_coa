@@ -37,6 +37,11 @@ if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 			aa.cap.updateProject(renewalCapProject);
 		}
 
+        var vAsyncScript = "SEND_MJ_LICENSE_ASYNC";
+        var envParameters = aa.util.newHashMap();
+        envParameters.put("CapId", vLicenseID.getCustomID());
+        aa.runAsyncScript(vAsyncScript, envParameters);
+
 	}
 }
 
