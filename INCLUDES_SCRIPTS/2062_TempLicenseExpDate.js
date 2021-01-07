@@ -12,5 +12,5 @@ if (wfStatus == 'Temp License Issued') {
 
 if (wfStatus == 'Temp Permit Extended') {
 	permit = AInfo['Temporary Permit Issue Date'];
-	editAppSpecific("Temporary Permit Expiration Date", dateAdd(permit, 180))
+	editAppSpecific("Temporary Permit Extended Expiration Date", dateAdd(permit, 180))
 }
