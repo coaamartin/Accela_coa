@@ -1,6 +1,6 @@
-//************************************************ >>  2062_LicenseStatus.js  << ****************************
+//************************************************ >>  2062_TempLicenseExpDate.js  << ****************************
 // SCRIPTNUMBER: 2062
-// SCRIPTFILENAME: 2062_LicenseStatus.js
+// SCRIPTFILENAME: 2062_TempLicenseExpDate.js
 // PURPOSE: When Liquor License record workflow is processed and a status of Temp License Issued. Set Expiration Date. If Temp License Issued Extended, then set extended date.
 // DATECREATED: 2021-01-05
 // BY: Alex Charlton TruePointSolutions
