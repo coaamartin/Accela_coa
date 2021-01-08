@@ -29,7 +29,8 @@ logDebug("Email to: " + emailTo);
 if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     //var emailTo = "bcammara@auroragov.org;hlamboy@auroragov.org;gadams@auroragov.org";
-    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var emailTo = "DB_Final_Approvers@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var firstName = recordApplicant.getFirstName();
@@ -57,7 +58,8 @@ if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
 else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     //var emailTo = "ncampbel@auroragov.org;sswan@auroragov.org";
-    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var emailTo = "TUP_Final_Approvers@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var firstName = recordApplicant.getFirstName();
@@ -84,7 +86,8 @@ else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
 else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
     logDebug("Starting to send notifications");
     //var emailTo = "cejohnso@auroragov.org;ddodd@auroragov.org;dshols@auroragov.org";
-    var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
+    var emailTo = "TSP_Final_Approvers@auroragov.org";
     var vEmailTemplate = "CC PLANNING DIRECTOR EMAIL REVIEW";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var firstName = recordApplicant.getFirstName();
