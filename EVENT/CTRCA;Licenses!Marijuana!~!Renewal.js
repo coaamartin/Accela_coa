@@ -1,7 +1,7 @@
 //CTRCA;Licenses!Marijuana!~!Renewal.js
 //send email 
 //******************************************************************************
-if(publicUser){
+/if(publicUser){
 	var emailTemplate = "LIC_MJ_RENEWALSUBMIT";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
@@ -45,5 +45,5 @@ if(publicUser){
     eParams.put("$$tradeName$$", tradeName);
     sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, eParams, null);
 
-}
+//}
 
