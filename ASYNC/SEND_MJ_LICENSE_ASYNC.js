@@ -58,12 +58,14 @@ try
     var vEParams = aa.util.newHashtable();
     addParameter(vEParams, "$$ApplicationName$$", appTypeAlias);
     addParameter(vEParams, "$$recordAlias$$", appTypeAlias);
+    addParameter(vEParams, "$$capAlias$$", appTypeAlias);
     //addParameter(vEParams, "$$wfComment$$", wfComment);
     addParameter(vEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
     addParameter(vEParams, "$$TradeName$$", tradeName);
     //addParameter(vEParams, "$$TradeName$$", asiValues["Trade Name"]);
     addParameter(vEParams, "$$FullAddress$$", primaryAddress);
     addParameter(vEParams, "$$acaRecordUrl$$", recordDeepUrl);
+    addParameter(vEParams, "altID", capId.getCustomID());
 
     var vRParams = aa.util.newHashtable();
     addParameter(vRParams, "Record_ID", capId.getCustomID());
