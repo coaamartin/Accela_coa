@@ -25,60 +25,68 @@ aa.print(capId);
 var asiValues = new Array();
 loadAppSpecific(asiValues);
 
-var adResult = aa.address.getAddressByCapId(capId).getOutput();
-for(x in adResult)
+try
 {
-    var adType = adResult[x].getAddressType();
-    var stNum = adResult[x].getHouseNumberStart();
-    var preDir =adResult[x].getStreetDirection();
-    var stName = adResult[x].getStreetName();
-    var stType = adResult[x].getStreetSuffix();
-    var city = adResult[x].getCity();
-    var state = adResult[x].getState();
-    var zip = adResult[x].getZip();
+    var adResult = aa.address.getAddressByCapId(capId).getOutput();
+    for(x in adResult)
+    {
+        var adType = adResult[x].getAddressType();
+        var stNum = adResult[x].getHouseNumberStart();
+        var preDir =adResult[x].getStreetDirection();
+        var stName = adResult[x].getStreetName();
+        var stType = adResult[x].getStreetSuffix();
+        var city = adResult[x].getCity();
+        var state = adResult[x].getState();
+        var zip = adResult[x].getZip();
+    }
+
+    var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
+    var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+    acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+
+
+    var recordDeepUrl = acaURLDefault; //getACARecordURL(acaURLDefault);
+
+    var tradeName = getAppName(capId);
+
+    var cap = aa.cap.getCap(capId).getOutput();
+    var appTypeAlias = cap.getCapType().getAlias();
+
+    //var wfComment = "AAA";
+    var vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
+    var vReportTemplate = "MJ_License";
+    var vEParams = aa.util.newHashtable();
+    addParameter(vEParams, "$$ApplicationName$$", appTypeAlias);
+    addParameter(vEParams, "$$recordAlias$$", appTypeAlias);
+    //addParameter(vEParams, "$$wfComment$$", wfComment);
+    addParameter(vEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
+    addParameter(vEParams, "$$TradeName$$", tradeName);
+    //addParameter(vEParams, "$$TradeName$$", asiValues["Trade Name"]);
+    addParameter(vEParams, "$$FullAddress$$", primaryAddress);
+    addParameter(vEParams, "$$acaRecordUrl$$", recordDeepUrl);
+
+    var vRParams = aa.util.newHashtable();
+    addParameter(vRParams, "Record_ID", capId.getCustomID());
+
+    var emails = _getContactEmailNoDupEmail(capId,"Applicant");
+    aa.print(emails);
+    var emails2 = _getContactEmailNoDupEmail(capId,"Responsible Party");
+    var allEmails = arrayUnique(emails.concat(emails2));
+    allEmails = allEmails.join(";");
+
+    logDebug("Email send to: " + allEmails)
+    var reportFiles = new Array();
+    var report = _generateReportFile(vReportTemplate, vRParams, aa.getServiceProviderCode(), capId);
+    reportFiles.push(report);
+    _sendNotification("noreply@auroragov.org", allEmails, "", vEmailTemplate, vEParams, reportFiles, capId);
+
+    aa.sendMail("suhailwakil@gmail.com", "suhailwakil@gmail.com", "", "Log", "Debug: " + debug);
+
 }
-
-var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
-var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
-acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
-
-
-var recordDeepUrl = acaURLDefault; //getACARecordURL(acaURLDefault);
-
-var tradeName = getAppName(capId);
-
-var cap = aa.cap.getCap(capId).getOutput();
-var appTypeAlias = cap.getCapType().getAlias();
-
-//var wfComment = "AAA";
-var vEmailTemplate = "LIC MJ APPROVAL OF LICENSE #226 - 230";
-var vReportTemplate = "MJ_License";
-var vEParams = aa.util.newHashtable();
-addParameter(vEParams, "$$ApplicationName$$", appTypeAlias);
-addParameter(vEParams, "$$recordAlias$$", appTypeAlias);
-//addParameter(vEParams, "$$wfComment$$", wfComment);
-addParameter(vEParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
-addParameter(vEParams, "$$TradeName$$", tradeName);
-//addParameter(vEParams, "$$TradeName$$", asiValues["Trade Name"]);
-addParameter(vEParams, "$$FullAddress$$", primaryAddress);
-addParameter(vEParams, "$$acaRecordUrl$$", recordDeepUrl);
-
-var vRParams = aa.util.newHashtable();
-addParameter(vRParams, "Record_ID", capId.getCustomID());
-
-var emails = _getContactEmailNoDupEmail(capId,"Applicant");
-aa.print(emails);
-var emails2 = _getContactEmailNoDupEmail(capId,"Responsible Party");
-var allEmails = arrayUnique(emails.concat(emails2));
-allEmails = allEmails.join(";");
-
-logDebug("Email send to: " + allEmails)
-var reportFiles = new Array();
-var report = _generateReportFile(vReportTemplate, vRParams, aa.getServiceProviderCode(), capId);
-reportFiles.push(report);
-_sendNotification("noreply@auroragov.org", allEmails, "", vEmailTemplate, vEParams, reportFiles, capId);
-
-
+catch (err)
+{
+    aa.sendMail("suhailwakil@gmail.com", "suhailwakil@gmail.com", "", "Log", "Debug: " + err);
+}
 
 ////FUNCTIONS//////
 
