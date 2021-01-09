@@ -53,3 +53,8 @@ include("436_cancelScheduledInpsectionsRenew");
 include("432_deactivateMJTasks");
 
 include("432_closeLicenseMJ");
+
+if (wfTask=="Renewal Review" && wfStatus=="Additional Info Required")
+{
+    include("210_SendMJEmail");
+}
