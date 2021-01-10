@@ -1,7 +1,7 @@
 //CTRCA;Licenses!Marijuana!~!Renewal.js
 //send email 
 //******************************************************************************
-/if(publicUser){
+//if(publicUser){
 	var emailTemplate = "LIC_MJ_RENEWALSUBMIT";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
