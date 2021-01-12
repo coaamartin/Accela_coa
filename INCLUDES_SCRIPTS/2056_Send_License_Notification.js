@@ -1,4 +1,4 @@
-if (balanceDue > 0) {
+if ((wfStatus == 'Fees Invoiced') && (balanceDue > 0)) {
 logDebug("Starting _License_Notification script");
 var invoiceNbrObj = getLastInvoice({});
 var invNbr = invoiceNbrObj.getInvNbr();
@@ -11,6 +11,20 @@ envParameters.put("capId", capId);
 envParameters.put("cap", cap);
 envParameters.put("INVOICEID", String(invNbr));
 logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
+aa.runAsyncScript(vAsyncScript, envParameters);
+logDebug("End of 2056_License_Notification script");
+}
+
+if ((wfStatus == 'Temp License Issued') || (wfStatus == 'Temp Permit Extended')) {
+logDebug("Starting TMP Liq Lic Email Script script");
+var altID = capId.getCustomID()
+appType = cap.getCapType().toString();
+var vAsyncScript = "SEND_EMAIL_TAXLIC_TMPLIC_ASYNC";
+var envParameters = aa.util.newHashMap();
+envParameters.put("altID", altID);
+envParameters.put("capId", capId);
+envParameters.put("cap", cap);
+logDebug("Starting to kick off ASYNC event for TMP License. Params being passed: " + envParameters);
 aa.runAsyncScript(vAsyncScript, envParameters);
 logDebug("End of 2056_License_Notification script");
 }
