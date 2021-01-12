@@ -22,7 +22,7 @@ if (appMatch('Licenses/Supplemental/*/*')){
 		}
 		
 	if (appMatch('Licenses/Supplemental/Door ID Badge/*')){
-		updateFee('CL105', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1005', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 
 	if (appMatch('Licenses/Supplemental/Door Seller/*')){
