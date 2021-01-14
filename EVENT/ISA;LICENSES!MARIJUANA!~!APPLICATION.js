@@ -1,5 +1,7 @@
 //ISA:LICENSES/MARIJUANA/*/APPLICATION 
-
+if (inspType.indexOf("MJ Building Inspections") != -1) {
+    assignInspectionDepartment("BUILDING/NA/NA/NA/NA/BI", inspType);
+}
 //AU434 Assign all to Dusty
 //assignInspection(inspId,"DALLEN")
 /*
