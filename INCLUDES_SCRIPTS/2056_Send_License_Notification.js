@@ -44,7 +44,7 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Zoning Revie
 //		addParameter(tParams, "$$wfComment$$", wfComment);
 		//logDebug("Comment is:" +wfComment);
 		var emailtemplate = "LIC GB ZONING";
-		sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+		sendNotification("planning@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 	}
 }
 
@@ -62,7 +62,7 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Rev
 		tParams.put("$$capAlias$$", capAlias);
 //		addParameter(tParams, "$$wfComment$$", wfComment);
 		var emailtemplate = "LIC GB ZONING";
-		sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+		sendNotification("permitcounter@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 	}
 }
 
