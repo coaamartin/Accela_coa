@@ -56,7 +56,7 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Rev
 		var today = new Date();
 		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 		var tParams = aa.util.newHashtable();
-		getWorkflowParams4Notification(tParams,wfTask);
+		getWorkflowParams4Notification(tParams,capId);
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
@@ -67,28 +67,13 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Rev
 }
 
 
-function getWorkflowParams4Notification(params) {
+function getWorkflowParams4Notification(tParams) {
     // pass in a hashtable and it will add the additional parameters to the table
+    // -- Allows for optional capId
+    var itemCap = capId;
+    if (arguments.length > 1 && arguments[1]) itemCap = arguments[1]; // Optional CapId
 
-    // Load Parmeters - Workflow
-    var taskItem = null;
-    if (arguments.length > 1 && arguments[1] != null) {
-        taskItem = arguments[1]; // use cap ID specified in args
-    }
+    addParameter(tParams, "$$wfComment$$", wfComment == null ? "" : wfComment);
 
-    if (taskItem) {             // Load from taskItem
-        addParameter(params, "$$wfTask$$", taskItem.getTaskDescription());
-        addParameter(params, "$$wfProcess$$", taskItem.getProcessCode());
-        addParameter(params, "$$wfNote$$", taskItem.getDispositionNote());
-        addParameter(params, "$$wfStatus$$", taskItem.getDisposition());
-        addParameter(params, "$$wfDate$$", taskItem.getDispositionDateString());
-        addParameter(params, "$$wfDue$$", taskItem.getDueDate());
-        addParameter(params, "$$wfComment$$", taskItem.getDispositionComment());
-    } else if (wfTask) {        // Load from Globals
-        if (typeof (wfStaffUserID) == "undefined") wfStaffUserID = currentUserID;
-        addParameter(params, "$$wfTask$$", wfTask);
-        addParameter(params, "$$wfDate$$", wfDateMMDDYYYY);
-        addParameter(params, "$$wfComment$$", wfComment);
-    }
-    return params;
+    return tParams;
 }
