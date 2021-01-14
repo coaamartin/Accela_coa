@@ -30,7 +30,8 @@ logDebug("End of 2056_License_Notification script");
 }
 
 if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Zoning Review"){
-	var emailTo = AInfo("Correspondence Email"); 
+	var emailTo = AInfo["Correspondence Email"]; 
+	logDebug("Email is: " +emailTo);
 	if (emailTo != "" && emailTo !=null){
 		var capAlias = cap.getCapModel().getAppTypeAlias();
 		var today = new Date();
@@ -40,13 +41,15 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Zoning Revie
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
 		addParameter(tParams, "$$wfComment$$", wfComment);
+		//logDebug("Comment is:" +wfComment);
 		var emailtemplate = "LIC GB ZONING";
 		sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 	}
 }
 
 if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Review"){
-	var emailTo = AInfo("Correspondence Email"); 
+	var emailTo = AInfo["Correspondence Email"]; 
+	logDebug("Email is: " +emailTo);
 	if (emailTo != "" && emailTo !=null){
 		var capAlias = cap.getCapModel().getAppTypeAlias();
 		var today = new Date();
