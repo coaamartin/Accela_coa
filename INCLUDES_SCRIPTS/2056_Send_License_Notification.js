@@ -37,7 +37,7 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Zoning Revie
 		var today = new Date();
 		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 		var tParams = aa.util.newHashtable();
-		getWorkflowParams4Notification(tParams);
+		getWorkflowParams4Notification(tParams,capId);
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
@@ -88,7 +88,6 @@ function getWorkflowParams4Notification(params) {
         if (typeof (wfStaffUserID) == "undefined") wfStaffUserID = currentUserID;
         addParameter(params, "$$wfTask$$", wfTask);
         addParameter(params, "$$wfDate$$", wfDateMMDDYYYY);
-        addParameter(params, "$$wfDue$$", wfDue);
         addParameter(params, "$$wfComment$$", wfComment);
     }
     return params;
