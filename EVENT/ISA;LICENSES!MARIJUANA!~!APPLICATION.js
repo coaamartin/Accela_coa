@@ -1,7 +1,7 @@
 //ISA:LICENSES/MARIJUANA/*/APPLICATION 
 
 //AU434 Assign all to Dusty
-assignInspection(inspId,"DALLEN")
+//assignInspection(inspId,"DALLEN")
 /*
 //allow manual assignment override
 if(matches(inspInspector,null,undefined,"")){
