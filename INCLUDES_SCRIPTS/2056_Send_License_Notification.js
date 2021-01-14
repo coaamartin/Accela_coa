@@ -37,11 +37,11 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Zoning Revie
 		var today = new Date();
 		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 		var tParams = aa.util.newHashtable();
-		getWorkflowParams4Notification(tParams);
+//		getWorkflowParams4Notification(tParams);
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
-		addParameter(tParams, "$$wfComment$$", wfComment);
+//		addParameter(tParams, "$$wfComment$$", wfComment);
 		//logDebug("Comment is:" +wfComment);
 		var emailtemplate = "LIC GB ZONING";
 		sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
@@ -56,18 +56,18 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Rev
 		var today = new Date();
 		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 		var tParams = aa.util.newHashtable();
-		getWorkflowParams4Notification(tParams,capId);
+//		getWorkflowParams4Notification(tParams,capId);
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
-		addParameter(tParams, "$$wfComment$$", wfComment);
+//		addParameter(tParams, "$$wfComment$$", wfComment);
 		var emailtemplate = "LIC GB ZONING";
 		sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 	}
 }
 
 
-function getWorkflowParams4Notification(tParams) {
+/*function getWorkflowParams4Notification(tParams) {
     // pass in a hashtable and it will add the additional parameters to the table
     // -- Allows for optional capId
     var itemCap = capId;
@@ -76,4 +76,4 @@ function getWorkflowParams4Notification(tParams) {
     addParameter(tParams, "$$wfComment$$", wfComment == null ? "" : wfComment);
 
     return tParams;
-}
+}*/
