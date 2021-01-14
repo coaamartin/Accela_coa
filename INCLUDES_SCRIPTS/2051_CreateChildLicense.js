@@ -94,6 +94,17 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 			nextYear = theYear + 1; comment('Next Year = ' + nextYear);
 			tmpNewDate = '12/31/'+ theYear;
 			logDebug("New Date 12/31 will be: " + tmpNewDate);
+			appType = cap.getCapType().toString();
+			var vAsyncScript = "SEND_EMAIL_TAXLIC_LICENSE_ASYNC";
+			var envParameters = aa.util.newHashMap();
+			envParameters.put("altID", capId.getCustomID());
+			logDebug("ALTID is " +capId.getCustomID());
+			envParameters.put("capId", capId);
+			logDebug("CAP ID is " +capId);
+			envParameters.put("cap", cap);
+			envParameters.put("currentUserID",currentUserID);
+			logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
+			aa.runAsyncScript(vAsyncScript, envParameters);
 			}
 			if (matches(licType,"Fireworks Stand License")) {
 			numberOfMonths = 12;
