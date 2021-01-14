@@ -28,3 +28,35 @@ logDebug("Starting to kick off ASYNC event for TMP License. Params being passed:
 aa.runAsyncScript(vAsyncScript, envParameters);
 logDebug("End of 2056_License_Notification script");
 }
+
+if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Zoning Review"){
+	var emailTo = AInfo("Correspondence Email"); 
+	if (emailTo != "" && emailTo !=null){
+		var capAlias = cap.getCapModel().getAppTypeAlias();
+		var today = new Date();
+		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+		var tParams = aa.util.newHashtable();
+		tParams.put("$$todayDate$$", thisDate);
+		tParams.put("$$altID$$", capId.getCustomID());
+		tParams.put("$$capAlias$$", capAlias);
+		addParameter(tParams, "$$wfComment$$", wfComment);
+		var emailtemplate = "LIC GB ZONING";
+		sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+	}
+}
+
+if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Review"){
+	var emailTo = AInfo("Correspondence Email"); 
+	if (emailTo != "" && emailTo !=null){
+		var capAlias = cap.getCapModel().getAppTypeAlias();
+		var today = new Date();
+		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+		var tParams = aa.util.newHashtable();
+		tParams.put("$$todayDate$$", thisDate);
+		tParams.put("$$altID$$", capId.getCustomID());
+		tParams.put("$$capAlias$$", capAlias);
+		addParameter(tParams, "$$wfComment$$", wfComment);
+		var emailtemplate = "LIC GB ZONING";
+		sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+	}
+}
