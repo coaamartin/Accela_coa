@@ -84,25 +84,12 @@ function getWorkflowParams4Notification(params) {
         addParameter(params, "$$wfDate$$", taskItem.getDispositionDateString());
         addParameter(params, "$$wfDue$$", taskItem.getDueDate());
         addParameter(params, "$$wfComment$$", taskItem.getDispositionComment());
-        addParameter(params, "$$wfStaffUserID$$", taskItem.getAsgnStaff());
-        addParameter(params, "$$wfStaffUserFullName$$", getUserFullName(taskItem.getAsgnStaff()));
-        addParameter(params, "$$wfTimeBillable$$", taskItem.getBillable());
-        addParameter(params, "$$wfTimeOT$$", taskItem.getOverTime());
-        addParameter(params, "$$wfHours$$", taskItem.getHoursSpent());
     } else if (wfTask) {        // Load from Globals
         if (typeof (wfStaffUserID) == "undefined") wfStaffUserID = currentUserID;
         addParameter(params, "$$wfTask$$", wfTask);
-        addParameter(params, "$$wfProcess$$", wfProcess);
-        addParameter(params, "$$wfNote$$", wfNote);
-        addParameter(params, "$$wfStatus$$", wfStatus);
         addParameter(params, "$$wfDate$$", wfDateMMDDYYYY);
         addParameter(params, "$$wfDue$$", wfDue);
         addParameter(params, "$$wfComment$$", wfComment);
-        addParameter(params, "$$wfStaffUserID$$", wfStaffUserID);
-        addParameter(params, "$$wfStaffUserFullName$$", getUserFullName(wfStaffUserID));
-        addParameter(params, "$$wfTimeBillable$$", wfTimeBillable);
-        addParameter(params, "$$wfTimeOT$$", wfTimeOT);
-        addParameter(params, "$$wfHours$$", wfHours);
     }
     return params;
 }
