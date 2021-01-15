@@ -8,8 +8,7 @@ try
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-	var acaUrl = lookup("ACA_CONFIGS", "ACA_SITE");
-    if (acaUrl) acaUrl = acaUrl.toLowerCase().replace("/admin", "").replace("/default.aspx", "");
+	var acaUrl = "https://awebdev.aurora.city/CitizenAccess/";
 	var tParams = aa.util.newHashtable();
 	getACARecordParam4Notification(tParams,acaUrl)
 	tParams.put("$$todayDate$$", thisDate);
