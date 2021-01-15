@@ -55,6 +55,7 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Rev
 		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 		var tParams = aa.util.newHashtable();
 		getACARecordParam4Notification(tParams,acaUrl)
+		logDebug("TESTING ACA SITE " +acaUrl)
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
