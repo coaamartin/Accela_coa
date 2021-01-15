@@ -3,7 +3,7 @@
 if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 	
 	closeTask("License Issuance", "Renewed - Pending Notification", "Updated by WTUA;Licenses!Professional!General!Renewal", "");
-
+	updateAppStatus("Renewed - Pending Notification","Updated by Script",capId);
 	// Begin script to complete the renewal and send notifications
 	var vLicenseID;
 	var vIDArray;
