@@ -41,7 +41,7 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Zoning Revie
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
-//		addParameter(tParams, "$$wfComment$$", wfComment);
+		addParameter(tParams, "$$wfComment$$", wfComment);
 		//logDebug("Comment is:" +wfComment);
 		var emailtemplate = "LIC GB ZONING";
 		sendNotification("planning@auroragov.org", emailTo, "", emailtemplate, tParams, null);
@@ -60,7 +60,7 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Rev
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
-//		addParameter(tParams, "$$wfComment$$", wfComment);
+		addParameter(tParams, "$$wfComment$$", wfComment);
 		var emailtemplate = "LIC GB ZONING";
 		sendNotification("permitcounter@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 	}
