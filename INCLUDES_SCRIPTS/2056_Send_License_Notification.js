@@ -37,12 +37,10 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Zoning Revie
 		var today = new Date();
 		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 		var tParams = aa.util.newHashtable();
-//		getWorkflowParams4Notification(tParams);
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
-//		addParameter(tParams, "$$wfComment$$", wfComment);
-		//logDebug("Comment is:" +wfComment);
+		addParameter(tParams, "$$wfComment$$", wfComment);
 		var emailtemplate = "LIC GB ZONING";
 		sendNotification("planning@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 	}
@@ -56,24 +54,13 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Rev
 		var today = new Date();
 		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 		var tParams = aa.util.newHashtable();
-//		getWorkflowParams4Notification(tParams,capId);
+		getACARecordParam4Notification(tParams,acaUrl)
+		logDebug("TESTING ACA SITE " +acaUrl)
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
-//		addParameter(tParams, "$$wfComment$$", wfComment);
-		var emailtemplate = "LIC GB ZONING";
+		addParameter(tParams, "$$wfComment$$", wfComment);
+		var emailtemplate = "LIC GB BUILDING";
 		sendNotification("permitcounter@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 	}
 }
-
-
-/*function getWorkflowParams4Notification(tParams) {
-    // pass in a hashtable and it will add the additional parameters to the table
-    // -- Allows for optional capId
-    var itemCap = capId;
-    if (arguments.length > 1 && arguments[1]) itemCap = arguments[1]; // Optional CapId
-
-    addParameter(tParams, "$$wfComment$$", wfComment == null ? "" : wfComment);
-
-    return tParams;
-}*/
