@@ -9,6 +9,7 @@ try
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
+	getACARecordParam4Notification(tParams,acaUrl)
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
@@ -220,3 +221,32 @@ function generateReportFile(aaReportName,parameters,rModule)
 	return contactAddressModelArr;
 
 }
+
+function getACARecordParam4Notification(params,acaUrl) {
+
+	itemCap = (arguments.length == 3) ? arguments[2] : capId;
+
+	addParameter(params, "$$acaRecordUrl$$", getACARecordURL(acaUrl,itemCap));
+
+	return params;	
+
+}
+
+function getACARecordURL(acaUrl) {
+	itemCap = (arguments.length == 2) ? arguments[1] : capId;
+	var enableCustomWrapper = lookup("ACA_CONFIGS","ENABLE_CUSTOMIZATION_PER_PAGE");
+	var acaRecordUrl = "";
+	var id1 = itemCap.ID1;
+ 	var id2 = itemCap.ID2;
+ 	var id3 = itemCap.ID3;
+ 	var itemCapModel = aa.cap.getCap(itemCap).getOutput().getCapModel();
+
+   	acaRecordUrl = acaUrl + "/urlrouting.ashx?type=1000";   
+	acaRecordUrl += "&Module=" + itemCapModel.getModuleName();
+	acaRecordUrl += "&capID1=" + id1 + "&capID2=" + id2 + "&capID3=" + id3;
+	acaRecordUrl += "&agencyCode=" + aa.getServiceProviderCode();
+	if(matches(enableCustomWrapper,"Yes","YES")) acaRecordUrl += "&FromACA=Y";
+
+   	return acaRecordUrl;
+
+} 
