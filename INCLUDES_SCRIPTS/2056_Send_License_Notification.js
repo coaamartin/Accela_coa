@@ -60,7 +60,7 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Rev
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);
 		addParameter(tParams, "$$wfComment$$", wfComment);
-		var emailtemplate = "LIC GB ZONING";
+		var emailtemplate = "LIC GB BUILDING";
 		sendNotification("permitcounter@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 	}
 }
