@@ -8,6 +8,8 @@ try
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+	var acaUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+    if (acaUrl) acaUrl = acaUrl.toLowerCase().replace("/admin", "").replace("/default.aspx", "");
 	var tParams = aa.util.newHashtable();
 	getACARecordParam4Notification(tParams,acaUrl)
 	tParams.put("$$todayDate$$", thisDate);
@@ -233,20 +235,19 @@ function getACARecordParam4Notification(params,acaUrl) {
 }
 
 function getACARecordURL(acaUrl) {
-	itemCap = (arguments.length == 2) ? arguments[1] : capId;
-	var enableCustomWrapper = lookup("ACA_CONFIGS","ENABLE_CUSTOMIZATION_PER_PAGE");
-	var acaRecordUrl = "";
-	var id1 = itemCap.ID1;
- 	var id2 = itemCap.ID2;
- 	var id3 = itemCap.ID3;
- 	var itemCapModel = aa.cap.getCap(itemCap).getOutput().getCapModel();
 
-   	acaRecordUrl = acaUrl + "/urlrouting.ashx?type=1000";   
-	acaRecordUrl += "&Module=" + itemCapModel.getModuleName();
-	acaRecordUrl += "&capID1=" + id1 + "&capID2=" + id2 + "&capID3=" + id3;
-	acaRecordUrl += "&agencyCode=" + aa.getServiceProviderCode();
-	if(matches(enableCustomWrapper,"Yes","YES")) acaRecordUrl += "&FromACA=Y";
+    var acaRecordUrl = "";
+                var acaUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+                if (acaUrl) acaUrl = acaUrl.toLowerCase().replace("/admin", "").replace("/default.aspx", "");     
+    var id1 = capId.ID1;
+    var id2 = capId.ID2;
+    var id3 = capId.ID3;
 
-   	return acaRecordUrl;
+    acaRecordUrl = acaUrl + "/urlrouting.ashx?type=1000";
+    acaRecordUrl += "&Module=" + cap.getCapModel().getModuleName();
+    acaRecordUrl += "&capID1=" + id1 + "&capID2=" + id2 + "&capID3=" + id3;
+    acaRecordUrl += "&agencyCode=" + aa.getServiceProviderCode();
 
-} 
+    return acaRecordUrl;
+}
+
