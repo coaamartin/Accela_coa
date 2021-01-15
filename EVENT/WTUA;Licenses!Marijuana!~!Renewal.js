@@ -2,7 +2,7 @@
 // Code moved from PRA:Licenses/Marijuana/*/Renewal
 if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 	
-	closeTask("License Issuance", "Renewed", "Updated by WTUA;Licenses!Professional!General!Renewal", "");
+	closeTask("License Issuance", "Renewed - Pending Notification", "Updated by WTUA;Licenses!Professional!General!Renewal", "");
 
 	// Begin script to complete the renewal and send notifications
 	var vLicenseID;
@@ -37,11 +37,13 @@ if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 			aa.cap.updateProject(renewalCapProject);
 		}
 
+		/*
+		//This logic is in BATCH JOB
         var vAsyncScript = "SEND_MJ_LICENSE_ASYNC";
         var envParameters = aa.util.newHashMap();
         envParameters.put("CapId", vLicenseID.getCustomID());
         aa.runAsyncScript(vAsyncScript, envParameters);
-
+		*/
 	}
 }
 
