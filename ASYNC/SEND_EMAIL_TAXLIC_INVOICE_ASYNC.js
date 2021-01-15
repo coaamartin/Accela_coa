@@ -8,7 +8,7 @@ try
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-	var acaUrl = "https://awebdev.aurora.city/CitizenAccess/";
+    var acaUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 	var tParams = aa.util.newHashtable();
 	getACARecordParam4Notification(tParams,acaUrl)
 	tParams.put("$$todayDate$$", thisDate);
@@ -250,3 +250,20 @@ function getACARecordURL(acaUrl) {
     return acaRecordUrl;
 }
 
+function lookup(stdChoice,stdValue) 
+	{
+	var strControl;
+	var bizDomScriptResult = aa.bizDomain.getBizDomainByValue(stdChoice,stdValue);
+	
+   	if (bizDomScriptResult.getSuccess())
+   		{
+		var bizDomScriptObj = bizDomScriptResult.getOutput();
+		strControl = "" + bizDomScriptObj.getDescription(); // had to do this or it bombs.  who knows why?
+		logDebug("lookup(" + stdChoice + "," + stdValue + ") = " + strControl);
+		}
+	else
+		{
+		logDebug("lookup(" + stdChoice + "," + stdValue + ") does not exist");
+		}
+	return strControl;
+	}
