@@ -1,8 +1,9 @@
 function getACARecordURL(acaUrl) {
 
     var acaRecordUrl = "";
-	var acaUrl = "https://awebdev.aurora.city/CitizenAccess"
-    var id1 = capId.ID1;
+	var acaUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+	if (acaUrl) acaUrl = acaUrl.toLowerCase().replace("/admin", "").replace("/default.aspx", "");     
+	var id1 = capId.ID1;
     var id2 = capId.ID2;
     var id3 = capId.ID3;
 
