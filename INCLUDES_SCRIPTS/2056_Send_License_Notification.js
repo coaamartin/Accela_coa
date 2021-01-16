@@ -10,6 +10,7 @@ envParameters.put("altID", altID);
 envParameters.put("capId", capId);
 envParameters.put("cap", cap);
 envParameters.put("INVOICEID", String(invNbr));
+getACARecordParam4Notification(envParameters,acaUrl)
 logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
 aa.runAsyncScript(vAsyncScript, envParameters);
 logDebug("End of 2056_License_Notification script");
@@ -37,6 +38,7 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Zoning Revie
 		var today = new Date();
 		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 		var tParams = aa.util.newHashtable();
+		getACARecordParam4Notification(tParams,acaUrl)
 		tParams.put("$$todayDate$$", thisDate);
 		tParams.put("$$altID$$", capId.getCustomID());
 		tParams.put("$$capAlias$$", capAlias);

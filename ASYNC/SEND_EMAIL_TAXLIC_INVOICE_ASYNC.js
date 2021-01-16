@@ -8,7 +8,9 @@ try
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+    var acaUrl = lookup("ACA_CONFIGS", "ACA_SITE");
 	var tParams = aa.util.newHashtable();
+	getACARecordParam4Notification(tParams,acaUrl)
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);
@@ -219,4 +221,61 @@ function generateReportFile(aaReportName,parameters,rModule)
 
 	return contactAddressModelArr;
 
+}
+
+function getACARecordParam4Notification(params,acaUrl) {
+
+	itemCap = (arguments.length == 3) ? arguments[2] : capId;
+
+	addParameter(params, "$$acaRecordUrl$$", getACARecordURL(acaUrl,itemCap));
+
+	return params;	
+
+}
+
+function getACARecordURL(acaUrl) {
+
+    var acaRecordUrl = "";
+                var acaUrl = lookup("ACA_CONFIGS", "ACA_SITE");
+                if (acaUrl) acaUrl = acaUrl.toLowerCase().replace("/admin", "").replace("/default.aspx", "");     
+    var id1 = capId.ID1;
+    var id2 = capId.ID2;
+    var id3 = capId.ID3;
+
+    acaRecordUrl = acaUrl + "/urlrouting.ashx?type=1000";
+    acaRecordUrl += "&Module=" + cap.getCapModel().getModuleName();
+    acaRecordUrl += "&capID1=" + id1 + "&capID2=" + id2 + "&capID3=" + id3;
+    acaRecordUrl += "&agencyCode=" + aa.getServiceProviderCode();
+
+    return acaRecordUrl;
+}
+
+function lookup(stdChoice,stdValue) 
+	{
+	var strControl;
+	var bizDomScriptResult = aa.bizDomain.getBizDomainByValue(stdChoice,stdValue);
+	
+   	if (bizDomScriptResult.getSuccess())
+   		{
+		var bizDomScriptObj = bizDomScriptResult.getOutput();
+		strControl = "" + bizDomScriptObj.getDescription(); // had to do this or it bombs.  who knows why?
+		logDebug("lookup(" + stdChoice + "," + stdValue + ") = " + strControl);
+		}
+	else
+		{
+		logDebug("lookup(" + stdChoice + "," + stdValue + ") does not exist");
+		}
+	return strControl;
+	}
+	
+function addParameter(pamaremeters, key, value)
+{
+	if(key != null)
+	{
+		if(value == null)
+		{
+			value = "";
+		}
+		pamaremeters.put(key, value);
+	}
 }
