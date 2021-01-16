@@ -3,6 +3,8 @@ function assignInspectionDepartment(dept, inspType) {
         return;
 
     var inspId = getInspId(inspType);
+    if(!inspId) return;
+
     var inspObj = aa.inspection.getInspection(capId, inspId).getOutput();
 
     var inspModelObj = inspObj.getInspection();
