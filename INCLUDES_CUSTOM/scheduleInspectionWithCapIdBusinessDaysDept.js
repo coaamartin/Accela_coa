@@ -15,13 +15,14 @@ function scheduleInspectionWithCapIdBusinessDaysDept(iType,DaysAhead) // optiona
         if (arguments[3] != null)
             inspTime = arguments[3];
 
-    if (arguments.length == 5)
+    if (arguments.length >= 5)
         if (arguments[4] != null)
             inspComm = arguments[4];
 
-    if (arguments.length == 6)
+    if (arguments.length >= 6)
         if (arguments[5] != null)
             vCapId = arguments[5];
+        
     if (arguments.length == 7)
         if (arguments[6] != null)
             dept = arguments[6];
