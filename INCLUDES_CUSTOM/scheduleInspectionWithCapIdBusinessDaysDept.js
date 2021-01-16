@@ -29,7 +29,7 @@ function scheduleInspectionWithCapIdBusinessDaysDept(iType,DaysAhead) // optiona
     var schedRes = aa.inspection.scheduleInspection(vCapId, inspectorObj, aa.date.parseDate(dateAddHC2(null,DaysAhead)), inspTime, iType, inspComm)
 
     var inspId = schedRes.getOutput();
-    var inspObj = aa.inspection.getInspection(capId, inspId).getOutput();
+    var inspObj = aa.inspection.getInspection(vCapId, inspId).getOutput();
     var inspModelObj = inspObj.getInspection();
     var inspModelActivityObj = inspModelObj.getActivity();
     
