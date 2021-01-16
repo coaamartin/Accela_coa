@@ -13,7 +13,7 @@ function assignInspectionDepartment(dept, inspType) {
         if (deptArray.length < 6)
             return;
         var newPerson = aa.person.getUser("", "", "", "", "", "", "", "", "", "", "").getOutput();
-        newPerson.setServiceProviderCode("DENVER");
+        newPerson.setServiceProviderCode("AURORACO");
         newPerson.setAgencyCode(deptArray[0]);
         newPerson.setBureauCode(deptArray[1]);
         newPerson.setDivisionCode(deptArray[2]);
