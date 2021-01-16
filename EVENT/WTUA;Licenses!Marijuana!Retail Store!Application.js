@@ -14,14 +14,16 @@ if(ifTracer(wfTask == "License Issuance" && wfStatus == "Issued", 'wf:License Is
         envParameters.put("CapId", newLicCapId.getCustomID());
         aa.runAsyncScript(vAsyncScript, envParameters);
 
-        scheduleInspectionWithCapIdBusinessDays("MJ AMED Inspections", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
-        scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Plumbing", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
-        scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Electrical", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
-        scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Mechanical", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
-        scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Life Safety", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
-        scheduleInspectionWithCapIdBusinessDays("MJ Building Inspections - Structural", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
-        scheduleInspectionWithCapIdBusinessDays("MJ Security Inspections - 3rd Party", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
-        scheduleInspectionWithCapIdBusinessDays("MJ Zoning Inspections", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
+        scheduleInspectionWithCapIdBusinessDaysDept("MJ AMED Inspections", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
+
+        scheduleInspectionWithCapIdBusinessDaysDept("MJ Building Inspections - Plumbing", 84, "", " ", "Scheduled by Script 228", newLicCapId, "BUILDING/NA/NA/NA/NA/BI");
+        scheduleInspectionWithCapIdBusinessDaysDept("MJ Building Inspections - Electrical", 84, "", " ", "Scheduled by Script 228", newLicCapId, "BUILDING/NA/NA/NA/NA/BI");
+        scheduleInspectionWithCapIdBusinessDaysDept("MJ Building Inspections - Mechanical", 84, "", " ", "Scheduled by Script 228", newLicCapId, "BUILDING/NA/NA/NA/NA/BI");
+        scheduleInspectionWithCapIdBusinessDaysDept("MJ Building Inspections - Life Safety", 84, "", " ", "Scheduled by Script 228", newLicCapId, "BUILDING/NA/NA/NA/NA/BI");
+        scheduleInspectionWithCapIdBusinessDaysDept("MJ Building Inspections - Structural", 84, "", " ", "Scheduled by Script 228", newLicCapId, "BUILDING/NA/NA/NA/NA/BI");
+
+        scheduleInspectionWithCapIdBusinessDaysDept("MJ Security Inspections - 3rd Party", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
+        scheduleInspectionWithCapIdBusinessDaysDept("MJ Zoning Inspections", 84, "DALLEN", " ", "Scheduled by Script 228", newLicCapId);
     }
     //END Script 228
 }
