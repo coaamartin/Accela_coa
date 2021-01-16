@@ -35,7 +35,9 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Complete"){
 			vInspector = "DALLEN";
 		} else if (vInspType != null && (vInspType == "MJ Security Inspections - Police")) {
 			vInspector = "DALLEN";
-		} else {
+		} else if (vInspType != null && vInspType.indexOf("MJ Building Inspections") != -1) {
+        	vInspector = "";
+        } else {
 			vInspector = "DALLEN";
 		}
 		
@@ -51,8 +53,12 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Complete"){
 		
 		var lastInspectionSeq = lastInspectionObj.getIdNumber();
 		
-		//assign inspection to inspector
-		assignInspection(lastInspectionSeq, vInspector);
+		if (vInspType != null && vInspType.indexOf("MJ Building Inspections") != -1) {
+	        assignInspectionDepartment("BUILDING/NA/NA/NA/NA/BI", vInspType);
+	    }else{
+	        //assign inspection to inspector
+	        assignInspection(lastInspectionSeq, vInspector);
+	    }
 	}
 
 	logDebug("Ending Script 404: MJ Application Automation");
