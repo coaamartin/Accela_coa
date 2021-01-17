@@ -59,7 +59,7 @@ function checkACARun() {
                 eParams.put("$$todayDate$$", todayDate);
                 eParams.put("$$altid$$", altId);
                 eParams.put("$$recordAlias$$", recordAlias);
-                eParams.put("$$fileDate$$", thisDate);
+                eParams.put("$$fileDate$$", todayDate);
                 eParams.put("$$capAlias$$", cap.getCapType().getAlias());
                 eParams.put("$$appTypeFirstLevel$$", "Permit");
                 eParams.put("$$deptPhoneNumber$$", "303-739-7420");
