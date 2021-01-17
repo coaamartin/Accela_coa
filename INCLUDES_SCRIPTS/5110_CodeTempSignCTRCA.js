@@ -40,24 +40,23 @@ function checkACARun() {
         //Send email
         //Donation Bin
         if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
-            var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
-            var capAlias = cap.getCapModel().getAppTypeAlias();
-            var recordApplicant = getContactByType("Applicant", capId);
-            var emailTo = recordApplicant.getEmail();
-            var recordAlias = "Donation Bin";
-            var todayDate = new Date();
-            logDebug("Today Date: " + todayDate);
-            //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-            var fileDate = fileDate;
-            logDebug("File Date: " + fileDate);
-            var altId = capId.getCustomID();
+
             if (emailTemplate != null && emailTemplate != "") {
                 logDebug("5110 sending DONATION BIN  APPLICANT.  Defaulting to contact Applicant.");
+                var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
+                var capAlias = cap.getCapModel().getAppTypeAlias();
+                var recordApplicant = getContactByType("Applicant", capId);
+                var emailTo = recordApplicant.getEmail();
+                var recordAlias = "Donation Bin";
+                var todayDate = new Date();
+                logDebug("Today Date: " + todayDate);
+                var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+                var altId = capId.getCustomID();
                 eParams = aa.util.newHashtable();
                 eParams.put("$$todayDate$$", todayDate);
                 eParams.put("$$altid$$", altId);
                 eParams.put("$$recordAlias$$", recordAlias);
-                eParams.put("$$fileDate$$", fileDate);
+                eParams.put("$$fileDate$$", thisDate);
                 eParams.put("$$capAlias$$", cap.getCapType().getAlias());
                 eParams.put("$$appTypeFirstLevel$$", "Permit");
                 eParams.put("$$deptPhoneNumber$$", "303-739-7420");
