@@ -47,8 +47,9 @@ function checkACARun() {
             var recordAlias = "Donation Bin";
             var todayDate = new Date();
             logDebug("Today Date: " + todayDate);
-            var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-            var fileDate = thisDate;
+            //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+            var fileDate = fileDate;
+            logDebug("File Date: " + fileDate);
             var altId = capId.getCustomID();
             if (emailTemplate != null && emailTemplate != "") {
                 logDebug("5110 sending DONATION BIN  APPLICANT.  Defaulting to contact Applicant.");
