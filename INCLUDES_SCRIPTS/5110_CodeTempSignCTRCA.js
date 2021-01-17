@@ -41,6 +41,9 @@ function checkACARun() {
         //Donation Bin
         if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
             var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
+            var capAlias = cap.getCapModel().getAppTypeAlias();
+            var recordApplicant = getContactByType("Applicant", capId);
+            var emailTo = recordApplicant.getEmail();
             var todayDate = new Date();
             var altId = capId.getCustomID();
             if (emailTemplate != null && emailTemplate != "") {
@@ -50,7 +53,7 @@ function checkACARun() {
                 eParams.put("$$altid$$", altId);
                 eParams.put("$$capAlias$$", cap.getCapType().getAlias());	
                 logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
-                emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+                sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, eParams, null);
             }
             logDebug("Starting to send notifications");
             //var emailTo = "esango@auroragov.org;gtaets@auroragov.org;jjking@auroragov.org;tvaughn@auroragov.org;dosoba@auroragov.org;wbarrett@auroragov.org;dhclark@auroragov.org;rpettina@auroragov.org";
@@ -87,6 +90,9 @@ function checkACARun() {
         else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
             //Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
             var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
+            var capAlias = cap.getCapModel().getAppTypeAlias();
+            var recordApplicant = getContactByType("Applicant", capId);
+            var emailTo = recordApplicant.getEmail();
             var todayDate = new Date();
             var altId = capId.getCustomID();
             if (emailTemplate != null && emailTemplate != "") {
@@ -96,7 +102,7 @@ function checkACARun() {
                 eParams.put("$$altid$$", altId);
                 eParams.put("$$capAlias$$", cap.getCapType().getAlias());
                 logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
-                emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+                sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, eParams, null);
             }
             logDebug("Starting to send notifications");
             //var emailTo = "esango@auroragov.org;gtaets@auroragov.org;jjking@auroragov.org;tvaughn@auroragov.org;dosoba@auroragov.org;wbarrett@auroragov.org;dhclark@auroragov.org;rpettina@auroragov.org;rwittman@auroragov.org;rmoody@auroragov.org;SMCGHEE@auroragov.org;ccerinic@auroragov.org;mhanifin@auroragov.org";
@@ -133,6 +139,9 @@ function checkACARun() {
         else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
             //Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
             var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
+            var capAlias = cap.getCapModel().getAppTypeAlias();
+            var recordApplicant = getContactByType("Applicant", capId);
+            var emailTo = recordApplicant.getEmail();
             var todayDate = new Date();
             var altId = capId.getCustomID();
             var signType = AInfo["Type of Sign"];
@@ -146,7 +155,7 @@ function checkACARun() {
                 eParams.put("$$signType$$",signType);
                 eParams.put("$$signAddress$$", signAddress);
                 logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
-                emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+                sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, eParams, null);
             }
             logDebug("Starting to send notifications");
             //var emailTo = "esango@auroragov.org;gtaets@auroragov.org;jjking@auroragov.org;tvaughn@auroragov.org;dosoba@auroragov.org;wbarrett@auroragov.org;dhclark@auroragov.org;rpettina@auroragov.org";
