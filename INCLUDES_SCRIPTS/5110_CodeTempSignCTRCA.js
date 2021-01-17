@@ -46,6 +46,7 @@ function checkACARun() {
             var emailTo = recordApplicant.getEmail();
             var recordAlias = "Donation Bin";
             var todayDate = new Date();
+            logDebug("Today Date: " + todayDate);
             var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
             var fileDate = thisDate;
             var altId = capId.getCustomID();
