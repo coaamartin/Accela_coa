@@ -44,14 +44,21 @@ function checkACARun() {
             var capAlias = cap.getCapModel().getAppTypeAlias();
             var recordApplicant = getContactByType("Applicant", capId);
             var emailTo = recordApplicant.getEmail();
+            var recordAlias = "Donation Bin";
             var todayDate = new Date();
+            var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+            var fileDate = thisDate;
             var altId = capId.getCustomID();
             if (emailTemplate != null && emailTemplate != "") {
                 logDebug("5110 sending DONATION BIN  APPLICANT.  Defaulting to contact Applicant.");
                 eParams = aa.util.newHashtable();
                 eParams.put("$$todayDate$$", todayDate);
                 eParams.put("$$altid$$", altId);
-                eParams.put("$$capAlias$$", cap.getCapType().getAlias());	
+                eParams.put("$$recordAlias$$", recordAlias);
+                eParams.put("$$fileDate$$", fileDate);
+                eParams.put("$$capAlias$$", cap.getCapType().getAlias());
+                eParams.put("$$appTypeFirstLevel$$", "Permit");
+                eParams.put("$$deptPhoneNumber$$", "303-739-7420");
                 logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
                 sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, eParams, null);
             }
@@ -93,14 +100,21 @@ function checkACARun() {
             var capAlias = cap.getCapModel().getAppTypeAlias();
             var recordApplicant = getContactByType("Applicant", capId);
             var emailTo = recordApplicant.getEmail();
+            var recordAlias = "Temporary Use Permit";
             var todayDate = new Date();
+            var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+            var fileDate = thisDate;
             var altId = capId.getCustomID();
             if (emailTemplate != null && emailTemplate != "") {
-                logDebug("5110 sending TEMP USE SUBMIT REVIEWERS.  Sending to several email groups.");
+                logDebug("5110 sending DONATION BIN  APPLICANT.  Defaulting to contact Applicant.");
                 eParams = aa.util.newHashtable();
                 eParams.put("$$todayDate$$", todayDate);
                 eParams.put("$$altid$$", altId);
+                eParams.put("$$recordAlias$$", recordAlias);
+                eParams.put("$$fileDate$$", fileDate);
                 eParams.put("$$capAlias$$", cap.getCapType().getAlias());
+                eParams.put("$$appTypeFirstLevel$$", "Permit");
+                eParams.put("$$deptPhoneNumber$$", "303-739-7420");
                 logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
                 sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, eParams, null);
             }
@@ -142,18 +156,21 @@ function checkACARun() {
             var capAlias = cap.getCapModel().getAppTypeAlias();
             var recordApplicant = getContactByType("Applicant", capId);
             var emailTo = recordApplicant.getEmail();
+            var recordAlias = "Temporary Sign Permit";
             var todayDate = new Date();
+            var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+            var fileDate = thisDate;
             var altId = capId.getCustomID();
-            var signType = AInfo["Type of Sign"];
-            var signAddress = AInfo["Address where proposed sign will be displayed"];
             if (emailTemplate != null && emailTemplate != "") {
-                logDebug("5110 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");
+                logDebug("5110 sending DONATION BIN  APPLICANT.  Defaulting to contact Applicant.");
                 eParams = aa.util.newHashtable();
                 eParams.put("$$todayDate$$", todayDate);
                 eParams.put("$$altid$$", altId);
+                eParams.put("$$recordAlias$$", recordAlias);
+                eParams.put("$$fileDate$$", fileDate);
                 eParams.put("$$capAlias$$", cap.getCapType().getAlias());
-                eParams.put("$$signType$$",signType);
-                eParams.put("$$signAddress$$", signAddress);
+                eParams.put("$$appTypeFirstLevel$$", "Permit");
+                eParams.put("$$deptPhoneNumber$$", "303-739-7420");
                 logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
                 sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, eParams, null);
             }
