@@ -47,10 +47,13 @@ function checkACARun() {
                 var capAlias = cap.getCapModel().getAppTypeAlias();
                 var recordApplicant = getContactByType("Applicant", capId);
                 var emailTo = recordApplicant.getEmail();
+                fileDateObj = cap.getFileDate();
+		        fileDate = "" + fileDateObj.getMonth() + "/" + fileDateObj.getDayOfMonth() + "/" + fileDateObj.getYear();
+                logDebug("file date: " + fileDate);
                 var recordAlias = "Donation Bin";
                 var todayDate = new Date();
                 logDebug("Today Date: " + todayDate);
-                var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+                //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
                 var altId = capId.getCustomID();
                 eParams = aa.util.newHashtable();
                 eParams.put("$$todayDate$$", todayDate);
