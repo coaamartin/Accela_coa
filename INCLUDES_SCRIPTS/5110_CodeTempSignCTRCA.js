@@ -64,7 +64,7 @@ function checkACARun() {
                 eParams.put("$$appTypeFirstLevel$$", "Permit");
                 eParams.put("$$deptPhoneNumber$$", "303-739-7420");
                 logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
-                sendNotification("noreply@auroragov.org", emailTo, "", EmailTemplate, eParams, null);
+                sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, eParams, null);
             }
             logDebug("Starting to send notifications");
             //var emailTo = "esango@auroragov.org;gtaets@auroragov.org;jjking@auroragov.org;tvaughn@auroragov.org;dosoba@auroragov.org;wbarrett@auroragov.org;dhclark@auroragov.org;rpettina@auroragov.org";
