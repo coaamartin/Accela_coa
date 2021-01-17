@@ -40,7 +40,7 @@ function checkACARun() {
         //Send email
         //Donation Bin
         if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
-
+            var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
             if (emailTemplate != null && emailTemplate != "") {
                 logDebug("5110 sending DONATION BIN  APPLICANT.  Defaulting to contact Applicant.");
                 var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
