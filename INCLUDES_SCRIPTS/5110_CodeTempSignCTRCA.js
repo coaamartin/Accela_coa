@@ -41,22 +41,31 @@ function checkACARun() {
         //Donation Bin
         if ("Building/Permit/DonationBin/NA".equals(appTypeString)) {
             // var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
-            // var todayDate = new Date();
-            // var altId = capId.getCustomID();
-            // //var signType = AInfo["Type of Sign"];
-            // var signAddress = AInfo["Address where proposed sign will be displayed"];
             // if (emailTemplate != null && emailTemplate != "") {
             //     logDebug("5110 sending DONATION BIN  APPLICANT.  Defaulting to contact Applicant.");
+            //     var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
+            //     var capAlias = cap.getCapModel().getAppTypeAlias();
+            //     var recordApplicant = getContactByType("Applicant", capId);
+            //     var emailTo = recordApplicant.getEmail();
+            //     fileDateObj = cap.getFileDate();
+		    //     fileDate = "" + fileDateObj.getMonth() + "/" + fileDateObj.getDayOfMonth() + "/" + fileDateObj.getYear();
+            //     logDebug("file date: " + fileDate);
+            //     var recordAlias = "Donation Bin";
+            //     var todayDate = new Date();
+            //     logDebug("Today Date: " + todayDate);
+            //     //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+            //     var altId = capId.getCustomID();
             //     eParams = aa.util.newHashtable();
-            //     eParams.put("$$ContactEmail$$", "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org");
             //     eParams.put("$$todayDate$$", todayDate);
             //     eParams.put("$$altid$$", altId);
+            //     eParams.put("$$recordAlias$$", recordAlias);
+            //     eParams.put("$$fileDate$$", todayDate);
             //     eParams.put("$$capAlias$$", cap.getCapType().getAlias());
-            //     //eParams.put("$$signType$$",signType);	
-            //     eParams.put("$$signAddress$$", signAddress);
+            //     eParams.put("$$appTypeFirstLevel$$", "Permit");
+            //     eParams.put("$$deptPhoneNumber$$", "303-739-7420");
             //     logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
-            //     emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
-            // }
+            //     sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, eParams, null);
+           // }
             logDebug("Starting to send notifications");
             //var emailTo = "esango@auroragov.org;gtaets@auroragov.org;jjking@auroragov.org;tvaughn@auroragov.org;dosoba@auroragov.org;wbarrett@auroragov.org;dhclark@auroragov.org;rpettina@auroragov.org";
             //var emailTo = "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org";
@@ -92,21 +101,30 @@ function checkACARun() {
         else if ("Building/Permit/TempUse/NA".equals(appTypeString)) {
             //Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
             // var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
-            // var todayDate = new Date();
-            // var altId = capId.getCustomID();
-            // var signType = AInfo["Type of Sign"];
-            // var signAddress = AInfo["Address where proposed sign will be displayed"];
             // if (emailTemplate != null && emailTemplate != "") {
-            //     logDebug("5110 sending TEMP USE SUBMIT REVIEWERS.  Sending to several email groups.");
+            //     logDebug("5110 sending DONATION BIN  APPLICANT.  Defaulting to contact Applicant.");
+            //     var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
+            //     var capAlias = cap.getCapModel().getAppTypeAlias();
+            //     var recordApplicant = getContactByType("Applicant", capId);
+            //     var emailTo = recordApplicant.getEmail();
+            //     fileDateObj = cap.getFileDate();
+		    //     fileDate = "" + fileDateObj.getMonth() + "/" + fileDateObj.getDayOfMonth() + "/" + fileDateObj.getYear();
+            //     logDebug("file date: " + fileDate);
+            //     var recordAlias = "Temporary Use Permit";
+            //     var todayDate = new Date();
+            //     logDebug("Today Date: " + todayDate);
+            //     //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+            //     var altId = capId.getCustomID();
             //     eParams = aa.util.newHashtable();
-            //     eParams.put("$$ContactEmail$$", "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org");
             //     eParams.put("$$todayDate$$", todayDate);
             //     eParams.put("$$altid$$", altId);
+            //     eParams.put("$$recordAlias$$", recordAlias);
+            //     eParams.put("$$fileDate$$", todayDate);
             //     eParams.put("$$capAlias$$", cap.getCapType().getAlias());
-            //     eParams.put("$$signType$$", signType);
-            //     eParams.put("$$signAddress$$", signAddress);
+            //     eParams.put("$$appTypeFirstLevel$$", "Permit");
+            //     eParams.put("$$deptPhoneNumber$$", "303-739-7420");
             //     logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
-            //     emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+            //     sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, eParams, null);
             // }
             logDebug("Starting to send notifications");
             //var emailTo = "esango@auroragov.org;gtaets@auroragov.org;jjking@auroragov.org;tvaughn@auroragov.org;dosoba@auroragov.org;wbarrett@auroragov.org;dhclark@auroragov.org;rpettina@auroragov.org;rwittman@auroragov.org;rmoody@auroragov.org;SMCGHEE@auroragov.org;ccerinic@auroragov.org;mhanifin@auroragov.org";
@@ -143,21 +161,30 @@ function checkACARun() {
         else if ("Building/Permit/TempSigns/NA".equals(appTypeString)) {
             //Use these groups when in production to populate ContactEmail.  Use a comma separator: tup_zoning@auroragov.org,tup_citymanager@auroragov.org,tup_publicworks@auroragov.org,tup_risk@auroragov.org,tup_neighborhood@auroragov.org
             // var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
-            // var todayDate = new Date();
-            // var altId = capId.getCustomID();
-            // //var signType = AInfo["Type of Sign"];
-            // var signAddress = AInfo["Address where proposed sign will be displayed"];
             // if (emailTemplate != null && emailTemplate != "") {
-            //     logDebug("5110 sending TEMP SIGN SUBMIT REVIEWERS.  Sending to several email groups.");
+            //     logDebug("5110 sending DONATION BIN  APPLICANT.  Defaulting to contact Applicant.");
+            //     var emailTemplate = "TEMP SIGN SUBMIT APPLICANT";
+            //     var capAlias = cap.getCapModel().getAppTypeAlias();
+            //     var recordApplicant = getContactByType("Applicant", capId);
+            //     var emailTo = recordApplicant.getEmail();
+            //     fileDateObj = cap.getFileDate();
+		    //     fileDate = "" + fileDateObj.getMonth() + "/" + fileDateObj.getDayOfMonth() + "/" + fileDateObj.getYear();
+            //     logDebug("file date: " + fileDate);
+            //     var recordAlias = "Temporary Sign Permit";
+            //     var todayDate = new Date();
+            //     logDebug("Today Date: " + todayDate);
+            //     //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+            //     var altId = capId.getCustomID();
             //     eParams = aa.util.newHashtable();
-            //     eParams.put("$$ContactEmail$$", "rprovinc@auroragov.org;bwatkins@auroragov.org;cmariano@auroragov.org");
             //     eParams.put("$$todayDate$$", todayDate);
             //     eParams.put("$$altid$$", altId);
+            //     eParams.put("$$recordAlias$$", recordAlias);
+            //     eParams.put("$$fileDate$$", todayDate);
             //     eParams.put("$$capAlias$$", cap.getCapType().getAlias());
-            //     //eParams.put("$$signType$$",signType);	
-            //     eParams.put("$$signAddress$$", signAddress);
+            //     eParams.put("$$appTypeFirstLevel$$", "Permit");
+            //     eParams.put("$$deptPhoneNumber$$", "303-739-7420");
             //     logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
-            //     emailContacts("Applicant", emailTemplate, eParams, null, null, "Y");
+            //     sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, eParams, null);
             // }
             logDebug("Starting to send notifications");
             //var emailTo = "esango@auroragov.org;gtaets@auroragov.org;jjking@auroragov.org;tvaughn@auroragov.org;dosoba@auroragov.org;wbarrett@auroragov.org;dhclark@auroragov.org;rpettina@auroragov.org";
