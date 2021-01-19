@@ -18,6 +18,8 @@ if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 	vLicenseID = aa.cap.getCapID(vIDArray[0], vIDArray[1], vIDArray[2]).getOutput();
 
 	if (vLicenseID != null) {
+		var licExpObj = aa.expiration.getLicensesByCapID(vLicenseID).getOutput().getExpDate();
+        var licExpDate = dateFormatted(licExpObj.getMonth(),licExpObj.getDayOfMonth(),licExpObj.getYear(),"");
 		//Activate the license records expiration cycle
 		vLicenseObj = new licenseObject(null, vLicenseID);
 		vLicenseObj.setStatus("Active");
@@ -25,7 +27,7 @@ if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 		expUnit = thisLicExpOb.getExpUnit()
 		expInt = thisLicExpOb.getExpInterval()
 		if (expUnit == "MONTHS") {
-			newExpDate = dateAddMonths(null, expInt);
+			newExpDate = dateAddMonths(licExpDate, expInt);
 			} 
 		vLicenseObj.setExpiration(newExpDate);
 		updateAppStatus("Active","Updated by Script",vLicenseID);
