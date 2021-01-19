@@ -10,8 +10,8 @@ try {
     eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
     eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
     eval(getScriptText("COMMON_ACA_PAGEFLOW_FUNCTIONS"));
-    //var applicantType = null;
-    //var contactArray = cap.getContactsGroup().toArray();
+    var applicantType = null;
+    var contactArray = cap.getContactsGroup().toArray();
 
     //remove all documents first
     removeAllRequiredDocumentCapCondition();
