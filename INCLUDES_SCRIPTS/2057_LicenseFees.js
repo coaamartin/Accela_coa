@@ -10,68 +10,119 @@ if (appMatch('Licenses/Supplemental/*/*')){
 	var unit = AInfo['Number of Units'];
 	logDebug('Unit value is '+unit);
 	//Start of Class 1 Fees
-	if (appMatch('Licenses/Supplemental/Amusement Device Distributor/*')){
+	if (appMatch('Licenses/Supplemental/Amusement Device Distributor/Application')){
 		updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
 		updateFee('CL1012', 'L_CLASS1', 'FINAL', 1, 'Y');
-
 		}
-
-	if (appMatch('Licenses/Supplemental/Amusement Device/*')){
+	if (appMatch('Licenses/Supplemental/Amusement Device Distributor/Renewal')){
+		updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
+		//updateFee('CL1012', 'L_CLASS1', 'FINAL', 1, 'Y');
+		}
+		
+	if (appMatch('Licenses/Supplemental/Amusement Device/Application')){
 		updateFee('CL1002', 'L_CLASS1', 'FINAL', unit, 'Y');
         updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
+		}
+		
+	if (appMatch('Licenses/Supplemental/Amusement Device/Renewal')){
+		updateFee('CL1002', 'L_CLASS1', 'FINAL', unit, 'Y');
+        //updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 		
 	if (appMatch('Licenses/Supplemental/Door ID Badge/*')){
 		updateFee('CL1005', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 
-	if (appMatch('Licenses/Supplemental/Door Seller/*')){
+	if (appMatch('Licenses/Supplemental/Door Seller/Application')){
 		updateFee('CL1003', 'L_CLASS1', 'FINAL', 1, 'Y');
 		updateFee('CL1004', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
 
-	if (appMatch('Licenses/Supplemental/Stable/*')){
+	if (appMatch('Licenses/Supplemental/Door Seller/Renewal')){
+		//updateFee('CL1003', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1004', 'L_CLASS1', 'FINAL', 1, 'Y');
+		}
+
+	if (appMatch('Licenses/Supplemental/Stable/Application')){
 		updateFee('CL1006', 'L_CLASS1', 'FINAL', 1, 'Y');
 		updateFee('CL1007', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
+
+	if (appMatch('Licenses/Supplemental/Stable/Renewal')){
+		//updateFee('CL1006', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1007', 'L_CLASS1', 'FINAL', 1, 'Y');
+		}
 		
-	if (appMatch('Licenses/Supplemental/Trash Hauler/*')){
+	if (appMatch('Licenses/Supplemental/Trash Hauler/Application')){
 		updateFee('CL1008', 'L_CLASS1', 'FINAL', 1, 'Y');
+		updateFee('CL1009', 'L_CLASS1', 'FINAL', unit, 'Y');
+		}
+
+	if (appMatch('Licenses/Supplemental/Trash Hauler/Renewal')){
+		//updateFee('CL1008', 'L_CLASS1', 'FINAL', 1, 'Y');
 		updateFee('CL1009', 'L_CLASS1', 'FINAL', unit, 'Y');
 		}
 //End of Class 1 Fees
 }
 
 //Start of Class 2 Fees
-	if (appMatch('Licenses/Supplemental/After Hours/*')){
+	if (appMatch('Licenses/Supplemental/After Hours/Application')){
 		updateFee('CL2001', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2002', 'L_CLASS2', 'FINAL', 1, 'Y');
-
+		}
+		
+	if (appMatch('Licenses/Supplemental/After Hours/Renewal')){
+		//updateFee('CL2001', 'L_CLASS2', 'FINAL', 1, 'Y');
+		updateFee('CL2002', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
 
-	if (appMatch('Licenses/Supplemental/Massage Facility/*')){
+	if (appMatch('Licenses/Supplemental/Massage Facility/Renewal')){
+		//updateFee('CL2005', 'L_CLASS2', 'FINAL', 1, 'Y');
+		updateFee('CL2006', 'L_CLASS2', 'FINAL', 1, 'Y');
+		}
+
+	if (appMatch('Licenses/Supplemental/Massage Facility/Application')){
 		updateFee('CL2005', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2006', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
-		
 
-	if (appMatch('Licenses/Supplemental/Pawnbroker/*')){
+	if (appMatch('Licenses/Supplemental/Pawnbroker/Application')){
 		updateFee('CL2008', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2009', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
+
+	if (appMatch('Licenses/Supplemental/Pawnbroker/Renewal')){
+		//updateFee('CL2008', 'L_CLASS2', 'FINAL', 1, 'Y');
+		updateFee('CL2009', 'L_CLASS2', 'FINAL', 1, 'Y');
+		}
 		
-	if (appMatch('Licenses/Supplemental/Second Hand Dealer/*')){
+	if (appMatch('Licenses/Supplemental/Second Hand Dealer/Application')){
 		updateFee('CL2012', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2013', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
 
-	if (appMatch('Licenses/Supplemental/Sexually Oriented Business/*')){
+	if (appMatch('Licenses/Supplemental/Second Hand Dealer/Renewal')){
+		//updateFee('CL2012', 'L_CLASS2', 'FINAL', 1, 'Y');
+		updateFee('CL2013', 'L_CLASS2', 'FINAL', 1, 'Y');
+		}
+
+	if (appMatch('Licenses/Supplemental/Sexually Oriented Business/Application')){
 		updateFee('CL2014', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2015', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
+
+	if (appMatch('Licenses/Supplemental/Sexually Oriented Business/Renewal')){
+		//updateFee('CL2014', 'L_CLASS2', 'FINAL', 1, 'Y');
+		updateFee('CL2015', 'L_CLASS2', 'FINAL', 1, 'Y');
+		}
 		
-	if (appMatch('Licenses/Supplemental/Teen Club/*')){
+	if (appMatch('Licenses/Supplemental/Teen Club/Application')){
 		updateFee('CL2018', 'L_CLASS2', 'FINAL', 1, 'Y');
+		updateFee('CL2019', 'L_CLASS2', 'FINAL', 1, 'Y');
+		}
+
+	if (appMatch('Licenses/Supplemental/Teen Club/Renewal')){
+		//updateFee('CL2018', 'L_CLASS2', 'FINAL', 1, 'Y');
 		updateFee('CL2019', 'L_CLASS2', 'FINAL', 1, 'Y');
 		}
 //End of Class 2 Fees
