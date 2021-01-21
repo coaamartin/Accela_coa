@@ -1,7 +1,5 @@
 //PRA;Licenses!Marijuana!~!Application.js
 
-/*
-
 sendEmailReceipt_MJApplication();
 
 var vPayment;
@@ -36,5 +34,3 @@ if (!publicUser) {
 }
 //SW - Script 434
 include("434_changeStatusAfterPaymentMJ");
-
-*/
