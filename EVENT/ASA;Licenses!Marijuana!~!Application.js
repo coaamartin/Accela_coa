@@ -5,7 +5,7 @@ include("28_AMEDEmailApplicantAtRecordCreation");
 }*/
 
 //ACA FEE Invoice
-if(!publicUser){
+if(publicUser){
 	invoiceAllFees();
 }
 //assess State MJ Licensing Fee on application submit
