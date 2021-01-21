@@ -4,8 +4,12 @@
 include("28_AMEDEmailApplicantAtRecordCreation");
 }*/
 
+//ACA FEE Invoice
+if(!publicUser){
+	invoiceAllFees();
+}
 //assess State MJ Licensing Fee on application submit
-include("246_AssessStateMJFee");
+//include("246_AssessStateMJFee");
 
 //SWAKIL
 //required docs conditions
