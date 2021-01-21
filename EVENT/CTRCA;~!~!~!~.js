@@ -22,12 +22,12 @@ try{
 	    params = aa.util.newHashtable();
 	    addParameter(params, "$$appTypeFirstLevel$$", appTypeArray[0]);
 	    var phoneNumber = "";
-	    if(module == "Building"){
-			 phoneNumber = "303-739-7420"
-			 appTypeFirstLevel = "Permit Center"
-			 addParameter(params, "$$appTypeFirstLevel$$", appTypeFirstLevel);
+	    // if(module == "Building"){
+		// 	 phoneNumber = "303-739-7420"
+		// 	 appTypeFirstLevel = "Permit Center"
+		// 	 addParameter(params, "$$appTypeFirstLevel$$", appTypeFirstLevel);
 	    
-	    }
+	    // }
 	    if(module == "Planning"){
 	    
 	    phoneNumber = "303-739-7000"
