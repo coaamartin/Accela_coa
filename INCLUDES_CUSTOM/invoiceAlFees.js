@@ -34,6 +34,6 @@ try{
 		logDebug("Error getting fees " + feeResult.getErrorMessage());
 	}
 	return retVal;
-}catch (exception) {
+}catch (err) {
     comment("A JavaScript Error occurred:  invoiceAllFees: " + err.message);
 }};
