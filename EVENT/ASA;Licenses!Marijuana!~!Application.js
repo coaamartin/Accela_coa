@@ -5,7 +5,7 @@ include("28_AMEDEmailApplicantAtRecordCreation");
 }*/
 
 //ACA FEE Invoice
-if(publicUser){
+/*if(publicUser){
 	if (appMatch("Licenses/Marijuana/Retail Cultivation/Application")) {
 		updateFee("LIC_MJRC_02", "LIC_MJ_RC", "FINAL", 1, "N");
 	} else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Application")) {
@@ -19,7 +19,8 @@ if(publicUser){
 	}
 
 	//_invoiceAllFees();
-}
+}*/
+
 //assess State MJ Licensing Fee on application submit
 //include("246_AssessStateMJFee");
 
