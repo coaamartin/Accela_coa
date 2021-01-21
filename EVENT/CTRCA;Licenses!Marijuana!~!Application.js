@@ -1,3 +1,4 @@
+/*
 if(publicUser){
 include("28_AMEDEmailApplicantAtRecordCreation");
 }
@@ -30,3 +31,5 @@ function _invoiceAllFees() {
 		}
 	}
 }
+
+*/
