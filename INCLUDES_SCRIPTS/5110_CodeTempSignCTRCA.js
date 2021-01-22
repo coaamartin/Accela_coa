@@ -49,25 +49,16 @@ function checkACARun() {
                 var emailTo = recordApplicant.getEmail();
                 var firstName = recordApplicant.getFirstName();
                 var lastName = recordApplicant.getLastName();
-                //fileDateObj = cap.getFileDate();
-		        //fileDate = "" + fileDateObj.getMonth() + "/" + fileDateObj.getDayOfMonth() + "/" + fileDateObj.getYear();
-                //logDebug("file date: " + fileDate);
                 var recordAlias = "Donation Bin";
-                //var todayDate = new Date();
-                //logDebug("Today Date: " + todayDate);
-                //var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
                 var altId = capId.getCustomID();
                 eParams = aa.util.newHashtable();
-                //eParams.put("$$todayDate$$", todayDate);
                 eParams.put("$$altid$$", altId);
                 eParams.put("$$recordAlias$$", recordAlias);
                 eParams.put("$$FirstName$$", firstName);
                 eParams.put("$$LastName$$", lastName);
-                //eParams.put("$$fileDate$$", todayDate);
-                eParams.put("$$capAlias$$", cap.getCapType().getAlias());
-                //eParams.put("$$appTypeFirstLevel$$", "Permit");
+                eParams.put("$$capAlias$$", capAlias);
                 eParams.put("$$deptPhoneNumber$$", "303-739-7420");
-                logDebug('Attempting to send email: ' + emailTemplate + " : " + altId);
+                logDebug('Attempting to send email: ' + emailTemplate + " : " + altId + eParams);
                 sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, eParams, null);
            }
             logDebug("Starting to send notifications");
