@@ -15,7 +15,7 @@ try{
 	appTypeArray=capType.split("/");
 	var module = appTypeArray[0];
     var category = appTypeArray[1];
-    var exceptionCategories = ["Marijuana"];
+    var exceptionCategories = ["Marijuana", "Building"];
 
 
     if(publicUser && !exists(category, exceptionCategories)){
@@ -66,8 +66,8 @@ try{
 	    getContactParams4Notification(params,"Arborist Applicant");
 	    getContactParams4Notification(params,"Contractor Applicant");
 	    getContactParams4Notification(params,"Responsible Party");
-	    
-	    sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null); 
+		sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null);
+
 	}
 	
 } catch (err) {
