@@ -224,7 +224,7 @@ var bldgInspType = "MJ Building Inspections";
 var bldgInspSchedDate;
 
 	for (i in cycleInspections) {
-		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations" || cycleInspections[i].getInspectionStatus() == "Passed - Notification Pending") {
+		if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
 			var eParams = aa.util.newHashtable();
 			addParameter(eParams, "$$altID$$", recordCapScriptModel.getCapModel().getAltID());
 			addParameter(eParams, "$$recordAlias$$", recordCapScriptModel.getCapModel().getCapType().getAlias());
