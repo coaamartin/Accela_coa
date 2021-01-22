@@ -197,8 +197,8 @@ function scheduleNextInspections(cycleInspections) {
 			//for building inspections, update inspection status and wait for other building inspections to be completed
 			if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
 				scheduleInspectDate(inspType, nextInspDate, inspector);
-				cycleInspections[i].setInspectionStatus("Passed - Notification Pending");
-				aa.inspection.editInspection(cycleInspections[i]);
+				//cycleInspections[i].setInspectionStatus("Passed - Notification Pending");
+				//aa.inspection.editInspection(cycleInspections[i]);
 				inspCounter++;
 			} else {
 				scheduleInspectDate(inspType, nextInspDate, inspector);
@@ -281,7 +281,7 @@ var bldgInspSchedDate;
 		
 		//update inspection status to reflect that notification was sent
 		for (i in cycleInspections) {
-			if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations" || cycleInspections[i].getInspectionStatus() == "Passed - Notification Pending") {
+			if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
 				if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
 					cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
 					aa.inspection.editInspection(cycleInspections[i]);
@@ -297,7 +297,7 @@ function updateNextInspectionDate(cycleInspections, daysToAdd) {
 	var readyCount = 0;
 	var nextInspDate = getAppSpecific("Next Inspection Date");
 	for (i in cycleInspections) {
-		if (cycleInspections[i].getInspectionStatus() == "Passed - Notification Sent" || cycleInspections[i].getInspectionStatus() == "Passed - Notification Pending") {
+		if (cycleInspections[i].getInspectionStatus() == "Passed - Notification Sent") {
 			readyCount++;
 		} else if (dateDiff(cycleInspections[i].getScheduledDate(), nextInspDate) <= 6) {
 			//nextInspDate = new Date(nextInspDate);
