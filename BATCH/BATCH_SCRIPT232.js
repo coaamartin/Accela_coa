@@ -239,26 +239,26 @@ var bldgInspSchedDate;
 			var reportParams = aa.util.newHashtable();
 			addParameter(reportParams, "InspActNumber", cycleInspections[i].getIdNumber());
 
-			//check to see if all five building inspection types have been passed
-			if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
-				bldgInspCount++;
-				bldgInspId = cycleInspections[i].getIdNumber();
-				bldgInspResult = cycleInspections[i].getInspectionStatus();
-				bldgInspResultDate = formatDateX(cycleInspections[i].getInspectionDate());
-				bldgInspSchedDate = cycleInspections[i].getScheduledDate();
-			} else {
-				logDebug2("Sending notification for Inspection Type " + cycleInspections[i].getInspectionType());
-				
-				//send email with report attachment
-				emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");				
-				
-				//update inspection status to reflect that notification was sent
-				cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
-				aa.inspection.editInspection(cycleInspections[i]);
-			}
+			logDebug2("Sending notification for Inspection Type " + cycleInspections[i].getInspectionType());
+			//send email with report attachment
+			emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");				
+			//update inspection status to reflect that notification was sent
+			cycleInspections[i].setInspectionStatus("Passed - Notification Sent");
+			aa.inspection.editInspection(cycleInspections[i]);
+			
 		}
 	}
-	
+	//Check Building Inspections
+	for (i in cycleInspections) {
+		if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1 && cycleInspections[i].getInspectionStatus() == "Passed - Notification Pending") {
+			bldgInspCount++;
+			bldgInspId = cycleInspections[i].getIdNumber();
+			bldgInspResult = cycleInspections[i].getInspectionStatus();
+			bldgInspResultDate = formatDateX(cycleInspections[i].getInspectionDate());
+			bldgInspSchedDate = cycleInspections[i].getScheduledDate();
+		}
+	}
+	logDebug2("<Font Color=BLACK>bldgInspCount " + bldgInspCount);
 	//only send one notification for building inspections when all five building inspection types have been passed
 	if (bldgInspCount == 5) {
 		var eParams = aa.util.newHashtable();
