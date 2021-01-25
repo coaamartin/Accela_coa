@@ -230,9 +230,28 @@ function sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel) {
     var bldgInspResultDate;
     var bldgInspType = "MJ Building Inspections";
     var bldgInspSchedDate;
+    var adResult = aa.address.getAddressByCapId(capId).getOutput();
+
+    for(x in adResult)
+    {
+        var stNum = adResult[x].getHouseNumberStart();
+        var preDir =adResult[x].getStreetDirection();
+        var stName = adResult[x].getStreetName();
+        var stType = adResult[x].getStreetSuffix();
+        var city = adResult[x].getCity();
+        var state = adResult[x].getState();
+        var zip = adResult[x].getZip();
+    }
+    var primaryAddress = stNum + " " + preDir + " " + stName + " " + stType + " " + "," + city + " " + state + " " + zip;
+    var tradeName = getAppName(capId);
+
+    var asiValues = new Array();
+    loadAppSpecific(asiValues);
 
     for (i in cycleInspections) {
         if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
+
+
             var eParams = aa.util.newHashtable();
             addParameter(eParams, "$$altID$$", recordCapScriptModel.getCapModel().getAltID()+"");
             addParameter(eParams, "$$recordAlias$$", recordCapScriptModel.getCapModel().getCapType().getAlias()+"");
@@ -243,6 +262,13 @@ function sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel) {
             addParameter(eParams, "$$inspType$$", cycleInspections[i].getInspectionType()+"");
             addParameter(eParams, "$$inspSchedDate$$", cycleInspections[i].getScheduledDate()+"");
             addParameter(eParams, "$$inspResultComment$$", cycleInspections[i].getInspectionComments()+"");
+
+            if (primaryAddress)
+                addParameter(eParams, "$$FullAddress$$", primaryAddress);
+            if (tradeName)
+                addParameter(eParams, "$$TradeName$$", tradeName);
+            if (asiValues["State License Number"])
+                addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
 
             var reportParams = aa.util.newHashtable();
             addParameter(reportParams, "InspActNumber", cycleInspections[i].getIdNumber()+"");
@@ -271,10 +297,10 @@ function sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel) {
     for (i in cycleInspections) {
         if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1 && cycleInspections[i].getInspectionStatus() == "Passed - Notification Pending") {
             bldgInspCount++;
-            bldgInspId = cycleInspections[i].getIdNumber();
-            bldgInspResult = cycleInspections[i].getInspectionStatus();
-            bldgInspResultDate = formatDateX(cycleInspections[i].getInspectionDate());
-            bldgInspSchedDate = cycleInspections[i].getScheduledDate();
+            bldgInspId = cycleInspections[i].getIdNumber()+"";
+            bldgInspResult = cycleInspections[i].getInspectionStatus()+"";
+            bldgInspResultDate = formatDateX(cycleInspections[i].getInspectionDate())+"";
+            bldgInspSchedDate = cycleInspections[i].getScheduledDate()+"";
         }
     }
 
@@ -290,13 +316,29 @@ function sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel) {
         addParameter(eParams, "$$inspType$$", bldgInspType);
         addParameter(eParams, "$$inspSchedDate$$", bldgInspSchedDate);
 
+        if (primaryAddress)
+            addParameter(eParams, "$$FullAddress$$", primaryAddress);
+        if (tradeName)
+            addParameter(eParams, "$$TradeName$$", tradeName);
+        if (asiValues["State License Number"])
+            addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
+
         var reportParams = aa.util.newHashtable();
         addParameter(reportParams, "InspActNumber", bldgInspId);
 
         logDebug2("Sending notification for Inspection Type " + bldgInspType);
 
+        var emails = _getContactEmailNoDupEmail(capId,"Inspection Contact");
+        emails = emails.join(";");
+        logDebug("Email send to: " + emails);
+        var reportFiles = new Array();
+        var report = _generateReportFile(REPORT_TEMPLATE, reportParams, aa.getServiceProviderCode());
+        if(report) reportFiles.push(report);
+
+        _sendNotification("noreply@auroragov.org", emails, "", EMAIL_TEMPLATE, eParams, reportFiles);
+
         //send email with report attachment
-        emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");
+        //emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");
 
         //update inspection status to reflect that notification was sent
         for (i in cycleInspections) {
