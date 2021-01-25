@@ -80,7 +80,7 @@ try
     var reportFiles = new Array();
     var report = _generateReportFile(vReportTemplate, vRParams, aa.getServiceProviderCode(), capId);
     reportFiles.push(report);
-    _sendNotification("noreply@auroragov.org", allEmails, "", vEmailTemplate, vEParams, reportFiles, capId);
+    _sendNotification("noreply@auroragov.org", allEmails, "marijuana@auroragov.org", vEmailTemplate, vEParams, reportFiles, capId);
 
     aa.sendMail("suhailwakil@gmail.com", "suhailwakil@gmail.com", "", "Log", "Debug: " + debug);
 
