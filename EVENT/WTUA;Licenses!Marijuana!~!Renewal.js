@@ -1,6 +1,5 @@
-
-// Code moved from PRA:Licenses/Marijuana/*/Renewal
-if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
+var totalPaid = totalPaidAmount();
+if (totalPaid >= 2500 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 	
 	closeTask("License Issuance", "Renewed - Pending Notification", "Updated by WTUA;Licenses!Professional!General!Renewal", "");
 	updateAppStatus("Renewed - Pending Notification","Updated by Script",capId);
@@ -49,7 +48,24 @@ if (balanceDue == 0 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 	}
 }
 
+function totalPaidAmount(){
+    var vPayment;
+    var vPayments;
+    var vPaymentAmt = 0;
 
+// Get all payments on the record
+    vPayments = aa.finance.getPaymentByCapID(capId, null);
+    if (vPayments.getSuccess() == true) {
+        vPayments = vPayments.getOutput();
+        var y = 0;
+        // Loop through payments to get the latest by highest SEQ number
+        for (y in vPayments) {
+            vPayment = vPayments[y];
+            vPaymentAmt += vPayment.getPaymentAmount();
+        }
+    }
+    return vPaymentAmt;
+}
 
 //SW Script 436
 include("436_cancelScheduledInpsectionsRenew");
