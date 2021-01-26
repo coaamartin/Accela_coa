@@ -4,7 +4,7 @@
 include("28_AMEDEmailApplicantAtRecordCreation");
 }*/
 
-/*
+
 //ACA FEE Invoice
 if (appMatch("Licenses/Marijuana/Retail Cultivation/Application")) {
 	updateFee("LIC_MJRC_02", "LIC_MJ_RC", "FINAL", 1, "N");
@@ -18,15 +18,16 @@ if (appMatch("Licenses/Marijuana/Retail Cultivation/Application")) {
 	updateFee("LIC_MJST_01", "LIC_MJ_STORE", "FINAL", 1, "N");
 }
 
-_invoiceAllFees();
-*/
+
+//_invoiceAllFees();
+
 //assess State MJ Licensing Fee on application submit
 //include("246_AssessStateMJFee");
 
 //SWAKIL
 //required docs conditions
 //include("495_Add_Required_Docs_Conditions");
-
+/*
 function _invoiceAllFees() {
 	itemCapId = capId;
 	if (arguments.length > 0) itemCapId = arguments[0];
@@ -53,7 +54,7 @@ function _invoiceAllFees() {
 		}
 	}
 }
-
+*/
 
 
 
