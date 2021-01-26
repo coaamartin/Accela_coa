@@ -25,7 +25,7 @@ if (vPayments.getSuccess() == true) {
     }
 }
 
-if(wfTask.equals("Renewal Review") && wfStatus.equals("Complete") && vPaymentAmt >= 2500){
+if(wfTask.equals("Renewal Review") && wfStatus.equals("Complete") && vPaymentAmt < 2500){
 	cancel = true;
 	showMessage = true;
 	comment("Fee is not Paid yet");
