@@ -12,7 +12,8 @@ try
 	cap = aa.cap.getCap(capId).getOutput();
 	logDebug("recordID is = "+recordID);
 	var emailTo = getEmailString(); 
-	var recordApplicant = getContactByType("Licensee", capId);
+	//var recordApplicant = getContactByType("Licensee", capId);
+	var recordApplicant = getContactByType("Licensee", recordID);
 	var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -36,7 +37,7 @@ try
 catch(e)
 {
 	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
-	email("noreply@auroragov.org", "acharlton@truepointsolutions.com", "Error", "ERROR: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack);// + br + "Debug: ");// + debug); 
+	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", "ERROR: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack);// + br + "Debug: ");// + debug); 
 }
 function getEmailString()
 {
