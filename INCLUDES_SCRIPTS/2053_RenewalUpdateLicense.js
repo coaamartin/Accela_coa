@@ -41,11 +41,8 @@
 		appType = cap.getCapType().toString();
 		var vAsyncScript = "SEND_EMAIL_TAXLIC_LICENSE_ASYNC";
 		var envParameters = aa.util.newHashMap();
-		envParameters.put("altID", parentLicenseCAPID);
-		logDebug("ALTID is " +parentLicenseCAPID);
-		envParameters.put("capId", capId);
-		logDebug("CAP ID is " +capId);
-		envParameters.put("cap", cap);
+		envParameters.put("altID", pCapIdCustomId);
+		logDebug("ALTID is " +pCapIdCustomId);
 		envParameters.put("currentUserID",currentUserID);
 		logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
