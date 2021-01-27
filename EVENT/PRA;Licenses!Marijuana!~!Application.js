@@ -1,7 +1,7 @@
 //PRA;Licenses!Marijuana!~!Application.js
 
 sendEmailReceipt_MJApplication();
-
+/*
 var vPayment;
 var vPayments;
 var vPaymentSeqNbr = 0;
@@ -31,6 +31,6 @@ if (!publicUser) {
 	if (vPaymentAmt  >= 2500) {
 		logDebug("Minimum payment of $2500 has been made");
 	}
-}
+}*/
 //SW - Script 434
 include("434_changeStatusAfterPaymentMJ");
