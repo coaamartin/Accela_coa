@@ -1,5 +1,10 @@
 aa.cap.updateAccessByACA(capId, "Y");
 
+if (balanceDue <= 0 && capStatus.equals("Payment Pending")) {
+	updateAppStatus("Pending", "Updated by PRA;Licenses!Marijuana!~!Renewal", capId);
+}
+
+
 // Renewal script - Moved to WTUA:Licenses/Marijuana/*/Renewal
 /*if (balanceDue == 0) {
 
