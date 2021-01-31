@@ -24,7 +24,7 @@ _failedMJInspectionAutomation(vCapType);
 
 //check for passed MJ inspections
 //passedMJInspectionAutomation(vCapType); 
-_passedMJInspectionEmailNotification();
+_passedMJInspectionEmailNotification(vCapType);
 
 //check for extension requests on MJ inspections
 requestExtensionMJInspection(vCapType);
@@ -141,9 +141,9 @@ function _failedMJInspectionAutomation(vCapType){
 
 }
 
-function _passedMJInspectionEmailNotification(){
+function _passedMJInspectionEmailNotification(vCapType){
 	
-	if ((inspResult == "Passed" || inspResult == "Passed - Minor Violations") && (inspType.indexOf("MJ Building Inspections") == -1) ) {
+	if ((inspResult == "Passed" || inspResult == "Passed - Minor Violations") && (!(vCapType.equals("License") && inspType.indexOf("MJ Building Inspections") != -1)) ) {
 		var emailTemplate = "LIC MJ COMPLIANCE #232";
 		var inspResultComment = inspObj.getInspection().getResultComment();
 		var adResult = aa.address.getAddressByCapId(capId).getOutput(); 
