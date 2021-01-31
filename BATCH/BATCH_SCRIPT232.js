@@ -251,7 +251,7 @@ function sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel) {
     for (i in cycleInspections) {
         if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
 
-
+        	/*
             var eParams = aa.util.newHashtable();
             addParameter(eParams, "$$altID$$", recordCapScriptModel.getCapModel().getAltID()+"");
             addParameter(eParams, "$$recordAlias$$", recordCapScriptModel.getCapModel().getCapType().getAlias()+"");
@@ -281,9 +281,9 @@ function sendNotificationsPassedInsp(cycleInspections, recordCapScriptModel) {
             var reportFiles = new Array();
             var report = _generateReportFile(REPORT_TEMPLATE, reportParams, aa.getServiceProviderCode());
             if(report) reportFiles.push(report);
-
+			//Email sent from IRSA
             _sendNotification("noreply@auroragov.org", emails, "", EMAIL_TEMPLATE, eParams, reportFiles);
-
+            */
 
             //send email with report attachment
             //emailContactsWithReportLinkASync("Inspection Contact", EMAIL_TEMPLATE, eParams, REPORT_TEMPLATE, reportParams, "N", "");
