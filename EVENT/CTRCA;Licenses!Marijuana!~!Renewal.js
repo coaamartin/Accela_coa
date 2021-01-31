@@ -1,5 +1,9 @@
 //CTRCA;Licenses!Marijuana!~!Renewal.js
 
+//Begin script to assess late fees delinquent MJ renewal
+include("313_AddExpiredRenewalLateFeeMJ");
+//End script to assess late fees delinquent MJ renewal
+    
 if (appMatch("Licenses/Marijuana/Retail Cultivation/Renewal")) {
         updateFee("LIC_MJRC_02", "LIC_MJ_RC", "FINAL", 1, "Y");
 } else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Renewal")) {
