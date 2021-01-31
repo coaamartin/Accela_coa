@@ -143,7 +143,7 @@ function _failedMJInspectionAutomation(vCapType){
 
 function _passedMJInspectionEmailNotification(){
 	
-	if (inspResult == "Passed" || inspResult == "Passed - Minor Violations") {
+	if ((inspResult == "Passed" || inspResult == "Passed - Minor Violations") && (inspType.indexOf("MJ Building Inspections") == -1) ) {
 		var emailTemplate = "LIC MJ COMPLIANCE #232";
 		var inspResultComment = inspObj.getInspection().getResultComment();
 		var adResult = aa.address.getAddressByCapId(capId).getOutput(); 
