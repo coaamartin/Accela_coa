@@ -22,11 +22,17 @@ updateAppStatus("Payment Pending", "Updated by ASA;Licenses!Marijuana!~!Renewal"
 //send email 
 //******************************************************************************
 //if(publicUser){
-	var emailTemplate = "LIC_MJ_RENEWALSUBMIT";
+    var emailTemplate = "LIC_MJ_RENEWALSUBMIT";
     var capAlias = cap.getCapModel().getAppTypeAlias();
     var recordApplicant = getContactByType("Applicant", capId);
-    var firstName = recordApplicant.getFirstName();
-    var lastName = recordApplicant.getLastName();
+    var firstName = "";
+    var lastName = "";
+
+    if(recordApplicant){
+        firstName = recordApplicant.getFirstName();
+        lastName = recordApplicant.getLastName();
+    }
+    
     //var emailTo = getContactByType("Applicant", capId);
     var emailTo = getAllContactsEmails()
     var stLicNumb = getAppSpecific("State License Number",capId)+""; 
@@ -48,6 +54,7 @@ updateAppStatus("Payment Pending", "Updated by ASA;Licenses!Marijuana!~!Renewal"
                 fullAddress = fullAddress + capAddresses.getZip();
             }
     }
+
     var eParams = aa.util.newHashtable();
     if(fullAddress!="" || fullAddress!=undefined){
         eParams.put("$$fullAddress$$", fullAddress);
