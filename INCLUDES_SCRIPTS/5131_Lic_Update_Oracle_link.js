@@ -25,5 +25,3 @@ logDebug("Start of script 5131_Lic_Update_Oracle_link.js");
     var oracleLink = AInfo["Oracle Link"];
     logDebug("Updated Oracle Link: " + oracleLink);
 	logDebug("End of script 5131_Lic_Update_Oracle_link.js");
-
-}
