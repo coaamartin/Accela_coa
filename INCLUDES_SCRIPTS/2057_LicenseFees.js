@@ -233,7 +233,7 @@ if (appMatch('Licenses/Liquor/*/Renewal')){
 
 	if (AInfo['Type of License'] == 'Lodging and Entertainment'){
 		updateFee('LL002', 'L_LIQUOR', 'FINAL', 1, 'Y');
-        updateFee('LL005', 'L_LIQUOR', 'FINAL', 750, 'Y');
+        updateFee('LL005', 'L_LIQUOR', 'FINAL', 650, 'Y');
 		updateFee('LL015', 'L_LIQUOR', 'FINAL', 1, 'Y');
 		}
 
