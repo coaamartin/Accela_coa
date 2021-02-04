@@ -21,7 +21,8 @@ var oracleURL = "http://doccity/cs/idcplg?IdcService=GET_SEARCH_RESULTS_FORCELOG
 logDebug("General Buiness Number: " + genBusinessNumber);
 logDebug("Oracle Link: " + oracleURL);
 //setCustomField(vFieldName,vFieldValue);
-setCustomField("Oracle Link", oracleURL);
+//setCustomField("Oracle Link", oracleURL);
+editAppSpecific("Oracle Link", oracleURL);
 var oracleLink = AInfo["Oracle Link"];
 logDebug("Updated Oracle Link: " + oracleLink);
 logDebug("End of script 5131_Lic_Update_Oracle_link.js");
