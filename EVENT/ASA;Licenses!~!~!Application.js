@@ -1,5 +1,6 @@
 //Ray adding in oracle link
-include("5131_Lic_Update_Oracle_link.js");
+logDebug("Start script 5131_Lic_Update_Oracle_link.js")
+include("5131_Lic_Update_Oracle_link");
 
 if (appMatch('Licenses/Liquor/*/*') || appMatch('Licenses/Supplemental/*/*')){
 	if (appMatch('Licenses/Liquor/Liquor License/*') || appMatch('Licenses/Liquor/Tasting License/*') || appMatch('Licenses/Supplemental/*/*')){
