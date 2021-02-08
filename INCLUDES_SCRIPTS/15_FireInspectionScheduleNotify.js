@@ -34,6 +34,8 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 		{newInspType = "FD Follow-up";}
 	else if (inspType == "FD Complaint Follow-Up Inspection")
 		{newInspType = "FD Complaint Follow-Up Inspection";}
+	else if (inspType == "Fire Special Inspection")
+		{newInspType = "FD Follow-up";}
 	else {newInspType = "FD Follow-up";}
 		
 	//assign inspector based on inspector assigned to the record
