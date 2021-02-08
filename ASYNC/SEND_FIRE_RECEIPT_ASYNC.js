@@ -26,7 +26,7 @@ try
 }
 catch(e)
 {
-	email("debug@gmail.com", "aurora@gov.org", "Error", e.message + " invNbr: " + invNbr);
+	email("rprovinc@auroragov.org", "rprovinc@auroragov.org", "Error", e.message + " invNbr: " + invNbr);
 }
 
 function getContactsEmailString(contactTypeArray)
