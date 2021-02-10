@@ -29,8 +29,8 @@ try
    addRequiredDocument("State - Business License Renewal Application");
 	if ("Corporation".equals(tOwner) || "LLC".equals(tOwner))
 	{
-      addRequiredDocument("Local - Articles of Incorporation");
-      addRequiredDocument("Local - Bylaws");
+      //addRequiredDocument("Local - Articles of Incorporation");
+      //addRequiredDocument("Local - Bylaws");
 	}
 	else if ("Individual".equals(tOwner) || "Sole Proprietor".equals(tOwner) || "Partnership".equals(tOwner))
 	{
