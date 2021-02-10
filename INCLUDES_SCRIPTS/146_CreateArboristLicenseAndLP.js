@@ -70,7 +70,7 @@ if (contact) {
 	}
 	
 	var vEmailTemplate = "FT ARBORIST LICENSE ISSUANCE #146";
-    var reportName = "Arborist License";
+    var reportName = "Arborist License_script";
     var LicenseType = "Licenses/Contractor/Arborist/License";
 	var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
     acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));

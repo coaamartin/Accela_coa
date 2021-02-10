@@ -16,7 +16,7 @@ wait(10000);
 var capId = aa.env.getValue("CapId");
 
 var module = "Licensing";
-var repName = "Arborist License";
+var repName = "Arborist License_script";
 
 reportParameters = aa.util.newHashMap(); 
 reportParameters.put("RecordID", capId.getCustomID());
