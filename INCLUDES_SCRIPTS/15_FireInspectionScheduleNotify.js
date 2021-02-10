@@ -18,7 +18,7 @@ if (!inspectionExist.getSuccess()) {
    
 }   
 
-if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection" || inspType == "FD Operational Permit" || inspType == "FD TUP" || inspType == "FD Initial Requested Inspection")
+if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || inspType == "FD Primary Inspection" || inspType == "FD Initial Unscheduled Inspection" || inspType == "FD Complaint Follow-Up Inspection" || inspType == "FD Operational Permit" || inspType == "FD TUP" || inspType == "FD Initial Requested Inspection" || inspType == "FD Operational Permit")
 	&& (inspResult == "Violations Found" || inspResult == "Order Notice" || inspResult == "Fail" || inspResult == "Stop Use" || inspResult == "Summons Served" || inspResult == "Parking Citation Issued" || inspResult == "Pre-citation Issued" || inspResult == "Postponed" || inspResult == "Rollover"))
 {
 	logDebug("Script 15 - criteria met");
@@ -34,6 +34,15 @@ if ((inspType == "FD Follow-up" || inspType == "FD Complaint Inspection" || insp
 		{newInspType = "FD Follow-up";}
 	else if (inspType == "FD Complaint Follow-Up Inspection")
 		{newInspType = "FD Complaint Follow-Up Inspection";}
+		//below is for all special record types
+	else if (inspType == "Fire Special Inspection")
+		{newInspType = "FD Follow-up";}
+	else if (inspType == "FD Initial Requested Inspection")
+		{newInspType = "FD Follow-up";}
+	else if (inspType == "FD TUP")
+		{newInspType = "FD Follow-up";}
+	else if (inspType == "FD Operational Permit")
+		{newInspType = "FD Follow-up";}
 	else {newInspType = "FD Follow-up";}
 		
 	//assign inspector based on inspector assigned to the record
