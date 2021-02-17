@@ -8,15 +8,15 @@ logDebug("appType: " + appTypeString);
 
 
 //ACA only
-if(publicUser){
+if(publicUser){ 
 	
 	var emailTemplate = "LIC_MJ_PRELICENSEMEETING";
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var recordApplicant = getContactByType("Applicant", capId);
 	var firstName = recordApplicant.getFirstName();
 	var lastName = recordApplicant.getLastName();
-	//var emailTo = getContactByType("Applicant", capId);
-	var emailTo = getAllContactsEmails();
+	var emailTo = getContactByType("Applicant", capId);
+	//var emailTo = getAllContactsEmails();
 	var emailCC = "marijuana@auroragov.org";
 	var scheduledDate = AInfo["Meeting Date"];
 	var scheduledTime = AInfo["Meeting Time"]; 	
