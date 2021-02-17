@@ -16,7 +16,7 @@ if(publicUser){
 	var firstName = recordApplicant.getFirstName();
 	var lastName = recordApplicant.getLastName();
 	//var emailTo = getContactByType("Applicant", capId);
-	var emailTo = getAllContactsEmails();
+	var emailTo = getAllContactsEmailsLocal();
 	var emailCC = "marijuana@auroragov.org";
 	var scheduledDate = AInfo["Meeting Date"];
 	var scheduledTime = AInfo["Meeting Time"]; 	
@@ -66,7 +66,7 @@ if(publicUser){
     assignTask("Pre Licensing Meeting",userObj.getUserID());
 }
 
-function getAllContactsEmails(){
+function getAllContactsEmailsLocal(){
 	var vConObjArry = getContactObjsByCap(capId);
 	var emailsString = "";
 	for(eachCont in vConObjArry){
