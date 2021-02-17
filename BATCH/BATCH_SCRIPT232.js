@@ -171,7 +171,7 @@ function getCycleInspections(capId) {
     for (i in capInspections) {
         var inspSchedDate = capInspections[i].getScheduledDate();
         inspSchedDate = convertDate(inspSchedDate);
-        if (inspSchedDate < nextInspDate && inspSchedDate >= beginCycleDate) {
+        if (inspSchedDate <= nextInspDate && inspSchedDate >= beginCycleDate) {
 
             //if multiple inspections of the same type, only add the most recent
             var pos = -1;
