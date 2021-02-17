@@ -23,26 +23,7 @@ if(publicUser){
 	editTaskSpecific("Pre Licensing Meeting","Original Scheduled Date",scheduledDate)
 	editTaskSpecific("Pre Licensing Meeting","Original Scheduled Time",scheduledTime) 
 	
-	function getAllContactsEmails(){
-		var vConObjArry = getContactObjsByCap(capId);
-		var emailsString = "";
-		for(eachCont in vConObjArry){
-			var vConObj = vConObjArry[eachCont];
-			var vConRefSeqNbr = vConObj.refSeqNumber;
-			//Get contact email
-			if (vConObj) {
-				conEmail = vConObj.people.getEmail();
-				if (conEmail && conEmail != null && conEmail != "") {
-					conEmail = conEmail.toUpperCase();
-					emailsString += conEmail + ";";
-				}
-			}
-		}
-		
-		if(emailsString.length > 0) return emailsString.slice(0, -1)
-		
-		return false;
-	}
+	
 
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -83,5 +64,26 @@ if(publicUser){
 	//dusty allen
 	var userObj = aa.person.getUser("Dusty",null,"Allen").getOutput();
     assignTask("Pre Licensing Meeting",userObj.getUserID());
+}
+
+function getAllContactsEmails(){
+	var vConObjArry = getContactObjsByCap(capId);
+	var emailsString = "";
+	for(eachCont in vConObjArry){
+		var vConObj = vConObjArry[eachCont];
+		var vConRefSeqNbr = vConObj.refSeqNumber;
+		//Get contact email
+		if (vConObj) {
+			conEmail = vConObj.people.getEmail();
+			if (conEmail && conEmail != null && conEmail != "") {
+				conEmail = conEmail.toUpperCase();
+				emailsString += conEmail + ";";
+			}
+		}
+	}
+	
+	if(emailsString.length > 0) return emailsString.slice(0, -1)
+	
+    return false;
 }
 
