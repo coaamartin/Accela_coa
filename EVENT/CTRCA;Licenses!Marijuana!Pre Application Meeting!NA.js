@@ -16,7 +16,7 @@ if(publicUser){
 	var firstName = recordApplicant.getFirstName();
 	var lastName = recordApplicant.getLastName();
 	//var emailTo = getContactByType("Applicant", capId);
-	var emailTo = getAllContactsEmailsLocal();
+	var emailTo = getEmailStringLocal();
 	var emailCC = "marijuana@auroragov.org";
 	var scheduledDate = AInfo["Meeting Date"];
 	var scheduledTime = AInfo["Meeting Time"]; 	
