@@ -15,14 +15,35 @@ if(publicUser){
 	var recordApplicant = getContactByType("Applicant", capId);
 	var firstName = recordApplicant.getFirstName();
 	var lastName = recordApplicant.getLastName();
-	var emailTo = getContactByType("Applicant", capId);
-	//var emailTo = getAllContactsEmails();
+	//var emailTo = getContactByType("Applicant", capId);
+	var emailTo = getAllContactsEmails();
 	var emailCC = "marijuana@auroragov.org";
 	var scheduledDate = AInfo["Meeting Date"];
 	var scheduledTime = AInfo["Meeting Time"]; 	
 	editTaskSpecific("Pre Licensing Meeting","Original Scheduled Date",scheduledDate)
 	editTaskSpecific("Pre Licensing Meeting","Original Scheduled Time",scheduledTime) 
 	
+	function getAllContactsEmails(){
+		var vConObjArry = getContactObjsByCap(capId);
+		var emailsString = "";
+		for(eachCont in vConObjArry){
+			var vConObj = vConObjArry[eachCont];
+			var vConRefSeqNbr = vConObj.refSeqNumber;
+			//Get contact email
+			if (vConObj) {
+				conEmail = vConObj.people.getEmail();
+				if (conEmail && conEmail != null && conEmail != "") {
+					conEmail = conEmail.toUpperCase();
+					emailsString += conEmail + ";";
+				}
+			}
+		}
+		
+		if(emailsString.length > 0) return emailsString.slice(0, -1)
+		
+		return false;
+	}
+
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var fullAddress = "";
