@@ -36,8 +36,8 @@ try
 }
 catch(e)
 {
-	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
-	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", "ERROR: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack);// + br + "Debug: ");// + debug); 
+	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error in TaxLic License Async", e.message);
+	//email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", "ERROR in TaxLic Async: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack);// + br + "Debug: ");// + debug); 
 }
 function getEmailString()
 {
