@@ -22,7 +22,7 @@ try
 }
 catch(e)
 {
-	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", e.message);
+	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error in TMP Lic Async", e.message);
 }
 function getEmailString()
 {
