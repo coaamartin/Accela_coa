@@ -16,14 +16,14 @@
    	var asiValues = new Array();
 	loadAppSpecific(asiValues);
       
-	if (!applicant || !applicant.getEmail()) 
-   {
-     logDebug("**WARN SCRIPT#210 - no applicant found or no email capId =" + capId);
-   }
+// 	if (!applicant || !applicant.getEmail()) 
+//    {
+//      logDebug("**WARN SCRIPT#210 - no applicant found or no email capId =" + capId);
+//    }
    
-   else
+//    else
       
-   {
+//    {
 	var files = new Array();
 	
 	// use the correct parameters related to the email template provided + wfComment
@@ -61,4 +61,4 @@
    
 	//send email to applicant, no report included
 	emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
-   }
+   //}
