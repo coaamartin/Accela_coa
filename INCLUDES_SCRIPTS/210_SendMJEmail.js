@@ -6,6 +6,8 @@
 
 	var emailTemplate= "LIC MJ ADDITIONAL INFO # 210";
 	var applicant = getContactByType("Applicant", capId);
+	var applicant2 = getContactByType("Responsible Party",capId);
+	logDebug("Responsible Party: " + applicant2);
 	//var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
     var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
     acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
