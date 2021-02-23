@@ -13,6 +13,6 @@ if (balanceDue > 0)
   var emailtemplate = "BLD_INVOICEDFEES";
 
   emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
-  coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
+  //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
 }
 logDebug("End off 5043_BuildingEmailInvoicedFees.js");
