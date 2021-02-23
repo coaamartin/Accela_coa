@@ -14,7 +14,7 @@ var balanceDue;
 		}
 logDebug("Balance Due: " + balanceDue);
 
-if (balanceDue > 0) {
+//if (balanceDue > 0) {
   logDebug("Balance Due was greater than 0 sending emails now");
   //email the applicant
 
@@ -43,5 +43,5 @@ if (balanceDue > 0) {
   logDebug("EmailTo: " + emailTo);
   //logDebug("Table Parameters: " + tParams);
   sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
-}
+//}
 logDebug("End off 5043_BuildingEmailInvoicedFees.js");
