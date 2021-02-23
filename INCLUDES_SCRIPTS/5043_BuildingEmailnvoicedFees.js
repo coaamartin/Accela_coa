@@ -15,7 +15,7 @@ logDebug("Start of 5043_BuildingEmailInvoicedFees.js");
   var emailtemplate = "BLD_INVOICEDFEES";
 
   emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
-  coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
+  //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
   logDebug("End of email to send");
 //}
 logDebug("End of 5043_BuildingEmailInvoicedFees.js");
