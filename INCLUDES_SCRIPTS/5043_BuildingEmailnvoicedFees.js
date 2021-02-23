@@ -24,7 +24,7 @@ var emailTo1 = emailTo;
   var vEmailTemplate = "BLD_INVOICEDFEES";
   //emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
   //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
-  sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, tParams, null);
+  sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, "", null);
   logDebug("End of email to send");
 //}
 logDebug("End of 5043_BuildingEmailInvoicedFees.js");
