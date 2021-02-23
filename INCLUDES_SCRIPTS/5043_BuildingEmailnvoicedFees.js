@@ -5,7 +5,7 @@ that fees are owed and they can click the link to go online to login to their ac
 Written by JMAIN
 */
 logDebug("Start of 5043_BuildingEmailInvoicedFees.js");
-
+aa.env.setValue("eventType", "Batch Process");
 //if (balanceDue > 0) {
   
   //email the applicant
