@@ -6,7 +6,7 @@ Written by JMAIN
 */
 logDebug("Start of 5043_BuildingEmailInvoicedFees.js");
 
-if (balanceDue > 0) {
+//if (balanceDue > 0) {
   
   //email the applicant
 
@@ -16,5 +16,6 @@ if (balanceDue > 0) {
 
   emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
   coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
-}
-logDebug("End off 5043_BuildingEmailInvoicedFees.js");
+  logDebug("End of email to send");
+//}
+logDebug("End of 5043_BuildingEmailInvoicedFees.js");
