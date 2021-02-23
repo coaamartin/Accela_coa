@@ -9,13 +9,22 @@ logDebug("Start of 5043_BuildingEmailInvoicedFees.js");
 //if (balanceDue > 0) {
   
   //email the applicant
-
-  var contacts = "Applicant,Contractor(s)";
-  var lptypes = "Contractor";
+  var recordApplicant = getContactByType("Applicant", capId);
+	var applicantEmail = null;
+	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+	} else {
+		applicantEmail = recordApplicant.getEmail();
+	}
+var emailTo = applicantEmail;
+logDebug("Email to: " + emailTo);
+var emailTo1 = emailTo;
+  //var contacts = "Applicant,Contractor(s)";
+  //var lptypes = "Contractor";
   var emailtemplate = "BLD_INVOICEDFEES";
-
-  emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
+  //emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
   //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
+  sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, tParams, null);
   logDebug("End of email to send");
 //}
 logDebug("End of 5043_BuildingEmailInvoicedFees.js");
