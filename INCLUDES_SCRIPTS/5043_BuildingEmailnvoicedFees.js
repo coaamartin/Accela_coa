@@ -4,9 +4,20 @@ that fees are owed and they can click the link to go online to login to their ac
 
 Written by JMAIN
 */
+aa.env.setValue("eventType", "Batch Process");
 logDebug("Kicking off 5043_BuildingEmailInvoicedFees.js");
+var balanceDue;
+		var capDetailObjResult = aa.cap.getCapDetail(capId);
+		if (capDetailObjResult.getSuccess()) {
+			capDetail = capDetailObjResult.getOutput();
+			balanceDue = capDetail.getBalance();
+		}
+logDebug("Balance Due: " + balanceDue);
+
 if (balanceDue > 0) {
+  logDebug("Balance Due was greater than 0 sending emails now");
   //email the applicant
+
   // var contacts = "Applicant,Contractor(s)";
   // var lptypes = "Contractor";
   // var emailtemplate = "BLD_INVOICEDFEES";
