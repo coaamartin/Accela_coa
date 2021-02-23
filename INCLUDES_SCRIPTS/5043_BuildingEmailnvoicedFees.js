@@ -14,7 +14,7 @@ var balanceDue;
 		}
 logDebug("Balance Due: " + balanceDue);
 
-if (balanceDue > 0) {
+//if (balanceDue > 0) {
   logDebug("Balance Due was greater than 0 sending emails now");
   //email the applicant
 
@@ -28,10 +28,10 @@ if (balanceDue > 0) {
   var emailTo = getContactByType("Applicant", capId);
   var vEmailTemplate = "BLD_INVOICEDFEES";
   var capAlias = cap.getCapModel().getAppTypeAlias();
-  var firstName = recordApplicant.getFirstName();
-  var lastName = recordApplicant.getLastName();
-  var today = new Date();
-  var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+  //var firstName = recordApplicant.getFirstName();
+  //var lastName = recordApplicant.getLastName();
+  // var today = new Date();
+  // var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
   var altId = capId.getCustomID();
   var tParams = aa.util.newHashtable();
   //tParams.put("$$todayDate$$", thisDate);
@@ -43,5 +43,5 @@ if (balanceDue > 0) {
   logDebug("EmailTo: " + emailTo);
   //logDebug("Table Parameters: " + tParams);
   sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
-}
+//}
 logDebug("End off 5043_BuildingEmailInvoicedFees.js");
