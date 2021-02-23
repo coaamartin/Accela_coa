@@ -21,7 +21,7 @@ logDebug("Email to: " + emailTo);
 var emailTo1 = emailTo;
   //var contacts = "Applicant,Contractor(s)";
   //var lptypes = "Contractor";
-  var emailtemplate = "BLD_INVOICEDFEES";
+  var vEmailTemplate = "BLD_INVOICEDFEES";
   //emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
   //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
   sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, tParams, null);
