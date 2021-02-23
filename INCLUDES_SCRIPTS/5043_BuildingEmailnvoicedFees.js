@@ -4,8 +4,20 @@ that fees are owed and they can click the link to go online to login to their ac
 
 Written by JMAIN
 */
+function getScriptText(vScriptName){
+  vScriptName = vScriptName.toUpperCase();
+  var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
+  var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
+  return emseScript.getScriptText() + "";          
+}
+
+var SCRIPT_VERSION = 3.0
+aa.env.setValue("CurrentUserID", "ADMIN");
+eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
+eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
+eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
 logDebug("Start of 5043_BuildingEmailInvoicedFees.js");
-aa.env.setValue("eventType", "Batch Process");
+
 //if (balanceDue > 0) {
   
   //email the applicant
