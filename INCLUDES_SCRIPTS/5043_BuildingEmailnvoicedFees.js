@@ -4,7 +4,7 @@ that fees are owed and they can click the link to go online to login to their ac
 
 Written by JMAIN
 */
-
+logDebug("Start of 5043_BuildingEmailInvoicedFees.js");
 
 if (balanceDue > 0) {
   
