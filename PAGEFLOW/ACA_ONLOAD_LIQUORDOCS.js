@@ -17,7 +17,7 @@ try
    //remove all documents first
    removeAllRequiredDocumentCapCondition();
                
-   addRequiredDocument("Background Information");
+   /*addRequiredDocument("Background Information");
    addRequiredDocument("Insurance Documents");
    addRequiredDocument("Legal Entity Documents");
    addRequiredDocument("Property Forms");
@@ -26,7 +26,7 @@ try
    addRequiredDocument("Consent Forms");
    addRequiredDocument("State Liquor Forms");
    addRequiredDocument("Financial Documentation");
-   addRequiredDocument("Application Forms");
+   addRequiredDocument("Application Forms");*/
 
 
 
