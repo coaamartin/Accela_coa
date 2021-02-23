@@ -4,39 +4,15 @@ that fees are owed and they can click the link to go online to login to their ac
 
 Written by JMAIN
 */
-function getScriptText(vScriptName){
-  vScriptName = vScriptName.toUpperCase();
-  var emseBiz = aa.proxyInvoker.newInstance("com.accela.aa.emse.emse.EMSEBusiness").getOutput();
-  var emseScript = emseBiz.getScriptByPK(aa.getServiceProviderCode(),vScriptName,"ADMIN");
-  return emseScript.getScriptText() + "";          
-}
-
-var SCRIPT_VERSION = 3.0
-aa.env.setValue("CurrentUserID", "ADMIN");
-eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
-eval(getScriptText("INCLUDES_ACCELA_GLOBALS"));
-eval(getScriptText("COMMON_RUN_REPORT_AND_NOTIFICATION"));
-logDebug("Start of 5043_BuildingEmailInvoicedFees.js");
-
-//if (balanceDue > 0) {
-  
+if (balanceDue > 0) {
   //email the applicant
-  var recordApplicant = getContactByType("Applicant", capId);
-	var applicantEmail = null;
-	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
-		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
-	} else {
-		applicantEmail = recordApplicant.getEmail();
-	}
-var emailTo = applicantEmail;
 logDebug("Email to: " + emailTo);
 var emailTo1 = emailTo;
-  //var contacts = "Applicant,Contractor(s)";
-  //var lptypes = "Contractor";
-  var vEmailTemplate = "BLD_INVOICEDFEES";
-  //emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
-  //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
-  sendNotification("noreply@auroragov.org", emailTo1, "", vEmailTemplate, "", null);
+  var contacts = "Applicant";
+  var lptypes = "Contractor";
+  var emailtemplate = "BLD_INVOICEDFEES";
+  emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
+  coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
   logDebug("End of email to send");
-//}
+}
 logDebug("End of 5043_BuildingEmailInvoicedFees.js");
