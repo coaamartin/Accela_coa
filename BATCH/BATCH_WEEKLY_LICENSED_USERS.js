@@ -160,13 +160,13 @@ function mainProcess() {
 	//rParams.put("ToDate", "5/31/2020");
 	//rParams.put("Record_type", "ALL");
 	//rParams.put("PaymentMethod", "ALL");
-	//var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
+	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$emailTitle$$", emailTitle);
 	tParams.put("$$emailBodyMSG$$", emailBodyMsg);
     tParams.put("$$emailSendTo$$", emailTo);
-	//sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-	sendMail("noreply@auroragov.org", emailTo, "rprovinc@auroragov.org", emailtemplate, tParams, null);
+	sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+	//sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 
 function generateReportFile(aaReportName,parameters,rModule) 
