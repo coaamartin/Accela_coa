@@ -153,12 +153,12 @@ function mainProcess() {
 	var emailTo = getJobParam("emailSendTo"); // email to: 
 	var emailTitle = getJobParam("emailTitle"); // email Title
 	var emailtemplate = getJobParam("emailTemplate");	 // email Template
-	var emailBodyMsg = "Daily Account Activity By Pay Type";
+	var emailBodyMsg = getJobParam("emailBodyMsg");
 	var reportName = getJobParam("reportName");
 	var rParams = aa.util.newHashtable();
 	//rParams.put("FromDate", "5/1/2020");
 	//rParams.put("ToDate", "5/31/2020");
-	rParams.put("Record_type", "ALL");
+	//rParams.put("Record_type", "ALL");
 	//rParams.put("PaymentMethod", "ALL");
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	var tParams = aa.util.newHashtable();
