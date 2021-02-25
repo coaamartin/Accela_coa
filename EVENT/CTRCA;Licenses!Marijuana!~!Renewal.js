@@ -70,7 +70,7 @@ updateAppStatus("Payment Pending", "Updated by ASA;Licenses!Marijuana!~!Renewal"
     eParams.put("$$LastName$$", lastName);
     eParams.put("$$stLicNumb$$", stLicNumb);
     eParams.put("$$tradeName$$", tradeName);
-    sendNotification("noreply@auroragov.org", emailTo, "", emailTemplate, eParams, null);
+    sendNotification("noreply@auroragov.org", emailTo, "marijuana@auroragov.org", emailTemplate, eParams, null);
 
 //}
 
