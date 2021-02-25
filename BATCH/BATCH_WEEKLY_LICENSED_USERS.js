@@ -155,18 +155,18 @@ function mainProcess() {
 	var emailtemplate = getJobParam("emailTemplate");	 // email Template
 	var emailBodyMsg = getJobParam("emailBodyMsg");
 	var reportName = getJobParam("reportName");
-	var rParams = aa.util.newHashtable();
+	//var rParams = aa.util.newHashtable();
 	//rParams.put("FromDate", "5/1/2020");
 	//rParams.put("ToDate", "5/31/2020");
 	//rParams.put("Record_type", "ALL");
 	//rParams.put("PaymentMethod", "ALL");
-	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
+	//var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$emailTitle$$", emailTitle);
 	tParams.put("$$emailBodyMSG$$", emailBodyMsg);
     tParams.put("$$emailSendTo$$", emailTo);
-	sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-
+	//sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+	sendMail("noreply@auroragov.org", emailTo, "rprovinc@auroragov.org", emailtemplate, tParams, null);
 }
 
 function generateReportFile(aaReportName,parameters,rModule) 
