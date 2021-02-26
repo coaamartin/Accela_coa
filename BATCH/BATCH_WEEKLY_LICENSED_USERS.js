@@ -169,7 +169,7 @@ function mainProcess() {
     tParams.put("$$emailSendTo$$", emailTo);
 	logDebug("EMail to: " + emailTo);
 	logDebug("Report Name: " + reportName);
-	sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 	//sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 
