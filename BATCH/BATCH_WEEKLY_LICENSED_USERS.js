@@ -169,8 +169,8 @@ function mainProcess() {
     tParams.put("$$emailSendTo$$", emailTo);
 	logDebug("EMail to: " + emailTo);
 	logDebug("Report Name: " + reportName);
-	//sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-	sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+	sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+	//sendMail("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 
 function generateReportFile(aaReportName,parameters,rModule) 
