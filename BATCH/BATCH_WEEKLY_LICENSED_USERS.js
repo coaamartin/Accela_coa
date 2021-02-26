@@ -230,21 +230,21 @@ function sendNotificationLocal(emailFrom,emailTo,emailCC,templateName,params,rep
 
 {
 
-	var itemCap = capId;
+	// var itemCap = capId;
 
-	if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
-
-
-
-	var id1 = itemCap.ID1;
-
- 	var id2 = itemCap.ID2;
-
- 	var id3 = itemCap.ID3;
+	// if (arguments.length == 7) itemCap = arguments[6]; // use cap ID specified in args
 
 
 
-	var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
+	// var id1 = itemCap.ID1;
+
+ 	// var id2 = itemCap.ID2;
+
+ 	// var id3 = itemCap.ID3;
+
+
+
+	// var capIDScriptModel = aa.cap.createCapIDScriptModel(id1, id2, id3);
 
 
 
