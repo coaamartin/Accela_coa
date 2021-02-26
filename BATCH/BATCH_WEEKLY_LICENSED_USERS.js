@@ -273,3 +273,4 @@ function sendNotificationLocal(emailFrom,emailTo,emailCC,templateName,params,rep
 		return false;
 
 	}
+}
