@@ -154,7 +154,7 @@ function mainProcess() {
 	var emailTitle = getJobParam("emailTitle"); // email Title
 	var emailtemplate = getJobParam("emailTemplate");	 // email Template
 	var emailBodyMsg = getJobParam("emailBodyMsg");
-	var reportName = getJobParam("reportName");
+	//var reportName = getJobParam("reportName");
 	var reportName = "Daily Revenue User Summary_script";
 	var rParams = aa.util.newHashtable();
 	//rParams.put("FromDate", "5/1/2020");
