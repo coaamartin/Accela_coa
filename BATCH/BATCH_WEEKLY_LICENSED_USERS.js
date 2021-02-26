@@ -252,7 +252,7 @@ function sendNotificationLocal(emailFrom,emailTo,emailCC,templateName,params,rep
 
 	var result = null;
 
-	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
+	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, "", reportFile);
 
 	if(result.getSuccess())
 
