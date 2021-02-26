@@ -150,7 +150,8 @@ function mainProcess() {
 	| BATCH PARAMETERS
     /------------------------------------------------------------------------------------------------------*/
 	var paramStdChoice = aa.env.getValue("paramStdChoice"); // use this standard choice for parameters instead of batchjob params
-	var emailTo = getJobParam("emailSendTo"); // email to: 
+	//var emailTo = getJobParam("emailSendTo"); // email to: 
+	var emailTo = "jwarthan@auroragov.org;rprovinc@auroragov.org";
 	var emailTitle = getJobParam("emailTitle"); // email Title
 	var emailtemplate = getJobParam("emailTemplate");	 // email Template
 	var emailBodyMsg = getJobParam("emailBodyMsg");
