@@ -170,7 +170,7 @@ else if (wfTask == "Final Approval" && wfStatus == "Denied") {
     //Script 5125_CityClerk_Denial
     include("5125_CityClerk_Denial");
     updateAppStatus("DENIED", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "");
+    closeAllTasks(capId, "Denied");
 }
 
 else if (wfStatus == "Void") {

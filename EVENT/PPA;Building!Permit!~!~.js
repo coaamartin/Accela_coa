@@ -7,7 +7,7 @@ logDebug("Starting DB approval email and updating statues");
 if (balanceDue == 0) {
 	updateAppStatus("Approved", "Status updated via script PPA;Building!Permit.js");
 	closeTask("Application Close", "Approved", "", "");
-	closeAllTasks(capId, "");
+	closeAllTasks(capId, "Approved");
 	//include("5124_CityClerk_Approval");
 	
 	logDebug("---------------------> PPA;Building!Permit.js ended.");
