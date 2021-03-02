@@ -118,7 +118,7 @@ else if ("No".equals(vASIValue) && "Building/Permit/TempSigns/NA".equals(appType
 else if ("Yes".equals(vASIValue)) {
     updateAppStatus("Approved", "Status updated via script 5121_CityClerk.js");
     closeTask("Application Close", "Approved", "", "");
-    closeAllTasks(capId, "");
+    closeAllTasks(capId, "Approved");
     //include("5124_CityClerk_Approval");
     //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     //Start to generate the Certificate. This will attach to the record when ran.
