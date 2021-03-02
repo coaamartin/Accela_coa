@@ -42,7 +42,7 @@ logDebug("Starting DB approval email and updating statues");
 if (balanceDue == 0) {
     updateAppStatus("Approved", "Status updated via script PRA;Building!Permit.js");
     closeTask("Application Close", "Approved", "", "");
-    closeAllTasks(capId, "");
+    closeAllTasks(capId, "Approved");
     //include("5124_CityClerk_Approval");
     //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
     //Start to generate the Certificate. This will attach to the record when ran.
