@@ -33,7 +33,8 @@ if (!appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempU
 //
 //Created By: Rprovinc
 //******************************************************************************
-
+else if (appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse/*") &&
+appMatch("Building/Permit/DonationBin/*")){
 logDebug("Starting PRA;Building!Permit!~!~.js ");
 //include("5127_CityClerk_PRA.js");
 logDebug("Current balance: " + balanceDue);
@@ -78,5 +79,6 @@ if (balanceDue == 0) {
 		logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	}
+}
 }
 logDebug("End of PPA;Building!Permit!~!~.js ");

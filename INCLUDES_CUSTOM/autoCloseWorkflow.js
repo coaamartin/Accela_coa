@@ -40,10 +40,10 @@ function autoCloseWorkflow() {
         var emailTemplate = "BLD PLANS APPROVED # 35";
         var lpEmail = getPrimLPEmailByCapId(capId);
         addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
-        var sendResult = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplate,eParams,reportFile,capID4Email);
+        var sendResult = sendNotification("noreply@auroragov.org",applicantEmail,"",emailTemplate,eParams,reportFile,capID4Email);
         if (!sendResult) { logDebug("autoCloseWorkflow: UNABLE TO SEND NOTICE!  ERROR: "+sendResult); }
 			else { logDebug("autoCloseWorkflow: Sent email to applicant "+applicantEmail)}  
-        var sendResult2 = sendNotification("noreply@aurora.gov",lpEmail,"",emailTemplate,eParams,reportFile,capID4Email);
+        var sendResult2 = sendNotification("noreply@auroragov.org",lpEmail,"",emailTemplate,eParams,reportFile,capID4Email);
         if (!sendResult2) { logDebug("autoCloseWorkflow: UNABLE TO SEND NOTICE!  ERROR: "+sendResult2); }
 			else { logDebug("autoCloseWorkflow: Sent email to applicant "+lpEmail)}         
         //Script 324
