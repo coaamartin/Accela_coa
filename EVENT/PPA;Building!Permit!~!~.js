@@ -1,3 +1,5 @@
+if (appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse/*") &&
+appMatch("Building/Permit/DonationBin/*")){
 logDebug("Starting PPA;Building!Permit!~!~.js ");
 // logDebug("Starting 5127_CityClerk_PRA.js");
 //include("5127_CityClerk_PRA.js");
@@ -48,3 +50,4 @@ if (balanceDue == 0) {
 }
 
 logDebug("End of PPA;CityClerk!Incident!~!~.js ");
+}
