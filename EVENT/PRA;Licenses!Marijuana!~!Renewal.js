@@ -2,6 +2,7 @@ aa.cap.updateAccessByACA(capId, "Y");
 
 if (balanceDue <= 0 && capStatus.equals("Payment Pending")) {
 	updateAppStatus("Pending", "Updated by PRA;Licenses!Marijuana!~!Renewal", capId);
+    sendEmailReceipt_MJApplication();
 }
 
 
