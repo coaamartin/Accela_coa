@@ -24,7 +24,7 @@ try
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-	var tParams = aa.util.newHashtable();
+	var tParms = aa.util.newHashtable();
 	addParameter(tParms, "$$todayDate$$", thisDate);
     addParameter(tParms, "$$altid$$", recordID);
     addParameter(tParms, "$$capAlias$$", capAlias);
