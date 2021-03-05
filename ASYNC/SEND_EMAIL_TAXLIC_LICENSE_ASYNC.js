@@ -1,5 +1,8 @@
 logDebug("***** Starting SEND_EMAIL_TAXLIC_LICENSE_ASYNC *****");
-
+if (typeof debug === 'undefined') {
+	var debug = "";										// Debug String, do not re-define if calling multiple
+	}
+var br = "<BR>";
 var currentUserID = aa.env.getValue("currentUserID");
 if (currentUserID == "ACHARLTO"){
 showDebug = 3;
@@ -11,20 +14,22 @@ try
 	//var capId = aa.env.getValue("capId");
 	cap = aa.cap.getCap(capId).getOutput();
 	logDebug("recordID is = "+recordID);
-	var emailTo = getEmailString(); 
-	var recordApplicant = getContactByType("Licensee", capId);
-	//var recordApplicant = getContactByType("Licensee", recordID);
+	//var emailTo = getEmailString(); 
+	var recordApplicants = getContactByType("Licensee", capId);
+	for (var i in recordApplicants) { 
+	var recordApplicant = recordApplicants[i];
 	var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
+	var emailTo = recordApplicant.getEmail();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
-	tParams.put("$$todayDate$$", thisDate);
-    tParams.put("$$altid$$", recordID);
-    tParams.put("$$capAlias$$", capAlias);
-    tParams.put("$$FirstName$$", firstName);
-    tParams.put("$$LastName$$", lastName);
+	addParameter(tParms, "$$todayDate$$", thisDate);
+    addParameter(tParms, "$$altid$$", recordID);
+    addParameter(tParms, "$$capAlias$$", capAlias);
+    addParameter(tParms, "$$FirstName$$", firstName);
+    addParameter(tParms, "$$LastName$$", lastName);
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
     var rParams = aa.util.newHashtable();
 	//rParams.put("Record ID", recordID);
@@ -34,9 +39,10 @@ try
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
+}
 catch(e)
 {
-	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error in TaxLic License Async", e.message);
+	email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error in TaxLic License Async" +recordID, e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug);
 	//email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", "ERROR in TaxLic Async: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack);// + br + "Debug: ");// + debug); 
 }
 function getEmailString()
@@ -98,19 +104,19 @@ function logMessage(str){aa.print(str);}
 
     var contactArray = getPeople(capId);
 
-
+	var cArray = [];
 
     for(thisContact in contactArray) {
 
         if((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase())
 
-            return contactArray[thisContact].getPeople();
+            cArray.put(contactArray[thisContact].getPeople());
 
     }
 
 
 
-    return false;
+    return cArray;
 
 }
 function email(pToEmail, pFromEmail, pSubject, pText) 
@@ -235,4 +241,16 @@ function generateReportFile(aaReportName,parameters,rModule)
 
 	return contactAddressModelArr;
 
+}
+
+function addParameter(pamaremeters, key, value)
+{
+	if(key != null)
+	{
+		if(value == null)
+		{
+			value = "";
+		}
+		pamaremeters.put(key, value);
+	}
 }
