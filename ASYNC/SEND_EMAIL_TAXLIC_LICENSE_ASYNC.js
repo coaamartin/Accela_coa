@@ -110,7 +110,7 @@ function logMessage(str){aa.print(str);}
 
         if((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase())
 
-            cArray.put(contactArray[thisContact].getPeople());
+            cArray.push(contactArray[thisContact].getPeople());
 
     }
 
