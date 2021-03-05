@@ -187,7 +187,7 @@ function generateReportFile(aaReportName,parameters,rModule)
   if(permit.getOutput().booleanValue()) 
   {
     var reportResult = aa.reportManager.getReportResult(report);
-
+	logMessage("Report Result 1: "+ reportResult);
     if(reportResult) 
     {
       reportResult = reportResult.getOutput();
