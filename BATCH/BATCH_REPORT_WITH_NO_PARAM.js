@@ -159,6 +159,7 @@ function mainProcess() {
 	var rParams = aa.util.newHashtable();
 	//rParams.put("FromDate", "5/1/2020");
 	//rParams.put("ToDate", "5/31/2020");
+	logdebut("Gen report", reportName)
 	var report = generateReportFile(reportName, rParams, aa.getServiceProviderCode());
 
 	var tParams = aa.util.newHashtable();
@@ -170,6 +171,8 @@ function mainProcess() {
 
 function generateReportFile(aaReportName,parameters,rModule) 
 {
+
+
   var reportName = aaReportName;
 
   report = aa.reportManager.getReportInfoModelByName(reportName);
