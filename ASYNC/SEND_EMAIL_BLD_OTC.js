@@ -20,11 +20,11 @@ try
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
-    tParams.put("$$recordAlias$$", appType);
+    tParams.put("$$recordAlias$$", capAlias);
 	// var rParams = aa.util.newHashtable();
 	// //rParams.put("AGENCYID", "AURORACO");
 	// rParams.put("RecordID", recordID);
-	// var emailtemplate = "BLD PERMIT ISSUED # 35";
+	 var emailtemplate = "BLD PERMIT ISSUED # 35";
 	// var report = generateReportFile("Receipt", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
     sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
