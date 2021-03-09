@@ -5,7 +5,7 @@ try
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var recordID = aa.env.getValue("altID");
-    var appType = aa.env.getValue("altType");
+    var appType = aa.env.getValue("appType");
 	var emailTo = getEmailString(); 
 	var recordApplicant = getContactByType("Applicant", capId);
 	var firstName = recordApplicant.getFirstName();
@@ -15,17 +15,19 @@ try
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
-    tParams.put("$$altid$$", recordID);
+    tParams.put("$$altID$$", recordID);
     tParams.put("$$Record Type$$", capAlias);
     tParams.put("$$capAlias$$", capAlias);
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
-	var rParams = aa.util.newHashtable();
-	//rParams.put("AGENCYID", "AURORACO");
-	rParams.put("RecordID", recordID);
-	var emailtemplate = "BLD PERMIT ISSUED # 35";
-	var report = generateReportFile("Receipt", rParams, aa.getServiceProviderCode());
-	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+    tParams.put("$$recordAlias$$", appType);
+	// var rParams = aa.util.newHashtable();
+	// //rParams.put("AGENCYID", "AURORACO");
+	// rParams.put("RecordID", recordID);
+	// var emailtemplate = "BLD PERMIT ISSUED # 35";
+	// var report = generateReportFile("Receipt", rParams, aa.getServiceProviderCode());
+	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+    sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 catch(e)
 {
