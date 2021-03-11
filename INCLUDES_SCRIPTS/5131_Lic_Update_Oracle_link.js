@@ -17,7 +17,7 @@ logDebug("Start of script 5131_Lic_Update_Oracle_link.js");
 // get general business license number
 var envParameters = aa.util.newHashMap();
 var genBusinessNumber = AInfo["General Business License Number"];
-var oracleURL = "http://doccity/cs/idcplg?IdcService=GET_SEARCH_RESULTS_FORCELOGIN&QueryText=" + genBusinessNumber;
+var oracleURL = "http://doccity/cs/idcplg?IdcService=GET_SEARCH_RESULTS_FORCELOGIN&QueryText=" + "`" + genBusinessNumber + "`" + "+<in>+xAltRefNumber2";
 logDebug("General Buiness Number: " + genBusinessNumber);
 logDebug("Oracle Link: " + oracleURL);
 //setCustomField(vFieldName,vFieldValue);
@@ -35,7 +35,7 @@ logDebug("Start of script 5131_Lic_Update_Oracle_link.js");
 // get general business license number
 var envParameters = aa.util.newHashMap();
 var genBusinessNumber = capId.getCustomID(); //pulling the record ALT ID number
-var oracleURL = "http://doccity/cs/idcplg?IdcService=GET_SEARCH_RESULTS_FORCELOGIN&QueryText=" + genBusinessNumber;
+var oracleURL = "http://doccity/cs/idcplg?IdcService=GET_SEARCH_RESULTS_FORCELOGIN&QueryText=" + "`" + genBusinessNumber + "`" + "+<in>+xAltRefNumber2";
 logDebug("General Buiness Number: " + genBusinessNumber);
 logDebug("Oracle Link: " + oracleURL);
 //setCustomField(vFieldName,vFieldValue);
