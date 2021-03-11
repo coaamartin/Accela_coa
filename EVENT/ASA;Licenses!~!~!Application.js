@@ -15,3 +15,7 @@ if (appMatch('Licenses/Liquor/*/*') || appMatch('Licenses/Supplemental/*/*')){
 	}
 }
 
+else if(appMatch('Licenses/Business/*/*')){
+	logDebug("Start script 5131_Lic_Update_Oracle_link.js")
+	include("5131_Lic_Update_Oracle_link");
+}
