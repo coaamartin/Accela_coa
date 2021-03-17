@@ -81,10 +81,10 @@ if(isTaskActive("Subtasks Complete","BLD_MASTER_INSPSUB") && allTasksComplete("B
 //Retreive Enterprise CRM Function File 
 eval(getScriptText("INCLUDES_CRM", null, false));
 
-logDebug("*** BEGIN process_WF_JSON_Rules for CRM (Building) ***");
-// execute workflow propagation rules
-process_WF_JSON_Rules(capId, wfTask, wfStatus);
-logDebug("*** FINISH process_WF_JSON_Rules for CRM (Building) ***");
+// logDebug("*** BEGIN process_WF_JSON_Rules for CRM (Building) ***");
+// // execute workflow propagation rules
+// process_WF_JSON_Rules(capId, wfTask, wfStatus);
+// logDebug("*** FINISH process_WF_JSON_Rules for CRM (Building) ***");
 
 //Retreive Custom CRM Logic File
 includesCrmCustomWorkflowRules();
