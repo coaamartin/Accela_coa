@@ -21,7 +21,7 @@ try
    addRequiredDocument("Local - Deed or Lease");
    addRequiredDocument("Local - Diagram of Licensed Premises");
    //addRequiredDocument("Local - Employee Certifications");
-   addRequiredDocument("Local - Employee List");
+   //addRequiredDocument("Local - Employee List");
    addRequiredDocument("Local - Floor Plan");
    addRequiredDocument("Local - Funding and Tax Documents");
    addRequiredDocument("Local - Security Plan");
