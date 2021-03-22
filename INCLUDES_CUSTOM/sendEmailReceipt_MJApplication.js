@@ -1,11 +1,15 @@
 function sendEmailReceipt_MJApplication(){
 
 	var applicant = getContactByType("Applicant", capId);
-	if (!applicant || !applicant.getEmail()) {
-		logDebug("**WARN no applicant found on or no email capId=" + capId);
-		return false;
-	}
-	var toEmail = applicant.getEmail();
+    var resParty = getContactByType("Responsible Party", capId);
+    var appEmail = applicant.getEmail();
+    var resPartyEmail = resParty.getEmail();
+    var toEmail = "marijuana@auroragov.org";
+
+    if(appEmail) toEmail += ", "+appEmail;
+    if(resPartyEmail) toEmail += ", "+resPartyEmail;
+
+    //var toEmail = applicant.getEmail();
 	var vStateFee;
 	var vLocalFee;
 	var vPayment;
