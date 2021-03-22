@@ -1,13 +1,14 @@
 function sendEmailReceipt_MJApplication(){
-
-	var applicant = getContactByType("Applicant", capId);
-    var resParty = getContactByType("Responsible Party", capId);
-    var appEmail = applicant.getEmail();
-    var resPartyEmail = resParty.getEmail();
     var toEmail = "marijuana@auroragov.org";
+    var appEmail = _getContactEmailNoDupEmail(capId,"Applicant");
+    appEmail = appEmail.join(";");
+    var resPartyEmail = _getContactEmailNoDupEmail(capId,"Responsible Party");
+    resPartyEmail = resPartyEmail.join(";");
 
-    if(appEmail) toEmail += ", "+appEmail;
-    if(resPartyEmail) toEmail += ", "+resPartyEmail;
+    if(appEmail) toEmail += ";"+appEmail;
+    if(resPartyEmail) toEmail += ";"+resPartyEmail;
+
+    logDebug(toEmail);
 
     //var toEmail = applicant.getEmail();
 	var vStateFee;
@@ -154,4 +155,36 @@ function sendEmailReceipt_MJApplication(){
 		//send email
 		emailWithReportLinkASync(toEmail, emailTemplateName, eParams, "", "", "N", "");
 	}
+}
+
+function _getContactEmailNoDupEmail(vcapId, vconType){
+    var thisItem = arguments[0];
+    var searchConType = arguments[1];
+    var conEmailArray = [];
+    var vConObjArry;
+    if(searchConType.toUpperCase()=="ALL"){
+        vConObjArry = getContactObjsByCap(thisItem);
+    }else{
+        vConObjArry = getContactObjsByCap(thisItem,searchConType);
+    }
+    //return valid email addressses and only one address for multiple contacts with same email
+    for(eachCont in vConObjArry){
+        var vConObj = vConObjArry[eachCont];
+        //Get contact email
+        if (vConObj) {
+            var conEmail = vConObj.people.getEmail();
+            var conType = vConObj.people.getContactType();
+            if (conEmail && conEmail != null && conEmail != "" && conEmail.indexOf("@") > 0) {
+                if(!exists(conEmail,conEmailArray) ){
+                    conEmailArray.push(conEmail);
+                    logDebug("Returning email for :" + conType )
+                    logDebug('Email: ' + conEmail)
+
+                }
+
+            }
+        }
+    }
+    return conEmailArray;
+
 }
