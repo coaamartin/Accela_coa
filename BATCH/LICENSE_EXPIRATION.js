@@ -426,10 +426,12 @@ function mainProcess() {
 				logDebug('Attempting to send email with report: ' + emailTemplate + " : " + reportName + " : " + capId.getCustomID());
 				//logDebug('Attempting to send email with report: ' + emailTemplate + " : " + reportName + " : " + capId.getCustomID());
 				emailContacts(sendEmailToContactTypes, emailTemplate, eParams, reportName, rParams, "Y");
+                emailWithReportLinkASync("marijuana@auroragov.org", emailTemplate, eParams, "", "", "N", "");
 			} else {
 				logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 				//logDebug('Attempting to send email: ' + emailTemplate + " : " + capId.getCustomID());
 				emailContacts(sendEmailToContactTypes, emailTemplate, eParams, null, null, "Y");
+                emailWithReportLinkASync("marijuana@auroragov.org", emailTemplate, eParams, "", "", "N", "");
 			}
 		}
 
