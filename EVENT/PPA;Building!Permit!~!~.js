@@ -51,3 +51,25 @@ if (balanceDue == 0) {
 
 logDebug("End of PPA;CityClerk!Incident!~!~.js ");
 }
+else (!appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempUse/*") && !appMatch("Building/Permit/DonationBin/*")) {
+logDebug("Starting PPA;Building!Permit!~!~.js ");
+logDebug("Current balance: " + balanceDue);
+//Check balance and update task
+if (balanceDue == 0) {
+	// updateAppStatus("Approved", "Status updated via script PPA;Building!Permit.js");
+	// closeTask("Application Close", "Approved", "", "");
+	// closeAllTasks(capId, "Approved");
+	var altID = capId.getCustomID();
+	appType = cap.getCapType().toString();
+	var vAsyncScript = "SEND_EMAIL_BLD_ASYNC";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("altID", altID);
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
+	aa.runAsyncScript(vAsyncScript, envParameters);
+	//aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+	logDebug("---------------------> PPA;Building!Permit.js ended.");
+	logDebug("Starting to kick off event to attach cert to record");
+}
+}
