@@ -18,6 +18,29 @@ if (!appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempU
     !appMatch("Building/Permit/DonationBin/*")) {
     autoCloseWorkflow();
     script381_UpdatCustomFieldPermitExpirationDates();
+	logDebug("Starting PPA;Building!Permit!~!~.js ");
+	logDebug("Current balance: " + balanceDue);
+	//Check balance and update task
+	if (balanceDue == 0) {
+			// updateAppStatus("Approved", "Status updated via script PPA;Building!Permit.js");
+			// closeTask("Application Close", "Approved", "", "");
+			// closeAllTasks(capId, "Approved");
+			var altID = capId.getCustomID();
+			appType = cap.getCapType().toString();
+			var invoiceNbrObj = getLastInvoice({});
+			var invNbr = invoiceNbrObj.getInvNbr();
+			//var invNbr = aa.env.getValue("INVOICEID");
+			var vAsyncScript = "SEND_EMAIL_BLD_ASYNC";
+			var envParameters = aa.util.newHashMap();
+			envParameters.put("altID", altID);
+			envParameters.put("capId", capId);
+			envParameters.put("cap", cap);
+			envParameters.put("INVOICEID", String(invNbr));
+			logDebug("Starting to kick off ASYNC event for BLD PERMITS. Params being passed: " + envParameters);
+			aa.runAsyncScript(vAsyncScript, envParameters);
+			//aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+			logDebug("---------------------> PPA;Building!Permit.js ended.");
+		}
 }
 
 
