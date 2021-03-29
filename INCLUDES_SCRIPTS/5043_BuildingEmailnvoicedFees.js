@@ -6,8 +6,8 @@ Written by JMAIN
 */
 if (balanceDue > 0) {
   //email the applicant
-logDebug("Email to: " + emailTo);
-var emailTo1 = emailTo;
+// logDebug("Email to: " + emailTo);
+//   var emailTo1 = emailTo;
   var contacts = "Applicant";
   var lptypes = "Contractor";
   var emailtemplate = "BLD_INVOICEDFEES";
@@ -16,3 +16,4 @@ var emailTo1 = emailTo;
   logDebug("End of email to send");
 }
 logDebug("End of 5043_BuildingEmailInvoicedFees.js");
+
