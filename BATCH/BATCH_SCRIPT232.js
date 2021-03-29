@@ -198,13 +198,14 @@ function scheduleNextInspections(cycleInspections) {
     var inspCounter = 0;
     for (i in cycleInspections) {
         if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
-            var inspector = getInspectorByInspID(cycleInspections[i].getIdNumber());
+            //var inspector = getInspectorByInspID(cycleInspections[i].getIdNumber());
             var inspType = cycleInspections[i].getInspectionType();
             var nextInspDate = getAppSpecific("Next Inspection Date");
 
             //for building inspections, update inspection status and wait for other building inspections to be completed
             if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
-                scheduleInspectDate(inspType, nextInspDate, inspector);
+                //scheduleInspectDate(inspType, nextInspDate, inspector); -- Before change made on 3/29 - RLP
+                scheduleInspectDate(inspType, nextInspDate, "");
                 cycleInspections[i].setInspectionStatus("Passed - Notification Pending");
                 aa.inspection.editInspection(cycleInspections[i]);
                 inspCounter++;
