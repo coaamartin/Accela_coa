@@ -55,11 +55,13 @@ if (appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse
 		// closeAllTasks(capId, "Approved");
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
+		var invNbr = aa.env.getValue("INVOICEID");
 		var vAsyncScript = "SEND_EMAIL_BLD_ASYNC";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("altID", altID);
 		envParameters.put("capId", capId);
 		envParameters.put("cap", cap);
+		envParameters.put("INVOICEID", invNbr);
 		logDebug("Starting to kick off ASYNC event for BLD PERMITS. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 		//aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
