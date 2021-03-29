@@ -51,7 +51,7 @@ if (balanceDue == 0) {
 
 logDebug("End of PPA;CityClerk!Incident!~!~.js ");
 }
-else (!appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempUse/*") && !appMatch("Building/Permit/DonationBin/*")) {
+else if (!appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempUse/*") && !appMatch("Building/Permit/DonationBin/*")) {
 logDebug("Starting PPA;Building!Permit!~!~.js ");
 logDebug("Current balance: " + balanceDue);
 //Check balance and update task
