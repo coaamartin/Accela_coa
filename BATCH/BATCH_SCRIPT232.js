@@ -204,13 +204,12 @@ function scheduleNextInspections(cycleInspections) {
 
             //for building inspections, update inspection status and wait for other building inspections to be completed
             if (cycleInspections[i].getInspectionType().indexOf("MJ Building Inspections") != -1) {
-                //scheduleInspectDate(inspType, nextInspDate, inspector); -- Before change made on 3/29 - RLP
-                scheduleInspectDate(inspType, nextInspDate, "");
+                scheduleInspectDate(inspType, nextInspDate, inspector); 
                 cycleInspections[i].setInspectionStatus("Passed - Notification Pending");
                 aa.inspection.editInspection(cycleInspections[i]);
                 inspCounter++;
             } else {
-                scheduleInspectDate(inspType, nextInspDate, "");
+                scheduleInspectDate(inspType, nextInspDate, inspector);
                 inspCounter++;
             }
         }
