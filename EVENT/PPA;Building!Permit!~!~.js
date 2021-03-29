@@ -55,8 +55,9 @@ if (appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse
 		// closeAllTasks(capId, "Approved");
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
+		var invoiceNbrObj = getLastInvoice({});
 		var invNbr = invoiceNbrObj.getInvNbr();
-		var invNbr = aa.env.getValue("INVOICEID");
+		//var invNbr = aa.env.getValue("INVOICEID");
 		var vAsyncScript = "SEND_EMAIL_BLD_ASYNC";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("altID", altID);
