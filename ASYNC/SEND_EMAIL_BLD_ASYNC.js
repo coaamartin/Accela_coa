@@ -21,11 +21,9 @@ try
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
 	var rParams = aa.util.newHashtable();
-	//rParams.put("AGENCYID", "AURORACO");
-	rParams.put("RecordID", recordID);
-	var emailtemplate = "BLD PERMIT ISSUANCE";
-	rParams.put("AGENCYID", "AURORACO");
+    rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
+	var emailtemplate = "BLD PERMIT ISSUANCE";
 	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
