@@ -210,7 +210,7 @@ function scheduleNextInspections(cycleInspections) {
                 aa.inspection.editInspection(cycleInspections[i]);
                 inspCounter++;
             } else {
-                scheduleInspectDate(inspType, nextInspDate, inspector);
+                scheduleInspectDate(inspType, nextInspDate, "");
                 inspCounter++;
             }
         }
