@@ -16,7 +16,7 @@ if (balanceDue == 0) {
 	logDebug("Starting to kick off event to attach cert to record");
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
-		var vAsyncScript = "SEND_EMAIL_BLD_OTC";
+		var vAsyncScript = "SEND_EMAIL_BLD_ASYNC";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("altID", altID);
 		envParameters.put("capId", capId);
