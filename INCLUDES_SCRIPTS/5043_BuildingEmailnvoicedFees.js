@@ -11,7 +11,7 @@ if (balanceDue > 0) {
   var contacts = "Applicant";
   //var lptypes = "Contractor";
   var emailtemplate = "BLD_INVOICEDFEES";
-  emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
+  emailContactsWithReportLinkASync("Applicant", emailtemplate, "", "", "", "N", "");
   //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
   logDebug("End of email to send");
 }
