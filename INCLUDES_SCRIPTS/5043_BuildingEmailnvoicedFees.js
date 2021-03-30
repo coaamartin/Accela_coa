@@ -4,6 +4,10 @@ that fees are owed and they can click the link to go online to login to their ac
 
 Written by JMAIN
 */
+var balanceDue;
+balanceDue = capDetail.getBalance();
+logDebug("Balance Due: " + balanceDue);
+
 if (balanceDue > 0) {
   //email the applicant
   // logDebug("Email to: " + emailTo);
