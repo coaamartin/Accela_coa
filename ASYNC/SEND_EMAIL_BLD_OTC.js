@@ -21,13 +21,13 @@ try
     tParams.put("$$FirstName$$", firstName);
     tParams.put("$$LastName$$", lastName);
     tParams.put("$$recordAlias$$", capAlias);
-	// var rParams = aa.util.newHashtable();
-	// //rParams.put("AGENCYID", "AURORACO");
-	// rParams.put("RecordID", recordID);
-	 var emailtemplate = "BLD PERMIT ISSUED # 35";
-	// var report = generateReportFile("Receipt", rParams, aa.getServiceProviderCode());
+	var rParams = aa.util.newHashtable();
+    rParams.put("AGENCYID", "AURORACO");
+	rParams.put("INVOICEID", invNbr);
+	var emailtemplate = "BLD PERMIT ISSUED # 35";
+	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-    sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+    sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
 {
