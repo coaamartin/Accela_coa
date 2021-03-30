@@ -22,7 +22,7 @@ if (balanceDue == 0) {
 		envParameters.put("capId", capId);
 		envParameters.put("cap", cap);
         envParameters.put("appType", appType);
-		logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
+		logDebug("Starting to kick off ASYNC event for OTC. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	
 }
