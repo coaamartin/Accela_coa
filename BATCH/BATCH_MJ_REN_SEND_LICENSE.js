@@ -101,7 +101,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredBeforeDays, newApp
 
 				var vAsyncScript = emailTemplate;
 		        var envParameters = aa.util.newHashMap();
-		        envParameters.put("CapId", vLicenseID.getCustomID());
+		        envParameters.put("CapId", vLicenseID.getCustomID()+"");
 		        aa.runAsyncScript(vAsyncScript, envParameters);
 		        logDebug2("<br>Updated Renewal and Email Sent on: " +vLicenseID.getCustomID());
        		}else {
