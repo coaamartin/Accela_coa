@@ -12,6 +12,7 @@ try
     var lastName = recordApplicant.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
+	var invNbr = aa.env.getValue("INVOICEID");
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
