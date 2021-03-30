@@ -26,7 +26,7 @@ if (balanceDue > 0) {
   tParams.put("$$FirstName$$", firstName);
   tParams.put("$$LastName$$", lastName);
   //emailContactsWithReportLinkASync(contacts, emailtemplate, "", "", "", "N", "");
-  sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+  sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, "");
   //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
   logDebug("End of email to send");
 }
