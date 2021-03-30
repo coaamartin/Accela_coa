@@ -198,7 +198,7 @@ function scheduleNextInspections(cycleInspections) {
     var inspCounter = 0;
     for (i in cycleInspections) {
         if (cycleInspections[i].getInspectionStatus() == "Passed" || cycleInspections[i].getInspectionStatus() == "Passed - Minor Violations") {
-            //var inspector = getInspectorByInspID(cycleInspections[i].getIdNumber());
+            var inspector = getInspectorByInspID(cycleInspections[i].getIdNumber());
             var inspType = cycleInspections[i].getInspectionType();
             var nextInspDate = getAppSpecific("Next Inspection Date");
 
