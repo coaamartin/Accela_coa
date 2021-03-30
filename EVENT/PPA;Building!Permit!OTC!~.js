@@ -16,13 +16,13 @@ if (balanceDue == 0) {
 	logDebug("Starting to kick off event to attach cert to record");
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
-		var vAsyncScript = "SEND_EMAIL_BLD_ASYNC";
+		var vAsyncScript = "SEND_EMAIL_BLD_OTC";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("altID", altID);
 		envParameters.put("capId", capId);
 		envParameters.put("cap", cap);
         envParameters.put("appType", appType);
-		logDebug("Starting to kick off ASYNC event for OTC. Params being passed: " + envParameters);
+		logDebug("Starting to kick off ASYNC event for DB. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	
 }
