@@ -1,7 +1,7 @@
 if (!appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempUse/*") &&
 	!appMatch("Building/Permit/DonationBin/*")) {
 
-	if (!publicUser) {
+
 		logDebug("Starting PRA;Building!Permit!OTC!~.js ");
 		logDebug("Current balance: " + balanceDue);
 		//Check balance and update task
@@ -25,7 +25,3 @@ if (!appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempU
 		}
 	}
 	logDebug("End of PRA;Building!Permit!OTC!~.js");
-	if (publicUser) {
-		logDebug("PRA event will not run as payment is being processed in ACA");
-	}
-}
