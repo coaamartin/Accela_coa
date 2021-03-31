@@ -21,5 +21,3 @@ if (balanceDue == 0) {
 }
 logDebug("End of PRA;Building!Permit!OTC!~.js");
 }
-
-​
