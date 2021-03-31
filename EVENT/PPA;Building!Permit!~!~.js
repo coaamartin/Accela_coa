@@ -54,7 +54,7 @@ if (balanceDue == 0) {
 		appType = cap.getCapType().toString();
 		var invoiceNbrObj = getLastInvoice({});
 		var invNbr = invoiceNbrObj.getInvNbr();
-		var vAsyncScript = "SEND_EMAIL_BLD_ASYNC";
+		var vAsyncScript = "SEND_EMAIL_BLD_OTC";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("altID", altID);
 		envParameters.put("capId", capId);
