@@ -28,7 +28,7 @@ try
    addRequiredDocument("Financial Documentation");
    addRequiredDocument("Application Forms");*/
 
-   if (appMatch("Licenses/Liquor/Common Consumption/*") || appMatch("Licenses/Liquor/Cabaret/Application"))
+   if (appMatch("Licenses/Liquor/Common Consumption/*", capId) //|| appMatch("Licenses/Liquor/Cabaret/Application"))
    {
    addRequiredDocument("Application Forms");
    addRequiredDocument("Business Operations");
@@ -36,14 +36,12 @@ try
    addRequiredDocument("Legal Entity Documents");
    addRequiredDocument("Insurance Documents");
    }
-   /*else if (appMatch("Licenses/Liquor/Cabaret/Application"))
+   else if (appMatch("Licenses/Liquor/Cabaret/Application", capId))
    {
    addRequiredDocument("Application Forms");
    addRequiredDocument("Business Operations");
    addRequiredDocument("Premise Diagrams");
-   addRequiredDocument("Legal Entity Documents");
-   addRequiredDocument("Premise Diagrams");
-   }*/
+   }
 
    /*var tOwner = getAppSpecific("Type of Ownership");
 
