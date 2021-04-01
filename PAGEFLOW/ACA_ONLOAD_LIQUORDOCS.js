@@ -28,7 +28,7 @@ try
    addRequiredDocument("Financial Documentation");
    addRequiredDocument("Application Forms");*/
 
-   if (appMatch("Licenses/Liquor/Common Consumption/*", capId) //|| appMatch("Licenses/Liquor/Cabaret/Application"))
+   if (appMatch("Licenses/Liquor/Common Consumption/*", capId)) //|| appMatch("Licenses/Liquor/Cabaret/Application"))
    {
    addRequiredDocument("Application Forms");
    addRequiredDocument("Business Operations");
