@@ -28,10 +28,11 @@ if (appMatch('Licenses/Supplemental/*/*')){
 		updateFee('CL1002', 'L_CLASS1', 'FINAL', unit, 'Y');
         //updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
-		
-	if (appMatch('Licenses/Supplemental/Door ID Badge/*')){
-		updateFee('CL1005', 'L_CLASS1', 'FINAL', 1, 'Y');
-		}
+	
+	//Commenting out per Lisa Keith and Cherwell ticket #355622
+	// if (appMatch('Licenses/Supplemental/Door ID Badge/*')){
+	// 	updateFee('CL1005', 'L_CLASS1', 'FINAL', 1, 'Y');
+	// 	}
 
 	if (appMatch('Licenses/Supplemental/Door Seller/Application')){
 		updateFee('CL1003', 'L_CLASS1', 'FINAL', 1, 'Y');
