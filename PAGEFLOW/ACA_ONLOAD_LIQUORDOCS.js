@@ -35,6 +35,7 @@ try
    addRequiredDocument("Premise Diagrams");
    addRequiredDocument("Legal Entity Documents");
    addRequiredDocument("Insurance Documents");
+   addRequiredDocument("Property Forms");
    }
    else if (appMatch("Licenses/Liquor/Cabaret/Application", capId))
    {
