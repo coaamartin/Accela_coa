@@ -24,3 +24,6 @@ if(appMatch("Building/Permit/DonationBin/*") && appMatch("Building/Permit/TempSi
 	include("5110_CodeTempSignCTRCA");
 	}
 
+	if(appMatch("Building/Permit/Master/*")) {
+		include("5043_BuildingEmailnvoicedFees")
+	}
