@@ -29,6 +29,6 @@ if(ifTracer(wfTask == "Quality Check" && wfStatus == "Approved")){
     //need to invoice the fee either here or in a new custom script
 	logDebug("Building Permit Master Quaility Check has been approved. Adding Building fee");
 	//updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
-	addFee("BLD_MST_01","BLD_MASTER","FINAL",parseFloat("$FI10212$"),"N");
+	addFee("BLD_MST_01","BLD_MASTER","FINAL",1,"Y","N");
 	logDebug("Building Fee has been added but not invoiced.")
 }
