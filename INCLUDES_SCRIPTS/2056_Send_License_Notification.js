@@ -71,7 +71,7 @@ if ((wfStatus == "Issue License") && appMatch('Licenses/Liquor/Tasting Permit/Pe
 logDebug("Starting Permits Liq Lic Email Script script");
 var altID = capId.getCustomID()
 appType = cap.getCapType().toString();
-var vAsyncScript = "SEND_EMAIL_TAXLIC_LICENSE_ASYNC";
+var vAsyncScript = "SEND_EMAIL_TAXLIC_TMPPERMIT_ASYNC";
 var envParameters = aa.util.newHashMap();
 envParameters.put("altID", altID);
 envParameters.put("capId", capId);
