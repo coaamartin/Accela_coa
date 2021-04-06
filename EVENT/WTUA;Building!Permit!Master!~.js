@@ -28,6 +28,7 @@ updatePermitExpirationCF([ "Accepted", "Accepted In House", "Structural Plan Rev
 if(ifTracer(wfTask == "Quality Check" && wfStatus == "Approved")){
     //need to invoice the fee either here or in a new custom script
 	logDebug("Building Permit Master Quaility Check has been approved. Adding Building fee");
-	addFee("BLD_MST_01","BLD_MASTER","FINAL","$FI10212$","N");
+	//updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+	addFee("BLD_MST_01","BLD_MASTER","FINAL",parseFloat("$FI10212$"),"N");
 	logDebug("Building Fee has been added but not invoiced.")
 }
