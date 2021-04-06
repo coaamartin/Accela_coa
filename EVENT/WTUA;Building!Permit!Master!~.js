@@ -32,7 +32,7 @@ if(ifTracer(wfTask == "Quality Check" && wfStatus == "Approved")){
     var feeschedule = "BLD_MASTER";
     var thefee = "1";
     //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
-    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
+    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "N", "N");
 	//addFee("BLD_MST_01","BLD_MASTER","FINAL",1,"Y");
 	logDebug("Building Fee has been added but not invoiced.")
 }
