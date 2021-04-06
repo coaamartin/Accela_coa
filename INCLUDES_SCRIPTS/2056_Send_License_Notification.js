@@ -66,3 +66,17 @@ if (matches(wfStatus,"Approved", "Denied", "Pending") && wfTask == "Building Rev
 		sendNotification("permitcounter@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 	}
 }
+
+if ((wfStatus == "Issue License") && appMatch('Licenses/Liquor/Tasting Permit/Permit')){
+logDebug("Starting Permits Liq Lic Email Script script");
+var altID = capId.getCustomID()
+appType = cap.getCapType().toString();
+var vAsyncScript = "SEND_EMAIL_TAXLIC_LICENSE_ASYNC";
+var envParameters = aa.util.newHashMap();
+envParameters.put("altID", altID);
+envParameters.put("capId", capId);
+envParameters.put("cap", cap);
+logDebug("Starting to kick off ASYNC event for Permits. Params being passed: " + envParameters);
+aa.runAsyncScript(vAsyncScript, envParameters);
+logDebug("End of 2056_License_Notification script");
+}
