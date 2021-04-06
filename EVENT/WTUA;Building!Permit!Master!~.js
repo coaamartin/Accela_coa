@@ -23,3 +23,11 @@ updatePermitExpirationCF([ "Accept Plans", "Accepted In House", "Structural Plan
 updatePermitExpirationCF([ "Accepted", "Accepted In House", "Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review",
 		"Bldg Life Safety Review", "Fire Life Safety Review", "Structural Engineering Review", "Real Property Review", "Planning Review", "Water Review", "Zoning Review",
 		"Engineering Review", "Traffic Review", "Waste Water Review", "Forestry Review" ], "Resubmittal Requested", "Application Expiration Date");
+
+//if workflow step Quaility Check is set to status approved need to insert building fee but do not invoice.
+if(ifTracer(wfTask == "Quality Check" && wfStatus == "Approved")){
+    //need to invoice the fee either here or in a new custom script
+	logDebug("Building Permit Master Quaility Check has been approved. Adding Building fee");
+	addFee("BLD_MST_01","BLD_MASTER","FINAL",$FI10212$,"N");
+	logDebug("Building Fee has been added but not invoiced.")
+}
