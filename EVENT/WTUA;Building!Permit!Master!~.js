@@ -30,7 +30,7 @@ if(ifTracer(wfTask == "Quality Check" && wfStatus == "Approved")){
 	logDebug("Building Permit Master Quaility Check has been approved. Adding Building fee");
 	var feecode = "BLD_MST_01";
     var feeschedule = "BLD_MASTER";
-    var thefee = "1";
+    var thefee = "$FI10212$";
     //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
     updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "Y", "N");
 	//addFee("BLD_MST_01","BLD_MASTER","FINAL",1,"Y");
