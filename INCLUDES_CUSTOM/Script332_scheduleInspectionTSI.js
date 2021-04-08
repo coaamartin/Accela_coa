@@ -1,5 +1,5 @@
 function Script332_scheduleInspectionTSI() {
-    if ($iTrc(wfTask == "Pre Hearing Inspection" && wfStatus == "Hearing Scheduled", 'wfTask == "Pre Hearing Inspection" && wfStatus == "Hearing Scheduled"')) {
+    if (wfTask == "Pre Hearing Inspection" && wfStatus == "Hearing Scheduled") {
         var today = aa.util.parseDate(dateAdd(null, 0));
         var tsiArray = new Array();
 
@@ -12,7 +12,7 @@ function Script332_scheduleInspectionTSI() {
         if (pPreHearingDate != null)
             scheduleInspection("Pre Court Investigation", noOfDays, inspectorID, null, workDescGet(capId));
     }
-    if ($iTrc(wfTask == "Complaint Intake" && wfStatus == "Assigned", 'wfTask == "Complaint Intake" && wfStatus == "Assigned"')) {
+    if (wfTask == "Complaint Intake" && wfStatus == "Assigned") {
         var today = aa.util.parseDate(dateAdd(null, 0));
         //var tsiArray = new Array();
 
