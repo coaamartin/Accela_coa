@@ -3,6 +3,6 @@ var $iTrc = ifTracer;
 if($iTrc(wfTask == "Pre Hearing Inspection" && wfStatus == "Hearing Scheduled", 'wfTask == "Pre Hearing Inspection" && wfStatus == "Hearing Scheduled"')){
 	Script332_scheduleInspectionTSI();
 }
-if($iTrc(wfTask == "Complaint intake" && wfStatus == "Assign", 'wfTask == "Complaint intake" && wfStatus == "Assign"')){
+if($iTrc(wfTask == "Complaint Intake" && wfStatus == "Assigned", 'wfTask == "Complaint Intake" && wfStatus == "Assigned"')){
 	Script332_scheduleInspectionTSI();
 }

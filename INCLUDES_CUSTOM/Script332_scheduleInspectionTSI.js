@@ -12,7 +12,7 @@ function Script332_scheduleInspectionTSI() {
         if (pPreHearingDate != null)
             scheduleInspection("Pre Court Investigation", noOfDays, inspectorID, null, workDescGet(capId));
     }
-    if ($iTrc(wfTask == "Complaint intake" && wfStatus == "Assign", 'wfTask == "Complaint intake" && wfStatus == "Assign"')) {
+    if ($iTrc(wfTask == "Complaint Intake" && wfStatus == "Assigned", 'wfTask == "Complaint Intake" && wfStatus == "Assigned"')) {
         var today = aa.util.parseDate(dateAdd(null, 0));
         //var tsiArray = new Array();
 
