@@ -47,8 +47,10 @@ comment("Looking for OTC Fees and Pending Inspections - UPDATED 2/4 JMPorter-CoA
          }
 
       if (appMatch('*/*/*/Gas Pipe')) {
+          if(asiValues['Are you converting a woodburning fireplace to a gas fireplace?'] == 'No'){
          updateFee('BLD_OTC_06', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
          createPendingInspection("BLD_OTC", "Mechanical Final");
+          }
          }
 
       if (appMatch('*/*/*/Commercial Roof')) {
