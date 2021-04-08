@@ -15,7 +15,7 @@ var targetStatusArray = ["Resubmittal Requested"];
 if (exists(wfStatus, targetStatusArray))
 {
 		var contacts = "Applicant";
-		var emailtemplate = "BLD RESUBMITTAL NOTIFICATION";
+		var emailtemplate = "BLD ACCEPTPLANS RESUBMITTAL REQUESTED";
 		//build ACA URL
 		var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
 		acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));  
