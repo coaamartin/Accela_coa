@@ -117,7 +117,8 @@ User code generally goes inside the try block below.
 // {
 /* your code here
 End script Tester header */
-
+if(appMatch("Building/Permit/DonationBin/*") && appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse/*")) {
+    
 logDebug("Starting WTUA;Building!Permit!~!~.js");
 // if (wfTask == "Planning Director Approval" && wfStatus != "") {
 
@@ -185,7 +186,7 @@ else if (wfStatus == "Withdrawn") {
     closeAllTasks(capId, "Withdrawn");
  }
 logDebug("End of WTUA;Building");
-
+}
 // aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 // Script Tester footer.  Comment this out when deploying.
 // }	
