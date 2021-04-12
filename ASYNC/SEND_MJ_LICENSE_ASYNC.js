@@ -82,12 +82,11 @@ try
     reportFiles.push(report);
     _sendNotification("noreply@auroragov.org", allEmails, "marijuana@auroragov.org", vEmailTemplate, vEParams, reportFiles, capId);
 
-    aa.sendMail("suhailwakil@gmail.com", "suhailwakil@gmail.com", "", "Log", "Debug: " + debug);
-
+    //aa.sendMail("suhailwakil@sbztechnology.com", "suhailwakil@sbztechnology.com", "", "Debug Information in Sending Report Script", debug);
 }
 catch (err)
 {
-    aa.sendMail("suhailwakil@gmail.com", "suhailwakil@gmail.com", "", "Log", "Debug: " + err);
+    aa.sendMail("suhailwakil@sbztechnology.com", "suhailwakil@sbztechnology.com", "", "Log", "Debug: " + err);
 }
 
 ////FUNCTIONS//////
