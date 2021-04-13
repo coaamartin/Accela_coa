@@ -25,7 +25,7 @@ try
 //	addRequiredDocument("Legal Entity Documents");
 //	addRequiredDocument("Insurance Documents");
 //	addRequiredDocument("Property Forms");
-		if (licType == 'Arts'){
+		if (AInfo['Type of License'] == 'Arts'){
 			addRequiredDocument("Business Operations");
 			addRequiredDocument("Premise Diagrams");
 			addRequiredDocument("Legal Entity Documents");
@@ -33,7 +33,7 @@ try
 			addRequiredDocument("Property Forms");
 			addRequiredDocument("State Liquor Forms");
 		}
-		if (licType == 'Beer and Wine'){
+		if (AInfo['Type of License'] == 'Beer and Wine'){
 			addRequiredDocument("Business Operations");
 			addRequiredDocument("Premise Diagrams");
 			addRequiredDocument("State Liquor Forms");
