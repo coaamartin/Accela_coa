@@ -18,14 +18,14 @@ try
    removeAllRequiredDocumentCapCondition();
 
    if (appMatch("Licenses/Liquor/Liquor License/*", capId)){
-	var licType = AInfo['Type of License'];
+	var licType = getAppSpecific('Type of License');
 	addRequiredDocument("Application Forms");
 //	addRequiredDocument("Business Operations");
 //	addRequiredDocument("Premise Diagrams");
 //	addRequiredDocument("Legal Entity Documents");
 //	addRequiredDocument("Insurance Documents");
 //	addRequiredDocument("Property Forms");
-		if (AInfo['Type of License'] == 'Arts'){
+		if (licType == 'Arts'){
 			addRequiredDocument("Business Operations");
 			addRequiredDocument("Premise Diagrams");
 			addRequiredDocument("Legal Entity Documents");
@@ -33,7 +33,7 @@ try
 			addRequiredDocument("Property Forms");
 			addRequiredDocument("State Liquor Forms");
 		}
-		if (AInfo['Type of License'] == 'Beer and Wine'){
+		if (licType == 'Beer and Wine'){
 			addRequiredDocument("Business Operations");
 			addRequiredDocument("Premise Diagrams");
 			addRequiredDocument("State Liquor Forms");
