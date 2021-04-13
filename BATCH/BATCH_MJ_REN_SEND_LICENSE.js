@@ -44,82 +44,85 @@ var emailText = "";
 var capId = null;
 var asyncScript = "SEND_MJ_LICENSE_ASYNC";
 showDebug = true;
-
-checkExpiredUpdateAppStatus("Renewed - Pending Notification", 7, "Renewed", asyncScript);
-
-function checkExpiredUpdateAppStatus(currentAppStatus, expiredBeforeDays, newAppStatus, asyncScript) {
-
-    var capTypeModel = aa.cap.getCapTypeModel().getOutput();
-    capTypeModel.setGroup("Licenses");
-    capTypeModel.setType("Marijuana");
-    capTypeModel.setSubType(null);
-    capTypeModel.setCategory("Renewal");
-
-    var capModel = aa.cap.getCapModel().getOutput();
-    capModel.setCapType(capTypeModel);
-    capModel.setCapStatus(currentAppStatus);
-
-    var capIdScriptModelList = aa.cap.getCapIDListByCapModel(capModel).getOutput();
-    logDebug2("<br><Font Color=RED> Processing " + capIdScriptModelList.length + " " + currentAppStatus + " records <br>");
-
-    for (r in capIdScriptModelList) {
-        capId = capIdScriptModelList[r].getCapID();
-        capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()
-        logDebug2("<Font Color=BLUE> <br> Processing record " + capIDString + "<Font Color=BLACK>");
-
-        vLicenseID = getParentLicenseCapID(capId);
-        vIDArray = String(vLicenseID).split("-");
-        vLicenseID = aa.cap.getCapID(vIDArray[0], vIDArray[1], vIDArray[2]).getOutput();
-
-        logDebug2("<Font Color=BLUE> <br> Parent License " + vLicenseID.getCustomID() + "<Font Color=BLACK>");
+try {
+    sendLicenseAttached("Renewed - Pending Notification", 7, "Renewed", asyncScript);
+} catch (ex) {
+    logDebug("**ERROR batch failed, error: " + ex);
+}
 
 
 
-        var expResult = aa.expiration.getLicensesByCapID(vLicenseID);
-        if (!expResult.getSuccess()) {
-            logDebug2("<br>****WARN failed to get expiration of capId " + vLicenseID.getCustomID());
-            continue;
-        }
-        expResult = expResult.getOutput();
+function sendLicenseAttached(currentAppStatus, expiredBeforeDays, newAppStatus, asyncScript) {
+    try
+    {
+        var capTypeModel = aa.cap.getCapTypeModel().getOutput();
+        capTypeModel.setGroup("Licenses");
+        capTypeModel.setType("Marijuana");
+        capTypeModel.setSubType(null);
+        capTypeModel.setCategory("Renewal");
 
-        var thisCap = null;
-        var expDate = expResult.getExpDate();
+        var capModel = aa.cap.getCapModel().getOutput();
+        capModel.setCapType(capTypeModel);
+        capModel.setCapStatus(currentAppStatus);
 
-        if (expDate) {
-            var lastb1ExpDate = expDate.getMonth() + "/" + expDate.getDayOfMonth() + "/" + (expDate.getYear() - 1);
-            logDebug2("<br>Last Expiration Date: " +lastb1ExpDate);
+        var capIdScriptModelList = aa.cap.getCapIDListByCapModel(capModel).getOutput();
+        aa.print("<br><Font Color=RED> Processing " + capIdScriptModelList.length + " " + currentAppStatus + " records <br>");
 
-            var sendLicAfterDate = new Date(lastb1ExpDate);
-            sendLicAfterDate.setDate(sendLicAfterDate.getDate() - expiredBeforeDays);
+        for (r in capIdScriptModelList) {
+            capId = capIdScriptModelList[r].getCapID();
+            capIDString = aa.cap.getCapID(capId.getID1(), capId.getID2(), capId.getID3()).getOutput().getCustomID()
+            aa.print("<Font Color=BLUE> <br> Processing record " + capIDString + "<Font Color=BLACK>");
 
-            var today = new Date();
-            if(today >= sendLicAfterDate){
-                logDebug2("<br>sendLicAfterDate: " +sendLicAfterDate + " Today: "+ today);
+            vLicenseID = getParentLicenseCapID(capId);
+            vIDArray = String(vLicenseID).split("-");
+            vLicenseID = aa.cap.getCapID(vIDArray[0], vIDArray[1], vIDArray[2]).getOutput();
 
-                closeTask("License Issuance", "Renewed", "Updated by Batch Job", "");
-                updateAppStatus(newAppStatus,"Updated by Script",capId);
+            aa.print("<Font Color=BLUE> <br> Parent License " + vLicenseID.getCustomID() + "<Font Color=BLACK>");
 
-                var envParameters = aa.util.newHashMap();
-                envParameters.put("CapId", vLicenseID.getCustomID()+"");
-                aa.runAsyncScript(asyncScript, envParameters);
-                logDebug2("<br>Updated Renewal and Email Sent on: " +vLicenseID.getCustomID());
-            }else {
-                logDebug2("<br> Skipping record; not within 7-days period");
+
+
+            var expResult = aa.expiration.getLicensesByCapID(vLicenseID);
+            if (!expResult.getSuccess()) {
+                aa.print("<br>****WARN failed to get expiration of capId " + vLicenseID.getCustomID());
+                continue;
             }
-        }
+            expResult = expResult.getOutput();
 
-        logDebug2("<br>#######################");
-    }//for all caps
+            var thisCap = null;
+            var expDate = expResult.getExpDate();
 
-}
+            if (expDate) {
+                var lastb1ExpDate = expDate.getMonth() + "/" + expDate.getDayOfMonth() + "/" + (expDate.getYear() - 1);
+                aa.print("<br>Last Expiration Date: " +lastb1ExpDate);
 
-function logDebug2(dstr) {
+                var sendLicAfterDate = new Date(lastb1ExpDate);
+                sendLicAfterDate.setDate(sendLicAfterDate.getDate() - expiredBeforeDays);
 
-    // function of the same name in ACCELA_FUNCTIONS creates multi lines in the Batch debug log. Use this one instead
-    if(showDebug) {
-        aa.print(dstr)
-        emailText+= dstr + "<br>";
-        aa.debug(aa.getServiceProviderCode() + " : " + aa.env.getValue("CurrentUserID"),dstr)
+                var today = new Date();
+                if(today >= sendLicAfterDate){
+                    aa.print("<br>sendLicAfterDate: " +sendLicAfterDate + " Today: "+ today);
+
+                    closeTask("License Issuance", "Renewed", "Updated by Batch Job", "");
+                    updateAppStatus(newAppStatus,"Updated by Script",capId);
+
+                    var envParameters = aa.util.newHashMap();
+                    envParameters.put("CapId", vLicenseID.getCustomID()+"");
+                    aa.runAsyncScript(asyncScript, envParameters);
+                    aa.print("<br>Updated Renewal and Email Sent on: " +vLicenseID.getCustomID());
+                }else {
+                    aa.print("<br> Skipping record; not within 7-days period");
+                }
+            }
+
+            aa.print("<br>#######################");
+        }//for all caps
+        aa.sendMail("suhailwakil@sbztechnology.com", "suhailwakil@sbztechnology.com", "", "Debug Information in BATCH_MJ_REN_SEND_LICENSE", debug);
     }
+    catch (err)
+    {
+        aa.sendMail("suhailwakil@sbztechnology.com", "suhailwakil@sbztechnology.com", "", "Log", "Debug: " + err);
+    }
+
 }
+
 
