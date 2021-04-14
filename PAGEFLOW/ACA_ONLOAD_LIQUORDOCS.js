@@ -16,17 +16,29 @@ try
 
    //remove all documents first
    removeAllRequiredDocumentCapCondition();
-               
-   /*addRequiredDocument("Background Information");
-   addRequiredDocument("Insurance Documents");
-   addRequiredDocument("Legal Entity Documents");
-   addRequiredDocument("Property Forms");
-   addRequiredDocument("Business Operations");
-   addRequiredDocument("Premise Diagrams");
-   addRequiredDocument("Consent Forms");
-   addRequiredDocument("State Liquor Forms");
-   addRequiredDocument("Financial Documentation");
-   addRequiredDocument("Application Forms");*/
+
+   if (appMatch("Licenses/Liquor/Liquor License/*", capId)){
+	var licType = getAppSpecific('Type of License');
+	addRequiredDocument("Application Forms");
+//	addRequiredDocument("Business Operations");
+//	addRequiredDocument("Premise Diagrams");
+//	addRequiredDocument("Legal Entity Documents");
+//	addRequiredDocument("Insurance Documents");
+//	addRequiredDocument("Property Forms");
+		if (licType == 'Arts'){
+			addRequiredDocument("Business Operations");
+			addRequiredDocument("Premise Diagrams");
+			addRequiredDocument("Legal Entity Documents");
+			addRequiredDocument("Background Information");
+			addRequiredDocument("Property Forms");
+			addRequiredDocument("State Liquor Forms");
+		}
+		if (licType == 'Beer and Wine'){
+			addRequiredDocument("Business Operations");
+			addRequiredDocument("Premise Diagrams");
+			addRequiredDocument("State Liquor Forms");
+   }
+   }
 
    if (appMatch("Licenses/Liquor/Common Consumption/*", capId)) //|| appMatch("Licenses/Liquor/Cabaret/Application"))
    {
