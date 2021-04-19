@@ -27,7 +27,7 @@ var DEPARTMENT = "Economy";
 var PROVIDER = "Economy";
 var DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
 var mailFrom = "Auto_Sender@Accela.com";
-var mailCC = "brook.huang@achievo.com";
+var mailCC = "acharlton@truepointsolutions.com";
 // -------------------------------------------------------------------------------------------------
 
 var capID = getCapId();
@@ -60,7 +60,7 @@ if (isWorkflowApproveForReview(capID,
 {
 	//2. Get parent license CAPID
 	var parentLicenseCAPID = getParentCapIDForReview(capID)
-	aa.print("parent capid :" + parentLicenseCAPID);
+	logDebug("parent capid :" + parentLicenseCAPID);
 	var partialCapID = getPartialCapID(capID);
 
 	if (parentLicenseCAPID != null)
@@ -81,18 +81,18 @@ if (isWorkflowApproveForReview(capID,
 				{
 					//6. Set renewal CAP status to "Complete"
 					renewalCapProject.setStatus("Complete");
-					aa.print("license(" + parentLicenseCAPID + ") is activated.");
+					//logDebug("license(" + parentLicenseCAPID + ") is activated.");
 					aa.cap.updateProject(renewalCapProject);
 					//7. Copy key information from child CAP to parent CAP.
 					copyKeyInfo(capID, parentLicenseCAPID);
 
 					//8. move renew document to parent cap
 					//aa.cap.transferRenewCapDocument(partialCapID, parentLicenseCAPID, false);
-					//aa.print("Transfer document for renew cap. Source Cap: " + partialCapID + ", target Cap: " + parentLicenseCAPID);
+					//logDebug("Transfer document for renew cap. Source Cap: " + partialCapID + ", target Cap: " + parentLicenseCAPID);
 					
 					//9. Send approved license email to public user
 					//aa.expiration.sendApprovedNoticEmailToCitizenUser(parentLicenseCAPID);
-					//aa.print("send approved license email to citizen user.");
+					//logDebug("send approved license email to citizen user.");
 				}
 			}
 		}
@@ -107,7 +107,7 @@ else if (isWorkflowDenyForReview(capID,
 
 	//1.1. Get parent license CAPID
 	var parentLicenseCAPID = getParentCapIDForReview(capID)
-	aa.print("parent capid :" + parentLicenseCAPID);
+	logDebug("parent capid :" + parentLicenseCAPID);
 	if (parentLicenseCAPID != null)
 	{
 		//1.2. Check to see if license is ready for renew.
@@ -119,7 +119,7 @@ else if (isWorkflowDenyForReview(capID,
 			{
 				//1.4 Send denied license email to public user
 				aa.expiration.sendDeniedNoticeEmailToCitizenUser(parentLicenseCAPID)
-				aa.print("send denied license email to citizen user.");
+				logDebug("send denied license email to citizen user.");
 			}
 		}
 	}
@@ -197,7 +197,7 @@ function isWorkflowApproveForReview(capID, wfTask, stepNum, processID, taskStatu
 		taskItemScriptModel = result.getOutput();
 		if (taskItemScriptModel == null)
 		{
-			aa.print("ERROR: Failed to get workflow task with CAPID(" + capID + ") for review");
+			logDebug("ERROR: Failed to get workflow task with CAPID(" + capID + ") for review");
 			return false;
 		}
 		//2. Check to see if the agency user approve renewal application .
@@ -209,12 +209,12 @@ function isWorkflowApproveForReview(capID, wfTask, stepNum, processID, taskStatu
 		}	
 		else
 		{
-			aa.print("Issuing license (" + wfTask +") task isn't listed in line 205");
+			logDebug("Issuing license (" + wfTask +") task isn't listed in line 205");
 		}
 	}  
     else 
     {
-      aa.print("ERROR: Failed to get workflow task(" + capID + ") for review: " + result.getErrorMessage());
+      logDebug("ERROR: Failed to get workflow task(" + capID + ") for review: " + result.getErrorMessage());
     }
 	return false;
 }
@@ -238,7 +238,7 @@ function isWorkflowDenyForReview(capID, wfTask, stepNum, processID, taskStatus)
 		taskItemScriptModel = result.getOutput();
 		if (taskItemScriptModel == null)
 		{
-			aa.print("ERROR: Failed to get workflow task with CAPID(" + capID + ") for review");
+			logDebug("ERROR: Failed to get workflow task with CAPID(" + capID + ") for review");
 			return false;
 		}
 		//2. Check to see if the agency user approve renewal application .
@@ -250,12 +250,12 @@ function isWorkflowDenyForReview(capID, wfTask, stepNum, processID, taskStatus)
 		}	
 		else
 		{
-			aa.print("Issuing license (" + wfTask +") don't have been approved");
+			logDebug("Issuing license (" + wfTask +") don't have been approved");
 		}
 	}  
     else 
     {
-      aa.print("ERROR: Failed to get workflow task(" + capID + ") for review: " + result.getErrorMessage());
+      logDebug("ERROR: Failed to get workflow task(" + capID + ") for review: " + result.getErrorMessage());
     }
 	return false;
 }
@@ -274,7 +274,7 @@ function isReadyRenew(capid)
 	}  
     else 
     {
-      aa.print("ERROR: Failed to get expiration with CAP(" + capid + "): " + result.getErrorMessage());
+      logDebug("ERROR: Failed to get expiration with CAP(" + capid + "): " + result.getErrorMessage());
     }
 	return false;
 }
@@ -292,7 +292,7 @@ function getB1ExpirationScriptModel(capid)
 	}  
     else 
     {
-      aa.print("ERROR: Failed to get expiration with CAP(" + capid + "): " + result.getErrorMessage());
+      logDebug("ERROR: Failed to get expiration with CAP(" + capid + "): " + result.getErrorMessage());
       return null;
     }
 }
@@ -311,7 +311,7 @@ function activeLicense(capid)
 	}  
 	else 
 	{
-	  aa.print("ERROR: Failed to activate License with CAP(" + capid + "): " + result.getErrorMessage());
+	  logDebug("ERROR: Failed to activate License with CAP(" + capid + "): " + result.getErrorMessage());
 	}
 	return false;
 }
@@ -329,7 +329,7 @@ function getParentCapIDForReview(capid)
 		projectScriptModels = result.getOutput();
 		if (projectScriptModels == null || projectScriptModels.length == 0)
 		{
-			aa.print("ERROR: Failed to get parent CAP with CAPID(" + capid + ") for review");
+			logDebug("ERROR: Failed to get parent CAP with CAPID(" + capid + ") for review");
 			return null;
 		}
 		//2. return parent CAPID.
@@ -338,7 +338,7 @@ function getParentCapIDForReview(capid)
 	}  
     else 
     {
-      aa.print("ERROR: Failed to get parent CAP by child CAP(" + capid + ") for review: " + result.getErrorMessage());
+      logDebug("ERROR: Failed to get parent CAP by child CAP(" + capid + ") for review: " + result.getErrorMessage());
       return null;
     }
 }
@@ -356,7 +356,7 @@ function getRenewalCapByParentCapIDForReview(parentCapid)
 		projectScriptModels = result.getOutput();
 		if (projectScriptModels == null || projectScriptModels.length == 0)
 		{
-			aa.print("ERROR: Failed to get renewal CAP by parent CAPID(" + parentCapid + ") for review");
+			logDebug("ERROR: Failed to get renewal CAP by parent CAPID(" + parentCapid + ") for review");
 			return null;
 		}
 		//2. return parent CAPID.
@@ -365,7 +365,7 @@ function getRenewalCapByParentCapIDForReview(parentCapid)
 	}  
     else 
     {
-      aa.print("ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for review: " + result.getErrorMessage());
+      logDebug("ERROR: Failed to get renewal CAP by parent CAP(" + parentCapid + ") for review: " + result.getErrorMessage());
       return null;
     }
 }
@@ -464,13 +464,13 @@ function getAppSpecificInfo(capId)
 		capAppSpecificInfo = s_result.getOutput();
 		if (capAppSpecificInfo == null || capAppSpecificInfo.length == 0)
 		{
-			aa.print("WARNING: no appSpecificInfo on this CAP:" + capId);
+			logDebug("WARNING: no appSpecificInfo on this CAP:" + capId);
 			capAppSpecificInfo = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to appSpecificInfo: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to appSpecificInfo: " + s_result.getErrorMessage());
 		capAppSpecificInfo = null;	
 	}
 	// Return AppSpecificInfoModel[] 
@@ -547,13 +547,13 @@ function getLicenseProfessional(capId)
 		capLicenseArr = s_result.getOutput();
 		if (capLicenseArr == null || capLicenseArr.length == 0)
 		{
-			aa.print("WARNING: no licensed professionals on this CAP:" + capId);
+			logDebug("WARNING: no licensed professionals on this CAP:" + capId);
 			capLicenseArr = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to license professional: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to license professional: " + s_result.getErrorMessage());
 		capLicenseArr = null;	
 	}
 	return capLicenseArr;
@@ -636,13 +636,13 @@ function getAddress(capId)
 		capAddresses = s_result.getOutput();
 		if (capAddresses == null || capAddresses.length == 0)
 		{
-			aa.print("WARNING: no addresses on this CAP:" + capId);
+			logDebug("WARNING: no addresses on this CAP:" + capId);
 			capAddresses = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to address: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to address: " + s_result.getErrorMessage());
 		capAddresses = null;	
 	}
 	return capAddresses;
@@ -702,13 +702,13 @@ function getAppSpecificTable(capId,tableName)
 		appSpecificTable = s_result.getOutput();
 		if (appSpecificTable == null || appSpecificTable.length == 0)
 		{
-			aa.print("WARNING: no appSpecificTable on this CAP:" + capId);
+			logDebug("WARNING: no appSpecificTable on this CAP:" + capId);
 			appSpecificTable = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to appSpecificTable: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to appSpecificTable: " + s_result.getErrorMessage());
 		appSpecificTable = null;	
 	}
 	return appSpecificTable;
@@ -784,13 +784,13 @@ function getParcel(capId)
 		capParcelArr = s_result.getOutput();
 		if (capParcelArr == null || capParcelArr.length == 0)
 		{
-			aa.print("WARNING: no parcel on this CAP:" + capId);
+			logDebug("WARNING: no parcel on this CAP:" + capId);
 			capParcelArr = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to parcel: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to parcel: " + s_result.getErrorMessage());
 		capParcelArr = null;	
 	}
 	return capParcelArr;
@@ -904,13 +904,13 @@ function getPeople(capId)
 		capPeopleArr = s_result.getOutput();
 		if (capPeopleArr == null || capPeopleArr.length == 0)
 		{
-			aa.print("WARNING: no People on this CAP:" + capId);
+			logDebug("WARNING: no People on this CAP:" + capId);
 			capPeopleArr = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to People: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to People: " + s_result.getErrorMessage());
 		capPeopleArr = null;	
 	}
 	return capPeopleArr;
@@ -991,13 +991,13 @@ function getOwner(capId)
 		capOwnerArr = s_result.getOutput();
 		if (capOwnerArr == null || capOwnerArr.length == 0)
 		{
-			aa.print("WARNING: no Owner on this CAP:" + capId);
+			logDebug("WARNING: no Owner on this CAP:" + capId);
 			capOwnerArr = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to Owner: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to Owner: " + s_result.getErrorMessage());
 		capOwnerArr = null;	
 	}
 	return capOwnerArr;
@@ -1090,13 +1090,13 @@ function getCapConditionByCapID(capId)
 		capConditionScriptModels = s_result.getOutput();
 		if (capConditionScriptModels == null || capConditionScriptModels.length == 0)
 		{
-			aa.print("WARNING: no cap condition on this CAP:" + capId);
+			logDebug("WARNING: no cap condition on this CAP:" + capId);
 			capConditionScriptModels = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to get cap condition: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to get cap condition: " + s_result.getErrorMessage());
 		capConditionScriptModels = null;	
 	}
 	return capConditionScriptModels;
@@ -1132,13 +1132,13 @@ function getAdditionalInfo(capId)
 		bvaluatnScriptModel = s_result.getOutput();
 		if (bvaluatnScriptModel == null)
 		{
-			aa.print("WARNING: no additional info on this CAP:" + capId);
+			logDebug("WARNING: no additional info on this CAP:" + capId);
 			bvaluatnScriptModel = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to get additional info: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to get additional info: " + s_result.getErrorMessage());
 		bvaluatnScriptModel = null;	
 	}
 	// Return bvaluatnScriptModel
@@ -1154,13 +1154,13 @@ function getCapDetailByID(capId)
 		capDetailScriptModel = s_result.getOutput();
 		if (capDetailScriptModel == null)
 		{
-			aa.print("WARNING: no cap detail on this CAP:" + capId);
+			logDebug("WARNING: no cap detail on this CAP:" + capId);
 			capDetailScriptModel = null;
 		}
 	}
 	else
 	{
-		aa.print("ERROR: Failed to get cap detail: " + s_result.getErrorMessage());
+		logDebug("ERROR: Failed to get cap detail: " + s_result.getErrorMessage());
 		capDetailScriptModel = null;	
 	}
 	// Return capDetailScriptModel
@@ -1181,7 +1181,7 @@ function getCapId()
 	}  
     else 
     {
-      aa.print("ERROR: Failed to get capId: " + s_capResult.getErrorMessage());
+      logDebug("ERROR: Failed to get capId: " + s_capResult.getErrorMessage());
       return null;
     }
 }
@@ -1195,12 +1195,12 @@ function getTaskItem(capID, stepNum, processID)
 		taskItemScriptModel = result.getOutput();
 		if (taskItemScriptModel == null)
 		{
-			aa.print("ERROR: Failed to get workflow task with CAPID(" + capID + ")");
+			logDebug("ERROR: Failed to get workflow task with CAPID(" + capID + ")");
 		}
 	}  
 	else 
 	{
-		aa.print("ERROR: Failed to get workflow task(" + capID + ") for review: " + result.getErrorMessage());
+		logDebug("ERROR: Failed to get workflow task(" + capID + ") for review: " + result.getErrorMessage());
 	}
 
 	return taskItemScriptModel;
@@ -1826,7 +1826,7 @@ function getPartialCapID(capid)
 		projectScriptModels = result.getOutput();
 		if (projectScriptModels == null || projectScriptModels.length == 0)
 		{
-			aa.print("ERROR: Failed to get partial CAP with CAPID(" + capid + ")");
+			logDebug("ERROR: Failed to get partial CAP with CAPID(" + capid + ")");
 			return null;
 		}
 		//2. Get original partial CAP ID from project Model
@@ -1835,7 +1835,7 @@ function getPartialCapID(capid)
 	}  
 	else 
 	{
-		aa.print("ERROR: Failed to get partial CAP by child CAP(" + capid + "): " + result.getErrorMessage());
+		logDebug("ERROR: Failed to get partial CAP by child CAP(" + capid + "): " + result.getErrorMessage());
 		return null;
 	}
 }
