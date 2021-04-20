@@ -37,7 +37,7 @@ if(ifTracer(wfTask == "Quality Check" && wfStatus == "Approved")){
 	logDebug("Building Fee has been added but not invoiced.")
 }
 
-if(ifTracer(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested")){
+if(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested"){
     //need to invoice the fee either here or in a new custom script
 	logDebug("Building Permit Master Planning Review, resubmittal requested.");
 	include("5132_BLD_ResubmitEmail.js");
