@@ -18,15 +18,61 @@ try
    removeAllRequiredDocumentCapCondition();
 
    if (appMatch("Licenses/Liquor/Liquor License/Application", capId)){
-//	var licType = getAppSpecific('Type of License');
-	addRequiredDocument("Background Information");
-	addRequiredDocument("Business Operations");
-	addRequiredDocument("Consent Forms");
-	addRequiredDocument("Financial Documentation");
-	addRequiredDocument("Premise Diagrams");
-	addRequiredDocument("Legal Entity Documents");
+	var appType = getAppSpecific('Type of Application');
+	var licType = getAppSpecific('Type of Change');
 	addRequiredDocument("State Liquor Forms");
-	addRequiredDocument("Property Forms");
+		if (licType == "Addition of Opotional Premise"){
+		addRequiredDocument("Premise Diagrams");
+		addRequiredDocument("Property Forms");
+		}
+		if (licType == "Change of Location"){
+		addRequiredDocument("Business Operations");
+		addRequiredDocument("Premise Diagrams");
+		addRequiredDocument("Property Forms");
+		}
+		if (licType == "Change of Ownership Structure"){
+		addRequiredDocument("Background Information");
+		addRequiredDocument("Business Operations");
+		addRequiredDocument("Consent Forms");
+		addRequiredDocument("Financial Documentation");
+		addRequiredDocument("Legal Entity Documents");
+		}
+		if (licType == "Modification of Premise"){
+		addRequiredDocument("Premise Diagrams");
+		addRequiredDocument("Property Forms");
+		}
+		if (licType == "Name Change"){
+		addRequiredDocument("Legal Entity Documents");
+		}
+		if (licType == "Registered Manager"){
+		addRequiredDocument("Background Information");
+		}
+		if (licType == "Sidewalk Service"){
+		addRequiredDocument("Business Operations");
+		addRequiredDocument("Premise Diagrams");
+		}
+		if (licType == "Storage Permit"){
+		addRequiredDocument("Premise Diagrams");
+		addRequiredDocument("Property Forms");
+		}
+		if (appType == "Transfer") {
+			addRequiredDocument("Background Information");
+			addRequiredDocument("Business Operations");
+			addRequiredDocument("Consent Forms");
+			addRequiredDocument("Financial Documentation");
+			addRequiredDocument("Premise Diagrams");
+			addRequiredDocument("Legal Entity Documents");
+			addRequiredDocument("Property Forms");
+		}
+		if (appType == "New Application") {
+			addRequiredDocument("Background Information");
+			addRequiredDocument("Business Operations");
+			addRequiredDocument("Consent Forms");
+			addRequiredDocument("Financial Documentation");
+			addRequiredDocument("Premise Diagrams");
+			addRequiredDocument("Legal Entity Documents");
+			addRequiredDocument("Property Forms");
+		}
    }
    if (appMatch("Licenses/Liquor/Liquor License/Renewal", capId)){
 //	var licType = getAppSpecific('Type of License');
