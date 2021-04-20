@@ -124,8 +124,8 @@ else if (isWorkflowDenyForReview(capID,
 		}
 	}
 }
-aa.env.setValue("ScriptReturnCode", "0"); 
-aa.env.setValue("ScriptReturnMessage", "WorkflowTaskUpdateAfter for Renewal process.");
+//aa.env.setValue("ScriptReturnCode", "0"); 
+//aa.env.setValue("ScriptReturnMessage", "WorkflowTaskUpdateAfter for Renewal process.");
 
 function isApproveEtisalatPayment(capID, wfTask, stepNum, processID, taskStatus)
 {
