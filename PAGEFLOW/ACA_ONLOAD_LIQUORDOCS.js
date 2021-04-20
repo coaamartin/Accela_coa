@@ -21,7 +21,7 @@ try
 	var appType = getAppSpecific('Type of Application');
 	var licType = getAppSpecific('Type of Change');
 	addRequiredDocument("State Liquor Forms");
-		if (licType == "Addition of Opotional Premise"){
+		if (licType == "Addition of Optional Premise"){
 		addRequiredDocument("Premise Diagrams");
 		addRequiredDocument("Property Forms");
 		}
