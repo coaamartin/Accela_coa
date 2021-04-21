@@ -15,11 +15,11 @@ if (wfStatus == "Resubmittal Requested") {
     updateExpirationDateAsi();
 }
 
-if(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested"){
-    logDebug("Building Permit Master Planning Review, resubmittal requested.");
-	include("5132_BLD_ResubmitEmail.js");
-	logDebug("Email was sent for resubmittal.");
-}
+// if(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested"){
+//     logDebug("Building Permit Master Planning Review, resubmittal requested.");
+// 	include("5132_BLD_ResubmitEmail.js");
+// 	logDebug("Email was sent for resubmittal.");
+// }
 
 if (wfTask == "Inspection Phase" && wfStatus == "Temporary CO Issued") {
     /*------------------------------------------------------------------------------------------------------/

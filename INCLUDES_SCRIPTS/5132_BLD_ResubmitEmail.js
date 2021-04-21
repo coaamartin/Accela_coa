@@ -18,7 +18,6 @@ logDebug("appType: " + appTypeString);
 
 
 
-if(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested") {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "BLD_PLANNING_RESUBMITTAL";
     var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -41,4 +40,3 @@ if(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested") {
     logDebug("Table Parameters: " + tParams);
     sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
     logDebug("End of Script 5132_BLD_ResubmitEmail.js");
-}
