@@ -13,6 +13,9 @@ if (wfTask == "Accepted" && wfStatus == "Accept Plans") {
 //Call all customs for wfStatus of Resubmittal Requested
 if (wfStatus == "Resubmittal Requested") {
     updateExpirationDateAsi();
+    if(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested") {
+    include("5132_BLD_ResubmitEmail.js");
+    }
 }
 
 // if(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested"){
