@@ -17,8 +17,8 @@ appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
 
 
- //Donation Bins code
- if ("Building/Permit/Master/NA".equals(appTypeString)) {
+
+if(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested") {
     logDebug("Starting to send notifications");
     var vEmailTemplate = "BLD_PLANNING_RESUBMITTAL";
     var capAlias = cap.getCapModel().getAppTypeAlias();
