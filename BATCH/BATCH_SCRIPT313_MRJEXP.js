@@ -164,6 +164,8 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			//addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
 			
 			emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
+            emailWithReportLinkASync("marijuana@auroragov.org", emailTemplate, eParams, "", "", "N", "");
+
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
 			//if (!sent) {
 			//	logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
