@@ -34,5 +34,5 @@ Notes:
 
 */
 
-permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
+//permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
 
