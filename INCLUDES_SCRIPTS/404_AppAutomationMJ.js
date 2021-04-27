@@ -30,7 +30,7 @@ if (wfTask == "Certificate of Occupancy" && wfStatus == "Complete"){
 		if (vInspType != null && (vInspType == "MJ AMED Inspections")) {
 			vInspector = "DALLEN";
 		} else if (vInspType != null && (vInspType == "MJ Planning Inspections")) {
-			vInspector = "KKREIMEY";
+			vInspector = "DALLEN";
 		} else if (vInspType != null && (vInspType == "MJ Code Enforcement Inspections")) {
 			vInspector = "DALLEN";
 		} else if (vInspType != null && (vInspType == "MJ Security Inspections - Police")) {
