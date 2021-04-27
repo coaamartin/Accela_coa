@@ -105,7 +105,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 		}
 		logDebug2(expSince1);
 
-		if (expSince1 > expiredSinceDays) {
+		if (expSince1 < expiredSinceDays) {
 			var renewalCapIDString = null;
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
 			if (renewalCapID) {
