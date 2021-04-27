@@ -94,9 +94,9 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 		expResult = expResult.getOutput();
 
 		var thisCap = null;
-		
+		logDebug2("ExpResult: " + expResult);
 		//check if delinquent record is outside 8-day grace period
-		var expSince = math.abs(dateDiff(expResult.getExpDate(), new Date()));
+		var expSince = (dateDiff(expResult.getExpDate(), new Date()));
 		logDebug2("Date expSince: " + expSince);
 		logDebug2("ExpiredSinceDays: " + expiredSinceDays);
 		if (expSince > expiredSinceDays) {
