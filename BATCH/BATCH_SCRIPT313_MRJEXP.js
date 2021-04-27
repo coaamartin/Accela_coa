@@ -95,8 +95,10 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 
 		var thisCap = null;
 		
-		//check if delinquent record is outside 7-day grace period
+		//check if delinquent record is outside 8-day grace period
 		var expSince = dateDiff(expResult.getExpDate(), new Date());
+		logDebug2("Date expSince: " + expSince);
+		logDebug2("ExpiredSinceDays: " + expiredSinceDays);
 		if (expSince > expiredSinceDays) {
 			var renewalCapIDString = null;
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
@@ -171,7 +173,7 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			//	logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			//}
 		} else {
-			logDebug2("<br> Skipping record; still within 7-day grace period");
+			logDebug2("<br> Skipping record; still within 8-day grace period");
 		}
 		logDebug2("<br>#######################");
 	}//for all caps
