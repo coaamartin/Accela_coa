@@ -27,7 +27,7 @@ if(appMatch("Licenses/Professional/General/Application"))
    
 
    logDebug("Starting to send notifications");
-   var vEmailTemplate = "BLD_PLANNING_RESUBMITTAL";
+   var vEmailTemplate = "BLD RESUBMITTAL NOTIFICATION";
    var capAlias = cap.getCapModel().getAppTypeAlias();
    var recordApplicant = getContactByType("Applicant", capId);
    var firstName = recordApplicant.getFirstName();
@@ -73,7 +73,7 @@ if(appMatch("Licenses/Contractor/General/Application"))
    // if (wfStatus == "Additional Info Required") addParameter(vEParams, "$$LetterReason$$", "additional information is required");   
   
    logDebug("Starting to send notifications");
-   var vEmailTemplate = "BLD_PLANNING_RESUBMITTAL";
+   var vEmailTemplate = "BLD RESUBMITTAL NOTIFICATION";
    var capAlias = cap.getCapModel().getAppTypeAlias();
    var recordApplicant = getContactByType("Applicant", capId);
    var firstName = recordApplicant.getFirstName();
