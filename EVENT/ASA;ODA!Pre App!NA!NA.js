@@ -6,12 +6,13 @@ var vEmailTemplate = "ODA PRE APP SUBMITAL EMAIL # 220";
    var recordApplicant = getContactByType("Applicant", capId);
    var recordCC = getContactByType("Consultant", capId);
    if (recordCC == null) {
-       recordCC = "";
+       emailCC = "";
+   } else {
+    var emailCC = recordCC.getEmail();
    }
    var firstName = recordApplicant.getFirstName();
    var lastName = recordApplicant.getLastName();
    var emailTo = recordApplicant.getEmail();
-   var emailCC = recordCC.getEmail();
    var today = new Date();
    var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
    var tParams = aa.util.newHashtable();
