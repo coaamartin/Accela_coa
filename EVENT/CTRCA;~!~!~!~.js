@@ -15,7 +15,7 @@ try{
 	appTypeArray=capType.split("/");
 	var module = appTypeArray[0];
     var category = appTypeArray[1];
-    var exceptionCategories = ["Marijuana", "Permit"];
+    var exceptionCategories = ["Marijuana", "Permit", "ODA"];
 
 
     if(publicUser && !exists(category, exceptionCategories)){
