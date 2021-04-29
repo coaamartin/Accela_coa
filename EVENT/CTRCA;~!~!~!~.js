@@ -7,7 +7,7 @@ try{
 	if(codeDistrict && codeDistrict.length > 0){
 		addParcelDistrict(null,codeDistrict[0]["CODE_NUMBER"]);
 	}
-	
+	if(!appMatch("ODA/Pre-App/NA/NA")){
 	var record = aa.cap.getCap(capId).getOutput();
     var capType=record.getCapType();
     capType=capType.toString();
@@ -17,7 +17,7 @@ try{
     var category = appTypeArray[1];
     var exceptionCategories = ["Marijuana", "Permit", "ODA"];
 
-
+	
     if(publicUser && !exists(category, exceptionCategories)){
 	    params = aa.util.newHashtable();
 	    addParameter(params, "$$appTypeFirstLevel$$", appTypeArray[0]);
@@ -69,7 +69,7 @@ try{
 		sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null);
 
 	}
-	
+	}
 } catch (err) {
 	logDebug("A JavaScript Error occurred: CTRCA:*/*/*/*: copyParcelGisObjects():" + err.lineNumber + ". Err Message: " + err.message);
 	logDebug("Stack: " + err.stack);
