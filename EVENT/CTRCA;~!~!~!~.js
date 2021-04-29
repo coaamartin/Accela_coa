@@ -1,81 +1,81 @@
 //Needed to get GIS feature associated when created by ACA
 //Copy Parcel GIS Objects to Record using function copyParcelGisObjects()
-try{
+try {
 	copyParcelGisObjects();
 	var codeDistrict = new Array;
-	codeDistrict = getGISBufferInfo("AURORACO","Code Enforcement Areas","0.01","CODE_NUMBER")
-	if(codeDistrict && codeDistrict.length > 0){
-		addParcelDistrict(null,codeDistrict[0]["CODE_NUMBER"]);
+	codeDistrict = getGISBufferInfo("AURORACO", "Code Enforcement Areas", "0.01", "CODE_NUMBER")
+	if (codeDistrict && codeDistrict.length > 0) {
+		addParcelDistrict(null, codeDistrict[0]["CODE_NUMBER"]);
 	}
-	if(!appMatch("ODA/Pre-App/NA/NA")){
-	var record = aa.cap.getCap(capId).getOutput();
-    var capType=record.getCapType();
-    capType=capType.toString();
-	var appTypeArray= new Array();
-	appTypeArray=capType.split("/");
-	var module = appTypeArray[0];
-    var category = appTypeArray[1];
-    var exceptionCategories = ["Marijuana", "Permit", "ODA"];
-
 	
-    if(publicUser && !exists(category, exceptionCategories)){
-	    params = aa.util.newHashtable();
-	    addParameter(params, "$$appTypeFirstLevel$$", appTypeArray[0]);
-	    var phoneNumber = "";
-	    // if(module == "Building"){
-		// 	 phoneNumber = "303-739-7420"
-		// 	 appTypeFirstLevel = "Permit Center"
-		// 	 addParameter(params, "$$appTypeFirstLevel$$", appTypeFirstLevel);
-	    
-	    // }
-	    if(module == "Planning"){
-	    
-	    phoneNumber = "303-739-7000"
-	    
-	    }
-	    if(module == "Enforcement"){
-	    
-	    phoneNumber = "303-739-7000"
-	    
-	    }
-	    if(module == "PublicWorks"){
-	    
-	    phoneNumber = "303-739-7300"
-	    
-	    }
-	    if(module == "Water"){
-	    
-	    phoneNumber = "303-739-7370"
-	    
-	    }
-	    
-	    var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-        acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
-        addParameter(params,"$$acaURL$$",acaSite);
-	    addParameter(params, "$$deptPhoneNumber$$", phoneNumber);
-	    //getACARecordParam4Notification(params,acaUrl);
-	    addParameter(params, "$$recordAlias$$", cap.getCapType().getAlias());
-	    //addParameter(params, "$$acaRecordUrl$$", acaUrl);
-	    getRecordParams4Notification(params);
-	    getContactParams4Notification(params,"Applicant");
-	    getContactParams4Notification(params,"License Holder");
-	    getContactParams4Notification(params,"Constituent");
-	    getContactParams4Notification(params,"Complainant");
-	    getContactParams4Notification(params,"Reporting Party");
-	    getContactParams4Notification(params,"Contact");
-	    getContactParams4Notification(params,"Arborist Applicant");
-	    getContactParams4Notification(params,"Contractor Applicant");
-	    getContactParams4Notification(params,"Responsible Party");
-		sendNotification("noreply@auroragov.org",params.get("$$applicantEmail$$"),"","GLOBAL SUBMISSION #416",params,null);
+		var record = aa.cap.getCap(capId).getOutput();
+		var capType = record.getCapType();
+		capType = capType.toString();
+		var appTypeArray = new Array();
+		appTypeArray = capType.split("/");
+		var module = appTypeArray[0];
+		var category = appTypeArray[1];
+		var exceptionCategories = ["Marijuana", "Permit", "ODA"];
 
-	}
+		if (!appMatch("ODA/Pre-App/NA/NA")) {
+		if (publicUser && !exists(category, exceptionCategories)) {
+			params = aa.util.newHashtable();
+			addParameter(params, "$$appTypeFirstLevel$$", appTypeArray[0]);
+			var phoneNumber = "";
+			// if(module == "Building"){
+			// 	 phoneNumber = "303-739-7420"
+			// 	 appTypeFirstLevel = "Permit Center"
+			// 	 addParameter(params, "$$appTypeFirstLevel$$", appTypeFirstLevel);
+
+			// }
+			if (module == "Planning") {
+
+				phoneNumber = "303-739-7000"
+
+			}
+			if (module == "Enforcement") {
+
+				phoneNumber = "303-739-7000"
+
+			}
+			if (module == "PublicWorks") {
+
+				phoneNumber = "303-739-7300"
+
+			}
+			if (module == "Water") {
+
+				phoneNumber = "303-739-7370"
+
+			}
+
+			var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+			acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));
+			addParameter(params, "$$acaURL$$", acaSite);
+			addParameter(params, "$$deptPhoneNumber$$", phoneNumber);
+			//getACARecordParam4Notification(params,acaUrl);
+			addParameter(params, "$$recordAlias$$", cap.getCapType().getAlias());
+			//addParameter(params, "$$acaRecordUrl$$", acaUrl);
+			getRecordParams4Notification(params);
+			getContactParams4Notification(params, "Applicant");
+			getContactParams4Notification(params, "License Holder");
+			getContactParams4Notification(params, "Constituent");
+			getContactParams4Notification(params, "Complainant");
+			getContactParams4Notification(params, "Reporting Party");
+			getContactParams4Notification(params, "Contact");
+			getContactParams4Notification(params, "Arborist Applicant");
+			getContactParams4Notification(params, "Contractor Applicant");
+			getContactParams4Notification(params, "Responsible Party");
+			sendNotification("noreply@auroragov.org", params.get("$$applicantEmail$$"), "", "GLOBAL SUBMISSION #416", params, null);
+
+		}
 	}
 } catch (err) {
 	logDebug("A JavaScript Error occurred: CTRCA:*/*/*/*: copyParcelGisObjects():" + err.lineNumber + ". Err Message: " + err.message);
 	logDebug("Stack: " + err.stack);
 };
 
- function getRecordParams4Notification(params) {
+function getRecordParams4Notification(params) {
 
 	// pass in a hashtable and it will add the additional parameters to the table
 
@@ -93,13 +93,13 @@ try{
 
 	addParameter(params, "$$balanceDue$$", "$" + parseFloat(balanceDue).toFixed(2));
 
-	
+
 
 	return params;
 
 }
 
- function getContactParams4Notification(params,conType) {
+function getContactParams4Notification(params, conType) {
 
 	// pass in a hashtable and it will add the additional parameters to the table
 
@@ -111,7 +111,7 @@ try{
 
 
 
-	for(ca in contactArray) {
+	for (ca in contactArray) {
 
 		thisContact = contactArray[ca];
 
@@ -169,7 +169,7 @@ try{
 
 
 
-	return params;	
+	return params;
 
 }
 
