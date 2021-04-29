@@ -32,7 +32,7 @@ function script220_ApplicationReceivedEmailForPreApp() {
 		
         
         var resParEmail = getContactEmailAddress("Responsible Party", capId);
-        var ccEmails = "";
+        var ccEmails = getContactEmailAddress("Applicant", capId);
         
         if(resParEmail){
             var conts = getContactObjs(capId);
