@@ -7,11 +7,11 @@ logDebug("Starting 5133_ODA_Email.js");
 var vEmailTemplate = "ODA PRE APP SUBMITAL EMAIL # 220";
 var capAlias = cap.getCapModel().getAppTypeAlias();
 var recordApplicant = getContactByType("Applicant", capId);
-var recordCC = getContactByType("Consultant", capId);
+var recordCC = getContactEmailAddress("Consultant", capId);
 if (recordCC == null) {
     emailCC = "";
 } else {
-    var emailCC = recordCC.getEmail();
+    var emailCC = getContactEmailAddress("Consultant", capId);
 }
 var firstName = recordApplicant.getFirstName();
 var lastName = recordApplicant.getLastName();
