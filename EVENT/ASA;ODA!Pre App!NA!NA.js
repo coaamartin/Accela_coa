@@ -4,7 +4,7 @@ logDebug("Starting ASA;ODA!Pre App!NA!NA");
 var vEmailTemplate = "ODA PRE APP SUBMITAL EMAIL # 220";
    var capAlias = cap.getCapModel().getAppTypeAlias();
    var recordApplicant = getContactByType("Applicant", capId);
-   var recordCC = getContactByType("Responsible Party", capId);
+   var recordCC = getContactByType("Consultant", capId);
    var firstName = recordApplicant.getFirstName();
    var lastName = recordApplicant.getLastName();
    var emailTo = recordApplicant.getEmail();
