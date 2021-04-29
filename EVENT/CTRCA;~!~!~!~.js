@@ -17,7 +17,7 @@ try {
 		var category = appTypeArray[1];
 		var exceptionCategories = ["Marijuana", "Permit", "ODA"];
 
-		if (!appMatch("ODA/Pre-App/NA/NA")) {
+		if (!appMatch("ODA/Pre App/NA/NA")) {
 		if (publicUser && !exists(category, exceptionCategories)) {
 			params = aa.util.newHashtable();
 			addParameter(params, "$$appTypeFirstLevel$$", appTypeArray[0]);
