@@ -5,7 +5,7 @@ function Script332_scheduleInspectionTSI() {
 
         loadTaskSpecific(tsiArray);
         var pPreHearingDate = tsiArray["Pre hearing inspection date"];
-        var preHearingDateMinus1 = getPrevWorkingDays(new Date(pPreHearingDate), 1);
+        var preHearingDateMinus1 = getPrevWorkingDays(new Date(pPreHearingDate), 3);
         var inspectorID = getInspectorID();
         var noOfDays = days_between(today, preHearingDateMinus1);
 
