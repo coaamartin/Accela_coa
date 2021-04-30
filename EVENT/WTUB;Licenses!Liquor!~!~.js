@@ -4,7 +4,7 @@ appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
 
-if (appTypeString != "Licenses/Liquor/Tasting License/Renewal ") {
+if (!appMatch("Licenses/Liquor/Tasting License/Renewal")) {
 
 	if ((wfStatus == 'Issue License') && (AInfo['General Business License Number'] == null)) {
 		cancel = true;
