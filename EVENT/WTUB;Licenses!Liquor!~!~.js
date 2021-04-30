@@ -1,4 +1,8 @@
 //IF ASI GENERALBUSINESS not filled out, then stop the worfklow.
+appTypeResult = cap.getCapType(); //create CapTypeModel object
+appTypeString = appTypeResult.toString();
+appTypeArray = appTypeString.split("/");
+logDebug("appType: " + appTypeString);
 
 if (!appMatch("Licenses/Liquor/Tasting License/Renewal ")){
 
