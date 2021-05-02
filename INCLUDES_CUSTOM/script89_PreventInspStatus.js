@@ -34,6 +34,7 @@ function script89_PreventInspStatus() {
 		if (!clearInspectionPassed || !hydroInspectionPassed || !superInspectionPassed) {
 			cancel = true;
 			showMessage = true;
+            logDebug("Task cannot be completed until the Clearwater, super flush, pressure test Inspection has been approved");
 			comment("Task cannot be completed until the Clearwater, super flush, pressure test Inspection has been approved");
 		}
 	}
