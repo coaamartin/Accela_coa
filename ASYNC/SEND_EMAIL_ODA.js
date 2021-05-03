@@ -6,9 +6,10 @@ try
 	var cap = aa.env.getValue("cap");
 	var recordID = aa.env.getValue("altID");
     var appType = aa.env.getValue("appType");
-	var emailTo = getEmailString(); 
-	var recordApplicant = aa.env.getValue("recordApplicant");
-    var recordCC = aa.env.getValue("recordCC");
+	var recordApplicant = getContactByType("Applicant", capId);
+	//var recordApplicant = aa.env.getValue("recordApplicant");
+	var emailTo = recordApplicant.getEmail();
+    var recordCC = aa.env.getValue("emailCC");
 	//var firstName = recordApplicant.getFirstName();
     //var lastName = recordApplicant.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
