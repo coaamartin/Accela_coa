@@ -33,3 +33,8 @@ if(ifTracer(wfTask == "Pre App Meeting Request" && wfStatus == "Email Sent to PM
     //Script 226
     include("226_ODAPreAppPMEmail");
 }
+
+if(ifTracer(wfTask == "Send Final Letter" && wfStatus == "Letter Sent", 'wf:Send Final Letter/Letter Sent')){
+    //Script 225
+    odaScript225_emailMeetingNotes();
+}
