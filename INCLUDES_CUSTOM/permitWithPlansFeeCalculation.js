@@ -45,24 +45,24 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
     //determine Fee Code / Fee Sched to sue based on record type
     var feeSched = null;
     var feeCodesAry = [];
-    if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")) {
-        // feeSched = "BLD_PWP";
-        // feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PWP_01";
-        // feeCodesAry["BUILDING_FEE_VALUATION"] = "BLD_PWP_06";
-        // feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PWP_03";
-        // feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PWP_04";
-        // feeCodesAry["BUILDING_USE_TAX_FEE"] = "BLD_PWP_02";
-        // feeCodesAry["BUILDING_DRIVEWAY_FEE"] = "BLD_PWP_11";
-        // feeCodesAry["BUILDING_CHICKEN_FEE"] = "BLD_PWP_12";
-    } else if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("No Plans")) {
-        feeSched = "BLD_PNP";
-    // //  feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PNP_06";
-    //     feeCodesAry["BUILDING_FEE_VALUATION"] = "BLD_PNP_01";
-    //     feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PNP_03";
-    //     feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PNP_04";
-    //     feeCodesAry["BUILDING_USE_TAX_FEE"] = "BLD_PNP_02";
-    //     feeCodesAry["BUILDING_DRIVEWAY_FEE"] = "BLD_PNP_11";
-    }
+    // if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("Plans")) {
+    //     // feeSched = "BLD_PWP";
+    //     // feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PWP_01";
+    //     // feeCodesAry["BUILDING_FEE_VALUATION"] = "BLD_PWP_06";
+    //     // feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PWP_03";
+    //     // feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PWP_04";
+    //     // feeCodesAry["BUILDING_USE_TAX_FEE"] = "BLD_PWP_02";
+    //     // feeCodesAry["BUILDING_DRIVEWAY_FEE"] = "BLD_PWP_11";
+    //     // feeCodesAry["BUILDING_CHICKEN_FEE"] = "BLD_PWP_12";
+    // } else if (appTypeArray && String(appTypeArray[2]).equalsIgnoreCase("No Plans")) {
+    //     feeSched = "BLD_PNP";
+    // // //  feeCodesAry["BUILDING_FEE_FLAT"] = "BLD_PNP_06";
+    // //     feeCodesAry["BUILDING_FEE_VALUATION"] = "BLD_PNP_01";
+    // //     feeCodesAry["ARAPAHOE_FEE_1"] = "BLD_PNP_03";
+    // //     feeCodesAry["ARAPAHOE_FEE_2"] = "BLD_PNP_04";
+    // //     feeCodesAry["BUILDING_USE_TAX_FEE"] = "BLD_PNP_02";
+    // //     feeCodesAry["BUILDING_DRIVEWAY_FEE"] = "BLD_PNP_11";
+    // }
 
     if (feeSched == null) {
         logDebug("**WARN could not obtain Fee Schedule from App Type " + appTypeArray);
