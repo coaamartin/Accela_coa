@@ -31,8 +31,8 @@ function script220_ApplicationReceivedEmailForPreApp() {
         addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
 		
         
-        var resParEmail = getContactEmailAddress("Responsible Party", capId);
-        var ccEmails = getContactEmailAddress("Applicant", capId);
+        var resParEmail = getContactEmailAddress("Applicant", capId);
+        var ccEmails = getContactEmailAddress("Consultant", capId);
         
         if(resParEmail){
             var conts = getContactObjs(capId);
