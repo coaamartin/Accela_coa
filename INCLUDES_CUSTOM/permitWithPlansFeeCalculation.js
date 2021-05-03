@@ -152,21 +152,21 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
         }
        
     //Building Use Tax Fee
-    var feeQty = 0;
-    var materialsCost = asiValues["Materials Cost"];
-    var valuation = asiValues["Valuation"];
+    // var feeQty = 0;
+    // var materialsCost = asiValues["Materials Cost"];
+    // var valuation = asiValues["Valuation"];
 
-    if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
-            && parseFloat(materialsCost) <= (parseFloat(valuation) / 2)) {
-        feeQty = parseFloat(valuation)/2;
-    } else if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
-            && parseFloat(materialsCost) > (parseFloat(valuation) / 2)) {
-        feeQty = parseFloat(materialsCost);
-    }
+    // if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
+    //         && parseFloat(materialsCost) <= (parseFloat(valuation) / 2)) {
+    //     feeQty = parseFloat(valuation)/2;
+    // } else if (materialsCost && materialsCost != null && materialsCost != "" && valuation && valuation != null && valuation != ""
+    //         && parseFloat(materialsCost) > (parseFloat(valuation) / 2)) {
+    //     feeQty = parseFloat(materialsCost);
+    // }
 
-    if (feeQty > 0) {
-        updateFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "N");
-    }//END Building Use Tax Fee
+    // if (feeQty > 0) {
+    //     updateFee(feeCodesAry["BUILDING_USE_TAX_FEE"], feeSched, "FINAL", feeQty, "N");
+    // }//END Building Use Tax Fee
 	
 try{    
     //Building Fee (Flat Fee)
