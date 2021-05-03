@@ -11,6 +11,8 @@ logDebug("Starting 5038_ODAPreApplicationMeetingAgenda.js");
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
 		var vAsyncScript = "SEND_EMAIL_ODA";
+		var firstName = recordApplicant.getFirstName();
+		var lastName = recordApplicant.getLastName();
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("altID", altID);
 		envParameters.put("capId", capId);
@@ -18,7 +20,7 @@ logDebug("Starting 5038_ODAPreApplicationMeetingAgenda.js");
 		envParameters.put("appType", appType);
 		logDebug("Starting to kick off ASYNC event for OTC Final Agenda. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
-		
+		logDebug("End of 5038_ODAPreApplicationMeetingAgenda.js");
 // var vEmailTemplate = "ODA Finalize Agenda #222"; 
 // var capAlias = cap.getCapModel().getAppTypeAlias();
 // var recordApplicant = getContactByType("Applicant", capId);
@@ -42,6 +44,6 @@ logDebug("Starting 5038_ODAPreApplicationMeetingAgenda.js");
 // logDebug("EmailTo: " + emailTo);
 // logDebug("Table Parameters: " + tParams);
 // sendNotification("noreply@auroragov.org", emailTo, emailCC, vEmailTemplate, tParams, null);
-logDebug("End of 5038_ODAPreApplicationMeetingAgenda.js");
+
 }
 

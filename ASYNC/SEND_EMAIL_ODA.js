@@ -9,8 +9,8 @@ try
 	var emailTo = getEmailString(); 
 	var recordApplicant = aa.env.getValue("recordApplicant");
     var recordCC = aa.env.getValue("recordCC");
-	var firstName = recordApplicant.getFirstName();
-    var lastName = recordApplicant.getLastName();
+	//var firstName = recordApplicant.getFirstName();
+    //var lastName = recordApplicant.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -21,8 +21,8 @@ try
     tParams.put("$$altID$$", recordID);
     tParams.put("$$Record Type$$", capAlias);
     tParams.put("$$capAlias$$", capAlias);
-    tParams.put("$$FirstName$$", firstName);
-    tParams.put("$$LastName$$", lastName);
+    //tParams.put("$$FirstName$$", firstName);
+    //tParams.put("$$LastName$$", lastName);
     tParams.put("$$recordAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
     rParams.put("fromDate", frmDate);
