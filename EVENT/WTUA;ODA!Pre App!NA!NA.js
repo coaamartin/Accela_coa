@@ -17,7 +17,7 @@ Sample Call:
     sendMeetingConfirmationEmail("Finalize Agenda", [ "Complete" ], "MESSAGE_NOTICE_PUBLIC WORKS");
 */
 
-sendMeetingConfirmationEmail("Finalize Agenda", [ "Complete" ], "ODA FINALIZE AGENDA #222");
+//sendMeetingConfirmationEmail("Finalize Agenda", [ "Complete" ], "ODA FINALIZE AGENDA #222"); //Commented out on 5/3/2021 as it is no longer being used.
 
 if(ifTracer(wfTask == "Prepare Final Letter" && wfStatus == "Complete", 'wf:Prepare Final Letter/Complete')){
     //Script 225
