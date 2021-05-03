@@ -2,9 +2,6 @@ script224_ActivatePlanningSupervisorReview();
 script133_AutoCreateTraffic();
 
 //COA - JMAIN
-include("5038_ODAPreApplicationMeetingAgenda");
-
-//COA - JMAIN
 include("5004_odaPlanningSupervisorReviewAssigned");
 
 //
@@ -37,4 +34,8 @@ if(ifTracer(wfTask == "Pre App Meeting Request" && wfStatus == "Email Sent to PM
 if(ifTracer(wfTask == "Send Final Letter" && wfStatus == "Letter Sent", 'wf:Send Final Letter/Letter Sent')){
     //Script 225
     odaScript225_emailMeetingNotes();
+}
+
+if(ifTracer(wfTask == "Finalize Agenda" && wfStatus == "Complete", 'wf:Finalize Agenda/Complete')){
+    include("5038_ODAPreApplicationMeetingAgenda");
 }
