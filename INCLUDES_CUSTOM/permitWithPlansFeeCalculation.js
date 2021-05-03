@@ -151,7 +151,7 @@ function permitWithPlansFeeCalculation(workFlowTask, workflowStatusArray, permit
             updateFee(feeCodesAry["BUILDING_DRIVEWAY_FEE"], feeSched, "FINAL", feeQty, "N");
         }
        
-    Building Use Tax Fee
+    //Building Use Tax Fee
     var feeQty = 0;
     var materialsCost = asiValues["Materials Cost"];
     var valuation = asiValues["Valuation"];
@@ -182,7 +182,7 @@ try{
         }
     } else if (!asiValues[permitFeeTypeAsiName] || asiValues[permitFeeTypeAsiName] == null || asiValues[permitFeeTypeAsiName] == "" || asiValues[permitFeeTypeAsiName] == "Other" || parseFloat(permitTypeTotal ) == 0) 
     {
-        ////Building Fee (Valuation) -- add logic for Other (dropdown)
+        //Building Fee (Valuation) -- add logic for Other (dropdown)
         var valuation = asiValues["Valuation"];
         var perFeeTot = AInfo["Permit Fee Type Total"];
         var feeAmt = 0;
