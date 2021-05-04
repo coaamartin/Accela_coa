@@ -35,7 +35,7 @@ try
 	//rParams.put("Record ID", recordID);
 	rParams.put("Record_id", recordID);
 	var emailtemplate = "LIC ISSUED EMAIL";
-	var report = generateReportFile("Licenses_Temp_script", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Licenses_Temp_tasting_script", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
