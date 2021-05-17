@@ -20,10 +20,15 @@ if(inspType == "Notice of Violation Inspection"){
         logDebug("Record is Closed.  Closing all active tasks for process code: " + wfProcess);
         if(wfProcess) deactivateActiveTasks(wfProcess);
     }
-    if(inspResult == "Non compliance"){
-      closeTask("Notice of Violation", "Non Compliance", wfComment, "Resulted via Script IRSA");
+    if(inspResult == "First Notice"){
+      updateTask("Notice of Violation", "First Notice", wfComment, "Resulted via Script IRSA");
     }
-    
+    if(inspResult == "Second Notice"){
+      updateTask("Notice of Violation", "Second Notice", wfComment, "Resulted via Script IRSA");
+    }
+    if(inspResult == "Third Notice"){
+      updateTask("Notice of Violation", "Third Notice", wfComment, "Resulted via Script IRSA");
+    }
     if(inspResult == "Issue Summons"){
         closeTask("Notice of Violation", "Issue Summons", "via Script 332", "via Script 332");
         activateTask("Pre Hearing Inspection");
