@@ -54,6 +54,7 @@ if(inspType == "Pre Court Investigation"){
   //Need to grab the inspection comments to populate the comments on the wf task.
   inspComment = inspObj.getInspection().getResultComment();
   wfComment = inspComment;
+  logDebug("Starting pre cout investigation IRSA event. Comment: " + wfComment);
   if(inspResult == "Compliance"){
     //closeTask(workflowTask, workflowStatus, workflowComment, "");
     closeTask("Pre Hearing Inspection", "Compliance", wfComment, "Resulted via Script IRSA");
