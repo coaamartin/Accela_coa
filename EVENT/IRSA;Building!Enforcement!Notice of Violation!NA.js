@@ -48,3 +48,16 @@ if(inspType == "Investigation"){
     processNotOfViolInsp("Investigation", "Notice of Violation", true, "Notice of Violation Inspection", true, "Investigation", "Notice of Violation");
     //Script 331 End
 }
+
+//Logic for SS#950 5/17 - RLP
+if(inspType == "Pre Court Investigation"){
+  //Need to grab the inspection comments to populate the comments on the wf task.
+  wfComment = inspComment;
+  if(inspResult == "Compliance"){
+    //closeTask(workflowTask, workflowStatus, workflowComment, "");
+    closeTask("Pre Hearing Inspection", "Compliance", wfComment, "Resulted via Script IRSA");
+  }
+  if(inspResult == "Non Compliance"){
+    closeTask("Pre Hearing Inspection", "Non Compliance", wfComment, "Resulted via Script IRSA");
+  }
+}
