@@ -52,6 +52,14 @@ if(inspType == "Investigation"){
 //Logic for SS#950 5/17 - RLP
 if(inspType == "Pre Court Investigation"){
   //Need to grab the inspection comments to populate the comments on the wf task.
+  var inspResultComment;
+			var vInspComments;
+			
+			if (inspResultComment != "" || inspResultComment != null) {
+				vInspComments = inspResultComment;				
+			} else {
+				vInspComments = inspComment;
+			}
   wfComment = inspComment;
   if(inspResult == "Compliance"){
     //closeTask(workflowTask, workflowStatus, workflowComment, "");
