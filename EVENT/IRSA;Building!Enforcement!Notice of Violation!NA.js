@@ -55,6 +55,7 @@ if(inspType == "Pre Court Investigation"){
   inspComment = inspObj.getInspection().getResultComment();
   wfComment = inspComment;
   logDebug("Starting pre cout investigation IRSA event. Comment: " + wfComment);
+  logDebug("Inspection Result: " + inspResult);
   if(inspResult == "Compliance"){
     //closeTask(workflowTask, workflowStatus, workflowComment, "");
     closeTask("Pre Hearing Inspection", "Compliance", wfComment, "Resulted via Script IRSA");
