@@ -60,7 +60,7 @@ if(inspType == "Pre Court Investigation"){
     //closeTask(workflowTask, workflowStatus, workflowComment, "");
     closeTask("Pre Hearing Inspection", "Compliance", wfComment, "Resulted via Script IRSA");
   }
-  if(inspResult == "Non Compliance"){
+  if(inspResult == "Non compliance"){
     closeTask("Pre Hearing Inspection", "Non Compliance", wfComment, "Resulted via Script IRSA");
   }
 }
