@@ -26,6 +26,7 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
         fTask = wfObj[i];
         if ("Water Meter".equals(fTask.getTaskDescription()))
         {
+          logDebug("FTask Get Disposition" + fTask.getDisposition()); 
           if (("Ready for CO" == fTask.getDisposition()) || ("Backflow Preventor" == fTask.getDisposition()))
           {
           }
