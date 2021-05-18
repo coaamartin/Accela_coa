@@ -21,6 +21,19 @@ if (!appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempU
 			logDebug("Starting to kick off ASYNC event for OTC. Params being passed: " + envParameters);
 			aa.runAsyncScript(vAsyncScript, envParameters);
 
+			//need to also send the permit to the customer once fees have been paid
+			logDebug("Starting to kick off event to send permit to customer");
+			var altID2 = capId.getCustomID();
+			appType2 = cap.getCapType().toString();
+			var vAsyncScript2 = "SEND_EMAIL_BLD_OTC_PERMIT";
+			var envParameters2 = aa.util.newHashMap();
+			envParameters2.put("altID", altID2);
+			envParameters2.put("capId", capId);
+			envParameters2.put("cap", cap);
+			envParameters2.put("appType", appType2);
+			logDebug("Starting to kick off ASYNC event for OTC Permit issuance. Params being passed: " + envParameters2);
+			aa.runAsyncScript(vAsyncScript2, envParameters2);
+
 		}
 
 		logDebug("End of PPA;Building!Permit!OTC!~.js");
