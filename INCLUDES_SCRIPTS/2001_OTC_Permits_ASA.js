@@ -82,9 +82,17 @@ comment("Looking for OTC Fees and Pending Inspections - UPDATED 2/4 JMPorter-CoA
          }
 
       if (appMatch('*/*/*/Water Heater')) {
-         updateFee('BLD_OTC_11', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
-         createPendingInspection("BLD_OTC", "Electrical Final");
-         createPendingInspection("BLD_OTC", "Plumbing Final");
+         if (appMatch('*/*/*/Water Heater')) {
+            if (asiValues['Water Heater Type'] == 'Electic') {
+               updateFee('BLD_OTC_11', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
+               createPendingInspection("BLD_OTC", "Electrical Final");
+               createPendingInspection("BLD_OTC", "Plumbing Final");
+            }
+            if (asiValues['Water Heater Type'] == 'Gas') {
+               updateFee('BLD_OTC_11', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
+               createPendingInspection("BLD_OTC", "Plumbing Final");
+            }
+         }
          }
 
       if (appMatch('*/*/*/Water Heater and AC')) {
@@ -96,6 +104,18 @@ comment("Looking for OTC Fees and Pending Inspections - UPDATED 2/4 JMPorter-CoA
 
       if (appMatch('*/*/*/Water Heater and Furnace')) {
          updateFee('BLD_OTC_13', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
+         createPendingInspection("BLD_OTC", "Mechanical Final");
+         createPendingInspection("BLD_OTC", "Electrical Final");
+         createPendingInspection("BLD_OTC", "Plumbing Final");
+         }
+
+      if (appMatch('*/*/*/Residential Roofing and Siding')) {
+         updateFee('BLD_OTC_08', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
+         updateFee('BLD_OTC_10', 'BLD_OTC_FEES', 'FINAL',1, 'Y');
+         createPendingInspection("BLD_OTC", "Framing Final");
+         createPendingInspection("BLD_OTC", "Reroof Final");
+         }
+      if (appMatch('*/*/*/Boiler New Record')) {
          createPendingInspection("BLD_OTC", "Mechanical Final");
          createPendingInspection("BLD_OTC", "Electrical Final");
          createPendingInspection("BLD_OTC", "Plumbing Final");
