@@ -20,5 +20,7 @@ if(ifTracer(wfTask == "Accepted In House" && wfStatus == "Route for Review", 'wf
 }
 
 if(ifTracer(wfTask == "Accepted In House" && wfStatus == "Route to Planning", 'wf:Accepted In House/Route to Planning')){
+    if (inspType.indexOf("Accepted In House") != -1){
     assignInspectionDepartment("BUILDING/NA/NA/NA/NA/PT", "Accepted In House");
+    }
 }
