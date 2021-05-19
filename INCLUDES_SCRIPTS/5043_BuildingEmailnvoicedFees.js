@@ -9,15 +9,28 @@ balanceDue = capDetail.getBalance();
 logDebug("Balance Due: " + balanceDue);
 
 if (balanceDue > 0) {
-  //email the applicant
-  // logDebug("Email to: " + emailTo);
-  //   var emailTo1 = emailTo;
-  var contacts = "Applicant";
-  //var lptypes = "Contractor";
-  var emailtemplate = "BLD_INVOICEDFEES";
-  emailContactsWithReportLinkASync("Applicant", emailtemplate, "", "", "", "N", "");
-  //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
-  logDebug("End of email to send");
+  // //email the applicant
+  // // logDebug("Email to: " + emailTo);
+  // //   var emailTo1 = emailTo;
+  // var contacts = "Applicant";
+  // //var lptypes = "Contractor";
+  // var emailtemplate = "BLD_INVOICEDFEES";
+  // emailContactsWithReportLinkASync("Applicant", emailtemplate, "", "", "", "N", "");
+  // //coa_emailLicenseProfessionals(lptypes, emailtemplate, "", "", "", capId);
+  // logDebug("End of email to send");
+  var altID = capId.getCustomID();
+		appType = cap.getCapType().toString();
+		var invoiceNbrObj = getLastInvoice({});
+		var invNbr = invoiceNbrObj.getInvNbr();
+		var vAsyncScript = "SEND_EMAIL_BLDMST_INVOICE";
+		var envParameters = aa.util.newHashMap();
+		envParameters.put("altID", altID);
+		envParameters.put("capId", capId);
+		envParameters.put("cap", cap);
+		envParameters.put("INVOICEID", String(invNbr));
+		logDebug("Starting to kick off ASYNC event for BLD Master Invoice. Params being passed: " + envParameters);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+		logDebug("---------------------> 5043_BuildingEmailInvoicedFees.js ended.");
 }
 logDebug("End of 5043_BuildingEmailInvoicedFees.js");
 
