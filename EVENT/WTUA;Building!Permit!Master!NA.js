@@ -19,6 +19,6 @@ if(ifTracer(wfTask == "Accepted In House" && wfStatus == "Route for Review", 'wf
     bldScript418SetTskDueDate();
 }
 
-if(ifTracer(wfTask == "Accepted In House" && wfStatus == "Route for Planning", 'wf:Accepted In House/Route for Planning')){
+if(ifTracer(wfTask == "Accepted In House" && wfStatus == "Route To Planning", 'wf:Accepted In House/Route to Planning')){
     assignInspectionDepartment("BUILDING/NA/NA/NA/NA/PT", "Accepted In House");
 }
