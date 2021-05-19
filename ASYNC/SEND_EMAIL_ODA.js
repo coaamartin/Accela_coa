@@ -15,8 +15,10 @@ try
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-    var frmDate = thisDate;
-	var toDate = thisDate;
+    // var frmDate = thisDate;
+	// var toDate = thisDate;
+	var frmDate = "01/01/2020";
+	var toDate = "01/01/2022";
 	var tParams = aa.util.newHashtable();
 	tParams.put("$$todayDate$$", thisDate);
     tParams.put("$$altID$$", recordID);
