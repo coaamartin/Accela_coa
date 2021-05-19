@@ -18,3 +18,7 @@ addMasterPlanDataToShrdDDList("Master Plan Type", "Approved", "Code Change");
 if(ifTracer(wfTask == "Accepted In House" && wfStatus == "Route for Review", 'wf:Accepted In House/Route for Review')){
     bldScript418SetTskDueDate();
 }
+
+if(ifTracer(wfTask == "Accepted In House" && wfStatus == "Route for Planning", 'wf:Accepted In House/Route for Planning')){
+    assignInspectionDepartment("BUILDING/NA/NA/NA/NA/PT", "Accepted In House");
+}

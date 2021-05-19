@@ -31,7 +31,6 @@ function bldScript418SetTskDueDate(){
             if(masterPlnTyp != "Other"){
                 taskToUpdateDueDte.push("Structural Plan Review","Electrical Plan Review","Mechanical Plan Review","Plumbing Plan Review","Structural Engineering Review","Bldg Life Safety Review","Fire Life Safety Review");
                 daysForDueDate = 21;
-                assignInspectionDepartment("BUILDING/NA/NA/NA/NA/PT", "Accepted In House");
             }
         }
         
