@@ -37,23 +37,8 @@ if (appMatch("Licenses/Professional/General/Application")) {
       aa.runAsyncScript(vAsyncScript, envParameters);
       logDebug("---------------------> 5113_EMailReadyToPay.js ended.");
    }
-   function getEmailString()
-{
-	var emailString = "";
-	var contactArray = getPeople(capId);
+   
 
-	//need to add inspection contact below to this logic 
-	for (var c in contactArray)
-	{
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "License Holder")
-		{
-			emailString += contactArray[c].getPeople().getEmail() + ";";
-
-		}
-	}
-	logDebug(emailString);
-	return emailString;
-}
    //    var contactType = "License Holder";
    //    var licenseType = "Qualified Professional";
    //    var addressType = "Business";
@@ -66,7 +51,6 @@ if (appMatch("Licenses/Professional/General/Application")) {
    //    addParameter(vEParams, "$$LicenseType$$", asiValues["Qualifying Professional Type"]);
 }
 
-
 if (appMatch("Licenses/Contractor/General/Application")) {
    if (balanceDue > 0) {
       var asiValues = getAppSpecific("Contractor Type");
@@ -77,7 +61,7 @@ if (appMatch("Licenses/Contractor/General/Application")) {
       var invoiceNbrObj = getLastInvoice({});
       var invNbr = invoiceNbrObj.getInvNbr();
       var vAsyncScript = "SEND_EMAIL_LIC_QPL_CLL";
-      var emailTo = getEmailString(); 
+      var emailTo = getEmailString2(); 
 	   var recordApplicant = getContactByType("License Holder", capId);
 	   var firstName = recordApplicant.getFirstName();
       var lastName = recordApplicant.getLastName();
@@ -96,7 +80,38 @@ if (appMatch("Licenses/Contractor/General/Application")) {
       aa.runAsyncScript(vAsyncScript, envParameters);
       logDebug("---------------------> 5113_EMailReadyToPay.js ended.");
    }
-   function getEmailString()
+   
+   // var contactType = "Applicant";
+   // var licenseType = "Contractor";
+   // var addressType = "Business";
+
+   // var vEmailTemplate = "BLD CLL LICENSE READY TO PAY # 106"; 
+   // var vEParams = aa.util.newHashtable();
+
+   // var asiValues = new Array();
+   // loadAppSpecific(asiValues);     
+   // addParameter(vEParams, "$$LicenseType$$", asiValues["Contractor Type"]);
+
+}
+function getEmailString()
+{
+	var emailString = "";
+	var contactArray = getPeople(capId);
+
+	//need to add inspection contact below to this logic 
+	for (var c in contactArray)
+	{
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "License Holder")
+		{
+			emailString += contactArray[c].getPeople().getEmail() + ";";
+
+		}
+	}
+	logDebug(emailString);
+	return emailString;
+}
+
+   function getEmailString2()
    {
       var emailString = "";
       var contactArray = getPeople(capId);
@@ -113,19 +128,6 @@ if (appMatch("Licenses/Contractor/General/Application")) {
       logDebug(emailString);
       return emailString;
    }
-   // var contactType = "Applicant";
-   // var licenseType = "Contractor";
-   // var addressType = "Business";
-
-   // var vEmailTemplate = "BLD CLL LICENSE READY TO PAY # 106"; 
-   // var vEParams = aa.util.newHashtable();
-
-   // var asiValues = new Array();
-   // loadAppSpecific(asiValues);     
-   // addParameter(vEParams, "$$LicenseType$$", asiValues["Contractor Type"]);
-
-}
-
 //emailContacts(contactType,vEmailTemplate, vEParams, "", "", "N", "");   
 
 logDebug('Ended script 5113_EMailReadyToPay');
