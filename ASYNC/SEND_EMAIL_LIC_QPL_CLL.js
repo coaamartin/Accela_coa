@@ -8,9 +8,9 @@ try
     var appType = aa.env.getValue("appType");
     var licenseType = aa.env.getValue("licenseType");
 	var emailTo = aa.env.getValue("emailTo");
-	var recordApplicant = getContactByType("License Holder", capId);
-	var firstName = recordApplicant.getFirstName();
-    var lastName = recordApplicant.getLastName();
+	var recordApplicant = aa.env.getValue("recordApplicant");
+	var firstName = aa.env.getValue("firstName");
+    var lastName = aa.env.getValue("LastName");
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var invNbr = aa.env.getValue("INVOICEID");
