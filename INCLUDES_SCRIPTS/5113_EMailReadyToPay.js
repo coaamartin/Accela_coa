@@ -54,7 +54,6 @@ if (appMatch("Licenses/Professional/General/Application")) {
 if (appMatch("Licenses/Contractor/General/Application")) {
    if (balanceDue > 0) {
       var asiValues = getAppSpecific("Contractor Type");
-      var asiValues = getAppSpecific("Qualifying Professional Type");
       licenseType = asiValues;
       var altID = capId.getCustomID();
       appType = cap.getCapType().toString();
@@ -62,7 +61,7 @@ if (appMatch("Licenses/Contractor/General/Application")) {
       var invNbr = invoiceNbrObj.getInvNbr();
       var vAsyncScript = "SEND_EMAIL_LIC_QPL_CLL";
       var emailTo = getEmailString2(); 
-	   var recordApplicant = getContactByType("License Holder", capId);
+	   var recordApplicant = getContactByType("Applicant", capId);
 	   var firstName = recordApplicant.getFirstName();
       var lastName = recordApplicant.getLastName();
       var envParameters = aa.util.newHashMap();
