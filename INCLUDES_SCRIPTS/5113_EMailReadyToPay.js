@@ -5,38 +5,75 @@
 // BY: JMPorter
 
 logDebug('Started script 5113_EMailReadyToPay');
+var balanceDue;
+balanceDue = capDetail.getBalance();
+logDebug("Balance Due: " + balanceDue);
 
-if(appMatch("Licenses/Professional/General/Application"))
-{
-   var contactType = "License Holder";
-   var licenseType = "Qualified Professional";
-   var addressType = "Business";
+if (appMatch("Licenses/Professional/General/Application")) {
+   if (balanceDue > 0) {
+      licenseType = asiValues["Qualifying Professional Type"];
+      var altID = capId.getCustomID();
+      appType = cap.getCapType().toString();
+      var invoiceNbrObj = getLastInvoice({});
+      var invNbr = invoiceNbrObj.getInvNbr();
+      var vAsyncScript = "SEND_EMAIL_LIC_QPL_CLL";
+      var envParameters = aa.util.newHashMap();
+      envParameters.put("altID", altID);
+      envParameters.put("capId", capId);
+      envParameters.put("cap", cap);
+      envParameters.put("INVOICEID", String(invNbr));
+      envParameters.put("licenseType", licenseType);
+      envParameters.put("vemailTemplate", "BLD QPL LICENSE READY TO PAY # 106");
+      logDebug("Starting to kick off ASYNC event for BLD Master Invoice. Params being passed: " + envParameters);
+      aa.runAsyncScript(vAsyncScript, envParameters);
+      logDebug("---------------------> 5113_EMailReadyToPay.js ended.");
+   }
+   //    var contactType = "License Holder";
+   //    var licenseType = "Qualified Professional";
+   //    var addressType = "Business";
 
-   var vEmailTemplate = "BLD QPL LICENSE READY TO PAY # 106"; 
-   var vEParams = aa.util.newHashtable();
-      
-   var asiValues = new Array();
-   loadAppSpecific(asiValues);     
-   addParameter(vEParams, "$$LicenseType$$", asiValues["Qualifying Professional Type"]);
+   //    var vEmailTemplate = "BLD QPL LICENSE READY TO PAY # 106"; 
+   //    var vEParams = aa.util.newHashtable();
+
+   //    var asiValues = new Array();
+   //    loadAppSpecific(asiValues);     
+   //    addParameter(vEParams, "$$LicenseType$$", asiValues["Qualifying Professional Type"]);
 }
 
 
-if(appMatch("Licenses/Contractor/General/Application"))
-{   
+if (appMatch("Licenses/Contractor/General/Application")) {
+   if (balanceDue > 0) {
+      licenseType = asiValues["Contractor Type"];
+      var altID = capId.getCustomID();
+      appType = cap.getCapType().toString();
+      var invoiceNbrObj = getLastInvoice({});
+      var invNbr = invoiceNbrObj.getInvNbr();
+      var vAsyncScript = "SEND_EMAIL_LIC_QPL_CLL";
+      var envParameters = aa.util.newHashMap();
+      envParameters.put("altID", altID);
+      envParameters.put("capId", capId);
+      envParameters.put("cap", cap);
+      envParameters.put("INVOICEID", String(invNbr));
+      envParameters.put("licenseType", licenseType);
+      envParameters.put("vemailTemplate", "BLD CLL LICENSE READY TO PAY # 106");
+      logDebug("Starting to kick off ASYNC event for BLD Master Invoice. Params being passed: " + envParameters);
+      aa.runAsyncScript(vAsyncScript, envParameters);
+      logDebug("---------------------> 5113_EMailReadyToPay.js ended.");
+   }
 
-   var contactType = "Applicant";
-   var licenseType = "Contractor";
-   var addressType = "Business";
-   
-   var vEmailTemplate = "BLD CLL LICENSE READY TO PAY # 106"; 
-   var vEParams = aa.util.newHashtable();
-   
-   var asiValues = new Array();
-   loadAppSpecific(asiValues);     
-   addParameter(vEParams, "$$LicenseType$$", asiValues["Contractor Type"]);
-  
-}  
-   
-emailContacts(contactType,vEmailTemplate, vEParams, "", "", "N", "");   
+   // var contactType = "Applicant";
+   // var licenseType = "Contractor";
+   // var addressType = "Business";
+
+   // var vEmailTemplate = "BLD CLL LICENSE READY TO PAY # 106"; 
+   // var vEParams = aa.util.newHashtable();
+
+   // var asiValues = new Array();
+   // loadAppSpecific(asiValues);     
+   // addParameter(vEParams, "$$LicenseType$$", asiValues["Contractor Type"]);
+
+}
+
+//emailContacts(contactType,vEmailTemplate, vEParams, "", "", "N", "");   
 
 logDebug('Ended script 5113_EMailReadyToPay');
