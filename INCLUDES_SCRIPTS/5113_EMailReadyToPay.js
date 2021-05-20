@@ -11,7 +11,8 @@ logDebug("Balance Due: " + balanceDue);
 
 if (appMatch("Licenses/Professional/General/Application")) {
    if (balanceDue > 0) {
-      licenseType = asiValues["Qualifying Professional Type"];
+      var asiValues = getAppSpecific("Qualifying Professional Type");
+      licenseType = asiValues;
       var altID = capId.getCustomID();
       appType = cap.getCapType().toString();
       var invoiceNbrObj = getLastInvoice({});
@@ -43,7 +44,8 @@ if (appMatch("Licenses/Professional/General/Application")) {
 
 if (appMatch("Licenses/Contractor/General/Application")) {
    if (balanceDue > 0) {
-      licenseType = asiValues["Contractor Type"];
+      var asiValues = getAppSpecific("Contractor Type");
+      licenseType = asiValues;
       var altID = capId.getCustomID();
       appType = cap.getCapType().toString();
       var invoiceNbrObj = getLastInvoice({});

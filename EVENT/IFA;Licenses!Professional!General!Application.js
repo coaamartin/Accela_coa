@@ -1,5 +1,5 @@
 /*
 Invoice Fee After
 */
-
-  include("5113_EMailReadyToPay");
+logDebug("IFA;Licenses!Professional!General!Applicaiton.js")
+include("5113_EMailReadyToPay");
