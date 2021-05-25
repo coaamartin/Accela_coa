@@ -52,7 +52,7 @@ if($iTrc(wfTask == "Accepted In House" && wfStatus == "Routed for Review", 'wf:A
     bldScript418SetTskDueDate();
 }
 if($iTrc(wfStatus == "Resubmittal Requested", 'wfStatus:Resubmittal Requested')){
-    include("5132_BLD_ResubmitEmail");
+    include("5134_BLD_Resubmittal");
 }
 
 /*
