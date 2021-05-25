@@ -51,6 +51,9 @@ if($iTrc(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Proce
 if($iTrc(wfTask == "Accepted In House" && wfStatus == "Routed for Review", 'wf:Accepted In House/Routed for Review')){
     bldScript418SetTskDueDate();
 }
+if($iTrc(wfStatus == "Resubmittal Requested", 'wfStatus:Resubmittal Requested')){
+    include("5132_BLD_ResubmitEmail");
+}
 
 /*
 Title : Activate workflow tasks (WorkflowTaskUpdateAfter) 
