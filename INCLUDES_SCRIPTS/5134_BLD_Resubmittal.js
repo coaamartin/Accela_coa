@@ -29,7 +29,7 @@ var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getF
 var tParams = aa.util.newHashtable();
 tParams.put("$$todayDate$$", thisDate);
 tParams.put("$$altid$$", capId.getCustomID());
-tParams.put("$$Record Type$$", appTypeString);
+tParams.put("$$Record Type$$", capAlias);
 tParams.put("$$capAlias$$", capAlias);
 tParams.put("$$FirstName$$", firstName);
 tParams.put("$$LastName$$", lastName);
