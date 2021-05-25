@@ -15,7 +15,8 @@ appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
-
+if($iTrc(wfTask != null, 'wfTask != "Null"')) {
+    
 logDebug("Starting to send notifications");
 var vEmailTemplate = "BLD RESUBMITTAL NOTIFICATION";
 var capAlias = cap.getCapModel().getAppTypeAlias();
@@ -42,3 +43,4 @@ logDebug("EmailTo: " + emailTo);
 logDebug("Table Parameters: " + tParams);
 sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
 logDebug("End of Script 5134_BLD_Resubmittal.js");
+}
