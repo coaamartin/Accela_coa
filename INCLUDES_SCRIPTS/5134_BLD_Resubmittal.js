@@ -24,6 +24,8 @@ var firstName = recordApplicant.getFirstName();
 var lastName = recordApplicant.getLastName();
 var emailTo = recordApplicant.getEmail();
 var wfcomment = wfComment;
+var workflowTasks = aa.workflow.getTasks(capId).getOutput();
+logDebug("Workflow Task: " + workflowTasks);
 var wfTask = wfTask;
 var today = new Date();
 var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
