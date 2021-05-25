@@ -23,7 +23,6 @@ try
 	addRequiredDocument("State Liquor Forms");
 		if (licType == "Addition of Optional Premise"){
 		addRequiredDocument("Application Forms");
-		addRequiredDocument("Application Forms");
 		addRequiredDocument("Premise Diagrams");
 		addRequiredDocument("Property Forms");
 		}
@@ -41,7 +40,6 @@ try
 		}
 		if (licType == "Modification of Premise"){
 		addRequiredDocument("Application Forms");
-		addRequiredDocument("Application Forms");
 		addRequiredDocument("Premise Diagrams");
 		addRequiredDocument("Property Forms");
 		}
@@ -52,7 +50,6 @@ try
 		addRequiredDocument("Background Information");
 		}
 		if (licType == "Sidewalk Service"){
-		addRequiredDocument("Application Forms");
 		addRequiredDocument("Application Forms");
 		addRequiredDocument("Business Operations");
 		addRequiredDocument("Premise Diagrams");
