@@ -16,6 +16,10 @@ BATCH Parameters: NONE
 Notes:
     - A record with no inspections at all will be skipped (as we don't have inspection type to use, and no last date to add freq to)
     - ASI (Month and year) not updated, no ASI with specified name exist.
+
+Updates:
+	- 5/19/2021: Schedule inspection based on month and frequency
+
 */
 
 function getScriptText(e) {
@@ -31,6 +35,7 @@ function getScriptText(e) {
         return ""
     }
 }
+
 
 var SCRIPT_VERSION = 3.0;
 eval(getScriptText("INCLUDES_ACCELA_FUNCTIONS"));
@@ -48,44 +53,64 @@ try {
  * get last scheduled inspection, check if next inspection should be scheduled, based on ASIs
  */
 function updateCustomFieldAndScheduleInspection() {
+    var today = aa.date.getCurrentDate();
+    var nextMonthDate = new Date();
+    nextMonthDate = dateAddMonths(nextMonthDate,1);
     var emseParameters = {};
-    emseParameters.LICENSE_TYPE = "Primary Inspection";
+    emseParameters.LICENSE_TYPE1 = "Primary Inspection";
+    emseParameters.LICENSE_TYPE2 = "Special Inspection";
+    emseParameters.LICENSE_TYPE3 = "Complaint";
     emseParameters.LICENSE_SUBTYPE = "NA";
     emseParameters.AGENCY = "AURORACO";
 
     var dataSet = getRecordsArray(emseParameters);
     if (dataSet != false || dataSet.length > 0) aa.print("**INFO total records=" + dataSet.length);
-    if (dataSet != false || dataSet.length > 0) 
-    for (var i in dataSet) {
-        var queryResult = dataSet[i];
-        aa.print(queryResult.B1_PER_ID1 + "-" + queryResult.B1_PER_ID2 + "-" + queryResult.B1_PER_ID3 +  " (" + queryResult.ALTID + ")" );
+    if (dataSet != false || dataSet.length > 0)
 
-        var capIdResult = aa.cap.getCapID(queryResult.ALTID);
-        if ( ! capIdResult.getSuccess())
-        {
-            logDebug("getCapID error: " + capIdResult.getErrorMessage());
-            continue;
-        }
-        
-        var capId = capIdResult.getOutput();
-        capId = aa.cap.getCapID(capId.ID1, capId.ID2, capId.ID3).getOutput();
-        aa.print(capId);
-        aa.print("<br>#######################");
-        aa.print("<br>**INFO Working on capId=" + capId.getId() + ", altId= " + capId.getCustomID());
-        var olduseAppSpecificGroupName = useAppSpecificGroupName;
-        useAppSpecificGroupName = false;
 
-        //sample value for inspectionMonth asi [01 January]
-        var inspectionMonth = getAppSpecific("Inspection Month");
-        if (inspectionMonth == null || inspectionMonth == "") {
-            aa.print("<br>Inspection Month is null, SKIP...");
-            continue;
-        }
+        for (var i in dataSet) {
+            var queryResult = dataSet[i];
+            aa.print("<br>#######################");
+            //aa.print(queryResult.B1_PER_ID1 + "-" + queryResult.B1_PER_ID2 + "-" + queryResult.B1_PER_ID3 +  " (" + queryResult.ALTID + ")" );
 
-        //the inspection is next month
-        if (inspectionMonth.indexOf(nextMonthNumber.toString()) != -1) {
+            var capIdResult = aa.cap.getCapID(queryResult.ALTID);
+            if ( ! capIdResult.getSuccess())
+            {
+                logDebug("getCapID error: " + capIdResult.getErrorMessage());
+                continue;
+            }
+
+            var capId = capIdResult.getOutput();
+            capId = aa.cap.getCapID(capId.ID1, capId.ID2, capId.ID3).getOutput();
+            //aa.print(capId);
+
+            aa.print("<br>**INFO Working on capId= " + capId.getId() + ", altId= " + capId.getCustomID());
+            //var olduseAppSpecificGroupName = useAppSpecificGroupName;
+            useAppSpecificGroupName = false;
+
+            //sample value for inspectionMonth asi [01 January]
+            var inspectionMonth = getAppSpecific("Inspection Month",capId);
+
+
+            if (inspectionMonth == null || inspectionMonth == "") {
+                aa.print("<br>Inspection Month is null, SKIP...");
+                continue;
+            }
+
+            var inspectionMonthNumber = inspectionMonth.split(" ");
+            var monthToSchedule = inspectionMonthNumber[0];
+            aa.print("Inspection month: " + monthToSchedule);
+
+            var nextMonth = today.getMonth()+1;
+            aa.print("Month to schedule: " + nextMonth)
+
+            if(nextMonth != monthToSchedule){
+                aa.print("<br>Month to schedule doesn't match record, SKIP...");
+                continue;
+            }
+
             //values [12 months], [24 months]
-            var inspectionFrequency = getAppSpecific("Inspection Frequency");
+            var inspectionFrequency = getAppSpecific("Inspection Frequency",capId);
 
             if (inspectionFrequency == null || inspectionFrequency == "") {
                 aa.print("<br>**WARN Inspection Frequency is null, SKIP...");
@@ -106,7 +131,7 @@ function updateCustomFieldAndScheduleInspection() {
             }
 
             var lastSchedDate = null;
-            //commenting out references to lastSchedType - AuroraCO wants the inspection type to always be "FD Primary Inspection" from this batch job 
+            //commenting out references to lastSchedType - AuroraCO wants the inspection type to always be "FD Primary Inspection" from this batch job
             //var lastSchedType = null;
             var inspSchedType = "FD Primary Inspection";
 
@@ -115,11 +140,15 @@ function updateCustomFieldAndScheduleInspection() {
                     continue;
                 }
                 if (lastSchedDate == null) {
-                    lastSchedDate = inspecs[i].getScheduledDate();
+                    if(inspecs[i].getInspectionType() == inspSchedType){
+                        lastSchedDate = inspecs[i].getScheduledDate();
+                    }
                     //lastSchedType = inspecs[i].getInspectionType();
                 } else {
                     if (dateDiff(inspecs[i].getScheduledDate(), lastSchedDate) < 0) {
-                        lastSchedDate = inspecs[i].getScheduledDate();
+                        if(inspecs[i].getInspectionType() == inspSchedType){
+                            lastSchedDate = inspecs[i].getScheduledDate();
+                        }
                         //lastSchedType = inspecs[i].getInspectionType();
                     }
                 }
@@ -127,44 +156,56 @@ function updateCustomFieldAndScheduleInspection() {
 
             if (lastSchedDate == null) {
                 aa.print("<br>**WARN could not find lastSchedDate, SKIP...");
+                continue;
             }
 
             lastSchedDate = convertDate(lastSchedDate);
-            
+            aa.print("Next Month: "+ nextMonthDate);
+
             //we calc dateDiff using nextMonth (which is due date, not current month)
             var diff = dateDiff(nextMonthDate, lastSchedDate); // in minus if lastSchedDate is in past
             diff = Math.ceil(diff / 30);
             aa.print("<br>**INFO lastSchedDate=" + lastSchedDate + " MonthsDiff=" + diff);
 
             //diff > 0 means in future
-            if (diff > 0 || Math.abs(diff) < inspectionFrequency) {
+            // if (diff > 0 || Math.abs(diff) < inspectionFrequency) {
+            if (diff > 0 ) {
                 aa.print("<br>**INFO next inspection could be already scheduled, SKIP...");
                 continue;
             }
 
+            /* schedule in the past, use last inspection date */
             //schedule same inspection, on date (lastSchedDate + inspectionFrequency)
-            var nextSchedDate = dateAddMonths(lastSchedDate, inspectionFrequency);
-            //change to script 20 - scheduling inspection for user assigned to record rather than inspector who completed previous inspection
-            //var lastInspectorId = getLastInspector(lastSchedType);
-            var inspectorId = getAssignedStaff(capId);
+            /* schedule only future inspections */
+
+            //var inspectionMonthNumber = inspectionMonth.split(" ");
+            var newScheduledDate = new Date(inspectionMonthNumber[0] + "/" + "01" + "/" + today.getYear())
+            aa.print("newScheduledDate: "+ newScheduledDate)
+            var nextSchedDate = dateAddMonths(newScheduledDate, inspectionFrequency);
             nextSchedDate = dateAdd(nextSchedDate, -1);
             nextSchedDate = nextWorkDay(nextSchedDate);
             aa.print("<br>**INFO need to sched inspection " + inspSchedType + " On " + nextSchedDate);
+
+            //change to script 20 - scheduling inspection for user assigned to record rather than inspector who completed previous inspection
+            //var lastInspectorId = getLastInspector(lastSchedType);
+            var inspectorId = getAssignedStaff(capId);
+            aa.print("InspectorId: " + inspectorId)
+            var daysAhead = dateDiff(today,nextSchedDate);
+            aa.print("date diff: " + dateDiff(today,nextSchedDate))
             try {
                 if(inspectorId) {
                     aa.print("<br>Scheduling with inspector assignment");
-                    scheduleInspectDate(inspSchedType, nextSchedDate, inspectorId);
+                    _scheduleInspectDate(inspSchedType, nextSchedDate, inspectorId, capId);
+
                 } else {
                     aa.print("<br>Scheduling without inspector assignment");
-                    scheduleInspectDate(inspSchedType, nextSchedDate);
+                    _scheduleInspectDate(inspSchedType, nextSchedDate,null, capId);
                 }
             } catch (ex) {
                 aa.print("<br>ERR scheduleInspectDate : " + ex);
             }
-        }//inspection is next month
 
-        useAppSpecificGroupName = olduseAppSpecificGroupName;
-    }
+        }
 }
 
 function getAssignedStaff(capId) {
@@ -173,7 +214,7 @@ function getAssignedStaff(capId) {
         var cdScriptObjResult = aa.cap.getCapDetail(capId);
         if (!cdScriptObjResult.getSuccess()) {
             aa.print("<br>**ERROR: No cap detail script object : ",
-                    cdScriptObjResult.getErrorMessage());
+                cdScriptObjResult.getErrorMessage());
             return false;
         }
 
@@ -194,18 +235,21 @@ function getAssignedStaff(capId) {
 }
 
 function getRecordsArray(emseParameters){
-    var sql = 
-            "select b.SERV_PROV_CODE,b.B1_PER_ID1, b.B1_PER_ID2, b.B1_PER_ID3, b.b1_alt_id AS ALTID \
-            from B1PERMIT b \
-            where b.b1_per_type =  '" +emseParameters.LICENSE_TYPE+"' \
-            and b.b1_per_sub_type = '" +emseParameters.LICENSE_SUBTYPE+"' \
+    var sql =
+        "select b.SERV_PROV_CODE,b.B1_PER_ID1, b.B1_PER_ID2, b.B1_PER_ID3, b.b1_alt_id AS ALTID \
+        from B1PERMIT b \
+        where b.b1_per_type  in ('" + emseParameters.LICENSE_TYPE1+ "','" + emseParameters.LICENSE_TYPE2 + "','" +emseParameters.LICENSE_TYPE3 + "') \
+			and b.b1_per_sub_type = '" +emseParameters.LICENSE_SUBTYPE+"' \
             and b.REC_STATUS = 'A' \
-            and b.serv_prov_code = '" +emseParameters.AGENCY+"' ";
+            and b.serv_prov_code = '" +emseParameters.AGENCY+ "' ";
 
-            //aa.print(sql);
+    //and b.b1_alt_id = '17-000033-FD' \ ;
+    //and b.b1_alt_id = '19-1616453-000-00-FD' \
+    //'" +emseParameters.LICENSE_TYPE+"' \
+    //aa.print(sql);
 
-            var arr = doSQL(sql);
-            return arr;
+    var arr = doSQL(sql);
+    return arr;
 }
 
 function doSQL(sql) {
@@ -237,4 +281,27 @@ function doSQL(sql) {
     } catch (err) {
         aa.print(err.message);
     }
+}
+
+function _scheduleInspectDate(iType,DateToSched, InspectorId, CapId) // optional inspector ID.
+{
+    var thisItem = CapId;
+    var inspectorObj = null;
+    var inspTime = null;
+    var inspComm = "Scheduled via Script";
+    if (arguments.length >= 3)
+        if (arguments[2] != null)
+        {
+            var inspRes = aa.person.getUser(arguments[2]);
+            if (inspRes.getSuccess())
+                inspectorObj = inspRes.getOutput();
+        }
+
+
+    var schedRes = aa.inspection.scheduleInspection(thisItem, inspectorObj, aa.date.parseDate(DateToSched), inspTime, iType, inspComm)
+
+    if (schedRes.getSuccess())
+        aa.print("Successfully scheduled inspection : " + iType + " for " + DateToSched);
+    else
+        aa.print( "**ERROR: adding scheduling inspection (" + iType + "): " + schedRes.getErrorMessage());
 }
