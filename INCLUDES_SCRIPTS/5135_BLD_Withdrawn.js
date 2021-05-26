@@ -1,12 +1,12 @@
 //Written by rprovinc   
 //
-//include("5134_BLD_Resubmittal.js");
+//include("5135_BLD_Withdrawn.js");
 
 //*****************************************************************************
-//Script WTUA;Licenses!Contractor!General!Renewal.js
-//Record Types:	
+//Script WTUA; Building/Permit/New Building/NA
+//Record Types:	Building/Permit/New Building/NA
 //Event: 		WTUA
-//Desc:			Going to send email communication to ciziten when resubmittal is required of them.
+//Desc:			Going to send email communication to ciziten when withdarwan is statused.
 //
 //Created By: Rprovinc
 
@@ -17,7 +17,7 @@ appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
 
 logDebug("Starting to send notifications");
-var vEmailTemplate = "BLD RESUBMITTAL NOTIFICATION";
+var vEmailTemplate = "BLD_WITHDRAWN";
 var capAlias = cap.getCapModel().getAppTypeAlias();
 var recordApplicant = getContactByType("Applicant", capId);
 var firstName = recordApplicant.getFirstName();
@@ -39,4 +39,4 @@ tParams.put("$$wfComment$$", wfComment);
 logDebug("EmailTo: " + emailTo);
 logDebug("Table Parameters: " + tParams);
 sendNotification("noreply@auroragov.org", emailTo, "", vEmailTemplate, tParams, null);
-logDebug("End of Script 5134_BLD_Resubmittal.js");
+logDebug("End of Script 5135_BLD_Withdrawn.js");
