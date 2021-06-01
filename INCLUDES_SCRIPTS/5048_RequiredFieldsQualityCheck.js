@@ -24,7 +24,7 @@ if ("Quality Check".equals(wfTask) && "Approved".equals(wfStatus))
 			cancel=true;
 			showMessage=true;
 			missingFields.required = true; //I tired this but think its for the expression builder.
-	        comment("<font size=small><b>Not all Required Custom fields are populated for the Quailty Check Approval.<b></font><br><br>The following fields are missing: <fontcolor=red>"+ missingFields + "</font><br>");
+	        comment("<font size=small><b>Not all Required Custom fields are populated for the Quailty Check Approval.<b><br><br>The following fields are missing: <font color=red>"+ missingFields + "</font></font><br>");
 		}
 }
 
