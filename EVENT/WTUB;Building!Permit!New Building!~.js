@@ -20,7 +20,5 @@ if (wfTask == "Certificate of Occupancy"  && wfStatus == "Final CO Issued")
     {
 	checkSpecialInspections();
     }
-if (wfTask == "Quality Check" && wfStatus == "Approved") {
-	include("5136_BLD_NewBuilding_ASI_Check");
-}
+
 
