@@ -21,3 +21,4 @@ if (wfTask == "Certificate of Occupancy"  && wfStatus == "Final CO Issued")
 	checkSpecialInspections();
     }
 
+
