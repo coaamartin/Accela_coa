@@ -8,6 +8,9 @@ try
     var appType = aa.env.getValue("appType");
 	var emailTo = getEmailString(); 
 	var recordApplicant = getContactByType("Applicant", capId);
+	if (recordApplicant == null) {
+		recordApplicant = getContactByType("Contractor(s)", capId);
+	}
 	var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
