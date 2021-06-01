@@ -119,7 +119,11 @@ function autoCloseWorkflow() {
         logDebug("match #3");
         recTypesAry = new Array();
         //  4-10-19 Keith added OTC permits to Array
-        recTypesAry = [ "Building/Permit/No Plans/NA","Building/Permit/OTC/AC Only","Building/Permit/OTC/Commercial Roof","Building/Permit/OTC/Furnace","Building/Permit/OTC/Furnace AC and Water Heater","Building/Permit/OTC/Furnace and AC","Building/Permit/OTC/Gas Pipe","Building/Permit/OTC/Residential Electrical Service","Building/Permit/OTC/Residential Roof","Building/Permit/OTC/Siding","Building/Permit/OTC/Tankless Water Heater","Building/Permit/OTC/Water Heater","Building/Permit/OTC/Water Heater and AC","Building/Permit/OTC/Water Heater and Furnace" ];
+        // 6/1/2021 RLP added New Building to Array per SS #1167
+        recTypesAry = [ "Building/Permit/No Plans/NA","Building/Permit/OTC/AC Only","Building/Permit/OTC/Commercial Roof","Building/Permit/OTC/Furnace","Building/Permit/OTC/Furnace AC and Water Heater",
+        "Building/Permit/OTC/Furnace and AC","Building/Permit/OTC/Gas Pipe","Building/Permit/OTC/Residential Electrical Service","Building/Permit/OTC/Residential Roof","Building/Permit/OTC/Siding",
+        "Building/Permit/OTC/Tankless Water Heater","Building/Permit/OTC/Water Heater","Building/Permit/OTC/Water Heater and AC","Building/Permit/OTC/Water Heater and Furnace","Building/Permit/New Building/Amendment",
+        "Building/Permit/New Building/NA"];
         if((appMatch("Building/Permit/No Plans/NA") || appMatch("Building/Permit/OTC/*")) && bldScript2_noContractorCheck() && validateParentCapStatus([ "Issued" ], "Building/Permit/Master/NA", "Unapproved"))
             matched = checkBalanceAndStatusUpdateRecord(recTypesAry, "Submitted", "Permit Issuance", "Issued", "Issued");
         else logDebug("No LP on file.  Not issuing permit");
