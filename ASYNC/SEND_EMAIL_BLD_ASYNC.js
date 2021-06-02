@@ -23,7 +23,7 @@ try
 	var rParams = aa.util.newHashtable();
     rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
-	var emailtemplate = "BLD_recipt";
+	var emailtemplate = "BLD_RECEIPT";
 	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
