@@ -49,6 +49,7 @@ if (appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse
 if (appMatch("Building/Permit/Master/*")) {
 	logDebug("Starting PPA;Building!Permit!Master!~.js ");
 	logDebug("Current balance: " + balanceDue);
+	closeTask("Fee Processing", "Complete", "", "");
 	//Check balance and update task
 	if (balanceDue == 0) {
 		var altID = capId.getCustomID();
