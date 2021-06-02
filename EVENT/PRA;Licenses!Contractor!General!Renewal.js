@@ -61,14 +61,41 @@ if (balanceDue == 0) {
 			aa.cap.updateProject(renewalCapProject);
 		}
 
-		var vEmailTemplate = "TBD LICENSE RENEWAL EMAIL";
-		var vEParams = aa.util.newHashtable();
-		addParameter(vEParams, "$$LicenseType$$", "Contractor License");
-		addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
-		addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
-		addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());
+		//var vEmailTemplate = "TBD LICENSE RENEWAL EMAIL";
+		// var vEParams = aa.util.newHashtable();
+		// addParameter(vEParams, "$$LicenseType$$", "Contractor License");
+		// addParameter(vEParams, "$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
+		// addParameter(vEParams, "$$ApplicationID$$", vLicenseID.getCustomID());
+		// addParameter(vEParams, "$$altID$$", vLicenseID.getCustomID());
 
-		emailContacts("All", vEmailTemplate, vEParams, null, null);
+		// emailContacts("All", vEmailTemplate, vEParams, null, null);
 
+
+		//Going to need to run an async as we will have send two emails. One for the Reciept and one for the license report
+		//Reciept code
+		//var altID = capId.getCustomID();
+		appType = cap.getCapType().toString();
+		var invoiceNbrObj = getLastInvoice({});
+		var invNbr = invoiceNbrObj.getInvNbr();
+		var vAsyncScript = "SEND_EMAIL_BLD_ASYNC";
+		var envParameters = aa.util.newHashMap();
+		envParameters.put("$$LicenseType$$", "Contractor License");
+		envParameters.put("$$ExpirationDate$$", dateAdd(vNewExpDate, 0));
+		envParameters.put("$$altID$$", vLicenseID.getCustomID());
+		envParameters.put("cap", cap);
+		envParameters.put("INVOICEID", String(invNbr));
+		logDebug("Starting to kick off ASYNC event for Licenses receipt. Params being passed: " + envParameters);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+		logDebug("---------------------> End of the Receipt code. Starting to send Licnese report to parent record");
+
+		//License Report Code
+		var vAsyncScript = "SEND_EMAIL_BLD_OTC";
+		var envParameters2 = aa.util.newHashMap();
+		envParameters2.put("$$altID$$", vLicenseID.getCustomID());
+		envParameters2.put("capId", capId);
+		envParameters2.put("cap", cap);
+		logDebug("Starting to kick off ASYNC event for License Contractor. Params being passed: " + envParameters);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+		logDebug("---------------------> PRA;Licenses!Contractor!Generral!Renewal.js ended.");
 	}
 }
