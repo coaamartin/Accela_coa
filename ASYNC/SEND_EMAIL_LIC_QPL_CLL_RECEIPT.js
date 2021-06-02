@@ -1,4 +1,4 @@
-logDebug("***** Starting SEND_EMAIL_LIC_QPL_CLL *****");
+logDebug("***** Starting SEND_EMAIL_LIC_QPL_CLL_RECEIPT *****");
 
 try
 {

@@ -9,7 +9,7 @@ var balanceDue;
 balanceDue = capDetail.getBalance();
 logDebug("Balance Due: " + balanceDue);
 
-if (appMatch("Licenses/Professional/General/Application")) {
+if (appMatch("Licenses/Professional/General/Application") || appMatch("Licenses/Professional/General/Renewal")) {
    if (balanceDue == 0) {
       var asiValues = getAppSpecific("Qualifying Professional Type");
       licenseType = asiValues;
@@ -33,13 +33,13 @@ if (appMatch("Licenses/Professional/General/Application")) {
       envParameters.put("firstName", firstName);
       envParameters.put("lastName", lastName);
       envParameters.put("vemailTemplate", "BLD_QPL_LICENSE_ISSUANCE_#_64-65");
-      logDebug("Starting to kick off ASYNC event for BLD Master Invoice. Params being passed: " + envParameters);
+      logDebug("Starting to kick off ASYNC event for QPL issuance. Params being passed: " + envParameters);
       aa.runAsyncScript(vAsyncScript, envParameters);
       logDebug("---------------------> 5114_EMailReadyLicenseIssue.js ended.");
    }
 }
 
-if (appMatch("Licenses/Contractor/General/Application")) {
+if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Contractor/General/Renewal")) {
    if (balanceDue == 0) {
       var asiValues = getAppSpecific("Contractor Type");
       licenseType = asiValues;
@@ -63,7 +63,7 @@ if (appMatch("Licenses/Contractor/General/Application")) {
       envParameters.put("firstName", firstName);
       envParameters.put("lastName", lastName);
       envParameters.put("vemailTemplate", "BLD_CLL_LICENSE_ISSUANCE_#111");
-      logDebug("Starting to kick off ASYNC event for BLD Master Invoice. Params being passed: " + envParameters);
+      logDebug("Starting to kick off ASYNC event for CLL issuance. Params being passed: " + envParameters);
       aa.runAsyncScript(vAsyncScript, envParameters);
       logDebug("---------------------> 5114_EMailReadyLicenseIssue.js ended.");
    }

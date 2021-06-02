@@ -9,7 +9,7 @@ var balanceDue;
 balanceDue = capDetail.getBalance();
 logDebug("Balance Due: " + balanceDue);
 
-if (appMatch("Licenses/Professional/General/Application")) {
+if (appMatch("Licenses/Professional/General/Application") || appMatch("Licenses/Professional/General/Renewal")) {
    if (balanceDue > 0) {
       var asiValues = getAppSpecific("Qualifying Professional Type");
       licenseType = asiValues;
