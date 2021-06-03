@@ -149,7 +149,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 if($iTrc(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"), 'wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"'){
     logDebug("Starting to setup inspections for BLDG Life Safety Review")
     inspGroup = "BLD_NEW_CON"
-	createPendingInspection(inspGroup,"Exit Signs/ Emergency Light");
+	createPendingInspection(inspGroup,"Exit Signs / Emergency Lights");
     createPendingInspection(inspGroup,"Fire Extinguisher");
 }
 
