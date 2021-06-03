@@ -148,7 +148,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 //RLP- SS #1045 
 if($iTrc(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"), 'wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"'){
     logDebug("Starting to setup inspections for BLDG Life Safety Review")
-    inspGroup = "BLD_NEW_BUILDING"
+    inspGroup = "BLD_NEW_CON"
 	createPendingInspection(inspGroup,"Exit Signs/ Emergency Light");
     createPendingInspection(inspGroup,"Fire Extinguisher");
 }
