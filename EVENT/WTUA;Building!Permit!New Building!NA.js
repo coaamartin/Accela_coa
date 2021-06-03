@@ -148,7 +148,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 //RLP- SS #1045 
 if(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"){
 	scheduleInspection("Exit Signs/ Emergency Light",0, user);
-    scheduleInspection("Exit Signs/ Emergency Light",0, user);
+    scheduleInspection("Fire Extinguisher",0, user);
 }
 
 
