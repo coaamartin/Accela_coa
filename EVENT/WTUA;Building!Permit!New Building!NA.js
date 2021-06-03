@@ -146,11 +146,11 @@ if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 	deactivateTask("Water Meter");
 }
 //RLP- SS #1045 
-if(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"){
-	//scheduleInspection("Exit Signs/ Emergency Light",0, user);
-    //if we need to list an end user it will be handled below
-    scheduleInspection("Exit Signs/ Emergency Light",0, "");
-    scheduleInspection("Fire Extinguisher",0, "");
+if($iTrc(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"), 'wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"'){
+    logDebug("Starting to setup inspections for BLDG Life Safety Review")
+    inspGroup = "BLD_NEW_BUILDING"
+	createPendingInspection(inspGroup,"Exit Signs/ Emergency Light");
+    createPendingInspection(inspGroup,"Fire Extinguisher");
 }
 
 
