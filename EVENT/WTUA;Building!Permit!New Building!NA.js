@@ -145,6 +145,11 @@ if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 	deactivateTask("Backflow Preventor");
 	deactivateTask("Water Meter");
 }
+//RLP- SS #1045 
+if(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"){
+	scheduleInspection("Exit Signs/ Emergency Light",0, user);
+    scheduleInspection("Exit Signs/ Emergency Light",0, user);
+}
 
 
 // SW - Script 433
