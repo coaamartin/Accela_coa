@@ -59,7 +59,6 @@ try
 	
    if (appMatch("Licenses/Supplemental/Seasonal Licenses/*", capId)){
 	var licType = getAppSpecific('Type of License');
-	addRequiredDocument("State Liquor Forms");
 		if (licType == "Fireworks Stand License"){
 		addRequiredDocument("Application Forms");
 		addRequiredDocument("Business Operations");
