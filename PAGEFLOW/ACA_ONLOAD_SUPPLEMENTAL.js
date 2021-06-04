@@ -37,7 +37,6 @@ try
 	addRequiredDocument("Application Forms");
 	addRequiredDocument("Background Information");
 	addRequiredDocument("Financial Documentation");
-	addRequiredDocument("Legal Entity Documents");
 	addRequiredDocument("Insurance Documents");
 	addRequiredDocument("Property Forms");
 	}
