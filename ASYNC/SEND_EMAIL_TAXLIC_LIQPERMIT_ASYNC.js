@@ -1,36 +1,46 @@
-logDebug("***** Starting SEND_EMAIL_TEMPCO_LIC *****");
-
+logDebug("***** Starting SEND_EMAIL_TAXLIC_TMPPERMIT_ASYNC *****");
+if (typeof debug === 'undefined') {
+	var debug = "";										// Debug String, do not re-define if calling multiple
+	}
+var br = "<BR>";
+var currentUserID = aa.env.getValue("currentUserID");
+if (currentUserID == "ACHARLTO"){
+showDebug = 3;
+}
 try
 {
-	var capId = aa.env.getValue("capId");
-	var cap = aa.env.getValue("cap");
 	var recordID = aa.env.getValue("altID");
-	var emailTo = getEmailString(); 
-	var recordApplicant = getContactByType("Applicant", capId);
+	var capId = aa.cap.getCapID(recordID).getOutput();
+	//var capId = aa.env.getValue("capId");
+	cap = aa.cap.getCap(capId).getOutput();
+	logDebug("recordID is = "+recordID);
+	//var emailTo = getEmailString(); 
+	var recordApplicants = getContactByType("Licensee", capId);
+	for (var i in recordApplicants) { 
+	var recordApplicant = recordApplicants[i];
 	var firstName = recordApplicant.getFirstName();
     var lastName = recordApplicant.getLastName();
+	var emailTo = recordApplicant.getEmail();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-	var tParams = aa.util.newHashtable();
-	tParams.put("$$todayDate$$", thisDate);
-    tParams.put("$$altid$$", recordID);
-    tParams.put("$$Record Type$$", capAlias);
-    tParams.put("$$capAlias$$", capAlias);
-    tParams.put("$$FirstName$$", firstName);
-    tParams.put("$$LastName$$", lastName);
-    //Need to add the report parameters below
+	var tParms = aa.util.newHashtable();
+	addParameter(tParms, "$$todayDate$$", thisDate);
+    addParameter(tParms, "$$altid$$", recordID);
+    addParameter(tParms, "$$capAlias$$", capAlias);
+    addParameter(tParms, "$$FirstName$$", firstName);
+    addParameter(tParms, "$$LastName$$", lastName);
     var rParams = aa.util.newHashtable();
-    //rParams.put("AGENCYID", "AURORACO");
-	rParams.put("RecordID", recordID);
-	var emailtemplate = "BLD_TCO_CO ISSUED";
-    //need to update the report file name
-	var report = generateReportFile("Certificate of Occupancy_script", rParams, aa.getServiceProviderCode());
-	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+	rParams.put("Record_id", recordID);
+	var emailtemplate = "LIC ISSUED EMAIL";
+	var report = generateReportFile("License_Temp_Special_Event_Script", rParams, aa.getServiceProviderCode());
+	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
+}
 }
 catch(e)
 {
-	email("rprovinc@auroragov.org", "rprovinc@auroragov.org", "Error", e.message);
+	email("acharlton@truepointsolutions.com", "rprovinc@auroragov.org", "Error in TaxLic License TMP Async" +recordID, e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug);
+	//email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "Error", "ERROR in TaxLic Async: " + e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack);// + br + "Debug: ");// + debug); 
 }
 function getEmailString()
 {
@@ -40,7 +50,7 @@ function getEmailString()
 	//need to add inspection contact below to this logic 
 	for (var c in contactArray)
 	{
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Applicant")
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Licensee")
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
 
@@ -91,19 +101,19 @@ function logMessage(str){aa.print(str);}
 
     var contactArray = getPeople(capId);
 
-
+	var cArray = [];
 
     for(thisContact in contactArray) {
 
         if((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase())
 
-            return contactArray[thisContact].getPeople();
+            cArray.push(contactArray[thisContact].getPeople());
 
     }
 
 
 
-    return false;
+    return cArray;
 
 }
 function email(pToEmail, pFromEmail, pSubject, pText) 
@@ -228,4 +238,16 @@ function generateReportFile(aaReportName,parameters,rModule)
 
 	return contactAddressModelArr;
 
+}
+
+function addParameter(pamaremeters, key, value)
+{
+	if(key != null)
+	{
+		if(value == null)
+		{
+			value = "";
+		}
+		pamaremeters.put(key, value);
+	}
 }
