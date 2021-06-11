@@ -1,4 +1,4 @@
-logDebug("***** Starting SEND_EMAIL_TAXLIC_TMPPERMIT_ASYNC *****");
+logDebug("***** Starting SEND_EMAIL_TAXLIC_LIQPERMIT_ASYNC *****");
 if (typeof debug === 'undefined') {
 	var debug = "";										// Debug String, do not re-define if calling multiple
 	}

@@ -16,7 +16,7 @@ aa.runAsyncScript(vAsyncScript, envParameters);
 logDebug("End of 2056_License_Notification script");
 }
 
-if ((wfStatus == 'Temp License Issued') || (wfStatus == 'Temp Permit Extended')) {
+if ((wfStatus == 'Temp License Issued') || (wfStatus == 'Temp Permit Extended') && !appMatch('Licenses/Liquor/Liquor Permit/Application')) {
 logDebug("Starting TMP Liq Lic Email Script script");
 var altID = capId.getCustomID()
 appType = cap.getCapType().toString();
@@ -80,3 +80,34 @@ logDebug("Starting to kick off ASYNC event for Permits. Params being passed: " +
 aa.runAsyncScript(vAsyncScript, envParameters);
 logDebug("End of 2056_License_Notification script");
 }
+
+if ((wfStatus == "Issue License") && appMatch('Licenses/Liquor/Liquor Permit/Application')){
+	logDebug("Starting Liquor Permits Liq Lic Email Script");
+	var altID = capId.getCustomID()
+	appType = cap.getCapType().toString();
+	//need new async event for the Liquor permit type
+	var vAsyncScript = "SEND_EMAIL_TAXLIC_LIQPERMIT_ASYNC";
+	var envParameters = aa.util.newHashMap();
+	envParameters.put("altID", altID);
+	envParameters.put("capId", capId);
+	envParameters.put("cap", cap);
+	logDebug("Starting to kick off ASYNC event for Permits. Params being passed: " + envParameters);
+	aa.runAsyncScript(vAsyncScript, envParameters);
+	logDebug("End of 2056_License_Notification script");
+	}
+
+	if ((wfStatus == "Issued") && appMatch('Licenses/Supplemental/Seasonal Licenses/License')){
+		logDebug("Starting Supplemental Seasonal Lic Email Script");
+		var altID = capId.getCustomID()
+		appType = cap.getCapType().toString();
+		//need new async event for the Liquor permit type
+		var vAsyncScript = "SEND_EMAIL_TAXLIC_LIQPERMIT_ASYNC";
+		var envParameters = aa.util.newHashMap();
+		envParameters.put("altID", altID);
+		envParameters.put("capId", capId);
+		envParameters.put("cap", cap);
+		logDebug("Starting to kick off ASYNC event for Permits. Params being passed: " + envParameters);
+		aa.runAsyncScript(vAsyncScript, envParameters);
+		logDebug("End of 2056_License_Notification script");
+		}
+	
