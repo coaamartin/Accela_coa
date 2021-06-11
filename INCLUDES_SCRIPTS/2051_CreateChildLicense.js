@@ -172,7 +172,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 		logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	}
-}
+// }
 } catch (err) {
 	logDebug("A JavaScript Error occured: " + err.message + " In Line " + err.lineNumber);
 	logDebug("Stack: " + err.stack);
