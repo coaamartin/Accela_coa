@@ -96,7 +96,7 @@ if ((wfStatus == "Issue License") && appMatch('Licenses/Liquor/Liquor Permit/App
 	logDebug("End of 2056_License_Notification script");
 	}
 
-	if ((wfStatus == "Issued") && appMatch('Licenses/Supplemental/Seasonal Licenses/License')){
+	if ((wfStatus == "Issue License") && appMatch('Licenses/Supplemental/Seasonal Licenses/License')){
 		logDebug("Starting Supplemental Seasonal Lic Email Script");
 		var altID = capId.getCustomID()
 		appType = cap.getCapType().toString();
