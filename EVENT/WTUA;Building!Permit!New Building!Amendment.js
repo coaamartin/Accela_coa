@@ -1,4 +1,6 @@
 // written by SWAKIL
+var $iTrc = ifTracer;
+//updated by Rprovinc on 6/14/21
 include("5046_DueDatesBuildingAmend");
 
 if($iTrc(wfStatus == "Resubmittal Requested", 'wfStatus:Resubmittal Requested')){
