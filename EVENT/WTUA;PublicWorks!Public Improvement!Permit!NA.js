@@ -1,12 +1,9 @@
-/*try {
-if (wfStatus == 'Resubmittal Requested') {
-	logDebug("Starting Email script 2056");
-	include("2063_PI_EmailNotifications");
-	comment("Ending Email script 2056");
+//Truepoint - PI Email on Initial Acceptance
+try{ 
+include("2063_PI_EmailNotifications");
+} catch(e) {
+	email("acharlton@truepointsolutions.com", "rprovinc@auroragov.org", "Error in 2063_PI_Notifications", e.message);
 }
-} catch (err) {
-	logDebug("A JavaScript Error occured: " + err.message + " In Line " + err.lineNumber);
-}*/
 
 //COA Script #22 added by JMAIN
 include("5022_publicworksPIPermitFinalAcceptanceEmail");
