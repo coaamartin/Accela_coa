@@ -1,3 +1,13 @@
+try {
+if (wfStatus == 'Resubmittal Requested') {
+	logDebug("Starting Email script 2056");
+	include("2063_PI_EmailNotifications");
+	comment("Ending Email script 2056");
+}
+} catch (err) {
+	logDebug("A JavaScript Error occured: " + err.message + " In Line " + err.lineNumber);
+}
+
 //COA Script #22 added by JMAIN
 include("5022_publicworksPIPermitFinalAcceptanceEmail");
 
