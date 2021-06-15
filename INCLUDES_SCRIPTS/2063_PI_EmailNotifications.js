@@ -1,4 +1,5 @@
-if ((wfStatus == 'Resubmittal Requested') && appMatch('Public Works/Public Improvement/Permit/NA')) {
+try{
+	if ((wfStatus == 'Resubmittal Requested') && appMatch('Public Works/Public Improvement/Permit/NA')) {
 logDebug("Starting Resubmittal Requested Email script, 2063_PI_EMAILNOTIFICATIONS");
 	var contactArray = getContactArray();
 		for(ca in contactArray) {
@@ -7,7 +8,9 @@ logDebug("Starting Resubmittal Requested Email script, 2063_PI_EMAILNOTIFICATION
 				emailTo	= thisContact["email"];
 			}
 		}
+		//emailTo = "acharlton@truepointsolutions.com:"
 	logDebug("Email is: " +emailTo);
+	comment ("Email is: " +emailTo);
 	if (emailTo != "" && emailTo !=null){
 		var capAlias = cap.getCapModel().getAppTypeAlias();
 		var today = new Date();
@@ -25,3 +28,9 @@ logDebug("Starting Resubmittal Requested Email script, 2063_PI_EMAILNOTIFICATION
 logDebug("End of 2063_PI_EMAILNOTIFICATIONS script");
 }
 
+
+
+
+} catch(e) {
+	email("acharlton@truepointsolutions.com", "rprovinc@auroragov.org", "Error in PI email", e.message);
+}
