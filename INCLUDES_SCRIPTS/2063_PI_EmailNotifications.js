@@ -1,5 +1,5 @@
 try{ 
-if ((wfStatus == 'Acceptance') && appMatch('PublicWorks/Public Improvement/Permit/*')) {
+if ((wfStatus == 'Accepted') && appMatch('PublicWorks/Public Improvement/Permit/*')) {
 logDebug("Starting of 2063_PI_Email Notification Script");
 var altID = capId.getCustomID()
 appType = cap.getCapType().toString();
