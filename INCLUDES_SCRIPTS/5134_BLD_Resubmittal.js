@@ -19,7 +19,7 @@ var wfTask = aa.env.getValue("WorkflowTask");
 logDebug("Starting to send notifications");
 var vEmailTemplate = "";
 logDebug("Workflow Task: " + wfTask);
-if (wfTask == "Accept Plans"){
+if (wfTask == "Accept Plans" || wfTask == "Accepted In House" ){
     var vEmailTemplate = "BLD_ACCEPTPLANS_RESUBMITTAL REQUESTED";
 } else {
     var vEmailTemplate = "BLD RESUBMITTAL NOTIFICATION";
