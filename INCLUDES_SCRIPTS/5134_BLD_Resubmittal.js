@@ -18,6 +18,7 @@ logDebug("appType: " + appTypeString);
 
 logDebug("Starting to send notifications");
 var vEmailTemplate = "";
+logDebug("Workflow Task: " + wfTask);
 if (wfTask == "Accept Plans"){
     var vEmailTemplate = "BLD_ACCEPTPLANS_RESUBMITTAL REQUESTED";
 } else {
