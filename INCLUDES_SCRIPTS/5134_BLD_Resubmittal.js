@@ -15,7 +15,7 @@ appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
-
+var wfTask = aa.env.getValue("WorkflowTask");
 logDebug("Starting to send notifications");
 var vEmailTemplate = "";
 logDebug("Workflow Task: " + wfTask);
