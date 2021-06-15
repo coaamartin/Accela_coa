@@ -1,36 +1,17 @@
-/*try{
-	if ((wfStatus == 'Resubmittal Requested') && appMatch('Public Works/Public Improvement/Permit/NA')) {
-logDebug("Starting Resubmittal Requested Email script, 2063_PI_EMAILNOTIFICATIONS");
-	var contactArray = getContactArray();
-		for(ca in contactArray) {
-			if(contactArray[ca]["contactType"] == "Applicant"){
-				thisContact = contactArray[ca];	
-				emailTo	= thisContact["email"];
-			}
-		}
-		//emailTo = "acharlton@truepointsolutions.com:"
-	logDebug("Email is: " +emailTo);
-	comment ("Email is: " +emailTo);
-	if (emailTo != "" && emailTo !=null){
-		var capAlias = cap.getCapModel().getAppTypeAlias();
-		var today = new Date();
-		var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
-		var tParams = aa.util.newHashtable();
-		getACARecordParam4Notification(tParams,acaUrl)
-		logDebug("TESTING ACA SITE " +acaUrl)
-		tParams.put("$$todayDate$$", thisDate);
-		tParams.put("$$altID$$", capId.getCustomID());
-		tParams.put("$$capAlias$$", capAlias);
-		addParameter(tParams, "$$wfComment$$", wfComment);
-		var emailtemplate = "PI RESUBMITTAL REQUESTED # 382";
-		sendNotification("noreply@auroraco.gov", emailTo, "", emailtemplate, tParams, null);
-	}
-logDebug("End of 2063_PI_EMAILNOTIFICATIONS script");
+try{ 
+if ((wfStatus == 'Acceptance') && appMatch('PublicWorks/Public Improvement/Permit/*')) {
+logDebug("Starting of 2063_PI_Email Notification Script");
+var altID = capId.getCustomID()
+appType = cap.getCapType().toString();
+var vAsyncScript = "SEND_EMAIL_PI_ACCEPTANCE_ASYNC";
+var envParameters = aa.util.newHashMap();
+envParameters.put("altID", altID);
+envParameters.put("capId", capId);
+envParameters.put("cap", cap);
+logDebug("Starting to kick off ASYNC event for PI. Params being passed: " + envParameters);
+aa.runAsyncScript(vAsyncScript, envParameters);
+logDebug("End of 2063_PI_Email Notification Script");
 }
-
-
-
-
 } catch(e) {
-	email("acharlton@truepointsolutions.com", "rprovinc@auroragov.org", "Error in PI email", e.message);
-}*/
+	email("acharlton@truepointsolutions.com", "rprovinc@auroragov.org", "Error in 2063_PI_Notifications", e.message);
+}
