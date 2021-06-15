@@ -23,8 +23,7 @@ try
     tParams.put("$$recordAlias$$", capAlias);
 	var rParams = aa.util.newHashtable();
     //rParams.put("AGENCYID", "AURORACO");
-	//rParams.put("RecordID", recordID);
-	rParams.put("INVOICEID", invNbr);
+	rParams.put("RecordID", recordID);
 	var emailtemplate = "BLD PERMIT ISSUED # 35";
 	var report = generateReportFile("Building Permit", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);

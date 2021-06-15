@@ -29,7 +29,7 @@ try
     rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = "BLD PERMIT ISSUED # 35";
-	var report = generateReportFile("Building Permit", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
     sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
