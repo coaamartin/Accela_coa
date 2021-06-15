@@ -55,16 +55,34 @@ if (appMatch("Building/Permit/Master/*")) {
 		var altID = capId.getCustomID();
 		appType = cap.getCapType().toString();
 		var invoiceNbrObj = getLastInvoice({});
-		var invNbr = invoiceNbrObj.getInvNbr();
+		//var invNbr = invoiceNbrObj.getInvNbr();
+		var receiptNbr = vPaymentSeqNbr;
 		var vAsyncScript = "SEND_EMAIL_BLD_ASYNC";
 		var envParameters = aa.util.newHashMap();
 		envParameters.put("altID", altID);
 		envParameters.put("capId", capId);
 		envParameters.put("cap", cap);
-		envParameters.put("INVOICEID", String(invNbr));
+		envParameters.put("INVOICEID", String(receiptNbr));
 		logDebug("Starting to kick off ASYNC event for BLD PERMITS. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 		logDebug("---------------------> PPA;Building!Permit.js ended.");
+
+		// Get all payments on the record
+	vPayments = aa.finance.getPaymentByCapID(capId, null);	
+	if (vPayments.getSuccess() == true) {
+		vPayments = vPayments.getOutput();
+		var y = 0;
+		// Loop through payments to get the latest by highest SEQ number
+		for (y in vPayments) {
+			vPayment = vPayments[y];
+			if (vPayment.getPaymentSeqNbr() > vPaymentSeqNbr) {
+				vPaymentSeqNbr = vPayment.getPaymentSeqNbr();
+			}
+		}
+		if (vPaymentSeqNbr != null && vPaymentSeqNbr != "") {
+			logDebug("The latest payment has a sequence number of " + vPaymentSeqNbr);
+		}
+	}
 	}
 } else if (!appMatch("Building/Permit/TempSigns/*") && !appMatch("Building/Permit/TempUse/*") && !appMatch("Building/Permit/DonationBin/*") && !appMatch("Building/Permit/OTC/*")) {
 	logDebug("Starting PPA;Building!Permit!~!~.js ");
