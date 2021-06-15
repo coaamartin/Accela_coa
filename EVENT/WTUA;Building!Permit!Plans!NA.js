@@ -90,3 +90,8 @@ Notes:
 // 4/16/2019
 
 include("5098_Business_Cancel_Open_Tasks_When_Withdrawn");
+if(wfStatus == "Resubmittal Requested"){
+    logDebug("Building Permit Plans, resubmittal requested.");
+	include("5132_BLD_ResubmitEmail");
+	logDebug("Email was sent for resubmittal.");
+}

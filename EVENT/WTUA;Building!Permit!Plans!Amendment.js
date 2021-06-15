@@ -6,3 +6,8 @@ include("5046_DueDatesBuildingAmend");
 if(wfTask == "Fee Processing" && wfStatus == "Complete"){
     setCodeReference("Complete");
 }
+if(wfStatus == "Resubmittal Requested"){
+    logDebug("Building Permit Plans Amendment, resubmittal requested.");
+	include("5132_BLD_ResubmitEmail");
+	logDebug("Email was sent for resubmittal.");
+}
