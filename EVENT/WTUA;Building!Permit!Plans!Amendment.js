@@ -8,6 +8,6 @@ if(wfTask == "Fee Processing" && wfStatus == "Complete"){
 }
 if(wfStatus == "Resubmittal Requested"){
     logDebug("Building Permit Plans Amendment, resubmittal requested.");
-	include("5132_BLD_ResubmitEmail");
+	include("5134_BLD_Resubmittal.js");
 	logDebug("Email was sent for resubmittal.");
 }

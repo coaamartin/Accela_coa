@@ -92,6 +92,6 @@ Notes:
 include("5098_Business_Cancel_Open_Tasks_When_Withdrawn");
 if(wfStatus == "Resubmittal Requested"){
     logDebug("Building Permit Plans, resubmittal requested.");
-	include("5132_BLD_ResubmitEmail");
+	include("5134_BLD_Resubmittal.js");
 	logDebug("Email was sent for resubmittal.");
 }
