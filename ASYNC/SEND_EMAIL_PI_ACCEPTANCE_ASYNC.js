@@ -32,6 +32,7 @@ try
     addParameter(tParms, "$$LastName$$", lastName);
     var rParams = aa.util.newHashtable();
 	rParams.put("Record_id", recordID);
+	logDebug("rParams: " + rParams);
 	var emailtemplate = "PI INITIAL ACCEPTANCE # 167";
 	var report = generateReportFile("PI_Initial_Acceptance_Script", rParams, aa.getServiceProviderCode());
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
