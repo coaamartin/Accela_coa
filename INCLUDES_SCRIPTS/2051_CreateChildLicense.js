@@ -143,7 +143,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 	if (newChildID){
 		capId = newChildID;
 	}
-
+	capIDString = capId.getCustomID();
 	// set the expiratipon date
 	comment("TMP NEW Date after checks = "+tmpNewDate);
 
