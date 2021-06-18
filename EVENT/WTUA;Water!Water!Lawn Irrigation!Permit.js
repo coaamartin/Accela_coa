@@ -84,16 +84,6 @@ function sendLIPNotification(vemailTemplate){
 			applicantEmail = recordApplicant.getEmail();
 		}
 
-	//get developer
-	var recordDeveloper = getContactByType("Developer", capId);
-	var developerEmail = null;
-	if (!recordDeveloper || recordDeveloper.getEmail() == null || recordDeveloper.getEmail() == "") {
-		logDebug("**WARN developer has no email, capId=" + capId);
-		
-	}else {
-		developerEmail = recordDeveloper.getEmail();
-		}
-		
 	//get owner email if exist
 	var ownerEmail = "";
 	var ownersObj = aa.owner.getOwnerByCapId(capId);
@@ -126,7 +116,7 @@ function sendLIPNotification(vemailTemplate){
 	//var sent = emailContacts("Applicant", emailTemplateName, eParams, "", "", "N", "");
 	
 	var reportFile = [];
-	var sent = sendNotification("noreply@aurora.gov",applicantEmail,developerEmail,emailTemplateName,eParams,reportFile);
+	var sent = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplateName,eParams,reportFile);
 	if (!sent) {
 		logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 		return false;
