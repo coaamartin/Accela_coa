@@ -12,13 +12,13 @@ function createTempWaterChild(emailTemplate) {
         var privateFireLineUtilityPermitTsiVal;
 
         // Get the "Water Review" TSI's
-        var valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Water Main Utility Permit").getOutput();
+        var valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Public Water Utility Permit").getOutput();
         if (valDef != null) waterMainUtilityPermitTsiVal = valDef.getChecklistComment();
 
-        valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Sanitary Sewer Permit").getOutput();
+        valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Public Sanitary Sewer Utility Permit").getOutput();
         if (valDef != null) sanitarySewerUtilityPermitTsiVal = valDef.getChecklistComment();
 
-        valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Public Storm Sewer Permit").getOutput();
+        valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Public Storm Sewer Utility Permit").getOutput();
         if (valDef != null) publicStormSewerUtilityPermitTsiVal = valDef.getChecklistComment();
 
         valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Private Storm Sewer Permit").getOutput();
@@ -32,13 +32,13 @@ function createTempWaterChild(emailTemplate) {
 
         // Create a child record based on the selected utility permit
         if (waterMainUtilityPermitTsiVal == "Yes") {
-            createTempChild("Water Utility Main Permit", "Water Main Utility Permit", emailTemplate);
+            createTempChild("Water Utility Main Permit", "Public Water Utility Permit", emailTemplate);
         }
         if (sanitarySewerUtilityPermitTsiVal == "Yes") {
-            createTempChild("Sanitary Sewer Utility Permit", "Sanitary Sewer Permit", emailTemplate);
+            createTempChild("Sanitary Sewer Utility Permit", "Public Sanitary Sewer Utility Permit", emailTemplate);
         }
         if (publicStormSewerUtilityPermitTsiVal == "Yes") {
-            createTempChild("Public Storm Sewer Utility Permit", "Public Storm Sewer Permit", emailTemplate);
+            createTempChild("Public Storm Sewer Utility Permit", "Public Storm Sewer Utility Permit", emailTemplate);
         }
         if (privateStormSewerUtilityPermitTsiVal == "Yes") {
             createTempChild("Private Storm Sewer Utility Permit", "Private Storm Sewer Permit", emailTemplate);
@@ -55,7 +55,7 @@ function createTempWaterChild(emailTemplate) {
 
             if (privateFireLinesCount > 0) {
                 for (var i = 0; i < privateFireLinesCount; i++) {
-                    createTempChild("Private Fire Line Utility Permit", "Private Fire Line Permit", emailTemplate);
+                    createTempChild("Private Fire Line Utility Permit", "Private Water Utility Permit", emailTemplate);
                 }
             }
         }

@@ -60,7 +60,7 @@ var totalRowCount = expression.getTotalRowCount();
 var displayFields = [];
 var hideFields = [];
 
-if(permitType.value.equals(String("Water Main Utility Permit"))){
+if(permitType.value.equals(String("Public Water Utility Permit"))){
     displayFields.push(numOfHydran, numOfValves);
     hideFields.push(numOfManHol, numOfStruct, underdrains, licAgreemnt);
     
@@ -68,7 +68,7 @@ if(permitType.value.equals(String("Water Main Utility Permit"))){
     ShowHideFields(false, hideFields, false);
 }
 
-if(permitType.value.equals(String("Sanitary Sewer Permit"))){
+if(permitType.value.equals(String("Public Sanitary Sewer Utility Permit"))){
     displayFields.push(numOfManHol, underdrains, licAgreemnt);
     hideFields.push(numOfHydran, numOfValves, numOfStruct);
     
@@ -76,7 +76,7 @@ if(permitType.value.equals(String("Sanitary Sewer Permit"))){
     ShowHideFields(false, hideFields, false);
 }
 
-if(permitType.value.equals(String("Public Storm Sewer Permit"))){
+if(permitType.value.equals(String("Public Storm Sewer Utility Permit"))){
     displayFields.push(numOfManHol, numOfStruct, underdrains);
     hideFields.push(licAgreemnt, numOfHydran, numOfValves);
     
@@ -92,9 +92,9 @@ if(permitType.value.equals(String("Private Storm Sewer Permit"))){
     ShowHideFields(false, hideFields, false);
 }
 
-if(!permitType.value.equals(String("Water Main Utility Permit")) &&
-   !permitType.value.equals(String("Sanitary Sewer Permit")) &&
-   !permitType.value.equals(String("Public Storm Sewer Permit")) &&
+if(!permitType.value.equals(String("Public Water Utility Permit")) &&
+   !permitType.value.equals(String("Public Sanitary Sewer Utility Permit")) &&
+   !permitType.value.equals(String("Public Storm Sewer Utility Permit")) &&
    !permitType.value.equals(String("Private Storm Sewer Permit"))){
     
     displayFields.push(numOfManHol, numOfStruct, licAgreemnt, underdrains, numOfHydran, numOfValves);
