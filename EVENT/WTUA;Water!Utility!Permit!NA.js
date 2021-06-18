@@ -59,13 +59,13 @@ if(ifTracer(wfTask == "Final Acceptance Inspection" && wfStatus == "Complete", '
 
 /* Script 401 - moved from ASIUA to WTUA */
 if ( wfTask == "Permit Issuance" && wfStatus == "Issued" ) {
-	if ("Public Water Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Fire Line Permit".equals(AInfo["Utility Permit Type"])) {
+	if ("Public Water Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Water Utility Permit".equals(AInfo["Utility Permit Type"])) {
 		createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
 	}
 }
 
 if(wfTask == "Fee Processing" && wfStatus == "No Fees Required"){
-	if ("Public Water Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Fire Line Permit".equals(AInfo["Utility Permit Type"])) {
+	if ("Public Water Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Water Utility Permit".equals(AInfo["Utility Permit Type"])) {
 		createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
 	}
 }
