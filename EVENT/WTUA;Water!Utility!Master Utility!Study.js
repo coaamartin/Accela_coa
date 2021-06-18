@@ -65,9 +65,19 @@ function sendMUSNotification(vemailTemplate){
 	var applicantEmail = null;
 	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
 		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
-		return false;
+		
 	}else {
 			applicantEmail = recordApplicant.getEmail();
+		}
+
+    //get developer
+	var recordDeveloper = getContactByType("Developer", capId);
+	var developerEmail = null;
+	if (!recordDeveloper || recordDeveloper.getEmail() == null || recordDeveloper.getEmail() == "") {
+		logDebug("**WARN developer has no email, capId=" + capId);
+		
+	}else {
+        developerEmail = recordDeveloper.getEmail();
 		}
 		
 		
@@ -83,7 +93,7 @@ function sendMUSNotification(vemailTemplate){
 	//var sent = emailContacts("Applicant", emailTemplateName, eParams, "", "", "N", "");
 	
 	var reportFile = [];
-	var sent = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplateName,eParams,reportFile);
+	var sent = sendNotification("noreply@aurora.gov",applicantEmail,developerEmail,emailTemplateName,eParams,reportFile);
 	if (!sent) {
 		logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
 		return false;
