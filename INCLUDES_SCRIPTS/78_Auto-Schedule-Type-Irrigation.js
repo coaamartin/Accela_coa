@@ -1,6 +1,6 @@
 /* JMPorter - 10/26/2018 - Script Item #78 - 78_Auto-Schedule-Type-Irrigation
 
-// ​After Application for irrigation Permit is submitted, auto schedule the correct type of inspection depending on Type of Property dropdown selection.  
+// After Application for irrigation Permit is submitted, auto schedule the correct type of inspection depending on Type of Property dropdown selection.  
 // If the Type of Property dropdown is set to Single Family Residential then schedule a Single Family Res Lawn/Irrigation Inspection as 
 // Pending or if the Type of Property dropdown is other then schedule a Commercial Lawn/Irrigation Inspection as Pending.
 
@@ -14,7 +14,7 @@ logDebug("JMPorter JMPorter Alert: ------------------------>> Script Item #78 - 
 if(wfTask =="Application Submittal" && !wfStatus== "Withdrawn")     
 {
    
-   var inspectionExist = aa.inspection.getInspections(settings.capId);
+   var inspectionExist = aa.inspection.getInspections(capId);
 	if (!inspectionExist.getSuccess()) 
    {
       
