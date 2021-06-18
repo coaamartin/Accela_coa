@@ -15,7 +15,7 @@ function wtrScript131_checkASITbefore(){
                 var rowsNeededInTable = "";
                 loadASITablesBefore4CoA();
                 
-                if(ifTracer(permitType == "Water Main Utility Permit", 'permitType == "Water Main Utility Permit"')){
+                if(ifTracer(permitType == "Public Water Utility Permit", 'permitType == "Public Water Utility Permit"')){
                     watMatRows = WATERMATERIAL.length;
                     for(x in WATERMATERIAL){
                         var col1 = WATERMATERIAL[x]["Size of Pipe"];
@@ -139,9 +139,9 @@ function wtrScript131_checkASITbefore(){
                 
             }
             catch(err2){
-                if(watMatRows   < minRows && sizeRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER MATERIAL"; }
-                if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE"; }
-                if(sizeRows     < minRows && watMatRows < minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE and WATER MATERIAL"; }
+                if(watMatRows   < minRows && sizeRows >= minRows && permitType == "Public Water Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER MATERIAL"; }
+                if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Public Water Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE"; }
+                if(sizeRows     < minRows && watMatRows < minRows && permitType == "Public Water Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE and WATER MATERIAL"; }
                 
                 if(swpRows      < minRows && permitType == "Sanitary Sewer Permit")      { doCancel = true; rowsNeededInTable = "SANITARY SEWER MATERIAL"; }
                 if(psspRows     < minRows && permitType == "Public Storm Sewer Permit")  { doCancel = true; rowsNeededInTable = "PUBLIC STORM MATERIAL"; }
@@ -155,9 +155,9 @@ function wtrScript131_checkASITbefore(){
             }
             logDebug("watMatRows:" + watMatRows);
             logDebug("sizeRows:" + sizeRows)
-            if(watMatRows   < minRows && sizeRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER MATERIAL"; }
-            if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE"; }
-            if(sizeRows     < minRows && watMatRows < minRows && permitType == "Water Main Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE and WATER MATERIAL"; }
+            if(watMatRows   < minRows && sizeRows >= minRows && permitType == "Public Water Utility Permit")  { doCancel = true; rowsNeededInTable = "WATER MATERIAL"; }
+            if(sizeRows     < minRows && watMatRows >= minRows && permitType == "Public Water Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE"; }
+            if(sizeRows     < minRows && watMatRows < minRows && permitType == "Public Water Utility Permit")  { doCancel = true; rowsNeededInTable = "WET TAP SIZE and WATER MATERIAL"; }
             
             if(swpRows      < minRows && permitType == "Sanitary Sewer Permit")      { doCancel = true; rowsNeededInTable = "SANITARY SEWER MATERIAL"; }
             if(psspRows     < minRows && permitType == "Public Storm Sewer Permit")  { doCancel = true; rowsNeededInTable = "PUBLIC STORM MATERIAL"; }
