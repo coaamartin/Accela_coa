@@ -130,8 +130,8 @@ function _failedMJInspectionAutomation(vCapType){
 		var reportParams = aa.util.newHashtable();
 		addParameter(reportParams, "InspActNumber", inspId);
 		var inspectionEmail = "";
-		if (vInspector == "jbeuthel") {
-			inspectionEmail = "rprovinc@auroragov.org"
+		if (vInspector == "JBEUTHEL") {
+			inspectionEmail = "jim@stonesecurity.net"
 		} else {
 			inspectionEmail = vInspector + "@auroragov.org";
 		}
@@ -213,8 +213,8 @@ function _passedMJInspectionEmailNotification(vCapType){
 		addParameter(reportParams, "InspActNumber", inspId);
 		var vInspector = getInspectorByInspID(inspId, capId);
 		inspectionEmail = "";
-		if (vInspector == "jbeuthel") {
-			inspectionEmail = "rprovinc@auroragov.org"
+		if (vInspector == "JBEUTHEL") {
+			inspectionEmail = "jim@stonesecurity.net"
 		} else {
 			inspectionEmail = vInspector + "@auroragov.org";
 		}
