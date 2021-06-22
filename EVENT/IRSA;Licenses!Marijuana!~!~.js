@@ -130,7 +130,7 @@ function _failedMJInspectionAutomation(vCapType){
 		var reportParams = aa.util.newHashtable();
 		addParameter(reportParams, "InspActNumber", inspId);
 		var inspectionEmail = "";
-		if (inspectionEmail = "jbeuthel") {
+		if (vInspector = "jbeuthel") {
 			inspectionEmail = "jbeuthel@Auroragov.onmicrosoft.com"
 		} else {
 			inspectionEmail = vInspector + "auroragov.org";
@@ -210,7 +210,7 @@ function _passedMJInspectionEmailNotification(vCapType){
 		var reportTemplate = "MJ_Compliance_Corrections_Letter";
 		var reportParams = aa.util.newHashtable();
 		addParameter(reportParams, "InspActNumber", inspId);
-		if (inspectionEmail = "jbeuthel") {
+		if (vInspector = "jbeuthel") {
 			inspectionEmail = "jbeuthel@Auroragov.onmicrosoft.com"
 		} else {
 			inspectionEmail = vInspector + "auroragov.org";
