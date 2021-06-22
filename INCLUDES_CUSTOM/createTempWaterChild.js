@@ -55,7 +55,7 @@ function createTempWaterChild(emailTemplate) {
 
             if (privateFireLinesCount > 0) {
                 for (var i = 0; i < privateFireLinesCount; i++) {
-                    createTempChild("Private Fire Line Utility Permit", "Private Water Utility Permit", emailTemplate);
+                    createTempChild("Private Water Utility Permit", "Private Water Utility Permit", emailTemplate);
                 }
             }
         }
