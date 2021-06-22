@@ -27,7 +27,7 @@ function createTempWaterChild(emailTemplate) {
         valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Storm Water Permit Required").getOutput();
         if (valDef != null) stormWaterUtilityPermitRequiredTsiVal = valDef.getChecklistComment();
 
-        valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Private Fire Line").getOutput();
+        valDef = aa.taskSpecificInfo.getTaskSpecifiInfoByDesc(capId, processID, stepNumber, "Private Water Utility Permit").getOutput();
         if (valDef != null) privateFireLineUtilityPermitTsiVal = valDef.getChecklistComment();
 
         // Create a child record based on the selected utility permit
