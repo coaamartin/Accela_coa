@@ -91,7 +91,7 @@ function sendMUSNotification(vemailTemplate){
 	addParameter(eParams, "$$altid$$", capId.getCustomID());
 	var cap = aa.cap.getCap(capId).getOutput();
 	addParameter(eParams, "$$capAlias$$", cap.getCapType().getAlias());
-	
+	addParameter(eParams, "$$recordAlias$$", cap.getCapType().getAlias())
 	//send
 	//var sent = emailContacts("Applicant", emailTemplateName, eParams, "", "", "N", "");
 	
