@@ -36,23 +36,24 @@ function autoCreateTempIrrigationPermit(wfTaskName, workflowStatusArray, appType
             copyContacts(capId, createChildResult);
             editAppSpecific("Type of Property","Other", createChildResult);
 
+            //no need to send email here... email send in wtua
             //build ACA URL
-            var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
-            acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));  
-            var recURL = acaSite + getACAUrl(createChildResult);
+            //var acaSite = lookup("ACA_CONFIGS", "ACA_SITE");
+            //acaSite = acaSite.substr(0, acaSite.toUpperCase().indexOf("/ADMIN"));  
+            //var recURL = acaSite + getACAUrl(createChildResult);
 
            //get contact
-           var aContact = getContactByType("Applicant", capId);
-           if (aContact) fullName = aContact.getFullName() || aContact.getFirstName() + " " + aContact.getLastName();
+           //var aContact = getContactByType("Applicant", capId);
+           //if (aContact) fullName = aContact.getFullName() || aContact.getFirstName() + " " + aContact.getLastName();
 
-            var eParams = aa.util.newHashtable();
-            addParameter(eParams, "$$altid$$", capId.getCustomID());
-            addParameter(eParams, "$$alias$$", cap.getCapType().getAlias());
-            addParameter(eParams, "$$contactFullName$$", fullName);
-            addParameter(eParams, "$$date$$", sysDateMMDDYYYY);
-            addParameter(eParams, "$$acaLink$$", recURL);
+            //var eParams = aa.util.newHashtable();
+            //addParameter(eParams, "$$altid$$", capId.getCustomID());
+            //addParameter(eParams, "$$alias$$", cap.getCapType().getAlias());
+            //addParameter(eParams, "$$contactFullName$$", fullName);
+            //addParameter(eParams, "$$date$$", sysDateMMDDYYYY);
+            //addParameter(eParams, "$$acaLink$$", recURL);
         
-            var sent = emailContacts("Applicant", emailTemplate, eParams, "", "", "N", "");     
+            //var sent = emailContacts("Applicant", emailTemplate, eParams, "", "", "N", "");     
 
         } else {
             logDebug("**ERROR create record failed, error:" + createChildResult.getErrorMessage());
