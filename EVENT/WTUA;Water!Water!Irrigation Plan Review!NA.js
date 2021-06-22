@@ -61,7 +61,7 @@ if(wfTask == "Fee Processing"){
 		sendLIPNotification("WAT_IRR_FEES_PAID");
 	}
 
-	if(wfStatus == "No Fees Required"){
+	if(wfStatus == "No Fee Required"){
 		sendLIPNotification("WAT_IRR_NO FEES DUE");
 	}
 	
