@@ -136,7 +136,7 @@ function _failedMJInspectionAutomation(vCapType){
 		var reportFiles = new Array();
         var report = _generateReportFile(reportTemplate, reportParams, aa.getServiceProviderCode());
 		reportFiles.push(report);
-        _sendNotification("noreply@auroragov.org", emails, "", emailTemplate, eParams, reportFiles);
+        _sendNotification("noreply@auroragov.org", emails, "jbeuthel@Auroragov.onmicrosoft.com", emailTemplate, eParams, reportFiles);
 	}
 
 }
@@ -212,7 +212,7 @@ function _passedMJInspectionEmailNotification(vCapType){
 		var reportFiles = new Array();
         var report = _generateReportFile(reportTemplate, reportParams, aa.getServiceProviderCode());
 		reportFiles.push(report);
-        _sendNotification("noreply@auroragov.org", emails, "", emailTemplate, eParams, reportFiles);
+        _sendNotification("noreply@auroragov.org", emails, "jbeuthel@Auroragov.onmicrosoft.com", emailTemplate, eParams, reportFiles);
 	}
 
 }
