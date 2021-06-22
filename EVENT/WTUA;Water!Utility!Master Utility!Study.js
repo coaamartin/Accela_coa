@@ -28,6 +28,9 @@ if(wfTask == "Completeness Check"){
 	else if(wfStatus == "Withdrawn"){
 		sendMUSNotification("WAT_WITHDRAWAL");
 	}
+	if(wfStatus == "Resubmittal Requested"){
+		sendMUSNotification("WAT OTHER RESUBMITAL REQUESTED #407")
+	}
 }
 
 if(wfTask == "Water Review"){
