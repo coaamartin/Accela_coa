@@ -133,7 +133,7 @@ function _failedMJInspectionAutomation(vCapType){
 		if (vInspector == "jbeuthel") {
 			inspectionEmail = "rprovinc@auroragov.org"
 		} else {
-			inspectionEmail = vInspector + "auroragov.org";
+			inspectionEmail = vInspector + "@auroragov.org";
 		}
 		logDebug ("Inspection Email: " + inspectionEmail);
         var emails = _getContactEmailNoDupEmail(capId,"Inspection Contact");
@@ -214,7 +214,7 @@ function _passedMJInspectionEmailNotification(vCapType){
 		if (vInspector == "jbeuthel") {
 			inspectionEmail = "rprovinc@auroragov.org"
 		} else {
-			inspectionEmail = vInspector + "auroragov.org";
+			inspectionEmail = vInspector + "@auroragov.org";
 		}
 		logDebug ("Inspection Email: " + inspectionEmail);
 		//send email with report attachment     
