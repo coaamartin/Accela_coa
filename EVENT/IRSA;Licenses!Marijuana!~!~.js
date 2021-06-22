@@ -210,6 +210,7 @@ function _passedMJInspectionEmailNotification(vCapType){
 		var reportTemplate = "MJ_Compliance_Corrections_Letter";
 		var reportParams = aa.util.newHashtable();
 		addParameter(reportParams, "InspActNumber", inspId);
+		var vInspector = getInspectorByInspID(inspId, capId);
 		inspectionEmail = "";
 		if (vInspector == "jbeuthel") {
 			inspectionEmail = "rprovinc@auroragov.org"
