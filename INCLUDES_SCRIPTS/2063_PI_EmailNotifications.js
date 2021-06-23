@@ -33,7 +33,7 @@ appType = cap.getCapType().toString();
 logDebug("End of 2063_PI_Email Notification Script");
 }
 } catch(e) {
-	email("acharlton@truepointsolutions.com", "rprovinc@auroragov.org", "Error in 2063 WTUA Script", e.message);
+	email("acharlton@truepointsolutions.com", "rprovinc@auroragov.org", "Error in 2063 WTUA Script" +recordID, e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug);
 }
 
 function generateReportFile(aaReportName,parameters,rModule) 
