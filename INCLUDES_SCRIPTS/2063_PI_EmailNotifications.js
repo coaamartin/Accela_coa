@@ -23,7 +23,7 @@ appType = cap.getCapType().toString();
         logDebug("rParams: " + rParams);
 	var emailTo = "acharlton@truepointsolutions.com";
         var emailtemplate = "PI INITIAL ACCEPTANCE # 167";
-        var report = generateReportFile("PI_Initial_Acceptance_Script", rParams, aa.getServiceProviderCode());
+        //var report = generateReportFile("PI_Initial_Acceptance_Script", rParams, aa.getServiceProviderCode());
         //sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms);
     }
