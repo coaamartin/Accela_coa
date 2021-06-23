@@ -100,7 +100,7 @@ Notes:
     
 */
 
-issuedPIEmailNotification(null, [ "Issued" ], "PI ISSUED");
+issuedPIEmailNotification(null, [ "Issued" ], "PW PI ISSUED # 180");
 
 //*********************************************************************************************************
 //script 183        Assess Public Improvement Fees
