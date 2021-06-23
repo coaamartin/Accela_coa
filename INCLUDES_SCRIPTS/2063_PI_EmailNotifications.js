@@ -1,7 +1,7 @@
 try{ 
 if ((wfStatus == 'Accepted') && appMatch('PublicWorks/Public Improvement/Permit/*')) {
 logDebug("Starting of 2063_PI_Email Notification Script");
-var altID = capId.getCustomID()
+var recordID = capId.getCustomID()
 appType = cap.getCapType().toString();
     var recordApplicants = getContactByType("Applicant", capId);
     for (var i in recordApplicants) {
@@ -19,7 +19,7 @@ appType = cap.getCapType().toString();
         //addParameter(tParms, "$$FirstName$$", firstName);
         //addParameter(tParms, "$$LastName$$", lastName);
         var rParams = aa.util.newHashtable();
-        rParams.put("RecordID", altID);
+        rParams.put("RecordID", recordID);
         logDebug("rParams: " + rParams);
 	var emailTo = "acharlton@truepointsolutions.com";
         var emailtemplate = "PI INITIAL ACCEPTANCE # 167";
