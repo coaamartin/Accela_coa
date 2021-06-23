@@ -3,7 +3,7 @@ logDebug("Current balance: " + balanceDue);
 //Check balance and update task
 if (appMatch("PublicWorks/Public Improvement/Permit/*")) {
 	if (balanceDue == 0) {
-		updateTask("Fee Processing", "Complete", "", "");
+		closeTask("Fee Processing", "Complete", "", "");
 	}
 }
 logDebug("Ending PRA Public Improvement");
