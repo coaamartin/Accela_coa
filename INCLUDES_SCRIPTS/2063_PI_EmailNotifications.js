@@ -25,11 +25,11 @@ appType = cap.getCapType().toString();
 			var emailtemplate = "PI INITIAL ACCEPTANCE # 167";
 			var report = generateReportFile("PI_Initial_Acceptance_Script", rParams, aa.getServiceProviderCode());
 			sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
+			scheduleInspectionCustom("PI Warranty Inspection", 5);
 		}	
     if (showDebug) {
         email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "DEBUG PI Acceptance Async for " +recordID, e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug);
     }
-scheduleInspectionCustom("PI Warranty Inspection", 5,null,null,"Inspection automatically scheduled for 1 day out");
 logDebug("End of 2063_PI_Email Notification Script");
 }
 } catch(e) {
