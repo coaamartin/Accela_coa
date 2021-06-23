@@ -32,7 +32,6 @@ appType = cap.getCapType().toString();
 logDebug("End of 2063_PI_Email Notification Script");
 scheduleInspectDate("PI Warranty Inspection", dateAdd(null, 1, "Y"),null,null,"Inspection automatically scheduled for 1 day out");
 }
-}
 } catch(e) {
 	email("acharlton@truepointsolutions.com", "rprovinc@auroragov.org", "Error in 2063 WTUA Script" +recordID, e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug);
 }
