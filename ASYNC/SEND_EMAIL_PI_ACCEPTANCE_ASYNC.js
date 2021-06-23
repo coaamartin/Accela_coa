@@ -30,7 +30,7 @@ try {
         addParameter(tParms, "$$FirstName$$", firstName);
         addParameter(tParms, "$$LastName$$", lastName);
         var rParams = aa.util.newHashtable();
-        rParams.put("Record_id", recordID);
+        rParams.put("RecordID", recordID);
         logDebug("rParams: " + rParams);
         var emailtemplate = "PI INITIAL ACCEPTANCE # 167";
         var report = generateReportFile("PI_Initial_Acceptance_Script", rParams, aa.getServiceProviderCode());
