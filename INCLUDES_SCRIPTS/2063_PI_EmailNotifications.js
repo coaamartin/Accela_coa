@@ -24,7 +24,8 @@ appType = cap.getCapType().toString();
 	var emailTo = "acharlton@truepointsolutions.com";
         var emailtemplate = "PI INITIAL ACCEPTANCE # 167";
         var report = generateReportFile("PI_Initial_Acceptance_Script", rParams, aa.getServiceProviderCode());
-        sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
+        //sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
+	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms);
     }
     if (showDebug) {
         email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "DEBUG PI Acceptance Async for " +recordID, e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug);
