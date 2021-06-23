@@ -6,9 +6,9 @@ appType = cap.getCapType().toString();
     var recordApplicants = getContactByType("Applicant", capId);
     for (var i in recordApplicants) {
         var recordApplicant = recordApplicants[i];
-        //var firstName = recordApplicant.getFirstName();
-        //var lastName = recordApplicant.getLastName();
-       // var emailTo = recordApplicant.getEmail();
+        var firstName = recordApplicant.getFirstName();
+        var lastName = recordApplicant.getLastName();
+        var emailTo = recordApplicant.getEmail();
         var capAlias = cap.getCapModel().getAppTypeAlias();
         var today = new Date();
         var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -16,16 +16,14 @@ appType = cap.getCapType().toString();
         addParameter(tParms, "$$todayDate$$", thisDate);
         addParameter(tParms, "$$altid$$", recordID);
         addParameter(tParms, "$$capAlias$$", capAlias);
-        //addParameter(tParms, "$$FirstName$$", firstName);
-        //addParameter(tParms, "$$LastName$$", lastName);
+        addParameter(tParms, "$$FirstName$$", firstName);
+        addParameter(tParms, "$$LastName$$", lastName);
         var rParams = aa.util.newHashtable();
         rParams.put("RecordID", recordID);
         logDebug("rParams: " + rParams);
-	var emailTo = "acharlton@truepointsolutions.com";
         var emailtemplate = "PI INITIAL ACCEPTANCE # 167";
-        //var report = generateReportFile("PI_Initial_Acceptance_Script", rParams, aa.getServiceProviderCode());
-        //sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
-	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms);
+        var report = generateReportFile("PI_Initial_Acceptance_Script", rParams, aa.getServiceProviderCode());
+        sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
     }
     if (showDebug) {
         email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "DEBUG PI Acceptance Async for " +recordID, e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug);
