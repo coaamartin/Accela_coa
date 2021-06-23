@@ -6,7 +6,7 @@ appType = cap.getCapType().toString();
     var recordApplicant = getContactByType("Applicant", capId);
     //for (var i in recordApplicants) {
         //var recordApplicant = recordApplicants[i];
-		if recordApplicant {
+		if (recordApplicant) {
 			var firstName = recordApplicant.getFirstName();
 			var lastName = recordApplicant.getLastName();
 			var emailTo = recordApplicant.getEmail();
