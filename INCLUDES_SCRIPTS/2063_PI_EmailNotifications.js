@@ -27,7 +27,7 @@ appType = cap.getCapType().toString();
         sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParms, [report]);
     }
     if (showDebug) {
-        email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "DEBUG PI Acceptance Async for " + recordID, "Debug: " + debug);
+        email("acharlton@truepointsolutions.com", "acharlton@truepointsolutions.com", "DEBUG PI Acceptance Async for " +recordID, e.message + " in Line " + e.lineNumber + br + "Stack: " + e.stack + br + "Debug: " + debug);
     }
 logDebug("End of 2063_PI_Email Notification Script");
 }
