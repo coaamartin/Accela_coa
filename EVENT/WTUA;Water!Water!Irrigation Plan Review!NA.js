@@ -30,7 +30,8 @@ addInspectionFeeAndSendEmail("Plans Review", [ "Resubmittal Requested" ], "Type 
 
 //script 191
 if ("Application Submittal".equals(wfTask) && "Plans Required".equals(wfStatus)) {
-	deactivateTask("Fee Processing");
+	//deactivateTask("Fee Processing"); //1310
+	activateTask("Fee Processing");
 }
 
 //SWAKIL
