@@ -77,8 +77,10 @@ function sendWETNotification(vemailTemplate){
         sizes.push(size)
     }
 
+    var amountPaid = getAmountPaid();
+
     addParameter(eParams, "$$size$$", sizes.toString());
-    addParameter(eParams, "$$amountPaid$$", PaymentTotalPaidAmount);
+    addParameter(eParams, "$$amountPaid$$", amountPaid);
     addParameter(eParams, "$$utilityPermitNumber$$", utilityPermitNumber);
     addParameter(eParams, "$$civilPlanNumber$$",civilPlanNumber );
 
@@ -92,4 +94,25 @@ function sendWETNotification(vemailTemplate){
 		return false;
 	}
 	
+}
+
+
+
+function getAmountPaid() {
+    //Optional capId
+    itemCap = capId;
+    if (arguments.length == 1)
+        itemCap = arguments[0];
+
+    var feesArr = loadFees();
+    if (!feesArr)
+        return 0;
+
+    var tot = 0;
+    for (i in feesArr)
+    {
+    		tot += (+feesArr[i].amountPaid);
+    }
+    
+    return tot;
 }
