@@ -6,6 +6,6 @@ logDebug("Warranty check =" +w);
 	}
 	if (w == 'No') {
 		branchTask("PI Inspection", "Completed", "", "");
-		closeTask("Request Testing", "Not Required Warranty", "", "");
+		branchTask("Request Testing", "Not Required Warranty", "", "");
 		}
 }
