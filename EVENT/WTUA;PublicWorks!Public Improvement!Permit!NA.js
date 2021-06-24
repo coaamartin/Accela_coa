@@ -6,7 +6,7 @@ include("2063_PI_EmailNotifications");
 }
 
 //COA Script #22 added by JMAIN
-include("5022_publicworksPIPermitFinalAcceptanceEmail");
+//include("5022_publicworksPIPermitFinalAcceptanceEmail");
 
 //COA Script #51 added by SWAKIL
 //include("5051_deactivatePIInspectionTask");
