@@ -8,7 +8,7 @@
 | Program: BATCH_REPORT_TEST 
 | Trigger: Batch
 | Client: COA
-|
+|  TEST Load
 |
 /------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------------------------------------------------------/
@@ -149,7 +149,7 @@ function mainProcess() {
 	/*----------------------------------------------------------------------------------------------------/
 	| BATCH PARAMETERS
     /------------------------------------------------------------------------------------------------------*/
-	
+
 	var paramStdChoice = aa.env.getValue("paramStdChoice"); // use this standard choice for parameters instead of batchjob params
 	//aa.env.setValue("paramStdChoice", "BATCH_REPORT_TEST") //TESTING
 	var emailTo = getJobParam("emailSendTo"); // email to: 
