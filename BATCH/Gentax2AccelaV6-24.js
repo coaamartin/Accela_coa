@@ -5,7 +5,7 @@
 | Version 1.0 - Base Version. 6/29/2011 - Joseph Cipriano - TruePoint Solutions
 |
 | Script is run daily to import Gentex file.
-|
+|Alex comment to add.
 Added to GitHub 6.24.21
 /------------------------------------------------------------------------------------------------------*/
 
