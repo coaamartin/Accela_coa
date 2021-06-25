@@ -74,7 +74,7 @@ try{
         if(appTypeString == "Water/Utility/Permit/NA"){
 			myloadASITables4ACA();
             var permitType = AInfo["Utility Permit Type"];
-            if(permitType == "Water Main Utility Permit"){
+            if(permitType == "Public Water Utility Permit"){
                 if (typeof (WATERMATERIAL) == "object") {
                     for(x in WATERMATERIAL){
                         var col1 = WATERMATERIAL[x]["Size of Pipe"];

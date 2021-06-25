@@ -1,5 +1,12 @@
+//Truepoint - PI Email on Initial Acceptance
+try{ 
+include("2063_PI_EmailNotifications");
+} catch(e) {
+	email("acharlton@truepointsolutions.com", "rprovinc@auroragov.org", "Error in 2063_PI_Notifications", e.message);
+}
+
 //COA Script #22 added by JMAIN
-include("5022_publicworksPIPermitFinalAcceptanceEmail");
+//include("5022_publicworksPIPermitFinalAcceptanceEmail");
 
 //COA Script #51 added by SWAKIL
 //include("5051_deactivatePIInspectionTask");
@@ -93,7 +100,7 @@ Notes:
     
 */
 
-issuedPIEmailNotification(null, [ "Issued" ], "PI ISSUED");
+issuedPIEmailNotification(null, [ "Issued" ], "PW PI ISSUED # 180");
 
 //*********************************************************************************************************
 //script 183        Assess Public Improvement Fees

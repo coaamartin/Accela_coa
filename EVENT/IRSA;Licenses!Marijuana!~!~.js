@@ -129,14 +129,20 @@ function _failedMJInspectionAutomation(vCapType){
 		var reportTemplate = "MJ_Compliance_Corrections_Letter";
 		var reportParams = aa.util.newHashtable();
 		addParameter(reportParams, "InspActNumber", inspId);
-		
+		var inspectionEmail = "";
+		if (vInspector == "JBEUTHEL") {
+			inspectionEmail = "jim@stonesecurity.net"
+		} else {
+			inspectionEmail = vInspector + "@auroragov.org";
+		}
+		logDebug ("Inspection Email: " + inspectionEmail);
         var emails = _getContactEmailNoDupEmail(capId,"Inspection Contact");
 		emails = emails.join(";");
 		logDebug("Email send to: " + emails)
 		var reportFiles = new Array();
         var report = _generateReportFile(reportTemplate, reportParams, aa.getServiceProviderCode());
 		reportFiles.push(report);
-        _sendNotification("noreply@auroragov.org", emails, "", emailTemplate, eParams, reportFiles);
+        _sendNotification("noreply@auroragov.org", emails, inspectionEmail, emailTemplate, eParams, reportFiles);
 	}
 
 }
@@ -204,7 +210,14 @@ function _passedMJInspectionEmailNotification(vCapType){
 		var reportTemplate = "MJ_Compliance_Corrections_Letter";
 		var reportParams = aa.util.newHashtable();
 		addParameter(reportParams, "InspActNumber", inspId);
-		
+		var vInspector = getInspectorByInspID(inspId, capId);
+		inspectionEmail = "";
+		if (vInspector == "JBEUTHEL") {
+			inspectionEmail = "jim@stonesecurity.net"
+		} else {
+			inspectionEmail = vInspector + "@auroragov.org";
+		}
+		logDebug ("Inspection Email: " + inspectionEmail);
 		//send email with report attachment     
         var emails = _getContactEmailNoDupEmail(capId,"Inspection Contact");
 		emails = emails.join(";");
@@ -212,7 +225,7 @@ function _passedMJInspectionEmailNotification(vCapType){
 		var reportFiles = new Array();
         var report = _generateReportFile(reportTemplate, reportParams, aa.getServiceProviderCode());
 		reportFiles.push(report);
-        _sendNotification("noreply@auroragov.org", emails, "", emailTemplate, eParams, reportFiles);
+        _sendNotification("noreply@auroragov.org", emails, inspectionEmail, emailTemplate, eParams, reportFiles);
 	}
 
 }

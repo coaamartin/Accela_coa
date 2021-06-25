@@ -5,7 +5,7 @@ function script219_createChildUtilityPermitRecords() {
         parentAppName;
 
     if (ifTracer(wfTask=="Plans Coordination Status" && wfStatus=="Water Review",'wfTask == Plans Coordination Status && wfStatus == Water Review')) {
-        var  waterMainUtilityPermit = getTaskSpecific(wfTask,"Water Main Utility Permit");
+        var  waterMainUtilityPermit = getTaskSpecific(wfTask,"Public Water Utility Permit");
         if(waterMainUtilityPermit == 'Yes') {
             emailParams = aa.util.newHashtable();
             parentAppName = aa.cap.getCap(capId).getOutput().specialText;

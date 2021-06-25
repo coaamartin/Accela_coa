@@ -90,3 +90,14 @@ Notes:
 // 4/16/2019
 
 include("5098_Business_Cancel_Open_Tasks_When_Withdrawn");
+if(wfStatus == "Resubmittal Requested"){
+    logDebug("Building Permit Plans, resubmittal requested.");
+	include("5134_BLD_Resubmittal");
+	logDebug("Email was sent for resubmittal.");
+}
+
+if(wfStatus == "Withdrawn"){
+    logDebug("Building Permit Plans, Withdrawn.");
+	include("5135_BLD_Withdrawn");
+	logDebug("Email was sent for Withdrawn.");
+}

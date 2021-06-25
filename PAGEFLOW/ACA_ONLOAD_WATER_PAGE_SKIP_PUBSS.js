@@ -151,13 +151,13 @@ try {
 /*
 Private Fire Lines 
 Private Storm Sewer Permit 
-Public Storm Sewer Permit 
+Public Storm Sewer Utility Permit 
 Sanitary Sewer Permit 
 Storm Water Permit 
 Water Main Utility Permit 
 */
 
-	var thisPageValue = "Public Storm Sewer Permit";  // change per page
+	var thisPageValue = "Public Storm Sewer Utility Permit";  // change per page
 	var showPage = (thisPageValue.equals(AInfo["Utility Permit Type"]));
 
 	if (!showPage) {    

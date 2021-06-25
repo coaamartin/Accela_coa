@@ -50,4 +50,5 @@
 	capId = saveId;
     logDebug('Running WTUA4Renewal');
 	include("2055_WORKFLOWTASKUPDATEAFTER4RENEWTPS");
-	logDebug('Messages in WTUA4Renewal:<br>' + aa.env.getValue('ScriptReturnMessage'));
+	//logDebug('Messages in WTUA4Renewal:<br>' + aa.env.getValue('ScriptReturnMessage'));
+	//aa.env.setValue('ScriptReturnMessage', '');

@@ -1,5 +1,11 @@
-/*
-if(inspType == "PI Inspection" && inspResult == "Final"){
-	activateTask("PI Inspection");
+if (inspType == "PI Inspection" && inspResult == "Final") {
+var w = AInfo["Warranty Work?"];
+logDebug("Warranty check =" +w);
+	if (w == 'Yes') {
+		branchTask("PI Inspection", "Completed", "", "");
+	}
+	if (w == 'No') {
+		branchTask("PI Inspection", "Completed", "", "");
+		branchTask("Request Testing", "Not Required Warranty", "", "");
+		}
 }
-*/

@@ -51,6 +51,16 @@ if($iTrc(wfTask == "Fee Processing" && wfStatus == "Ready to Pay", 'wf:Fee Proce
 if($iTrc(wfTask == "Accepted In House" && wfStatus == "Routed for Review", 'wf:Accepted In House/Routed for Review')){
     bldScript418SetTskDueDate();
 }
+if($iTrc(wfStatus == "Temporary CO Issued", 'wfStatus:Temporary CO Issued')){
+    include("5137_BLD_TempCO_Issued");
+}
+if($iTrc(wfStatus == "Resubmittal Requested", 'wfStatus:Resubmittal Requested')){
+    include("5134_BLD_Resubmittal");
+}
+
+if($iTrc(wfStatus == "Withdrawn", 'wfStatus:Withdrawn')){
+    include("5135_BLD_Withdrawn");
+}
 
 /*
 Title : Activate workflow tasks (WorkflowTaskUpdateAfter) 
@@ -137,6 +147,13 @@ bldScript48_addForestryFee();
 if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 	deactivateTask("Backflow Preventor");
 	deactivateTask("Water Meter");
+}
+//RLP- SS #1045 
+if($iTrc(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"), 'wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"'){
+    logDebug("Starting to setup inspections for BLDG Life Safety Review")
+    inspGroup = "BLD_NEW_CON"
+	createPendingInspection(inspGroup,"Exit Signs / Emergency Lights");
+    createPendingInspection(inspGroup,"Fire Extinguisher");
 }
 
 

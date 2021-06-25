@@ -106,25 +106,26 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 			logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
 			aa.runAsyncScript(vAsyncScript, envParameters);
 			}
-			if (matches(licType,"Fireworks Stand License")) {
-			numberOfMonths = 12;
-			today = new Date(); comment('Today = ' + today);
-			theMonth = today.getMonth(); comment('the month = ' + theMonth);
-			theYear = today.getFullYear(); comment('The Year = ' + theYear);
-			nextYear = theYear + 1; comment('Next Year = ' + nextYear);
-			tmpNewDate = '07/04/'+ theYear;
-			logDebug("New Date 07/04 will be: " + tmpNewDate);
-			appType = cap.getCapType().toString();
-			var vAsyncScript = "SEND_EMAIL_TAXLIC_LICENSE_ASYNC";
-			var envParameters = aa.util.newHashMap();
-			envParameters.put("altID", capId.getCustomID());
-			logDebug("ALTID is " +capId.getCustomID());
-			envParameters.put("capId", capId);
-			logDebug("CAP ID is " +capId);
-			envParameters.put("cap", cap);
-			envParameters.put("currentUserID",currentUserID);
-			logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
-			aa.runAsyncScript(vAsyncScript, envParameters);
+			//RLP - 6/11/2021 commented out due to issue 361115
+			// if (matches(licType,"Fireworks Stand License")) {
+			// numberOfMonths = 12;
+			// today = new Date(); comment('Today = ' + today);
+			// theMonth = today.getMonth(); comment('the month = ' + theMonth);
+			// theYear = today.getFullYear(); comment('The Year = ' + theYear);
+			// nextYear = theYear + 1; comment('Next Year = ' + nextYear);
+			// tmpNewDate = '07/04/'+ theYear;
+			// logDebug("New Date 07/04 will be: " + tmpNewDate);
+			// appType = cap.getCapType().toString();
+			// var vAsyncScript = "SEND_EMAIL_TAXLIC_LICENSE_ASYNC";
+			// var envParameters = aa.util.newHashMap();
+			// envParameters.put("altID", capId.getCustomID());
+			// logDebug("ALTID is " +capId.getCustomID());
+			// envParameters.put("capId", capId);
+			// logDebug("CAP ID is " +capId);
+			// envParameters.put("cap", cap);
+			// envParameters.put("currentUserID",currentUserID);
+			// logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
+			// aa.runAsyncScript(vAsyncScript, envParameters);
 			}
 		}
 
@@ -142,7 +143,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 	if (newChildID){
 		capId = newChildID;
 	}
-
+	
 	// set the expiratipon date
 	comment("TMP NEW Date after checks = "+tmpNewDate);
 
@@ -171,7 +172,7 @@ tmpNewDate = dateAddMonths(null, numberOfMonths);
 		logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
 		aa.runAsyncScript(vAsyncScript, envParameters);
 	}
-}
+// }
 } catch (err) {
 	logDebug("A JavaScript Error occured: " + err.message + " In Line " + err.lineNumber);
 	logDebug("Stack: " + err.stack);

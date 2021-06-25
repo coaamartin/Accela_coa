@@ -21,9 +21,9 @@ try
    addRequiredDocument("Local - Deed or Lease");
    addRequiredDocument("Local - Diagram of Licensed Premises");
    //addRequiredDocument("Local - Employee Certifications");
-   addRequiredDocument("Local - Employee List");
+   //addRequiredDocument("Local - Employee List");
    addRequiredDocument("Local - Floor Plan");
-   addRequiredDocument("Local - Funding and Tax Documents");
+   //addRequiredDocument("Local - Funding and Tax Documents");
    addRequiredDocument("Local - Security Plan");
    addRequiredDocument("Local - Odor Mitigation Plan");
    addRequiredDocument("State - Business License Renewal Application");

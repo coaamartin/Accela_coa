@@ -28,10 +28,11 @@ if (appMatch('Licenses/Supplemental/*/*')){
 		updateFee('CL1002', 'L_CLASS1', 'FINAL', unit, 'Y');
         //updateFee('CL1001', 'L_CLASS1', 'FINAL', 1, 'Y');
 		}
-		
-	if (appMatch('Licenses/Supplemental/Door ID Badge/*')){
-		updateFee('CL1005', 'L_CLASS1', 'FINAL', 1, 'Y');
-		}
+	
+	//Commenting out per Lisa Keith and Cherwell ticket #355622
+	// if (appMatch('Licenses/Supplemental/Door ID Badge/*')){
+	// 	updateFee('CL1005', 'L_CLASS1', 'FINAL', 1, 'Y');
+	// 	}
 
 	if (appMatch('Licenses/Supplemental/Door Seller/Application')){
 		updateFee('CL1003', 'L_CLASS1', 'FINAL', 1, 'Y');
@@ -129,6 +130,7 @@ if (appMatch('Licenses/Supplemental/*/*')){
 //Start of Temp Permit Fees
 	if (AInfo['Type of License'] == 'Carnival/Circus (Amusement Enterprise)'){
 		updateFee('TMP001', 'L_TEMPSUPP', 'FINAL', 1, 'Y');
+		updateFee('TMP008', 'L_TEMPSUPP', 'FINAL', 1, 'Y');
 		var tableRowCount = countTableRows(EVENTDATES);
 		logDebug("Table Count = "+tableRowCount);
 		if(tableRowCount == '2'){
@@ -143,8 +145,41 @@ if (appMatch('Licenses/Supplemental/*/*')){
 		if(tableRowCount == '5'){
 		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 4, 'Y');
 		}
-		if(tableRowCount > '6'){
+		if(tableRowCount == '6'){
 		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 5, 'Y');
+		}
+		if(tableRowCount == '7'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 6, 'Y');
+		}
+		if(tableRowCount == '8'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 7, 'Y');
+		}
+		if(tableRowCount == '9'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 8, 'Y');
+		}
+		if(tableRowCount == '10'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 9, 'Y');
+		}
+		if(tableRowCount == '11'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 10, 'Y');
+		}
+		if(tableRowCount == '12'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 11, 'Y');
+		}
+		if(tableRowCount == '13'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 12, 'Y');
+		}
+		if(tableRowCount == '14'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 13, 'Y');
+		}
+		if(tableRowCount == '15'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 14, 'Y');
+		}
+		if(tableRowCount == '16'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 15, 'Y');
+		}
+		if(tableRowCount > '17'){
+		updateFee('TMP002', 'L_TEMPSUPP', 'FINAL', 16, 'Y');
 		}
 	}
 

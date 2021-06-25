@@ -157,7 +157,7 @@ Storm Water Permit
 Water Main Utility Permit 
 */
 
-	var thisPageValue = "Water Main Utility Permit";  // change per page
+	var thisPageValue = "Public Water Utility Permit";  // change per page
 	var showPage = (thisPageValue.equals(AInfo["Utility Permit Type"]));
 
 	if (!showPage) {    

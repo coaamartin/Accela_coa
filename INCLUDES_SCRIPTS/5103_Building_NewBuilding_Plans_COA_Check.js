@@ -24,65 +24,66 @@ if ((wfStatus == "Final CO Issued") && (wfTask == "Certificate of Occupancy"))
       for (i in wfObj) 
       {
         fTask = wfObj[i];
-        if ("Water Meter".equals(fTask.getTaskDescription()))
-        {
-          if (("Ready for CO" == fTask.getDisposition()) || ("Backflow Preventor" == fTask.getDisposition()))
-          {
-          }
-          else
-          {
-           DoesMeet = true; 
-           ListDidNotMake = ListDidNotMake + "Water Meter;";
-          }
-        }
+        // if ("Water Meter".equals(fTask.getTaskDescription()))
+        // {
+        //   logDebug("FTask Get Disposition" + fTask.getDisposition()); 
+        //   if (("Ready for CO" == fTask.getDisposition()) || ("Backflow Preventor" == fTask.getDisposition()))
+        //   {
+        //   }
+        //   else
+        //   {
+        //    DoesMeet = true; 
+        //    ListDidNotMake = ListDidNotMake + "Water Meter;";
+        //   }
+        // }
         
-        if ("Backflow Preventor".equals(fTask.getTaskDescription()))
-        {
-          if (("Not Required" == fTask.getDisposition()) || ("Ready for CO" == fTask.getDisposition()))
-          {
-          }
-          else             
-          {
-           DoesMeet = true; 
-           ListDidNotMake = ListDidNotMake + "Backflow Preventor;";           
-          }
-        }
+        // if ("Backflow Preventor".equals(fTask.getTaskDescription()))
+        // {
+        //   if (("Not Required" == fTask.getDisposition()) || ("Ready for CO" == fTask.getDisposition()))
+        //   {
+        //   }
+        //   else             
+        //   {
+        //    DoesMeet = true; 
+        //    ListDidNotMake = ListDidNotMake + "Backflow Preventor;";           
+        //   }
+        // }
         
-         if ("Waste Water".equals(fTask.getTaskDescription()))
-        {
-          if ("Ready for CO" == fTask.getDisposition())
-          {
-          }
-          else          
-          {
-           DoesMeet = true;    
-           ListDidNotMake = ListDidNotMake + "Waste Water;";   
-          }
-        } 
+        //  if ("Waste Water".equals(fTask.getTaskDescription()))
+        // {
+        //   if ("Ready for CO" == fTask.getDisposition())
+        //   {
+        //   }
+        //   else          
+        //   {
+        //    DoesMeet = true;    
+        //    ListDidNotMake = ListDidNotMake + "Waste Water;";   
+        //   }
+        // } 
 
-         if ("Special Inspections Check".equals(fTask.getTaskDescription()))
-        {
-          if ("Ready for CO" == fTask.getDisposition())
-          {
-          }
-          else                    
-          {
-           DoesMeet = true;     
-           ListDidNotMake = ListDidNotMake + "Special Inspections Check;";              
-          }
-        } 
+        //  if ("Special Inspections Check".equals(fTask.getTaskDescription()))
+        // {
+        //   if ("Ready for CO" == fTask.getDisposition())
+        //   {
+        //   }
+        //   else                    
+        //   {
+        //    DoesMeet = true;     
+        //    ListDidNotMake = ListDidNotMake + "Special Inspections Check;";              
+        //   }
+        // } 
         
-        if ("FEMA Elevation Certification".equals(fTask.getTaskDescription()))
-        {
-          if ("Ready for CO" == fTask.getDisposition())
-          {
-          }
-          else                    
-          {
-           DoesMeet = true;     
-           ListDidNotMake = ListDidNotMake + "FEMA Elevation Certification;";          
-          }
-        } 
+        // if ("FEMA Elevation Certification".equals(fTask.getTaskDescription()))
+        // {
+        //   if ("Ready for CO" == fTask.getDisposition())
+        //   {
+        //   }
+        //   else                    
+        //   {
+        //    DoesMeet = true;     
+        //    ListDidNotMake = ListDidNotMake + "FEMA Elevation Certification;";          
+        //   }
+        // } 
         
         if ("Inspection Phase".equals(fTask.getTaskDescription()))
         {

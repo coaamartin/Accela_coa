@@ -38,11 +38,23 @@ addParameter(eParams, "$$acaRecordUrl$$", recordURL);
 if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
 
     //send email()
-    var lpEmail = getPrimLPEmailByCapId(capId);
-    addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
-    emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
-    if(lpEmail != null)
-		{
-		emailContactsIncludesLP("PRIMARYLP", issuedEmlTemplate, eParams, reportTemplate, reportParams);
-		}            
+    //need to also send the permit to the customer once fees have been paid
+			logDebug("Starting to kick off event to send permit to customer");
+			var altID2 = capId.getCustomID();
+			appType2 = cap.getCapType().toString();
+			var vAsyncScript2 = "SEND_EMAIL_BLD_OTC_PERMIT";
+			var envParameters2 = aa.util.newHashMap();
+			envParameters2.put("altID", altID2);
+			envParameters2.put("capId", capId);
+			envParameters2.put("cap", cap);
+			envParameters2.put("appType", appType2);
+			logDebug("Starting to kick off ASYNC event for OTC Permit issuance. Params being passed: " + envParameters2);
+			aa.runAsyncScript(vAsyncScript2, envParameters2);
+    // var lpEmail = getPrimLPEmailByCapId(capId);
+    // addParameter(eParams, "$$LicenseProfessionalEmail$$", lpEmail);
+    // emailContacts("Applicant", issuedEmlTemplate, eParams, reportTemplate, reportParams);
+    // if(lpEmail != null)
+		// {
+		// emailContactsIncludesLP("PRIMARYLP", issuedEmlTemplate, eParams, reportTemplate, reportParams);
+		//}            
 }

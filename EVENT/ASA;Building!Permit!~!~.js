@@ -20,4 +20,10 @@ if (cOO!="CHECKED"){
 //SWAKIL
 include("5047_master_plan_parent");
 //Rprovinc - Moved as part of the city clerk module update.
-include("5110_CodeTempSignCTRCA");
+if(appMatch("Building/Permit/DonationBin/*") && appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse/*")) {
+	include("5110_CodeTempSignCTRCA");
+	}
+
+	if(appMatch("Building/Permit/Master/*")) {
+		include("5043_BuildingEmailnvoicedFees")
+	}

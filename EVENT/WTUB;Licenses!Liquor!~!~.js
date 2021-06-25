@@ -1,15 +1,23 @@
 //IF ASI GENERALBUSINESS not filled out, then stop the worfklow.
-if ((wfStatus == 'Issue License') && (AInfo['General Business License Number'] == null)){
-	cancel = true;
-	showMessage = true;
-	logDebug("<font size=small><b>Liquor License:</b></font><br><br>The General Business License Number field is blank; cannot issue license.");
-	comment("Warning: The General Business License field is missing. Go to Info Fields and enter the General Business License Number and try again.");
-}
+appTypeResult = cap.getCapType(); //create CapTypeModel object
+appTypeString = appTypeResult.toString();
+appTypeArray = appTypeString.split("/");
+logDebug("appType: " + appTypeString);
 
-//IF ASI Temp License Issue Date not filled out, then stop the worfklow.
-if ((wfStatus == 'Temp License Issued') && (AInfo['Temporary Permit Issue Date'] == null)){
-	cancel = true;
-	showMessage = true;
-	logDebug("<font size=small><b>Liquor License:</b></font><br><br>The Temporary Permit Issue Date field is blank; cannot issue a temporary license.");
-	comment("Warning: The Temporary Permit Issue Date field is missing. Go to Info Fields and enter the Temporary Permit Issue Date and try again.");
+if (!appMatch("Licenses/Liquor/Tasting License/*")){ //|| !appMatch("Licenses/Liquor/Tasting License/Application") || !appMatch("Licenses/Liquor/Tasting License/License") || !appMatch("Licenses/Liquor/Tasting License/Amendment")) {
+
+	if ((wfStatus == 'Issue License') && (AInfo['General Business License Number'] == null)) {
+		cancel = true;
+		showMessage = true;
+		logDebug("<font size=small><b>Liquor License:</b></font><br><br>The General Business License Number field is blank; cannot issue license.");
+		comment("Warning: The General Business License field is missing. Go to Info Fields and enter the General Business License Number and try again.");
+	}
+
+	//IF ASI Temp License Issue Date not filled out, then stop the worfklow.
+	if ((wfStatus == 'Temp License Issued') && (AInfo['Temporary Permit Issue Date'] == null)) {
+		cancel = true;
+		showMessage = true;
+		logDebug("<font size=small><b>Liquor License:</b></font><br><br>The Temporary Permit Issue Date field is blank; cannot issue a temporary license.");
+		comment("Warning: The Temporary Permit Issue Date field is missing. Go to Info Fields and enter the Temporary Permit Issue Date and try again.");
+	}
 }

@@ -37,7 +37,7 @@ if (totalPaid >= 2500 && wfTask == "Renewal Review" && wfStatus == "Complete") {
 			renewalCapProject.setStatus("Complete");
 			aa.cap.updateProject(renewalCapProject);
 		}
-        emailOnRenewApproval();
+        emailOnRenewApproval(licExpDate);
 		/*
 		//This logic is in BATCH JOB
         var vAsyncScript = "SEND_MJ_LICENSE_ASYNC";
@@ -79,7 +79,7 @@ if (wfTask=="Renewal Review" && wfStatus=="Additional Info Required")
     include("210_SendMJEmail");
 }
 
-function emailOnRenewApproval(){
+function emailOnRenewApproval(licExpDate){
     var emailTemplate= "LIC_MJ_RENEWALAPPROVAL";
     var applicant = getContactByType("Applicant", capId);
     //var acaUrl = lookup("ACA_CONFIGS","OFFICIAL_WEBSITE_URL");
@@ -129,8 +129,10 @@ function emailOnRenewApproval(){
         addParameter(eParams, "$$TradeName$$", appName);
         //addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
         addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
+        addParameter(eParams, "$$licExpDate$$", licExpDate+"");
 
         //send email to applicant, no report included
         emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
+        emailWithReportLinkASync("marijuana@auroragov.org", emailTemplate, eParams, "", "", "N", "");
     }
 }

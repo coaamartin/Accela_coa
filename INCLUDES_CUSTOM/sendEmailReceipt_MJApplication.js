@@ -1,11 +1,16 @@
 function sendEmailReceipt_MJApplication(){
+    var toEmail = "marijuana@auroragov.org";
+    var appEmail = getContactEmailNoDupEmail(capId,"Applicant");
+    appEmail = appEmail.join(";");
+    var resPartyEmail = getContactEmailNoDupEmail(capId,"Responsible Party");
+    resPartyEmail = resPartyEmail.join(";");
 
-	var applicant = getContactByType("Applicant", capId);
-	if (!applicant || !applicant.getEmail()) {
-		logDebug("**WARN no applicant found on or no email capId=" + capId);
-		return false;
-	}
-	var toEmail = applicant.getEmail();
+    if(appEmail) toEmail += ";"+appEmail;
+    if(resPartyEmail) toEmail += ";"+resPartyEmail;
+
+    logDebug(toEmail);
+
+    //var toEmail = applicant.getEmail();
 	var vStateFee;
 	var vLocalFee;
 	var vPayment;

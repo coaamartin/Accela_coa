@@ -16,7 +16,7 @@ function odaScript225_emailMeetingNotes(){
         addParameter(emailParams, "$$altID$$", capIDString);
         addParameter(emailParams, "$$acaRecordUrl$$", recordURL);
         
-        var resParEmail = getContactEmailAddress("Responsible Party", capId) + ";";
+        var resParEmail = getContactEmailAddress("Applicant", capId) + ";"; //Applicant Consultant
         var ccEmails = "";
         
         if(resParEmail){
@@ -26,7 +26,7 @@ function odaScript225_emailMeetingNotes(){
             for(each in conts){
                 var aCont = conts[each].people;
                 
-                if(matches(aCont.contactType, "Consultant", "Responsible Party") && aCont.email) 
+                if(matches(aCont.contactType, "Consultant", "Applicant") && aCont.email) 
                     resParEmail += aCont.email + ";";
             }
             

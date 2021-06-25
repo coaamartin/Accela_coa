@@ -37,9 +37,9 @@ function createTempWaterWetTapCopyDataAndSendEmail(emailTemplate) {
         //copyASITables( capId, childCapId, igArr );
         copyASITableByTName("SIZE", capId, childCapId);
         
-        if(AInfo["Utility Permit Type"] == "Private Fire Line Permit") 
+        if(AInfo["Utility Permit Type"] == "Private Water Utility Permit") 
             copyASITableByTName("PRIVATE FIRE LINE MATERIAL", capId, childCapId);
-        if(AInfo["Utility Permit Type"] == "Water Main Utility Permit") 
+        if(AInfo["Utility Permit Type"] == "Public Water Utility Permit") 
             copyASITableByTName("WATER MATERIAL", capId, childCapId);
         
         var recordApplicant = getContactByType("Developer", capId);

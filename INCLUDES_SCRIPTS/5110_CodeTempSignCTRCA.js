@@ -4,7 +4,9 @@
 // DATECREATED: 05/23/2019
 // BY: amartin
 // CHANGELOG: rprovinc 7/24/2020 updated to include all 3 record types for City Clerk. Also updated the email template that is being used for all 3 record types. 
-
+if(appMatch("Building/Permit/DonationBin/*") && appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse/*")) {
+    
+    
 logDebug("---------------------> At start of 5110 CTRCA");
 
 var adResult = aa.address.getPrimaryAddressByCapID(capId, "Y");
@@ -203,7 +205,6 @@ function checkACARun() {
     }
 }
 
-
-
 logDebug("---------------------> At end of 5110 CTRCA");
 //aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
+}

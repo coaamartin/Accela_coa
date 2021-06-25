@@ -94,10 +94,18 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 		expResult = expResult.getOutput();
 
 		var thisCap = null;
-		
-		//check if delinquent record is outside 7-day grace period
-		var expSince = dateDiff(expResult.getExpDate(), new Date());
-		if (expSince > expiredSinceDays) {
+		logDebug2("ExpResult: " + expResult.getExpDate());
+		//check if delinquent record is outside 8-day grace period
+		var expSince = (dateDiff(expResult.getExpDate(), new Date()));
+		logDebug2("Date expSince: " + expSince);
+		logDebug2("ExpiredSinceDays: " + expiredSinceDays);
+		expSince1 = '';
+		if (expSince < 0) {
+			expSince1 = expSince * -1;
+		}
+		logDebug2(expSince1);
+
+		if (expSince1 < expiredSinceDays) {
 			var renewalCapIDString = null;
 			var renewalCapID = getRenewalByParentCapIDForPending(capId);
 			if (renewalCapID) {
@@ -162,14 +170,16 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 			addParameter(eParams, "$$StateLicenseNumber$$", asiValues["State License Number"]);
 			addParameter(eParams, "$$TradeName$$", tradeName);
 			//addParameter(eParams, "$$TradeName$$", asiValues["Trade Name"]);
-			
+
 			emailContactsWithReportLinkASync("Applicant,Responsible Party", emailTemplate, eParams, "", "", "N", "");
+            emailWithReportLinkASync("marijuana@auroragov.org", emailTemplate, eParams, "", "", "N", "");
+
 			//var sent = aa.document.sendEmailByTemplateName("", applicant.getEmail(), "", emailTemplate, eParams, null);
 			//if (!sent) {
 			//	logDebug2("<br>**WARN sending email to (" + applicant.getEmail() + ") failed, error:" + sent.getErrorMessage());
 			//}
 		} else {
-			logDebug2("<br> Skipping record; still within 7-day grace period");
+			logDebug2("<br> Skipping record; still within 8-day grace period");
 		}
 		logDebug2("<br>#######################");
 	}//for all caps

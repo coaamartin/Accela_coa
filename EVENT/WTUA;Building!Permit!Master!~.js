@@ -23,3 +23,22 @@ updatePermitExpirationCF([ "Accept Plans", "Accepted In House", "Structural Plan
 updatePermitExpirationCF([ "Accepted", "Accepted In House", "Structural Plan Review", "Electrical Plan Review", "Mechanical Plan Review", "Plumbing Plan Review",
 		"Bldg Life Safety Review", "Fire Life Safety Review", "Structural Engineering Review", "Real Property Review", "Planning Review", "Water Review", "Zoning Review",
 		"Engineering Review", "Traffic Review", "Waste Water Review", "Forestry Review" ], "Resubmittal Requested", "Application Expiration Date");
+
+//if workflow step Quaility Check is set to status approved need to insert building fee but do not invoice.
+if(ifTracer(wfTask == "Quality Check" && wfStatus == "Approved")){
+    //need to invoice the fee either here or in a new custom script
+	logDebug("Building Permit Master Quaility Check has been approved. Adding Building fee");
+	var feecode = "BLD_MST_01";
+    var feeschedule = "BLD_MASTER";
+    var thefee = "1";
+    //feeseqnum =    addFee(feecode, feeschedule, 'FINAL', parseFloat(thefee), 'Y');
+    updateFee(feecode, feeschedule, "FINAL", parseFloat(thefee), "N", "N");
+	//addFee("BLD_MST_01","BLD_MASTER","FINAL",1,"Y");
+	logDebug("Building Fee has been added but not invoiced.")
+}
+
+if(wfStatus == "Resubmittal Requested"){
+    logDebug("Building Permit Master Planning Review, resubmittal requested.");
+	include("5132_BLD_ResubmitEmail");
+	logDebug("Email was sent for resubmittal.");
+}

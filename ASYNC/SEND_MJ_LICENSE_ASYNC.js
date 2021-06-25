@@ -74,20 +74,19 @@ try
     aa.print(emails);
     var emails2 = _getContactEmailNoDupEmail(capId,"Responsible Party");
     var allEmails = arrayUnique(emails.concat(emails2));
-    allEmails = allEmails.join(";");
-
+    allEmails = allEmails.join("; ");
+    allEmails=allEmails+ "; marijuana@auroragov.org";
     logDebug("Email send to: " + allEmails)
     var reportFiles = new Array();
     var report = _generateReportFile(vReportTemplate, vRParams, aa.getServiceProviderCode(), capId);
-    reportFiles.push(report);
-    _sendNotification("noreply@auroragov.org", allEmails, "marijuana@auroragov.org", vEmailTemplate, vEParams, reportFiles, capId);
+    if(report) reportFiles.push(report);
+    _sendNotification("noreply@auroragov.org", allEmails, "", vEmailTemplate, vEParams, reportFiles, capId);
 
-    aa.sendMail("suhailwakil@gmail.com", "suhailwakil@gmail.com", "", "Log", "Debug: " + debug);
-
+    aa.sendMail("suhailwakil@sbztechnology.com", "suhailwakil@sbztechnology.com", "", "Debug Information in Sending Report Script", debug);
 }
 catch (err)
 {
-    aa.sendMail("suhailwakil@gmail.com", "suhailwakil@gmail.com", "", "Log", "Debug: " + err);
+    aa.sendMail("suhailwakil@sbztechnology.com", "suhailwakil@sbztechnology.com", "", "ERR Information in Sending Report Script", err);
 }
 
 ////FUNCTIONS//////

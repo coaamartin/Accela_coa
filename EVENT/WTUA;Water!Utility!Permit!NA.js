@@ -59,13 +59,13 @@ if(ifTracer(wfTask == "Final Acceptance Inspection" && wfStatus == "Complete", '
 
 /* Script 401 - moved from ASIUA to WTUA */
 if ( wfTask == "Permit Issuance" && wfStatus == "Issued" ) {
-	if ("Water Main Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Fire Line Permit".equals(AInfo["Utility Permit Type"])) {
+	if ("Public Water Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Water Utility Permit".equals(AInfo["Utility Permit Type"])) {
 		createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
 	}
 }
 
 if(wfTask == "Fee Processing" && wfStatus == "No Fees Required"){
-	if ("Water Main Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Fire Line Permit".equals(AInfo["Utility Permit Type"])) {
+	if ("Public Water Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Water Utility Permit".equals(AInfo["Utility Permit Type"])) {
 		createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
 	}
 }
@@ -74,9 +74,78 @@ if(wfTask == "Verify Materials Testing" && wfStatus == "Incomplete"){
 	deactivateTask("Verify Materials Testing");
 }
 
-
 //SWAKIL - Email
 include("438_UtiltiyInspectionComplete");
 
 //SWAKIL - Email when VMT is Approved
 include("494_EmailWaterUtilityPermitVMT");
+
+if(wfTask == "Engineering Review" && wfStatus == "Resubmittal Requested"){
+	sendWUPNotification("WAT UTL RESUBMITAL REQUESTED #218");
+}
+
+
+function sendWUPNotification(vemailTemplate){
+	var emailTemplateName = arguments[0];
+	email
+	var eParams = aa.util.newHashtable();
+	//today
+	var today = new Date();
+	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
+	eParams.put("$$todayDate$$", thisDate);
+	
+	//build address
+	var capAddresses = aa.address.getAddressByCapId(capId);
+	if (capAddresses.getSuccess()) {
+		capAddresses = capAddresses.getOutput();
+		if (capAddresses != null && capAddresses.length > 0) {
+			capAddresses = capAddresses[0];
+			var addressVar = "";
+			addressVar = capAddresses.getHouseNumberStart() + " ";
+			addressVar = addressVar + capAddresses.getStreetName() + " ";
+			addressVar = addressVar + capAddresses.getCity() + " ";
+			addressVar = addressVar + capAddresses.getState() + " ";
+			addressVar = addressVar + capAddresses.getZip();
+			addParameter(eParams, "$$FullAddress$$", addressVar);
+		}
+	}
+
+	//build ACA URL
+	var acaURLDefault = lookup("ACA_CONFIGS", "ACA_SITE");
+	acaURLDefault = acaURLDefault.substr(0, acaURLDefault.toUpperCase().indexOf("/ADMIN"));
+	var recordURL = getACARecordURL(acaURLDefault);
+	addParameter(eParams, "$$acaRecordUrl$$", recordURL);
+
+	//get contact
+	var recordApplicant = getContactByType("Applicant", capId);
+	var applicantEmail = null;
+	if (!recordApplicant || recordApplicant.getEmail() == null || recordApplicant.getEmail() == "") {
+		logDebug("**WARN no applicant or applicant has no email, capId=" + capId);
+		return false;
+	}else 
+		{
+			applicantEmail = recordApplicant.getEmail();
+		}
+		
+	//wf comments
+	if (wfComment) addParameter(eParams, "$$wfComment$$", wfComment);
+	
+	
+	addParameter(eParams, "$$ContactEmail$$", applicantEmail);
+	addParameter(eParams, "$$FirstName$$", recordApplicant.getFirstName());
+	addParameter(eParams, "$$LastName$$", recordApplicant.getLastName());
+	addParameter(eParams, "$$altid$$", capId.getCustomID());
+	var cap = aa.cap.getCap(capId).getOutput();
+	addParameter(eParams, "$$capAlias$$", cap.getCapType().getAlias());
+	
+	//send
+	//var sent = emailContacts("Applicant", emailTemplateName, eParams, "", "", "N", "");
+	
+	var reportFile = [];
+	var sent = sendNotification("noreply@aurora.gov",applicantEmail,"",emailTemplateName,eParams,reportFile);
+	if (!sent) {
+		logDebug("**WARN sending email failed, error:" + sent.getErrorMessage());
+		return false;
+	}
+	
+}

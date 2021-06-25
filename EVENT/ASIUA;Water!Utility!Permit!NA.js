@@ -14,7 +14,7 @@ Sample Call:
 
 establishCivilPlanParentRelationship("Civil Plan number", "PublicWorks/Civil Plan/Review/NA");
 /* moving to WTUA
-if ("Water Main Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Fire Lines".equals(AInfo["Utility Permit Type"])) {
+if ("Public Water Utility Permit".equals(AInfo["Utility Permit Type"]) || "Private Fire Lines".equals(AInfo["Utility Permit Type"])) {
 	createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
 }
 */

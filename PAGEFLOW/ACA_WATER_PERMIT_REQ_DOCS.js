@@ -16,10 +16,15 @@ var phased = getAppSpecific("Is this project going to be phased?");
 if (phased == "Yes") {
 	removeAllRequiredDocumentCapCondition();
    	addRequiredDocument("Phase Work Plan");
+	addRequiredDocument("Extension Agreement");
+	addRequiredDocument("Civil Plan Sheets");
 	
 }
 else{	
-	aa.env.setValue("ReturnData", "{'PageFlow': {'HidePage' : 'Y'}}");
+	//aa.env.setValue("ReturnData", "{'PageFlow': {'HidePage' : 'Y'}}");
+	removeAllRequiredDocumentCapCondition();
+	addRequiredDocument("Extension Agreement");
+	addRequiredDocument("Civil Plan Sheets");
 }
 
 function getScriptText(vScriptName) {
