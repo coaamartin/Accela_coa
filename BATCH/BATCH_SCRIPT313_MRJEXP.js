@@ -127,6 +127,10 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
             }
             */
 
+            expResult.setExpStatus(currentAppStatus);
+            aa.expiration.editB1Expiration(expResult.getB1Expiration());
+
+
 			thisCap = aa.cap.getCap(capId).getOutput();
 			thisCap.getCapModel().setCapStatus(newAppStatus);
 			var edit = aa.cap.editCapByPK(thisCap.getCapModel());
