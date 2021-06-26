@@ -106,24 +106,27 @@ function checkExpiredUpdateAppStatus(currentAppStatus, expiredSinceDays, newAppS
 		logDebug2(expSince1);
 
 		if (expSince1 < expiredSinceDays) {
-			var renewalCapIDString = null;
-			var renewalCapID = getRenewalByParentCapIDForPending(capId);
-			if (renewalCapID) {
-				renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
-			}
-			
-			logDebug2("<br>Checking for incomplete renewals... ");
-			
-			//check for incomplete renewals, assess late fee
-			if (renewalCapIDString) {
-				logDebug2("<br>Found incomplete renewal on license. Record ID: " + renewalCapIDString);
-				if (assessMJLateFee(renewalCapID)) {
-					logDebug2("<br>Assessed late fee on Renewal Record ID " + renewalCapIDString);
-				}
-			} else {
-				logDebug2("No renewals found.");
-			}
-			
+            /* Logic moved to CTRCA of Renewals
+            var renewalCapIDString = null;
+
+            var renewalCapID = getRenewalByParentCapIDForPending(capId);
+            if (renewalCapID) {
+                renewalCapIDString = aa.cap.getCapID(renewalCapID.getID1(), renewalCapID.getID2(), renewalCapID.getID3()).getOutput().getCustomID();
+            }
+
+            logDebug2("<br>Checking for incomplete renewals... ");
+
+            //check for incomplete renewals, assess late fee
+            if (renewalCapIDString) {
+                logDebug2("<br>Found incomplete renewal on license. Record ID: " + renewalCapIDString);
+                if (assessMJLateFee(renewalCapID)) {
+                    logDebug2("<br>Assessed late fee on Renewal Record ID " + renewalCapIDString);
+                }
+            } else {
+                logDebug2("No renewals found.");
+            }
+            */
+
 			thisCap = aa.cap.getCap(capId).getOutput();
 			thisCap.getCapModel().setCapStatus(newAppStatus);
 			var edit = aa.cap.editCapByPK(thisCap.getCapModel());
