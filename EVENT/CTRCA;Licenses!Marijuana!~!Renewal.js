@@ -5,7 +5,7 @@ include("313_AddExpiredRenewalLateFeeMJ");
 //End script to assess late fees delinquent MJ renewal
     
 if (appMatch("Licenses/Marijuana/Retail Cultivation/Renewal")) {
-        updateFee("LIC_MJRC_02", "LIC_MJ_RC", "FINAL", 1, "Y");
+    updateFee("LIC_MJRC_02", "LIC_MJ_RC", "FINAL", 1, "Y");
 } else if (appMatch("Licenses/Marijuana/Retail Product Manufacturer/Renewal")) {
     updateFee("LIC_MJRPM_02", "LIC_MJ_RPM", "FINAL", 1, "Y");
 } else if (appMatch("Licenses/Marijuana/Retail Transporter/Renewal")) {

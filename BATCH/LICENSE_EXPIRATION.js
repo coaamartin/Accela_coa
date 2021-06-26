@@ -291,6 +291,14 @@ function mainProcess() {
 		if (expDate) {
 			var b1ExpDate = expDate.getMonth() + "/" + expDate.getDayOfMonth() + "/" + expDate.getYear();
 			var dueDate = (expDate.getMonth() -1) + "/" + expDate.getDayOfMonth() + "/" + expDate.getYear();
+
+            vLicExp_mm = expDate.getMonth(); //Month less (no +1 for month)
+            vLicExp_mm = (vLicExp_mm < 10) ? '0' + vLicExp_mm : vLicExp_mm;
+            vLicExp_dd = expDate.getDate();
+            vLicExp_dd = (vLicExp_dd < 10) ? '0' + vLicExp_dd : vLicExp_dd;
+            vLicExp_yyyy = expDate.getFullYear();
+            var expExtraFeeDateString = vLicExp_mm + "/" + vLicExp_dd + "/" + vLicExp_yyyy;
+            expExtraFeeDateString = dateAdd(expExtraFeeDateString, 7);
 		}
 		var b1Status = b1Exp.getExpStatus();
 		var renewalCapId = null;
@@ -411,6 +419,7 @@ function mainProcess() {
 			eParams.put("$$TradeName$$", tradeName); //MJ LICENSE RENEWAL NOTICE #311 Using
 			eParams.put("$$AddressLine$$", addressLine); //MJ LICENSE RENEWAL NOTICE #311 Using
 			eParams.put("$$StateLicenseNumber$$", stateLicenseNumber); //MJ LICENSE RENEWAL NOTICE #311 Using
+            eParams.put("$$RenewalGracePeriodDate$$", expExtraFeeDateString); //LIC MJ FINAL NOTICE - DELINQUENT ACCOUNT # 312 Using
 
 			eParams.put("$$altID$$",capId.getCustomID());
 			//eParams.put("$$capName$$",capName);
