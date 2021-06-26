@@ -292,11 +292,14 @@ function mainProcess() {
 			var b1ExpDate = expDate.getMonth() + "/" + expDate.getDayOfMonth() + "/" + expDate.getYear();
 			var dueDate = (expDate.getMonth() -1) + "/" + expDate.getDayOfMonth() + "/" + expDate.getYear();
 
-            vLicExp_mm = expDate.getMonth(); //Month less (no +1 for month)
+            var vLicExp_mm = expDate.getMonth(); //Month less (no +1 for month)
             vLicExp_mm = (vLicExp_mm < 10) ? '0' + vLicExp_mm : vLicExp_mm;
-            vLicExp_dd = expDate.getDate();
+
+            var vLicExp_dd = expDate.getDate();
             vLicExp_dd = (vLicExp_dd < 10) ? '0' + vLicExp_dd : vLicExp_dd;
-            vLicExp_yyyy = expDate.getFullYear();
+
+            var vLicExp_yyyy = expDate.getFullYear();
+
             var expExtraFeeDateString = vLicExp_mm + "/" + vLicExp_dd + "/" + vLicExp_yyyy;
             expExtraFeeDateString = dateAdd(expExtraFeeDateString, 7);
 		}
