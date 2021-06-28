@@ -1,7 +1,7 @@
 /*
 Title : Establish Civil Plan Parent Relationship (ApplicationSubmitAfter)
 
-Purpose : If the custom field “Civil Plan number” value matches a record alt id for the record type PublicWorks/Civil Plan/Review/NA
+Purpose : If the custom field "Civil Plan number" value matches a record alt id for the record type PublicWorks/Civil Plan/Review/NA
 and the current record is not already a parent or grandparent of a record then make this record a child of the Civil Plan
 
 Author: Yazan Barghouth 
@@ -36,7 +36,6 @@ try{
 				copyAddress(capId, cWETApplication);
 				copyParcels(capId, cWETApplication);
 				copyOwner(capId, cWETApplication);
-				copyContacts(capId, cWETApplication);
 				
 				editAppSpecific("Application ID",capId.getCustomID());
 				editAppSpecific("Utility Permit Number",capId.getCustomID(), cWETApplication);
