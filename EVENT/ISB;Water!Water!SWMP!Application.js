@@ -8,7 +8,7 @@ try{
             if (result==null) {
                 throw "There must be an ECKO initial inspection schedule and completed"
             }else if (result==false){
-                throw "ECKO Initial Inspection must be completed prior to scheduling " + InspectionType ;
+                throw inspection2Check + " must be completed prior to scheduling " + InspectionType ;
             }		
        
     }
@@ -37,14 +37,14 @@ function checkInspectionTypeAndStatus(insp2Check){
                     return true;
                 }
                 else{
-                    return null;
+                    return false;
                 }
               
             }
         }
            
         if(!inspectionFoundFlag){
-                return "";
+                return null;
         }
     }
 }
