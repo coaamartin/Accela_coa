@@ -18,3 +18,44 @@ if ("Public Water Utility Permit".equals(AInfo["Utility Permit Type"]) || "Priva
 	createTempWaterWetTapCopyDataAndSendEmail("WATER CREATE WET TAP TEMP RECORD #401");
 }
 */
+
+// 1313 Create water tap based on ASIT entry
+try{
+	var thisTableName = "SIZE"
+    var itemCap = capId;
+	var SIZEASIT = loadASITable(thisTableName, itemCap) || new Array();
+    var atLeastOne = false;
+	var newTempRecordType = ["Water", "Water", "Wet Tap", "Application"];
+
+    //add permits
+    for (var p in SIZEASIT)
+    {
+            if (isBlank(SIZEASIT[p]["WET Record ID"]))
+            {
+                var cWETApplication = createChild("Water", "Water", "Wet Tap", "Application", "", itemCap);
+                copyASITableByTName("SIZE", capId, childCapId);
+				copyAddress(capId, childCapId);
+				copyParcels(capId, childCapId);
+				copyOwner(capId, childCapId);
+				copyContacts(capId, childCapId);
+				
+				editAppSpecific("Application ID",capId.getCustomID());
+				editAppSpecific("Utility Permit Number",capId.getCustomID(), cWETApplication);
+				editAppSpecific("Civil Plan Number", AInfo["Civil Plan number"], cWETApplication);
+                          
+                SIZEASIT[p]["WET Record ID"] = cWETApplication.getCustomID();
+                atLeastOne = true;
+            }
+        
+    }
+    if (atLeastOne)
+    {
+        removeASITable(thisTableName, itemCap);
+        addASITable(thisTableName, SIZEASIT, itemCap);
+    }
+    
+}
+catch (err) {
+    logDebug("Error occurred: ASIUA: " + err.message);
+    logDebug(err.stack)
+}
