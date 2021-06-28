@@ -25,19 +25,18 @@ try{
     var itemCap = capId;
 	var SIZEASIT = loadASITable(thisTableName, itemCap) || new Array();
     var atLeastOne = false;
-	var newTempRecordType = ["Water", "Water", "Wet Tap", "Application"];
-
+	
     //add permits
     for (var p in SIZEASIT)
     {
             if (isBlank(SIZEASIT[p]["WET Record ID"]))
             {
                 var cWETApplication = createChild("Water", "Water", "Wet Tap", "Application", "", itemCap);
-                copyASITableByTName("SIZE", capId, childCapId);
-				copyAddress(capId, childCapId);
-				copyParcels(capId, childCapId);
-				copyOwner(capId, childCapId);
-				copyContacts(capId, childCapId);
+                copyASITableByTName("SIZE", capId, cWETApplication);
+				copyAddress(capId, cWETApplication);
+				copyParcels(capId, cWETApplication);
+				copyOwner(capId, cWETApplication);
+				copyContacts(capId, cWETApplication);
 				
 				editAppSpecific("Application ID",capId.getCustomID());
 				editAppSpecific("Utility Permit Number",capId.getCustomID(), cWETApplication);
