@@ -36,7 +36,7 @@ if ("Application Submittal".equals(wfTask) && "Plans Required".equals(wfStatus))
 
 //SWAKIL
 if ("Plan Review".equals(wfTask) && "Resubmittal Requested".equals(wfStatus)) {
-	deactivateTask("Plan Review");
+	//deactivateTask("Plan Review");
 }
 
 
