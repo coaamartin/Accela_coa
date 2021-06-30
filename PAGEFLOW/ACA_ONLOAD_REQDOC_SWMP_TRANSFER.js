@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------------------------------------/
-| Program : ACA_WATER_PERMIT_REQ_DOCS	
+| Program : ACA_ONLOAD_REQDOCS_SWMP_TRANSFER
 | Event   : -
 |
 /------------------------------------------------------------------------------------------------------*/
@@ -13,7 +13,9 @@ var capId = cap.getCapID();
 
 
 	removeAllRequiredDocumentCapCondition();
-   	addRequiredDocument("SWMP Permit Transfer Agreement")
+   	addRequiredDocument("SWMP Permit Transfer Agreement");
+
+       
 function getScriptText(vScriptName) {
    var servProvCode = aa.getServiceProviderCode();
    if (arguments.length > 1) {
