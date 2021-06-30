@@ -80,7 +80,7 @@ Notes:
 1- The script will update the "Code Reference" custom field, when the workflow status = "Issued"
 */
 
-setCodeReference("Issued");
+
 
 
 //Script ID#60  Resubmittal Requested Notification 
@@ -197,6 +197,8 @@ else if (wfStatus == "Waiting on Site Use Agreement/Fee") {
  }
 logDebug("End of WTUA;Building");
 }
+
+setCodeReference("Issued");
 // aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 // Script Tester footer.  Comment this out when deploying.
 // }	
