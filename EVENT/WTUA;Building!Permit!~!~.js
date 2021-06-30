@@ -191,6 +191,10 @@ else if (wfStatus == "Withdrawn") {
     updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
     closeAllTasks(capId, "Withdrawn");
  }
+else if (wfStatus == "Waiting on Site Use Agreement/Fee") {
+    logDebug("Parks is waiting on Site Use Agreement/Fee")
+    include("5138_CityClerk_SiteUse");
+ }
 logDebug("End of WTUA;Building");
 }
 // aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
