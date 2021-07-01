@@ -11,4 +11,10 @@ Sample Call : checkIfAddressOrParcelExists();
 
 */
 
-checkIfAddressOrParcelExists();
+appTypeResult = cap.getCapType(); //create CapTypeModel object
+appTypeString = appTypeResult.toString();
+appTypeArray = appTypeString.split("/");
+logDebug("appType: " + appTypeString);
+if(appTypeArray[3]!="Renewal"){
+    checkIfAddressOrParcelExists();
+}
