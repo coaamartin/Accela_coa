@@ -81,8 +81,24 @@ Notes:
     $$altID$$, $$recordAlias$$, $$recordStatus$$, $$balance$$, $$wfTask$$, $$wfStatus$$, $$wfDate$$, $$wfComment$$, $$wfStaffUserID$$, $$wfHours$$
     
 */
-
-readyToPayRequestedEmailNotification(null, [ "Ready to Pay" ], "PW READY TO PAY #123");
+if ((wfStatus == 'Ready to Pay') && (balanceDue > 0)) {
+logDebug("Starting _PI_Notification script");
+var invoiceNbrObj = getLastInvoice({});
+var invNbr = invoiceNbrObj.getInvNbr();
+var altID = capId.getCustomID()
+appType = cap.getCapType().toString();
+var vAsyncScript = "SEND_EMAIL_PI_INVOICE_ASYNC";
+var envParameters = aa.util.newHashMap();
+envParameters.put("altID", altID);
+envParameters.put("capId", capId);
+envParameters.put("cap", cap);
+envParameters.put("INVOICEID", String(invNbr));
+getACARecordParam4Notification(envParameters,acaUrl)
+logDebug("Starting to kick off ASYNC event for Invoice. Params being passed: " + envParameters);
+aa.runAsyncScript(vAsyncScript, envParameters);
+logDebug("End of PI_Notification script");
+}
+//readyToPayRequestedEmailNotification(null, [ "Ready to Pay" ], "PW READY TO PAY #123");
 /*
 Title : Permit Issued email notification (WorkflowTaskUpdateAfter) 
 
