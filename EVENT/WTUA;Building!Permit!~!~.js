@@ -80,7 +80,7 @@ Notes:
 1- The script will update the "Code Reference" custom field, when the workflow status = "Issued"
 */
 
-setCodeReference("Issued");
+
 
 
 //Script ID#60  Resubmittal Requested Notification 
@@ -123,7 +123,7 @@ User code generally goes inside the try block below.
 // {
 /* your code here
 End script Tester header */
-if(appMatch("Building/Permit/DonationBin/*") && appMatch("Building/Permit/TempSigns/*") && appMatch("Building/Permit/TempUse/*")) {
+if(appMatch("Building/Permit/DonationBin/*") || appMatch("Building/Permit/TempSigns/*") || appMatch("Building/Permit/TempUse/*")) {
     
 logDebug("Starting WTUA;Building!Permit!~!~.js");
 // if (wfTask == "Planning Director Approval" && wfStatus != "") {
@@ -191,8 +191,15 @@ else if (wfStatus == "Withdrawn") {
     updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
     closeAllTasks(capId, "Withdrawn");
  }
+
+else if (wfStatus == "Waiting on Site Use Agreement/Fee") {
+    logDebug("Parks is waiting on Site Use Agreement/Fee")
+    include("5138_CityClerk_SiteUse");
+ }
 logDebug("End of WTUA;Building");
 }
+
+setCodeReference("Issued");
 // aa.sendMail("rprovinc@auroragov.org", "rprovinc@auroragov.org", "", "Log", "Debug: <br>" + debug + "<br>Message: <br>" + message);
 // Script Tester footer.  Comment this out when deploying.
 // }	
