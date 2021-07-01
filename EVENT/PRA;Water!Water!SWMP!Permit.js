@@ -1,5 +1,5 @@
 //PRA:Water/Water/SWMP/Permit
-if (balanceDue <= 0 && isTaskActive("Permit Issued"))
+if (balanceDue <= 0 && isTaskActive("Active Permit"))
 {
 	//updateAppStatus("Issued", "Updated via script");
     rB1ExpResult.setExpDate(aa.date.parseDate(dateAdd(null, 365)));
