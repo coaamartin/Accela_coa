@@ -33,7 +33,7 @@ function getEmailString()
 	//need to add inspection contact below to this logic 
 	for (var c in contactArray)
 	{
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Licensee")
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Applicant")
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
 
