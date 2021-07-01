@@ -62,7 +62,7 @@ function notifyOverdueIssuedPermits(grp, typ, stype, cat){
                         //change renewal status
                         lic.setExpStatus("About to Expire");
                         aa.expiration.editB1Expiration(lic.getB1Expiration());
-                        //updateAppStatus("About to Expire","Updated via Batch Job : " + batchJobName, capScript.getCapID());
+                        updateAppStatus("About to Expire","Updated via Batch Job : " + batchJobName, capScript.getCapID());
                     } 
                 }
             }
