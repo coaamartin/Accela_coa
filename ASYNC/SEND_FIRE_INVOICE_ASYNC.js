@@ -9,6 +9,8 @@ try
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 	var tParams = aa.util.newHashtable();
+	var servProvcode = aa.aa.getServiceProviderCode();
+	logDebug("Service Provider code: " + servProvcode);
 	tParams.put("$$todayDate$$", thisDate);
 	tParams.put("$$altID$$", capId.getCustomID());
 	tParams.put("$$capAlias$$", capAlias);

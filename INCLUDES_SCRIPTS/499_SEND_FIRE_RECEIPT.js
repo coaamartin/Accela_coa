@@ -6,4 +6,6 @@ envParameters.put("cap", cap);
 //envParameters.put("amount", PaymentTotalPaidAmount);
 envParameters.put("INVOICEID", String(invNbr));
 var vAsyncScript = "SEND_FIRE_RECEIPT_ASYNC";
+var servProvcode = aa.aa.getServiceProviderCode();
+logDebug("Service Provider code: " + servProvcode);
 aa.runAsyncScript(vAsyncScript, envParameters);
