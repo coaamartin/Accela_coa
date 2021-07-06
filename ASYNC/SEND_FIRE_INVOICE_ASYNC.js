@@ -109,10 +109,9 @@ function generateReportFile(aaReportName, parameters, rModule) {
 
 	report = aa.reportManager.getReportInfoModelByName(reportName);
 	report = report.getOutput();
+	setModule = rModule;
 
-
-	//report.setModule(rModule);
-	report.setModule(cap.getCapModel().getModuleName());
+	report.setModule;
 	report.setCapId(capId);
 	report.setReportParameters(parameters);
 	//Added
