@@ -118,7 +118,7 @@ function generateReportFile(aaReportName,parameters,rModule)
 	report = report.getOutput();
 
 
-	report.setModule("AURORACO");
+	//report.setModule("AURORACO");
 	report.setCapId(capId);
 	report.setReportParameters(parameters);
 	//Added
