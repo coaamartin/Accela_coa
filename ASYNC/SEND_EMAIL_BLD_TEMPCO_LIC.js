@@ -1,4 +1,4 @@
-logDebug("***** Starting SEND_EMAIL_TEMPCO_LIC *****");
+logDebug("***** Starting SEND_EMAIL_BLD_TEMPCO_LIC *****");
 
 try
 {
