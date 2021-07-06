@@ -1,4 +1,4 @@
-logDebug("***** Starting SEND_EMAIL_BLD_OTC_PERMIT *****");
+logDebug("***** Starting SEND_EMAIL_BLD_NEW_PERMIT *****");
 
 try
 {
@@ -41,7 +41,7 @@ function getEmailString()
 	//need to add inspection contact below to this logic 
 	for (var c in contactArray)
 	{
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Applicant")
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople())
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
 
