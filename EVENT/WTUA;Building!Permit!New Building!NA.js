@@ -57,6 +57,9 @@ if($iTrc(wfStatus == "Temporary CO Issued", 'wfStatus:Temporary CO Issued')){
 if($iTrc(wfStatus == "Final CO Issued", 'wfStatus:Final CO Issued')){
     include("5137_BLD_TempCO_Issued");
 }
+if($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wfTask: Permit Issuance/wfStatus:Issued')){
+    include("5137_BLD_TempCO_Issued");
+}
 if($iTrc(wfStatus == "Resubmittal Requested", 'wfStatus:Resubmittal Requested')){
     include("5134_BLD_Resubmittal");
 }
