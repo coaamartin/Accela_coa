@@ -28,7 +28,7 @@ var today = new Date();
 var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
 var altID = capId.getCustomID();
 appType = cap.getCapType().toString();
-var vAsyncScript = "SEND_EMAIL_TEMPCO_LIC";
+var vAsyncScript = "SEND_EMAIL_BLD_TEMPCO_LIC";
 var envParameters = aa.util.newHashMap();
 envParameters.put("altID", altID);
 envParameters.put("capId", capId);
