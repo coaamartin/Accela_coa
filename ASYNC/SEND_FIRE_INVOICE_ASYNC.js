@@ -1,10 +1,9 @@
 logDebug("***** Starting SEND_FIRE_INVOICE_ASYNC *****");
-try
-{
+try {
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var invNbr = aa.env.getValue("INVOICEID");
-	var emailTo = getEmailString(); 
+	var emailTo = getEmailString();
 	var capAlias = cap.getCapModel().getAppTypeAlias();
 	var today = new Date();
 	var thisDate = (today.getMonth() + 1) + "/" + today.getDate() + "/" + today.getFullYear();
@@ -20,21 +19,17 @@ try
 	var emailtemplate = "FIRE INVOICED FEES";
 	var report = generateReportFile("Fire Invoice Report", rParams, "AURORACO");
 	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-}
-catch(e)
-{
+} catch (e) {
 	email("rprovinc@auroragov.org", "rprovinc@auroragov.org", "Error", e.message);
 }
-function getEmailString()
-{
+
+function getEmailString() {
 	var emailString = "";
 	var contactArray = getPeople(capId);
 
 	//need to add inspection contact below to this logic 
-	for (var c in contactArray)
-	{
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact")
-		{
+	for (var c in contactArray) {
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Inspection Contact") {
 			emailString += contactArray[c].getPeople().getEmail() + ";";
 
 		}
@@ -43,112 +38,107 @@ function getEmailString()
 	return emailString;
 }
 logDebug("Starting function getPeople")
- function getPeople(capId)
-{
+
+function getPeople(capId) {
 	capPeopleArr = null;
 	var s_result = aa.people.getCapContactByCapID(capId);
-	if(s_result.getSuccess())
-	{
+	if (s_result.getSuccess()) {
 		capPeopleArr = s_result.getOutput();
-		if(capPeopleArr != null || capPeopleArr.length > 0)
-		{
-			for (loopk in capPeopleArr)	
-			{
+		if (capPeopleArr != null || capPeopleArr.length > 0) {
+			for (loopk in capPeopleArr) {
 				var capContactScriptModel = capPeopleArr[loopk];
 				var capContactModel = capContactScriptModel.getCapContactModel();
 				var peopleModel = capContactScriptModel.getPeople();
 				var contactAddressrs = aa.address.getContactAddressListByCapContact(capContactModel);
-				if (contactAddressrs.getSuccess())
-				{
+				if (contactAddressrs.getSuccess()) {
 					var contactAddressModelArr = convertContactAddressModelArr(contactAddressrs.getOutput());
-					peopleModel.setContactAddressList(contactAddressModelArr);    
+					peopleModel.setContactAddressList(contactAddressModelArr);
 				}
 			}
-		}
-		else
-		{
+		} else {
 			aa.print("WARNING: no People on this CAP:" + capId);
 			capPeopleArr = null;
 		}
-	}
-	else
-	{
+	} else {
 		aa.print("ERROR: Failed to People: " + s_result.getErrorMessage());
-		capPeopleArr = null;	
+		capPeopleArr = null;
 	}
 	return capPeopleArr;
 }
-function logDebug(str){aa.print(str);}
-function logMessage(str){aa.print(str);}
- function getContactByType(conType,capId) {
 
-    var contactArray = getPeople(capId);
+function logDebug(str) {
+	aa.print(str);
+}
 
+function logMessage(str) {
+	aa.print(str);
+}
 
+function getContactByType(conType, capId) {
 
-    for(thisContact in contactArray) {
-
-        if((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase())
-
-            return contactArray[thisContact].getPeople();
-
-    }
+	var contactArray = getPeople(capId);
 
 
 
-    return false;
+	for (thisContact in contactArray) {
+
+		if ((contactArray[thisContact].getPeople().contactType).toUpperCase() == conType.toUpperCase())
+
+			return contactArray[thisContact].getPeople();
+
+	}
+
+
+
+	return false;
 
 }
-function email(pToEmail, pFromEmail, pSubject, pText) 
-	{
+
+function email(pToEmail, pFromEmail, pSubject, pText) {
 	//Sends email to specified address
 	//06SSP-00221
 	//
 	aa.sendMail(pFromEmail, pToEmail, "", pSubject, pText);
-	logDebug("Email sent to "+pToEmail);
+	logDebug("Email sent to " + pToEmail);
 	return true;
-	}
+}
 
 
-function generateReportFile(aaReportName,parameters,rModule) 
-{
+function generateReportFile(aaReportName, parameters, rModule) {
 	var reportName = aaReportName;
 
 	report = aa.reportManager.getReportInfoModelByName(reportName);
 	report = report.getOutput();
 
 
-	//report.setModule("AURORACO");
+	report.setModule(rModule);
 	report.setCapId(capId);
 	report.setReportParameters(parameters);
 	//Added
 	vAltId = capId.getCustomID();
 	report.getEDMSEntityIdModel().setAltId(vAltId);
-	var permit = aa.reportManager.hasPermission(reportName,"ADMIN");
-	aa.print("---"+permit.getOutput().booleanValue());
-	if(permit.getOutput().booleanValue()) 
-	{
+	var permit = aa.reportManager.hasPermission(reportName, "ADMIN");
+	aa.print("---" + permit.getOutput().booleanValue());
+	if (permit.getOutput().booleanValue()) {
 		var reportResult = aa.reportManager.getReportResult(report);
 
-		if(reportResult) 
-		{
+		if (reportResult) {
 			reportResult = reportResult.getOutput();
 			var reportFile = aa.reportManager.storeReportToDisk(reportResult);
-			logMessage("Report Result: "+ reportResult);
+			logMessage("Report Result: " + reportResult);
 			reportFile = reportFile.getOutput();
 			return reportFile
-		} else 
-		{
-			logMessage("Unable to run report: "+ reportName + " for Admin" + systemUserObj);
+		} else {
+			logMessage("Unable to run report: " + reportName + " for Admin" + systemUserObj);
 			return false;
 		}
-	} else 
-	{
-		logMessage("No permission to report: "+ reportName + " for Admin" + systemUserObj);
-		return false; 
+	} else {
+		logMessage("No permission to report: " + reportName + " for Admin" + systemUserObj);
+		return false;
 	}
 }
- function sendNotification(emailFrom,emailTo,emailCC,templateName,params,reportFile)
+
+function sendNotification(emailFrom, emailTo, emailCC, templateName, params, reportFile)
 
 {
 
@@ -160,9 +150,9 @@ function generateReportFile(aaReportName,parameters,rModule)
 
 	var id1 = itemCap.ID1;
 
- 	var id2 = itemCap.ID2;
+	var id2 = itemCap.ID2;
 
- 	var id3 = itemCap.ID3;
+	var id3 = itemCap.ID3;
 
 
 
@@ -176,7 +166,7 @@ function generateReportFile(aaReportName,parameters,rModule)
 
 	result = aa.document.sendEmailAndSaveAsDocument(emailFrom, emailTo, emailCC, templateName, params, capIDScriptModel, reportFile);
 
-	if(result.getSuccess())
+	if (result.getSuccess())
 
 	{
 
@@ -184,9 +174,7 @@ function generateReportFile(aaReportName,parameters,rModule)
 
 		return true;
 
-	}
-
-	else
+	} else
 
 	{
 
@@ -197,19 +185,20 @@ function generateReportFile(aaReportName,parameters,rModule)
 	}
 
 }
- function convertContactAddressModelArr(contactAddressScriptModelArr)
+
+function convertContactAddressModelArr(contactAddressScriptModelArr)
 
 {
 
 	var contactAddressModelArr = null;
 
-	if(contactAddressScriptModelArr != null && contactAddressScriptModelArr.length > 0)
+	if (contactAddressScriptModelArr != null && contactAddressScriptModelArr.length > 0)
 
 	{
 
 		contactAddressModelArr = aa.util.newArrayList();
 
-		for(loopk in contactAddressScriptModelArr)
+		for (loopk in contactAddressScriptModelArr)
 
 		{
 
@@ -217,7 +206,7 @@ function generateReportFile(aaReportName,parameters,rModule)
 
 		}
 
-	}	
+	}
 
 	return contactAddressModelArr;
 
