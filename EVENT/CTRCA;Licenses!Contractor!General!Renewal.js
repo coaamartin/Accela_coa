@@ -2,11 +2,11 @@
 var theFee = 125;
 
 if ("Commercial Building".equals(AInfo["Contractor Type"])) {
-	theFee = 300;
+	theFee = 325;
 }
 
 if ("Residential Building".equals(AInfo["Contractor Type"])) {
-	theFee = 180;
+	theFee = 195;
 }
 
 updateFee("LIC_030", "LIC_CONTRACTOR_GENERAL", "FINAL", theFee, "N");
