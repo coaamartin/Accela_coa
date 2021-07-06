@@ -40,7 +40,7 @@ aa.runAsyncScript(vAsyncScript, envParameters);
 logDebug("End of Script 5137_BLD_TempCO_Issued.js");
 }
 
-if ($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wfTask: Permit Issuance/wfStatus:Issued')) {
+if ($iTrc(wfTask == "Permit Issuance", 'wfTask: Permit Issuance')) {
 logDebug("Starting to send notifications on Permit Issuance");
 var capAlias = cap.getCapModel().getAppTypeAlias();
 var recordApplicant = getContactByType("Applicant", capId);
