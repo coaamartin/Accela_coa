@@ -15,7 +15,9 @@ appTypeResult = cap.getCapType(); //create CapTypeModel object
 appTypeString = appTypeResult.toString();
 appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
-if (wfStatus == "Temporary CO Issued" || wfStatus == "Final CO Issued") {
+
+var $iTrc = ifTracer;
+if ($iTrc(wfStatus == "Temporary CO Issued", 'wfStatus:Temporary CO Issued' || wfStatus == "Final CO Issued", 'wfStatus:Final CO Issued')) {
 logDebug("Starting to send notifications on TEMP CO ISSUED || FINAL CO ISSUED");
 var capAlias = cap.getCapModel().getAppTypeAlias();
 var recordApplicant = getContactByType("Applicant", capId);
@@ -38,7 +40,7 @@ aa.runAsyncScript(vAsyncScript, envParameters);
 logDebug("End of Script 5137_BLD_TempCO_Issued.js");
 }
 
-if (wfTask == "Permit Issuance" && wfStatus == "Issued") {
+if ($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued", 'wfTask: Permit Issuance/wfStatus:Issued')) {
 logDebug("Starting to send notifications on Permit Issuance");
 var capAlias = cap.getCapModel().getAppTypeAlias();
 var recordApplicant = getContactByType("Applicant", capId);
