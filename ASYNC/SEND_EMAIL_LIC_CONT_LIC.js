@@ -26,7 +26,8 @@ try
 	var rParams = aa.util.newHashtable();
     rParams.put("AGENCYID", "AURORACO");
 	rParams.put("altID", recordID);
-	var emailtemplate = "BLD QPL LICENSE ISSUANCE #64-65";
+	var emailtemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
+	//need to run the license report below
 	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
     sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);

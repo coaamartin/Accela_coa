@@ -63,9 +63,35 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
       envParameters.put("firstName", firstName);
       envParameters.put("lastName", lastName);
       //envParameters.put("vemailTemplate", "BLD_CLL_LICENSE_ISSUANCE_#111");
-      envParameters.put("vemailTemplate", "BLD QPL LICENSE ISSUANCE # 64&65");
-      logDebug("Starting to kick off ASYNC event for CLL issuance. Params being passed: " + envParameters);
+      envParameters.put("vemailTemplate", "BLD_RECIEPT");
+      logDebug("Starting to kick off ASYNC event for CLL payment reciept. Params being passed: " + envParameters);
       aa.runAsyncScript(vAsyncScript, envParameters);
+      logDebug("Kicking off the license issuance email. ------->")
+      //Below we will run the License report script
+      var asiValues2 = getAppSpecific("Contractor Type");
+      licenseType2 = asiValues;
+      var altID2 = capId.getCustomID();
+      appType2 = cap.getCapType().toString();
+      var invoiceNbrObj2 = getLastInvoice({});
+      var invNbr2 = invoiceNbrObj.getInvNbr();
+      var vAsyncScript2 = "SEND_EMAIL_LIC_CONT_LIC";
+      var emailTo2 = getEmailString2(); 
+	   var recordApplicant2 = getContactByType("Applicant", capId);
+	   var firstName2 = recordApplicant.getFirstName();
+      var lastName2 = recordApplicant.getLastName();
+      var envParameters2 = aa.util.newHashMap();
+      envParameters2.put("altID", altID2);
+      envParameters2.put("capId", capId);
+      envParameters2.put("cap", cap);
+      envParameters2.put("INVOICEID", String(invNbr2));
+      envParameters2.put("licenseType", licenseType2);
+      envParameters2.put("emailTo", emailTo2);
+      envParameters2.put("recordApplicant", recordApplicant2);
+      envParameters2.put("firstName", firstName2);
+      envParameters2.put("lastName", lastName2);
+      envParameters2.put("vemailTemplate", "BLD QPL LICENSE ISSUANCE # 64&65");
+      logDebug("Starting to kick off ASYNC event for CLL issuance of the license. Params being passed: " + envParameters2);
+      aa.runAsyncScript2(vAsyncScript2, envParameters2);
       logDebug("---------------------> 5114_EMailReadyLicenseIssue.js ended.");
    }
 
