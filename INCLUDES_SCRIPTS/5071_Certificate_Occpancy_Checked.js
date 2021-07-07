@@ -23,3 +23,19 @@ if(wfTask == "Inspection Phase" && wfStatus == "Ready for CO")     // "Final CO 
 		cancel = true;
 	}
 }
+
+if(wfTask == "Inspection Phase" && wfStatus == "Ready for CO")     // "Final CO Issued" used in DEV to test 
+{
+  logDebug("Checking if Backflow Prevention Task is being activated. If so CO box needs to be checked.");
+  
+  var doesCOExist = getAppSpecific("Certificate of Occupancy");
+  
+  if (doesCOExist == null)
+   {
+		showMessage = true;
+		comment("<h2 style='background-color:rgb(255, 0, 0);'>WARNING - The Certificate of Occupancy box is not checked and is required on this record.</h2>");
+		//deactivateTask("Certificate of Occupancy");
+		cancel = true;
+	}
+}
+
