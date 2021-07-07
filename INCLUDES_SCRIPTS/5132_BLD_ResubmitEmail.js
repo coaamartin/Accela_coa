@@ -17,7 +17,7 @@ appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
 
 logDebug("Starting to send notifications");
-var vEmailTemplate = "BLD_ACCEPTPLANS_RESUBMITTAL REQUESTED";// BLD ACCEPTPLANS
+var vEmailTemplate = "BLD_PLANNING_RESUBMITTAL";// BLD ACCEPTPLANS
 var capAlias = cap.getCapModel().getAppTypeAlias();
 var recordApplicant = getContactByType("Applicant", capId);
 var firstName = recordApplicant.getFirstName();
