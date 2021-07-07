@@ -7,7 +7,7 @@ try
 	var recordID = aa.env.getValue("altID");
     var appType = aa.env.getValue("appType");
     var licenseType = aa.env.getValue("licenseType");
-	var emailTo = getEmailString();
+	var emailTo = aa.env.getValue("emailTo");
 	var recordApplicant = aa.env.getValue("recordApplicant");
 	var firstName = aa.env.getValue("firstName");
     var lastName = aa.env.getValue("LastName");
