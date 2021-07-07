@@ -62,7 +62,8 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
       envParameters.put("recordApplicant", recordApplicant);
       envParameters.put("firstName", firstName);
       envParameters.put("lastName", lastName);
-      envParameters.put("vemailTemplate", "BLD_CLL_LICENSE_ISSUANCE_#111");
+      //envParameters.put("vemailTemplate", "BLD_CLL_LICENSE_ISSUANCE_#111");
+      envParameters.put("vemailTemplate", "BLD QPL LICENSE ISSUANCE # 64&65");
       logDebug("Starting to kick off ASYNC event for CLL issuance. Params being passed: " + envParameters);
       aa.runAsyncScript(vAsyncScript, envParameters);
       logDebug("---------------------> 5114_EMailReadyLicenseIssue.js ended.");

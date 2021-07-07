@@ -7,7 +7,7 @@ try
 	var recordID = aa.env.getValue("altID");
     var appType = aa.env.getValue("appType");
     var licenseType = aa.env.getValue("licenseType");
-	var emailTo = aa.env.getValue("emailTo");
+	var emailTo = getEmailString();
 	var recordApplicant = aa.env.getValue("recordApplicant");
 	var firstName = aa.env.getValue("firstName");
     var lastName = aa.env.getValue("LastName");
@@ -44,7 +44,7 @@ function getEmailString()
 	//need to add inspection contact below to this logic 
 	for (var c in contactArray)
 	{
-		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople().contactType == "Applicant")
+		if (contactArray[c].getPeople().getEmail() && contactArray[c].getPeople())
 		{
 			emailString += contactArray[c].getPeople().getEmail() + ";";
 
