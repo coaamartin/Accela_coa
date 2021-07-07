@@ -24,7 +24,7 @@ if(wfTask == "Inspection Phase" && wfStatus == "Ready for CO")     // "Final CO 
 	}
 }
 
-if(wfTask == "Inspection Phase" && wfStatus == "Ready for CO")     // "Final CO Issued" used in DEV to test 
+if(wfTask == "Permit Issuance" && wfStatus == "Issued")     // "Final CO Issued" used in DEV to test 
 {
   logDebug("Checking if Backflow Prevention Task is being activated. If so CO box needs to be checked.");
   
