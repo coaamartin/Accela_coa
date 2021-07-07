@@ -25,7 +25,7 @@ if (capAddresses.getSuccess()) {
         logDebug(fullAddress);
     }
     getCounty = capAddresses.getCounty();
-    if (getCounty == "Arapahoe") {
+    if (getCounty == "ARAPAHOE") {
         addFee("BLD_PWP_03", "BLD_PWP", "FINAL", 1, "Y");
     }
 }
