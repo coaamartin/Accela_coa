@@ -101,3 +101,8 @@ if(wfStatus == "Withdrawn"){
 	include("5135_BLD_Withdrawn");
 	logDebug("Email was sent for Withdrawn.");
 }
+
+if (wfStatus == "Ready to Pay") {
+	logDebug("Building Permit Plans, Ready to Pay");
+	include("5139_BLD_Plan_Fee");
+}
