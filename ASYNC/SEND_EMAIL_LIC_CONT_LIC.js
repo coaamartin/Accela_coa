@@ -28,9 +28,10 @@ try
 	rParams.put("Record_id", recordID);
 	var emailtemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
 	//need to run the license report below
-	var report = generateReportFile("Licenses_script", rParams, aa.getServiceProviderCode());
+	//var report = generateReportFile("Licenses_script", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-    sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+    //sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 catch(e)
 {
