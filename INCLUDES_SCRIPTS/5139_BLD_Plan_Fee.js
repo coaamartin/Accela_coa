@@ -5,9 +5,9 @@ logDebug("Start of 5139_BLD_Plan_Fee.js");
 //Depends on address it would insert the Use Tax fees
 
 //Building Fee (Flat Fee)
-addFee("BLD_PWP_01", "BLD_PWP", "FINAL", 1, "Y");
+addFee("BLD_PWP_01", "BLD_PWP", "FINAL", 1, "N");
 //Building Fee Use Tax below
-addFee("BLD_PWP_02", "BLD_PWP", "FINAL", 1, "Y");
+addFee("BLD_PWP_02", "BLD_PWP", "FINAL", 1, "N");
 
 var fullAddress = "";
 var capAddresses = aa.address.getAddressByCapId(capId);
@@ -26,6 +26,6 @@ if (capAddresses.getSuccess()) {
     }
     getCounty = capAddresses.getCounty();
     if (getCounty == "ARAPAHOE") {
-        addFee("BLD_PWP_03", "BLD_PWP", "FINAL", 1, "Y");
+        addFee("BLD_PWP_03", "BLD_PWP", "FINAL", 1, "N");
     }
 }
