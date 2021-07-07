@@ -7,7 +7,7 @@ try
 	var recordID = aa.env.getValue("altID");
     var appType = aa.env.getValue("appType");
     var licenseType = aa.env.getValue("licenseType");
-	var emailTo = aa.env.getValue("emailTo");
+	var emailTo = getEmailString();
 	var recordApplicant = aa.env.getValue("recordApplicant");
 	var firstName = aa.env.getValue("firstName");
     var lastName = aa.env.getValue("LastName");
@@ -25,10 +25,10 @@ try
     tParams.put("$$LicenseType$$", licenseType);
 	var rParams = aa.util.newHashtable();
     rParams.put("AGENCYID", "AURORACO");
-	rParams.put("altID", recordID);
+	rParams.put("Record_id", recordID);
 	var emailtemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
 	//need to run the license report below
-	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Licenses_script", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
     sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
