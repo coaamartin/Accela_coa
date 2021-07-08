@@ -13,6 +13,7 @@ Sample Call : checkSpecialInspections()
 /------------------------------------------------------------------------------------------------------*/
 var $iTrc = ifTracer;
 checkSpecialInspections();
+
 var wfTask = aa.env.getValue("WorkflowTask"); // Workflow Task Triggered event
 var wfStatus = aa.env.getValue("WorkflowStatus");
 logDebug("WFTask: " + wfTask);
@@ -24,24 +25,6 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	//Once I can pull the values need to loop through to ensure that 
 	//at least one checkbox is selected before the workflow can proceed.
 	var wfTSI = aa.env.getValue("TaskSpecificInfoModels"); // Workflow Task Specific Info Array
-	var wfTask = aa.env.getValue("WorkflowTask"); // Workflow Task Triggered event
-	var wfStatus = aa.env.getValue("WorkflowStatus"); // Status of workflow that triggered event
-	var wfStep;
-	var wfDue;
-	var wfProcess;
-	var wfTaskObj; // Initialize
-
-	var wfObj = aa.workflow.getTasks(capId).getOutput();
-	for (i in wfObj) {
-		fTask = wfObj[i];
-		if (fTask.getTaskDescription().equals(wfTask) && (fTask.getProcessID() == wfProcessID)) {
-			wfStep = fTask.getStepNumber();
-			wfProcess = fTask.getProcessCode();
-			wfDue = fTask.getDueDate();
-			wfTaskObj = fTask;
-			logDebug("WFTASKOBJ: " + wfTaskObj);
-		}
-	}
 	logDebug("TSIM = " + wfTSI);
 	if (wfTSI != "") {
 		for (TSIm in wfTSI) {
@@ -52,12 +35,10 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 		}
 	}
 
-	if (wfTSI = "") {
-		for (TSIm in wfTSI) {
+	else {
 			showMessage = true;
 			comment("<h2 style='background-color:rgb(255, 0, 0);'>At least one TSI field needs to be selected before the workflow can be completed.</h2>");
 			cancel = true;
-		}
 
 	}
 
