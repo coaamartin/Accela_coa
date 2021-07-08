@@ -26,7 +26,11 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	//at least one checkbox is selected before the workflow can proceed.
 	for (TSIm in wfTSI) {
 		var tsiCheck = [wfTSI[TSIm].getChecklistComment()];
-		logDebug("TSICHECK: " + tsiCheck);
-		
+		logDebug("TSICHECK: " + [tsiCheck]);		
+}
+if (tsiCheck != "CHECKED") {
+	showMessage = true;
+				comment("<h2 style='background-color:rgb(255, 0, 0);'>At least one TSI field needs to be selected before the workflow can be completed.</h2>");
+				cancel = true;
 }
 }
