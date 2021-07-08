@@ -24,13 +24,15 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	//need to figure out how to pull TSI values.
 	//Once I can pull the values need to loop through to ensure that 
 	//at least one checkbox is selected before the workflow can proceed.
+	var tsiCheckarry = [];
 	for (TSIm in wfTSI) {
-		var tsiCheckarry = [];
 		var tsiCheck = wfTSI[TSIm].getChecklistComment();
-		tsiCheckarry.push(tsiCheck);
 		logDebug("TSICHECK: " + tsiCheckarry);
 
 	}
+	tsiCheckarry.push(tsiCheck);
+	logDebug("TSICHECK: " + tsiCheckarry);
+	
 	if (tsiCheckarry == "CHECKED") {
 		logDebug("Value exists!");
 	} else {
