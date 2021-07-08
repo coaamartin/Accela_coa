@@ -29,8 +29,10 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 		var tsiCheck = wfTSI[TSIm].getChecklistComment();
 		tsiCheckarry.push(tsiCheck);
 		logDebug("TSICHECK: " + tsiCheckarry);
+		var tsiIndex = tsiCheckarry.indexOf("CHECKED");
+		logDebug("Does a value with checked exist? " + tsiIndex);
 	}
-	if (tsiCheck.indexOf("CHECKED") !== -1) {
+	if (tsiCheckarry.indexOf("CHECKED") !== -1) {
 		logDebug("Value exists!");
 	} else {
 		logDebug("Value does not exists")
