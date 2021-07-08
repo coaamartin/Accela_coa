@@ -26,10 +26,6 @@ if (wfTask == "Accept Plans" && wfStatus == "Approved") {
 		var processID = fTask.getProcessID();
       
       
-		if ("BLD_REVRS".equals(fTask.getTaskDescription()))          
-    
-      { 
-      
          var TSIResult = aa.taskSpecificInfo.getTaskSpecificInfoByTask(capId, processID, stepnumber)  // 
 			if (TSIResult.getSuccess()) 
          {
@@ -49,8 +45,7 @@ if (wfTask == "Accept Plans" && wfStatus == "Approved") {
               }  
             }
             
-         }      
-      }
+         }   
 	
    }
    
