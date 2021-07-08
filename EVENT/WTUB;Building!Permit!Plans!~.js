@@ -29,9 +29,9 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 		logDebug("TSICHECK: " + [tsiCheck]);
 	}
 	if (tsiCheck.indexOf("CHECKED") !== -1) {
-		alert("Value exists!");
+		logDebug("Value exists!");
 	} else {
-		alert("Value does not exists")
+		logDebug("Value does not exists")
 		showMessage = true;
 		comment("<h2 style='background-color:rgb(255, 0, 0);'>At least one TSI field needs to be selected before the workflow can be completed.</h2>");
 		cancel = true
