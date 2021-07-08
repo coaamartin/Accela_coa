@@ -31,9 +31,9 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 		logDebug("TSICHECKarry: " + tsiCheckarry);	
 	}
 	logDebug("TSI CHECK ARRAY: " + tsiCheckarry);	
-	logDebug(tsiCheckarry.indexOf("CHECKED"));
+	logDebug(tsiCheckarry.indexOf('CHECKED'));
 
-	if (tsiCheckarry.indexOf("CHECKED") !== -1) {
+	if (tsiCheckarry.indexOf('CHECKED') !== -1) {
 		logDebug("Value exists!");
 	} else {
 		logDebug("Value does not exists")
