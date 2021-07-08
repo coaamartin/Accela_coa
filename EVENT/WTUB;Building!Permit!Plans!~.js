@@ -43,15 +43,15 @@ if (wfTask == "Accept Plans" && wfStatus == "Accepted") {
 	if (wfTSI != "") {
 		for (TSIm in wfTSI) {
 			if (useTaskSpecificGroupName)
-				AInfo["Updated." + wfProcess + "." + wfTask + "." + wfTSI[TSIm].getCheckboxDesc()] = wfTSI[TSIm].getChecklistComment();
+				AInfo["Updated1." + wfTSI[TSIm].getCheckboxDesc()] = wfTSI[TSIm].getChecklistComment();
 			else
-				AInfo["Updated." + wfTSI[TSIm].getCheckboxDesc()] = wfTSI[TSIm].getChecklistComment();
+				AInfo["Updated2." + wfTSI[TSIm].getCheckboxDesc()] = wfTSI[TSIm].getChecklistComment();
 		}
 	}
-	if (!foundCheckBox) {
-		showMessage = true;
-		comment("<h2 style='background-color:rgb(255, 0, 0);'>Email applicant requires at least one document type to be checked for the upload to continue.</h2>");
-		cancel = true;
-	}
+	// if (!foundCheckBox) {
+	// 	showMessage = true;
+	// 	comment("<h2 style='background-color:rgb(255, 0, 0);'>Email applicant requires at least one document type to be checked for the upload to continue.</h2>");
+	// 	cancel = true;
+	// }
 
 }
