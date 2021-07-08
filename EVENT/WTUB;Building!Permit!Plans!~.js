@@ -13,6 +13,10 @@ Sample Call : checkSpecialInspections()
 /------------------------------------------------------------------------------------------------------*/
 var $iTrc = ifTracer;
 checkSpecialInspections();
+var wfTask = aa.env.getValue("WorkflowTask"); // Workflow Task Triggered event
+var wfStatus = aa.env.getValue("WorkflowStatus");
+logDebug("WFTask: " + wfTask);
+logDebug("WFStatus: " + wfStatus);
 
 //Adding code to verify that a TSI field has been selected
 if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
