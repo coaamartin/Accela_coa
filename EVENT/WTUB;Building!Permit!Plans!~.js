@@ -26,16 +26,16 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	//at least one checkbox is selected before the workflow can proceed.
 	var wfTSI = aa.env.getValue("TaskSpecificInfoModels"); // Workflow Task Specific Info Array
 	logDebug("TSIM = " + wfTSI);
-	tsiCheck();
-	function tsiCheck(a){
-		var result = '';
-		var wfCheck = wfTSI;
-		for(i = 0; i < wfCheck; i++ ){
-		  result += [0];
-		} 
-		logDebug("Results:" + result);
-		return result;
-
-	  } 
-	
+	tsiCheck(wfTSI);	
 }
+
+function tsiCheck(a){
+	var result = '';
+	var wfCheck = wfTSI;
+	for(i = 0; i < wfCheck; i++ ){
+	  result += [0];
+	} 
+	logDebug("Results:" + result);
+	return result;
+
+  }
