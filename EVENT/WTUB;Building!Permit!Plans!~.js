@@ -24,8 +24,6 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	//Once I can pull the values need to loop through to ensure that 
 	//at least one checkbox is selected before the workflow can proceed.
 	var wfTSI = aa.env.getValue("TaskSpecificInfoModels"); // Workflow Task Specific Info Array
-	logDebug("TSIM = " + wfTSI);
-	var wfDate = aa.env.getValue("WorkflowStatusDate"); // Workflow Task Date
 	var wfTask = aa.env.getValue("WorkflowTask"); // Workflow Task Triggered event
 	var wfStatus = aa.env.getValue("WorkflowStatus"); // Status of workflow that triggered event
 	var wfStep;
@@ -41,9 +39,10 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 			wfProcess = fTask.getProcessCode();
 			wfDue = fTask.getDueDate();
 			wfTaskObj = fTask;
+			logDebug("WFTASKOBJ: " + wfTaskObj);
 		}
 	}
-
+	logDebug("TSIM = " + wfTSI);
 	if (wfTSI != "") {
 		for (TSIm in wfTSI) {
 			if (useTaskSpecificGroupName)
