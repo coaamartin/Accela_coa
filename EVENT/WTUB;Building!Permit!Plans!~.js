@@ -29,6 +29,7 @@ if (wfTask == "Accept Plans" && wfStatus == "Accepted") {
 
 
 		var TSIResult = aa.taskSpecificInfo.getTaskSpecificInfoByTask(capId, processID, stepnumber) // 
+		logDebug("TSI result: " + TSIResult);
 		if (TSIResult.getSuccess()) {
 
 			var TSI = TSIResult.getOutput();
