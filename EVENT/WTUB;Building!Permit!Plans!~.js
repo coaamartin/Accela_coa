@@ -26,16 +26,21 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	//at least one checkbox is selected before the workflow can proceed.
 	var wfTSI = aa.env.getValue("TaskSpecificInfoModels"); // Workflow Task Specific Info Array
 	logDebug("TSIM = " + wfTSI);
-	tsiCheck(wfTSI);	
+	tsiCheck(wfTSI);
 }
 
-function tsiCheck(a){
+function tsiCheck(a) {
 	var result = '';
 	var wfCheck = wfTSI;
-	for(i = 0; i < wfCheck; i++ ){
-	  result += [0];
-	} 
+	for (i = 0; i < wfCheck; i++) {
+		result += [0];
+	}
 	logDebug("Results:" + result);
+	if (result == '') {
+		showMessage = true;
+		comment("<h2 style='background-color:rgb(255, 0, 0);'>At least one TSI field needs to be selected before the workflow can be completed.</h2>");
+		cancel = true;
+	}
 	return result;
 
-  }
+}
