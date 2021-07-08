@@ -30,7 +30,7 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 		tsiCheckarry.push(tsiCheck);
 		logDebug("TSICHECKarry: " + tsiCheckarry);	
 	}
-		
+	logDebug("TSI CHECK ARRAY: " + tsiCheckarry);	
 	logDebug(tsiCheckarry.indexOf("CHECKED"));
 
 	if (tsiCheckarry.indexOf("CHECKED") !== -1) {
