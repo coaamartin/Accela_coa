@@ -19,6 +19,10 @@ if (wfTask == "Accept Plans" && wfStatus == "Accepted") {
 	var foundCheckBox = false;
 	var workflowResult = aa.workflow.getTasks(capId);
 	var wfObj = workflowResult.getOutput();
+	var tsiArray = new Array();
+
+    loadTaskSpecific(tsiArray);
+	logDebug("TSI ARRAY: " + tsiArray);
 	logDebug("WFOBJ: " + wfObj);
 	logDebug("WorkflowResult: " + workflowResult);
 
