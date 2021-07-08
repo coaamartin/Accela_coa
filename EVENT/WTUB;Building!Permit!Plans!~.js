@@ -32,7 +32,7 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 
 	}
 	var tsiA = tsiCheck;
-	logDebug(tsiA);
+	logDebug("tsiA: " + tsiA);
 	if (tsiA != "") {
 		AInfo["Updated1." + wfTSI[TSIm].getCheckboxDesc()] = wfTSI[TSIm].getChecklistComment();
 	}
