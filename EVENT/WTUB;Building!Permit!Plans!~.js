@@ -11,11 +11,11 @@ Functional Area : Records
 
 Sample Call : checkSpecialInspections()
 /------------------------------------------------------------------------------------------------------*/
-
+var $iTrc = ifTracer;
 checkSpecialInspections();
 
 //Adding code to verify that a TSI field has been selected
-if (wfTask == "Accept Plans" && wfStatus == "Accepted") {
+if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	//need to figure out how to pull TSI values.
 	//Once I can pull the values need to loop through to ensure that 
 	//at least one checkbox is selected before the workflow can proceed.
