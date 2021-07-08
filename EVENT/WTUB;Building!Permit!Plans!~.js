@@ -52,10 +52,14 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 				AInfo["Updated2." + wfTSI[TSIm].getCheckboxDesc()] = wfTSI[TSIm].getChecklistComment();
 		}
 	}
-	// if (!foundCheckBox) {
-	// 	showMessage = true;
-	// 	comment("<h2 style='background-color:rgb(255, 0, 0);'>Email applicant requires at least one document type to be checked for the upload to continue.</h2>");
-	// 	cancel = true;
-	// }
+
+	if (wfTSI = "") {
+		for (TSIm in wfTSI) {
+			showMessage = true;
+			comment("<h2 style='background-color:rgb(255, 0, 0);'>At least one TSI field needs to be selected before the workflow can be completed.</h2>");
+			cancel = true;
+		}
+
+	}
 
 }
