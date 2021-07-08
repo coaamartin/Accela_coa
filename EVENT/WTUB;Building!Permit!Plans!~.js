@@ -28,17 +28,18 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	for (TSIm in wfTSI) {
 		var tsiCheck = wfTSI[TSIm].getChecklistComment();
 		tsiCheckarry.push(tsiCheck);
-		logDebug("TSICHECKarry: " + tsiCheckarry);
-		logDebug(tsiCheckarry.indexOf("CHECKED"));
-		if (tsiCheckarry.indexOf("CHECKED") !== -1) {
-			logDebug("Value exists!");
-		} else {
-			logDebug("Value does not exists")
-			showMessage = true;
-			comment("<h2 style='background-color:rgb(255, 0, 0);'>At least one TSI field needs to be selected before the workflow can be completed.</h2>");
-			cancel = true
-		}
-	}	
-	
+		logDebug("TSICHECKarry: " + tsiCheckarry);	
+	}
+		
+	logDebug(tsiCheckarry.indexOf("CHECKED"));
+
+	if (tsiCheckarry.indexOf("CHECKED") !== -1) {
+		logDebug("Value exists!");
+	} else {
+		logDebug("Value does not exists")
+		showMessage = true;
+		comment("<h2 style='background-color:rgb(255, 0, 0);'>At least one TSI field needs to be selected before the workflow can be completed.</h2>");
+		cancel = true
+	}
 
 }
