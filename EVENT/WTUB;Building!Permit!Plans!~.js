@@ -13,8 +13,9 @@ Sample Call : checkSpecialInspections()
 /------------------------------------------------------------------------------------------------------*/
 
 checkSpecialInspections();
+
 //Adding code to verify that a TSI field has been selected
-if (wfTask == "Accept Plans" && wfStatus == "Approved") {
+if (wfTask == "Accept Plans" && wfStatus == "Accepted") {
 	var foundCheckBox = false;
 	var workflowResult = aa.workflow.getTasks(capId);
 	var wfObj = workflowResult.getOutput();
