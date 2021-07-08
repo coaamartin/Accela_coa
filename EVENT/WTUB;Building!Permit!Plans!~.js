@@ -27,13 +27,14 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	var tsiCheckarry = [];
 	for (TSIm in wfTSI) {
 		var tsiCheck = wfTSI[TSIm].getChecklistComment();
-		tsiCheckarry.push(tsiCheck);
-		logDebug("TSICHECKarry: " + tsiCheckarry);
-		logDebug(tsiCheckarry.indexOf('CHECKED'));	
+		//tsiCheckarry.push(tsiCheck);
+		// logDebug("TSICHECKarry: " + tsiCheckarry);
+		// logDebug(tsiCheckarry.indexOf('CHECKED'));	
 	}
+	tsiCheckarry.push(tsiCheck);
 	logDebug("TSI CHECK ARRAY: " + tsiCheckarry);	
-	logDebug(tsiCheckarry.indexOf(+'CHECKED'));
-	logDebug("TSI CHECK: " + tsiCheck.indexOf(+"CHECKED"));
+	logDebug(tsiCheckarry.indexOf('CHECKED'));
+	logDebug("TSI CHECK: " + tsiCheck.indexOf("CHECKED"));
 
 	if (tsiCheckarry.indexOf('CHECKED') !== -1) {
 		logDebug("Value exists!");
