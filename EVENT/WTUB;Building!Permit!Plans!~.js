@@ -13,3 +13,51 @@ Sample Call : checkSpecialInspections()
 /------------------------------------------------------------------------------------------------------*/
 
 checkSpecialInspections();
+//Adding code to verify that a TSI field has been selected
+if (wfTask == "Accept Plans" && wfStatus == "Approved") {
+	var foundCheckBox = false;   
+	var workflowResult = aa.workflow.getTasks(capId);
+   var wfObj = workflowResult.getOutput();
+   
+   for (i in wfObj) 
+   {
+      var fTask = wfObj[i];
+		var stepnumber = fTask.getStepNumber();
+		var processID = fTask.getProcessID();
+      
+      
+		if ("BLD_REVRS".equals(fTask.getTaskDescription()))          
+    
+      { 
+      
+         var TSIResult = aa.taskSpecificInfo.getTaskSpecificInfoByTask(capId, processID, stepnumber)  // 
+			if (TSIResult.getSuccess()) 
+         {
+            
+            var TSI = TSIResult.getOutput();
+            if (TSI != null) 
+               
+            for (dmyIttr in TSI)
+            {          
+              
+              if (TSI[dmyIttr].getChecklistComment() != null)
+              {   
+                if (TSI[dmyIttr].getChecklistComment() == "CHECKED") 
+                {
+                   foundCheckBox = true;
+                }
+              }  
+            }
+            
+         }      
+      }
+	
+   }
+   
+   if (!foundCheckBox)
+   {
+      showMessage = true;
+	   comment("<h2 style='background-color:rgb(255, 0, 0);'>Accepted Plans requires at least one TSI field type to be checked for the workflow to continue.</h2>");
+      cancel = true;
+   }
+} 
