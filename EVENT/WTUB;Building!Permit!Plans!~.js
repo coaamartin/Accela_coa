@@ -27,7 +27,7 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	var tsiCheckarry = [];
 	for (TSIm in wfTSI) {
 		var tsiCheck = wfTSI[TSIm].getChecklistComment();
-		logDebug("TSICHECK: " + tsiCheckarry);
+		logDebug("TSICHECK: " + tsiCheck);
 
 	}
 	tsiCheckarry.push(tsiCheck);
