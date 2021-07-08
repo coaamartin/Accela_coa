@@ -24,23 +24,9 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 	//need to figure out how to pull TSI values.
 	//Once I can pull the values need to loop through to ensure that 
 	//at least one checkbox is selected before the workflow can proceed.
-	var wfTSI = [aa.env.getValue("TaskSpecificInfoModels")]; // Workflow Task Specific Info Array
-	logDebug("TSIM = " + wfTSI);
-	tsiCheck(wfTSI);
+	for (TSIm in wfTSI) {
+		var tsiCheck = [wfTSI[TSIm].getChecklistComment()];
+		logDebug("TSICHECK: " + tsiCheck);
+		
 }
-
-function tsiCheck(i) {
-	var result = '';
-	var wfCheck = wfTSI;
-	for (i = 0; i < wfCheck; i++) {
-		result += [0];
-	}
-	logDebug("Results:" + result);
-	if (result == '') {
-		showMessage = true;
-		comment("<h2 style='background-color:rgb(255, 0, 0);'>At least one TSI field needs to be selected before the workflow can be completed.</h2>");
-		cancel = true;
-	}
-	return result;
-
 }
