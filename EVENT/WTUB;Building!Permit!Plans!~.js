@@ -33,6 +33,7 @@ if (wfTask == "Accept Plans" && wfStatus == "Accepted") {
 		if (TSIResult.getSuccess()) {
 
 			var TSI = TSIResult.getOutput();
+			logDebug("TSI: " + TSI);
 			if (TSI != null)
 
 				for (dmyIttr in TSI) {
