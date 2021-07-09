@@ -95,7 +95,7 @@ appType = cap.getCapType().toString();
 			addParameter(tParms, "$$FirstName$$", firstName);
 			addParameter(tParms, "$$LastName$$", lastName);
 			var rParams = aa.util.newHashtable();
-			rParams.put("RecordID", RecordID);
+			rParams.put("RecordID", recordID);
 			logDebug("rParams: " + rParams);
 			var emailtemplate = "PW PI ISSUED # 180";
 			var report = generateReportFile("PI Permit", rParams, aa.getServiceProviderCode());
