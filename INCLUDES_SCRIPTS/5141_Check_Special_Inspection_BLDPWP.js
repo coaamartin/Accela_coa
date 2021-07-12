@@ -48,7 +48,7 @@ asiCheckValues.push(asiRadioRec);
 
 logDebug("ASI Values: " + asiValues);
 logDebug("ASI ARRAY: " + asiCheckValues);
-if (asiValues == "Yes"){
+if (asiValues == "Yes" || asiValues == null){
     if(asiCheckValues.toString().indexOf("CHECKED") !== -1){
     logDebug("Special Inspections Value was set to Yes. Going to keep the Special Inspections workflow task open.");
 }
