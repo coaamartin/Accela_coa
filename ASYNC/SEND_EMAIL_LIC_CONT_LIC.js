@@ -25,10 +25,10 @@ try
     tParams.put("$$LicenseType$$", licenseType);
 	var rParams = aa.util.newHashtable();
     rParams.put("AGENCYID", "AURORACO");
-	rParams.put("Record_id", recordID);
-	var emailtemplate = "BLD QPL LICENSE ISSUANCE # 64&65";
+	rParams.put("Recordid", recordID);
+	var emailtemplate = "BLD CLL LICENSE ISSUANCE # 111 & 112";
 	//need to run the license report below
-	var report = generateReportFile("Licenses_script", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Contractor_License_Script", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
     sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
