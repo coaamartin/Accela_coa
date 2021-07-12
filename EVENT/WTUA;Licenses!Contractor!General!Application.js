@@ -23,6 +23,7 @@ if ("License Issuance".equals(wfTask) && "Issued".equals(wfStatus))
   {
    
     include("5114_EMailReadyLicenseIssue");
+	include("5140_eMailLicensesContractor");
     include("111_CreateContractorLicenseAndLP");
     closeTask("License Issuance","Issued","Updated by WTUA;Licenses!Contractor!General!Application","");
   }  
