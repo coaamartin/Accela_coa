@@ -106,3 +106,8 @@ if (wfStatus == "Ready to Pay") {
 	logDebug("Building Permit Plans, Ready to Pay");
 	include("5139_BLD_Plan_Fee");
 }
+
+if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
+    logDebug("Building Permit Plans, Permit Issuance. Check for Special Inspection.");
+	include("5141_Check_Special_Inspection_BLDPWP");
+}
