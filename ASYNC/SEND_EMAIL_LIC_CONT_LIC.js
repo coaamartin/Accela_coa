@@ -17,7 +17,7 @@ try
 	var capId = aa.env.getValue("capId");
 	var cap = aa.env.getValue("cap");
 	var recordID = aa.env.getValue("altID");
-    var appType = aa.env.getValue("appType");
+    //var appType = aa.env.getValue("appType");
     var licenseType = aa.env.getValue("licenseType");
 	var emailTo = aa.env.getValue("emailTo");
 	var recordApplicant = aa.env.getValue("recordApplicant");
