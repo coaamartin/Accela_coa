@@ -66,6 +66,8 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
       envParameters.put("vemailTemplate", "BLD_RECIEPT");
       logDebug("Starting to kick off ASYNC event for CLL payment reciept. Params being passed: " + envParameters);
       aa.runAsyncScript(vAsyncScript, envParameters);
+      var sendEmail2 = '';
+      if(sendEmail2 === '') {
       logDebug("Kicking off the license issuance email. ------->")
       //Below we will run the License report script
       var asiValues2 = getAppSpecific("Contractor Type");
@@ -93,7 +95,7 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
       aa.runAsyncScript(vAsyncScript2, envParameters2);
       logDebug("---------------------> 5114_EMailReadyLicenseIssue.js ended.");
    }
-
+   }
 
 }
 function getEmailString()
