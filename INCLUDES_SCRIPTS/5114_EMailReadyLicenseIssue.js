@@ -68,6 +68,7 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
       aa.runAsyncScript(vAsyncScript, envParameters);
       var sendEmail2 = '';
       if(sendEmail2 === '') {
+      wait(10000);
       logDebug("Kicking off the license issuance email. ------->")
       //Below we will run the License report script
       var asiValues2 = getAppSpecific("Contractor Type");
@@ -132,6 +133,14 @@ function getEmailString()
       }
       logDebug(emailString);
       return emailString;
+   }
+
+   function wait(ms){
+      var start = new Date().getTime();
+      var end = start;
+      while(end < start + ms) {
+        end = new Date().getTime();
+     }
    }
 //emailContacts(contactType,vEmailTemplate, vEParams, "", "", "N", "");
 // if(appMatch("Licenses/Professional/General/Application"))
