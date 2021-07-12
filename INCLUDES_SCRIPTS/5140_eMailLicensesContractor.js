@@ -4,7 +4,7 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
        logDebug("Kicking off the license issuance email. ------->")
        //Below we will run the License report script
        var asiValues2 = getAppSpecific("Contractor Type");
-       licenseType2 = asiValues;
+       licenseType2 = asiValues2;
        var altID2 = capId.getCustomID();
        appType2 = cap.getCapType().toString();
        var invoiceNbrObj2 = getLastInvoice({});
