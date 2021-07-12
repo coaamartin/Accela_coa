@@ -68,8 +68,6 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
       aa.runAsyncScript(vAsyncScript, envParameters);
    }
    }
-
-}
 function getEmailString()
 {
 	var emailString = "";
