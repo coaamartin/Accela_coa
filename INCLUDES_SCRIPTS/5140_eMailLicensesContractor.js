@@ -12,8 +12,8 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
        var vAsyncScript2 = "SEND_EMAIL_LIC_CONT_LIC";
        var emailTo2 = getEmailString2(); 
         var recordApplicant2 = getContactByType("Applicant", capId);
-        var firstName2 = recordApplicant.getFirstName();
-       var lastName2 = recordApplicant.getLastName();
+        var firstName2 = recordApplicant2.getFirstName();
+       var lastName2 = recordApplicant2.getLastName();
        var envParameters2 = aa.util.newHashMap();
        envParameters2.put("altID", altID2);
        envParameters2.put("capId", capId);
