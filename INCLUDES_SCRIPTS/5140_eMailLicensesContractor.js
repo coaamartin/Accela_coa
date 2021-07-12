@@ -7,8 +7,8 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
        licenseType2 = asiValues2;
        var altID2 = capId.getCustomID();
        appType2 = cap.getCapType().toString();
-       var invoiceNbrObj2 = getLastInvoice({});
-       var invNbr2 = invoiceNbrObj.getInvNbr();
+       //var invoiceNbrObj2 = getLastInvoice({});
+       //var invNbr2 = invoiceNbrObj.getInvNbr();
        var vAsyncScript2 = "SEND_EMAIL_LIC_CONT_LIC";
        var emailTo2 = getEmailString2(); 
         var recordApplicant2 = getContactByType("Applicant", capId);
@@ -18,7 +18,7 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
        envParameters2.put("altID", altID2);
        envParameters2.put("capId", capId);
        envParameters2.put("cap", cap);
-       envParameters2.put("INVOICEID", String(invNbr2));
+       //envParameters2.put("INVOICEID", String(invNbr2));
        envParameters2.put("licenseType", licenseType2);
        envParameters2.put("emailTo", emailTo2);
        envParameters2.put("recordApplicant", recordApplicant2);
