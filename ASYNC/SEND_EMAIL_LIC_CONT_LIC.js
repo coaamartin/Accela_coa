@@ -41,9 +41,8 @@ try
 	var emailtemplate = "BLD CLL LICENSE ISSUANCE # 111 & 112";
 	//need to run the license report below
 	var report = generateReportFile("Contractor_License_Script", rParams, aa.getServiceProviderCode());
-	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-    //sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
-	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
+	sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
+	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, null);
 }
 catch(e)
 {
