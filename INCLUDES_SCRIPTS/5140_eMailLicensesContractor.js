@@ -26,7 +26,7 @@ if (appMatch("Licenses/Contractor/General/Application") || appMatch("Licenses/Co
        envParameters2.put("lastName", lastName2);
        logDebug("Starting to kick off ASYNC event for CLL issuance of the license. Params being passed: " + envParameters2);
        aa.runAsyncScript(vAsyncScript2, envParameters2);
-       logDebug("---------------------> 5114_EMailReadyLicenseIssue.js ended.");
+       logDebug("---------------------> 5140_eMailLicensesContractor.js ended.");
     }
     }
 
