@@ -19,8 +19,9 @@ logDebug("appType: " + appTypeString);
 //need to find what Workflow ASI fields are checked and then schedule the inspection.
 //Will use the below code for the inspection schedule
 //scheduleInspection("FD Complaint Inspection",0);
+var wfTSI = aa.env.getValue("TaskSpecificInfoModels");
+logDebug("wfTSI: " + wfTSI);
 var asiCheckValues = new Array();
-
 var asiAlarmSystem = getAppSpecific("Alarm System");
 logDebug("Alarm System: " + asiAlarmSystem);
 asiCheckValues.push(asiAlarmSystem);
