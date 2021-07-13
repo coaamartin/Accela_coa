@@ -21,6 +21,17 @@ logDebug("appType: " + appTypeString);
 //scheduleInspection("FD Complaint Inspection",0);
 var wfTSI = aa.env.getValue("TaskSpecificInfoModels");
 logDebug("wfTSI: " + wfTSI);
+if (wfTSI != "")
+	{
+	for (TSIm in wfTSI)
+		{
+		if (useTaskSpecificGroupName)
+			AInfo["Updated." + wfProcess + "." + wfTask + "." + wfTSI[TSIm].getCheckboxDesc()] = wfTSI[TSIm].getChecklistComment();
+		else
+			AInfo["Updated." + wfTSI[TSIm].getCheckboxDesc()] = wfTSI[TSIm].getChecklistComment();
+		}
+	}
+    logDebug("AInfo: " + AInfo);
 var asiCheckValues = new Array();
 var asiAlarmSystem = getAppSpecific("Alarm System");
 logDebug("Alarm System: " + asiAlarmSystem);
