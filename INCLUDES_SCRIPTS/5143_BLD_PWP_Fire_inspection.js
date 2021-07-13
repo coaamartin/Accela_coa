@@ -23,7 +23,7 @@ var asiCheckValues = new Array();
 
 var asiAlarmSystem = getAppSpecific("Alarm System");
 asiCheckValues.push(asiAlarmSystem);
-if(asiAlarmSystem == "Checked"){
+if(asiAlarmSystem == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
 } else{
@@ -32,7 +32,7 @@ if(asiAlarmSystem == "Checked"){
 
 var asiFireLane = getAppSpecific("Fire Lanes");
 asiCheckValues.push(asiFireLane);
-if(asiFireLane == "Checked"){
+if(asiFireLane == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
 } else{
@@ -41,7 +41,7 @@ if(asiFireLane == "Checked"){
 
 var asiFuelTankLine = getAppSpecific("Fuel Tank Lines");
 asiCheckValues.push(asiFuelTankLine);
-if(asiFuelTankLine == "Checked"){
+if(asiFuelTankLine == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
 } else{
@@ -50,7 +50,7 @@ if(asiFuelTankLine == "Checked"){
 
 var asiGatingSystem = getAppSpecific("Gating system/Hazardous Materials");
 asiCheckValues.push(asiGatingSystem);
-if(asiGatingSystem == "Checked"){
+if(asiGatingSystem == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
 } else{
@@ -59,7 +59,7 @@ if(asiGatingSystem == "Checked"){
 
 var asiHoodSystem = getAppSpecific("Hood System");
 asiCheckValues.push(asiHoodSystem);
-if(asiHoodSystem == "Checked"){
+if(asiHoodSystem == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
 } else{
@@ -68,7 +68,7 @@ if(asiHoodSystem == "Checked"){
 
 var asiKnoxBox = getAppSpecific("Knox Box");
 asiCheckValues.push(asiKnoxBox);
-if(asiKnoxBox == "Checked"){
+if(asiKnoxBox == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
 } else{
@@ -77,7 +77,7 @@ if(asiKnoxBox == "Checked"){
 
 var asiSprinklerSystem = getAppSpecific("Sprinkler System Final");
 asiCheckValues.push(asiSprinklerSystem);
-if(asiSprinklerSystem == "Checked"){
+if(asiSprinklerSystem == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
 } else{
@@ -85,8 +85,8 @@ if(asiSprinklerSystem == "Checked"){
 }
 
 var asiSprinklerSystemRough = getAppSpecific("Sprinkler System Rough");
-asiCheckValues.push(asiSprinklerSystemRoug);
-if(asiSprinklerSystemRough == "Checked"){
+asiCheckValues.push(asiSprinklerSystemRough);
+if(asiSprinklerSystemRough == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
 } else{
