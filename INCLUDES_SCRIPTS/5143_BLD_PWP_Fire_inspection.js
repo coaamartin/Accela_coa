@@ -21,7 +21,8 @@ logDebug("appType: " + appTypeString);
 //scheduleInspection("FD Complaint Inspection",0);
 var asiCheckValues = new Array();
 
-var asiAlarmSystem = getAppSpecific("Alarm System").getChecklistComment();
+var asiAlarmSystem = getAppSpecific("Alarm System");
+logDebug("Alarm System: " + asiAlarmSystem);
 asiCheckValues.push(asiAlarmSystem);
 if(asiAlarmSystem == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
@@ -30,7 +31,8 @@ if(asiAlarmSystem == "CHECKED"){
     logDebug("Alarm System was not checked.")
 }
 
-var asiFireLane = getAppSpecific("Fire Lanes").getChecklistComment();
+var asiFireLane = getAppSpecific("Fire Lanes");
+logDebug("Fire Lane: " + asiFireLane);
 asiCheckValues.push(asiFireLane);
 if(asiFireLane == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
@@ -39,7 +41,8 @@ if(asiFireLane == "CHECKED"){
     logDebug("Alarm System was not checked.")
 }
 
-var asiFuelTankLine = getAppSpecific("Fuel Tank Lines").getChecklistComment();
+var asiFuelTankLine = getAppSpecific("Fuel Tank Lines");
+logDebug("Fuel Tank Line: " + asiFuelTankLine);
 asiCheckValues.push(asiFuelTankLine);
 if(asiFuelTankLine == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
@@ -48,7 +51,8 @@ if(asiFuelTankLine == "CHECKED"){
     logDebug("Alarm System was not checked.")
 }
 
-var asiGatingSystem = getAppSpecific("Gating system/Hazardous Materials").getChecklistComment();
+var asiGatingSystem = getAppSpecific("Gating system/Hazardous Materials");
+logDebug("Gating System: " + asiGatingSystem);
 asiCheckValues.push(asiGatingSystem);
 if(asiGatingSystem == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
@@ -58,15 +62,17 @@ if(asiGatingSystem == "CHECKED"){
 }
 
 var asiHoodSystem = getAppSpecific("Hood System");
+logDebug("Hood System: " + asiHoodSystem);
 asiCheckValues.push(asiHoodSystem);
 if(asiHoodSystem == "CHECKED"){
-    logDebug("Going to Schedule Alarm System Inspection.").getChecklistComment();
+    logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
 } else{
     logDebug("Alarm System was not checked.")
 }
 
-var asiKnoxBox = getAppSpecific("Knox Box").getChecklistComment();
+var asiKnoxBox = getAppSpecific("Knox Box");
+logDebug("Knox Box: " + asiKnoxBox);
 asiCheckValues.push(asiKnoxBox);
 if(asiKnoxBox == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
@@ -75,8 +81,9 @@ if(asiKnoxBox == "CHECKED"){
     logDebug("Alarm System was not checked.")
 }
 
-var asiSprinklerSystem = getAppSpecific("Sprinkler System Final").getChecklistComment();
+var asiSprinklerSystem = getAppSpecific("Sprinkler System Final");
 asiCheckValues.push(asiSprinklerSystem);
+logDebug("Sprinkler System: " + asiSprinklerSystem);
 if(asiSprinklerSystem == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
@@ -84,8 +91,9 @@ if(asiSprinklerSystem == "CHECKED"){
     logDebug("Alarm System was not checked.")
 }
 
-var asiSprinklerSystemRough = getAppSpecific("Sprinkler System Rough").getChecklistComment();
+var asiSprinklerSystemRough = getAppSpecific("Sprinkler System Rough");
 asiCheckValues.push(asiSprinklerSystemRough);
+logDebug("Sprinkler System Rough: " + asiSprinklerSystemRough);
 if(asiSprinklerSystemRough == "CHECKED"){
     logDebug("Going to Schedule Alarm System Inspection.");
     scheduleInspection("Alarm System",0);
