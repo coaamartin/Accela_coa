@@ -112,3 +112,8 @@ if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
 	include("5141_Check_Special_Inspection_BLDPWP");
 	include("5142_BLDPWP_Permit_Issuance");
 }
+
+if(wfTask == "Fire Life Safety Review" && wfStatus == "Approved"){
+	logDebug("Fire Life Safety Review has been approved. Going to schedule inspections if selected.");
+	include("5143_BLD_PWP_Fire_inspection");
+}
