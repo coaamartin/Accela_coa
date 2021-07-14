@@ -154,6 +154,8 @@ if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 	deactivateTask("Backflow Preventor");
 	deactivateTask("Water Meter");
 }
+logDebug("WFTASK: " + wfTask);
+logDebug("WF Status: " + wfStatus);
 //RLP- SS #1045 
 if($iTrc(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"), 'wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"'){
     logDebug("Starting to setup inspections for BLDG Life Safety Review")
