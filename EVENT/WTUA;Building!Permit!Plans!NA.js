@@ -96,10 +96,10 @@ if(wfStatus == "Resubmittal Requested"){
 	logDebug("Email was sent for resubmittal.");
 }
 
-if(wfStatus == "Withdrawn"){
-    logDebug("Building Permit Plans, Withdrawn.");
+if(wfStatus == "Cancelled"){
+    logDebug("Building Permit Plans, Cancelled.");
 	include("5135_BLD_Withdrawn");
-	logDebug("Email was sent for Withdrawn.");
+	logDebug("Email was sent for Cancelled.");
 }
 
 if (wfStatus == "Ready to Pay") {
@@ -116,4 +116,9 @@ if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
 if(wfTask == "Fire Life Safety Review" && wfStatus == "Approved"){
 	logDebug("Fire Life Safety Review has been approved. Going to schedule inspections if selected.");
 	include("5143_BLD_PWP_Fire_inspection");
+}
+
+if(wfTask == "Waste Water Review" && wfStatus == "Approved Inspection Required"){
+	logDebug("Waste Water Review has been set to Approved Inpection Required.");
+	scheduleInspection("Waste Water",0);
 }

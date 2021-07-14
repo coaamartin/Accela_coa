@@ -58,3 +58,9 @@ if(wfTask == "Permit Issuance" && wfStatus == "Issued"){
 		// emailContactsIncludesLP("PRIMARYLP", issuedEmlTemplate, eParams, reportTemplate, reportParams);
 		//}            
 }
+
+if(wfStatus == "Cancelled"){
+    logDebug("Building Permit OTC, Cancelled.");
+	include("5135_BLD_Withdrawn");
+	logDebug("Email was sent for cancelled.");
+}

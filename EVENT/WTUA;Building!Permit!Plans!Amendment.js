@@ -12,8 +12,8 @@ if(wfStatus == "Resubmittal Requested"){
 	logDebug("Email was sent for resubmittal.");
 }
 
-if(wfStatus == "Withdrawn"){
-    logDebug("Building Permit Plans, withdrawn.");
+if(wfStatus == "Cancelled"){
+    logDebug("Building Permit Plans, Cancelled.");
 	include("5135_BLD_Withdrawn");
-	logDebug("Email was sent for withdrawn.");
+	logDebug("Email was sent for cancelled.");
 }

@@ -7,6 +7,6 @@ if($iTrc(wfStatus == "Resubmittal Requested", 'wfStatus:Resubmittal Requested'))
     include("5134_BLD_Resubmittal");
 }
 
-if($iTrc(wfStatus == "Withdrawn", 'wfStatus:Withdrawn')){
+if($iTrc(wfStatus == "Cancelled", 'wfStatus:Cancelled')){
     include("5135_BLD_Withdrawn");
 }

@@ -42,3 +42,9 @@ if(wfStatus == "Resubmittal Requested"){
 	include("5132_BLD_ResubmitEmail");
 	logDebug("Email was sent for resubmittal.");
 }
+
+if(wfStatus == "Cancelled"){
+    logDebug("Building Permit Master/amendment, Cancelled.");
+	include("5135_BLD_Withdrawn");
+	logDebug("Email was sent for cancelled.");
+}

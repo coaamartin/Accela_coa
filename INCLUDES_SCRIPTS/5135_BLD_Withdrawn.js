@@ -17,7 +17,7 @@ appTypeArray = appTypeString.split("/");
 logDebug("appType: " + appTypeString);
 
 logDebug("Starting to send notifications");
-var vEmailTemplate = "BLD_WITHDRAWN";
+var vEmailTemplate = "BLD CANCELLED";
 var capAlias = cap.getCapModel().getAppTypeAlias();
 var recordApplicant = getContactByType("Applicant", capId);
 var firstName = recordApplicant.getFirstName();
