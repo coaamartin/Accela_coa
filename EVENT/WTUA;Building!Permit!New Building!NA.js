@@ -157,18 +157,15 @@ if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 logDebug("WFTASK: " + wfTask);
 logDebug("WF Status: " + wfStatus);
 //RLP- SS #1045 
-if($iTrc(wfTask == "Bldg Life Safety Review"), 'wfTask =="Bldg Life Safety Review"'){
-    if (wfStatus== "Approved"){
+if(wfTask == "Bldg Life Safety Review" && wfStatus== "Approved"){
     logDebug("Starting to setup inspections for BLDG Life Safety Review")
     inspGroup = "BLD_NEW_CON"
 	createPendingInspection(inspGroup,"Exit Signs / Emergency Lights");
     createPendingInspection(inspGroup,"Fire Extinguisher");
-    }
 }
 
 //RLP - SS #1043
-if($iTrc(wfTask == "Structural Plan Review"), 'wfTask =="Structural Plan Review"'){
-    if(wfStatus== "Approved"){
+if(wfTask == "Structural Plan Review" && wfStatus== "Approved"){
     logDebug("Starting to setup inspections for BLDG Structural Plan Review")
     inspGroup = "BLD_NEW_CON"
 	createPendingInspection(inspGroup,"Framing Rough");
@@ -178,6 +175,6 @@ if($iTrc(wfTask == "Structural Plan Review"), 'wfTask =="Structural Plan Review"
     createPendingInspection(inspGroup,"Foundation");
     createPendingInspection(inspGroup,"Roofing");
 }
-}
+
 // SW - Script 433
 include("433_MJ_Application_Update");
