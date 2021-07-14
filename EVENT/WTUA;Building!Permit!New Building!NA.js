@@ -162,6 +162,17 @@ if($iTrc(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"), 'wfTask =
     createPendingInspection(inspGroup,"Fire Extinguisher");
 }
 
+//RLP - SS #1043
+if($iTrc(wfTask =="Structural Plan Review" && wfStatus== "Approved"), 'wfTask =="Structural Plan Review" && wfStatus== "Approved"'){
+    logDebug("Starting to setup inspections for BLDG Structural Plan Review")
+    inspGroup = "BLD_NEW_CON"
+	createPendingInspection(inspGroup,"Framing Rough");
+    createPendingInspection(inspGroup,"Framing Final");
+    createPendingInspection(inspGroup,"Dry Wall");
+    createPendingInspection(inspGroup,"Insulation");
+    createPendingInspection(inspGroup,"Foundation");
+    createPendingInspection(inspGroup,"Roofing");
+}
 
 // SW - Script 433
 include("433_MJ_Application_Update");
