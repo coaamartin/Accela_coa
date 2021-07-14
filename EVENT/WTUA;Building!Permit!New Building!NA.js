@@ -157,7 +157,7 @@ if(wfTask =="Inspection Phase" && wfStatus== "Expired"){
 logDebug("WFTASK: " + wfTask);
 logDebug("WF Status: " + wfStatus);
 //RLP- SS #1045 
-if($iTrc(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"), 'wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"'){
+if($iTrc(wfTask == "Bldg Life Safety Review" && wfStatus== "Approved"), 'wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"'){
     logDebug("Starting to setup inspections for BLDG Life Safety Review")
     inspGroup = "BLD_NEW_CON"
 	createPendingInspection(inspGroup,"Exit Signs / Emergency Lights");
@@ -165,7 +165,7 @@ if($iTrc(wfTask =="Bldg Life Safety Review" && wfStatus== "Approved"), 'wfTask =
 }
 
 //RLP - SS #1043
-if($iTrc(wfTask =="Structural Plan Review" && wfStatus== "Approved"), 'wfTask =="Structural Plan Review" && wfStatus== "Approved"'){
+if($iTrc(wfTask == "Structural Plan Review" && wfStatus== "Approved"), 'wfTask =="Structural Plan Review" && wfStatus== "Approved"'){
     logDebug("Starting to setup inspections for BLDG Structural Plan Review")
     inspGroup = "BLD_NEW_CON"
 	createPendingInspection(inspGroup,"Framing Rough");
