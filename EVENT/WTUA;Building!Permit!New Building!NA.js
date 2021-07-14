@@ -170,7 +170,7 @@ if(wfTask == "Structural Plan Review" && wfStatus== "Approved"){
     inspGroup = "BLD_NEW_CON"
 	createPendingInspection(inspGroup,"Framing Rough");
     createPendingInspection(inspGroup,"Framing Final");
-    createPendingInspection(inspGroup,"Dry Wall");
+    createPendingInspection(inspGroup,"Drywall");
     createPendingInspection(inspGroup,"Insulation");
     createPendingInspection(inspGroup,"Foundation");
     createPendingInspection(inspGroup,"Roofing");
