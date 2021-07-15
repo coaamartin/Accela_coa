@@ -17,7 +17,7 @@ if (balanceDue == 0) {
 	closeTask("Renewal Intake", "Fees Paid", "Updated by PRA;Licenses!Professional!General!Renewal", "");
 
 	closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Professional!General!Renewal", "");
-
+	include("5114_EMailReadyLicenseIssue");
 	// Begin script to complete the renewal and send notifications
 	var vLicenseID;
 	var vIDArray;

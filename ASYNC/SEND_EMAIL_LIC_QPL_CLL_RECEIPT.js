@@ -28,7 +28,7 @@ try
     rParams.put("AGENCYID", "AURORACO");
 	rParams.put("INVOICEID", invNbr);
 	var emailtemplate = aa.env.getValue("vemailTemplate");
-	var report = generateReportFile("Invoice Report", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("BLD_RECIEPT", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
     sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
