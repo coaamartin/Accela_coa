@@ -20,7 +20,7 @@ logDebug("WFTask: " + wfTask);
 logDebug("WFStatus: " + wfStatus);
 
 //Adding code to verify that a TSI field has been selected
-if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
+if (wfTask == "Accept Plans" && wfStatus == "Accepted") {
 	//need to figure out how to pull TSI values.
 	//Once I can pull the values need to loop through to ensure that 
 	//at least one checkbox is selected before the workflow can proceed.
@@ -47,7 +47,7 @@ if ($iTrc(wfTask == "Accept Plans" && wfStatus == "Accepted")) {
 
 }
 
-if ($iTrc(wfTask == "Permit Issuance" && wfStatus == "Issued") || (wfTask == "Structural Plan Review" && wfStatus == "Approved")) {
+if ((wfTask == "Permit Issuance" && wfStatus == "Issued") || (wfTask == "Structural Plan Review" && wfStatus == "Approved")) {
 var asiValues = getAppSpecific("Special Inspections");
 
 var asiCheckValues = new Array();
