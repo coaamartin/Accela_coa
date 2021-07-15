@@ -12,7 +12,7 @@ Functional Area : Records
 Sample Call : checkSpecialInspections()
 /------------------------------------------------------------------------------------------------------*/
 var $iTrc = ifTracer;
-checkSpecialInspections();
+//checkSpecialInspections();
 
 var wfTask = aa.env.getValue("WorkflowTask"); // Workflow Task Triggered event
 var wfStatus = aa.env.getValue("WorkflowStatus");
