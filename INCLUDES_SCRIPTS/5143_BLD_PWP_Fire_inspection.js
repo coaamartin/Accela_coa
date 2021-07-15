@@ -24,7 +24,7 @@ logDebug("wfTSI: " + wfTSI);
 var tsiCheckarry = [];
 	for (TSIm in wfTSI) {
         var tsiCheck = [];
-		var tsiCheck = [wfProcess + "." + wfTask + "." + wfTSI[TSIm].getChecklistComment()];
+		var tsiCheck = [wfProcess + "." + wfTask + "." + wfTSI[TSIm].getCheckboxDesc() + "." + wfTSI[TSIm].getChecklistComment()];
 		tsiCheckarry.push(tsiCheck);
 		// logDebug("TSICHECKarry: " + tsiCheckarry);
 		// logDebug(tsiCheckarry.indexOf('CHECKED'));	
