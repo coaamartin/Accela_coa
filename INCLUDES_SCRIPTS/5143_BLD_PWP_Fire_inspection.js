@@ -23,6 +23,7 @@ var wfTSI = aa.env.getValue("TaskSpecificInfoModels");
 logDebug("wfTSI: " + wfTSI);
 var tsiCheckarry = [];
 	for (TSIm in wfTSI) {
+        var tsiCheck = [];
 		var tsiCheck = [wfProcess + "." + wfTask + "." + wfTSI[TSIm].getChecklistComment()];
 		tsiCheckarry.push(tsiCheck);
 		// logDebug("TSICHECKarry: " + tsiCheckarry);
