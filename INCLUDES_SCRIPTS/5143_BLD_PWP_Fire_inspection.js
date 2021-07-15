@@ -6,7 +6,7 @@
 //Script WTUA;Building!Permit!Plans!NA.js
 //Record Types:	
 //Event: 		WTUA
-//Desc:			Going to send email communication to ciziten when the Permit has been issued.
+//Desc:			Going to create pending inspections based off of TSI fields.
 //
 //Created By: Rprovinc
 

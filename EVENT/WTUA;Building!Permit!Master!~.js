@@ -48,3 +48,8 @@ if(wfStatus == "Cancelled"){
 	include("5135_BLD_Withdrawn");
 	logDebug("Email was sent for cancelled.");
 }
+
+if(wfTask == "Fire Life Safety Review" && wfStatus == "Approved"){
+	logDebug("Fire Life Safety Review has been approved. Going to schedule inspections if selected.");
+	include("5143_BLD_PWP_Fire_inspection");
+}
