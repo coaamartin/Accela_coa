@@ -51,7 +51,7 @@ if (appMatch("Licenses/Professional/General/Application") || appMatch("Licenses/
       envParameters2.put("firstName", firstName);
       envParameters2.put("lastName", lastName);
       envParameters2.put("vemailTemplate", "BLD QPL LICENSE ISSUANCE # 64&65");
-      logDebug("Starting to kick off ASYNC event for QPL issuance. Params being passed: " + envParameters);
+      logDebug("Starting to kick off ASYNC event for QPL LIC issuance. Params being passed: " + envParameters2);
       aa.runAsyncScript(vAsyncScript2, envParameters2);
 
       logDebug("---------------------> 5114_EMailReadyLicenseIssue.js ended.");
