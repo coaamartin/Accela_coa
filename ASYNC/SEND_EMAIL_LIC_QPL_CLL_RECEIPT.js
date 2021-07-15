@@ -25,10 +25,10 @@ try
     tParams.put("$$recordAlias$$", capAlias);
     tParams.put("$$LicenseType$$", licenseType);
 	var rParams = aa.util.newHashtable();
-    rParams.put("AGENCYID", "AURORACO");
+    //rParams.put("AGENCYID", "AURORACO");
 	rParams.put("InvoiceNumber", invNbr);
 	var emailtemplate = aa.env.getValue("vemailTemplate");
-	var report = generateReportFile("Receipt_Invoice_Script", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Receipt_Invoice_Script", rParams, "AURORACO");
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
     sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
 }
