@@ -32,7 +32,6 @@ for (TSIm in wfTSI) {
 
 logDebug("TSI Check Arry: " + tsiCheckarry);
 var inspGroup = "BLD_NEW_CON";
-// var asiCheckValues = new Array();
 var asiAlarmSystem = tsiCheckarry.toString().indexOf(",Alarm System : CHECKED");
     if (asiAlarmSystem !== -1) {
         logDebug("Going to Schedule Alarm System Inspection.");
@@ -46,7 +45,6 @@ var asiAlarmSystem = tsiCheckarry.toString().indexOf(",Alarm System : CHECKED");
 
 var asiFireLane = tsiCheckarry.toString().indexOf(",Fire Lanes : CHECKED");
 logDebug("Fire Lane: " + asiFireLane);
-//asiCheckValues.push(asiFireLane);
     if (asiFireLane !== -1) {
         logDebug("Going to Schedule Fire Lane Inspection.");
         createPendingInspection(inspGroup,"Fire Lanes");
