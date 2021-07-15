@@ -26,7 +26,7 @@ try
     tParams.put("$$LicenseType$$", licenseType);
 	var rParams = aa.util.newHashtable();
     rParams.put("AGENCYID", "AURORACO");
-	rParams.put("INVOICEID", invNbr);
+	rParams.put("InvoiceNumber", invNbr);
 	var emailtemplate = aa.env.getValue("vemailTemplate");
 	var report = generateReportFile("Receipt_Invoice_Script", rParams, aa.getServiceProviderCode());
 	//sendNotification("noreply@auroragov.org", emailTo, "", emailtemplate, tParams, [report]);
