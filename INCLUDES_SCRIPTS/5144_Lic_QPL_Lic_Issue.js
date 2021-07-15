@@ -5,6 +5,7 @@
 // BY: rprovinc
 
 logDebug('Started script 5144_Lic_QPL_Lic_Issue.js');
+wait(10000);
 var balanceDue;
 balanceDue = capDetail.getBalance();
 logDebug("Balance Due: " + balanceDue);
@@ -59,3 +60,11 @@ function getEmailString()
 	logDebug(emailString);
 	return emailString;
 }
+
+function wait(ms){
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+   }
+ }
