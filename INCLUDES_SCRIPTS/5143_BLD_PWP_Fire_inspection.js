@@ -22,127 +22,95 @@ logDebug("appType: " + appTypeString);
 var wfTSI = aa.env.getValue("TaskSpecificInfoModels");
 logDebug("wfTSI: " + wfTSI);
 var tsiCheckarry = [];
-	for (TSIm in wfTSI) {
-        var tsiCheck = [];
-		var tsiCheck = [wfTSI[TSIm].getCheckboxDesc() + " : " + wfTSI[TSIm].getChecklistComment() + "<br>"];
-		tsiCheckarry.push(tsiCheck);
-		// logDebug("TSICHECKarry: " + tsiCheckarry);
-		// logDebug(tsiCheckarry.indexOf('CHECKED'));	
-	}
+for (TSIm in wfTSI) {
+    var tsiCheck = [];
+    var tsiCheck = [wfTSI[TSIm].getCheckboxDesc() + " : " + wfTSI[TSIm].getChecklistComment() + "<br>"];
+    tsiCheckarry.push(tsiCheck);
+    // logDebug("TSICHECKarry: " + tsiCheckarry);
+    // logDebug(tsiCheckarry.indexOf('CHECKED'));	
+}
 
 logDebug("TSI Check Arry: " + tsiCheckarry);
 var inspGroup = "BLD_NEW_CON";
 // var asiCheckValues = new Array();
-var asiAlarmSystem = tsiCheckarry.toString().indexOf("Alarm System");
-    if(asiAlarmSystem !== -1) {
-        asiAlarmSystemCheck = tsiCheckarry.toString().indexOf("CHECKED");
-        logDebug(asiAlarmSystemCheck);
-            if(asiAlarmSystemCheck == 82) {
-                logDebug("Going to Schedule Alarm System Inspection.");
-                createPendingInspection(inspGroup,"Alarm System");
-            }
-            else{
-                logDebug("Alarm System was not checked.")
-            }
+var asiAlarmSystem = tsiCheckarry.toString().indexOf(",Alarm System : CHECKED");
+    if (asiAlarmSystem !== -1) {
+        logDebug("Going to Schedule Alarm System Inspection.");
+        createPendingInspection(inspGroup, "Alarm System");
+    } else {
+        logDebug("Alarm System was not checked.")
     }
 
 
 
-var asiFireLane = tsiCheckarry.toString().indexOf("Fire Lanes");
+
+var asiFireLane = tsiCheckarry.toString().indexOf(",Fire Lanes : CHECKED");
 logDebug("Fire Lane: " + asiFireLane);
 //asiCheckValues.push(asiFireLane);
-if(asiFireLane !== -1) {
-    asiFireLaneCheck = tsiCheckarry.toString().indexOf("CHECKED", 94);
-    logDebug(asiFireLaneCheck);
-        if(asiFireLaneCheck == 94) {
-            logDebug("Going to Schedule Alarm System Inspection.");
-            //createPendingInspection(inspGroup,"Alarm System");
-        }
-        else{
-            logDebug("Alarm System was not checked.")
-        }
-}
+    if (asiFireLane !== -1) {
+        logDebug("Going to Schedule Alarm System Inspection.");
+        //createPendingInspection(inspGroup,"Alarm System");
+    } else {
+        logDebug("Fire Lane was not checked.")
+    }
 
-var asiFuelTankLine = tsiCheckarry.toString().indexOf("Fuel Tank Lines");
+
+var asiFuelTankLine = tsiCheckarry.toString().indexOf(",Fuel Tank Lines : CHECKED");
 logDebug("Fuel Tank Line: " + asiFuelTankLine);
-if(asiFuelTankLine !== -1) {
-    asiFuelTankLineCheck = tsiCheckarry.toString().indexOf("CHECKED", 119);
-    logDebug(asiFuelTankLineCheck);
-        if(asiFuelTankLineCheck == 119) {
-            logDebug("Going to Schedule Alarm System Inspection.");
-            createPendingInspection(inspGroup,"Alarm System");
-        }
-        else{
-            logDebug("Alarm System was not checked.")
-        }
-}
+    if (asiFuelTankLine !== -1) {
+        logDebug("Going to Schedule Alarm System Inspection.");
+        createPendingInspection(inspGroup, "Alarm System");
+    } else {
+        logDebug("Fuel Tank Line was not checked.")
+    }
 
-var asiGatingSystem = tsiCheckarry.toString().indexOf("Gating system/Hazardous Materials");
+
+var asiGatingSystem = tsiCheckarry.toString().indexOf(",Gating system/Hazardous Materials : CHECKED");
 logDebug("Gating System: " + asiGatingSystem);
-if(asiGatingSystem !== -1) {
-    asiGatingSystemCheck = tsiCheckarry.toString().indexOf("CHECKED", 149);
-    logDebug(asiGatingSystemCheck);
-        if(asiGatingSystemCheck == 149) {
-            logDebug("Going to Schedule Alarm System Inspection.");
-            createPendingInspection(inspGroup,"Alarm System");
-        }
-        else{
-            logDebug("Alarm System was not checked.")
-        }
-}
+    if (asiGatingSystem == 149) {
+        logDebug("Going to Schedule Alarm System Inspection.");
+        createPendingInspection(inspGroup, "Alarm System");
+    } else {
+        logDebug("Gating System was not checked.")
+    }
 
-var asiHoodSystem = tsiCheckarry.toString().indexOf("Hood System");
+
+var asiHoodSystem = tsiCheckarry.toString().indexOf(",Hood System : CHECKED");
 logDebug("Hood System: " + asiHoodSystem);
-if(asiHoodSystem !== -1) {
-    asiHoodSystemCheck = tsiCheckarry.toString().indexOf("CHECKED", 197);
-    logDebug(asiHoodSystemCheck);
-        if(asiHoodSystemCheck == 197) {
-            logDebug("Going to Schedule Alarm System Inspection.");
-            createPendingInspection(inspGroup,"Alarm System");
-        }
-        else{
-            logDebug("Alarm System was not checked.")
-        }
-}
+    if (asiHoodSystem !== -1) {
+        logDebug("Going to Schedule Alarm System Inspection.");
+        createPendingInspection(inspGroup, "Alarm System");
+    } else {
+        logDebug("Hood System was not checked.")
+    }
 
-var asiKnoxBox = tsiCheckarry.toString().indexOf("Knox Box");
+
+var asiKnoxBox = tsiCheckarry.toString().indexOf(",Knox Box : CHECKED");
 logDebug("Knox Box: " + asiKnoxBox);
-if(asiKnoxBox !== -1) {
-    asiKnoxBoxCheck = tsiCheckarry.toString().indexOf("CHECKED", 223);
-    logDebug(asiKnoxBoxCheck);
-        if(asiKnoxBoxCheck == 223) {
-            logDebug("Going to Schedule Alarm System Inspection.");
-            createPendingInspection(inspGroup,"Alarm System");
-        }
-        else{
-            logDebug("Alarm System was not checked.")
-        }
-}
+    if (asiKnoxBox !== -1) {
+        logDebug("Going to Schedule Alarm System Inspection.");
+        createPendingInspection(inspGroup, "Alarm System");
+    } else {
+        logDebug("Knox Box was not checked.")
+    }
 
-var asiSprinklerSystem = tsiCheckarry.toString().indexOf("Sprinkler System Final");
+
+var asiSprinklerSystem = tsiCheckarry.toString().indexOf(",Sprinkler System Final : CHECKED");
 logDebug("Sprinkler System: " + asiSprinklerSystem);
-if(asiSprinklerSystem !== -1) {
-    asiSprinklerSystemCheck = tsiCheckarry.toString().indexOf("CHECKED", 246);
-    logDebug(asiSprinklerSystemCheck);
-        if(asiSprinklerSystemCheck == 246) {
-            logDebug("Going to Schedule Alarm System Inspection.");
-            createPendingInspection(inspGroup,"Alarm System");
-        }
-        else{
-            logDebug("Alarm System was not checked.")
-        }
+if (asiSprinklerSystem !== -1) {
+    logDebug("Going to Schedule Alarm System Inspection.");
+    createPendingInspection(inspGroup, "Alarm System");
+} else {
+    logDebug("Sprinkler System was not checked.")
 }
 
-var asiSprinklerSystemRough = tsiCheckarry.toString().indexOf("Sprinkler System Rough");
+
+var asiSprinklerSystemRough = tsiCheckarry.toString().indexOf(",Sprinkler System Rough : CHECKED");
 logDebug("Sprinkler System Rough: " + asiSprinklerSystemRough);
-if(asiSprinklerSystemRough !== -1) {
-    asiSprinklerSystemRoughCheck = tsiCheckarry.toString().indexOf("CHECKED", 283);
-    logDebug(asiSprinklerSystemRoughCheck);
-        if(asiSprinklerSystemRoughCheck == 283) {
-            logDebug("Going to Schedule Alarm System Inspection.");
-            createPendingInspection(inspGroup,"Alarm System");
-        }
-        else{
-            logDebug("Alarm System was not checked.")
-        }
+logDebug(asiSprinklerSystemRough);
+if (asiSprinklerSystemRough !== 1) {
+    logDebug("Going to Schedule Alarm System Inspection.");
+    createPendingInspection(inspGroup, "Alarm System");
+} else {
+    logDebug("Sprinkler System Rough was not checked.")
 }
