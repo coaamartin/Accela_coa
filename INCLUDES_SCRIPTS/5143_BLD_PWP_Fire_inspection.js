@@ -39,7 +39,6 @@ var asiAlarmSystem = tsiCheckarry.toString().indexOf("Alarm System");
         logDebug(asiAlarmSystemCheck);
             if(asiAlarmSystemCheck == 82) {
                 logDebug("Going to Schedule Alarm System Inspection.");
-                scheduleInspection("Alarm System",0);
                 createPendingInspection(inspGroup,"Alarm System");
             }
             else{
