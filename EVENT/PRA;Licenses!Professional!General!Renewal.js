@@ -18,6 +18,7 @@ if (balanceDue == 0) {
 
 	closeTask("License Issuance", "Renewed", "Updated by PRA;Licenses!Professional!General!Renewal", "");
 	include("5114_EMailReadyLicenseIssue");
+	include("5144_Lic_QPL_Lic_Issue");
 	// Begin script to complete the renewal and send notifications
 	var vLicenseID;
 	var vIDArray;
