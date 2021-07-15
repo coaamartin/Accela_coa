@@ -11,6 +11,7 @@ logDebug("Balance Due: " + balanceDue);
 
 if (appMatch("Licenses/Professional/General/Application") || appMatch("Licenses/Professional/General/Renewal")) {
    if (balanceDue == 0) {
+      //need to send the receipt below
       var asiValues = getAppSpecific("Qualifying Professional Type");
       licenseType = asiValues;
       var altID = capId.getCustomID();
@@ -32,9 +33,27 @@ if (appMatch("Licenses/Professional/General/Application") || appMatch("Licenses/
       envParameters.put("recordApplicant", recordApplicant);
       envParameters.put("firstName", firstName);
       envParameters.put("lastName", lastName);
-      envParameters.put("vemailTemplate", "BLD_QPL_LICENSE_ISSUANCE_#_64-65");
+      envParameters.put("vemailTemplate", "BLD_RECEIPT");
       logDebug("Starting to kick off ASYNC event for QPL issuance. Params being passed: " + envParameters);
       aa.runAsyncScript(vAsyncScript, envParameters);
+      
+
+      //need to send the license below
+      var vAsyncScript2 = "SEND_EMAIL_LIC_QPL_CLL_LIC";
+      var envParameters2 = aa.util.newHashMap();
+      envParameters2.put("altID", altID);
+      envParameters2.put("capId", capId);
+      envParameters2.put("cap", cap);
+      envParameters2.put("INVOICEID", String(invNbr));
+      envParameters2.put("licenseType", licenseType);
+      envParameters2.put("emailTo", emailTo);
+      envParameters2.put("recordApplicant", recordApplicant);
+      envParameters2.put("firstName", firstName);
+      envParameters2.put("lastName", lastName);
+      envParameters2.put("vemailTemplate", "BLD QPL LICENSE ISSUANCE # 64&65");
+      logDebug("Starting to kick off ASYNC event for QPL issuance. Params being passed: " + envParameters);
+      aa.runAsyncScript(vAsyncScript2, envParameters2);
+
       logDebug("---------------------> 5114_EMailReadyLicenseIssue.js ended.");
    }
 }
