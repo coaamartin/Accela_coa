@@ -35,7 +35,7 @@ var inspGroup = "BLD_NEW_CON";
 // var asiCheckValues = new Array();
 var asiAlarmSystem = tsiCheckarry.toString().indexOf("Alarm System");
     if(asiAlarmSystem !== -1) {
-        asiAlarmSystemCheck = tsiCheckarry.toString().indexOf("CHECKED");
+        asiAlarmSystemCheck = asiAlarmSystem.toString().indexOf("CHECKED");
         logDebug(asiAlarmSystemCheck);
             if(asiAlarmSystemCheck == 82) {
                 logDebug("Going to Schedule Alarm System Inspection.");
@@ -52,7 +52,7 @@ var asiFireLane = tsiCheckarry.toString().indexOf("Fire Lanes");
 logDebug("Fire Lane: " + asiFireLane);
 //asiCheckValues.push(asiFireLane);
 if(asiFireLane !== -1) {
-    asiFireLaneCheck = tsiCheckarry.toString().indexOf("CHECKED", 94);
+    asiFireLaneCheck = asiFireLane.toString().indexOf("CHECKED", 94);
     logDebug(asiFireLaneCheck);
         if(asiFireLaneCheck == 94) {
             logDebug("Going to Schedule Alarm System Inspection.");
