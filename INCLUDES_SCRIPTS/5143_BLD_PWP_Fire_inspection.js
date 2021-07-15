@@ -31,6 +31,7 @@ var tsiCheckarry = [];
 	}
 
 logDebug("TSI Check Arry: " + tsiCheckarry);
+var inspGroup = "BLD_NEW_CON";
 // var asiCheckValues = new Array();
 var asiAlarmSystem = tsiCheckarry.toString().indexOf("Alarm System");
     if(asiAlarmSystem !== -1) {
@@ -39,6 +40,7 @@ var asiAlarmSystem = tsiCheckarry.toString().indexOf("Alarm System");
             if(asiAlarmSystemCheck == 82) {
                 logDebug("Going to Schedule Alarm System Inspection.");
                 scheduleInspection("Alarm System",0);
+                createPendingInspection(inspGroup,"Alarm System");
             }
             else{
                 logDebug("Alarm System was not checked.")
