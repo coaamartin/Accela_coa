@@ -36,15 +36,16 @@ var asiAlarmSystem = tsiCheckarry.toString().indexOf("Alarm System");
     if(asiAlarmSystem !== -1) {
         asiAlarmSystemCheck = tsiCheckarry.toString().indexOf("CHECKED");
         logDebug(asiAlarmSystemCheck);
+            if(asiAlarmSystemCheck == 82) {
+                logDebug("Going to Schedule Alarm System Inspection.");
+                scheduleInspection("Alarm System",0);
+            }
+            else{
+                logDebug("Alarm System was not checked.")
+            }
     }
-logDebug("Alarm System: " + asiAlarmSystem);
-//asiCheckValues.push(asiAlarmSystem);
-// if(asiAlarmSystem == "CHECKED"){
-//     logDebug("Going to Schedule Alarm System Inspection.");
-//     scheduleInspection("Alarm System",0);
-// } else{
-//     logDebug("Alarm System was not checked.")
-// }
+
+
 
 var asiFireLane = getAppSpecific("Fire Lanes");
 logDebug("Fire Lane: " + asiFireLane);
