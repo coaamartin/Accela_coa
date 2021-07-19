@@ -13,14 +13,17 @@ if (wfTask == "Accepted" && wfStatus == "Accept Plans") {
 //Call all customs for wfStatus of Resubmittal Requested
 if (wfStatus == "Resubmittal Requested") {
     updateExpirationDateAsi();
-    
+
 }
 
-// if(wfTask == "Planning Review" && wfStatus == "Resubmittal Requested"){
-//     logDebug("Building Permit Master Planning Review, resubmittal requested.");
-// 	include("5132_BLD_ResubmitEmail.js");
-// 	logDebug("Email was sent for resubmittal.");
-// }
+if (wfTask == "Planning Review" || wfTask == "Water Review" || wfTask == "Real Property" ||
+    wfTask == "Engineering Review" || wfTask == "Traffic Review" || wfTask == "Forestry Review") {
+    if (wfStatus == "Resubmittal Requested") {
+        logDebug("Building Permit Master Planning Review, resubmittal requested.");
+        include("5132_BLD_ResubmitEmail.js");
+        logDebug("Email was sent for resubmittal.");
+    }
+}
 
 if (wfTask == "Inspection Phase" && wfStatus == "Temporary CO Issued") {
     /*------------------------------------------------------------------------------------------------------/
@@ -123,80 +126,69 @@ User code generally goes inside the try block below.
 // {
 /* your code here
 End script Tester header */
-if(appMatch("Building/Permit/DonationBin/*") || appMatch("Building/Permit/TempSigns/*") || appMatch("Building/Permit/TempUse/*")) {
-    
-logDebug("Starting WTUA;Building!Permit!~!~.js");
-// if (wfTask == "Planning Director Approval" && wfStatus != "") {
+if (appMatch("Building/Permit/DonationBin/*") || appMatch("Building/Permit/TempSigns/*") || appMatch("Building/Permit/TempUse/*")) {
 
-//     // Script 5121_CityClerk
-//     include("5128_CityClerk_CityManager_email");
+    logDebug("Starting WTUA;Building!Permit!~!~.js");
+    // if (wfTask == "Planning Director Approval" && wfStatus != "") {
 
-// }
+    //     // Script 5121_CityClerk
+    //     include("5128_CityClerk_CityManager_email");
 
-//Below is going to be logic for an email to be sent to the Planning Director after all other WFtasks have been statused with anything or to not empty status.
-//Each workflow has different steps. Going to need to call each record type seperatly. 
-//Below is the logic for donation bin
-// if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
-//     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
-//     if ((wfTask == "Housing and Community Services" || wfTask == "City Managers Office" || wfTask == "Zoning" || wfTask == "Risk Mgmt" || wfTask == "Pw Traffic" ||
-//             wfTask == "Finance") && wfStatus == "Approved") {
-//         logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
-//         logDebug("Starting to send notification to the Planning Director");
-//         include("5122_CityClerk_Notifications");
-//         logDebug("Finished sending notification to the Planning Director");
+    // }
 
-//     }
-//     }
+    //Below is going to be logic for an email to be sent to the Planning Director after all other WFtasks have been statused with anything or to not empty status.
+    //Each workflow has different steps. Going to need to call each record type seperatly. 
+    //Below is the logic for donation bin
+    // if ("CityClerk/Incident/DonationBin/NA".equals(appTypeString)) {
+    //     logDebug("Looking at wf tasks and status to see if Planning Director email can send.");
+    //     if ((wfTask == "Housing and Community Services" || wfTask == "City Managers Office" || wfTask == "Zoning" || wfTask == "Risk Mgmt" || wfTask == "Pw Traffic" ||
+    //             wfTask == "Finance") && wfStatus == "Approved") {
+    //         logDebug("All workflow steps have been approved. Ready to send Planning Director email.");
+    //         logDebug("Starting to send notification to the Planning Director");
+    //         include("5122_CityClerk_Notifications");
+    //         logDebug("Finished sending notification to the Planning Director");
 
-//Below is the logic for donation bin
-if (isTaskActive("Final Approval")) {
-    logDebug("Looking at wf tasks and status to see if Final approval email can send.");
-    logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
-    logDebug("Starting to send notification to fianl approval staff");
-    include("5122_CityClerk_Notifications");
-    logDebug("Finished sending notification to the final approvers");
-}
+    //     }
+    //     }
 
-//Need logic below that will send communication out to citizen if more info is needed to proceed
-else if (wfStatus == "Additional Information Required") {
+    //Below is the logic for donation bin
+    if (isTaskActive("Final Approval")) {
+        logDebug("Looking at wf tasks and status to see if Final approval email can send.");
+        logDebug("All workflow steps have been approved. Ready to send Final Approval email.");
+        logDebug("Starting to send notification to fianl approval staff");
+        include("5122_CityClerk_Notifications");
+        logDebug("Finished sending notification to the final approvers");
+    }
 
-    include("5123_CityClerk_AddInfoEmail");
-}
+    //Need logic below that will send communication out to citizen if more info is needed to proceed
+    else if (wfStatus == "Additional Information Required") {
 
-else if (wfTask == "Final Approval" && wfStatus == "Approved") {
+        include("5123_CityClerk_AddInfoEmail");
+    } else if (wfTask == "Final Approval" && wfStatus == "Approved") {
 
-    // Script 5124_CityClerk
-    //include("5124_CityClerk_Approval");
-    include("5121_CityClerk");
+        // Script 5124_CityClerk
+        //include("5124_CityClerk_Approval");
+        include("5121_CityClerk");
 
-}
+    } else if (wfTask == "Final Approval" && wfStatus == "Denied") {
 
-
-else if (wfTask == "Final Approval" && wfStatus == "Denied") {
-
-    //Script 5125_CityClerk_Denial
-    include("5125_CityClerk_Denial");
-    updateAppStatus("DENIED", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "Denied");
-}
-
-else if (wfStatus == "Cancelled") {
-    include("5129_CityClerk_Void");
-    updateAppStatus("Cancelled", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "Cancelled");
-}
-
-else if (wfStatus == "Withdrawn") {
-    include("5130_CityClerk_Withdrawn");
-    updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "Withdrawn");
- }
-
-else if (wfStatus == "Waiting on Site Use Agreement/Fee") {
-    logDebug("Parks is waiting on Site Use Agreement/Fee")
-    include("5138_CityClerk_SiteUse");
- }
-logDebug("End of WTUA;Building");
+        //Script 5125_CityClerk_Denial
+        include("5125_CityClerk_Denial");
+        updateAppStatus("DENIED", "Script 5125_CityClerk_Denial");
+        closeAllTasks(capId, "Denied");
+    } else if (wfStatus == "Cancelled") {
+        include("5129_CityClerk_Void");
+        updateAppStatus("Cancelled", "Script 5125_CityClerk_Denial");
+        closeAllTasks(capId, "Cancelled");
+    } else if (wfStatus == "Withdrawn") {
+        include("5130_CityClerk_Withdrawn");
+        updateAppStatus("Withdrawn", "Script 5125_CityClerk_Denial");
+        closeAllTasks(capId, "Withdrawn");
+    } else if (wfStatus == "Waiting on Site Use Agreement/Fee") {
+        logDebug("Parks is waiting on Site Use Agreement/Fee")
+        include("5138_CityClerk_SiteUse");
+    }
+    logDebug("End of WTUA;Building");
 }
 
 setCodeReference("Issued");
