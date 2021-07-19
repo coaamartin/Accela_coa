@@ -180,10 +180,10 @@ else if (wfTask == "Final Approval" && wfStatus == "Denied") {
     closeAllTasks(capId, "Denied");
 }
 
-else if (wfStatus == "Void") {
+else if (wfStatus == "Cancelled") {
     include("5129_CityClerk_Void");
-    updateAppStatus("Void", "Script 5125_CityClerk_Denial");
-    closeAllTasks(capId, "Void");
+    updateAppStatus("Cancelled", "Script 5125_CityClerk_Denial");
+    closeAllTasks(capId, "Cancelled");
 }
 
 else if (wfStatus == "Withdrawn") {
