@@ -19,7 +19,7 @@ try
 	tParams.put("$$capAlias$$", capAlias);
 	tParams.put("$$amount$$", amount);
 	var rParams = aa.util.newHashtable();
-	rParams.put("INVOICEID", String(invNbr));
+	rParams.put("InvoiceNumber", String(invNbr));
 	var emailtemplate = "FIRE_PAYMENT_CONFIRM";
 	var report = generateReportFile("Receipt_Invoice_Script", rParams, "AURORACO");
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
