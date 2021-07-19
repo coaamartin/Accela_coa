@@ -21,7 +21,7 @@ if (wfTask == "Planning Review" || wfTask == "Water Review" || wfTask == "Real P
         logDebug("WF TASK and Resubmittal is requested");
     if (wfStatus == "Resubmittal Requested") {
         logDebug("Building Permit Master Planning Review, resubmittal requested.");
-        include("5132_BLD_ResubmitEmail.js");
+        include("5132_BLD_ResubmitEmail");
         logDebug("Email was sent for resubmittal.");
     }
 }
