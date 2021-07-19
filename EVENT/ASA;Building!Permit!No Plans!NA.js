@@ -22,4 +22,7 @@ Notes:
 
 createPendingInspBuilding()
 
+//SS #1295
+createPendingInspection("BLD_NEW_CON", "Superflush");
+
 
