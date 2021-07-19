@@ -21,7 +21,7 @@ try
 	var rParams = aa.util.newHashtable();
 	rParams.put("INVOICEID", String(invNbr));
 	var emailtemplate = "FIRE_PAYMENT_CONFIRM";
-	var report = generateReportFile("Receipt Report", rParams, aa.getServiceProviderCode());
+	var report = generateReportFile("Receipt Report", rParams, "AURORACO");
 	sendNotification("noreply@aurora.gov", emailTo, "", emailtemplate, tParams, [report]);
 }
 catch(e)
