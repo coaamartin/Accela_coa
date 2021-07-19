@@ -21,3 +21,7 @@ Notes:
 if($iTrc(wfStatus == "Cancelled", 'wfStatus:Cancelled')){
     include("5135_BLD_Withdrawn");
 }
+
+if($iTrc(wfStatus == "Withdrawn", 'wfStatus:Withdrawn')){
+    include("5135_BLD_Withdrawn");
+}
