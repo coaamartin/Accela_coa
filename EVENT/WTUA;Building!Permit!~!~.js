@@ -15,9 +15,10 @@ if (wfStatus == "Resubmittal Requested") {
     updateExpirationDateAsi();
 
 }
-
+logDebug("WF Task: " + wfTask);
 if (wfTask == "Planning Review" || wfTask == "Water Review" || wfTask == "Real Property" ||
     wfTask == "Engineering Review" || wfTask == "Traffic Review" || wfTask == "Forestry Review") {
+        logDebug("WF TASK and Resubmittal is requested");
     if (wfStatus == "Resubmittal Requested") {
         logDebug("Building Permit Master Planning Review, resubmittal requested.");
         include("5132_BLD_ResubmitEmail.js");
