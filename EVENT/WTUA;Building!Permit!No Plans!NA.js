@@ -17,7 +17,7 @@ Notes:
 */
 //Not needed in WTUA
 //permitWithPlansFeeCalculation(null, null, "Permit Fee Type", "Permit Fee Type Total");
-
+var $iTrc = ifTracer;
 if($iTrc(wfStatus == "Cancelled", 'wfStatus:Cancelled')){
     include("5135_BLD_Withdrawn");
 }
