@@ -21,4 +21,10 @@ if (wfTask == "Certificate of Occupancy"  && wfStatus == "Final CO Issued")
 	checkSpecialInspections();
     }
 
+	
+
+if (wfTask == "Engineer Letter/Special Inspections" && wfStatus == "Reports Received") {
+	include("5145_BLD_New_Con_Check");
+}
+
 

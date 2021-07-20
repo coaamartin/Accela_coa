@@ -7,11 +7,11 @@
   if there are then prevent the wf task from proceeding and present a message stating "There are pending or scheduled inspections or workflow tasks active, Inspection Phase workflow can't proceed.  
 */
 
-include("5063_Inspection_Phase_Water_Meter");   
+include("5063_Inspection_Phase_Water_Meter");
 
-include("5071_Certificate_Occpancy_Checked");	
-include("5062_Building_Inspection_Check_Pending_Scheduled");	
-include("5103_Building_NewBuilding_Plans_COA_Check");	
+include("5071_Certificate_Occpancy_Checked");
+include("5062_Building_Inspection_Check_Pending_Scheduled");
+include("5103_Building_NewBuilding_Plans_COA_Check");
 
 /*
 Title : Unapproved permit with plans (WorkflowTaskUpdateBefore) 
@@ -29,7 +29,7 @@ Notes:
 	- Record type is 'BUILDING/PERMIT/PLAN(S)/NA' not Plan
 */
 
-checkWfAndParentBlockSubmit("Permit Issuance", [ "Issued" ], "Building/Permit/Master/NA", "Unapproved");
+checkWfAndParentBlockSubmit("Permit Issuance", ["Issued"], "Building/Permit/Master/NA", "Unapproved");
 
 /*------------------------------------------------------------------------------------------------------/
 Title 		: Final CO Issued checks Special Inspections (WorkflowTaskUpdateBefore).
@@ -68,8 +68,6 @@ Notes :
 requireDataInSpecialInspections();
 
 //Script 9
-if (wfTask == "Special Inspection Check" && wfStatus == "Reports Received")
-		{
-		checkSpecialInspections();
-		}
-		
+if (wfTask == "Special Inspection Check" && wfStatus == "Reports Received") {
+	checkSpecialInspections();
+}
