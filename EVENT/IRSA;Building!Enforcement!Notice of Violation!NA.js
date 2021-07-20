@@ -71,5 +71,6 @@ if(inspType == "Pre Court Investigation"){
   }
   if(inspResult == "Non compliance"){
     closeTask("Pre Hearing Inspection", "Non Compliance", wfComment, "Resulted via Script IRSA");
+    activateTask("Court Hearing");
   }
 }
