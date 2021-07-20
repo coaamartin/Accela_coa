@@ -15,6 +15,7 @@ Sample Call : checkIfAddressOrParcelExists();
 // appTypeString = appTypeResult.toString();
 // appTypeArray = appTypeString.split("/");
 // logDebug("appType: " + appTypeString);
-if(appTypeArray[3]!="Renewal"){
+//skip Water/Water/SWMP/Transfer
+if(appTypeArray[3]!="Renewal" && appTypeArray[3]!="Transfer"){
     checkIfAddressOrParcelExists();
 }
