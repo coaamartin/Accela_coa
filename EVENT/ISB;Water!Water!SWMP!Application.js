@@ -6,7 +6,7 @@ try{
        var inspection2Check = "ECKO and Initial Inspection"
         var result=checkInspectionTypeAndStatus(inspection2Check);
             if (result==null) {
-                throw "There must be an ECKO initial inspection schedule and completed"
+                throw "An ECKO must be completed before an initial inspection can be scheduled"
             }else if (result==false){
                 throw inspection2Check + " must be completed prior to scheduling " + InspectionType ;
             }		
