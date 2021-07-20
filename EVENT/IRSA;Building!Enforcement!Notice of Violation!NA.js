@@ -51,6 +51,10 @@ if(inspType == "Investigation"){
         updateAppStatus("Closed", "Updated via IRSA 331");
         closeAllTasks(capId, "");
     }
+    //SS #718
+    if(inspResult == "Notice of Violation") {
+      updateTask("Notice of Violation", "Notice of Violation", wfComment, "Resulted via Script IRSA");
+    }
       //331c
     processNotOfViolInsp("Investigation", "In Progress", true, "Investigation", true, "Investigation", "In Progress");
       //331d
