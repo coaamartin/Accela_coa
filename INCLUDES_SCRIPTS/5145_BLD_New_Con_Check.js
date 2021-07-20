@@ -26,7 +26,7 @@ asiCheckValues.push(asiStructReq);
 var asiStructWoodReq = getAppSpecific("Structural Wood Required");
 asiCheckValues.push(asiStructWoodReq);
 var asiStructWoodRec = getAppSpecific("Structural Wood Received");
-asiCheckValues.push(var asiStructWoodRec);
+asiCheckValues.push(asiStructWoodRec);
 var asiEIFSRec = getAppSpecific("EIFS Received");
 asiCheckValues.push(asiEIFSRec);
 var asiConCreteRec = getAppSpecific("Concrete Report Received");
